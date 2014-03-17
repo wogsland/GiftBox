@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Giftbox - Create</title>
+
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
+    <link rel="stylesheet" href="css/feature-carousel.css" />
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery.featureCarousel.min.js" type="text/javascript"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+  	<script src="js/jquery.superscrollorama.js"></script>
+	<script src="js/scripts.js"></script>
+	
+	<script>
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+	</script>
+	
+</head>
+<body>
+	<div class="header-wrapper" id="create-header-wrapper">
+		<header>
+			<h1>
+				<a id="create-home-icon" title="Return to the Homepage" href="index.html">Giftbox</a>
+			</h1>
+			<nav id="create-top-nav">
+				<ul>
+					<li>
+						<a href="index.html">Home</a>
+					</li>
+					<li>
+						<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>
+					</li>
+					<li>
+						<a class="open-popup-link" id="settings-link" href="#login-form" data-effect="mfp-3d-unfold">Settings</a>
+					</li>
+					<li>
+						<a href="about.html">About</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	
+	<div id="content-wrapper">
+		<section id="wrapper-section">
+			<h2 id="step-1">Step 1: Choose Your Wrapper</h2>
+			<div id="multiple-list-container">
+				<div class="wrapper-list" id="standard-wrappers">
+					<img src="images/wrapper1.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper2.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper3.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper4.png" onClick="selectWrapper(this);">
+				</div>
+				<div class="wrapper-list" id="premium-wrappers">
+					<img src="images/wrapper1.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper2.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper3.png" onClick="selectWrapper(this);">
+					<img src="images/wrapper4.png" onClick="selectWrapper(this);">
+				</div>
+			</div>
+			<div id="show-premium-div">
+				<a href="#" id="show-premium" onClick="showPremium()">Show Specialty Wrappers</a>
+			</div>
+		</section>
+		<section id="fill-section">
+			<h2 id="step-2">Step 2: Fill Your Giftbox</h2>
+			<div id="button-container">
+				<a class="open-popup-link fill-button" id="send-link" href="#send-form" data-effect="mfp-3d-unfold">Send</a>
+				<a class="open-popup-link fill-button" id="preview-link" href="#preview" data-effect="mfp-3d-unfold">Preview</a>
+			</div>
+			<div id="fill-container">
+				<div id="tabs">
+					<ul>
+						<li><a href="#tab-1">Images</a></li>
+						<li><a href="#tab-2">Downloads</a></li>
+					</ul>
+					<div class="tab-panel" id="tab-1">
+						<form class="search-form">
+							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search" onkeyup="handleSearch(this)">
+						</form>
+						<div class="search-results-container">
+							<ul class="search-results" id="images-results">
+								<li><img class="result-image" id="result-image-1" draggable="true" src="images/rhcp-1.jpg"></li>
+								<li><img class="result-image" id="result-image-2" draggable="true" src="images/rhcp-2.jpg"></li>
+								<li><img class="result-image" id="result-image-3" draggable="true" src="images/rhcp-3.jpg"></li>
+								<li><img class="result-image" id="result-image-4" draggable="true" src="images/rhcp-4.jpg"></li>
+								<li><img class="result-image" id="result-image-5" draggable="true" src="images/rhcp-5.jpg"></li>
+								<li><img class="result-image" id="result-image-6" draggable="true" src="images/rhcp-6.jpg"></li>
+								<li><img class="result-image" id="result-image-7" draggable="true" src="images/rhcp-7.jpg"></li>
+								<li><img class="result-image" id="result-image-8" draggable="true" src="images/rhcp-8.jpg"></li>
+								<li><img class="result-image" id="result-image-9" draggable="true" src="images/rhcp-9.jpg"></li>
+								<li><img class="result-image" id="result-image-10" draggable="true" src="images/happy-birthday-1.jpg"></li>
+								<li><img class="result-image" id="result-image-11" draggable="true" src="images/happy-birthday-2.jpg"></li>
+								<li><img class="result-image" id="result-image-12" draggable="true" src="images/happy-birthday-3.jpg"></li>
+							</ul>
+						</div>
+					</div>
+					<div class="tab-panel" id="tab-2">
+						<form class="search-form">
+							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search">
+						</form>
+						<div class="search-results-container">
+							<ul class="search-results" id="download-results">
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="template">
+					<div class="bento" id="bento-1">
+					</div>
+					<div class="bento" id="bento-2">
+					</div>
+					<div class="bento" id="bento-3">
+					</div>
+					<div class="bento" id="bento-4">
+					</div>
+					<div class="bento" id="bento-5">
+					</div>
+					<div class="bento" id="bento-6">
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<div id="footer-wrapper">
+		<footer>
+			<nav>
+				<ul>
+					<li>
+						<a href="/about/">ABOUT</a>
+					</li>
+					<li>
+						<a href="/support/faq/">FAQ</a>
+					</li>
+					<li>
+						<a href="/support/">SUPPORT</a>
+					</li>
+					</ul>
+					<ul class="dark">
+					<li>
+						<a href="/privacy/">PRIVACY POLICY</a>
+					</li>
+					<li>
+						<a href="/terms/">TERMS OF SERVICE</a>
+					</li>
+				</ul>
+			</nav>
+			<ul class="social">
+				<li class="facebook">
+					<a id="facebook-icon" target="_bland" href="http://www.facebook.com">Facebook</a>
+				</li>
+				<li class="twitter">
+					<a id="twitter-icon" href="http://twitter.com">Twitter</a>
+				</li>
+			</ul>
+		</footer>
+	</div>
+
+	<form id="send-form" class="white-popup mfp-hide">
+		<h1 id="login-header">Send Your Giftbox</h1>
+		<div id="login-form-container">
+			<input class="login-input" id="email1" name="email1" type="text" placeholder="Email address" size="25">
+			<input class="login-input" id="email1" name="email1" type="text" placeholder="Email address" size="25">
+			<input class="login-input" id="email1" name="email1" type="text" placeholder="Email address" size="25">
+			<a id="forgot-password" href="#">More addresses...</a>
+			<a class="dialog-button" id="send-button" href="#" onClick="send();">Send</a>
+		</div>
+	</form>
+	
+	<div id="preview" class="white-popup mfp-hide">
+		<h1 id="login-header">Giftbox Preview</h1>
+		<div id="login-form-container">
+		</div>
+	</div>
+	
+	<script>
+		var bentos = document.querySelectorAll('.bento');
+		[].forEach.call(bentos, function(bento) {
+			bento.addEventListener('dragenter', handleDragEnter, false);
+			bento.addEventListener('dragover', handleDragOver, false);
+			bento.addEventListener('dragleave', handleDragLeave, false);
+			bento.addEventListener('drop', handleDrop, false);
+			bento.addEventListener('dragend', handleDragEnd, false);
+		});
+	</script>
+	
+</body>
+</html>
