@@ -9,6 +9,7 @@ function login() {
 
 	$.magnificPopup.close();
 	document.location.href = 'create.html';
+	//blah
 };
 
 function send() {
