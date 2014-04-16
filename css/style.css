@@ -53,7 +53,7 @@ li {
 .fss-container {
       height: 5px;
       width: 100%;
-
+	margin-top:-5px;
 }
 
 .show {
@@ -916,7 +916,7 @@ h3#big-feature-light {
 /*         		 FOOTER                   */
 /*----------------------------------------*/
 #footer-wrapper {
-    background-color: #293133;
+    background-color: #FFFFFF;
     min-width: 990px;
     width: 100%;
 }
@@ -979,8 +979,8 @@ footer ul.social li a {
     background: url("../images/facebook.png");
     display: block;
     float: left;
-    height: 60px;
-    width: 60px;
+    height: 0px;
+    width: 0px;
     position: relative;
     text-indent: -9999px;
     top: 0px;
@@ -1192,14 +1192,14 @@ header nav {
     position: relative;
 	left: 140px;
     top: px;
-	border:1px solid;
+	border:0px solid;
 	border-top-width: 0px;
 	padding: 10px;
 	border-radius: 0px 0px 5px 5px;
 }
 
 header nav ul {
-    margin-left: 40px;
+    margin-left: 400px;
 }
 
 header nav ul li {
@@ -1207,9 +1207,6 @@ header nav ul li {
     width: 115px;
 }
 
-header nav a {
-    color: #293133;
-}
 
 header nav a:hover {
     color: #CACCCC;
@@ -1429,11 +1426,7 @@ div.container {
 /*----------------------------------------*/
 /*         PERSONALIZE SECTION            */
 /*----------------------------------------*/
-#personalize-section {
-	color: #FFFFFF;
-/*	background-color: #293133; */
-	background: url("../images/ParallaxBG.jpg");
-}
+
 
 #icon-list {
 	margin: 100px auto 0px;
@@ -1458,276 +1451,4 @@ div.container {
 	font-size: 40px;
 }
 
-/*----------------------------------------*/
-/*          ADD IMAGES SECTION             */
-/*----------------------------------------*/
-#add-images-section {
-	height: 650px;
-}
-
-#animation-container {
-	width: 990px;
-	height: 1700px;
-	margin: 0px auto;
-	position: relative;
-	display: block;
-}
-
-#search-box {
-	overflow: hidden;
-	position: absolute;
-	left: 0px;
-}
-
-#text-reveal {
-	background-color: #FFFFFF;
-	height: 30px;
-	width: 280px;
-	position: absolute;
-	top: 60px;
-	left: 12px;
-}
-
-#rhcp-logo {
-	position: absolute;
-	top: 103px;
-	left: 16px;
-}
-
-#rhcp-logo-2 {
-	position: absolute;
-	top: 700px;
-	left: 300px;
-}
-
-#add-images {
-}
-
-#add-downloads {
-	top: 630px;
-}
-
-#blank-template {
-	position: absolute;
-	left: 320px;
-	border: solid 1px black;
-}
-
-/*----------------------------------------*/
-/*          ADD DOWNLOADS SECTION             */
-/*----------------------------------------*/
-#add-downloads-section {
-	height: 1300px;
-	background: url("../images/ParallaxBG.jpg") no-repeat scroll 0 0 / cover #000000;
-}
-
-#animation-container-2 {
-	width: 990px;
-	height: 1700px;
-	margin: 0px auto;
-	position: relative;
-	display: block;
-}
-
-#search-box-2 {
-	overflow: hidden;
-	position: absolute;
-	left: 0px;
-}
-
-#text-reveal-2 {
-	background-color: #FFFFFF;
-	height: 30px;
-	width: 280px;
-	position: absolute;
-	top: 60px;
-	left: 12px;
-}
-
-#blank-template-2 {
-	position: absolute;
-	left: 320px;
-	border: solid 1px white;
-}
-
-#blank-template-3 {
-	position: absolute;
-	left: 320px;
-	border: solid 1px white;
-	opacity: 0;
-}
-
-#download {
-	position: absolute;
-	top: 103px;
-	left: 16px;
-}
-
-#box-top {
-	position: absolute;
-	top: 600px;
-	left: 380px;
-}
-
-#box-bottom {
-	position: absolute;
-	top: 722px;
-	left: 380px;
-}
-
-/*----------------------------------------*/
-/*         		 FOOTER                   */
-/*----------------------------------------*/
-#footer-wrapper {
-    background-color: #293133;
-    min-width: 990px;
-    width: 100%;
-}
-
-footer {
-    height: 112px;
-    margin: 0 auto;
-    overflow: visible;
-    width: 800px;
-	padding: 70px 70px 0px 70px;
-}
-
-footer nav {
-    float: left;
-}
-
-footer nav ul {
-    text-align: left;
-}
-
-footer nav ul.dark {
-    margin-top: 10px;
-}
-
-footer nav ul.dark li {
-    margin-right: 30px;
-}
-
-footer nav ul.dark li a {
-    color: #6E6F71;
-}
-
-footer nav ul.dark li a:hover {
-    color: #FFFFFF;
-}
-
-footer nav ul li {
-    display: inline;
-    margin-right: 50px;
-}
-
-footer nav a {
-    color: #FFFFFF;
-}
-
-footer nav a:hover {
-    color: #6E6F71;
-}
-
-footer ul.social {
-    float: right;
-}
-
-footer ul.social li {
-    display: inline-block;
-	margin-left: 15px;
-}
-
-footer ul.social li a {
-    background: url("../images/facebook.png");
-    display: block;
-    float: left;
-    height: 60px;
-    width: 60px;
-    position: relative;
-    text-indent: -9999px;
-    top: 0px;
-}
-
-footer ul.social li.facebook a {
-    background: url("../images/facebook.png");
-}
-
-footer ul.social li.twitter a {
-    background: url("../images/twitter.png");
-}
-
-.white-popup {
-	position: relative;
-	background: #FFFFFF;
-	padding: 20px;
-	width: auto;
-	margin: 20px auto;
-	border-radius: 20px;
-}
-
-#login-form {
-	max-width: 550px;
-}
-
-#send-form {
-	max-width: 550px;
-}
-
-#login-form-container {
-	width: 100%;
-	position: relative;
-}
-
-.login-input {
-	border: 1px solid;
-	border-radius: 5px;
-	font-size: 200%;
-	margin: 20px auto;
-	padding: 10px;
-	display: block;
-}
-
-#email {
-	margin-top: 40px;
-}
-
-#forgot-password {
-	width: 100%;
-	display: block;
-	text-align: right;
-	color: black;
-}
-
-#forgot-password:hover {
-    color: #CACCCC;
-}
-
-.dialog-button {
-	color: white;
-	border:1px solid;
-	border-top-width: 0px;
-	padding: 10px;
-	border-radius: 10px;
-	background-color: #293133;
-	margin-top: 20px;
-	display: inline-block;
-	font-size: 150%;
-}
-
-.dialog-button:hover {
-    color: #CACCCC;
-}
-
-#signup-button {
-	float: left;
-}
-
-#facebook-button {
-	margin-left: 20px;
-}
-
-#login-button {
-	float: right;
-}
 

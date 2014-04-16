@@ -1,6 +1,7 @@
-function handleDragStart(e) {
-	e.dataTransfer.effectAllowed = 'move';
-	e.dataTransfer.setData('text', this.src);
+/************** BENTO DRAG/DROP HANDLERS *****************/
+
+function handleDragEnter(e) {
+	this.classList.add('over');
 }
 
 function handleDragOver(e) {
@@ -12,14 +13,112 @@ function handleDragOver(e) {
 	return false;
 }
 
-function handleDragEnter(e) {
+function handleDragLeave(e) {
+	this.classList.remove('over');
+}
+
+function handleDrop(e) {
+	if (e.preventDefault) {
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	this.classList.remove('over');
+	
+	// remove any previously dropped image
+	removeImage(this);
+	
+	// get the drop data
+	var src = e.dataTransfer.getData('text');
+	
+	// create an IMG element
+	var img = document.createElement('img');
+	
+	// create a DIV element
+	var div = document.createElement('div');
+	
+	// set the IMG attributes
+	img.setAttribute('src', src);
+	var imageId = this.id + '-image';
+	img.id = imageId
+	
+	// set the DIV attributes
+	var divId = this.id + '-image-container';
+	div.id = divId;
+	div.style.position = 'absolute';
+	
+	// add the IMG to the DIV, add the DIV to the bento
+	div.appendChild(img);
+	this.appendChild(div);
+
+	// make the IMG draggable inside the DIV
+	$('#'+ img.id).draggable({ containment: "#" + div.id});
+	
+	// now resize the image so that it covers the bento
+	resizeImage(img, this);
+	
+	// resize the image container so that the image has scroll containment
+	resizeContainer(this, img, div);	
+	
+	// change the hover for the bento to show the slider
+	showControls(this);
+	
+	return false;
+}
+
+function handleDragEnd(e) {
+	this.classList.remove('over');
+}
+
+//******* ADD IMAGE DRAG/DROP HANDLERS *****************
+
+function handleAddImageDragLeave(e) {
+	this.classList.remove('over');
+}
+
+function handleAddImageDragOver(e) {
+	if (e.preventDefault) {
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	e.dataTransfer.dropEffect = 'move';
+
+	return false;
+}
+
+function handleAddImageDragEnter(e) {
 	this.classList.add('over');
 }
 
-function handleDragLeave(e) {
-	this.classList.remove('over');  // this / e.target is previous target element.
+function handleAddImageDrop(e) {
+	if (e.preventDefault) {
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	this.classList.remove('over');
+	handleFiles(e.dataTransfer.files);
 }
 
+function handleAddImageDragEnd(e) {
+	this.classList.remove('over');
+}
+
+function handleFiles(files) {
+	var uploads = document.getElementById("uploads");
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		var imageType = /image.*/;
+
+		// if not an image go on to next file
+		if (!file.type.match(imageType)) {
+			continue;
+		}
+
+		var img = document.createElement("img");
+		img.classList.add("photo-thumbnail");
+		img.src = window.URL.createObjectURL(file);
+		img.file = file;
+		uploads.appendChild(img);
+	}
+}
+
+//******************************************************
 function hideControls(bento) {
 	var sliderId = bento.id + '-slider';
 	var closeId = bento.id + '-close';
@@ -103,57 +202,6 @@ function resizeContents(bento, img, div) {
 	resizeContainer(bento, img, div);
 }
 
-function handleDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	
-	// remove any previously dropped image
-	removeImage(this);
-	
-	// get the drop data
-	var src = e.dataTransfer.getData('text');
-	
-	// create an IMG element
-	var img = document.createElement('img');
-	
-	// create a DIV element
-	var div = document.createElement('div');
-	
-	// set the IMG attributes
-	img.setAttribute('src', src);
-	var imageId = this.id + '-image';
-	img.id = imageId
-	
-	// set the DIV attributes
-	var divId = this.id + '-image-container';
-	div.id = divId;
-	div.style.position = 'absolute';
-	
-	// add the IMG to the DIV, add the DIV to the bento
-	div.appendChild(img);
-	this.appendChild(div);
-
-	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + div.id});
-	
-	// now resize the image so that it covers the bento
-	resizeImage(img, this);
-	
-	// resize the image container so that the image has scroll containment
-	resizeContainer(this, img, div);	
-	
-	// change the hover for the bento to show the slider
-	showControls(this);
-	
-	return false;
-}
-
-function handleDragEnd(e) {
-	this.classList.remove('over');
-}
-
 function handleSearch(field) {
 	var textLength = field.value.length;
 	var index = 1;
@@ -199,10 +247,13 @@ $(function() {
 
 function handleHorizontalDrag(target, movement) {
 	var index;
+	var newWidth;
+	var newLeft;
 
 	for (index = 0; index < target.leftBentos.length; ++index) {
 		var leftBento = target.leftBentos[index];
-		leftBento.style.width = (parseInt(getComputedStyle(leftBento).width, 10) + movement) + "px";
+		newWidth = parseInt(getComputedStyle(leftBento).width, 10) + movement;
+		leftBento.style.width = newWidth + "px";
 		var leftImage = document.getElementById(leftBento.id + "-image");
 		if (leftImage) {
 			var leftContainer = document.getElementById(leftBento.id + "-image-container");
@@ -212,8 +263,10 @@ function handleHorizontalDrag(target, movement) {
 
 	for (index = 0; index < target.rightBentos.length; ++index) {
 		var rightBento = target.rightBentos[index];
-		rightBento.style.left = (parseInt(getComputedStyle(rightBento, null).left, 10) + movement) + "px";
-		rightBento.style.width = (parseInt(getComputedStyle(rightBento).width, 10) - movement) + "px";
+		newWidth = parseInt(getComputedStyle(rightBento).width, 10) - movement;
+		newLeft = parseInt(getComputedStyle(rightBento, null).left, 10) + movement;
+		rightBento.style.left = newLeft + "px";
+		rightBento.style.width = newWidth + "px";
 		var rightImage = document.getElementById(rightBento.id + "-image");
 		if (rightImage) {
 			var rightContainer = document.getElementById(rightBento.id + "-image-container");
@@ -227,7 +280,7 @@ function handleVerticalDrag(target, movement) {
 
 	for (index = 0; index < target.topBentos.length; ++index) {
 		var topBento = target.topBentos[index];
-		var newHeight = (parseInt(getComputedStyle(topBento).height, 10) + movement);
+		var newHeight = parseInt(getComputedStyle(topBento).height, 10) + movement;
 		topBento.style.height = newHeight + "px";
 		var topSlider = document.getElementById(topBento.id + "-slider");
 		topSlider.style.height = (newHeight - 45) + "px";
@@ -241,7 +294,10 @@ function handleVerticalDrag(target, movement) {
 	for (index = 0; index < target.bottomBentos.length; ++index) {
 		var bottomBento = target.bottomBentos[index];
 		bottomBento.style.top = (parseInt(getComputedStyle(bottomBento, null).top, 10) + movement) + "px";
-		bottomBento.style.height = (parseInt(getComputedStyle(bottomBento).height, 10) - movement) + "px";
+		var newHeight = parseInt(getComputedStyle(bottomBento).height, 10) - movement;
+		bottomBento.style.height = newHeight + "px";
+		var bottomSlider = document.getElementById(bottomBento.id + "-slider");
+		bottomSlider.style.height = (newHeight - 45) + "px";
 		var bottomImage = document.getElementById(bottomBento.id + "-image");
 		if (bottomImage) {
 			var bottomContainer = document.getElementById(bottomBento.id + "-image-container");
@@ -255,11 +311,11 @@ $(function() {
 	
 	divider = document.getElementById("divider-1-1");
 	divider.leftBentos = [document.getElementById("bento-1-1")]
-	divider.rightBentos = [document.getElementById("bento-1-2")]
+	divider.rightBentos = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")]
 
 	divider = document.getElementById("divider-1-2");
-	divider.leftBentos = [document.getElementById("bento-1-2")];
-	divider.rightBentos = [document.getElementById("bento-1-3"), document.getElementById("bento-1-4"), document.getElementById("divider-1-3")];
+	divider.leftBentos = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-1")];
+	divider.rightBentos = [document.getElementById("bento-1-3"), document.getElementById("bento-1-4"), document.getElementById("divider-1-3"), document.getElementById("divider-container-1-3")];
 
 	divider = document.getElementById("divider-1-3");
 	divider.topBentos = [document.getElementById("bento-1-3")];
@@ -268,6 +324,7 @@ $(function() {
 
 	$("#divider-1-1").draggable({
 		axis: "x",
+		containment: "#divider-container-1-1",
 		drag: function(event, ui) {
 			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
 			ui.originalPosition.left = ui.position.left;
@@ -276,6 +333,7 @@ $(function() {
 	
 	$("#divider-1-2").draggable({
 		axis: "x",
+		containment: "#divider-container-1-2",
 		drag: function(event, ui) {
 			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
 			ui.originalPosition.left = ui.position.left;
@@ -284,6 +342,7 @@ $(function() {
 
 	$("#divider-1-3").draggable({
 		axis: "y",
+		containment: "#divider-container-1-3",
 		drag: function(event, ui) {
 			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
 			ui.originalPosition.top = ui.position.top;

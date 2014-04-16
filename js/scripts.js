@@ -48,31 +48,33 @@ $(document).ready(function() {
 	var t1 = new TimelineLite();
 	
 	t1
-	.to("#text-reveal", .5, {left:210}, "+=1")
-	.to("#text-reveal", .5, {width:80}, "-=.5")
-	.from("#rhcp-logo", .5, {scale:0}, "-=.5")
-	.to("#rhcp-logo", .5, {left: 368, top: 36})
+	.to("#text-reveal", .25, {left:210}, "+=1.5")
+	.to("#text-reveal", .25, {width:80}, "-=.25")
+	.from("#rhcp-logo", .25, {scale:0}, "-=.25")
+	.to("#rhcp-logo", .5, {left: 377, top: 40})
 	.to("#rhcp-logo", .25, {scale:1.4})
-	.to("#blank-template", 2, {top: 800})
+	.to("#blank-template-over", .3, {opacity: 1}, "-=.15")
+	.to("#blank-template-over", 2, {top: 800})
+	.to("#blank-template", 2, {top: 800}, "-=2")
 	.to("#rhcp-logo", 2, {top: 836}, "-=2")
 	.to("#search-box", 2, {top: 800}, "-=2")
 	;
 		
 	var t2 = new TimelineLite();
 	t2
-	.from("#search-box-2", 1.5, {opacity:0}, "+=.5")
-	.from("#blank-template-2", 1.5, {opacity:0}, "-=1.5")
+	.from("#search-box-2", 2, {opacity:0}, "+=.5")
+	.from("#blank-template-2", 2, {opacity:0}, "-=1.5")
 	.to("#text-reveal-2", 1, {left:265})
 	.to("#text-reveal-2", 1, {width:20}, "-=1")
 	.from("#download", 1, {scale:0}, "-=1")
-	.to("#download", 1, {left: 335, top: 0})
-	.to("#download", .5, {opacity:.5})
+	.to("#download", 1, {left: 553, top: 80})
+	.to("#download", .5, {opacity:.3})
 	.to("#download", 0, {opacity:0})
 	.to("#blank-template-2", 0, {opacity:0})
 	.to("#blank-template-3", 0, {opacity:1})
 	.to("#blank-template-3", 2, {top:600})
 	.to("#blank-template-3", 2, {left:150}, "-=2")
-	.to("#blank-template-3", 2, {scale:0.1}, "-=2")
+	.to("#blank-template-3", 2, {scale:0.01}, "-=2")
 	.to("#box-top", .5, {left:550}, "-=2")
 	.to("#box-top", .5, {rotation:90}, "-=2")
 	.to("#box-top", .25, {top:520}, "-=2")
