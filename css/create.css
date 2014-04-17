@@ -3,6 +3,11 @@ p {
 	color: rgba(0,0,0,0.74);
 }
 
+
+#create-top-nav {
+	background-color: rgba(0,0,0,.4);
+}
+
 #content-wrapper {
     position: absolute;
     top: 0;
@@ -100,7 +105,7 @@ p {
 #templates {
 	height: 100%;
 	margin-left: 220px;
-	margin-right 220px;
+	margin-right: 220px;
 	overflow: scroll;
 }
 #template-container {
