@@ -15,4 +15,6 @@ handlers:
   static_dir: models
 - url: /.*
   script: index.html
+  http_headers:
+    Access-Control-Allow-Origin: "*"
 
