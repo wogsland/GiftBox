@@ -7,11 +7,12 @@ threadsafe: yes
 handlers:
 - url: /css
   static_dir: css
-- url: /.*
-  script: index.html
 - url: /js
   static_dir: js
 - url: /images
   static_dir: images
 - url: /models
   static_dir: models
+- url: /.*
+  script: index.html
+
