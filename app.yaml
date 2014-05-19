@@ -13,8 +13,8 @@ handlers:
   static_dir: images
 - url: /models
   static_dir: models
-- url: /.*
+- url: /
   script: index.html
-  http_headers:
-    Access-Control-Allow-Origin: "*"
+- url: /(.+\)$
+  script: \1
 
