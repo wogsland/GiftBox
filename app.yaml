@@ -1,0 +1,10 @@
+application: stone-timing-557
+version: 1
+runtime: php
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /css
+  static_dir: css
+
