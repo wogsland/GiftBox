@@ -7,4 +7,5 @@ threadsafe: yes
 handlers:
 - url: /css
   static_dir: css
-
+- url: /.*
+  script: index.html
