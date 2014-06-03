@@ -14,7 +14,7 @@ handlers:
 - url: /models
   static_dir: models
 - url: /
-  script: index.html
+  script: index.php
 - url: /(.+\.html)$
   script: \1
 
