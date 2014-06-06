@@ -27,12 +27,12 @@
 		<div class="header-wrapper" id="create-header-wrapper">
 			<header>
 				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="index.html">Giftbox</a>
+					<a id="create-home-icon" title="Return to the Homepage" href="/">Giftbox</a>
 				</h1>
 				<nav id="create-top-nav">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="/">Home</a>
 						</li>
 						<li>
 							<a href="box.html">3D Present Box</a>
