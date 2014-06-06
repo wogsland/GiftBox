@@ -11,8 +11,6 @@ body {
 	font-family:  'Lato', helvetica, arial, sans-serif;
     font-size: 16px;
 	font-weight: 600;
-	
-
 }
 
 a {
@@ -151,8 +149,6 @@ header nav a {
 header nav a:hover {
     color: #CACCCC;
 }
-
-
 
 #create-top-nav {
 	background-color: white;
@@ -1007,6 +1003,10 @@ footer ul.social li.twitter a {
 	max-width: 550px;
 }
 
+#signup-form {
+	max-width: 700px;
+}
+
 #send-form {
 	max-width: 550px;
 }
@@ -1020,13 +1020,16 @@ footer ul.social li.twitter a {
 	border: 1px solid;
 	border-radius: 5px;
 	font-size: 200%;
-	margin: 20px auto;
+	margin: 20px;
 	padding: 10px;
 	display: block;
 }
 
-#email {
-	margin-top: 40px;
+#login-message {
+	color: red;
+	margin-top: 10px;
+	text-align: center;
+	width: 100%;
 }
 
 #forgot-password {
@@ -1062,6 +1065,7 @@ footer ul.social li.twitter a {
 
 #facebook-button {
 	margin-left: 20px;
+	background-color: #6D84B4;
 }
 
 #login-button {
@@ -1199,7 +1203,7 @@ header nav {
 }
 
 header nav ul {
-    margin-left: 400px;
+    margin-left: 250px;
 }
 
 header nav ul li {

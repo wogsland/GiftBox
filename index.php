@@ -1,14 +1,16 @@
+<?php
+	include_once 'util.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
-
-
 	<title>Giftbox - Home</title>
 
 	<link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/feature-carousel.css" />
 	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.featureCarousel.min.js" type="text/javascript"></script>
@@ -16,24 +18,29 @@
 	<script src="js/TweenMax.min.js"></script>
   	<script src="js/jquery.superscrollorama.js"></script>
 	<script src="js/scripts.js"></script>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<script src="js/account.js"></script>
 </head>
 <body>
 
 	<div id="header-wrapper-fixed">
 		<header id="header-fixed">
-			<a id="home-icon-black" title="Return to the Homepage" href="index.html">Giftbox</a>
+			<a id="home-icon-black" title="Return to the Homepage" href="/giftbox">Giftbox</a>
 			<nav id="home-top-nav-fixed">
 				<ul>
-					<!--<li>
-						<a href="index.html">Home</a>
-					</li> -->
-					<li>
-						<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold" style="color: #000000">Login</a>
-					</li>
-					<!--<li>
-						<a class="open-popup-link" id="settings-link" href="#login-form" data-effect="mfp-3d-unfold">Settings</a>
-					</li> -->
+					<?php
+					if (logged_in()) {
+						echo '<li>';
+						echo '<a href="javascript:void(0)" onclick="logout();" style="color: #000000">Logout</a>';
+						echo '</li>';
+					} else {
+						echo '<li>';
+						echo '<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold" style="color: #000000">Login</a>';
+						echo '</li>';
+						echo '<li>';
+						echo '<a class="open-popup-link" id="signup-link" href="#signup-form" data-effect="mfp-3d-unfold" style="color: #000000">Sign Up</a>';
+						echo '</li>';
+					}
+					?>
 					<li>
 						<a href="about.html" style="color: #000000">About</a>
 					</li>
@@ -54,9 +61,20 @@
 						<a id="home-icon" title="Return to the Homepage" href="index.html">Giftbox</a>
 						<nav id="home-top-nav">
 							<ul>
-								<li>
-									<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>
-								</li>
+							<?php
+							if (logged_in()) {
+								echo '<li>';
+								echo '<a href="javascript:void(0)" onclick="logout();">Logout</a>';
+								echo '</li>';
+							} else {
+								echo '<li>';
+								echo '<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>';
+								echo '</li>';
+								echo '<li>';
+								echo '<a class="open-popup-link" id="signup-link" href="#signup-form" data-effect="mfp-3d-unfold">Sign Up</a>';
+								echo '</li>';
+					}
+					?>
 								<li>
 									<a href="about.html">About</a>
 								</li>
@@ -72,7 +90,11 @@
 						Send your next gift with Giftbox!
 					</p>
 					<p>
-						<a class="button trans big" href="create.html">Create GiftBox</a>
+					<?php
+					if (logged_in()) {
+						echo '<a class="button trans big" href="create.php">Create GiftBox</a>';
+					}
+					?>
 					</p>
 				</div>
 		</section>
@@ -265,15 +287,28 @@
 		</footer>
 	</div>
 
-	<form id="login-form" class="white-popup mfp-hide">
+	<form id="login-form" class="white-popup mfp-hide" name="login-form">
 		<h1 id="login-header">Log Into Giftbox</h1>
 		<div id="login-form-container">
+			<p id="login-message"></p>
 			<input class="login-input" id="email" name="email" type="text" placeholder="Email address" size="25">
 			<input class="login-input" id="password" name="password" type="password" placeholder="Password" size="25">
 			<a id="forgot-password" href="#">Forgot your password?</a>
-			<a class="dialog-button" id="signup-button" href="#">Sign Up</a>
-			<a class="dialog-button" id="facebook-button" href="#">Facebook Login</a>
-			<a class="dialog-button" id="login-button" href="#" onClick="login();">Log In</a>
+			<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBLogin(response)}, {scope: 'public_profile, email'});">Log In with Facebook</a>
+			<a class="dialog-button" id="login-button" href="javascript:void(0)" onClick="var a = document.forms['login-form']; login(a.email.value, a.password.value);">Log In</a>
+		</div>
+	</form>
+
+	<form id="signup-form" class="white-popup mfp-hide" name="signup-form">
+		<h1 id="login-header">Sign Up With Giftbox</h1>
+		<div id="login-form-container">
+			<p id="login-message"></p>
+			<input class="login-input" id="first-name" name="first-name" type="text" placeholder="First Name" size="20">
+			<input class="login-input" id="last-name" name="last-name" type="text" placeholder="Last Name" size="20">
+			<input class="login-input" id="email" name="email" type="text" placeholder="Your Email" size="40">
+			<input class="login-input" id="password" name="password" type="password" placeholder="New Password" size="40">
+			<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});">Sign Up Using Facebook</a>
+			<a class="dialog-button" id="login-button" href="javascript:void(0)" onClick="var a = document.forms['signup-form']; register(a.first-name.value, a.last-name.value, a.email.value, a.password.value);">Sign Up</a>
 		</div>
 	</form>
 	

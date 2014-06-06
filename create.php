@@ -1,3 +1,10 @@
+<?php
+	include_once 'util.php';
+	if (!logged_in()) {
+		header('Location: /giftbox');
+		break;
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>
