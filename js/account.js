@@ -15,7 +15,7 @@ function login(email, password) {
 			document.cookie = "email_address=" + jsonObj.email_address;
 			document.cookie = "first_name=" + jsonObj.first_name;
 			document.cookie = "last_name=" + jsonObj.last_name;
-			document.location.href = '/giftbox';
+			document.location.href = '/';
 		} else {
 			document.getElementById('login-message').innerHTML = jsonObj.message;
 		}
@@ -40,7 +40,7 @@ function handleFBLogin(response) {
 				document.cookie = "email_address=" + jsonObj.email_address;
 				document.cookie = "first_name=" + jsonObj.first_name;
 				document.cookie = "last_name=" + jsonObj.last_name;
-				document.location.href = '/giftbox';
+				document.location.href = '/';
 			} else {
 				document.getElementById('login-message').innerHTML = jsonObj.message;
 			}
@@ -68,7 +68,7 @@ function handleFBReg(response) {
 				document.cookie = "email_address=" + jsonObj.email_address;
 				document.cookie = "first_name=" + jsonObj.first_name;
 				document.cookie = "last_name=" + jsonObj.last_name;
-				document.location.href = '/giftbox';
+				document.location.href = '/';
 			} else {
 				document.getElementById('login-message').innerHTML = jsonObj.message;
 			}
