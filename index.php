@@ -58,7 +58,7 @@
 		<section id="intro-section" data-type="background" data-speed="2.2">
 				<div id="header-wrapper">
 					<header>
-						<a id="home-icon" title="Return to the Homepage" href="index.html">Giftbox</a>
+						<a id="home-icon" title="Return to the Homepage" href="/">Giftbox</a>
 						<nav id="home-top-nav">
 							<ul>
 							<?php
