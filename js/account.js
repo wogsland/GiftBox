@@ -121,7 +121,7 @@ function logout() {
 
   window.fbAsyncInit = function() {
 	  FB.init({
-		appId      : '866886230005253',
+		appId      : '1498055593756885',
 		cookie     : true,  // enable cookies to allow the server to access 
 							// the session
 		xfbml      : true,  // parse social plugins on this page
