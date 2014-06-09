@@ -50,7 +50,7 @@ function handleFBLogin(response) {
 		document.getElementById('login-message').innerHTML = "You are now signed up and logged into Giftbox!";
     } else {
       // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-		document.getElementById('login-message').innerHTML = "Registration using Facebook failed.";
+		document.getElementById('login-message').innerHTML = "Log In with Facebook failed.";
     }
 }
 
