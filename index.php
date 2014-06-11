@@ -94,6 +94,9 @@
 					if (logged_in()) {
 						echo '<a class="button trans big" href="create.php">Create GiftBox</a>';
 					}
+					else {
+						echo '<a class="button trans big open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>';
+					}
 					?>
 					</p>
 				</div>

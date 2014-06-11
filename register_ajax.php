@@ -2,6 +2,7 @@
 
 include_once ('util.php');
 include_once ('config.php');
+include_once ('password.php');
 
 $message = "Unable to register at this time.";
 $email_address = $_GET['email'];
@@ -13,7 +14,6 @@ if (isset($_GET['password'])) {
 } else {
 	$password = null;
 }
-
 // Make sure the email address is available:
 $sql = "SELECT * FROM user WHERE email_address ='$email_address'";
 $result = execute_query($sql);
@@ -24,6 +24,8 @@ if (!$result) {
 	if ($result->num_rows == 0) { // If no previous user is using this email
 
 		if ($reg_type == 'EMAIL') {
+			$activation_key = md5(uniqid(mt_rand(), false));
+			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 		} else if ($reg_type == 'FACEBOOK') {
 			$activation_key = null;
 			$password_hash = null;

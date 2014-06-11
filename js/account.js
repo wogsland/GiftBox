@@ -20,9 +20,32 @@ function login(email, password) {
 			document.getElementById('login-message').innerHTML = jsonObj.message;
 		}
 	}
-};
+}
 
-function register() {
+function register(first_name, last_name, email, password) {
+	if (!document.getElementById('email').value) {
+		document.getElementById('login-message').innerHTML = "Please enter a valid email.";
+	} else if (!document.getElementById('password').value) {
+		document.getElementById('login-message').innerHTML = "Please enter a password.";
+	} else if (!document.getElementById('first-name').value) {
+		document.getElementById('login-message').innerHTML = "Please enter a first name.";
+	} else if (!document.getElementById('last-name').value) {
+		document.getElementById('login-message').innerHTML = "Please enter a last name";
+	} else {
+		var xmlhttp = new XMLHttpRequest();
+		var url = "register_ajax.php?reg_type=EMAIL&first_name=" + encodeURIComponent(document.getElementById('first-name').value) + "&last_name=" + encodeURIComponent(document.getElementById('last-name').value) + "&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
+		xmlhttp.open("GET", url, false);
+		xmlhttp.send();
+		var jsonObj = JSON.parse(xmlhttp.responseText);
+		if (jsonObj.message == 'SUCCESSS'){
+			$.magnificPopup.close();
+			//document.getElementById('login-message').innerHTML = "Successful Registration";
+		}
+		else {
+			document.getElementById('login-message').innerHTML = jsonObj.message;
+		}
+	}
+
 }
 
 function handleFBLogin(response) {
@@ -154,3 +177,4 @@ function logout() {
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
