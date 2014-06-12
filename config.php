@@ -1,7 +1,7 @@
-q<?php
-$server = "173.194.247.193";
-$user = "root";
-$password = "Accede555";
+<?php
+$server = "localhost";
+$user = "giftbox";
+$password = "giftbox";
 /*
 $server = "173.194.244.175";
 $user = "giftbox";

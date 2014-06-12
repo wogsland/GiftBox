@@ -20,7 +20,7 @@ function login(email, password) {
 			document.getElementById('login-message').innerHTML = jsonObj.message;
 		}
 	}
-}
+};
 
 function register(first_name, last_name, email, password) {
 	if (!document.getElementById('email').value) {
@@ -107,6 +107,14 @@ function handleFBReg(response) {
 }
 
 function logout() {
+	//clears all cookies. No FB log out.
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+    	var cookie = cookies[i];
+    	var eqPos = cookie.indexOf("=");
+    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
 }
 
 window.fbAsyncInit = function() {
