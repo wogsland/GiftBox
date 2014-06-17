@@ -1,6 +1,7 @@
 <?php
 include_once ('util.php');
 include_once ('config.php');
+include_once ('password.php');
 include_once ('eventLogger.class.php');
 include_once ('database.php');
 
@@ -15,7 +16,6 @@ if (isset($_GET['password'])) {
 } else {
 	$password = null;
 }
-
 // Make sure the email address is available:
 $sql = "SELECT * FROM user WHERE email_address ='$email_address'";
 $result = execute_query($sql);
@@ -26,8 +26,7 @@ if (!$result) {
 	if ($result->num_rows == 0) { // If no previous user is using this email
 
 		if ($reg_type == 'EMAIL') {
-			// Create a unique activation code:
-			$activation_key = md5(uniqid(rand(), true));
+			$activation_key = md5(uniqid(mt_rand(), false));
 			$password_hash = password_hash($password, PASSWORD_DEFAULT);
 			$event = REGISTER_USING_EMAIL;
 		} else if ($reg_type == 'FACEBOOK') {
