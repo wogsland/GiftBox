@@ -84,7 +84,13 @@ function handleFBReg(response) {
 }
 
 function logout() {
+	document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "email_address=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "first_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "last_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	document.location.href = '/';
 }
+
 
 window.fbAsyncInit = function() {
 	FB.init({

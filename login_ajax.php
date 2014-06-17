@@ -1,10 +1,13 @@
 <?php
-include_once ('password.php');
 include_once ('util.php');
+include_once ('password.php');
+include_once ('eventLogger.class.php');
+
 $message = "Unable to log in at this time.";
 $user = null;
 $email = $_GET['email'];
 $login_type = $_GET['login_type'];
+$event = null;
 if (isset($_GET['password'])) {
 	$password = $_GET['password'];
 } else {
@@ -24,6 +27,7 @@ if (!$results) {
 		$user = $results->fetch_object();
 		if ($login_type == 'FACEBOOK') {
 				$message = 'SUCCESS';
+				$event = LOGIN_USING_FACEBOOK;
 		} else if ($login_type == 'EMAIL') {
 			if (!$user->password) {
 				$message = 'This account was created using Facebook.<br>Please use the Log In With FaceBook button.';
@@ -31,7 +35,12 @@ if (!$results) {
 				$message = 'The password you entered is incorrect.';
 			} else {
 				$message = 'SUCCESS';
+				$event = LOGIN_USING_EMAIL;
 			}
+		}
+		if ($message == 'SUCCESS') {
+			$event = new eventLogger($user_id, $event);
+			$event->log();
 		}
 	} else {
 		$message = "The email you entered does not belong to any account.";
