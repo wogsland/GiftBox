@@ -1,3 +1,13 @@
+function readCookie(name){
+	var c = document.cookie.split('; ');
+	var cookies = {};
+	for(var i = c.length-1; i >= 0; i--){
+	   var C = c[i].split('=');
+	   cookies[C[0]] = C[1];
+	}
+	return cookies[name];
+}
+
 function login(email, password) {
 	if (!document.getElementById('email').value) {
 		document.getElementById('login-message').innerHTML = "An email address is required when logging in with email.";
@@ -36,15 +46,17 @@ function register(first_name, last_name, email, password) {
 		var url = "register_ajax.php?reg_type=EMAIL&first_name=" + encodeURIComponent(document.getElementById('first-name').value) + "&last_name=" + encodeURIComponent(document.getElementById('last-name').value) + "&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
 		xmlhttp.open("GET", url, false);
 		xmlhttp.send();
-		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message == 'SUCCESSS'){
-			$.magnificPopup.close();
-			document.location.href = '/';
-
-			//document.getElementById('login-message').innerHTML = "Successful Registration";
-		}
-		else {
-			document.getElementById('login-message').innerHTML = jsonObj.message;
+		try {
+			var jsonObj = JSON.parse(xmlhttp.responseText);
+			if (jsonObj.message == 'SUCCESSS'){
+				$.magnificPopup.close();
+				document.location.href = '/';
+			}
+			else {
+				document.getElementById('login-message').innerHTML = jsonObj.message;
+			}
+		} catch(err) {
+			alert(xmlhttp.responseText);
 		}
 	}
 
@@ -109,15 +121,29 @@ function handleFBReg(response) {
 }
 
 function logout() {
-	//clears all cookies. No FB log out.
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++) {
-    	var cookie = cookies[i];
-    	var eqPos = cookie.indexOf("=");
-    	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-    	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    }
-    document.location.href = '/';
+	$user_id = readCookie('user_id');
+	var xmlhttp = new XMLHttpRequest();
+	var url = "logout_ajax.php?user_id=" + encodeURIComponent($user_id);
+	xmlhttp.open("GET", url, false);
+	xmlhttp.send();
+	try {
+		var jsonObj = JSON.parse(xmlhttp.responseText);
+		if (jsonObj.message == 'SUCCESS') {
+			//clears all cookies. No FB log out.
+			var cookies = document.cookie.split(";");
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i];
+				var eqPos = cookie.indexOf("=");
+				var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+				document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+			}
+			document.location.href = '/';
+		} else {
+			alert(jsonObj.message);
+		}
+	} catch(err) {
+		alert(xmlhttp.responseText);
+	}
 }
 
 

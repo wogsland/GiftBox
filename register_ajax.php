@@ -32,12 +32,11 @@ if (!$result) {
 		} else if ($reg_type == 'FACEBOOK') {
 			$activation_key = null;
 			$password_hash = null;
-			$event = REGISTER_USING_FACEBOOK
+			$event = REGISTER_USING_FACEBOOK;
 		}
 
 		$sql = "INSERT INTO user (email_address, first_name, last_name, password, activation_key) VALUES ('$email_address', '$first_name', '$last_name', ".($password ? "'".$password_hash."'" : 'NULL').", ".($activation_key ? "'".$activation_key."'" : 'NULL').")";
-		execute($sql);
-		$user_id = $mysqli->insert_id;
+		$user_id = insert($sql);
 		$event = new eventLogger($user_id, $event);
 		$event->log();
 
@@ -54,7 +53,7 @@ if (!$result) {
 		if (!$user->password) {
 			$message = "That email address has already been registered using Facebook.<br>Try logging in using Facebook.";
 		} else {
-			$message = "That email address has already been registered using an email address.<br>Try logging in using the email address.";
+			$message = "That email address has already been registered.<br>Try logging in using the email address.";
 		}
 	}
 }

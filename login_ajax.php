@@ -39,7 +39,7 @@ if (!$results) {
 			}
 		}
 		if ($message == 'SUCCESS') {
-			$event = new eventLogger($user_id, $event);
+			$event = new eventLogger($user->id, $event);
 			$event->log();
 		}
 	} else {

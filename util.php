@@ -14,9 +14,15 @@
 		if (!$mysqli->query($sql)) {
 			throw new Exception($mysqli->error);
 		}
-		if (!$mysqli->query("commit")) {
+	}
+
+	function insert($sql) {
+		include 'database.php';
+		debug_output($sql);
+		if (!$mysqli->query($sql)) {
 			throw new Exception($mysqli->error);
 		}
+		return $mysqli->insert_id;
 	}
 
 	function update($sql) {
