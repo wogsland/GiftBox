@@ -25,6 +25,7 @@ function login(email, password) {
 			document.cookie = "email_address=" + jsonObj.email_address;
 			document.cookie = "first_name=" + jsonObj.first_name;
 			document.cookie = "last_name=" + jsonObj.last_name;
+			document.cookie = "login_type=EMAIL";
 			document.location.href = '/';
 		} else {
 			document.getElementById('login-message').innerHTML = jsonObj.message;
@@ -77,6 +78,7 @@ function handleFBLogin(response) {
 				document.cookie = "email_address=" + jsonObj.email_address;
 				document.cookie = "first_name=" + jsonObj.first_name;
 				document.cookie = "last_name=" + jsonObj.last_name;
+				document.cookie = "login_type=FACEBOOK";
 				document.location.href = '/';
 			} else {
 				document.getElementById('login-message').innerHTML = jsonObj.message;
@@ -121,6 +123,20 @@ function handleFBReg(response) {
 }
 
 function logout() {
+	var $login_type = readCookie('login_type');
+	if ($login_type == 'FACEBOOK') {
+		FB.getLoginStatus(function(response) {
+			// are they currently logged into Facebook?
+			var myRet = response;
+			console.log(response);
+			if (response.status === 'connected') {
+				//they were authed so do the logout		
+				FB.logout(function(response) {
+					console.log(response);
+				});
+			}
+		})
+	}
 	$user_id = readCookie('user_id');
 	var xmlhttp = new XMLHttpRequest();
 	var url = "logout_ajax.php?user_id=" + encodeURIComponent($user_id);
@@ -129,14 +145,11 @@ function logout() {
 	try {
 		var jsonObj = JSON.parse(xmlhttp.responseText);
 		if (jsonObj.message == 'SUCCESS') {
-			//clears all cookies. No FB log out.
-			var cookies = document.cookie.split(";");
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = cookies[i];
-				var eqPos = cookie.indexOf("=");
-				var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-				document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			}
+			document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+			document.cookie = "email_address=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+			document.cookie = "first_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+			document.cookie = "last_name=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+			document.cookie = "login_type=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			document.location.href = '/';
 		} else {
 			alert(jsonObj.message);
@@ -145,7 +158,6 @@ function logout() {
 		alert(xmlhttp.responseText);
 	}
 }
-
 
 window.fbAsyncInit = function() {
 	FB.init({

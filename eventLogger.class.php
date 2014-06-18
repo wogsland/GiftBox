@@ -6,6 +6,7 @@ define('REGISTER_USING_FACEBOOK', 2);
 define('LOGIN_USING_EMAIL', 3);
 define('LOGIN_USING_FACEBOOK', 4);
 define('LOGOUT', 5);
+define('ACTIVATE_ACCOUNT', 6);
 
 class eventLogger {
 	var $id;

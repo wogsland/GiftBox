@@ -2,6 +2,7 @@
 
 include_once ('util.php');
 include_once ('database.php');
+include_once ('eventLogger.class.php');
 
 if (isset($_GET['email']) && isset($_GET['key'])) {
 	$email = $_GET['email'];
@@ -11,6 +12,9 @@ if (isset($_GET['email']) && isset($_GET['key'])) {
 		if ($rows_affected != 1) {
 			throw new Exception('Update failed');
 		}
+		$user_id = execute_query("SELECT id from user where email = '$email'")->fetch_object()->id;
+		$event = new eventLogger($user_id, ACTIVATE_ACCOUNT);
+		$event->log();
 		echo '<div>Your account is now active. You may now <a href="/">Log in</a></div>';
 	} catch (Exception $e) {
 		echo '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
