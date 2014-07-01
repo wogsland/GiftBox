@@ -6,7 +6,7 @@ if ($_SERVER['SERVER_NAME'] == "giftbox.com") {
 } else if ($_SERVER['SERVER_NAME'] == "stone-timing-557.appspot.com") {
 	$server = "173.194.244.175";
 	$app_url = "http://stone-timing-557.appspot.com";
-	$app_root = "/giftbox/";
+	$app_root = "/";
 }
 $user = "giftbox";
 $password = "giftbox";
