@@ -73,9 +73,8 @@ header#header-fixed {
 	padding-top:0;
 }
 
-#home-top-nav-fixed{
-	padding: 30px 79px 0 0;
-
+#home-top-nav-fixed {
+	padding: 10px;
 }
 
 #home-icon {
@@ -1007,16 +1006,21 @@ footer ul.social li.twitter a {
 	max-width: 700px;
 }
 
-#send-form {
-	max-width: 550px;
+#change-password-form {
+	max-width: 600px;
+	overflow: auto;
 }
 
-#login-form-container {
+#edit-user-form {
+	max-width: 900px;
+}
+
+#dialog-form-container {
 	width: 100%;
 	position: relative;
 }
 
-.login-input {
+.dialog-input {
 	border: 1px solid;
 	border-radius: 5px;
 	font-size: 200%;
@@ -1025,7 +1029,7 @@ footer ul.social li.twitter a {
 	display: block;
 }
 
-#login-message {
+.dialog-message {
 	color: red;
 	margin-top: 10px;
 	text-align: center;
@@ -1059,21 +1063,14 @@ footer ul.social li.twitter a {
     color: #CACCCC;
 }
 
-#signup-button {
-	float: left;
+.dialog-button-right {
+	float: right;
 }
 
 #facebook-button {
 	margin-left: 20px;
 	background-color: #6D84B4;
 }
-
-#login-button {
-	float: right;
-}
-
-
-
 
 /* ::::: https://fonts.googleapis.com/css?family=Lato:300, 400, 700 ::::: */
 
@@ -1455,4 +1452,47 @@ div.container {
 	font-size: 40px;
 }
 
+/*----------------------------------------*/
+/*         MY ACCOUNT		              */
+/*----------------------------------------*/
+
+#my-account-form-wrapper {
+	width: 900px;
+	margin: 50px auto;
+	border: solid 1px #CBCBCB;
+	padding: 20px;
+}
+
+#save-my-account-button {
+	float: right;
+}
+
+/*----------------------------------------*/
+/*         ADMIN     		              */
+/*----------------------------------------*/
+#centering-wrapper {
+	display: block;
+	text-align: center;
+	margin: 50px auto;
+}
+
+#user-search-form-wrapper {
+	width: 900px;
+	margin: 50px auto 20px auto;
+	border: solid 1px #CBCBCB;
+	padding: 20px;
+	text-align: left;
+}
+
+#user-table-wrapper {
+	width: 940px;
+	margin: 0px auto;
+	text-align: left;
+	font-weight: normal;
+}
+
+#event-table {
+	margin: 0px auto;
+	font-weight: normal;
+}
 

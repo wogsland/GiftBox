@@ -1,3 +1,34 @@
+$(document).ready(function() {
+	$('.open-popup-link').magnificPopup({
+		type: 'inline',
+		midClick: true
+	});
+});
+
+function sendGiftbox() {
+	if (!document.getElementById('email').value) {
+		document.getElementById('send-message').innerHTML = "Please enter a valid email address.";
+	} else {
+		var email = document.getElementById('email').value;
+		var previewId = document.getElementById('preview-id').value;
+		var xmlhttp = new XMLHttpRequest();
+		var url = "send_preview.php?email=" + encodeURIComponent(email) + "&preview_id=" + encodeURIComponent(previewId);
+		xmlhttp.open("GET", url, false);
+		xmlhttp.send();
+		try {
+			var jsonObj = JSON.parse(xmlhttp.responseText);
+			if (jsonObj.message == 'SUCCESSS'){
+				$.magnificPopup.close();
+			}
+			else {
+				document.getElementById('send-message').innerHTML = jsonObj.message;
+			}
+		} catch(err) {
+			alert(xmlhttp.responseText);
+		}
+	}
+}
+
 /************** BENTO DRAG/DROP HANDLERS *****************/
 
 function handleDragEnter(e) {

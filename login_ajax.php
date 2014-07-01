@@ -1,7 +1,8 @@
 <?php
-include_once ('util.php');
-include_once ('password.php');
-include_once ('eventLogger.class.php');
+include_once 'config.php';
+include_once 'util.php';
+include_once 'password.php';
+include_once 'eventLogger.class.php';
 
 $message = "Unable to log in at this time.";
 $user = null;
@@ -50,7 +51,7 @@ if (!$results) {
 $json = '{"message":"'.$message.'"';
 if ($message == "SUCCESS") {
 	if ($user) {
-		$json .= ',"user_id":"'.$user->id.'","email_address":"'.$user->email_address.'","first_name":"'.$user->first_name.'","last_name":"'.$user->last_name.'"';
+		$json .= ',"user_id":"'.$user->id.'","app_root":"'.$app_root.'"';
 	}
 }
 $json .= '}';
