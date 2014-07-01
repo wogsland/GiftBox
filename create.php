@@ -12,13 +12,13 @@
 	<title>Giftbox - Create</title>
 
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
+	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
     <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="js/TweenMax.min.js"></script>
-  	<script src="js/jquery.superscrollorama.js"></script>
+	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/create.js"></script>
 	
 </head>
@@ -27,15 +27,12 @@
 		<div class="header-wrapper" id="create-header-wrapper">
 			<header>
 				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="/">Giftbox</a>
+					<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
 				</h1>
 				<nav id="create-top-nav">
 					<ul>
 						<li>
-							<a href="/">Home</a>
-						</li>
-						<li>
-							<a href="box.html">3D Present Box</a>
+							<a href="<?php echo $app_root ?>">Home</a>
 						</li>
 					</ul>
 				</nav>
@@ -80,6 +77,9 @@
 				</div>
 			</div>
 			<div id="templates">
+				<div id="template-button-container">
+					<a class="open-popup-link template-button" id="send-button" data-effect="mfp-3d-unfold" href="#send-form">Send</a>
+				</div>
 				<div id="template-container">
 					<div class="template" id="template-3">
 						<div class="bento" id="bento-3-1">
@@ -157,6 +157,18 @@
 			</div>
 		</section>
 	</div>
+
+	<form id="send-form" class="white-popup mfp-hide" name="send-form">
+		<h1 class="dialog-header">Send Giftbox</h1>
+		<div id="dialog-form-container">
+			<p class="dialog-message" id="send-message"></p>
+			<input id="preview-id" type="hidden" name="preview-id" value="0da4fb2c9250c2dc2f692ef051ad94cc">
+			<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30">
+			<p>Or, copy this link into an email and send it yourself:</p>
+			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="50" value="https://giftbox.com/preview.php?gbpid=0da4fb2c9250c2dc2f692ef051ad94cc" readonly="readonly">
+			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="sendGiftbox()">Send</a>
+		</div>
+	</form>
 
 	<script>
 		var bentos = document.querySelectorAll('.bento');

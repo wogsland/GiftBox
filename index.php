@@ -1,5 +1,6 @@
 <?php
 	include_once 'util.php';
+	include_once 'config.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,9 +15,10 @@
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.featureCarousel.min.js" type="text/javascript"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/TweenMax.min.js"></script>
   	<script src="js/jquery.superscrollorama.js"></script>
+	<script src="js/facebook_init.js"></script>
 	<script src="js/scripts.js"></script>
 	<script src="js/account.js"></script>
 </head>
@@ -24,7 +26,7 @@
 
 	<div id="header-wrapper-fixed">
 		<header id="header-fixed">
-			<a id="home-icon-black" title="Return to the Homepage" href="/giftbox">Giftbox</a>
+			<a id="home-icon-black" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
 			<nav id="home-top-nav-fixed">
 				<ul>
 					<?php
@@ -32,6 +34,14 @@
 						echo '<li>';
 						echo '<a href="javascript:void(0)" onclick="logout();" style="color: #000000">Logout</a>';
 						echo '</li>';
+						echo '<li>';
+						echo '<a href="my_account.php" style="color: #000000">My Account</a>';
+						echo '</li>';
+						if (is_admin()) {
+							echo '<li>';
+							echo '<a href="admin.php" style="color: #000000">Admin</a>';
+							echo '</li>';
+						}
 					} else {
 						echo '<li>';
 						echo '<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold" style="color: #000000">Login</a>';
@@ -42,7 +52,7 @@
 					}
 					?>
 					<li>
-						<a href="about.html" style="color: #000000">About</a>
+						<a href="about.php" style="color: #000000">About</a>
 					</li>
 				</ul>
 			</nav>
@@ -58,25 +68,33 @@
 		<section id="intro-section" data-type="background" data-speed="2.2">
 				<div id="header-wrapper">
 					<header>
-						<a id="home-icon" title="Return to the Homepage" href="/">Giftbox</a>
+						<a id="home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
 						<nav id="home-top-nav">
 							<ul>
-							<?php
-							if (logged_in()) {
-								echo '<li>';
-								echo '<a href="javascript:void(0)" onclick="logout();">Logout</a>';
-								echo '</li>';
-							} else {
-								echo '<li>';
-								echo '<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>';
-								echo '</li>';
-								echo '<li>';
-								echo '<a class="open-popup-link" id="signup-link" href="#signup-form" data-effect="mfp-3d-unfold">Sign Up</a>';
-								echo '</li>';
-					}
-					?>
+								<?php
+								if (logged_in()) {
+									echo '<li>';
+									echo '<a href="javascript:void(0)" onclick="logout();">Logout</a>';
+									echo '</li>';
+									echo '<li>';
+									echo '<a href="my_account.php">My Account</a>';
+									echo '</li>';
+									if (is_admin()) {
+										echo '<li>';
+										echo '<a href="admin.php">Admin</a>';
+										echo '</li>';
+									}
+								} else {
+									echo '<li>';
+									echo '<a class="open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>';
+									echo '</li>';
+									echo '<li>';
+									echo '<a class="open-popup-link" id="signup-link" href="#signup-form" data-effect="mfp-3d-unfold">Sign Up</a>';
+									echo '</li>';
+								}
+								?>
 								<li>
-									<a href="about.html">About</a>
+									<a href="about.php">About</a>
 								</li>
 							</ul>
 						</nav>					
@@ -291,27 +309,27 @@
 	</div>
 
 	<form id="login-form" class="white-popup mfp-hide" name="login-form">
-		<h1 id="login-header">Log Into Giftbox</h1>
-		<div id="login-form-container">
-			<p id="login-message"></p>
-			<input class="login-input" id="email" name="email" type="text" placeholder="Email address" size="25">
-			<input class="login-input" id="password" name="password" type="password" placeholder="Password" size="25">
-			<a id="forgot-password" href="#">Forgot your password?</a>
+		<h1 class="dialog-header">Log Into Giftbox</h1>
+		<div id="dialog-form-container">
+			<p class="dialog-message" id="login-message"></p>
+			<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="25">
+			<input class="dialog-input" id="password" name="password" type="password" placeholder="Password" size="25">
+			<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>
 			<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBLogin(response)}, {scope: 'public_profile, email'});">Log In with Facebook</a>
-			<a class="dialog-button" id="login-button" href="javascript:void(0)" onClick="var a = document.forms['login-form']; login(a.email.value, a.password.value);">Log In</a>
+			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="var a = document.forms['login-form']; login(a.email.value, a.password.value);">Log In</a>
 		</div>
 	</form>
 
 	<form id="signup-form" class="white-popup mfp-hide" name="signup-form">
-		<h1 id="login-header">Sign Up With Giftbox</h1>
-		<div id="login-form-container">
-			<p id="login-message"></p>
-			<input class="login-input" id="first-name" name="first-name" type="text" placeholder="First Name" size="20">
-			<input class="login-input" id="last-name" name="last-name" type="text" placeholder="Last Name" size="20">
-			<input class="login-input" id="email" name="email" type="text" placeholder="Your Email" size="40">
-			<input class="login-input" id="password" name="password" type="password" placeholder="New Password" size="40">
+		<h1 class="dialog-header">Sign Up With Giftbox</h1>
+		<div id="dialog-form-container">
+			<p class="dialog-message" id="signup-message"></p>
+			<input class="dialog-input" id="first-name" name="first-name" type="text" placeholder="First Name" size="20">
+			<input class="dialog-input" id="last-name" name="last-name" type="text" placeholder="Last Name" size="20">
+			<input class="dialog-input" id="email" name="email" type="text" placeholder="Your Email" size="40">
+			<input class="dialog-input" id="password" name="password" type="password" placeholder="New Password" size="40">
 			<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});">Sign Up Using Facebook</a>
-			<a class="dialog-button" id="login-button" href="javascript:void(0)" onClick="var a = document.forms['signup-form']; register(a.first-name.value, a.last-name.value, a.email.value, a.password.value);">Sign Up</a>
+			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="var a = document.forms['signup-form']; register(a.first-name.value, a.last-name.value, a.email.value, a.password.value);">Sign Up</a>
 		</div>
 	</form>
 	

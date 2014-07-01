@@ -7,6 +7,9 @@ define('LOGIN_USING_EMAIL', 3);
 define('LOGIN_USING_FACEBOOK', 4);
 define('LOGOUT', 5);
 define('ACTIVATE_ACCOUNT', 6);
+define('SEND_GIFTBOX', 7);
+define('UPDATE_ACCOUNT_INFO', 8);
+define('CHANGE_PASSWORD', 9);
 
 class eventLogger {
 	var $id;

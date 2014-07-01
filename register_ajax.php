@@ -42,9 +42,9 @@ if (!$result) {
 
 		if ($reg_type == 'EMAIL') {
 			// Send the email
-			$message = " To activate your account, please click on this link:\n\n";
-			$message .= $app_root . '/activate.php?email=' . urlencode($email_address) . "&key=$activation_key";
-			mail($email_address, 'Registration Confirmation', $message, 'From:'. $sender_email);
+			$message = " To activate your Giftbox account, please click on this link:\n\n";
+			$message .= $app_url . '/activate.php?email=' . urlencode($email_address) . "&key=$activation_key";
+			mail($email_address, 'Giftbox Registration Confirmation', $message, 'From:'. $sender_email);
 		}
 		$message = 'SUCCESS';
 
