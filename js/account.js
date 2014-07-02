@@ -154,11 +154,10 @@ function handleFBReg(response) {
 }
 
 function logout() {
-	var $login_type = readCookie('login_type');
-	if ($login_type == 'FACEBOOK') {
+	var loginType = readCookie('login_type');
+	if (loginType == 'FACEBOOK') {
 		FB.getLoginStatus(function(response) {
 			// are they currently logged into Facebook?
-			var myRet = response;
 			console.log(response);
 			if (response.status === 'connected') {
 				//they were authed so do the logout		
@@ -168,10 +167,10 @@ function logout() {
 			}
 		})
 	}
-	$user_id = readCookie('user_id');
-	$app_root = readCookie('app_root');
+	userId = readCookie('user_id');
+	appRoot = readCookie('app_root');
 	var xmlhttp = new XMLHttpRequest();
-	var url = "logout_ajax.php?user_id=" + encodeURIComponent($user_id);
+	var url = "logout_ajax.php?user_id=" + encodeURIComponent(userId);
 	xmlhttp.open("GET", url, false);
 	xmlhttp.send();
 	try {
@@ -180,7 +179,7 @@ function logout() {
 			document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			document.cookie = "login_type=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			document.cookie = "app_root=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			document.location.href = $app_root;
+			document.location.href = appRoot;
 		} else {
 			alert(jsonObj.message);
 		}
