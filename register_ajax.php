@@ -11,6 +11,8 @@ $first_name = $_GET['first_name'];
 $last_name = $_GET['last_name'];
 $reg_type = $_GET['reg_type'];
 $event = null;
+$user_id = null;
+
 if (isset($_GET['password'])) {
 	$password = $_GET['password'];
 } else {
@@ -42,9 +44,9 @@ if (!$result) {
 
 		if ($reg_type == 'EMAIL') {
 			// Send the email
-			$message = " To activate your Giftbox account, please click on this link:\n\n";
-			$message .= $app_url . '/activate.php?email=' . urlencode($email_address) . "&key=$activation_key";
-			mail($email_address, 'Giftbox Registration Confirmation', $message, 'From:'. $sender_email);
+			$email_message = " To activate your Giftbox account, please click on this link:\n\n";
+			$email_message .= $app_url . '/activate.php?email=' . urlencode($email_address) . "&key=$activation_key";
+			mail($email_address, 'Giftbox Registration Confirmation', $email_message, 'From:'. $sender_email);
 		}
 		$message = 'SUCCESS';
 
@@ -58,7 +60,11 @@ if (!$result) {
 	}
 }
 
-$json = '{"message":"'.$message.'"}';
+$json = '{"message":"'.$message.'"';
+if ($message == "SUCCESS") {
+	$json .= ',"user_id":"'.$user_id.'","app_root":"'.$app_root.'"';
+}
+$json .= '}';
 
 echo $json;
 
