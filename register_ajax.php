@@ -1,9 +1,10 @@
 <?php
-include_once ('util.php');
-include_once ('config.php');
-include_once ('password.php');
-include_once ('eventLogger.class.php');
-include_once ('database.php');
+include_once 'util.php';
+include_once 'config.php';
+include_once 'mail.php';
+include_once 'password.php';
+include_once 'eventLogger.class.php';
+include_once 'database.php';
 
 $message = "Unable to register at this time.";
 $email_address = $_GET['email'];
@@ -46,7 +47,7 @@ if (!$result) {
 			// Send the email
 			$email_message = " To activate your Giftbox account, please click on this link:\n\n";
 			$email_message .= $app_url . '/activate.php?email=' . urlencode($email_address) . "&key=$activation_key";
-			mail($email_address, 'Giftbox Registration Confirmation', $email_message, 'From:'. $sender_email);
+			sendMail($email_address, 'Giftbox Registration Confirmation', $email_message, $sender_email);
 		}
 		$message = 'SUCCESS';
 
