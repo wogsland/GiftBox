@@ -2,11 +2,11 @@
 if ($_SERVER['SERVER_NAME'] == "giftbox.com") {
 	$server = "localhost";
 	$app_url = "http://giftbox.com";
-	$useGoogleMail = false;
+	$use_google_mail = false;
 } else if ($_SERVER['SERVER_NAME'] == "stone-timing-557.appspot.com") {
 	$server = "173.194.244.175";
 	$app_url = "http://stone-timing-557.appspot.com";
-	$useGoogleMail = true;
+	$use_google_mail = true;
 }
 $user = "giftbox";
 $password = "giftbox";
