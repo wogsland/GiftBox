@@ -85,7 +85,7 @@ function register(first_name, last_name, email, password) {
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 			if (jsonObj.message == 'SUCCESS'){
 				$.magnificPopup.close();
-				document.location.href = readCookie('app_root') ;
+				document.location.href = jsonObj.app_root;
 			}
 			else {
 				document.getElementById('signup-message').innerHTML = jsonObj.message;
