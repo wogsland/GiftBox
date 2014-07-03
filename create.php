@@ -1,5 +1,6 @@
 <?php
 	include_once 'util.php';
+	include_once 'config';
 	if (!logged_in()) {
 		header('Location: /giftbox');
 		break;
