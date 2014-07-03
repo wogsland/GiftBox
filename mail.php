@@ -3,7 +3,8 @@ include_once 'config.php';
 use \google\appengine\api\mail\Message;
 
 function sendMail($to, $subject, $message, $from) {
-	if ($useGoogleMail) {
+	global $use_google_mail;
+	if ($use_google_mail) {
 		try
 		{
 		  $message = new Message();
