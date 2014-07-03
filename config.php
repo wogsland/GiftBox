@@ -13,5 +13,5 @@ $password = "giftbox";
 $database = "giftbox";
 $app_root = "/";
 $app_name = "Giftbox";
-$sender_email = "admin@giftbox.com";
+$sender_email = "john_hall@corridor-inc.com";
 ?>
