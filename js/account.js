@@ -83,7 +83,7 @@ function register(first_name, last_name, email, password) {
 		xmlhttp.send();
 		try {
 			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESSS'){
+			if (jsonObj.message == 'SUCCESS'){
 				$.magnificPopup.close();
 				document.location.href = readCookie('app_root') ;
 			}
