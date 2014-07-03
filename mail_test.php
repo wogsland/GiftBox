@@ -1,5 +1,6 @@
 <?php
 include_once 'config.php';
+include_once 'mail.php';
 use \google\appengine\api\mail\Message;
 
 try {
