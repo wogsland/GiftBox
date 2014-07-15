@@ -21,7 +21,11 @@
     <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/create.js"></script>
-	
+	<script>
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+	</script>	
 </head>
 <body>
 	<div id="content-wrapper">
@@ -72,11 +76,32 @@
 					</div>
 				</div>
 			</div>
+
 			<div id="uploads">
-				<div id="image-drop-zone">
-					<p id="image-drop-text">Drag and drop image files here</p>
+				<div id="tabs">
+					<ul>
+						<li><a href="#tab-1">Images</a></li>
+						<li><a href="#tab-2">Downloads</a></li>
+					</ul>
+					<div class="tab-panel" id="tab-1">
+						<div class="icon-container" id="images-icon-container">
+							<a id="select-image" title="Select image files" href="">Select image files</a>
+						</div>
+						<div id="image-drop-zone">
+							<p id="image-drop-text">Drag and drop image files here</p>
+						</div>
+					</div>
+					<div class="tab-panel" id="tab-2">
+						<div class="icon-container" id="media-icon-container">
+							<a id="select-media" title="Select media files" href="">Select music/video files</a>
+						</div>
+						<form class="search-form">
+							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search">
+						</form>
+					</div>
 				</div>
 			</div>
+			
 			<div id="templates">
 				<div id="template-button-container">
 					<a class="open-popup-link template-button" id="send-button" data-effect="mfp-3d-unfold" href="#send-form">Send</a>
