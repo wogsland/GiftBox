@@ -80,10 +80,10 @@
 			<div id="uploads">
 				<div id="tabs">
 					<ul>
-						<li><a href="#tab-1">Images</a></li>
+						<li><a href="#images-tab">Images</a></li>
 						<li><a href="#tab-2">Downloads</a></li>
 					</ul>
-					<div class="tab-panel" id="tab-1">
+					<div class="tab-panel" id="images-tab">
 						<div class="icon-container" id="images-icon-container">
 							<ul class="icon-list">
 								<li>
