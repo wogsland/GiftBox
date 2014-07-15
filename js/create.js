@@ -281,27 +281,27 @@ function handleHorizontalDrag(target, movement) {
 	var newWidth;
 	var newLeft;
 
-	for (index = 0; index < target.leftBentos.length; ++index) {
-		var leftBento = target.leftBentos[index];
-		newWidth = parseInt(getComputedStyle(leftBento).width, 10) + movement;
-		leftBento.style.width = newWidth + "px";
-		var leftImage = document.getElementById(leftBento.id + "-image");
+	for (index = 0; index < target.leftDependents.length; ++index) {
+		var leftDependent = target.leftDependents[index];
+		newWidth = parseInt(getComputedStyle(leftDependent).width, 10) + movement;
+		leftDependent.style.width = newWidth + "px";
+		var leftImage = document.getElementById(leftDependent.id + "-image");
 		if (leftImage) {
-			var leftContainer = document.getElementById(leftBento.id + "-image-container");
-			resizeContents(leftBento, leftImage, leftContainer);
+			var leftContainer = document.getElementById(leftDependent.id + "-image-container");
+			resizeContents(leftDependent, leftImage, leftContainer);
 		}
 	}	
 
-	for (index = 0; index < target.rightBentos.length; ++index) {
-		var rightBento = target.rightBentos[index];
-		newWidth = parseInt(getComputedStyle(rightBento).width, 10) - movement;
-		newLeft = parseInt(getComputedStyle(rightBento, null).left, 10) + movement;
-		rightBento.style.left = newLeft + "px";
-		rightBento.style.width = newWidth + "px";
-		var rightImage = document.getElementById(rightBento.id + "-image");
+	for (index = 0; index < target.rightDependents.length; ++index) {
+		var rightDependent = target.rightDependents[index];
+		newWidth = parseInt(getComputedStyle(rightDependent).width, 10) - movement;
+		newLeft = parseInt(getComputedStyle(rightDependent, null).left, 10) + movement;
+		rightDependent.style.left = newLeft + "px";
+		rightDependent.style.width = newWidth + "px";
+		var rightImage = document.getElementById(rightDependent.id + "-image");
 		if (rightImage) {
-			var rightContainer = document.getElementById(rightBento.id + "-image-container");
-			resizeContents(rightBento, rightImage, rightContainer);
+			var rightContainer = document.getElementById(rightDependent.id + "-image-container");
+			resizeContents(rightDependent, rightImage, rightContainer);
 		}
 	}
 }
@@ -309,49 +309,53 @@ function handleHorizontalDrag(target, movement) {
 function handleVerticalDrag(target, movement) {
 	var index;
 
-	for (index = 0; index < target.topBentos.length; ++index) {
-		var topBento = target.topBentos[index];
-		var newHeight = parseInt(getComputedStyle(topBento).height, 10) + movement;
-		topBento.style.height = newHeight + "px";
-		var topSlider = document.getElementById(topBento.id + "-slider");
-		topSlider.style.height = (newHeight - 45) + "px";
-		var topImage = document.getElementById(topBento.id + "-image");
+	for (index = 0; index < target.topDependents.length; ++index) {
+		var topDependent = target.topDependents[index];
+		var newHeight = parseInt(getComputedStyle(topDependent).height, 10) + movement;
+		topDependent.style.height = newHeight + "px";
+		var topSlider = document.getElementById(topDependent.id + "-slider");
+		if (topSlider) {
+			topSlider.style.height = (newHeight - 45) + "px";
+		}
+		var topImage = document.getElementById(topDependent.id + "-image");
 		if (topImage) {
-			var topContainer = document.getElementById(topBento.id + "-image-container");
-			resizeContents(topBento, topImage, topContainer);
+			var topContainer = document.getElementById(topDependent.id + "-image-container");
+			resizeContents(topDependent, topImage, topContainer);
 		}
 	}	
 
-	for (index = 0; index < target.bottomBentos.length; ++index) {
-		var bottomBento = target.bottomBentos[index];
-		bottomBento.style.top = (parseInt(getComputedStyle(bottomBento, null).top, 10) + movement) + "px";
-		var newHeight = parseInt(getComputedStyle(bottomBento).height, 10) - movement;
-		bottomBento.style.height = newHeight + "px";
-		var bottomSlider = document.getElementById(bottomBento.id + "-slider");
-		bottomSlider.style.height = (newHeight - 45) + "px";
-		var bottomImage = document.getElementById(bottomBento.id + "-image");
+	for (index = 0; index < target.bottomDependents.length; ++index) {
+		var bottomDependent = target.bottomDependents[index];
+		bottomDependent.style.top = (parseInt(getComputedStyle(bottomDependent, null).top, 10) + movement) + "px";
+		var newHeight = parseInt(getComputedStyle(bottomDependent).height, 10) - movement;
+		bottomDependent.style.height = newHeight + "px";
+		var bottomSlider = document.getElementById(bottomDependent.id + "-slider");
+		if (bottomSlider) {
+			bottomSlider.style.height = (newHeight - 45) + "px";
+		}
+		var bottomImage = document.getElementById(bottomDependent.id + "-image");
 		if (bottomImage) {
-			var bottomContainer = document.getElementById(bottomBento.id + "-image-container");
-			resizeContents(bottomBento, bottomImage, bottomContainer);
+			var bottomContainer = document.getElementById(bottomDependent.id + "-image-container");
+			resizeContents(bottomDependent, bottomImage, bottomContainer);
 		}
 	}
 }
 
 $(function() {
 	var divider;
-	
+
+	// Template #1
 	divider = document.getElementById("divider-1-1");
-	divider.leftBentos = [document.getElementById("bento-1-1")]
-	divider.rightBentos = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")]
+	divider.leftDependents = [document.getElementById("bento-1-1")]
+	divider.rightDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")]
 
 	divider = document.getElementById("divider-1-2");
-	divider.leftBentos = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-1")];
-	divider.rightBentos = [document.getElementById("bento-1-3"), document.getElementById("bento-1-4"), document.getElementById("divider-1-3"), document.getElementById("divider-container-1-3")];
+	divider.leftDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-1")];
+	divider.rightDependents = [document.getElementById("bento-1-3"), document.getElementById("bento-1-4"), document.getElementById("divider-1-3"), document.getElementById("divider-container-1-3")];
 
 	divider = document.getElementById("divider-1-3");
-	divider.topBentos = [document.getElementById("bento-1-3")];
-	divider.bottomBentos = [document.getElementById("bento-1-4")];
-
+	divider.topDependents = [document.getElementById("bento-1-3")];
+	divider.bottomDependents = [document.getElementById("bento-1-4")];
 
 	$("#divider-1-1").draggable({
 		axis: "x",
@@ -379,16 +383,126 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
+	
+	// Template #2
+	divider = document.getElementById("divider-2-1");
+	divider.leftDependents = [document.getElementById("bento-2-1"), document.getElementById("bento-2-2"), document.getElementById("divider-2-2"), document.getElementById("divider-container-2-2")]
+	divider.rightDependents = [document.getElementById("bento-2-3"), document.getElementById("bento-2-4"), document.getElementById("bento-2-5"), document.getElementById("divider-2-3"), document.getElementById("divider-2-4"), document.getElementById("divider-container-2-3"), document.getElementById("divider-container-2-4")]
 
-/*	
-	Draggable.create("#divider-1-2", {
-        type:"x",
-        onDrag: function() {
-			handleHorizontalDrag(this.target, this.pointerEvent.mozMovementX);
-			console.log("this.x: "+this.x + " this.pointerEvent.mozMovementX: "+this.pointerEvent.mozMovementX);
+	divider = document.getElementById("divider-2-2");
+	divider.topDependents = [document.getElementById("bento-2-1")];
+	divider.bottomDependents = [document.getElementById("bento-2-2")];
+
+	divider = document.getElementById("divider-2-3");
+	divider.topDependents = [document.getElementById("bento-2-3")];
+	divider.bottomDependents = [document.getElementById("bento-2-4"), document.getElementById("divider-container-2-4")];
+
+	divider = document.getElementById("divider-2-4");
+	divider.topDependents = [document.getElementById("bento-2-4"), document.getElementById("divider-container-2-3")];
+	divider.bottomDependents = [document.getElementById("bento-2-5")];
+
+	$("#divider-2-1").draggable({
+		axis: "x",
+		containment: "#divider-container-2-1",
+		drag: function(event, ui) {
+			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
+			ui.originalPosition.left = ui.position.left;
 		}
-    });
-*/
+	});
+	
+	$("#divider-2-2").draggable({
+		axis: "y",
+		containment: "#divider-container-2-2",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+	
+	$("#divider-2-3").draggable({
+		axis: "y",
+		containment: "#divider-container-2-3",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+	
+	$("#divider-2-4").draggable({
+		axis: "y",
+		containment: "#divider-container-2-4",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+	
+	// Template #3
+	divider = document.getElementById("divider-3-1");
+	divider.leftDependents = [document.getElementById("bento-3-1"), document.getElementById("bento-3-2"), document.getElementById("divider-3-3"), document.getElementById("divider-container-3-3")];
+	divider.rightDependents = [document.getElementById("bento-3-3"), document.getElementById("bento-3-4"), document.getElementById("divider-3-4"), document.getElementById("divider-container-3-2")];
+
+	divider = document.getElementById("divider-3-2");
+	divider.leftDependents = [document.getElementById("bento-3-3"), document.getElementById("bento-3-4"), document.getElementById("divider-3-4"), document.getElementById("divider-container-3-1"), document.getElementById("divider-container-3-4")];
+	divider.rightDependents = [document.getElementById("bento-3-5"), document.getElementById("bento-3-6"), document.getElementById("divider-3-5"), document.getElementById("divider-container-3-5")];
+
+	divider = document.getElementById("divider-3-3");
+	divider.topDependents = [document.getElementById("bento-3-1")];
+	divider.bottomDependents = [document.getElementById("bento-3-2")];
+
+	divider = document.getElementById("divider-3-4");
+	divider.topDependents = [document.getElementById("bento-3-3")];
+	divider.bottomDependents = [document.getElementById("bento-3-4")];
+
+	divider = document.getElementById("divider-3-5");
+	divider.topDependents = [document.getElementById("bento-3-5")];
+	divider.bottomDependents = [document.getElementById("bento-3-6")];
+
+	$("#divider-3-1").draggable({
+		axis: "x",
+		containment: "#divider-container-3-1",
+		drag: function(event, ui) {
+			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
+			ui.originalPosition.left = ui.position.left;
+		}
+	});
+	
+	$("#divider-3-2").draggable({
+		axis: "x",
+		containment: "#divider-container-3-2",
+		drag: function(event, ui) {
+			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
+			ui.originalPosition.left = ui.position.left;
+		}
+	});
+
+	$("#divider-3-3").draggable({
+		axis: "y",
+		containment: "#divider-container-3-3",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+	
+	$("#divider-3-4").draggable({
+		axis: "y",
+		containment: "#divider-container-3-4",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+	
+	$("#divider-3-5").draggable({
+		axis: "y",
+		containment: "#divider-container-3-5",
+		drag: function(event, ui) {
+			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+			ui.originalPosition.top = ui.position.top;
+		}
+	});
+
 });
 
 function stack(top, middle, bottom) {

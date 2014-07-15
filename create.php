@@ -83,6 +83,11 @@
 				</div>
 				<div id="template-container">
 					<div class="template" id="template-3">
+						<div class="divider-container" id="divider-container-3-1"></div>
+						<div class="divider-container" id="divider-container-3-2"></div>
+						<div class="divider-container" id="divider-container-3-3"></div>
+						<div class="divider-container" id="divider-container-3-4"></div>
+						<div class="divider-container" id="divider-container-3-5"></div>
 						<div class="bento" id="bento-3-1">
 							<div class="image-slider" id="bento-3-1-slider"></div>
 							<div class="close-button" id="bento-3-1-close" onclick="removeImage(this.parentElement)"></div>
@@ -107,8 +112,17 @@
 							<div class="image-slider" id="bento-3-6-slider"></div>
 							<div class="close-button" id="bento-3-6-close" onclick="removeImage(this.parentElement)"></div>
 						</div>
+						<div class="divider" id="divider-3-1"></div>
+						<div class="divider" id="divider-3-2"></div>
+						<div class="divider" id="divider-3-3"></div>
+						<div class="divider" id="divider-3-4"></div>
+						<div class="divider" id="divider-3-5"></div>
 					</div>
 					<div class="template" id="template-2">
+						<div class="divider-container" id="divider-container-2-1"></div>
+						<div class="divider-container" id="divider-container-2-2"></div>
+						<div class="divider-container" id="divider-container-2-3"></div>
+						<div class="divider-container" id="divider-container-2-4"></div>
 						<div class="bento" id="bento-2-1">
 							<div class="image-slider" id="bento-2-1-slider"></div>
 							<div class="close-button" id="bento-2-1-close" onclick="removeImage(this.parentElement)"></div>
@@ -129,6 +143,10 @@
 							<div class="image-slider" id="bento-2-5-slider"></div>
 							<div class="close-button" id="bento-2-5-close" onclick="removeImage(this.parentElement)"></div>
 						</div>
+						<div class="divider" id="divider-2-1"></div>
+						<div class="divider" id="divider-2-2"></div>
+						<div class="divider" id="divider-2-3"></div>
+						<div class="divider" id="divider-2-4"></div>
 					</div>
 					<div class="template" id="template-1">
 						<div class="divider-container" id="divider-container-1-1"></div>
