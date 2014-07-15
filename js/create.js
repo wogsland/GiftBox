@@ -131,7 +131,7 @@ function handleAddImageDragEnd(e) {
 }
 
 function handleFiles(files) {
-	var tabs = document.getElementById("tabs");
+	var tabs = document.getElementById("images-tab");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 		var imageType = /image.*/;
