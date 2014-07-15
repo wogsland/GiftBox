@@ -87,7 +87,7 @@
 						<div class="icon-container" id="images-icon-container">
 							<ul class="icon-list">
 								<li>
-									<img src="images/computer.png" height="55" width="57">
+									<img src="images/computer.png">
 									<input type="file" name="file" id="open-image-file" />
 								</li>
 							</ul>
@@ -100,7 +100,7 @@
 						<div class="icon-container" id="media-icon-container">
 							<ul class="icon-list">
 								<li>
-									<img src="images/computer.png" height="55" width="57">
+									<img src="images/computer.png">
 									<input type="file" name="file" id="open-image-file" />
 								</li>
 							</ul>
