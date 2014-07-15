@@ -131,7 +131,7 @@ function handleAddImageDragEnd(e) {
 }
 
 function handleFiles(files) {
-	var uploads = document.getElementById("uploads");
+	var tabs = document.getElementById("tabs");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 		var imageType = /image.*/;
@@ -145,7 +145,7 @@ function handleFiles(files) {
 		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
-		uploads.appendChild(img);
+		tabs.appendChild(img);
 	}
 }
 

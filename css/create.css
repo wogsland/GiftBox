@@ -565,6 +565,49 @@ p {
 	float: right;
 }
 
+#tabs {
+	width: 198px;
+	display: inline-block;
+    vertical-align: top;
+	font-size: 75%;
+	border: none;
+}
+
+#tab-1 {
+	padding: 5px;
+}
+
+#tab-2 {
+	padding: 5px;
+}
+
+.icon-container {
+	margin: 10px auto;
+	width: 100%;
+	display: inline-block;
+}	
+
+#select-image {
+    background: url("../images/computer.png");
+	bacground-position: center;
+    display: block;
+    width: 57px;
+    height: 55px;
+    text-indent: -9999px;
+	display: inline-block;
+}
+
+#select-media {
+    background: url("../images/computer.png");
+	bacground-position: center;
+    display: block;
+    width: 57px;
+    height: 55px;
+    text-indent: -9999px;
+	display: inline-block;
+}
+
+
 #image-drop-zone {
 	padding: 10px;
 	text-align: center;
@@ -572,6 +615,7 @@ p {
 	border-radius: 5px;
 	margin: 5px;
 	height: 150px;
+	display: inline-block;
 }
 
 #image-drop-zone.over {
