@@ -149,6 +149,15 @@ function handleFiles(files) {
 	}
 }
 
+function handleImageFileSelect(evt) {
+	handleFiles(evt.target.files);
+}
+
+function handleMediaFileSelect(evt) {
+
+}
+
+
 //******************************************************
 function hideControls(bento) {
 	var sliderId = bento.id + '-slider';

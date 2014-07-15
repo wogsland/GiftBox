@@ -587,18 +587,7 @@ p {
 	display: block;
 }	
 
-#select-image {
-    background: url("../images/computer.png");
-    width: 57px;
-    height: 55px;
-    text-indent: -9999px;
-	display: inline-block;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-#open-image-file {
+#select-image-file {
 	opacity: 0;
 	width: 48px;
 	height: 48px;
@@ -607,14 +596,13 @@ p {
 	left: 0px;
 }
 
-#select-media {
-    background: url("../images/computer.png");
-	bacground-position: center;
-    display: block;
-    width: 57px;
-    height: 55px;
-    text-indent: -9999px;
-	display: inline-block;
+#select-media-file {
+	opacity: 0;
+	width: 48px;
+	height: 48px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }
 
 

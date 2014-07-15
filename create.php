@@ -87,8 +87,8 @@
 						<div class="icon-container" id="images-icon-container">
 							<ul class="icon-list">
 								<li>
-									<img src="images/computer.png">
-									<input type="file" name="file" id="open-image-file" />
+									<img id="select-image" src="images/computer.png">
+									<input type="file" multiple id="select-image-file" />
 								</li>
 							</ul>
 						</div>
@@ -100,8 +100,8 @@
 						<div class="icon-container" id="media-icon-container">
 							<ul class="icon-list">
 								<li>
-									<img src="images/computer.png">
-									<input type="file" name="file" id="open-image-file" />
+									<img id="select-media" src="images/computer.png">
+									<input type="file" multiple id="select-media-file" />
 								</li>
 							</ul>
 						</div>
@@ -240,6 +240,9 @@
 		imageDropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
 		imageDropZone.addEventListener('drop', handleAddImageDrop, false);
 		imageDropZone.addEventListener('dragend', handleAddImageDragEnd, false);
+		
+		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
+		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
 	</script>
 	
 </body>
