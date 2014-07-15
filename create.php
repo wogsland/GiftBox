@@ -85,7 +85,12 @@
 					</ul>
 					<div class="tab-panel" id="tab-1">
 						<div class="icon-container" id="images-icon-container">
-							<a id="select-image" title="Select image files" href="">Select image files</a>
+							<ul class="icon-list">
+								<li>
+									<img src="images/computer.png" height="55" width="57">
+									<input type="file" name="file" id="open-image-file" />
+								</li>
+							</ul>
 						</div>
 						<div id="image-drop-zone">
 							<p id="image-drop-text">Drag and drop image files here</p>
@@ -93,7 +98,12 @@
 					</div>
 					<div class="tab-panel" id="tab-2">
 						<div class="icon-container" id="media-icon-container">
-							<a id="select-media" title="Select media files" href="">Select music/video files</a>
+							<ul class="icon-list">
+								<li>
+									<img src="images/computer.png" height="55" width="57">
+									<input type="file" name="file" id="open-image-file" />
+								</li>
+							</ul>
 						</div>
 						<form class="search-form">
 							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search">
