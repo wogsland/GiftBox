@@ -92,12 +92,12 @@ p {
 	margin-top: 5px;
 }
 
-.thumb-image {
-	margin: 4px;
-}
-
 .template-thumbnail:hover {
 	border: solid 2px #CBCBCB;
+}
+
+.thumb-image {
+	margin: 4px;
 }
 
 /*----------------------------------------*/
@@ -623,6 +623,7 @@ p {
 
 .drop-zone-text {
 	vertical-align: middle;
+    pointer-events: none;
 }
 
 .photo-thumbnail {
@@ -636,4 +637,18 @@ p {
 
 .photo-thumbnail:hover {
 	border: solid 2px gray;
+}
+
+.download-icon {
+    height: 50px;
+    width: 50px;
+    opacity: .5;
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.download-icon:hover {
+    opacity: 1;
 }
