@@ -719,7 +719,7 @@ h3#big-feature {
 }
 
 .ch-item:hover .ch-info-back {
-	background: rgba(41,49,41, 0.8));
+	background: rgba(41,49,41, 0.8);
 }
 
 
@@ -1111,9 +1111,6 @@ footer ul.social li.twitter a {
     
 	src:   url('bariol_regular-webfont.woff') format("woff");
     
-}
-
-
 }
 
 body, div, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, img, form, fieldset, input, textarea, blockquote {

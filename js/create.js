@@ -1,3 +1,7 @@
+var imageType = /image.*/;
+var videoType = /video.*/;
+var audioType = /audio.*/;
+
 $(document).ready(function() {
 	$('.open-popup-link').magnificPopup({
 		type: 'inline',
@@ -17,7 +21,7 @@ function sendGiftbox() {
 		xmlhttp.send();
 		try {
 			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESSS'){
+			if (jsonObj.message === 'SUCCESSS'){
 				$.magnificPopup.close();
 			}
 			else {
@@ -37,7 +41,7 @@ function handleDragEnter(e) {
 
 function handleDragOver(e) {
 	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
+		e.preventDefault();
 	}
 	e.dataTransfer.dropEffect = 'move';
 
@@ -52,45 +56,67 @@ function handleDrop(e) {
 	if (e.preventDefault) {
 		e.preventDefault(); // Necessary. Allows us to drop.
 	}
-	this.classList.remove('over');
-	
-	// remove any previously dropped image
-	removeImage(this);
-	
-	// get the drop data
-	var src = e.dataTransfer.getData('text');
-	
-	// create an IMG element
-	var img = document.createElement('img');
-	
-	// create a DIV element
-	var div = document.createElement('div');
-	
-	// set the IMG attributes
-	img.setAttribute('src', src);
-	var imageId = this.id + '-image';
-	img.id = imageId
-	
-	// set the DIV attributes
-	var divId = this.id + '-image-container';
-	div.id = divId;
-	div.style.position = 'absolute';
-	
-	// add the IMG to the DIV, add the DIV to the bento
-	div.appendChild(img);
-	this.appendChild(div);
+	var mimeType = e.dataTransfer.getData('mime_type');
+	var img;
+	var imageId;
+	if (mimeType.match(imageType)) {
+		this.classList.remove('over');
 
-	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + div.id});
-	
-	// now resize the image so that it covers the bento
-	resizeImage(img, this);
-	
-	// resize the image container so that the image has scroll containment
-	resizeContainer(this, img, div);	
-	
-	// change the hover for the bento to show the slider
-	showControls(this);
+		// remove any previously dropped image
+		removeImage(this);
+
+		// get the drop data
+		var src = e.dataTransfer.getData('text');
+//		var item0 = e.dataTransfer.getData('text/plain');
+//		var item1 = e.dataTransfer.getData('text/uri-list');
+//		var item2 = e.dataTransfer.getData('text/html');
+
+		// create an IMG element
+		img = document.createElement('img');
+
+		// create a DIV element
+		var div = document.createElement('div');
+
+		// set the IMG attributes
+		img.setAttribute('src', src);
+		imageId = this.id + '-image';
+		img.id = imageId;
+
+		// set the DIV attributes
+		var divId = this.id + '-image-container';
+		div.id = divId;
+		div.style.position = 'absolute';
+
+		// add the IMG to the DIV, add the DIV to the bento
+		div.appendChild(img);
+		this.appendChild(div);
+
+		// make the IMG draggable inside the DIV
+		$('#'+ img.id).draggable({ containment: "#" + div.id});
+
+		// now resize the image so that it covers the bento
+		resizeImage(img, this);
+
+		// resize the image container so that the image has scroll containment
+		resizeContainer(this, img, div);	
+
+		// change the hover for the bento to show the slider
+		showControls(this);
+		
+		// bring existing download icon back to the front
+		var iconId = this.id + "-download-icon";
+		var downloadIcon = document.getElementById(iconId);
+		if (downloadIcon) {
+			$('#'+iconId).css('z-index', "9999");
+		}
+	} else if (mimeType.match(audioType) || mimeType.match(videoType)) {
+		img = document.createElement('img');
+		img.setAttribute('src', 'images/download.jpg');
+		imageId = this.id + '-download-icon';
+		img.id = imageId;
+		img.classList.add("download-icon");
+		this.appendChild(img);
+	}
 	
 	return false;
 }
@@ -99,23 +125,26 @@ function handleDragEnd(e) {
 	this.classList.remove('over');
 }
 
-//******* ADD IMAGE DRAG/DROP HANDLERS *****************
+function handleDragStart(e) {
+	e.dataTransfer.setData("mime_type", this.file.type);
+}
 
-function handleAddImageDragLeave(e) {
-	this.classList.remove('over');
+//******* SIDEBAR DRAG/DROP HANDLERS *****************
+
+function handleAddImageDragEnter(e) {
+	this.classList.add('over');
 }
 
 function handleAddImageDragOver(e) {
 	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
+		e.preventDefault();
 	}
 	e.dataTransfer.dropEffect = 'move';
 
 	return false;
 }
-
-function handleAddImageDragEnter(e) {
-	this.classList.add('over');
+function handleAddImageDragLeave(e) {
+	this.classList.remove('over');
 }
 
 function handleAddImageDrop(e) {
@@ -142,10 +171,10 @@ function handleImageFiles(files) {
 	var tabs = document.getElementById("images-tab");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-		var imageType = /image.*/;
 
 		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
+			alert("This drop zone only accepts image files (.jpg, .png, etc.).");
 			continue;
 		}
 
@@ -153,6 +182,7 @@ function handleImageFiles(files) {
 		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
+		img.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(img);
 	}
 }
@@ -160,25 +190,27 @@ function handleImageFiles(files) {
 function handleMediaFiles(files) {
     var tabs = document.getElementById("media-tab");
     for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var videoType = /video.*/;
-            var audioType = /audio.*/;
+		var file = files[i];
 
-            // if not an image go on to next file
-            if (!file.type.match(videoType) && !file.type.match(audioType)) {
-                    continue;
-            }
+		// if not an image go on to next file
+		if (!file.type.match(videoType) && !file.type.match(audioType)) {
+			alert("This drop zone only accepts music and video files (.mp3, .mp4, etc.).");
+			continue;
+		}
 
-            var img = document.createElement("img");
-            img.classList.add("photo-thumbnail");
-			if (file.type.match(videoType)) {
-				img.src = "images/video.jpg";
-			}
-			if (file.type.match(audioType)) {
-				img.src = "images/audio.jpg"
-			}
-            img.file = file;
-            tabs.appendChild(img);
+		var element;
+		if (file.type.match(videoType)) {
+			element = document.createElement("img");
+			element.src = "images/video.jpg";
+		}
+		if (file.type.match(audioType)) {
+			element = document.createElement("img");
+			element.src = "images/audio.jpg";
+		}
+		element.classList.add("photo-thumbnail");
+		element.file = file;
+		element.addEventListener('dragstart', handleDragStart, false);
+		tabs.appendChild(element);
     }
 
 }
@@ -389,8 +421,8 @@ $(function() {
 
 	// Template #1
 	divider = document.getElementById("divider-1-1");
-	divider.leftDependents = [document.getElementById("bento-1-1")]
-	divider.rightDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")]
+	divider.leftDependents = [document.getElementById("bento-1-1")];
+	divider.rightDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")];
 
 	divider = document.getElementById("divider-1-2");
 	divider.leftDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-1")];
@@ -429,8 +461,8 @@ $(function() {
 	
 	// Template #2
 	divider = document.getElementById("divider-2-1");
-	divider.leftDependents = [document.getElementById("bento-2-1"), document.getElementById("bento-2-2"), document.getElementById("divider-2-2"), document.getElementById("divider-container-2-2")]
-	divider.rightDependents = [document.getElementById("bento-2-3"), document.getElementById("bento-2-4"), document.getElementById("bento-2-5"), document.getElementById("divider-2-3"), document.getElementById("divider-2-4"), document.getElementById("divider-container-2-3"), document.getElementById("divider-container-2-4")]
+	divider.leftDependents = [document.getElementById("bento-2-1"), document.getElementById("bento-2-2"), document.getElementById("divider-2-2"), document.getElementById("divider-container-2-2")];
+	divider.rightDependents = [document.getElementById("bento-2-3"), document.getElementById("bento-2-4"), document.getElementById("bento-2-5"), document.getElementById("divider-2-3"), document.getElementById("divider-2-4"), document.getElementById("divider-container-2-3"), document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-2");
 	divider.topDependents = [document.getElementById("bento-2-1")];
