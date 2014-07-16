@@ -2,8 +2,7 @@
 	include_once 'util.php';
 	include_once 'config.php';
 	if (!logged_in()) {
-		header('Location: /giftbox');
-		break;
+            header('Location: /giftbox');
 	}
 ?>
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
 	<link rel="stylesheet" href="css/create.css" />
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+        <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/create.js"></script>
 	<script>
@@ -81,7 +80,7 @@
 				<div id="tabs">
 					<ul>
 						<li><a href="#images-tab">Images</a></li>
-						<li><a href="#tab-2">Downloads</a></li>
+						<li><a href="#media-tab">Downloads</a></li>
 					</ul>
 					<div class="tab-panel" id="images-tab">
 						<div class="icon-container" id="images-icon-container">
@@ -92,11 +91,11 @@
 								</li>
 							</ul>
 						</div>
-						<div id="image-drop-zone">
-							<p id="image-drop-text">Drag and drop image files here</p>
+						<div class="file-drop-zone" id="image-drop-zone">
+							<p class="drop-zone-text">Drag and drop image files here</p>
 						</div>
 					</div>
-					<div class="tab-panel" id="tab-2">
+					<div class="tab-panel" id="media-tab">
 						<div class="icon-container" id="media-icon-container">
 							<ul class="icon-list">
 								<li>
@@ -105,9 +104,14 @@
 								</li>
 							</ul>
 						</div>
+						<div class="file-drop-zone" id="media-drop-zone">
+							<p class="drop-zone-text">Drag and drop music/video files here</p>
+						</div>
+<!--
 						<form class="search-form">
 							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search">
 						</form>
+-->
 					</div>
 				</div>
 			</div>
@@ -234,12 +238,19 @@
 			bento.addEventListener('dragend', handleDragEnd, false);
 		});
 		
-		var imageDropZone = document.getElementById("image-drop-zone");
-		imageDropZone.addEventListener('dragenter', handleAddImageDragEnter, false);
-		imageDropZone.addEventListener('dragover', handleAddImageDragOver, false);
-		imageDropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
-		imageDropZone.addEventListener('drop', handleAddImageDrop, false);
-		imageDropZone.addEventListener('dragend', handleAddImageDragEnd, false);
+		var dropZone = document.getElementById("image-drop-zone");
+		dropZone.addEventListener('dragenter', handleAddImageDragEnter, false);
+		dropZone.addEventListener('dragover', handleAddImageDragOver, false);
+		dropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
+		dropZone.addEventListener('drop', handleAddImageDrop, false);
+		dropZone.addEventListener('dragend', handleAddImageDragEnd, false);
+		
+		dropZone = document.getElementById("media-drop-zone");
+		dropZone.addEventListener('dragenter', handleAddImageDragEnter, false);
+		dropZone.addEventListener('dragover', handleAddImageDragOver, false);
+		dropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
+		dropZone.addEventListener('drop', handleAddMediaDrop, false);
+		dropZone.addEventListener('dragend', handleAddImageDragEnd, false);
 		
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);

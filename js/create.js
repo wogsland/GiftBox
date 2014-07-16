@@ -123,14 +123,22 @@ function handleAddImageDrop(e) {
 		e.preventDefault(); // Necessary. Allows us to drop.
 	}
 	this.classList.remove('over');
-	handleFiles(e.dataTransfer.files);
+	handleImageFiles(e.dataTransfer.files);
+}
+
+function handleAddMediaDrop(e) {
+	if (e.preventDefault) {
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	this.classList.remove('over');
+	handleMediaFiles(e.dataTransfer.files);
 }
 
 function handleAddImageDragEnd(e) {
 	this.classList.remove('over');
 }
 
-function handleFiles(files) {
+function handleImageFiles(files) {
 	var tabs = document.getElementById("images-tab");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
@@ -149,12 +157,38 @@ function handleFiles(files) {
 	}
 }
 
+function handleMediaFiles(files) {
+    var tabs = document.getElementById("media-tab");
+    for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var videoType = /video.*/;
+            var audioType = /audio.*/;
+
+            // if not an image go on to next file
+            if (!file.type.match(videoType) && !file.type.match(audioType)) {
+                    continue;
+            }
+
+            var img = document.createElement("img");
+            img.classList.add("photo-thumbnail");
+			if (file.type.match(videoType)) {
+				img.src = "images/video.jpg";
+			}
+			if (file.type.match(audioType)) {
+				img.src = "images/audio.jpg"
+			}
+            img.file = file;
+            tabs.appendChild(img);
+    }
+
+}
+
 function handleImageFileSelect(evt) {
-	handleFiles(evt.target.files);
+	handleImageFiles(evt.target.files);
 }
 
 function handleMediaFileSelect(evt) {
-
+    handleMediaFiles(evt.target.files);
 }
 
 
