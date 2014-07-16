@@ -24,9 +24,9 @@ class database
 	}
 	
 	function connect($host, $user, $pass, $dbName) {
-		this->host = $host;
-		this->user = $user;
-		this->pass = $pass;
+		$this->host = $host;
+		$this->user = $user;
+		$this->pass = $pass;
 		$this->dbName = $dbName;
 		$this->connection = mysqli_connect($this->host, $this->user, $this->pass, $this->dbName);
 	}

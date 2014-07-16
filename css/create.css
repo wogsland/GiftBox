@@ -577,7 +577,7 @@ p {
 	padding: 5px;
 }
 
-#tab-2 {
+#media-tab {
 	padding: 5px;
 }
 
@@ -606,7 +606,7 @@ p {
 }
 
 
-#image-drop-zone {
+.file-drop-zone {
 	padding: 10px;
 	text-align: center;
 	border: dashed 2px gray;
@@ -616,11 +616,11 @@ p {
 	display: inline-block;
 }
 
-#image-drop-zone.over {
+.file-drop-zone.over {
 	background-color: #00ADEF;
 }
 
-#image-drop-text {
+.drop-zone-text {
 	vertical-align: middle;
 }
 
