@@ -56,11 +56,11 @@ function handleDrop(e) {
 	if (e.preventDefault) {
 		e.preventDefault(); // Necessary. Allows us to drop.
 	}
+	this.classList.remove('over');
 	var mimeType = e.dataTransfer.getData('mime_type');
 	var img;
 	var imageId;
 	if (mimeType.match(imageType)) {
-		this.classList.remove('over');
 
 		// remove any previously dropped image
 		removeImage(this);
