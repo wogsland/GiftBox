@@ -24,9 +24,28 @@
 		$(function() {
 			$( "#tabs" ).tabs();
 		});
+
+		$(function() {
+			$( "#status-dialog" ).dialog({ autoOpen: false, dialogClass: "no-close"});
+		});
+  
+		$(function() {
+			$( "#confirm-dialog" ).dialog({
+				autoOpen: false,
+				resizable: false,
+				height:200,
+				width: 400,
+				modal: true,
+				buttons: {
+					OK: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		});
 	</script>	
 </head>
-<body>
+<body id="create-body">
 	<div id="content-wrapper">
 		<div class="header-wrapper" id="create-header-wrapper">
 			<header>
@@ -118,7 +137,10 @@
 			
 			<div id="templates">
 				<div id="template-button-container">
-					<a class="open-popup-link template-button" id="send-button" data-effect="mfp-3d-unfold" href="#send-form">Send</a>
+					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="save()">Save</a>
+					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
+					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
+					<p id="template-status"></p>
 				</div>
 				<div id="template-container">
 					<div class="template" id="template-3">
@@ -212,22 +234,31 @@
 						<div class="divider" id="divider-1-3"></div>
 					</div>
 				</div>
+				<div id="template-downloads-container">
+				</div>
 			</div>
 		</section>
 	</div>
 
 	<form id="send-form" class="white-popup mfp-hide" name="send-form">
-		<h1 class="dialog-header">Send Giftbox</h1>
+		<h1 class="dialog-header">Send to:</h1>
 		<div id="dialog-form-container">
 			<p class="dialog-message" id="send-message"></p>
-			<input id="preview-id" type="hidden" name="preview-id" value="0da4fb2c9250c2dc2f692ef051ad94cc">
 			<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30">
 			<p>Or, copy this link into an email and send it yourself:</p>
-			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="50" value="https://giftbox.com/preview.php?gbpid=0da4fb2c9250c2dc2f692ef051ad94cc" readonly="readonly">
+			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="50" value="" readonly="readonly">
 			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="sendGiftbox()">Send</a>
 		</div>
 	</form>
-
+	
+	<div id="status-dialog" title="No title specified">
+		<p id="status-text">No status text specified</p>
+	</div>
+	<div id="confirm-dialog" title="No title specified">
+		<p id="confirm-text">No status text specified</p>
+	</div>
+	
+	
 	<script>
 		var bentos = document.querySelectorAll('.bento');
 		[].forEach.call(bentos, function(bento) {
@@ -254,6 +285,18 @@
 		
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
+		
+		var template1 = document.getElementById('template-1');
+		var template2 = document.getElementById('template-2');
+		var template3 = document.getElementById('template-3');
+		template1.giftboxName = "Untitled-1"
+		template1.giftboxId = null;
+		template2.giftboxName = "Untitled-2"
+		template2.giftboxId = null;
+		template3.giftboxName = "Untitled-3"
+		template3.giftboxId = null;
+		window.top_template = template1;
+		$("#preview-link").val("");
 	</script>
 	
 </body>

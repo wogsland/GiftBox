@@ -48,9 +48,9 @@
 				<form class="pure-form" method="get" action="manage_users.php">
 					<fieldset>
 						<legend>Search for a user</legend>
-						<input name="first-name" type="text" placeholder="First Name" value="<?php echo $_GET['first-name'] ?>">
-						<input name="last-name" type="text" placeholder="Last Name" value="<?php echo $_GET['last-name'] ?>">
-						<input name="email" type="email" placeholder="Email" value="<?php echo $_GET['email'] ?>">
+						<input name="first-name" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name'])) {echo $_GET['first-name'];} ?>">
+						<input name="last-name" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name'])) {echo $_GET['last-name'];} ?>">
+						<input name="email" type="email" placeholder="Email" value="<?php if (isset($_GET['email'])) {echo $_GET['email'];} ?>">
 						<label for="admin">
 							<input name="admin" id="admin" type="checkbox" <?php if (isset($_GET['admin'])) echo "checked" ?>> Administrator
 						</label>
@@ -101,12 +101,12 @@
 		<fieldset>
 			<legend>Edit a user</legend>
 			<p class="dialog-message" id="edit-user-message"></p>
-			<input id="user-id" type="hidden">
-			<input id="first-name-edit" type="text" placeholder="First Name">
-			<input id="last-name-edit" type="text" placeholder="Last Name">
-			<input id="email-edit" type="email" placeholder="Email">
+			<input id="user-id" name="user_id" type="hidden">
+			<input id="first-name-edit" name="first_name" type="text" placeholder="First Name">
+			<input id="last-name-edit" name="last_name" type="text" placeholder="Last Name">
+			<input id="email-edit" name="email" type="email" placeholder="Email">
 			<label for="admin-edit">
-				<input id="admin-edit" type="checkbox"> Administrator
+				<input id="admin-edit" name="admin" type="checkbox" value="Y"> Administrator
 			</label>
 			<a class="pure-button pure-button-primary" href="javascript:void(0)" onclick="saveUser()">Save</a>
 		</fieldset>

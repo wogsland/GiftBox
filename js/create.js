@@ -9,27 +9,24 @@ $(document).ready(function() {
 	});
 });
 
+function readCookie(name){
+	var c = document.cookie.split('; ');
+	var cookies = {};
+	for(var i = c.length-1; i >= 0; i--){
+	   var C = c[i].split('=');
+	   cookies[C[0]] = C[1];
+	}
+	return cookies[name];
+}
+
 function sendGiftbox() {
 	if (!document.getElementById('email').value) {
 		document.getElementById('send-message').innerHTML = "Please enter a valid email address.";
 	} else {
-		var email = document.getElementById('email').value;
-		var previewId = document.getElementById('preview-id').value;
-		var xmlhttp = new XMLHttpRequest();
-		var url = "send_preview.php?email=" + encodeURIComponent(email) + "&preview_id=" + encodeURIComponent(previewId);
-		xmlhttp.open("GET", url, false);
-		xmlhttp.send();
-		try {
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message === 'SUCCESSS'){
-				$.magnificPopup.close();
-			}
-			else {
-				document.getElementById('send-message').innerHTML = jsonObj.message;
-			}
-		} catch(err) {
-			alert(xmlhttp.responseText);
-		}
+		var posting = $.post("send_preview.php", $("#send-form").serialize());
+		posting.done(function(data) {
+			$.magnificPopup.close();
+		});
 	}
 }
 
@@ -580,8 +577,96 @@ $(function() {
 
 });
 
+function openConfirm(title, text) {
+	$("#confirm-dialog").dialog( "option", "title", title);
+	$("#confirm-text").text(text);
+	$("#confirm-dialog").dialog("open");
+}
+
+function openStatus(title, text) {
+	$("#status-dialog").dialog( "option", "title", title);
+	$("#status-text").text(text);
+	$("#status-dialog").dialog("open");
+}
+
+function closeStatus() {
+	$("#status-dialog" ).dialog("close");
+}
+
+function setPreviewLink (giftboxId) {
+	$("#preview-link").val(readCookie("app_url") + "/preview.php?id=" + giftboxId);
+}
 function stack(top, middle, bottom) {
+	window.top_template = document.getElementById(top);
+	setPreviewLink($(top).attr("giftboxId"));
 	$(top).css('z-index', "3");
 	$(middle).css('z-index', "2");
 	$(bottom).css('z-index', "1");
+}
+
+function save() {
+	openStatus("Save", "Saving your giftbox...");
+	var template = window.top_template;
+	var giftboxName = template.giftboxName;
+	var giftboxId = template.giftboxId;
+	var userId = readCookie('user_id');
+	var giftbox = {
+		giftbox_id: giftboxId,
+		user_id: userId,
+		name: giftboxName,
+		bentos: new Array()
+	};
+	$("#"+template.id+" div.bento").each(function(i) { 
+		var bento = new Object();
+		bento.name = $(this).attr("id");
+		bento.width = $(this).css("width");
+		bento.height = $(this).css("height");
+		bento.top = $(this).css("top");
+		bento.left = $(this).css("left");
+		giftbox.bentos[i] = bento;
+		var image = document.getElementById(bento.name + "-image");
+		if (image) {
+			$.ajax(image.src, {async: false}).done(
+				function(data) {
+					bento.imageData = data;
+				}
+			)
+		}
+	});	
+
+	// Save the template first
+	$.post("save_giftbox_ajax.php", 
+		giftbox, 
+		function(result) { 
+			template.giftboxId = result.giftbox_id;
+			setPreviewLink(template.giftboxId);
+			console.log(result); 
+			closeStatus();
+		}, 
+		"json");
+		
+	// Now save any images
+}
+
+function send() {
+	var giftboxId = window.top_template.giftboxId;
+	if (!giftboxId) {
+		openConfirm("Send", "The giftbox must be saved before it can be sent.");
+	} else {
+		$.magnificPopup.open({
+		  items: {
+			src: '#send-form',
+			type: 'inline'
+		  }
+		});
+	}
+}
+
+function preview() {
+	var giftboxId = window.top_template.giftboxId;
+	if (!giftboxId) {
+		openConfirm("Preview", "The giftbox must be saved before it can be previewed.");
+	} else {
+		window.open("preview.php?id=" + giftboxId, "_blank");
+	}
 }

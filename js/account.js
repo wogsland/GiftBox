@@ -16,7 +16,7 @@ function changePassword() {
 		message.innerHTML = "Please enter a new password.";
 	} else if (!confirmPassword) {
 		message.innerHTML = "Please confirm the new password";
-	} else if (newPassword != confirmPassword) {
+	} else if (newPassword !== confirmPassword) {
 		message.innerHTML = "Passwords do not match.";
 	} else {
 		var xmlhttp = new XMLHttpRequest();
@@ -24,7 +24,7 @@ function changePassword() {
 		xmlhttp.open("GET", url, false);
 		xmlhttp.send();
 		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message == 'SUCCESS') {
+		if (jsonObj.message === 'SUCCESS') {
 			$.magnificPopup.close();
 			document.getElementById('save-password-message').innerHTML = "Your password has been changed.";
 		} else {
@@ -42,6 +42,13 @@ function sendPassword(email) {
 	alert('Email: ' + email);
 }
 
+function setCookies(jsonObj, loginType) {
+	document.cookie = "user_id=" + jsonObj.user_id;
+	document.cookie = "login_type=" + loginType;
+	document.cookie = "app_root=" + jsonObj.app_root;
+	document.cookie = "app_url=" + jsonObj.app_url;
+}
+
 function login(email, password) {
 	var message = document.getElementById('login-message');
 	if (!document.getElementById('email').value) {
@@ -54,11 +61,9 @@ function login(email, password) {
 		xmlhttp.open("GET", url, false);
 		xmlhttp.send();
 		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message == 'SUCCESS') {
+		if (jsonObj.message === 'SUCCESS') {
 			$.magnificPopup.close();
-			document.cookie = "user_id=" + jsonObj.user_id;
-			document.cookie = "login_type=EMAIL";
-			document.cookie = "app_root=" + jsonObj.app_root;
+			setCookies(jsonObj, "EMAIL");
 			document.location.href = jsonObj.app_root;
 		} else {
 			document.getElementById('login-message').innerHTML = jsonObj.message;
@@ -83,7 +88,7 @@ function register(first_name, last_name, email, password) {
 		xmlhttp.send();
 		try {
 			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESS'){
+			if (jsonObj.message === 'SUCCESS'){
 				$.magnificPopup.close();
 				document.location.href = jsonObj.app_root;
 			}
@@ -106,11 +111,9 @@ function handleFBLogin(response) {
 			xmlhttp.open("GET", url, false);
 			xmlhttp.send();
 			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESS') {
+			if (jsonObj.message === 'SUCCESS') {
 				$.magnificPopup.close();
-				document.cookie = "user_id=" + jsonObj.user_id;
-				document.cookie = "login_type=FACEBOOK";
-				document.cookie = "app_root=" + jsonObj.app_root;
+				setCookies(jsonObj, "FACEBOOK");
 				document.location.href = jsonObj.app_root;
 			} else {
 				document.getElementById('login-message').innerHTML = jsonObj.message;
@@ -134,7 +137,7 @@ function handleFBReg(response) {
 			xmlhttp.open("GET", url, false);
 			xmlhttp.send();
 			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESS') {
+			if (jsonObj.message === 'SUCCESS') {
 				$.magnificPopup.close();
 				document.cookie = "user_id=" + jsonObj.user_id;
 				document.cookie = "login_type=FACEBOOK";
@@ -155,7 +158,7 @@ function handleFBReg(response) {
 
 function logout() {
 	var loginType = readCookie('login_type');
-	if (loginType == 'FACEBOOK') {
+	if (loginType === 'FACEBOOK') {
 		FB.getLoginStatus(function(response) {
 			// are they currently logged into Facebook?
 			console.log(response);
@@ -165,17 +168,17 @@ function logout() {
 					console.log(response);
 				});
 			}
-		})
+		});
 	}
-	userId = readCookie('user_id');
-	appRoot = readCookie('app_root');
+	var userId = readCookie('user_id');
+	var appRoot = readCookie('app_root');
 	var xmlhttp = new XMLHttpRequest();
 	var url = "logout_ajax.php?user_id=" + encodeURIComponent(userId);
 	xmlhttp.open("GET", url, false);
 	xmlhttp.send();
 	try {
 		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message == 'SUCCESS') {
+		if (jsonObj.message === 'SUCCESS') {
 			document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			document.cookie = "login_type=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 			document.cookie = "app_root=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
@@ -203,7 +206,7 @@ function editUser(user_id) {
 	firstNameEdit.value = firstName.innerHTML;
 	lastNameEdit.value = lastName.innerHTML;
 	emailEdit.value = email.innerHTML;
-	if (admin.innerHTML == 'Y') {
+	if (admin.innerHTML === 'Y') {
 		adminEdit.checked = true;
 	} else {
 		adminEdit.checked = false;
@@ -218,49 +221,35 @@ function editUser(user_id) {
 }
 
 function saveUser() {
+	var message = $("#edit-user-message");
+	var firstName = $("#first-name-edit");
+	var lastName = $("#last-name-edit");
+	var emailAddress = $("#email-edit");
+	var admin = $("#admin-edit");
 	
-	var message = document.getElementById('edit-user-message');
-	if (!document.getElementById('first-name-edit').value) {
-		message.innerHTML = "Please enter a first name.";
-	} else if (!document.getElementById('last-name-edit').value) {
-		message.innerHTML = "Please enter a last name";
-	} else if (!document.getElementById('email-edit').value) {
-		message.innerHTML = "Please enter a valid email.";
+	if (!firstName.val()) {
+		message.text("Please enter a first name.");
+	} else if (!lastName.val()) {
+		message.text("Please enter a last name");
+	} else if (!emailAddress.val()) {
+		message.text("Please enter a valid email.");
 	} else {
-		// save changes
-		var user_id = document.getElementById('user-id').value;
-		var firstName = document.getElementById('first-name-'+user_id);
-		var lastName = document.getElementById('last-name-'+user_id);
-		var email = document.getElementById('email-'+user_id);
-		var admin = document.getElementById('admin-'+user_id);
-		var firstNameEdit = document.getElementById('first-name-edit');
-		var lastNameEdit = document.getElementById('last-name-edit');
-		var emailEdit = document.getElementById('email-edit');
-		var adminEdit = document.getElementById('admin-edit');
+		message.text("Saving user information...");
+		var posting = $.post("update_user_ajax.php", $("#edit-user-form").serialize());
 
-		var xmlhttp = new XMLHttpRequest();
-		var url = "update_user_ajax.php?user_id=" + user_id + "&first_name=" + encodeURIComponent(firstNameEdit.value) + "&last_name=" + encodeURIComponent(lastNameEdit.value) + "&email=" + encodeURIComponent(emailEdit.value) + "&admin=" + (adminEdit.checked ? 'Y':'N');
-		xmlhttp.open("GET", url, false);
-		xmlhttp.send();
-		try {
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message == 'SUCCESSS'){
-				firstName.innerHTML = firstNameEdit.value;
-				lastName.innerHTML = lastNameEdit.value;
-				email.innerHTML = emailEdit.value;
-				admin.innerHTML = adminEdit.checked ? 'Y':'N';
-				$.magnificPopup.close();
-			}
-			else {
-				message.innerHTML = jsonObj.message;
-			}
-		} catch(err) {
-			message.innerHTML = xmlhttp.responseText;
-		}
-		
-		
-		
-		
+		posting.done(function(data) {
+			var userId = $("#user-id").val();
+			$("#first-name-" + userId).html(firstName.val());
+			$("#last-name-" + userId).html(lastName.val());
+			$("#email-" + userId).html(emailAddress.val());
+			var yesNo = admin.is(":checked") ? "Y" : "N";
+			$("#admin-" + userId).html(yesNo);
+			$.magnificPopup.close();
+		});
 
+		posting.fail(function(data, textStatus) {
+			message.text(textStatus);
+			console.log(textStatus);
+		});
 	}
 }
