@@ -1,8 +1,9 @@
+#create-body {
+	font-size: 12px;
+}
 p {
-
 	color: rgba(0,0,0,0.74);
 }
-
 
 #create-top-nav {
 	background-color: #293133;
@@ -234,8 +235,8 @@ p {
 }
 
 #bento-1-4 {
-	bottom: 9px;
-	right: 9px;
+	top: 393px;
+	left: 685px;
 	width: 330px;
 	height: 376px;
 }
@@ -535,23 +536,54 @@ p {
 
 #template-button-container {
 	margin: 10px auto;
-	width: 80px;
+	width: 1024px;
 	height: 30px;
-/*	border: solid #B9B9B9 1px; */
+	overflow: hidden;
 }
 
 .template-button {
 	color: white;
-	padding: 5px 20px;
+	padding: 5px 20px;  
 	border-radius: 10px;
 	background-color: #293133;
 	display: inline-block;
+	font-size: 16px;
+	vertical-align: top;
+}
+
+#send-button {
+	margin-left: 20px;
+}
+
+#preview-button {
+	margin-left: 20px;
+}
+
+#template-status {
+	display: inline-block;
+	color: black;
 	font-size: 100%;
+	vertical-align: middle;
+	line-height: 30px;
+	margin-left: 20px;
 }
 
 #send-form {
-	max-width: 800px;
+	max-width: 900px;
 	overflow: auto;
+}
+
+#save-form {
+	max-width: 900px;
+	overflow: auto;
+}
+
+#template-downloads-container {
+	margin: 10px auto;
+	width: 1024px;
+	height: 30px;
+	background-color: white;
+	border: solid 2px #B9B9B9;
 }
 
 /*----------------------------------------*/
@@ -615,6 +647,7 @@ p {
 	margin: 5px;
 	height: 150px;
 	display: inline-block;
+	font-size: medium;
 }
 
 .file-drop-zone.over {
@@ -651,4 +684,26 @@ p {
 
 .download-icon:hover {
     opacity: 1;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+#confirm-text {
+	font-size: 16px;
+}
+
+#status-text {
+	font-size: 16px;
+}
+
+.preview-bento {
+	display: inline-block;
+	position: absolute;
+	border: solid 1px #B9B9B9;
+	overflow: hidden;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;	
 }

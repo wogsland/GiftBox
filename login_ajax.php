@@ -51,7 +51,7 @@ if (!$results) {
 $json = '{"message":"'.$message.'"';
 if ($message == "SUCCESS") {
 	if ($user) {
-		$json .= ',"user_id":"'.$user->id.'","app_root":"'.$app_root.'"';
+		$json .= ',"user_id":"'.$user->id.'","app_root":"'.$app_root.'","app_url":"'.$app_url.'"';
 	}
 }
 $json .= '}';
