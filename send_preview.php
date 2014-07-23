@@ -1,6 +1,7 @@
 <?php
 include_once 'eventLogger.class.php';
 include_once 'config.php';
+include_once 'mail.php';
 
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];
@@ -12,5 +13,5 @@ $event->log();
 
 // Send the email
 $message = "To open your Giftbox, please click on this link:\n\n".$preview_link;
-mail($email_address, 'You have a Giftbox to open!!!', $message, 'From:'. $sender_email);
+sendMail($email_address, 'You have a Giftbox to open!!!', $message, 'From:'. $sender_email);
 ?>

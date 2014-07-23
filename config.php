@@ -1,14 +1,13 @@
 <?php
-if ($_SERVER['SERVER_NAME'] == "localhost") {
-	$server = "localhost";
-    $app_root = "/giftbox";
-	$app_url = "http://localhost/giftbox";
-	$use_google_mail = false;
-} else if ($_SERVER['SERVER_NAME'] == "stone-timing-557.appspot.com") {
-	$server = "stone-timing-557.appspot.com";
+$server = $_SERVER['SERVER_NAME'];
+ if ($server == "stone-timing-557.appspot.com") {
     $app_root = "/";
 	$app_url = "http://stone-timing-557.appspot.com";
 	$use_google_mail = true;
+} else {
+    $app_root = "/giftbox";
+	$app_url = "http://".$server."/giftbox";
+	$use_google_mail = false;
 }
 $user = "giftbox";
 $password = "giftbox";

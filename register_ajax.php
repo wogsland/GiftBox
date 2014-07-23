@@ -45,7 +45,7 @@ if (!$result) {
 
 		if ($reg_type == 'EMAIL') {
 			// Send the email
-			$email_message = " To activate your Giftbox account, please click on this link:<br><br>";
+			$email_message = " To activate your Giftbox account, please click on this link:\n\n";
 			$email_message .= $app_url . '/activate.php?uid=' . $user_id . "&key=$activation_key";
 			sendMail($email_address, 'Giftbox Registration Confirmation', $email_message, $sender_email);
 		}

@@ -30,6 +30,18 @@ function sendGiftbox() {
 	}
 }
 
+function uploadFile(file) {
+    var xhr = new XMLHttpRequest();
+    if (xhr.upload) {
+        xhr.open("POST", "upload.php", true);
+        xhr.setRequestHeader("X_FILENAME", file.name);
+        xhr.send(file);
+    }
+}
+        
+        
+        
+        
 /************** BENTO DRAG/DROP HANDLERS *****************/
 
 function handleDragEnter(e) {
@@ -55,6 +67,7 @@ function handleDrop(e) {
 	}
 	this.classList.remove('over');
 	var mimeType = e.dataTransfer.getData('mime_type');
+	var fileName = e.dataTransfer.getData('file_name');
 	var img;
 	var imageId;
 	if (mimeType.match(imageType)) {
@@ -78,6 +91,7 @@ function handleDrop(e) {
 		img.setAttribute('src', src);
 		imageId = this.id + '-image';
 		img.id = imageId;
+		img.fileName = fileName;
 
 		// set the DIV attributes
 		var divId = this.id + '-image-container';
@@ -124,6 +138,7 @@ function handleDragEnd(e) {
 
 function handleDragStart(e) {
 	e.dataTransfer.setData("mime_type", this.file.type);
+	e.dataTransfer.setData("file_name", this.file.name);
 }
 
 //******* SIDEBAR DRAG/DROP HANDLERS *****************
@@ -179,6 +194,7 @@ function handleImageFiles(files) {
 		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
+		img.id = file.name;
 		img.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(img);
 	}
@@ -626,11 +642,9 @@ function save() {
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.name + "-image");
 		if (image) {
-			$.ajax(image.src, {async: false}).done(
-				function(data) {
-					bento.imageData = data;
-				}
-			)
+			bento.image_file_name = image.fileName;
+			var thumbnail = document.getElementById(image.fileName);
+			uploadFile(thumbnail.file);
 		}
 	});	
 
@@ -640,12 +654,9 @@ function save() {
 		function(result) { 
 			template.giftboxId = result.giftbox_id;
 			setPreviewLink(template.giftboxId);
-			console.log(result); 
 			closeStatus();
 		}, 
 		"json");
-		
-	// Now save any images
 }
 
 function send() {
