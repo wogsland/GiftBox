@@ -1,7 +1,8 @@
 <?php
 include_once 'config.php';
-require_once 'google/appengine/api/mail/Message.php';
-use google\appengine\api\mail\Message;
+if ($use_google_mail) {
+	require_once 'google/appengine/api/mail/Message.php';
+}
 
 function sendMail($to, $subject, $message, $from) {
 	global $use_google_mail;

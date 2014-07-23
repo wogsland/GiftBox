@@ -28,7 +28,11 @@
 			<thead><tr><th>First Name</th><th>Last Name</th><th>Event</th><th>Event Time</th><th>Event Info</th></tr></thead>
 			<tbody>
 			<?php
-				$sql = "SELECT * from log WHERE user_id = ".$_GET['user_id']." ORDER BY event_time desc";
+				$sql = "SELECT * from log ";
+				if (isset($_GET['user_id'])) {
+					$sql .= "WHERE user_id = ".$_GET['user_id'];
+				}
+				$sql .= " ORDER BY event_time desc";
 				$results = execute_query($sql);
 				while ($event = $results->fetch_object()) {
 					print '
