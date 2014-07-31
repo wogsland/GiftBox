@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="css/create.css" />
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/create.js"></script>
 	<script>
@@ -27,6 +27,32 @@
 
 		$(function() {
 			$( "#status-dialog" ).dialog({ autoOpen: false, dialogClass: "no-close"});
+		});
+  
+		$(function() {
+			$( "#save-dialog" ).dialog({ 
+				autoOpen: false,
+				resizable: false,
+				height:200,
+				width: 400,
+				modal: true,
+				buttons: {
+					Save: function() {
+						save();
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				},
+				open: function() {
+					$("#save-dialog").keypress(function(e) {
+						if (e.keyCode == $.ui.keyCode.ENTER) {
+							save();
+							return false;
+						}
+					});
+				}
+			});
 		});
   
 		$(function() {
@@ -69,13 +95,13 @@
 						<span class="palette-box-header-text">Pick A Template</span>
 					</div>
 					<div class="template-thumbnail">
-						<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('#template-1', '#template-2', '#template-3')">
+						<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('template-1', 'template-2', 'template-3')">
 					</div>
 					<div class="template-thumbnail">
-						<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('#template-2', '#template-3', '#template-1')">
+						<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('template-2', 'template-3', 'template-1')">
 					</div>
 					<div class="template-thumbnail">
-						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('#template-3', '#template-1', '#template-2')">
+						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
 					</div>
 				</div>
 				<div class="palette-box">
@@ -137,7 +163,7 @@
 			
 			<div id="templates">
 				<div id="template-button-container">
-					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="save()">Save</a>
+					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="$('#save-name').val(window.top_template.giftboxName); $('#save-dialog').dialog('open');">Save</a>
 					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
 					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
 					<p id="template-status"></p>
@@ -234,7 +260,7 @@
 						<div class="divider" id="divider-1-3"></div>
 					</div>
 				</div>
-				<div id="template-downloads-container">
+<!--				<div id="template-downloads-container">  -->
 				</div>
 			</div>
 		</section>
@@ -256,6 +282,15 @@
 	</div>
 	<div id="confirm-dialog" title="No title specified">
 		<p id="confirm-text">No status text specified</p>
+	</div>
+
+	<div id="save-dialog" title="Save">
+		<form>
+		    <fieldset style="margin-top: 25px">
+				<label for="save-name">Name</label>
+				<input type="text" name="save-name" id="save-name" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
+		    </fieldset>
+		</form>
 	</div>
 	
 	
