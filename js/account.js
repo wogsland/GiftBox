@@ -60,13 +60,17 @@ function login(email, password) {
 		var url = "login_ajax.php?login_type=EMAIL&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
 		xmlhttp.open("GET", url, false);
 		xmlhttp.send();
-		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message === 'SUCCESS') {
-			$.magnificPopup.close();
-			setCookies(jsonObj, "EMAIL");
-			document.location.href = jsonObj.app_root;
-		} else {
-			document.getElementById('login-message').innerHTML = jsonObj.message;
+		try {
+			var jsonObj = JSON.parse(xmlhttp.responseText);
+			if (jsonObj.message === 'SUCCESS') {
+				$.magnificPopup.close();
+				setCookies(jsonObj, "EMAIL");
+				document.location.href = jsonObj.app_root;
+			} else {
+				document.getElementById('login-message').innerHTML = jsonObj.message;
+			}
+		} catch(err) {
+			alert(xmlhttp.responseText);
 		}
 	}
 };

@@ -34,7 +34,7 @@ function uploadFile(file) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
         xhr.open("POST", "upload.php", true);
-        xhr.setRequestHeader("X_FILENAME", file.name);
+        xhr.setRequestHeader("X-FILENAME", file.name);
         xhr.send(file);
     }
 }
@@ -121,10 +121,12 @@ function handleDrop(e) {
 			$('#'+iconId).css('z-index', "9999");
 		}
 	} else if (mimeType.match(audioType) || mimeType.match(videoType)) {
+		removeDownload(this);
 		img = document.createElement('img');
 		img.setAttribute('src', 'images/download.jpg');
 		imageId = this.id + '-download-icon';
 		img.id = imageId;
+		img.fileName = fileName;
 		img.classList.add("download-icon");
 		this.appendChild(img);
 	}
@@ -205,7 +207,7 @@ function handleMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
-		// if not an image go on to next file
+		// if not video or audio go on to next file
 		if (!file.type.match(videoType) && !file.type.match(audioType)) {
 			alert("This drop zone only accepts music and video files (.mp3, .mp4, etc.).");
 			continue;
@@ -222,6 +224,7 @@ function handleMediaFiles(files) {
 		}
 		element.classList.add("photo-thumbnail");
 		element.file = file;
+		element.id = file.name;
 		element.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(element);
     }
@@ -280,6 +283,10 @@ function removeChild(parent, childId) {
 function removeImage(bento) {
 	removeChild(bento, bento.id + '-image-container');
 	hideControls(bento);
+}
+
+function removeDownload(bento) {
+	removeChild(bento, bento.id + '-download-icon');
 }
 
 function resizeContainer(bento, img, div) {
@@ -593,7 +600,7 @@ $(function() {
 
 });
 
-function openConfirm(title, text) {
+function openMessage(title, text) {
 	$("#confirm-dialog").dialog( "option", "title", title);
 	$("#confirm-text").text(text);
 	$("#confirm-dialog").dialog("open");
@@ -613,17 +620,43 @@ function setPreviewLink (giftboxId) {
 	$("#preview-link").val(readCookie("app_url") + "/preview.php?id=" + giftboxId);
 }
 function stack(top, middle, bottom) {
-	window.top_template = document.getElementById(top);
-	setPreviewLink($(top).attr("giftboxId"));
-	$(top).css('z-index', "3");
-	$(middle).css('z-index', "2");
-	$(bottom).css('z-index', "1");
+	var top_template = document.getElementById(top);
+	var middle_template = document.getElementById(middle);
+	var bottom_template = document.getElementById(bottom);
+	window.top_template = top_template;
+	setPreviewLink(top_template.giftboxId);
+	top_template.style.zIndex = 3;
+	middle_template.style.zIndex = 2;
+	bottom_template.style.zIndex = 1;
+}
+
+function calcTop(bento, image, container) {
+	var top = null;
+	var imageTop = parseInt(image.style.top, 10);
+	var bentoHeight = parseInt(bento.height, 10);
+	var containerHeight = parseInt(container.style.height, 10);
+	top = imageTop - ((containerHeight - bentoHeight)/2);
+	return top + "px";
+}
+
+function calcLeft(bento, image, container) {
+	var left = null;
+	var imageLeft = parseInt(image.style.left, 10);
+	var bentoWidth = parseInt(bento.width, 10);
+	var containerWidth = parseInt(container.style.width, 10);
+	left = imageLeft - ((containerWidth - bentoWidth)/2);
+	return left + "px";
 }
 
 function save() {
+	// Prompt for giftbox name
+	var saveName = document.getElementById("save-name").value;
+	$("#save-dialog" ).dialog("close");
+	window.top_template.giftboxName = saveName;
+	
 	openStatus("Save", "Saving your giftbox...");
 	var template = window.top_template;
-	var giftboxName = template.giftboxName;
+	var giftboxName = saveName;
 	var giftboxId = template.giftboxId;
 	var userId = readCookie('user_id');
 	var giftbox = {
@@ -641,10 +674,31 @@ function save() {
 		bento.left = $(this).css("left");
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.name + "-image");
+		var thumbnail = null;
+		
 		if (image) {
+			var container = document.getElementById(bento.name + '-image-container');
 			bento.image_file_name = image.fileName;
-			var thumbnail = document.getElementById(image.fileName);
+			bento.image_width = image.style.width;
+			bento.image_height = image.style.height;
+			bento.image_top = calcTop(bento, image, container);
+			bento.image_left = calcLeft(bento, image, container);
+			thumbnail = document.getElementById(image.fileName);
 			uploadFile(thumbnail.file);
+		} else {
+			bento.image_file_name = null;
+			bento.image_width = null;
+			bento.image_height = null;
+			bento.image_top = null;
+			bento.image_left = null;
+		}
+		var download = document.getElementById(bento.name + "-download-icon");
+		if (download) {
+			bento.download_file_name = download.fileName;
+			thumbnail = document.getElementById(download.fileName);
+			uploadFile(thumbnail.file);
+		} else {
+			bento.download_file_name = null;
 		}
 	});	
 
@@ -656,13 +710,13 @@ function save() {
 			setPreviewLink(template.giftboxId);
 			closeStatus();
 		}, 
-		"json");
+		"json").fail(function() {alert("Save failed!");});
 }
 
 function send() {
 	var giftboxId = window.top_template.giftboxId;
 	if (!giftboxId) {
-		openConfirm("Send", "The giftbox must be saved before it can be sent.");
+		openMessage("Send", "The giftbox must be saved before it can be sent.");
 	} else {
 		$.magnificPopup.open({
 		  items: {
@@ -676,7 +730,7 @@ function send() {
 function preview() {
 	var giftboxId = window.top_template.giftboxId;
 	if (!giftboxId) {
-		openConfirm("Preview", "The giftbox must be saved before it can be previewed.");
+		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
 	} else {
 		window.open("preview.php?id=" + giftboxId, "_blank");
 	}

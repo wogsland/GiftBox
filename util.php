@@ -45,8 +45,10 @@
 	
 	function is_admin() {
 		$retval = FALSE;
-		if (execute_query("SELECT admin from user WHERE id = ".$_COOKIE['user_id'])->fetch_object()->admin == 'Y') {
-			$retval = TRUE;
+		if (isset($_COOKIE['user_id'])) {
+			if (execute_query("SELECT admin from user WHERE id = ".$_COOKIE['user_id'])->fetch_object()->admin == 'Y') {
+				$retval = TRUE;
+			}
 		}
 		return $retval;
 	}

@@ -19,7 +19,7 @@ if (!$giftbox_id) {
 
 // Insert bentos
 foreach ($bentos as $bento) {
-	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."')";
+	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left, image_file_name, image_width, image_height, image_top, image_left, download_file_name) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."', '".$bento['image_file_name']."', '".$bento['image_width']."', '".$bento['image_height']."', '".$bento['image_top']."', '".$bento['image_left']."', '".$bento['download_file_name']."')";
 	execute($sql);
 }
 

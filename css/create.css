@@ -267,7 +267,7 @@ p {
 
 /*----------------------------------------*/
 #bento-2-2 {
-	bottom: 9px;
+	top: 393px;
 	left: 9px;
 	width: 500px;
 	height: 376px;
@@ -290,7 +290,7 @@ p {
 /*----------------------------------------*/
 #bento-2-3 {
 	top: 9px;
-	right: 9px;
+	left: 517px;
 	width: 498px;
 	height: 248px;
 }
@@ -312,7 +312,7 @@ p {
 /*----------------------------------------*/
 #bento-2-4 {
 	top: 265px;
-	right: 9px;
+	left: 517px;
 	width: 498px;
 	height: 248px;
 }
@@ -333,8 +333,8 @@ p {
 
 /*----------------------------------------*/
 #bento-2-5 {
-	bottom: 9px;
-	right: 9px;
+	top: 521px;
+	left: 517px;
 	width: 498px;
 	height: 248px;
 }
@@ -364,7 +364,7 @@ p {
 }
 
 #bento-3-2 {
-	bottom: 9px;
+	top: 297px;
 	left: 9px;
 	width: 330px;
 	height: 472px; 
@@ -406,7 +406,7 @@ p {
 }
 
 #bento-3-4 {
-	bottom: 9px;
+	top: 393px;
 	left: 347px;
 	width: 330px;
 	height: 376px;
@@ -428,7 +428,7 @@ p {
 
 #bento-3-5 {
 	top: 9px;
-	right: 9px;
+	left: 685px;
 	width: 330px;
 	height: 472px;
 }
@@ -448,8 +448,8 @@ p {
 }
 
 #bento-3-6 {
-	bottom: 9px;
-	right: 9px;
+	top: 489px;
+	left: 685px;
 	width: 330px;
 	height: 280px;
 }
@@ -657,6 +657,7 @@ p {
 .drop-zone-text {
 	vertical-align: middle;
     pointer-events: none;
+	margin: 0;
 }
 
 .photo-thumbnail {
@@ -696,14 +697,4 @@ p {
 
 #status-text {
 	font-size: 16px;
-}
-
-.preview-bento {
-	display: inline-block;
-	position: absolute;
-	border: solid 1px #B9B9B9;
-	overflow: hidden;
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;	
 }
