@@ -1,2 +1,5 @@
 .DS_Store
 Icon
+/nbproject/private/
+/logs/access.log
+/logs/error.log
