@@ -4,14 +4,15 @@ include_once 'util.php';
 $giftbox_id = $_POST['giftbox_id'];
 $giftbox_name = $_POST['name'];
 $user_id = $_POST['user_id'];
+$letter_text = $_POST['letter_text'];
 $bentos = $_POST['bentos'];
 
 // If no giftbox id is passed in, then INSERT a record, otherwise UPDATE the giftbox name and delete the bentos
 if (!$giftbox_id) {
-	$sql = "INSERT into giftbox (name, user_id) values ('".$giftbox_name."', ".$user_id.")";
+	$sql = "INSERT into giftbox (name, user_id, letter_text) values ('".$giftbox_name."', ".$user_id.", '".$letter_text."')";
 	$giftbox_id = insert($sql);
 } else {
-	$sql = "UPDATE giftbox set name = '".$giftbox_name."' WHERE id = ".$giftbox_id;
+	$sql = "UPDATE giftbox set name = '".$giftbox_name."', letter_text = '".$letter_text."' WHERE id = ".$giftbox_id;
 	execute($sql);
 	$sql = "DELETE FROM bento where giftbox_id = ".$giftbox_id;
 	execute($sql);

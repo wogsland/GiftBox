@@ -658,11 +658,13 @@ function save() {
 	var template = window.top_template;
 	var giftboxName = saveName;
 	var giftboxId = template.giftboxId;
+	var letterText = template.letterText;
 	var userId = readCookie('user_id');
 	var giftbox = {
 		giftbox_id: giftboxId,
 		user_id: userId,
 		name: giftboxName,
+		letter_text: letterText,
 		bentos: new Array()
 	};
 	$("#"+template.id+" div.bento").each(function(i) { 
@@ -734,4 +736,10 @@ function preview() {
 	} else {
 		window.open("preview.php?id=" + giftboxId, "_blank");
 	}
+}
+
+function save_letter() {
+	var letterText = document.getElementById("letter-text");
+	window.top_template.letterText = letterText.value;
+	$("#letter-dialog" ).dialog("close");
 }
