@@ -30,6 +30,24 @@
 		});
   
 		$(function() {
+			$( "#letter-dialog" ).dialog({
+				autoOpen: false,
+				resizable: false,
+				width: 800,
+				height: 600,
+				modal: true,
+				buttons: {
+					OK: function() {
+						save_letter();
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		});
+  
+		$(function() {
 			$( "#save-dialog" ).dialog({ 
 				autoOpen: false,
 				resizable: false,
@@ -163,6 +181,7 @@
 			
 			<div id="templates">
 				<div id="template-button-container">
+					<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
 					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="$('#save-name').val(window.top_template.giftboxName); $('#save-dialog').dialog('open');">Save</a>
 					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
 					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
@@ -293,6 +312,13 @@
 		</form>
 	</div>
 	
+	<div id="letter-dialog" title="Letter">
+		<form>
+			<textarea rows="29" cols="55" id="letter-text" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
+			</textarea>
+		</form>
+	</div>
+	
 	
 	<script>
 		var bentos = document.querySelectorAll('.bento');
@@ -324,12 +350,15 @@
 		var template1 = document.getElementById('template-1');
 		var template2 = document.getElementById('template-2');
 		var template3 = document.getElementById('template-3');
-		template1.giftboxName = "Untitled-1"
+		template1.giftboxName = "Untitled-1";
 		template1.giftboxId = null;
-		template2.giftboxName = "Untitled-2"
+		template1.letterText = null;
+		template2.giftboxName = "Untitled-2";
 		template2.giftboxId = null;
-		template3.giftboxName = "Untitled-3"
+		template2.letterText = null;
+		template3.giftboxName = "Untitled-3";
 		template3.giftboxId = null;
+		template3.letterText = null;
 		window.top_template = template1;
 		$("#preview-link").val("");
 	</script>
