@@ -199,6 +199,10 @@ function handleImageFiles(files) {
 		img.id = file.name;
 		img.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(img);
+		var text = document.createElement("p");
+		text.innerHTML = file.name;
+		text.classList.add("file-name");
+		tabs.appendChild(text);
 	}
 }
 

@@ -142,8 +142,8 @@
 			<div id="uploads">
 				<div id="tabs">
 					<ul>
-						<li><a href="#images-tab">Images</a></li>
-						<li><a href="#media-tab">Downloads</a></li>
+						<li><a class="tab-text" href="#images-tab">Images</a></li>
+						<li><a class="tab-text" href="#media-tab">Downloads</a></li>
 					</ul>
 					<div class="tab-panel" id="images-tab">
 						<div class="icon-container" id="images-icon-container">
