@@ -56,14 +56,14 @@
 			</div>
 <?php
 				if ($letterText) {
-					echo "\t\t\t".'<a class="flip-over" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL;
+					echo "\t\t\t".'<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL;
 				}
 ?>
 		</div>
 		<div class="back">
 <?php
 				if ($letterText) {
-					echo "\t\t\t".'<a class="flip-back" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL;
+					echo "\t\t\t".'<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL;
 				}
 ?>
 			<p id="letter-text"><?php echo str_replace("\n", "<br />", $letterText) ?></p>

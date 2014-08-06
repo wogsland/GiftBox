@@ -607,6 +607,10 @@ p {
 	padding: 5px;
 }
 
+.tab-text {
+	font-size: small;
+}
+
 .icon-container {
 	width: 100%;
 	position: relative;
@@ -651,6 +655,7 @@ p {
 	vertical-align: middle;
     pointer-events: none;
 	margin: 0;
+	line-height: 30px;
 }
 
 .photo-thumbnail {
@@ -690,4 +695,12 @@ p {
 
 #status-text {
 	font-size: 16px;
+}
+
+.file-name {
+	height: 20px;
+	font-size: medium;
+	color: black;
+	text-align: center;
+	line-height: 20px;
 }
