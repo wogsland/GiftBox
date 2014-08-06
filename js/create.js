@@ -231,6 +231,10 @@ function handleMediaFiles(files) {
 		element.id = file.name;
 		element.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(element);
+		var text = document.createElement("p");
+		text.innerHTML = file.name;
+		text.classList.add("file-name");
+		tabs.appendChild(text);
     }
 
 }
