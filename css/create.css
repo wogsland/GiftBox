@@ -698,9 +698,14 @@ p {
 }
 
 .file-name {
-	height: 20px;
 	font-size: medium;
 	color: black;
 	text-align: center;
 	line-height: 20px;
+}
+
+.audio-player {
+	position: absolute;
+	top: 0px;
+	left: 0px;
 }

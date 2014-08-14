@@ -66,71 +66,77 @@ function handleDrop(e) {
 		e.preventDefault(); // Necessary. Allows us to drop.
 	}
 	this.classList.remove('over');
-	var mimeType = e.dataTransfer.getData('mime_type');
-	var fileName = e.dataTransfer.getData('file_name');
-	var img;
-	var imageId;
-	if (mimeType.match(imageType)) {
+	var srcId = e.dataTransfer.getData('src_id');
+	if (srcId.length > 0) {
+		var file = document.getElementById(srcId).file;
+		var img;
+		if (file.type.match(imageType)) {
+			// remove any previously dropped image
+			removeImage(this);
+			// create an IMG element
+			img = document.createElement('img');
+			// create a DIV for image container
+			var div = document.createElement('div');
 
-		// remove any previously dropped image
-		removeImage(this);
+			// set the IMG attributes
+			img.src = e.dataTransfer.getData('text');
+			img.id = this.id + '-image';
+			img.file = file;
 
-		// get the drop data
-		var src = e.dataTransfer.getData('text');
-//		var item0 = e.dataTransfer.getData('text/plain');
-//		var item1 = e.dataTransfer.getData('text/uri-list');
-//		var item2 = e.dataTransfer.getData('text/html');
+			// set the DIV attributes
+			var divId = this.id + '-image-container';
+			div.id = divId;
+			div.style.position = 'absolute';
 
-		// create an IMG element
-		img = document.createElement('img');
+			// add the IMG to the DIV, add the DIV to the bento
+			div.appendChild(img);
+			this.appendChild(div);
 
-		// create a DIV element
-		var div = document.createElement('div');
+			// make the IMG draggable inside the DIV
+			$('#'+ img.id).draggable({ containment: "#" + div.id});
 
-		// set the IMG attributes
-		img.setAttribute('src', src);
-		imageId = this.id + '-image';
-		img.id = imageId;
-		img.fileName = fileName;
+			// now resize the image so that it covers the bento
+			resizeImage(img, this);
 
-		// set the DIV attributes
-		var divId = this.id + '-image-container';
-		div.id = divId;
-		div.style.position = 'absolute';
+			// resize the image container so that the image has scroll containment
+			resizeContainer(this, img, div);	
 
-		// add the IMG to the DIV, add the DIV to the bento
-		div.appendChild(img);
-		this.appendChild(div);
+			// change the hover for the bento to show the slider
+			showControls(this);
 
-		// make the IMG draggable inside the DIV
-		$('#'+ img.id).draggable({ containment: "#" + div.id});
-
-		// now resize the image so that it covers the bento
-		resizeImage(img, this);
-
-		// resize the image container so that the image has scroll containment
-		resizeContainer(this, img, div);	
-
-		// change the hover for the bento to show the slider
-		showControls(this);
-		
-		// bring existing download icon back to the front
-		var iconId = this.id + "-download-icon";
-		var downloadIcon = document.getElementById(iconId);
-		if (downloadIcon) {
-			$('#'+iconId).css('z-index', "9999");
+			// bring existing download icon back to the front
+			var iconId = this.id + "-download-icon";
+			var downloadIcon = document.getElementById(iconId);
+			if (downloadIcon) {
+				$('#'+iconId).css('z-index', "9999");
+			}
+		} else if (file.type.match(audioType)) {
+			removeDownload(this);
+			img = document.createElement('img');
+			img.src = e.dataTransfer.getData('text');
+			img.id = this.id + '-download-icon';
+//			img.classList.add("download-icon");
+			this.file = file;
+			this.appendChild(img);
+			
+			audio = document.createElement('audio');
+			audio.setAttribute('controls', true);
+			audio.src = window.URL.createObjectURL(file);
+			audio.classList.add("audio-player");
+			this.appendChild(audio);
+			
+			
+		} else if (file.type.match(videoType)) {
+			removeDownload(this);
+			var video = document.createElement('video');
+			video.width =  parseInt(getComputedStyle(this).width, 10);
+			video.src = window.URL.createObjectURL(file);
+			this.file = file;
+			video.setAttribute('controls', true);
+			video.setAttribute('draggable', true);
+			this.appendChild(video);
 		}
-	} else if (mimeType.match(audioType) || mimeType.match(videoType)) {
-		removeDownload(this);
-		img = document.createElement('img');
-		img.setAttribute('src', 'images/download.jpg');
-		imageId = this.id + '-download-icon';
-		img.id = imageId;
-		img.fileName = fileName;
-		img.classList.add("download-icon");
-		this.appendChild(img);
 	}
-	
 	return false;
 }
 
@@ -139,13 +145,14 @@ function handleDragEnd(e) {
 }
 
 function handleDragStart(e) {
-	e.dataTransfer.setData("mime_type", this.file.type);
-	e.dataTransfer.setData("file_name", this.file.name);
+	e.dataTransfer.setData("src_id", this.id);
+
 }
 
 //******* SIDEBAR DRAG/DROP HANDLERS *****************
 
 function handleAddImageDragEnter(e) {
+	
 	this.classList.add('over');
 }
 
@@ -219,12 +226,24 @@ function handleMediaFiles(files) {
 
 		var element;
 		if (file.type.match(videoType)) {
-			element = document.createElement("img");
-			element.src = "images/video.jpg";
+			element = document.createElement("video")
+			element.src = window.URL.createObjectURL(file);
+			element.setAttribute('draggable', true);
 		}
 		if (file.type.match(audioType)) {
 			element = document.createElement("img");
-			element.src = "images/audio.jpg";
+			
+			// Get the album artwork from an MP3
+			if (file.type.indexOf("mp3") >= 0) {
+				var url = file.urn || file.name;
+				ID3.loadTags(
+					url, 
+					function() {showAlbumArt(url, file, tabs);},
+					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
+				);
+			} else {
+				element.src = "images/audio.jpg";
+			}
 		}
 		element.classList.add("photo-thumbnail");
 		element.file = file;
@@ -237,6 +256,23 @@ function handleMediaFiles(files) {
 		tabs.appendChild(text);
     }
 
+}
+
+function showAlbumArt(url, file) {
+	var tags = ID3.getAllTags(url);
+	console.log(tags);
+	var image = tags.picture;
+	var img = document.getElementById(file.name);
+	if (image) {
+		var base64String = "";
+		for (var i = 0; i < image.data.length; i++) {
+			base64String += String.fromCharCode(image.data[i]);
+		}
+		var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+		img.setAttribute('src', base64);
+	} else {
+		img.src = "images/audio.jpg";
+	}
 }
 
 function handleImageFileSelect(evt) {
@@ -682,35 +718,35 @@ function save() {
 		bento.height = $(this).css("height");
 		bento.top = $(this).css("top");
 		bento.left = $(this).css("left");
+		bento.image_file_name = null;
+		bento.image_width = null;
+		bento.image_height = null;
+		bento.image_top = null;
+		bento.image_left = null;
+		bento.download_file_name = null;
+		bento.download_mime_type = null;
+
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.name + "-image");
 		var thumbnail = null;
 		
 		if (image) {
 			var container = document.getElementById(bento.name + '-image-container');
-			bento.image_file_name = image.fileName;
+			bento.image_file_name = image.file.name;
 			bento.image_width = image.style.width;
 			bento.image_height = image.style.height;
 			bento.image_top = calcTop(bento, image, container);
 			bento.image_left = calcLeft(bento, image, container);
-			thumbnail = document.getElementById(image.fileName);
+			thumbnail = document.getElementById(image.file.name);
 			uploadFile(thumbnail.file);
-		} else {
-			bento.image_file_name = null;
-			bento.image_width = null;
-			bento.image_height = null;
-			bento.image_top = null;
-			bento.image_left = null;
 		}
-		var download = document.getElementById(bento.name + "-download-icon");
-		if (download) {
-			bento.download_file_name = download.fileName;
-			thumbnail = document.getElementById(download.fileName);
-			uploadFile(thumbnail.file);
-		} else {
-			bento.download_file_name = null;
+		var file = $(this).get(0).file;
+		if (file) {
+			bento.download_file_name = file.name;
+			bento.download_mime_type = file.type;
+			uploadFile(file);
 		}
-	});	
+	});
 
 	// Save the template first
 	$.post("save_giftbox_ajax.php", 
@@ -720,7 +756,7 @@ function save() {
 			setPreviewLink(template.giftboxId);
 			closeStatus();
 		}, 
-		"json").fail(function() {alert("Save failed!");});
+		"json").fail(function() {alert("Save failed!"); closeStatus();});
 }
 
 function send() {
