@@ -3,8 +3,11 @@ include_once 'util.php';
 
 $giftbox_id = $_POST['giftbox_id'];
 $giftbox_name = $_POST['name'];
+$giftbox_name = str_replace("'", "''", $giftbox_name);
+
 $user_id = $_POST['user_id'];
 $letter_text = $_POST['letter_text'];
+$letter_text = str_replace("'", "''", $letter_text);
 $bentos = $_POST['bentos'];
 
 // If no giftbox id is passed in, then INSERT a record, otherwise UPDATE the giftbox name and delete the bentos
@@ -20,7 +23,9 @@ if (!$giftbox_id) {
 
 // Insert bentos
 foreach ($bentos as $bento) {
-	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left, image_file_name, image_width, image_height, image_top, image_left, download_file_name) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."', '".$bento['image_file_name']."', '".$bento['image_width']."', '".$bento['image_height']."', '".$bento['image_top']."', '".$bento['image_left']."', '".$bento['download_file_name']."')";
+	$image_file_name = str_replace("'", "''", $bento['image_file_name']);
+	$download_file_name = str_replace("'", "''", $bento['download_file_name']);
+	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left, image_file_name, image_width, image_height, image_top, image_left, download_file_name, download_mime_type) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."', '".$image_file_name."', '".$bento['image_width']."', '".$bento['image_height']."', '".$bento['image_top']."', '".$bento['image_left']."', '".$download_file_name."', '".$bento['download_mime_type']."')";
 	execute($sql);
 }
 
