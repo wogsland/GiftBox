@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-if ($server == "stone-timing-557.appspot.com") {
+if ($server == "givetoken.com") {
 	$mysqli = new mysqli(null, $user, $password, $database, null, '/cloudsql/stone-timing-557:test');
 } else {
 	$mysqli = new mysqli('p:'.$server, $user, $password, $database);
