@@ -105,7 +105,7 @@
 						Want a simple way to personalize digital gifts?<br>
 					</h1>
 					<p>
-						Send your next gift with Giftbox!
+						Send your next gift with Token!
 					</p>
 					<p>
 					<?php
