@@ -1,8 +1,8 @@
 <?php
 $server = $_SERVER['SERVER_NAME'];
- if ($server == "stone-timing-557.appspot.com") {
+ if ($server == "givetoken.com") {
 	 $app_root = "/";
-	 $app_url = "http://stone-timing-557.appspot.com";
+	 $app_url = "givetoken.com";
 	 $use_google_mail = true;
 } else {
     $app_root = "/giftbox";
