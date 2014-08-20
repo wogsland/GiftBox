@@ -102,15 +102,15 @@
 				</div>
 				<div id="intro-text" class="centered">
 					<h1 id="intro-description">
-						Want a simple way to personalize digital gifts?<br>
+						Want a simple way to personalize digital gifts?!!<br>
 					</h1>
 					<p>
-						Send your next gift with Token!
+						Send your next gift with Token!!!!!
 					</p>
 					<p>
 					<?php
 					if (logged_in()) {
-						echo '<a class="button trans big" href="create.php">Create Token</a>';
+						echo '<a class="button trans big" href="create.php">Create Token!</a>';
 					}
 					else {
 						echo '<a class="button trans big open-popup-link" id="login-link" href="#login-form" data-effect="mfp-3d-unfold">Login</a>';
