@@ -51,7 +51,7 @@
 						if ($row->download_file_name) {
 							$downloads[] = $row->download_file_name;
 							if (strpos($row->download_mime_type, 'video') === 0) {
-								echo "\t\t\t\t\t"."<video id=\"".$row->download_file_name."\" class=\"video-js vjs-default-skin\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $row->css_width)."\"  height=\"".str_replace("px", null, $row->css_height)."\" controls>".PHP_EOL;
+								echo "\t\t\t\t\t"."<video id=\"".$row->download_file_name."\" class=\"video-js vjs-default-skin video-player\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $row->css_width)."\"  height=\"".str_replace("px", null, $row->css_height)."\" controls>".PHP_EOL;
 								echo "\t\t\t\t\t\t".'<source src="uploads/'.$row->download_file_name.'" type="'.$row->download_mime_type.'" />'.PHP_EOL;
 								echo "\t\t\t\t\t\t".'<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';									
 								echo "\t\t\t\t\t".'</video>'.PHP_EOL;
