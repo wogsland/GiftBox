@@ -10,7 +10,7 @@ if (isset($_SERVER["HTTP_X_APPENGINE_DEFAULT_NAMESPACE"])) {
 } else {
     $app_root = "/giftbox";
 	$app_url = "http://".$server."/giftbox";
-	$file_storage_path = 'uploads/'
+	$file_storage_path = 'uploads/';
 }
 $database = "giftbox";
 $user = "giftbox";
