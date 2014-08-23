@@ -2,6 +2,9 @@
 	include_once 'util.php';
 	include_once 'config.php';
 	$downloads = array();
+	require_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+	use google\appengine\api\cloud_storage\CloudStorageTools;
+	
 	$sql = "SELECT * from giftbox where id = ".$_GET['id'];
 	$query = execute_query($sql);
 	$row = $query->fetch_object();
@@ -83,7 +86,13 @@
 	<div class="download-container">
 <?php
 	foreach ($downloads as $theFile) {
-		echo "\t\t".'<a class="pure-button download-button" href="uploads/'.$theFile.'" target="_blank">'.$theFile.'</a>'.PHP_EOL;
+		echo "\t\t".'<a class="pure-button download-button" href="'
+		if ($google_app_engine) {
+			$object_url = $file_storgage_path.$theFile;
+			$object_public_url = CloudStorageTools::getPublicUrl($object_url, false);
+		} else {
+			$file_storage_path.$theFile.'" target="_blank">'.$theFile.'</a>'.PHP_EOL;
+		}
 	}
 ?>
 	</div>
