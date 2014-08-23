@@ -1,4 +1,6 @@
 <?php
+include_once config.php;
+
 $file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 if ($file_name) {
 	$image_data = file_get_contents('php://input');
@@ -11,6 +13,6 @@ if ($file_name) {
 			$image_data = base64_decode(str_replace('data:image/png;base64,', '', $image_data));
 		}
 	}
-	file_put_contents('uploads/' . $file_name, $image_data);
+	file_put_contents($file_storage_path.$file_name, $image_data);
 }	
 ?>
