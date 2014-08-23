@@ -1,13 +1,16 @@
 <?php
+$google_app_engine = false;
 $server = $_SERVER['SERVER_NAME'];
- if ($server == "givetoken.com") {
-	 $app_root = "/";
-	 $app_url = "givetoken.com";
-	 $use_google_mail = true;
+
+if (isset($_SERVER["HTTP_X_APPENGINE_DEFAULT_NAMESPACE"])) {
+	$app_root = "/";
+	$app_url = "givetoken.com";
+	$google_app_engine = true;
+	$file_storage_path = 'gs://tokenstorage/';
 } else {
     $app_root = "/giftbox";
 	$app_url = "http://".$server."/giftbox";
-	$use_google_mail = false;
+	$file_storage_path = 'uploads/'
 }
 $database = "giftbox";
 $user = "giftbox";
