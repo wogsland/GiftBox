@@ -2,9 +2,11 @@
 $google_app_engine = false;
 $server = $_SERVER['SERVER_NAME'];
 $prefix = "http://";
+$use_https = false;
 if (isset($_SERVER['HTTPS'])) {
 	if ($_SERVER['HTTPS'] == "on") {
 		$prefix = "https://";
+		$use_https = true;
 	}
 }
 if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {

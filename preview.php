@@ -53,7 +53,7 @@
 						if ($row->image_file_name) {
 							$file_name = $row->image_file_name;
 							if ($google_app_engine) {
-								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->image_file_name, false);
+								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->image_file_name, $use_https);
 							} else {
 								$path = $file_storage_path.$row->image_file_name;
 							}
@@ -63,7 +63,7 @@ syslog(LOG_INFO, $path);
 						if ($row->download_file_name) {
 							$download_file_names[] = $row->download_file_name;
 							if ($google_app_engine) {
-								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->download_file_name, false);
+								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->download_file_name, $use_https);
 							} else {
 								$path = $file_storage_path.$row->download_file_name;
 							}
