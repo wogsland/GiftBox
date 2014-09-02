@@ -57,6 +57,7 @@
 							} else {
 								$path = $file_storage_path.$row->image_file_name;
 							}
+syslog(LOG_INFO, $path);
 							echo "\t\t\t".'<img src="'.$path.'" width="'.$row->image_width.'" height="'.$row->image_height.'" style="position:absolute; top:'.$row->image_top.'; left:'.$row->image_left.'">'.PHP_EOL;
 						}
 						if ($row->download_file_name) {
@@ -66,6 +67,7 @@
 							} else {
 								$path = $file_storage_path.$row->download_file_name;
 							}
+syslog(LOG_INFO, $path);
 							$download_paths[] = $path;
 							if (strpos($row->download_mime_type, 'video') === 0) {
 								echo "\t\t\t\t\t"."<video id=\"".$row->download_file_name."\" class=\"video-js vjs-default-skin video-player\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $row->css_width)."\"  height=\"".str_replace("px", null, $row->css_height)."\" controls>".PHP_EOL;
