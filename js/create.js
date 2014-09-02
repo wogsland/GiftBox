@@ -30,7 +30,7 @@ function sendGiftbox() {
 	}
 }
 
-function uploadFile(fileData, fileName) {
+function uploadFileData(fileData, fileName) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
         xhr.open("POST", "upload.php", true);
@@ -38,7 +38,16 @@ function uploadFile(fileData, fileName) {
         xhr.send(fileData);
     }
 }
-        
+
+function uploadFile(file) {
+	var reader  = new FileReader();
+	reader.onloadend = function () {
+		uploadFileData(reader.result, reader.fileName);
+	};
+	reader.fileName = file.name;
+	reader.readAsDataURL(file);
+}
+
 /************** BENTO DRAG/DROP HANDLERS *****************/
 
 function handleDragEnter(e) {
@@ -671,7 +680,7 @@ function closeStatus() {
 }
 
 function setPreviewLink (giftboxId) {
-	$("#preview-link").val(readCookie("app_url") + "/preview.php?id=" + giftboxId);
+	$("#preview-link").val(readCookie("app_url") + "preview.php?id=" + giftboxId);
 }
 function stack(top, middle, bottom) {
 	var top_template = document.getElementById(top);
@@ -746,16 +755,16 @@ function save() {
 			bento.image_left = calcLeft(bento, image, container);
 			if (image.file) {
 				bento.image_file_name = image.file.name;
-				uploadFile(image.file, image.file.name);
+				uploadFile(image.file);
 			} else {
 				bento.image_file_name = this.image_file_name;
-				uploadFile(image.src, this.image_file_name);
+				uploadFileData(image.src, this.image_file_name);
 			}
 		}
 		if (this.file) {
 			bento.download_file_name = this.file.name;
 			bento.download_mime_type = this.file.type;
-			uploadFile(this.file, this.file.name);
+			uploadFile(this.file);
 		}
 	});
 

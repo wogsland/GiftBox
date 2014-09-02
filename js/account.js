@@ -109,11 +109,13 @@ function register(first_name, last_name, email, password) {
 function handleFBLogin(response) {
     if (response.status === 'connected') {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			// Save a Logged in with Facebook event
+console.log(api_response);			
+		// Save a Logged in with Facebook event
 			var xmlhttp = new XMLHttpRequest();
 			var url = "login_ajax.php?login_type=FACEBOOK&email=" + encodeURIComponent(api_response.email);
 			xmlhttp.open("GET", url, false);
 			xmlhttp.send();
+console.log(xmlhttp.responseText);
 			var jsonObj = JSON.parse(xmlhttp.responseText);
 			if (jsonObj.message === 'SUCCESS') {
 				$.magnificPopup.close();

@@ -1,18 +1,20 @@
 <?php
-include_once config.php;
+use google\appengine\api\log\LogService;
+include_once "config.php";
 
 $file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 if ($file_name) {
-	$image_data = file_get_contents('php://input');
-	if (strpos($image_data, "base64")) {
-		if (strpos($image_data, "/bmp")) {
-			$image_data = base64_decode(str_replace('data:image/bmp;base64,', '', $image_data));
-		} else if (strpos($image_data, "/jpg")) {
-			$image_data = base64_decode(str_replace('data:image/jpg;base64,', '', $image_data));
-		} else if (strpos($image_data, "/png")) {
-			$image_data = base64_decode(str_replace('data:image/png;base64,', '', $image_data));
-		}
+	$file_data = file_get_contents('php://input');
+	$pos = strpos($file_data, "base64");
+	if ($pos) {
+		$file_data =  base64_decode(substr($file_data, $pos + 7));
 	}
-	file_put_contents($file_storage_path.$file_name, $image_data);
+	if ($google_app_engine) {
+		$content_type = $_SERVER['CONTENT_TYPE'];
+		$ctx = stream_context_create(['gs'=>['acl'=>'public-read','Content-Type' => $content_type]]);
+		file_put_contents($file_storage_path.$file_name, $file_data, 0, $ctx);
+	} else {
+		file_put_contents($file_storage_path.$file_name, $file_data);
+	}
 }	
 ?>

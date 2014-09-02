@@ -1,4 +1,5 @@
 <?php
+use google\appengine\api\mail\Message;
 include_once 'config.php';
 if ($google_app_engine) {
 	require_once 'google/appengine/api/mail/Message.php';
