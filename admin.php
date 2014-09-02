@@ -10,7 +10,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Giftbox - Admin</title>
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+	<link rel="stylesheet" href="css/pure/pure-min.css">
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
 </head>

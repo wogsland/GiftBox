@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/feature-carousel.css" />
 	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.featureCarousel.min.js" type="text/javascript"></script>

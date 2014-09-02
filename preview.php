@@ -1,10 +1,12 @@
 <?php
+	use google\appengine\api\cloud_storage\CloudStorageTools;
 	include_once 'util.php';
 	include_once 'config.php';
-	$downloads = array();
-	require_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
-	use google\appengine\api\cloud_storage\CloudStorageTools;
-	
+	if ($google_app_engine) {
+		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+	}
+	$download_file_names = array();
+	$download_paths = array();
 	$sql = "SELECT * from giftbox where id = ".$_GET['id'];
 	$query = execute_query($sql);
 	$row = $query->fetch_object();
@@ -17,7 +19,7 @@
 	<title><?php echo $row->name ?></title>
 	<link rel="stylesheet" href="css/create.css" />
 	<link rel="stylesheet" href="css/preview.css" />
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+	<link rel="stylesheet" href="css/pure/pure-min.css">
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
@@ -49,17 +51,29 @@
 					while ($row = $query->fetch_object()) {
 						echo "\t\t\t\t".'<div class="preview-bento" style="position:absolute; top:'.$row->css_top.'; left:'.$row->css_left.'; width:'.$row->css_width.'; height:'.$row->css_height.'">'.PHP_EOL;
 						if ($row->image_file_name) {
-							echo "\t\t\t".'<img src="uploads/'.$row->image_file_name.'" width="'.$row->image_width.'" height="'.$row->image_height.'" style="position:absolute; top:'.$row->image_top.'; left:'.$row->image_left.'">'.PHP_EOL;
+							$file_name = $row->image_file_name;
+							if ($google_app_engine) {
+								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->image_file_name, false);
+							} else {
+								$path = $file_storage_path.$row->image_file_name;
+							}
+							echo "\t\t\t".'<img src="'.$path.'" width="'.$row->image_width.'" height="'.$row->image_height.'" style="position:absolute; top:'.$row->image_top.'; left:'.$row->image_left.'">'.PHP_EOL;
 						}
 						if ($row->download_file_name) {
-							$downloads[] = $row->download_file_name;
+							$download_file_names[] = $row->download_file_name;
+							if ($google_app_engine) {
+								$path = CloudStorageTools::getPublicUrl($file_storage_path.$row->download_file_name, false);
+							} else {
+								$path = $file_storage_path.$row->download_file_name;
+							}
+							$download_paths[] = $path;
 							if (strpos($row->download_mime_type, 'video') === 0) {
 								echo "\t\t\t\t\t"."<video id=\"".$row->download_file_name."\" class=\"video-js vjs-default-skin video-player\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $row->css_width)."\"  height=\"".str_replace("px", null, $row->css_height)."\" controls>".PHP_EOL;
-								echo "\t\t\t\t\t\t".'<source src="uploads/'.$row->download_file_name.'" type="'.$row->download_mime_type.'" />'.PHP_EOL;
+								echo "\t\t\t\t\t\t".'<source src="'.$path.'" type="'.$row->download_mime_type.'" />'.PHP_EOL;
 								echo "\t\t\t\t\t\t".'<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';									
 								echo "\t\t\t\t\t".'</video>'.PHP_EOL;
 							} else if (strpos($row->download_mime_type, 'audio') === 0) {
-								echo "\t\t\t\t\t".'<audio class="audio-player" src="uploads/'.$row->download_file_name.'" width="'.$row->css_width.'" controls>';
+								echo "\t\t\t\t\t".'<audio class="audio-player" src="'.$path.'" width="'.$row->css_width.'" controls>';
 							} else {
 								echo "\t\t".'<img class="download-icon" src="images/download.jpg">';
 							}
@@ -85,14 +99,8 @@
 	</div>
 	<div class="download-container">
 <?php
-	foreach ($downloads as $theFile) {
-		echo "\t\t".'<a class="pure-button download-button" href="'
-		if ($google_app_engine) {
-			$object_url = $file_storgage_path.$theFile;
-			$object_public_url = CloudStorageTools::getPublicUrl($object_url, false);
-		} else {
-			$file_storage_path.$theFile.'" target="_blank">'.$theFile.'</a>'.PHP_EOL;
-		}
+	foreach ($download_paths as $key => $path) {
+		echo "\t\t".'<a class="pure-button download-button" href="'.urldecode($path).'" target="_blank">'.$download_file_names[$key].'</a>'.PHP_EOL;
 	}
 ?>
 	</div>

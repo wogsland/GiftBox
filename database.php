@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-if ($server == "givetoken.com") {
+if ($google_app_engine) {
 	$mysqli = new mysqli(null, $user, $password, $database, null, '/cloudsql/stone-timing-557:test');
 } else {
 	$mysqli = new mysqli('p:'.$server, $user, $password, $database);
