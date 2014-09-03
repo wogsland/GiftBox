@@ -117,7 +117,7 @@ function handleDrop(e) {
 		var file = document.getElementById(srcId).file;
 		var imageSrc = null;
 		if (file.type.match(imageType)) {
-			imageSrc = e.dataTransfer.getData('text');
+			imageSrc = e.dataTransfer.getData('text/uri-list');
 			addImage(this, imageSrc, file);
 		} else if (file.type.match(audioType)) {
 			// Remove any existing audio
@@ -126,7 +126,7 @@ function handleDrop(e) {
 				this.audio = null;
 			}
 			// Check for album art
-			imageSrc = e.dataTransfer.getData('text');
+			imageSrc = e.dataTransfer.getData('text/uri-list');
 			if (imageSrc) {
 				addImage(this, imageSrc, null);
 				this.image_file_name = file.name.replace(".", "_") + ".jpg";
