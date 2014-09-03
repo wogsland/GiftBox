@@ -12,7 +12,6 @@ if ($file_name) {
 		$file_data =  base64_decode(substr($file_data, $pos + 7));
 	}
 	if ($google_app_engine) {
-		$content_type = $_SERVER['CONTENT_TYPE'];
 		$ctx = stream_context_create(['gs'=>['acl'=>'public-read','Content-Type' => $content_type]]);
 		file_put_contents($file_storage_path.$file_name, $file_data, 0, $ctx);
 	} else {
