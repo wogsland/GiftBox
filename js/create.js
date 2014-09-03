@@ -261,7 +261,7 @@ function handleMediaFiles(files) {
 			element = document.createElement("img");
 			
 			// Get the album artwork from an MP3
-			if (file.type.indexOf("mp3") >= 0) {
+			if (file.type.indexOf("mp3") >= 0 || file.type.indexOf("mpeg") >= 0) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
 					url, 
