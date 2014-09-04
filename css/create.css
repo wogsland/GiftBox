@@ -166,6 +166,16 @@ p {
     background: url("../images/close_image.png");
 }
 
+.audio-close-button {
+	display: none;
+	position: absolute;
+	bottom: 5px;
+	left: 140px;
+	width: 20px;
+	height: 20px;
+    background: url("../images/close_image.png");
+}
+
 /*----------------------------------------*/
 /*             Template 1                 */
 /*----------------------------------------*/
