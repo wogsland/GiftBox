@@ -125,21 +125,31 @@ function handleDrop(e) {
 				this.removeChild(this.audio);
 				this.audio = null;
 			}
+			
 			// Check for album art
 			imageSrc = e.dataTransfer.getData('text/uri-list');
 			if (imageSrc) {
 				addImage(this, imageSrc, null);
 				this.image_file_name = file.name.replace(".", "_") + ".jpg";
 			}
+			
+			// Create the audio element
 			var audio = document.createElement('audio');
 			audio.setAttribute('controls', true);
 			audio.src = window.URL.createObjectURL(file);
 			audio.id = this.id + '-audio';
+			audio.classList.add("audio-player");
+			audio.style.zIndex = 10;
+			this.appendChild(audio);
+			var closeButton = document.createElement('div');
+			closeButton.id = audio.id + "-close";
+			closeButton.classList.add("audio-close-button");
+			closeButton.style.zIndex = 11;
+			closeButton.onclick = function(){closeClicked(closeButton);};
+			this.appendChild(closeButton);
+			showControl(closeButton.id, audio);
 			this.file = file;
 			this.audio = audio;
-			audio.classList.add("audio-player");
-			this.appendChild(audio);
-			audio.style.zIndex = 10;
 		} else if (file.type.match(videoType)) {
 			if (this.imageContainer) {
 				this.removeChild(this.imageContainer);
@@ -343,13 +353,19 @@ function closeClicked(closeButton) {
 	if (closeButton.target) {
 		if (closeButton.target.nodeName === "VIDEO") {
 			closeButton.parentNode.video = null;
+		} else if (closeButton.target.nodeName === "AUDIO") {
+			closeButton.parentNode.audio = null;
 		} else if (closeButton.target.nodeName === "DIV") {
 			closeButton.parentNode.imageContainer = null;
 		}
 		closeButton.parentNode.removeChild(closeButton.target);
 	}
-	hideControl(closeButton.id);
-	hideControl(closeButton.parentNode.id + "-slider");
+	if (closeButton.target.nodeName === "AUDIO") {
+		closeButton.parentNode.removeChild(closeButton);
+	} else {
+		hideControl(closeButton.id);
+		hideControl(closeButton.parentNode.id + "-slider");
+	}
 }
 
 function resizeContainer(bento, img, div) {
