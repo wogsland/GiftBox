@@ -738,12 +738,16 @@ function save() {
 	var giftboxName = saveName;
 	var giftboxId = template.giftboxId;
 	var letterText = template.letterText;
+	var wrapperType = template.wrapperType;
+	var unloadCount = template.unloadCount;
 	var userId = readCookie('user_id');
 	var giftbox = {
 		giftbox_id: giftboxId,
 		user_id: userId,
 		name: giftboxName,
 		letter_text: letterText,
+		wrapper_type: wrapperType,
+		unload_count: unloadCount,
 		bentos: new Array()
 	};
 	$("#"+template.id+" div.bento").each(function(i) { 
@@ -811,10 +815,16 @@ function send() {
 
 function preview() {
 	var giftboxId = window.top_template.giftboxId;
+	var unloadType = window.top_template.wrapperType;
+	var unloadCount = window.top_template.unloadCount
 	if (!giftboxId) {
 		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
 	} else {
-		window.open("preview.php?id=" + giftboxId, "_blank");
+		if (window.top_template.wrapperType) {
+			window.open("second-harvest.html?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
+		} else {
+			window.open("preview.php?id=" + giftboxId, "_blank");
+		}
 	}
 }
 
@@ -822,4 +832,18 @@ function save_letter() {
 	var letterText = document.getElementById("letter-text");
 	window.top_template.letterText = letterText.value;
 	$("#letter-dialog" ).dialog("close");
+}
+
+function wrapper() {
+	$('#wrapper-type').val(window.top_template.wrapperType);
+	$('#unload-count').val(window.top_template.unloadCount);
+	$('#wrapper-dialog').dialog('open');
+}
+
+function save_wrapper() {
+	var wrapperType = document.getElementById("wrapper-type");
+	var unloadCount = document.getElementById("unload-count");
+	window.top_template.wrapperType = wrapperType.value;
+	window.top_template.unloadCount = unloadCount.value;
+	$("#wrapper-dialog" ).dialog("close");
 }

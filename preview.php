@@ -27,6 +27,9 @@
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 </head>
 <body>
+	<div class="header-wrapper" id="preview-header-wrapper">
+		<a id="preview-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
+	</div>
 	<script>
 		$(document).ready(function(){
 			

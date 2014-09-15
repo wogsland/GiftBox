@@ -12,6 +12,6 @@ $event = new eventLogger($user_id, $event);
 $event->log();
 
 // Send the email
-$message = "To open your Giftbox, please click on this link:<br><br>".$preview_link;
-sendMail($email_address, 'You have a Giftbox to open!!!', $message, $sender_email);
+$message = '<a href="'.$preview_link.'">Click here to open your Token!</a>';
+sendMail($email_address, 'You have a Token to open!!!', $message, $sender_email);
 ?>
