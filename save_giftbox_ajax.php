@@ -8,14 +8,16 @@ $giftbox_name = str_replace("'", "''", $giftbox_name);
 $user_id = $_POST['user_id'];
 $letter_text = $_POST['letter_text'];
 $letter_text = str_replace("'", "''", $letter_text);
+$wrapper_type = $_POST['wrapper_type'];
+$unload_count = $_POST['unload_count'];
 $bentos = $_POST['bentos'];
 
-// If no giftbox id is passed in, then INSERT a record, otherwise UPDATE the giftbox name and delete the bentos
+// If no giftbox_id is passed in, then INSERT a record, otherwise UPDATE the giftbox name and delete the bentos
 if (!$giftbox_id) {
-	$sql = "INSERT into giftbox (name, user_id, letter_text) values ('".$giftbox_name."', ".$user_id.", '".$letter_text."')";
+	$sql = "INSERT into giftbox (name, user_id, letter_text, wrapper_type, unload_count) values ('".$giftbox_name."', ".$user_id.", '".$letter_text."', '".$wrapper_type."', ".$unload_count.")";
 	$giftbox_id = insert($sql);
 } else {
-	$sql = "UPDATE giftbox set name = '".$giftbox_name."', letter_text = '".$letter_text."' WHERE id = ".$giftbox_id;
+	$sql = "UPDATE giftbox set name = '".$giftbox_name."', letter_text = '".$letter_text."', wrapper_type = '".$wrapper_type."', unload_count = ".$unload_count." WHERE id = ".$giftbox_id;
 	execute($sql);
 	$sql = "DELETE FROM bento where giftbox_id = ".$giftbox_id;
 	execute($sql);

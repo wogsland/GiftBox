@@ -53,6 +53,28 @@
 		});
   
 		$(function() {
+			$("#unload-count").bind("keydown", function (event) {
+				event.preventDefault();
+			});			
+			$( "#unload-count" ).spinner({min: 0, max: 20});
+			$( "#wrapper-dialog" ).dialog({
+				autoOpen: false,
+				resizable: false,
+				width: 500,
+				height: 250,
+				modal: true,
+				buttons: {
+					OK: function() {
+						save_wrapper();
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		});
+  
+		$(function() {
 			$( "#save-dialog" ).dialog({ 
 				autoOpen: false,
 				resizable: false,
@@ -187,6 +209,7 @@
 			<div id="templates">
 				<div id="template-button-container">
 					<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
+					<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
 					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="$('#save-name').val(window.top_template.giftboxName); $('#save-dialog').dialog('open');">Save</a>
 					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
 					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
@@ -324,6 +347,21 @@
 		</form>
 	</div>
 	
+	<div id="wrapper-dialog" title="Wrapper">
+		<form>
+			<fieldset style="margin-top: 30px">
+				<label for="wrapper-type">Select a wrapper type</label>
+				<select name="wrapper-type" id="wrapper-type">
+					<option selected="selected" value="">None</option>
+					<option value="food-box">Unload Boxes</option>
+					<option value="briefcase">Unload Bags</option>
+				</select>
+				<br><br>
+				<label for="unload-count">Number of items to unload</label>
+				<input id="unload-count" name="unload-count">
+			</fieldset>			
+		</form>
+	</div>
 	
 	<script>
 		var bentos = document.querySelectorAll('.bento');
@@ -355,15 +393,25 @@
 		var template1 = document.getElementById('template-1');
 		var template2 = document.getElementById('template-2');
 		var template3 = document.getElementById('template-3');
+	
 		template1.giftboxName = "Untitled-1";
 		template1.giftboxId = null;
 		template1.letterText = null;
+		template1.wrapperType = "";
+		template1.unloadCount = 3;
+		
 		template2.giftboxName = "Untitled-2";
 		template2.giftboxId = null;
 		template2.letterText = null;
-		template3.giftboxName = "Untitled-3";
+		template2.wrapperType = "";
+		template2.unloadCount = 3;
+
+	template3.giftboxName = "Untitled-3";
 		template3.giftboxId = null;
 		template3.letterText = null;
+		template3.wrapperType = "";
+		template3.unloadCount = 3;
+
 		window.top_template = template1;
 		$("#preview-link").val("");
 	</script>

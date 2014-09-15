@@ -28,6 +28,24 @@ body
 	background-image: linear-gradient(to bottom, #FFFFFF 0%, #9099B0 100%);	
 }
 
+#preview-header-wrapper {
+	background-color: #293133;
+	height: 85px;
+}
+
+#preview-home-icon {
+    background: url("../images/Giftbox.png") no-repeat;
+	background-position: center;
+    display: block;
+    width: 245px;
+    height: 65px;
+    position: relative;
+    text-indent: -9999px;
+    top: 10px;
+	left: 10px;
+}
+
+
 #preview {
 	position: relative;
 	display: block;
