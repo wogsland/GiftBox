@@ -821,7 +821,7 @@ function preview() {
 		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
 	} else {
 		if (window.top_template.wrapperType) {
-			window.open("second-harvest.html?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
+			window.open("second-harvest.php?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
 		} else {
 			window.open("preview.php?id=" + giftboxId, "_blank");
 		}
