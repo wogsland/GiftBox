@@ -319,7 +319,7 @@
 			<p class="dialog-message" id="send-message"></p>
 			<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30">
 			<p>Or, copy this link into an email and send it yourself:</p>
-			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="50" value="" readonly="readonly">
+			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="60" value="" readonly="readonly">
 			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="sendGiftbox()">Send</a>
 		</div>
 	</form>

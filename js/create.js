@@ -695,15 +695,22 @@ function closeStatus() {
 	$("#status-dialog" ).dialog("close");
 }
 
-function setPreviewLink (giftboxId) {
-	$("#preview-link").val(readCookie("app_url") + "preview.php?id=" + giftboxId);
+function setPreviewLink (template) {
+	var linkText;
+	if (template.wrapperType) {
+		linkText = "second-harvest.php?ut=" + template.wrapperType + "&uc=" + template.unloadCount + "&tid=" + template.giftboxId;
+	} else {
+		linkText = "preview.php?id=" + template.giftboxId;
+	}
+	$("#preview-link").val(readCookie("app_url") + linkText);
 }
+
 function stack(top, middle, bottom) {
 	var top_template = document.getElementById(top);
 	var middle_template = document.getElementById(middle);
 	var bottom_template = document.getElementById(bottom);
 	window.top_template = top_template;
-	setPreviewLink(top_template.giftboxId);
+	setPreviewLink(top_template);
 	top_template.style.zIndex = 3;
 	middle_template.style.zIndex = 2;
 	bottom_template.style.zIndex = 1;
@@ -793,7 +800,7 @@ function save() {
 		giftbox, 
 		function(result) { 
 			template.giftboxId = result.giftbox_id;
-			setPreviewLink(template.giftboxId);
+			setPreviewLink(template);
 			closeStatus();
 		}, 
 		"json").fail(function() {alert("Save failed!"); closeStatus();});
