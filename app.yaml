@@ -13,6 +13,10 @@ handlers:
   static_dir: images
 - url: /models
   static_dir: models
+- url: /assets/images
+  static_dir: assets/images
+- url: /assets/fonts
+  static_dir: assets/fonts
 - url: /
   script: index.php
 
