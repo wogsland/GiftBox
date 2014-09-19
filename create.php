@@ -210,7 +210,7 @@
 				<div id="template-button-container">
 					<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
 					<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
-					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="$('#save-name').val(window.top_template.giftboxName); $('#save-dialog').dialog('open');">Save</a>
+					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="saveButton()">Save</a>
 					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
 					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
 					<p id="template-status"></p>
@@ -394,19 +394,19 @@
 		var template2 = document.getElementById('template-2');
 		var template3 = document.getElementById('template-3');
 	
-		template1.giftboxName = "Untitled-1";
+		template1.giftboxName = "Untitled";
 		template1.giftboxId = null;
 		template1.letterText = null;
 		template1.wrapperType = "";
 		template1.unloadCount = 3;
 		
-		template2.giftboxName = "Untitled-2";
+		template2.giftboxName = "Untitled";
 		template2.giftboxId = null;
 		template2.letterText = null;
 		template2.wrapperType = "";
 		template2.unloadCount = 3;
 
-	template3.giftboxName = "Untitled-3";
+		template3.giftboxName = "Untitled";
 		template3.giftboxId = null;
 		template3.letterText = null;
 		template3.wrapperType = "";

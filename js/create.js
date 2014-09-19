@@ -218,6 +218,11 @@ function handleAddMediaDrop(e) {
 		e.preventDefault(); // Necessary. Allows us to drop.
 	}
 	this.classList.remove('over');
+	
+var data1 = e.dataTransfer.getData('text/plain');
+var data2 = e.dataTransfer.getData('text/uri-list');
+var data3 = e.dataTransfer.getData('text/html');
+	
 	handleMediaFiles(e.dataTransfer.files);
 }
 
@@ -734,15 +739,26 @@ function calcLeft(bento, image, container) {
 	return left + "px";
 }
 
-function save() {
-	// Prompt for giftbox name
-	var saveName = document.getElementById("save-name").value;
-	$("#save-dialog" ).dialog("close");
-	window.top_template.giftboxName = saveName;
+function saveButton() {
+	if (!window.top_template.giftboxId) {
+		$('#save-name').val(window.top_template.giftboxName); 
+		$('#save-dialog').dialog('open');	
+	} else {
+		save();
+	}
 	
-	openStatus("Save", "Saving your giftbox...");
+}
+function save() {
+	if ($("#save-dialog" ).dialog("isOpen")) {
+		// Get the name
+		var giftboxName = document.getElementById("save-name").value;
+		$("#save-dialog" ).dialog("close");
+		window.top_template.giftboxName = giftboxName;
+	}
+	var giftboxName = window.top_template.giftboxName;
+	
+	openStatus("Save", "Saving " + giftboxName + "...");
 	var template = window.top_template;
-	var giftboxName = saveName;
 	var giftboxId = template.giftboxId;
 	var letterText = template.letterText;
 	var wrapperType = template.wrapperType;
