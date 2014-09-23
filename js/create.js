@@ -188,6 +188,7 @@ function handleDrop(e) {
 				video.src = window.URL.createObjectURL(file);
 				video.id = this.id + '-video';
 				video.width =  parseInt(getComputedStyle(this).width, 10);
+				video.height = parseInt(getComputedStyle(this).height, 10);
 				this.file = file;
 				this.video = video;
 				video.classList.add("video-js");
@@ -579,6 +580,10 @@ function handleVerticalDrag(target, movement) {
 		if (topImage) {
 			var topContainer = document.getElementById(topDependent.id + "-image-container");
 			resizeContents(topDependent, topImage, topContainer);
+		} else if (topDependent.video) {
+			topDependent.video.height = newHeight;
+		} else if (topDependent.iframe) {
+			topDependent.iframe.height = newHeight;
 		}
 	}	
 
@@ -595,6 +600,10 @@ function handleVerticalDrag(target, movement) {
 		if (bottomImage) {
 			var bottomContainer = document.getElementById(bottomDependent.id + "-image-container");
 			resizeContents(bottomDependent, bottomImage, bottomContainer);
+		} else if (bottomDependent.video) {
+			bottomDependent.video.height = newHeight;
+		} else if (bottomDependent.iframe) {
+			bottomDependent.iframe.height = newHeight;
 		}
 	}
 }
