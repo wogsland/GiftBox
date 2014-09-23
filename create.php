@@ -202,7 +202,7 @@
 					<div class="tab-panel" id="images-tab">
 						<div class="icon-container" id="images-icon-container">
 							<ul class="icon-list">
-								<li>
+								<li class="tab-icon">
 									<img id="select-image" src="images/computer.png">
 									<input type="file" multiple id="select-image-file" />
 								</li>
@@ -215,18 +215,18 @@
 					<div class="tab-panel" id="media-tab">
 						<div class="icon-container" id="media-icon-container">
 							<ul class="icon-list" id="media-icon-list">
-								<li>
-									<img id="select-media" src="images/computer.png">
+								<li class="tab-icon">
+									<img class="media-icon-image" id="select-media"  width="48" height="48" src="images/computer.png">
 									<input type="file" multiple id="select-media-file" />
 								</li>
-								<li>
-									<a href="javascript:void(0)" onclick="inputURL('YouTube')"><img width="48" height="48" src="images/youtube_icon.jpg"></a>
+								<li class="tab-icon">
+									<a href="javascript:void(0)" onclick="inputURL('YouTube')"><img class="media-icon-image" width="48" height="48" src="images/youtube_icon.jpg"></a>
 								</li>
-								<li>
-									<a href="javascript:void(0)" onclick="inputURL('SoundCloud')"><img width="48" height="48" src="images/soundcloud_icon.jpg"></a>
+								<li class="tab-icon">
+									<a href="javascript:void(0)" onclick="inputURL('SoundCloud')"><img class="media-icon-image" width="48" height="48" src="images/soundcloud_icon.jpg"></a>
 								</li>
-								<li>
-									<a href="javascript:void(0)" onclick="inputURL('Spotify')"><img width="48" height="48" src="images/spotify_icon.jpg"></a>
+								<li class="tab-icon">
+									<a href="javascript:void(0)" onclick="inputURL('Spotify')"><img class="media-icon-image" width="48" height="48" src="images/spotify_icon.jpg"></a>
 								</li>
 							</ul>
 						</div>

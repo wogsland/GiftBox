@@ -627,9 +627,16 @@ p {
 	display: block;
 }	
 
-#media-icon-list li {
-	display: inline;
-}	
+.tab-icon {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	border: solid 1px white;
+}
+.tab-icon:hover {
+	border: solid 1px gray;
+}
 
 #select-image-file {
 	opacity: 0;
