@@ -27,7 +27,7 @@ if (!$giftbox_id) {
 foreach ($bentos as $bento) {
 	$image_file_name = str_replace("'", "''", $bento['image_file_name']);
 	$download_file_name = str_replace("'", "''", $bento['download_file_name']);
-	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left, image_file_name, image_width, image_height, image_top, image_left, download_file_name, download_mime_type) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."', '".$image_file_name."', '".$bento['image_width']."', '".$bento['image_height']."', '".$bento['image_top']."', '".$bento['image_left']."', '".$download_file_name."', '".$bento['download_mime_type']."')";
+	$sql = "INSERT INTO bento (giftbox_id, css_width, css_height, css_top, css_left, image_file_name, image_width, image_height, image_top, image_left, download_file_name, download_mime_type, content_uri) VALUES (".$giftbox_id.", '".$bento['width']."', '".$bento['height']."', '".$bento['top']."', '".$bento['left']."', '".$image_file_name."', '".$bento['image_width']."', '".$bento['image_height']."', '".$bento['image_top']."', '".$bento['image_left']."', '".$download_file_name."', '".$bento['download_mime_type']."', '".$bento['content_uri']."')";
 	execute($sql);
 }
 

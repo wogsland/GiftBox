@@ -60,7 +60,6 @@
 							} else {
 								$path = $file_storage_path.$row->image_file_name;
 							}
-syslog(LOG_INFO, $path);
 							echo "\t\t\t".'<img src="'.$path.'" width="'.$row->image_width.'" height="'.$row->image_height.'" style="position:absolute; top:'.$row->image_top.'; left:'.$row->image_left.'">'.PHP_EOL;
 						}
 						if ($row->download_file_name) {
@@ -70,7 +69,6 @@ syslog(LOG_INFO, $path);
 							} else {
 								$path = $file_storage_path.$row->download_file_name;
 							}
-syslog(LOG_INFO, $path);
 							$download_paths[] = $path;
 							if (strpos($row->download_mime_type, 'video') === 0) {
 								echo "\t\t\t\t\t"."<video id=\"".$row->download_file_name."\" class=\"video-js vjs-default-skin video-player\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $row->css_width)."\"  height=\"".str_replace("px", null, $row->css_height)."\" controls>".PHP_EOL;
@@ -83,7 +81,15 @@ syslog(LOG_INFO, $path);
 								echo "\t\t".'<img class="download-icon" src="images/download.jpg">';
 							}
 						}
-						echo "\t\t\t\t</div>".PHP_EOL;
+						if ($row->content_uri) {
+							if (is_youtube($row->content_uri)) {
+								$video_id = youtube_id($row->content_uri);
+								echo "\t\t\t\t\t"."<iframe width=\"".$row->css_width."\" height=\"".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."\" frameborder=\"0\"></iframe>".PHP_EOL;
+							} elseif (strpos($row->content_uri, 'soundcloud.com') !== FALSE) {
+								echo "\t\t\t\t\t"."<iframe width=\"100%\" height=".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."\" frameborder=\"0\"></iframe>".PHP_EOL;
+							}
+						}
+						echo "</div>";
 					}
 ?>
 			</div>
