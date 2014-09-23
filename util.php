@@ -72,4 +72,20 @@
 			echo $text."</pre>\n";
 		}
 	}
+	
+	function youtube_id($url) {
+		$id = null;
+		if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
+			$id = $match[count($match)-1];
+		}
+		return $id;
+	}
+	
+	function is_youtube($url) {
+		$retval = false;
+		if (strpos($url, 'youtube.com') !== FALSE || strpos($url, 'youtu.be') !== FALSE) {
+			$retval = TRUE;
+		}
+		return $retval;
+	}
 ?>

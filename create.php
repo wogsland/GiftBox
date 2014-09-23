@@ -24,6 +24,7 @@
 	<script src="js/id3-minimized.js"></script>
 	<script src="js/create.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
+	<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 	
 	<script>
 		$(function() {
@@ -99,7 +100,33 @@
 				}
 			});
 		});
-  
+
+		$(function() {
+			$( "#url-dialog" ).dialog({ 
+				autoOpen: false,
+				resizable: false,
+				height:200,
+				width: 600,
+				modal: true,
+				buttons: {
+					Ok: function() {
+						addURL();
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				},
+				open: function() {
+					$("#url-dialog").keypress(function(e) {
+						if (e.keyCode == $.ui.keyCode.ENTER) {
+							addURL();
+							return false;
+						}
+					});
+				}
+			});
+		});
+
 		$(function() {
 			$( "#confirm-dialog" ).dialog({
 				autoOpen: false,
@@ -187,10 +214,19 @@
 					</div>
 					<div class="tab-panel" id="media-tab">
 						<div class="icon-container" id="media-icon-container">
-							<ul class="icon-list">
+							<ul class="icon-list" id="media-icon-list">
 								<li>
 									<img id="select-media" src="images/computer.png">
 									<input type="file" multiple id="select-media-file" />
+								</li>
+								<li>
+									<a href="javascript:void(0)" onclick="inputURL('YouTube')"><img width="48" height="48" src="images/youtube_icon.jpg"></a>
+								</li>
+								<li>
+									<a href="javascript:void(0)" onclick="inputURL('SoundCloud')"><img width="48" height="48" src="images/soundcloud_icon.jpg"></a>
+								</li>
+								<li>
+									<a href="javascript:void(0)" onclick="inputURL('Spotify')"><img width="48" height="48" src="images/spotify_icon.jpg"></a>
 								</li>
 							</ul>
 						</div>
@@ -339,7 +375,16 @@
 		    </fieldset>
 		</form>
 	</div>
-	
+
+	<div id="url-dialog">
+		<form>
+		    <fieldset style="margin-top: 25px">
+				<label for="save-name">Paste link address here</label>
+				<input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
+		    </fieldset>
+		</form>
+	</div>
+
 	<div id="letter-dialog" title="Letter">
 		<form>
 			<textarea rows="29" cols="55" id="letter-text" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">

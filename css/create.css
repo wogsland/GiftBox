@@ -627,6 +627,10 @@ p {
 	display: block;
 }	
 
+#media-icon-list li {
+	display: inline;
+}	
+
 #select-image-file {
 	opacity: 0;
 	width: 48px;
