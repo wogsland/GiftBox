@@ -680,12 +680,12 @@ p {
 }
 
 .photo-thumbnail {
+	display: block;
 	max-width: 150px;
 	max-height: 150px;
 	border: solid 2px white;
 	border-radius: 2px;
-	margin-left: 20px;
-	margin-top: 20px;
+	margin: 10px auto 0px auto;
 }
 
 .photo-thumbnail:hover {

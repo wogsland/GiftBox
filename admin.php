@@ -26,6 +26,12 @@
 						<li>
 							<a href="<?php echo $app_root ?>">Home</a>
 						</li>
+						<li>
+							<a href="business-solutions/business-solutions.html">Business Solutions</a>
+						</li>
+						<li>
+							<a href="about-us/about-us.html">About Us</a>
+						</li>
 					</ul>
 				</nav>
 			</header>
