@@ -19,6 +19,8 @@ handlers:
   static_dir: assets/fonts
 - url: /business-solutions
   static_dir: business-solutions
+- url: /about-us
+  static_dir: about-us
 - url: /
   script: index.php
 
