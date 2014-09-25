@@ -17,6 +17,8 @@ handlers:
   static_dir: assets/images
 - url: /assets/fonts
   static_dir: assets/fonts
+- url: /business-solutions
+  static_dir: business-solutions
 - url: /
   script: index.php
 
