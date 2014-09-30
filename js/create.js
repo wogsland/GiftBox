@@ -232,7 +232,7 @@ function handleDrop(e) {
 			this.contentURI = contentURI;
 		} else if (source.soundCloudURL) {
 			var iframe = document.createElement('iframe');
-			iframe.src = "https:/w.soundcloud.com/player/?url="+encodeURIComponent(source.soundCloudURL);
+			iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(source.soundCloudURL);
 			var width = this.offsetWidth;
 			var height = this.offsetHeight;
 			iframe.width = width;
