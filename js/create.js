@@ -230,6 +230,17 @@ function handleDrop(e) {
 			this.appendChild(iframe);
 			this.iframe = iframe;
 			this.contentURI = contentURI;
+		} else if (source.soundCloudURL) {
+			var iframe = document.createElement('iframe');
+			iframe.src = "https:/w.soundcloud.com/player/?url="+encodeURIComponent(source.soundCloudURL);
+			var width = this.offsetWidth;
+			var height = this.offsetHeight;
+			iframe.width = width;
+			iframe.height = height;
+			iframe.style.border = 0;
+			this.appendChild(iframe);
+			this.iframe = iframe;
+			this.contentURI = source.soundCloudURL;
 		}
 	}
 	return false;
@@ -319,14 +330,26 @@ function addYouTube(url) {
 
 function addSoundCloud(url) {
     var mediaList = document.getElementById("media-tab");
-	var img = document.createElement("img");
-	var iframe = document.createElement("iframe");
-	iframe.src = "https://w.soundcloud.com/player/?url=" + url;
-	iframe.id = "sc-widget";
-	iframe.classList.add("photo-thumbnail");
-	iframe.addEventListener('dragstart', handleDragStart, false);
-	iframe.soundCloudURL = url;
-	mediaList.appendChild(iframe);
+	$.getJSON("http://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
+		var img = document.createElement("img");
+		img.classList.add("photo-thumbnail");
+		if (data.artwork_url) {
+			img.src = data.artwork_url.replace("large", "t500x500");
+		} else {
+			img.src = "images/soundcloud_icon.jpg";
+		}
+		img.id = data.id;
+		img.addEventListener('dragstart', handleDragStart, false);
+		img.soundCloudURL = data.uri;
+		mediaList.appendChild(img);
+
+		var text = document.createElement("p");
+		text.innerHTML = data.title;
+		text.classList.add("file-name");
+		mediaList.appendChild(text);
+		
+	});
+	
 }
 
 function addSpotify(url) {
