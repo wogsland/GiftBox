@@ -88,4 +88,21 @@
 		}
 		return $retval;
 	}
-?>
+
+	function is_spotify($url) {
+		$retval = false;
+		if (strpos($url, 'spotify.com') !== FALSE) {
+			$retval = TRUE;
+		}
+		return $retval;
+	}
+	
+	function is_soundcloud($url) {
+		$retval = false;
+		if (strpos($url, 'soundcloud.com') !== FALSE) {
+			$retval = TRUE;
+		}
+		return $retval;
+	}
+	
+	?>

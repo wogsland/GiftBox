@@ -218,6 +218,17 @@ function handleDrop(e) {
 			this.appendChild(iframe);
 			this.iframe = iframe;
 			this.contentURI = source.youTubeURL;
+		} else if (source.spotifyTrackId) {
+			var iframe = document.createElement('iframe');
+			var contentURI = "https://embed.spotify.com/?url=spotify:track:"+source.spotifyTrackId;
+			iframe.src = contentURI;
+			var width = this.offsetWidth;
+			var height = this.offsetHeight;
+			iframe.width = width;
+			iframe.style.border = 0;
+			this.appendChild(iframe);
+			this.iframe = iframe;
+			this.contentURI = contentURI;
 		}
 	}
 	return false;
@@ -294,6 +305,7 @@ function handleURIDrop(e) {
 }
 
 function addYouTube(url) {
+    var mediaList = document.getElementById("media-tab");
 	var videoId = youTubeID(url);
 	var img = document.createElement("img");
 	img.classList.add("photo-thumbnail");
@@ -301,11 +313,11 @@ function addYouTube(url) {
 	img.id = videoId;
 	img.addEventListener('dragstart', handleDragStart, false);
 	img.youTubeURL = url;
-	tabs.appendChild(img);
+	mediaList.appendChild(img);
 }
 
 function addSoundCloud(url) {
-//<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/123160946&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+    var mediaList = document.getElementById("media-tab");
 	var img = document.createElement("img");
 	var iframe = document.createElement("iframe");
 	iframe.src = "https://w.soundcloud.com/player/?url=" + url;
@@ -313,10 +325,11 @@ function addSoundCloud(url) {
 	iframe.classList.add("photo-thumbnail");
 	iframe.addEventListener('dragstart', handleDragStart, false);
 	iframe.soundCloudURL = url;
-	tabs.appendChild(iframe);
+	mediaList.appendChild(iframe);
 }
 
 function addSpotify(url) {
+    var mediaList = document.getElementById("media-tab");
 	var parts = url.split("/");
 	var trackId = parts[parts.length - 1];
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
@@ -326,7 +339,7 @@ function addSpotify(url) {
 		img.id = trackId;
 		img.addEventListener('dragstart', handleDragStart, false);
 		img.spotifyTrackId = trackId;
-		tabs.appendChild(img);
+		mediaList.appendChild(img);
 	});
 }
 
