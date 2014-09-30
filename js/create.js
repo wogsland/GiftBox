@@ -35,6 +35,14 @@ function isSoundCloud(url) {
 	return retVal;
 }
 
+function isSpotify(url) {
+	retVal = false;
+	if (url.indexOf("spotify.com") > -1) {
+		retVal = true;
+	}
+	return retVal;
+}
+
 function youTubeID(url) {
 	var result = url.match(/(youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+))/i);
 	return result[result.length - 1];
@@ -277,29 +285,49 @@ function handleURIDrop(e) {
     var tabs = document.getElementById("media-tab");
 
 	if (isYouTube(textURIList)) {
-		youTubeDrop(textURIList);
+		addYouTube(textURIList);
 	} else if (isSoundCloud(textURIList)) {
-		soundCloudDrop(textURIList);
+		addSoundCloud(textURIList);
+	} else if (isSpotify(textURIList)) {
+		addSpotify(textURIList);
 	}
 }
 
-function youTubeDrop (url) {
+function addYouTube(url) {
 	var videoId = youTubeID(url);
 	var img = document.createElement("img");
 	img.classList.add("photo-thumbnail");
-	img.src = "http://img.youtube.com/vi/"+videoId+"/2.jpg";
+	img.src = "http://img.youtube.com/vi/"+videoId+"/0.jpg";
 	img.id = videoId;
 	img.addEventListener('dragstart', handleDragStart, false);
 	img.youTubeURL = url;
 	tabs.appendChild(img);
 }
 
-function soundCloudDrop (url) {
+function addSoundCloud(url) {
+//<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/123160946&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
 	var img = document.createElement("img");
-	img.classList.add("photo-thumbnail");
-	img.addEventListener('dragstart', handleDragStart, false);
-	img.soundCloudURL = url;
-	tabs.appendChild(img);
+	var iframe = document.createElement("iframe");
+	iframe.src = "https://w.soundcloud.com/player/?url=" + url;
+	iframe.id = "sc-widget";
+	iframe.classList.add("photo-thumbnail");
+	iframe.addEventListener('dragstart', handleDragStart, false);
+	iframe.soundCloudURL = url;
+	tabs.appendChild(iframe);
+}
+
+function addSpotify(url) {
+	var parts = url.split("/");
+	var trackId = parts[parts.length - 1];
+	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
+		var img = document.createElement("img");
+		img.classList.add("photo-thumbnail");
+		img.src = data.album.images[1].url;
+		img.id = trackId;
+		img.addEventListener('dragstart', handleDragStart, false);
+		img.spotifyTrackId = trackId;
+		tabs.appendChild(img);
+	});
 }
 
 function handleImageFiles(files) {
@@ -974,7 +1002,11 @@ function addURL() {
 	var url = document.getElementById("url").value;
 	$("#url-dialog" ).dialog("close");
 	if (isYouTube(url)) {
-		youTubeDrop(url);
+		addYouTube(url);
+	} else if (isSoundCloud(url)) {
+		addSoundCloud(url);
+	} else if (isSpotify(url)) {
+		addSpotify(url);
 	}
 }
 
