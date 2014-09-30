@@ -225,6 +225,7 @@ function handleDrop(e) {
 			var width = this.offsetWidth;
 			var height = this.offsetHeight;
 			iframe.width = width;
+			iframe.height = height;
 			iframe.style.border = 0;
 			this.appendChild(iframe);
 			this.iframe = iframe;
