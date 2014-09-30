@@ -52,7 +52,12 @@
 					$sql = "SELECT * FROM bento WHERE giftbox_id = ".$_GET['id'];
 					$query = execute_query($sql);
 					while ($row = $query->fetch_object()) {
-						echo "\t\t\t\t".'<div class="preview-bento" style="position:absolute; top:'.$row->css_top.'; left:'.$row->css_left.'; width:'.$row->css_width.'; height:'.$row->css_height.'">'.PHP_EOL;
+						if (is_spotify($row->content_uri)) {
+							$background_color = "black";
+						} else {
+							$background_color = "white";
+						}
+						echo "\t\t\t\t".'<div class="preview-bento" style="position:absolute; top:'.$row->css_top.'; left:'.$row->css_left.'; width:'.$row->css_width.'; height:'.$row->css_height.'; background-color: '.$background_color.'">'.PHP_EOL;
 						if ($row->image_file_name) {
 							$file_name = $row->image_file_name;
 							if ($google_app_engine) {
@@ -85,8 +90,10 @@
 							if (is_youtube($row->content_uri)) {
 								$video_id = youtube_id($row->content_uri);
 								echo "\t\t\t\t\t"."<iframe width=\"".$row->css_width."\" height=\"".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."\" frameborder=\"0\"></iframe>".PHP_EOL;
-							} elseif (strpos($row->content_uri, 'soundcloud.com') !== FALSE) {
+							} elseif (is_soundcloud($row->content_uri)) {
 								echo "\t\t\t\t\t"."<iframe width=\"100%\" height=".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."\" frameborder=\"0\"></iframe>".PHP_EOL;
+							} elseif (is_spotify($row->content_uri)) {
+								echo "\t\t\t\t\t"."<iframe width=\"".$row->css_width."\" height=\"".$row->css_height."\" src=\"".$row->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 							}
 						}
 						echo "</div>";
