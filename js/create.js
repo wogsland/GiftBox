@@ -37,7 +37,7 @@ function isSoundCloud(url) {
 
 function isSpotify(url) {
 	retVal = false;
-	if (url.indexOf("spotify.com") > -1) {
+	if (url.indexOf("spotify.com") > -1 || url.indexOf("spotify:track:") > -1) {
 		retVal = true;
 	}
 	return retVal;
@@ -354,7 +354,11 @@ function addSoundCloud(url) {
 
 function addSpotify(url) {
     var mediaList = document.getElementById("media-tab");
-	var parts = url.split("/");
+	var delimiter = "/";
+	if (url.indexOf("spotify:track:") > -1) {
+		delimiter = ":";
+	}
+	var parts = url.split(delimiter);
 	var trackId = parts[parts.length - 1];
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
 		var img = document.createElement("img");
