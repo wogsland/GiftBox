@@ -10,11 +10,12 @@ $letter_text = $_POST['letter_text'];
 $letter_text = str_replace("'", "''", $letter_text);
 $wrapper_type = $_POST['wrapper_type'];
 $unload_count = $_POST['unload_count'];
+$user_agent = $_POST['user_agent'];
 $bentos = $_POST['bentos'];
 
 // If no giftbox_id is passed in, then INSERT a record, otherwise UPDATE the giftbox name and delete the bentos
 if (!$giftbox_id) {
-	$sql = "INSERT into giftbox (name, user_id, letter_text, wrapper_type, unload_count) values ('".$giftbox_name."', ".$user_id.", '".$letter_text."', '".$wrapper_type."', ".$unload_count.")";
+	$sql = "INSERT into giftbox (name, user_id, letter_text, wrapper_type, unload_count, user_agent) values ('".$giftbox_name."', ".$user_id.", '".$letter_text."', '".$wrapper_type."', ".$unload_count.", '".$user_agent."')";
 	$giftbox_id = insert($sql);
 } else {
 	$sql = "UPDATE giftbox set name = '".$giftbox_name."', letter_text = '".$letter_text."', wrapper_type = '".$wrapper_type."', unload_count = ".$unload_count." WHERE id = ".$giftbox_id;
