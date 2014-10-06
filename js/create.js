@@ -921,6 +921,7 @@ function save() {
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userId = readCookie('user_id');
+	var userAgent = navigator.userAgent;
 	var giftbox = {
 		giftbox_id: giftboxId,
 		user_id: userId,
@@ -928,6 +929,7 @@ function save() {
 		letter_text: letterText,
 		wrapper_type: wrapperType,
 		unload_count: unloadCount,
+		user_agent: userAgent,
 		bentos: new Array()
 	};
 	$("#"+template.id+" div.bento").each(function(i) { 
