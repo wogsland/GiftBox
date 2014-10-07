@@ -1,11 +1,10 @@
 html {
-	height: 100%;
+	min-height: 100%;
 }
 
 body
 {
-	overflow: hidden;
-	height: 100%;
+	min-height: 100%;
 	margin: 0px;
 	overflow: auto;
 
@@ -107,9 +106,10 @@ body
 
 #flip-container {
 	position: relative;
-	margin: 50px auto 10px auto;
+	margin: 85px auto 0px auto;
 	width: 1138px;
 	height: 780px;
+	display: block;
 }
 
 .panel {
@@ -183,13 +183,13 @@ body
 	transform: rotateX(0deg) rotateY(0deg);
 }
 
-@media (max-width: 1024px)
+@media screen and (max-height: 865px)
 {
 	#preview-header-wrapper {
 		display: none;
 	}
 
 	#flip-container {
-		margin: 0px;
+		margin: 0px auto;
 	}
 }

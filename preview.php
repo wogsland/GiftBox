@@ -116,12 +116,14 @@
 			<p id="letter-text"><?php echo str_replace("\n", "<br />", $letterText) ?></p>
 		</div>
 	</div>
-	<div class="download-container">
 <?php
-	foreach ($download_paths as $key => $path) {
-		echo "\t\t".'<a class="pure-button download-button" href="'.urldecode($path).'" target="_blank">'.$download_file_names[$key].'</a>'.PHP_EOL;
+	if (count($download_paths)) {
+		echo "\t".'<div class="download-container">';
+		foreach ($download_paths as $key => $path) {
+			echo "\t\t".'<a class="pure-button download-button" href="'.urldecode($path).'" target="_blank">'.$download_file_names[$key].'</a>'.PHP_EOL;
+		}
+		echo "\t".'</div>';
 	}
 ?>
-	</div>
 </body>
 </html>
