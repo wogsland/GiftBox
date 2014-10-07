@@ -19,6 +19,13 @@ function readCookie(name){
 	return cookies[name];
 }
 
+function addText(text, container) {
+	var p = document.createElement("p");
+	p.innerHTML = text;
+	p.classList.add("file-name");
+	container.appendChild(p);
+}
+
 function isYouTube(url) {
 	retVal = false;
 	if (url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1) {
@@ -45,7 +52,11 @@ function isSpotify(url) {
 
 function youTubeID(url) {
 	var result = url.match(/(youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+))/i);
-	return result[result.length - 1];
+	if (result) {
+		return result[result.length - 1];
+	} else {
+		return null;
+	}
 }
 
 function sendGiftbox() {
@@ -313,19 +324,40 @@ function handleURIDrop(e) {
 		addSoundCloud(textURIList);
 	} else if (isSpotify(textURIList)) {
 		addSpotify(textURIList);
+	} else {
+		var error = "The dropped item is not one of the accepted types.\n\n"+textURIList;
+		console.log(error);
+		alert(error);
 	}
 }
 
 function addYouTube(url) {
-    var mediaList = document.getElementById("media-tab");
 	var videoId = youTubeID(url);
-	var img = document.createElement("img");
-	img.classList.add("photo-thumbnail");
-	img.src = "http://img.youtube.com/vi/"+videoId+"/0.jpg";
-	img.id = videoId;
-	img.addEventListener('dragstart', handleDragStart, false);
-	img.youTubeURL = url;
-	mediaList.appendChild(img);
+	var error = null;
+	if (videoId) {
+		var dataURL = "http://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
+		$.getJSON(dataURL,
+			function(data){
+			var title = data.entry.title.$t;
+			var mediaList = document.getElementById("media-tab");
+			var img = document.createElement("img");
+			img.classList.add("photo-thumbnail");
+			img.src = "http://img.youtube.com/vi/"+videoId+"/0.jpg";
+			img.id = videoId;
+			img.addEventListener('dragstart', handleDragStart, false);
+			img.youTubeURL = url;
+			mediaList.appendChild(img);
+			addText(title, mediaList);
+		}).fail(function() {
+			error = "Youtube API call failed.\n\n" + dataURL;
+			console.log(error);
+			alert(error);
+		});	
+	} else {
+		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
+		console.log(error);
+		alert(error);
+	}
 }
 
 function addSoundCloud(url) {
@@ -342,14 +374,12 @@ function addSoundCloud(url) {
 		img.addEventListener('dragstart', handleDragStart, false);
 		img.soundCloudURL = data.uri;
 		mediaList.appendChild(img);
-
-		var text = document.createElement("p");
-		text.innerHTML = data.title;
-		text.classList.add("file-name");
-		mediaList.appendChild(text);
-		
+		addText(data.title, mediaList);
+	}).fail(function(){
+		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
+		console.log(error);
+		alert(error);
 	});
-	
 }
 
 function addSpotify(url) {
@@ -368,6 +398,9 @@ function addSpotify(url) {
 		img.addEventListener('dragstart', handleDragStart, false);
 		img.spotifyTrackId = trackId;
 		mediaList.appendChild(img);
+		addText(data.name, mediaList);
+	}).fail(function() {
+		alert(url + " is not a valid Spotify track URL");
 	});
 }
 
@@ -389,10 +422,7 @@ function handleImageFiles(files) {
 		img.id = file.name;
 		img.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(img);
-		var text = document.createElement("p");
-		text.innerHTML = file.name;
-		text.classList.add("file-name");
-		tabs.appendChild(text);
+		addText(file.name, tabs);
 	}
 }
 
@@ -433,10 +463,7 @@ function handleMediaFiles(files) {
 		element.id = file.name;
 		element.addEventListener('dragstart', handleDragStart, false);
 		tabs.appendChild(element);
-		var text = document.createElement("p");
-		text.innerHTML = file.name;
-		text.classList.add("file-name");
-		tabs.appendChild(text);
+		addText(file.name, tabs);
     }
 
 }
@@ -1043,16 +1070,17 @@ function inputURL(site) {
 function addURL() {
 	// Get the url
 	var url = document.getElementById("url").value;
-	$("#url-dialog" ).dialog("close");
+	var title = $("#url-dialog").dialog("option", "title");
+	$("#url-dialog").dialog("close");
 	if (isYouTube(url)) {
 		addYouTube(url);
 	} else if (isSoundCloud(url)) {
 		addSoundCloud(url);
 	} else if (isSpotify(url)) {
 		addSpotify(url);
+	} else {
+		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
+		console.log(error);
+		alert(error);
 	}
 }
-
-
-
-// https://play.spotify.com/track/1rlHAlpDJyPiWpGcf6Wc8H
