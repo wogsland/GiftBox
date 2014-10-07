@@ -182,3 +182,14 @@ body
 	-moz-transform: rotateX(0deg) rotateY(0deg);
 	transform: rotateX(0deg) rotateY(0deg);
 }
+
+@media (max-width: 1024px)
+{
+	#preview-header-wrapper {
+		display: none;
+	}
+
+	#flip-container {
+		margin: 0px;
+	}
+}
