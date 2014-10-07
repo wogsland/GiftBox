@@ -16,6 +16,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width; initial-scale=1; minimal-ui">	
 	<title><?php echo $row->name ?></title>
 	<link rel="stylesheet" href="css/create.css" />
 	<link rel="stylesheet" href="css/preview.css" />
