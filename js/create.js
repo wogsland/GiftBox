@@ -400,7 +400,9 @@ function addSpotify(url) {
 		mediaList.appendChild(img);
 		addText(data.name, mediaList);
 	}).fail(function() {
-		alert(url + " is not a valid Spotify track URL");
+		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
+		console.log(error);
+		alert(error);
 	});
 }
 
