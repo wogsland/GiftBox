@@ -1,6 +1,7 @@
 <?php
 	include_once 'config.php';
 	include_once 'util.php';
+	session_start();
 	if (!logged_in() || !is_admin()) {
 		header('Location: '.$app_root);
 	}

@@ -90,7 +90,7 @@
 						if ($row->content_uri) {
 							if (is_youtube($row->content_uri)) {
 								$video_id = youtube_id($row->content_uri);
-								echo "\t\t\t\t\t"."<iframe width=\"".$row->css_width."\" height=\"".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
+								echo "\t\t\t\t\t"."<iframe class=\"youtube-player\" type=\"text/html\" width=\"".$row->css_width."\" height=\"".$row->css_height."\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
 							} elseif (is_soundcloud($row->content_uri)) {
 								echo "\t\t\t\t\t"."<iframe width=\"100%\" height=\"".$row->css_height."\" src=\"https://w.soundcloud.com/player/?url=".$row->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 							} elseif (is_spotify($row->content_uri)) {

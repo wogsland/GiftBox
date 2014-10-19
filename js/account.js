@@ -1,129 +1,82 @@
-function readCookie(name){
-	var c = document.cookie.split('; ');
-	var cookies = {};
-	for(var i = c.length-1; i >= 0; i--){
-	   var C = c[i].split('=');
-	   cookies[C[0]] = C[1];
-	}
-	return cookies[name];
+function getSession() {
+	var session = null;
+	$.ajax({
+		url: "get_session_ajax.php",
+		async: false
+	}).done(function(data, textStatus, jqXHR){
+		session = data;
+	});
+	return session;
 }
 
 function changePassword() {
-	var newPassword = document.getElementById('new-password').value;
-	var confirmPassword = document.getElementById('confirm-password').value;
-	var message = document.getElementById('change-password-message');
+	var newPassword = $("#new-password").val();
+	var confirmPassword = $("#confirm-password").val();
 	if (!newPassword) {
-		message.innerHTML = "Please enter a new password.";
+		$("#change-password-message").text("Please enter a new password.");
 	} else if (!confirmPassword) {
-		message.innerHTML = "Please confirm the new password";
+		$("#change-password-message").text("Please confirm the new password");
 	} else if (newPassword !== confirmPassword) {
-		message.innerHTML = "Passwords do not match.";
+		$("#change-password-message").text("Passwords do not match.");
 	} else {
-		var xmlhttp = new XMLHttpRequest();
-		var url = "change_password_ajax.php?user_id=" + readCookie('user_id') + "&new_password=" + encodeURIComponent(newPassword);
-		xmlhttp.open("GET", url, false);
-		xmlhttp.send();
-		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message === 'SUCCESS') {
+		$.post("change_password_ajax.php", newPassword, function(data, textStatus, jqXHR){
 			$.magnificPopup.close();
-			document.getElementById('save-password-message').innerHTML = "Your password has been changed.";
-		} else {
-			document.getElementById('login-message').innerHTML = jsonObj.message;
-		}
+			$("#my-account-message").text("Your password has been changed.");
+		}).fail(function(){
+			alert("Change password failed.");
+		});
 	}
 }
 
 function forgotPassword() {
 	$.magnificPopup.close();
-	document.location.href = readCookie('app_root') + 'forgot_password.html';
+	var session = getSession();
+	document.location.href = session.app_root+"forgot_password.php";
 }
 
 function sendPassword(email) {
 	alert('Email: ' + email);
 }
 
-function setCookies(jsonObj, loginType) {
-	document.cookie = "user_id=" + jsonObj.user_id;
-	document.cookie = "login_type=" + loginType;
-	document.cookie = "app_root=" + jsonObj.app_root;
-	document.cookie = "app_url=" + jsonObj.app_url;
-}
-
-function login(email, password) {
-	var message = document.getElementById('login-message');
-	if (!document.getElementById('email').value) {
-		message.innerHTML = "An email address is required when logging in with email.";
-	} else if (!document.getElementById('password').value) {
-		message.innerHTML = "A password is required when logging in with email.";
+function login() {
+	if (!$("#email").val()) {
+		$("#login-message").text("An email address is required when logging in with email.");
+	} else if (!$("#password").val()) {
+		$("#login-message").text("A password is required when logging in with email.");
 	} else {
-		var xmlhttp = new XMLHttpRequest();
-		var url = "login_ajax.php?login_type=EMAIL&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
-		xmlhttp.open("GET", url, false);
-		xmlhttp.send();
-		try {
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message === 'SUCCESS') {
+		$.post("login_ajax.php", $("#login-form").serialize(), function(data, textStatus, jqXHR){
+			if(data.status === "SUCCESS") {
 				$.magnificPopup.close();
-				setCookies(jsonObj, "EMAIL");
-				document.location.href = jsonObj.app_root;
-			} else {
-				document.getElementById('login-message').innerHTML = jsonObj.message;
+				document.location.href = data.app_root;
+			} else if (data.status === "ERROR") {
+				$("#login-message").text(data.message);
+			}  else {
+				$("#login-message").text("Unknown return status: "+data.status);
 			}
-		} catch(err) {
-			alert(xmlhttp.responseText);
-		}
+		}).fail(function() {
+			$("#login-message").text("Login failed.");
+		});
 	}
 };
-
-function register(first_name, last_name, email, password) {
-	var message = document.getElementById('signup-message');
-	if (!document.getElementById('first-name').value) {
-		message.innerHTML = "Please enter a first name.";
-	} else if (!document.getElementById('last-name').value) {
-		message.innerHTML = "Please enter a last name";
-	} else if (!document.getElementById('email').value) {
-		message.innerHTML = "Please enter a valid email.";
-	} else if (!document.getElementById('password').value) {
-		message.innerHTML = "Please enter a password.";
-	} else {
-		var xmlhttp = new XMLHttpRequest();
-		var url = "register_ajax.php?reg_type=EMAIL&first_name=" + encodeURIComponent(document.getElementById('first-name').value) + "&last_name=" + encodeURIComponent(document.getElementById('last-name').value) + "&email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password);
-		xmlhttp.open("GET", url, false);
-		xmlhttp.send();
-		try {
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message === 'SUCCESS'){
-				$.magnificPopup.close();
-				document.location.href = jsonObj.app_root;
-			}
-			else {
-				document.getElementById('signup-message').innerHTML = jsonObj.message;
-			}
-		} catch(err) {
-			alert(xmlhttp.responseText);
-		}
-	}
-
-}
 
 function handleFBLogin(response) {
     if (response.status === 'connected') {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-console.log(api_response);			
-		// Save a Logged in with Facebook event
-			var xmlhttp = new XMLHttpRequest();
-			var url = "login_ajax.php?login_type=FACEBOOK&email=" + encodeURIComponent(api_response.email);
-			xmlhttp.open("GET", url, false);
-			xmlhttp.send();
-console.log(xmlhttp.responseText);
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message === 'SUCCESS') {
-				$.magnificPopup.close();
-				setCookies(jsonObj, "FACEBOOK");
-				document.location.href = jsonObj.app_root;
-			} else {
-				document.getElementById('login-message').innerHTML = jsonObj.message;
-			}
+			console.log(api_response);
+			api_response["login-type"] = "FACEBOOK";
+			
+			$.post("login_ajax.php", api_response, function(data, textStatus, jqXHR){
+				if(data.status === "SUCCESS") {
+					$.magnificPopup.close();
+					document.location.href = data.app_root;
+				} else if (data.status === "ERROR") {
+					$("#login-message").text(data.message);
+				}  else {
+					$("#login-message").text("Unknown return status: "+data.status);
+				}
+			}).fail(function() {
+				$("#login-message").text("Login with Facebook failed.");
+			});
 		});
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
@@ -134,67 +87,82 @@ console.log(xmlhttp.responseText);
     }
 }
 
+function register() {
+	$("#reg_type").val("EMAIL");
+	if (!$("#first_name").val()) {
+		$("#signup-message").text("Please enter a first name.");
+	} else if (!$("#last_name").val()) {
+		$("#signup-message").text("Please enter a last name");
+	} else if (!$("#email").val()) {
+		$("#signup-message").text("Please enter a valid email.");
+	} else if (!$("#password").val()) {
+		$("#signup-message").text("Please enter a password.");
+	} else {
+		$.post("register_ajax.php", $("#signup-form").serialize(), function(data, textStatus, jqXHR){
+			if(data.status === "SUCCESS") {
+				$.magnificPopup.close();
+				document.location.href = data.app_root;
+			} else if (data.status === "ERROR") {
+				$("#signup-message").text(data.message);
+			}  else {
+				$("#signup-message").text("Unknown return status: "+data.status);
+			}
+		}).fail(function() {
+			$("#signup-message").text("Sign up failed.");
+		});
+	}
+}
+
 function handleFBReg(response) {
     if (response.status === 'connected') {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			// Register the user
-			var xmlhttp = new XMLHttpRequest();
-			var url = "register_ajax.php?reg_type=FACEBOOK&email=" + encodeURIComponent(api_response.email) + "&first_name=" + encodeURIComponent(api_response.first_name) + "&last_name=" + encodeURIComponent(api_response.last_name);
-			xmlhttp.open("GET", url, false);
-			xmlhttp.send();
-			var jsonObj = JSON.parse(xmlhttp.responseText);
-			if (jsonObj.message === 'SUCCESS') {
-				$.magnificPopup.close();
-				document.cookie = "user_id=" + jsonObj.user_id;
-				document.cookie = "login_type=FACEBOOK";
-				document.cookie = "app_root=" + jsonObj.app_root;
-				document.location.href = jsonObj.app_root;
-			} else {
-				document.getElementById('signup-message').innerHTML = jsonObj.message;
-			}
+			api_response["reg_type"] = "FACEBOOK";
+			$.post("register_ajax.php", api_response, function(data, textStatus, jqXHR){
+				if(data.status === "SUCCESS") {
+					$.magnificPopup.close();
+					document.location.href = data.app_root;
+				} else if (data.status === "ERROR") {
+					$("#signup-message").text(data.message);
+				}  else {
+					$("#signup-message").text("Unknown return status: "+data.status);
+				}
+			}).fail(function() {
+				$("#signup-message").text("Sign up with Facebook failed.");
+			});
 		});
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
-		document.getElementById('signup-message').innerHTML = "You are now signed up and logged into Giftbox!";
+		$("#signup-message").text("You are now signed up and logged into Giftbox!");
     } else {
       // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-		document.getElementById('signup-message').innerHTML = "Registration using Facebook failed.";
+		$("#signup-message").text("Registration using Facebook failed.");
     }
 }
 
 function logout() {
-	var loginType = readCookie('login_type');
-	if (loginType === 'FACEBOOK') {
-		FB.getLoginStatus(function(response) {
-			// are they currently logged into Facebook?
-			console.log(response);
-			if (response.status === 'connected') {
-				//they were authed so do the logout		
-				FB.logout(function(response) {
+	$.post("logout_ajax.php", function(data, textStatus, jqXHR){
+		if (data.status === "SUCCESS") {
+			if (data.login_type === "FACEBOOK") {
+				FB.getLoginStatus(function(response) {
+					// are they currently logged into Facebook?
 					console.log(response);
+					if (response.status === 'connected') {
+						//they were authed so do the logout		
+						FB.logout(function(response) {
+							console.log(response);
+						});
+					}
 				});
 			}
-		});
-	}
-	var userId = readCookie('user_id');
-	var appRoot = readCookie('app_root');
-	var xmlhttp = new XMLHttpRequest();
-	var url = "logout_ajax.php?user_id=" + encodeURIComponent(userId);
-	xmlhttp.open("GET", url, false);
-	xmlhttp.send();
-	try {
-		var jsonObj = JSON.parse(xmlhttp.responseText);
-		if (jsonObj.message === 'SUCCESS') {
-			document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			document.cookie = "login_type=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			document.cookie = "app_root=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			document.location.href = appRoot;
-		} else {
-			alert(jsonObj.message);
+			document.location.href = data.app_root;
+		} else if (data.status === "ERROR") {
+			alert(data.message);
+		}  else {
+			alert("Unknown return status: "+data.status);
 		}
-	} catch(err) {
-		alert(xmlhttp.responseText);
-	}
+	}).fail(function() {
+		alert("Logout failed.");
+	});
 }
 
 function editUser(user_id) {
@@ -226,21 +194,30 @@ function editUser(user_id) {
 	});
 }
 
+function editUserStatus(text) {
+	$("#edit-user-message").removeClass("red-text");
+	$("#edit-user-message").text(text);
+}
+
+function editUserError(text) {
+	$("#edit-user-message").addClass("red-text");
+	$("#edit-user-message").text(text);
+}
+
 function saveUser() {
-	var message = $("#edit-user-message");
 	var firstName = $("#first-name-edit");
 	var lastName = $("#last-name-edit");
 	var emailAddress = $("#email-edit");
 	var admin = $("#admin-edit");
 	
 	if (!firstName.val()) {
-		message.text("Please enter a first name.");
+		editUserError("Please enter a first name.");
 	} else if (!lastName.val()) {
-		message.text("Please enter a last name");
+		editUserError("Please enter a last name");
 	} else if (!emailAddress.val()) {
-		message.text("Please enter a valid email.");
+		editUserError("Please enter a valid email.");
 	} else {
-		message.text("Saving user information...");
+		editUserStatus("Saving user information...");
 		var posting = $.post("update_user_ajax.php", $("#edit-user-form").serialize());
 
 		posting.done(function(data) {
@@ -254,7 +231,74 @@ function saveUser() {
 		});
 
 		posting.fail(function(data, textStatus) {
-			message.text(textStatus);
+			editUserError(textStatus);
+			console.log(textStatus);
+		});
+	}
+}
+
+function upgradeStatus(text) {
+	$("#upgrade-status").removeClass("red-text");
+	$("#upgrade-status").text(text);
+}
+
+function upgradeError(text) {
+	$("#upgrade-status").addClass("red-text");
+	$("#upgrade-status").text(text);
+}
+
+function process_upgrade(token) {
+	upgradeStatus("Processing your upgrade...");
+	var upgradeData = {
+		newLevel: $('input[name=level-value]:checked', '#upgrade-form').val(),
+		amount: $('input[name=level-value]:checked', '#upgrade-form').attr('price') * 100,
+		stripeToken: token.id,
+		email: token.email,
+		userId: $("#user-id").val()
+	};
+	
+	$.post("upgrade_ajax.php", upgradeData, function(data, textStatus, jqXHR){
+		if(data.status === "SUCCESS") {
+			$("#level-name").val(data.level_name);
+			$("#upgrade-dialog" ).dialog("close");
+			upgradeStatus("You have been successfully upgraded to "+data.level_name+" Level!");
+		} else if (data.status === "ERROR") {
+			upgradeError("Upgrade failed: "+data.message);
+		}  else {
+			upgradeError("Upgrade failed", "Unknown data.status");
+		}
+	}).fail(function() {
+		upgradeError("Upgrade failed!");
+	});
+}
+
+function showStatus(id, text) {
+	$(id).removeClass("red-text");
+	$(id).text(text);
+}
+
+function showError(id, text) {
+	$(id).addClass("red-text");
+	$(id).text(text);
+}
+
+function saveMyAccount() {
+	if (!$("#first-name").val()) {
+		showError("#my-account-message", "Please enter a first name.");
+	} else if (!$("#last-name").val()) {
+		showError("#my-account-message", "Please enter a last name");
+	} else if (!$("#email").val()) {
+		showError("#my-account-message", "Please enter a valid email.");
+	} else {
+		showStatus("#my-account-message", "Saving account information...");
+		var posting = $.post("update_user_ajax.php", $("#edit-user-form").serialize());
+
+		posting.done(function(data) {
+			showStatus("#my-account-message", "Your account changes have been saved.");
+		});
+
+		posting.fail(function(data, textStatus) {
+			showError("#my-account-message", textStatus);
 			console.log(textStatus);
 		});
 	}

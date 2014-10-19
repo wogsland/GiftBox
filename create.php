@@ -1,6 +1,7 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
+	session_start();
 	if (!logged_in()) {
             header('Location: /giftbox');
 	}
@@ -22,6 +23,7 @@
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/id3-minimized.js"></script>
+	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
@@ -31,10 +33,6 @@
 			$( "#tabs" ).tabs();
 		});
 
-		$(function() {
-			$( "#status-dialog" ).dialog({ autoOpen: false, dialogClass: "no-close"});
-		});
-  
 		$(function() {
 			$( "#letter-dialog" ).dialog({
 				autoOpen: false,
@@ -360,13 +358,6 @@
 		</div>
 	</form>
 	
-	<div id="status-dialog" title="No title specified">
-		<p id="status-text">No status text specified</p>
-	</div>
-	<div id="confirm-dialog" title="No title specified">
-		<p id="confirm-text">No status text specified</p>
-	</div>
-
 	<div id="save-dialog" title="Save">
 		<form>
 		    <fieldset style="margin-top: 25px">

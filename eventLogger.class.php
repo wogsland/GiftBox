@@ -1,5 +1,7 @@
 <?php
 include_once 'util.php';
+include_once 'eventLogger.class.php';
+
 
 define('REGISTER_USING_EMAIL', 1);
 define('REGISTER_USING_FACEBOOK', 2);
@@ -10,6 +12,7 @@ define('ACTIVATE_ACCOUNT', 6);
 define('SEND_GIFTBOX', 7);
 define('UPDATE_ACCOUNT_INFO', 8);
 define('CHANGE_PASSWORD', 9);
+define('UPGRADE', 10);
 
 class eventLogger {
 	var $id;

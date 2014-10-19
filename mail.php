@@ -17,7 +17,6 @@ function sendMail($to, $subject, $message, $from) {
 		$message = new Message($mail_options);
 		$message->send();	
 	} else {
-		mail($to, $subject, $message, $from);
+		mail($to, $subject, $message, "From: ".$from."\r\n"."Content-Type: text/html; charset=ISO-8859-1\r\n");
 	}
 }
-?>

@@ -9,16 +9,6 @@ $(document).ready(function() {
 	});
 });
 
-function readCookie(name){
-	var c = document.cookie.split('; ');
-	var cookies = {};
-	for(var i = c.length-1; i >= 0; i--){
-	   var C = c[i].split('=');
-	   cookies[C[0]] = C[1];
-	}
-	return cookies[name];
-}
-
 function addText(text, container) {
 	var p = document.createElement("p");
 	p.innerHTML = text;
@@ -870,22 +860,6 @@ $(function() {
 
 });
 
-function openMessage(title, text) {
-	$("#confirm-dialog").dialog( "option", "title", title);
-	$("#confirm-text").text(text);
-	$("#confirm-dialog").dialog("open");
-}
-
-function openStatus(title, text) {
-	$("#status-dialog").dialog( "option", "title", title);
-	$("#status-text").text(text);
-	$("#status-dialog").dialog("open");
-}
-
-function closeStatus() {
-	$("#status-dialog" ).dialog("close");
-}
-
 function setPreviewLink (template) {
 	var linkText;
 	if (template.wrapperType) {
@@ -893,7 +867,7 @@ function setPreviewLink (template) {
 	} else {
 		linkText = "preview.php?id=" + template.giftboxId;
 	}
-	$("#preview-link").val(readCookie("app_url") + linkText);
+	$("#preview-link").val(template.appURL + linkText);
 }
 
 function stack(top, middle, bottom) {
@@ -949,11 +923,9 @@ function save() {
 	var letterText = template.letterText;
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
-	var userId = readCookie('user_id');
 	var userAgent = navigator.userAgent;
 	var giftbox = {
 		giftbox_id: giftboxId,
-		user_id: userId,
 		name: giftboxName,
 		letter_text: letterText,
 		wrapper_type: wrapperType,
@@ -1004,14 +976,14 @@ function save() {
 	});
 
 	// Save the template first
-	$.post("save_giftbox_ajax.php", 
-		giftbox, 
-		function(result) { 
-			template.giftboxId = result.giftbox_id;
-			setPreviewLink(template);
-			closeStatus();
-		}, 
-		"json").fail(function() {alert("Save failed!"); closeStatus();});
+	$.post("save_giftbox_ajax.php", giftbox, function(result) { 
+		template.giftboxId = result.giftbox_id;
+		template.appURL = result.app_url;
+		setPreviewLink(template);
+		closeStatus();
+	}).fail(function() {
+		alert("Save failed!"); closeStatus();
+	});
 }
 
 function send() {

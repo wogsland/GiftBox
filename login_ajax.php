@@ -4,13 +4,18 @@ include_once 'util.php';
 include_once 'password.php';
 include_once 'eventLogger.class.php';
 
-$message = "Unable to log in at this time.";
+session_start();
+
 $user = null;
-$email = $_GET['email'];
-$login_type = $_GET['login_type'];
-$event = null;
-if (isset($_GET['password'])) {
-	$password = $_GET['password'];
+$event_type = null;
+$response['status'] = "ERROR";
+$response['message'] = "Unable to log in at this time.";
+$response['app_root'] = $app_root;
+
+$email = $_POST['email'];
+$login_type = $_POST['login-type'];
+if (isset($_POST['password'])) {
+	$password = $_POST['password'];
 } else {
 	$password = null;
 }
@@ -21,41 +26,42 @@ $results = execute_query($sql);
 
 if (!$results) {
 	// The SQL failed to return a result for some reason.
-	$message = "Unable to log in at this time.";
+	$response['status'] = "ERROR";
+	$response['message'] = "Unable to log in at this time.";
 } else {
 	// We found a user record
 	if ($results->num_rows == 1) {
 		$user = $results->fetch_object();
 		if ($login_type == 'FACEBOOK') {
-				$message = 'SUCCESS';
-				$event = LOGIN_USING_FACEBOOK;
+				$event_type = LOGIN_USING_FACEBOOK;
+				$response['status'] = 'SUCCESS';
 		} else if ($login_type == 'EMAIL') {
 			if (!$user->password) {
-				$message = 'This account was created using Facebook.<br>Please use the Log In With FaceBook button.';
+				$response['status'] = "ERROR";
+				$response['message'] = "This account was created using Facebook.<br>Please use the Log In With FaceBook button.";
 			} else if (!password_verify($password, $user->password)) {
-				$message = 'The password you entered is incorrect.';
+				$response['status'] = "ERROR";
+				$response['message'] = 'The password you entered is incorrect.';
 			} else {
-				$message = 'SUCCESS';
-				$event = LOGIN_USING_EMAIL;
+				$event_type = LOGIN_USING_EMAIL;
+				$response['status'] = 'SUCCESS';
 			}
 		}
-		if ($message == 'SUCCESS') {
-			$event = new eventLogger($user->id, $event);
+		if ($response['status'] == 'SUCCESS') {
+			$_SESSION['user_id'] = $user->id;
+			$_SESSION['admin'] = $user->admin;
+			$_SESSION['login_type'] = $login_type;
+			$_SESSION['app_root'] = $app_root;
+			$_SESSION['app_url'] = $app_url;
+			$_SESSION['level'] = $user->level;
+			$event = new eventLogger($user->id, $event_type);
 			$event->log();
 		}
 	} else {
-		$message = "The email you entered does not belong to any account.";
+		$response['status'] = "ERROR";
+		$response['message'] = "The email you entered does not belong to any account.";
 	}
 }
 
-$json = '{"message":"'.$message.'"';
-if ($message == "SUCCESS") {
-	if ($user) {
-		$json .= ',"user_id":"'.$user->id.'","app_root":"'.$app_root.'","app_url":"'.$app_url.'"';
-	}
-}
-$json .= '}';
-
-echo $json;
-
-?>
+header('Content-Type: application/json');
+echo json_encode($response);

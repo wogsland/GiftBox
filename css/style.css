@@ -991,6 +991,12 @@ footer ul.social li.twitter a {
 	max-width: 900px;
 }
 
+#edit-user-message {
+	font-size: 20px;
+	color: black;
+	text-align: center;
+}
+
 #dialog-form-container {
 	width: 100%;
 	position: relative;
@@ -1445,3 +1451,38 @@ div.container {
 	font-weight: normal;
 }
 
+#level-name {
+	color: #000;
+}
+
+.level-value {
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+#upgrade-button {
+	color: white;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	background: green;
+}
+
+#pay-button {
+	width: 200px;
+	display: block;
+	margin: 25px auto;
+	color: white;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	background: #0078E7;
+}
+
+#upgrade-status {
+	font-size: 20px;
+	text-align: center;
+	min-height: 70px;
+}
+
+.red-text {
+	color: red;
+}
