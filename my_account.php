@@ -1,35 +1,26 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
-	include_once 'eventLogger.class.php';
+	
+	session_start();
 	
 	$message = null;
 	$first_name = null;
 	$last_name = null;
 	$email = null;
+	$user_id = null;
 	
 	if (!logged_in()) {
 		header('Location: '.$app_root);
 	} else {
-		if (isset($_POST['first-name'])) {
-			execute("UPDATE user set first_name = '".$_POST['first-name']."', last_name = '".$_POST['last-name']."', email_address = '".$_POST['email']."' WHERE id = ".$_COOKIE['user_id']);
-
-			$event = new eventLogger($_COOKIE['user_id'], UPDATE_ACCOUNT_INFO);
-			$event->log();
-
-			$first_name = $_POST['first-name'];
-			$last_name = $_POST['last-name'];
-			$email = $_POST['email'];
-			
-			$message = "Your changes have been saved.";
-		} else {
-			$results = execute_query("SELECT * FROM user WHERE id = ".$_COOKIE['user_id']);
-			if ($results->num_rows == 1) {
-				$user = $results->fetch_object();
-				$first_name = $user->first_name;
-				$last_name = $user->last_name;
-				$email = $user->email_address;
-			}
+		$results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
+		if ($results->num_rows == 1) {
+			$user = $results->fetch_object();
+			$first_name = $user->first_name;
+			$last_name = $user->last_name;
+			$email = $user->email_address;
+			$level = $user->name;
+			$user_id = $user->id;
 		}
 	}
 ?>
@@ -45,8 +36,9 @@
 	<link rel="stylesheet" href="css/pure/pure-min.css">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/jquery.magnific-popup.js"></script>
+	<script src="js/util.js"></script>
 	<script src="js/account.js"></script>
 		
 	<script>
@@ -56,7 +48,25 @@
 				midClick: true
 			});
 		});
+
 	</script>
+	
+	<script>
+		$(function() {
+			$( "#upgrade-dialog" ).dialog({
+				autoOpen: false,
+				resizable: false,
+				height:500,
+				width: 350,
+				modal: true,
+				open: function( event, ui ) {
+					$("#upgrade-status").text("");
+					$("#upgrade-status").removeClass("red-text");
+				}
+			});
+		});
+	</script>	
+	
 	
 </head>
 <body>
@@ -77,10 +87,17 @@
 		</div>
 		
 		<div id="my-account-form-wrapper">
-			<p class="dialog-message" id="save-password-message"><?php echo $message ?></p>
+			<p id="my-account-message"></p>
 			<form class="pure-form pure-form-aligned" id="account-form" name="account-form" method="post" action="my_account.php">
+				<input type="hidden" name="user-id" id="user-id" value="<?php echo $user_id ?>">
 				<legend>My Account</legend>
 				<fieldset>
+					<div class="pure-control-group">
+						<label for="level-name">Level</label>
+						<input name="level-name" id="level-name" type="text" placeholder="Level Name" value="<?php echo $level ?>" disabled>
+						<a class="pure-button green-button" id="upgrade-button" href="javascript:void(0)" onclick="$('#upgrade-dialog').dialog('open');">Upgrade</a>
+					</div>
+
 					<div class="pure-control-group">
 						<label for="first-name">First Name</label>
 						<input name="first-name" id="first-name" type="text" placeholder="First Name" value="<?php echo $first_name ?>" required>
@@ -101,7 +118,7 @@
 						<a class="pure-button open-popup-link" href="#change-password-form">Change Password</a>
 					</div>
 					
-					<input type="submit" id="save-my-account-button" class="pure-button pure-button-primary" value="Save Changes">
+					<input type="button" id="save-my-account-button" class="pure-button pure-button-primary" value="Save Changes" onclick="saveMyAccount()">
 				</fieldset>
 			</form>
 		</div>
@@ -117,6 +134,59 @@
 			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="changePassword()">Change Password</a>
 		</div>
 	</form>
+
+	<div id="upgrade-dialog" title="Upgrade">
+		<p id="upgrade-status"></p>
+		<form class="pure-form" id="upgrade-form">
+			<legend style="margin-top: 20px;">Choose an upgrade option:</legend>
+			<?php
+				$results = execute_query("SELECT id, name, price from level order by id");
+				$last = null;
+				while ($level = $results->fetch_object()) {
+					if ($level->id > $_SESSION['level']) {
+						echo '<label for="'.$level->name.'" class="pure-radio">'.PHP_EOL;
+						echo '<input class="level-value" id="'.$level->name.'" type="radio" name="level-value" value="'.$level->id.'" price="'.$level->price.'">'.PHP_EOL;
+						echo $level->name." ($".$level->price.")".PHP_EOL;
+						echo "</label>";
+						$last = $level->name;
+						$last_value = $level->id;
+					}
+				}
+				if ($last) {
+					echo '<script>$("#'.$last.'").attr("checked", "checked");</script>';
+				} else {
+					echo '<script> $("#upgrade-button").remove();</script>';
+				}
+			?>
+
+			<script src="https://checkout.stripe.com/checkout.js"></script>
+
+			<button class="pure-button" id="pay-button">Pay</button>
+
+			<script>
+				var handler = StripeCheckout.configure({
+					key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
+					image: './images/logoicon.png',
+					token: function(token) {
+						process_upgrade(token);
+					}
+				});
+
+				document.getElementById('pay-button').addEventListener('click', function(e) {
+					// Open Checkout with further options
+					var upgradeAmount = $('input[name=level-value]:checked', '#upgrade-form').attr('price');
+					var upgradeDescription = $('input[name=level-value]:checked', '#upgrade-form').attr('id');
+					handler.open({
+						name: 'GiveToken Upgrade',
+						description: upgradeDescription+" ($"+upgradeAmount+")",
+						amount: upgradeAmount * 100
+					});
+					e.preventDefault();
+				});
+			</script>		
+		</form>
+	</div>
+	
 
 </body>
 </html>

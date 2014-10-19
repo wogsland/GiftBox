@@ -3,10 +3,12 @@ include_once 'eventLogger.class.php';
 include_once 'config.php';
 include_once 'mail.php';
 
+session_start();
+
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];
 $event = SEND_GIFTBOX;
-$user_id = $_COOKIE["user_id"];
+$user_id = $_SESSION["user_id"];
 
 $event = new eventLogger($user_id, $event);
 $event->log();

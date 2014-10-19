@@ -1,21 +1,3 @@
-function login() {
-	var loginLink = $("#login-link");
-	loginLink.text("My Account");
-	loginLink.attr('href', 'myaccount.html');
-	
-	$("#settings-link").attr('href', 'settings.html');
-	
-	$("#create-link").attr('href', 'create.html');
-
-	$.magnificPopup.close();
-	document.location.href = 'create.html';
-	//blah
-};
-
-function send() {
-	$.magnificPopup.close();
-};
-
 $(document).ready(function(){
 	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		$('body,html').animate({scrollTop: 2000}, 10000); 

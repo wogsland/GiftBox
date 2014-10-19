@@ -6,24 +6,28 @@ include_once 'password.php';
 include_once 'eventLogger.class.php';
 include_once 'database.php';
 
-$message = "Unable to register at this time.";
-$email_address = $_GET['email'];
-$first_name = $_GET['first_name'];
-$last_name = $_GET['last_name'];
-$reg_type = $_GET['reg_type'];
 $event = null;
 $user_id = null;
+$response['status'] = "ERROR";
+$response['message'] = "Unable to register at this time.";
+$response['app_root'] = $app_root;
 
-if (isset($_GET['password'])) {
-	$password = $_GET['password'];
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$email_address = $_POST['email'];
+if (isset($_POST['password'])) {
+	$password = $_POST['password'];
 } else {
 	$password = null;
 }
+$reg_type = $_POST['reg_type'];
+
 // Make sure the email address is available:
 $sql = "SELECT * FROM user WHERE email_address ='$email_address'";
 $result = execute_query($sql);
 if (!$result) {
-	$message = "Check for duplicate registered email address failed.";
+	$response['status'] = "ERROR";
+	$response['message'] = "Check for duplicate registered email address failed.";
 } else {
 
 	if ($result->num_rows == 0) { // If no previous user is using this email
@@ -49,25 +53,18 @@ if (!$result) {
 			$email_message .= $app_url . 'activate.php?uid=' . $user_id . "&key=$activation_key";
 			sendMail($email_address, 'Giftbox Registration Confirmation', $email_message, $sender_email);
 		}
-		$message = 'SUCCESS';
+		$response['status'] = "SUCCESS";
 
 	} else { // The email address is not available
+		$response['status'] = "ERROR";
 		$user = $result->fetch_object();
 		if (!$user->password) {
-			$message = "That email address has already been registered using Facebook.<br>Try logging in using Facebook.";
+			$response['message'] = "That email address has already been registered using Facebook. Try logging in using Facebook.";
 		} else {
-			$message = "That email address has already been registered.<br>Try logging in using the email address.";
+			$response['message'] = "That email address has already been registered. Try logging in using the email address.";
 		}
 	}
 }
 
-$json = '{"message":"'.$message.'"';
-if ($message == "SUCCESS") {
-	$json .= ',"user_id":"'.$user_id.'","app_root":"'.$app_root.'"';
-}
-$json .= '}';
-
-echo $json;
-
-
-?>
+header('Content-Type: application/json');
+echo json_encode($response);

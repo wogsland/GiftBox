@@ -1,6 +1,7 @@
 <?php
 	include_once 'config.php';
 	include_once 'util.php';
+	session_start();
 	if (!logged_in() || !is_admin()) {
 		header('Location: '.$app_root);
 	}
@@ -100,7 +101,7 @@
 	<form class="pure-form pure-form-aligned white-popup mfp-hide" id="edit-user-form" name="edit-user-form">
 		<fieldset>
 			<legend>Edit a user</legend>
-			<p class="dialog-message" id="edit-user-message"></p>
+			<p id="edit-user-message"></p>
 			<input id="user-id" name="user_id" type="hidden">
 			<input id="first-name-edit" name="first_name" type="text" placeholder="First Name">
 			<input id="last-name-edit" name="last_name" type="text" placeholder="Last Name">

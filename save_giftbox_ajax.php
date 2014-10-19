@@ -1,11 +1,13 @@
 <?php
 include_once 'util.php';
+include_once 'config.php';
+
+session_start();
+$user_id = $_SESSION['user_id'];
 
 $giftbox_id = $_POST['giftbox_id'];
 $giftbox_name = $_POST['name'];
 $giftbox_name = str_replace("'", "''", $giftbox_name);
-
-$user_id = $_POST['user_id'];
 $letter_text = $_POST['letter_text'];
 $letter_text = str_replace("'", "''", $letter_text);
 $wrapper_type = $_POST['wrapper_type'];
@@ -32,8 +34,9 @@ foreach ($bentos as $bento) {
 	execute($sql);
 }
 
-$return = ['giftbox_id' => $giftbox_id];
-$json = json_encode($return);
-header('Content-type: application/json');
-echo $json;
-?>
+$response['status'] = "SUCCESS";
+$response['giftbox_id'] = $giftbox_id;
+$response['app_url'] = $app_url;
+
+header('Content-Type: application/json');
+echo json_encode($response);

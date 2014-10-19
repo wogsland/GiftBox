@@ -37,7 +37,7 @@
 	
 	function logged_in() {
 		$logged_in = FALSE;
-		if (isset($_COOKIE['user_id'])) {
+		if (isset($_SESSION['user_id'])) {
 			$logged_in = TRUE;;
 		}
 		return $logged_in;
@@ -45,8 +45,8 @@
 	
 	function is_admin() {
 		$retval = FALSE;
-		if (isset($_COOKIE['user_id'])) {
-			if (execute_query("SELECT admin from user WHERE id = ".$_COOKIE['user_id'])->fetch_object()->admin == 'Y') {
+		if (isset($_SESSION['admin'])) {
+			if ($_SESSION['admin'] == 'Y') {
 				$retval = TRUE;
 			}
 		}
@@ -105,4 +105,10 @@
 		return $retval;
 	}
 	
-	?>
+	function is_selected($field_value, $data_value, $select_string = 'selected') {
+		$retval = null;
+		if ($field_value == $data_value) {
+			$retval = $select_string;
+		}
+		return $retval;
+	}

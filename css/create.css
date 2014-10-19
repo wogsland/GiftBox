@@ -710,14 +710,6 @@ p {
   display: none;
 }
 
-#confirm-text {
-	font-size: 16px;
-}
-
-#status-text {
-	font-size: 16px;
-}
-
 .file-name {
 	font-size: medium;
 	color: black;
