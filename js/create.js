@@ -325,14 +325,14 @@ function addYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
-		var dataURL = "http://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
+		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
 		$.getJSON(dataURL,
 			function(data){
 			var title = data.entry.title.$t;
 			var mediaList = document.getElementById("media-tab");
 			var img = document.createElement("img");
 			img.classList.add("photo-thumbnail");
-			img.src = "http://img.youtube.com/vi/"+videoId+"/0.jpg";
+			img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 			img.id = videoId;
 			img.addEventListener('dragstart', handleDragStart, false);
 			img.youTubeURL = url;
@@ -352,7 +352,7 @@ function addYouTube(url) {
 
 function addSoundCloud(url) {
     var mediaList = document.getElementById("media-tab");
-	$.getJSON("http://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
+	$.getJSON("https://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
 		var img = document.createElement("img");
 		img.classList.add("photo-thumbnail");
 		if (data.artwork_url) {
