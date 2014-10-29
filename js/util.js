@@ -47,10 +47,10 @@ document.write('\
 \
 \
 	<div id="status-dialog" title="No title specified">\
-		<p id="status-text" style="text-align: center">No status text specified</p>\
+		<p id="status-text" style="text-align: center"></p>\
 	</div>\
 \
 	<div id="message-dialog" title="No title specified">\
-		<p id="message-text" style="text-align: center">No status text specified</p>\
+		<p id="message-text" style="text-align: center"></p>\
 	</div>\
 ');

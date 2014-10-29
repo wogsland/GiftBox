@@ -42,7 +42,7 @@ if (!$result) {
 			$event = REGISTER_USING_FACEBOOK;
 		}
 
-		$sql = "INSERT INTO user (email_address, first_name, last_name, password, activation_key) VALUES ('$email_address', '$first_name', '$last_name', ".($password ? "'".$password_hash."'" : 'NULL').", ".($activation_key ? "'".$activation_key."'" : 'NULL').")";
+		$sql = "INSERT INTO user (email_address, first_name, last_name, password, activation_key, admin, level) VALUES ('$email_address', '$first_name', '$last_name', ".($password ? "'".$password_hash."'" : 'NULL').", ".($activation_key ? "'".$activation_key."'" : 'NULL').", 'N', 1)";
 		$user_id = insert($sql);
 		$event = new eventLogger($user_id, $event);
 		$event->log();

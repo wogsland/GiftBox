@@ -722,3 +722,8 @@ p {
 	bottom: 0px;
 	left: 0px;
 }
+
+#token-list {
+	width: 100%;
+	height: 100%;
+}
