@@ -42,7 +42,25 @@
 				modal: true,
 				buttons: {
 					OK: function() {
-						save_letter();
+						saveLetter();
+					},
+					Cancel: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			});
+		});
+  
+		$(function() {
+			$( "#open-dialog" ).dialog({
+				autoOpen: false,
+				resizable: false,
+				width: 400,
+				height: 300,
+				modal: true,
+				buttons: {
+					Open: function() {
+						loadSaved();
 					},
 					Cancel: function() {
 						$( this ).dialog( "close" );
@@ -247,6 +265,7 @@
 					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="saveButton()">Save</a>
 					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
 					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
+					<a class="template-button" id="open-button" href="javascript:void(0)" onclick="selectSaved()">Open</a>
 					<p id="template-status"></p>
 				</div>
 				<div id="template-container">
@@ -398,7 +417,15 @@
 			</fieldset>			
 		</form>
 	</div>
-	
+
+	<div id="open-dialog" title="Open">
+		<fieldset>
+			<label for="token-list">Select a Token to open:</label><br>
+			<select id="token-list" name="token-list" size="9" style="margin: auto; margin-top: 10px;">
+			</select>
+		</fieldset>			
+	</div>
+
 	<script>
 		var bentos = document.querySelectorAll('.bento');
 		[].forEach.call(bentos, function(bento) {

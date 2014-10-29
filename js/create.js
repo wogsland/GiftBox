@@ -1015,7 +1015,7 @@ function preview() {
 	}
 }
 
-function save_letter() {
+function saveLetter() {
 	var letterText = document.getElementById("letter-text");
 	window.top_template.letterText = letterText.value;
 	$("#letter-dialog" ).dialog("close");
@@ -1057,4 +1057,22 @@ function addURL() {
 		console.log(error);
 		alert(error);
 	}
+}
+
+function selectSaved() {
+	openStatus("Open", "Retrieving saved Tokens...");
+	$.get("get_user_tokens.php", function(data) {
+		var output = [];
+		$.each(data, function(key, value)
+		{
+		  output.push('<option value="'+ value[0] + '"' + ((key === 0) ? " selected" : "") +'>' + value[1] + '</option>');
+		});
+		$('#token-list').html(output.join(''));
+		closeStatus();
+		$('#open-dialog').dialog('open');
+	});
+}
+
+function loadSaved() {
+	alert("Token ID: " + $('#token-list').find(":selected").val());
 }
