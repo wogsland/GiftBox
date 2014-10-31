@@ -102,10 +102,10 @@
 				</div>
 				<div id="intro-text" class="centered">
 					<h1 id="intro-description">
-						Want a simple way to personalize digital gifts!?!<br>
+						Want a simple way to personalize digital interactions?<br>
 					</h1>
 					<p>
-						Send your next gift with Token!?!?!
+						Send your next token of appreciation with Give Token.
 					</p>
 					<p>
 					<?php
