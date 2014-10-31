@@ -126,10 +126,10 @@
 					Digital Wrapper
 				</h4>
 				<h3 id="big-feature">
-					More than just the gift
+					More than just a thank you
 				</h3>
 				<p id="feature-description">
-					Customize any digital gift with personal stories. Just like how you would decorate a real gift.
+					Customize any token of appreciation with personal stories. 
 				</p>
 			</div>
 
@@ -188,7 +188,7 @@
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-1"></div>
 								<div class="ch-info-back">
-									<h3>Find the right band, gift, card, or ebook in our huge database.</h3>
+									<h3>Upload your favorite song, video, or image OR check our huge database.</h3>
 								</div>	
 							</div>
 						</div>
@@ -212,7 +212,7 @@
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-3"></div>
 								<div class="ch-info-back">
-									<h3>Our service is completely free. Only pay for the gift itself.</h3>
+									<h3>Our service is completely free.</h3>
 								</div>
 							</div>
 						</div>
@@ -255,7 +255,7 @@
 					Add content
 				</h3>
 				<p id="feature-description">
-					Fill the Giftbox with singles, albums, ebooks, giftcards, and more!
+					Fill the Token with singles, albums, videos, attachments, and more!
 				</p>
 			</div>
 			<div id="animation-container-2">
