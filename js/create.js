@@ -49,6 +49,17 @@ function youTubeID(url) {
 	}
 }
 
+function spotifyTrackId(url) {
+	var delimiter = "/";
+	if (url.indexOf("spotify:track:") > -1) {
+		delimiter = ":";
+	}
+	var parts = url.split(delimiter);
+	var trackId = parts[parts.length - 1];
+	
+	return trackId;
+}
+
 function sendGiftbox() {
 	if (!document.getElementById('email').value) {
 		document.getElementById('send-message').innerHTML = "Please enter a valid email address.";
@@ -207,44 +218,55 @@ function handleDrop(e) {
 				showControl(this.id + "-close", video);
 			}
 		} else if (source.youTubeURL) {
-			var url = source.youTubeURL;
-			var videoId = source.id;
-			var iframe = document.createElement('iframe');
-			iframe.src = "//www.youtube.com/embed/"+videoId;
-			var width = this.offsetWidth;
-			var height = this.offsetHeight;
-			iframe.width = width;
-			iframe.height = height;
-			iframe.style.border = 0;
-			this.appendChild(iframe);
-			this.iframe = iframe;
-			this.contentURI = source.youTubeURL;
+			dropYouTube(this, source.youTubeURL);
 		} else if (source.spotifyTrackId) {
-			var iframe = document.createElement('iframe');
-			var contentURI = "https://embed.spotify.com/?url=spotify:track:"+source.spotifyTrackId;
-			iframe.src = contentURI;
-			var width = this.offsetWidth;
-			var height = this.offsetHeight;
-			iframe.width = width;
-			iframe.height = height;
-			iframe.style.border = 0;
-			this.appendChild(iframe);
-			this.iframe = iframe;
-			this.contentURI = contentURI;
+			dropSpotify(this, source.spotifyTrackId)
 		} else if (source.soundCloudURL) {
-			var iframe = document.createElement('iframe');
-			iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(source.soundCloudURL);
-			var width = this.offsetWidth;
-			var height = this.offsetHeight;
-			iframe.width = width;
-			iframe.height = height;
-			iframe.style.border = 0;
-			this.appendChild(iframe);
-			this.iframe = iframe;
-			this.contentURI = source.soundCloudURL;
+			dropSoundCloud(this, source.soundCloudURL);
 		}
 	}
 	return false;
+}
+
+function dropSpotify(bento, trackId) {
+	var iframe = document.createElement('iframe');
+	var contentURI = "https://embed.spotify.com/?url=spotify:track:"+trackId;
+	iframe.src = contentURI;
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	iframe.width = width;
+	iframe.height = height;
+	iframe.style.border = 0;
+	bento.appendChild(iframe);
+	bento.iframe = iframe;
+	bento.contentURI = contentURI;
+}
+
+function dropSoundCloud(bento, url) {
+	var iframe = document.createElement('iframe');
+	iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(url);
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	iframe.width = width;
+	iframe.height = height;
+	iframe.style.border = 0;
+	bento.appendChild(iframe);
+	bento.iframe = iframe;
+	bento.contentURI = url;
+}
+
+function dropYouTube(bento, url) {
+	var iframe = document.createElement('iframe');
+	var videoId =  youTubeID(url);
+	iframe.src = "//www.youtube.com/embed/"+videoId;
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	iframe.width = width;
+	iframe.height = height;
+	iframe.style.border = 0;
+	bento.appendChild(iframe);
+	bento.iframe = iframe;
+	bento.contentURI = url;
 }
 
 function handleDragEnd(e) {
@@ -374,12 +396,7 @@ function addSoundCloud(url) {
 
 function addSpotify(url) {
     var mediaList = document.getElementById("media-tab");
-	var delimiter = "/";
-	if (url.indexOf("spotify:track:") > -1) {
-		delimiter = ":";
-	}
-	var parts = url.split(delimiter);
-	var trackId = parts[parts.length - 1];
+	var trackId = spotifyTrackId(url);
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
 		var img = document.createElement("img");
 		img.classList.add("photo-thumbnail");
@@ -1061,11 +1078,11 @@ function addURL() {
 
 function selectSaved() {
 	openStatus("Open", "Retrieving saved Tokens...");
-	$.get("get_user_tokens.php", function(data) {
+	$.get("get_user_tokens_ajax.php", function(data) {
 		var output = [];
 		$.each(data, function(key, value)
 		{
-		  output.push('<option value="'+ value[0] + '"' + ((key === 0) ? " selected" : "") +'>' + value[1] + '</option>');
+		  output.push('<option value="'+ value['id'] + '"' + ((key === 0) ? " selected" : "") +'>' + value['name'] + '</option>');
 		});
 		$('#token-list').html(output.join(''));
 		closeStatus();
@@ -1074,5 +1091,84 @@ function selectSaved() {
 }
 
 function loadSaved() {
-	alert("Token ID: " + $('#token-list').find(":selected").val());
+	var tokenId = $('#token-list').find(":selected").val();
+	if (tokenId) {
+		$('#open-dialog').dialog('close');
+		openStatus("Loading", "Loading saved Token...");
+		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			var token = data;
+			var bentoId = "bento-";
+			closeStatus();
+			if (token.bentos.length === 4) {
+				stack('template-1', 'template-2', 'template-3');
+				bentoId += "1-";
+			} else if (token.bentos.length === 5) {
+				stack('template-2', 'template-3', 'template-1')				
+				bentoId += "2-";
+			} else {
+				stack('template-3', 'template-1', 'template-2')				
+				bentoId += "3-";
+			}
+			var template = window.top_template;
+			template.giftboxId = token.id;
+			template.appURL = token.app_url;
+			setPreviewLink(template);
+			var index;
+			var bento;
+			for (index = 0; index < token.bentos.length; ++index) {
+				bento = document.getElementById(bentoId+(index+1));
+				bento.style.width = token.bentos[index].css_width;
+				bento.style.height = token.bentos[index].css_height;
+				bento.style.top = token.bentos[index].css_top;
+				bento.style.left = token.bentos[index].css_left;
+				clearBento(bento);
+				loadBento(bento, token.bentos[index]);
+			}
+		});
+	}
+}
+
+function clearBento(bento) {
+	hideControl(bento.id+"-close");
+	hideControl(bento.id+"-slider");
+	if (bento.imageContainer) {
+		bento.removeChild(bento.imageContainer);
+		bento.imageContainer = null;
+	}
+	if (bento.video) {
+		bento.removeChild(bento.video);
+		bento.video = null;
+	}
+	if (bento.audio) {
+		var closeButton = document.getElementById(bento.audio.id+"-close");
+		bento.removeChild(closeButton);
+		bento.removeChild(bento.audio);
+		bento.audio = null;
+	}
+	if (bento.iframe) {
+		bento.removeChild(bento.iframe);
+		bento.iframe = null;
+		bento.contentURI = null;
+	}
+	bento.file = null;
+}
+
+function loadBento(bento, savedBento) {
+	if (savedBento.content_uri) {
+		if (isYouTube(savedBento.content_uri)) {
+			dropYouTube(bento, savedBento.content_uri);
+		} else if (isSoundCloud(savedBento.content_uri)) {
+			dropSoundCloud(bento, savedBento.content_uri);
+		} else if (isSpotify(savedBento.content_uri)) {
+			var trackId = spotifyTrackId(savedBento.content_uri);
+			dropSpotify(bento, trackId);
+		}
+	}
+	if (savedBento.image_file_name) {
+		
+	}
+	if (savedBento.download_file_name) {
+		
+	}
+	
 }
