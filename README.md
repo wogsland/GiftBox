@@ -49,6 +49,7 @@ Branch names should follow the following convention:
 - `git pull github master`
 - `git checkout -b feature/233-example-branch-name`
 - Exhibit your brilliance
+- `git add [filename]`
 - `git commit -am "Add great new functionality to users per 223"`
 - `git push github feature/233-example-branch-name`
 
@@ -161,3 +162,5 @@ When deploying using the following procedures, *be absolutely sure* that you are
 - `gcloud preview app deploy ./ --project stone-timing-557`
 
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
+
+# GMP was here
