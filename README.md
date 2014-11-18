@@ -95,7 +95,7 @@ if you happen to run into merge conflicts:
 - `git status`
 - `git add [name_of_file]` or `git add .` (adds all files that were changed)
 - `git commit -m "Fix merge conflicts"`
-- `git push origin [branch_name]` you want to push to
+- `git push origin [branch_name]` (push to the branch you were initially trying to merge into)
 
 ### Sending a Pull Request
 
