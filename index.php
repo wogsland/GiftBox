@@ -105,7 +105,7 @@
 						Want a simple way to personalize digital interactions?<br>
 					</h1>
 					<p>
-						Send your next token of appreciation with Give Token.
+						Send your next Token of appreciation with Give Token.
 					</p>
 					<p>
 					<?php
