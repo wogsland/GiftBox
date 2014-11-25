@@ -1,5 +1,7 @@
 <?php
+use google\appengine\api\cloud_storage\CloudStorageTools;
 include_once 'util.php';
+include_once 'config.php';
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -11,11 +13,24 @@ if (isset($_SESSION['user_id'])) {
 		$response->bentos = array();
 		$sql = "SELECT * FROM bento WHERE giftbox_id = ".$_GET['id']." ORDER BY CAST(css_left AS SIGNED), CAST(css_top AS SIGNED)";
 		$results = execute_query($sql);
-		$index = 0;
 		while ($bento = $results->fetch_object()) {
-			$response->bentos[$index] = $bento;
-			$index++;
+			if ($google_app_engine) {
+				$bento->image_file_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->image_file_name, $use_https);
+				$bento->download_file_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->download_file_name, $use_https);
+			} else {
+				$bento->image_file_path = $file_storage_path.$bento->image_file_name;
+				$bento->download_file_path = $file_storage_path.$bento->download_file_name;
+			}
+			$response->bentos[count($response->bentos)] = $bento;
 		}
+
+		$response->dividers = array();
+		$sql = "SELECT * FROM divider WHERE giftbox_id = {$_GET['id']}";
+		$results = execute_query($sql);
+		while ($divider = $results->fetch_object()) {
+			$response->dividers[count($response->dividers)] = $divider;
+		}
+		
 		header('Content-Type: application/json');
 		echo json_encode($response);
 	}

@@ -74,7 +74,13 @@ function sendGiftbox() {
 function uploadFileData(fileData, fileName) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
-        xhr.open("POST", "upload.php", true);
+		setStatus("Uploading " + fileName);
+		xhr.upload.onprogress = function(e) {
+			if (e.lengthComputable) {
+				setStatus(((e.loaded / e.total) * 100)+"%");
+			}
+		};
+        xhr.open("POST", "upload.php", false);
         xhr.setRequestHeader("X-FILENAME", fileName);
         xhr.send(fileData);
     }
@@ -108,7 +114,50 @@ function handleDragLeave(e) {
 	this.classList.remove('over');
 }
 
-function addImage(bento, imageSrc, imageFile) {
+function addAudio (bento, audioSrc, audioFile, savedBento) {
+	// Create the audio element
+	var audio = document.createElement('audio');
+	audio.setAttribute('controls', true);
+	audio.src = audioSrc;
+	audio.id = bento.id + '-audio';
+	audio.classList.add("audio-player");
+	audio.style.zIndex = 10;
+	bento.appendChild(audio);
+	bento.file = audioFile;
+	bento.audio = audio;
+
+	// add close button
+	var closeButton = document.createElement('div');
+	closeButton.id = audio.id + "-close";
+	closeButton.classList.add("audio-close-button");
+	closeButton.style.zIndex = 11;
+	closeButton.onclick = function(){closeClicked(closeButton);};
+	bento.appendChild(closeButton);
+	showControl(closeButton.id, audio);
+}
+
+function addVideo (bento, videoSrc, videoFile, savedBento) {
+	var video = document.createElement('video');
+	video.setAttribute('controls', true);
+	video.setAttribute('preload', "auto");
+	if (videoFile) {
+		video.src = window.URL.createObjectURL(videoFile);
+		bento.file = videoFile;
+	} else {
+		video.src = videoSrc;
+	}
+	video.id = bento.id + '-video';
+	video.width =  parseInt(getComputedStyle(bento).width, 10);
+	video.height = parseInt(getComputedStyle(bento).height, 10);
+	bento.video = video;
+	video.classList.add("video-js");
+	video.classList.add("vjs-default-skin");
+	video.classList.add("video-player");
+	bento.appendChild(video);
+	showControl(bento.id + "-close", video);
+}
+
+function addImage(bento, imageSrc, imageFile, savedBento) {
 		// Remove any previously dropped image or video
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -118,33 +167,47 @@ function addImage(bento, imageSrc, imageFile) {
 		bento.video = null;
 	}
 
-	// Create the DIV
-	var div = document.createElement('div');
-	div.id =  bento.id + '-image-container';
-	div.style.position = 'absolute';
+	// Create the image scroll container
+	var imageContainer = document.createElement('div');
+	imageContainer.id =  bento.id + '-image-container';
+	imageContainer.style.position = 'absolute';
 
 	// Create the IMG
-	var img = document.createElement('img');
-	img.src = imageSrc;
+	var img = new Image();
 	img.id = bento.id + '-image';
 	img.file = imageFile;
+	img.parentBento = bento;
+	img.imageContainer = imageContainer;
+	img.savedBento = savedBento;
+	img.onload = function() {
+		resizeImage(this, this.parentBento);
+		if (this.savedBento) {
+			this.style.width = this.savedBento.image_width;
+			this.style.height = this.savedBento.image_height;
+			this.saved = true;
+			$("#"+bento.id+"-slider").slider("value", this.savedBento.slider_value);
+		} else {
+		}
+		// resize the image container so that the image has scroll containment
+		resizeContainer(this.parentBento, this, this.imageContainer);
+		if (this.savedBento) {
+			this.style.top = this.savedBento.image_top_in_container;
+			this.style.left = this.savedBento.image_left_in_container;
+		}
+	}
 
-	// Add the IMG to the DIV, add the DIV to the bento
-	div.appendChild(img);
-	bento.appendChild(div);
-	bento.imageContainer = div;
+	// add the img to the container, add the container to the bento
+	imageContainer.appendChild(img);
+	bento.appendChild(imageContainer);
+	bento.imageContainer = imageContainer;
 
 	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + div.id});
+	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
 
-	// now resize the image so that it covers the bento
-	resizeImage(img, bento);
-
-	// resize the image container so that the image has scroll containment
-	resizeContainer(bento, img, div);	
-
-	// change the hover for the bento to show the slider
-	showControl(bento.id + "-close", div);
+	img.src = imageSrc;
+	
+	// change the hover for the bento to show the slider and close button
+	showControl(bento.id + "-close", imageContainer);
 	showControl(bento.id + "-slider", img);
 }
 
@@ -161,7 +224,8 @@ function handleDrop(e) {
 			var imageSrc = null;
 			if (file.type.match(imageType)) {
 				imageSrc = e.dataTransfer.getData('text/uri-list');
-				addImage(this, imageSrc, file);
+				addImage(this, imageSrc, file, null);
+				this.image_file_name = file.name;
 			} else if (file.type.match(audioType)) {
 				// Remove any existing audio
 				if (this.audio) {
@@ -172,27 +236,12 @@ function handleDrop(e) {
 				// Check for album art
 				imageSrc = e.dataTransfer.getData('text/uri-list');
 				if (imageSrc) {
-					addImage(this, imageSrc, null);
+					addImage(this, imageSrc, null, null);
 					this.image_file_name = file.name.replace(".", "_") + ".jpg";
 				}
-
-				// Create the audio element
-				var audio = document.createElement('audio');
-				audio.setAttribute('controls', true);
-				audio.src = window.URL.createObjectURL(file);
-				audio.id = this.id + '-audio';
-				audio.classList.add("audio-player");
-				audio.style.zIndex = 10;
-				this.appendChild(audio);
-				var closeButton = document.createElement('div');
-				closeButton.id = audio.id + "-close";
-				closeButton.classList.add("audio-close-button");
-				closeButton.style.zIndex = 11;
-				closeButton.onclick = function(){closeClicked(closeButton);};
-				this.appendChild(closeButton);
-				showControl(closeButton.id, audio);
-				this.file = file;
-				this.audio = audio;
+				addAudio(this, window.URL.createObjectURL(file), file, null);
+				this.download_file_name = file.name;
+				this.download_mime_type = file.type;
 			} else if (file.type.match(videoType)) {
 				if (this.imageContainer) {
 					this.removeChild(this.imageContainer);
@@ -202,20 +251,9 @@ function handleDrop(e) {
 					this.removeChild(this.video);
 					this.video = null;
 				}
-				var video = document.createElement('video');
-				video.setAttribute('controls', true);
-				video.setAttribute('preload', "auto");
-				video.src = window.URL.createObjectURL(file);
-				video.id = this.id + '-video';
-				video.width =  parseInt(getComputedStyle(this).width, 10);
-				video.height = parseInt(getComputedStyle(this).height, 10);
-				this.file = file;
-				this.video = video;
-				video.classList.add("video-js");
-				video.classList.add("vjs-default-skin");
-				video.classList.add("video-player");
-				this.appendChild(video);
-				showControl(this.id + "-close", video);
+				this.download_file_name = file.name;
+				this.download_mime_type = file.type;
+				addVideo(this, null, file, null);
 			}
 		} else if (source.youTubeURL) {
 			dropYouTube(this, source.youTubeURL);
@@ -551,30 +589,28 @@ function closeClicked(closeButton) {
 }
 
 function resizeContainer(bento, img, div) {
-	// resize the DIV so that the image covers the bento with no white space
+	// resize the container so that the image covers the bento with no white space
 	var widthDiff = img.width - bento.offsetWidth;
 	var heightDiff = img.height - bento.offsetHeight;
-	var divWidth = bento.offsetWidth + (widthDiff * 2);
-	var divHeight = bento.offsetHeight + (heightDiff * 2);
-	div.style.width = divWidth + 'px';
-	div.style.height = divHeight + 'px';
-	div.style.left = (0 - ((divWidth - bento.offsetWidth) / 2)) + 'px';
-	div.style.top = (0 - ((divHeight - bento.offsetHeight) / 2)) + 'px';
-	img.style.left = ((divWidth / 2) - (img.width / 2)) + 'px';
-	img.style.top = ((divHeight / 2) - (img.height / 2)) + 'px';
+	var newContainerWidth = bento.offsetWidth + (widthDiff * 2);
+	var newContainerHeight = bento.offsetHeight + (heightDiff * 2);
+	div.style.width = newContainerWidth + 'px';
+	div.style.height = newContainerHeight + 'px';
+	div.style.left = Math.round(0 - ((newContainerWidth - bento.offsetWidth) / 2)) + 'px';
+	div.style.top = Math.round(0 - ((newContainerHeight - bento.offsetHeight) / 2)) + 'px';
+	img.style.left = Math.round((newContainerWidth / 2) - (img.width / 2)) + 'px';
+	img.style.top = Math.round((newContainerHeight / 2) - (img.height / 2)) + 'px';
 }
 
 function resizeImage(img, bento) {
 	var imgAspectRatio = img.height / img.width;
 	var bentoAspectRatio = bento.offsetHeight / bento.offsetWidth;
 	if (bentoAspectRatio < imgAspectRatio) {
-//		img.width = bento.offsetWidth;
-		img.style.height = "auto";
 		img.style.width = bento.offsetWidth + "px";
+		img.style.height = "auto";
 	} else {
-//		img.height = bento.offsetHeight;
-		img.style.width = "auto";
 		img.style.height = bento.offsetHeight + "px";
+		img.style.width = "auto";
 	}
 	img.style.top = 0;
 	img.style.left = 0;
@@ -614,8 +650,8 @@ function handleSliderEvent(event, ui) {
 	var value = ui.value / 100;
 
 	// scale the image
-	image.style.width = (image.originalWidth * value) + "px";
-	image.style.height = (image.originalHeight * value) + "px";
+	image.style.width = Math.round(image.originalWidth * value) + "px";
+	image.style.height = Math.round(image.originalHeight * value) + "px";
 	
 	// now resize the container so the image can be moved around
 	resizeContainer(bento, image, container);
@@ -928,7 +964,7 @@ function saveButton() {
 function save() {
 	if ($("#save-dialog" ).dialog("isOpen")) {
 		// Get the name
-		var giftboxName = document.getElementById("save-name").value;
+		var giftboxName = $("#save-name").val();
 		$("#save-dialog" ).dialog("close");
 		window.top_template.giftboxName = giftboxName;
 	}
@@ -937,59 +973,96 @@ function save() {
 	openStatus("Save", "Saving " + giftboxName + "...");
 	var template = window.top_template;
 	var giftboxId = template.giftboxId;
+	var cssId = template.id;
 	var letterText = template.letterText;
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
 	var giftbox = {
 		giftbox_id: giftboxId,
+		css_id: cssId,
 		name: giftboxName,
 		letter_text: letterText,
 		wrapper_type: wrapperType,
 		unload_count: unloadCount,
 		user_agent: userAgent,
-		bentos: new Array()
+		bentos: new Array(),
+		dividers: new Array()
 	};
 	$("#"+template.id+" div.bento").each(function(i) { 
 		var bento = new Object();
-		bento.name = $(this).attr("id");
+		// initialize the bento to be saved
+		bento.css_id = $(this).attr("id");
 		bento.width = $(this).css("width");
 		bento.height = $(this).css("height");
 		bento.top = $(this).css("top");
 		bento.left = $(this).css("left");
+		
 		bento.image_file_name = null;
+		bento.download_file_name = null;
+		bento.download_mime_type = null;
+		bento.content_uri = null;
+		bento.slider_value = "null";
+
 		bento.image_width = null;
 		bento.image_height = null;
 		bento.image_top = null;
 		bento.image_left = null;
-		bento.download_file_name = null;
-		bento.download_mime_type = null;
-		bento.content_uri = null;
+		bento.image_left_in_container = null;
+		bento.image_top_in_container = null;
 
 		giftbox.bentos[i] = bento;
-		var image = document.getElementById(bento.name + "-image");
+		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
-			var container = document.getElementById(bento.name + '-image-container');
+			bento.image_file_name = this.image_file_name;
+			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
+			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
 			bento.image_height = image.style.height;
 			bento.image_top = calcTop(bento, image, container);
 			bento.image_left = calcLeft(bento, image, container);
-			if (image.file) {
-				bento.image_file_name = image.file.name;
-				uploadFile(image.file);
-			} else {
-				bento.image_file_name = this.image_file_name;
-				uploadFileData(image.src, this.image_file_name);
+			bento.image_left_in_container = image.style.left;
+			bento.image_top_in_container = image.style.top;
+			if (!image.saved) {
+				if (image.file) {
+					uploadFile(image.file);
+				} else {
+					uploadFileData(image.src, this.image_file_name);
+				}
+				image.saved = true;
 			}
 		}
-		if (this.file) {
-			bento.download_file_name = this.file.name;
-			bento.download_mime_type = this.file.type;
-			uploadFile(this.file);
+		if (this.video || this.audio) {
+			bento.download_file_name = this.download_file_name;
+			bento.download_mime_type = this.download_mime_type;
+			if (this.file) {
+				uploadFile(this.file);
+				this.file = null;
+			}
 		}
 		if (this.contentURI) {
 			bento.content_uri = this.contentURI;
 		}
+	});
+
+	$("#"+template.id+" div.divider").each(function(i) { 
+		var divider = new Object();
+		divider.css_id = $(this).attr("id");
+		divider.width = $(this).css("width");
+		divider.height = $(this).css("height");
+		divider.top = $(this).css("top");
+		divider.left = $(this).css("left");
+		giftbox.dividers[i] = divider;
+	});
+
+	$("#"+template.id+" div.divider-container").each(function(i) { 
+		var container = new Object();
+		container.css_id = $(this).attr("id");
+		container.width = $(this).css("width");
+		container.height = $(this).css("height");
+		container.top = $(this).css("top");
+		container.left = $(this).css("left");
+		giftbox.dividers[giftbox.dividers.length] = container;
 	});
 
 	// Save the template first
@@ -1040,15 +1113,15 @@ function saveLetter() {
 
 function wrapper() {
 	$('#wrapper-type').val(window.top_template.wrapperType);
-	$('#unload-count').val(window.top_template.unloadCount);
+	$('#unload-count').spinner("value", window.top_template.unloadCount);
 	$('#wrapper-dialog').dialog('open');
 }
 
 function save_wrapper() {
-	var wrapperType = document.getElementById("wrapper-type");
+	var wrapperType = document.getElementById;
 	var unloadCount = document.getElementById("unload-count");
-	window.top_template.wrapperType = wrapperType.value;
-	window.top_template.unloadCount = unloadCount.value;
+	window.top_template.wrapperType = $("#wrapper-type").val();
+	window.top_template.unloadCount = $("#unload-count").spinner("value");
 	$("#wrapper-dialog" ).dialog("close");
 }
 
@@ -1097,32 +1170,42 @@ function loadSaved() {
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
-			var bentoId = "bento-";
 			closeStatus();
-			if (token.bentos.length === 4) {
+			
+			// Bring the correct template to the top
+			if (token.css_id === 'template-1') {
 				stack('template-1', 'template-2', 'template-3');
-				bentoId += "1-";
-			} else if (token.bentos.length === 5) {
+			} else if (token.css_id === 'template-2') {
 				stack('template-2', 'template-3', 'template-1')				
-				bentoId += "2-";
 			} else {
 				stack('template-3', 'template-1', 'template-2')				
-				bentoId += "3-";
 			}
-			var template = window.top_template;
-			template.giftboxId = token.id;
-			template.appURL = token.app_url;
-			setPreviewLink(template);
+			
+			// Populate the top template properties
+			window.top_template.giftboxId = token.id;
+			window.top_template.appURL = token.app_url;
+			window.top_template.letterText = token.letter_text;
+			window.top_template.wrapperType = token.wrapper_type;
+			window.top_template.unloadCount = token.unload_count;
+			setPreviewLink(window.top_template);
 			var index;
 			var bento;
 			for (index = 0; index < token.bentos.length; ++index) {
-				bento = document.getElementById(bentoId+(index+1));
+				bento = document.getElementById(token.bentos[index].css_id);
 				bento.style.width = token.bentos[index].css_width;
 				bento.style.height = token.bentos[index].css_height;
 				bento.style.top = token.bentos[index].css_top;
 				bento.style.left = token.bentos[index].css_left;
 				clearBento(bento);
 				loadBento(bento, token.bentos[index]);
+			}
+			var divider;
+			for (index = 0; index < token.dividers.length; ++index) {
+				divider = document.getElementById(token.dividers[index].css_id);
+				divider.style.width = token.dividers[index].css_width;
+				divider.style.height = token.dividers[index].css_height;
+				divider.style.top = token.dividers[index].css_top;
+				divider.style.left = token.dividers[index].css_left;
 			}
 		});
 	}
@@ -1165,10 +1248,18 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
-		
+		addImage(bento, savedBento.image_file_path, null, savedBento);
+		bento.image_file_name = savedBento.image_file_name;
 	}
 	if (savedBento.download_file_name) {
-		
+		bento.download_file_name = savedBento.download_file_name;
+		bento.download_mime_type = savedBento.download_mime_type;
+		if (bento.download_mime_type.match(videoType)) {
+			addVideo(bento, savedBento.download_file_path, null, savedBento);
+		}
+		if (bento.download_mime_type.match(audioType)) {
+			addAudio(bento, savedBento.download_file_path, null, savedBento);
+		}
 	}
 	
 }

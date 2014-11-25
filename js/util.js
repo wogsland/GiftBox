@@ -28,6 +28,10 @@ function closeStatus() {
 	$("#status-dialog" ).dialog("close");
 }
 
+function setStatus(text) {
+	$("#status-text").text(text);
+}
+
 function openMessage(title, text) {
 	$("#message-dialog").dialog( "option", "title", title);
 	$("#message-text").text(text);

@@ -5,6 +5,8 @@
 2. [Branching Strategy](#branching)
 3. [Deployment Information](#deployment)
 
+View at stone-timing-557.appspot.com
+
 ## <a name="general-info"></a>General Info
 
 ### URLs
@@ -49,6 +51,7 @@ Branch names should follow the following convention:
 - `git pull github master`
 - `git checkout -b feature/233-example-branch-name`
 - Exhibit your brilliance
+- `git add [filename]`
 - `git commit -am "Add great new functionality to users per 223"`
 - `git push github feature/233-example-branch-name`
 
@@ -61,6 +64,37 @@ to check your code on a production-like environment
 - `git merge --no-ff bug/5-emperor-has-no-clothes`
 - `git push github staging`
 - deploy to staging site
+
+### Handling Merge Conflicts
+
+if you happen to run into merge conflicts:
+
+- `git checkout [branch_youre_trying_to_merge_to]`
+- `git status`
+- Open the file that contains conflicts in your text editor of choice
+- Look for `<<<<<<< HEAD` The conflict starts here and there can be more than one.
+- Everything bewteen `<<<<<<< HEAD` and `=======` represents the code that's on the branch you are **merging to**
+- Everything bewteen `=======` and `======= branch name or commit id` represents the code that's on the branch you want to **merge in**
+
+<code><<<<<<< HEAD
+<br>
+  some code that does cool stuff (usually from master or staging)
+<br>
+=======</code>
+
+<code>
+  some new code that does even cooler stuff (from the branch you are merging in)
+<br>
+======= Name of branch that is being merged in or commit id
+</code>
+
+- Keep or remove any code that you don't want or shouldn't be included
+- Delete all `<<<<<<< HEAD` and `=======` lines
+- Save the file and switch to your terminal
+- `git status`
+- `git add [name_of_file]` or `git add .` (adds all files that were changed)
+- `git commit -m "Fix merge conflicts"`
+- `git push origin [branch_name]` (push to the branch you were initially trying to merge into)
 
 ### Sending a Pull Request
 
@@ -161,3 +195,5 @@ When deploying using the following procedures, *be absolutely sure* that you are
 - `gcloud preview app deploy ./ --project stone-timing-557`
 
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
+
+# GMP was here
