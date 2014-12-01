@@ -103,7 +103,7 @@
 						Want a simple way to personalize digital interactions?<br>
 					</h1>
 					<p>
-						Send your next Token of appreciation with Give Token.
+						Send your next Token of appreciation with GiveToken
 					</p>
 					<p>
 					<?php
@@ -288,10 +288,10 @@
 				</ul>-->
 					<ul class="dark">
 					<li>
-						<a href="/privacy/">PRIVACY POLICY</a>
+						<a href="privacypolicy.php">PRIVACY POLICY</a>
 					</li>
 					<li>
-						<a href="/terms/">TERMS OF SERVICE</a>
+						<a href="termsservice.php">TERMS OF SERVICE</a>
 					</li>
 				</ul>
 			</nav>

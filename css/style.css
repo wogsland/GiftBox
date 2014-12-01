@@ -1486,3 +1486,38 @@ div.container {
 .red-text {
 	color: red;
 }
+
+/*----------------------------------------*/
+/*         POLICY     		              */
+/*----------------------------------------*/
+
+
+summary {
+	text-align: center;
+	position: relative;
+	padding: 3% 10%;
+}
+
+summary h1 {    
+	font-family: "HelveticaNeue",Helvetica,sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+summary h2{
+	text-align: left;
+	font-family: 'Bariol', sans-serif;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
+summary p em{
+	font-style: italic;
+}
+
+summary p{
+	text-align: left;
+	line-height: 1.4em;
+	font-size: 1.2em;
+	margin-bottom: 1.2em;
+}
