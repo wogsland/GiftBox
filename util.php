@@ -4,6 +4,7 @@
 		if ($result = $mysqli->query($sql)) {
 			return $result;
 		} else {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 	}
@@ -12,6 +13,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 	}
@@ -20,6 +22,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 		return $mysqli->insert_id;
@@ -29,7 +32,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
-			error_log("util.php:".__METHOD__.":".$mysqli->error);
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 		return $mysqli->affected_rows;
