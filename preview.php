@@ -1,11 +1,7 @@
 <?php
-	use google\appengine\api\cloud_storage\CloudStorageTools;
 	include_once 'config.php';
 	include_once 'Token.class.php';
 	
-	if ($google_app_engine) {
-		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
-	}
 	$download_file_names = array();
 	$download_paths = array();
 	$token = new Token($_GET['id']);

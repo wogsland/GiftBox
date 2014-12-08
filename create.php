@@ -3,7 +3,7 @@
 	include_once 'config.php';
 	session_start();
 	if (!logged_in()) {
-            header('Location: /giftbox');
+            header('Location: '.$app_url);
 	}
 ?>
 <!DOCTYPE html>
