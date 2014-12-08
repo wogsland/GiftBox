@@ -15,6 +15,7 @@ try {
 
 	$response['status'] = "SUCCESS";
 	$response['giftbox_id'] = $token->id;
+	$response['app_url'] = $app_url;
 } catch (Exception $e) {
 	$response['status'] = "ERROR";
 	$response['message'] = $e->getMessage();
