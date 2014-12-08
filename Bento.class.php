@@ -1,4 +1,9 @@
 <?php
+use google\appengine\api\cloud_storage\CloudStorageTools;
+if ($google_app_engine) {
+	include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+}
+
 include_once 'util.php';
 
 class Bento {
