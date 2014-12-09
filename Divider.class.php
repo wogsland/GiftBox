@@ -28,12 +28,12 @@ class Divider {
 	}
 	
 	public function width_percentage() {
-		$width = round(($this->css_width/1011)*100, 1);
+		$width = round(($this->css_width/1011)*100);
 		echo ' style="width: '.$width.'%"';
 	}
 	
 	public function height_percentage() {
-		$height = round(($this->css_height/756)*100, 1);
+		$height = round(($this->css_height/756)*100);
 		echo ' style="height: '.$height.'%"';
 	}
 	
