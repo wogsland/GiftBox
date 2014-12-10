@@ -993,9 +993,14 @@ function save() {
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
+	var templateStyle = getComputedStyle(template);
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
+//		css_width: templateStyle.width,
+//		css_height: templateStyle.height,
+		css_width: $("#"+cssId).innerWidth(),
+		css_height: $("#"+cssId).innerHeight(),
 		name: giftboxName,
 		letter_text: letterText,
 		wrapper_type: wrapperType,
@@ -1097,6 +1102,7 @@ function save() {
 		column.css_height = $(this).css("height");
 		column.css_top = $(this).css("top");
 		column.css_left = $(this).css("left");
+		column.parent_css_id = $(this).parent().attr("id");
 		giftbox.columns[giftbox.columns.length] = column;
 	});
 

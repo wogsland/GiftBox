@@ -6,6 +6,8 @@ include 'Divider.class.php';
 class Token {
 	var $id;
 	var $css_id;
+	var $css_width;
+	var $css_height;
 	var $name;
 	var $user_id;
 	var $letter_text;
@@ -46,7 +48,7 @@ class Token {
 		foreach ($array as $b) {
 			$bento = new Bento();
 			$bento->init((object)$b);
-			$this->bentos[count($this->bentos)] = $bento;
+			$this->bentos[$bento->css_id] = $bento;
 		}
 	}
 	
@@ -54,7 +56,7 @@ class Token {
 		foreach ($array as $d) {
 			$divider = new Divider();
 			$divider->init((object)$d);
-			$this->dividers[count($this->dividers)] = $divider;
+			$this->dividers[$divider->css_id] = $divider;
 		}
 	}
 	
@@ -62,7 +64,18 @@ class Token {
 		foreach ($array as $c) {
 			$column = new Divider();
 			$column->init((object)$c);
-			$this->columns[count($this->columns)] = $column;
+			$this->columns[$column->css_id] = $column;
+		}
+		$this->assignParents();
+	}
+	
+	private function assignParents() {
+		foreach ($this->columns as $column) {
+			if (isset($this->columns[$column->parent_css_id])) {
+				$column->parent = $this->columns[$column->parent_css_id];
+			} else {
+				$column->parent = $this;
+			}
 		}
 	}
 	
@@ -105,6 +118,7 @@ class Token {
 		while ($column = $results->fetch_object("Divider")) {
 			$this->columns[$column->css_id] = $column;
 		}
+		$this->assignParents();
 	}
 
 	public function init($object) {
@@ -125,8 +139,8 @@ class Token {
 	
 	public function save() {
 		if (!$this->id) {
-			$sql = "INSERT into giftbox (name, css_id, user_id, letter_text, wrapper_type, unload_count, user_agent) "
-				."VALUES ('$this->name', '$this->css_id', $this->user_id, '$this->letter_text', "
+			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent) "
+				."VALUES ('$this->name', '$this->css_id', '$this->css_width', '$this->css_height', $this->user_id, '$this->letter_text', "
 				."'$this->wrapper_type', $this->unload_count, '$this->user_agent')";
 			$this->setId(insert($sql));
 		} else {
