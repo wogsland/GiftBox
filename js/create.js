@@ -77,7 +77,8 @@ function uploadFileData(fileData, fileName) {
 		setStatus("Uploading " + fileName);
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
-				setStatus(((e.loaded / e.total) * 100)+"%");
+				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
+				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
         xhr.open("POST", "upload.php", true);
@@ -997,8 +998,6 @@ function save() {
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
-//		css_width: templateStyle.width,
-//		css_height: templateStyle.height,
 		css_width: $("#"+cssId).innerWidth(),
 		css_height: $("#"+cssId).innerHeight(),
 		name: giftboxName,
@@ -1107,7 +1106,7 @@ function save() {
 	});
 
 	// Save the template first
-	$.post("save_giftbox_ajax.php", giftbox, function(result) { 
+	$.post("save_token_ajax.php", giftbox, function(result) { 
 		closeStatus();
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;

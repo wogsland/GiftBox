@@ -1,4 +1,9 @@
 <?php
+	function escape_string($string) {
+		include 'database.php';
+		return $mysqli->real_escape_string($string);
+	}
+	
 	function execute_query($sql) {
 		include 'database.php';
 		if ($result = $mysqli->query($sql)) {
