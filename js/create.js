@@ -179,6 +179,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.file = imageFile;
 	img.parentBento = bento;
 	img.imageContainer = imageContainer;
+	img.crossOrigin = "Anonymous";
 	img.savedBento = savedBento;
 	img.onload = function() {
 		resizeImage(this, this.parentBento);
