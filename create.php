@@ -3,7 +3,7 @@
 	include_once 'config.php';
 	session_start();
 	if (!logged_in()) {
-            header('Location: /giftbox');
+            header('Location: '.$app_url);
 	}
 ?>
 <!DOCTYPE html>
@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 	
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
@@ -25,139 +26,9 @@
 	<script src="js/id3-minimized.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
+	<script src="js/init.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
-	
-	<script>
-		$(function() {
-			$( "#tabs" ).tabs();
-		});
-
-		$(function() {
-			$( "#letter-dialog" ).dialog({
-				autoOpen: false,
-				resizable: false,
-				width: 800,
-				height: 600,
-				modal: true,
-				buttons: {
-					OK: function() {
-						saveLetter();
-					},
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				}
-			});
-		});
-  
-		$(function() {
-			$( "#open-dialog" ).dialog({
-				autoOpen: false,
-				resizable: false,
-				width: 400,
-				height: 300,
-				modal: true,
-				buttons: {
-					Open: function() {
-						loadSaved();
-					},
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				}
-			});
-		});
-  
-		$(function() {
-			$("#unload-count").bind("keydown", function (event) {
-				event.preventDefault();
-			});			
-			$( "#unload-count" ).spinner({min: 0, max: 20});
-			$( "#wrapper-dialog" ).dialog({
-				autoOpen: false,
-				resizable: false,
-				width: 500,
-				height: 250,
-				modal: true,
-				buttons: {
-					OK: function() {
-						save_wrapper();
-					},
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				}
-			});
-		});
-  
-		$(function() {
-			$( "#save-dialog" ).dialog({ 
-				autoOpen: false,
-				resizable: false,
-				height:200,
-				width: 400,
-				modal: true,
-				buttons: {
-					Save: function() {
-						save();
-					},
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				},
-				open: function() {
-					$("#save-dialog").keypress(function(e) {
-						if (e.keyCode == $.ui.keyCode.ENTER) {
-							save();
-							return false;
-						}
-					});
-				}
-			});
-		});
-
-		$(function() {
-			$( "#url-dialog" ).dialog({ 
-				autoOpen: false,
-				resizable: false,
-				height:200,
-				width: 600,
-				modal: true,
-				buttons: {
-					Ok: function() {
-						addURL();
-					},
-					Cancel: function() {
-						$( this ).dialog( "close" );
-					}
-				},
-				open: function() {
-					$("#url-dialog").keypress(function(e) {
-						if (e.keyCode == $.ui.keyCode.ENTER) {
-							addURL();
-							return false;
-						}
-					});
-				}
-			});
-		});
-
-		$(function() {
-			$( "#confirm-dialog" ).dialog({
-				autoOpen: false,
-				resizable: false,
-				height:200,
-				width: 400,
-				modal: true,
-				buttons: {
-					OK: function() {
-						$( this ).dialog( "close" );
-					}
-				}
-			});
-		});
-	</script>	
 </head>
 <body id="create-body">
 	<div id="content-wrapper">
@@ -249,11 +120,6 @@
 						<div class="file-drop-zone" id="media-drop-zone">
 							<p class="drop-zone-text">Drag and drop music/video files here</p>
 						</div>
-<!--
-						<form class="search-form">
-							<input type="text" name="image-search" id="image-search" placeholder="Search" class="text ui-widget-content ui-corner-all search">
-						</form>
--->
 					</div>
 				</div>
 			</div>
@@ -275,92 +141,132 @@
 						<div class="divider-container" id="divider-container-3-3"></div>
 						<div class="divider-container" id="divider-container-3-4"></div>
 						<div class="divider-container" id="divider-container-3-5"></div>
-						<div class="bento" id="bento-3-1">
-							<div class="image-slider" id="bento-3-1-slider"></div>
-							<div class="close-button" id="bento-3-1-close" onclick="closeClicked(this)"></div>
+						<div id="column-3-1" class="column height100 width33">
+							<div id="column-3-4" class="padded column height33 width100">
+								<div class="bento" id="bento-3-1">
+									<div class="image-slider" id="bento-3-1-slider"></div>
+									<div class="close-button" id="bento-3-1-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-3-5" class="padded column height66 width100">
+								<div class="bento" id="bento-3-2">
+									<div class="image-slider" id="bento-3-2-slider"></div>
+									<div class="close-button" id="bento-3-2-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
 						</div>
-						<div class="bento" id="bento-3-2">
-							<div class="image-slider" id="bento-3-2-slider"></div>
-							<div class="close-button" id="bento-3-2-close" onclick="closeClicked(this)"></div>
+						<div id="column-3-2" class="column height100 width33">
+							<div id="column-3-6" class="padded column height50 width100">
+								<div class="bento" id="bento-3-3">
+									<div class="image-slider" id="bento-3-3-slider"></div>
+									<div class="close-button" id="bento-3-3-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-3-7" class="padded column height50 width100">
+								<div class="bento" id="bento-3-4">
+									<div class="image-slider" id="bento-3-4-slider"></div>
+									<div class="close-button" id="bento-3-4-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
 						</div>
-						<div class="bento" id="bento-3-3">
-							<div class="image-slider" id="bento-3-3-slider"></div>
-							<div class="close-button" id="bento-3-3-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-3-4">
-							<div class="image-slider" id="bento-3-4-slider"></div>
-							<div class="close-button" id="bento-3-4-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-3-5">
-							<div class="image-slider" id="bento-3-5-slider"></div>
-							<div class="close-button" id="bento-3-5-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-3-6">
-							<div class="image-slider" id="bento-3-6-slider"></div>
-							<div class="close-button" id="bento-3-6-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="divider" id="divider-3-1"></div>
-						<div class="divider" id="divider-3-2"></div>
-						<div class="divider" id="divider-3-3"></div>
-						<div class="divider" id="divider-3-4"></div>
-						<div class="divider" id="divider-3-5"></div>
+						<div id="column-3-3" class="column height100 width33">
+							<div id="column-3-8" class="padded column height66 width100">
+								<div class="bento" id="bento-3-5">
+									<div class="image-slider" id="bento-3-5-slider"></div>
+									<div class="close-button" id="bento-3-5-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-3-9" class="padded column height33 width100">
+								<div class="bento" id="bento-3-6">
+									<div class="image-slider" id="bento-3-6-slider"></div>
+									<div class="close-button" id="bento-3-6-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+						</div>	
+						<div class="vertical divider" id="divider-3-1"></div>
+						<div class="vertical divider" id="divider-3-2"></div>
+						<div class="horizontal divider" id="divider-3-3"></div>
+						<div class="horizontal divider" id="divider-3-4"></div>
+						<div class="horizontal divider" id="divider-3-5"></div>
 					</div>
 					<div class="template" id="template-2">
 						<div class="divider-container" id="divider-container-2-1"></div>
 						<div class="divider-container" id="divider-container-2-2"></div>
 						<div class="divider-container" id="divider-container-2-3"></div>
 						<div class="divider-container" id="divider-container-2-4"></div>
-						<div class="bento" id="bento-2-1">
-							<div class="image-slider" id="bento-2-1-slider"></div>
-							<div class="close-button" id="bento-2-1-close" onclick="closeClicked(this)"></div>
+						<div id="column-2-1" class="column height100 width50">
+							<div id="column-2-3" class="padded column height50 width100">
+								<div class="bento" id="bento-2-1">
+									<div class="image-slider" id="bento-2-1-slider"></div>
+									<div class="close-button" id="bento-2-1-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-2-4" class="padded column height50 width100">
+								<div class="bento" id="bento-2-2">
+									<div class="image-slider" id="bento-2-2-slider"></div>
+									<div class="close-button" id="bento-2-2-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
 						</div>
-						<div class="bento" id="bento-2-2">
-							<div class="image-slider" id="bento-2-2-slider"></div>
-							<div class="close-button" id="bento-2-2-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-2-3">
-							<div class="image-slider" id="bento-2-3-slider"></div>
-							<div class="close-button" id="bento-2-3-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-2-4">
-							<div class="image-slider" id="bento-2-4-slider"></div>
-							<div class="close-button" id="bento-2-4-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="bento" id="bento-2-5">
-							<div class="image-slider" id="bento-2-5-slider"></div>
-							<div class="close-button" id="bento-2-5-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="divider" id="divider-2-1"></div>
-						<div class="divider" id="divider-2-2"></div>
-						<div class="divider" id="divider-2-3"></div>
-						<div class="divider" id="divider-2-4"></div>
+						<div id="column-2-2" class="column height100 width50">
+							<div id="column-2-5" class="padded column height33 width100">
+								<div class="bento" id="bento-2-3">
+									<div class="image-slider" id="bento-2-3-slider"></div>
+									<div class="close-button" id="bento-2-3-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-2-6" class="padded column height33 width100">
+								<div class="bento" id="bento-2-4">
+									<div class="image-slider" id="bento-2-4-slider"></div>
+									<div class="close-button" id="bento-2-4-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-2-7" class="padded column height33 width100">
+								<div class="bento" id="bento-2-5">
+									<div class="image-slider" id="bento-2-5-slider"></div>
+									<div class="close-button" id="bento-2-5-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+						</div>	
+						<div class="vertical divider" id="divider-2-1"></div>
+						<div class="horizontal divider" id="divider-2-2"></div>
+						<div class="horizontal divider" id="divider-2-3"></div>
+						<div class="horizontal divider" id="divider-2-4"></div>
 					</div>
 					<div class="template" id="template-1">
 						<div class="divider-container" id="divider-container-1-1"></div>
 						<div class="divider-container" id="divider-container-1-2"></div>
 						<div class="divider-container" id="divider-container-1-3"></div>
-						<div class="bento" id="bento-1-1">
-							<div class="image-slider" id="bento-1-1-slider"></div>
-							<div class="close-button" id="bento-1-1-close" onclick="closeClicked(this)"></div>
+						<div id="column-1-1" class="column padded height100 width33">
+							<div class="bento" id="bento-1-1">
+								<div class="image-slider" id="bento-1-1-slider"></div>
+								<div class="close-button" id="bento-1-1-close" onclick="closeClicked(this)"></div>
+							</div>
 						</div>
-						<div class="bento" id="bento-1-2">
-							<div class="image-slider" id="bento-1-2-slider"></div>
-							<div class="close-button" id="bento-1-2-close" onclick="closeClicked(this)"></div>
+						<div id="column-1-2" class="column padded height100 width33">
+							<div class="bento" id="bento-1-2">
+								<div class="image-slider" id="bento-1-2-slider"></div>
+								<div class="close-button" id="bento-1-2-close" onclick="closeClicked(this)"></div>
+							</div>
 						</div>
-						<div class="bento" id="bento-1-3">
-							<div class="image-slider" id="bento-1-3-slider"></div>
-							<div class="close-button" id="bento-1-3-close" onclick="closeClicked(this)"></div>
+						<div id="column-1-3" class="column height100 width33">
+							<div id="column-1-4" class="column padded height50 width100">
+								<div class="bento" id="bento-1-3">
+									<div class="image-slider" id="bento-1-3-slider"></div>
+									<div class="close-button" id="bento-1-3-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
+							<div id="column-1-5" class="column padded height50 width100">
+								<div class="bento" id="bento-1-4">
+									<div class="image-slider" id="bento-1-4-slider"></div>
+									<div class="close-button" id="bento-1-4-close" onclick="closeClicked(this)"></div>
+								</div>
+							</div>
 						</div>
-						<div class="bento" id="bento-1-4">
-							<div class="image-slider" id="bento-1-4-slider"></div>
-							<div class="close-button" id="bento-1-4-close" onclick="closeClicked(this)"></div>
-						</div>
-						<div class="divider" id="divider-1-1"></div>
-						<div class="divider" id="divider-1-2"></div>
-						<div class="divider" id="divider-1-3"></div>
+						<div class="vertical divider" id="divider-1-1"></div>
+						<div class="vertical divider" id="divider-1-2"></div>
+						<div class="horizontal divider" id="divider-1-3"></div>
 					</div>
-				</div>
-<!--				<div id="template-downloads-container">  -->
 				</div>
 			</div>
 		</section>

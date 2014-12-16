@@ -77,10 +77,11 @@ function uploadFileData(fileData, fileName) {
 		setStatus("Uploading " + fileName);
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
-				setStatus(((e.loaded / e.total) * 100)+"%");
+				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
+				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
-        xhr.open("POST", "upload.php", false);
+        xhr.open("POST", "upload.php", true);
         xhr.setRequestHeader("X-FILENAME", fileName);
         xhr.send(fileData);
     }
@@ -178,6 +179,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.file = imageFile;
 	img.parentBento = bento;
 	img.imageContainer = imageContainer;
+	img.crossOrigin = "Anonymous";
 	img.savedBento = savedBento;
 	img.onload = function() {
 		resizeImage(this, this.parentBento);
@@ -620,9 +622,13 @@ function resizeImage(img, bento) {
 	img.originalHeight = img.height;
 }
 
-function resizeContents(bento, img, div) {
-	resizeImage(img, bento);
-	resizeContainer(bento, img, div);
+function resizeBento(bento) {
+	var image = document.getElementById(bento.id + "-image");
+	if (image) {
+		resizeImage(image, bento);
+		var container = document.getElementById(bento.id + "-image-container");
+		resizeContainer(bento, image, container);
+	}
 }
 
 function handleSearch(field) {
@@ -672,79 +678,58 @@ function handleHorizontalDrag(target, movement) {
 	var index;
 	var newWidth;
 	var newLeft;
-
-	for (index = 0; index < target.leftDependents.length; ++index) {
-		var leftDependent = target.leftDependents[index];
-		newWidth = parseInt(getComputedStyle(leftDependent).width, 10) + movement;
-		leftDependent.style.width = newWidth + "px";
-		var leftImage = document.getElementById(leftDependent.id + "-image");
-		if (leftImage) {
-			var leftContainer = document.getElementById(leftDependent.id + "-image-container");
-			resizeContents(leftDependent, leftImage, leftContainer);
-		} else if (leftDependent.video) {
-			leftDependent.video.width = newWidth;
-		} else if (leftDependent.iframe) {
-			leftDependent.iframe.width = newWidth;
+	if (movement !== 0) {
+		for (index = 0; index < target.leftDependents.length; ++index) {
+			var leftDependent = target.leftDependents[index];
+			newWidth = parseFloat(getComputedStyle(leftDependent).width, 10) + movement;
+			leftDependent.style.width = newWidth + "px";
+			
+			var bentos = leftDependent.getElementsByClassName("bento");
+			for (var i = 0; i < bentos.length; ++i) {
+				resizeBento(bentos[i]);
+			}
 		}
-	}
 
-	for (index = 0; index < target.rightDependents.length; ++index) {
-		var rightDependent = target.rightDependents[index];
-		newWidth = parseInt(getComputedStyle(rightDependent).width, 10) - movement;
-		newLeft = parseInt(getComputedStyle(rightDependent, null).left, 10) + movement;
-		rightDependent.style.left = newLeft + "px";
-		rightDependent.style.width = newWidth + "px";
-		var rightImage = document.getElementById(rightDependent.id + "-image");
-		if (rightImage) {
-			var rightContainer = document.getElementById(rightDependent.id + "-image-container");
-			resizeContents(rightDependent, rightImage, rightContainer);
-		} else if (rightDependent.video) {
-			rightDependent.video.width = newWidth;
-		} else if (rightDependent.iframe) {
-			rightDependent.iframe.width = newWidth;
+		for (index = 0; index < target.rightDependents.length; ++index) {
+			var rightDependent = target.rightDependents[index];
+			newWidth = parseFloat(getComputedStyle(rightDependent).width, 10) - movement;
+			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
+			rightDependent.style.left = newLeft + "px";
+			rightDependent.style.width = newWidth + "px";
+			
+			var bentos = rightDependent.getElementsByClassName("bento");
+			for (var i = 0; i < bentos.length; ++i) {
+				resizeBento(bentos[i]);
+			}
 		}
-	}
+	}	
 }
 
 function handleVerticalDrag(target, movement) {
 	var index;
 
-	for (index = 0; index < target.topDependents.length; ++index) {
-		var topDependent = target.topDependents[index];
-		var newHeight = parseInt(getComputedStyle(topDependent).height, 10) + movement;
-		topDependent.style.height = newHeight + "px";
-		var topSlider = document.getElementById(topDependent.id + "-slider");
-		if (topSlider) {
-			topSlider.style.height = (newHeight - 45) + "px";
-		}
-		var topImage = document.getElementById(topDependent.id + "-image");
-		if (topImage) {
-			var topContainer = document.getElementById(topDependent.id + "-image-container");
-			resizeContents(topDependent, topImage, topContainer);
-		} else if (topDependent.video) {
-			topDependent.video.height = newHeight;
-		} else if (topDependent.iframe) {
-			topDependent.iframe.height = newHeight;
-		}
-	}	
+	if (movement !== 0) {
+		for (index = 0; index < target.topDependents.length; ++index) {
+			var topDependent = target.topDependents[index];
+			var newHeight = parseFloat(getComputedStyle(topDependent).height, 10) + movement;
+			topDependent.style.height = newHeight + "px";
+			
+			var bentos = topDependent.getElementsByClassName("bento");
+			for (var i = 0; i < bentos.length; ++i) {
+				resizeBento(bentos[i]);
+			}
+		}	
 
-	for (index = 0; index < target.bottomDependents.length; ++index) {
-		var bottomDependent = target.bottomDependents[index];
-		bottomDependent.style.top = (parseInt(getComputedStyle(bottomDependent, null).top, 10) + movement) + "px";
-		var newHeight = parseInt(getComputedStyle(bottomDependent).height, 10) - movement;
-		bottomDependent.style.height = newHeight + "px";
-		var bottomSlider = document.getElementById(bottomDependent.id + "-slider");
-		if (bottomSlider) {
-			bottomSlider.style.height = (newHeight - 45) + "px";
-		}
-		var bottomImage = document.getElementById(bottomDependent.id + "-image");
-		if (bottomImage) {
-			var bottomContainer = document.getElementById(bottomDependent.id + "-image-container");
-			resizeContents(bottomDependent, bottomImage, bottomContainer);
-		} else if (bottomDependent.video) {
-			bottomDependent.video.height = newHeight;
-		} else if (bottomDependent.iframe) {
-			bottomDependent.iframe.height = newHeight;
+		for (index = 0; index < target.bottomDependents.length; ++index) {
+			var bottomDependent = target.bottomDependents[index];
+			bottomDependent.style.top = (parseFloat(getComputedStyle(bottomDependent, null).top, 10) + movement) + "px";
+			var newHeight = parseFloat(getComputedStyle(bottomDependent).height, 10) - movement;
+			bottomDependent.style.height = newHeight + "px";
+			
+			var bentos = bottomDependent.getElementsByClassName("bento");
+			for (var i = 0; i < bentos.length; ++i) {
+				resizeBento(bentos[i]);
+			}
 		}
 	}
 }
@@ -754,16 +739,23 @@ $(function() {
 
 	// Template #1
 	divider = document.getElementById("divider-1-1");
-	divider.leftDependents = [document.getElementById("bento-1-1")];
-	divider.rightDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-2")];
+	divider.leftDependents = [document.getElementById("column-1-1")];
+	divider.rightDependents = [
+		document.getElementById("column-1-2"), 
+		document.getElementById("divider-container-1-2")];
 
 	divider = document.getElementById("divider-1-2");
-	divider.leftDependents = [document.getElementById("bento-1-2"), document.getElementById("divider-container-1-1")];
-	divider.rightDependents = [document.getElementById("bento-1-3"), document.getElementById("bento-1-4"), document.getElementById("divider-1-3"), document.getElementById("divider-container-1-3")];
+	divider.leftDependents = [
+		document.getElementById("column-1-2"), 
+		document.getElementById("divider-container-1-1")];
+	divider.rightDependents = [
+		document.getElementById("column-1-3"), 
+		document.getElementById("divider-1-3"), 
+		document.getElementById("divider-container-1-3")];
 
 	divider = document.getElementById("divider-1-3");
-	divider.topDependents = [document.getElementById("bento-1-3")];
-	divider.bottomDependents = [document.getElementById("bento-1-4")];
+	divider.topDependents = [document.getElementById("column-1-4")];
+	divider.bottomDependents = [document.getElementById("column-1-5")];
 
 	$("#divider-1-1").draggable({
 		axis: "x",
@@ -794,20 +786,32 @@ $(function() {
 	
 	// Template #2
 	divider = document.getElementById("divider-2-1");
-	divider.leftDependents = [document.getElementById("bento-2-1"), document.getElementById("bento-2-2"), document.getElementById("divider-2-2"), document.getElementById("divider-container-2-2")];
-	divider.rightDependents = [document.getElementById("bento-2-3"), document.getElementById("bento-2-4"), document.getElementById("bento-2-5"), document.getElementById("divider-2-3"), document.getElementById("divider-2-4"), document.getElementById("divider-container-2-3"), document.getElementById("divider-container-2-4")];
+	divider.leftDependents = [
+		document.getElementById("column-2-1"), 
+		document.getElementById("divider-2-2"), 
+		document.getElementById("divider-container-2-2")];
+	divider.rightDependents = [
+		document.getElementById("column-2-2"), 
+		document.getElementById("divider-2-3"), 
+		document.getElementById("divider-2-4"), 
+		document.getElementById("divider-container-2-3"), 
+		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-2");
-	divider.topDependents = [document.getElementById("bento-2-1")];
-	divider.bottomDependents = [document.getElementById("bento-2-2")];
+	divider.topDependents = [document.getElementById("column-2-3")];
+	divider.bottomDependents = [document.getElementById("column-2-4")];
 
 	divider = document.getElementById("divider-2-3");
-	divider.topDependents = [document.getElementById("bento-2-3")];
-	divider.bottomDependents = [document.getElementById("bento-2-4"), document.getElementById("divider-container-2-4")];
+	divider.topDependents = [document.getElementById("column-2-5")];
+	divider.bottomDependents = [
+		document.getElementById("column-2-6"), 
+		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-4");
-	divider.topDependents = [document.getElementById("bento-2-4"), document.getElementById("divider-container-2-3")];
-	divider.bottomDependents = [document.getElementById("bento-2-5")];
+	divider.topDependents = [
+		document.getElementById("column-2-6"), 
+		document.getElementById("divider-container-2-3")];
+	divider.bottomDependents = [document.getElementById("column-2-7")];
 
 	$("#divider-2-1").draggable({
 		axis: "x",
@@ -847,24 +851,37 @@ $(function() {
 	
 	// Template #3
 	divider = document.getElementById("divider-3-1");
-	divider.leftDependents = [document.getElementById("bento-3-1"), document.getElementById("bento-3-2"), document.getElementById("divider-3-3"), document.getElementById("divider-container-3-3")];
-	divider.rightDependents = [document.getElementById("bento-3-3"), document.getElementById("bento-3-4"), document.getElementById("divider-3-4"), document.getElementById("divider-container-3-2")];
+	divider.leftDependents = [
+		document.getElementById("column-3-1"), 
+		document.getElementById("divider-3-3"), 
+		document.getElementById("divider-container-3-3")];
+	divider.rightDependents = [
+		document.getElementById("column-3-2"), 
+		document.getElementById("divider-3-4"), 
+		document.getElementById("divider-container-3-4")];
 
 	divider = document.getElementById("divider-3-2");
-	divider.leftDependents = [document.getElementById("bento-3-3"), document.getElementById("bento-3-4"), document.getElementById("divider-3-4"), document.getElementById("divider-container-3-1"), document.getElementById("divider-container-3-4")];
-	divider.rightDependents = [document.getElementById("bento-3-5"), document.getElementById("bento-3-6"), document.getElementById("divider-3-5"), document.getElementById("divider-container-3-5")];
+	divider.leftDependents = [
+		document.getElementById("column-3-2"), 
+		document.getElementById("divider-3-4"), 
+		document.getElementById("divider-container-3-4"), 
+		document.getElementById("divider-container-3-1")];
+	divider.rightDependents = [
+		document.getElementById("column-3-3"), 
+		document.getElementById("divider-3-5"), 
+		document.getElementById("divider-container-3-5")];
 
 	divider = document.getElementById("divider-3-3");
-	divider.topDependents = [document.getElementById("bento-3-1")];
-	divider.bottomDependents = [document.getElementById("bento-3-2")];
+	divider.topDependents = [document.getElementById("column-3-4")];
+	divider.bottomDependents = [document.getElementById("column-3-5")];
 
 	divider = document.getElementById("divider-3-4");
-	divider.topDependents = [document.getElementById("bento-3-3")];
-	divider.bottomDependents = [document.getElementById("bento-3-4")];
+	divider.topDependents = [document.getElementById("column-3-6")];
+	divider.bottomDependents = [document.getElementById("column-3-7")];
 
 	divider = document.getElementById("divider-3-5");
-	divider.topDependents = [document.getElementById("bento-3-5")];
-	divider.bottomDependents = [document.getElementById("bento-3-6")];
+	divider.topDependents = [document.getElementById("column-3-8")];
+	divider.bottomDependents = [document.getElementById("column-3-9")];
 
 	$("#divider-3-1").draggable({
 		axis: "x",
@@ -978,32 +995,40 @@ function save() {
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
+	var templateStyle = getComputedStyle(template);
 	var giftbox = {
-		giftbox_id: giftboxId,
+		id: giftboxId,
 		css_id: cssId,
+		css_width: $("#"+cssId).innerWidth(),
+		css_height: $("#"+cssId).innerHeight(),
 		name: giftboxName,
 		letter_text: letterText,
 		wrapper_type: wrapperType,
 		unload_count: unloadCount,
 		user_agent: userAgent,
 		bentos: new Array(),
-		dividers: new Array()
+		dividers: new Array(),
+		columns: new Array()
 	};
+	
+	
+	
+	
+	
+	
 	$("#"+template.id+" div.bento").each(function(i) { 
 		var bento = new Object();
-		// initialize the bento to be saved
+		bento.giftbox_id = giftboxId;
 		bento.css_id = $(this).attr("id");
-		bento.width = $(this).css("width");
-		bento.height = $(this).css("height");
-		bento.top = $(this).css("top");
-		bento.left = $(this).css("left");
-		
+		bento.css_width = $(this).css("width");
+		bento.css_height = $(this).css("height");
+		bento.css_top = $(this).css("top");
+		bento.css_left = $(this).css("left");
 		bento.image_file_name = null;
 		bento.download_file_name = null;
 		bento.download_mime_type = null;
 		bento.content_uri = null;
-		bento.slider_value = "null";
-
+		bento.slider_value = null;
 		bento.image_width = null;
 		bento.image_height = null;
 		bento.image_top = null;
@@ -1023,6 +1048,8 @@ function save() {
 			bento.image_left = calcLeft(bento, image, container);
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
+			var croppedImage = createCroppedImage(bento, image, container);
+			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
 			if (!image.saved) {
 				if (image.file) {
 					uploadFile(image.file);
@@ -1047,32 +1074,52 @@ function save() {
 
 	$("#"+template.id+" div.divider").each(function(i) { 
 		var divider = new Object();
+		divider.giftbox_id = giftboxId;
 		divider.css_id = $(this).attr("id");
-		divider.width = $(this).css("width");
-		divider.height = $(this).css("height");
-		divider.top = $(this).css("top");
-		divider.left = $(this).css("left");
+		divider.css_width = $(this).css("width");
+		divider.css_height = $(this).css("height");
+		divider.css_top = $(this).css("top");
+		divider.css_left = $(this).css("left");
 		giftbox.dividers[i] = divider;
 	});
 
 	$("#"+template.id+" div.divider-container").each(function(i) { 
 		var container = new Object();
+		container.giftbox_id = giftboxId;
 		container.css_id = $(this).attr("id");
-		container.width = $(this).css("width");
-		container.height = $(this).css("height");
-		container.top = $(this).css("top");
-		container.left = $(this).css("left");
+		container.css_width = $(this).css("width");
+		container.css_height = $(this).css("height");
+		container.css_top = $(this).css("top");
+		container.css_left = $(this).css("left");
 		giftbox.dividers[giftbox.dividers.length] = container;
 	});
 
+	$("#"+template.id+" div.column").each(function(i) { 
+		var column = new Object();
+		column.giftbox_id = giftboxId;
+		column.css_id = $(this).attr("id");
+		column.css_width = $(this).css("width");
+		column.css_height = $(this).css("height");
+		column.css_top = $(this).css("top");
+		column.css_left = $(this).css("left");
+		column.parent_css_id = $(this).parent().attr("id");
+		giftbox.columns[giftbox.columns.length] = column;
+	});
+
 	// Save the template first
-	$.post("save_giftbox_ajax.php", giftbox, function(result) { 
-		template.giftboxId = result.giftbox_id;
-		template.appURL = result.app_url;
-		setPreviewLink(template);
+	$.post("save_token_ajax.php", giftbox, function(result) { 
 		closeStatus();
+		if (result.status === "SUCCESS") {
+			template.giftboxId = result.giftbox_id;
+			template.appURL = result.app_url;
+			setPreviewLink(template);
+		} else if (result.status === "ERROR") {
+			openMessage("Save", "Save failed with the following error:  "+result.message);
+		} else {
+			openMessage("Save", "Save failed!");
+		}
 	}).fail(function() {
-		alert("Save failed!"); closeStatus();
+		openMessage("Save", "Save failed!");
 	});
 }
 
@@ -1261,5 +1308,35 @@ function loadBento(bento, savedBento) {
 			addAudio(bento, savedBento.download_file_path, null, savedBento);
 		}
 	}
+}
 	
+function createCroppedImage (bento, image, container) {
+	// draw the original image to a scaled canvas
+	var canvas = document.createElement('canvas');
+	var imageStyle = getComputedStyle(image);
+	var width = parseInt(imageStyle.width, 10);
+	var height = parseInt(imageStyle.height, 10);
+	canvas.width = width;
+	canvas.height = height;
+	var context = canvas.getContext('2d');
+	context.drawImage(image, 0, 0, width, height);
+	
+	// now crop the canvas
+	var containerStyle = getComputedStyle(container);
+	var containerLeft = parseInt(containerStyle.left, 10);
+	var imageLeft = parseInt(imageStyle.left, 10);
+	var sourceX = (containerLeft * -1) - imageLeft;
+	var containerTop = parseInt(containerStyle.top, 10);
+	var imageTop = parseInt(imageStyle.top, 10);
+	var sourceY = (containerTop * -1) - imageTop;
+	var croppedCanvas = document.createElement('canvas');
+	croppedCanvas.width = parseInt(bento.css_width, 10);
+	croppedCanvas.height = parseInt(bento.css_height, 10);
+	var croppedContext = croppedCanvas.getContext('2d');
+	var cropWidth = parseInt(bento.css_width, 10);
+	var cropHeight = parseInt(bento.css_height, 10);
+	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
+	var croppedImage = new Image();
+	croppedImage.src = croppedCanvas.toDataURL();
+	return croppedImage;
 }

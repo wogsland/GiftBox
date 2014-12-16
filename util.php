@@ -1,9 +1,15 @@
 <?php
+	function escape_string($string) {
+		include 'database.php';
+		return $mysqli->real_escape_string($string);
+	}
+	
 	function execute_query($sql) {
 		include 'database.php';
 		if ($result = $mysqli->query($sql)) {
 			return $result;
 		} else {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 	}
@@ -12,6 +18,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 	}
@@ -20,6 +27,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 		return $mysqli->insert_id;
@@ -29,7 +37,7 @@
 		include 'database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
-			error_log("util.php:".__METHOD__.":".$mysqli->error);
+			error_log($sql);
 			throw new Exception($mysqli->error);
 		}
 		return $mysqli->affected_rows;

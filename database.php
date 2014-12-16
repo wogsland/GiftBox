@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 if ($google_app_engine) {
-	$mysqli = new mysqli(null, $user, $password, $database, null, '/cloudsql/stone-timing-557:test');
+	$mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {
 	$mysqli = new mysqli('p:'.$server, $user, $password, $database);
 }
