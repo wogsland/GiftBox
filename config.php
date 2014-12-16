@@ -3,6 +3,7 @@ $google_app_engine = false;
 $server = $_SERVER['SERVER_NAME'];
 $prefix = "http://";
 $use_https = false;
+$socket = null;
 if (isset($_SERVER['HTTPS'])) {
 	if ($_SERVER['HTTPS'] === "on") {
 		$prefix = "https://";
@@ -14,8 +15,10 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
 	$google_app_engine = true;
 	if ($_SERVER["APPLICATION_ID"] === "s~stone-timing-557") {
 		$file_storage_path = 'gs://tokenstorage/';
+		$socket = '/cloudsql/stone-timing-557:test';
 	} elseif ($_SERVER["APPLICATION_ID"] === "t-sunlight-757") {
 		$file_storage_path = 'gs://tokenstorage-staging/';
+		$socket = '/cloudsql/t-sunlight-757:test';
 	}
 } else {
     $app_root = "/giftbox/";
