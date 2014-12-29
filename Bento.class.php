@@ -1,4 +1,6 @@
 <?php
+include_once 'Mobile_Detect.php';
+include_once 'config.php';
 use google\appengine\api\cloud_storage\CloudStorageTools;
 if ($google_app_engine) {
 	include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
@@ -54,7 +56,8 @@ class Bento {
 	
 	public function render() {
 		include 'config.php';
-		
+		$detect = new Mobile_Detect();
+
 		echo '<div class="bento">';
 		
 		if (is_spotify($this->content_uri)) {
@@ -94,11 +97,15 @@ class Bento {
 		if ($this->content_uri) {
 			if (is_youtube($this->content_uri)) {
 				$video_id = youtube_id($this->content_uri);
+				echo $detect->isMobile() ? '<div class="video-wrapper">' : "";
 				echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
+				echo $detect->isMobile() ? "</div>" : "";
 			} elseif (is_soundcloud($this->content_uri)) {
-				echo "<iframe width=\"100%\" height=\"".$this->css_height."\" src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
+				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {
-				echo "<iframe width=\"".$this->css_width."\" height=\"".$this->css_height."\" src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
+				echo $detect->isMobile() ? '<div class="spotify-wrapper">' : "";
+				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
+				echo $detect->isMobile() ? "</div>" : "";
 			}
 		}
 		
