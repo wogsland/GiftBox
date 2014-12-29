@@ -676,12 +676,14 @@ $(function() {
 
 function handleHorizontalDrag(target, movement) {
 	var index;
+	var width;
 	var newWidth;
 	var newLeft;
 	if (movement !== 0) {
 		for (index = 0; index < target.leftDependents.length; ++index) {
 			var leftDependent = target.leftDependents[index];
-			newWidth = parseFloat(getComputedStyle(leftDependent).width, 10) + movement;
+			width = parseFloat(getComputedStyle(leftDependent).width);
+			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
 			
 			var bentos = leftDependent.getElementsByClassName("bento");
@@ -692,7 +694,8 @@ function handleHorizontalDrag(target, movement) {
 
 		for (index = 0; index < target.rightDependents.length; ++index) {
 			var rightDependent = target.rightDependents[index];
-			newWidth = parseFloat(getComputedStyle(rightDependent).width, 10) - movement;
+			width = parseFloat(getComputedStyle(rightDependent).width);
+			newWidth = width - movement;
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
 			rightDependent.style.width = newWidth + "px";
@@ -763,7 +766,7 @@ $(function() {
 		drag: function(event, ui) {
 			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
 			ui.originalPosition.left = ui.position.left;
-		}
+		},
 	});
 	
 	$("#divider-1-2").draggable({
@@ -995,12 +998,11 @@ function save() {
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
-	var templateStyle = getComputedStyle(template);
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
-		css_width: $("#"+cssId).innerWidth(),
-		css_height: $("#"+cssId).innerHeight(),
+		css_width: template.clientWidth,
+		css_height: template.clientHeight,
 		name: giftboxName,
 		letter_text: letterText,
 		wrapper_type: wrapperType,
@@ -1010,11 +1012,6 @@ function save() {
 		dividers: new Array(),
 		columns: new Array()
 	};
-	
-	
-	
-	
-	
 	
 	$("#"+template.id+" div.bento").each(function(i) { 
 		var bento = new Object();
