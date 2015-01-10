@@ -158,15 +158,15 @@ class Token {
 	
 	public function render() {
 		$detect = new Mobile_Detect();
-		if (!$detect->isMobile()) {
+//		if (!$detect->isMobile()) {
 			echo '<div class="template" id="preview">'.PHP_EOL;
 			include "./templates/$this->css_id.php";
 			echo "</div>";
-		} else {
-			foreach ($this->bentos as $bento) {
-				$bento->render();
-			}
-		}
+//		} else {
+//			foreach ($this->bentos as $bento) {
+//				$bento->render();
+//			}
+//		}
 	}
 
 }
