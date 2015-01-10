@@ -593,12 +593,6 @@ p {
 	line-height: 20px;
 }
 
-.audio-player {
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-}
-
 #token-list {
 	width: 100%;
 	height: 100%;

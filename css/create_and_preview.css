@@ -39,3 +39,9 @@
 	top: 0px;
 	height: 100%;
 }
+
+.audio-player {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
