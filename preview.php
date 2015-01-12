@@ -28,7 +28,7 @@
 	echo "</div>";
 	echo '<div class="back">';
 	echo $token->letter_text ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
-	echo '<p id="letter-text">'.str_replace('n', '<br />', $token->letter_text).'</p>';
+	echo '<p id="letter-text">'.nl2br($token->letter_text).'</p>';
 	echo "</div>";
 	echo "</div>";
 	?>
