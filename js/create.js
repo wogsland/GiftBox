@@ -683,6 +683,7 @@ function handleHorizontalDrag(target, movement) {
 		for (index = 0; index < target.leftDependents.length; ++index) {
 			var leftDependent = target.leftDependents[index];
 			width = parseFloat(getComputedStyle(leftDependent).width);
+console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
 			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
 			
@@ -695,6 +696,7 @@ function handleHorizontalDrag(target, movement) {
 		for (index = 0; index < target.rightDependents.length; ++index) {
 			var rightDependent = target.rightDependents[index];
 			width = parseFloat(getComputedStyle(rightDependent).width);
+console.log("movement: "+movement+", right: "+rightDependent.id+", width: "+width);
 			newWidth = width - movement;
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
@@ -1227,26 +1229,35 @@ function loadSaved() {
 			
 			// Populate the top template properties
 			window.top_template.giftboxId = token.id;
+			window.top_template.giftboxName = token.name;
 			window.top_template.appURL = token.app_url;
 			window.top_template.letterText = token.letter_text;
 			window.top_template.wrapperType = token.wrapper_type;
 			window.top_template.unloadCount = token.unload_count;
 			setPreviewLink(window.top_template);
+			
+			// Bento properties
 			var index;
 			var bento;
 			for (index = 0; index < token.bentos.length; ++index) {
 				bento = document.getElementById(token.bentos[index].css_id);
-				bento.style.width = token.bentos[index].css_width;
-				bento.style.height = token.bentos[index].css_height;
-				bento.style.top = token.bentos[index].css_top;
-				bento.style.left = token.bentos[index].css_left;
+				bento.style.width = "100%";
+				bento.style.height = "100%";
+				bento.style.top = "0px";
+				bento.style.left = "0px";
 				clearBento(bento);
 				loadBento(bento, token.bentos[index]);
 			}
+			
+			// Divider properties
 			var divider;
 			for (index = 0; index < token.dividers.length; ++index) {
 				divider = document.getElementById(token.dividers[index].css_id);
-				divider.style.width = token.dividers[index].css_width;
+				if (token.dividers[index].parent_css_id.indexOf("column") > -1) {
+					divider.style.width = "100%";
+				} else {
+					divider.style.width = token.dividers[index].css_width;
+				}
 				divider.style.height = token.dividers[index].css_height;
 				divider.style.top = token.dividers[index].css_top;
 				divider.style.left = token.dividers[index].css_left;
