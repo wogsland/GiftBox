@@ -683,7 +683,7 @@ function handleHorizontalDrag(target, movement) {
 		for (index = 0; index < target.leftDependents.length; ++index) {
 			var leftDependent = target.leftDependents[index];
 			width = parseFloat(getComputedStyle(leftDependent).width);
-console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
+// console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
 			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
 			
@@ -696,7 +696,7 @@ console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width)
 		for (index = 0; index < target.rightDependents.length; ++index) {
 			var rightDependent = target.rightDependents[index];
 			width = parseFloat(getComputedStyle(rightDependent).width);
-console.log("movement: "+movement+", right: "+rightDependent.id+", width: "+width);
+// console.log("movement: "+movement+", right: "+rightDependent.id+", width: "+width);
 			newWidth = width - movement;
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
