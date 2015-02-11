@@ -229,7 +229,7 @@
 			</div>
 			
 			<!-- SERVICE HEADING -->
-			<h3>Link</h3>
+			<h3>Links</h3>
 			
 			<!-- SERVICE DESCRIPTION -->
 			<p>
@@ -426,9 +426,9 @@
 			<div class="video-container">
 				
         <div class="video">
-	        <iframe src="//player.vimeo.com/video/57175742?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=5ebb47" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				</div>
-				
+			<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+		</div>
+
 			</div>
 		</div>
 		
