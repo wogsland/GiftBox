@@ -5,7 +5,6 @@
 2. [Branching Strategy](#branching)
 3. [Deployment Information](#deployment)
 
-
 View at stone-timing-557.appspot.com
 
 ## <a name="general-info"></a>General Info
@@ -198,4 +197,3 @@ When deploying using the following procedures, *be absolutely sure* that you are
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
 
 # GMP was here
-
