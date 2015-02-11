@@ -6,20 +6,40 @@ threadsafe: yes
 handlers:
 - url: /css
   static_dir: css
+
 - url: /js
   static_dir: js
+
 - url: /images
   static_dir: images
+
 - url: /models
   static_dir: models
+
 - url: /assets/images
   static_dir: assets/images
+
+- url: /assets/img
+  static_dir: assets/img
+
 - url: /assets/fonts
   static_dir: assets/fonts
+
+- url: /fonts
+  static_dir: fonts
+
+- url: /assets/app-icons
+  static_dir: assets/app-icons
+
+- url: /assets/elegant-icons
+  static_dir: assets/elegant-icons
+
 - url: /business-solutions
   static_dir: business-solutions
+
 - url: /about-us
   static_dir: about-us
+
 - url: /
   script: index.php
 
