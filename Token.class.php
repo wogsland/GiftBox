@@ -1,4 +1,5 @@
 <?php
+include_once 'Mobile_Detect.php';
 include_once 'util.php';
 include 'Bento.class.php';
 include 'Divider.class.php';
@@ -153,6 +154,19 @@ class Token {
 		$this->saveBentos();
 		$this->saveDividers();
 		$this->saveColumns();
+	}
+	
+	public function render() {
+		$detect = new Mobile_Detect();
+		if (!$detect->isMobile()) {
+			echo '<div class="template" id="preview">'.PHP_EOL;
+			include "./templates/$this->css_id.php";
+			echo "</div>";
+		} else {
+			foreach ($this->bentos as $bento) {
+				$bento->render();
+			}
+		}
 	}
 
 }
