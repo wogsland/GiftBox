@@ -164,7 +164,7 @@
 					
 					<!-- WELCOM MESSAGE -->
 					<h1 class="intro">Give a Token of Appreciation</h1>
-					<h5>Send your next gift with GiveToken!</h5>
+					<h5>Send your next message with GiveToken</h5>
 					
 					<!-- BUTTON -->
 					<div class="buttons" id="login-button">
@@ -205,12 +205,12 @@
 	<div class="section-header wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
 		
 		<!-- SECTION TITLE -->
-		<h2 class="white-text">Amazing Features!</h2>
+		<h2 class="white-text">Amazing Features</h2>
 		
 		<div class="colored-line">
 		</div>
 		<div class="section-description">
-			Go ahead, we got you covered. Our team is working hard to roll out more features everyday. Hover below to learn about what we current offer.
+			Go ahead, we got you covered. See how our features can help you create a token you’ll love to share.
 		</div>
 		<div class="colored-line">
 		</div>
@@ -225,15 +225,15 @@
 			
 			<!-- SERVICE ICON -->
 			<div class="service-icon">
-				<i class="icon_gift_alt"></i>
+				<i class="icon_link"></i>
 			</div>
 			
 			<!-- SERVICE HEADING -->
-			<h3>More Than Just A Gift</h3>
+			<h3>Links</h3>
 			
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 Customize any digital gift with personal stories. Just like how you would decorate a real gift.
+				 Token can take you anywhere. We’ll show you how to embed links wherever you need them.
 			</p>
 			
 		</div>
@@ -244,15 +244,15 @@
 			
 			<!-- SERVICE ICON -->
 			<div class="service-icon">
-				<i class="icon_search"></i>
+				<i class="icon_music"></i>
 			</div>
 			
 			<!-- SERVICE HEADING -->
-			<h3>Search Our Library</h3>
+			<h3>Music</h3>
 			
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 Find the right band, gift, card, or ebook in our huge database.
+				 Load up your token with just the right soundtrack.
 			</p>
 			
 		</div>
@@ -287,15 +287,15 @@
 			
 			<!-- SERVICE ICON -->
 			<div class="service-icon">
-				<i class="icon_currency"></i>
+				<i class="icon_film"></i>
 			</div>
 			
 			<!-- SERVICE HEADING -->
-			<h3>Great Value</h3>
+			<h3>Video</h3>
 			
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 Our service is completely free. Only pay for the gift itself.
+				 Sometimes they just have to see it. Token has plenty of space for your “you­-just-­had-­to-be­-there” moments.
 			</p>
 			
 		</div>
@@ -329,11 +329,74 @@
 			</div>
 			
 			<!-- SERVICE HEADING -->
-			<h3>Content</h3>
+			<h3>Images</h3>
 			
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 Fill the GiveToken with singles, albums, ebooks, giftcards, and more!
+				 We give you space to cover your token with photos of any shape and size.
+			</p>
+			
+		</div>
+		<!-- /END SINGLE SERVICE -->
+		
+	</div>
+	<!-- /END ROW -->
+
+	<!--Third Row -->
+	<div class="row">
+		
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+			
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_grid-2x2"></i>
+			</div>
+			
+			<!-- SERVICE HEADING -->
+			<h3>Collage</h3>
+			
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				 GiveToken lets you package content into a dynamic collage, to add that personal touch.
+			</p>
+			
+		</div>
+		<!-- /END SINGLE SERVICE -->
+		
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+			
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_quotations_alt"></i>
+			</div>
+			
+			<!-- SERVICE HEADING -->
+			<h3>Text & Quotes</h3>
+			
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				Never underestimate the power of words. Personalize your token with text of your own.
+			</p>
+			
+		</div>
+		<!-- /END SINGLE SERVICE -->
+		
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+			
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_cloud-upload"></i>
+			</div>
+			
+			<!-- SERVICE HEADING -->
+			<h3>Share on any Platform</h3>
+			
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				Once your token looks just the way you want it, we make it simple to share.
 			</p>
 			
 		</div>
@@ -358,14 +421,14 @@
 	
 	<div class="row">
 		
-		<!-- PHONES IMAGE -->
+		<!-- PHONES IMAGE >-->
 		<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
 			<div class="video-container">
 				
         <div class="video">
-	        <iframe src="//player.vimeo.com/video/57175742?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;color=5ebb47" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-				</div>
-				
+			<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+		</div>
+
 			</div>
 		</div>
 		
@@ -379,9 +442,15 @@
 			</div>
 			
 			<p class="white-text">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/><br/>
-				Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+				GiveToken is your blank canvas to create a personalized virtual postcard.
 			</p>
+			<ul class="white-text">
+ 				<li>Customize your token with a unique mix of videos, music, photos and more</li>
+ 				<li>Click and drag media from your computer or from anywhere on the web</li>
+ 				<li>Share your token on any platform with just a simple link</li>
+ 				<li>Make it personal and send your token to a specific person or group</li>
+			</ul>  
+
 			
 			
 		</div>
@@ -413,14 +482,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated deep-grey-bg" data-wow-offset="10" data-wow-duration="1.5s">
 					
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">More than just a gift</h2>
+					<h2 class="white-text">GiveToken is connecting</h2>
 					
 					<div class="white-line-left">
 					</div>
 					
 					<p class="white-text">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/><br/>
-						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+					You know those “you just had to be there” moments? Your fans and friends know them too. With our help, you can combine the best clips and sounds from the night in one personalized token to share with fans. The best part? Your fans can share the same token with anyone who missed the epic show. We help you break through that barrier and build more personal relationships with the people who truly matter.
 					</p>
 					
 					
@@ -447,14 +515,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" style="margin-top: 15%;" data-wow-offset="10" data-wow-duration="1.5s">
 					
 					<!-- SECTION TITLE -->
-					<h2 class="dark-text">More than just a gift</h2>
+					<h2 class="dark-text">GiveToken is sharing</h2>
 					
 					<div class="colored-line-left">
 					</div>
 					
 					<p class="dark-text">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/><br/>
-						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+						We’ll help you design a token for any event, like a company service day, so you can look back at the day’s highlights. Share the token with everyone who was there, and they can show their own friends and family what they missed.
 					</p>
 					
 					
@@ -489,14 +556,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 					
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">More than just a gift</h2>
+					<h2 class="white-text">GiveToken is short and sweet</h2>
 					
 					<div class="white-line-left">
 					</div>
 					
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br/><br/>
-						Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+						We all know the best way to share a lot of information in the simplest way is through images. Tokens combine both visuals and sounds to create a compact, shareable gift for the most impact.
 					</p>
 					
 					
@@ -527,7 +593,7 @@
 		<div class="colored-line">
 		</div>
 		<div class="section-description">
-			Lorem ipsum dolor kadr
+			Friends of GiveToken
 		</div>
 		<div class="colored-line">
 		</div>
