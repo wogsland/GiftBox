@@ -32,23 +32,9 @@
 </head>
 <body id="create-body">
 	<div id="content-wrapper">
-		<div class="header-wrapper" id="create-header-wrapper">
-			<header>
-				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
-				</h1>
-				<nav id="create-top-nav">
-					<ul>
-						<li>
-							<a href="<?php echo $app_root ?>">Home</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-	
 		<section id="create-section">
 			<div id="palette">
+				
 				<div class="palette-box">
 					<div class="palette-box-header">
 						<span class="palette-box-header-text">Pick A Template</span>
@@ -61,21 +47,6 @@
 					</div>
 					<div class="template-thumbnail">
 						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
-					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Border Settings</span>
-					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Background Settings</span>
-					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Wrapper</span>
 					</div>
 				</div>
 			</div>
