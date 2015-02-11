@@ -1,5 +1,4 @@
 <?php
-include_once 'Mobile_Detect.php';
 include_once 'config.php';
 use google\appengine\api\cloud_storage\CloudStorageTools;
 if ($google_app_engine) {
@@ -56,7 +55,6 @@ class Bento {
 	
 	public function render() {
 		include 'config.php';
-		$detect = new Mobile_Detect();
 
 		echo '<div class="bento">';
 		
@@ -69,11 +67,15 @@ class Bento {
 		if ($this->image_file_name) {
 			$file_name = $this->css_id."-cropped_".$this->image_file_name;
 			if ($google_app_engine) {
-				$path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
+				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
 			} else {
-				$path = $file_storage_path.$file_name;
+				$image_path = $file_storage_path.$file_name;
 			}
-			echo '<img src="'.$path.'">'.PHP_EOL;
+			if ($this->download_file_name && (strpos($this->download_mime_type, 'audio') === 0)) {
+				// Show the image as a poster in the audio player
+			} else {
+				echo '<img src="'.$image_path.'">'.PHP_EOL;
+			}
 		}
 		if ($this->download_file_name) {
 			$download_file_names[] = $this->download_file_name;
@@ -84,12 +86,13 @@ class Bento {
 			}
 			$download_paths[] = $path;
 			if (strpos($this->download_mime_type, 'video') === 0) {
-				echo "<video id=\"".$this->download_file_name."\" class=\"video-js vjs-default-skin video-player\" data-setup='{\"controls\": true, \"autoplay\": false, \"preload\": \"auto\"}' width=\"".str_replace("px", null, $this->css_width)."\"  height=\"".str_replace("px", null, $this->css_height)."\" controls>".PHP_EOL;
+				echo '<video id="'.$this->download_file_name.'" class="video-js vjs-default-skin video-player" controls preload="auto" width="auto" height="auto" data-setup="{}">'.PHP_EOL;
 				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
 				echo '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';									
 				echo '</video>'.PHP_EOL;
 			} else if (strpos($this->download_mime_type, 'audio') === 0) {
-				echo '<audio class="audio-player" src="'.$path.'" width="'.$this->css_width.'" controls>';
+				echo '<audio class="audio-player video-js vjs-default-skin" controls preload="auto" src="'.$path.'" width="auto" height="auto" poster="'.$image_path.'" data-setup="{}">';
+				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
 			} else {
 				echo '<img class="download-icon" src="images/download.jpg">';
 			}
@@ -97,15 +100,11 @@ class Bento {
 		if ($this->content_uri) {
 			if (is_youtube($this->content_uri)) {
 				$video_id = youtube_id($this->content_uri);
-				echo $detect->isMobile() ? '<div class="video-wrapper">' : "";
 				echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
-				echo $detect->isMobile() ? "</div>" : "";
 			} elseif (is_soundcloud($this->content_uri)) {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {
-				echo $detect->isMobile() ? '<div class="spotify-wrapper">' : "";
 				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
-				echo $detect->isMobile() ? "</div>" : "";
 			}
 		}
 		
