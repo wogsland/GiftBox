@@ -1183,7 +1183,22 @@ font-weight: 500;
     padding:136px 0 0 0;
 }
 
+/* There are alot of duplications in the code below, need to refactor later*/
+
 .pricingChart .pricingLevel {
+    padding: 21px 12px;
+    font-size: 18px;
+    cursor: pointer;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    width:24%;
+    margin-left:1%;
+    background:#f7f7f7;
+    float:left;
+}
+
+.pricingChart .pricingLevel2 {
     padding: 21px 12px;
     font-size: 18px;
     cursor: pointer;
@@ -1198,9 +1213,21 @@ font-weight: 500;
 
 .pricingChart .pricingLevel:hover{background: rgb(98,185,77); color: white;}
 
+.pricingChart .pricingLevel2:hover{background: rgba(171,223,236, 1); color: white;}
+
 .pricingChart .pricingLevel:first-child{margin-left:0.5%;}
 
+.pricingChart .pricingLevel2:first-child{margin-left:0.5%;}
+
 .pricingChart .pricingLevel .pricingImage{
+    background:url('../assets/img/pricingSprite.png') no-repeat 6px top;
+    width:85px;
+    height:75px;
+    margin:0 auto;
+    margin-bottom:12px;
+}
+
+.pricingChart .pricingLevel2 .pricingImage{
     background:url('../assets/img/pricingSprite.png') no-repeat 6px top;
     width:85px;
     height:75px;
@@ -1213,18 +1240,41 @@ font-weight: 500;
     color: white;
 }
 
+.pricingChart .pricingLevelOn2, .pricingChart .pricingLevelOn2:hover {
+    background-color: #26a34e;
+    color: white;
+}
+
 .pricingChart .pricingLevelOn .pricingImage{
+    background-position: 6px -159px;
+}
+
+.pricingChart .pricingLevelOn2 .pricingImage{
     background-position: 6px -159px;
 }
 
 .pricingChart .pricingLevel#pricing2500 .pricingImage{ background-position:-190px top; }
 .pricingChart .pricingLevelOn#pricing2500 .pricingImage{ background-position:-190px -159px; }
 
+.pricingChart .pricingLevel2#pricingU2 .pricingImage{ background-position:-190px top; }
+.pricingChart .pricingLevelOn2#pricingU2 .pricingImage{ background-position:-190px -159px; }
+
+
+
 .pricingChart .pricingLevel#pricing5000 .pricingImage{ background-position:-384px top; }
 .pricingChart .pricingLevelOn#pricing5000 .pricingImage{ background-position:-384px -159px; }
 
+.pricingChart .pricingLevel2#pricingU3 .pricingImage{ background-position:-384px top; }
+.pricingChart .pricingLevelOn2#pricingU3 .pricingImage{ background-position:-384px -159px; }
+
+
+
 .pricingChart .pricingLevel#pricing10000 .pricingImage{ background-position:-580px top; }
 .pricingChart .pricingLevelOn#pricing10000 .pricingImage{ background-position:-580px -159px; }
+
+.pricingChart .pricingLevel2#pricingU4 .pricingImage{ background-position:-580px top; }
+.pricingChart .pricingLevelOn2#pricingU4 .pricingImage{ background-position:-580px -159px; }
+
 
 .pricingChart .pricingDolla {
     font-size: 22px;
@@ -1364,8 +1414,19 @@ font-weight: 500;
     cursor: pointer
 }
 
+.pricingLevel2 {
+    padding: 10px 0;
+    font-size: 18px;
+    cursor: pointer
+}
+
 .pricingLevelOn {
     background-color: #f3631f;
+    color: white
+}
+
+.pricingLevelOn2 {
+    background-color: #abdfec;
     color: white
 }
 
