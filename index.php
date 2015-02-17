@@ -1,7 +1,7 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
-	session_start();
+	zebra_session_start();
 ?>
 <!doctype html>
 <html lang="en">

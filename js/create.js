@@ -1113,7 +1113,7 @@ function save() {
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
-			openMessage("Save", "Save failed with the following error:  "+result.message);
+			openMessage("Error", "Save failed with the following error:  "+result.message);
 		} else {
 			openMessage("Save", "Save failed!");
 		}
@@ -1347,4 +1347,25 @@ function createCroppedImage (bento, image, container) {
 	var croppedImage = new Image();
 	croppedImage.src = croppedCanvas.toDataURL();
 	return croppedImage;
+}
+
+function selectTab(tab) {
+	alert(tab.id);
+	tab.style.backgroundPosition = "0px -150";
+}
+
+function sidebarTemplates(tab) {
+	selectTab(tab);
+}
+
+function sidebarText(tab) {
+	selectTab(tab);
+}
+
+function sidebarOpener(tab) {
+	selectTab(tab);
+}
+
+function sidebarSend(tab) {
+	selectTab(tab);
 }

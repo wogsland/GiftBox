@@ -4,7 +4,7 @@ include_once 'util.php';
 include_once 'password.php';
 include_once 'eventLogger.class.php';
 
-session_start();
+zebra_session_start();
 
 $user = null;
 $event_type = null;

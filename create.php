@@ -34,21 +34,45 @@
 	<div id="content-wrapper">
 		<section id="create-section">
 			<div id="palette">
-				
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Template</span>
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('template-1', 'template-2', 'template-3')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('template-2', 'template-3', 'template-1')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
-					</div>
+				<div id="palette-top">
 				</div>
+				<a href="#"><img id="give-token-palette" src="images/give-token.jpg" width="220"></a>
+				<a class="sidebar-tabs" id="templates-tab" href="javascript:void(0)" onclick="sidebarTemplates(this)"></a>
+				<a class="sidebar-tabs" id="text-tab" href="javascript:void(0)" onclick="sidebarText(this)"></a>
+				<a class="sidebar-tabs" id="opener-tab" href="javascript:void(0)" onclick="sidebarOpener(this)"></a>
+				<a class="sidebar-tabs" id="send-tab" href="javascript:void(0)" onclick="sidebarSend(this)"></a>
+	
+				
+				<div class="sidebar-tab-container" id="sidebar-template-container">
+					<span class="template-tab-text">PICK A TEMPLATE</span>
+					<a class="template-number" href="javascript:void(0)">ALL</a>
+					<a class="template-number" href="javascript:void(0)">2</a>
+					<a class="template-number" href="javascript:void(0)">3</a>
+					<a class="template-number" href="javascript:void(0)">4</a>
+					<a class="template-number" href="javascript:void(0)">5</a>
+					<a class="template-number" href="javascript:void(0)">6</a>
+					<a class="template-number" href="javascript:void(0)">7</a>
+					<a class="template-number" href="javascript:void(0)">8</a>
+					<a class="template-number" href="javascript:void(0)">9</a>
+					
+					<div class="template-thumbnail-container">
+						<div class="template-thumbnail">
+							<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('template-1', 'template-2', 'template-3')">
+						</div>
+						<div class="template-thumbnail">
+							<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('template-2', 'template-3', 'template-1')">
+						</div>
+						<div class="template-thumbnail">
+							<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
+						</div>
+					</div>
+					
+					
+					
+					
+				</div>
+
+			
 			</div>
 
 			<div id="uploads">
