@@ -135,7 +135,7 @@ include_once 'config.php';
               
               </div>    
 	
-		          <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+		          <div class="select-btn solid-blue"><button type="button" class="btn dark-grey" onclick="basicView()">Select <i class="fa fa-chevron-right"></i></button></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -168,7 +168,7 @@ include_once 'config.php';
               
               </div>    
 	
-		          <div class="select-btn solid-lt-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+		          <div class="select-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="basicView()">Select <i class="fa fa-chevron-right"></i></button></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -200,7 +200,7 @@ include_once 'config.php';
                   <h2>Premium</h2>
                 </div>    
 	
-		            <div class="select-btn solid-lt-green"><button type="button" class="btn teal">Select <i class="fa fa-chevron-right"></i></button></div>
+		            <div class="select-btn solid-lt-green"><button type="button" class="btn teal" onclick="premiumView()">Select <i class="fa fa-chevron-right"></i></button></div>
 
                 <ul class="item-list">
 									<li>8 HR Response Support</li>
@@ -230,7 +230,7 @@ include_once 'config.php';
                   <h2>Enterprise</h2>
                 </div>  
 	
-		            <div class="select-btn solid-green"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+		            <div class="select-btn solid-green"><button type="button" class="btn dark-grey" onclick="entView()">Select <i class="fa fa-chevron-right"></i></button></div>
 		            
                 <ul class="item-list">
 									<li>24/7 Response Support</li>
@@ -261,7 +261,7 @@ include_once 'config.php';
 </section>
 
 <!-- Section for choosing Trackable Viewers-->
-<section class="pricingChart" id="pricingChart">
+<section class="pricingChart not" id="pricingChart">
 	<div class="container">
 		<div class="verticleHeight40"></div>
 		<h1 id="attached-narrow">Pricing Step Two -- Number of Trackable Viewers</h1>
@@ -293,7 +293,7 @@ include_once 'config.php';
 </section>
 
 <!-- Section for choosing Users-->
-<section class="pricingChart" id="pricingChart2">
+<section class="pricingChart not" id="pricingChart2">
 	<div class="container">
 		<div class="verticleHeight40"></div>
 		<h1 id="attached-narrow">Pricing Step Three -- How many Enterprise Users</h1>
@@ -412,6 +412,20 @@ include_once 'config.php';
         tab.addClass('pricingLevelOn2');
     	}
 
+    	function basicView() {
+        	$('#pricingChart').removeClass('not').addClass('not');
+        	$('#pricingChart2').removeClass('not').addClass('not');
+    	}
+
+    	function premiumView() {
+        	$('#pricingChart').removeClass('not');
+        	$('#pricingChart2').removeClass('not').addClass('not');
+    	}
+
+    	function entView() {
+        	$('#pricingChart').removeClass('not');
+        	$('#pricingChart2').removeClass('not');
+    	}
 	
 </script>
 
