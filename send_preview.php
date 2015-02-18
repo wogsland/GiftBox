@@ -3,7 +3,7 @@ include_once 'eventLogger.class.php';
 include_once 'config.php';
 include_once 'mail.php';
 
-session_start();
+_session_start();
 
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];

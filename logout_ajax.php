@@ -1,7 +1,7 @@
 <?php
 include_once 'config.php';
 include_once ('eventLogger.class.php');
-session_start();
+_session_start();
 
 $response['login_type'] = $_SESSION['login_type'];
 $response['app_root'] = $app_root;
