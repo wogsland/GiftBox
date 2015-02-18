@@ -35,7 +35,7 @@ include_once 'config.php';
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
 <!-- WEB FONTS -->
-<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
 
 <!-- CAROUSEL AND LIGHTBOX -->
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -63,7 +63,7 @@ include_once 'config.php';
 <![endif]-->
 
 <!-- JQUERY -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </head>
 
@@ -128,14 +128,15 @@ include_once 'config.php';
         <div class="row">
           <div class="col-sm-3 col-md-3">
            
-           <div class="plan first basic">
+           <div class="plan first basic" data-plan="basic">
 
               <div class="head">
                 <h2>Free</h2>
               
               </div>    
-	
-		          <div class="select-btn solid-blue"><button type="button" class="btn dark-grey" onclick="basicView()">Select <i class="fa fa-chevron-right"></i></button></div>
+
+              <!-- button was here -->
+              <div class="select-btn solid-blue"></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -154,6 +155,8 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
+              <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+
            </div>
              
             
@@ -161,14 +164,14 @@ include_once 'config.php';
 
 
           <div class="col-sm-3 col-md-3 ">
-              <div class="plan standard">
+              <div class="plan standard" data-plan="standard">
 
               <div class="head">
                 <h2>Basic</h2>
               
               </div>    
 	
-		          <div class="select-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="basicView()">Select <i class="fa fa-chevron-right"></i></button></div>
+		          <div class="select-btn solid-lt-blue"></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -187,6 +190,8 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
+              <div class="select-btn solid-lt-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+
            </div>
 
           </div>
@@ -194,13 +199,13 @@ include_once 'config.php';
 
           <div class="col-sm-3 col-md-3 ">
               
-              <div class="plan recommended">
+              <div class="plan recommended" data-plan="premium">
 								<div class="popular-badge">MOST POPULAR</div>
                 <div class="head">
                   <h2>Premium</h2>
                 </div>    
 	
-		            <div class="select-btn solid-lt-green"><button type="button" class="btn teal" onclick="premiumView()">Select <i class="fa fa-chevron-right"></i></button></div>
+		            <div class="select-btn solid-lt-green"></div>
 
                 <ul class="item-list">
 									<li>8 HR Response Support</li>
@@ -216,21 +221,24 @@ include_once 'config.php';
 
                 <div class="price">
                   <h3><span class="symbol">$</span>49.99</h3>
-                  <h4>per month</h4>
+                  <h4>per month + step 2</h4>
                 </div>
+
+                <div class="select-btn solid-lt-green"><button type="button" class="btn teal">Select <i class="fa fa-chevron-right"></i></button></div>
+
            </div>
 
           </div>
 
           <div class="col-sm-3 col-md-3 ">
               
-              <div class="plan last enterprise">
+              <div class="plan last enterprise" data-plan="enterprise">
 
                 <div class="head">
                   <h2>Enterprise</h2>
                 </div>  
 	
-		            <div class="select-btn solid-green"><button type="button" class="btn dark-grey" onclick="entView()">Select <i class="fa fa-chevron-right"></i></button></div>
+		            <div class="select-btn solid-green"></div>
 		            
                 <ul class="item-list">
 									<li>24/7 Response Support</li>
@@ -246,9 +254,10 @@ include_once 'config.php';
 
                 <div class="price">
                   <h3><span class="symbol">$</span>120</h3>
-                  <h4>per user per month</h4>
+                  <h4>per user per month + step 2 + step 3</h4>
                 </div>
 
+                <div class="select-btn solid-green"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
                 
            </div>
 
@@ -267,22 +276,22 @@ include_once 'config.php';
 		<h1 id="attached-narrow">Pricing Step Two -- Number of Trackable Viewers</h1>
 		<div class="row pricingChart" id="getStarted">
       		<div class="span12 text-center clearfix">
-          		<div class="pricingLevel pricingLevelOn" id="pricing500" onclick="pricingSwitchLevel(500)">
+          		<div class="pricingLevel " id="pricing500" data-viewer="500">
               		<div class="pricingImage"></div>
               		1-500
           		</div>
 
-          		<div class="pricingLevel pricing2500" id="pricing2500" onclick="pricingSwitchLevel(2500)">
+          		<div class="pricingLevel pricing2500" id="pricing2500" data-viewer="2500">
               		<div class="pricingImage"></div>
               		501-<span>2,500</span>
           		</div>
 
-          		<div class="pricingLevel pricing5000" id="pricing5000" onclick="pricingSwitchLevel(5000)">
+          		<div class="pricingLevel pricing5000" id="pricing5000" data-viewer="5000">
               		<div class="pricingImage"></div>
               		2,501-<span>5,000</span>
           		</div>
 
-          		<div class="pricingLevel pricing10000" id="pricing10000" onclick="pricingSwitchLevel(10000)">
+          		<div class="pricingLevel pricing10000" id="pricing10000" data-viewer="10000">
               		<div class="pricingImage"></div>
               		5,001-<span>10,000</span>
           		</div>
@@ -299,22 +308,22 @@ include_once 'config.php';
 		<h1 id="attached-narrow">Pricing Step Three -- How many Enterprise Users</h1>
 		<div class="row pricingChart" id="getStarted2">
       		<div class="span12 text-center clearfix">
-          		<div class="pricingLevel2 pricingLevelOn2" id="pricingU1" onclick="pricingSwitchLevel2(1)">
+          		<div class="pricingLevel2 pricingLevelOn2" id="pricingU1" data-user="1">
               		<div class="pricingImage"></div>
               		1-10
           		</div>
 
-          		<div class="pricingLevel2 pricingU2" id="pricingU2" onclick="pricingSwitchLevel2(2)">
+          		<div class="pricingLevel2 pricingU2" id="pricingU2" data-user="2">
               		<div class="pricingImage"></div>
               		11-<span>50</span>
           		</div>
 
-          		<div class="pricingLevel2 pricingU3" id="pricingU3" onclick="pricingSwitchLevel2(3)">
+          		<div class="pricingLevel2 pricingU3" id="pricingU3" data-user="3">
               		<div class="pricingImage"></div>
               		51-<span>180</span>
           		</div>
 
-          		<div class="pricingLevel2 pricingU4" id="pricingU4" onclick="pricingSwitchLevel2(4)">
+          		<div class="pricingLevel2 pricingU4" id="pricingU4" data-user="4">
               		<div class="pricingImage"></div>
               		180+
           		</div>
@@ -332,6 +341,7 @@ include_once 'config.php';
 	          	<div class="row">
 	              	<div class="span10 offset1 text-center">
 	                  	<div class="pricingAmounts">
+                        <h1 id="total-ref">Total:</h1>
 	                      	<span class="pricingDolla">$</span><span class="pricingLargeAmount pricingAnnualDiscountedPrice">25</span><span class="pricingPerMonthLabel">/month</span>
 	                  	</div>
 	              	</div>
@@ -389,49 +399,151 @@ include_once 'config.php';
      SCRIPTS 
 ============================== -->
 <script>
-		function add(text){
-	    var TheTextBox = document.getElementById("Mytextbox");
-	    TheTextBox.value = TheTextBox.value + text;
-		}
+// Immediately Invoked Function Expression (IIFE)
+// Used to be referred to as a self executing function
+// Avoids creating global variables and functions which can interfere with other scripts
+(function() {
+      
+  var plans = {
+    basic: {
+      pricingChart: false,
+      pricingChart2: false,
+      basePrice: 0
+    },
+    standard: {
+      pricingChart: false,
+      pricingChart2: false,
+      basePrice: 2.99
+    },
+    premium: {
+      pricingChart: true,
+      pricingChart2: false,
+      basePrice: 49.99
+    },
+    enterprise: {
+      pricingChart: true,
+      pricingChart2: true,
+      basePrice: 120
+    }
+  };
+      
+  var viewerLevels = {
+    500: 10.99,
+    2500: 20.99,
+    5000: 30.99,
+    10000: 40.99
+  };
+  
+  var userLevels = {
+    1: 100.59,
+    2: 200.59,
+    3: 300.59,
+    4: 400.59
+  };
+  
 
-		function pricingSwitchLevel(size) {
+    var selectedPlan = "basic";
+    var viewerLevel = null;
+    var userLevel = null;
 
-        selected_account_size = size;
 
+
+      // Find all elements with class plan, then find all elements with class select-button within it
+      // Bind to click events on those elements
+      $( ".plan .select-btn" ).on( "click", function( event ) {
+        // Read the plan type from the data-plan attribute on the div with class plan
+        selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
+
+        // Get the plan information from the plans variable, based on the key that we just read from the attribute
+        var planInfo = plans[ selectedPlan ];
+
+        if ( planInfo.pricingChart ) {
+          $( "#pricingChart" ).removeClass( "not" );
+        } else {
+          $( "#pricingChart" ).addClass( "not" );
+          viewerLevel = null;
+          $('.pricingLevelOn').removeClass('pricingLevelOn');
+        }
+        
+        if ( planInfo.pricingChart2 ) {
+          $( "#pricingChart2" ).removeClass( "not" );
+        } else {
+          $( "#pricingChart2" ).addClass( "not" );
+          userLevel = null;
+          $('.pricingLevelOn2').removeClass('pricingLevelOn2');
+        }
+
+        // Determine which pricing chart to scroll to
+        var showPricingChart = "#topPricingChart";
+        if ( planInfo.pricingChart ) {
+          showPricingChart = "#pricingChart";
+        }
+
+        // Scroll to the pricing chart
+        // https://github.com/jquery/api.jquery.com/issues/417
+        $( "html,body" ).animate({
+          scrollTop: $( showPricingChart ).offset().top
+        }, "slow" );
+        
+        updatePrice();
+      });
+      
+      // TODO: add data-level attribute to <div class="pricingLevel"> elements.
+        // TODO: remove the funciton that onclick() was calling
+      $( ".pricingLevel" ).on( "click", function() {
+        
+        // Update the "global" viewer level
+        viewerLevel = $( this ).attr( "data-viewer" );
+        
+        // Update the color/ selected element
+        // how do you grab the information about the item clicked if you dont have the size passed in -- use a data-something and pass it in and use it to assign property
+        var size = viewerLevel
         $('.pricingLevelOn').removeClass('pricingLevelOn');
         var tab = $('#pricing' + size.toString());
         tab.addClass('pricingLevelOn');
-    	}
 
-		function pricingSwitchLevel2(size2) {
+        // update the price
+        updatePrice();  
+      });
+  
+    // TODO: Same stuff as .pricingLevel TODOs, but for .pricingLevel2
+      $( ".pricingLevel2" ).on( "click", function() {
+        userLevel = $( this ).attr( "data-user" );
 
-        selected_user_size = size2;
-
+        var size2 = userLevel
         $('.pricingLevelOn2').removeClass('pricingLevelOn2');
         var tab = $('#pricingU' + size2.toString());
         tab.addClass('pricingLevelOn2');
-    	}
 
-    	function basicView() {
-        	$('#pricingChart').removeClass('not').addClass('not');
-        	$('#pricingChart2').removeClass('not').addClass('not');
-    	}
+        updatePrice();
+      });
+      
+          function updatePrice() {
+            var basePrice = plans[ selectedPlan ].basePrice;
 
-    	function premiumView() {
-        	$('#pricingChart').removeClass('not');
-        	$('#pricingChart2').removeClass('not').addClass('not');
-    		$('html,body').animate({
-        		scrollTop: $("#pricingChart").offset().top},
-        		'slow');
-    	}
+            var viewerPrice = 0;
+            if ( viewerLevel ) {
+              viewerPrice = viewerLevels[ viewerLevel ];
+            }
+      
+            var userPrice = 0;
+            if ( userLevel ) {
+              userPrice = userLevels[ userLevel ];
+            }
+              
+            var totalPrice = basePrice + viewerPrice + userPrice;
+          $( ".pricingLargeAmount" ).text( strip(totalPrice) );
+          }
 
-    	function entView() {
-        	$('#pricingChart').removeClass('not');
-        	$('#pricingChart2').removeClass('not');
-    		$('html,body').animate({
-        		scrollTop: $("#pricingChart").offset().top},
-        		'slow');
-    	}
+          //MAY NEED TO UPDATE SINCE WE ARE DEALING WITH MONEY... THIS IS NOT THE FULL WORK AROUND
+          //http://stackoverflow.com/questions/1458633/elegant-workaround-for-javascript-floating-point-number-problem
+          function strip(number) {
+            return (parseFloat(number.toPrecision(12)));
+          }
+
+        // Set the price based on the defaults defined above
+        updatePrice();
+})();
 	
 </script>
 
