@@ -1,6 +1,6 @@
 <?php
 include_once 'util.php';
-session_start();
+_session_start();
 
 if (isset($_SESSION['user_id'])) {
 	$sql = "SELECT id, name from giftbox where user_id = ".$_SESSION['user_id']." ORDER BY name";

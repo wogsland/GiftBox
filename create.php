@@ -1,7 +1,7 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
-	session_start();
+	_session_start();
 	if (!logged_in()) {
             header('Location: '.$app_url);
 	}
