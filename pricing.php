@@ -131,7 +131,7 @@ include_once 'config.php';
            <div class="plan first basic" data-plan="basic">
 
               <div class="head">
-                <h2>Free</h2>
+                <h2>Basic</h2>
               
               </div>    
 
@@ -155,7 +155,7 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
-              <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+              <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Sign Up<i class="fa fa-chevron-right"></i></button></div>
 
            </div>
              
@@ -167,7 +167,7 @@ include_once 'config.php';
               <div class="plan standard" data-plan="standard">
 
               <div class="head">
-                <h2>Basic</h2>
+                <h2>Standard</h2>
               
               </div>    
 	
@@ -352,7 +352,7 @@ include_once 'config.php';
 	      	<div class="span12 blueBgWhiteCopy showFormButton">
 	          	<div class="row text-center">
 	              	<div class="span8 offset2 text-center">
-	                  	<div class="btn btn-default btn-lg standard-button" onclick="showForm()">Continue</div>
+	                  	<div class="btn btn-default btn-lg standard-button" id="continue">Continue</div>
 	              	</div>
 	          	</div>
 	      	</div>
@@ -393,6 +393,57 @@ include_once 'config.php';
  
 </footer>
 <!-- /END FOOTER -->
+
+<!-- These modals will be deleted when Stripe is used -->
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class ="modal-header">
+        Plan Type
+      </div>
+      <div class ="modal-body">
+        Options
+        <!-- Change so that this links to the log in -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Log In</button>
+        <!-- Change so that this links to the sign up -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
+      </div>
+      <div class ="modal-footer">
+        GiveToken
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal2">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class ="modal-header">
+        Plan Type
+      </div>
+      <div class ="modal-body">
+        Options
+        <!-- Change so that this links to the log in -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Log In</button>
+        <!-- Change so that this links to the sign up -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
+        <p>
+          Thanks for looking at GiveToken! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
+        </p>
+        <p>
+          We can be reached at rzettler@givetoken.com 
+      </div>
+      <div class ="modal-footer">
+        GiveToken
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- =========================
@@ -442,9 +493,9 @@ include_once 'config.php';
   };
   
 
-    var selectedPlan = "basic";
-    var viewerLevel = null;
-    var userLevel = null;
+  var selectedPlan = "basic";
+  var viewerLevel = null;
+  var userLevel = null;
 
 
 
@@ -488,15 +539,11 @@ include_once 'config.php';
         updatePrice();
       });
       
-      // TODO: add data-level attribute to <div class="pricingLevel"> elements.
-        // TODO: remove the funciton that onclick() was calling
       $( ".pricingLevel" ).on( "click", function() {
-        
         // Update the "global" viewer level
         viewerLevel = $( this ).attr( "data-viewer" );
         
         // Update the color/ selected element
-        // how do you grab the information about the item clicked if you dont have the size passed in -- use a data-something and pass it in and use it to assign property
         var size = viewerLevel
         $('.pricingLevelOn').removeClass('pricingLevelOn');
         var tab = $('#pricing' + size.toString());
@@ -506,7 +553,6 @@ include_once 'config.php';
         updatePrice();  
       });
   
-    // TODO: Same stuff as .pricingLevel TODOs, but for .pricingLevel2
       $( ".pricingLevel2" ).on( "click", function() {
         userLevel = $( this ).attr( "data-user" );
 
@@ -543,6 +589,40 @@ include_once 'config.php';
 
         // Set the price based on the defaults defined above
         updatePrice();
+
+
+        //Handeling the Continue Button
+        $( "#continue" ).on( "click", function() {
+          if (selectedPlan =="enterprise"){
+            //CHANGE TO
+            //1st accept credit card info
+            //2nd tell the user the service is not yet ready
+            $( '#myModal2 .modal-header' ).text( 'Enterprise Plan' )
+            $('#myModal2').modal()
+          } else if ( selectedPlan  == "premium" ){
+            //CHANGE TO
+            //1st accept credit card info
+            //2nd tell the user the service is not yet ready
+            $( '#myModal2 .modal-header' ).text( 'Premium Plan' )
+            $('#myModal2').modal()
+          } else if ( selectedPlan  == "standard" ){
+            //CHANGE TO
+            //1st If click Log In have them Log In then go to Stripe Collectio OR if they hit sign up do all in one: sign up and collect credit info
+            //2nd lead user to create screen with activated service
+            $( '#myModal .modal-header' ).text( 'Standard Plan' )
+            $('#myModal').modal()
+
+          } else if ( selectedPlan  == "basic" ){
+            //this is the free option... the user should not see the continue button... they should only click sign up
+            $( '#myModal .modal-header' ).text( 'Basic Plan' )
+            $('#myModal').modal()
+
+          } else {
+            alert("How did you get to this option??");
+          }
+
+        });
+
 })();
 	
 </script>
