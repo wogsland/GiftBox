@@ -128,7 +128,7 @@
 					<?php
 					if (logged_in()) {
 						echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
-						echo '<li><a href="my_account.php" class="external">My Account</a></li>';
+						echo '<li><a href="profile.php" class="external">My Account</a></li>';
 						if (is_admin()) {
 							echo '<li><a href="admin.php">Admin</a></li>';
 						}
