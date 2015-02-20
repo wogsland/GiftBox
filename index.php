@@ -706,13 +706,20 @@
 	
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
-		<li><a href="#"><i class="social_facebook_square"></i></a></li>
+		<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
 		<li><a href="#"><i class="social_twitter_square"></i></a></li>
 		<li><a href="#"><i class="social_pinterest_square"></i></a></li>
 		<li><a href="#"><i class="social_googleplus_square"></i></a></li>
 		<li><a href="#"><i class="social_instagram_square"></i></a></li>
 		<li><a href="#"><i class="social_flickr_square"></i></a></li>
 	</ul>
+
+	<!--Terms and Policy-->
+	<ul class="terms-policy">
+		<li><a href="termsservice.php">Terms and Conditions</a></li>
+		<li><a href="privacypolicy.php">Privacy Policy</a></li>
+	</ul>
+
 	
 	<!-- COPYRIGHT TEXT -->
 	<p class="copyright">
