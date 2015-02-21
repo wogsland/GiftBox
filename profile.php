@@ -156,10 +156,11 @@
 				<!-- Tab Navigation -->
 				<ul class="nav nav-tabs nav-line">
 	          <li class="active"><a href="#activities" data-toggle="tab"><strong>Activities</strong></a></li>
-	          <li class=""><a href="#givetokens" data-toggle="tab"><strong>GiveTokens</strong></a></li>
-	          <li class=""><a href="#messages" data-toggle="tab"><strong>Messages</strong></a></li>
+	          <li class=""><a href="#givetokens" data-toggle="tab"><strong>My Tokens</strong></a></li>
+	          <!--<li class=""><a href="#messages" data-toggle="tab"><strong>Messages</strong></a></li>-->
 	          <li class=""><a href="#viewers" data-toggle="tab"><strong>Viewers</strong></a></li>
 	          <li class=""><a href="#account" data-toggle="tab"><strong>Account Info</strong></a></li>
+	          <!-- Manage Users will only be for enterprise -->
 	          <li class=""><a href="#users" data-toggle="tab"><strong>Manage Users</strong></a></li>
 	      </ul>
 				<div class="tab-content nopadding noborder">
@@ -248,7 +249,7 @@
 		      	</div>
 		      	<!-- GiveTokens -->
 		      	<div class="tab-pane" id="givetokens">
-			      	<h2>My GiveTokens</h2>
+			      	<h2>My Tokens</h2>
 			      	<div class="col-md-3 col-xs-6 text-center"><img src="assets/img/token-varied-01.png" alt="" width="78" height="64"><br><div class="main-color">GiveToken 1</div>For: Angela L.</div>
 			      	<div class="col-md-3 col-xs-6 text-center"><img src="assets/img/token-varied-02.png" alt="" width="78" height="65"><br><div class="main-color">GiveToken 2</div>For: Angela L.</div>
 			      	<div class="col-md-3 col-xs-6 text-center"><img src="assets/img/token-varied-03.png" alt="" width="78" height="65"><br><div class="main-color">GiveToken 3</div>For: Angela L.</div>
@@ -653,10 +654,10 @@
               </div>
           </div>
 		      	</div>
-		      	<!-- Private Viewers -->
+		      	<!-- Viewers -->
 		      	<div class="tab-pane" id="viewers">
 			      	<div class="row">
-				      	<div class="col-md-9 pull-left"><h2 class="mt0">Groups</h2></div>
+				      	<div class="col-md-9 pull-left"><h2 class="mt0">Groups (X/Y)</h2></div>
 			      		<div class="col-md-3 pull-right mt10"><a href="#" class="btn btn-success btn-block btn-create-msg">Create Group</a></div>
 			      	</div>
 			      	<div class="form-group">
@@ -667,7 +668,7 @@
 							</div>
               <hr>
 			      	<div class="row">
-				      	<div class="col-md-9 pull-left"><h2 class="mt0">Viewers</h2></div>
+				      	<div class="col-md-9 pull-left"><h2 class="mt0">Viewers (AB/CD)</h2></div>
 			      		<div class="col-md-3 pull-right mt10"><a href="#" class="btn btn-success btn-block btn-create-msg">Add Viewer</a></div>
 			      	</div>
 			      	<div class="row dataTable">
@@ -751,6 +752,7 @@
 			        </div>
 							</div>
               <hr>
+              		<!--
 			      	<div class="row">
 				      	<div class="col-md-9 pull-left"><h2 class="mt0">Private Viewers</h2></div>
 			      		<div class="col-md-3 pull-right mt10"><a href="#" class="btn btn-success btn-block btn-create-msg">Add Private Viewer</a></div>
@@ -836,6 +838,7 @@
 			            
 			        </div>
 							</div>
+						-->
 			      	<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
 								<div class="modal-dialog">
 								<div class="modal-content">
@@ -930,40 +933,40 @@
 			      	<h2>Account Information</h2>
 			      	<form class="form-horizontal form-bordered">
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">Company</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="Company Inc." title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">Company</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="Company Inc." title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">Address</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="123 Any Street Ste #101" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">Address</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="123 Any Street Ste #101" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">City</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="San Francisco" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">City</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="San Francisco" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">State</label>
-                    <div class="col-sm-10">
-                        <input type="password" placeholder="CA" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">State</label>
+                    		<div class="col-sm-10">
+                        		<input type="password" placeholder="CA" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">Zip</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="23121" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">Zip</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="23121" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 			      	</form>
 			      	<h2>Billing</h2>
 			      	<form class="form-horizontal form-bordered">
@@ -981,41 +984,109 @@
 	                        </div>
 	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
 	                    </div>
+	                    <!--
 				      	<div class="form-group">
 	                        <label class="col-sm-2 control-label">Billing Address</label>
 	                        <div class="col-sm-9"></div>
 	                        <label class="col-sm-1 control-label"></label>
 	                    </div>
-	              <div class="form-group">
-                    <label class="col-sm-1 control-label">Address</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="123 Any Street Ste #101" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+						-->
+	            		<div class="form-group">
+                    		<label class="col-sm-1 control-label">Address</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="123 Any Street Ste #101" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">City</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="San Francisco" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">City</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="San Francisco" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">State</label>
-                    <div class="col-sm-10">
-                        <input type="password" placeholder="CA" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">State</label>
+                    		<div class="col-sm-10">
+                        		<input type="password" placeholder="CA" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 				      	<div class="form-group">
-                    <label class="col-sm-1 control-label">Zip</label>
-                    <div class="col-sm-10">
-                        <input type="text" placeholder="23121" title="" class="form-control tooltips">
-                    </div>
-                    <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
-                </div>
+                    		<label class="col-sm-1 control-label">Zip</label>
+                    		<div class="col-sm-10">
+                        		<input type="text" placeholder="23121" title="" class="form-control tooltips">
+                    		</div>
+                    		<label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+                		</div>
 			      	</form>
-			      	</div>
+			      	<h2>Social Integrations</h2>
+			      	<form class="form-horizontal form-bordered">
+			      		<div class="form-group">
+	                        <label class="col-sm-1 control-label">Facebook</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Facebook Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Twitter</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Twitter Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Pinterest</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Pinterest Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Google+</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Google+ Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Instagram</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Instagram Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Flickr</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Flickr Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">LinkedIn</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="LinkedIn Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Reddit</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Reddit Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+				      	<div class="form-group">
+	                        <label class="col-sm-1 control-label">Tumblr</label>
+	                        <div class="col-sm-10">
+	                            <input type="text" placeholder="Tumblr Web Address" title="" class="form-control tooltips">
+	                        </div>
+	                        <label class="col-sm-1 control-label"><a href="#" target="" class="">Edit</a></label>
+	                    </div>
+			      	</form>
+			   	</div>
 		      	<!-- Manage Users -->
 		      	<div class="tab-pane" id="users">
 			      	<h2>Manage Users</h2>
