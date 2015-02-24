@@ -1369,3 +1369,7 @@ function sidebarOpener(tab) {
 function sidebarSend(tab) {
 	selectTab(tab);
 }
+
+function showTemplates(number) {
+	alert(number);
+}

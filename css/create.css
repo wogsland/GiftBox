@@ -58,7 +58,7 @@ a {
 /*----------------------------------------*/
 
 #palette {
-	width: 230px;
+	width: 235px;
 	background-color: #23282B;
 	height: 100%;
 	float: left;
@@ -66,22 +66,36 @@ a {
 	padding-left: 5px;
 	padding-right: 5px;
 }
+
+.template-thumbnail-container {
+/*	border: solid 1px gray; */
+	max-height: 230px;
+	overflow-y: scroll;
+}
+
 .template-thumbnail {
 	display: inline-block;
-	width: 56px;
-	height: 56px;
-	border: solid 2px #E4E4E4;
+	width: 60px;
+	height: 46px;
+	border: solid 2px #23282B;
 	border-radius: 2px;
-	background-color: white;
-	margin-top: 5px;
+	background-color: #23282B;
+	margin-top: 2px;
+	padding: 1px;
 }
 
 .template-thumbnail:hover {
-	border: solid 2px #CBCBCB;
+	border: solid 2px #509c3e;
 }
 
-.thumb-image {
-	margin: 4px;
+.thumb-padded {
+	box-sizing: border-box;
+	border: solid 1px #23282B;
+	background-color: #c0c0c0;
+}
+	
+.thumb-column {
+	float: left;
 }
 
 /*----------------------------------------*/
@@ -92,6 +106,7 @@ a {
 	margin-left: 220px;
 	margin-right: 220px;
 	overflow: scroll;
+	background-color: #1c2021;
 }
 #template-container {
 	position: relative;
@@ -590,11 +605,17 @@ iframe {
 	margin: 0px;
 }
 #palette-top {
-	border: solid 1px black;
 	height: 30px;
 }
 
-.sidebar-tabs {
+.popout-arrow {
+	font-size: 16px;
+	float: right;
+	margin: 5px 0px 5px 5px;
+	color: #94a7b7;
+}
+
+.sidebar-tab {
 	background-image: url('../images/ui-sidebar-tabs-sprite.png');
 	background-repeat: no-repeat;
 	height: 51px;
@@ -604,10 +625,18 @@ iframe {
 	margin-left: 2px;
 }
 
-.sidebar-tabs:hover {
+.sidebar-tab:hover {
 	border: solid 1px white;
 }
+.selected-sidebar-tab:hover {
+	border: solid 1px #23282B;
+}
+
 #template-tab {
+}
+
+#template-tab-selected {
+	background-position: 0px -58px;
 }
 
 #text-tab {
@@ -623,11 +652,8 @@ iframe {
 }
 
 .sidebar-tab-container {
-	border: solid 1px white;
-}
-
-#sidebar-template-container {
-	height: 300px;
+/*	border: solid 1px white; */
+	padding: 5px;
 }
 
 .template-tab-text {
@@ -637,6 +663,7 @@ iframe {
 	margin: 10px 0px 5px 4px;
 	
 }
+
 .template-number {
 	display: inline-block;
 	padding: 2px 4px 2px 4px;
@@ -647,8 +674,4 @@ iframe {
 
 .template-number:hover {
 	color: white;
-}
-
-.template-thumbnail-container {
-	border: solid 1px gray;
 }
