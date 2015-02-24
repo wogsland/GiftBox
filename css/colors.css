@@ -28,6 +28,11 @@ GREEN COLOR CODE: #5ebb47
     background: #5ebb47;
 }
 
+.standard-button:hover {
+    background: #476fb6;
+    color: white;
+}
+
 .standard-button2 {
     background: #476fb6;
 }
