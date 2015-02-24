@@ -31,6 +31,7 @@
 	<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 </head>
 <body id="create-body">
+	<?php include_once("analyticstracking.php") ?>
 	<div id="content-wrapper">
 		<div class="header-wrapper" id="create-header-wrapper">
 			<header>
