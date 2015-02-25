@@ -1349,27 +1349,57 @@ function createCroppedImage (bento, image, container) {
 	return croppedImage;
 }
 
-function selectTab(tab) {
-	alert(tab.id);
-	tab.style.backgroundPosition = "0px -150";
-}
-
-function sidebarTemplates(tab) {
-	selectTab(tab);
-}
-
-function sidebarText(tab) {
-	selectTab(tab);
-}
-
-function sidebarOpener(tab) {
-	selectTab(tab);
-}
-
-function sidebarSend(tab) {
-	selectTab(tab);
+function selectSidebarTab(tab) {
+	var selectedIcon = $("#"+tab.id);
+	if (tab.id === 'text-tab') {
+		openMessage("Text", "This feature is not available yet.");
+	} else if (tab.id === 'opener-tab') {
+		openMessage("Opener", "This feature is not available yet.");
+	} else {
+		// restore all icons
+		$(".sidebar-tab").each(function(i) {
+			$(this).removeClass("sidebar-tab-hover");
+			$(this).addClass("sidebar-tab-hover");
+			$(this).removeClass($(this).attr("id"));
+			$(this).addClass($(this).attr("id"));
+			$(this).removeClass($(this).attr("id")+"-selected");
+		});
+		
+		// set the selected icon
+		selectedIcon.removeClass("sidebar-tab-hover");
+		selectedIcon.removeClass(tab.id);
+		selectedIcon.addClass(tab.id+"-selected");
+		
+		// hide all sidebar tab containers
+		$(".sidebar-tab-container").css("display", "none");
+		
+		// show the selected container
+		$("#"+tab.id+"-container").css("display", "block");
+		
+		
+		
+	}
 }
 
 function showTemplates(number) {
-	alert(number);
+	var selectedButton = $("#template-number-"+number);
+	
+	// restore all number buttons
+	$(".template-number").each(function(i) {
+		$(this).removeClass("template-number-hover");
+		$(this).addClass("template-number-hover");
+		$(this).removeClass("template-number-selected");
+	});
+	
+	// set the selected number button
+	selectedButton.removeClass("template-number-hover");
+	selectedButton.addClass("template-number-selected");
+
+	// show only those template for the selected button
+	if (number === "ALL") {
+		$(".template-thumbnail").css("display", "inline-block");
+	} else {
+		$(".template-thumbnail").css("display", "none");
+		$("#template-thumbnail-"+number).css("display", "inline-block");
+	}
 }
