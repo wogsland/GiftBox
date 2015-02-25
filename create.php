@@ -12,6 +12,7 @@
 	<meta charset="utf-8" />
 	<title>Giftbox - Create</title>
 
+	<link rel="stylesheet" href="assets/elegant-icons/style.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
 	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="css/style.css" />
@@ -33,50 +34,197 @@
 <body id="create-body">
 	<?php include_once("analyticstracking.php") ?>
 	<div id="content-wrapper">
-		<div class="header-wrapper" id="create-header-wrapper">
-			<header>
-				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
-				</h1>
-				<nav id="create-top-nav">
-					<ul>
-						<li>
-							<a href="<?php echo $app_root ?>">Home</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-	
 		<section id="create-section">
 			<div id="palette">
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Template</span>
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('template-1', 'template-2', 'template-3')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('template-2', 'template-3', 'template-1')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
-					</div>
+				<div id="palette-top">
+					<a id="create-page-logo" href="javascript:void(0)" onclick=""><i class="arrow_triangle-left_alt2 popout-arrow"></i></a>
 				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Border Settings</span>
+				<div id="palette-body">
+					<a href="#"><img id="give-token-palette" src="images/give-token.jpg" width="235"></a>
+					<a class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+					<a class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+					<a class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+					<a class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+
+					<div class="sidebar-tab-container" id="template-tab-container">
+						<span class="template-tab-text">PICK A TEMPLATE</span>
+						<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('ALL')">ALL</a>
+						<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
+						<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
+						<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
+						<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
+						<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
+						<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
+						<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
+						<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
+
+						<div class="template-thumbnail-container">
+<!--							
+							<div class="template-thumbnail" id="template-1-1"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width100"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-2-1"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width50"></div>
+								<div class="thumb-padded column height100 width50"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-2-2"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height50 width100"></div>
+								<div class="thumb-padded column height50 width100"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-3-1"  onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-padded column height100 width33"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-3-2"  onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-padded column height33 width100"></div>
+								<div class="thumb-padded column height33 width100"></div>
+								<div class="thumb-padded column height33 width100"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-3-3"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width50"></div>
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+							</div>
+
+							<div class="template-thumbnail" id="template-3-4"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+								<div class="thumb-padded column height100 width50"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-3-5"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-column height50 width100">
+									<div class="thumb-padded thumb-column height100 width50"></div>
+									<div class="thumb-padded thumb-column height100 width50"></div>
+								</div>						
+								<div class="thumb-padded column height50 width100"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-3-6"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height50 width100"></div>
+								<div class="thumb-column height50 width100">
+									<div class="thumb-padded thumb-column height100 width50"></div>
+									<div class="thumb-padded thumb-column height100 width50"></div>
+								</div>						
+							</div>
+
+							<div class="template-thumbnail" id="template-4-1"  onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-padded column height100 width25"></div>
+								<div class="thumb-padded column height100 width25"></div>
+								<div class="thumb-padded column height100 width25"></div>
+								<div class="thumb-padded column height100 width25"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-4-2"  onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-padded column height25 width100"></div>
+								<div class="thumb-padded column height25 width100"></div>
+								<div class="thumb-padded column height25 width100"></div>
+								<div class="thumb-padded column height25 width100"></div>
+							</div>
+
+							<div class="template-thumbnail" id="template-4-3"  onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded column height50 width100"></div>
+									<div class="thumb-padded column height50 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded column height50 width100"></div>
+									<div class="thumb-padded column height50 width100"></div>
+								</div>						
+							</div>
+
+							<div class="template-thumbnail" id="template-4-4"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width50"></div>
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+							</div>
+							
+							<div class="template-thumbnail" id="template-4-5"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+								<div class="thumb-padded column height100 width50"></div>
+							</div>
+							
+							<div class="template-thumbnail" id="template-4-6"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-column height50 width100">
+									<div class="thumb-padded thumb-column height100 width33"></div>
+									<div class="thumb-padded thumb-column height100 width33"></div>
+									<div class="thumb-padded thumb-column height100 width33"></div>
+								</div>						
+								<div class="thumb-padded column height50 width100"></div>
+							</div>
+							
+							<div class="template-thumbnail" id="template-4-7"  onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height50 width100"></div>
+								<div class="thumb-column height50 width100">
+									<div class="thumb-padded thumb-column height100 width33"></div>
+									<div class="thumb-padded thumb-column height100 width33"></div>
+									<div class="thumb-padded thumb-column height100 width33"></div>
+								</div>						
+							</div>
+-->							
+							<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+							</div>
+							
+							<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+							</div>
+							
+							<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height66 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height66 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+							</div>
+							
+
+						</div>
 					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Background Settings</span>
-					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Wrapper</span>
+					<div class="sidebar-tab-container" id="send-tab-container">
+						<div class="send-button" id="facebook-send-button"></div>
+						<div class="send-button" id="twitter-send-button"></div>
+						<div class="send-button" id="pinterest-send-button"></div>
+						<div class="send-button" id="instagram-send-button"></div>
+						<div class="send-button" id="googleplus-send-button"></div>
+						<div class="corp-send-button" id="corporate-send"></div>
 					</div>
 				</div>
 			</div>
