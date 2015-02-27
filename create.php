@@ -12,9 +12,9 @@
 	<meta charset="utf-8" />
 	<title>Giftbox - Create</title>
 
+	<link rel="stylesheet" href="assets/elegant-icons/style.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
@@ -22,61 +22,92 @@
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/id3-minimized.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
 	<script src="js/init.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
-	<script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
 </head>
 <body id="create-body">
 	<?php include_once("analyticstracking.php") ?>
 	<div id="content-wrapper">
-		<div class="header-wrapper" id="create-header-wrapper">
-			<header>
-				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
-				</h1>
-				<nav id="create-top-nav">
-					<ul>
-						<li>
-							<a href="<?php echo $app_root ?>">Home</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-	
 		<section id="create-section">
 			<div id="palette">
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Template</span>
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-4.jpg" class="thumb-image" onclick="stack('template-1', 'template-2', 'template-3')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-5.jpg" class="thumb-image" onclick="stack('template-2', 'template-3', 'template-1')">
-					</div>
-					<div class="template-thumbnail">
-						<img src="./images/template-thumb-6.jpg" class="thumb-image" onclick="stack('template-3', 'template-1', 'template-2')">
-					</div>
+				<div id="palette-top">
+					<a id="create-page-logo" href="javascript:void(0)" onclick=""><i class="arrow_triangle-left_alt2 popout-arrow"></i></a>
 				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Border Settings</span>
+				<div id="palette-line"></div>
+				<div id="palette-body">
+					<a href="#"><img id="give-token-palette" src="assets/img/logo-light.png" width="225"></a>
+					<a class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+					<a class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" href="javascript:void(0)" onclick="featureNotAvailable('Text')"></a>
+					<a class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" href="javascript:void(0)" onclick="featureNotAvailable('Opener')"></a>
+					<a class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+
+					<div class="sidebar-tab-container" id="template-tab-container">
+						<span class="template-tab-text">PICK A TEMPLATE</span>
+						<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('all')">ALL</a>
+						<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
+						<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
+						<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
+						<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
+						<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
+						<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
+						<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
+						<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
+
+						<div class="template-thumbnail-container">
+							<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="stack('template-1', 'template-2', 'template-3')">
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-padded column height100 width33"></div>
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+							</div>
+							
+							<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width50">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+							</div>
+							
+							<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height33 width100"></div>
+									<div class="thumb-padded thumb-column height66 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height50 width100"></div>
+									<div class="thumb-padded thumb-column height50 width100"></div>
+								</div>						
+								<div class="thumb-column height100 width33">
+									<div class="thumb-padded thumb-column height66 width100"></div>
+									<div class="thumb-padded thumb-column height33 width100"></div>
+								</div>						
+							</div>
+							
+
+						</div>
 					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Background Settings</span>
-					</div>
-				</div>
-				<div class="palette-box">
-					<div class="palette-box-header">
-						<span class="palette-box-header-text">Pick A Wrapper</span>
+					<div class="sidebar-tab-container" id="send-tab-container">
+						<a href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><div class="send-button" id="facebook-send-button"></div></a>
+						<a href="javascript:void(0)" onclick="featureNotAvailable('Twitter')"><div class="send-button" id="twitter-send-button"></div></a>
+						<a href="javascript:void(0)" onclick="featureNotAvailable('Pinterest')"><div class="send-button" id="pinterest-send-button"></div></a>
+						<a href="javascript:void(0)" onclick="featureNotAvailable('Instagram')"><div class="send-button" id="instagram-send-button"></div></a>
+						<a href="javascript:void(0)" onclick="featureNotAvailable('Google+')"><div class="send-button" id="googleplus-send-button"></div></a>
+<!--						<a href="javascript:void(0)" onclick="featureNotAvailable('Send For Corporate')"><div class="palette-button" id="corporate-send"></div></a> -->
+						<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
+						<span class="template-tab-text">LINK</span>
+						<input id="send-link-input" type="text"  readonly="readonly">
+						<button class="palette-button" onclick="send()">ADVANCED SEND</button>
 					</div>
 				</div>
 			</div>
@@ -126,14 +157,16 @@
 			</div>
 			
 			<div id="templates">
-				<div id="template-button-container">
-					<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
-					<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
-					<a class="template-button" id="save-button" href="javascript:void(0)" onclick="saveButton()">Save</a>
-					<a class="template-button" id="preview-button" href="javascript:void(0)" onclick="preview()">Preview</a>
-					<a class="template-button" id="send-button" href="javascript:void(0)" onclick="send()">Send</a>
-					<a class="template-button" id="open-button" href="javascript:void(0)" onclick="selectSaved()">Open</a>
-					<p id="template-status"></p>
+				<div id="template-nav-container">
+					<ul class="template-nav-bar">
+
+	<!--				<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
+						<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
+	 -->
+						<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
+						<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
+						<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+					</ul>
 				</div>
 				<div id="template-container">
 					<div class="template" id="template-3">
@@ -273,30 +306,32 @@
 		</section>
 	</div>
 
-	<form id="send-form" class="white-popup mfp-hide" name="send-form">
-		<h1 class="dialog-header">Send to:</h1>
-		<div id="dialog-form-container">
-			<p class="dialog-message" id="send-message"></p>
-			<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30">
-			<p>Or, copy this link into an email and send it yourself:</p>
-			<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="60" value="" readonly="readonly">
-			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="sendGiftbox()">Send</a>
-		</div>
-	</form>
+	<!-- DIALOGS -------------------------------------------------------------------------------------------------------->
+	
+	<div id="send-dialog" title="Advanced Send">
+		<p class="dialog-message" id="send-message"></p>
+		<form>
+		    <fieldset>
+				<label class="input-label" for="email">Send to:</label>
+				<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30"><br><br>
+				<label class="input-label" for="preview-link">Or, copy this link into an email and send it yourself:</label>
+				<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="60" value="" readonly="readonly">
+		    </fieldset>
+		</form>
+	</div>	
 	
 	<div id="save-dialog" title="Save">
 		<form>
-		    <fieldset style="margin-top: 25px">
-				<label for="save-name">Name</label>
+		    <fieldset>
+				<label class="input-label" for="save-name">Name</label>
 				<input type="text" name="save-name" id="save-name" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
-		    </fieldset>
 		</form>
 	</div>
 
 	<div id="url-dialog">
 		<form>
-		    <fieldset style="margin-top: 25px">
-				<label for="save-name">Paste link address here</label>
+		    <fieldset>
+				<labe class="input-label"l for="save-name">Paste link address here</label>
 				<input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
 		    </fieldset>
 		</form>
@@ -311,15 +346,15 @@
 	
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
-			<fieldset style="margin-top: 30px">
-				<label for="wrapper-type">Select a wrapper type</label>
+			<fieldset>
+				<label class="input-label" for="wrapper-type">Select a wrapper type</label>
 				<select name="wrapper-type" id="wrapper-type">
 					<option selected="selected" value="">None</option>
 					<option value="food-box">Unload Boxes</option>
 					<option value="briefcase">Unload Bags</option>
 				</select>
 				<br><br>
-				<label for="unload-count">Number of items to unload</label>
+				<label class="input-label" for="unload-count">Number of items to unload</label>
 				<input id="unload-count" name="unload-count">
 			</fieldset>			
 		</form>
@@ -327,9 +362,8 @@
 
 	<div id="open-dialog" title="Open">
 		<fieldset>
-			<label for="token-list">Select a Token to open:</label><br>
-			<select id="token-list" name="token-list" size="9" style="margin: auto; margin-top: 10px;">
-			</select>
+			<label class="input-label" for="token-list">Select a Token to open:</label>
+			<select id="token-list" name="token-list" size="9" style="margin: auto"></select>
 		</fieldset>			
 	</div>
 

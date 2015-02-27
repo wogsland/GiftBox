@@ -1,8 +1,26 @@
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('../fonts/Lato-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #create-body {
 	font-size: 12px;
+    font-family: 'Lato-Bold', sans-serif;
 }
+
 p {
 	color: rgba(0,0,0,0.74);
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
 }
 
 #create-top-nav {
@@ -16,7 +34,6 @@ p {
     right: 0;
     bottom: 0;
     left: 0;
-    padding-top: 85px;
 }
 
 .header-wrapper {
@@ -55,60 +72,128 @@ p {
 /*----------------------------------------*/
 
 #palette {
-	width: 220px;
-	background-color: white;
-	overflow-y: scroll;
+	width: 230px;
+	background-color: #23282B;
 	height: 100%;
 	float: left;
-}
-
-.palette-box {
-	width: 195px;
-	height: 250px;
-	background-color: #E9E9E9;
-	margin: 5px;
-	border: solid 1px #E2E2E2;
-	border-radius: 5px;
-}
-
-.palette-box-header{
-	width: 170;
-	background-color: #9EC033;
-	margin: 2px;
-	border: solid 2px #82A31B;
-	box-shadow: 1px 1px white;	
-	border-radius: 2px;
-	color: #F0FDED;
 	padding-left: 10px;
-	font-size: small;
+	padding-right: 10px;
+	color: #e2e3e5;
+	font-size: 1em;
+}
+
+#palette-top {
+	height: 30px;
+}
+
+.popout-arrow {
+	font-size: 16px;
+	float: right;
+	margin: 5px 0px 5px 5px;
+	color: #94a7b7;
+}
+
+#give-token-palette {
+	margin-bottom: 20px;
+}
+
+.template-thumbnail-container {
+	max-height: 230px;
+	overflow-y: auto;
+	margin-top: 20px;
+	
 }
 
 .template-thumbnail {
 	display: inline-block;
-	width: 56px;
-	height: 56px;
-	border: solid 2px #E4E4E4;
+	width: 60px;
+	height: 46px;
+	border: solid 2px #23282B;
 	border-radius: 2px;
-	background-color: white;
-	margin-top: 5px;
+	background-color: #23282B;
+	margin-top: 2px;
+	margin-right: 5px;
+	padding: 1px;
 }
 
 .template-thumbnail:hover {
-	border: solid 2px #CBCBCB;
+	border: solid 2px #509c3e;
 }
 
-.thumb-image {
-	margin: 4px;
+.thumb-padded {
+	box-sizing: border-box;
+	border: solid 1px #23282B;
+	background-color: #c0c0c0;
+}
+	
+.thumb-column {
+	float: left;
+}
+
+.palette-button {
+	display: block;
+	height: 30px;
+	width: 217px;
+	margin: auto;
+	outline: none;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	background-color: #486eb5;
+	color: white;
+	font-family: 'Lato-Bold';
+	font-size: 1em;
+}
+
+#send-link-input {
+	height: 20px;
+	width: 213px;
+	margin: auto;
+	outline: none;
+	display: block;
 }
 
 /*----------------------------------------*/
 /*          	TEMPLATE                  */
 /*----------------------------------------*/
+#template-nav-container {
+	height: 30px;
+	overflow: hidden;
+	background-color: #363b3e;
+}
+
+.template-nav-bar {
+	list-style:none;
+	margin-top: 10px;
+	float: right;
+	margin-right: 30px;
+}
+
+.template-nav-bar li {
+	display:inline; 
+	padding: 0 10px; 
+}
+
+.template-nav-bar li a i {
+	color: #5ebb46;
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.template-nav-bar li a {
+	padding-left: 10px;
+	text-decoration: none;
+	color: #888c8d;
+}
+
+.template-nav-bar li a:hover {
+	color: white;
+}
+
 #templates {
 	height: 100%;
-	margin-left: 220px;
-	margin-right: 220px;
-	overflow: scroll;
+	overflow: auto;
+	background-color: #1c2021;
 }
 #template-container {
 	position: relative;
@@ -200,7 +285,7 @@ p {
 }
 
 #divider-1-2 {
-	left: 670px;
+	left: 671px;
 }
 
 #divider-1-3 {
@@ -420,33 +505,6 @@ p {
 	height: 12px;
 }
 
-#template-button-container {
-	margin: 10px auto;
-	width: 1024px;
-	height: 30px;
-	overflow: hidden;
-}
-
-.template-button {
-	color: white;
-	padding: 5px 20px;  
-	border-radius: 10px;
-	background-color: #293133;
-	display: inline-block;
-	font-size: 16px;
-	vertical-align: top;
-	margin-right: 20px;
-}
-
-#template-status {
-	display: inline-block;
-	color: black;
-	font-size: 100%;
-	vertical-align: middle;
-	line-height: 30px;
-	margin-left: 20px;
-}
-
 #send-form {
 	max-width: 900px;
 	overflow: auto;
@@ -521,6 +579,7 @@ p {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	cursor: pointer;
 }
 
 #select-media-file {
@@ -530,6 +589,7 @@ p {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	cursor: pointer;
 }
 
 
@@ -602,3 +662,139 @@ iframe {
 	width: 100%;
 	height: 100%;
 }
+
+.sidebar-tab {
+	background-image: url('../images/ui-sidebar-tabs-sprite.png');
+	background-repeat: no-repeat;
+	height: 51px;
+	width: 51px;
+	display: inline-block;
+	border: solid 1px #23282B;
+	margin-left: 2px;
+	outline: none;
+}
+
+.sidebar-tab-hover:hover {
+	border: solid 1px white;
+}
+
+.template-tab {
+	background-position: 0px 0px;
+}
+
+.template-tab-selected {
+	background-position: 0px -58px;
+	pointer-events: none;
+}
+
+#text-tab {
+	background-position: 0px -116px;
+}
+
+#opener-tab {
+	background-position: 0px -233px;
+}
+
+.send-tab {
+	background-position: 0px -349px;
+}
+
+.send-tab-selected {
+	background-position: 0px -407px;
+	pointer-events: none;
+}
+
+.sidebar-tab-container {
+	padding: 3px;
+	margin-top: 10px;
+}
+
+.template-tab-text {
+	display: block;
+	margin: 10px 0px 10px 4px;
+	
+}
+
+.template-number {
+	display: inline-block;
+	padding: 2px 4px 2px 4px;
+	margin-left: 1px;
+	color: #adadad;
+	border: solid 1px #23282B;
+	border-radius: 4px;
+	text-align: center;
+	vertical-align: middle;
+	min-width: 10px;
+}
+
+.template-number-hover:hover {
+	color: white;
+	border-color: white;
+}
+
+.template-number-selected {
+	color: white;
+	border: solid 1px #5abb47;
+	background-color: #35393b;
+	pointer-events: none;
+}
+
+#send-tab-container {
+	display: none;
+	margin-top: 20px;
+}
+
+.send-button {
+	background-image: url('../images/ui-buttons-sprite.png');
+	background-repeat: no-repeat;
+	height: 38px;
+	width: 196px;
+	border: solid 1px #23282B;
+	margin: auto;
+	outline: none;
+	margin-top: 10px;
+}
+
+#facebook-send-button {
+	background-position: -1px -252px;
+}
+#twitter-send-button {
+	background-position: -1px -303px;
+}
+#pinterest-send-button {
+	background-position: -1px -355px;
+}
+#instagram-send-button {
+	background-position: -1px -406px;
+}
+#googleplus-send-button {
+	background-position: -1px -458px;
+}
+
+#create-page-logo {
+	margin: auto;
+}
+
+#advanced-send-button {
+	height: 30px;
+	width: 217px;
+	margin: auto;
+	outline: none;
+	margin-top: 30px;
+	background-color: #486eb5;
+	color: white;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.input-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+
+fieldset {
+	border: none;
+}
+
