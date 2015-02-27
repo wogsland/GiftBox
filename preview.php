@@ -18,6 +18,7 @@
 	<script src="js/preview.js"></script>
 </head>
 <body>
+	<?php include_once("analyticstracking.php") ?>
 	<?php 
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
