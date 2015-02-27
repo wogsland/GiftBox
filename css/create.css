@@ -5,9 +5,6 @@
     font-style: normal;
 }
 
-fieldset {
-	border: none;
-}
 #create-body {
 	font-size: 12px;
     font-family: 'Lato-Bold', sans-serif;
@@ -19,6 +16,11 @@ p {
 
 a {
 	text-decoration: none;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
 }
 
 #create-top-nav {
@@ -577,6 +579,7 @@ a {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	cursor: pointer;
 }
 
 #select-media-file {
@@ -586,6 +589,7 @@ a {
 	position: absolute;
 	top: 0px;
 	left: 0px;
+	cursor: pointer;
 }
 
 
@@ -789,3 +793,8 @@ iframe {
 	font-weight: bold;
 	margin-bottom: 3px;
 }
+
+fieldset {
+	border: none;
+}
+

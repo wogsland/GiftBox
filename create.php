@@ -331,7 +331,7 @@
 	<div id="url-dialog">
 		<form>
 		    <fieldset>
-				<label for="save-name">Paste link address here</label>
+				<labe class="input-label"l for="save-name">Paste link address here</label>
 				<input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
 		    </fieldset>
 		</form>
@@ -347,14 +347,14 @@
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
 			<fieldset>
-				<label for="wrapper-type">Select a wrapper type</label>
+				<label class="input-label" for="wrapper-type">Select a wrapper type</label>
 				<select name="wrapper-type" id="wrapper-type">
 					<option selected="selected" value="">None</option>
 					<option value="food-box">Unload Boxes</option>
 					<option value="briefcase">Unload Bags</option>
 				</select>
 				<br><br>
-				<label for="unload-count">Number of items to unload</label>
+				<label class="input-label" for="unload-count">Number of items to unload</label>
 				<input id="unload-count" name="unload-count">
 			</fieldset>			
 		</form>
