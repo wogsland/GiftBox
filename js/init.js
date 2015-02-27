@@ -21,6 +21,24 @@ $(function() {
 });
 
 $(function() {
+	$( "#send-dialog" ).dialog({
+		autoOpen: false,
+		resizable: false,
+		width: 800,
+		height: 250,
+		modal: true,
+		buttons: {
+			Send: function() {
+				sendGiftbox();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+});
+
+$(function() {
 	$( "#open-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
