@@ -122,7 +122,7 @@ include_once 'config.php';
     			Privacy Policy
 			</h1>
 			<p>
-			    <em>Last Updated: November 11, 2014</em>
+			    <em>Last Updated: March 1, 2015</em>
 			</p>
 			<p>
 			    Giftly, Inc., a Delaware corporation (referred to in these Terms of Use as “Giftly,” “we,” or “us”) is committed to protecting your privacy. This Privacy
@@ -156,6 +156,21 @@ include_once 'config.php';
 			    We may use “cookies,” which are small files stored on your computer’s hard drive that are used to store and track personal information. Many browsers can
 			    notify you when you receive a cookie, giving you the option to accept it or not. By not accepting cookies, you may not be permitted to access certain
 			    information and some Site pages may not display properly.
+			</p>
+			<p>
+				Google Analytics is a web analysis service provided by Google. Google utilizes the data collected to track and examine the use of https://www.givetoken.com, to prepare reports on its activities and share them with other Google services. 
+				Google may use the data collected to contextualize and personalize the ads of its own advertising network.
+			</p>
+			<p>
+				Personal data collected: Cookie and Usage Data. Place of processing: USA. Find Google's <a href= "http://www.google.com/intl/en/policies/privacy/">privacy policy here.</a>
+			</p>
+			<p>
+				The Google Analytics features GiveToken has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting). 
+				Visitors can <a href="https://tools.google.com/dlpage/gaoptout/"> opt-out </a> of Google Analytics for Display Advertising and customize Google Display Network ads using the Ads Settings.
+			</p>
+			<p>
+				Via Google's 'Opt-Out Method' you will not facilitate the merging of personally-identifiable information with non-personally identifiable information previously collected from Display Advertising features that is based on the DoubleClick 
+				cookie unless you have robust notice of, and the user's prior affirmative (i.e., opt-in) consent to, that merger.
 			</p>
 			<h2>
 			    Using Information About You
