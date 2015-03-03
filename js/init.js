@@ -15,24 +15,6 @@ $(function() {
 });
 
 $(function() {
-	$( "#letter-dialog" ).dialog({
-		autoOpen: false,
-		resizable: false,
-		width: 800,
-		height: 600,
-		modal: true,
-		buttons: {
-			OK: function() {
-				saveLetter();
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	});
-});
-
-$(function() {
 	$( "#send-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
