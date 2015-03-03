@@ -736,47 +736,44 @@ fieldset {
 
 #add-nav-container {
 	height: 40px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: #1f2326;
 	box-sizing: border-box;
 	border: solid 1px black;
 }
 
 #add-nav-bar {
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	float: left;
+	height: 100%;
 }
 
 #add-nav-bar li {
-	display: inline; 
+	display: inline-block; 
 	margin: 0 10px; 
+	height: 100%;
 }
 
-#add-nav-bar li a {
-	color: #aaadaf;
+.add-nav-item {
+	display: inline-block;
+	height: 100%;
+	color: #aaadaf !important;
 	outline: none;
 	border: solid 2px #1f2326;
+	box-sizing: border-box;
+	padding-top: 8px;
 }
 
-#add-nav-bar li a:hover {
-	color: white;
+.add-nav-item-hover:hover {
+	color: white !important;
 	border-bottom: solid 2px #68d74c;
+	cursor: pointer;
 }
 
-.add-nav-link {
-	color: #aaadaf;
-	outline: none;
-	border: solid 2px #1f2326;
-}
-
-.add-nav-link-hover:hover {
-	color: white;
+.add-nav-item-selected {
+	color: white !important;
 	border-bottom: solid 2px #68d74c;
-}
-
-.add-nav-link-selected {
-	color: white;
-	border-bottom: solid 2px #68d74c;
+	pointer-events: none;
 }
 
 /****************** CONTENT ***********************/
@@ -814,24 +811,23 @@ fieldset {
 	margin: 17px auto;
 }
 
-.add-images-icon-link {
+.add-icon-link {
 	display: inline-block;
 	height: 40px;
 	width: 40px;
 	margin: 0px 20px;
 	outline: none;
+	color: #808183 !important;
 }
 
-.ui-widget-content a {
-	color: #808183;
-}
-.ui-widget-content a:hover {
-	color: white;
+.add-icon-link:hover {
+	color: white !important;
 }
 
-.add-images-icon {
+.add-icon {
 	margin: auto;
 }
+
 
 /******************** CONTENT UNDER ICON BAR *******************/
 .add-content {
@@ -862,7 +858,15 @@ fieldset {
 	text-align: center;
 	vertical-align: middle;
 	height: 40px;
+	color: #aaadaf;
 }
+
+.add-button:hover {
+	color: white;
+	background-color: #626c71;
+	cursor: pointer;
+}
+
 
 /******************** IMAGES **************************/
 
@@ -874,7 +878,9 @@ fieldset {
 	box-sizing: border-box;
 	margin-right: 8px;
 	margin-bottom: 10px;
-	vertical-align: top;
+	vertical-align: bottom;
+	overflow: hidden;
+	white-space: nowrap; 
 }
 
 .thumbnail-container-hover:hover {
