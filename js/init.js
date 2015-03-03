@@ -3,6 +3,18 @@ $(function() {
 });
 
 $(function() {
+	$( "#add-dialog" ).dialog({
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		dialogClass: 'add-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+	});
+});
+
+$(function() {
 	$( "#letter-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
