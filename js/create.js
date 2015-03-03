@@ -1394,6 +1394,10 @@ function doAdd() {
 	var element;
 	var bento;
 	$('#add-dialog').dialog('close');
+	
+	// LETTER
+	saveLetter();
+	
 	bentoId = $("#add-dialog").attr("target-bento");
 	bento = $("#"+bentoId)[0];
 

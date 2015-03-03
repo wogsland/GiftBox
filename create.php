@@ -310,13 +310,6 @@
 		</form>
 	</div>
 
-	<div id="letter-dialog" title="Letter">
-		<form>
-			<textarea rows="29" cols="55" id="letter-text" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
-			</textarea>
-		</form>
-	</div>
-	
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
