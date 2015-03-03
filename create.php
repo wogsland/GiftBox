@@ -314,7 +314,7 @@
 	
 	<div id="send-dialog" title="Advanced Send">
 		<p class="dialog-message" id="send-message"></p>
-		<form>
+		<form id="send-form">
 		    <fieldset>
 				<label class="input-label" for="email">Send to:</label>
 				<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30"><br><br>
