@@ -238,7 +238,7 @@ ul {
 	color: #486eb5;
 	display: table-cell;
 	vertical-align: middle;
-	margin: auto;
+	/* margin: auto; */
 	text-align: center;
 }
 
@@ -535,90 +535,6 @@ ul {
 	border: solid 2px #B9B9B9;
 }
 
-/*----------------------------------------*/
-/*          	UPLOADS                   */
-/*----------------------------------------*/
-#uploads {
-	width: 220px;
-	background-color: white;
-	overflow-y: scroll;
-	height: 100%;	
-	float: right;
-}
-
-#tabs {
-	width: 198px;
-	display: inline-block;
-    vertical-align: top;
-	border: none;
-}
-
-#media-tab {
-	padding: 5px;
-}
-
-.tab-text {
-}
-
-.icon-container {
-	width: 100%;
-	position: relative;
-	display: block;
-}	
-
-.tab-icon {
-	display: inline-block;
-	width: 48px;
-	height: 48px;
-	overflow: hidden;
-	border: solid 1px white;
-}
-.tab-icon:hover {
-	border: solid 1px gray;
-}
-
-#select-image-file {
-	opacity: 0;
-	width: 48px;
-	height: 48px;
-	position: absolute;
-	top: 0px;
-	left: -1000px;
-	cursor: pointer;
-}
-
-#select-media-file {
-	opacity: 0;
-	width: 48px;
-	height: 48px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	cursor: pointer;
-}
-
-
-.file-drop-zone {
-	padding: 10px;
-	text-align: center;
-	border: dashed 2px gray;
-	border-radius: 5px;
-	margin: 5px;
-	height: 150px;
-	display: inline-block;
-}
-
-.file-drop-zone.over {
-	background-color: #00ADEF;
-}
-
-.drop-zone-text {
-	vertical-align: middle;
-    pointer-events: none;
-	margin: 0;
-	line-height: 30px;
-}
-
 .download-icon {
     height: 50px;
     width: 50px;
@@ -847,7 +763,18 @@ fieldset {
 	border-bottom: solid 2px #68d74c;
 }
 
-.nav_selected {
+.add-nav-link {
+	color: #aaadaf;
+	outline: none;
+	border: solid 2px #1f2326;
+}
+
+.add-nav-link-hover:hover {
+	color: white;
+	border-bottom: solid 2px #68d74c;
+}
+
+.add-nav-link-selected {
 	color: white;
 	border-bottom: solid 2px #68d74c;
 }
@@ -895,7 +822,6 @@ fieldset {
 	outline: none;
 }
 
-
 .ui-widget-content a {
 	color: #808183;
 }
@@ -940,11 +866,7 @@ fieldset {
 
 /******************** IMAGES **************************/
 
-#add-images-desktop {
-
-}
-
-.photo-thumbnail-container {
+.thumbnail-container {
 	display: inline-block;
 	width: 178px;
 	height: 152px;
@@ -952,13 +874,14 @@ fieldset {
 	box-sizing: border-box;
 	margin-right: 8px;
 	margin-bottom: 10px;
+	vertical-align: top;
 }
 
-.photo-thumbnail-container-hover:hover {
+.thumbnail-container-hover:hover {
 	border: solid 2px white;
 }
 
-.photo-thumbnail-container-selected {
+.thumbnail-container-selected {
 	border: solid 2px #5abb47;
 	background-color: #626c71;
 	pointer-events: none;
@@ -995,3 +918,11 @@ fieldset {
 	margin: 10px;
 }
 
+.hidden-file-input {
+	opacity: 0;
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	top: 0px;
+	left: -1000px;
+}
