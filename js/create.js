@@ -71,7 +71,6 @@ function uploadFileData(fileData, fileName) {
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
 				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
-				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
         xhr.open("POST", "upload.php", true);
