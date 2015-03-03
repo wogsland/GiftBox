@@ -6,6 +6,8 @@ include_once 'mail.php';
 sendMail(
 	$message_recipient_email, 
 	$_POST['subject'], 
-	"Name: ".$_POST['name']."
-	Message: ".$_POST['message'],
-	$_POST['email']);
+	"Name: &nbsp;".$_POST['name']."<br><br>".
+	"Email: &nbsp;".$_POST['email']."<br><br>".
+	"Server: &nbsp;".$server."<br><br>".
+	"Message: &nbsp;".$_POST['message'],
+	$sender_email);
