@@ -115,22 +115,9 @@
 			<div id="uploads">
 				<div id="tabs">
 					<ul>
-						<li><a class="tab-text" href="#images-tab">Images</a></li>
 						<li><a class="tab-text" href="#media-tab">Downloads</a></li>
 					</ul>
-					<div class="tab-panel" id="images-tab">
-						<div class="icon-container" id="images-icon-container">
-							<ul class="icon-list">
-								<li class="tab-icon">
-									<img id="select-image" src="images/computer.png">
-									<input type="file" multiple id="select-image-file" />
-								</li>
-							</ul>
-						</div>
-						<div class="file-drop-zone" id="image-drop-zone">
-							<p class="drop-zone-text">Drag and drop image files here</p>
-						</div>
-					</div>
+
 					<div class="tab-panel" id="media-tab">
 						<div class="icon-container" id="media-icon-container">
 							<ul class="icon-list" id="media-icon-list">
@@ -178,42 +165,48 @@
 						<div id="column-3-1" class="column height100 width33">
 							<div id="column-3-4" class="padded column height33 width100">
 								<div class="bento" id="bento-3-1">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-1-slider"></div>
-									<div class="close-button" id="bento-3-1-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-1-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-5" class="padded column height66 width100">
 								<div class="bento" id="bento-3-2">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-2-slider"></div>
-									<div class="close-button" id="bento-3-2-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-2-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>
 						<div id="column-3-2" class="column height100 width33">
 							<div id="column-3-6" class="padded column height50 width100">
 								<div class="bento" id="bento-3-3">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-3-slider"></div>
-									<div class="close-button" id="bento-3-3-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-3-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-7" class="padded column height50 width100">
 								<div class="bento" id="bento-3-4">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-4-slider"></div>
-									<div class="close-button" id="bento-3-4-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-4-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>
 						<div id="column-3-3" class="column height100 width33">
 							<div id="column-3-8" class="padded column height66 width100">
 								<div class="bento" id="bento-3-5">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-5-slider"></div>
-									<div class="close-button" id="bento-3-5-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-5-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-9" class="padded column height33 width100">
 								<div class="bento" id="bento-3-6">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-6-slider"></div>
-									<div class="close-button" id="bento-3-6-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-3-6-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>	
@@ -223,6 +216,7 @@
 						<div class="horizontal divider" id="divider-3-4"></div>
 						<div class="horizontal divider" id="divider-3-5"></div>
 					</div>
+					
 					<div class="template" id="template-2">
 						<div class="divider-container" id="divider-container-2-1"></div>
 						<div class="divider-container" id="divider-container-2-2"></div>
@@ -230,35 +224,40 @@
 						<div class="divider-container" id="divider-container-2-4"></div>
 						<div id="column-2-1" class="column height100 width50">
 							<div id="column-2-3" class="padded column height50 width100">
-								<div class="bento" id="bento-2-1">
+								<div class="bento" id="bento-2-1" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-1-slider"></div>
-									<div class="close-button" id="bento-2-1-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-2-1-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-2-4" class="padded column height50 width100">
-								<div class="bento" id="bento-2-2">
+								<div class="bento" id="bento-2-2" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-2-slider"></div>
-									<div class="close-button" id="bento-2-2-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-2-2-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>
 						<div id="column-2-2" class="column height100 width50">
 							<div id="column-2-5" class="padded column height33 width100">
-								<div class="bento" id="bento-2-3">
+								<div class="bento" id="bento-2-3" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-3-slider"></div>
-									<div class="close-button" id="bento-2-3-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-2-3-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-2-6" class="padded column height33 width100">
-								<div class="bento" id="bento-2-4">
+								<div class="bento" id="bento-2-4" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-4-slider"></div>
-									<div class="close-button" id="bento-2-4-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-2-4-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-2-7" class="padded column height33 width100">
-								<div class="bento" id="bento-2-5">
+								<div class="bento" id="bento-2-5" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-5-slider"></div>
-									<div class="close-button" id="bento-2-5-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-2-5-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>	
@@ -267,33 +266,38 @@
 						<div class="horizontal divider" id="divider-2-3"></div>
 						<div class="horizontal divider" id="divider-2-4"></div>
 					</div>
+					
 					<div class="template" id="template-1">
 						<div class="divider-container" id="divider-container-1-1"></div>
 						<div class="divider-container" id="divider-container-1-2"></div>
 						<div class="divider-container" id="divider-container-1-3"></div>
 						<div id="column-1-1" class="column padded height100 width33">
-							<div class="bento" id="bento-1-1">
+							<div class="bento" id="bento-1-1" onclick="bentoClick(this)">
+								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-1-slider"></div>
-								<div class="close-button" id="bento-1-1-close" onclick="closeClicked(this)"></div>
+								<div class="close-button" id="bento-1-1-close" onclick="closeClicked(event, this)"></div>
 							</div>
 						</div>
 						<div id="column-1-2" class="column padded height100 width33">
-							<div class="bento" id="bento-1-2">
+							<div class="bento" id="bento-1-2" onclick="bentoClick(this)">
+								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-2-slider"></div>
-								<div class="close-button" id="bento-1-2-close" onclick="closeClicked(this)"></div>
+								<div class="close-button" id="bento-1-2-close" onclick="closeClicked(event, this)"></div>
 							</div>
 						</div>
 						<div id="column-1-3" class="column height100 width33">
 							<div id="column-1-4" class="column padded height50 width100">
-								<div class="bento" id="bento-1-3">
+								<div class="bento" id="bento-1-3" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-1-3-slider"></div>
-									<div class="close-button" id="bento-1-3-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-1-3-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-1-5" class="column padded height50 width100">
-								<div class="bento" id="bento-1-4">
+								<div class="bento" id="bento-1-4" onclick="bentoClick(this)">
+									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-1-4-slider"></div>
-									<div class="close-button" id="bento-1-4-close" onclick="closeClicked(this)"></div>
+									<div class="close-button" id="bento-1-4-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 						</div>
@@ -344,6 +348,69 @@
 		</form>
 	</div>
 	
+	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
+		<input type="file" multiple id="select-image-file" />
+		<div id="add-nav-container">
+			<ul id="add-nav-bar">
+				<li><a class="add-nav-link" id="add-stock" href="javascript:void(0)" onclick="selectAddNav(this)">STOCK LIBRARY</a></li>
+				<li><a class="add-nav-link" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</a></li>
+				<li><a class="add-nav-link" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</a></li>
+				<li><a class="add-nav-link" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</a></li>
+			</ul>
+		</div>
+		
+			<!------------------ STOCK LIBRARY ------------------------>
+			<div id="add-stock-container" class="add-content-container">
+				<div class="add-content add-content-no-icons">
+				</div>
+			</div>
+			
+			<!--------------------- IMAGES ---------------------------->
+			<div id="add-images-container" class="add-content-container">
+				<div class="add-content-icon-bar">
+					<div class="add-icon-container">
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Facebook Images')"><i class="fa fa-facebook fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr Images')"><i class="fa fa-flickr fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox Images')"><i class="fa fa-dropbox fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
+					</div>
+				</div>
+				<div class="add-content">
+					<div id="add-images-desktop">
+					</div>
+				</div>
+			</div>
+
+			<!--------------------- VIDEO & AUDIO --------------------->
+			<div id="add-video-audio-container" class="add-content-container">
+				<div class="add-content-icon-bar">
+					<div class="add-icon-container">
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-youtube fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Vimeo Video')"><i class="fa fa-vimeo-square fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-soundcloud fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-spotify fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox Video/Audio')"><i class="fa fa-dropbox fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
+					</div>
+				</div>
+				<div class="add-content">
+				</div>
+			</div>
+
+			<!------------------------ LETTER ------------------------->
+			<div id="add-letter-container" class="add-content-container">
+				<form id="letter-form">
+					<textarea id="letter-text">
+					</textarea>
+				</form>
+			</div>
+			
+		<div id="add-button-container">
+			<a class="add-button" href="javascript:void(0)" onclick="$('#add-dialog').dialog('close')">CANCEL</a>
+			<a class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</a>
+		</div>
+	</div>
+	
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
 			<fieldset>
@@ -376,13 +443,6 @@
 			bento.addEventListener('drop', handleDrop, false);
 			bento.addEventListener('dragend', handleDragEnd, false);
 		});
-		
-		var dropZone = document.getElementById("image-drop-zone");
-		dropZone.addEventListener('dragenter', handleAddImageDragEnter, false);
-		dropZone.addEventListener('dragover', handleAddImageDragOver, false);
-		dropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
-		dropZone.addEventListener('drop', handleAddImageDrop, false);
-		dropZone.addEventListener('dragend', handleAddImageDragEnd, false);
 		
 		dropZone = document.getElementById("media-drop-zone");
 		dropZone.addEventListener('dragenter', handleAddImageDragEnter, false);

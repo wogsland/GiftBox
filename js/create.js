@@ -3,10 +3,10 @@ var videoType = /video.*/;
 var audioType = /audio.*/;
 
 function addText(text, container) {
-	var p = document.createElement("p");
-	p.innerHTML = text;
-	p.classList.add("file-name");
-	container.appendChild(p);
+	var div = document.createElement("div");
+	div.innerHTML = text;
+	div.classList.add("file-name");
+	container.appendChild(div);
 }
 
 function isYouTube(url) {
@@ -195,6 +195,9 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
 	bento.imageContainer = imageContainer;
+	if (imageFile) {
+		bento.image_file_name = imageFile.name;
+	}
 
 	// make the IMG draggable inside the DIV
 	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
@@ -220,7 +223,6 @@ function handleDrop(e) {
 			if (file.type.match(imageType)) {
 				imageSrc = e.dataTransfer.getData('text/uri-list');
 				addImage(this, imageSrc, file, null);
-				this.image_file_name = file.name;
 			} else if (file.type.match(audioType)) {
 				// Remove any existing audio
 				if (this.audio) {
@@ -447,24 +449,29 @@ function addSpotify(url) {
 }
 
 function handleImageFiles(files) {
-	var tabs = document.getElementById("images-tab");
+	var tabs = document.getElementById("add-images-desktop");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
 		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
-			alert("This drop zone only accepts image files (.jpg, .png, etc.).");
+			openMessage("Select Image Files", file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
 		}
 
+		var container = document.createElement("div");
+		container.classList.add("photo-thumbnail-container");
+		container.classList.add("photo-thumbnail-container-hover");
+		container.id = "photo-thumbnail-container-"+($(".photo-thumbnail-container").size()+1);
+		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
 		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
 		img.id = file.name;
-		img.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(img);
-		addText(file.name, tabs);
+		container.appendChild(img);
+		tabs.appendChild(container);
+		addText(file.name, container);
 	}
 }
 
@@ -564,7 +571,7 @@ function showControl(controlId, target) {
 	control.target = target;
 }
 
-function closeClicked(closeButton) {
+function closeClicked(event, closeButton) {
 	if (closeButton.target) {
 		if (closeButton.target.nodeName === "VIDEO") {
 			closeButton.parentNode.video = null;
@@ -581,6 +588,7 @@ function closeClicked(closeButton) {
 		hideControl(closeButton.id);
 		hideControl(closeButton.parentNode.id + "-slider");
 	}
+	event.stopPropagation();
 }
 
 function resizeContainer(bento, img, div) {
@@ -1389,5 +1397,65 @@ function showTemplates(number) {
 	} else {
 		$(".template-thumbnail").css("display", "none");
 		$("#template-thumbnail-"+number).css("display", "inline-block");
+	}
+}
+
+function bentoClick(bento) {
+	$("#add-dialog").attr("target-bento", bento.id);
+	$("#add-dialog").dialog("open");
+}
+
+function selectAddNav(nav) {
+	var selectedNav = $("#"+nav.id);
+
+/*
+	// restore all link styles
+	$(".add-nav-link").each(function(i) {
+
+  		$(this).removeClass("sidebar-nav-hover");
+		$(this).addClass("sidebar-nav-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+		
+	});
+
+	// set the selected icon
+	selectedNav.removeClass("sidebar-nav-hover");
+	selectedNav.removeClass(nav.id);
+	selectedNav.addClass(nav.id+"-selected");
+
+*/
+	// hide all sidebar nav containers
+	$(".add-content-container").css("display", "none");
+
+	// show the selected container
+	$("#"+nav.id+"-container").css("display", "block");
+}
+
+function selectImage(image) {
+	var selectedImage = $("#"+image.id);
+	
+	// restore all number buttons
+	$(".photo-thumbnail-container").each(function(i) {
+		$(this).removeClass("photo-thumbnail-container-hover");
+		$(this).addClass("photo-thumbnail-container-hover");
+		$(this).removeClass("photo-thumbnail-container-selected");
+	});
+	
+	// set the selected number button
+	selectedImage.removeClass("photo-thumbnail-container-hover");
+	selectedImage.addClass("photo-thumbnail-container-selected");
+}
+
+function doAdd() {
+	$('#add-dialog').dialog('close');
+
+	var jqueryImage = $(".photo-thumbnail-container-selected > img");
+	if (jqueryImage.size() > 0) {
+		var bentoID = $("#add-dialog").attr("target-bento");
+		var image = jqueryImage[0];
+		var bento = $("#"+bentoID)[0];
+		addImage(bento, image.src, image.file, null);
 	}
 }
