@@ -1388,6 +1388,12 @@ function selectImage(image) {
 	selectedImage.addClass("thumbnail-container-selected");
 }
 
+function removeSelection(parentId) {
+	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
+	jqueryContainer.removeClass("thumbnail-container-selected");
+	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
 function doAdd() {
 	var jqueryObject;
 	var bentoId;
@@ -1404,6 +1410,7 @@ function doAdd() {
 	// IMAGE
 	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > img");
 	if (jqueryObject.size() > 0) {
+		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
 		addImage(bento, element.src, element.file, null);
 	}
@@ -1414,6 +1421,7 @@ function doAdd() {
 		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > video");
 	}
 	if (jqueryObject.size() > 0) {
+		removeSelection("add-av-desktop");
 		element = jqueryObject[0];
 		if (element.file.type.match(audioType)) {
 			addImage(bento, element.src, null, null);
