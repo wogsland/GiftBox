@@ -1348,24 +1348,18 @@ function bentoClick(bento) {
 function selectAddNav(nav) {
 	var selectedNav = $("#"+nav.id);
 
-/*
 	// restore all link styles
-	$(".add-nav-link").each(function(i) {
-
-  		$(this).removeClass("sidebar-nav-hover");
-		$(this).addClass("sidebar-nav-hover");
-		$(this).removeClass($(this).attr("id"));
-		$(this).addClass($(this).attr("id"));
-		$(this).removeClass($(this).attr("id")+"-selected");
+	$(".add-nav-item").each(function(i) {
+  		$(this).removeClass("add-nav-item-hover");
+		$(this).addClass("add-nav-item-hover");
+		$(this).removeClass("add-nav-item-selected");
 		
 	});
 
 	// set the selected icon
-	selectedNav.removeClass("sidebar-nav-hover");
-	selectedNav.removeClass(nav.id);
-	selectedNav.addClass(nav.id+"-selected");
+	selectedNav.removeClass("add-nav-item-hover");
+	selectedNav.addClass("add-nav-item-selected");
 
-*/
 	// hide all sidebar nav containers
 	$(".add-content-container").css("display", "none");
 

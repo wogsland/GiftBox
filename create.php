@@ -286,9 +286,9 @@
 		<form id="send-form">
 		    <fieldset>
 				<label class="input-label" for="email">Send to:</label>
-				<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="30"><br><br>
+				<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address"><br><br>
 				<label class="input-label" for="preview-link">Or, copy this link into an email and send it yourself:</label>
-				<input class="dialog-input" id="preview-link" name="preview-link" type="text" size="60" value="" readonly="readonly">
+				<input class="dialog-input" id="preview-link" name="preview-link" type="text"value="" readonly="readonly">
 		    </fieldset>
 		</form>
 	</div>	
@@ -297,15 +297,15 @@
 		<form>
 		    <fieldset>
 				<label class="input-label" for="save-name">Name</label>
-				<input type="text" name="save-name" id="save-name" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
+				<input class="dialog-input" type="text" name="save-name" id="save-name">
 		</form>
 	</div>
 
 	<div id="url-dialog">
 		<form>
 		    <fieldset>
-				<labe class="input-label"l for="save-name">Paste link address here</label>
-				<input type="text" name="url" id="url" class="text ui-widget-content ui-corner-all" style="padding: .4em; width: 95%;">
+				<labe class="input-label" for="save-name">Paste link address here</label>
+				<input class="dialog-input" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
 	</div>
@@ -315,10 +315,10 @@
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-				<li><a class="add-nav-link add-nav-link-hover" id="add-stock" href="javascript:void(0)" onclick="selectAddNav(this)">STOCK LIBRARY</a></li>
-				<li><a class="add-nav-link add-nav-link-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</a></li>
-				<li><a class="add-nav-link add-nav-link-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</a></li>
-				<li><a class="add-nav-link add-nav-link-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</a></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this)">STOCK LIBRARY</div></li>
+				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</div></li>
 			</ul>
 		</div>
 		
@@ -332,10 +332,10 @@
 			<div id="add-images-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Facebook Images')"><i class="fa fa-facebook fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr Images')"><i class="fa fa-flickr fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox Images')"><i class="fa fa-dropbox fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><i class="fa fa-facebook fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
 				<div class="add-content">
@@ -348,22 +348,16 @@
 			<div id="add-video-audio-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-youtube fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Vimeo Video')"><i class="fa fa-vimeo-square fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-soundcloud fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-spotify fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox Video/Audio')"><i class="fa fa-dropbox fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-youtube fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-spotify fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
 				<div class="add-content">
-					<div id="add-av-youtube">
-					</div>
-					<div id="add-av-soundcloud">
-					</div>
 					<div id="add-av-desktop">
-					</div>
-					<div id="add-av-spotify">
 					</div>
 				</div>
 			</div>
@@ -371,14 +365,13 @@
 			<!------------------------ LETTER ------------------------->
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
-					<textarea id="letter-text">
-					</textarea>
+					<textarea id="letter-text"></textarea>
 				</form>
 			</div>
 			
 		<div id="add-button-container">
-			<a class="add-button" href="javascript:void(0)" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</a>
-			<a class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</a>
+			<div class="add-button" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</div>
+			<div class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</div>
 		</div>
 	</div>
 	
