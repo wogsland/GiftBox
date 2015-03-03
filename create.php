@@ -112,37 +112,6 @@
 				</div>
 			</div>
 
-			<div id="uploads">
-				<div id="tabs">
-					<ul>
-						<li><a class="tab-text" href="#media-tab">Downloads</a></li>
-					</ul>
-
-					<div class="tab-panel" id="media-tab">
-						<div class="icon-container" id="media-icon-container">
-							<ul class="icon-list" id="media-icon-list">
-								<li class="tab-icon">
-									<img class="media-icon-image" id="select-media"  width="48" height="48" src="images/computer.png">
-									<input type="file" multiple id="select-media-file" />
-								</li>
-								<li class="tab-icon">
-									<a href="javascript:void(0)" onclick="inputURL('YouTube')"><img class="media-icon-image" width="48" height="48" src="images/youtube_icon.jpg"></a>
-								</li>
-								<li class="tab-icon">
-									<a href="javascript:void(0)" onclick="inputURL('SoundCloud')"><img class="media-icon-image" width="48" height="48" src="images/soundcloud_icon.jpg"></a>
-								</li>
-								<li class="tab-icon">
-									<a href="javascript:void(0)" onclick="inputURL('Spotify')"><img class="media-icon-image" width="48" height="48" src="images/spotify_icon.jpg"></a>
-								</li>
-							</ul>
-						</div>
-						<div class="file-drop-zone" id="media-drop-zone">
-							<p class="drop-zone-text">Drag and drop music/video files here</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			
 			<div id="templates">
 				<div id="template-nav-container">
 					<ul class="template-nav-bar">
@@ -349,13 +318,14 @@
 	</div>
 	
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
-		<input type="file" multiple id="select-image-file" />
+		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
+		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-				<li><a class="add-nav-link" id="add-stock" href="javascript:void(0)" onclick="selectAddNav(this)">STOCK LIBRARY</a></li>
-				<li><a class="add-nav-link" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</a></li>
-				<li><a class="add-nav-link" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</a></li>
-				<li><a class="add-nav-link" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</a></li>
+				<li><a class="add-nav-link add-nav-link-hover" id="add-stock" href="javascript:void(0)" onclick="selectAddNav(this)">STOCK LIBRARY</a></li>
+				<li><a class="add-nav-link add-nav-link-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</a></li>
+				<li><a class="add-nav-link add-nav-link-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</a></li>
+				<li><a class="add-nav-link add-nav-link-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</a></li>
 			</ul>
 		</div>
 		
@@ -390,10 +360,18 @@
 						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-soundcloud fa-3x add-images-icon"></i></a>
 						<a class="add-images-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-spotify fa-3x add-images-icon"></i></a>
 						<a class="add-images-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox Video/Audio')"><i class="fa fa-dropbox fa-3x add-images-icon"></i></a>
-						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
+						<a class="add-images-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-images-icon"></i></a>
 					</div>
 				</div>
 				<div class="add-content">
+					<div id="add-av-youtube">
+					</div>
+					<div id="add-av-soundcloud">
+					</div>
+					<div id="add-av-desktop">
+					</div>
+					<div id="add-av-spotify">
+					</div>
 				</div>
 			</div>
 
@@ -435,22 +413,6 @@
 	</div>
 
 	<script>
-		var bentos = document.querySelectorAll('.bento');
-		[].forEach.call(bentos, function(bento) {
-			bento.addEventListener('dragenter', handleDragEnter, false);
-			bento.addEventListener('dragover', handleDragOver, false);
-			bento.addEventListener('dragleave', handleDragLeave, false);
-			bento.addEventListener('drop', handleDrop, false);
-			bento.addEventListener('dragend', handleDragEnd, false);
-		});
-		
-		dropZone = document.getElementById("media-drop-zone");
-		dropZone.addEventListener('dragenter', handleAddImageDragEnter, false);
-		dropZone.addEventListener('dragover', handleAddImageDragOver, false);
-		dropZone.addEventListener('dragleave', handleAddImageDragLeave, false);
-		dropZone.addEventListener('drop', handleAddMediaDrop, false);
-		dropZone.addEventListener('dragend', handleAddImageDragEnd, false);
-		
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
 		
