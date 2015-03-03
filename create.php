@@ -377,7 +377,7 @@
 			</div>
 			
 		<div id="add-button-container">
-			<a class="add-button" href="javascript:void(0)" onclick="$('#add-dialog').dialog('close')">CANCEL</a>
+			<a class="add-button" href="javascript:void(0)" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</a>
 			<a class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</a>
 		</div>
 	</div>
