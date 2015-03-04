@@ -730,6 +730,7 @@ fieldset {
 #add-dialog {
 	overflow: auto;
 	padding: 0px;
+	display: inline;
 }
 
 /************** NAVIGATION BAR ********************/
@@ -931,4 +932,11 @@ fieldset {
 	position: absolute;
 	top: 0px;
 	left: -1000px;
+}
+
+#url {
+	width: 500px;
+	height:  30px;
+	font-size: 16px;
+	margin-top: 5px;
 }
