@@ -133,14 +133,14 @@
 						<div class="divider-container" id="divider-container-3-5"></div>
 						<div id="column-3-1" class="column height100 width33">
 							<div id="column-3-4" class="padded column height33 width100">
-								<div class="bento" id="bento-3-1">
+								<div class="bento" id="bento-3-1" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-1-slider"></div>
 									<div class="close-button" id="bento-3-1-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-5" class="padded column height66 width100">
-								<div class="bento" id="bento-3-2">
+								<div class="bento" id="bento-3-2" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-2-slider"></div>
 									<div class="close-button" id="bento-3-2-close" onclick="closeClicked(event, this)"></div>
@@ -149,14 +149,14 @@
 						</div>
 						<div id="column-3-2" class="column height100 width33">
 							<div id="column-3-6" class="padded column height50 width100">
-								<div class="bento" id="bento-3-3">
+								<div class="bento" id="bento-3-3" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-3-slider"></div>
 									<div class="close-button" id="bento-3-3-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-7" class="padded column height50 width100">
-								<div class="bento" id="bento-3-4">
+								<div class="bento" id="bento-3-4" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-4-slider"></div>
 									<div class="close-button" id="bento-3-4-close" onclick="closeClicked(event, this)"></div>
@@ -165,14 +165,14 @@
 						</div>
 						<div id="column-3-3" class="column height100 width33">
 							<div id="column-3-8" class="padded column height66 width100">
-								<div class="bento" id="bento-3-5">
+								<div class="bento" id="bento-3-5" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-5-slider"></div>
 									<div class="close-button" id="bento-3-5-close" onclick="closeClicked(event, this)"></div>
 								</div>
 							</div>
 							<div id="column-3-9" class="padded column height33 width100">
-								<div class="bento" id="bento-3-6">
+								<div class="bento" id="bento-3-6" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-6-slider"></div>
 									<div class="close-button" id="bento-3-6-close" onclick="closeClicked(event, this)"></div>

@@ -257,6 +257,9 @@ function dropSpotify(bento, trackId) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = contentURI;
@@ -270,6 +273,9 @@ function dropSoundCloud(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
@@ -325,8 +331,10 @@ function addYouTube(url) {
 }
 
 function addSoundCloud(url) {
-    var mediaList = document.getElementById("media-tab");
+    var panel = document.getElementById("add-av-desktop");
 	$.getJSON("https://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
+		var container = createThumbnailContainer();
+		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
 		img.classList.add("photo-thumbnail");
 		if (data.artwork_url) {
@@ -335,10 +343,10 @@ function addSoundCloud(url) {
 			img.src = "images/soundcloud_icon.jpg";
 		}
 		img.id = data.id;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.soundCloudURL = data.uri;
-		mediaList.appendChild(img);
-		addText(data.title, mediaList);
+		container.appendChild(img);
+		panel.appendChild(container);
+		addText(data.title, container);
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
 		console.log(error);
@@ -347,17 +355,19 @@ function addSoundCloud(url) {
 }
 
 function addSpotify(url) {
-    var mediaList = document.getElementById("media-tab");
+    var panel = document.getElementById("add-av-desktop");
 	var trackId = spotifyTrackId(url);
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
+		var container = createThumbnailContainer();
+		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
 		img.classList.add("photo-thumbnail");
 		img.src = data.album.images[1].url;
 		img.id = trackId;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.spotifyTrackId = trackId;
-		mediaList.appendChild(img);
-		addText(data.name, mediaList);
+		container.appendChild(img);
+		panel.appendChild(container);
+		addText(data.name, container);
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
 		console.log(error);
