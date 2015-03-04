@@ -284,26 +284,12 @@ function dropYouTube(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
-}
-
-function handleURIDrop(e) {
-	var textURIList = e.dataTransfer.getData('text/uri-list');
-    var tabs = document.getElementById("media-tab");
-
-	if (isYouTube(textURIList)) {
-		addYouTube(textURIList);
-	} else if (isSoundCloud(textURIList)) {
-		addSoundCloud(textURIList);
-	} else if (isSpotify(textURIList)) {
-		addSpotify(textURIList);
-	} else {
-		var error = "The dropped item is not one of the accepted types.\n\n"+textURIList;
-		console.log(error);
-		alert(error);
-	}
 }
 
 function addYouTube(url) {
@@ -313,21 +299,24 @@ function addYouTube(url) {
 		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-			var title = data.entry.title.$t;
-			var mediaList = document.getElementById("media-tab");
-			var img = document.createElement("img");
-			img.classList.add("photo-thumbnail");
-			img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
-			img.id = videoId;
-			img.addEventListener('dragstart', handleDragStart, false);
-			img.youTubeURL = url;
-			mediaList.appendChild(img);
-			addText(title, mediaList);
-		}).fail(function() {
-			error = "Youtube API call failed.\n\n" + dataURL;
-			console.log(error);
-			alert(error);
-		});	
+				var title = data.entry.title.$t;
+				var panel = document.getElementById("add-av-desktop");
+				var container = createThumbnailContainer();
+				container.onclick = function(){selectImage(this)};
+				var img = document.createElement("img");
+				img.classList.add("photo-thumbnail");
+				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
+				img.id = videoId;
+				img.youTubeURL = url;
+		
+				container.appendChild(img);
+				panel.appendChild(container);
+				addText(title, container);
+			}).fail(function() {
+				error = "Youtube API call failed.\n\n" + dataURL;
+				console.log(error);
+				alert(error);
+			});	
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
 		console.log(error);
@@ -1417,12 +1406,20 @@ function doAdd() {
 	if (jqueryObject.size() > 0) {
 		removeSelection("add-av-desktop");
 		element = jqueryObject[0];
-		if (element.file.type.match(audioType)) {
-			addImage(bento, element.src, null, null);
-			bento.image_file_name = element.file.name.replace(".", "_") + ".jpg";
-			addAudio(bento, window.URL.createObjectURL(element.file), element.file, null);
-		} else if (element.file.type.match(videoType)) {
-			addVideo(bento, null, element.file, null);
+		if (element.file) {
+			if (element.file.type.match(audioType)) {
+				addImage(bento, element.src, null, null);
+				bento.image_file_name = element.file.name.replace(".", "_") + ".jpg";
+				addAudio(bento, window.URL.createObjectURL(element.file), element.file, null);
+			} else if (element.file.type.match(videoType)) {
+				addVideo(bento, null, element.file, null);
+			}
+		} else if (element.youTubeURL) {
+			dropYouTube(bento, element.youTubeURL);
+		} else if (element.spotifyTrackId) {
+			dropSpotify(bento, element.spotifyTrackId)
+		} else if (element.soundCloudURL) {
+			dropSoundCloud(bento, element.soundCloudURL);
 		}
 	}
 }

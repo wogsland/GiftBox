@@ -304,7 +304,7 @@
 	<div id="url-dialog">
 		<form>
 		    <fieldset>
-				<labe class="input-label" for="save-name">Paste link address here</label>
+				<label class="input-label" for="url">Paste link address here</label>
 				<input class="dialog-input" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
@@ -348,10 +348,10 @@
 			<div id="add-video-audio-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
-						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-youtube fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('YouTube')"><i class="fa fa-youtube fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick=""><i class="fa fa-spotify fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('SoundCloud')"><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Spotify')"><i class="fa fa-spotify fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
