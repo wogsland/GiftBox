@@ -1,3 +1,28 @@
+var confirmOnPageExit = function(e) 
+{
+    // If we haven't been passed the event get the window.event
+    e = e || window.event;
+
+    var message = 'Any unsaved changes will be lost!';
+
+    // For IE6-8 and Firefox prior to version 4
+    if (e) 
+    {
+        e.returnValue = message;
+    }
+
+    // For Chrome, Safari, IE8+ and Opera 12+
+    return message;
+};
+
+function saved () {
+	window.onbeforeunload = null;
+}
+
+function unsaved() {
+	window.onbeforeunload = confirmOnPageExit;
+}
+
 $(function() {
 	$( "#status-dialog" ).dialog({ 
 		autoOpen: false, 

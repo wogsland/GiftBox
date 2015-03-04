@@ -29,101 +29,101 @@
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
 </head>
-<body id="create-body">
+<body>
 	<?php include_once("analyticstracking.php") ?>
 	<div id="content-wrapper">
-		<section id="create-section">
-			<div id="palette">
-				<div id="palette-top">
-					<a id="create-page-logo" href="javascript:void(0)" onclick=""><i class="arrow_triangle-left_alt2 popout-arrow"></i></a>
-				</div>
-				<div id="palette-line"></div>
-				<div id="palette-body">
-					<a href="#"><img id="give-token-palette" src="assets/img/logo-light.png" width="225"></a>
-					<a class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
-					<a class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" href="javascript:void(0)" onclick="featureNotAvailable('Text')"></a>
-					<a class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" href="javascript:void(0)" onclick="featureNotAvailable('Opener')"></a>
-					<a class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" href="javascript:void(0)" onclick="selectSidebarTab(this)"></a>
+		<div id="palette">
+			<div id="palette-top">
+				<div class="popout-control" id="hide-palette" onclick="hidePalette()"><i class="fa fa-arrow-left fa-lg popout-arrow"></i></div>
+				<div class="popout-control hidden" id="show-palette" class="hidden" href="javascript:void(0)" onclick="showPalette()"><i class="fa fa-arrow-right fa-lg popout-arrow"></i></div>
+			</div>
+			<div id="palette-body">
+				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
+				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
+				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="featureNotAvailable('Text')"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="featureNotAvailable('Opener')"></div>
+				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
-					<div class="sidebar-tab-container" id="template-tab-container">
-						<span class="template-tab-text">PICK A TEMPLATE</span>
-						<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('all')">ALL</a>
-						<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
-						<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
-						<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
-						<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
-						<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
-						<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
-						<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
-						<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
+				<div class="sidebar-tab-container" id="template-tab-container">
+					<span class="template-tab-text">PICK A TEMPLATE</span>
+					<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('all')">ALL</a>
+					<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
+					<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
+					<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
+					<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
+					<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
+					<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
+					<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
+					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
 
-						<div class="template-thumbnail-container">
-							<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="stack('template-1', 'template-2', 'template-3')">
-								<div class="thumb-padded column height100 width33"></div>
-								<div class="thumb-padded column height100 width33"></div>
-								<div class="thumb-column height100 width33">
-									<div class="thumb-padded thumb-column height50 width100"></div>
-									<div class="thumb-padded thumb-column height50 width100"></div>
-								</div>						
-							</div>
-							
-							<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
-								<div class="thumb-column height100 width50">
-									<div class="thumb-padded thumb-column height50 width100"></div>
-									<div class="thumb-padded thumb-column height50 width100"></div>
-								</div>						
-								<div class="thumb-column height100 width50">
-									<div class="thumb-padded thumb-column height33 width100"></div>
-									<div class="thumb-padded thumb-column height33 width100"></div>
-									<div class="thumb-padded thumb-column height33 width100"></div>
-								</div>						
-							</div>
-							
-							<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
-								<div class="thumb-column height100 width33">
-									<div class="thumb-padded thumb-column height33 width100"></div>
-									<div class="thumb-padded thumb-column height66 width100"></div>
-								</div>						
-								<div class="thumb-column height100 width33">
-									<div class="thumb-padded thumb-column height50 width100"></div>
-									<div class="thumb-padded thumb-column height50 width100"></div>
-								</div>						
-								<div class="thumb-column height100 width33">
-									<div class="thumb-padded thumb-column height66 width100"></div>
-									<div class="thumb-padded thumb-column height33 width100"></div>
-								</div>						
-							</div>
-							
-
+					<div class="template-thumbnail-container">
+						<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="stack('template-1', 'template-2', 'template-3')">
+							<div class="thumb-padded column height100 width33"></div>
+							<div class="thumb-padded column height100 width33"></div>
+							<div class="thumb-column height100 width33">
+								<div class="thumb-padded thumb-column height50 width100"></div>
+								<div class="thumb-padded thumb-column height50 width100"></div>
+							</div>						
 						</div>
+
+						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
+							<div class="thumb-column height100 width50">
+								<div class="thumb-padded thumb-column height50 width100"></div>
+								<div class="thumb-padded thumb-column height50 width100"></div>
+							</div>						
+							<div class="thumb-column height100 width50">
+								<div class="thumb-padded thumb-column height33 width100"></div>
+								<div class="thumb-padded thumb-column height33 width100"></div>
+								<div class="thumb-padded thumb-column height33 width100"></div>
+							</div>						
+						</div>
+
+						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
+							<div class="thumb-column height100 width33">
+								<div class="thumb-padded thumb-column height33 width100"></div>
+								<div class="thumb-padded thumb-column height66 width100"></div>
+							</div>						
+							<div class="thumb-column height100 width33">
+								<div class="thumb-padded thumb-column height50 width100"></div>
+								<div class="thumb-padded thumb-column height50 width100"></div>
+							</div>						
+							<div class="thumb-column height100 width33">
+								<div class="thumb-padded thumb-column height66 width100"></div>
+								<div class="thumb-padded thumb-column height33 width100"></div>
+							</div>						
+						</div>
+
+
 					</div>
-					<div class="sidebar-tab-container" id="send-tab-container">
-						<a href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><div class="send-button" id="facebook-send-button"></div></a>
-						<a href="javascript:void(0)" onclick="featureNotAvailable('Twitter')"><div class="send-button" id="twitter-send-button"></div></a>
-						<a href="javascript:void(0)" onclick="featureNotAvailable('Pinterest')"><div class="send-button" id="pinterest-send-button"></div></a>
-						<a href="javascript:void(0)" onclick="featureNotAvailable('Instagram')"><div class="send-button" id="instagram-send-button"></div></a>
-						<a href="javascript:void(0)" onclick="featureNotAvailable('Google+')"><div class="send-button" id="googleplus-send-button"></div></a>
+				</div>
+				<div class="sidebar-tab-container" id="send-tab-container">
+					<a href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><div class="send-button" id="facebook-send-button"></div></a>
+					<a href="javascript:void(0)" onclick="featureNotAvailable('Twitter')"><div class="send-button" id="twitter-send-button"></div></a>
+					<a href="javascript:void(0)" onclick="featureNotAvailable('Pinterest')"><div class="send-button" id="pinterest-send-button"></div></a>
+					<a href="javascript:void(0)" onclick="featureNotAvailable('Instagram')"><div class="send-button" id="instagram-send-button"></div></a>
+					<a href="javascript:void(0)" onclick="featureNotAvailable('Google+')"><div class="send-button" id="googleplus-send-button"></div></a>
 <!--						<a href="javascript:void(0)" onclick="featureNotAvailable('Send For Corporate')"><div class="palette-button" id="corporate-send"></div></a> -->
-						<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
-						<span class="template-tab-text">LINK</span>
-						<input id="send-link-input" type="text"  readonly="readonly">
-						<button class="palette-button" onclick="send()">ADVANCED SEND</button>
-					</div>
+					<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
+					<span class="template-tab-text">LINK</span>
+					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
+					<button class="palette-button" onclick="send()">ADVANCED SEND</button>
 				</div>
 			</div>
+		</div>
 
-			<div id="templates">
-				<div id="template-nav-container">
-					<ul class="template-nav-bar">
+		<div id="templates">
+			<div id="template-nav-container">
+				<ul class="template-nav-bar">
 
-	<!--				<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
-						<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
-	 -->
-						<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
-						<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
-						<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
-					</ul>
-				</div>
+<!--				<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
+					<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
+ -->
+					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
+					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
+					<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+				</ul>
+			</div>
+			<div id="template-scroll-container">
 				<div id="template-container">
 					<div class="template" id="template-3">
 						<div class="divider-container" id="divider-container-3-1"></div>
@@ -185,7 +185,7 @@
 						<div class="horizontal divider" id="divider-3-4"></div>
 						<div class="horizontal divider" id="divider-3-5"></div>
 					</div>
-					
+
 					<div class="template" id="template-2">
 						<div class="divider-container" id="divider-container-2-1"></div>
 						<div class="divider-container" id="divider-container-2-2"></div>
@@ -235,7 +235,7 @@
 						<div class="horizontal divider" id="divider-2-3"></div>
 						<div class="horizontal divider" id="divider-2-4"></div>
 					</div>
-					
+
 					<div class="template" id="template-1">
 						<div class="divider-container" id="divider-container-1-1"></div>
 						<div class="divider-container" id="divider-container-1-2"></div>
@@ -276,7 +276,7 @@
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	</div>
 
 	<!-- DIALOGS -------------------------------------------------------------------------------------------------------->

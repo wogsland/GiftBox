@@ -2,7 +2,7 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 
-function addText(text, container) {
+function addTitleText(text, container) {
 	var div = document.createElement("div");
 	div.innerHTML = text;
 	div.classList.add("file-name");
@@ -317,7 +317,7 @@ function addYouTube(url) {
 		
 				container.appendChild(img);
 				panel.appendChild(container);
-				addText(title, container);
+				addTitleText(title, container);
 			}).fail(function() {
 				error = "Youtube API call failed.\n\n" + dataURL;
 				console.log(error);
@@ -346,7 +346,7 @@ function addSoundCloud(url) {
 		img.soundCloudURL = data.uri;
 		container.appendChild(img);
 		panel.appendChild(container);
-		addText(data.title, container);
+		addTitleText(data.title, container);
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
 		console.log(error);
@@ -367,7 +367,7 @@ function addSpotify(url) {
 		img.spotifyTrackId = trackId;
 		container.appendChild(img);
 		panel.appendChild(container);
-		addText(data.name, container);
+		addTitleText(data.name, container);
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
 		console.log(error);
@@ -406,7 +406,7 @@ function handleImageFiles(files) {
 		
 		container.appendChild(img);
 		panel.appendChild(container);
-		addText(file.name, container);
+		addTitleText(file.name, container);
 	}
 }
 
@@ -452,7 +452,7 @@ function handleMediaFiles(files) {
 		
 		container.appendChild(element);
 		panel.appendChild(container);
-		addText(file.name, container);
+		addTitleText(file.name, container);
     }
 }
 
@@ -1432,4 +1432,18 @@ function doAdd() {
 			dropSoundCloud(bento, element.soundCloudURL);
 		}
 	}
+}
+
+function hidePalette() {
+	$("#palette").animate({width: "25px"});
+	$("#palette-body").addClass("hidden")
+	$("#hide-palette").addClass("hidden");
+	$("#show-palette").removeClass("hidden");
+}
+
+function showPalette() {
+	$("#palette").animate({width: "260px"});
+	$("#show-palette").addClass("hidden");
+	$("#hide-palette").removeClass("hidden");
+	$("#palette-body").removeClass("hidden");
 }
