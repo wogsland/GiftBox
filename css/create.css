@@ -657,6 +657,7 @@ iframe {
 	margin: auto;
 	outline: none;
 	margin-top: 10px;
+	cursor: pointer;
 }
 
 #facebook-send-button {

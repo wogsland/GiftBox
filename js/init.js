@@ -23,7 +23,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Send: function() {
-				sendGiftbox();
+				sendToken();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );

@@ -97,12 +97,11 @@
 					</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
-					<a href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><div class="send-button" id="facebook-send-button"></div></a>
-					<a href="javascript:void(0)" onclick="featureNotAvailable('Twitter')"><div class="send-button" id="twitter-send-button"></div></a>
-					<a href="javascript:void(0)" onclick="featureNotAvailable('Pinterest')"><div class="send-button" id="pinterest-send-button"></div></a>
-					<a href="javascript:void(0)" onclick="featureNotAvailable('Instagram')"><div class="send-button" id="instagram-send-button"></div></a>
-					<a href="javascript:void(0)" onclick="featureNotAvailable('Google+')"><div class="send-button" id="googleplus-send-button"></div></a>
-<!--						<a href="javascript:void(0)" onclick="featureNotAvailable('Send For Corporate')"><div class="palette-button" id="corporate-send"></div></a> -->
+					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
+					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
+					<div class="send-button" id="pinterest-send-button" onclick="featureNotAvailable('Pinterest')"></div>
+					<div class="send-button" id="instagram-send-button" onclick="featureNotAvailable('Instagram')"></div>
+					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
 					<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
@@ -114,10 +113,6 @@
 		<div id="templates">
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
-
-<!--				<a class="template-button" id="letter-button" href="javascript:void(0)" onclick="$('#letter-text').val(window.top_template.letterText); $('#letter-dialog').dialog('open');">Letter</a>
-					<a class="template-button" id="wrapper-button" href="javascript:void(0)" onclick="wrapper()">Wrapper</a>
- -->
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
 					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
 					<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
@@ -408,19 +403,19 @@
 	
 		template1.giftboxName = "Untitled";
 		template1.giftboxId = null;
-		template1.letterText = null;
+		template1.letterText = "";
 		template1.wrapperType = "";
 		template1.unloadCount = 3;
 		
 		template2.giftboxName = "Untitled";
 		template2.giftboxId = null;
-		template2.letterText = null;
+		template2.letterText = "";
 		template2.wrapperType = "";
 		template2.unloadCount = 3;
 
 		template3.giftboxName = "Untitled";
 		template3.giftboxId = null;
-		template3.letterText = null;
+		template3.letterText = "";
 		template3.wrapperType = "";
 		template3.unloadCount = 3;
 
