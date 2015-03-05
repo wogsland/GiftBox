@@ -164,15 +164,15 @@ ul {
 }
 
 #template-scroll-container {
+	height: calc(100% - 30px);
 	overflow: auto;
-	height: 100%
 }
 
 #template-container {
 	position: relative;
 	width: 1024px;
 	height: 768px;
-	margin: 10px auto;
+	margin: 10px auto 0px auto;
 }
 
 .template-nav-bar {
