@@ -215,7 +215,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	unsaved();
 }
 
-function dropSpotify(bento, trackId) {
+function addSpotify(bento, trackId) {
 	var iframe = document.createElement('iframe');
 	var contentURI = "https://embed.spotify.com/?url=spotify:track:"+trackId;
 	iframe.src = contentURI;
@@ -234,7 +234,7 @@ function dropSpotify(bento, trackId) {
 	unsaved();
 }
 
-function dropSoundCloud(bento, url) {
+function addSoundCloud(bento, url) {
 	var iframe = document.createElement('iframe');
 	iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(url);
 	var width = bento.offsetWidth;
@@ -252,7 +252,7 @@ function dropSoundCloud(bento, url) {
 	unsaved();
 }
 
-function dropYouTube(bento, url) {
+function addYouTube(bento, url) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -271,7 +271,26 @@ function dropYouTube(bento, url) {
 	unsaved();
 }
 
-function addYouTube(url) {
+function createThumbnailContainer(object, titleText, parentId) {
+	var container = document.createElement("div");
+	var inner = document.createElement("div");
+	inner.classList.add("inner-thumbnail-container");
+	container.onclick = function(){selectThumbnail(this)};
+	object.classList.add("photo-thumbnail");
+	container.classList.add("thumbnail-container");
+	container.classList.add("thumbnail-container-hover");
+	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
+	inner.appendChild(object);
+	container.appendChild(inner);
+	if (titleText) {
+		addTitleText(titleText, inner);
+	}
+	document.getElementById(parentId).appendChild(container);
+
+	return container;
+}
+
+function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
@@ -279,18 +298,11 @@ function addYouTube(url) {
 		$.getJSON(dataURL,
 			function(data){
 				var title = data.entry.title.$t;
-				var panel = document.getElementById("add-av-desktop");
-				var container = createThumbnailContainer();
-				container.onclick = function(){selectImage(this)};
 				var img = document.createElement("img");
-				img.classList.add("photo-thumbnail");
 				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 				img.id = videoId;
 				img.youTubeURL = url;
-		
-				container.appendChild(img);
-				panel.appendChild(container);
-				addTitleText(title, container);
+				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
 				error = "Youtube API call failed.\n\n" + dataURL;
 				console.log(error);
@@ -303,13 +315,9 @@ function addYouTube(url) {
 	}
 }
 
-function addSoundCloud(url) {
-    var panel = document.getElementById("add-av-desktop");
+function openSoundCloud(url) {
 	$.getJSON("https://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
-		var container = createThumbnailContainer();
-		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		if (data.artwork_url) {
 			img.src = data.artwork_url.replace("large", "t500x500");
 		} else {
@@ -317,9 +325,7 @@ function addSoundCloud(url) {
 		}
 		img.id = data.id;
 		img.soundCloudURL = data.uri;
-		container.appendChild(img);
-		panel.appendChild(container);
-		addTitleText(data.title, container);
+		createThumbnailContainer(img, data.title, "add-av-desktop");
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
 		console.log(error);
@@ -327,20 +333,14 @@ function addSoundCloud(url) {
 	});
 }
 
-function addSpotify(url) {
-    var panel = document.getElementById("add-av-desktop");
+function openSpotify(url) {
 	var trackId = spotifyTrackId(url);
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
-		var container = createThumbnailContainer();
-		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = data.album.images[1].url;
 		img.id = trackId;
 		img.spotifyTrackId = trackId;
-		container.appendChild(img);
-		panel.appendChild(container);
-		addTitleText(data.name, container);
+		createThumbnailContainer(img, data.name, "add-av-desktop");
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
 		console.log(error);
@@ -348,17 +348,7 @@ function addSpotify(url) {
 	});
 }
 
-function createThumbnailContainer() {
-	var container = document.createElement("div");
-	container.classList.add("thumbnail-container");
-	container.classList.add("thumbnail-container-hover");
-	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
-	
-	return container;
-}
-
-function handleImageFiles(files) {
-	var panel = document.getElementById("add-images-desktop");
+function openImageFiles(files) {
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
@@ -368,28 +358,17 @@ function handleImageFiles(files) {
 			continue;
 		}
 
-		var container = createThumbnailContainer();
-		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
 		img.src = window.URL.createObjectURL(file);
-
-		img.classList.add("photo-thumbnail");
 		img.file = file;
 		img.id = file.name;
-		
-		container.appendChild(img);
-		panel.appendChild(container);
-		addTitleText(file.name, container);
+		createThumbnailContainer(img, file.name, "add-images-desktop");
 	}
 }
 
-function handleMediaFiles(files) {
-    var panel = document.getElementById("add-av-desktop");
+function openMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-
-		var container = createThumbnailContainer();
-		container.onclick = function(){selectImage(this)};
 
 		// if not video or audio go on to next file
 		if (!file.type.match(videoType) && !file.type.match(audioType)) {
@@ -411,7 +390,7 @@ function handleMediaFiles(files) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
 					url, 
-					function() {showAlbumArt(url, file, panel);},
+					function() {showAlbumArt(url, file);},
 					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
 				);
 			} else {
@@ -419,13 +398,9 @@ function handleMediaFiles(files) {
 			}
 		}
 		
-		element.classList.add("photo-thumbnail");
 		element.file = file;
 		element.id = file.name;
-		
-		container.appendChild(element);
-		panel.appendChild(container);
-		addTitleText(file.name, container);
+		createThumbnailContainer(element, file.name, "add-av-desktop");
     }
 }
 
@@ -446,11 +421,11 @@ function showAlbumArt(url, file) {
 }
 
 function handleImageFileSelect(evt) {
-	handleImageFiles(evt.target.files);
+	openImageFiles(evt.target.files);
 }
 
 function handleMediaFileSelect(evt) {
-    handleMediaFiles(evt.target.files);
+    openMediaFiles(evt.target.files);
 }
 
 
@@ -1102,17 +1077,17 @@ function inputURL(site) {
 	$('#url-dialog').dialog('open');	
 }
 
-function addURL() {
+function openURL() {
 	// Get the url
 	var url = document.getElementById("url").value;
 	var title = $("#url-dialog").dialog("option", "title");
 	$("#url-dialog").dialog("close");
 	if (isYouTube(url)) {
-		addYouTube(url);
+		openYouTube(url);
 	} else if (isSoundCloud(url)) {
-		addSoundCloud(url);
+		openSoundCloud(url);
 	} else if (isSpotify(url)) {
-		addSpotify(url);
+		openSpotify(url);
 	} else {
 		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
 		console.log(error);
@@ -1219,12 +1194,12 @@ function clearBento(bento) {
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
 		if (isYouTube(savedBento.content_uri)) {
-			dropYouTube(bento, savedBento.content_uri);
+			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
-			dropSoundCloud(bento, savedBento.content_uri);
+			addSoundCloud(bento, savedBento.content_uri);
 		} else if (isSpotify(savedBento.content_uri)) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
-			dropSpotify(bento, trackId);
+			addSpotify(bento, trackId);
 		}
 	}
 	if (savedBento.image_file_name) {
@@ -1329,8 +1304,13 @@ function bentoClick(bento) {
 	$("#add-dialog").dialog("open");
 }
 
-function selectAddNav(nav) {
-	var selectedNav = $("#"+nav.id);
+function textIconClicked() {
+	$("#add-dialog").dialog("open");
+	selectAddNav("add-letter");
+}
+
+function selectAddNav(navId) {
+	var selectedNav = $("#"+navId);
 
 	// restore all link styles
 	$(".add-nav-item").each(function(i) {
@@ -1348,11 +1328,11 @@ function selectAddNav(nav) {
 	$(".add-content-container").css("display", "none");
 
 	// show the selected container
-	$("#"+nav.id+"-container").css("display", "block");
+	$("#"+navId+"-container").css("display", "block");
 }
 
-function selectImage(image) {
-	var selectedImage = $("#"+image.id);
+function selectThumbnail(thumbnail) {
+	var selectedThumbnail = $("#"+thumbnail.id);
 	
 	// restore all number buttons
 	$(".thumbnail-container").each(function(i) {
@@ -1362,8 +1342,8 @@ function selectImage(image) {
 	});
 	
 	// set the selected number button
-	selectedImage.removeClass("thumbnail-container-hover");
-	selectedImage.addClass("thumbnail-container-selected");
+	selectedThumbnail.removeClass("thumbnail-container-hover");
+	selectedThumbnail.addClass("thumbnail-container-selected");
 }
 
 function removeSelection(parentId) {
@@ -1386,7 +1366,7 @@ function doAdd() {
 	bento = $("#"+bentoId)[0];
 
 	// IMAGE
-	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > img");
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
 	if (jqueryObject.size() > 0) {
 		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
@@ -1394,9 +1374,9 @@ function doAdd() {
 	}
 
 	// VIDEO/AUDIO
-	jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > img");
+	jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
 	if (jqueryObject.size() == 0) {
-		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > video");
+		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > video");
 	}
 	if (jqueryObject.size() > 0) {
 		removeSelection("add-av-desktop");
@@ -1410,11 +1390,11 @@ function doAdd() {
 				addVideo(bento, null, element.file, null);
 			}
 		} else if (element.youTubeURL) {
-			dropYouTube(bento, element.youTubeURL);
+			addYouTube(bento, element.youTubeURL);
 		} else if (element.spotifyTrackId) {
-			dropSpotify(bento, element.spotifyTrackId)
+			addSpotify(bento, element.spotifyTrackId)
 		} else if (element.soundCloudURL) {
-			dropSoundCloud(bento, element.soundCloudURL);
+			addSoundCloud(bento, element.soundCloudURL);
 		}
 	}
 }

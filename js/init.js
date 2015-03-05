@@ -107,7 +107,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Ok: function() {
-				addURL();
+				openURL();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -116,7 +116,7 @@ $(function() {
 		open: function() {
 			$("#url-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					addURL();
+					openURL();
 					return false;
 				}
 			});
