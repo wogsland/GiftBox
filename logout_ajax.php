@@ -1,15 +1,18 @@
 <?php
 include_once 'config.php';
 include_once ('eventLogger.class.php');
-_session_start();
+
+
+$session = _session_start();
 
 $response['login_type'] = $_SESSION['login_type'];
 $response['app_root'] = $app_root;
 $event = new eventLogger($_SESSION['user_id'], LOGOUT);
 $event->log();
 
-session_unset();
-session_destroy();
+$session->stop();
+//session_unset();
+//session_destroy();
 
 $response['status'] = "SUCCESS";
 

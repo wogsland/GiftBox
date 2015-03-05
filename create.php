@@ -40,7 +40,7 @@
 			<div id="palette-body">
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
-				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="featureNotAvailable('Text')"></div>
+				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
 				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="featureNotAvailable('Opener')"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
@@ -310,10 +310,10 @@
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this)">STOCK LIBRARY</div></li>
-				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this)">IMAGES</div></li>
-				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this)">VIDEO & AUDIO</div></li>
-				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this)">LETTER</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
+				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this.id)">LETTER</div></li>
 			</ul>
 		</div>
 		

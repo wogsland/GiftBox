@@ -880,9 +880,7 @@ fieldset {
 	box-sizing: border-box;
 	margin-right: 8px;
 	margin-bottom: 10px;
-	vertical-align: bottom;
 	overflow: hidden;
-	white-space: nowrap; 
 }
 
 .thumbnail-container-hover:hover {
@@ -894,6 +892,13 @@ fieldset {
 	background-color: #626c71;
 	pointer-events: none;
 }
+.inner-thumbnail-container {
+	width: 178px;
+	height: 152px;
+	display: table-cell;
+	vertical-align: bottom;
+	overflow: hidden;
+}
 
 .photo-thumbnail {
 	display: block;
@@ -903,13 +908,13 @@ fieldset {
 }
 
 .file-name {
+	width: 178px;
 	color: white;
 	text-align: center;
 	line-height: 20px;
 	margin: 5px 0px;
-    overflow: hidden;
+	overflow: hidden;
 	white-space: nowrap; 
-	width: 100%;
 	text-overflow: ellipsis;
 }
 
