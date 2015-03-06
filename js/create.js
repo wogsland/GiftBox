@@ -179,7 +179,6 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 
 	// Create the IMG
 	var img = new Image();
-	img.onclick = function(){imageClicked(event, this)};
 	img.id = bento.id + '-image';
 	img.file = imageFile;
 	img.parentBento = bento;
@@ -208,7 +207,14 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	bento.appendChild(imageContainer);
 
 	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
+	$('#'+ img.id)
+		.draggable({ containment: "#" + imageContainer.id})
+		.click(function(){
+            if ( $(this).is('.ui-draggable-dragging') ) {
+                  return;
+            }
+            imageClicked(this);
+      });
 
 	img.src = imageSrc;
 	
@@ -1417,7 +1423,7 @@ function showPalette() {
 	$("#palette-body").removeClass("hidden");
 }
 
-function imageClicked(event, image) {
+function imageClicked(image) {
 	$("#add-hyperlink-dialog").attr("target-image", image.id);
 	$("#add-hyperlink-dialog").dialog("open");
 	event.stopPropagation();
