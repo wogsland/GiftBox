@@ -131,14 +131,14 @@
 								<div class="bento" id="bento-3-1" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-1-slider"></div>
-									<div class="close-button" id="bento-3-1-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-1-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-3-5" class="padded column height66 width100">
 								<div class="bento" id="bento-3-2" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-2-slider"></div>
-									<div class="close-button" id="bento-3-2-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-2-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>
@@ -147,14 +147,14 @@
 								<div class="bento" id="bento-3-3" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-3-slider"></div>
-									<div class="close-button" id="bento-3-3-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-3-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-3-7" class="padded column height50 width100">
 								<div class="bento" id="bento-3-4" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-4-slider"></div>
-									<div class="close-button" id="bento-3-4-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-4-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>
@@ -163,14 +163,14 @@
 								<div class="bento" id="bento-3-5" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-5-slider"></div>
-									<div class="close-button" id="bento-3-5-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-5-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-3-9" class="padded column height33 width100">
 								<div class="bento" id="bento-3-6" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-3-6-slider"></div>
-									<div class="close-button" id="bento-3-6-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-3-6-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>	
@@ -191,14 +191,14 @@
 								<div class="bento" id="bento-2-1" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-1-slider"></div>
-									<div class="close-button" id="bento-2-1-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-2-1-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-2-4" class="padded column height50 width100">
 								<div class="bento" id="bento-2-2" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-2-slider"></div>
-									<div class="close-button" id="bento-2-2-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-2-2-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>
@@ -207,21 +207,21 @@
 								<div class="bento" id="bento-2-3" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-3-slider"></div>
-									<div class="close-button" id="bento-2-3-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-2-3-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-2-6" class="padded column height33 width100">
 								<div class="bento" id="bento-2-4" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-4-slider"></div>
-									<div class="close-button" id="bento-2-4-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-2-4-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-2-7" class="padded column height33 width100">
 								<div class="bento" id="bento-2-5" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-2-5-slider"></div>
-									<div class="close-button" id="bento-2-5-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-2-5-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>	
@@ -239,14 +239,14 @@
 							<div class="bento" id="bento-1-1" onclick="bentoClick(this)">
 								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-1-slider"></div>
-								<div class="close-button" id="bento-1-1-close" onclick="closeClicked(event, this)"></div>
+								<i class="close-button icon_close_alt" id="bento-1-1-close" onclick="closeClicked(event, this)"></i>
 							</div>
 						</div>
 						<div id="column-1-2" class="column padded height100 width33">
 							<div class="bento" id="bento-1-2" onclick="bentoClick(this)">
 								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-2-slider"></div>
-								<div class="close-button" id="bento-1-2-close" onclick="closeClicked(event, this)"></div>
+								<i class="close-button icon_close_alt" id="bento-1-2-close" onclick="closeClicked(event, this)"></i>
 							</div>
 						</div>
 						<div id="column-1-3" class="column height100 width33">
@@ -254,14 +254,14 @@
 								<div class="bento" id="bento-1-3" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-1-3-slider"></div>
-									<div class="close-button" id="bento-1-3-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-1-3-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 							<div id="column-1-5" class="column padded height50 width100">
 								<div class="bento" id="bento-1-4" onclick="bentoClick(this)">
 									<p class="click-to-add">click to add</p>
 									<div class="image-slider" id="bento-1-4-slider"></div>
-									<div class="close-button" id="bento-1-4-close" onclick="closeClicked(event, this)"></div>
+									<i class="close-button icon_close_alt" id="bento-1-4-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
 						</div>
@@ -297,6 +297,15 @@
 	</div>
 
 	<div id="url-dialog">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="url">Paste link address here</label>
+				<input class="dialog-input" type="text" name="url" id="url">
+		    </fieldset>
+		</form>
+	</div>
+
+	<div id="add-hyperlink-dialog" title="Add A Hyperlink To This Image">
 		<form>
 		    <fieldset>
 				<label class="input-label" for="url">Paste link address here</label>
