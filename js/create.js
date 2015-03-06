@@ -133,6 +133,7 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	bento.download_mime_type = videoFile.type;
 	
 	var video = document.createElement('video');
+	video.onclick = function(){videoClicked(event, this)};
 	video.setAttribute('controls', true);
 	video.setAttribute('preload', "auto");
 	if (videoFile) {
@@ -151,6 +152,7 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	video.classList.add("video-js");
 	video.classList.add("vjs-default-skin");
 	video.classList.add("video-player");
+	video.classList.add("no-pointer");
 	bento.appendChild(video);
 	showControl(bento.id + "-close", video);
 	unsaved();
@@ -165,18 +167,19 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.removeChild(bento.video);
 		bento.video = null;
 	}
-	bento.imageContainer = imageContainer;
 	if (imageFile) {
 		bento.image_file_name = imageFile.name;
 	}
 
 	// Create the image scroll container
 	var imageContainer = document.createElement('div');
+	bento.imageContainer = imageContainer;
 	imageContainer.id =  bento.id + '-image-container';
 	imageContainer.style.position = 'absolute';
 
 	// Create the IMG
 	var img = new Image();
+	img.onclick = function(){imageClicked(event, this)};
 	img.id = bento.id + '-image';
 	img.file = imageFile;
 	img.parentBento = bento;
@@ -1026,7 +1029,7 @@ function save() {
 function send() {
 	var giftboxId = window.top_template.giftboxId;
 	if (!giftboxId) {
-		openMessage("Send", "The giftbox must be saved before it can be sent.");
+		openMessage("Send", "The Token must be saved before it can be sent.");
 	} else {
 		$('#send-dialog').dialog('open');	
 	}
@@ -1037,7 +1040,7 @@ function preview() {
 	var unloadType = window.top_template.wrapperType;
 	var unloadCount = window.top_template.unloadCount
 	if (!giftboxId) {
-		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
+		openMessage("Preview", "The Token must be saved before it can be previewed.");
 	} else {
 		if (window.top_template.wrapperType) {
 			window.open("second-harvest.php?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
@@ -1186,8 +1189,8 @@ function clearBento(bento) {
 	if (bento.iframe) {
 		bento.removeChild(bento.iframe);
 		bento.iframe = null;
-		bento.contentURI = null;
 	}
+	bento.contentURI = null;
 	bento.file = null;
 }
 
@@ -1252,6 +1255,7 @@ function createCroppedImage (bento, image, container) {
 function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
 }
+
 function selectSidebarTab(tab) {
 	var selectedIcon = $("#"+tab.id);
 
@@ -1411,4 +1415,18 @@ function showPalette() {
 	$("#show-palette").addClass("hidden");
 	$("#hide-palette").removeClass("hidden");
 	$("#palette-body").removeClass("hidden");
+}
+
+function imageClicked(event, image) {
+	$("#add-hyperlink-dialog").attr("target-image", image.id);
+	$("#add-hyperlink-dialog").dialog("open");
+	event.stopPropagation();
+}
+
+function videoClicked(event, video) {
+	event.stopPropagation();
+}
+
+function addImageHyperlink() {
+	featureNotAvailable("Add Hyperlink To Image");
 }

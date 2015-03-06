@@ -125,6 +125,32 @@ $(function() {
 });
 
 $(function() {
+	$( "#add-hyperlink-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				addImageHyperlink();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#url-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					openURL();
+					return false;
+				}
+			});
+		}
+	});
+});
+
+$(function() {
 	$( "#confirm-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
