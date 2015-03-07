@@ -12,8 +12,6 @@
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 	<script src="js/preview.js"></script>
 </head>
