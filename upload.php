@@ -12,7 +12,7 @@ if ($file_name) {
 		$file_data =  base64_decode(substr($file_data, $pos + 7));
 	}
 	if ($google_app_engine) {
-		$ctx = stream_context_create(['gs'=>['acl'=>'public-read','Content-Type' => $content_type, enable_cache => false]]);
+		$ctx = stream_context_create(['gs'=>['acl'=>'public-read','Content-Type' => $content_type, 'enable_cache' => false]]);
 		file_put_contents($file_storage_path.$file_name, $file_data, 0, $ctx);
 	} else {
 		file_put_contents($file_storage_path.$file_name, $file_data);
