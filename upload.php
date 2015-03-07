@@ -19,7 +19,7 @@ if ($file_name) {
 				'Content-Type' => $content_type, 
 				'enable_cache' => false,
 				'read_cache_expiry_seconds' => 0,
-				'Cache-Control' => 'private, max-age=0,no-transform'
+				'cache-control' => 'private, max-age=0,no-transform'
 				]
 			]
 		);
