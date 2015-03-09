@@ -127,7 +127,7 @@ include_once 'config.php';
 		            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
 		            <h4 class="profile-name mb5">Tom Brady</h4>
 		            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-		            <div class="small-txt mb5"><i class="fa fa-star"></i> 9237 Gift Points</div>
+		            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
 		            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
 		            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
 		        
@@ -296,7 +296,7 @@ include_once 'config.php';
 					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , <span id="preview-1">...</span><span id="full-post-1" style="display:none">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , <span id="preview-1">...</span><span id="full-post-1" style="display:none;">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -326,6 +326,62 @@ include_once 'config.php';
 					        </li>
 				    	</ul>
 				    </div>
+				    <div class="tab-pane" id="spotlight">
+			    		<h2>Spotlight</h2>
+		    			<ul class="timeline">
+		    				<!--Plug this up to the list of elements in the database. -->
+		    				<li>
+		    				 	<div class="timeline-badge solid-blue"><i class="fa fa-user"></i></div>
+		    				 	<div class="timeline-panel">
+			    				 	<div class="text-center">
+							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+							            <h4 class="profile-name mb5">Tom Brady</h4>
+							            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
+							            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+							            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
+							        </div>
+								</div>
+								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
+								<div class="timeline-panel timeline-panel-post">
+									<div class="timeline-heading">
+					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+
+					            	</div>
+								</div>
+		    				</li>
+		    				<li>
+					        	<div class="timeline-badge solid-blue"><i class="fa fa-user"></i></div>
+		    				 	<div class="timeline-panel">
+			    				 	<div class="text-center">
+							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+							            <h4 class="profile-name mb5">Tom Brady</h4>
+							            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
+							            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+							            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
+							        </div>
+								</div>
+								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
+								<div class="timeline-panel-post timeline-panel">
+									<div class="timeline-heading">
+					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		
+					            	</div>
+								</div>
+					        </li>
+		    			</ul>
+			    	</div>
 			    </div>
 			</div>
 		</div>
@@ -334,6 +390,7 @@ include_once 'config.php';
 
 
 <script>
+
 
 function togglePost(){
 	var val = this.id.substring('post-title'.length);
@@ -348,7 +405,6 @@ function expandPost(el){
 	var val = el.id.substring('post-title'.length);
 	document.getElementById('full-post' + val).style.display = 'initial';
 	document.getElementById('preview' + val).style.display = 'none';
-	//document.getElementsByClassName('test')[0].style.width = '800px';
 
 	var li = document.getElementsByClassName('headers');
 	for(i = 0; i < li.length; i++){
