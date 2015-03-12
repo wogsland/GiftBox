@@ -1052,6 +1052,10 @@ object {
   padding-bottom: 25px;
   text-align: center; 
   }
+  .plan:hover {
+	margin-top: 6px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
+  }
 .plan .head {
 padding: 12px 16px;
  }
@@ -1088,6 +1092,10 @@ width: 80%;
   }
 .plan .select-btn{
 padding: 12px 0;
+height: 66px;
+vertical-align: middle;
+color: white;
+font-size: 20px;
 }
 .plan .btn {
 padding: 10px 30px;
@@ -1115,13 +1123,13 @@ font-weight: 500;
 .plan ul strong {
   font-weight: 700; }
 .plan.recommended {
-	margin-top: 6px;
-	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
+//	margin-top: 6px;
+//	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
 	position: relative;
 	z-index: 99; 
 }
 .plan.recommended {
-  background: #FDF8E2; 
+//  background: #FDF8E2; 
 }
 .plan.recommended .btn { }
       

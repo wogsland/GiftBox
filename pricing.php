@@ -1,5 +1,7 @@
 <?php
-include_once 'config.php';
+	include_once 'util.php';
+	include_once 'config.php';
+	_session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -104,8 +106,13 @@ include_once 'config.php';
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.php" class="external">Home</a></li>
-					<li><a href="account.php" class="external">My Account</a></li>
-					<li><a href="#">Login</a></li>
+					<?php
+					if (logged_in()) {
+						echo '<li><a href="account.php" class="external">My Account</a></li>';
+					} else {
+						echo '<li><a href="#">Login</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 		</div> <!-- /END CONTAINER -->
@@ -155,7 +162,15 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
-              <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Sign Up<i class="fa fa-chevron-right"></i></button></div>
+              <div class="select-btn solid-blue">
+				<?php
+					if (logged_in()) {
+						echo 'Already a member!';
+					} else {
+						echo '<button type="button" class="btn dark-grey">Sign Up<i class="fa fa-chevron-right"></i></button>';
+					}
+				?>
+			  </div>
 
            </div>
              
@@ -200,7 +215,7 @@ include_once 'config.php';
           <div class="col-sm-3 col-md-3 ">
               
               <div class="plan recommended" data-plan="premium">
-								<div class="popular-badge">MOST POPULAR</div>
+<!--								<div class="popular-badge">MOST POPULAR</div>  -->
                 <div class="head">
                   <h2>Premium</h2>
                 </div>    
