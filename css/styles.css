@@ -1051,6 +1051,8 @@ object {
   background: #f7f7f7;
   position: relative;
   z-index: 1;
+  -webkit-transition: .5s; /* Safari */
+  transition: .5s;
   }
   .plan-hover:hover {
 	background: #FDF8E2; 
@@ -1062,7 +1064,7 @@ object {
 	background: #FDF8E2; 
 	margin-top: 6px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
-	z-index: 99;
+	z-index: 98;
   }
   
 .plan .head {
