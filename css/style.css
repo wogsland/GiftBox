@@ -13,14 +13,10 @@ body {
 	font-weight: 600;
 }
 
-a {
-    text-decoration: none;
-    transition: color 200ms linear 0s;
-}
-
 li {
     list-style: none;
 }
+
 
 .white {
 	color: white;
@@ -1127,11 +1123,6 @@ body {
     font-size: 16px;
 	font-weight: 600;
 
-}
-
-a {
-    text-decoration: none;
-    transition: color 200ms linear 0s;
 }
 
 li {
