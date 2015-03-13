@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="author" content="Maverick Blair & Co. | www.maverickblair.com">
+<meta name="author" content="Gary Peters">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE TITLE -->
@@ -125,7 +125,7 @@
 					<li><a href="index.html#features">Features</a></li>
 					<li><a href="index.html#brief1">How It Works?</a></li>
 					<li><a href="index.html#screenshot-section">Examples</a></li>
-					<li><a href="pricing.html" class="external">Pricing</a></li>
+					<li><a href="pricing.php" class="external">Pricing</a></li>
 					<li><a href="index.html#contact">Contact</a></li>
 					<?php
 					if (logged_in()) {
