@@ -3,20 +3,14 @@ $(function() {
 });
 
 $(function() {
-	$( "#letter-dialog" ).dialog({
+	$( "#add-dialog" ).dialog({
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,
-		width: 800,
-		height: 600,
+		width: 620,
+		height: 580,
 		modal: true,
-		buttons: {
-			OK: function() {
-				saveLetter();
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		}
 	});
 });
 

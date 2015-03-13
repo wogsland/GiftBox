@@ -3,10 +3,10 @@ var videoType = /video.*/;
 var audioType = /audio.*/;
 
 function addText(text, container) {
-	var p = document.createElement("p");
-	p.innerHTML = text;
-	p.classList.add("file-name");
-	container.appendChild(p);
+	var div = document.createElement("div");
+	div.innerHTML = text;
+	div.classList.add("file-name");
+	container.appendChild(div);
 }
 
 function isYouTube(url) {
@@ -71,7 +71,6 @@ function uploadFileData(fileData, fileName) {
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
 				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
-				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
         xhr.open("POST", "upload.php", true);
@@ -89,26 +88,15 @@ function uploadFile(file) {
 	reader.readAsDataURL(file);
 }
 
-/************** BENTO DRAG/DROP HANDLERS *****************/
-
-function handleDragEnter(e) {
-	this.classList.add('over');
-}
-
-function handleDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	e.dataTransfer.dropEffect = 'move';
-
-	return false;
-}
-
-function handleDragLeave(e) {
-	this.classList.remove('over');
-}
-
 function addAudio (bento, audioSrc, audioFile, savedBento) {
+	// Remove any existing audio
+	if (bento.audio) {
+		bento.removeChild(bento.audio);
+		bento.audio = null;
+	}
+	bento.download_file_name = audioFile.name;
+	bento.download_mime_type = audioFile.type;
+	
 	// Create the audio element
 	var audio = document.createElement('audio');
 	audio.setAttribute('controls', true);
@@ -125,12 +113,24 @@ function addAudio (bento, audioSrc, audioFile, savedBento) {
 	closeButton.id = audio.id + "-close";
 	closeButton.classList.add("audio-close-button");
 	closeButton.style.zIndex = 11;
-	closeButton.onclick = function(){closeClicked(closeButton);};
+	closeButton.target = audio;
+	closeButton.onclick = function(){closeClicked(event, closeButton);};
 	bento.appendChild(closeButton);
 	showControl(closeButton.id, audio);
 }
 
 function addVideo (bento, videoSrc, videoFile, savedBento) {
+	if (bento.imageContainer) {
+		bento.removeChild(this.imageContainer);
+		bento.imageContainer = null;
+		hideControl(bento.id + "-slider");
+	} else if (bento.video) {
+		bento.removeChild(bento.video);
+		bento.video = null;
+	}
+	bento.download_file_name = videoFile.name;
+	bento.download_mime_type = videoFile.type;
+	
 	var video = document.createElement('video');
 	video.setAttribute('controls', true);
 	video.setAttribute('preload', "auto");
@@ -143,6 +143,9 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	video.id = bento.id + '-video';
 	video.width =  parseInt(getComputedStyle(bento).width, 10);
 	video.height = parseInt(getComputedStyle(bento).height, 10);
+	video.style.position = "absolute";
+	video.style.top = 0;
+	video.style.left = 0;
 	bento.video = video;
 	video.classList.add("video-js");
 	video.classList.add("vjs-default-skin");
@@ -159,6 +162,10 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	} else if (bento.video) {
 		bento.removeChild(bento.video);
 		bento.video = null;
+	}
+	bento.imageContainer = imageContainer;
+	if (imageFile) {
+		bento.image_file_name = imageFile.name;
 	}
 
 	// Create the image scroll container
@@ -194,7 +201,6 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	// add the img to the container, add the container to the bento
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
-	bento.imageContainer = imageContainer;
 
 	// make the IMG draggable inside the DIV
 	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
@@ -220,14 +226,7 @@ function handleDrop(e) {
 			if (file.type.match(imageType)) {
 				imageSrc = e.dataTransfer.getData('text/uri-list');
 				addImage(this, imageSrc, file, null);
-				this.image_file_name = file.name;
 			} else if (file.type.match(audioType)) {
-				// Remove any existing audio
-				if (this.audio) {
-					this.removeChild(this.audio);
-					this.audio = null;
-				}
-
 				// Check for album art
 				imageSrc = e.dataTransfer.getData('text/uri-list');
 				if (imageSrc) {
@@ -235,19 +234,7 @@ function handleDrop(e) {
 					this.image_file_name = file.name.replace(".", "_") + ".jpg";
 				}
 				addAudio(this, window.URL.createObjectURL(file), file, null);
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
 			} else if (file.type.match(videoType)) {
-				if (this.imageContainer) {
-					this.removeChild(this.imageContainer);
-					this.imageContainer = null;
-					hideControl(this.id + "-slider");
-				} else if (this.video) {
-					this.removeChild(this.video);
-					this.video = null;
-				}
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
 				addVideo(this, null, file, null);
 			}
 		} else if (source.youTubeURL) {
@@ -300,63 +287,6 @@ function dropYouTube(bento, url) {
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
-}
-
-function handleDragEnd(e) {
-	this.classList.remove('over');
-}
-
-function handleDragStart(e) {
-	e.dataTransfer.setData("src_id", this.id);
-
-}
-
-//******* SIDEBAR DRAG/DROP HANDLERS *****************
-
-function handleAddImageDragEnter(e) {
-	
-	this.classList.add('over');
-}
-
-function handleAddImageDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	e.dataTransfer.dropEffect = 'move';
-
-	return false;
-}
-function handleAddImageDragLeave(e) {
-	this.classList.remove('over');
-}
-
-function handleAddImageDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	handleImageFiles(e.dataTransfer.files);
-}
-
-function handleAddMediaDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	
-	if (e.dataTransfer) {
-		if (e.dataTransfer.files) {
-			if (e.dataTransfer.files.length > 0) {
-				handleMediaFiles(e.dataTransfer.files);
-			} else {
-				handleURIDrop(e);
-			}
-		}
-	}
-}
-
-function handleAddImageDragEnd(e) {
-	this.classList.remove('over');
 }
 
 function handleURIDrop(e) {
@@ -446,36 +376,52 @@ function addSpotify(url) {
 	});
 }
 
+function createThumbnailContainer() {
+	var container = document.createElement("div");
+	container.classList.add("thumbnail-container");
+	container.classList.add("thumbnail-container-hover");
+	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
+	
+	return container;
+}
+
 function handleImageFiles(files) {
-	var tabs = document.getElementById("images-tab");
+	var panel = document.getElementById("add-images-desktop");
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
 		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
-			alert("This drop zone only accepts image files (.jpg, .png, etc.).");
+			openMessage("Select Image Files", file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
 		}
 
+		var container = createThumbnailContainer();
+		container.onclick = function(){selectImage(this)};
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
+
+		img.classList.add("photo-thumbnail");
 		img.file = file;
 		img.id = file.name;
-		img.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(img);
-		addText(file.name, tabs);
+		
+		container.appendChild(img);
+		panel.appendChild(container);
+		addText(file.name, container);
 	}
 }
 
 function handleMediaFiles(files) {
-    var tabs = document.getElementById("media-tab");
+    var panel = document.getElementById("add-av-desktop");
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
+		var container = createThumbnailContainer();
+		container.onclick = function(){selectImage(this)};
+
 		// if not video or audio go on to next file
 		if (!file.type.match(videoType) && !file.type.match(audioType)) {
-			alert("This drop zone only accepts music and video files (.mp3, .mp4, etc.).");
+			openMessage("Select Video/Audio Files", file.name+" is not a music or video file (.mp3, .mp4, etc.).");
 			continue;
 		}
 
@@ -483,8 +429,8 @@ function handleMediaFiles(files) {
 		if (file.type.match(videoType)) {
 			element = document.createElement("video");
 			element.src = window.URL.createObjectURL(file);
-			element.setAttribute('draggable', true);
 		}
+		
 		if (file.type.match(audioType)) {
 			element = document.createElement("img");
 			
@@ -493,21 +439,22 @@ function handleMediaFiles(files) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
 					url, 
-					function() {showAlbumArt(url, file, tabs);},
+					function() {showAlbumArt(url, file, panel);},
 					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
 				);
 			} else {
 				element.src = "images/audio.jpg";
 			}
 		}
+		
 		element.classList.add("photo-thumbnail");
 		element.file = file;
 		element.id = file.name;
-		element.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(element);
-		addText(file.name, tabs);
+		
+		container.appendChild(element);
+		panel.appendChild(container);
+		addText(file.name, container);
     }
-
 }
 
 function showAlbumArt(url, file) {
@@ -564,7 +511,7 @@ function showControl(controlId, target) {
 	control.target = target;
 }
 
-function closeClicked(closeButton) {
+function closeClicked(event, closeButton) {
 	if (closeButton.target) {
 		if (closeButton.target.nodeName === "VIDEO") {
 			closeButton.parentNode.video = null;
@@ -581,6 +528,7 @@ function closeClicked(closeButton) {
 		hideControl(closeButton.id);
 		hideControl(closeButton.parentNode.id + "-slider");
 	}
+	event.stopPropagation();
 }
 
 function resizeContainer(bento, img, div) {
@@ -1389,5 +1337,98 @@ function showTemplates(number) {
 	} else {
 		$(".template-thumbnail").css("display", "none");
 		$("#template-thumbnail-"+number).css("display", "inline-block");
+	}
+}
+
+function bentoClick(bento) {
+	$("#add-dialog").attr("target-bento", bento.id);
+	$("#add-dialog").dialog("open");
+}
+
+function selectAddNav(nav) {
+	var selectedNav = $("#"+nav.id);
+
+/*
+	// restore all link styles
+	$(".add-nav-link").each(function(i) {
+
+  		$(this).removeClass("sidebar-nav-hover");
+		$(this).addClass("sidebar-nav-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+		
+	});
+
+	// set the selected icon
+	selectedNav.removeClass("sidebar-nav-hover");
+	selectedNav.removeClass(nav.id);
+	selectedNav.addClass(nav.id+"-selected");
+
+*/
+	// hide all sidebar nav containers
+	$(".add-content-container").css("display", "none");
+
+	// show the selected container
+	$("#"+nav.id+"-container").css("display", "block");
+}
+
+function selectImage(image) {
+	var selectedImage = $("#"+image.id);
+	
+	// restore all number buttons
+	$(".thumbnail-container").each(function(i) {
+		$(this).removeClass("thumbnail-container-hover");
+		$(this).addClass("thumbnail-container-hover");
+		$(this).removeClass("thumbnail-container-selected");
+	});
+	
+	// set the selected number button
+	selectedImage.removeClass("thumbnail-container-hover");
+	selectedImage.addClass("thumbnail-container-selected");
+}
+
+function removeSelection(parentId) {
+	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
+	jqueryContainer.removeClass("thumbnail-container-selected");
+	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
+function doAdd() {
+	var jqueryObject;
+	var bentoId;
+	var element;
+	var bento;
+	$('#add-dialog').dialog('close');
+	
+	// LETTER
+	saveLetter();
+	
+	bentoId = $("#add-dialog").attr("target-bento");
+	bento = $("#"+bentoId)[0];
+
+	// IMAGE
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > img");
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-images-desktop");
+		element = jqueryObject[0];
+		addImage(bento, element.src, element.file, null);
+	}
+
+	// VIDEO/AUDIO
+	jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > img");
+	if (jqueryObject.size() == 0) {
+		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > video");
+	}
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-av-desktop");
+		element = jqueryObject[0];
+		if (element.file.type.match(audioType)) {
+			addImage(bento, element.src, null, null);
+			bento.image_file_name = element.file.name.replace(".", "_") + ".jpg";
+			addAudio(bento, window.URL.createObjectURL(element.file), element.file, null);
+		} else if (element.file.type.match(videoType)) {
+			addVideo(bento, null, element.file, null);
+		}
 	}
 }
