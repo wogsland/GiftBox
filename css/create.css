@@ -1,6 +1,18 @@
+@font-face {
+    font-family: 'Lato-Bold';
+    src: url('../fonts/Lato-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+fieldset {
+	border: none;
+}
 #create-body {
 	font-size: 12px;
+    font-family: 'Lato-Bold', sans-serif;
 }
+
 p {
 	color: rgba(0,0,0,0.74);
 }
@@ -58,17 +70,32 @@ a {
 /*----------------------------------------*/
 
 #palette {
-	width: 235px;
+	width: 230px;
 	background-color: #23282B;
 	height: 100%;
 	float: left;
-	color: white;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #e2e3e5;
+	font-size: 1em;
+}
+
+#palette-top {
+	height: 30px;
+}
+
+.popout-arrow {
+	font-size: 16px;
+	float: right;
+	margin: 5px 0px 5px 5px;
+	color: #94a7b7;
+}
+
+#give-token-palette {
+	margin-bottom: 20px;
 }
 
 .template-thumbnail-container {
-/*	border: solid 1px gray; */
 	max-height: 230px;
 	overflow-y: auto;
 	margin-top: 20px;
@@ -101,9 +128,66 @@ a {
 	float: left;
 }
 
+.palette-button {
+	display: block;
+	height: 30px;
+	width: 217px;
+	margin: auto;
+	outline: none;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	background-color: #486eb5;
+	color: white;
+	font-family: 'Lato-Bold';
+	font-size: 1em;
+}
+
+#send-link-input {
+	height: 20px;
+	width: 213px;
+	margin: auto;
+	outline: none;
+	display: block;
+}
+
 /*----------------------------------------*/
 /*          	TEMPLATE                  */
 /*----------------------------------------*/
+#template-nav-container {
+	height: 30px;
+	overflow: hidden;
+	background-color: #363b3e;
+}
+
+.template-nav-bar {
+	list-style:none;
+	margin-top: 10px;
+	float: right;
+	margin-right: 30px;
+}
+
+.template-nav-bar li {
+	display:inline; 
+	padding: 0 10px; 
+}
+
+.template-nav-bar li a i {
+	color: #5ebb46;
+	display: inline-block;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.template-nav-bar li a {
+	padding-left: 10px;
+	text-decoration: none;
+	color: #888c8d;
+}
+
+.template-nav-bar li a:hover {
+	color: white;
+}
+
 #templates {
 	height: 100%;
 	overflow: auto;
@@ -419,33 +503,6 @@ a {
 	height: 12px;
 }
 
-#template-button-container {
-	margin: 10px auto;
-	width: 1024px;
-	height: 30px;
-	overflow: hidden;
-}
-
-.template-button {
-	color: white;
-	padding: 5px 20px;  
-	border-radius: 10px;
-	background-color: #293133;
-	display: inline-block;
-	font-size: 16px;
-	vertical-align: top;
-	margin-right: 20px;
-}
-
-#template-status {
-	display: inline-block;
-	color: black;
-	font-size: 100%;
-	vertical-align: middle;
-	line-height: 30px;
-	margin-left: 20px;
-}
-
 #send-form {
 	max-width: 900px;
 	overflow: auto;
@@ -602,20 +659,6 @@ iframe {
 	height: 100%;
 }
 
-#give-token-palette {
-	margin: 0px;
-}
-#palette-top {
-	height: 30px;
-}
-
-.popout-arrow {
-	font-size: 16px;
-	float: right;
-	margin: 5px 0px 5px 5px;
-	color: #94a7b7;
-}
-
 .sidebar-tab {
 	background-image: url('../images/ui-sidebar-tabs-sprite.png');
 	background-repeat: no-repeat;
@@ -664,8 +707,6 @@ iframe {
 
 .template-tab-text {
 	display: block;
-	color: #e2e3e5;
-	font-size: 1em;
 	margin: 10px 0px 10px 4px;
 	
 }
@@ -726,17 +767,25 @@ iframe {
 	background-position: -1px -458px;
 }
 
-#corporate-send {
-	background-image: url('../images/ui-buttons-sprite.png');
-	background-position: 1px -768px;
-	background-repeat: no-repeat;
+#create-page-logo {
+	margin: auto;
+}
+
+#advanced-send-button {
 	height: 30px;
 	width: 217px;
 	margin: auto;
 	outline: none;
 	margin-top: 30px;
+	background-color: #486eb5;
+	color: white;
+	display: block;
+	text-align: center;
+	vertical-align: middle;
 }
 
-#create-page-logo {
-	margin: auto;
+.input-label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 3px;
 }

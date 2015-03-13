@@ -2,13 +2,6 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 
-$(document).ready(function() {
-	$('.open-popup-link').magnificPopup({
-		type: 'inline',
-		midClick: true
-	});
-});
-
 function addText(text, container) {
 	var p = document.createElement("p");
 	p.innerHTML = text;
@@ -66,7 +59,7 @@ function sendGiftbox() {
 	} else {
 		var posting = $.post("send_preview.php", $("#send-form").serialize());
 		posting.done(function(data) {
-			$.magnificPopup.close();
+			$("#send-dialog" ).dialog("close");
 		});
 	}
 }
@@ -943,6 +936,11 @@ function setPreviewLink (template) {
 		linkText = "preview.php?id=" + template.giftboxId;
 	}
 	$("#preview-link").val(template.appURL + linkText);
+	if (template.giftboxId) {
+		$("#send-link-input").val(template.appURL + linkText);
+	} else {
+		$("#send-link-input").val("");
+	}
 }
 
 function stack(top, middle, bottom) {
@@ -1127,12 +1125,7 @@ function send() {
 	if (!giftboxId) {
 		openMessage("Send", "The giftbox must be saved before it can be sent.");
 	} else {
-		$.magnificPopup.open({
-		  items: {
-			src: '#send-form',
-			type: 'inline'
-		  }
-		});
+		$('#send-dialog').dialog('open');	
 	}
 }
 
@@ -1349,36 +1342,31 @@ function createCroppedImage (bento, image, container) {
 	return croppedImage;
 }
 
+function featureNotAvailable(feature) {
+	openMessage(feature, "This feature is not available yet.");
+}
 function selectSidebarTab(tab) {
 	var selectedIcon = $("#"+tab.id);
-	if (tab.id === 'text-tab') {
-		openMessage("Text", "This feature is not available yet.");
-	} else if (tab.id === 'opener-tab') {
-		openMessage("Opener", "This feature is not available yet.");
-	} else {
-		// restore all icons
-		$(".sidebar-tab").each(function(i) {
-			$(this).removeClass("sidebar-tab-hover");
-			$(this).addClass("sidebar-tab-hover");
-			$(this).removeClass($(this).attr("id"));
-			$(this).addClass($(this).attr("id"));
-			$(this).removeClass($(this).attr("id")+"-selected");
-		});
-		
-		// set the selected icon
-		selectedIcon.removeClass("sidebar-tab-hover");
-		selectedIcon.removeClass(tab.id);
-		selectedIcon.addClass(tab.id+"-selected");
-		
-		// hide all sidebar tab containers
-		$(".sidebar-tab-container").css("display", "none");
-		
-		// show the selected container
-		$("#"+tab.id+"-container").css("display", "block");
-		
-		
-		
-	}
+
+	// restore all icons
+	$(".sidebar-tab").each(function(i) {
+		$(this).removeClass("sidebar-tab-hover");
+		$(this).addClass("sidebar-tab-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+	});
+
+	// set the selected icon
+	selectedIcon.removeClass("sidebar-tab-hover");
+	selectedIcon.removeClass(tab.id);
+	selectedIcon.addClass(tab.id+"-selected");
+
+	// hide all sidebar tab containers
+	$(".sidebar-tab-container").css("display", "none");
+
+	// show the selected container
+	$("#"+tab.id+"-container").css("display", "block");
 }
 
 function showTemplates(number) {
@@ -1396,7 +1384,7 @@ function showTemplates(number) {
 	selectedButton.addClass("template-number-selected");
 
 	// show only those template for the selected button
-	if (number === "ALL") {
+	if (number === "all") {
 		$(".template-thumbnail").css("display", "inline-block");
 	} else {
 		$(".template-thumbnail").css("display", "none");
