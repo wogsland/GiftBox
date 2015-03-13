@@ -2,7 +2,7 @@
 use google\appengine\api\cloud_storage\CloudStorageTools;
 include_once 'util.php';
 include_once 'config.php';
-session_start();
+_session_start();
 
 if (isset($_SESSION['user_id'])) {
 	if (isset($_GET['id'])) {
