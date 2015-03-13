@@ -3,7 +3,7 @@ require_once('./stripe/Stripe.php');
 require_once('util.php');
 include_once 'eventLogger.class.php';
 
-session_start();
+_session_start();
 
 $response['status'] = "ERROR";
 $response['message'] = "Unable to register at this time.";

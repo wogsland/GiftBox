@@ -2,7 +2,7 @@
 	include_once 'util.php';
 	include_once 'config.php';
 	
-	session_start();
+	_session_start();
 	
 	$message = null;
 	$first_name = null;
