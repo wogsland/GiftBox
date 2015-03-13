@@ -67,9 +67,9 @@ class Bento {
 		if ($this->image_file_name) {
 			$file_name = $this->css_id."-cropped_".$this->image_file_name;
 			if ($google_app_engine) {
-				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
-				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
-//				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
+//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
+//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
+				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
 			} else {
 				$image_path = $file_storage_path.$file_name;
 			}
