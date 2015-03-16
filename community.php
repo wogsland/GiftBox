@@ -1,4 +1,5 @@
 <?php
+include_once 'util.php';
 include_once 'config.php';
 ?>
 
@@ -36,7 +37,7 @@ include_once 'config.php';
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
 <!-- WEB FONTS -->
-<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
 
 <!-- CAROUSEL AND LIGHTBOX -->
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -55,6 +56,10 @@ include_once 'config.php';
 
 <!-- RESPONSIVE FIXES -->
 <link rel="stylesheet" href="css/responsive.css">
+
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+
 
 
 
@@ -98,14 +103,14 @@ include_once 'config.php';
 				<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand" href="index.html#"><img src="assets/img/logo-light.png" alt=""></a>
+				<a class="navbar-brand" href="index.php#"><img src="assets/img/logo-light.png" alt=""></a>
 				
 			</div>
 			
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
-					<li><a href="index.html#home" class="external">Home</a></li>
+					<li><a href="index.php#home" class="external">Home</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a href="#">Login</a></li>
 				</ul>
@@ -123,34 +128,47 @@ include_once 'config.php';
 		<div class="row">
 			<!-- Sidebar -->
 			<div class="col-sm-4 col-md-3">
-				<div class="text-center">
-		            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-		            <h4 class="profile-name mb5">Tom Brady</h4>
-		            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-		            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
-		            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-		            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
-		        
-		            <div class="mb20"></div>
-		        
-		            <div class="btn-group">
-		                <button class="btn btn-primary btn-bordered">Create GiveToken</button>
-		                <button class="btn btn-primary btn-bordered">Send GiveToken</button>
-		            </div>
-		            
-		            <div class="mb20"></div>
-		        </div>
-				<h5 class="md-title">Special Message</h5>
-				<p class="mb30 small-txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat... <a href="">Show More</a></p>
-				<h5 class="md-title">Connect</h5>
-				<ul class="list-unstyled social-list">
-		            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
-		            <li><i class="fa fa-facebook"></i> <a href="">facebook.com/#</a></li>
-		            <li><i class="fa fa-youtube"></i> <a href="">youtube.com/#</a></li>
-		            <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/#</a></li>
-		            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
-		            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
-		        </ul>
+				<?php
+					if (logged_in()) {
+						echo '<div class="text-center">
+					            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+					            <h4 class="profile-name mb5">Tom Brady</h4>
+					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
+					            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+					            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
+					        
+					            <div class="mb20"></div>
+					        
+					            <div class="btn-group">
+					                <button class="btn btn-primary btn-bordered">Create GiveToken</button>
+					                <button class="btn btn-primary btn-bordered">Send GiveToken</button>
+					            </div>
+					            
+					            <div class="mb20"></div>
+					        </div>
+					        <h5 class="md-title">Welcome to the Community Page!</h5>
+							<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>
+					        <h5 class="md-title">Connect</h5>
+							<ul class="list-unstyled social-list">
+					            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
+					            <li><i class="fa fa-facebook"></i> <a href="">facebook.com/#</a></li>
+					            <li><i class="fa fa-youtube"></i> <a href="">youtube.com/#</a></li>
+					            <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/#</a></li>
+					            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
+					            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
+					        </ul>';
+					} else {
+						echo '<h5 class="md-title">Welcome to the Community Page!</h5>
+								<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>';
+						echo '<div class="btn-group buttons login-button text-center">
+								<button href="#login-form" class="open-popup-link btn btn-primary btn-bordered">Login</button>
+								<button href="#signup-form" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
+							  </div>';
+					}
+				?>
+				
+				
 			</div><!-- /Sidebar -->
 			<div class="col-sm-8 col-md-9">
 				<!-- Tab Navigation -->
@@ -161,6 +179,11 @@ include_once 'config.php';
 			        <li class=""><a href="#blog" data-toggle="tab"><strong>GiveToken Blog</strong></a></li>
 			        <li class=""><a href="#spotlight" data-toggle="tab"><strong>Spotlight</strong></a></li>
 			        <li class="" style="float: right;"><a href="index.php"><strong>Home</strong></a></li>
+			       	<?php
+				        if (!is_admin()) {
+								echo '<li><a href="admin.php" data-toggle="tab"><strong>Admin</strong></a></li>';
+						}
+					?>
 			    </ul>
 
 			    <div class="tab-content nopadding noborder">
@@ -335,11 +358,8 @@ include_once 'config.php';
 		    				 	<div class="timeline-panel">
 			    				 	<div class="text-center">
 							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5">Tom Brady</h4>
-							            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-							            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
 							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-							            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
 							        </div>
 								</div>
 								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
@@ -360,11 +380,8 @@ include_once 'config.php';
 		    				 	<div class="timeline-panel">
 			    				 	<div class="text-center">
 							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5">Tom Brady</h4>
-							            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-							            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
 							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-							            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
 							        </div>
 								</div>
 								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
@@ -427,6 +444,33 @@ for(i = 0; i < els.length; i++){
 }
 </script>
 
+<form id="login-form" class="white-popup mfp-hide" name="login-form">
+	<h1 class="dialog-header">Log Into Giftbox</h1>
+	<div id="dialog-form-container">
+		<p class="dialog-message" id="login-message"></p>
+		<input type="hidden" name="login-type" value="EMAIL">
+		<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="25">
+		<input class="dialog-input" id="password" name="password" type="password" placeholder="Password" size="25">
+		<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>
+		<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBLogin(response)}, {scope: 'public_profile, email'});">Log In with Facebook</a>
+		<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="login(document.forms['login-form']);">Log In</a>
+	</div>
+</form>
+
+<form id="signup-form" class="white-popup mfp-hide" name="signup-form">
+	<h1 class="dialog-header">Sign Up With Giftbox</h1>
+	<div id="dialog-form-container">
+		<p class="dialog-message" id="signup-message"></p>
+		<input type="hidden" id="reg_type" name="reg_type" value="">
+		<input class="dialog-input" id="first_name" name="first_name" type="text" placeholder="First Name" size="20">
+		<input class="dialog-input" id="last_name" name="last_name" type="text" placeholder="Last Name" size="20">
+		<input class="dialog-input" id="email" name="email" type="text" placeholder="Your Email" size="35">
+		<input class="dialog-input" id="password" name="password" type="password" placeholder="New Password" size="35">
+		<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});">Sign Up Using Facebook</a>
+		<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="var a = document.forms['signup-form']; register(a.first-name.value, a.last-name.value, a.email.value, a.password.value);">Sign Up</a>
+	</div>
+</form>
+
 
 
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
@@ -447,6 +491,11 @@ for(i = 0; i < els.length; i++){
 <script src="js/jquery.ajaxchimp.min.js"></script>
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/facebook_init.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/account.js"></script>
+
 
 </body>
 </html>
