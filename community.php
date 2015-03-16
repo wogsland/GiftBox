@@ -38,6 +38,7 @@ include_once 'config.php';
 
 <!-- WEB FONTS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+=======
 
 <!-- CAROUSEL AND LIGHTBOX -->
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -58,8 +59,6 @@ include_once 'config.php';
 <link rel="stylesheet" href="css/responsive.css">
 
 <link rel="stylesheet" href="css/magnific-popup.css">
-
-
 
 
 
@@ -102,7 +101,6 @@ include_once 'config.php';
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-
 				<a class="navbar-brand" href="index.php#"><img src="assets/img/logo-light.png" alt=""></a>
 				
 			</div>
@@ -167,8 +165,6 @@ include_once 'config.php';
 							  </div>';
 					}
 				?>
-				
-				
 			</div><!-- /Sidebar -->
 			<div class="col-sm-8 col-md-9">
 				<!-- Tab Navigation -->
@@ -349,6 +345,7 @@ include_once 'config.php';
 					        </li>
 				    	</ul>
 				    </div>
+<<<<<<< HEAD
 				    <div class="tab-pane" id="spotlight">
 			    		<h2>Spotlight</h2>
 		    			<ul class="timeline">
@@ -407,7 +404,6 @@ include_once 'config.php';
 
 
 <script>
-
 
 function togglePost(){
 	var val = this.id.substring('post-title'.length);
@@ -471,8 +467,6 @@ for(i = 0; i < els.length; i++){
 	</div>
 </form>
 
-
-
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
 <script src="js/bootstrap.min.js"></script>
@@ -495,7 +489,6 @@ for(i = 0; i < els.length; i++){
 <script src="js/facebook_init.js"></script>
 <script src="js/scripts.js"></script>
 <script src="js/account.js"></script>
-
 
 </body>
 </html>
