@@ -345,7 +345,6 @@ include_once 'config.php';
 					        </li>
 				    	</ul>
 				    </div>
-<<<<<<< HEAD
 				    <div class="tab-pane" id="spotlight">
 			    		<h2>Spotlight</h2>
 		    			<ul class="timeline">
