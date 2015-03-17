@@ -12,7 +12,7 @@ $response['status'] = "ERROR";
 $response['message'] = "Unable to log in at this time.";
 $response['app_root'] = $app_root;
 
-$email = $_POST['email'];
+$email = $_POST['login_email'];
 $login_type = $_POST['login-type'];
 if (isset($_POST['password'])) {
 	$password = $_POST['password'];

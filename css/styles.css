@@ -1020,12 +1020,10 @@ object {
 .pricing-tables .plan.basic {
 		border-top: rgb(71,111,182) 8px solid;  
 		border-bottom: rgb(71,111,182) 8px solid;
-		background: #f7f7f7;
 }
 .pricing-tables .plan.standard { 
 	border-top: rgb(171,223,236) 8px solid; 
 	border-bottom: rgb(171,223,236) 8px solid;
-	background: #f7f7f7;
 }
 .pricing-tables .plan.recommended { 
 	border-top: rgb(98,185,77) 8px solid; 
@@ -1034,7 +1032,6 @@ object {
 .pricing-tables .plan.enterprise { 
 	border-top: rgb(38,163,78) 8px solid; 
 	border-bottom: rgb(38,163,78) 8px solid;
-	background: #f7f7f7;
 	}
 .pricing-tables.attached .col-sm-4,
 .pricing-tables.attached .col-md-4,
@@ -1051,7 +1048,25 @@ object {
   margin: 20px 0;
   padding-bottom: 25px;
   text-align: center; 
+  background: #f7f7f7;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: .5s; /* Safari */
+  transition: .5s;
   }
+  .plan-hover:hover {
+	background: #FDF8E2; 
+	margin-top: 6px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
+	z-index: 99;
+  }
+  .plan-selected {
+	background: #FDF8E2; 
+	margin-top: 6px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
+	z-index: 98;
+  }
+  
 .plan .head {
 padding: 12px 16px;
  }
@@ -1088,7 +1103,20 @@ width: 80%;
   }
 .plan .select-btn{
 padding: 12px 0;
+height: 66px;
+vertical-align: middle;
+color: white;
+font-size: 20px;
 }
+
+.plan .not-btn{
+padding: 12px 0;
+height: 66px;
+vertical-align: middle;
+color: white;
+font-size: 20px;
+}
+
 .plan .btn {
 padding: 10px 30px;
 text-transform: uppercase;
@@ -1115,13 +1143,13 @@ font-weight: 500;
 .plan ul strong {
   font-weight: 700; }
 .plan.recommended {
-	margin-top: 6px;
-	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
-	position: relative;
-	z-index: 99; 
+//	margin-top: 6px;
+//	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
+//	position: relative;
+//	z-index: 99; 
 }
 .plan.recommended {
-  background: #FDF8E2; 
+//  background: #FDF8E2; 
 }
 .plan.recommended .btn { }
       
@@ -2548,6 +2576,10 @@ div.fill img {
 	max-width: 700px;
 }
 
+.large-input {
+	width: 90%;
+}
+
 .white-popup {
 	position: relative;
 	background: #FFFFFF;
@@ -2621,6 +2653,7 @@ div.fill img {
 #facebook-button {
 	margin-left: 20px;
 	background-color: #6D84B4;
+	float: left;
 }
 
 

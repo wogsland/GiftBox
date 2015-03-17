@@ -1,5 +1,7 @@
 <?php
-include_once 'config.php';
+	include_once 'util.php';
+	include_once 'config.php';
+	_session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -104,8 +106,13 @@ include_once 'config.php';
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.php" class="external">Home</a></li>
-					<li><a href="account.php" class="external">My Account</a></li>
-					<li><a href="#">Login</a></li>
+					<?php
+					if (logged_in()) {
+						echo '<li><a href="account.php" class="external">My Account</a></li>';
+					} else {
+						echo '<li><a href="#">Login</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 		</div> <!-- /END CONTAINER -->
@@ -128,7 +135,7 @@ include_once 'config.php';
         <div class="row">
           <div class="col-sm-3 col-md-3">
            
-           <div class="plan first basic" data-plan="basic">
+           <div class="plan first basic plan-hover" id="basic" data-plan="basic">
 
               <div class="head">
                 <h2>Basic</h2>
@@ -136,7 +143,7 @@ include_once 'config.php';
               </div>    
 
               <!-- button was here -->
-              <div class="select-btn solid-blue"></div>
+              <div class="not-btn solid-blue"></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -155,7 +162,15 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
-              <div class="select-btn solid-blue"><button type="button" class="btn dark-grey">Sign Up<i class="fa fa-chevron-right"></i></button></div>
+              <div class="not-btn solid-blue">
+				<?php
+					if (logged_in()) {
+						echo 'Already a member!';
+					} else {
+						echo '<button type="button" class="btn dark-grey" onclick="selectBasic()">Sign Up <i class="fa fa-chevron-right"></i></button>';
+					}
+				?>
+			  </div>
 
            </div>
              
@@ -164,14 +179,14 @@ include_once 'config.php';
 
 
           <div class="col-sm-3 col-md-3 ">
-              <div class="plan standard" data-plan="standard">
+              <div class="plan standard plan-hover" id="standard" data-plan="standard">
 
               <div class="head">
                 <h2>Standard</h2>
               
               </div>    
 	
-		          <div class="select-btn solid-lt-blue"></div>
+		          <div class="not-btn solid-lt-blue"></div>
 
               <ul class="item-list">
 								<li>Email Support</li>
@@ -190,7 +205,7 @@ include_once 'config.php';
                 <h4>per month</h4>
               </div>
 
-              <div class="select-btn solid-lt-blue"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+              <div class="not-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="selectStandard()">Finish <i class="fa fa-chevron-right"></i></button></div>
 
            </div>
 
@@ -199,8 +214,8 @@ include_once 'config.php';
 
           <div class="col-sm-3 col-md-3 ">
               
-              <div class="plan recommended" data-plan="premium">
-								<div class="popular-badge">MOST POPULAR</div>
+              <div class="plan recommended plan-hover" id="premium" data-plan="premium">
+<!--								<div class="popular-badge">MOST POPULAR</div>  -->
                 <div class="head">
                   <h2>Premium</h2>
                 </div>    
@@ -224,7 +239,7 @@ include_once 'config.php';
                   <h4>per month + step 2</h4>
                 </div>
 
-                <div class="select-btn solid-lt-green"><button type="button" class="btn teal">Select <i class="fa fa-chevron-right"></i></button></div>
+                <div class="select-btn solid-lt-green"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
 
            </div>
 
@@ -232,7 +247,7 @@ include_once 'config.php';
 
           <div class="col-sm-3 col-md-3 ">
               
-              <div class="plan last enterprise" data-plan="enterprise">
+              <div class="plan last enterprise plan-hover" id="enterprise" data-plan="enterprise">
 
                 <div class="head">
                   <h2>Enterprise</h2>
@@ -450,6 +465,29 @@ include_once 'config.php';
      SCRIPTS 
 ============================== -->
 <script>
+	function selectBasic() {
+		selectPlan("basic");
+		$('#signup-dialog').modal();
+	}
+	
+	function selectStandard() {
+		selectPlan("standard");
+	}
+	function selectPlan(plan) {
+		var selectedPlan = $("#"+plan);
+
+		// restore all plans
+		$(".plan").each(function(i) {
+			$(this).removeClass("plan-hover");
+			$(this).addClass("plan-hover");
+			$(this).removeClass("plan-selected");
+		});
+
+		// set the selected plan
+		selectedPlan.removeClass("plan-hover");
+		selectedPlan.addClass("plan-selected");
+	}
+	
 // Immediately Invoked Function Expression (IIFE)
 // Used to be referred to as a self executing function
 // Avoids creating global variables and functions which can interfere with other scripts
@@ -504,6 +542,7 @@ include_once 'config.php';
       $( ".plan .select-btn" ).on( "click", function( event ) {
         // Read the plan type from the data-plan attribute on the div with class plan
         selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
+		selectPlan(selectedPlan);
 
         // Get the plan information from the plans variable, based on the key that we just read from the attribute
         var planInfo = plans[ selectedPlan ];
@@ -641,7 +680,10 @@ include_once 'config.php';
 <script src="js/matchMedia.js"></script>
 <script src="js/jquery.ajaxchimp.min.js"></script>
 <script src="js/jquery.fitvids.js"></script>
+<script src="js/facebook_init.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/signup.js"></script>
+<script src="js/account.js"></script>
 
 </body>
 </html>
