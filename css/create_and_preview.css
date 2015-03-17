@@ -1,9 +1,14 @@
 .column {
 	float: left;
+	overflow: hidden;
 }
 .padded {
 	box-sizing: border-box;
 	border: solid 5px white;
+}
+
+.width25 {
+	width: 25%;
 }
 
 .width33 {
@@ -21,6 +26,10 @@
 .width100 {
 	left: 0xp;
 	width: 100%;
+}
+
+.height25 {
+	height: 25%;
 }
 
 .height33 {

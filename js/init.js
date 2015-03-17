@@ -3,15 +3,27 @@ $(function() {
 });
 
 $(function() {
-	$( "#letter-dialog" ).dialog({
+	$( "#add-dialog" ).dialog({
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		dialogClass: 'add-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+	});
+});
+
+$(function() {
+	$( "#send-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		width: 800,
-		height: 600,
+		height: 250,
 		modal: true,
 		buttons: {
-			OK: function() {
-				saveLetter();
+			Send: function() {
+				sendToken();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -95,7 +107,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Ok: function() {
-				addURL();
+				openURL();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -104,7 +116,33 @@ $(function() {
 		open: function() {
 			$("#url-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					addURL();
+					openURL();
+					return false;
+				}
+			});
+		}
+	});
+});
+
+$(function() {
+	$( "#add-hyperlink-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				addImageHyperlink();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#url-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					openURL();
 					return false;
 				}
 			});

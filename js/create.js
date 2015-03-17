@@ -2,18 +2,11 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 
-$(document).ready(function() {
-	$('.open-popup-link').magnificPopup({
-		type: 'inline',
-		midClick: true
-	});
-});
-
-function addText(text, container) {
-	var p = document.createElement("p");
-	p.innerHTML = text;
-	p.classList.add("file-name");
-	container.appendChild(p);
+function addTitleText(text, container) {
+	var div = document.createElement("div");
+	div.innerHTML = text;
+	div.classList.add("file-name");
+	container.appendChild(div);
 }
 
 function isYouTube(url) {
@@ -60,13 +53,13 @@ function spotifyTrackId(url) {
 	return trackId;
 }
 
-function sendGiftbox() {
+function sendToken() {
 	if (!document.getElementById('email').value) {
 		document.getElementById('send-message').innerHTML = "Please enter a valid email address.";
 	} else {
 		var posting = $.post("send_preview.php", $("#send-form").serialize());
 		posting.done(function(data) {
-			$.magnificPopup.close();
+			$("#send-dialog" ).dialog("close");
 		});
 	}
 }
@@ -78,7 +71,6 @@ function uploadFileData(fileData, fileName) {
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
 				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
-				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
         xhr.open("POST", "upload.php", true);
@@ -96,26 +88,15 @@ function uploadFile(file) {
 	reader.readAsDataURL(file);
 }
 
-/************** BENTO DRAG/DROP HANDLERS *****************/
-
-function handleDragEnter(e) {
-	this.classList.add('over');
-}
-
-function handleDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	e.dataTransfer.dropEffect = 'move';
-
-	return false;
-}
-
-function handleDragLeave(e) {
-	this.classList.remove('over');
-}
-
 function addAudio (bento, audioSrc, audioFile, savedBento) {
+	// Remove any existing audio
+	if (bento.audio) {
+		bento.removeChild(bento.audio);
+		bento.audio = null;
+	}
+	bento.download_file_name = audioFile.name;
+	bento.download_mime_type = audioFile.type;
+	
 	// Create the audio element
 	var audio = document.createElement('audio');
 	audio.setAttribute('controls', true);
@@ -132,13 +113,27 @@ function addAudio (bento, audioSrc, audioFile, savedBento) {
 	closeButton.id = audio.id + "-close";
 	closeButton.classList.add("audio-close-button");
 	closeButton.style.zIndex = 11;
-	closeButton.onclick = function(){closeClicked(closeButton);};
+	closeButton.target = audio;
+	closeButton.onclick = function(){closeClicked(event, closeButton);};
 	bento.appendChild(closeButton);
 	showControl(closeButton.id, audio);
+	unsaved();
 }
 
 function addVideo (bento, videoSrc, videoFile, savedBento) {
+	if (bento.imageContainer) {
+		bento.removeChild(this.imageContainer);
+		bento.imageContainer = null;
+		hideControl(bento.id + "-slider");
+	} else if (bento.video) {
+		bento.removeChild(bento.video);
+		bento.video = null;
+	}
+	bento.download_file_name = videoFile.name;
+	bento.download_mime_type = videoFile.type;
+	
 	var video = document.createElement('video');
+	video.onclick = function(){videoClicked(event, this)};
 	video.setAttribute('controls', true);
 	video.setAttribute('preload', "auto");
 	if (videoFile) {
@@ -150,12 +145,17 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	video.id = bento.id + '-video';
 	video.width =  parseInt(getComputedStyle(bento).width, 10);
 	video.height = parseInt(getComputedStyle(bento).height, 10);
+	video.style.position = "absolute";
+	video.style.top = 0;
+	video.style.left = 0;
 	bento.video = video;
 	video.classList.add("video-js");
 	video.classList.add("vjs-default-skin");
 	video.classList.add("video-player");
+	video.classList.add("no-pointer");
 	bento.appendChild(video);
 	showControl(bento.id + "-close", video);
+	unsaved();
 }
 
 function addImage(bento, imageSrc, imageFile, savedBento) {
@@ -167,9 +167,13 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.removeChild(bento.video);
 		bento.video = null;
 	}
+	if (imageFile) {
+		bento.image_file_name = imageFile.name;
+	}
 
 	// Create the image scroll container
 	var imageContainer = document.createElement('div');
+	bento.imageContainer = imageContainer;
 	imageContainer.id =  bento.id + '-image-container';
 	imageContainer.style.position = 'absolute';
 
@@ -201,74 +205,26 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	// add the img to the container, add the container to the bento
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
-	bento.imageContainer = imageContainer;
 
 	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
+	$('#'+ img.id)
+		.draggable({ containment: "#" + imageContainer.id})
+		.click(function(){
+            if ( $(this).is('.ui-draggable-dragging') ) {
+                  return;
+            }
+            imageClicked(this);
+      });
 
 	img.src = imageSrc;
 	
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
 	showControl(bento.id + "-slider", img);
+	unsaved();
 }
 
-function handleDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	var srcId = e.dataTransfer.getData('src_id');
-	if (srcId.length > 0) {
-		var source = document.getElementById(srcId);
-		if (source.file) {
-			var file = source.file;
-			var imageSrc = null;
-			if (file.type.match(imageType)) {
-				imageSrc = e.dataTransfer.getData('text/uri-list');
-				addImage(this, imageSrc, file, null);
-				this.image_file_name = file.name;
-			} else if (file.type.match(audioType)) {
-				// Remove any existing audio
-				if (this.audio) {
-					this.removeChild(this.audio);
-					this.audio = null;
-				}
-
-				// Check for album art
-				imageSrc = e.dataTransfer.getData('text/uri-list');
-				if (imageSrc) {
-					addImage(this, imageSrc, null, null);
-					this.image_file_name = file.name.replace(".", "_") + ".jpg";
-				}
-				addAudio(this, window.URL.createObjectURL(file), file, null);
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
-			} else if (file.type.match(videoType)) {
-				if (this.imageContainer) {
-					this.removeChild(this.imageContainer);
-					this.imageContainer = null;
-					hideControl(this.id + "-slider");
-				} else if (this.video) {
-					this.removeChild(this.video);
-					this.video = null;
-				}
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
-				addVideo(this, null, file, null);
-			}
-		} else if (source.youTubeURL) {
-			dropYouTube(this, source.youTubeURL);
-		} else if (source.spotifyTrackId) {
-			dropSpotify(this, source.spotifyTrackId)
-		} else if (source.soundCloudURL) {
-			dropSoundCloud(this, source.soundCloudURL);
-		}
-	}
-	return false;
-}
-
-function dropSpotify(bento, trackId) {
+function addSpotify(bento, trackId) {
 	var iframe = document.createElement('iframe');
 	var contentURI = "https://embed.spotify.com/?url=spotify:track:"+trackId;
 	iframe.src = contentURI;
@@ -277,12 +233,17 @@ function dropSpotify(bento, trackId) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = contentURI;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function dropSoundCloud(bento, url) {
+function addSoundCloud(bento, url) {
 	var iframe = document.createElement('iframe');
 	iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(url);
 	var width = bento.offsetWidth;
@@ -290,12 +251,17 @@ function dropSoundCloud(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function dropYouTube(bento, url) {
+function addYouTube(bento, url) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -304,107 +270,53 @@ function dropYouTube(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function handleDragEnd(e) {
-	this.classList.remove('over');
-}
-
-function handleDragStart(e) {
-	e.dataTransfer.setData("src_id", this.id);
-
-}
-
-//******* SIDEBAR DRAG/DROP HANDLERS *****************
-
-function handleAddImageDragEnter(e) {
-	
-	this.classList.add('over');
-}
-
-function handleAddImageDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
+function createThumbnailContainer(object, titleText, parentId) {
+	var container = document.createElement("div");
+	var inner = document.createElement("div");
+	inner.classList.add("inner-thumbnail-container");
+	container.onclick = function(){selectThumbnail(this)};
+	object.classList.add("photo-thumbnail");
+	container.classList.add("thumbnail-container");
+	container.classList.add("thumbnail-container-hover");
+	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
+	inner.appendChild(object);
+	container.appendChild(inner);
+	if (titleText) {
+		addTitleText(titleText, inner);
 	}
-	e.dataTransfer.dropEffect = 'move';
+	document.getElementById(parentId).appendChild(container);
 
-	return false;
-}
-function handleAddImageDragLeave(e) {
-	this.classList.remove('over');
+	return container;
 }
 
-function handleAddImageDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	handleImageFiles(e.dataTransfer.files);
-}
-
-function handleAddMediaDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	
-	if (e.dataTransfer) {
-		if (e.dataTransfer.files) {
-			if (e.dataTransfer.files.length > 0) {
-				handleMediaFiles(e.dataTransfer.files);
-			} else {
-				handleURIDrop(e);
-			}
-		}
-	}
-}
-
-function handleAddImageDragEnd(e) {
-	this.classList.remove('over');
-}
-
-function handleURIDrop(e) {
-	var textURIList = e.dataTransfer.getData('text/uri-list');
-    var tabs = document.getElementById("media-tab");
-
-	if (isYouTube(textURIList)) {
-		addYouTube(textURIList);
-	} else if (isSoundCloud(textURIList)) {
-		addSoundCloud(textURIList);
-	} else if (isSpotify(textURIList)) {
-		addSpotify(textURIList);
-	} else {
-		var error = "The dropped item is not one of the accepted types.\n\n"+textURIList;
-		console.log(error);
-		alert(error);
-	}
-}
-
-function addYouTube(url) {
+function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
 		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-			var title = data.entry.title.$t;
-			var mediaList = document.getElementById("media-tab");
-			var img = document.createElement("img");
-			img.classList.add("photo-thumbnail");
-			img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
-			img.id = videoId;
-			img.addEventListener('dragstart', handleDragStart, false);
-			img.youTubeURL = url;
-			mediaList.appendChild(img);
-			addText(title, mediaList);
-		}).fail(function() {
-			error = "Youtube API call failed.\n\n" + dataURL;
-			console.log(error);
-			alert(error);
-		});	
+				var title = data.entry.title.$t;
+				var img = document.createElement("img");
+				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
+				img.id = videoId;
+				img.youTubeURL = url;
+				createThumbnailContainer(img, title, "add-av-desktop");
+			}).fail(function() {
+				error = "Youtube API call failed.\n\n" + dataURL;
+				console.log(error);
+				alert(error);
+			});	
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
 		console.log(error);
@@ -412,21 +324,17 @@ function addYouTube(url) {
 	}
 }
 
-function addSoundCloud(url) {
-    var mediaList = document.getElementById("media-tab");
+function openSoundCloud(url) {
 	$.getJSON("https://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		if (data.artwork_url) {
 			img.src = data.artwork_url.replace("large", "t500x500");
 		} else {
 			img.src = "images/soundcloud_icon.jpg";
 		}
 		img.id = data.id;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.soundCloudURL = data.uri;
-		mediaList.appendChild(img);
-		addText(data.title, mediaList);
+		createThumbnailContainer(img, data.title, "add-av-desktop");
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
 		console.log(error);
@@ -434,18 +342,14 @@ function addSoundCloud(url) {
 	});
 }
 
-function addSpotify(url) {
-    var mediaList = document.getElementById("media-tab");
+function openSpotify(url) {
 	var trackId = spotifyTrackId(url);
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = data.album.images[1].url;
 		img.id = trackId;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.spotifyTrackId = trackId;
-		mediaList.appendChild(img);
-		addText(data.name, mediaList);
+		createThumbnailContainer(img, data.name, "add-av-desktop");
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
 		console.log(error);
@@ -453,36 +357,31 @@ function addSpotify(url) {
 	});
 }
 
-function handleImageFiles(files) {
-	var tabs = document.getElementById("images-tab");
+function openImageFiles(files) {
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
 		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
-			alert("This drop zone only accepts image files (.jpg, .png, etc.).");
+			openMessage("Select Image Files", file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
 		}
 
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
 		img.id = file.name;
-		img.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(img);
-		addText(file.name, tabs);
+		createThumbnailContainer(img, file.name, "add-images-desktop");
 	}
 }
 
-function handleMediaFiles(files) {
-    var tabs = document.getElementById("media-tab");
+function openMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
 		// if not video or audio go on to next file
 		if (!file.type.match(videoType) && !file.type.match(audioType)) {
-			alert("This drop zone only accepts music and video files (.mp3, .mp4, etc.).");
+			openMessage("Select Video/Audio Files", file.name+" is not a music or video file (.mp3, .mp4, etc.).");
 			continue;
 		}
 
@@ -490,8 +389,8 @@ function handleMediaFiles(files) {
 		if (file.type.match(videoType)) {
 			element = document.createElement("video");
 			element.src = window.URL.createObjectURL(file);
-			element.setAttribute('draggable', true);
 		}
+		
 		if (file.type.match(audioType)) {
 			element = document.createElement("img");
 			
@@ -500,21 +399,18 @@ function handleMediaFiles(files) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
 					url, 
-					function() {showAlbumArt(url, file, tabs);},
+					function() {showAlbumArt(url, file);},
 					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
 				);
 			} else {
 				element.src = "images/audio.jpg";
 			}
 		}
-		element.classList.add("photo-thumbnail");
+		
 		element.file = file;
 		element.id = file.name;
-		element.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(element);
-		addText(file.name, tabs);
+		createThumbnailContainer(element, file.name, "add-av-desktop");
     }
-
 }
 
 function showAlbumArt(url, file) {
@@ -534,11 +430,11 @@ function showAlbumArt(url, file) {
 }
 
 function handleImageFileSelect(evt) {
-	handleImageFiles(evt.target.files);
+	openImageFiles(evt.target.files);
 }
 
 function handleMediaFileSelect(evt) {
-    handleMediaFiles(evt.target.files);
+    openMediaFiles(evt.target.files);
 }
 
 
@@ -571,23 +467,28 @@ function showControl(controlId, target) {
 	control.target = target;
 }
 
-function closeClicked(closeButton) {
+function closeClicked(event, closeButton) {
+	var bento = closeButton.parentNode;
 	if (closeButton.target) {
 		if (closeButton.target.nodeName === "VIDEO") {
-			closeButton.parentNode.video = null;
+			bento.video = null;
 		} else if (closeButton.target.nodeName === "AUDIO") {
-			closeButton.parentNode.audio = null;
+			bento.audio = null;
 		} else if (closeButton.target.nodeName === "DIV") {
-			closeButton.parentNode.imageContainer = null;
+			bento.imageContainer = null;
 		}
-		closeButton.parentNode.removeChild(closeButton.target);
+		bento.removeChild(closeButton.target);
+		bento.iframe = null;
+		bento.contentURI = null;
 	}
 	if (closeButton.target.nodeName === "AUDIO") {
-		closeButton.parentNode.removeChild(closeButton);
+		bento.removeChild(closeButton);
 	} else {
 		hideControl(closeButton.id);
-		hideControl(closeButton.parentNode.id + "-slider");
+		hideControl(bento.id + "-slider");
 	}
+	event.stopPropagation();
+	unsaved();
 }
 
 function resizeContainer(bento, img, div) {
@@ -661,6 +562,7 @@ function handleSliderEvent(event, ui) {
 	
 	// now resize the container so the image can be moved around
 	resizeContainer(bento, image, container);
+	unsaved();
 }
 
 $(function() {
@@ -707,6 +609,7 @@ function handleHorizontalDrag(target, movement) {
 				resizeBento(bentos[i]);
 			}
 		}
+		unsaved();
 	}	
 }
 
@@ -736,6 +639,7 @@ function handleVerticalDrag(target, movement) {
 				resizeBento(bentos[i]);
 			}
 		}
+		unsaved();
 	}
 }
 
@@ -943,6 +847,11 @@ function setPreviewLink (template) {
 		linkText = "preview.php?id=" + template.giftboxId;
 	}
 	$("#preview-link").val(template.appURL + linkText);
+	if (template.giftboxId) {
+		$("#send-link-input").val(template.appURL + linkText);
+	} else {
+		$("#send-link-input").val("");
+	}
 }
 
 function stack(top, middle, bottom) {
@@ -1113,26 +1022,22 @@ function save() {
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
-			openMessage("Save", "Save failed with the following error:  "+result.message);
+			openMessage("Error", "Save failed with the following error:  "+result.message);
 		} else {
 			openMessage("Save", "Save failed!");
 		}
 	}).fail(function() {
 		openMessage("Save", "Save failed!");
 	});
+	saved();
 }
 
 function send() {
 	var giftboxId = window.top_template.giftboxId;
 	if (!giftboxId) {
-		openMessage("Send", "The giftbox must be saved before it can be sent.");
+		openMessage("Send", "The Token must be saved before it can be sent.");
 	} else {
-		$.magnificPopup.open({
-		  items: {
-			src: '#send-form',
-			type: 'inline'
-		  }
-		});
+		$('#send-dialog').dialog('open');	
 	}
 }
 
@@ -1141,7 +1046,7 @@ function preview() {
 	var unloadType = window.top_template.wrapperType;
 	var unloadCount = window.top_template.unloadCount
 	if (!giftboxId) {
-		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
+		openMessage("Preview", "The Token must be saved before it can be previewed.");
 	} else {
 		if (window.top_template.wrapperType) {
 			window.open("second-harvest.php?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
@@ -1152,9 +1057,13 @@ function preview() {
 }
 
 function saveLetter() {
-	var letterText = document.getElementById("letter-text");
-	window.top_template.letterText = letterText.value;
-	$("#letter-dialog" ).dialog("close");
+	var letterTextInput = document.getElementById("letter-text");
+	var newValue = letterTextInput.value;
+	var oldValue = window.top_template.letterText;
+	if (newValue !== oldValue) {
+		window.top_template.letterText = newValue;
+		unsaved();
+	}
 }
 
 function wrapper() {
@@ -1177,17 +1086,17 @@ function inputURL(site) {
 	$('#url-dialog').dialog('open');	
 }
 
-function addURL() {
+function openURL() {
 	// Get the url
 	var url = document.getElementById("url").value;
 	var title = $("#url-dialog").dialog("option", "title");
 	$("#url-dialog").dialog("close");
 	if (isYouTube(url)) {
-		addYouTube(url);
+		openYouTube(url);
 	} else if (isSoundCloud(url)) {
-		addSoundCloud(url);
+		openSoundCloud(url);
 	} else if (isSpotify(url)) {
-		addSpotify(url);
+		openSpotify(url);
 	} else {
 		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
 		console.log(error);
@@ -1286,20 +1195,20 @@ function clearBento(bento) {
 	if (bento.iframe) {
 		bento.removeChild(bento.iframe);
 		bento.iframe = null;
-		bento.contentURI = null;
 	}
+	bento.contentURI = null;
 	bento.file = null;
 }
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
 		if (isYouTube(savedBento.content_uri)) {
-			dropYouTube(bento, savedBento.content_uri);
+			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
-			dropSoundCloud(bento, savedBento.content_uri);
+			addSoundCloud(bento, savedBento.content_uri);
 		} else if (isSpotify(savedBento.content_uri)) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
-			dropSpotify(bento, trackId);
+			addSpotify(bento, trackId);
 		}
 	}
 	if (savedBento.image_file_name) {
@@ -1347,4 +1256,183 @@ function createCroppedImage (bento, image, container) {
 	var croppedImage = new Image();
 	croppedImage.src = croppedCanvas.toDataURL();
 	return croppedImage;
+}
+
+function featureNotAvailable(feature) {
+	openMessage(feature, "This feature is not available yet.");
+}
+
+function selectSidebarTab(tab) {
+	var selectedIcon = $("#"+tab.id);
+
+	// restore all icons
+	$(".sidebar-tab").each(function(i) {
+		$(this).removeClass("sidebar-tab-hover");
+		$(this).addClass("sidebar-tab-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+	});
+
+	// set the selected icon
+	selectedIcon.removeClass("sidebar-tab-hover");
+	selectedIcon.removeClass(tab.id);
+	selectedIcon.addClass(tab.id+"-selected");
+
+	// hide all sidebar tab containers
+	$(".sidebar-tab-container").css("display", "none");
+
+	// show the selected container
+	$("#"+tab.id+"-container").css("display", "block");
+}
+
+function showTemplates(number) {
+	var selectedButton = $("#template-number-"+number);
+	
+	// restore all number buttons
+	$(".template-number").each(function(i) {
+		$(this).removeClass("template-number-hover");
+		$(this).addClass("template-number-hover");
+		$(this).removeClass("template-number-selected");
+	});
+	
+	// set the selected number button
+	selectedButton.removeClass("template-number-hover");
+	selectedButton.addClass("template-number-selected");
+
+	// show only those template for the selected button
+	if (number === "all") {
+		$(".template-thumbnail").css("display", "inline-block");
+	} else {
+		$(".template-thumbnail").css("display", "none");
+		$("#template-thumbnail-"+number).css("display", "inline-block");
+	}
+}
+
+function bentoClick(bento) {
+	$("#add-dialog").attr("target-bento", bento.id);
+	$("#add-dialog").dialog("open");
+}
+
+function textIconClicked() {
+	$("#add-dialog").dialog("open");
+	selectAddNav("add-letter");
+}
+
+function selectAddNav(navId) {
+	var selectedNav = $("#"+navId);
+
+	// restore all link styles
+	$(".add-nav-item").each(function(i) {
+  		$(this).removeClass("add-nav-item-hover");
+		$(this).addClass("add-nav-item-hover");
+		$(this).removeClass("add-nav-item-selected");
+		
+	});
+
+	// set the selected icon
+	selectedNav.removeClass("add-nav-item-hover");
+	selectedNav.addClass("add-nav-item-selected");
+
+	// hide all sidebar nav containers
+	$(".add-content-container").css("display", "none");
+
+	// show the selected container
+	$("#"+navId+"-container").css("display", "block");
+}
+
+function selectThumbnail(thumbnail) {
+	var selectedThumbnail = $("#"+thumbnail.id);
+	
+	// restore all number buttons
+	$(".thumbnail-container").each(function(i) {
+		$(this).removeClass("thumbnail-container-hover");
+		$(this).addClass("thumbnail-container-hover");
+		$(this).removeClass("thumbnail-container-selected");
+	});
+	
+	// set the selected number button
+	selectedThumbnail.removeClass("thumbnail-container-hover");
+	selectedThumbnail.addClass("thumbnail-container-selected");
+}
+
+function removeSelection(parentId) {
+	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
+	jqueryContainer.removeClass("thumbnail-container-selected");
+	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
+function doAdd() {
+	var jqueryObject;
+	var bentoId;
+	var element;
+	var bento;
+	$('#add-dialog').dialog('close');
+	
+	// LETTER
+	saveLetter();
+	
+	bentoId = $("#add-dialog").attr("target-bento");
+	bento = $("#"+bentoId)[0];
+
+	// IMAGE
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-images-desktop");
+		element = jqueryObject[0];
+		addImage(bento, element.src, element.file, null);
+	}
+
+	// VIDEO/AUDIO
+	jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() == 0) {
+		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > video");
+	}
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-av-desktop");
+		element = jqueryObject[0];
+		if (element.file) {
+			if (element.file.type.match(audioType)) {
+				addImage(bento, element.src, null, null);
+				bento.image_file_name = element.file.name.replace(".", "_") + ".jpg";
+				addAudio(bento, window.URL.createObjectURL(element.file), element.file, null);
+			} else if (element.file.type.match(videoType)) {
+				addVideo(bento, null, element.file, null);
+			}
+		} else if (element.youTubeURL) {
+			addYouTube(bento, element.youTubeURL);
+		} else if (element.spotifyTrackId) {
+			addSpotify(bento, element.spotifyTrackId)
+		} else if (element.soundCloudURL) {
+			addSoundCloud(bento, element.soundCloudURL);
+		}
+	}
+}
+
+function hidePalette() {
+	$("#palette").animate({width: "25px"});
+	$("#palette-body").addClass("hidden")
+	$("#hide-palette").addClass("hidden");
+	$("#show-palette").removeClass("hidden");
+}
+
+function showPalette() {
+	$("#palette").animate({width: "260px"});
+	$("#show-palette").addClass("hidden");
+	$("#hide-palette").removeClass("hidden");
+	$("#palette-body").removeClass("hidden");
+}
+
+function imageClicked(image) {
+	$("#add-hyperlink-dialog").attr("target-image", image.id);
+	$("#add-hyperlink-dialog").dialog("open");
+	event.stopPropagation();
+}
+
+function videoClicked(event, video) {
+	event.stopPropagation();
+}
+
+function addImageHyperlink() {
+	featureNotAvailable("Add Hyperlink To Image");
 }

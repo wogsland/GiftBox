@@ -12,7 +12,17 @@ if ($file_name) {
 		$file_data =  base64_decode(substr($file_data, $pos + 7));
 	}
 	if ($google_app_engine) {
-		$ctx = stream_context_create(['gs'=>['acl'=>'public-read','Content-Type' => $content_type]]);
+		$ctx = stream_context_create(
+			['gs'=>	
+				[
+				'acl'=>'public-read',
+				'Content-Type' => $content_type, 
+				'enable_cache' => false,
+				'read_cache_expiry_seconds' => 0,
+				'cache-control' => 'private, max-age=0,must-revalidate'
+				]
+			]
+		);
 		file_put_contents($file_storage_path.$file_name, $file_data, 0, $ctx);
 	} else {
 		file_put_contents($file_storage_path.$file_name, $file_data);

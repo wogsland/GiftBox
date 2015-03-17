@@ -402,7 +402,7 @@ include_once 'config.php';
 			    Information About You and Your Visits to the Platform
 			</h2>
 			<p>
-			All information we collect on this Platform is subject to our Privacy Policy    <a href="https://www.givetoken.com/privacypolicy">https://www.givetoken.com/privacypolicy</a>. By using the Platform, you consent to all actions taken by
+			All information we collect on this Platform is subject to our Privacy Policy    <a href="https://www.givetoken.com/privacypolicy.php">https://www.givetoken.com/privacypolicy</a>. By using the Platform, you consent to all actions taken by
 			    us with respect to your information in compliance with the Privacy Policy.
 			</p>
 			<h2>

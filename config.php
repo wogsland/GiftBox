@@ -29,4 +29,5 @@ $user = "giftbox";
 $password = "giftbox";
 $app_name = "Giftbox";
 $app_url = $prefix.$server.$app_root;
-$sender_email = "john_hall@corridor-inc.com";
+$sender_email = "founder@givetoken.com";
+$message_recipient_email = "founder@givetoken.com";
