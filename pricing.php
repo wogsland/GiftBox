@@ -205,7 +205,7 @@
                 <h4>per month</h4>
               </div>
 
-              <div class="not-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="selectStandard()">Select <i class="fa fa-chevron-right"></i></button></div>
+              <div class="not-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="selectStandard()">Finish <i class="fa fa-chevron-right"></i></button></div>
 
            </div>
 
@@ -467,6 +467,7 @@
 <script>
 	function selectBasic() {
 		selectPlan("basic");
+		$('#signup-dialog').modal();
 	}
 	
 	function selectStandard() {
@@ -679,7 +680,10 @@
 <script src="js/matchMedia.js"></script>
 <script src="js/jquery.ajaxchimp.min.js"></script>
 <script src="js/jquery.fitvids.js"></script>
+<script src="js/facebook_init.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/signup.js"></script>
+<script src="js/account.js"></script>
 
 </body>
 </html>
