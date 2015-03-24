@@ -649,7 +649,7 @@
 <!-- =========================
      FOOTER
 ============================== -->
-<footer id="contact" class="deep-dark-bg">
+<footer id="contact-footer" class="deep-dark-bg">
 
 <div class="container">
 
@@ -665,7 +665,7 @@
 			<div class="col-md-8 col-md-offset-2">
 
 				<!-- FORM -->
-				<form class="contact-form" id="contact" role="form">
+				<form class="contact-form" id="contact" role="form" action = "sendemail.php" method="POST">
 
 					<!-- IF MAIL SENT SUCCESSFULLY -->
 					<h4 class="success">
@@ -687,7 +687,7 @@
 
 					<div class="col-md-12">
 						<input class="form-control input-box" id="subject" type="text" name="subject" placeholder="Subject">
-						<textarea class="form-control textarea-box" id="message" rows="8" placeholder="Message"></textarea>
+						<textarea class="form-control textarea-box" id="message" name="message" rows="8" placeholder="Message"></textarea>
 					</div>
 
 					<button class="btn btn-primary standard-button2 ladda-button" type="submit" id="submit" name="submit" data-style="expand-left">Send Message</button>
@@ -767,10 +767,59 @@
      SCRIPTS
 ============================== -->
 <script>
-		function add(text){
-	    var TheTextBox = document.getElementById("Mytextbox");
-	    TheTextBox.value = TheTextBox.value + text;
-		}
+
+(function() {
+
+function isEmail( str ) {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( str );
+}
+
+// When the user submits the contact form...
+var contactForm = $( "#contact" ).on( "submit", function( event ) {
+    // Prevent the form from actually submitting
+    // We do this so that the user stays on the current page
+    event.preventDefault();
+
+    // Hide any messages from previous send attempts
+    contactForm.find( ".success" ).hide();
+    contactForm.find( ".error" ).hide();
+
+    var name = $( "#name" ).val();
+    var email = $( "#email" ).val();
+    var subject = $( "#subject" ).val();
+    var message = $( "#message" ).val();
+
+    // If any field isn't filled in, show the error message and stop processing
+    if ( !name.length || !isEmail(email) || !subject.length || !message.length ) {
+        contactForm.find( ".error" ).show();
+        return;
+    }
+
+    // Submit the form via Ajax
+	$.post(
+	    // Get the URL from the form
+	    contactForm.attr("action"),
+	    // Get the data from the form
+	    contactForm.serialize(),
+	    // Set up a callback for successfully posting the data
+	    function(data, textStatus, jqXHR){
+    		if(data.status === "SUCCESS") {
+    		    contactForm.find( ".success" ).show();
+    		} else if (data.status === "ERROR") {
+    			// TODO
+    			alert( "error1" );
+    		} else {
+    			// TODO
+    			alert( "error2" );
+    		}
+	    }
+	).fail(function() {
+		// TODO
+		alert( "error3" );
+	});
+});
+
+})();
 
 </script>
 <script src="js/bootstrap.min.js"></script>
