@@ -61,6 +61,7 @@ body#viewer-page footer{
 a {
     -webkit-transition: all ease 0.25s;
             transition: all ease 0.25s;
+    cursor: pointer;
 }
 
 a:hover {
@@ -73,7 +74,7 @@ a:hover {
 }
 
 textarea:focus, input:focus {
-    color: #ffffff;
+    color: #000000;
 }
 /* Other fixes*/
 
