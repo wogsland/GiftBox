@@ -31,6 +31,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
 <!-- FONT ICONS -->
+<link rel="stylesheet" href="assets/elegant-icons/style.css">
 <link rel="stylesheet" href="assets/app-icons/styles.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
