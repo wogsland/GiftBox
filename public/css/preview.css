@@ -1,0 +1,214 @@
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+body
+{
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #9099B0 100%);
+
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top, #FFFFFF 0%, #9099B0 100%);
+
+	/* Opera */ 
+	background-image: -o-linear-gradient(top, #FFFFFF 0%, #9099B0 100%);
+
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #9099B0));
+
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #9099B0 100%);
+
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom, #FFFFFF 0%, #9099B0 100%);	
+}
+
+iframe {
+	width: 100%;
+	height: 100%;
+}
+
+#preview-header-wrapper {
+	background-color: #293133;
+	height: 85px;
+}
+
+#preview-home-icon {
+    background: url("../images/Giftbox.png") no-repeat;
+	background-position: center;
+    display: block;
+    width: 245px;
+    height: 65px;
+    position: relative;
+    text-indent: -9999px;
+    top: 10px;
+	left: 10px;
+}
+
+.template {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	box-sizing: border-box;
+	border: solid 5px white;
+	position: relative;
+}
+
+#letter-text {
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	box-sizing: border-box;
+	padding: 40px;
+	background-color: white;
+}
+
+.bento {
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.bento img {
+	width: 100%;
+	height: 100%;
+}
+
+.download-container {
+	width: 1024px;
+	margin: 10px auto;
+}
+
+.download-button {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.flip-tab {
+	text-decoration: none;
+	border: solid 1px #B9B9B9;
+	padding: 5px;
+	width: 100px;
+	text-align: center;
+	background-color: white;
+}
+
+#view-letter {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 1;
+}
+
+#close-letter {
+	float: left;
+}
+
+#flip-container {
+	box-sizing: border-box;
+    width: 100vw; 
+    height: 75.76vw; /* 100/1.32 = 75.75757575 */
+    background: white;
+    max-height: 100vh;
+    max-width: 131.62vh; /* 1024/778 = 1.32 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+	overflow: hidden;
+	border: 1px solid gray;
+}
+
+.panel {
+	width: 100%;
+	height: 100%;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective: 3000px;
+}
+
+.panel .front {
+	z-index: 900;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	
+	-webkit-transform: rotateX(0deg) rotateY(0deg);
+	-moz-transform: rotateX(0deg) rotateY(0deg);
+	transform: rotateX(0deg) rotateY(0deg);
+
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	-webkit-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+	
+}
+
+.panel.flip .front {
+	z-index: 900;
+	border-color: #eee;
+	box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+
+.panel .back {
+	z-index: 800;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+	transform: rotateY(-179deg);
+
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+
+	-webkit-transition: all .4s ease-in-out;
+	transition: all .4s ease-in-out;
+}
+
+.panel.flip .back {
+	z-index: 1000;
+
+	-webkit-transform: rotateX(0deg) rotateY(0deg);
+	-moz-transform: rotateX(0deg) rotateY(0deg);
+	transform: rotateX(0deg) rotateY(0deg);
+}
+
+.video-js {
+	width: 100%;
+	height: 100%;
+}

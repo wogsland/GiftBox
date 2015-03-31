@@ -1,0 +1,56 @@
+.column {
+	float: left;
+	overflow: hidden;
+}
+.padded {
+	box-sizing: border-box;
+	border: solid 5px white;
+}
+
+.width25 {
+	width: 25%;
+}
+
+.width33 {
+	width: 33.33%;
+}
+
+.width50 {
+	width: 50%;
+}
+
+.width66 {
+	width: 66.66%;
+}
+
+.width100 {
+	left: 0xp;
+	width: 100%;
+}
+
+.height25 {
+	height: 25%;
+}
+
+.height33 {
+	height: 33.33%;
+}
+
+.height50 {
+	height: 50%;
+}
+
+.height66 {
+	height: 66.66%;
+}
+
+.height100 {
+	top: 0px;
+	height: 100%;
+}
+
+.audio-player {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}

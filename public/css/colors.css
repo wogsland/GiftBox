@@ -1,0 +1,352 @@
+/* --------------------------------------
+=========================================
+COLOR : BLUE 
+
+MAIN COLOR CODE: #476fb6
+
+GREEN COLOR CODE: #5ebb47
+=========================================
+----------------------------------------- */
+
+.solid-blue {
+  background: rgba(71,111,182, 1) !important;
+}
+
+.solid-lt-blue {
+	background: rgba(171,223,236, 1) !important;
+}
+
+.solid-lt-green {
+	background: rgba(98,185,77, 1) !important;
+}
+
+.solid-green {
+	background: rgba(38,163,78, 1) !important;
+}
+
+.standard-button {
+    background: #5ebb47;
+}
+
+.standard-button:hover {
+    background: #476fb6;
+    color: white;
+}
+
+.standard-button2 {
+    background: #476fb6;
+}
+
+.standard-button2:hover {
+    background: #5ebb47;
+}
+
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary.active, 
+.open .dropdown-toggle.btn-primary {
+    background: #5ebb47;
+    border-color: inherit;
+}
+
+.white-line,
+.white-line-left {
+    background: #ffffff;
+}
+
+.colored-line,
+.colored-line-left {
+    background: #476fb6;
+}
+
+.main-color {
+    color: #476fb6;
+}
+
+h4.main-color {
+	text-transform: capitalize;
+}
+
+.color-bg {
+	background: #476fb6;
+	color: #FFFFFF;
+}
+
+
+
+/* ---------------------------------------------------------------------- */
+/*	Buttons
+/* ---------------------------------------------------------------------- */
+.teal {
+    color: white;
+    border-color: #049795;
+    text-shadow: 0 -1px 0 rgba(68, 68, 68, 0.4);
+    background-color: #35c0c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#35c0c0), to(#049795));
+    background: -webkit-linear-gradient(top, #35c0c0, #049795);
+    background: -moz-linear-gradient(top, #35c0c0, #049795);
+    background: -ms-linear-gradient(top, #35c0c0, #049795);
+    background: -o-linear-gradient(top, #35c0c0, #049795)
+}
+
+.teal {
+    color: white;
+    border-color: #049795;
+    text-shadow: 0 -1px 0 rgba(68, 68, 68, 0.4);
+    background-color: #35c0c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#35c0c0), to(#049795));
+    background: -webkit-linear-gradient(top, #35c0c0, #049795);
+    background: -moz-linear-gradient(top, #35c0c0, #049795);
+    background: -ms-linear-gradient(top, #35c0c0, #049795);
+    background: -o-linear-gradient(top, #35c0c0, #049795)
+}
+
+.teal:hover {
+    border-color: #35c0c0;
+    background-color: #42cbcc;
+    background: -webkit-gradient(linear, left top, left bottom, from(#42cbcc), to(#14a4a3));
+    background: -webkit-linear-gradient(top, #42cbcc, #14a4a3);
+    background: -moz-linear-gradient(top, #42cbcc, #14a4a3);
+    background: -ms-linear-gradient(top, #42cbcc, #14a4a3);
+    background: -o-linear-gradient(top, #42cbcc, #14a4a3)
+}
+
+.teal:active, .teal.open {
+    border-color: #35c0c0;
+    background-color: #14a4a3;
+    background: -webkit-gradient(linear, left top, left bottom, from(#14a4a3), to(#42cbcc));
+    background: -webkit-linear-gradient(top, #14a4a3, #42cbcc);
+    background: -moz-linear-gradient(top, #14a4a3, #42cbcc);
+    background: -ms-linear-gradient(top, #14a4a3, #42cbcc);
+    background: -o-linear-gradient(top, #14a4a3, #42cbcc)
+}
+
+.teal.disabled:hover, .teal.disabled:active, .teal.open.disabled {
+    border-color: #049795;
+    background-color: #35c0c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#35c0c0), to(#049795));
+    background: -webkit-linear-gradient(top, #35c0c0, #049795);
+    background: -moz-linear-gradient(top, #35c0c0, #049795);
+    background: -ms-linear-gradient(top, #35c0c0, #049795);
+    background: -o-linear-gradient(top, #35c0c0, #049795)
+}
+
+.dark-grey {
+    color: white;
+    border-color: #666666;
+    text-shadow: 0 -1px 0 rgba(68, 68, 68, 0.4);
+    background-color: #989898;
+    background: -webkit-gradient(linear, left top, left bottom, from(#989898), to(#666));
+    background: -webkit-linear-gradient(top, #989898, #666);
+    background: -moz-linear-gradient(top, #989898, #666);
+    background: -ms-linear-gradient(top, #989898, #666);
+    background: -o-linear-gradient(top, #989898, #666)
+}
+
+.dark-grey:hover {
+    background-color: #a4a4a4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a4a4a4), to(#787878));
+    background: -webkit-linear-gradient(top, #a4a4a4, #787878);
+    background: -moz-linear-gradient(top, #a4a4a4, #787878);
+    background: -ms-linear-gradient(top, #a4a4a4, #787878);
+    background: -o-linear-gradient(top, #a4a4a4, #787878)
+}
+
+.dark-grey:active, .dark-grey.open {
+    background-color: #787878;
+    background: -webkit-gradient(linear, left top, left bottom, from(#787878), to(#a4a4a4));
+    background: -webkit-linear-gradient(top, #787878, #a4a4a4);
+    background: -moz-linear-gradient(top, #787878, #a4a4a4);
+    background: -ms-linear-gradient(top, #787878, #a4a4a4);
+    background: -o-linear-gradient(top, #787878, #a4a4a4)
+}
+
+.dark-grey.disabled:hover, .dark-grey.disabled:active, .dark-grey.open.disabled {
+    border-color: #666666;
+    background-color: #989898;
+    background: -webkit-gradient(linear, left top, left bottom, from(#989898), to(#666));
+    background: -webkit-linear-gradient(top, #989898, #666);
+    background: -moz-linear-gradient(top, #989898, #666);
+    background: -ms-linear-gradient(top, #989898, #666);
+    background: -o-linear-gradient(top, #989898, #666)
+}
+
+.yellow {
+    border-color: #DFC235;
+    text-shadow: 0 1px 0 #fcfc85;
+    background-color: #f8f777;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f777), to(#dfc235));
+    background: -webkit-linear-gradient(top, #f8f777, #dfc235);
+    background: -moz-linear-gradient(top, #f8f777, #dfc235);
+    background: -ms-linear-gradient(top, #f8f777, #dfc235);
+    background: -o-linear-gradient(top, #f8f777, #dfc235)
+}
+
+.yellow:hover {
+    border-color: #999;
+    background-color: #fcfc85;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcfc85), to(#edce38));
+    background: -webkit-linear-gradient(top, #fcfc85, #edce38);
+    background: -moz-linear-gradient(top, #fcfc85, #edce38);
+    background: -ms-linear-gradient(top, #fcfc85, #edce38);
+    background: -o-linear-gradient(top, #fcfc85, #edce38)
+}
+
+.yellow:active, .yellow.open {
+    border-color: #999;
+    background-color: #f7e258;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f7e258), to(#faf476));
+    background: -webkit-linear-gradient(top, #f7e258, #faf476);
+    background: -moz-linear-gradient(top, #f7e258, #faf476);
+    background: -ms-linear-gradient(top, #f7e258, #faf476);
+    background: -o-linear-gradient(top, #f7e258, #faf476)
+}
+
+.yellow.disabled:hover, .yellow.disabled:active, .yellow.open.disabled {
+    border-color: #DFC235;
+    background-color: #f8f777;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f777), to(#dfc235));
+    background: -webkit-linear-gradient(top, #f8f777, #dfc235);
+    background: -moz-linear-gradient(top, #f8f777, #dfc235);
+    background: -ms-linear-gradient(top, #f8f777, #dfc235);
+    background: -o-linear-gradient(top, #f8f777, #dfc235)
+}
+
+.green {
+    color: white;
+    border-color: #799334;
+    text-shadow: 0 -1px 0 #677e2c;
+    background-color: #adc93f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#adc93f), to(#799334));
+    background: -webkit-linear-gradient(top, #adc93f, #799334);
+    background: -moz-linear-gradient(top, #adc93f, #799334);
+    background: -ms-linear-gradient(top, #adc93f, #799334);
+    background: -o-linear-gradient(top, #adc93f, #799334)
+}
+
+.green:hover {
+    background-color: #b4d141;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b4d141), to(#819d37));
+    background: -webkit-linear-gradient(top, #b4d141, #819d37);
+    background: -moz-linear-gradient(top, #b4d141, #819d37);
+    background: -ms-linear-gradient(top, #b4d141, #819d37);
+    background: -o-linear-gradient(top, #b4d141, #819d37)
+}
+
+.green:active, .green.open {
+    background-color: #819d37;
+    background: -webkit-gradient(linear, left top, left bottom, from(#819d37), to(#b4d141));
+    background: -webkit-linear-gradient(top, #819d37, #b4d141);
+    background: -moz-linear-gradient(top, #819d37, #b4d141);
+    background: -ms-linear-gradient(top, #819d37, #b4d141);
+    background: -o-linear-gradient(top, #819d37, #b4d141)
+}
+
+.green.disabled:hover, .green.disabled:active, .green.open.disabled {
+    border-color: #799334;
+    background-color: #adc93f;
+    background: -webkit-gradient(linear, left top, left bottom, from(#adc93f), to(#799334));
+    background: -webkit-linear-gradient(top, #adc93f, #799334);
+    background: -moz-linear-gradient(top, #adc93f, #799334);
+    background: -ms-linear-gradient(top, #adc93f, #799334);
+    background: -o-linear-gradient(top, #adc93f, #799334)
+}
+
+.red {
+    color: white;
+    border-color: #900;
+    text-shadow: 0 -1px 0 #677e2c;
+    background-color: #ef2310;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ef2310), to(#900));
+    background: -webkit-linear-gradient(top, #ef2310, #900);
+    background: -moz-linear-gradient(top, #ef2310, #900);
+    background: -ms-linear-gradient(top, #ef2310, #900);
+    background: -o-linear-gradient(top, #ef2310, #900)
+}
+
+.red:hover {
+    background-color: #ff3320;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff3320), to(#a20505));
+    background: -webkit-linear-gradient(top, #ff3320, #a20505);
+    background: -moz-linear-gradient(top, #ff3320, #a20505);
+    background: -ms-linear-gradient(top, #ff3320, #a20505);
+    background: -o-linear-gradient(top, #ff3320, #a20505)
+}
+
+.red:active, .red.open {
+    background-color: #900;
+    background: -webkit-gradient(linear, left top, left bottom, from(#900), to(#ef2310));
+    background: -webkit-linear-gradient(top, #900, #ef2310);
+    background: -moz-linear-gradient(top, #900, #ef2310);
+    background: -ms-linear-gradient(top, #900, #ef2310);
+    background: -o-linear-gradient(top, #900, #ef2310)
+}
+
+.red.disabled:hover, .red.disabled:active, .red.open.disabled {
+    border-color: #900;
+    background-color: #ef2310;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ef2310), to(#900));
+    background: -webkit-linear-gradient(top, #ef2310, #900);
+    background: -moz-linear-gradient(top, #ef2310, #900);
+    background: -ms-linear-gradient(top, #ef2310, #900);
+    background: -o-linear-gradient(top, #ef2310, #900)
+}
+
+.lowlite {
+    color: white;
+    border-color: rgba(0, 0, 0, 0.16);
+    text-shadow: 0 -1px 0 #677e2c;
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#00000005, endColorstr=#00000005);
+    background-color: rgba(0, 0, 0, 0.13);
+    background-color: rgba(0, 0, 0, 0.1);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.2)));
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))
+}
+
+.lowlite:hover, .lowlite.disabled:hover, .lowlite.disabled:active, .lowlite.open.disabled {
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#00000005, endColorstr=#00000005);
+    background-color: rgba(0, 0, 0, 0.23);
+    background-color: rgba(0, 0, 0, 0.23);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.23)), to(rgba(0, 0, 0, 0.26)));
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.23), rgba(0, 0, 0, 0.26));
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.23), rgba(0, 0, 0, 0.26));
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.23), rgba(0, 0, 0, 0.26));
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.23), rgba(0, 0, 0, 0.26))
+}
+
+.btn.green, .btn.red, .btn.teal, .btn.dark-grey {
+    color: #fff
+}
+
+
+.features .single-service .service-icon,
+.features .single-service h3 {
+    color: #476fb6;
+}
+
+.screenshots .owl-theme .owl-controls .owl-page span {
+    background: #476fb6;
+}
+
+footer .contact-button {
+    border: 2px solid #476fb6;
+    color: #476fb6;
+}
+
+footer .contact-button:hover {
+    background: #476fb6;
+}
+
+footer .contact-box .expanded-contact-form .input-box:active,
+footer .contact-box .expanded-contact-form .textarea-box:active,
+footer .contact-box .expanded-contact-form .input-box:focus,
+footer .contact-box .expanded-contact-form .textarea-box:focus {
+    border: 1px solid #476fb6;
+}
+
+footer .social-icons li a:hover {
+    color: #476fb6;
+}

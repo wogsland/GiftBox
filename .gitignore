@@ -1,0 +1,6 @@
+.DS_Store
+Icon
+/public/uploads
+/vendor
+/node_modules
+.env
