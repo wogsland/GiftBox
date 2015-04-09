@@ -159,7 +159,7 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 }
 
 function addImage(bento, imageSrc, imageFile, savedBento) {
-		// Remove any previously dropped image or video
+	// Remove any previously dropped image or video
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
 		bento.imageContainer = null;
@@ -184,6 +184,9 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.parentBento = bento;
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
+	img.src = imageSrc;
+	img.hyperlink = null;
+	img.className = "bento-image";
 	img.savedBento = savedBento;
 	img.onload = function() {
 		resizeImage(this, this.parentBento);
@@ -213,15 +216,14 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
             if ( $(this).is('.ui-draggable-dragging') ) {
                   return;
             }
-            imageClicked(this);
-      });
+            imageClicked($('#'+ img.id));
+		});
 
-	img.src = imageSrc;
-	
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
 	showControl(bento.id + "-slider", img);
 	unsaved();
+	selectImage($('#'+ img.id));
 }
 
 function addSpotify(bento, trackId) {
@@ -440,6 +442,9 @@ function handleMediaFileSelect(evt) {
 
 //******************************************************
 function hideControl(controlId) {
+//	$("#"+controlId).css("display", "none");
+//	$("#"+controlId)[0].target = null;
+	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: none;}';
 	var style = document.createElement('style');
@@ -450,9 +455,15 @@ function hideControl(controlId) {
 	document.getElementsByTagName('head')[0].appendChild(style);
 	control.style.zIndex = -9999;
 	control.target = null;
+	
 }
 
 function showControl(controlId, target) {
+//	$("#"+controlId).css("display", "block");
+//	$("#"+controlId).css("zIndex", $("#"+target.id).css("zIndex")+1);
+//	$("#"+controlId)[0].target = target;
+	
+	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: block;}';
 	var style = document.createElement('style');
@@ -465,6 +476,7 @@ function showControl(controlId, target) {
 	// put the control on top
 	control.style.zIndex = 9999;
 	control.target = target;
+	
 }
 
 function closeClicked(event, closeButton) {
@@ -943,6 +955,7 @@ function save() {
 		bento.image_left = null;
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
+		bento.image_hyperlink = null;
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -956,6 +969,7 @@ function save() {
 			bento.image_left = calcLeft(bento, image, container);
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
+			bento.image_hyperlink = image.hyperlink;
 			var croppedImage = createCroppedImage(bento, image, container);
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
 			if (!image.saved) {
@@ -1424,8 +1438,7 @@ function showPalette() {
 }
 
 function imageClicked(image) {
-	$("#add-hyperlink-dialog").attr("target-image", image.id);
-	$("#add-hyperlink-dialog").dialog("open");
+	selectImage(image);
 	event.stopPropagation();
 }
 
@@ -1433,6 +1446,55 @@ function videoClicked(event, video) {
 	event.stopPropagation();
 }
 
+function selectImage(image) {
+	// Set the dialog's target image
+	$("#image-dialog").data("target-image", image);
+	
+	// Change all the dialog values to match the target image
+	$("#hyperlink-text").val(image[0].hyperlink);
+	
+	// Show the dialog if it's not already open
+	$("#image-dialog").dialog("open");
+}
+
+function deselectImage(image) {
+	
+}
+
+function openHyperlinkInput() {
+	$("#hyperlink-dialog-url").val($("#hyperlink-text").val());
+	$("#add-hyperlink-dialog").dialog("open");
+}
+
 function addImageHyperlink() {
-	featureNotAvailable("Add Hyperlink To Image");
+	var validLink = false;
+	
+	// Get the link address from the hyperlink input dialog
+	var linkAddress = $("#hyperlink-dialog-url").val();
+
+	// Get the target image from the image dialog
+	var image = $("#image-dialog").data("target-image");
+
+	if (linkAddress.length > 0) {
+	
+		// Make sure it has an 'http' or 'https' prefix
+		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {
+			linkAddress = "http://" + linkAddress;
+		}
+
+		// Validate the link address
+		validLink = true;
+	} else {
+		validLink = true;
+	}
+	
+	if (validLink) {
+		// Set the image dialog hyperlink text
+		$("#hyperlink-text").val(linkAddress);
+		
+		// Set the images hyperlink text
+		image[0].hyperlink = linkAddress;
+		$("#add-hyperlink-dialog").dialog("close");
+	}
+
 }

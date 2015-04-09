@@ -26,6 +26,7 @@ class Bento {
 	var $slider_value;
 	var $image_left_in_container;
 	var $image_top_in_container;
+	var $image_hyperlink;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -44,12 +45,13 @@ class Bento {
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
 			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
-			."image_top_in_container, image_left_in_container) "
+			."image_top_in_container, image_left_in_container, image_hyperlink) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
 			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
-			."'$this->image_top_in_container', '$this->image_left_in_container')";
+			."'$this->image_top_in_container', '$this->image_left_in_container', "
+			."'$this->image_hyperlink')";
 		$this->id = insert($sql);
 	}
 	
@@ -76,7 +78,13 @@ class Bento {
 			if ($this->download_file_name && (strpos($this->download_mime_type, 'audio') === 0)) {
 				// Show the image as a poster in the audio player
 			} else {
+				if ($this->image_hyperlink) {
+					echo '<a href="'.$this->image_hyperlink.'" target="_blank">';
+				}
 				echo '<img src="'.$image_path.'">'.PHP_EOL;
+				if ($this->image_hyperlink) {
+					echo '</a>';
+				}
 			}
 		}
 		if ($this->download_file_name) {

@@ -235,6 +235,10 @@ ul {
 	background-color: #CBCBCB;
 }
 
+.bento-image {
+	cursor: move;
+}
+
 .click-to-add {
 	color: #486eb5;
 	display: table-cell;
@@ -279,7 +283,6 @@ ul {
 	height: 20px;
 	font-size: 16px;
 	color: #B9B9B9;
-//   background: url("../images/close_image.png");
 }
 
 .audio-close-button {
@@ -552,9 +555,12 @@ ul {
     opacity: 1;
 }
 
+/*
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+
+*/
 
 #token-list {
 	width: 100%;
@@ -956,3 +962,39 @@ fieldset {
 .no-pointer {
 	cursor: default;
 }
+
+#image-dialog {
+	padding: 0px;
+}
+
+#image-dialog-container {
+	padding: 10px 5px;
+}
+#hyperlink-button {
+	width: 100%;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: white;
+	background-color: #476FB6;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+#hyperlink-button:hover {
+	color: white;
+	background-color: #626c71;
+	cursor: pointer;
+}
+
+#hyperlink-text {
+	width: 100%;
+	margin-top: 5px;
+	color: black;
+	text-align: center;
+	box-sizing: border-box;
+	height: 25px;
+	line-height: 25px;
+	border: none
+}
+
