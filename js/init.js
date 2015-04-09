@@ -1,8 +1,4 @@
 $(function() {
-	$( "#tabs" ).tabs();
-});
-
-$(function() {
 	$( "#add-dialog" ).dialog({
 		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
 		dialogClass: 'add-dialog-class',
@@ -124,6 +120,7 @@ $(function() {
 	});
 });
 
+
 $(function() {
 	$( "#add-hyperlink-dialog" ).dialog({ 
 		autoOpen: false,
@@ -151,16 +148,10 @@ $(function() {
 });
 
 $(function() {
-	$( "#confirm-dialog" ).dialog({
+	$( "#image-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
-		height:200,
-		width: 400,
-		modal: true,
-		buttons: {
-			OK: function() {
-				$( this ).dialog( "close" );
-			}
-		}
+		height:400,
+		width: 300
 	});
 });

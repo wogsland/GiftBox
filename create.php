@@ -309,7 +309,7 @@
 		<form>
 		    <fieldset>
 				<label class="input-label" for="url">Paste link address here</label>
-				<input class="dialog-input" type="text" name="url" id="url">
+				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
 	</div>
@@ -402,6 +402,14 @@
 		</fieldset>			
 	</div>
 
+	<div id="image-dialog" title="Image">
+		<div id="image-dialog-container">
+			<div id="hyperlink-button" onclick="openHyperlinkInput()"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
+			<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+		</div>
+	</div>
+
+	
 	<script>
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
