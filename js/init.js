@@ -137,9 +137,9 @@ $(function() {
 			}
 		},
 		open: function() {
-			$("#url-dialog").keypress(function(e) {
+			$("#add-hyperlink-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					openURL();
+					addImageHyperlink();
 					return false;
 				}
 			});
