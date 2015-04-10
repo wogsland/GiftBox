@@ -224,11 +224,15 @@ ul {
 	overflow: hidden;
 	cursor: pointer;
 	display: table;
+	font-size: 16px;
+}
+.selected-bento {
+	border: red 2px solid;
 }
 
 .bento:hover {
-	border: solid 2px #486eb5;;
-	font-size: 16px;
+	/*	border: solid 2px #486eb5; */
+	background-color: #e2e3e5;
 }
 
 .bento.over {
@@ -970,8 +974,8 @@ fieldset {
 #image-dialog-container {
 	padding: 10px 5px;
 }
-#hyperlink-button {
-	width: 100%;
+
+.image-dialog-button {
 	text-align: center;
 	height: 30px;
 	line-height: 30px;
@@ -979,6 +983,23 @@ fieldset {
 	background-color: #476FB6;
 	font-weight: bold;
 	border-radius: 3px;
+	cursor: pointer;
+}
+
+.small-image-dialog-button {
+	width: 49%;
+	display: inline-block;
+	font-size: 10px;
+	display: none;
+}
+
+#add-hyperlink-button {
+	width: 100%;
+}
+
+#close-image-dialog-button {
+	display: block;
+	margin: 240px auto 0px auto;
 }
 
 #hyperlink-button:hover {
@@ -995,6 +1016,10 @@ fieldset {
 	box-sizing: border-box;
 	height: 25px;
 	line-height: 25px;
-	border: none
+	border: none;
+	overflow: hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+	padding: 0px 3px;
 }
 
