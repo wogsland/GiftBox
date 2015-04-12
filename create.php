@@ -240,6 +240,7 @@
 								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-1-slider"></div>
 								<i class="close-button icon_close_alt" id="bento-1-1-close" onclick="closeClicked(event, this)"></i>
+								<i class="bento-link-icon icon-link fa fa-link fa-lg" id="bento-1-1-link-icon"></i>
 							</div>
 						</div>
 						<div id="column-1-2" class="column padded height100 width33">

@@ -58,7 +58,7 @@ class Bento {
 	public function render() {
 		include 'config.php';
 
-		echo '<div class="bento">';
+		echo '<div class="bento">'.PHP_EOL;
 		
 		if (is_spotify($this->content_uri)) {
 			$background_color = "black";
@@ -79,11 +79,11 @@ class Bento {
 				// Show the image as a poster in the audio player
 			} else {
 				if ($this->image_hyperlink) {
-					echo '<a href="'.$this->image_hyperlink.'" target="_blank">';
+					echo '<a href="'.$this->image_hyperlink.'" target="_blank">'.PHP_EOL;
 				}
 				echo '<img src="'.$image_path.'">'.PHP_EOL;
 				if ($this->image_hyperlink) {
-					echo '</a>';
+					echo '</a>'.PHP_EOL;
 				}
 			}
 		}
@@ -98,13 +98,13 @@ class Bento {
 			if (strpos($this->download_mime_type, 'video') === 0) {
 				echo '<video id="'.$this->download_file_name.'" class="video-js vjs-default-skin video-player" controls preload="auto" width="auto" height="auto" data-setup="{}">'.PHP_EOL;
 				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
-				echo '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';									
+				echo '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>'.PHP_EOL;									
 				echo '</video>'.PHP_EOL;
 			} else if (strpos($this->download_mime_type, 'audio') === 0) {
-				echo '<audio class="audio-player video-js vjs-default-skin" controls preload="auto" src="'.$path.'" width="auto" height="auto" poster="'.$image_path.'" data-setup="{}">';
+				echo '<audio class="audio-player video-js vjs-default-skin" controls preload="auto" src="'.$path.'" width="auto" height="auto" poster="'.$image_path.'" data-setup="{}">'.PHP_EOL;
 				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
 			} else {
-				echo '<img class="download-icon" src="images/download.jpg">';
+				echo '<img class="download-icon" src="images/download.jpg">'.PHP_EOL;
 			}
 		}
 		if ($this->content_uri) {
@@ -117,8 +117,9 @@ class Bento {
 				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			}
 		}
-		
-		
-		echo '</div>';
+		if ($this->image_hyperlink) {
+			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
+		}
+		echo '</div>'.PHP_EOL;
 	}
 }

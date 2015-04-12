@@ -231,12 +231,7 @@ ul {
 }
 
 .bento:hover {
-	/*	border: solid 2px #486eb5; */
 	background-color: #e2e3e5;
-}
-
-.bento.over {
-	background-color: #CBCBCB;
 }
 
 .bento-image {
@@ -559,12 +554,9 @@ ul {
     opacity: 1;
 }
 
-/*
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
-
-*/
 
 #token-list {
 	width: 100%;
