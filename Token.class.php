@@ -19,7 +19,8 @@ class Token {
 	var $bentos;
 	var $dividers;
 	var $columns;
-	
+	var $attachments;
+
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$token = execute_query("SELECT * from giftbox where id = $id")->fetch_object("Token");
@@ -29,9 +30,10 @@ class Token {
 			$this->load_bentos();
 			$this->load_dividers();
 			$this->load_columns();
+			$this->load_attachments();
 		}
 	}
-	
+
 	private function setId($id) {
 		$this->id = $id;
 		foreach ($this->bentos as $bento) {
@@ -44,7 +46,7 @@ class Token {
 			$column->setGiftboxId($id);
 		}
 	}
-	
+
 	private function initBentos($array) {
 		foreach ($array as $b) {
 			$bento = new Bento();
@@ -52,7 +54,7 @@ class Token {
 			$this->bentos[$bento->css_id] = $bento;
 		}
 	}
-	
+
 	private function initDividers($array) {
 		foreach ($array as $d) {
 			$divider = new Divider();
@@ -60,7 +62,7 @@ class Token {
 			$this->dividers[$divider->css_id] = $divider;
 		}
 	}
-	
+
 	private function initColumns($array) {
 		foreach ($array as $c) {
 			$column = new Divider();
@@ -69,7 +71,18 @@ class Token {
 		}
 		$this->assignParents();
 	}
-	
+
+	private function initAttachments($array) {
+		$this->attachments = array();
+		foreach ($array as $a) {
+			$attachment = new stdClass();
+			foreach (get_object_vars((object)$a) as $key => $value) {
+				$attachment->$key = $value;
+			}
+			array_push($this->attachments, $attachment);
+		}
+	}
+
 	private function assignParents() {
 		foreach ($this->columns as $column) {
 			if (isset($this->columns[$column->parent_css_id])) {
@@ -79,24 +92,34 @@ class Token {
 			}
 		}
 	}
-	
+
 	private function saveBentos() {
 		execute("DELETE FROM bento WHERE giftbox_id = $this->id");
 		foreach ($this->bentos as $bento) {
 			$bento->save();
 		}
 	}
-	
+
 	private function saveDividers() {
 		execute("DELETE FROM divider WHERE giftbox_id = $this->id");
 		foreach ($this->dividers as $divider) {
 			$divider->save();
 		}
 	}
-	
+
 	private function saveColumns() {
 		foreach ($this->columns as $column) {
 			$column->save();
+		}
+	}
+
+	private function saveAttachments() {
+		foreach ($this->attachments as $attachment) {
+			//$file_name = str_replace("'", "''", $attachment->file_name);
+			$download_file_name = str_replace("'", "''", $attachment->download_file_name);
+			$sql = "INSERT INTO attachment (giftbox_id, file_name, download_file_name, download_mime_type) "
+				."VALUES ($this->id, '$download_file_name', '$download_file_name', '$attachment->download_mime_type')";
+			$attachment->id = insert($sql);
 		}
 	}
 
@@ -122,6 +145,14 @@ class Token {
 		$this->assignParents();
 	}
 
+	private function load_attachments() {
+		$this->attachments = array();
+		$results = execute_query("SELECT * FROM attachment WHERE giftbox_id = $this->id GROUP BY download_file_name");
+		while ($a = $results->fetch_object()) {
+			array_push($this->attachments, $a);
+		}
+	}
+
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
 			if (is_array($value)) {
@@ -131,13 +162,15 @@ class Token {
 					$this->initDividers($value);
 				} elseif ($key === "columns") {
 					$this->initColumns($value);
+				} elseif ($key === "attachments") {
+					$this->initAttachments($value);
 				}
 			} else {
 				$this->$key = $value;
 			}
 		}
 	}
-	
+
 	public function save() {
 		if (!$this->id) {
 			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent) "
@@ -154,8 +187,9 @@ class Token {
 		$this->saveBentos();
 		$this->saveDividers();
 		$this->saveColumns();
+		$this->saveAttachments();
 	}
-	
+
 	public function render() {
 		$detect = new Mobile_Detect();
 //		if (!$detect->isMobile()) {
