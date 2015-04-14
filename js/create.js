@@ -50,7 +50,7 @@ function spotifyTrackId(url) {
 	}
 	var parts = url.split(delimiter);
 	var trackId = parts[parts.length - 1];
-	
+
 	return trackId;
 }
 
@@ -97,7 +97,7 @@ function addAudio (bento, audioSrc, audioFile, savedBento) {
 	}
 	bento.download_file_name = audioFile.name;
 	bento.download_mime_type = audioFile.type;
-	
+
 	// Create the audio element
 	var audio = document.createElement('audio');
 	audio.setAttribute('controls', true);
@@ -132,7 +132,7 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	}
 	bento.download_file_name = videoFile.name;
 	bento.download_mime_type = videoFile.type;
-	
+
 	var video = document.createElement('video');
 	video.onclick = function(){videoClicked(event, this)};
 	video.setAttribute('controls', true);
@@ -317,7 +317,7 @@ function openYouTube(url) {
 				error = "Youtube API call failed.\n\n" + dataURL;
 				console.log(error);
 				alert(error);
-			});	
+			});
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
 		console.log(error);
@@ -391,15 +391,15 @@ function openMediaFiles(files) {
 			element = document.createElement("video");
 			element.src = window.URL.createObjectURL(file);
 		}
-		
+
 		if (file.type.match(audioType)) {
 			element = document.createElement("img");
-			
+
 			// Get the album artwork from an MP3
 			if (file.type.indexOf("mp3") >= 0 || file.type.indexOf("mpeg") >= 0) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
-					url, 
+					url,
 					function() {showAlbumArt(url, file);},
 					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
 				);
@@ -407,11 +407,31 @@ function openMediaFiles(files) {
 				element.src = "images/audio.jpg";
 			}
 		}
-		
+
 		element.file = file;
 		element.id = file.name;
 		createThumbnailContainer(element, file.name, "add-av-desktop");
     }
+}
+
+function openAttachmentFiles(files) {
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		var a = appendAttachmentDisplay({file_name: file.name, download_file_name: file.name, download_mime_type: file.type});
+		a.file = file;
+	}
+}
+
+function appendAttachmentDisplay(attachment) {
+	var a = document.createElement("a");
+	a.appendChild( document.createTextNode(attachment.file_name) );
+	a.download_file_name = attachment.download_file_name;
+	a.download_mime_type = attachment.download_mime_type;
+	var icon = document.createElement("i");
+	icon.classList.add("fa", "fa-file", "fa-2x");
+	a.appendChild(icon)
+	document.getElementById("add-attachment-desktop").appendChild(a);
+	return a;
 }
 
 function showAlbumArt(url, file) {
@@ -435,7 +455,11 @@ function handleImageFileSelect(evt) {
 }
 
 function handleMediaFileSelect(evt) {
-    openMediaFiles(evt.target.files);
+  openMediaFiles(evt.target.files);
+}
+
+function handleAttachmentFileSelect(evt) {
+	openAttachmentFiles(evt.target.files);
 }
 
 
@@ -452,7 +476,7 @@ function hideControl(controlId) {
 	var style = document.createElement('style');
 	if (style.styleSheet)
 		style.styleSheet.cssText = css;
-	else 
+	else
 		style.appendChild(document.createTextNode(css));
 	document.getElementsByTagName('head')[0].appendChild(style);
 	control.style.zIndex = -9999;
@@ -468,16 +492,15 @@ function showControl(controlId, target) {
 		control[0].target = target;
 	}
 /*	
-	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: block;}';
 	var style = document.createElement('style');
 	if (style.styleSheet)
 		style.styleSheet.cssText = css;
-	else 
+	else
 		style.appendChild(document.createTextNode(css));
 	document.getElementsByTagName('head')[0].appendChild(style);
-	
+
 	// put the control on top
 	control.style.zIndex = 9999;
 	control.target = target;
@@ -536,7 +559,7 @@ function resizeImage(img, bento) {
 	}
 	img.style.top = 0;
 	img.style.left = 0;
-	
+
 	// set values for slider scaling
 	img.originalWidth = img.width;
 	img.originalHeight = img.height;
@@ -554,7 +577,7 @@ function resizeBento(bento) {
 function handleSearch(field) {
 	var textLength = field.value.length;
 	var index = 1;
-	
+
 	var images = document.querySelectorAll('.result-image');
 	[].forEach.call(images, function(image) {
 		if (index <= textLength) {
@@ -571,14 +594,14 @@ function handleSliderEvent(event, ui) {
 	var nameRoot = bento.id;
 	var image = document.getElementById(nameRoot + "-image");
 	var container = document.getElementById(nameRoot + "-image-container");
-	
+
 	// change the value into a float (e.g. 1.5);
 	var value = ui.value / 100;
 
 	// scale the image
 	image.style.width = Math.round(image.originalWidth * value) + "px";
 	image.style.height = Math.round(image.originalHeight * value) + "px";
-	
+
 	// now resize the container so the image can be moved around
 	resizeContainer(bento, image, container);
 	unsaved();
@@ -607,7 +630,7 @@ function handleHorizontalDrag(target, movement) {
 // console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
 			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
-			
+
 			var bentos = leftDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
@@ -622,14 +645,14 @@ function handleHorizontalDrag(target, movement) {
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
 			rightDependent.style.width = newWidth + "px";
-			
+
 			var bentos = rightDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
 			}
 		}
 		unsaved();
-	}	
+	}
 }
 
 function handleVerticalDrag(target, movement) {
@@ -640,19 +663,19 @@ function handleVerticalDrag(target, movement) {
 			var topDependent = target.topDependents[index];
 			var newHeight = parseFloat(getComputedStyle(topDependent).height, 10) + movement;
 			topDependent.style.height = newHeight + "px";
-			
+
 			var bentos = topDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
 			}
-		}	
+		}
 
 		for (index = 0; index < target.bottomDependents.length; ++index) {
 			var bottomDependent = target.bottomDependents[index];
 			bottomDependent.style.top = (parseFloat(getComputedStyle(bottomDependent, null).top, 10) + movement) + "px";
 			var newHeight = parseFloat(getComputedStyle(bottomDependent).height, 10) - movement;
 			bottomDependent.style.height = newHeight + "px";
-			
+
 			var bentos = bottomDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
@@ -669,16 +692,16 @@ $(function() {
 	divider = document.getElementById("divider-1-1");
 	divider.leftDependents = [document.getElementById("column-1-1")];
 	divider.rightDependents = [
-		document.getElementById("column-1-2"), 
+		document.getElementById("column-1-2"),
 		document.getElementById("divider-container-1-2")];
 
 	divider = document.getElementById("divider-1-2");
 	divider.leftDependents = [
-		document.getElementById("column-1-2"), 
+		document.getElementById("column-1-2"),
 		document.getElementById("divider-container-1-1")];
 	divider.rightDependents = [
-		document.getElementById("column-1-3"), 
-		document.getElementById("divider-1-3"), 
+		document.getElementById("column-1-3"),
+		document.getElementById("divider-1-3"),
 		document.getElementById("divider-container-1-3")];
 
 	divider = document.getElementById("divider-1-3");
@@ -693,7 +716,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		},
 	});
-	
+
 	$("#divider-1-2").draggable({
 		axis: "x",
 		containment: "#divider-container-1-2",
@@ -711,18 +734,18 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	// Template #2
 	divider = document.getElementById("divider-2-1");
 	divider.leftDependents = [
-		document.getElementById("column-2-1"), 
-		document.getElementById("divider-2-2"), 
+		document.getElementById("column-2-1"),
+		document.getElementById("divider-2-2"),
 		document.getElementById("divider-container-2-2")];
 	divider.rightDependents = [
-		document.getElementById("column-2-2"), 
-		document.getElementById("divider-2-3"), 
-		document.getElementById("divider-2-4"), 
-		document.getElementById("divider-container-2-3"), 
+		document.getElementById("column-2-2"),
+		document.getElementById("divider-2-3"),
+		document.getElementById("divider-2-4"),
+		document.getElementById("divider-container-2-3"),
 		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-2");
@@ -732,12 +755,12 @@ $(function() {
 	divider = document.getElementById("divider-2-3");
 	divider.topDependents = [document.getElementById("column-2-5")];
 	divider.bottomDependents = [
-		document.getElementById("column-2-6"), 
+		document.getElementById("column-2-6"),
 		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-4");
 	divider.topDependents = [
-		document.getElementById("column-2-6"), 
+		document.getElementById("column-2-6"),
 		document.getElementById("divider-container-2-3")];
 	divider.bottomDependents = [document.getElementById("column-2-7")];
 
@@ -749,7 +772,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		}
 	});
-	
+
 	$("#divider-2-2").draggable({
 		axis: "y",
 		containment: "#divider-container-2-2",
@@ -758,7 +781,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-2-3").draggable({
 		axis: "y",
 		containment: "#divider-container-2-3",
@@ -767,7 +790,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-2-4").draggable({
 		axis: "y",
 		containment: "#divider-container-2-4",
@@ -776,27 +799,27 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	// Template #3
 	divider = document.getElementById("divider-3-1");
 	divider.leftDependents = [
-		document.getElementById("column-3-1"), 
-		document.getElementById("divider-3-3"), 
+		document.getElementById("column-3-1"),
+		document.getElementById("divider-3-3"),
 		document.getElementById("divider-container-3-3")];
 	divider.rightDependents = [
-		document.getElementById("column-3-2"), 
-		document.getElementById("divider-3-4"), 
+		document.getElementById("column-3-2"),
+		document.getElementById("divider-3-4"),
 		document.getElementById("divider-container-3-4")];
 
 	divider = document.getElementById("divider-3-2");
 	divider.leftDependents = [
-		document.getElementById("column-3-2"), 
-		document.getElementById("divider-3-4"), 
-		document.getElementById("divider-container-3-4"), 
+		document.getElementById("column-3-2"),
+		document.getElementById("divider-3-4"),
+		document.getElementById("divider-container-3-4"),
 		document.getElementById("divider-container-3-1")];
 	divider.rightDependents = [
-		document.getElementById("column-3-3"), 
-		document.getElementById("divider-3-5"), 
+		document.getElementById("column-3-3"),
+		document.getElementById("divider-3-5"),
 		document.getElementById("divider-container-3-5")];
 
 	divider = document.getElementById("divider-3-3");
@@ -819,7 +842,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		}
 	});
-	
+
 	$("#divider-3-2").draggable({
 		axis: "x",
 		containment: "#divider-container-3-2",
@@ -837,7 +860,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-3-4").draggable({
 		axis: "y",
 		containment: "#divider-container-3-4",
@@ -846,7 +869,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-3-5").draggable({
 		axis: "y",
 		containment: "#divider-container-3-5",
@@ -875,7 +898,7 @@ function setPreviewLink (template) {
 
 function stack(top, middle, bottom) {
 	var top_template = document.getElementById(top);
-	
+
 	// Only shuffle the stack if the top is not on top
 	if (!Object.is(top_template, window.top_template)) {
 		closeImageDialog();
@@ -910,12 +933,12 @@ function calcLeft(bento, image, container) {
 
 function saveButton() {
 	if (!window.top_template.giftboxId) {
-		$('#save-name').val(window.top_template.giftboxName); 
-		$('#save-dialog').dialog('open');	
+		$('#save-name').val(window.top_template.giftboxName);
+		$('#save-dialog').dialog('open');
 	} else {
 		save();
 	}
-	
+
 }
 function save() {
 	if ($("#save-dialog" ).dialog("isOpen")) {
@@ -925,7 +948,7 @@ function save() {
 		window.top_template.giftboxName = giftboxName;
 	}
 	var giftboxName = window.top_template.giftboxName;
-	
+
 	openStatus("Save", "Saving " + giftboxName + "...");
 	var template = window.top_template;
 	var giftboxId = template.giftboxId;
@@ -946,10 +969,11 @@ function save() {
 		user_agent: userAgent,
 		bentos: new Array(),
 		dividers: new Array(),
-		columns: new Array()
+		columns: new Array(),
+		attachments: new Array()
 	};
-	
-	$("#"+template.id+" div.bento").each(function(i) { 
+
+	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
 		bento.giftbox_id = giftboxId;
 		bento.css_id = $(this).attr("id");
@@ -1007,7 +1031,18 @@ function save() {
 		}
 	});
 
-	$("#"+template.id+" div.divider").each(function(i) { 
+	$("#add-attachment-desktop > a").each(function(i) {
+		var attachment = new Object();
+		attachment.download_file_name = this.download_file_name;
+		attachment.download_mime_type = this.download_mime_type;
+		giftbox.attachments[i] = attachment;
+		if (this.file) {
+			uploadFile(this.file);
+			this.file = null;
+		}
+	});
+
+	$("#"+template.id+" div.divider").each(function(i) {
 		var divider = new Object();
 		divider.giftbox_id = giftboxId;
 		divider.css_id = $(this).attr("id");
@@ -1018,7 +1053,7 @@ function save() {
 		giftbox.dividers[i] = divider;
 	});
 
-	$("#"+template.id+" div.divider-container").each(function(i) { 
+	$("#"+template.id+" div.divider-container").each(function(i) {
 		var container = new Object();
 		container.giftbox_id = giftboxId;
 		container.css_id = $(this).attr("id");
@@ -1029,7 +1064,7 @@ function save() {
 		giftbox.dividers[giftbox.dividers.length] = container;
 	});
 
-	$("#"+template.id+" div.column").each(function(i) { 
+	$("#"+template.id+" div.column").each(function(i) {
 		var column = new Object();
 		column.giftbox_id = giftboxId;
 		column.css_id = $(this).attr("id");
@@ -1042,7 +1077,7 @@ function save() {
 	});
 
 	// Save the template first
-	$.post("save_token_ajax.php", giftbox, function(result) { 
+	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
@@ -1064,7 +1099,7 @@ function send() {
 	if (!giftboxId) {
 		openMessage("Send", "The Token must be saved before it can be sent.");
 	} else {
-		$('#send-dialog').dialog('open');	
+		$('#send-dialog').dialog('open');
 	}
 }
 
@@ -1109,8 +1144,8 @@ function save_wrapper() {
 
 function inputURL(site) {
 	$('#url').val("");
-	$('#url-dialog').dialog({title: site});	
-	$('#url-dialog').dialog('open');	
+	$('#url-dialog').dialog({title: site});
+	$('#url-dialog').dialog('open');
 }
 
 function openURL() {
@@ -1153,16 +1188,16 @@ function loadSaved() {
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
 			closeStatus();
-			
+
 			// Bring the correct template to the top
 			if (token.css_id === 'template-1') {
 				stack('template-1', 'template-2', 'template-3');
 			} else if (token.css_id === 'template-2') {
-				stack('template-2', 'template-3', 'template-1')				
+				stack('template-2', 'template-3', 'template-1')
 			} else {
-				stack('template-3', 'template-1', 'template-2')				
+				stack('template-3', 'template-1', 'template-2')
 			}
-			
+
 			// Populate the top template properties
 			window.top_template.giftboxId = token.id;
 			window.top_template.giftboxName = token.name;
@@ -1171,7 +1206,7 @@ function loadSaved() {
 			window.top_template.wrapperType = token.wrapper_type;
 			window.top_template.unloadCount = token.unload_count;
 			setPreviewLink(window.top_template);
-			
+
 			// Bento properties
 			var index;
 			var bento;
@@ -1184,7 +1219,7 @@ function loadSaved() {
 				clearBento(bento);
 				loadBento(bento, token.bentos[index]);
 			}
-			
+
 			// Divider properties
 			var divider;
 			for (index = 0; index < token.dividers.length; ++index) {
@@ -1198,6 +1233,12 @@ function loadSaved() {
 				divider.style.top = token.dividers[index].css_top;
 				divider.style.left = token.dividers[index].css_left;
 			}
+
+			$("#add-attachment-desktop").empty();
+			for (index = 0; index < token.attachments.length; ++index) {
+				appendAttachmentDisplay(token.attachments[index]);
+			}
+
 		});
 	}
 	closeImageDialog();
@@ -1259,7 +1300,7 @@ function loadBento(bento, savedBento) {
 		}
 	}
 }
-	
+
 function createCroppedImage (bento, image, container) {
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
@@ -1270,7 +1311,7 @@ function createCroppedImage (bento, image, container) {
 	canvas.height = height;
 	var context = canvas.getContext('2d');
 	context.drawImage(image, 0, 0, width, height);
-	
+
 	// now crop the canvas
 	var containerStyle = getComputedStyle(container);
 	var containerLeft = parseInt(containerStyle.left, 10);
@@ -1321,14 +1362,14 @@ function selectSidebarTab(tab) {
 
 function showTemplates(number) {
 	var selectedButton = $("#template-number-"+number);
-	
+
 	// restore all number buttons
 	$(".template-number").each(function(i) {
 		$(this).removeClass("template-number-hover");
 		$(this).addClass("template-number-hover");
 		$(this).removeClass("template-number-selected");
 	});
-	
+
 	// set the selected number button
 	selectedButton.removeClass("template-number-hover");
 	selectedButton.addClass("template-number-selected");
@@ -1360,7 +1401,7 @@ function selectAddNav(navId) {
   		$(this).removeClass("add-nav-item-hover");
 		$(this).addClass("add-nav-item-hover");
 		$(this).removeClass("add-nav-item-selected");
-		
+
 	});
 
 	// set the selected icon
@@ -1376,14 +1417,14 @@ function selectAddNav(navId) {
 
 function selectThumbnail(thumbnail) {
 	var selectedThumbnail = $("#"+thumbnail.id);
-	
+
 	// restore all number buttons
 	$(".thumbnail-container").each(function(i) {
 		$(this).removeClass("thumbnail-container-hover");
 		$(this).addClass("thumbnail-container-hover");
 		$(this).removeClass("thumbnail-container-selected");
 	});
-	
+
 	// set the selected number button
 	selectedThumbnail.removeClass("thumbnail-container-hover");
 	selectedThumbnail.addClass("thumbnail-container-selected");
@@ -1401,10 +1442,10 @@ function doAdd() {
 	var element;
 	var bento;
 	$('#add-dialog').dialog('close');
-	
+
 	// LETTER
 	saveLetter();
-	
+
 	bentoId = $("#add-dialog").attr("target-bento");
 	bento = $("#"+bentoId)[0];
 
@@ -1441,6 +1482,9 @@ function doAdd() {
 			addSoundCloud(bento, element.soundCloudURL);
 		}
 	}
+
+	// ATTACHMENT
+
 }
 
 function hidePalette() {
@@ -1468,7 +1512,7 @@ function videoClicked(event, video) {
 
 function selectImage(image) {
 	var linkAddress = image[0].hyperlink;
-	
+
 	// de-select the current target image
 	var currentImage = getImageDialogImage();
 	if (currentImage) {
@@ -1480,13 +1524,13 @@ function selectImage(image) {
 	
 	// Change all the dialog values to match the target image
 	$("#hyperlink-text").val(linkAddress);
-	
+
 	// Set the hyperlink control buttons
 	setHyperlinkButtons(linkAddress);
-	
+
 	// Highlight the bento
 	image.closest(".bento").addClass("selected-bento");
-	
+
 	// Show the dialog if it's not already open
 	openImageDialog();
 }
@@ -1504,7 +1548,7 @@ function openHyperlinkInput() {
 
 function addImageHyperlink() {
 	var validLink = false;
-	
+
 	// Get the link address from the hyperlink input dialog
 	var linkAddress = $("#hyperlink-dialog-url").val();
 
@@ -1512,7 +1556,7 @@ function addImageHyperlink() {
 	var image = getImageDialogImage();
 
 	if (linkAddress.length > 0) {
-	
+
 		// Make sure it has an 'http' or 'https' prefix
 		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {
 			linkAddress = "http://" + linkAddress;
@@ -1523,7 +1567,7 @@ function addImageHyperlink() {
 	} else {
 		validLink = true;
 	}
-	
+
 	if (validLink) {
 		setHyperlink(linkAddress);
 	}
