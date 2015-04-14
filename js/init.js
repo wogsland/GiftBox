@@ -1,8 +1,4 @@
 $(function() {
-	$( "#tabs" ).tabs();
-});
-
-$(function() {
 	$( "#add-dialog" ).dialog({
 		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
 		dialogClass: 'add-dialog-class',
@@ -19,7 +15,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		width: 800,
-		height: 250,
+		height: 300,
 		modal: true,
 		buttons: {
 			Send: function() {
@@ -124,6 +120,7 @@ $(function() {
 	});
 });
 
+
 $(function() {
 	$( "#add-hyperlink-dialog" ).dialog({ 
 		autoOpen: false,
@@ -140,9 +137,9 @@ $(function() {
 			}
 		},
 		open: function() {
-			$("#url-dialog").keypress(function(e) {
+			$("#add-hyperlink-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					openURL();
+					addImageHyperlink();
 					return false;
 				}
 			});
@@ -151,16 +148,10 @@ $(function() {
 });
 
 $(function() {
-	$( "#confirm-dialog" ).dialog({
+	$( "#image-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
-		height:200,
-		width: 400,
-		modal: true,
-		buttons: {
-			OK: function() {
-				$( this ).dialog( "close" );
-			}
-		}
+		height:400,
+		width: 300
 	});
 });

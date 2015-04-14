@@ -8,6 +8,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title><?php echo $token->name ?></title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
