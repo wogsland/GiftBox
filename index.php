@@ -36,6 +36,8 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
+<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
+
 <!-- WEB FONTS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
 
@@ -172,7 +174,9 @@
 						if (logged_in()) {
 							echo '<a href="create.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
 						} else {
-							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="$(\'#login-dialog\').modal()"><i class="icon_key"></i>Login</a>';
+							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
+							echo ' or ';
+							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
 						}
 						?>
 					</div>
@@ -809,9 +813,12 @@ var contactForm = $( "#contact" ).on( "submit", function( event ) {
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/custom.js"></script>
 <script src="js/facebook_init.js"></script>
+<script src="js/util.js"></script>
+<script src="js/pay_with_stripe.js"></script>
 <script src="js/login.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/account.js"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
 
 </body>
 </html>
