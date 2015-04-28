@@ -29,7 +29,7 @@ function changePassword() {
 }
 
 function forgotPassword() {
-	login_close();
+	loginClose();
 	var session = getSession();
 	document.location.href = session.app_root+"forgot_password.php";
 }

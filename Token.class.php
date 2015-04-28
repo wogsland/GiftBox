@@ -114,12 +114,14 @@ class Token {
 	}
 
 	private function saveAttachments() {
-		foreach ($this->attachments as $attachment) {
-			//$file_name = str_replace("'", "''", $attachment->file_name);
-			$download_file_name = str_replace("'", "''", $attachment->download_file_name);
-			$sql = "INSERT INTO attachment (giftbox_id, file_name, download_file_name, download_mime_type) "
-				."VALUES ($this->id, '$download_file_name', '$download_file_name', '$attachment->download_mime_type')";
-			$attachment->id = insert($sql);
+		if (isset($this->attachments)) {
+			foreach ($this->attachments as $attachment) {
+				//$file_name = str_replace("'", "''", $attachment->file_name);
+				$download_file_name = str_replace("'", "''", $attachment->download_file_name);
+				$sql = "INSERT INTO attachment (giftbox_id, file_name, download_file_name, download_mime_type) "
+					."VALUES ($this->id, '$download_file_name', '$download_file_name', '$attachment->download_mime_type')";
+				$attachment->id = insert($sql);
+			}
 		}
 	}
 
