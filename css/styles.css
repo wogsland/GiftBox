@@ -126,6 +126,10 @@ li {
     margin: -20px 0 0 -20px;
 }
 
+.modal-title {
+	color: black;
+}
+
 
 /*---------------------------------------
    Typography
@@ -2686,6 +2690,10 @@ div.fill img {
 
 .dialog-button-right {
 	float: right;
+}
+
+.dialog-button-left {
+	float: left;
 }
 
 #facebook-button {

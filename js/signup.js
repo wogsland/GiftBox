@@ -14,11 +14,16 @@ document.write('\
 					<input class="dialog-input" id="last_name" name="last_name" type="text" placeholder="Last Name">\
 					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Your Email">\
 					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
+					<select class="dialog-input large-input" id="signup_level" name="signup_level">\
+					<option value="1">Basic (Free)</option>\
+					<option value="2">Standard ($2.99)</option>\
+					</select>\
+					Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>\
 				</form>\
 				 <div class="modal-footer">\
 					<div id="fb-root"></div>\
-					<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBReg(response)}, {scope: \'public_profile, email\'});">Sign Up Using Facebook</a>\
-					<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="signup();">Sign Up</a>\
+					<button type="button" class="btn-lg btn-primary dialog-button-left" onclick="signupFacebook()"><i class="fa fa-facebook"></i> Sign Up Using Facebook</button>\
+					<button type="button" class="btn-lg btn-default dialog-button-right" onclick="signupEmail()">Sign Up</button>\
 				</div>\
 			</div>\
 		</div>\
@@ -26,46 +31,75 @@ document.write('\
 </div>\
 ');
 
-function signup_error(message) {
+function signupOpen(level) {
+	signupClear();
+	$("#signup_level").val(level);
+	$("#signup-dialog").modal();
+}
+
+function signupClear() {
+	$('#signup-alert-placeholder').html('<div></div>');
+	$('#first_name').val("");
+	$('#last_name').val("");
+	$('#signup_email').val("");
+	$('#signup_password').val("");
+}
+
+function signupClose() {
+	$('#signup-dialog').modal('hide');
+}
+
+function signupError(message) {
 	$('#signup-alert-placeholder').html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>')
 }
 
-function signup_info(message) {
+function signupInfo(message) {
 	$('#signup-alert-placeholder').html('<div class="alert alert-info"><span>'+message+'</span></div>')
 }
 
-function signup_success(app_root) {
+function signupSuccess(app_root, signupType, userInfo) {
+	var email;
+	if (signupType == "FACEBOOK") {
+		email = userInfo.signup_email;
+	} else {
+		email = $("#signup_email").val();
+	}
 	$('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with GiveToken!</span></div>');
-    setTimeout(function(){
-		$('#signup-dialog').modal('hide');
-		document.location.href = app_root;
-	}, 5000);	
+
+	if ($("#signup_level").val() == 2) {
+		pay_with_stripe(email, "SIGNUP");
+	} else {
+		if (userInfo.reg_type == "FACEBOOK") {
+			signupInfo("Logging into GiveToken...");
+			userInfo.login_email = userInfo.signup_email;
+			userInfo.login_type = userInfo.reg_type;
+			processLogin(userInfo);
+		} else {
+			signupClose();
+			openMessage("Welcome!", "You have successfully signed up with GiveToken.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
+		}
+	}
 }
 
-function signup() {
+function signupEmail() {
 	$("#reg_type").val("EMAIL");
 	if (!$("#first_name").val()) {
-		signup_error("Please enter a first name.");
+		signupError("Please enter a first name.");
 	} else if (!$("#last_name").val()) {
-		signup_error("Please enter a last name");
+		signupError("Please enter a last name");
 	} else if (!$("#signup_email").val()) {
-		signup_error("Please enter a valid email.");
+		signupError("Please enter a valid email.");
 	} else if (!$("#signup_password").val()) {
-		signup_error("Please enter a password.");
+		signupError("Please enter a password.");
 	} else {
-		signup_info("Processing your registration.  Please wait...");
-		$.post("register_ajax.php", $("#signup-form").serialize(), function(data, textStatus, jqXHR){
-			if(data.status === "SUCCESS") {
-				signup_success(data.app_root);
-			} else if (data.status === "ERROR") {
-				signup_error(data.message);
-			}  else {
-				signup_error("Unknown return status: "+data.status);
-			}
-		}).fail(function() {
-			signup_error("Sign up failed.");
-		});
+		processSignup($("#signup-form").serialize(), "EMAIL");
 	}
+}
+
+function signupFacebook() {
+	$("#reg_type").val("FACEBOOK");
+	signupInfo("Checking Facebook login status.  Please wait...");
+	FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});
 }
 
 function handleFBReg(response) {
@@ -73,25 +107,34 @@ function handleFBReg(response) {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
 			api_response["reg_type"] = "FACEBOOK";
 			api_response["signup_email"] = api_response["email"];
-			$.post("register_ajax.php", api_response, function(data, textStatus, jqXHR){
-				if(data.status === "SUCCESS") {
-					signup_success(data.app_root);
-				} else if (data.status === "ERROR") {
-					signup_error("Sign Up using Facebook failed. "+data.status);
-				}  else {
-					signup_error("Sign Up using Facebook failed. Unknown return status: "+data.status);
-				}
-			}).fail(function() {
-				signup_error("Sign Up using Facebook failed.");
-			});
+			api_response["signup_level"] = "1";
+			processSignup(api_response, "FACEBOOK");
 		});
-    } else if (response.status === 'not_authorized') {
+	} else if (response.status === 'not_authorized') {
 		// The person is logged into Facebook, but not your app.
-		signup_success(data.app_root);
+		signupSuccess(data.app_root, "FACEBOOK");
     } else {
 		// The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-		signup_error("Sign Up using Facebook failed.");
+		signupError("Sign Up using Facebook failed.");
     }
 }
 
+function processSignup(userInfo, signupType) {
+	signupInfo("Processing your registration.  Please wait...");
+	$.post("register_ajax.php", userInfo, function(data, textStatus, jqXHR){
+		if(data.status === "SUCCESS") {
+			signupSuccess(data.app_root, signupType, userInfo);
+		} else if (data.status === "ERROR") {
+			signupError(data.message);
+		}  else {
+			signupError("Unknown return status: "+data.status);
+		}
+	}).fail(function() {
+		signupError("Sign up failed.");
+	});
+}
 
+function switchToLogin() {
+	signupClose();
+	loginOpen();	
+}
