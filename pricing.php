@@ -1,6 +1,7 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
+	require 'User.class.php';
 	_session_start();
 ?>
 <!doctype html>
@@ -167,7 +168,7 @@
 					if (logged_in()) {
 						echo 'Already a member!';
 					} else {
-						echo '<button type="button" class="btn dark-grey" onclick="selectBasic()">Sign Up <i class="fa fa-chevron-right"></i></button>';
+						echo '<button type="button" class="btn dark-grey" onclick="signupOpen(1)">Sign Up <i class="fa fa-chevron-right"></i></button>';
 					}
 				?>
 			  </div>
@@ -178,38 +179,48 @@
           </div>
 
 
-          <div class="col-sm-3 col-md-3 ">
-              <div class="plan standard plan-hover" id="standard" data-plan="standard">
+			<div class="col-sm-3 col-md-3 ">
+				<div class="plan standard plan-hover" id="standard" data-plan="standard">
 
-              <div class="head">
-                <h2>Standard</h2>
-              
-              </div>    
-	
-		          <div class="not-btn solid-lt-blue"></div>
+					<div class="head">
+						<h2>Standard</h2>
+					</div>    
 
-              <ul class="item-list">
-								<li>Email Support</li>
-								<li>Open Saved Tokens</li>
-								<li>Embed Link</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-								<li>&nbsp;</li>
-              </ul>
+					<div class="not-btn solid-lt-blue"></div>
 
-              <div class="price">
-                <h3><span class="symbol">$</span>2.99</h3>
-                <h4>per month</h4>
-              </div>
+					<ul class="item-list">
+						<li>Email Support</li>
+						<li>Open Saved Tokens</li>
+						<li>Embed Link</li>
+						<li>&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>&nbsp;</li>
+						<li>&nbsp;</li>
+					</ul>
 
-              <div class="not-btn solid-lt-blue"><button type="button" class="btn dark-grey" onclick="selectStandard()">Finish <i class="fa fa-chevron-right"></i></button></div>
+					<div class="price">
+						<h3><span class="symbol">$</span>2.99</h3>
+						<h4>per month</h4>
+					</div>
 
-           </div>
-
-          </div>
+					<div class="not-btn solid-lt-blue">
+						<?php
+							if (logged_in()) {
+								if (isset($_SESSION["level"]) && $_SESSION["level"] == 2) {
+									echo 'Already a member!';
+								} else {
+									$user = new User($_SESSION["user_id"]);
+									echo '<button type="button" class="btn dark-grey" onclick="pay_with_stripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
+								}	
+							} else {
+								echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
+							}
+						?>
+					</div>
+				</div>
+			</div>
 
 
           <div class="col-sm-3 col-md-3 ">
@@ -682,8 +693,12 @@
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/facebook_init.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/pay_with_stripe.js"></script>
+<script src="js/login.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/account.js"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
 
 </body>
 </html>

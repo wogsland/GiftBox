@@ -29,7 +29,7 @@ function changePassword() {
 }
 
 function forgotPassword() {
-	login_close();
+	loginClose();
 	var session = getSession();
 	document.location.href = session.app_root+"forgot_password.php";
 }
@@ -134,41 +134,6 @@ function saveUser() {
 			console.log(textStatus);
 		});
 	}
-}
-
-function upgradeStatus(text) {
-	$("#upgrade-status").removeClass("red-text");
-	$("#upgrade-status").text(text);
-}
-
-function upgradeError(text) {
-	$("#upgrade-status").addClass("red-text");
-	$("#upgrade-status").text(text);
-}
-
-function process_upgrade(token) {
-	upgradeStatus("Processing your upgrade...");
-	var upgradeData = {
-		newLevel: $('input[name=level-value]:checked', '#upgrade-form').val(),
-		amount: $('input[name=level-value]:checked', '#upgrade-form').attr('price') * 100,
-		stripeToken: token.id,
-		email: token.email,
-		userId: $("#user-id").val()
-	};
-	
-	$.post("upgrade_ajax.php", upgradeData, function(data, textStatus, jqXHR){
-		if(data.status === "SUCCESS") {
-			$("#level-name").val(data.level_name);
-			$("#upgrade-dialog" ).dialog("close");
-			upgradeStatus("You have been successfully upgraded to "+data.level_name+" Level!");
-		} else if (data.status === "ERROR") {
-			upgradeError("Upgrade failed: "+data.message);
-		}  else {
-			upgradeError("Upgrade failed", "Unknown data.status");
-		}
-	}).fail(function() {
-		upgradeError("Upgrade failed!");
-	});
 }
 
 function showStatus(id, text) {

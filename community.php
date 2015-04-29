@@ -1,4 +1,5 @@
 <?php
+include_once 'util.php';
 include_once 'config.php';
 ?>
 
@@ -36,7 +37,7 @@ include_once 'config.php';
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
 <!-- WEB FONTS -->
-<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
 
 <!-- CAROUSEL AND LIGHTBOX -->
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -55,6 +56,8 @@ include_once 'config.php';
 
 <!-- RESPONSIVE FIXES -->
 <link rel="stylesheet" href="css/responsive.css">
+
+<link rel="stylesheet" href="css/magnific-popup.css">
 
 
 
@@ -97,15 +100,14 @@ include_once 'config.php';
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				</button>
-
-				<a class="navbar-brand" href="index.html#"><img src="assets/img/logo-light.png" alt=""></a>
+				<a class="navbar-brand" href="index.php#"><img src="assets/img/logo-light.png" alt=""></a>
 				
 			</div>
 			
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
-					<li><a href="index.html#home" class="external">Home</a></li>
+					<li><a href="index.php#home" class="external">Home</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a href="#">Login</a></li>
 				</ul>
@@ -123,34 +125,45 @@ include_once 'config.php';
 		<div class="row">
 			<!-- Sidebar -->
 			<div class="col-sm-4 col-md-3">
-				<div class="text-center">
-		            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-		            <h4 class="profile-name mb5">Tom Brady</h4>
-		            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-		            <div class="small-txt mb5"><i class="fa fa-star"></i> 9237 Gift Points</div>
-		            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-		            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
-		        
-		            <div class="mb20"></div>
-		        
-		            <div class="btn-group">
-		                <button class="btn btn-primary btn-bordered">Create GiveToken</button>
-		                <button class="btn btn-primary btn-bordered">Send GiveToken</button>
-		            </div>
-		            
-		            <div class="mb20"></div>
-		        </div>
-				<h5 class="md-title">Special Message</h5>
-				<p class="mb30 small-txt">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat... <a href="">Show More</a></p>
-				<h5 class="md-title">Connect</h5>
-				<ul class="list-unstyled social-list">
-		            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
-		            <li><i class="fa fa-facebook"></i> <a href="">facebook.com/#</a></li>
-		            <li><i class="fa fa-youtube"></i> <a href="">youtube.com/#</a></li>
-		            <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/#</a></li>
-		            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
-		            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
-		        </ul>
+				<?php
+					if (logged_in()) {
+						echo '<div class="text-center">
+					            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+					            <h4 class="profile-name mb5">Tom Brady</h4>
+					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
+					            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
+					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+					            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
+					        
+					            <div class="mb20"></div>
+					        
+					            <div class="btn-group">
+					                <button class="btn btn-primary btn-bordered">Create GiveToken</button>
+					                <button class="btn btn-primary btn-bordered">Send GiveToken</button>
+					            </div>
+					            
+					            <div class="mb20"></div>
+					        </div>
+					        <h5 class="md-title">Welcome to the Community Page!</h5>
+							<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>
+					        <h5 class="md-title">Connect</h5>
+							<ul class="list-unstyled social-list">
+					            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
+					            <li><i class="fa fa-facebook"></i> <a href="">facebook.com/#</a></li>
+					            <li><i class="fa fa-youtube"></i> <a href="">youtube.com/#</a></li>
+					            <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/#</a></li>
+					            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
+					            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
+					        </ul>';
+					} else {
+						echo '<h5 class="md-title">Welcome to the Community Page!</h5>
+								<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>';
+						echo '<div class="btn-group buttons login-button text-center">
+								<button href="#login-form" class="open-popup-link btn btn-primary btn-bordered">Login</button>
+								<button href="#signup-form" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
+							  </div>';
+					}
+				?>
 			</div><!-- /Sidebar -->
 			<div class="col-sm-8 col-md-9">
 				<!-- Tab Navigation -->
@@ -161,6 +174,11 @@ include_once 'config.php';
 			        <li class=""><a href="#blog" data-toggle="tab"><strong>GiveToken Blog</strong></a></li>
 			        <li class=""><a href="#spotlight" data-toggle="tab"><strong>Spotlight</strong></a></li>
 			        <li class="" style="float: right;"><a href="index.php"><strong>Home</strong></a></li>
+			       	<?php
+				        if (!is_admin()) {
+								echo '<li><a href="admin.php" data-toggle="tab"><strong>Admin</strong></a></li>';
+						}
+					?>
 			    </ul>
 
 			    <div class="tab-content nopadding noborder">
@@ -296,7 +314,7 @@ include_once 'config.php';
 					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , <span id="preview-1">...</span><span id="full-post-1" style="display:none">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , <span id="preview-1">...</span><span id="full-post-1" style="display:none;">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -326,6 +344,56 @@ include_once 'config.php';
 					        </li>
 				    	</ul>
 				    </div>
+				    <div class="tab-pane" id="spotlight">
+			    		<h2>Spotlight</h2>
+		    			<ul class="timeline">
+		    				<!--Plug this up to the list of elements in the database. -->
+		    				<li>
+		    				 	<div class="timeline-badge solid-blue"><i class="fa fa-user"></i></div>
+		    				 	<div class="timeline-panel">
+			    				 	<div class="text-center">
+							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
+							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+							        </div>
+								</div>
+								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
+								<div class="timeline-panel timeline-panel-post">
+									<div class="timeline-heading">
+					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+
+					            	</div>
+								</div>
+		    				</li>
+		    				<li>
+					        	<div class="timeline-badge solid-blue"><i class="fa fa-user"></i></div>
+		    				 	<div class="timeline-panel">
+			    				 	<div class="text-center">
+							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
+							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+							        </div>
+								</div>
+								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
+								<div class="timeline-panel-post timeline-panel">
+									<div class="timeline-heading">
+					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
+					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+					            		
+					            	</div>
+								</div>
+					        </li>
+		    			</ul>
+			    	</div>
 			    </div>
 			</div>
 		</div>
@@ -348,7 +416,6 @@ function expandPost(el){
 	var val = el.id.substring('post-title'.length);
 	document.getElementById('full-post' + val).style.display = 'initial';
 	document.getElementById('preview' + val).style.display = 'none';
-	//document.getElementsByClassName('test')[0].style.width = '800px';
 
 	var li = document.getElementsByClassName('headers');
 	for(i = 0; i < li.length; i++){
@@ -371,8 +438,6 @@ for(i = 0; i < els.length; i++){
 }
 </script>
 
-
-
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
 <script src="js/bootstrap.min.js"></script>
@@ -391,6 +456,10 @@ for(i = 0; i < els.length; i++){
 <script src="js/jquery.ajaxchimp.min.js"></script>
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/facebook_init.js"></script>
+<script src="js/scripts.js"></script>
+<script src="js/account.js"></script>
 
 </body>
 </html>

@@ -240,6 +240,7 @@
 								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-1-slider"></div>
 								<i class="close-button icon_close_alt" id="bento-1-1-close" onclick="closeClicked(event, this)"></i>
+								<i class="bento-link-icon icon-link fa fa-link fa-lg" id="bento-1-1-link-icon"></i>
 							</div>
 						</div>
 						<div id="column-1-2" class="column padded height100 width33">
@@ -407,7 +408,7 @@
 
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
-			<div class="image-dialog-button" id="add-hyperlink-button" onclick="openHyperlinkInput()"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
+			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
 			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
 			<input id="hyperlink-text" placeholder="https://www.example.com" disabled>

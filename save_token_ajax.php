@@ -3,7 +3,6 @@ include_once 'config.php';
 include_once 'Token.class.php';
 
 _session_start();
-$user_id = $_SESSION['user_id'];
 
 if (isset($_SESSION['user_id'])) {
 	$user_id = $_SESSION['user_id'];

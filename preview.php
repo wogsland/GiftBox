@@ -13,13 +13,13 @@
 <head>
 	<meta charset="utf-8" />
 	<title><?php echo $token->name ?></title>
-
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!--<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">-->
+	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<!--<script src="//vjs.zencdn.net/4.11/video.js"></script>-->
+	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 	<script src="js/preview.js"></script>
 </head>
 <body>
