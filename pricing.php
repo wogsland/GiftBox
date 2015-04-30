@@ -250,7 +250,7 @@
                   <h4>per month + step 2</h4>
                 </div>
 
-                <div class="select-btn solid-lt-green"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+                <div class="select-btn solid-lt-green"><button type="button" class="btn dark-grey">Pre-Order <i class="fa fa-chevron-right"></i></button></div>
 
            </div>
 
@@ -283,7 +283,7 @@
                   <h4>per user per month + step 2 + step 3</h4>
                 </div>
 
-                <div class="select-btn solid-green"><button type="button" class="btn dark-grey">Select <i class="fa fa-chevron-right"></i></button></div>
+                <div class="select-btn solid-green"><button type="button" class="btn dark-grey">Pre-Order <i class="fa fa-chevron-right"></i></button></div>
                 
            </div>
 
