@@ -6,7 +6,7 @@ include_once 'config.php';
 <head>
 	<meta charset="utf-8" />
 	<!-- SITE TITLE -->
-	<title>GiveToken.com - About</title>
+	<title>GiveToken.com - Give a Token of Appreciation</title>
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
 </head>
