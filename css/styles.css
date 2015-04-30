@@ -2287,6 +2287,46 @@ footer .terms-policy li a:hover{
             border-bottom-left-radius: 50%;
         }
 
+
+        .timeline > li > .timeline-badge-spotlight {
+            top: 76px;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            font-size: 1.4em;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            margin-left: -25px;
+            background-color: #999999;
+            z-index: 100;
+            border-top-right-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+        }
+
+        .timeline > li > .timeline-panel-post {
+            float: right;
+        }
+
+            .timeline > li > .timeline-panel-post:before {
+                top: 85px;
+                border-left-width: 0;
+                border-right-width: 15px;
+                left: -15px;
+                right: auto;
+            }
+
+            .timeline > li > .timeline-panel-post:after {
+                top: 86px;
+                border-left-width: 0;
+                border-right-width: 14px;
+                left: -14px;
+                right: auto;
+            }
+        
         .timeline > li.timeline-inverted > .timeline-panel {
             float: right;
         }
