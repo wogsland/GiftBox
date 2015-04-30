@@ -458,7 +458,6 @@ for(i = 0; i < els.length; i++){
 <script src="js/custom.js"></script>
 <script src="js/jquery.magnific-popup.js"></script>
 <script src="js/facebook_init.js"></script>
-<script src="js/scripts.js"></script>
 <script src="js/account.js"></script>
 
 </body>
