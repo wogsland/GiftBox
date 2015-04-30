@@ -102,3 +102,14 @@ function handleFBLogin(response) {
     }
 }
 
+/* For handeling pressing enter to Submit... why are the buttons not in the form to begin with? */
+$('#login_email').keypress(function(e) {
+if (e.which == '13') {
+         loginEmail();
+   }
+});
+$('#password').keypress(function(e) {
+if (e.which == '13') {
+         loginEmail();
+   }
+});
