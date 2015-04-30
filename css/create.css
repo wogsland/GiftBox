@@ -182,8 +182,8 @@ ul {
 }
 
 .template-nav-bar li {
-	display:inline; 
-	padding: 0 10px; 
+	display:inline;
+	padding: 0 10px;
 }
 
 .template-nav-bar li a i {
@@ -216,7 +216,7 @@ ul {
 
 .bento {
 	position: relative;
-	box-sizing: border-box;	
+	box-sizing: border-box;
 	border: dashed 2px #486eb5;;
 	width: 100%;
 	height: 100%;
@@ -224,15 +224,23 @@ ul {
 	overflow: hidden;
 	cursor: pointer;
 	display: table;
+	font-size: 16px;
+}
+.selected-bento {
+	border: red 2px solid;
 }
 
 .bento:hover {
-	border: solid 2px #486eb5;;
-	font-size: 16px;
+	/*	border: solid 2px #486eb5; */
+	background-color: #e2e3e5;
 }
 
 .bento.over {
 	background-color: #CBCBCB;
+}
+
+.bento-image {
+	cursor: move;
 }
 
 .click-to-add {
@@ -279,7 +287,6 @@ ul {
 	height: 20px;
 	font-size: 16px;
 	color: #B9B9B9;
-//   background: url("../images/close_image.png");
 }
 
 .audio-close-button {
@@ -467,11 +474,11 @@ ul {
 
 /*----------------------------------------*/
 #bento-2-1-slider{
-	height: 332px; 
+	height: 332px;
 }
 
 #bento-2-2-slider{
-	height: 332px; 
+	height: 332px;
 }
 
 #bento-2-3-slider {
@@ -488,11 +495,11 @@ ul {
 
 /*----------------------------------------*/
 #bento-3-1-slider{
-	height: 235px; 
+	height: 235px;
 }
 
 #bento-3-2-slider{
-	height: 425px; 
+	height: 425px;
 }
 
 #bento-3-3-slider {
@@ -552,9 +559,12 @@ ul {
     opacity: 1;
 }
 
+/*
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+
+*/
 
 #token-list {
 	width: 100%;
@@ -618,7 +628,7 @@ iframe {
 .template-tab-text {
 	display: block;
 	margin: 10px 0px 10px 4px;
-	
+
 }
 
 .template-number {
@@ -753,8 +763,8 @@ fieldset {
 }
 
 #add-nav-bar li {
-	display: inline-block; 
-	margin: 0 10px; 
+	display: inline-block;
+	margin: 0 10px;
 	height: 100%;
 }
 
@@ -832,6 +842,29 @@ fieldset {
 	margin: auto;
 }
 
+#attachment-icon-link {
+  width: 180px;
+}
+
+#attachment-icon-link > span {
+  display: block;
+  float: left;
+  padding-top: 6px;
+  padding-right: 12px;
+}
+
+#add-attachment-desktop {
+  float: right;
+}
+
+#add-attachment-desktop > a {
+  color: #aaadaf;
+  padding-left: 12px;
+}
+
+#add-attachment-desktop > a > i {
+  padding-left: 8px;
+}
 
 /******************** CONTENT UNDER ICON BAR *******************/
 .add-content {
@@ -916,7 +949,7 @@ fieldset {
 	line-height: 20px;
 	margin: 5px 0px;
 	overflow: hidden;
-	white-space: nowrap; 
+	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
@@ -928,7 +961,7 @@ fieldset {
 #letter-text {
 	box-sizing: border-box;
 	width: 600px;
-	height: 427px;
+	height: 390px; /*427px;*/
 	overflow: auto;
 	margin: 10px;
 }
@@ -955,4 +988,60 @@ fieldset {
 
 .no-pointer {
 	cursor: default;
+}
+
+#image-dialog {
+	padding: 0px;
+}
+
+#image-dialog-container {
+	padding: 10px 5px;
+}
+
+.image-dialog-button {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: white;
+	background-color: #476FB6;
+	font-weight: bold;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.small-image-dialog-button {
+	width: 49%;
+	display: inline-block;
+	font-size: 10px;
+	display: none;
+}
+
+#add-hyperlink-button {
+	width: 100%;
+}
+
+#close-image-dialog-button {
+	display: block;
+	margin: 240px auto 0px auto;
+}
+
+#hyperlink-button:hover {
+	color: white;
+	background-color: #626c71;
+	cursor: pointer;
+}
+
+#hyperlink-text {
+	width: 100%;
+	margin-top: 5px;
+	color: black;
+	text-align: center;
+	box-sizing: border-box;
+	height: 25px;
+	line-height: 25px;
+	border: none;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding: 0px 3px;
 }

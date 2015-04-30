@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="css/create.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
-	
+
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
@@ -63,34 +63,34 @@
 							<div class="thumb-column height100 width33">
 								<div class="thumb-padded thumb-column height50 width100"></div>
 								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>						
+							</div>
 						</div>
 
 						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
 							<div class="thumb-column height100 width50">
 								<div class="thumb-padded thumb-column height50 width100"></div>
 								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>						
+							</div>
 							<div class="thumb-column height100 width50">
 								<div class="thumb-padded thumb-column height33 width100"></div>
 								<div class="thumb-padded thumb-column height33 width100"></div>
 								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>						
+							</div>
 						</div>
 
 						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
 							<div class="thumb-column height100 width33">
 								<div class="thumb-padded thumb-column height33 width100"></div>
 								<div class="thumb-padded thumb-column height66 width100"></div>
-							</div>						
+							</div>
 							<div class="thumb-column height100 width33">
 								<div class="thumb-padded thumb-column height50 width100"></div>
 								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>						
+							</div>
 							<div class="thumb-column height100 width33">
 								<div class="thumb-padded thumb-column height66 width100"></div>
 								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>						
+							</div>
 						</div>
 
 
@@ -173,7 +173,7 @@
 									<i class="close-button icon_close_alt" id="bento-3-6-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
-						</div>	
+						</div>
 						<div class="vertical divider" id="divider-3-1"></div>
 						<div class="vertical divider" id="divider-3-2"></div>
 						<div class="horizontal divider" id="divider-3-3"></div>
@@ -224,7 +224,7 @@
 									<i class="close-button icon_close_alt" id="bento-2-5-close" onclick="closeClicked(event, this)"></i>
 								</div>
 							</div>
-						</div>	
+						</div>
 						<div class="vertical divider" id="divider-2-1"></div>
 						<div class="horizontal divider" id="divider-2-2"></div>
 						<div class="horizontal divider" id="divider-2-3"></div>
@@ -275,7 +275,7 @@
 	</div>
 
 	<!-- DIALOGS -------------------------------------------------------------------------------------------------------->
-	
+
 	<div id="send-dialog" title="Advanced Send">
 		<p class="dialog-message" id="send-message"></p>
 		<form id="send-form">
@@ -286,8 +286,8 @@
 				<input class="dialog-input" id="preview-link" name="preview-link" type="text"value="" readonly="readonly">
 		    </fieldset>
 		</form>
-	</div>	
-	
+	</div>
+
 	<div id="save-dialog" title="Save">
 		<form>
 		    <fieldset>
@@ -309,7 +309,7 @@
 		<form>
 		    <fieldset>
 				<label class="input-label" for="url">Paste link address here</label>
-				<input class="dialog-input" type="text" name="url" id="url">
+				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
 	</div>
@@ -317,21 +317,22 @@
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
+		<input class="hidden-file-input" type="file" multiple id="select-attachment-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
 				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
 				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
 				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
-				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this.id)">LETTER</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this.id)">LETTER & ATTACHMENTS</div></li>
 			</ul>
 		</div>
-		
+
 			<!------------------ STOCK LIBRARY ------------------------>
 			<div id="add-stock-container" class="add-content-container">
 				<div class="add-content add-content-no-icons">
 				</div>
 			</div>
-			
+
 			<!--------------------- IMAGES ---------------------------->
 			<div id="add-images-container" class="add-content-container">
 				<div class="add-content-icon-bar">
@@ -370,15 +371,17 @@
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
 					<textarea id="letter-text"></textarea>
+					<div id="add-attachment-desktop"></div>
+					<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
 				</form>
 			</div>
-			
+
 		<div id="add-button-container">
 			<div class="add-button" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</div>
 			<div class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</div>
 		</div>
 	</div>
-	
+
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
 			<fieldset>
@@ -391,7 +394,7 @@
 				<br><br>
 				<label class="input-label" for="unload-count">Number of items to unload</label>
 				<input id="unload-count" name="unload-count">
-			</fieldset>			
+			</fieldset>
 		</form>
 	</div>
 
@@ -399,23 +402,35 @@
 		<fieldset>
 			<label class="input-label" for="token-list">Select a Token to open:</label>
 			<select id="token-list" name="token-list" size="9" style="margin: auto"></select>
-		</fieldset>			
+		</fieldset>
 	</div>
 
+	<div id="image-dialog" title="Image">
+		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-hyperlink-button" onclick="openHyperlinkInput()"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
+			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
+			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
+			<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+		</div>
+		<div  class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#image-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
+	</div>
+
+	
 	<script>
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
-		
+		document.getElementById('select-attachment-file').addEventListener('change', handleAttachmentFileSelect, false);
+
 		var template1 = document.getElementById('template-1');
 		var template2 = document.getElementById('template-2');
 		var template3 = document.getElementById('template-3');
-	
+
 		template1.giftboxName = "Untitled";
 		template1.giftboxId = null;
 		template1.letterText = "";
 		template1.wrapperType = "";
 		template1.unloadCount = 3;
-		
+
 		template2.giftboxName = "Untitled";
 		template2.giftboxId = null;
 		template2.letterText = "";
@@ -431,6 +446,6 @@
 		window.top_template = template1;
 		$("#preview-link").val("");
 	</script>
-	
+
 </body>
 </html>
