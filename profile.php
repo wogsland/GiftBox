@@ -123,7 +123,7 @@
      ACCOUNT PROFILE
 ============================== -->
 
-<script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
 <script type="text/javascript" src="/app/models/model.js"></script>
 <script type="text/jsx" src="/app/account/AccountStore.js"></script>
 
