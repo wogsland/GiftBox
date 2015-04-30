@@ -28,7 +28,8 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Giftbox - My Account</title>
+	<!-- SITE TITLE -->
+	<title>GiveToken.com - My Account</title>
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
 	<link rel="stylesheet" href="css/magnific-popup.css">
 	<link rel="stylesheet" href="css/style.css" />
