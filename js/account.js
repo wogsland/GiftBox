@@ -29,114 +29,13 @@ function changePassword() {
 }
 
 function forgotPassword() {
-	$.magnificPopup.close();
+	login_close();
 	var session = getSession();
 	document.location.href = session.app_root+"forgot_password.php";
 }
 
 function sendPassword(email) {
 	alert('Email: ' + email);
-}
-
-function login() {
-	if (!$("#email").val()) {
-		$("#login-message").text("An email address is required when logging in with email.");
-	} else if (!$("#password").val()) {
-		$("#login-message").text("A password is required when logging in with email.");
-	} else {
-		$.post("login_ajax.php", $("#login-form").serialize(), function(data, textStatus, jqXHR){
-			if(data.status === "SUCCESS") {
-				$.magnificPopup.close();
-				document.location.href = data.app_root;
-			} else if (data.status === "ERROR") {
-				$("#login-message").text(data.message);
-			}  else {
-				$("#login-message").text("Unknown return status: "+data.status);
-			}
-		}).fail(function() {
-			$("#login-message").text("Login failed.");
-		});
-	}
-};
-
-function handleFBLogin(response) {
-    if (response.status === 'connected') {
-		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			console.log(api_response);
-			api_response["login-type"] = "FACEBOOK";
-			
-			$.post("login_ajax.php", api_response, function(data, textStatus, jqXHR){
-				if(data.status === "SUCCESS") {
-					$.magnificPopup.close();
-					document.location.href = data.app_root;
-				} else if (data.status === "ERROR") {
-					$("#login-message").text(data.message);
-				}  else {
-					$("#login-message").text("Unknown return status: "+data.status);
-				}
-			}).fail(function() {
-				$("#login-message").text("Login with Facebook failed.");
-			});
-		});
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-		document.getElementById('login-message').innerHTML = "You are now signed up and logged into Giftbox!";
-    } else {
-      // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-		document.getElementById('login-message').innerHTML = "Log In with Facebook failed.";
-    }
-}
-
-function register() {
-	$("#reg_type").val("EMAIL");
-	if (!$("#first_name").val()) {
-		$("#signup-message").text("Please enter a first name.");
-	} else if (!$("#last_name").val()) {
-		$("#signup-message").text("Please enter a last name");
-	} else if (!$("#email").val()) {
-		$("#signup-message").text("Please enter a valid email.");
-	} else if (!$("#password").val()) {
-		$("#signup-message").text("Please enter a password.");
-	} else {
-		$.post("register_ajax.php", $("#signup-form").serialize(), function(data, textStatus, jqXHR){
-			if(data.status === "SUCCESS") {
-				$.magnificPopup.close();
-				document.location.href = data.app_root;
-			} else if (data.status === "ERROR") {
-				$("#signup-message").text(data.message);
-			}  else {
-				$("#signup-message").text("Unknown return status: "+data.status);
-			}
-		}).fail(function() {
-			$("#signup-message").text("Sign up failed.");
-		});
-	}
-}
-
-function handleFBReg(response) {
-    if (response.status === 'connected') {
-		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			api_response["reg_type"] = "FACEBOOK";
-			$.post("register_ajax.php", api_response, function(data, textStatus, jqXHR){
-				if(data.status === "SUCCESS") {
-					$.magnificPopup.close();
-					document.location.href = data.app_root;
-				} else if (data.status === "ERROR") {
-					$("#signup-message").text(data.message);
-				}  else {
-					$("#signup-message").text("Unknown return status: "+data.status);
-				}
-			}).fail(function() {
-				$("#signup-message").text("Sign up with Facebook failed.");
-			});
-		});
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-		$("#signup-message").text("You are now signed up and logged into Giftbox!");
-    } else {
-      // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-		$("#signup-message").text("Registration using Facebook failed.");
-    }
 }
 
 function logout() {
