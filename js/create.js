@@ -492,7 +492,6 @@ function showControl(controlId, target) {
 		control[0].target = target;
 	}
 /*	
-	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: block;}';
 	var style = document.createElement('style');
@@ -1335,6 +1334,10 @@ function createCroppedImage (bento, image, container) {
 
 function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
+}
+
+function standardFeature() {
+	openMessage("Add Hyperlink", "This feature is only available to \"Standard\" level and higher members.");
 }
 
 function selectSidebarTab(tab) {

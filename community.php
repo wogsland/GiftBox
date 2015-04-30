@@ -38,7 +38,6 @@ include_once 'config.php';
 
 <!-- WEB FONTS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
-=======
 
 <!-- CAROUSEL AND LIGHTBOX -->
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -438,33 +437,6 @@ for(i = 0; i < els.length; i++){
 	els[i].onclick = togglePost;
 }
 </script>
-
-<form id="login-form" class="white-popup mfp-hide" name="login-form">
-	<h1 class="dialog-header">Log Into Giftbox</h1>
-	<div id="dialog-form-container">
-		<p class="dialog-message" id="login-message"></p>
-		<input type="hidden" name="login-type" value="EMAIL">
-		<input class="dialog-input" id="email" name="email" type="text" placeholder="Email address" size="25">
-		<input class="dialog-input" id="password" name="password" type="password" placeholder="Password" size="25">
-		<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>
-		<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBLogin(response)}, {scope: 'public_profile, email'});">Log In with Facebook</a>
-		<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="login(document.forms['login-form']);">Log In</a>
-	</div>
-</form>
-
-<form id="signup-form" class="white-popup mfp-hide" name="signup-form">
-	<h1 class="dialog-header">Sign Up With Giftbox</h1>
-	<div id="dialog-form-container">
-		<p class="dialog-message" id="signup-message"></p>
-		<input type="hidden" id="reg_type" name="reg_type" value="">
-		<input class="dialog-input" id="first_name" name="first_name" type="text" placeholder="First Name" size="20">
-		<input class="dialog-input" id="last_name" name="last_name" type="text" placeholder="Last Name" size="20">
-		<input class="dialog-input" id="email" name="email" type="text" placeholder="Your Email" size="35">
-		<input class="dialog-input" id="password" name="password" type="password" placeholder="New Password" size="35">
-		<a class="dialog-button" id="facebook-button" href="javascript:void(0)" onClick="FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});">Sign Up Using Facebook</a>
-		<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="var a = document.forms['signup-form']; register(a.first-name.value, a.last-name.value, a.email.value, a.password.value);">Sign Up</a>
-	</div>
-</form>
 
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 

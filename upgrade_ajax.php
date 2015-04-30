@@ -2,11 +2,12 @@
 require_once('./stripe/Stripe.php');
 require_once('util.php');
 include_once 'eventLogger.class.php';
+require "User.class.php";
 
 _session_start();
 
 $response['status'] = "ERROR";
-$response['message'] = "Unable to register at this time.";
+$response['message'] = "Unable to upgrade at this time.";
 
 // Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://dashboard.stripe.com/account
@@ -17,7 +18,9 @@ $token = $_POST['stripeToken'];
 $email = $_POST['email'];
 $amount = $_POST['amount'];
 $new_level = $_POST['newLevel'];
-$user_id = $_SESSION['user_id'];
+
+// Retrieve user by email
+$user = User::fetch($email);
 
 // Create the charge on Stripe's servers - this will charge the user's card
 try {
@@ -34,14 +37,13 @@ try {
 }
 
 if ($response['status'] == "SUCCESS") {
-	execute("UPDATE user set level = ".$new_level." WHERE id = ".$user_id);
-	$event = new eventLogger($_SESSION['user_id'], UPGRADE);
+	$user->level = $new_level;
+	$user->save();
+	$event = new eventLogger($user->getId(), UPGRADE);
 	$event->log();
-	$_SESSION['level'] = $new_level;
-
-	$result = execute_query("SELECT name from level where id = ".$new_level);
-	$level_name = $result->fetch_object();
-	$response['level_name'] = $level_name->name;
+	if (isset($_SESSION['level'])) {
+		$_SESSION['level'] = $new_level;
+	}
 }
 
 header('Content-Type: application/json');
