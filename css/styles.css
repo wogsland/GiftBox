@@ -61,6 +61,7 @@ body#viewer-page footer{
 a {
     -webkit-transition: all ease 0.25s;
             transition: all ease 0.25s;
+    cursor: pointer;
 }
 
 a:hover {
@@ -73,7 +74,7 @@ a:hover {
 }
 
 textarea:focus, input:focus {
-    color: #ffffff;
+    color: #000000;
 }
 /* Other fixes*/
 
@@ -127,7 +128,7 @@ li {
 
 
 /*---------------------------------------
-   Typography                
+   Typography
 -----------------------------------------*/
 
 /* FONT FACE LOADER */
@@ -140,7 +141,7 @@ li {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
- 
+
     @font-face {
         font-family: 'Lane';
         src: url('../fonts/lanenar_Lane.svg#Lane') format('svg');
@@ -242,7 +243,7 @@ h5 {
 }
 
 /*---------------------------------------
-   CUSTOM BUTTON              
+   CUSTOM BUTTON
 -----------------------------------------*/
 
 .standard-button,
@@ -274,7 +275,7 @@ h5 {
 
 
 /*---------------------------------------
-   TEXTS AND BG               
+   TEXTS AND BG
 -----------------------------------------*/
 
 .white-text {
@@ -298,7 +299,7 @@ h5 {
 
 
 /*---------------------------------------
-   SECTIONS          
+   SECTIONS
 -----------------------------------------*/
 
 .section-header {
@@ -318,7 +319,7 @@ h5 {
 }
 
 /*---------------------------------------
-   LINES          
+   LINES
 -----------------------------------------*/
 
 .colored-line {
@@ -353,12 +354,12 @@ h5 {
 
 /*---------------------------------------
 =========================================
- **   SECTION STYLES                
+ **   SECTION STYLES
 =========================================
 -----------------------------------------*/
 
 /*---------------------------------------
-   SECTION:  HOME                 
+   SECTION:  HOME
 -----------------------------------------*/
 
 header .deep-dark-bg {
@@ -434,7 +435,7 @@ header .intro-section .buttons {
 
 
 /*---------------------------------------
-   SECTION:  BRIEF                 
+   SECTION:  BRIEF
 -----------------------------------------*/
 
 .app-brief {
@@ -482,12 +483,12 @@ header .intro-section .buttons {
 
 
 /*---------------------------------------
-   SECTION:  HOW IT WORKS VIDEO                 
+   SECTION:  HOW IT WORKS VIDEO
 -----------------------------------------*/
 
 video {
     height: auto;
-    
+
 }
 
 iframe,
@@ -501,7 +502,7 @@ object {
     background: transparent !important;
     margin: auto;
     margin-bottom: 50px;
-    margin-top: 40px; 
+    margin-top: 40px;
 }
 
 .video {
@@ -646,7 +647,7 @@ object {
 }
 
 /*---------------------------------------
-   SECTION:  TESTIMONIALS                 
+   SECTION:  TESTIMONIALS
 -----------------------------------------*/
 
 .testimonials {
@@ -714,7 +715,7 @@ object {
 
 
 /*---------------------------------------
-   SECTION:  TOKENS ON MOBILE DEVICES           
+   SECTION:  TOKENS ON MOBILE DEVICES
 -----------------------------------------*/
 .token-ipad {
     padding-top: 110px;
@@ -753,43 +754,43 @@ object {
     margin-top: 50px;
 }
 
-.token-ipad { 
+.token-ipad {
 		background: url(../assets/img/bg-1.jpg) 50% 0 fixed;
 		background-size: cover;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
-		height: auto;  
-		margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
+		height: auto;
+		margin: 0 auto;
+    width: 100%;
+    position: relative;
 }
-.token-iphone { 
-		background: url(../assets/img/bg-2.jpg) 50% 0 fixed; 
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		height: auto;  
-		margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
-}
-.token-macbook { 
-		background: url(../assets/img/bg-3.jpg) 50% 0 fixed; 
+.token-iphone {
+		background: url(../assets/img/bg-2.jpg) 50% 0 fixed;
 		background-size: cover;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		height: auto;
-		margin: 0 auto; 
-    width: 100%; 
-    position: relative; 
+		margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+.token-macbook {
+		background: url(../assets/img/bg-3.jpg) 50% 0 fixed;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		height: auto;
+		margin: 0 auto;
+    width: 100%;
+    position: relative;
     color: #fff;
 }
 
 /*---------------------------------------
-   SECTION:  SERVICES           
+   SECTION:  SERVICES
 -----------------------------------------*/
 
 .features {
@@ -812,7 +813,7 @@ object {
 
 
 /*---------------------------------------
-   SECTION:  SCREENSHOTS 
+   SECTION:  SCREENSHOTS
 -----------------------------------------*/
 
 .screenshots {
@@ -837,7 +838,7 @@ object {
 
 
 /*---------------------------------------
-   SECTION:  login                 
+   SECTION:  login
 -----------------------------------------*/
 
 .login {
@@ -867,7 +868,7 @@ object {
     border: 2px solid #FFF;
 }
 
-.login .subscription-form .input-box:focus, 
+.login .subscription-form .input-box:focus,
 .login .subscription-form .input-box:active {
     color: #000;
     font-weight: 400;
@@ -894,7 +895,7 @@ object {
     .container {
 		width: initial;
         padding-left: 2em;
-        padding-right: 2em;        
+        padding-right: 2em;
 	}
 }
 
@@ -912,7 +913,7 @@ object {
 }
 .my_planPrice {
     font-size:1.4em;
-    font-weight: bold;    
+    font-weight: bold;
 }
 .my_planDuration {
     font-size: 13px;
@@ -922,13 +923,13 @@ object {
     .my_planTitle,
     .my_planFeature {
         font-size:small !important;
-    }    
+    }
 }
 
 /* --- Features ------------------------- */
 
 .my_feature {
-    line-height:2.8em;   
+    line-height:2.8em;
 }
 
 @media (max-width: 768px) {
@@ -941,7 +942,7 @@ object {
     margin-top: 0.2em;
     margin-bottom: 0.2em;
     border: 0.1em solid rgb(163, 163, 163);
-}    
+}
 
 /* --- Plan 1 --------------------------- */
 .my_plan1 {
@@ -1011,28 +1012,28 @@ object {
 }
 
 .pricing-tables {
-  padding: 20px; 
+  padding: 20px;
 }
 .pricing-tables h1,
 .pricingChart h1 {
-    font-size: 48px; 
+    font-size: 48px;
 }
 .pricing-tables .plan.basic {
-		border-top: rgb(71,111,182) 8px solid;  
+		border-top: rgb(71,111,182) 8px solid;
 		border-bottom: rgb(71,111,182) 8px solid;
 		background: #f7f7f7;
 }
-.pricing-tables .plan.standard { 
-	border-top: rgb(171,223,236) 8px solid; 
+.pricing-tables .plan.standard {
+	border-top: rgb(171,223,236) 8px solid;
 	border-bottom: rgb(171,223,236) 8px solid;
 	background: #f7f7f7;
 }
-.pricing-tables .plan.recommended { 
-	border-top: rgb(98,185,77) 8px solid; 
-	border-bottom: rgb(98,185,77) 8px solid; 
+.pricing-tables .plan.recommended {
+	border-top: rgb(98,185,77) 8px solid;
+	border-bottom: rgb(98,185,77) 8px solid;
 }
-.pricing-tables .plan.enterprise { 
-	border-top: rgb(38,163,78) 8px solid; 
+.pricing-tables .plan.enterprise {
+	border-top: rgb(38,163,78) 8px solid;
 	border-bottom: rgb(38,163,78) 8px solid;
 	background: #f7f7f7;
 	}
@@ -1041,7 +1042,7 @@ object {
 .pricing-tables.attached .col-sm-3,
 .pricing-tables.attached .col-md-3 {
   padding-left: 0;
-  padding-right: 0; 
+  padding-right: 0;
 }
 
 .plan {
@@ -1050,7 +1051,7 @@ object {
   background: #fff;
   margin: 20px 0;
   padding-bottom: 25px;
-  text-align: center; 
+  text-align: center;
   }
 .plan .head {
 padding: 12px 16px;
@@ -1059,32 +1060,32 @@ padding: 12px 16px;
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  font-weight: 400; 
+  font-weight: 400;
   }
 .plan .head h2 {
   font-size: 24px;
-}  
+}
 
 .plan .price {
 border-top: 1px solid #eee;
 margin: 0 auto 30px auto;
-width: 80%; 
+width: 80%;
 }
 .plan .price h3 {
   font-size: 82px;
   vertical-align: top;
-  line-height: 1; 
+  line-height: 1;
   }
   .plan .price h3 span {
     font-size: 38px;
     vertical-align: top;
     position: relative;
     margin: 6px 0 0 -7px;
-    display: inline-block; 
+    display: inline-block;
     }
 .plan .price h4 {
   color: #aaa;
-  font-size: 14px; 
+  font-size: 14px;
   }
 .plan .select-btn{
 padding: 12px 0;
@@ -1092,25 +1093,25 @@ padding: 12px 0;
 .plan .btn {
 padding: 10px 30px;
 text-transform: uppercase;
-font-weight: 500; 
+font-weight: 500;
 }
 .plan ul {
 	list-style-type: none;
-	margin-top: 2px; 
+	margin-top: 2px;
 }
 .plan ul li {
   line-height: 22px;
   padding: 10px 0;
   font-size: 14px;
-  font-weight: 400; 
+  font-weight: 400;
   border-top: 1px solid #eee;
   }
 .plan ul li a {
   text-decoration: underline;
-  color: #e6e9ed; 
+  color: #e6e9ed;
   }
 .plan ul li:last-child {
-  border-bottom: none; 
+  border-bottom: none;
   }
 .plan ul strong {
   font-weight: 700; }
@@ -1118,13 +1119,13 @@ font-weight: 500;
 	margin-top: 6px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
 	position: relative;
-	z-index: 99; 
+	z-index: 99;
 }
 .plan.recommended {
-  background: #FDF8E2; 
+  background: #FDF8E2;
 }
 .plan.recommended .btn { }
-      
+
 .popular-badge {
     position: absolute;
     top: -13px;
@@ -1494,7 +1495,7 @@ font-weight: 500;
 }
 
 /*---------------------------------------
-   SECTION:  FOOTER                
+   SECTION:  FOOTER
 -----------------------------------------*/
 
 footer .contact-box {
@@ -1597,7 +1598,7 @@ footer .terms-policy li a:hover{
 
 
 /*---------------------------------------
-   SECTION:  FORM CONTROLS         
+   SECTION:  FORM CONTROLS
 -----------------------------------------*/
 
 
@@ -1632,7 +1633,7 @@ footer .terms-policy li a:hover{
 }
 
 /*---------------------------------------
-   SECTION:  ACCOUNT PROFILE           
+   SECTION:  ACCOUNT PROFILE
 -----------------------------------------*/
 
 .contentpanel {
@@ -2667,20 +2668,20 @@ div.fill img {
 /************************* SMARTPHONES *************************/
 
 /* LANDSCAPE STYLES */
-@media only screen 
+@media only screen
 and (min-width : 321px)
 and (max-width : 600px){
-	
-	
+
+
 
 }
 
 /* PORTRAIT STYLES */
-@media only screen 
-and (min-width : 320px) 
+@media only screen
+and (min-width : 320px)
 and (max-width : 480px) {
 
-	
+
 
 }
 
@@ -2704,7 +2705,7 @@ td.visible-xs{display:none!important}
 @media (min-width:768px) and (max-width:991px){.visible-sm{display:block!important}table.visible-sm{display:table}tr.visible-sm{display:table-row!important}th.visible-sm,td.visible-sm{display:table-cell!important}}.visible-md,tr.visible-md,th.visible-md,td.visible-md{display:none!important}
 
 @media (min-width:992px) and (max-width:1199px){.visible-md{display:block!important}table.visible-md{display:table}tr.visible-md{display:table-row!important}th.visible-md,td.visible-md{display:table-cell!important}}.visible-lg,tr.visible-lg,th.visible-lg,td.visible-lg{display:none!important
-	
+
 }
 
 @media (min-width:1200px){.visible-lg{display:block!important}table.visible-lg{display:table}tr.visible-lg{display:table-row!important}th.visible-lg,td.visible-lg{display:table-cell!important}
@@ -2720,10 +2721,3 @@ td.visible-xs{display:none!important}
 @media (min-width:1200px){.hidden-lg,tr.hidden-lg,th.hidden-lg,td.hidden-lg{display:none!important}}.visible-print,tr.visible-print,th.visible-print,td.visible-print{display:none!important}
 
 @media print{.visible-print{display:block!important}table.visible-print{display:table}tr.visible-print{display:table-row!important}th.visible-print,td.visible-print{display:table-cell!important}}@media print{.hidden-print,tr.hidden-print,th.hidden-print,td.hidden-print{display:none!important}}
-
-
-
-
-
-
-
