@@ -9,11 +9,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>Giftbox - Admin</title>
-	<link rel="stylesheet" href="css/pure/pure-min.css">
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/create.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GiveToken - Admin</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 	<div id="content-wrapper">

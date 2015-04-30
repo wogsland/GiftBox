@@ -316,74 +316,6 @@
               		<div class="pricingImage"></div>
               		2,501-<span>5,000</span>
           		</div>
-
-          		<div class="pricingLevel pricing10000" id="pricing10000" data-viewer="10000">
-              		<div class="pricingImage"></div>
-              		5,001-<span>10,000</span>
-          		</div>
-
-      		</div> <!-- end span12 -->
-  		</div>
-  	</div>
-</section>
-
-<!-- Section for choosing Users-->
-<section class="pricingChart not" id="pricingChart2">
-	<div class="container">
-		<div class="verticleHeight40"></div>
-		<h1 id="attached-narrow">Pricing Step Three -- How many Enterprise Users</h1>
-		<div class="row pricingChart" id="getStarted2">
-      		<div class="span12 text-center clearfix">
-          		<div class="pricingLevel2 pricingLevelOn2" id="pricingU1" data-user="1">
-              		<div class="pricingImage"></div>
-              		1-10
-          		</div>
-
-          		<div class="pricingLevel2 pricingU2" id="pricingU2" data-user="2">
-              		<div class="pricingImage"></div>
-              		11-<span>50</span>
-          		</div>
-
-          		<div class="pricingLevel2 pricingU3" id="pricingU3" data-user="3">
-              		<div class="pricingImage"></div>
-              		51-<span>180</span>
-          		</div>
-
-          		<div class="pricingLevel2 pricingU4" id="pricingU4" data-user="4">
-              		<div class="pricingImage"></div>
-              		180+
-          		</div>
-
-      		</div> <!-- end span12 -->
-  		</div>
-  	</div>
-</section>
-
-<!-- Dynamic Price-->
-<section class="pricingChart">
-  	<div class="container">
-		<div class="row pricingChart" id="topPricingChart">
-	      	<div class="span12 blueBgWhiteCopy">
-	          	<div class="row">
-	              	<div class="span10 offset1 text-center">
-	                  	<div class="pricingAmounts">
-                        <h1 id="total-ref">Total:</h1>
-	                      	<span class="pricingDolla">$</span><span class="pricingLargeAmount pricingAnnualDiscountedPrice">25</span><span class="pricingPerMonthLabel">/month</span>
-	                  	</div>
-	              	</div>
-	          	</div>
-	      	</div>
-  		</div>
-		<div class="row pricingChart">
-	      	<div class="span12 blueBgWhiteCopy showFormButton">
-	          	<div class="row text-center">
-	              	<div class="span8 offset2 text-center">
-	                  	<div class="btn btn-default btn-lg standard-button" id="continue">Continue</div>
-	              	</div>
-	          	</div>
-	      	</div>
-  		</div>
-		<div class="verticleHeight40"></div>
 	</div>
 </section>
 
@@ -700,5 +632,11 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 
+		<center>
+			<br><br><br><br>
+			<h1 id="attached-narrow">Pricing</h1>
+			<h1>Please contact Robbie Zettler at</h1>
+			<a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h1><b>rzettler@givetoken.com</b></h1></a>
+		</center>
 </body>
 </html>
