@@ -1,6 +1,7 @@
 var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
+var imageDialogSelector = "#image-dialog"
 
 function addTitleText(text, container) {
 	var div = document.createElement("div");
@@ -222,8 +223,6 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
 	showControl(bento.id + "-slider", img);
-	unsaved();
-	selectImage($('#'+ img.id));
 }
 
 function addSpotify(bento, trackId) {
@@ -466,9 +465,12 @@ function handleAttachmentFileSelect(evt) {
 
 //******************************************************
 function hideControl(controlId) {
-//	$("#"+controlId).css("display", "none");
-//	$("#"+controlId)[0].target = null;
-
+	var control = $("#"+controlId);
+	if (control.length > 0) {
+		control.css("display", "none");
+		control[0].target = null;
+	}
+/*	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: none;}';
 	var style = document.createElement('style');
@@ -479,15 +481,18 @@ function hideControl(controlId) {
 	document.getElementsByTagName('head')[0].appendChild(style);
 	control.style.zIndex = -9999;
 	control.target = null;
-
+*/	
 }
 
 function showControl(controlId, target) {
-//	$("#"+controlId).css("display", "block");
-//	$("#"+controlId).css("zIndex", $("#"+target.id).css("zIndex")+1);
-//	$("#"+controlId)[0].target = target;
-
-
+	var control = $("#"+controlId);
+	if (control.length > 0) {
+		control.css("display", "block");
+		control.css("zIndex", 2);
+		control[0].target = target;
+	}
+/*	
+	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: block;}';
 	var style = document.createElement('style');
@@ -500,7 +505,7 @@ function showControl(controlId, target) {
 	// put the control on top
 	control.style.zIndex = 9999;
 	control.target = target;
-
+*/	
 }
 
 function closeClicked(event, closeButton) {
@@ -523,6 +528,7 @@ function closeClicked(event, closeButton) {
 	} else {
 		hideControl(closeButton.id);
 		hideControl(bento.id + "-slider");
+		hideControl(bento.id + "-link-icon");
 	}
 	event.stopPropagation();
 	unsaved();
@@ -896,7 +902,7 @@ function stack(top, middle, bottom) {
 
 	// Only shuffle the stack if the top is not on top
 	if (!Object.is(top_template, window.top_template)) {
-		$("#image-dialog").dialog("close");
+		closeImageDialog();
 		var middle_template = document.getElementById(middle);
 		var bottom_template = document.getElementById(bottom);
 		window.top_template = top_template;
@@ -1236,6 +1242,7 @@ function loadSaved() {
 
 		});
 	}
+	closeImageDialog();
 }
 
 function clearBento(bento) {
@@ -1277,6 +1284,11 @@ function loadBento(bento, savedBento) {
 	if (savedBento.image_file_name) {
 		addImage(bento, savedBento.image_file_path, null, savedBento);
 		bento.image_file_name = savedBento.image_file_name;
+		if (savedBento.image_hyperlink) {
+			var image = $("#"+bento.id+"-image");
+			image[0].hyperlink = savedBento.image_hyperlink;
+			showControl(bento.id+"-link-icon");
+		}
 	}
 	if (savedBento.download_file_name) {
 		bento.download_file_name = savedBento.download_file_name;
@@ -1444,6 +1456,7 @@ function doAdd() {
 		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
 		addImage(bento, element.src, element.file, null);
+		unsaved();
 	}
 
 	// VIDEO/AUDIO
@@ -1502,14 +1515,14 @@ function selectImage(image) {
 	var linkAddress = image[0].hyperlink;
 
 	// de-select the current target image
-	var currentImage = $("#image-dialog").data("target-image");
+	var currentImage = getImageDialogImage();
 	if (currentImage) {
 		deselectImage(currentImage);
 	}
 
 	// Set the dialog's target image
-	$("#image-dialog").data("target-image", image);
-
+	setImageDialogImage(image);
+	
 	// Change all the dialog values to match the target image
 	$("#hyperlink-text").val(linkAddress);
 
@@ -1520,7 +1533,7 @@ function selectImage(image) {
 	image.closest(".bento").addClass("selected-bento");
 
 	// Show the dialog if it's not already open
-	$("#image-dialog").dialog("open");
+	openImageDialog();
 }
 
 function deselectImage(image) {
@@ -1541,7 +1554,7 @@ function addImageHyperlink() {
 	var linkAddress = $("#hyperlink-dialog-url").val();
 
 	// Get the target image from the image dialog
-	var image = $("#image-dialog").data("target-image");
+	var image = getImageDialogImage();
 
 	if (linkAddress.length > 0) {
 
@@ -1567,11 +1580,19 @@ function setHyperlink(linkAddress) {
 	$("#hyperlink-text").val(linkAddress);
 
 	// Set the images hyperlink text
-	$("#image-dialog").data("target-image")[0].hyperlink = linkAddress;
+	getImageDialogImage()[0].hyperlink = linkAddress;
 
 	// Adjust the image dialogs buttons
 	setHyperlinkButtons(linkAddress)
-
+	
+	// Show the link icon
+	var icon = getImageDialogImage().parent().parent().children(".bento-link-icon");
+	if (linkAddress && linkAddress.length > 0) {
+		showControl(icon.attr("id"), null);
+	} else {
+		hideControl(icon.attr("id"));
+	}
+	
 	// Close the modal input dialog
 	$("#add-hyperlink-dialog").dialog("close");
 }
@@ -1598,16 +1619,32 @@ function changeHyperlink() {
 
 function removeImage(image) {
 	deselectImage(image);
-
-	if (image.is($("#image-dialog").data("target-image"))) {
+	
+	if (image.is(getImageDialogImage())) {
 
 		// Clear the hyperlink text in the image dialog
 		$("#hyperlink-text").val(null);
 
 		// Clear the image dialog's target image
-		$("#image-dialog").data("target-image", null);
+		setImageDialogImage(null);
 
 		// Close the image dialog
-		$("#image-dialog").dialog("close");
+		closeImageDialog();
 	}
+}
+
+function openImageDialog() {
+	$(imageDialogSelector).dialog("open");
+}
+
+function closeImageDialog() {
+	$(imageDialogSelector).dialog("close");
+}
+
+function setImageDialogImage(image) {
+	$(imageDialogSelector).data("target-image", image);
+}
+
+function getImageDialogImage() {
+	return $(imageDialogSelector).data("target-image");
 }

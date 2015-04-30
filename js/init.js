@@ -15,7 +15,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		width: 800,
-		height: 250,
+		height: 300,
 		modal: true,
 		buttons: {
 			Send: function() {
