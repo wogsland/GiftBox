@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Giftbox - Forgot Password</title>
+	<!-- SITE TITLE -->
+	<title>GiveToken.com - Forgot Password</title>
 	<link rel="stylesheet" href="css/style.css" />
 	<script src="js/account.js"></script>
 </head>
