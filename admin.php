@@ -10,8 +10,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<!-- SITE TITLE -->
-	<title>GiveToken.com - Give a Token of Appreciation</title>
+	<title>Giftbox - Admin</title>
 	<link rel="stylesheet" href="css/pure/pure-min.css">
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="stylesheet" href="css/create.css" />
