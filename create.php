@@ -10,7 +10,8 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title>Giftbox - Create</title>
+	<!-- SITE TITLE -->
+	<title>GiveToken.com - Create</title>
 
 	<link rel="stylesheet" href="assets/elegant-icons/style.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">

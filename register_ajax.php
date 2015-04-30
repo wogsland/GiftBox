@@ -45,9 +45,9 @@ if (User::exists($user->email_address)) {
 
 	if ($reg_type == 'EMAIL') {
 		// Send the email
-		$email_message = " To activate your Giftbox account, please click on this link:\n\n";
+		$email_message = " To activate your GiveToken account, please click on this link:\n\n";
 		$email_message .= $app_url . 'activate.php?uid=' . $user->getId() . "&key=$user->activation_key";
-		sendMail($user->email_address, 'Giftbox Registration Confirmation', $email_message, $sender_email);
+		sendMail($user->email_address, 'GiveToken Registration Confirmation', $email_message, $sender_email);
 	}
 	$response['status'] = "SUCCESS";
 }
