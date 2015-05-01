@@ -47,7 +47,7 @@
 	<?php
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
-	echo $token->letter_text ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
+	echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
 
 	$token->render();
 
