@@ -1666,6 +1666,10 @@ footer .terms-policy li a:hover{
    SECTION:  ACCOUNT PROFILE
 -----------------------------------------*/
 
+section{
+    margin-top: 45px;
+}
+
 .contentpanel {
     position: relative;
     padding: 20px;
