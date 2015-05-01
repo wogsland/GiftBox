@@ -415,6 +415,7 @@ header .only-logo .navbar {
 
 header .only-logo .navbar .navbar-header {
     float: none;
+    padding-top: 100px;
 }
 
 /* INTRO */

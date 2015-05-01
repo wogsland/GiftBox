@@ -121,7 +121,7 @@
 <!-- SOLID COLOR BG -->
 <div class="deep-dark-bg"> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
 
-	<!-- STICKY NAVIGATION -->
+	<!-- STICKY NAVIGATION (Animation removed)-->
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
