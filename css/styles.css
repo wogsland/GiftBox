@@ -8,6 +8,10 @@ html {
     font-size: 100%;
 }
 
+section{
+    margin-top: 45px;
+}
+
 body {
     background: #232323;
     font-family: 'Roboto', sans-serif;
@@ -1665,10 +1669,6 @@ footer .terms-policy li a:hover{
 /*---------------------------------------
    SECTION:  ACCOUNT PROFILE
 -----------------------------------------*/
-
-section{
-    margin-top: 45px;
-}
 
 .contentpanel {
     position: relative;
