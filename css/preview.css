@@ -84,7 +84,7 @@ iframe {
 	
 }
 
-.bento-raised {
+.bento:hover {
 	margin-top: -5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
 }
