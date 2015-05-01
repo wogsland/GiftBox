@@ -108,10 +108,10 @@ iframe {
 
 #flip-container {
 	box-sizing: border-box;
-    width: 100vw;
-    height: 75.76vw; /* 100/1.32 = 75.75757575 */
+    width: 95vw;
+    height: 71.97vw; /* 100/1.32 = 75.75757575 */
     background: white;
-    max-height: 100vh;
+    max-height: 95vh;
     max-width: 131.62vh; /* 1024/778 = 1.32 */
     margin: auto;
     position: absolute;
