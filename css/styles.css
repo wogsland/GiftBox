@@ -2608,6 +2608,28 @@ div.fill img {
     cursor: pointer;
 }
 
+/* /////////////////////////////////////////////////////////////////////
+//  Manage Users Page
+/////////////////////////////////////////////////////////////////////*/
+
+#manage-jumbo{
+    margin-top: 80px;
+}
+
+#manage-table td{
+    padding: 15px;
+}
+
+#manage-table table, td, th {
+    border: 1px solid white;
+}
+
+#manage-table th {
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
 /************************* POPUP DIALOGS *************************/
 
 #login-form {
