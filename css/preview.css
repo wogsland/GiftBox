@@ -79,7 +79,14 @@ iframe {
         -ms-animation: fadein 2s; /* Internet Explorer */
          -o-animation: fadein 2s; /* Opera < 12.1 */
             animation: fadein 2s;
+	-webkit-transition: .5s; /* Safari */
+	transition: .5s;
 	
+}
+
+.bento-raised {
+	margin-top: -5px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
 }
 
 .bento img {
@@ -131,7 +138,8 @@ iframe {
 	overflow: hidden;
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
-	box-shadow: 5px 5px 10px #DCDCDC;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
+//	box-shadow: 5px 5px 10px #DCDCDC;
 }
 
 .panel {
