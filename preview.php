@@ -53,7 +53,7 @@
 
 	echo "</div>";
 	echo '<div class="back">';
-	echo $token->letter_text ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
+	echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
 
 	echo '<div id="letter-text">';
 	echo '<p>'.nl2br($token->letter_text).'</p>';
