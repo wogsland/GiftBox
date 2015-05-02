@@ -11,14 +11,17 @@ if (isset($_SERVER['HTTPS'])) {
 	}
 }
 if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
+	$application_id = $_SERVER["APPLICATION_ID"];
 	$app_root = "/";
 	$google_app_engine = true;
-	if ($_SERVER["APPLICATION_ID"] === "s~stone-timing-557") {
+	if ($application_id === "s~stone-timing-557") {
 		$file_storage_path = 'gs://tokenstorage/';
 		$socket = '/cloudsql/stone-timing-557:test';
-	} elseif ($_SERVER["APPLICATION_ID"] === "s~t-sunlight-757") {
+	} elseif ($application_id === "s~t-sunlight-757") {
 		$file_storage_path = 'gs://tokenstorage-staging/';
 		$socket = '/cloudsql/t-sunlight-757:staging';
+	} else {
+		$file_storage_path = 'gs://tokenstorage/';
 	}
 } else {
     $app_root = "/giftbox/";
