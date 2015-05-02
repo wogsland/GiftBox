@@ -19,6 +19,8 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
 	} elseif ($_SERVER["APPLICATION_ID"] === "s~t-sunlight-757") {
 		$file_storage_path = 'gs://tokenstorage-staging/';
 		$socket = '/cloudsql/t-sunlight-757:staging';
+	} else{
+		$file_storage_path = 'gs://tokenstorage/';
 	}
 } else {
     $app_root = "/giftbox/";
