@@ -287,8 +287,8 @@ include_once 'config.php';
 								            <div class="timeline-body">
 												<p>
 												    Streaming songs from Spotify or SoundCloud will always be easier than using an MP3 file, simply because the tracks do not carry as much data. The more
-												    data, the longer a Token‚_¢ creation will take to load. If a personal music file is the desired way to distribute music, GiveToken requires MP3 format.
-												    Remember, the Token‚_¢ creation is being shared, so only use MP3 files if the music it is legal to distribute, otherwise stream from Spotify or SoundCloud.
+												    data, the longer a Token‚Ñ¢ creation will take to load. If a personal music file is the desired way to distribute music, GiveToken requires MP3 format.
+												    Remember, the Token‚Ñ¢ creation is being shared, so only use MP3 files if the music it is legal to distribute, otherwise stream from Spotify or SoundCloud.
 												    GiveToken allows more than just individual songs but entire playlists. SoundCloud is the preferred platform for linking playlists, and Spotify is a better
 												    option if for the distribution of a single song.
 												</p>
@@ -302,7 +302,7 @@ include_once 'config.php';
 												</p>
 												<br/>
 												<p>
-												    1. In Spotify, right click on the track you wish to include and select ‚__Copy HTTP Link‚__
+												    1. In Spotify, right click on the track you wish to include and select ‚ÄúCopy HTTP Link‚Äù
 												</p>
 												<p>
 												    2. Click on the box where you would like the music to be displayed
@@ -347,7 +347,7 @@ include_once 'config.php';
 							            	</div>
 							            	<div class="timeline-body">
 												<p>
-												    Similar to uploading music, streaming videos is easier than using an MP4 file. MP4 files carry a lot of data, which causes the Token‚_¢ creation to take
+												    Similar to uploading music, streaming videos is easier than using an MP4 file. MP4 files carry a lot of data, which causes the Token‚Ñ¢ creation to take
 												    longer for the receiver to open. While MP4 videos are allowed, streaming from YouTube is the simplest way to ensure that a viewer can watch the video
 												    without a minute wasted.
 												</p>
@@ -457,16 +457,16 @@ include_once 'config.php';
 										</p>
 										<p>
 										    Customize that next email by sending it to a select few of the most valuable customers, with a short thank you video and some photos of the last event that
-										    they made possible. Next time, they‚__ll be more willing to buy knowing that that their loyalty is valued. Customer‚__s time is valuable and a Token‚_¢ creation
+										    they made possible. Next time, they‚Äôll be more willing to buy knowing that that their loyalty is valued. Customer‚Äôs time is valuable and a Token‚Ñ¢ creation
 										    is an easy way to create an experience in just one stop.
 										</p>
 										<p>
 										    <strong>2.Pre-release sale</strong>
 										</p>
 										<p>
-										    Send out a special invite to an event before the release of tickets to the public for only the VIP members, along with a custom snippet of what they‚__ll
+										    Send out a special invite to an event before the release of tickets to the public for only the VIP members, along with a custom snippet of what they‚Äôll
 										    experience at the event. What better way to get them excited about an event or fundraiser than to get glimpse of what it will entail and what the benefits
-										    will be. Plus, giving clients a ‚__pre-sale‚__ offer will make them feel like they are getting a deal.
+										    will be. Plus, giving clients a ‚Äôpre-sale‚Äô offer will make them feel like they are getting a deal.
 										</p>
 										<p>
 										    <a href="https://www.givetoken.com/preview.php?id=316">Click Here</a>
@@ -475,7 +475,7 @@ include_once 'config.php';
 										    <strong>3. Simply Say Hello!</strong>
 										</p>
 										<p>
-										    Send out a Token‚_¢ creation just to say hello. People are sold products and asked to donate all the time. By sending a note from your CEO or President
+										    Send out a Token‚Ñ¢ creation just to say hello. People are sold products and asked to donate all the time. By sending a note from your CEO or President
 										    purely to engage with the customer shows how much the customer is valued by a company. In the future, they will be more apt to buy or donate when they feel
 										    valued as a human being, and not as a dollar sign.
 										</p>
@@ -492,9 +492,9 @@ include_once 'config.php';
 					            	</div>
 					            	<div class="timeline-body">
 											<p>
-											    Nowadays, everyone blogs. You can literally find a blog about anything and everything. It‚__s a way to get your name out there, to educate people on your
-											    company, and keep people up to date on what‚__s going on with your community. Companies with blogs receive 97% more inbound links than those who don‚__t blog.
-											    That‚__s a big difference! In fact, 37% of marketers say blogs are the most valuable content type for marketing.
+											    Nowadays, everyone blogs. You can literally find a blog about anything and everything. It‚Äôs a way to get your name out there, to educate people on your
+											    company, and keep people up to date on what‚Äôs going on with your community. Companies with blogs receive 97% more inbound links than those who don‚Äôt blog.
+											    That‚Äôs a big difference! In fact, 37% of marketers say blogs are the most valuable content type for marketing.
 											</p>
 											<p>
 											    With so many blogs and so many different sites flying around the web, how do you make your brand stand out? How do you attract more readers and in turn
@@ -503,11 +503,11 @@ include_once 'config.php';
 											<p>
 											    GiveToken not only provides a different and interesting way to attract readership, but it also makes it easy to share visual content on your social media.
 											    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
-											    more sales, donations and interest. Blogs give sites 444% (yes, that‚__s four hundred and forty-four. That‚__s not a typo!) more indexed pages and 97% more
+											    more sales, donations and interest. Blogs give sites 444% (yes, that‚Äôs four hundred and forty-four. That‚Äôs not a typo!) more indexed pages and 97% more
 											indexed links. In layman terms that means: More pages + more links = bigger slice of the online pie (    <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>)
 											</p>
 											<p>
-											    Creating your identity through a blog, creates a relationship with your readers. It‚__s not just about the content, it‚__s about the community.
+											    Creating your identity through a blog, creates a relationship with your readers. It‚Äôs not just about the content, it‚Äôs about the community.
 											</p>
 											<p>
 											    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
@@ -533,13 +533,13 @@ include_once 'config.php';
 										    and money possible. GiveToken has the tool that will help with their video tool.
 										</p>
 										<p>
-										YouTube is the leading online source for videos, and there is a reason it‚__s so popular‚__ people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
-										    what they want and add more videos. That‚__s 96% of perspective customers that want to see the product. Companies will see your company as more reliable, as
+										YouTube is the leading online source for videos, and there is a reason it‚Äôs so popular‚Äô people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
+										    what they want and add more videos. That‚Äôs 96% of perspective customers that want to see the product. Companies will see your company as more reliable, as
 										    well as much more engaging and personable with customers. These more trusting relationship have a direct correlation with sales.
 										</p>
 										<p>
 										    Another perk to putting video on a website is the increase in popularity. Studies show that users are more likely to watch video than reading text, which
-										    leads to longer stays on your page. Adding keywords to the Token‚_¢ creation boosts the probability of users finding you in a search engine.
+										    leads to longer stays on your page. Adding keywords to the Token‚Ñ¢ creation boosts the probability of users finding you in a search engine.
 										</p>
 										<p>
 										    <a href="https://www.givetoken.com/preview.php?id=320">Click Here</a>
@@ -585,19 +585,19 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel test">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken ‚__ Customization:: Text, Quotes, and Collage features</h4>
+					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken ‚Äô Customization:: Text, Quotes, and Collage features</h4>
 					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
 										<p>
-										    Creating a Token‚_¢ creation through GiveToken is simple and easy. With so many different features, each Token‚_¢ creation is completely customizable. Each one
+										    Creating a Token‚Ñ¢ creation through GiveToken is simple and easy. With so many different features, each Token‚Ñ¢ creation is completely customizable. Each one
 										    can be shared with customers and can offer an individual, personal touch to make them feel like a VIP.
 										</p>
 										<p>
 										    <strong> Collage </strong>
 										</p>
 										<p>
-										    Design the Token‚_¢ creation with a variety of multimedia files into an effortless collage showing a unique personal touch. The pre-made templates provided
+										    Design the Token‚Ñ¢ creation with a variety of multimedia files into an effortless collage showing a unique personal touch. The pre-made templates provided
 										    enable simple click to add functionality, and then adjust each section to fit the specific needs for the customer. Simply click the box you want to fill
 										    and select the image, video, or music desired.
 										</p>
@@ -605,12 +605,12 @@ include_once 'config.php';
 										    <strong> Text &amp; Quotes </strong>
 										</p>
 										<p>
-										    Token‚_¢ creation can also be personalized by using customer specific text and quotes. Whether a famous quote or personal note, these messages can be added
+										    Token‚Ñ¢ creation can also be personalized by using customer specific text and quotes. Whether a famous quote or personal note, these messages can be added
 										    to the collage with a simple click of a button. A unique feature to GiveToken is the ability to send a letter along with the multi-media portion of the
 										    collage. Remind customers or employees about a special event, say thank you, send special offers, or simply just say hello.
 										</p>
 										<p>
-										    With a Token‚_¢ creation from GiveToken, customers can feel like a VIP and be sure to come back for repeat business.
+										    With a Token‚Ñ¢ creation from GiveToken, customers can feel like a VIP and be sure to come back for repeat business.
 										</p>
 					            	</div>
 					        	</div>
@@ -619,7 +619,7 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-2">We‚__re Here! Dive deeper into GiveToken</h4>
+					            		<h4 class="timeline-title headers" id="post-title-2">We‚Äôre Here! Dive deeper into GiveToken</h4>
 					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
@@ -629,8 +629,8 @@ include_once 'config.php';
 										</p>
 										<p>
 										    GiveToken is a tool that is used to market, sell or educate others about a service or product. By allowing the user to combine any type of media, be it
-										    pictures, videos, or music, with text and attachments, the user can show the customer the full power of a product. Token‚_¢ creations can be created and then
-										    shared using any platform that is desired, whether that‚__s social media, email, or texts.
+										    pictures, videos, or music, with text and attachments, the user can show the customer the full power of a product. Token‚Ñ¢ creations can be created and then
+										    shared using any platform that is desired, whether that‚Äôs social media, email, or texts.
 										</p>
 										<p>
 										    There inlies the beauty of GiveToken. It is completely customizable to however the user wants to create and share an experience with the customer.
@@ -639,16 +639,16 @@ include_once 'config.php';
 										    GiveToken is the blank canvas to create a personalized digital content.
 										</p>
 										<p>
-										    ‚_¢ Customize a Token‚_¢ creation with a unique mix of videos, music, photos and more
+										    ‚Ñ¢ Customize a Token‚Ñ¢ creation with a unique mix of videos, music, photos and more
 										</p>
 										<p>
-										    ‚_¢ Click and drag media from the user‚__s computer or from anywhere on the web
+										    ‚Ñ¢ Click and drag media from the user‚Äôs computer or from anywhere on the web
 										</p>
 										<p>
-										    ‚_¢ Share a Token‚_¢ creation on any platform with just a simple link
+										    ‚Ñ¢ Share a Token‚Ñ¢ creation on any platform with just a simple link
 										</p>
 										<p>
-										    ‚_¢ Make it personal and send the Token‚_¢ creation to a specific person or group
+										    ‚Ñ¢ Make it personal and send the Token‚Ñ¢ creation to a specific person or group
 										</p>
 										<p>
 										    Stay tuned for an in depth look at all of the best features GiveToken has to offer.

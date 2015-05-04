@@ -120,10 +120,8 @@
 									echo '<li><a href="#">Login</a></li>';
 								}
 								?>
-					</ul>
-				</nav>
-			</header>
-		</div>
+							</ul>
+						</div>
 					</div> <!-- /END CONTAINER -->
 				</div> <!-- /END STICKY NAVIGATION -->
 		

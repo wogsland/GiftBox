@@ -45,7 +45,7 @@
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/account.js"></script>
-		
+
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -160,7 +160,7 @@
 							<ul class="nav navbar-nav navbar-right main-navigation">
 								<li><a href="index.php" class="external">Home</a></li>
 								<li><a href="create.php" class="external">Create</a></li>
-					</ul>
+							</ul>
 						</div>
 					</div> <!-- /END CONTAINER -->
 				</div> <!-- /END STICKY NAVIGATION -->

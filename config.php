@@ -24,7 +24,6 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
 		$file_storage_path = 'gs://tokenstorage/';
 	}
 } else {
-    $app_root = "/giftbox/";
 	$file_storage_path = 'uploads/';
 }
 $database = "giftbox";
