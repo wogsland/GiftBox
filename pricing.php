@@ -651,12 +651,13 @@
 <script src="js/account.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
-
+<!--
 		<center>
 			<br><br><br><br>
 			<h1 id="attached-narrow">Pricing</h1>
 			<h1>Please contact Robbie Zettler at</h1>
 			<a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h1><b>rzettler@givetoken.com</b></h1></a>
 		</center>
+  -->
 </body>
 </html>
