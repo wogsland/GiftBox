@@ -1,6 +1,27 @@
 <?php
 include_once 'util.php';
 include_once 'config.php';
+
+	_session_start();
+
+	$message = null;
+	$first_name = null;
+	$last_name = null;
+	$email = null;
+	$user_id = null;
+	
+	if (logged_in()){
+		$results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
+		if ($results->num_rows == 1) {
+			$user = $results->fetch_object();
+			$first_name = $user->first_name;
+			$last_name = $user->last_name;
+			$email = $user->email_address;
+			$level = $user->name;
+			$user_id = $user->id;
+		}
+	}
+
 ?>
 
 <!doctype html>
@@ -127,9 +148,19 @@ include_once 'config.php';
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
-					<li><a href="index.php#home" class="external">Home</a></li>
-					<li><a href="#">My Account</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a href="index.php" class="external">Home</a></li>
+					<?php
+					if (logged_in()) {
+						echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
+						echo '<li><a href="profile.php" class="external">My Account</a></li>';
+						if (is_admin()) {
+							echo '<li><a href="admin.php" class="external">Admin</a></li>';
+						}
+					} else {
+						echo '<li><a href="javascript:void(0)" onclick="$(\'#login-dialog\').modal()">Login</a></li>';
+						echo '<li><a href="javascript:void(0)" onclick="$(\'#signup-dialog\').modal()">Sign Up</a></li>';
+					}
+					?>
 				</ul>
 			</div>
 		</div> <!-- /END CONTAINER -->
@@ -148,24 +179,24 @@ include_once 'config.php';
 				<?php
 					if (logged_in()) {
 						echo '<div class="text-center">
-					            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-					            <h4 class="profile-name mb5">Tom Brady</h4>
-					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 4 Give Tokens</div>
-					            <div class="small-txt mb5"><i class="fa fa-star"></i> 423 Token Views</div>
-					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-					            <div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>
+					            <img src="assets/gt-favicons.ico/favicon-96x96.png" class="img-circle img-offline img-responsive img-profile" alt="">
+					            <h4 class="profile-name mb5">' . " $first_name  $last_name " . '</h4>
+					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
+					            <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
+					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>
+					            <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
 					        
 					            <div class="mb20"></div>
 					        
 					            <div class="btn-group">
-					                <button class="btn btn-primary btn-bordered">Create GiveToken</button>
-					                <button class="btn btn-primary btn-bordered">Send GiveToken</button>
+					                <a href="create.php" class="btn btn-primary btn-bordered">Create GiveToken</a>
+					                <a href="create.php" class="btn btn-primary btn-bordered">Send GiveToken</a>
 					            </div>
 					            
 					            <div class="mb20"></div>
 					        </div>
 					        <h5 class="md-title">Welcome to the Community Page!</h5>
-							<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>
+							<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!</p>
 					        <h5 class="md-title">Connect</h5>
 							<ul class="list-unstyled social-list">
 					            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
@@ -798,6 +829,8 @@ for(i = 0; i < els.length; i++){
 <script src="js/custom.js"></script>
 <script src="js/jquery.magnific-popup.js"></script>
 <script src="js/facebook_init.js"></script>
+<script src="js/login.js"></script>
+<script src="js/signup.js"></script>
 <script src="js/account.js"></script>
 
 </body>
