@@ -33,9 +33,6 @@ handlers:
 - url: /assets/app-icons
   static_dir: assets/app-icons
 
-- url: /assets/gt-favicons.ico
-  static_dir: assets/gt-favicons.ico
-
 - url: /assets/elegant-icons
   static_dir: assets/elegant-icons
 

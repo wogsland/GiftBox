@@ -1423,7 +1423,7 @@ div.container {
 }
 
 #user-search-form-wrapper {
-	width: 920px;
+	width: 900px;
 	margin: 50px auto 20px auto;
 	border: solid 1px #CBCBCB;
 	padding: 20px;
@@ -1511,8 +1511,4 @@ summary p{
 	line-height: 1.4em;
 	font-size: 1.2em;
 	margin-bottom: 1.2em;
-}
-
-#searchHeader{
-	color: white;
 }

@@ -1,6 +1,6 @@
 .column {
 	float: left;
-//	overflow: hidden;
+	overflow: hidden;
 }
 .padded {
 	box-sizing: border-box;
