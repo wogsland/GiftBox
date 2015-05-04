@@ -461,19 +461,18 @@
 		<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 			<!-- SECTION TITLE -->
-			<h2 class="white-text">How it Works</h2>
+			<h2 class="white-text">What We Do</h2>
 
 			<div class="white-line-left">
 			</div>
 
 			<p class="white-text">
-				GiveToken is your blank canvas to create a personalized virtual postcard.
+				GiveToken is your blank canvas to create a personalized digital experience.  Customize your Token™ Creation by:
 			</p>
 			<ul class="white-text">
- 				<li>Customize your token with a unique mix of videos, music, photos and more</li>
- 				<li>Click and drag media from your computer or from anywhere on the web</li>
- 				<li>Share your token on any platform with just a simple link</li>
- 				<li>Make it personal and send your token to a specific person or group</li>
+ 				<li>Click-to-add media from your computer or the web</li>
+ 				<li>Sharing your Token™ Creation on any platform</li>
+ 				<li>Targeting specific individuals or groups</li>
 			</ul>
 
 
@@ -507,13 +506,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated deep-grey-bg" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">GiveToken is connecting</h2>
+					<h2 class="white-text">GiveToken is Content</h2>
 
 					<div class="white-line-left">
 					</div>
 
 					<p class="white-text">
-					You know those “you just had to be there” moments? Your fans and friends know them too. With our help, you can combine the best clips and sounds from the night in one personalized token to share with fans. The best part? Your fans can share the same token with anyone who missed the epic show. We help you break through that barrier and build more personal relationships with the people who truly matter.
+						GiveToken allows you to combine digital content of all media types into one easy-to-view and easy-to-access webpage.  It can be personalized for any business, event, or customer to turn a bland interaction into a memorable experience.
 					</p>
 
 
@@ -540,13 +539,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" style="margin-top: 15%;" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="dark-text">GiveToken is sharing</h2>
+					<h2 class="dark-text">Experiences with GiveToken</h2>
 
 					<div class="colored-line-left">
 					</div>
 
 					<p class="dark-text">
-						We’ll help you design a token for any event, like a company service day, so you can look back at the day’s highlights. Share the token with everyone who was there, and they can show their own friends and family what they missed.
+						You know those “you just had to be there” moments? Your customers know them too. With GiveToken's help, you can combine the best clips and sounds that highlight your company in one Token™ Creation. The best part?  Your customers can show off the same Token™ Creation on any platform at any time, all while preserving a consistent message and experience.
 					</p>
 
 
@@ -581,13 +580,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">GiveToken is short and sweet</h2>
+					<h2 class="white-text">GiveToken is Short and Sweet</h2>
 
 					<div class="white-line-left">
 					</div>
 
 					<p>
-						We all know the best way to share a lot of information in the simplest way is through images. Tokens combine both visuals and sounds to create a compact, shareable gift for the most impact.
+						We all know the simplest, most genuine way to share information is through media.  Combine both sights and sounds with a Token™ Creation to develop a compact, shareable, and impactful experience.
 					</p>
 
 
