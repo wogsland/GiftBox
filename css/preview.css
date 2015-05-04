@@ -12,6 +12,7 @@ body
 	margin: 0px;
 	padding: 0px;
 	overflow: hidden;
+	background-color: #E6E6E6;
 
 	/* IE10 Consumer Preview */
 	background-image: -ms-linear-gradient(top, #FFFFFF 0%, #9099B0 100%);
@@ -63,6 +64,13 @@ iframe {
 	position: relative;
 }
 
+#letter-text-container {
+	width: 100%;
+	height: 100%;
+	padding: 40px 20px 20px 20px;
+	box-sizing: border-box;
+}
+
 #letter-text {
 	top: 0px;
 	left: 0px;
@@ -72,11 +80,17 @@ iframe {
 	box-sizing: border-box;
 	padding: 40px;
 	background-color: white;
+	overflow-y: auto;
 }
 
 #letter-attachments > a {
 	padding-right: 12px;
 	text-decoration: none;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .bento {
@@ -85,6 +99,19 @@ iframe {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 2s; /* Firefox < 16 */
+        -ms-animation: fadein 2s; /* Internet Explorer */
+         -o-animation: fadein 2s; /* Opera < 12.1 */
+            animation: fadein 2s;
+	-webkit-transition: .5s; /* Safari */
+	transition: .5s;
+	
+}
+
+.bento:hover {
+	margin-top: -5px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);
 }
 
 .bento img {
@@ -120,21 +147,25 @@ iframe {
 
 #close-letter {
 	float: left;
+	display: block;
 }
 
 #flip-container {
 	box-sizing: border-box;
-    width: 100vw;
-    height: 75.76vw; /* 100/1.32 = 75.75757575 */
+    width: 95vw;
+    height: 71.97vw; /* 100/1.32 = 75.75757575 */
     background: white;
-    max-height: 100vh;
+    max-height: 95vh;
     max-width: 131.62vh; /* 1024/778 = 1.32 */
     margin: auto;
     position: absolute;
     top:0;bottom:0; /* vertical center */
     left:0;right:0; /* horizontal center */
 	overflow: hidden;
-	border: 1px solid gray;
+	border: 1px solid #DCDCDC;;
+	border-radius: 5px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
+//	box-shadow: 5px 5px 10px #DCDCDC;
 }
 
 .panel {

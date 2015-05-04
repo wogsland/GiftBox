@@ -9,11 +9,11 @@ include_once 'config.php';
 <meta charset="UTF-8">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<meta name="author" content="Maverick Blair & Co. | www.maverickblair.com">
+<meta name="author" content="Gary Peters">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE TITLE -->
-<title>GiveToken.com - Give a Token of Appreciation</title>
+<title>GiveToken.com - Community Page</title>
 
 <!-- =========================
       FAV AND TOUCH ICONS  
@@ -23,6 +23,26 @@ include_once 'config.php';
 <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png">
 ============================== -->
+
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="assets/gt-favicons.ico/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/gt-favicons.ico/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="assets/gt-favicons.ico/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="assets/gt-favicons.ico/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="assets/gt-favicons.ico/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="assets/gt-favicons.ico/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/gt-favicons.ico/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="assets/gt-favicons.ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="assets/gt-favicons.ico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/gt-favicons.ico/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="assets/gt-favicons.ico/favicon-16x16.png">
+	<link rel="manifest" href="assets/gt-favicons.ico/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- endFavicon -->
 
 <!-- =========================
      STYLESHEETS   
@@ -195,16 +215,25 @@ include_once 'config.php';
 				    			<ul class="timeline">
 				    				<!--Plug this up to the list of elements in the database. -->
 				    				<li>
-				    				 	<div class="timeline-badge solid-blue"><i class="fa fa-film"></i></div>
+							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
 				    				 	<div class="timeline-panel">
 					    				 	<div class="timeline-heading">
-						    				 	<h4 class="timeline-title">Mussum ipsum cacilds- Beginner</h4>
-								            	<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+							            		<h4 class="timeline-title">Upload an image:</h4>
+							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
 								            </div>
 								            <div class="timeline-body">
-						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
-												</div>
+												<p>
+												    1. Click on the location desired to add an image
+												</p>
+												<p>
+												    2. Upload the image from your computer and click OK
+												</p>
+												<p>
+												    3. Use the scrollbar on the image to zoom in and out for the perfect display
+												</p>
+												<p>
+												    4. You can also move the dotted lines around the box to spread out or shrink your image
+												</p>
 											</div>
 										</div>
 				    				</li>
@@ -212,11 +241,35 @@ include_once 'config.php';
 							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
-							            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
-							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+							            		<h4 class="timeline-title">Multi-Media Intro MP3 vs MP4: </h4>
+							            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
 							            	</div>
 							            	<div class="timeline-body">
-							            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
+												<p>
+												    With GiveToken, multiple forms of media are allowed to be sent. MP3s and MP4 files, as well as media from SoundCloud, Spotify and YouTube, are easily able
+												    to be uploaded and distributed using GiveToken.
+												</p>
+												<br/>
+												<p>
+												    MP3 files are simply compressed audio files, while MP4 files are a multimedia format most commonly used for video and audio. SoundCloud is a distribution
+												    platform where bands can upload and promote their music for listeners to download. Spotify is a music platform that gives listeners access to millions of
+												    songs when using the service. Both of these music platforms allow fans to create playlists, and YouTube can be used to search for videos of any kind, while
+												    also subscribing to a variety of channels.
+												</p>
+											</div>
+							        	</div>
+							        </li>
+				    				<li>
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-panel">
+							        		<div class="timeline-heading">
+							            		<h4 class="timeline-title">Intro</h4>
+							            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
+							            	</div>
+							            	<div class="timeline-body">
+						    					<div class="video">
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+												</div>
 							            	</div>
 							        	</div>
 							        </li>
@@ -224,13 +277,131 @@ include_once 'config.php';
 				    		</div>
 				    		<div class="tab-pane" id="intermediate">
 				    			<ul class="timeline">
+						    		<li>
+				    				 	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
+				    				 	<div class="timeline-panel">
+					    				 	<div class="timeline-heading">
+						    				 	<h4 class="timeline-title">Best practices for adding music: </h4>
+								            	<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 week ago via Facebook</small></p>
+								            </div>
+								            <div class="timeline-body">
+												<p>
+												    Streaming songs from Spotify or SoundCloud will always be easier than using an MP3 file, simply because the tracks do not carry as much data. The more
+												    data, the longer a Token‚_¢ creation will take to load. If a personal music file is the desired way to distribute music, GiveToken requires MP3 format.
+												    Remember, the Token‚_¢ creation is being shared, so only use MP3 files if the music it is legal to distribute, otherwise stream from Spotify or SoundCloud.
+												    GiveToken allows more than just individual songs but entire playlists. SoundCloud is the preferred platform for linking playlists, and Spotify is a better
+												    option if for the distribution of a single song.
+												</p>
+												<br/>
+												<p>
+												    Best practices for adding videos:
+												</p>
+												<br/>
+												<p>
+												    <strong> Upload a song from Spotify: </strong>
+												</p>
+												<br/>
+												<p>
+												    1. In Spotify, right click on the track you wish to include and select ‚__Copy HTTP Link‚__
+												</p>
+												<p>
+												    2. Click on the box where you would like the music to be displayed
+												</p>
+												<p>
+												    3. Select Spotify, paste your link, and click OK
+												</p>
+												<br/>
+												<p>
+												    <strong> Upload a playlist from SoundCloud: </strong>
+												</p>
+												<br/>
+												<p>
+												    1. Make sure the playlist you wish to include from SoundCloud is public, then copy the link to your playlist page
+												</p>
+												<p>
+												    2. Click on the box where you would like the playlist to be displayed
+												</p>
+												<p>
+												    3. Select SoundCloud, paste your link, and click OK
+												</p>
+												<br/>
+												<p>
+												    <strong> Upload MP3 files: </strong>
+												</p>
+												<br/>
+												<p>
+												    1. Click on the box where you would like to display your music
+												</p>
+												<p>
+												    2. Upload the MP3 file and click OK
+												</p>
+											</div>
+										</div>
+				    				</li>
+				    				<li class="timeline-inverted">
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-panel">
+							        		<div class="timeline-heading">
+							            		<h4 class="timeline-title">Best practices for adding videos:</h4>
+							            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
+							            	</div>
+							            	<div class="timeline-body">
+												<p>
+												    Similar to uploading music, streaming videos is easier than using an MP4 file. MP4 files carry a lot of data, which causes the Token‚_¢ creation to take
+												    longer for the receiver to open. While MP4 videos are allowed, streaming from YouTube is the simplest way to ensure that a viewer can watch the video
+												    without a minute wasted.
+												</p>
+												<p>
+												    <strong id="docs-internal-guid-68f41699-136a-2d2f-996d-bd8dee2acb48">
+												        <br/>
+												    </strong>
+												</p>
+												<p>
+												    <strong> Upload a video from YouTube: </strong>
+												</p>
+												<p>
+												    <strong>
+												        <br/>
+												    </strong>
+												</p>
+												<p>
+												    1. Copy the link of the YouTube video you wish to include
+												</p>
+												<p>
+												    2. Click on the box where you would like to add the video
+												</p>
+												<p>
+												    3. Paste the link and click OK to add the video in the selected box
+												</p>
+												<p>
+												    <strong>
+												        <br/>
+												    </strong>
+												</p>
+												<p>
+												    <strong> Upload MP4 files: </strong>
+												</p>
+												<p>
+												    <strong>
+												        <br/>
+												    </strong>
+												</p>
+												<p>
+												    1. Click on the box where you would like to add the video
+												</p>
+												<p>
+												    2. Upload the MP4 file from your computer and click OK to add the video in the selected box
+												</p>
+											</div>
+							        	</div>
+							        </li>
 				    				<!--Plug this up to the list of elements in the database. -->
 				    				<li>
 				    				 	<div class="timeline-badge solid-blue"><i class="fa fa-film"></i></div>
 				    				 	<div class="timeline-panel">
 					    				 	<div class="timeline-heading">
-						    				 	<h4 class="timeline-title">Mussum ipsum cacilds - Intermediate</h4>
-								            	<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+						    				 	<h4 class="timeline-title"> Give A Token of Appreciation - Intermediate</h4>
+								            	<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 months ago via Twitter</small></p>
 								            </div>
 								            <div class="timeline-body">
 						    					<div class="video">
@@ -248,7 +419,7 @@ include_once 'config.php';
 				    				 	<div class="timeline-badge solid-blue"><i class="fa fa-film"></i></div>
 				    				 	<div class="timeline-panel">
 					    				 	<div class="timeline-heading">
-						    				 	<h4 class="timeline-title">Mussum ipsum cacilds - Expert</h4>
+						    				 	<h4 class="timeline-title">More To Come - Expert</h4>
 								            	<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
 								            </div>
 								            <div class="timeline-body">
@@ -267,28 +438,130 @@ include_once 'config.php';
 		    			<ul class="timeline">
 		    				<!--Plug this up to the list of elements in the database. -->
 		    				<li>
+					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+		    				 	<div class="timeline-panel">
+			    				 	<div class="timeline-heading">
+					            		<h4 class="timeline-title">3 Ways to Improve Your Email Marketing</h4>
+					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 2 days ago via Facebook</small></p>
+						            </div>
+						            <div class="timeline-body">
+										<p>
+										    Email marketing has been around for years, and it is constantly evolving and growing. Changes continue to occur in order to improve open and click through
+										    rates for an email, blog, or specific promotion. Personalization has a massive impact on improving these key metrics.
+										</p>
+										<p>
+										    Here are 3 key ways to improve the personalization of email marketing in order to improve on those key metrics.
+										</p>
+										<p>
+										    <strong>1. Make a VIP List</strong>
+										</p>
+										<p>
+										    Customize that next email by sending it to a select few of the most valuable customers, with a short thank you video and some photos of the last event that
+										    they made possible. Next time, they‚__ll be more willing to buy knowing that that their loyalty is valued. Customer‚__s time is valuable and a Token‚_¢ creation
+										    is an easy way to create an experience in just one stop.
+										</p>
+										<p>
+										    <strong>2.Pre-release sale</strong>
+										</p>
+										<p>
+										    Send out a special invite to an event before the release of tickets to the public for only the VIP members, along with a custom snippet of what they‚__ll
+										    experience at the event. What better way to get them excited about an event or fundraiser than to get glimpse of what it will entail and what the benefits
+										    will be. Plus, giving clients a ‚__pre-sale‚__ offer will make them feel like they are getting a deal.
+										</p>
+										<p>
+										    <a href="https://www.givetoken.com/preview.php?id=316">Click Here</a>
+										</p>
+										<p>
+										    <strong>3. Simply Say Hello!</strong>
+										</p>
+										<p>
+										    Send out a Token‚_¢ creation just to say hello. People are sold products and asked to donate all the time. By sending a note from your CEO or President
+										    purely to engage with the customer shows how much the customer is valued by a company. In the future, they will be more apt to buy or donate when they feel
+										    valued as a human being, and not as a dollar sign.
+										</p>
+										</div>
+									</div>
+					        </li>
+		    				<!--Plug this up to the list of elements in the database. -->
+ 							<li class="timeline-inverted">
+					        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
+					        	<div class="timeline-panel">
+					        		<div class="timeline-heading">
+					            		<h4 class="timeline-title">Blogging With Give Token</h4>
+							           <p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 week ago via Facebook</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+											<p>
+											    Nowadays, everyone blogs. You can literally find a blog about anything and everything. It‚__s a way to get your name out there, to educate people on your
+											    company, and keep people up to date on what‚__s going on with your community. Companies with blogs receive 97% more inbound links than those who don‚__t blog.
+											    That‚__s a big difference! In fact, 37% of marketers say blogs are the most valuable content type for marketing.
+											</p>
+											<p>
+											    With so many blogs and so many different sites flying around the web, how do you make your brand stand out? How do you attract more readers and in turn
+											    more people investing in your company? Give them something that stands out from the rest!
+											</p>
+											<p>
+											    GiveToken not only provides a different and interesting way to attract readership, but it also makes it easy to share visual content on your social media.
+											    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
+											    more sales, donations and interest. Blogs give sites 444% (yes, that‚__s four hundred and forty-four. That‚__s not a typo!) more indexed pages and 97% more
+											indexed links. In layman terms that means: More pages + more links = bigger slice of the online pie (    <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>)
+											</p>
+											<p>
+											    Creating your identity through a blog, creates a relationship with your readers. It‚__s not just about the content, it‚__s about the community.
+											</p>
+											<p>
+											    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
+											    humanize businesses and create a deeper relationship and community with their audience this year.
+											</p>
+											<p>
+											    Stand out from the crowd! Give people what they want. Give them a Token.
+											</p>
+					            	</div>
+								</div>
+		    				</li>
+		    				<!--Plug this up to the list of elements in the database. -->
+ 							<li>
+					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+					        	<div class="timeline-panel">
+					        		<div class="timeline-heading">
+					            		<h4 class="timeline-title">Using Video to boost your SEO ranking</h4>
+					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 2 weeks ago via Facebook</small></p>
+					            	</div>
+					            	<div class="timeline-body">
+										<p>
+										    All companies are looking for ways to drive more traffic to their sites, close more sales and reach more customers while spending the least amount of time
+										    and money possible. GiveToken has the tool that will help with their video tool.
+										</p>
+										<p>
+										YouTube is the leading online source for videos, and there is a reason it‚__s so popular‚__ people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
+										    what they want and add more videos. That‚__s 96% of perspective customers that want to see the product. Companies will see your company as more reliable, as
+										    well as much more engaging and personable with customers. These more trusting relationship have a direct correlation with sales.
+										</p>
+										<p>
+										    Another perk to putting video on a website is the increase in popularity. Studies show that users are more likely to watch video than reading text, which
+										    leads to longer stays on your page. Adding keywords to the Token‚_¢ creation boosts the probability of users finding you in a search engine.
+										</p>
+										<p>
+										    <a href="https://www.givetoken.com/preview.php?id=320">Click Here</a>
+										</p>
+										<p>
+										    GiveToken adds an increased level of sharability through social media and email. Mixing that with key-words and videos will have a drastic impact in search
+										    engine rankings and site visits
+										</p>					            	
+									</div>
+					        	</div>
+					        </li>
+		    				<li class="timeline-inverted">
 		    				 	<div class="timeline-badge solid-blue"><i class="fa fa-film"></i></div>
 		    				 	<div class="timeline-panel">
 			    				 	<div class="timeline-heading">
-				    				 	<h4 class="timeline-title">Mussum ipsum cacilds- Beginner</h4>
-						            	<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+				    				 	<h4 class="timeline-title">What is GiveToken?</h4>
+						            	<p><small class="text-muted"><i class="fa fa-vimeo-square"></i> 1 month ago via Vimeo</small></p>
 						            </div>
 						            <div class="timeline-body">
 				    					<div class="video">
 											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 										</div>
-									</div>
-								</div>
-		    				</li>
-		    				<li class="timeline-inverted">
-					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
-					        	<div class="timeline-panel">
-					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
-					            	</div>
-					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -304,17 +577,41 @@ include_once 'config.php';
 							</li>
 						</ul>
 			    	</div>
+			    	<!-- Start of GiveToken Blog, not sure why I can't find GiveToken Blog text.... -->
 			    	<div class="tab-pane" id="blog">
+			    		<h2>GiveToken Blog</h2>
 				    	<ul class="timeline" id="timeline-blog">
 				    		<li>
-					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+					        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel test">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-1">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken ‚__ Customization:: Text, Quotes, and Collage features</h4>
+					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , <span id="preview-1">...</span><span id="full-post-1" style="display:none;">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
+										<p>
+										    Creating a Token‚_¢ creation through GiveToken is simple and easy. With so many different features, each Token‚_¢ creation is completely customizable. Each one
+										    can be shared with customers and can offer an individual, personal touch to make them feel like a VIP.
+										</p>
+										<p>
+										    <strong> Collage </strong>
+										</p>
+										<p>
+										    Design the Token‚_¢ creation with a variety of multimedia files into an effortless collage showing a unique personal touch. The pre-made templates provided
+										    enable simple click to add functionality, and then adjust each section to fit the specific needs for the customer. Simply click the box you want to fill
+										    and select the image, video, or music desired.
+										</p>
+										<p>
+										    <strong> Text &amp; Quotes </strong>
+										</p>
+										<p>
+										    Token‚_¢ creation can also be personalized by using customer specific text and quotes. Whether a famous quote or personal note, these messages can be added
+										    to the collage with a simple click of a button. A unique feature to GiveToken is the ability to send a letter along with the multi-media portion of the
+										    collage. Remind customers or employees about a special event, say thank you, send special offers, or simply just say hello.
+										</p>
+										<p>
+										    With a Token‚_¢ creation from GiveToken, customers can feel like a VIP and be sure to come back for repeat business.
+										</p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -322,23 +619,40 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-2">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            		<h4 class="timeline-title headers" id="post-title-2">We‚__re Here! Dive deeper into GiveToken</h4>
+					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , <span id="preview-2">...</span><span id="full-post-2" style="display:none">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
-					            	</div>
-					        	</div>
-					        </li>
-					        <li>
-					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
-					        	<div class="timeline-panel">
-					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-3">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
-					            	</div>
-					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , <span id="preview-3">...</span><span id="full-post-3" style="display:none">depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</span></p>
+										<p>
+										    GiveToken is here. For companies struggling to engage potential customers, GiveToken provides a new tool that enables the recipient to feel the changes
+										    that a product or service can have.
+										</p>
+										<p>
+										    GiveToken is a tool that is used to market, sell or educate others about a service or product. By allowing the user to combine any type of media, be it
+										    pictures, videos, or music, with text and attachments, the user can show the customer the full power of a product. Token‚_¢ creations can be created and then
+										    shared using any platform that is desired, whether that‚__s social media, email, or texts.
+										</p>
+										<p>
+										    There inlies the beauty of GiveToken. It is completely customizable to however the user wants to create and share an experience with the customer.
+										</p>
+										<p>
+										    GiveToken is the blank canvas to create a personalized digital content.
+										</p>
+										<p>
+										    ‚_¢ Customize a Token‚_¢ creation with a unique mix of videos, music, photos and more
+										</p>
+										<p>
+										    ‚_¢ Click and drag media from the user‚__s computer or from anywhere on the web
+										</p>
+										<p>
+										    ‚_¢ Share a Token‚_¢ creation on any platform with just a simple link
+										</p>
+										<p>
+										    ‚_¢ Make it personal and send the Token‚_¢ creation to a specific person or group
+										</p>
+										<p>
+										    Stay tuned for an in depth look at all of the best features GiveToken has to offer.
+										</p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -353,20 +667,47 @@ include_once 'config.php';
 		    				 	<div class="timeline-panel">
 			    				 	<div class="text-center">
 							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
-							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Juice Plus, Inc.</a></h4>							            
+							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Memphis, Tenneessee, USA</div>
 							        </div>
 								</div>
 								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
 								<div class="timeline-panel timeline-panel-post">
 									<div class="timeline-heading">
-					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
+					            		<h4 class="timeline-title">JuicePlus</h4>
+					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 month ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra l√° , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. M√© faiz elementum girarzis, nisi eros vermeio, in elementis m√© pra quem √© amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-
+										<p>
+										    GiveToken is a multi-purpose tool, with a variety of different options to improve the digital experience. One such way is as a teaching tool. When trying
+										    to teach employees about new products or continue their sales education, GiveToken can be utilized to combine facts, figures, and pictures with video in
+										    order to deliver the full load of information. Sending further education using GiveToken provides context to the bland information and gives the product
+										    the chance to come to life.
+										</p>
+										<br/>
+										<p>
+										    Take this example for Juice Plus+.
+										</p>
+										<br/>
+										<p>
+										    Juice Plus+ is whole food based nutrition, including juice powder concentrates from 30 different fruits, vegetables and grains. Juice Plus+ helps bridge
+										    the gap between what you should eat and what you do eat every day. Not a multivitamin, medicine, treatment or cure for any disease, Juice Plus+ is made
+										    from quality ingredients carefully monitored from farm to capsule to provide natural nutrients your body needs to be at its best.
+										</p>
+										<br/>
+										<p>
+										    <a href="https://www.givetoken.com/preview.php?id=315"> Click Me! </a>
+										</p>
+										<br/>
+										<p>
+										    As you can see, all of the information that a new employee might need to start growing their business is right there at their fingertips in one easy,
+										    simple to use Tokentm creation. With continuing education on their products being a key to the success as a company, JuicePlus+ is trying to make their new
+										    classes and product information as readily available and accessible as possible, and GiveToken is the perfect way to do that.
+										</p>
+										<br/>
+										<p>
+										    What is your biggest challenge in educating your employees and keeping them motivated?
+										</p>
 					            	</div>
 								</div>
 		    				</li>
