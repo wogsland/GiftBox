@@ -8,6 +8,10 @@ html {
     font-size: 100%;
 }
 
+section{
+    margin-top: 45px;
+}
+
 body {
     background: #232323;
     font-family: 'Roboto', sans-serif;
@@ -415,6 +419,7 @@ header .only-logo .navbar {
 
 header .only-logo .navbar .navbar-header {
     float: none;
+    padding-top: 100px;
 }
 
 /* INTRO */

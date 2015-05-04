@@ -78,7 +78,7 @@ $(document).ready(function() {
 
 /* NAVIGATION VISIBLE ON SCROLL */
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     mainNav();
 });
 
@@ -102,7 +102,7 @@ if (matchMedia('(min-width: 768px) and (max-width: 991px)').matches) {
 
         else $('.sticky-navigation').stop().animate({"top": '-120'});
     }
-}
+}*/
 
 
 
