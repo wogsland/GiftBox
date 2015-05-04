@@ -639,16 +639,16 @@ include_once 'config.php';
 										    GiveToken is the blank canvas to create a personalized digital content.
 										</p>
 										<p>
-										    ™ Customize a Token™ creation with a unique mix of videos, music, photos and more
+										    • Customize a Token™ creation with a unique mix of videos, music, photos and more
 										</p>
 										<p>
-										    ™ Click and drag media from the user’s computer or from anywhere on the web
+										    • Click and drag media from the user’s computer or from anywhere on the web
 										</p>
 										<p>
-										    ™ Share a Token™ creation on any platform with just a simple link
+										    • Share a Token™ creation on any platform with just a simple link
 										</p>
 										<p>
-										    ™ Make it personal and send the Token™ creation to a specific person or group
+										    • Make it personal and send the Token™ creation to a specific person or group
 										</p>
 										<p>
 										    Stay tuned for an in depth look at all of the best features GiveToken has to offer.
