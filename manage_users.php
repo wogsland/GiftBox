@@ -115,7 +115,7 @@
 								<li><a href="index.php" class="external">Home</a></li>
 								<?php
 								if (logged_in()) {
-									echo '<li><a href="account.php" class="external">My Account</a></li>';
+									echo '<li><a href="profile.php" class="external">My Account</a></li>';
 								} else {
 									echo '<li><a href="#">Login</a></li>';
 								}
