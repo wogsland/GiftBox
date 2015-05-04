@@ -55,6 +55,7 @@
 	echo '<div class="back">';
 	echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
 
+	echo '<div id="letter-text-container">';
 	echo '<div id="letter-text">';
 	echo '<p>'.nl2br($token->letter_text).'</p>';
 	echo '<p id="letter-attachments">';
@@ -67,9 +68,10 @@
 		echo '<a href="'.$image_path.'" target="_blank"><i class="fa fa-file fa-x2"></i> '.$attachment->file_name.'</a>';
 	}
 	echo '</p>';
-	echo '</div>';
-	echo "</div>";
-	echo "</div>";
+	echo '</div>'; // letter-text
+	echo "</div>"; // letter-text-container
+	echo "</div>"; // back
+	echo "</div>"; // flip-container
 	?>
 </body>
 </html>
