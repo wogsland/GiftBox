@@ -249,7 +249,7 @@ include_once 'config.php';
 							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
 				    				 	<div class="timeline-panel">
 					    				 	<div class="timeline-heading">
-							            		<h4 class="timeline-title">Upload an image:</h4>
+							            		<h4 class="timeline-title">Add an image:</h4>
 							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
 								            </div>
 								            <div class="timeline-body">
