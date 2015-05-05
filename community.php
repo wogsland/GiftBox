@@ -655,7 +655,7 @@ include_once 'config.php';
 										    and money possible. GiveToken has the tool that will help with their video tool.
 										</p>
 										<p>
-										YouTube is the leading online source for videos, and there is a reason it’s so popular’ people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
+										YouTube is the leading online source for videos, and there is a reason it’s so popular- people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
 										    what they want and add more videos. That’s 96% of perspective customers that want to see the product. Companies will see your company as more reliable, as
 										    well as much more engaging and personable with customers. These more trusting relationship have a direct correlation with sales.
 										</p>
