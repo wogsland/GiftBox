@@ -274,8 +274,8 @@ include_once 'config.php';
 							            	</div>
 							        	</div>
 							        </li>
-									<li>
-							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
+									<li class="timeline-inverted">
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Add Music:</h4>
@@ -283,28 +283,55 @@ include_once 'config.php';
 							            	</div>
 							            	<div class="timeline-body">
 												<p>
-												    1. Click on the location from which you want to add an image
+												    <strong>Spotify</strong>
 												</p>
 												<p>
-												    2. Upload the image from your computer and click OK
+												    1. Click on the Spotify Logo
 												</p>
 												<p>
-													3. Select “Use” and the media will appear in selected box
+												    2. Insert the desired Spotify Link and click OK
 												</p>
 												<p>
-												    4. Use the scrollbar on the image to zoom in and out for the perfect display
+												    3.Select “Use” and the media will appear in selected box
 												</p>
 												<p>
-												    5. Click and hold image to move the image within the box
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
 												</p>
 												<p>
-													6. Use moveable borders around the box to enlarge or shrink your image
+												    <strong>SoundCloud</strong>
+												</p>
+												<p>
+												    1. Click on the SoundCloud Logo
+												</p>
+												<p>
+												    2. Insert the desired SoundCloud Link and click OK
+												</p>
+												<p>
+												    3. Select “Use” and the media will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
+												</p>
+												<p>
+												    <strong>MP3</strong>
+												</p>
+												<p>
+												    1. Click on the My Computer Logo
+												</p>
+												<p>
+												    2. Select the desired MP3 and click OK
+												</p>
+												<p>
+												    3.Select “Use” and the media will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
 												</p>
 							            	</div>
 							        	</div>
 							        </li>
 									<li>
-							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-badge solid-blue"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Add an Video:</h4>
@@ -312,28 +339,40 @@ include_once 'config.php';
 							            	</div>
 							            	<div class="timeline-body">
 												<p>
-												    1. Click on the location from which you want to add an image
+												    <strong>YouTube</strong>
 												</p>
 												<p>
-												    2. Upload the image from your computer and click OK
+												    1. Click on the YouTube Logo
 												</p>
 												<p>
-													3. Select “Use” and the media will appear in selected box
+												    2. Insert the desired YouTube Link and click OK
 												</p>
 												<p>
-												    4. Use the scrollbar on the image to zoom in and out for the perfect display
+												    3. Select “Use” and the video will appear in selected box
 												</p>
 												<p>
-												    5. Click and hold image to move the image within the box
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
 												</p>
 												<p>
-													6. Use moveable borders around the box to enlarge or shrink your image
+												    <strong>MP4</strong>
+												</p>
+												<p>
+												    1. Click on the My Computer Logo
+												</p>
+												<p>
+												    2. Select the desired MP4 and click OK
+												</p>
+												<p>
+												    3. Select “Use” and the video will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
 												</p>
 							            	</div>
 							        	</div>
 							        </li>
 				    				<li class="timeline-inverted">
-							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Multi-Media Intro MP3 vs MP4: </h4>
@@ -355,7 +394,7 @@ include_once 'config.php';
 							        	</div>
 							        </li>
 				    				<li>
-							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-film"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Intro</h4>
@@ -573,31 +612,31 @@ include_once 'config.php';
 							           <p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-											<p>
-											    Nowadays, everyone blogs. You can literally find a blog about anything and everything. It’s a way to get your name out there, to educate people on your
-											    company, and keep people up to date on what’s going on with your community. Companies with blogs receive 97% more inbound links than those who don’t blog.
-											    That’s a big difference! In fact, 37% of marketers say blogs are the most valuable content type for marketing.
-											</p>
-											<p>
-											    With so many blogs and so many different sites flying around the web, how do you make your brand stand out? How do you attract more readers and in turn
-											    more people investing in your company? Give them something that stands out from the rest!
-											</p>
-											<p>
-											    GiveToken not only provides a different and interesting way to attract readership, but it also makes it easy to share visual content on your social media.
-											    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
-											    more sales, donations and interest. Blogs give sites 444% (yes, that’s four hundred and forty-four. That’s not a typo!) more indexed pages and 97% more
-											indexed links. In layman terms that means: More pages + more links = bigger slice of the online pie (    <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>)
-											</p>
-											<p>
-											    Creating your identity through a blog, creates a relationship with your readers. It’s not just about the content, it’s about the community.
-											</p>
-											<p>
-											    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
-											    humanize businesses and create a deeper relationship and community with their audience this year.
-											</p>
-											<p>
-											    Stand out from the crowd! Give people what they want. Give them a Token.
-											</p>
+										<p>
+										    Nowadays, everyone blogs. It’s a way to get your name out there, to educate people on your company, or keep people up to date on what’s going on in your
+										    community. Companies with blogs receive 97% more inbound links than those who don’t. That’s a big difference! In fact, 37% of marketers say blogs are the
+										    most valuable content type for marketing.
+										</p>
+										<p>
+										    With so many blogs and sites flying around the web, how do you make your brand stand out? How do you attract more readers, and in turn, more people
+										    investing in your company? Give them something that stands out from the status quo.
+										</p>
+										<p>
+										    GiveToken not only provides a different and unique way to attract readership, but it also makes it easy to share visual content on your social media.
+										    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
+										    more sales, donations and interest. Blogs give sites 444% (yes, that’s four hundred and forty-four percent) more indexed pages and 97% more indexed links.
+										    In layman’s terms, that’s more pages + more links = bigger slice of the online pie ( <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>).
+										</p>
+										<p>
+										    Creating your identity through a blog generates a relationship with your readers. It’s not just about the content; it’s about the community.
+										</p>
+										<p>
+										    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
+										    humanize businesses and create a deeper relationship and community with their audience this year.
+										</p>
+										<p>
+										    Stand out from the crowd. Give people what they want. Give them a Token™ Creation.
+										</p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -667,7 +706,7 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel test">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken — Customization:: Text, Quotes, and Collage features</h4>
+					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken — Customization: Text, Quotes, and Collage features</h4>
 					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
