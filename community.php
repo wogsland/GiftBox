@@ -249,27 +249,130 @@ include_once 'config.php';
 							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
-							            		<h4 class="timeline-title">Upload an image:</h4>
+							            		<h4 class="timeline-title">Add an image:</h4>
 							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
 							            	</div>
 							            	<div class="timeline-body">
 												<p>
-												    1. Click on the location desired to add an image
+												    1. Click on the location from which you want to add an image
 												</p>
 												<p>
 												    2. Upload the image from your computer and click OK
 												</p>
 												<p>
-												    3. Use the scrollbar on the image to zoom in and out for the perfect display
+													3. Select “Use” and the media will appear in selected box
 												</p>
 												<p>
-												    4. You can also move the dotted lines around the box to spread out or shrink your image
+												    4. Use the scrollbar on the image to zoom in and out for the perfect display
+												</p>
+												<p>
+												    5. Click and hold image to move the image within the box
+												</p>
+												<p>
+													6. Use moveable borders around the box to enlarge or shrink your image
+												</p>
+							            	</div>
+							        	</div>
+							        </li>
+									<li class="timeline-inverted">
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-panel">
+							        		<div class="timeline-heading">
+							            		<h4 class="timeline-title">Add Music:</h4>
+							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
+							            	</div>
+							            	<div class="timeline-body">
+												<p>
+												    <strong>Spotify</strong>
+												</p>
+												<p>
+												    1. Click on the Spotify Logo
+												</p>
+												<p>
+												    2. Insert the desired Spotify Link and click OK
+												</p>
+												<p>
+												    3.Select “Use” and the media will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
+												</p>
+												<p>
+												    <strong>SoundCloud</strong>
+												</p>
+												<p>
+												    1. Click on the SoundCloud Logo
+												</p>
+												<p>
+												    2. Insert the desired SoundCloud Link and click OK
+												</p>
+												<p>
+												    3. Select “Use” and the media will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
+												</p>
+												<p>
+												    <strong>MP3</strong>
+												</p>
+												<p>
+												    1. Click on the My Computer Logo
+												</p>
+												<p>
+												    2. Select the desired MP3 and click OK
+												</p>
+												<p>
+												    3.Select “Use” and the media will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
+												</p>
+							            	</div>
+							        	</div>
+							        </li>
+									<li>
+							        	<div class="timeline-badge solid-blue"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-panel">
+							        		<div class="timeline-heading">
+							            		<h4 class="timeline-title">Add an Video:</h4>
+							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
+							            	</div>
+							            	<div class="timeline-body">
+												<p>
+												    <strong>YouTube</strong>
+												</p>
+												<p>
+												    1. Click on the YouTube Logo
+												</p>
+												<p>
+												    2. Insert the desired YouTube Link and click OK
+												</p>
+												<p>
+												    3. Select “Use” and the video will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
+												</p>
+												<p>
+												    <strong>MP4</strong>
+												</p>
+												<p>
+												    1. Click on the My Computer Logo
+												</p>
+												<p>
+												    2. Select the desired MP4 and click OK
+												</p>
+												<p>
+												    3. Select “Use” and the video will appear in selected box
+												</p>
+												<p>
+												    4. Use the moveable borders around an individual box to enlarge or shrink it
 												</p>
 							            	</div>
 							        	</div>
 							        </li>
 				    				<li class="timeline-inverted">
-							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Multi-Media Intro MP3 vs MP4: </h4>
@@ -291,7 +394,7 @@ include_once 'config.php';
 							        	</div>
 							        </li>
 				    				<li>
-							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
+							        	<div class="timeline-badge solid-lt-green"><i class="fa fa-film"></i></div>
 							        	<div class="timeline-panel">
 							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Intro</h4>
@@ -325,11 +428,7 @@ include_once 'config.php';
 												</p>
 												<br/>
 												<p>
-												    Best practices for adding videos:
-												</p>
-												<br/>
-												<p>
-												    <strong> Upload a song from Spotify: </strong>
+												    <strong> Add a song from Spotify: </strong>
 												</p>
 												<br/>
 												<p>
@@ -343,7 +442,7 @@ include_once 'config.php';
 												</p>
 												<br/>
 												<p>
-												    <strong> Upload a playlist from SoundCloud: </strong>
+												    <strong> Add a playlist from SoundCloud: </strong>
 												</p>
 												<br/>
 												<p>
@@ -476,19 +575,16 @@ include_once 'config.php';
 					            	</div>
 					            	<div class="timeline-body">
 										<p>
-										    Email marketing has been around for years, and it is constantly evolving and growing. Changes continue to occur in order to improve open and click through
-										    rates for an email, blog, or specific promotion. Personalization has a massive impact on improving these key metrics.
+											Email marketing has been around for years, and it is constantly evolving and growing. Changes continue to occur to improve open and click-through rates for an email, blog, or specific promotion. Personalization makes a significant impact on improving these key metrics.
 										</p>
 										<p>
-										    Here are 3 key ways to improve the personalization of email marketing in order to improve on those key metrics.
+										    Here are 3 key ways to improve the personalization of email marketing to improve on those metrics.
 										</p>
 										<p>
 										    <strong>1. Make a VIP List</strong>
 										</p>
 										<p>
-										    Customize that next email by sending it to a select few of the most valuable customers, with a short thank you video and some photos of the last event that
-										    they made possible. Next time, they’ll be more willing to buy knowing that that their loyalty is valued. Customer’s time is valuable and a Token™ creation
-										    is an easy way to create an experience in just one stop.
+											Send out a special invite to an event to the VIP members before the public release with a custom snippet of what they’ll experience at the event. What better way to get them excited about an event or fundraiser than with a glimpse of what it will entail and what the benefits will be? Plus, giving clients a “pre-sale” offer will make them feel like they are getting the first shot at a deal.
 										</p>
 										<p>
 										    <strong>2.Pre-release sale</strong>
@@ -496,18 +592,13 @@ include_once 'config.php';
 										<p>
 										    Send out a special invite to an event before the release of tickets to the public for only the VIP members, along with a custom snippet of what they’ll
 										    experience at the event. What better way to get them excited about an event or fundraiser than to get glimpse of what it will entail and what the benefits
-										    will be. Plus, giving clients a “pre-sale” offer will make them feel like they are getting a deal.
-										</p>
-										<p>
-										    <a href="https://www.givetoken.com/preview.php?id=316">Click Here</a>
+										    will be. Plus, giving clients a “pre-sale” offer will make them feel like they are getting a deal.<a href="https://www.givetoken.com/preview.php?id=316">Click Here!</a>
 										</p>
 										<p>
 										    <strong>3. Simply Say Hello!</strong>
 										</p>
 										<p>
-										    Send out a Token™ creation just to say hello. People are sold products and asked to donate all the time. By sending a note from your CEO or President
-										    purely to engage with the customer shows how much the customer is valued by a company. In the future, they will be more apt to buy or donate when they feel
-										    valued as a human being, and not as a dollar sign.
+											Send out a Token™ Creation just to say, “Hello.” People are sold products and asked to donate all the time. By sending a note from your CEO or President purely to engage with the customer shows how much the customer is valued by a company. In the future, they will be more apt to buy or donate when they feel valued as a human being, and not just a dollar sign.
 										</p>
 					            	</div>
 					        	</div>
@@ -517,35 +608,35 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title">Blogging With Give Token</h4>
+					            		<h4 class="timeline-title">Blogging With GiveToken</h4>
 							           <p><small class="text-muted"><i class="fa fa-facebook-square"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
-											<p>
-											    Nowadays, everyone blogs. You can literally find a blog about anything and everything. It’s a way to get your name out there, to educate people on your
-											    company, and keep people up to date on what’s going on with your community. Companies with blogs receive 97% more inbound links than those who don’t blog.
-											    That’s a big difference! In fact, 37% of marketers say blogs are the most valuable content type for marketing.
-											</p>
-											<p>
-											    With so many blogs and so many different sites flying around the web, how do you make your brand stand out? How do you attract more readers and in turn
-											    more people investing in your company? Give them something that stands out from the rest!
-											</p>
-											<p>
-											    GiveToken not only provides a different and interesting way to attract readership, but it also makes it easy to share visual content on your social media.
-											    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
-											    more sales, donations and interest. Blogs give sites 444% (yes, that’s four hundred and forty-four. That’s not a typo!) more indexed pages and 97% more
-											indexed links. In layman terms that means: More pages + more links = bigger slice of the online pie (    <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>)
-											</p>
-											<p>
-											    Creating your identity through a blog, creates a relationship with your readers. It’s not just about the content, it’s about the community.
-											</p>
-											<p>
-											    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
-											    humanize businesses and create a deeper relationship and community with their audience this year.
-											</p>
-											<p>
-											    Stand out from the crowd! Give people what they want. Give them a Token.
-											</p>
+										<p>
+										    Nowadays, everyone blogs. It’s a way to get your name out there, to educate people on your company, or keep people up to date on what’s going on in your
+										    community. Companies with blogs receive 97% more inbound links than those who don’t. That’s a big difference! In fact, 37% of marketers say blogs are the
+										    most valuable content type for marketing.
+										</p>
+										<p>
+										    With so many blogs and sites flying around the web, how do you make your brand stand out? How do you attract more readers, and in turn, more people
+										    investing in your company? Give them something that stands out from the status quo.
+										</p>
+										<p>
+										    GiveToken not only provides a different and unique way to attract readership, but it also makes it easy to share visual content on your social media.
+										    Interesting content is a top 3 reason people follow brands on social media. The sharing they do on social media leads to more inbound links, which leads to
+										    more sales, donations and interest. Blogs give sites 444% (yes, that’s four hundred and forty-four percent) more indexed pages and 97% more indexed links.
+										    In layman’s terms, that’s more pages + more links = bigger slice of the online pie ( <a href="http://wwww.contentplus.co.uk/">contentplus.co.uk</a>).
+										</p>
+										<p>
+										    Creating your identity through a blog generates a relationship with your readers. It’s not just about the content; it’s about the community.
+										</p>
+										<p>
+										    Using Video in your blogs and social media outlets allows you to humanize your brand. According to some social media gurus, videos will be the best way to
+										    humanize businesses and create a deeper relationship and community with their audience this year.
+										</p>
+										<p>
+										    Stand out from the crowd. Give people what they want. Give them a Token™ Creation.
+										</p>
 					            	</div>
 					        	</div>
 					        </li>
@@ -615,7 +706,7 @@ include_once 'config.php';
 					        	<div class="timeline-badge solid-green"><i class="fa fa-file-text-o"></i></div>
 					        	<div class="timeline-panel test">
 					        		<div class="timeline-heading">
-					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken — Customization:: Text, Quotes, and Collage features</h4>
+					            		<h4 class="timeline-title headers" id="post-title-1">Discovering GiveToken — Customization: Text, Quotes, and Collage features</h4>
 					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 1 week ago via Facebook</small></p>
 					            	</div>
 					            	<div class="timeline-body">
@@ -731,7 +822,7 @@ include_once 'config.php';
 										<br/>
 										<p>
 										    As you can see, all of the information that a new employee might need to start growing their business is right there at their fingertips in one easy,
-										    simple to use Tokentm creation. With continuing education on their products being a key to the success as a company, JuicePlus+ is trying to make their new
+										    simple to use Token™ creation. With continuing education on their products being a key to the success as a company, JuicePlus+ is trying to make their new
 										    classes and product information as readily available and accessible as possible, and GiveToken is the perfect way to do that.
 										</p>
 										<br/>
@@ -741,28 +832,6 @@ include_once 'config.php';
 							       	</div>
 								</div>
 		    				</li>
-		    				<li>
-					        	<div class="timeline-badge solid-blue"><i class="fa fa-user"></i></div>
-		    				 	<div class="timeline-panel">
-			    				 	<div class="text-center">
-							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Company, Inc.</a></h4>							            
-							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> San Francisco, California, USA</div>
-							        </div>
-								</div>
-								<div class="solid-lt-green timeline-badge-spotlight"><i class="fa fa-file-text-o"></i></div>
-								<div class="timeline-panel-post timeline-panel">
-									<div class="timeline-heading">
-					            		<h4 class="timeline-title">Mussum ipsum cacilds</h4>
-					            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 11 hours ago via Twitter</small></p>
-					            	</div>
-					            	<div class="timeline-body">
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-					            		<p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-					            		
-					            	</div>
-								</div>
-					        </li>
 		    			</ul>
 			    	</div>
 			    </div>
