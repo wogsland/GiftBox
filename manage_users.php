@@ -124,11 +124,11 @@
 						</div>
 					</div> <!-- /END CONTAINER -->
 				</div> <!-- /END STICKY NAVIGATION -->
-		
+				
 			</div>
 			<!-- /END COLOR OVERLAY -->
 			</header>
-
+		
 		<div class="container">
 
 			<div class="container">

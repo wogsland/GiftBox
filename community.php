@@ -247,12 +247,12 @@ include_once 'config.php';
 				    				<!--Plug this up to the list of elements in the database. -->
 				    				<li>
 							        	<div class="timeline-badge solid-lt-blue"><i class="fa fa-file-text-o"></i></div>
-				    				 	<div class="timeline-panel">
-					    				 	<div class="timeline-heading">
+							        	<div class="timeline-panel">
+							        		<div class="timeline-heading">
 							            		<h4 class="timeline-title">Add an image:</h4>
 							            		<p><small class="text-muted"><i class="fa fa-twitter"></i> 2 weeks ago via Twitter</small></p>
-								            </div>
-								            <div class="timeline-body">
+							            	</div>
+							            	<div class="timeline-body">
 												<p>
 												    1. Click on the location from which you want to add an image
 												</p>
@@ -404,7 +404,7 @@ include_once 'config.php';
 						    					<div class="video">
 													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 												</div>
-							            	</div>
+											</div>
 							        	</div>
 							        </li>
 				    			</ul>
@@ -566,15 +566,14 @@ include_once 'config.php';
 			    	<div class="tab-pane" id="mastering">
 			    		<h2>Mastering SEO</h2>
 		    			<ul class="timeline">
-		    				<!--Plug this up to the list of elements in the database. -->
-		    				<li>
+ 							<li>
 					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
-		    				 	<div class="timeline-panel">
-			    				 	<div class="timeline-heading">
+					        	<div class="timeline-panel">
+					        		<div class="timeline-heading">
 					            		<h4 class="timeline-title">3 Ways to Improve Your Email Marketing</h4>
 					            		<p><small class="text-muted"><i class="fa fa-facebook-square"></i> 2 days ago via Facebook</small></p>
-						            </div>
-						            <div class="timeline-body">
+					            	</div>
+					            	<div class="timeline-body">
 										<p>
 											Email marketing has been around for years, and it is constantly evolving and growing. Changes continue to occur to improve open and click-through rates for an email, blog, or specific promotion. Personalization makes a significant impact on improving these key metrics.
 										</p>
@@ -601,8 +600,8 @@ include_once 'config.php';
 										<p>
 											Send out a Token™ Creation just to say, “Hello.” People are sold products and asked to donate all the time. By sending a note from your CEO or President purely to engage with the customer shows how much the customer is valued by a company. In the future, they will be more apt to buy or donate when they feel valued as a human being, and not just a dollar sign.
 										</p>
-										</div>
-									</div>
+					            	</div>
+					        	</div>
 					        </li>
 		    				<!--Plug this up to the list of elements in the database. -->
  							<li class="timeline-inverted">
@@ -639,8 +638,8 @@ include_once 'config.php';
 										    Stand out from the crowd. Give people what they want. Give them a Token™ Creation.
 										</p>
 					            	</div>
-								</div>
-		    				</li>
+					        	</div>
+					        </li>
 		    				<!--Plug this up to the list of elements in the database. -->
  							<li>
 					        	<div class="timeline-badge solid-lt-green"><i class="fa fa-file-text-o"></i></div>
@@ -655,7 +654,7 @@ include_once 'config.php';
 										    and money possible. GiveToken has the tool that will help with their video tool.
 										</p>
 										<p>
-										YouTube is the leading online source for videos, and there is a reason it’s so popular- people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
+										YouTube is the leading online source for videos, and there is a reason it’s so popular— people love video. A survey conducted by    <a href="http://animoto.com">animoto.com</a> showed that 96% of consumers find videos helpful when making purchase decisions online, so give the people
 										    what they want and add more videos. That’s 96% of perspective customers that want to see the product. Companies will see your company as more reliable, as
 										    well as much more engaging and personable with customers. These more trusting relationship have a direct correlation with sales.
 										</p>
@@ -684,9 +683,9 @@ include_once 'config.php';
 				    					<div class="video">
 											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
 										</div>
-					            	</div>
-					        	</div>
-					        </li>
+									</div>
+								</div>
+		    				</li>
 		    			</ul>
 			    	</div>
 			    	<div class="tab-pane" id="promotional">
@@ -734,7 +733,7 @@ include_once 'config.php';
 										<p>
 										    With a Token™ creation from GiveToken, customers can feel like a VIP and be sure to come back for repeat business.
 										</p>
-					            	</div>
+									</div>
 					        	</div>
 					        </li>
 					        <li class="timeline-inverted">
@@ -775,7 +774,7 @@ include_once 'config.php';
 										<p>
 										    Stay tuned for an in depth look at all of the best features GiveToken has to offer.
 										</p>
-					            	</div>
+									</div>
 					        	</div>
 					        </li>
 				    	</ul>
@@ -830,7 +829,7 @@ include_once 'config.php';
 										<p>
 										    What is your biggest challenge in educating your employees and keeping them motivated?
 										</p>
-					            	</div>
+							       	</div>
 								</div>
 		    				</li>
 		    			</ul>
