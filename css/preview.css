@@ -201,6 +201,7 @@ iframe {
 	left: 0;
 	width: 100%;
 	height: 100%;
+	background-color: white;
 
 	-webkit-transform: rotateY(-180deg);
 	-moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
