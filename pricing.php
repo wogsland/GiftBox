@@ -374,25 +374,24 @@
 
 <!-- These modals will be deleted when Stripe is used -->
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class ="modal-header">
-        Plan Type
-      </div>
-      <div class ="modal-body">
-        Options
-        <!-- Change so that this links to the log in -->
-        <button type="button" class="btn btn-default" data-dismiss="modal">Log In</button>
-        <!-- Change so that this links to the sign up -->
-        <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
-      </div>
-      <div class ="modal-footer">
-        GiveToken
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
+<div class="modal fade"  id="premium-dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class ="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title" id="gridSystemModalLabel"><b>Pre-order</b></h3>
+			</div>
+			<div class ="modal-body">
+				<center>
+					<h3>Please contact Robbie Zettler at</h3>
+					<a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@givetoken.com</b></h3></a>
+				</center>
+			</div>
+			<div class ="modal-footer">
+			  <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- Modal 2-->
@@ -503,6 +502,9 @@
       // Find all elements with class plan, then find all elements with class select-button within it
       // Bind to click events on those elements
       $( ".plan .select-btn" ).on( "click", function( event ) {
+		  	$("#premium-dialog").modal();
+
+/*		  
         // Read the plan type from the data-plan attribute on the div with class plan
         selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
 		selectPlan(selectedPlan);
@@ -539,6 +541,8 @@
         }, "slow" );
         
         updatePrice();
+*/		
+		
       });
       
       $( ".pricingLevel" ).on( "click", function() {
