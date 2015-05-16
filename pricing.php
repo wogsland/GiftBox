@@ -48,6 +48,8 @@
 <!-- =========================
      STYLESHEETS   
 ============================== -->
+<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
+
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -86,7 +88,8 @@
 <![endif]-->
 
 <!-- JQUERY -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -186,7 +189,9 @@
               <div class="not-btn solid-blue">
 				<?php
 					if (logged_in()) {
-						echo 'Already a member!';
+						if (isset($_SESSION["level"]) && $_SESSION["level"] == 1) {
+							echo 'Already a member!';
+						}
 					} else {
 						echo '<button type="button" class="btn dark-grey" onclick="signupOpen(1)">Sign Up <i class="fa fa-chevron-right"></i></button>';
 					}
@@ -232,7 +237,7 @@
 									echo 'Already a member!';
 								} else {
 									$user = new User($_SESSION["user_id"]);
-									echo '<button type="button" class="btn dark-grey" onclick="pay_with_stripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
+									echo '<button type="button" class="btn dark-grey" onclick="payWithStripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
 								}	
 							} else {
 								echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
@@ -649,7 +654,8 @@
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/facebook_init.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/pay_with_stripe.js"></script>
+<script src="js/util.js"></script>
+<script src="js/pay_with_stripe.php"></script>
 <script src="js/login.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/account.js"></script>

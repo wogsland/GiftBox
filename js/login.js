@@ -49,7 +49,7 @@ function loginInfo(message) {
 }
 
 function loginSuccess(app_root) {
-	$('#login-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully logged into GiveToken using Facebook.</span></div>');
+	$('#login-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully logged into GiveToken.</span></div>');
 	setTimeout(function(){
 		$('#login-dialog').modal('hide');
 		document.location.href = app_root;
