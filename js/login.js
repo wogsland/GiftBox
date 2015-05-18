@@ -91,7 +91,16 @@ function handleFBLogin(response) {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
 			api_response["login_type"] = "FACEBOOK";
 			api_response["login_email"] = api_response["email"];
-			processLogin(api_response);
+			response["access_token"] = FB.getAuthResponse().accessToken;
+			$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
+				if(data.status === "SUCCESS"){
+					processLogin(api_response);
+				} else if (data.status === "ERROR"){
+					loginError("Facebook authorization failed on login.");
+				}
+			}).fail(function() {
+				loginError("Facebook authorization failed");
+			});
 		});
     } else if (response.status === 'not_authorized') {
 		// The person is logged into Facebook, but not your app.
