@@ -58,7 +58,7 @@ function loginSuccess(app_root) {
 
 function loginFacebook() {
 	loginInfo("Logging in with Facebook...");
-	FB.login(function(response){handleFBLogin(response)}, {scope: 'public_profile, email'});
+	FB.login(function(response){handleFBLogin(response)}, {scope: 'user_photos, public_profile, email'});
 }
 
 function processLogin(userInfo) {
@@ -91,6 +91,7 @@ function handleFBLogin(response) {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
 			api_response["login_type"] = "FACEBOOK";
 			api_response["login_email"] = api_response["email"];
+			response["email"] = api_response["email"];
 			response["access_token"] = FB.getAuthResponse().accessToken;
 			$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
 				if(data.status === "SUCCESS"){

@@ -1651,3 +1651,52 @@ function setImageDialogImage(image) {
 function getImageDialogImage() {
 	return $(imageDialogSelector).data("target-image");
 }
+
+/***
+FACEBOOK DIALOG
+****/
+
+function selectFacebookImage(){
+	$('#facebook-dialog').dialog("open");
+}
+
+function getFacebookAlbums(){
+	var token;
+	$.get("get_access_token.php", function(data){
+		token = data[0].access_token;
+		FB.api('/me?access_token='+token, function(response){
+			//Will be empty or null if the user is not logged in and the token hasn't been updated.
+			if(response.id){
+				if(document.getElementById('facebook-albums').innerHTML == ""){
+					FB.api('/'+response.id+'/albums?access_token='+token, function(data){
+						data = data.data;
+						document.getElementById('facebook-albums').innerHTML += '<ul>';
+						for(i = 0; i < data.length; i++){
+							FB.api('/'+data[i].cover_photo+'?access_token='+token, function(photo){
+								document.getElementById('facebook-albums').innerHTML += "<img class='facebook-cover-photo' src='" + photo.picture + "'></img>";
+							});
+						}
+						document.getElementById('facebook-albums').innerHTML += '</ul>';
+					});
+				}
+			} else {
+				FB.login(function(response){
+					FB.api('/me?fields=email', function(api_response) {
+						response["email"] = api_response["email"];
+						response["access_token"] = FB.getAuthResponse().accessToken;
+						$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
+							if(data.status === "SUCCESS"){
+								getFacebookAlbums();
+							} else if (data.status === "ERROR"){
+								//Throw error
+							}
+						}).fail(function() {
+							//Throw error loginError("Facebook authorization failed");
+						});
+					});
+				}, {scope: 'user_photos, public_profile, email'});
+			}
+		});
+	})
+	
+}

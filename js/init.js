@@ -155,3 +155,24 @@ $(function() {
 		width: 300
 	});
 });
+
+$(function() {
+	$( "#facebook-dialog" ).dialog({
+		open: function(){ $("#facebook-albums").trigger("click"); },
+		dialogClass: 'facebook-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				addImageHyperlink();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+				document.getElementById('facebook-albums').innerHTML = "";
+			}
+		},
+	});
+});

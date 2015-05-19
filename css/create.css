@@ -1037,3 +1037,27 @@ fieldset {
 	text-overflow: ellipsis;
 	padding: 0px 3px;
 }
+
+/******************** Facebook **************************/
+#facebook-dialog{
+	overflow: auto;
+	padding: 0px;
+	display: inline;
+}
+
+#facebook-albums {
+	width: inherit;
+	height: 300px;
+	overflow-x: scroll;
+}
+
+.facebook-cover-photo{
+	width: 100px;
+	margin: 10px;
+}
+
+.facebook-cover-photo::after{
+	height: 10px;
+	display: inline-block;
+
+};
