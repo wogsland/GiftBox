@@ -1673,7 +1673,7 @@ function getFacebookAlbums(){
 						document.getElementById('facebook-albums').innerHTML += '<ul>';
 						for(i = 0; i < data.length; i++){
 							FB.api('/'+data[i].cover_photo+'?access_token='+token, function(photo){
-								document.getElementById('facebook-albums').innerHTML += "<img class='facebook-cover-photo' src='" + photo.picture + "'></img>";
+								document.getElementById('facebook-albums').innerHTML += "<div class='facebook-container facebook-container-hover'><img class='photo-thumbnail' src='" + photo.picture + "'><div class='facebook-file-name'>What</div></div>";
 							});
 						}
 						document.getElementById('facebook-albums').innerHTML += '</ul>';
