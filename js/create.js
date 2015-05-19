@@ -169,6 +169,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.video = null;
 	}
 	if (imageFile) {
+		//need to figure out where imageFile.name is being set!!!!!!!!!!!!!
 		bento.image_file_name = imageFile.name;
 	}
 
@@ -358,11 +359,33 @@ function openSpotify(url) {
 	});
 }
 
+function openDropBoxImage(){
+
+    Dropbox.choose({
+        linkType: "direct",
+        success: function(files){
+			for (var i=0; i < files.length; i++){
+				var file = files[i];
+		        var img = document.createElement("img");
+				img.src = file.link;
+				//img.file = file;
+				//alert(file.name);
+				img.name = file.name;
+				img.id = file.name;
+				createThumbnailContainer(img, file.name, "add-images-desktop");
+			}
+        },
+
+        multiselect:true,
+
+        extensions: ['.png', '.jpeg', '.gif', '.jpg'],
+
+    });
+}
+
 function openImageFiles(files) {
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-
-		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
 			openMessage("Select Image Files", file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
@@ -1013,6 +1036,8 @@ function save() {
 				if (image.file) {
 					uploadFile(image.file);
 				} else {
+					//alert(image.src);
+					//alert(this.image_file_name);
 					uploadFileData(image.src, this.image_file_name);
 				}
 				image.saved = true;
@@ -1458,7 +1483,12 @@ function doAdd() {
 	if (jqueryObject.size() > 0) {
 		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
-		addImage(bento, element.src, element.file, null);
+		if (element.file) {
+			addImage(bento, element.src, element.file, null);
+		} else {
+			addImage(bento, element.src, null, null);
+			bento.image_file_name = element.name;
+		}
 		unsaved();
 	}
 
