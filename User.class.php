@@ -12,6 +12,8 @@ class User {
 	public $level = 1;
 	public $stripe_id;
 	public $active_until;
+	public $facebook_email;
+	public $access_token;
 	
 	static function exists ($email_address) {
 		$exists = FALSE;

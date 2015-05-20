@@ -13,6 +13,7 @@ define('SEND_GIFTBOX', 7);
 define('UPDATE_ACCOUNT_INFO', 8);
 define('CHANGE_PASSWORD', 9);
 define('UPGRADE', 10);
+define('UPDATE_FACEBOOK_ACCESS_TOKEN', 11);
 
 class EventLogger {
 	var $id;
