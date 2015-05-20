@@ -2,7 +2,7 @@
 include_once 'config.php';
 include_once 'util.php';
 include_once 'database.php';
-include_once 'EventLogger.class.php';
+include_once 'eventLogger.class.php';
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
 	$user_id = $_GET['uid'];
@@ -12,7 +12,7 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
 		if ($rows_affected != 1) {
 			throw new Exception('Update failed');
 		}
-		$event = new EventLogger($user_id, ACTIVATE_ACCOUNT);
+		$event = new eventLogger($user_id, ACTIVATE_ACCOUNT);
 		$event->log();
 		echo '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
 	} catch (Exception $e) {

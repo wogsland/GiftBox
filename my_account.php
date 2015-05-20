@@ -248,10 +248,10 @@
 
 			<script>
 				var handler = StripeCheckout.configure({
-					key: '<?php echo $stripe_publishable_key ?>',
+					key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
 					image: './images/logoicon.png',
 					token: function(token) {
-						processUpgrade(token);
+						process_upgrade(token);
 					}
 				});
 
