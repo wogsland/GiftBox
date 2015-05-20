@@ -366,13 +366,25 @@ function openDropBoxImage(){
         success: function(files){
 			for (var i=0; i < files.length; i++){
 				var file = files[i];
-		        var img = document.createElement("img");
-				img.src = file.link;
-				//img.file = file;
-				//alert(file.name);
-				img.name = file.name;
-				img.id = file.name;
-				createThumbnailContainer(img, file.name, "add-images-desktop");
+				var xhr = new XMLHttpRequest();
+				//only use the first one. add additional photos if possible in the future
+				xhr.open('GET', file.link, true);
+				xhr.responseType = 'blob';
+				xhr.onload = function(e) {
+				  if (this.status == 200) {
+				    var myBlob = this.response;
+				    var image = document.createElement("img");
+					image.src = file.link;
+					image.id = file.name;
+					image.name = file.name;
+					myBlob.name = file.name;
+					myBlob.lastModifiedDate = new Date();
+					image.file = myBlob;
+					createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+				    // myBlob is now the blob that the object URL pointed to.
+				  }
+				};
+				xhr.send();
 			}
         },
 
