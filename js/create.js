@@ -376,6 +376,31 @@ function openImageFiles(files) {
 	}
 }
 
+function addFacebookImage(){
+	var selected = $(".facebook-container-selected > div > img");
+	$("#facebook-photos-dialog").dialog("close");
+	var xhr = new XMLHttpRequest();
+	//only use the first one. add additional photos if possible in the future
+	xhr.open('GET', $(selected[0]).attr('link'), true);
+	xhr.responseType = 'blob';
+	xhr.onload = function(e) {
+	  if (this.status == 200) {
+	    var myBlob = this.response;
+	    var image = selected[0];
+		$(image).attr("src", window.URL.createObjectURL(myBlob));
+		image.id = image.name;
+		image.name = "Facebook Photo";
+		myBlob.name = image.name;
+		myBlob.lastModifiedDate = new Date();
+		image.file = myBlob;
+		console.log(image.file);
+		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+	    // myBlob is now the blob that the object URL pointed to.
+	  }
+	};
+	xhr.send();
+}
+
 function openMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
@@ -1009,6 +1034,7 @@ function save() {
 			bento.image_hyperlink = image.hyperlink;
 			var croppedImage = createCroppedImage(bento, image, container);
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
+			console.log(image);
 			if (!image.saved) {
 				if (image.file) {
 					uploadFile(image.file);
@@ -1458,6 +1484,8 @@ function doAdd() {
 	if (jqueryObject.size() > 0) {
 		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
+		bento.image_file_name = element.name;
+		console.log(element);
 		addImage(bento, element.src, element.file, null);
 		unsaved();
 	}
@@ -1657,7 +1685,9 @@ FACEBOOK DIALOG
 ****/
 
 function selectFacebookImage(){
-	$('#facebook-dialog').dialog("open");
+	$('#facebook-album-dialog').empty();
+	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
+	$('#facebook-album-dialog').dialog("open");
 }
 
 function getFacebookAlbums(){
@@ -1672,9 +1702,13 @@ function getFacebookAlbums(){
 						data = data.data;
 						document.getElementById('facebook-albums').innerHTML += '<ul>';
 						for(i = 0; i < data.length; i++){
-							FB.api('/'+data[i].cover_photo+'?access_token='+token, function(photo){
-								document.getElementById('facebook-albums').innerHTML += "<div class='facebook-container facebook-container-hover'><img class='photo-thumbnail' src='" + photo.picture + "'><div class='facebook-file-name'>What</div></div>";
-							});
+							if(data[i].count != null){
+								document.getElementById('facebook-albums').innerHTML += "<div class='facebook-container facebook-container-hover' onclick='getFacebookPhotos(\""+data[i].id.toString()+ "\")'><div class='inner-thumbnail-container'><img id='"+ data[i].cover_photo +"' class='photo-thumbnail'><div class='facebook-file-name'>"+ data[i].name +"</div></div></div>"
+								val = data[i];
+								FB.api('/'+val.cover_photo+'?access_token='+token, function(photo){
+									$('#'+photo.id).attr('src', photo.picture);
+								});				
+							}		
 						}
 						document.getElementById('facebook-albums').innerHTML += '</ul>';
 					});
@@ -1700,3 +1734,61 @@ function getFacebookAlbums(){
 	})
 	
 }
+
+function getFacebookPhotos(album_id){
+	$( "#facebook-album-dialog" ).dialog("close");
+	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
+	$('#facebook-photos-dialog').dialog("open");
+	$.get("get_access_token.php", function(data){
+		token = data[0].access_token;
+		if(album_id){
+			var link = '/'+album_id+'/photos?access_token='+token;
+			setFacebookPage(link, token);
+		} else {
+			//throw an error
+		}
+	});
+}
+
+function setFacebookPage(link, token){	
+	$('#facebook-photos-dialog').html('<div id="facebook-photos" onClick="getFacebookPhotos()"></div>');
+	//if you change pages, you will not be able to save the selected (limits to 25 images selected)
+	var selected = document.getElementsByClassName("facebook-container-selected");
+	for(i = 0; i < selected.length; i++){
+		$(selected).removeClass("facebook-container-selected");
+	}
+	FB.api(link, function(photos) {
+		if(photos.data.length > 0){
+			if(photos.paging.previous){
+				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.previous + ", " + token + "\")'>Previous</a>";
+			}
+			if(photos.paging.next){
+				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.next + ", " + token + "\")'>Next</a>";
+			}
+			for(i = 0; i < photos.data.length; i++){
+				if(document.getElementById(''+ photos.data[i].id.toString()) == null){
+					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
+					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
+					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
+				} else {
+					//The element exists because it wasn't removed  from the facebook-album dialog. investigating
+					document.getElementById(photos.data[i].id.toString()).remove();
+					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
+					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
+					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
+				}
+			}
+		} else {
+			document.getElementById('facebook-photos').innerHTML = "There was either an error loading the photos, or there are no photos in the album. Please verify there are photos in the album on Facebook.";
+		}
+	});
+}
+
+function selectFacebook(elem){
+	selection = document.getElementsByClassName("facebook-container-selected");
+	for(i = 0; i < selection.length; i++){
+		$(selection[i]).removeClass("facebook-container-selected");
+	}
+	$(elem).addClass("facebook-container-selected");
+}
+	

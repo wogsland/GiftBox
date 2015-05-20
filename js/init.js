@@ -157,7 +157,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#facebook-dialog" ).dialog({
+	$( "#facebook-album-dialog" ).dialog({
 		open: function(){ $("#facebook-albums").trigger("click"); },
 		dialogClass: 'facebook-dialog-class',
 		autoOpen: false,
@@ -166,12 +166,31 @@ $(function() {
 		height: 580,
 		modal: true,
 		buttons: {
-			Ok: function() {
-				addImageHyperlink();
-			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
 				document.getElementById('facebook-albums').innerHTML = "";
+			}
+		},
+	});
+});
+
+$(function() {
+	$( "#facebook-photos-dialog" ).dialog({
+		dialogClass: 'facebook-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				addFacebookImage();
+			},
+			Back: function() {
+				$( this ).dialog( "close" );
+				$( this ).empty();
+				$( this ).html('<div id="facebook-photos" onClick="getFacebookPhotos()"></div>');
+				$( "#facebook-album-dialog" ).dialog( "open" );
 			}
 		},
 	});

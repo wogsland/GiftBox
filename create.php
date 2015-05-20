@@ -337,8 +337,12 @@
 		</form>
 	</div>
 
-	<div id="facebook-dialog" title="CHOOSE AN ALBUM">
+	<div id="facebook-album-dialog" title="CHOOSE AN ALBUM">
 		<div id="facebook-albums" onclick="getFacebookAlbums()"></div>
+	</div>
+
+	<div id="facebook-photos-dialog" title="CHOOSE YOUR PHOTO">
+		<div id="facebook-photos" onClick="getFacebookPhotos()"></div>
 	</div>
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">

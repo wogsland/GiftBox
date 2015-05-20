@@ -923,11 +923,17 @@ fieldset {
 	border: solid 2px #33383b;
 }
 
-.thumbnail-container-selected {
+.thumbnail-container-selected{
 	border: solid 2px #5abb47;
 	background-color: #626c71;
 	pointer-events: none;
 }
+
+.facebook-container-selected{
+	border: solid 2px #5abb47;
+	background-color: #626c71;
+}
+
 .inner-thumbnail-container {
 	width: 178px;
 	height: 152px;
@@ -1053,19 +1059,8 @@ fieldset {
 }
 
 /******************** Facebook **************************/
-#facebook-dialog{
+#facebook-albums-dialog{
 	overflow: auto;
 	padding: 0px;
 	display: inline;
-}
-
-#facebook-albums {
-	width: inherit;
-	height: 300px;
-	overflow-x: scroll;
-}
-
-.facebook-cover-photo{
-	width: 100px;
-	margin: 10px;
 }
