@@ -2,7 +2,7 @@
 include_once 'config.php';
 include_once 'util.php';
 include_once 'password.php';
-include_once 'EventLogger.class.php';
+include_once 'eventLogger.class.php';
 require 'User.class.php';
 
 _session_start();
@@ -50,7 +50,7 @@ if (User::exists($email)) {
 		$_SESSION['app_root'] = $app_root;
 		$_SESSION['app_url'] = $app_url;
 		$_SESSION['level'] = $user->level;
-		$event = new EventLogger($user->getId(), $event_type);
+		$event = new eventLogger($user->getId(), $event_type);
 		$event->log();
 	}
 } else {
