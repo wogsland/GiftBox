@@ -10,6 +10,10 @@ class User {
 	public $activation_key = null;
 	public $admin = "N";
 	public $level = 1;
+	public $stripe_id;
+	public $active_until;
+	public $facebook_email;
+	public $access_token;
 	
 	static function exists ($email_address) {
 		$exists = FALSE;
@@ -61,7 +65,9 @@ class User {
 				. "password = '$this->password', "
 				. "activation_key = ".($this->activation_key ? "'".$this->activation_key."'" : "null").", "
 				. "admin = '$this->admin', "
-				. "level = $this->level "
+				. "level = $this->level, "
+				. "stripe_id = '$this->stripe_id', "
+				. "active_until = '$this->active_until' "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}

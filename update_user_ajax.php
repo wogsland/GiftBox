@@ -1,6 +1,6 @@
 <?php
 include_once 'util.php';
-include_once 'eventLogger.class.php';
+include_once 'EventLogger.class.php';
 
 $user_id = $_POST['user_id'];
 $first_name = $_POST['first_name'];

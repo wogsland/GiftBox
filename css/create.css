@@ -899,7 +899,8 @@ fieldset {
 
 /******************** IMAGES **************************/
 
-.thumbnail-container {
+.thumbnail-container,
+.facebook-container {
 	display: inline-block;
 	width: 178px;
 	height: 152px;
@@ -910,15 +911,29 @@ fieldset {
 	overflow: hidden;
 }
 
+.facebook-container {px;
+	border: solid 2px white;
+}
+
 .thumbnail-container-hover:hover {
 	border: solid 2px white;
 }
 
-.thumbnail-container-selected {
+.facebook-container-hover:hover {
+	border: solid 2px #33383b;
+}
+
+.thumbnail-container-selected{
 	border: solid 2px #5abb47;
 	background-color: #626c71;
 	pointer-events: none;
 }
+
+.facebook-container-selected{
+	border: solid 2px #5abb47;
+	background-color: #626c71;
+}
+
 .inner-thumbnail-container {
 	width: 178px;
 	height: 152px;
@@ -934,7 +949,8 @@ fieldset {
 	margin: 2px auto;
 }
 
-.file-name {
+.file-name,
+.facebook-file-name {
 	width: 178px;
 	color: white;
 	text-align: center;
@@ -943,6 +959,10 @@ fieldset {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.facebook-file-name{
+	color: black;
 }
 
 #letter-form {
@@ -1036,4 +1056,11 @@ fieldset {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	padding: 0px 3px;
+}
+
+/******************** Facebook **************************/
+#facebook-albums-dialog{
+	overflow: auto;
+	padding: 0px;
+	display: inline;
 }
