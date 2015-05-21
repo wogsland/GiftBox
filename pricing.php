@@ -226,7 +226,7 @@
 					</ul>
 
 					<div class="price">
-						<h3><span class="symbol">$</span>2.99</h3>
+						<h3><span class="symbol">$</span>9.99</h3>
 						<h4>per month</h4>
 					</div>
 
@@ -469,7 +469,7 @@
     standard: {
       pricingChart: false,
       pricingChart2: false,
-      basePrice: 2.99
+      basePrice: 9.99
     },
     premium: {
       pricingChart: true,
