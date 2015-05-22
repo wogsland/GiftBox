@@ -387,7 +387,7 @@
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('YouTube')"><i class="fa fa-youtube fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('SoundCloud')"><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Spotify')"><i class="fa fa-spotify fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
