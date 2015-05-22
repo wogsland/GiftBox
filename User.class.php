@@ -17,8 +17,8 @@ class User {
 	
 	static function exists ($email_address) {
 		$exists = FALSE;
-		$result = execute_query("SELECT * FROM user WHERE upper(email_address) = '".strtoupper($email_address)."'");
-		if ($result->num_rows > 0) {
+		$user = User::fetch($email_address);
+		if ($user) {
 			$exists = TRUE;
 		}
 		return $exists;
@@ -35,7 +35,7 @@ class User {
 	
 	public function __construct($id = null) {
 		if ($id !== null) {
-			$user = execute_query("SELECT * from user where id = $id")->fetch_object("User");
+			$user = execute_query("SELECT * from user WHERE id = $id")->fetch_object("User");
 			foreach (get_object_vars($user) as $key => $value) {
 				$this->$key = $value;
 			}
@@ -62,12 +62,12 @@ class User {
 			$sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
 				. "first_name = '".escape_string($this->first_name)."', "
 				. "last_name = '".escape_string($this->last_name)."', "
-				. "password = '$this->password', "
+				. "password = ".($this->password ? "'".$this->password."'" : "null").", "
 				. "activation_key = ".($this->activation_key ? "'".$this->activation_key."'" : "null").", "
 				. "admin = '$this->admin', "
 				. "level = $this->level, "
-				. "stripe_id = '$this->stripe_id', "
-				. "active_until = '$this->active_until' "
+				. "stripe_id = ".($this->stripe_id ? "'".$this->stripe_id."'" : "null").", "
+				. "active_until =  ".($this->active_until ? "'".$this->active_until."'" : "null")." "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}
