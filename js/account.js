@@ -65,24 +65,15 @@ function logout() {
 }
 
 function editUser(user_id) {
-	document.getElementById('edit-user-message').innerHTML = "";
-	document.getElementById('user-id').value = user_id;
-	var firstName = document.getElementById('first-name-'+user_id);
-	var lastName = document.getElementById('last-name-'+user_id);
-	var email = document.getElementById('email-'+user_id);
-	var admin = document.getElementById('admin-'+user_id);
-	var firstNameEdit = document.getElementById('first-name-edit');
-	var lastNameEdit = document.getElementById('last-name-edit');
-	var emailEdit = document.getElementById('email-edit');
-	var adminEdit = document.getElementById('admin-edit');
-
-	firstNameEdit.value = firstName.innerHTML;
-	lastNameEdit.value = lastName.innerHTML;
-	emailEdit.value = email.innerHTML;
-	if (admin.innerHTML === 'Y') {
-		adminEdit.checked = true;
+	$("#edit-user-message").html("");
+	$("#user-id").val(user_id);
+	$('#first-name').val($("#first-name-"+user_id).html());
+	$('#last-name').val($("#last-name-"+user_id).html());
+	$('#email').val($("#email-"+user_id).html());
+	if ($("#admin-"+user_id).html() === 'Y') {
+		$("#admin").prop("checked", true);
 	} else {
-		adminEdit.checked = false;
+		$("#admin").prop("checked", false);
 	}
 	
 	$.magnificPopup.open({
@@ -104,10 +95,10 @@ function editUserError(text) {
 }
 
 function saveUser() {
-	var firstName = $("#first-name-edit");
-	var lastName = $("#last-name-edit");
-	var emailAddress = $("#email-edit");
-	var admin = $("#admin-edit");
+	var firstName = $("#first-name");
+	var lastName = $("#last-name");
+	var emailAddress = $("#email");
+	var admin = $("#admin");
 	
 	if (!firstName.val()) {
 		editUserError("Please enter a first name.");
@@ -155,7 +146,7 @@ function saveMyAccount() {
 		showError("#my-account-message", "Please enter a valid email.");
 	} else {
 		showStatus("#my-account-message", "Saving account information...");
-		var posting = $.post("update_user_ajax.php", $("#edit-user-form").serialize());
+		var posting = $.post("update_user_ajax.php", $("#account-form").serialize());
 
 		posting.done(function(data) {
 			showStatus("#my-account-message", "Your account changes have been saved.");

@@ -1408,9 +1408,19 @@ div.container {
 	border: solid 1px #CBCBCB;
 	padding: 20px;
 }
+#my-account-form-wrapper label {
+	clear: both;
+	display: block;
+	color: black;
+	text-align: left;
+}
 
 #save-my-account-button {
 	float: right;
+}
+
+#my-account-message {
+	color: white;
 }
 
 /*----------------------------------------*/
@@ -1443,6 +1453,9 @@ div.container {
 }
 
 #level-name {
+	display: inline-block;
+	float: left;
+	width: 80%;
 	color: #000;
 }
 
@@ -1452,6 +1465,7 @@ div.container {
 }
 
 #upgrade-button {
+	float: right;
 	color: white;
 	border-radius: 4px;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);

@@ -11,7 +11,6 @@ function processUpgrade(token, payFrom) {
 	var upgradeData = {
 		newLevel: 2,
 		plan: 'standard',
-		amount: 299,
 		stripeToken: token.id,
 		email: token.email,
 	};
@@ -46,8 +45,8 @@ function payWithStripe(email, payFrom) {
 
 	// Open Checkout with further options
 	handler.open({
-		name: 'GiveToken Membership',
-		description: "GiveToken Standard ($2.99/month)",
-		amount: 299
+		name: 'GiveToken',
+		description: "GiveToken Standard ($9.99/month)",
+		amount: 999
 	});
 }

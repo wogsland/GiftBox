@@ -1,6 +1,7 @@
 <?php
 	include_once 'util.php';
 	include_once 'config.php';
+	require_once('User.class.php');
 	
 	_session_start();
 	
@@ -13,15 +14,7 @@
 	if (!logged_in()) {
 		header('Location: '.$app_root);
 	} else {
-		$results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
-		if ($results->num_rows == 1) {
-			$user = $results->fetch_object();
-			$first_name = $user->first_name;
-			$last_name = $user->last_name;
-			$email = $user->email_address;
-			$level = $user->name;
-			$user_id = $user->id;
-		}
+		$user = new User($_SESSION["user_id"]);
 	}
 ?>
 <!DOCTYPE html>
@@ -45,6 +38,8 @@
 	<script src="js/jquery.magnific-popup.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/account.js"></script>
+	<script src="pay_with_stripe.php"></script>
+	<script src="https://checkout.stripe.com/checkout.js"></script>
 
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
@@ -106,25 +101,7 @@
 				midClick: true
 			});
 		});
-
 	</script>
-	
-	<script>
-		$(function() {
-			$( "#upgrade-dialog" ).dialog({
-				autoOpen: false,
-				resizable: false,
-				height:500,
-				width: 350,
-				modal: true,
-				open: function( event, ui ) {
-					$("#upgrade-status").text("");
-					$("#upgrade-status").removeClass("red-text");
-				}
-			});
-		});
-	</script>	
-	
 	
 </head>
 <body>
@@ -172,28 +149,34 @@
 		
 		<div class = "container" id="my-account-form-wrapper">
 			<p id="my-account-message"></p>
-			<form class="jumbotron" id="account-form" name="account-form" method="post" action="my_account.php">
-				<input type="hidden" name="user-id" id="user-id" value="<?php echo $user_id ?>">
+			<form class="jumbotron" id="account-form" name="account-form">
+				<input type="hidden" name="user-id" id="user-id" value="<?php echo $user->getId() ?>">
 				<legend>My Account</legend>
 				<fieldset>
-					<div class="form-group">
-						<label for="level-name">Level</label>
-						<input class="form-control" name="level-name" id="level-name" type="text" placeholder="Level Name" value="<?php echo $level ?>" disabled>
-						<a class="pure-button green-button" id="upgrade-button" href="javascript:void(0)" onclick="$('#upgrade-dialog').dialog('open');">Upgrade</a>
+					<div class="form-group" >
+						<div id="level-container">
+							<label for="level-name">Level</label>
+							<input class="form-control" name="level-name" id="level-name" type="text" placeholder="Level Name" value="<?php echo $user->level == 1 ? 'Basic':'Standard' ?>" disabled>
+							<?php
+							if (isset($_SESSION["level"]) && $_SESSION["level"] < 2) {
+								echo '<button id="upgrade-button" type="button" class="btn success" onclick="payWithStripe(\''.$user->email_address.'\', \'MY_ACCOUNT\')">Upgrade</button>';
+							}	
+							?>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="first-name">First Name</label>
-						<input class="form-control" name="first-name" id="first-name" type="text" placeholder="First Name" value="<?php echo $first_name ?>" required>
+						<input class="form-control" name="first-name" id="first-name" type="text" placeholder="First Name" value="<?php echo $user->first_name ?>" required>
 					</div>
 
 					<div class="form-group">
 						<label for="last-name">Last Name</label>
-						<input class="form-control" name="last-name" id="last-name" type="text" placeholder="Last Name" value="<?php echo $last_name ?>" required>
+						<input class="form-control" name="last-name" id="last-name" type="text" placeholder="Last Name" value="<?php echo $user->last_name ?>" required>
 					</div>
 
 					<div class="form-group">
 						<label for="email">Email Address</label>
-						<input class="form-control" name="email" id="email" type="email" placeholder="Email Address" value="<?php echo $email ?>" required>
+						<input class="form-control" name="email" id="email" type="email" placeholder="Email Address" value="<?php echo $user->email_address ?>" required>
 					</div>
 
 					<div class="pure-control-group">
@@ -217,59 +200,6 @@
 			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="changePassword()">Change Password</a>
 		</div>
 	</form>
-
-	<div id="upgrade-dialog" title="Upgrade">
-		<p id="upgrade-status"></p>
-		<form class="pure-form" id="upgrade-form">
-			<legend style="margin-top: 20px;">Choose an upgrade option:</legend>
-			<?php
-				$results = execute_query("SELECT id, name, price from level order by id");
-				$last = null;
-				while ($level = $results->fetch_object()) {
-					if ($level->id > $_SESSION['level']) {
-						echo '<label for="'.$level->name.'" class="pure-radio">'.PHP_EOL;
-						echo '<input class="level-value" id="'.$level->name.'" type="radio" name="level-value" value="'.$level->id.'" price="'.$level->price.'">'.PHP_EOL;
-						echo $level->name." ($".$level->price.")".PHP_EOL;
-						echo "</label>";
-						$last = $level->name;
-						$last_value = $level->id;
-					}
-				}
-				if ($last) {
-					echo '<script>$("#'.$last.'").attr("checked", "checked");</script>';
-				} else {
-					echo '<script> $("#upgrade-button").remove();</script>';
-				}
-			?>
-
-			<script src="https://checkout.stripe.com/checkout.js"></script>
-
-			<button class="pure-button" id="pay-button">Pay</button>
-
-			<script>
-				var handler = StripeCheckout.configure({
-					key: '<?php echo $stripe_publishable_key ?>',
-					image: './images/logoicon.png',
-					token: function(token) {
-						processUpgrade(token);
-					}
-				});
-
-				document.getElementById('pay-button').addEventListener('click', function(e) {
-					// Open Checkout with further options
-					var upgradeAmount = $('input[name=level-value]:checked', '#upgrade-form').attr('price');
-					var upgradeDescription = $('input[name=level-value]:checked', '#upgrade-form').attr('id');
-					handler.open({
-						name: 'GiveToken Upgrade',
-						description: upgradeDescription+" ($"+upgradeAmount+")",
-						amount: upgradeAmount * 100
-					});
-					e.preventDefault();
-				});
-			</script>		
-		</form>
-	</div>
-	
 
 </body>
 </html>
