@@ -7,16 +7,18 @@ _session_start();
 
 
 $response['status'] = 'ERROR';
-$user_id = $_SESSION['user_id'];
+if(isset($_SESSION['user_id'])){
+	$user = new User($_SESSION['user_id']);
+} else if(isset($_POST['email']) && User::exists($_POST['email'])){
+	$user = User::fetch($_POST['email']);
+}
 
 if(isset($_POST['access_token'])){
-	if (isset($_SESSION['user_id'])) {
-		$access_token = $_POST['access_token'];
-		$response['result'] = execute("UPDATE user set access_token = '". $access_token ."' WHERE id = ". $user_id);
-		$response['status'] = 'SUCCESS';
-		$event = new EventLogger($user_id, UPDATE_ACCOUNT_INFO);
-		$event->log();
-	}	
+	$access_token = $_POST['access_token'];
+	$user->update_token($access_token, $user->getId());
+	$response['status'] = 'SUCCESS';
+	$event = new EventLogger($user->getId(), UPDATE_ACCOUNT_INFO);
+	$event->log();
 }
 
 header('Content-Type: application/json');

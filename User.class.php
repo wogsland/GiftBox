@@ -45,6 +45,12 @@ class User {
 	public function getId() {
 		return $this->id;
 	}
+
+	public function update_token($token = null){
+		if($token !== null) {
+			execute_query("UPDATE user set access_token = '".$token."' WHERE id = '$this->id'");
+		}
+	}
 	
 	public function save() {
 		if (!$this->id) {
