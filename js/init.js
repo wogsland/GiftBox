@@ -195,3 +195,20 @@ $(function() {
 		},
 	});
 });
+
+$(function() {
+	$( "#facebook-login-fail-dialog" ).dialog({
+		dialogClass: 'facebook-fail-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 200,
+		height: 200,
+		modal: true,
+		buttons: {
+			Back: function() {
+				$( this ).dialog( "close" );
+				$("#facebook-album-dialog").dialog("close");
+			}
+		},
+	});
+});

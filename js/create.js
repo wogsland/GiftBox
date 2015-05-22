@@ -1798,7 +1798,10 @@ function selectFacebookImage(){
 	$('#facebook-album-dialog').dialog("open");
 }
 
-function getFacebookAlbums(){
+function getFacebookAlbums(state){
+	if(state == null){
+		state = 1;
+	}
 	var token;
 	$.get("get_access_token.php", function(data){
 		token = data[0].access_token;
@@ -1823,19 +1826,29 @@ function getFacebookAlbums(){
 				}
 			} else {
 				FB.login(function(response){
-					FB.api('/me?fields=email', function(api_response) {
-						response["email"] = api_response["email"];
+					if (response.status === 'connected') {
 						response["access_token"] = FB.getAuthResponse().accessToken;
 						$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
 							if(data.status === "SUCCESS"){
-								getFacebookAlbums();
+								if(state == 1){
+									getFacebookAlbums(2);
+								} else {
+									$("#facebook-login-fail-dialog").dialog("open");
+								}
 							} else if (data.status === "ERROR"){
 								//Throw error
 							}
 						}).fail(function() {
 							//Throw error loginError("Facebook authorization failed");
 						});
-					});
+				    } else if (response.status === 'not_authorized') {
+						// The person is logged into Facebook, but not your app.
+						$("#facebook-login-fail-dialog").dialog("open");
+				    } else {
+						// The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
+						$("#facebook-login-fail-dialog").dialog("open");
+				    }
+					
 				}, {scope: 'user_photos, public_profile, email'});
 			}
 		});
