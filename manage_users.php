@@ -135,11 +135,11 @@
 				<form class="jumbotron" id="manage-jumbo" method="get" action="manage_users.php">
 					<fieldset>
 						<legend id="searchHeader">Search for a user</legend>
-						<input name="first-name" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name'])) {echo $_GET['first-name'];} ?>">
-						<input name="last-name" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name'])) {echo $_GET['last-name'];} ?>">
-						<input name="email" type="email" placeholder="Email" value="<?php if (isset($_GET['email'])) {echo $_GET['email'];} ?>">
+						<input name="first-name-search" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name-search'])) {echo $_GET['first-name-search'];} ?>">
+						<input name="last-name-search" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name-search'])) {echo $_GET['last-name-search'];} ?>">
+						<input name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];} ?>">
 						<label for="admin">
-							<input name="admin" id="admin" type="checkbox" <?php if (isset($_GET['admin'])) echo "checked" ?>> Administrator
+							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) echo "checked" ?>> Administrator
 						</label>
 						<input type="submit" class="pure-button pure-button-primary" value="Search">
 					</fieldset>
@@ -151,16 +151,16 @@
 					<tbody>
 					<?php
 						$sql = "SELECT * from user WHERE 1 = 1";
-						if (isset($_GET['last-name']) && strlen($_GET['last-name']) > 0) {
-							$sql .= " AND upper(last_name) = upper('".$_GET['last-name']."')";
+						if (isset($_GET['last-name-search']) && strlen($_GET['last-name-search']) > 0) {
+							$sql .= " AND upper(last_name) = upper('".$_GET['last-name-search']."')";
 						}
-						if (isset($_GET['first-name']) && strlen($_GET['first-name']) > 0) {
-							$sql .= " AND upper(first_name) = upper('".$_GET['first-name']."')";
+						if (isset($_GET['first-name-search']) && strlen($_GET['first-name-search']) > 0) {
+							$sql .= " AND upper(first_name) = upper('".$_GET['first-name-search']."')";
 						}
-						if (isset($_GET['email']) && strlen($_GET['email']) > 0) {
-							$sql .= " AND upper(email_address) = upper('".$_GET['email']."')";
+						if (isset($_GET['email-search']) && strlen($_GET['email-search']) > 0) {
+							$sql .= " AND upper(email_address) = upper('".$_GET['email-search']."')";
 						}
-						if (isset($_GET['admin'])) {
+						if (isset($_GET['admin-search'])) {
 							$sql .= " AND admin = 'Y'";
 						}
 						$sql .= " ORDER BY last_name, first_name";
@@ -173,8 +173,7 @@
 								<td id="email-'.$user->id.'">'.$user->email_address.'</td>
 								<td id="admin-'.$user->id.'">'.$user->admin.'</td>
 								<td><a class="pure-button open-popup-link" href="javascript:void(0)" onclick="editUser('.$user->id.')"><i class="fa fa-edit fa-lg"></i> Edit</a></td>
-								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td>
-</tr>';
+								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td></tr>';
 						}
 						?>
 						
@@ -189,11 +188,11 @@
 			<legend>Edit a user</legend>
 			<p id="edit-user-message"></p>
 			<input id="user-id" name="user_id" type="hidden">
-			<input id="first-name-edit" name="first_name" type="text" placeholder="First Name">
-			<input id="last-name-edit" name="last_name" type="text" placeholder="Last Name">
-			<input id="email-edit" name="email" type="email" placeholder="Email">
+			<input id="first-name" name="first_name" type="text" placeholder="First Name">
+			<input id="last-name" name="last_name" type="text" placeholder="Last Name">
+			<input id="email" name="email" type="email" placeholder="Email">
 			<label for="admin-edit">
-				<input id="admin-edit" name="admin" type="checkbox" value="Y"> Administrator
+				<input id="admin" name="admin" type="checkbox" value="Y"> Administrator
 			</label>
 			<a class="pure-button pure-button-primary" href="javascript:void(0)" onclick="saveUser()">Save</a>
 		</fieldset>

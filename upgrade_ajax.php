@@ -16,7 +16,6 @@ $response['message'] = "Unable to upgrade at this time.";
 // Get the credit card details submitted by the form
 $token = $_POST['stripeToken'];
 $email = $_POST['email'];
-$amount = $_POST['amount'];
 $new_level = $_POST['newLevel'];
 $plan = $_POST['plan'];
 
