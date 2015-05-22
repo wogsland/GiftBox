@@ -352,7 +352,7 @@ function openVimeo(url){
 				img.vimeoURL = url;
 				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
-				error = "Vimeo API call failed.\n\n" + dataURL;
+				error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
 				console.log(error);
 				alert(error);
 			});
