@@ -10,6 +10,14 @@ function addTitleText(text, container) {
 	container.appendChild(div);
 }
 
+function isVimeo(url){
+	retVal = false;
+	if(url.indexOf("vimeo.com") > -1){
+		retVal = true;
+	}
+	return retVal;
+}
+
 function isYouTube(url) {
 	retVal = false;
 	if (url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1) {
@@ -39,6 +47,15 @@ function youTubeID(url) {
 	if (result) {
 		return result[result.length - 1];
 	} else {
+		return null;
+	}
+}
+
+function vimeoId(url){
+	var result = url.split("vimeo.com/");
+	if(result){
+		return result[1];
+	} else { 
 		return null;
 	}
 }
@@ -263,6 +280,25 @@ function addSoundCloud(bento, url) {
 	unsaved();
 }
 
+function addVimeo(bento, url) {
+	var iframe = document.createElement('iframe');
+	var videoId =  vimeoId(url);
+	iframe.src = "//player.vimeo.com/video/"+videoId;
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	iframe.width = width;
+	iframe.height = height;
+	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
+	bento.appendChild(iframe);
+	bento.iframe = iframe;
+	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
+}
+
 function addYouTube(bento, url) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
@@ -276,6 +312,7 @@ function addYouTube(bento, url) {
 	iframe.style.top = "0px";
 	iframe.style.left = "0px";
 	bento.appendChild(iframe);
+	console.log(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
 	showControl(bento.id + "-close", iframe);
@@ -299,6 +336,31 @@ function createThumbnailContainer(object, titleText, parentId) {
 	document.getElementById(parentId).appendChild(container);
 
 	return container;
+}
+
+function openVimeo(url){
+	var videoId = vimeoId(url);
+	var error = null;
+	if (videoId) {
+		var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
+		$.getJSON(dataURL,
+			function(data){
+				var title = data[0].title;
+				var img = document.createElement("img");
+				img.src = data[0].thumbnail_medium;
+				img.id = videoId;
+				img.vimeoURL = url;
+				createThumbnailContainer(img, title, "add-av-desktop");
+			}).fail(function() {
+				error = "Vimeo API call failed.\n\n" + dataURL;
+				console.log(error);
+				alert(error);
+			});
+	} else {
+		error = "Unable to extract a Vimeo video ID from the URL.\n\n"+url;
+		console.log(error);
+		alert(error);
+	}
 }
 
 function openYouTube(url) {
@@ -1222,6 +1284,8 @@ function openURL() {
 		openSoundCloud(url);
 	} else if (isSpotify(url)) {
 		openSpotify(url);
+	} else if (isVimeo(url)){
+		openVimeo(url);
 	} else {
 		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
 		console.log(error);
@@ -1554,6 +1618,8 @@ function doAdd() {
 			addSpotify(bento, element.spotifyTrackId)
 		} else if (element.soundCloudURL) {
 			addSoundCloud(bento, element.soundCloudURL);
+		} else if (element.vimeoURL){
+			addVimeo(bento, element.vimeoURL);
 		}
 	}
 
