@@ -120,3 +120,10 @@
 		}
 		return $retval;
 	}
+	
+	function _session_start() {
+		include 'database.php';
+		require 'Zebra_Session.php';
+		$session = new Zebra_Session($mysqli, 'sEcUr1tY_c0dE');
+		return $session;
+	}

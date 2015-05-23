@@ -26,6 +26,7 @@ class Bento {
 	var $slider_value;
 	var $image_left_in_container;
 	var $image_top_in_container;
+	var $image_hyperlink;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -44,19 +45,20 @@ class Bento {
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
 			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
-			."image_top_in_container, image_left_in_container) "
+			."image_top_in_container, image_left_in_container, image_hyperlink) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
 			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
-			."'$this->image_top_in_container', '$this->image_left_in_container')";
+			."'$this->image_top_in_container', '$this->image_left_in_container', "
+			."'$this->image_hyperlink')";
 		$this->id = insert($sql);
 	}
 	
 	public function render() {
 		include 'config.php';
 
-		echo '<div class="bento">';
+		echo '<div class="bento">'.PHP_EOL;
 		
 		if (is_spotify($this->content_uri)) {
 			$background_color = "black";
@@ -67,6 +69,8 @@ class Bento {
 		if ($this->image_file_name) {
 			$file_name = $this->css_id."-cropped_".$this->image_file_name;
 			if ($google_app_engine) {
+//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
+//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
 				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
 			} else {
 				$image_path = $file_storage_path.$file_name;
@@ -74,7 +78,13 @@ class Bento {
 			if ($this->download_file_name && (strpos($this->download_mime_type, 'audio') === 0)) {
 				// Show the image as a poster in the audio player
 			} else {
+				if ($this->image_hyperlink) {
+					echo '<a href="'.$this->image_hyperlink.'" target="_blank">'.PHP_EOL;
+				}
 				echo '<img src="'.$image_path.'">'.PHP_EOL;
+				if ($this->image_hyperlink) {
+					echo '</a>'.PHP_EOL;
+				}
 			}
 		}
 		if ($this->download_file_name) {
@@ -88,13 +98,13 @@ class Bento {
 			if (strpos($this->download_mime_type, 'video') === 0) {
 				echo '<video id="'.$this->download_file_name.'" class="video-js vjs-default-skin video-player" controls preload="auto" width="auto" height="auto" data-setup="{}">'.PHP_EOL;
 				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
-				echo '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>';									
+				echo '<p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>'.PHP_EOL;									
 				echo '</video>'.PHP_EOL;
 			} else if (strpos($this->download_mime_type, 'audio') === 0) {
-				echo '<audio class="audio-player video-js vjs-default-skin" controls preload="auto" src="'.$path.'" width="auto" height="auto" poster="'.$image_path.'" data-setup="{}">';
+				echo '<audio class="audio-player video-js vjs-default-skin" controls preload="auto" src="'.$path.'" width="auto" height="auto" poster="'.$image_path.'" data-setup="{}">'.PHP_EOL;
 				echo '<source src="'.$path.'" type="'.$this->download_mime_type.'" />'.PHP_EOL;
 			} else {
-				echo '<img class="download-icon" src="images/download.jpg">';
+				echo '<img class="download-icon" src="images/download.jpg">'.PHP_EOL;
 			}
 		}
 		if ($this->content_uri) {
@@ -107,8 +117,9 @@ class Bento {
 				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			}
 		}
-		
-		
-		echo '</div>';
+		if ($this->image_hyperlink) {
+			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
+		}
+		echo '</div>'.PHP_EOL;
 	}
 }

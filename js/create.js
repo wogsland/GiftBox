@@ -1,19 +1,21 @@
 var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
+var imageDialogSelector = "#image-dialog"
 
-$(document).ready(function() {
-	$('.open-popup-link').magnificPopup({
-		type: 'inline',
-		midClick: true
-	});
-});
+function addTitleText(text, container) {
+	var div = document.createElement("div");
+	div.innerHTML = text;
+	div.classList.add("file-name");
+	container.appendChild(div);
+}
 
-function addText(text, container) {
-	var p = document.createElement("p");
-	p.innerHTML = text;
-	p.classList.add("file-name");
-	container.appendChild(p);
+function isVimeo(url){
+	retVal = false;
+	if(url.indexOf("vimeo.com") > -1){
+		retVal = true;
+	}
+	return retVal;
 }
 
 function isYouTube(url) {
@@ -49,6 +51,15 @@ function youTubeID(url) {
 	}
 }
 
+function vimeoId(url){
+	var result = url.split("vimeo.com/");
+	if(result){
+		return result[1];
+	} else { 
+		return null;
+	}
+}
+
 function spotifyTrackId(url) {
 	var delimiter = "/";
 	if (url.indexOf("spotify:track:") > -1) {
@@ -56,17 +67,17 @@ function spotifyTrackId(url) {
 	}
 	var parts = url.split(delimiter);
 	var trackId = parts[parts.length - 1];
-	
+
 	return trackId;
 }
 
-function sendGiftbox() {
+function sendToken() {
 	if (!document.getElementById('email').value) {
 		document.getElementById('send-message').innerHTML = "Please enter a valid email address.";
 	} else {
 		var posting = $.post("send_preview.php", $("#send-form").serialize());
 		posting.done(function(data) {
-			$.magnificPopup.close();
+			$("#send-dialog" ).dialog("close");
 		});
 	}
 }
@@ -78,7 +89,6 @@ function uploadFileData(fileData, fileName) {
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
 				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
-				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
         xhr.open("POST", "upload.php", true);
@@ -96,26 +106,15 @@ function uploadFile(file) {
 	reader.readAsDataURL(file);
 }
 
-/************** BENTO DRAG/DROP HANDLERS *****************/
-
-function handleDragEnter(e) {
-	this.classList.add('over');
-}
-
-function handleDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
-	}
-	e.dataTransfer.dropEffect = 'move';
-
-	return false;
-}
-
-function handleDragLeave(e) {
-	this.classList.remove('over');
-}
-
 function addAudio (bento, audioSrc, audioFile, savedBento) {
+	// Remove any existing audio
+	if (bento.audio) {
+		bento.removeChild(bento.audio);
+		bento.audio = null;
+	}
+	bento.download_file_name = audioFile.name;
+	bento.download_mime_type = audioFile.type;
+
 	// Create the audio element
 	var audio = document.createElement('audio');
 	audio.setAttribute('controls', true);
@@ -132,13 +131,27 @@ function addAudio (bento, audioSrc, audioFile, savedBento) {
 	closeButton.id = audio.id + "-close";
 	closeButton.classList.add("audio-close-button");
 	closeButton.style.zIndex = 11;
-	closeButton.onclick = function(){closeClicked(closeButton);};
+	closeButton.target = audio;
+	closeButton.onclick = function(){closeClicked(event, closeButton);};
 	bento.appendChild(closeButton);
 	showControl(closeButton.id, audio);
+	unsaved();
 }
 
 function addVideo (bento, videoSrc, videoFile, savedBento) {
+	if (bento.imageContainer) {
+		bento.removeChild(this.imageContainer);
+		bento.imageContainer = null;
+		hideControl(bento.id + "-slider");
+	} else if (bento.video) {
+		bento.removeChild(bento.video);
+		bento.video = null;
+	}
+	bento.download_file_name = videoFile.name;
+	bento.download_mime_type = videoFile.type;
+
 	var video = document.createElement('video');
+	video.onclick = function(){videoClicked(event, this)};
 	video.setAttribute('controls', true);
 	video.setAttribute('preload', "auto");
 	if (videoFile) {
@@ -150,16 +163,21 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	video.id = bento.id + '-video';
 	video.width =  parseInt(getComputedStyle(bento).width, 10);
 	video.height = parseInt(getComputedStyle(bento).height, 10);
+	video.style.position = "absolute";
+	video.style.top = 0;
+	video.style.left = 0;
 	bento.video = video;
 	video.classList.add("video-js");
 	video.classList.add("vjs-default-skin");
 	video.classList.add("video-player");
+	video.classList.add("no-pointer");
 	bento.appendChild(video);
 	showControl(bento.id + "-close", video);
+	unsaved();
 }
 
 function addImage(bento, imageSrc, imageFile, savedBento) {
-		// Remove any previously dropped image or video
+	// Remove any previously dropped image or video
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
 		bento.imageContainer = null;
@@ -167,9 +185,14 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.removeChild(bento.video);
 		bento.video = null;
 	}
+	if (imageFile) {
+		//need to figure out where imageFile.name is being set!!!!!!!!!!!!!
+		bento.image_file_name = imageFile.name;
+	}
 
 	// Create the image scroll container
 	var imageContainer = document.createElement('div');
+	bento.imageContainer = imageContainer;
 	imageContainer.id =  bento.id + '-image-container';
 	imageContainer.style.position = 'absolute';
 
@@ -180,6 +203,9 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.parentBento = bento;
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
+	img.src = imageSrc;
+	img.hyperlink = null;
+	img.className = "bento-image";
 	img.savedBento = savedBento;
 	img.onload = function() {
 		resizeImage(this, this.parentBento);
@@ -201,74 +227,23 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	// add the img to the container, add the container to the bento
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
-	bento.imageContainer = imageContainer;
 
 	// make the IMG draggable inside the DIV
-	$('#'+ img.id).draggable({ containment: "#" + imageContainer.id});
+	$('#'+ img.id)
+		.draggable({ containment: "#" + imageContainer.id})
+		.click(function(){
+            if ( $(this).is('.ui-draggable-dragging') ) {
+                  return;
+            }
+            imageClicked($('#'+ img.id));
+		});
 
-	img.src = imageSrc;
-	
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
 	showControl(bento.id + "-slider", img);
 }
 
-function handleDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	var srcId = e.dataTransfer.getData('src_id');
-	if (srcId.length > 0) {
-		var source = document.getElementById(srcId);
-		if (source.file) {
-			var file = source.file;
-			var imageSrc = null;
-			if (file.type.match(imageType)) {
-				imageSrc = e.dataTransfer.getData('text/uri-list');
-				addImage(this, imageSrc, file, null);
-				this.image_file_name = file.name;
-			} else if (file.type.match(audioType)) {
-				// Remove any existing audio
-				if (this.audio) {
-					this.removeChild(this.audio);
-					this.audio = null;
-				}
-
-				// Check for album art
-				imageSrc = e.dataTransfer.getData('text/uri-list');
-				if (imageSrc) {
-					addImage(this, imageSrc, null, null);
-					this.image_file_name = file.name.replace(".", "_") + ".jpg";
-				}
-				addAudio(this, window.URL.createObjectURL(file), file, null);
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
-			} else if (file.type.match(videoType)) {
-				if (this.imageContainer) {
-					this.removeChild(this.imageContainer);
-					this.imageContainer = null;
-					hideControl(this.id + "-slider");
-				} else if (this.video) {
-					this.removeChild(this.video);
-					this.video = null;
-				}
-				this.download_file_name = file.name;
-				this.download_mime_type = file.type;
-				addVideo(this, null, file, null);
-			}
-		} else if (source.youTubeURL) {
-			dropYouTube(this, source.youTubeURL);
-		} else if (source.spotifyTrackId) {
-			dropSpotify(this, source.spotifyTrackId)
-		} else if (source.soundCloudURL) {
-			dropSoundCloud(this, source.soundCloudURL);
-		}
-	}
-	return false;
-}
-
-function dropSpotify(bento, trackId) {
+function addSpotify(bento, trackId) {
 	var iframe = document.createElement('iframe');
 	var contentURI = "https://embed.spotify.com/?url=spotify:track:"+trackId;
 	iframe.src = contentURI;
@@ -277,12 +252,17 @@ function dropSpotify(bento, trackId) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = contentURI;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function dropSoundCloud(bento, url) {
+function addSoundCloud(bento, url) {
 	var iframe = document.createElement('iframe');
 	iframe.src = "https://w.soundcloud.com/player/?url="+encodeURIComponent(url);
 	var width = bento.offsetWidth;
@@ -290,12 +270,36 @@ function dropSoundCloud(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function dropYouTube(bento, url) {
+function addVimeo(bento, url) {
+	var iframe = document.createElement('iframe');
+	var videoId =  vimeoId(url);
+	iframe.src = "//player.vimeo.com/video/"+videoId;
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	iframe.width = width;
+	iframe.height = height;
+	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
+	bento.appendChild(iframe);
+	bento.iframe = iframe;
+	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
+}
+
+function addYouTube(bento, url) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -304,107 +308,79 @@ function dropYouTube(bento, url) {
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
+	iframe.style.position = "absolute";
+	iframe.style.top = "0px";
+	iframe.style.left = "0px";
 	bento.appendChild(iframe);
+	console.log(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	showControl(bento.id + "-close", iframe);
+	unsaved();
 }
 
-function handleDragEnd(e) {
-	this.classList.remove('over');
-}
-
-function handleDragStart(e) {
-	e.dataTransfer.setData("src_id", this.id);
-
-}
-
-//******* SIDEBAR DRAG/DROP HANDLERS *****************
-
-function handleAddImageDragEnter(e) {
-	
-	this.classList.add('over');
-}
-
-function handleAddImageDragOver(e) {
-	if (e.preventDefault) {
-		e.preventDefault();
+function createThumbnailContainer(object, titleText, parentId) {
+	var container = document.createElement("div");
+	var inner = document.createElement("div");
+	inner.classList.add("inner-thumbnail-container");
+	container.onclick = function(){selectThumbnail(this)};
+	object.classList.add("photo-thumbnail");
+	container.classList.add("thumbnail-container");
+	container.classList.add("thumbnail-container-hover");
+	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
+	inner.appendChild(object);
+	container.appendChild(inner);
+	if (titleText) {
+		addTitleText(titleText, inner);
 	}
-	e.dataTransfer.dropEffect = 'move';
+	document.getElementById(parentId).appendChild(container);
 
-	return false;
-}
-function handleAddImageDragLeave(e) {
-	this.classList.remove('over');
+	return container;
 }
 
-function handleAddImageDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	handleImageFiles(e.dataTransfer.files);
-}
-
-function handleAddMediaDrop(e) {
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.remove('over');
-	
-	if (e.dataTransfer) {
-		if (e.dataTransfer.files) {
-			if (e.dataTransfer.files.length > 0) {
-				handleMediaFiles(e.dataTransfer.files);
-			} else {
-				handleURIDrop(e);
-			}
-		}
-	}
-}
-
-function handleAddImageDragEnd(e) {
-	this.classList.remove('over');
-}
-
-function handleURIDrop(e) {
-	var textURIList = e.dataTransfer.getData('text/uri-list');
-    var tabs = document.getElementById("media-tab");
-
-	if (isYouTube(textURIList)) {
-		addYouTube(textURIList);
-	} else if (isSoundCloud(textURIList)) {
-		addSoundCloud(textURIList);
-	} else if (isSpotify(textURIList)) {
-		addSpotify(textURIList);
+function openVimeo(url){
+	var videoId = vimeoId(url);
+	var error = null;
+	if (videoId) {
+		var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
+		$.getJSON(dataURL,
+			function(data){
+				var title = data[0].title;
+				var img = document.createElement("img");
+				img.src = data[0].thumbnail_medium;
+				img.id = videoId;
+				img.vimeoURL = url;
+				createThumbnailContainer(img, title, "add-av-desktop");
+			}).fail(function() {
+				error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
+				console.log(error);
+				alert(error);
+			});
 	} else {
-		var error = "The dropped item is not one of the accepted types.\n\n"+textURIList;
+		error = "Unable to extract a Vimeo video ID from the URL.\n\n"+url;
 		console.log(error);
 		alert(error);
 	}
 }
 
-function addYouTube(url) {
+function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
 		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-			var title = data.entry.title.$t;
-			var mediaList = document.getElementById("media-tab");
-			var img = document.createElement("img");
-			img.classList.add("photo-thumbnail");
-			img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
-			img.id = videoId;
-			img.addEventListener('dragstart', handleDragStart, false);
-			img.youTubeURL = url;
-			mediaList.appendChild(img);
-			addText(title, mediaList);
-		}).fail(function() {
-			error = "Youtube API call failed.\n\n" + dataURL;
-			console.log(error);
-			alert(error);
-		});	
+				var title = data.entry.title.$t;
+				var img = document.createElement("img");
+				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
+				img.id = videoId;
+				img.youTubeURL = url;
+				createThumbnailContainer(img, title, "add-av-desktop");
+			}).fail(function() {
+				error = "Youtube API call failed.\n\n" + dataURL;
+				console.log(error);
+				alert(error);
+			});
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
 		console.log(error);
@@ -412,21 +388,17 @@ function addYouTube(url) {
 	}
 }
 
-function addSoundCloud(url) {
-    var mediaList = document.getElementById("media-tab");
+function openSoundCloud(url) {
 	$.getJSON("https://api.soundcloud.com/resolve.json?url="+url+"&client_id=YOUR_CLIENT_ID", function(data){
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		if (data.artwork_url) {
 			img.src = data.artwork_url.replace("large", "t500x500");
 		} else {
 			img.src = "images/soundcloud_icon.jpg";
 		}
 		img.id = data.id;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.soundCloudURL = data.uri;
-		mediaList.appendChild(img);
-		addText(data.title, mediaList);
+		createThumbnailContainer(img, data.title, "add-av-desktop");
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
 		console.log(error);
@@ -434,18 +406,14 @@ function addSoundCloud(url) {
 	});
 }
 
-function addSpotify(url) {
-    var mediaList = document.getElementById("media-tab");
+function openSpotify(url) {
 	var trackId = spotifyTrackId(url);
 	$.getJSON("https://api.spotify.com/v1/tracks/"+trackId, function(data){
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = data.album.images[1].url;
 		img.id = trackId;
-		img.addEventListener('dragstart', handleDragStart, false);
 		img.spotifyTrackId = trackId;
-		mediaList.appendChild(img);
-		addText(data.name, mediaList);
+		createThumbnailContainer(img, data.name, "add-av-desktop");
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
 		console.log(error);
@@ -453,36 +421,90 @@ function addSpotify(url) {
 	});
 }
 
-function handleImageFiles(files) {
-	var tabs = document.getElementById("images-tab");
+function openDropBoxImage(){
+
+    Dropbox.choose({
+        linkType: "direct",
+        success: function(files){
+			for (var i=0; i < files.length; i++){
+				var file = files[i];
+				var xhr = new XMLHttpRequest();
+				//only use the first one. add additional photos if possible in the future
+				xhr.open('GET', file.link, true);
+				xhr.responseType = 'blob';
+				xhr.onload = function(e) {
+				  if (this.status == 200) {
+				    var myBlob = this.response;
+				    var image = document.createElement("img");
+					image.src = file.link;
+					image.id = file.name;
+					image.name = file.name;
+					myBlob.name = file.name;
+					myBlob.lastModifiedDate = new Date();
+					image.file = myBlob;
+					createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+				    // myBlob is now the blob that the object URL pointed to.
+				  }
+				};
+				xhr.send();
+			}
+        },
+
+        multiselect:true,
+
+        extensions: ['.png', '.jpeg', '.gif', '.jpg'],
+
+    });
+}
+
+function openImageFiles(files) {
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
-
-		// if not an image go on to next file
 		if (!file.type.match(imageType)) {
-			alert("This drop zone only accepts image files (.jpg, .png, etc.).");
+			openMessage("Select Image Files", file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
 		}
 
 		var img = document.createElement("img");
-		img.classList.add("photo-thumbnail");
 		img.src = window.URL.createObjectURL(file);
 		img.file = file;
 		img.id = file.name;
-		img.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(img);
-		addText(file.name, tabs);
+		createThumbnailContainer(img, file.name, "add-images-desktop");
 	}
 }
 
-function handleMediaFiles(files) {
-    var tabs = document.getElementById("media-tab");
+function addFacebookImage(){
+	var selected = $(".facebook-container-selected > div > img");
+	$("#facebook-photos-dialog").dialog("close");
+	var xhr = new XMLHttpRequest();
+	//only use the first one. add additional photos if possible in the future
+	xhr.open('GET', $(selected[0]).attr('link'), true);
+	xhr.responseType = 'blob';
+	xhr.onload = function(e) {
+	  if (this.status == 200) {
+	    var myBlob = this.response;
+	    var image = selected[0];
+		$(image).attr("src", window.URL.createObjectURL(myBlob));
+		image.id = image.name;
+		image.name = "Facebook Photo";
+		myBlob.name = image.name;
+		myBlob.lastModifiedDate = new Date();
+		image.file = myBlob;
+		console.log(image.file);
+		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+	    // myBlob is now the blob that the object URL pointed to.
+	  }
+	};
+	xhr.send();
+}
+
+function openMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
 
 		// if not video or audio go on to next file
 		if (!file.type.match(videoType) && !file.type.match(audioType)) {
-			alert("This drop zone only accepts music and video files (.mp3, .mp4, etc.).");
+			openMessage("Select Video/Audio Files", file.name+" is not a music or video file (.mp3, .mp4, etc.).");
 			continue;
 		}
 
@@ -490,31 +512,48 @@ function handleMediaFiles(files) {
 		if (file.type.match(videoType)) {
 			element = document.createElement("video");
 			element.src = window.URL.createObjectURL(file);
-			element.setAttribute('draggable', true);
 		}
+
 		if (file.type.match(audioType)) {
 			element = document.createElement("img");
-			
+
 			// Get the album artwork from an MP3
 			if (file.type.indexOf("mp3") >= 0 || file.type.indexOf("mpeg") >= 0) {
 				var url = file.urn || file.name;
 				ID3.loadTags(
-					url, 
-					function() {showAlbumArt(url, file, tabs);},
+					url,
+					function() {showAlbumArt(url, file);},
 					{tags: ["title","artist","album","picture"], dataReader: FileAPIReader(file)}
 				);
 			} else {
 				element.src = "images/audio.jpg";
 			}
 		}
-		element.classList.add("photo-thumbnail");
+
 		element.file = file;
 		element.id = file.name;
-		element.addEventListener('dragstart', handleDragStart, false);
-		tabs.appendChild(element);
-		addText(file.name, tabs);
+		createThumbnailContainer(element, file.name, "add-av-desktop");
     }
+}
 
+function openAttachmentFiles(files) {
+	for (var i = 0; i < files.length; i++) {
+		var file = files[i];
+		var a = appendAttachmentDisplay({file_name: file.name, download_file_name: file.name, download_mime_type: file.type});
+		a.file = file;
+	}
+}
+
+function appendAttachmentDisplay(attachment) {
+	var a = document.createElement("a");
+	a.appendChild( document.createTextNode(attachment.file_name) );
+	a.download_file_name = attachment.download_file_name;
+	a.download_mime_type = attachment.download_mime_type;
+	var icon = document.createElement("i");
+	icon.classList.add("fa", "fa-file", "fa-2x");
+	a.appendChild(icon)
+	document.getElementById("add-attachment-desktop").appendChild(a);
+	return a;
 }
 
 function showAlbumArt(url, file) {
@@ -534,60 +573,86 @@ function showAlbumArt(url, file) {
 }
 
 function handleImageFileSelect(evt) {
-	handleImageFiles(evt.target.files);
+	openImageFiles(evt.target.files);
 }
 
 function handleMediaFileSelect(evt) {
-    handleMediaFiles(evt.target.files);
+  openMediaFiles(evt.target.files);
+}
+
+function handleAttachmentFileSelect(evt) {
+	openAttachmentFiles(evt.target.files);
 }
 
 
 //******************************************************
 function hideControl(controlId) {
+	var control = $("#"+controlId);
+	if (control.length > 0) {
+		control.css("display", "none");
+		control[0].target = null;
+	}
+/*	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: none;}';
 	var style = document.createElement('style');
 	if (style.styleSheet)
 		style.styleSheet.cssText = css;
-	else 
+	else
 		style.appendChild(document.createTextNode(css));
 	document.getElementsByTagName('head')[0].appendChild(style);
 	control.style.zIndex = -9999;
 	control.target = null;
+*/	
 }
 
 function showControl(controlId, target) {
+	var control = $("#"+controlId);
+	if (control.length > 0) {
+		control.css("display", "block");
+		control.css("zIndex", 2);
+		control[0].target = target;
+	}
+/*	
 	var control = document.getElementById(controlId);
 	var css = '.bento:hover #' + controlId + '{display: block;}';
 	var style = document.createElement('style');
 	if (style.styleSheet)
 		style.styleSheet.cssText = css;
-	else 
+	else
 		style.appendChild(document.createTextNode(css));
 	document.getElementsByTagName('head')[0].appendChild(style);
-	
+
 	// put the control on top
 	control.style.zIndex = 9999;
 	control.target = target;
+*/	
 }
 
-function closeClicked(closeButton) {
+function closeClicked(event, closeButton) {
+	var bento = closeButton.parentNode;
 	if (closeButton.target) {
 		if (closeButton.target.nodeName === "VIDEO") {
-			closeButton.parentNode.video = null;
+			bento.video = null;
 		} else if (closeButton.target.nodeName === "AUDIO") {
-			closeButton.parentNode.audio = null;
+			bento.audio = null;
 		} else if (closeButton.target.nodeName === "DIV") {
-			closeButton.parentNode.imageContainer = null;
+			bento.imageContainer = null;
+			removeImage($("#"+closeButton.target.id).find("img"));
 		}
-		closeButton.parentNode.removeChild(closeButton.target);
+		bento.removeChild(closeButton.target);
+		bento.iframe = null;
+		bento.contentURI = null;
 	}
 	if (closeButton.target.nodeName === "AUDIO") {
-		closeButton.parentNode.removeChild(closeButton);
+		bento.removeChild(closeButton);
 	} else {
 		hideControl(closeButton.id);
-		hideControl(closeButton.parentNode.id + "-slider");
+		hideControl(bento.id + "-slider");
+		hideControl(bento.id + "-link-icon");
 	}
+	event.stopPropagation();
+	unsaved();
 }
 
 function resizeContainer(bento, img, div) {
@@ -616,7 +681,7 @@ function resizeImage(img, bento) {
 	}
 	img.style.top = 0;
 	img.style.left = 0;
-	
+
 	// set values for slider scaling
 	img.originalWidth = img.width;
 	img.originalHeight = img.height;
@@ -634,7 +699,7 @@ function resizeBento(bento) {
 function handleSearch(field) {
 	var textLength = field.value.length;
 	var index = 1;
-	
+
 	var images = document.querySelectorAll('.result-image');
 	[].forEach.call(images, function(image) {
 		if (index <= textLength) {
@@ -651,16 +716,17 @@ function handleSliderEvent(event, ui) {
 	var nameRoot = bento.id;
 	var image = document.getElementById(nameRoot + "-image");
 	var container = document.getElementById(nameRoot + "-image-container");
-	
+
 	// change the value into a float (e.g. 1.5);
 	var value = ui.value / 100;
 
 	// scale the image
 	image.style.width = Math.round(image.originalWidth * value) + "px";
 	image.style.height = Math.round(image.originalHeight * value) + "px";
-	
+
 	// now resize the container so the image can be moved around
 	resizeContainer(bento, image, container);
+	unsaved();
 }
 
 $(function() {
@@ -686,7 +752,7 @@ function handleHorizontalDrag(target, movement) {
 // console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
 			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
-			
+
 			var bentos = leftDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
@@ -701,13 +767,14 @@ function handleHorizontalDrag(target, movement) {
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
 			rightDependent.style.width = newWidth + "px";
-			
+
 			var bentos = rightDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
 			}
 		}
-	}	
+		unsaved();
+	}
 }
 
 function handleVerticalDrag(target, movement) {
@@ -718,24 +785,25 @@ function handleVerticalDrag(target, movement) {
 			var topDependent = target.topDependents[index];
 			var newHeight = parseFloat(getComputedStyle(topDependent).height, 10) + movement;
 			topDependent.style.height = newHeight + "px";
-			
+
 			var bentos = topDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
 			}
-		}	
+		}
 
 		for (index = 0; index < target.bottomDependents.length; ++index) {
 			var bottomDependent = target.bottomDependents[index];
 			bottomDependent.style.top = (parseFloat(getComputedStyle(bottomDependent, null).top, 10) + movement) + "px";
 			var newHeight = parseFloat(getComputedStyle(bottomDependent).height, 10) - movement;
 			bottomDependent.style.height = newHeight + "px";
-			
+
 			var bentos = bottomDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
 				resizeBento(bentos[i]);
 			}
 		}
+		unsaved();
 	}
 }
 
@@ -746,16 +814,16 @@ $(function() {
 	divider = document.getElementById("divider-1-1");
 	divider.leftDependents = [document.getElementById("column-1-1")];
 	divider.rightDependents = [
-		document.getElementById("column-1-2"), 
+		document.getElementById("column-1-2"),
 		document.getElementById("divider-container-1-2")];
 
 	divider = document.getElementById("divider-1-2");
 	divider.leftDependents = [
-		document.getElementById("column-1-2"), 
+		document.getElementById("column-1-2"),
 		document.getElementById("divider-container-1-1")];
 	divider.rightDependents = [
-		document.getElementById("column-1-3"), 
-		document.getElementById("divider-1-3"), 
+		document.getElementById("column-1-3"),
+		document.getElementById("divider-1-3"),
 		document.getElementById("divider-container-1-3")];
 
 	divider = document.getElementById("divider-1-3");
@@ -770,7 +838,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		},
 	});
-	
+
 	$("#divider-1-2").draggable({
 		axis: "x",
 		containment: "#divider-container-1-2",
@@ -788,18 +856,18 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	// Template #2
 	divider = document.getElementById("divider-2-1");
 	divider.leftDependents = [
-		document.getElementById("column-2-1"), 
-		document.getElementById("divider-2-2"), 
+		document.getElementById("column-2-1"),
+		document.getElementById("divider-2-2"),
 		document.getElementById("divider-container-2-2")];
 	divider.rightDependents = [
-		document.getElementById("column-2-2"), 
-		document.getElementById("divider-2-3"), 
-		document.getElementById("divider-2-4"), 
-		document.getElementById("divider-container-2-3"), 
+		document.getElementById("column-2-2"),
+		document.getElementById("divider-2-3"),
+		document.getElementById("divider-2-4"),
+		document.getElementById("divider-container-2-3"),
 		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-2");
@@ -809,12 +877,12 @@ $(function() {
 	divider = document.getElementById("divider-2-3");
 	divider.topDependents = [document.getElementById("column-2-5")];
 	divider.bottomDependents = [
-		document.getElementById("column-2-6"), 
+		document.getElementById("column-2-6"),
 		document.getElementById("divider-container-2-4")];
 
 	divider = document.getElementById("divider-2-4");
 	divider.topDependents = [
-		document.getElementById("column-2-6"), 
+		document.getElementById("column-2-6"),
 		document.getElementById("divider-container-2-3")];
 	divider.bottomDependents = [document.getElementById("column-2-7")];
 
@@ -826,7 +894,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		}
 	});
-	
+
 	$("#divider-2-2").draggable({
 		axis: "y",
 		containment: "#divider-container-2-2",
@@ -835,7 +903,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-2-3").draggable({
 		axis: "y",
 		containment: "#divider-container-2-3",
@@ -844,7 +912,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-2-4").draggable({
 		axis: "y",
 		containment: "#divider-container-2-4",
@@ -853,27 +921,27 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	// Template #3
 	divider = document.getElementById("divider-3-1");
 	divider.leftDependents = [
-		document.getElementById("column-3-1"), 
-		document.getElementById("divider-3-3"), 
+		document.getElementById("column-3-1"),
+		document.getElementById("divider-3-3"),
 		document.getElementById("divider-container-3-3")];
 	divider.rightDependents = [
-		document.getElementById("column-3-2"), 
-		document.getElementById("divider-3-4"), 
+		document.getElementById("column-3-2"),
+		document.getElementById("divider-3-4"),
 		document.getElementById("divider-container-3-4")];
 
 	divider = document.getElementById("divider-3-2");
 	divider.leftDependents = [
-		document.getElementById("column-3-2"), 
-		document.getElementById("divider-3-4"), 
-		document.getElementById("divider-container-3-4"), 
+		document.getElementById("column-3-2"),
+		document.getElementById("divider-3-4"),
+		document.getElementById("divider-container-3-4"),
 		document.getElementById("divider-container-3-1")];
 	divider.rightDependents = [
-		document.getElementById("column-3-3"), 
-		document.getElementById("divider-3-5"), 
+		document.getElementById("column-3-3"),
+		document.getElementById("divider-3-5"),
 		document.getElementById("divider-container-3-5")];
 
 	divider = document.getElementById("divider-3-3");
@@ -896,7 +964,7 @@ $(function() {
 			ui.originalPosition.left = ui.position.left;
 		}
 	});
-	
+
 	$("#divider-3-2").draggable({
 		axis: "x",
 		containment: "#divider-container-3-2",
@@ -914,7 +982,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-3-4").draggable({
 		axis: "y",
 		containment: "#divider-container-3-4",
@@ -923,7 +991,7 @@ $(function() {
 			ui.originalPosition.top = ui.position.top;
 		}
 	});
-	
+
 	$("#divider-3-5").draggable({
 		axis: "y",
 		containment: "#divider-container-3-5",
@@ -943,17 +1011,28 @@ function setPreviewLink (template) {
 		linkText = "preview.php?id=" + template.giftboxId;
 	}
 	$("#preview-link").val(template.appURL + linkText);
+	if (template.giftboxId) {
+		$("#send-link-input").val(template.appURL + linkText);
+	} else {
+		$("#send-link-input").val("");
+	}
 }
 
 function stack(top, middle, bottom) {
 	var top_template = document.getElementById(top);
-	var middle_template = document.getElementById(middle);
-	var bottom_template = document.getElementById(bottom);
-	window.top_template = top_template;
-	setPreviewLink(top_template);
-	top_template.style.zIndex = 3;
-	middle_template.style.zIndex = 2;
-	bottom_template.style.zIndex = 1;
+
+	// Only shuffle the stack if the top is not on top
+	if (!Object.is(top_template, window.top_template)) {
+		closeImageDialog();
+		var middle_template = document.getElementById(middle);
+		var bottom_template = document.getElementById(bottom);
+		window.top_template = top_template;
+
+		setPreviewLink(top_template);
+		top_template.style.zIndex = 3;
+		middle_template.style.zIndex = 2;
+		bottom_template.style.zIndex = 1;
+	}
 }
 
 function calcTop(bento, image, container) {
@@ -976,12 +1055,12 @@ function calcLeft(bento, image, container) {
 
 function saveButton() {
 	if (!window.top_template.giftboxId) {
-		$('#save-name').val(window.top_template.giftboxName); 
-		$('#save-dialog').dialog('open');	
+		$('#save-name').val(window.top_template.giftboxName);
+		$('#save-dialog').dialog('open');
 	} else {
 		save();
 	}
-	
+
 }
 function save() {
 	if ($("#save-dialog" ).dialog("isOpen")) {
@@ -991,7 +1070,7 @@ function save() {
 		window.top_template.giftboxName = giftboxName;
 	}
 	var giftboxName = window.top_template.giftboxName;
-	
+
 	openStatus("Save", "Saving " + giftboxName + "...");
 	var template = window.top_template;
 	var giftboxId = template.giftboxId;
@@ -1012,10 +1091,11 @@ function save() {
 		user_agent: userAgent,
 		bentos: new Array(),
 		dividers: new Array(),
-		columns: new Array()
+		columns: new Array(),
+		attachments: new Array()
 	};
-	
-	$("#"+template.id+" div.bento").each(function(i) { 
+
+	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
 		bento.giftbox_id = giftboxId;
 		bento.css_id = $(this).attr("id");
@@ -1034,6 +1114,7 @@ function save() {
 		bento.image_left = null;
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
+		bento.image_hyperlink = null;
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1047,12 +1128,16 @@ function save() {
 			bento.image_left = calcLeft(bento, image, container);
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
+			bento.image_hyperlink = image.hyperlink;
 			var croppedImage = createCroppedImage(bento, image, container);
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
+			console.log(image);
 			if (!image.saved) {
 				if (image.file) {
 					uploadFile(image.file);
 				} else {
+					//alert(image.src);
+					//alert(this.image_file_name);
 					uploadFileData(image.src, this.image_file_name);
 				}
 				image.saved = true;
@@ -1071,7 +1156,18 @@ function save() {
 		}
 	});
 
-	$("#"+template.id+" div.divider").each(function(i) { 
+	$("#add-attachment-desktop > a").each(function(i) {
+		var attachment = new Object();
+		attachment.download_file_name = this.download_file_name;
+		attachment.download_mime_type = this.download_mime_type;
+		giftbox.attachments[i] = attachment;
+		if (this.file) {
+			uploadFile(this.file);
+			this.file = null;
+		}
+	});
+
+	$("#"+template.id+" div.divider").each(function(i) {
 		var divider = new Object();
 		divider.giftbox_id = giftboxId;
 		divider.css_id = $(this).attr("id");
@@ -1082,7 +1178,7 @@ function save() {
 		giftbox.dividers[i] = divider;
 	});
 
-	$("#"+template.id+" div.divider-container").each(function(i) { 
+	$("#"+template.id+" div.divider-container").each(function(i) {
 		var container = new Object();
 		container.giftbox_id = giftboxId;
 		container.css_id = $(this).attr("id");
@@ -1093,7 +1189,7 @@ function save() {
 		giftbox.dividers[giftbox.dividers.length] = container;
 	});
 
-	$("#"+template.id+" div.column").each(function(i) { 
+	$("#"+template.id+" div.column").each(function(i) {
 		var column = new Object();
 		column.giftbox_id = giftboxId;
 		column.css_id = $(this).attr("id");
@@ -1106,33 +1202,29 @@ function save() {
 	});
 
 	// Save the template first
-	$.post("save_token_ajax.php", giftbox, function(result) { 
+	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
-			openMessage("Save", "Save failed with the following error:  "+result.message);
+			openMessage("Error", "Save failed with the following error:  "+result.message);
 		} else {
 			openMessage("Save", "Save failed!");
 		}
 	}).fail(function() {
 		openMessage("Save", "Save failed!");
 	});
+	saved();
 }
 
 function send() {
 	var giftboxId = window.top_template.giftboxId;
 	if (!giftboxId) {
-		openMessage("Send", "The giftbox must be saved before it can be sent.");
+		openMessage("Send", "The Token must be saved before it can be sent.");
 	} else {
-		$.magnificPopup.open({
-		  items: {
-			src: '#send-form',
-			type: 'inline'
-		  }
-		});
+		$('#send-dialog').dialog('open');
 	}
 }
 
@@ -1141,7 +1233,7 @@ function preview() {
 	var unloadType = window.top_template.wrapperType;
 	var unloadCount = window.top_template.unloadCount
 	if (!giftboxId) {
-		openMessage("Preview", "The giftbox must be saved before it can be previewed.");
+		openMessage("Preview", "The Token must be saved before it can be previewed.");
 	} else {
 		if (window.top_template.wrapperType) {
 			window.open("second-harvest.php?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
@@ -1152,9 +1244,13 @@ function preview() {
 }
 
 function saveLetter() {
-	var letterText = document.getElementById("letter-text");
-	window.top_template.letterText = letterText.value;
-	$("#letter-dialog" ).dialog("close");
+	var letterTextInput = document.getElementById("letter-text");
+	var newValue = letterTextInput.value;
+	var oldValue = window.top_template.letterText;
+	if (newValue !== oldValue) {
+		window.top_template.letterText = newValue;
+		unsaved();
+	}
 }
 
 function wrapper() {
@@ -1173,21 +1269,23 @@ function save_wrapper() {
 
 function inputURL(site) {
 	$('#url').val("");
-	$('#url-dialog').dialog({title: site});	
-	$('#url-dialog').dialog('open');	
+	$('#url-dialog').dialog({title: site});
+	$('#url-dialog').dialog('open');
 }
 
-function addURL() {
+function openURL() {
 	// Get the url
 	var url = document.getElementById("url").value;
 	var title = $("#url-dialog").dialog("option", "title");
 	$("#url-dialog").dialog("close");
 	if (isYouTube(url)) {
-		addYouTube(url);
+		openYouTube(url);
 	} else if (isSoundCloud(url)) {
-		addSoundCloud(url);
+		openSoundCloud(url);
 	} else if (isSpotify(url)) {
-		addSpotify(url);
+		openSpotify(url);
+	} else if (isVimeo(url)){
+		openVimeo(url);
 	} else {
 		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
 		console.log(error);
@@ -1217,16 +1315,16 @@ function loadSaved() {
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
 			closeStatus();
-			
+
 			// Bring the correct template to the top
 			if (token.css_id === 'template-1') {
 				stack('template-1', 'template-2', 'template-3');
 			} else if (token.css_id === 'template-2') {
-				stack('template-2', 'template-3', 'template-1')				
+				stack('template-2', 'template-3', 'template-1')
 			} else {
-				stack('template-3', 'template-1', 'template-2')				
+				stack('template-3', 'template-1', 'template-2')
 			}
-			
+
 			// Populate the top template properties
 			window.top_template.giftboxId = token.id;
 			window.top_template.giftboxName = token.name;
@@ -1235,7 +1333,7 @@ function loadSaved() {
 			window.top_template.wrapperType = token.wrapper_type;
 			window.top_template.unloadCount = token.unload_count;
 			setPreviewLink(window.top_template);
-			
+
 			// Bento properties
 			var index;
 			var bento;
@@ -1248,7 +1346,7 @@ function loadSaved() {
 				clearBento(bento);
 				loadBento(bento, token.bentos[index]);
 			}
-			
+
 			// Divider properties
 			var divider;
 			for (index = 0; index < token.dividers.length; ++index) {
@@ -1262,8 +1360,15 @@ function loadSaved() {
 				divider.style.top = token.dividers[index].css_top;
 				divider.style.left = token.dividers[index].css_left;
 			}
+
+			$("#add-attachment-desktop").empty();
+			for (index = 0; index < token.attachments.length; ++index) {
+				appendAttachmentDisplay(token.attachments[index]);
+			}
+
 		});
 	}
+	closeImageDialog();
 }
 
 function clearBento(bento) {
@@ -1286,25 +1391,30 @@ function clearBento(bento) {
 	if (bento.iframe) {
 		bento.removeChild(bento.iframe);
 		bento.iframe = null;
-		bento.contentURI = null;
 	}
+	bento.contentURI = null;
 	bento.file = null;
 }
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
 		if (isYouTube(savedBento.content_uri)) {
-			dropYouTube(bento, savedBento.content_uri);
+			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
-			dropSoundCloud(bento, savedBento.content_uri);
+			addSoundCloud(bento, savedBento.content_uri);
 		} else if (isSpotify(savedBento.content_uri)) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
-			dropSpotify(bento, trackId);
+			addSpotify(bento, trackId);
 		}
 	}
 	if (savedBento.image_file_name) {
 		addImage(bento, savedBento.image_file_path, null, savedBento);
 		bento.image_file_name = savedBento.image_file_name;
+		if (savedBento.image_hyperlink) {
+			var image = $("#"+bento.id+"-image");
+			image[0].hyperlink = savedBento.image_hyperlink;
+			showControl(bento.id+"-link-icon");
+		}
 	}
 	if (savedBento.download_file_name) {
 		bento.download_file_name = savedBento.download_file_name;
@@ -1317,7 +1427,7 @@ function loadBento(bento, savedBento) {
 		}
 	}
 }
-	
+
 function createCroppedImage (bento, image, container) {
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
@@ -1328,7 +1438,7 @@ function createCroppedImage (bento, image, container) {
 	canvas.height = height;
 	var context = canvas.getContext('2d');
 	context.drawImage(image, 0, 0, width, height);
-	
+
 	// now crop the canvas
 	var containerStyle = getComputedStyle(container);
 	var containerLeft = parseInt(containerStyle.left, 10);
@@ -1348,3 +1458,458 @@ function createCroppedImage (bento, image, container) {
 	croppedImage.src = croppedCanvas.toDataURL();
 	return croppedImage;
 }
+
+function featureNotAvailable(feature) {
+	openMessage(feature, "This feature is not available yet.");
+}
+
+function standardFeature() {
+	openMessage("Add Hyperlink", "This feature is only available to \"Standard\" level and higher members.");
+}
+
+function selectSidebarTab(tab) {
+	var selectedIcon = $("#"+tab.id);
+
+	// restore all icons
+	$(".sidebar-tab").each(function(i) {
+		$(this).removeClass("sidebar-tab-hover");
+		$(this).addClass("sidebar-tab-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+	});
+
+	// set the selected icon
+	selectedIcon.removeClass("sidebar-tab-hover");
+	selectedIcon.removeClass(tab.id);
+	selectedIcon.addClass(tab.id+"-selected");
+
+	// hide all sidebar tab containers
+	$(".sidebar-tab-container").css("display", "none");
+
+	// show the selected container
+	$("#"+tab.id+"-container").css("display", "block");
+}
+
+function showTemplates(number) {
+	var selectedButton = $("#template-number-"+number);
+
+	// restore all number buttons
+	$(".template-number").each(function(i) {
+		$(this).removeClass("template-number-hover");
+		$(this).addClass("template-number-hover");
+		$(this).removeClass("template-number-selected");
+	});
+
+	// set the selected number button
+	selectedButton.removeClass("template-number-hover");
+	selectedButton.addClass("template-number-selected");
+
+	// show only those template for the selected button
+	if (number === "all") {
+		$(".template-thumbnail").css("display", "inline-block");
+	} else {
+		$(".template-thumbnail").css("display", "none");
+		$("#template-thumbnail-"+number).css("display", "inline-block");
+	}
+}
+
+function bentoClick(bento) {
+	$("#add-dialog").attr("target-bento", bento.id);
+	$("#add-dialog").dialog("open");
+}
+
+function textIconClicked() {
+	$("#add-dialog").dialog("open");
+	selectAddNav("add-letter");
+}
+
+function selectAddNav(navId) {
+	var selectedNav = $("#"+navId);
+
+	// restore all link styles
+	$(".add-nav-item").each(function(i) {
+  		$(this).removeClass("add-nav-item-hover");
+		$(this).addClass("add-nav-item-hover");
+		$(this).removeClass("add-nav-item-selected");
+
+	});
+
+	// set the selected icon
+	selectedNav.removeClass("add-nav-item-hover");
+	selectedNav.addClass("add-nav-item-selected");
+
+	// hide all sidebar nav containers
+	$(".add-content-container").css("display", "none");
+
+	// show the selected container
+	$("#"+navId+"-container").css("display", "block");
+}
+
+function selectThumbnail(thumbnail) {
+	var selectedThumbnail = $("#"+thumbnail.id);
+
+	// restore all number buttons
+	$(".thumbnail-container").each(function(i) {
+		$(this).removeClass("thumbnail-container-hover");
+		$(this).addClass("thumbnail-container-hover");
+		$(this).removeClass("thumbnail-container-selected");
+	});
+
+	// set the selected number button
+	selectedThumbnail.removeClass("thumbnail-container-hover");
+	selectedThumbnail.addClass("thumbnail-container-selected");
+}
+
+function removeSelection(parentId) {
+	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
+	jqueryContainer.removeClass("thumbnail-container-selected");
+	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
+function doAdd() {
+	var jqueryObject;
+	var bentoId;
+	var element;
+	var bento;
+	$('#add-dialog').dialog('close');
+
+	// LETTER
+	saveLetter();
+
+	bentoId = $("#add-dialog").attr("target-bento");
+	bento = $("#"+bentoId)[0];
+
+	// IMAGE
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-images-desktop");
+		element = jqueryObject[0];
+		bento.image_file_name = element.name;
+		addImage(bento, element.src, element.file, null);
+		if (element.file) {
+			addImage(bento, element.src, element.file, null);
+		} else {
+			addImage(bento, element.src, null, null);
+			bento.image_file_name = element.name;
+		}
+		unsaved();
+	}
+
+	// VIDEO/AUDIO
+	jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() == 0) {
+		jqueryObject = $("#add-av-desktop > .thumbnail-container-selected > .inner-thumbnail-container > video");
+	}
+	if (jqueryObject.size() > 0) {
+		removeSelection("add-av-desktop");
+		element = jqueryObject[0];
+		if (element.file) {
+			if (element.file.type.match(audioType)) {
+				addImage(bento, element.src, null, null);
+				bento.image_file_name = element.file.name.replace(".", "_") + ".jpg";
+				addAudio(bento, window.URL.createObjectURL(element.file), element.file, null);
+			} else if (element.file.type.match(videoType)) {
+				addVideo(bento, null, element.file, null);
+			}
+		} else if (element.youTubeURL) {
+			addYouTube(bento, element.youTubeURL);
+		} else if (element.spotifyTrackId) {
+			addSpotify(bento, element.spotifyTrackId)
+		} else if (element.soundCloudURL) {
+			addSoundCloud(bento, element.soundCloudURL);
+		} else if (element.vimeoURL){
+			addVimeo(bento, element.vimeoURL);
+		}
+	}
+
+	// ATTACHMENT
+
+}
+
+function hidePalette() {
+	$("#palette").animate({width: "25px"});
+	$("#palette-body").addClass("hidden")
+	$("#hide-palette").addClass("hidden");
+	$("#show-palette").removeClass("hidden");
+}
+
+function showPalette() {
+	$("#palette").animate({width: "260px"});
+	$("#show-palette").addClass("hidden");
+	$("#hide-palette").removeClass("hidden");
+	$("#palette-body").removeClass("hidden");
+}
+
+function imageClicked(image) {
+	selectImage(image);
+	event.stopPropagation();
+}
+
+function videoClicked(event, video) {
+	event.stopPropagation();
+}
+
+function selectImage(image) {
+	var linkAddress = image[0].hyperlink;
+
+	// de-select the current target image
+	var currentImage = getImageDialogImage();
+	if (currentImage) {
+		deselectImage(currentImage);
+	}
+
+	// Set the dialog's target image
+	setImageDialogImage(image);
+	
+	// Change all the dialog values to match the target image
+	$("#hyperlink-text").val(linkAddress);
+
+	// Set the hyperlink control buttons
+	setHyperlinkButtons(linkAddress);
+
+	// Highlight the bento
+	image.closest(".bento").addClass("selected-bento");
+
+	// Show the dialog if it's not already open
+	openImageDialog();
+}
+
+function deselectImage(image) {
+	if (image) {
+		image.closest(".bento").removeClass("selected-bento");
+	}
+}
+
+function openHyperlinkInput() {
+	$("#hyperlink-dialog-url").val($("#hyperlink-text").val());
+	$("#add-hyperlink-dialog").dialog("open");
+}
+
+function addImageHyperlink() {
+	var validLink = false;
+
+	// Get the link address from the hyperlink input dialog
+	var linkAddress = $("#hyperlink-dialog-url").val();
+
+	// Get the target image from the image dialog
+	var image = getImageDialogImage();
+
+	if (linkAddress.length > 0) {
+
+		// Make sure it has an 'http' or 'https' prefix
+		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {
+			linkAddress = "http://" + linkAddress;
+		}
+
+		// Validate the link address
+		validLink = true;
+	} else {
+		validLink = true;
+	}
+
+	if (validLink) {
+		setHyperlink(linkAddress);
+	}
+
+}
+
+function setHyperlink(linkAddress) {
+	// Set the image dialog hyperlink text
+	$("#hyperlink-text").val(linkAddress);
+
+	// Set the images hyperlink text
+	getImageDialogImage()[0].hyperlink = linkAddress;
+
+	// Adjust the image dialogs buttons
+	setHyperlinkButtons(linkAddress)
+	
+	// Show the link icon
+	var icon = getImageDialogImage().parent().parent().children(".bento-link-icon");
+	if (linkAddress && linkAddress.length > 0) {
+		showControl(icon.attr("id"), null);
+	} else {
+		hideControl(icon.attr("id"));
+	}
+	
+	// Close the modal input dialog
+	$("#add-hyperlink-dialog").dialog("close");
+}
+
+function setHyperlinkButtons(linkAddress) {
+	if (linkAddress && linkAddress.length > 0) {
+		$("#add-hyperlink-button").css("display", "none");
+		$("#remove-hyperlink-button").css("display", "inline-block");
+		$("#change-hyperlink-button").css("display", "inline-block");
+	} else {
+		$("#add-hyperlink-button").css("display", "block");
+		$("#remove-hyperlink-button").css("display", "none");
+		$("#change-hyperlink-button").css("display", "none");
+	}
+}
+
+function removeHyperlink() {
+	setHyperlink(null);
+}
+
+function changeHyperlink() {
+	openHyperlinkInput();
+}
+
+function removeImage(image) {
+	deselectImage(image);
+	
+	if (image.is(getImageDialogImage())) {
+
+		// Clear the hyperlink text in the image dialog
+		$("#hyperlink-text").val(null);
+
+		// Clear the image dialog's target image
+		setImageDialogImage(null);
+
+		// Close the image dialog
+		closeImageDialog();
+	}
+}
+
+function openImageDialog() {
+	$(imageDialogSelector).dialog("open");
+}
+
+function closeImageDialog() {
+	$(imageDialogSelector).dialog("close");
+}
+
+function setImageDialogImage(image) {
+	$(imageDialogSelector).data("target-image", image);
+}
+
+function getImageDialogImage() {
+	return $(imageDialogSelector).data("target-image");
+}
+
+/***
+FACEBOOK DIALOG
+****/
+
+function selectFacebookImage(){
+	$('#facebook-album-dialog').empty();
+	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
+	$('#facebook-album-dialog').dialog("open");
+}
+
+function getFacebookAlbums(state){
+	if(state == null){
+		state = 1;
+	}
+	var token;
+	$.get("get_access_token.php", function(data){
+		token = data[0].access_token;
+		FB.api('/me?access_token='+token, function(response){
+			//Will be empty or null if the user is not logged in and the token hasn't been updated.
+			if(response.id){
+				if(document.getElementById('facebook-albums').innerHTML == ""){
+					FB.api('/'+response.id+'/albums?access_token='+token, function(data){
+						data = data.data;
+						document.getElementById('facebook-albums').innerHTML += '<ul>';
+						for(i = 0; i < data.length; i++){
+							if(data[i].count != null){
+								document.getElementById('facebook-albums').innerHTML += "<div class='facebook-container facebook-container-hover' onclick='getFacebookPhotos(\""+data[i].id.toString()+ "\")'><div class='inner-thumbnail-container'><img id='"+ data[i].cover_photo +"' class='photo-thumbnail'><div class='facebook-file-name'>"+ data[i].name +"</div></div></div>"
+								val = data[i];
+								FB.api('/'+val.cover_photo+'?access_token='+token, function(photo){
+									$('#'+photo.id).attr('src', photo.picture);
+								});				
+							}		
+						}
+						document.getElementById('facebook-albums').innerHTML += '</ul>';
+					});
+				}
+			} else {
+				FB.login(function(response){
+					if (response.status === 'connected') {
+						response["access_token"] = FB.getAuthResponse().accessToken;
+						$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
+							if(data.status === "SUCCESS"){
+								if(state == 1){
+									getFacebookAlbums(2);
+								} else {
+									$("#facebook-login-fail-dialog").dialog("open");
+								}
+							} else if (data.status === "ERROR"){
+								//Throw error
+							}
+						}).fail(function() {
+							//Throw error loginError("Facebook authorization failed");
+						});
+				    } else if (response.status === 'not_authorized') {
+						// The person is logged into Facebook, but not your app.
+						$("#facebook-login-fail-dialog").dialog("open");
+				    } else {
+						// The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
+						$("#facebook-login-fail-dialog").dialog("open");
+				    }
+					
+				}, {scope: 'user_photos, public_profile, email'});
+			}
+		});
+	})
+	
+}
+
+function getFacebookPhotos(album_id){
+	$( "#facebook-album-dialog" ).dialog("close");
+	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
+	$('#facebook-photos-dialog').dialog("open");
+	$.get("get_access_token.php", function(data){
+		token = data[0].access_token;
+		if(album_id){
+			var link = '/'+album_id+'/photos?access_token='+token;
+			setFacebookPage(link, token);
+		} else {
+			//throw an error
+		}
+	});
+}
+
+function setFacebookPage(link, token){	
+	$('#facebook-photos-dialog').html('<div id="facebook-photos" onClick="getFacebookPhotos()"></div>');
+	//if you change pages, you will not be able to save the selected (limits to 25 images selected)
+	var selected = document.getElementsByClassName("facebook-container-selected");
+	for(i = 0; i < selected.length; i++){
+		$(selected).removeClass("facebook-container-selected");
+	}
+	FB.api(link, function(photos) {
+		if(photos.data.length > 0){
+			if(photos.paging.previous){
+				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.previous + ", " + token + "\")'>Previous</a>";
+			}
+			if(photos.paging.next){
+				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.next + ", " + token + "\")'>Next</a>";
+			}
+			for(i = 0; i < photos.data.length; i++){
+				if(document.getElementById(''+ photos.data[i].id.toString()) == null){
+					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
+					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
+					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
+				} else {
+					//The element exists because it wasn't removed  from the facebook-album dialog. investigating
+					document.getElementById(photos.data[i].id.toString()).remove();
+					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
+					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
+					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
+				}
+			}
+		} else {
+			document.getElementById('facebook-photos').innerHTML = "There was either an error loading the photos, or there are no photos in the album. Please verify there are photos in the album on Facebook.";
+		}
+	});
+}
+
+function selectFacebook(elem){
+	selection = document.getElementsByClassName("facebook-container-selected");
+	for(i = 0; i < selection.length; i++){
+		$(selection[i]).removeClass("facebook-container-selected");
+	}
+	$(elem).addClass("facebook-container-selected");
+}
+	

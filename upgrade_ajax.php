@@ -1,32 +1,35 @@
 <?php
-require_once('./stripe/Stripe.php');
-require_once('util.php');
-include_once 'eventLogger.class.php';
+require_once('./stripe-php/init.php');
+require_once 'EventLogger.class.php';
+require_once 'User.class.php';
+require_once 'util.php';
+require_once 'config.php';
 
-session_start();
+_session_start();
 
 $response['status'] = "ERROR";
-$response['message'] = "Unable to register at this time.";
+$response['message'] = "Unable to upgrade at this time.";
 
-// Set your secret key: remember to change this to your live secret key in production
 // See your keys here https://dashboard.stripe.com/account
-Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
+\Stripe\Stripe::setApiKey($stripe_secret_key);
 
 // Get the credit card details submitted by the form
 $token = $_POST['stripeToken'];
 $email = $_POST['email'];
-$amount = $_POST['amount'];
 $new_level = $_POST['newLevel'];
-$user_id = $_SESSION['user_id'];
+$plan = $_POST['plan'];
 
-// Create the charge on Stripe's servers - this will charge the user's card
+// Retrieve the GiveToken user recored
+$user = User::fetch($email);
+
 try {
-	$charge = Stripe_Charge::create(array(
-		"amount" => $amount,
-		"currency" => "usd",
-		"card" => $token,
-		"description" => $email)
+	// Create the customer with a plan, this will also charge the customer
+	$customer = \Stripe\Customer::create(array(
+		"source" => $token,
+		"plan" => $plan,
+		"email" => $email)
 	);
+
 	$response['status'] = "SUCCESS";
 } catch(Exception $e) {
 	$response['status'] = "ERROR";
@@ -34,14 +37,25 @@ try {
 }
 
 if ($response['status'] == "SUCCESS") {
-	execute("UPDATE user set level = ".$new_level." WHERE id = ".$user_id);
-	$event = new eventLogger($_SESSION['user_id'], UPGRADE);
-	$event->log();
-	$_SESSION['level'] = $new_level;
+	$active_until = new DateTime("now");
+	$active_until->add(new DateInterval("P1M"));
+	
+	// Update the user properties
+	$user->level = $new_level;
+	$user->stripe_id = $customer->id;
+	$user->active_until = $active_until->format("Y-m-d");
 
-	$result = execute_query("SELECT name from level where id = ".$new_level);
-	$level_name = $result->fetch_object();
-	$response['level_name'] = $level_name->name;
+	// Save the user
+	$user->save();
+	
+	// Log an event
+	$event = new EventLogger($user->getId(), UPGRADE, 'Stripe Token: '.$token);
+	$event->log();
+	
+	// Set the session variable
+	if (isset($_SESSION['level'])) {
+		$_SESSION['level'] = $new_level;
+	}
 }
 
 header('Content-Type: application/json');
