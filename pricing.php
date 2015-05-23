@@ -48,8 +48,6 @@
 <!-- =========================
      STYLESHEETS   
 ============================== -->
-<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -88,8 +86,7 @@
 <![endif]-->
 
 <!-- JQUERY -->
-<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </head>
 
@@ -189,9 +186,7 @@
               <div class="not-btn solid-blue">
 				<?php
 					if (logged_in()) {
-						if (isset($_SESSION["level"]) && $_SESSION["level"] == 1) {
-							echo 'Already a member!';
-						}
+						echo 'Already a member!';
 					} else {
 						echo '<button type="button" class="btn dark-grey" onclick="signupOpen(1)">Sign Up <i class="fa fa-chevron-right"></i></button>';
 					}
@@ -237,7 +232,7 @@
 									echo 'Already a member!';
 								} else {
 									$user = new User($_SESSION["user_id"]);
-									echo '<button type="button" class="btn dark-grey" onclick="payWithStripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
+									echo '<button type="button" class="btn dark-grey" onclick="pay_with_stripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
 								}	
 							} else {
 								echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
@@ -379,24 +374,25 @@
 
 <!-- These modals will be deleted when Stripe is used -->
 
-<div class="modal fade"  id="premium-dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class ="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title" id="gridSystemModalLabel"><b>Pre-order</b></h3>
-			</div>
-			<div class ="modal-body">
-				<center>
-					<h3>Please contact Robbie Zettler at</h3>
-					<a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@givetoken.com</b></h3></a>
-				</center>
-			</div>
-			<div class ="modal-footer">
-			  <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-			</div>
-		</div>
-	</div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="myModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class ="modal-header">
+        Plan Type
+      </div>
+      <div class ="modal-body">
+        Options
+        <!-- Change so that this links to the log in -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Log In</button>
+        <!-- Change so that this links to the sign up -->
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
+      </div>
+      <div class ="modal-footer">
+        GiveToken
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal 2-->
@@ -507,9 +503,6 @@
       // Find all elements with class plan, then find all elements with class select-button within it
       // Bind to click events on those elements
       $( ".plan .select-btn" ).on( "click", function( event ) {
-		  	$("#premium-dialog").modal();
-
-/*		  
         // Read the plan type from the data-plan attribute on the div with class plan
         selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
 		selectPlan(selectedPlan);
@@ -546,8 +539,6 @@
         }, "slow" );
         
         updatePrice();
-*/		
-		
       });
       
       $( ".pricingLevel" ).on( "click", function() {
@@ -654,8 +645,7 @@
 <script src="js/jquery.fitvids.js"></script>
 <script src="js/facebook_init.js"></script>
 <script src="js/custom.js"></script>
-<script src="js/util.js"></script>
-<script src="pay_with_stripe.php"></script>
+<script src="js/pay_with_stripe.js"></script>
 <script src="js/login.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/account.js"></script>

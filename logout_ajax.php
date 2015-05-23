@@ -1,13 +1,13 @@
 <?php
 include_once 'config.php';
-include_once ('EventLogger.class.php');
+include_once ('eventLogger.class.php');
 
 
 $session = _session_start();
 
 $response['login_type'] = $_SESSION['login_type'];
 $response['app_root'] = $app_root;
-$event = new EventLogger($_SESSION['user_id'], LOGOUT);
+$event = new eventLogger($_SESSION['user_id'], LOGOUT);
 $event->log();
 
 $session->stop();

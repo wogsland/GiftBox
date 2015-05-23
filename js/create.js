@@ -473,31 +473,6 @@ function openImageFiles(files) {
 	}
 }
 
-function addFacebookImage(){
-	var selected = $(".facebook-container-selected > div > img");
-	$("#facebook-photos-dialog").dialog("close");
-	var xhr = new XMLHttpRequest();
-	//only use the first one. add additional photos if possible in the future
-	xhr.open('GET', $(selected[0]).attr('link'), true);
-	xhr.responseType = 'blob';
-	xhr.onload = function(e) {
-	  if (this.status == 200) {
-	    var myBlob = this.response;
-	    var image = selected[0];
-		$(image).attr("src", window.URL.createObjectURL(myBlob));
-		image.id = image.name;
-		image.name = "Facebook Photo";
-		myBlob.name = image.name;
-		myBlob.lastModifiedDate = new Date();
-		image.file = myBlob;
-		console.log(image.file);
-		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
-	    // myBlob is now the blob that the object URL pointed to.
-	  }
-	};
-	xhr.send();
-}
-
 function openMediaFiles(files) {
     for (var i = 0; i < files.length; i++) {
 		var file = files[i];
@@ -1131,7 +1106,6 @@ function save() {
 			bento.image_hyperlink = image.hyperlink;
 			var croppedImage = createCroppedImage(bento, image, container);
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
-			console.log(image);
 			if (!image.saved) {
 				if (image.file) {
 					uploadFile(image.file);
@@ -1786,6 +1760,7 @@ function setImageDialogImage(image) {
 
 function getImageDialogImage() {
 	return $(imageDialogSelector).data("target-image");
+
 }
 
 /***
@@ -1912,4 +1887,3 @@ function selectFacebook(elem){
 	}
 	$(elem).addClass("facebook-container-selected");
 }
-	

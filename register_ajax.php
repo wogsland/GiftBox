@@ -3,7 +3,7 @@ include_once 'util.php';
 include_once 'config.php';
 include_once 'mail.php';
 include_once 'password.php';
-include_once 'EventLogger.class.php';
+include_once 'eventLogger.class.php';
 include_once 'database.php';
 require 'User.class.php';
 
@@ -40,7 +40,7 @@ if (User::exists($user->email_address)) {
 		$event = REGISTER_USING_FACEBOOK;
 	}
 	$user->save();
-	$event = new EventLogger($user->getId(), $event);
+	$event = new eventLogger($user->getId(), $event);
 	$event->log();
 
 	if ($reg_type == 'EMAIL') {

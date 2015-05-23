@@ -200,6 +200,5 @@
 			<a class="dialog-button dialog-button-right" href="javascript:void(0)" onClick="changePassword()">Change Password</a>
 		</div>
 	</form>
-
 </body>
 </html>
