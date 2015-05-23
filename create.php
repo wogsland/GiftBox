@@ -361,7 +361,11 @@
 			<div id="add-images-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
+<<<<<<< HEAD
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><i class="fa fa-facebook fa-3x add-icon"></i></a>
+=======
+						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()" ><i class="fa fa-facebook fa-3x add-icon"></i></a>
+>>>>>>> develop
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
