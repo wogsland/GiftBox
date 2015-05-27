@@ -1,5 +1,5 @@
 <?php
-include_once 'eventLogger.class.php';
+include_once 'EventLogger.class.php';
 include_once 'config.php';
 include_once 'mail.php';
 
@@ -10,7 +10,7 @@ $preview_link = $_POST["preview-link"];
 $event = SEND_GIFTBOX;
 $user_id = $_SESSION["user_id"];
 
-$event = new eventLogger($user_id, $event);
+$event = new EventLogger($user_id, $event);
 $event->log();
 
 // Send the email

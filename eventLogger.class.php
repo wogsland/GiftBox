@@ -1,6 +1,6 @@
 <?php
 include_once 'util.php';
-include_once 'eventLogger.class.php';
+include_once 'EventLogger.class.php';
 
 
 define('REGISTER_USING_EMAIL', 1);
@@ -13,8 +13,9 @@ define('SEND_GIFTBOX', 7);
 define('UPDATE_ACCOUNT_INFO', 8);
 define('CHANGE_PASSWORD', 9);
 define('UPGRADE', 10);
+define('UPDATE_FACEBOOK_ACCESS_TOKEN', 11);
 
-class eventLogger {
+class EventLogger {
 	var $id;
 	var $user_id;
 	var $event_type_id;
@@ -31,6 +32,6 @@ class eventLogger {
 		$sql = "INSERT INTO event_log (user_id, event_type_id, event_info) values (".$this->user_id.", ".$this->event_type_id.", '".$this->event_info."')";
 		execute($sql);
 	}
-} //Class eventLogger
+} //Class EventLogger
 
 ?>

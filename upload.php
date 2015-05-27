@@ -5,6 +5,7 @@ include_once "config.php";
 $file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 $content_type = null;
 if ($file_name) {
+	echo file_get_contents('php://input');
 	$file_data = file_get_contents('php://input');
 	$pos = strpos($file_data, "base64");
 	if ($pos) {

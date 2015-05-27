@@ -29,6 +29,7 @@
 	<script src="js/init.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
+	<script src="js/facebook_init.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>
 	
@@ -338,6 +339,14 @@
 		</form>
 	</div>
 
+	<div id="facebook-album-dialog" title="CHOOSE AN ALBUM">
+		<div id="facebook-albums" onclick="getFacebookAlbums()"></div>
+	</div>
+
+	<div id="facebook-photos-dialog" title="CHOOSE YOUR PHOTO">
+		<div id="facebook-photos" onClick="getFacebookPhotos()"></div>
+	</div>
+
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -361,11 +370,7 @@
 			<div id="add-images-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
-<<<<<<< HEAD
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Facebook')"><i class="fa fa-facebook fa-3x add-icon"></i></a>
-=======
 						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()" ><i class="fa fa-facebook fa-3x add-icon"></i></a>
->>>>>>> develop
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>

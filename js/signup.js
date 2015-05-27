@@ -67,7 +67,7 @@ function signupSuccess(app_root, signupType, userInfo) {
 	$('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with GiveToken!</span></div>');
 
 	if ($("#signup_level").val() == 2) {
-		pay_with_stripe(email, "SIGNUP");
+		payWithStripe(email, "SIGNUP");
 	} else {
 		if (userInfo.reg_type == "FACEBOOK") {
 			signupInfo("Logging into GiveToken...");
