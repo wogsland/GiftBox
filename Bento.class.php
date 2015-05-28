@@ -115,6 +115,8 @@ class Bento {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {
 				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
+			} elseif (8 !== FALSE){
+				echo "<iframe src=\"".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			}
 		}
 		if ($this->image_hyperlink) {

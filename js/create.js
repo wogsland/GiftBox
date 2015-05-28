@@ -294,7 +294,7 @@ function addVimeo(bento, url) {
 	iframe.style.left = "0px";
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
-	bento.contentURI = url;
+	bento.contentURI = iframe.src;
 	showControl(bento.id + "-close", iframe);
 	unsaved();
 }
@@ -312,7 +312,6 @@ function addYouTube(bento, url) {
 	iframe.style.top = "0px";
 	iframe.style.left = "0px";
 	bento.appendChild(iframe);
-	console.log(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
 	showControl(bento.id + "-close", iframe);
@@ -1130,7 +1129,6 @@ function save() {
 			bento.image_hyperlink = image.hyperlink;
 			var croppedImage = createCroppedImage(bento, image, container);
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
-			console.log(image);
 			if (!image.saved) {
 				if (image.file) {
 					uploadFile(image.file);
