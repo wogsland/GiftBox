@@ -3,6 +3,13 @@ var videoType = /video.*/;
 var audioType = /audio.*/;
 var imageDialogSelector = "#image-dialog"
 
+window.onload = function(){
+    var browser = get_browser_info();
+    if(browser.name != "Chrome" && browser.name != "Opera"){
+    	$("#browser-dialog").dialog("open");
+    }
+};
+
 function addTitleText(text, container) {
 	var div = document.createElement("div");
 	div.innerHTML = text;

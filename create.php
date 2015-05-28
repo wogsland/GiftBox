@@ -351,6 +351,10 @@
 		<div>Login failed. This was either because of your login information or because you have no albums on facebook.</div>
 	</div>
 
+	<div id="browser-dialog" title="BROWSER WARNING">
+		<div>Please Note: Our product currently works best with Chrome or Opera. For best result, use one of those browsers.</div>
+	</div>
+
 
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
