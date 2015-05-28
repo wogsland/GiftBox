@@ -98,6 +98,8 @@ function handleFBLogin(response) {
 					processLogin(api_response);
 				} else if (data.status === "ERROR"){
 					loginError("Facebook authorization failed on login.");
+				} else if (data.status === "NO_USER"){
+					loginError("This Facebook account is not registered. Please use the sign up button to continue.");
 				}
 			}).fail(function() {
 				loginError("Facebook authorization failed");

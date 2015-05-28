@@ -55,7 +55,7 @@ if (User::exists($email)) {
 	}
 } else {
 	$response['status'] = "ERROR";
-	$response['message'] = "The email address \"".$email."\" does not belong to any GiveToken account.";
+	$response['message'] = "The email address \"".$email."\" does not belong to any GiveToken account. Please use the signup button to register!";
 }
 
 header('Content-Type: application/json');
