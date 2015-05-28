@@ -340,12 +340,18 @@
 	</div>
 
 	<div id="facebook-album-dialog" title="CHOOSE AN ALBUM">
-		<div id="facebook-albums" onclick="getFacebookAlbums()"></div>
+		<div id="facebook-albums" onclick="getFacebookAlbums()"><a id="previous-album" style="display:none">Previous</a><a id="next-album" style="display:none">Next</a></div>
 	</div>
 
 	<div id="facebook-photos-dialog" title="CHOOSE YOUR PHOTO">
 		<div id="facebook-photos" onClick="getFacebookPhotos()"></div>
 	</div>
+
+	<div id="facebook-login-fail-dialog"  title="LOGIN FAILED">
+		<div>Login failed. This was either because of your login information or because you have no albums on facebook.</div>
+	</div>
+
+
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
@@ -370,7 +376,7 @@
 			<div id="add-images-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
-						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()" ><i class="fa fa-facebook fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>

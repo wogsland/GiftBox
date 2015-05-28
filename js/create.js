@@ -478,7 +478,7 @@ function addFacebookImage(){
 	$("#facebook-photos-dialog").dialog("close");
 	var xhr = new XMLHttpRequest();
 	//only use the first one. add additional photos if possible in the future
-	xhr.open('GET', $(selected[0]).attr('link'), true);
+	xhr.open('GET', selected[0].link, true);
 	xhr.responseType = 'blob';
 	xhr.onload = function(e) {
 	  if (this.status == 200) {
@@ -490,7 +490,6 @@ function addFacebookImage(){
 		myBlob.name = image.name;
 		myBlob.lastModifiedDate = new Date();
 		image.file = myBlob;
-		console.log(image.file);
 		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
 	    // myBlob is now the blob that the object URL pointed to.
 	  }
@@ -1794,36 +1793,75 @@ FACEBOOK DIALOG
 
 function selectFacebookImage(){
 	$('#facebook-album-dialog').empty();
-	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
+	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"><a id="previous-album" style="display:none">Previous</a><a id="next-album" style="display:none">Next</a></div>');
 	$('#facebook-album-dialog').dialog("open");
 }
 
-function getFacebookAlbums(state){
+function getFacebookAlbums(state, link){
 	if(state == null){
 		state = 1;
 	}
 	var token;
+	$('#facebook-albums ul div').empty();
+	$('#facebook-album-dialog').html('<div id="facebook-albums"><a id="previous-album" style="display:none">Previous</a><a id="next-album" style="display:none">Next</a></div>');
 	$.get("get_access_token.php", function(data){
 		token = data[0].access_token;
 		FB.api('/me?access_token='+token, function(response){
 			//Will be empty or null if the user is not logged in and the token hasn't been updated.
 			if(response.id){
-				if(document.getElementById('facebook-albums').innerHTML == ""){
-					FB.api('/'+response.id+'/albums?access_token='+token, function(data){
+				FB.api(link == null ? '/'+response.id+'/albums?access_token='+token : link, function(data){
+					if(data.data.length > 0){
+						previous = data.paging.previous;
+						nex = data.paging.next;
+						if(data.paging.previous){
+							document.getElementById("previous-album").onclick = function(){ getFacebookAlbums(state, previous); };
+							document.getElementById("previous-album").style.display = "inline-block";
+						} else {
+							document.getElementById("previous-album").style.display = "none";
+						}
+
+						if(data.paging.next){
+							document.getElementById("next-album").onclick = function(){ getFacebookAlbums(state, nex); };
+							document.getElementById("next-album").style.display = "inline-block";
+						} else {
+							document.getElementById("next-album").style.display = "none";
+						}
 						data = data.data;
-						document.getElementById('facebook-albums').innerHTML += '<ul>';
+						var ul = document.createElement("ul");
+						document.getElementById('facebook-albums').appendChild(ul);
 						for(i = 0; i < data.length; i++){
 							if(data[i].count != null){
-								document.getElementById('facebook-albums').innerHTML += "<div class='facebook-container facebook-container-hover' onclick='getFacebookPhotos(\""+data[i].id.toString()+ "\")'><div class='inner-thumbnail-container'><img id='"+ data[i].cover_photo +"' class='photo-thumbnail'><div class='facebook-file-name'>"+ data[i].name +"</div></div></div>"
+								var container = document.createElement("div");
+								container.classList.add("facebook-container");
+								container.classList.add("facebook-container-hover");
+								container.setAttribute("id", data[i].id.toString());
+								container.onclick = function(){getFacebookPhotos(this);};
+								ul.appendChild(container);
+
+								var inner = document.createElement("div");
+								inner.classList.add("inner-thumbanil-container");
+								container.appendChild(inner);
+
+								var img = document.createElement("img");
+								img.classList.add("photo-thumbnail");
+								img.setAttribute("id", data[i].cover_photo);
+								inner.appendChild(img);
+
+								var file_name = document.createElement("div");
+								file_name.classList.add('facebook-file-name');
+								file_name.innerText = data[i].name;
+								inner.appendChild(file_name);
+
 								val = data[i];
 								FB.api('/'+val.cover_photo+'?access_token='+token, function(photo){
 									$('#'+photo.id).attr('src', photo.picture);
 								});				
 							}		
 						}
-						document.getElementById('facebook-albums').innerHTML += '</ul>';
-					});
-				}
+					} else {
+						$("#facebook-login-fail-dialog").dialog("open");
+					}
+				});
 			} else {
 				FB.login(function(response){
 					if (response.status === 'connected') {
@@ -1852,11 +1890,11 @@ function getFacebookAlbums(state){
 				}, {scope: 'user_photos, public_profile, email'});
 			}
 		});
-	})
-	
+	})	
 }
 
-function getFacebookPhotos(album_id){
+function getFacebookPhotos(elem){
+	album_id = elem.id;
 	$( "#facebook-album-dialog" ).dialog("close");
 	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
 	$('#facebook-photos-dialog').dialog("open");
@@ -1872,37 +1910,70 @@ function getFacebookPhotos(album_id){
 }
 
 function setFacebookPage(link, token){	
-	$('#facebook-photos-dialog').html('<div id="facebook-photos" onClick="getFacebookPhotos()"></div>');
+	$('#facebook-photos-dialog').html('<div id="facebook-photos"></div>');
 	//if you change pages, you will not be able to save the selected (limits to 25 images selected)
 	var selected = document.getElementsByClassName("facebook-container-selected");
+
 	for(i = 0; i < selected.length; i++){
 		$(selected).removeClass("facebook-container-selected");
 	}
+
 	FB.api(link, function(photos) {
-		if(photos.data.length > 0){
+		var photo = document.getElementById("facebook-photos");
+
+		if(photos.data && photos.data.length > 0){
+
 			if(photos.paging.previous){
-				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.previous + ", " + token + "\")'>Previous</a>";
+				var prev = document.createElement("a");
+				prev.innerText = "Previous";
+				prev.setAttribute("id", "previous");
+				document.getElementById("facebook-photos").appendChild(prev);
 			}
+
 			if(photos.paging.next){
-				document.getElementById("facebook-photos").innerHTML += "<a onclick = 'setFacebookPage(\"" + photos.paging.next + ", " + token + "\")'>Next</a>";
+				var next = document.createElement("a");
+				next.innerText = "Next";
+				next.setAttribute("id", "next");
+				document.getElementById("facebook-photos").appendChild(next);
 			}
+
 			for(i = 0; i < photos.data.length; i++){
-				if(document.getElementById(''+ photos.data[i].id.toString()) == null){
-					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
-					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
-					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
-				} else {
-					//The element exists because it wasn't removed  from the facebook-album dialog. investigating
+
+				if(document.getElementById(photos.data[i].id.toString()) != null){
 					document.getElementById(photos.data[i].id.toString()).remove();
-					document.getElementById('facebook-photos').innerHTML += "<div class='facebook-container facebook-container-hover' onclick= selectFacebook(this)><div class='inner-thumbnail-container'><img id='"+ photos.data[i].id.toString() +"' class='photo-thumbnail'></div></div>"
-					$('#'+photos.data[i].id).attr('src', photos.data[i].picture);
-					$('#'+photos.data[i].id).attr('link', photos.data[i].source);
 				}
+
+				var container = document.createElement("div");
+				container.classList.add("facebook-container");
+				container.classList.add("facebook-container-hover");
+				container.onclick = function(){ selectFacebook(this);};
+
+				var inner = document.createElement("div");
+				inner.classList.add("inner-thumbnail-container");
+				container.appendChild(inner);
+
+				var img = document.createElement("img");
+				img.classList.add("photo-thumbnail");
+				img.src = photos.data[i].picture;
+				img.link = photos.data[i].source;
+				inner.appendChild(img);
+
+				document.getElementById('facebook-photos').appendChild(container);
+			}
+			if(document.getElementById("previous")){
+				document.getElementById("previous").onclick = function(){ setFacebookPage(photos.paging.previous, token); };
+			} 
+			if(document.getElementById("next")){
+				document.getElementById("next").onclick = function(){ setFacebookPage(photos.paging.next, token);};
 			}
 		} else {
 			document.getElementById('facebook-photos').innerHTML = "There was either an error loading the photos, or there are no photos in the album. Please verify there are photos in the album on Facebook.";
 		}
 	});
+}
+
+function test(elem){
+	alert(elem);
 }
 
 function selectFacebook(elem){
@@ -1912,4 +1983,3 @@ function selectFacebook(elem){
 	}
 	$(elem).addClass("facebook-container-selected");
 }
-	
