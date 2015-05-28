@@ -212,14 +212,14 @@ When deploying using the following procedures, *be absolutely sure* that you are
 
 - `git checkout develop`
 - `git pull github develop`
-- `gcloud preview app deploy ./ --project t-sunlight-757 --version 1`
+- `gcloud preview app deploy app.yaml --project t-sunlight-757 --version 1`
 
 ### <a name="deploy-production"></a>Deploy to Production
 *assumptions: you have merged your pull request into master, pulled the GH master to your local machine, and you are at the project root (i.e. `stone-timing-557/default/`)*
 
 - `git checkout master`
 - `git pull github master`
-- `gcloud preview app deploy ./ --project stone-timing-557 --version 1`
+- `gcloud preview app deploy app.yaml --project stone-timing-557 --version 1`
 
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
 
