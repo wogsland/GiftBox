@@ -212,3 +212,19 @@ $(function() {
 		},
 	});
 });
+
+$(function(){
+	$("#browser-dialog").dialog({
+		dialogClass: 'browser-dialog',
+		autoOpen: false,
+		resizable: false,
+		width: 300,
+		height: 200,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				$(this).dialog("close");
+			}
+		}
+	})
+})
