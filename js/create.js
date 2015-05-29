@@ -1546,8 +1546,6 @@ function selectAddNav(navId) {
 
 	});
 
-	$("#gallery-check")[0].checked = false;
-
 	// set the selected icon
 	selectedNav.removeClass("add-nav-item-hover");
 	selectedNav.addClass("add-nav-item-selected");
