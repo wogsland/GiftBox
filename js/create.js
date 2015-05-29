@@ -1120,6 +1120,7 @@ function save() {
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
+		bento.gallery_file_list = [];
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1157,6 +1158,12 @@ function save() {
 		}
 		if (this.contentURI) {
 			bento.content_uri = this.contentURI;
+		}
+		if (this.image_file_list && this.image_file_list.length > 0){
+			for(i = 0; i < this.image_file_list.length; i++){
+				uploadFile(this.image_file_list[i][1]);
+				bento.gallery_file_list.push(this.image_file_list[i][0]);
+			}
 		}
 	});
 
@@ -1539,6 +1546,8 @@ function selectAddNav(navId) {
 
 	});
 
+	$("#gallery-check")[0].checked = false;
+
 	// set the selected icon
 	selectedNav.removeClass("add-nav-item-hover");
 	selectedNav.addClass("add-nav-item-selected");
@@ -1553,22 +1562,63 @@ function selectAddNav(navId) {
 function selectThumbnail(thumbnail) {
 	var selectedThumbnail = $("#"+thumbnail.id);
 
-	// restore all number buttons
-	$(".thumbnail-container").each(function(i) {
-		$(this).removeClass("thumbnail-container-hover");
-		$(this).addClass("thumbnail-container-hover");
-		$(this).removeClass("thumbnail-container-selected");
-	});
+	if($(".thumbnail-container").parent()[0].id === "add-images-desktop"){
+		$(".thumbnail-container").each(function(i) {
+			$(this).removeClass("thumbnail-container-hover");
+			$(this).addClass("thumbnail-container-hover");
+			$(this).removeClass("thumbnail-container-selected");
+		});
 
-	// set the selected number button
-	selectedThumbnail.removeClass("thumbnail-container-hover");
-	selectedThumbnail.addClass("thumbnail-container-selected");
+		// set the selected number button
+		selectedThumbnail.removeClass("thumbnail-container-hover");
+		selectedThumbnail.addClass("thumbnail-container-selected");
+	} else {
+		if(selectedThumbnail[0].classList.contains("thumbnail-container-selected")){
+			selectedThumbnail.addClass("thumbnail-container-hover");
+			selectedThumbnail.removeClass("thumbnail-container-selected");
+		} else{
+			selectedThumbnail.removeClass("thumbnail-container-hover");
+			selectedThumbnail.addClass("thumbnail-container-selected");
+		}
+	}
+
 }
 
 function removeSelection(parentId) {
 	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
 	jqueryContainer.removeClass("thumbnail-container-selected");
 	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
+function doGalleryAdd(){
+	var jqueryObject;
+	var bentoId;
+	var element;
+	var bento;
+
+	bento = $(".selected-bento")[0];
+	bento.gallery = true;
+	bento.image_file_list = [];
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() > 0){
+		removeSelection("add-images-desktop");
+		var element;
+		jqueryObject.each(function(i){
+			bento.image_file_list.push([this.id, this.file]);
+		});
+		unsaved();
+	}
+
+}
+
+function loadPhotoOptions(){
+	$("#add-images-desktop > div").each(function(i){
+		$("#choose-photo-options")[0].appendChild(this);
+	});
+}
+
+function createGallery(){
+	$("#choose-photos-dialog").dialog("open");
 }
 
 function doAdd() {
@@ -1674,6 +1724,7 @@ function selectImage(image) {
 
 	// Highlight the bento
 	image.closest(".bento").addClass("selected-bento");
+	$("#choose-photos-dialog").value = "1.1";
 
 	// Show the dialog if it's not already open
 	openImageDialog();

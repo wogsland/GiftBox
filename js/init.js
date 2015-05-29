@@ -4,7 +4,7 @@ $(function() {
 		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,
-		width: 620,
+		width: 650,
 		height: 580,
 		modal: true,
 	});
@@ -227,4 +227,30 @@ $(function(){
 			}
 		}
 	})
-})
+});
+
+$(function(){
+	$("#choose-photos-dialog").dialog({
+		dialogClass: 'choose-photos-dialog',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				$(this).dialog("close");
+				doGalleryAdd();
+			}
+		},
+		open: function(){
+			loadPhotoOptions();
+		},
+		close: function(){
+			//call the add function for gallery
+			$("#choose-photo-options > div").each(function(i){
+				$("#add-images-desktop")[0].appendChild(this);
+			});
+		}
+	})
+});

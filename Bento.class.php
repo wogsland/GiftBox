@@ -6,6 +6,7 @@ if ($google_app_engine) {
 }
 
 include_once 'util.php';
+include 'PhotoGallery.class.php';
 
 class Bento {
 	var $id;
@@ -27,6 +28,7 @@ class Bento {
 	var $image_left_in_container;
 	var $image_top_in_container;
 	var $image_hyperlink;
+	var $gallery_file_list = array();
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -53,12 +55,34 @@ class Bento {
 			."'$this->image_top_in_container', '$this->image_left_in_container', "
 			."'$this->image_hyperlink')";
 		$this->id = insert($sql);
+		if(sizeof($this->gallery_file_list) > 0){
+			$photo_gallery = new PhotoGallery();
+			$photo_gallery->setBentoId($this->id);
+			$photo_gallery->setFileNames($this->gallery_file_list);
+			$photo_gallery->save();
+		}
 	}
 	
 	public function render() {
 		include 'config.php';
-
-		echo '<div class="bento">'.PHP_EOL;
+		$gallery = PhotoGallery::fetch($this->id);
+		if(sizeof($gallery)> 0){
+			foreach($gallery as $file_name){
+				if ($google_app_engine) {
+	//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
+	//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name[2], $use_https);
+				} else {
+					$image_path = $file_storage_path.$file_name[2];
+				}
+				array_push($this->gallery_file_list, $image_path);
+			}
+		}
+		if ($this->gallery_file_list){
+			echo '<div class="bento gallery '.$this->id.'" href="'.$this->gallery_file_list[0].'">'.PHP_EOL;
+		} else {
+			echo '<div class="bento">'.PHP_EOL;
+		}
 		
 		if (is_spotify($this->content_uri)) {
 			$background_color = "black";
@@ -123,5 +147,12 @@ class Bento {
 			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
 		}
 		echo '</div>'.PHP_EOL;
+		if ($this->gallery_file_list){
+			foreach($this->gallery_file_list as $key => $file_name){
+				if($key != 0){
+					echo '<div id="'.$key.'"href="'.$file_name.'" class="'.$this->id.'"></div>';
+				}
+			}
+		}
 	}
 }

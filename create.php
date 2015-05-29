@@ -355,7 +355,9 @@
 		<div>Please Note: Our product currently works best with Chrome or Opera. For best result, use one of those browsers.</div>
 	</div>
 
-
+	<div id="choose-photos-dialog" title="CHOOSE COVER FOR GALLERY" value="">
+		<div id="choose-photo-options"></div>
+	</div>
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
@@ -386,7 +388,7 @@
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
-				<div class="add-content">
+				<div class="add-content" id="add-images">
 					<div id="add-images-desktop">
 					</div>
 				</div>
@@ -450,6 +452,7 @@
 
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()">CREATE GALLERY</div>
 			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
 			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>

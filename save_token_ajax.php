@@ -20,6 +20,7 @@ if (isset($_SESSION['user_id'])) {
 	} catch (Exception $e) {
 		$response['status'] = "ERROR";
 		$response['message'] = $e->getMessage();
+		$repsonse['object'] = $e;
 	}
 } else {
 	$response['status'] = "ERROR";
