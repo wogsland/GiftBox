@@ -263,8 +263,10 @@
 							<div class="bento" id="bento-1-1" onclick="bentoClick(this)">
 								<p class="click-to-add">click to add</p>
 								<div class="image-slider" id="bento-1-1-slider"></div>
+								<i class="show-overlay" id="bento-1-1-show-overlay" onclick="showOverlay(event, this)"></i>
 								<i class="close-button icon_close_alt" id="bento-1-1-close" onclick="closeClicked(event, this)"></i>
 								<i class="bento-link-icon icon-link fa fa-link fa-lg" id="bento-1-1-link-icon"></i>
+								<div class="text-overlay-hidden" id="bento-1-1-text-overlay"></div>
 							</div>
 						</div>
 						<div id="column-1-2" class="column padded height100 width33">
@@ -357,6 +359,15 @@
 
 	<div id="choose-photos-dialog" title="CHOOSE COVER FOR GALLERY" value="">
 		<div id="choose-photo-options"></div>
+	</div>
+
+	<div id="input-overlay-dialog" title="INPUT TEXT FOR OVERLAY">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="url">Write your message here</label>
+				<input class="dialog-input" id="overlay-dialog" type="text" name="url" id="url">
+		    </fieldset>
+		</form>
 	</div>
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
@@ -452,6 +463,7 @@
 
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
 			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()">CREATE GALLERY</div>
 			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>

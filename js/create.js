@@ -634,6 +634,24 @@ function showControl(controlId, target) {
 */	
 }
 
+function showOverlay(event, showButton){
+	var bento = showButton.parentNode;
+	var text = $("#"+bento.id+"-text-overlay");
+	if(bento.overlayText){
+		if(text[0].classList.contains("text-overlay-hidden")){
+			text[0].innerHTML = bento.overlayText;
+			text.removeClass("text-overlay-hidden");
+			text.addClass("text-overlay-show");
+			text.draggable({
+				containment: "parent"
+			});
+		} else {
+			$(text).removeClass("text-overlay-show");
+			$(text).addClass("text-overlay-hidden");
+		}
+	}
+}
+
 function closeClicked(event, closeButton) {
 	var bento = closeButton.parentNode;
 	if (closeButton.target) {
@@ -656,6 +674,10 @@ function closeClicked(event, closeButton) {
 		hideControl(bento.id + "-slider");
 		hideControl(bento.id + "-link-icon");
 	}
+	if(bento.overlayText){
+		hideControl(bento.id + "-show-overlay");
+	}
+	bento.onclick=function(){bentoClick(this)};
 	event.stopPropagation();
 	unsaved();
 }
@@ -1631,7 +1653,7 @@ function doAdd() {
 
 	bentoId = $("#add-dialog").attr("target-bento");
 	bento = $("#"+bentoId)[0];
-
+	bento.onclick = null;
 	// IMAGE
 	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
 	if (jqueryObject.size() > 0) {
@@ -2026,10 +2048,6 @@ function setFacebookPage(link, token){
 	});
 }
 
-function test(elem){
-	alert(elem);
-}
-
 function selectFacebook(elem){
 	selection = document.getElementsByClassName("facebook-container-selected");
 	for(i = 0; i < selection.length; i++){
@@ -2037,3 +2055,25 @@ function selectFacebook(elem){
 	}
 	$(elem).addClass("facebook-container-selected");
 }
+
+function openOverlay(){
+	//open the dialog for what text they want
+		//put button in corner of bento
+		//display text-dialog on click.
+	//add text to bento in db.
+	//change preview
+	$("#input-overlay-dialog").dialog("open");
+}
+
+function addOverlay(text){
+	var bento;
+	bento = $(".selected-bento")[0];
+	bento.overlayText = text
+	var textbox = $("#"+bento.id+"-text-overlay");
+	if(textbox[0].classList.contains("text-overlay-show")){
+		textbox[0].innerHTML = text;
+	}
+
+
+	showControl(bento.id + "-show-overlay");
+;}

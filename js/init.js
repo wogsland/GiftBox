@@ -254,3 +254,23 @@ $(function(){
 		}
 	})
 });
+
+$(function(){
+	$("#input-overlay-dialog").dialog({
+		dialogClass: 'input-overlay-dialog',
+		autoOpen: false,
+		resizable: false,
+		height: 200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				addOverlay($("#overlay-dialog")[0].value);
+				$(this).dialog("close");
+			},
+			Back: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+});
