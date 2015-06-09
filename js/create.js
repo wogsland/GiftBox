@@ -1075,9 +1075,10 @@ function preview() {
 }
 
 function saveLetter() {
-	var letterTextInput = document.getElementById("letter-text");
-	var newValue = letterTextInput.value;
+	var letterTextInput = CKEDITOR.instances.lettertext.getData();
+	var newValue = letterTextInput;
 	var oldValue = window.top_template.letterText;
+	console.log(newValue);
 	if (newValue !== oldValue) {
 		window.top_template.letterText = newValue;
 		unsaved();

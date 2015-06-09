@@ -30,6 +30,7 @@
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
 	<script src="js/facebook_init.js"></script>
+	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>
 	
@@ -265,7 +266,12 @@
 			<!------------------------ LETTER ------------------------->
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
-					<textarea id="letter-text"></textarea>
+					<br>
+					<textarea id="lettertext"></textarea>
+					<script>
+		                CKEDITOR.replace( 'lettertext' );
+		            </script>
+		            <br>
 					<div id="add-attachment-desktop"></div>
 					<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
 				</form>
