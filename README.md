@@ -14,6 +14,16 @@ hosted on Google Cloud
 - production: [givetoken.com](http://givetoken.com/)
 - staging: [http://t-sunlight-757.appspot.com/](http://t-sunlight-757.appspot.com/)
 
+## <a name="database"></a>Database Management
+
+### Creating a Local Instance of your database.
+
+#### Assumptions:
+- You have downloaded and installed MySQL workbench and have created your local instance
+- You have access to the Google Developer Console linked in the following file.
+
+To create a local instance of the givetoken database. Refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing).
+
 ## <a name="branching"></a>Branching Strategy
 
 ### Basic Tenets
