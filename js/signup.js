@@ -99,7 +99,7 @@ function signupEmail() {
 function signupFacebook() {
 	$("#reg_type").val("FACEBOOK");
 	signupInfo("Checking Facebook login status.  Please wait...");
-	FB.login(function(response){handleFBReg(response)}, {scope: 'public_profile, email'});
+	FB.login(function(response){handleFBReg(response)}, {scope: 'user_photos, public_profile, email'});
 }
 
 function handleFBReg(response) {
