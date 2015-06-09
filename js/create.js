@@ -373,10 +373,10 @@ function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
-		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
+		var dataURL = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key=AIzaSyArRtXJ4scccS9Dw6rcHgKhi0UCR3IHTMU&part=snippet&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-				var title = data.entry.title.$t;
+				var title = data.items[0].snippet.title.$t;
 				var img = document.createElement("img");
 				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 				img.id = videoId;
@@ -734,17 +734,6 @@ function handleSliderEvent(event, ui) {
 	unsaved();
 }
 
-$(function() {
-	$(".image-slider").slider({
-		orientation: "vertical",
-		min: 100,
-		max: 400,
-		slide: function(event, ui) {
-			handleSliderEvent(event, ui);
-		}
-	});
-});
-
 function handleHorizontalDrag(target, movement) {
 	var index;
 	var width;
@@ -812,202 +801,6 @@ function handleVerticalDrag(target, movement) {
 	}
 }
 
-$(function() {
-	var divider;
-
-	// Template #1
-	divider = document.getElementById("divider-1-1");
-	divider.leftDependents = [document.getElementById("column-1-1")];
-	divider.rightDependents = [
-		document.getElementById("column-1-2"),
-		document.getElementById("divider-container-1-2")];
-
-	divider = document.getElementById("divider-1-2");
-	divider.leftDependents = [
-		document.getElementById("column-1-2"),
-		document.getElementById("divider-container-1-1")];
-	divider.rightDependents = [
-		document.getElementById("column-1-3"),
-		document.getElementById("divider-1-3"),
-		document.getElementById("divider-container-1-3")];
-
-	divider = document.getElementById("divider-1-3");
-	divider.topDependents = [document.getElementById("column-1-4")];
-	divider.bottomDependents = [document.getElementById("column-1-5")];
-
-	$("#divider-1-1").draggable({
-		axis: "x",
-		containment: "#divider-container-1-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		},
-	});
-
-	$("#divider-1-2").draggable({
-		axis: "x",
-		containment: "#divider-container-1-2",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-1-3").draggable({
-		axis: "y",
-		containment: "#divider-container-1-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	// Template #2
-	divider = document.getElementById("divider-2-1");
-	divider.leftDependents = [
-		document.getElementById("column-2-1"),
-		document.getElementById("divider-2-2"),
-		document.getElementById("divider-container-2-2")];
-	divider.rightDependents = [
-		document.getElementById("column-2-2"),
-		document.getElementById("divider-2-3"),
-		document.getElementById("divider-2-4"),
-		document.getElementById("divider-container-2-3"),
-		document.getElementById("divider-container-2-4")];
-
-	divider = document.getElementById("divider-2-2");
-	divider.topDependents = [document.getElementById("column-2-3")];
-	divider.bottomDependents = [document.getElementById("column-2-4")];
-
-	divider = document.getElementById("divider-2-3");
-	divider.topDependents = [document.getElementById("column-2-5")];
-	divider.bottomDependents = [
-		document.getElementById("column-2-6"),
-		document.getElementById("divider-container-2-4")];
-
-	divider = document.getElementById("divider-2-4");
-	divider.topDependents = [
-		document.getElementById("column-2-6"),
-		document.getElementById("divider-container-2-3")];
-	divider.bottomDependents = [document.getElementById("column-2-7")];
-
-	$("#divider-2-1").draggable({
-		axis: "x",
-		containment: "#divider-container-2-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-2-2").draggable({
-		axis: "y",
-		containment: "#divider-container-2-2",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-2-3").draggable({
-		axis: "y",
-		containment: "#divider-container-2-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-2-4").draggable({
-		axis: "y",
-		containment: "#divider-container-2-4",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	// Template #3
-	divider = document.getElementById("divider-3-1");
-	divider.leftDependents = [
-		document.getElementById("column-3-1"),
-		document.getElementById("divider-3-3"),
-		document.getElementById("divider-container-3-3")];
-	divider.rightDependents = [
-		document.getElementById("column-3-2"),
-		document.getElementById("divider-3-4"),
-		document.getElementById("divider-container-3-4")];
-
-	divider = document.getElementById("divider-3-2");
-	divider.leftDependents = [
-		document.getElementById("column-3-2"),
-		document.getElementById("divider-3-4"),
-		document.getElementById("divider-container-3-4"),
-		document.getElementById("divider-container-3-1")];
-	divider.rightDependents = [
-		document.getElementById("column-3-3"),
-		document.getElementById("divider-3-5"),
-		document.getElementById("divider-container-3-5")];
-
-	divider = document.getElementById("divider-3-3");
-	divider.topDependents = [document.getElementById("column-3-4")];
-	divider.bottomDependents = [document.getElementById("column-3-5")];
-
-	divider = document.getElementById("divider-3-4");
-	divider.topDependents = [document.getElementById("column-3-6")];
-	divider.bottomDependents = [document.getElementById("column-3-7")];
-
-	divider = document.getElementById("divider-3-5");
-	divider.topDependents = [document.getElementById("column-3-8")];
-	divider.bottomDependents = [document.getElementById("column-3-9")];
-
-	$("#divider-3-1").draggable({
-		axis: "x",
-		containment: "#divider-container-3-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-3-2").draggable({
-		axis: "x",
-		containment: "#divider-container-3-2",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-3-3").draggable({
-		axis: "y",
-		containment: "#divider-container-3-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-3-4").draggable({
-		axis: "y",
-		containment: "#divider-container-3-4",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-3-5").draggable({
-		axis: "y",
-		containment: "#divider-container-3-5",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-});
-
 function setPreviewLink (template) {
 	var linkText;
 	if (template.wrapperType) {
@@ -1023,21 +816,48 @@ function setPreviewLink (template) {
 	}
 }
 
-function stack(top, middle, bottom) {
-	var top_template = document.getElementById(top);
-
-	// Only shuffle the stack if the top is not on top
-	if (!Object.is(top_template, window.top_template)) {
+function showTemplate(template) {
+	// Only hide the other templates and show the target if the target is not on top
+	if (!Object.is(template, window.top_template)) {
 		closeImageDialog();
-		var middle_template = document.getElementById(middle);
-		var bottom_template = document.getElementById(bottom);
-		window.top_template = top_template;
-
-		setPreviewLink(top_template);
-		top_template.style.zIndex = 3;
-		middle_template.style.zIndex = 2;
-		bottom_template.style.zIndex = 1;
+		window.top_template = template;
+		setPreviewLink(template);
+		$(".template").each(function(){
+			$(this).css("display", "none");
+		});
+		$("#"+template.id).css("display", "block");
 	}
+}
+
+function selectTemplate(templateId) {
+	var template = document.getElementById(templateId);
+	if (!template) {
+		$.get("templates/create-"+templateId+".html", function(data){
+			$("#template-container").append(data);
+			template = document.getElementById(templateId);
+			initTemplate($("#"+templateId));
+			template.giftboxName = "Untitled";
+			template.giftboxId = null;
+			template.letterText = "";
+			template.wrapperType = "";
+			template.unloadCount = 3;
+			
+			// initialize the sliders
+			$("#"+templateId+" .image-slider").slider({
+				orientation: "vertical",
+				min: 100,
+				max: 400,
+				slide: function(event, ui) {
+					handleSliderEvent(event, ui);
+				}
+			});
+			
+			showTemplate(template);
+		});
+	} else {
+		showTemplate(template);
+	}
+
 }
 
 function calcTop(bento, image, container) {
@@ -1255,9 +1075,10 @@ function preview() {
 }
 
 function saveLetter() {
-	var letterTextInput = document.getElementById("letter-text");
-	var newValue = letterTextInput.value;
+	var letterTextInput = CKEDITOR.instances.lettertext.getData();
+	var newValue = letterTextInput;
 	var oldValue = window.top_template.letterText;
+	console.log(newValue);
 	if (newValue !== oldValue) {
 		window.top_template.letterText = newValue;
 		unsaved();
@@ -2036,4 +1857,83 @@ function selectFacebook(elem){
 		$(selection[i]).removeClass("facebook-container-selected");
 	}
 	$(elem).addClass("facebook-container-selected");
+}
+
+function initTemplate(template) {
+	var templateId = template.attr("id");
+	var templateNumber = templateId.substring(templateId.indexOf("-")+1);
+	$("[id^='divider-"+templateNumber+"']").each(function(){
+		
+		// position the dividers
+		var left = $(this).data("left");
+		var top = $(this).data("top");
+		var width = $(this).data("width");
+		if (typeof left != 'undefined') {
+			$(this).css("left", left);
+		}
+		if (typeof top != 'undefined') {
+			$(this).css("top", top);
+		}
+		if (typeof width != 'undefined') {
+			$(this).css("width", width);
+		}
+
+		// set up dependencies
+		var leftDependents = $(this).data("left-dependents");
+		var rightDependents = $(this).data("right-dependents");
+		var topDependents = $(this).data("top-dependents");
+		var bottomDependents = $(this).data("bottom-dependents");
+		
+		// set the left dependents
+		$(this)[0].leftDependents = new Array();
+		if (typeof leftDependents != 'undefined') {
+			for (var i=0; i < leftDependents.length; i++) {
+				$(this)[0].leftDependents.push(document.getElementById(leftDependents[i]));
+			}
+		}
+
+		// set the right dependents
+		$(this)[0].rightDependents = new Array();
+		if (typeof rightDependents != 'undefined') {
+			for (var i=0; i < rightDependents.length; i++) {
+				$(this)[0].rightDependents.push(document.getElementById(rightDependents[i]));
+			}
+		}
+
+		// set the top dependents
+		$(this)[0].topDependents = new Array();
+		if (typeof topDependents != 'undefined') {
+			for (var i=0; i < topDependents.length; i++) {
+				$(this)[0].topDependents.push(document.getElementById(topDependents[i]));
+			}
+		}
+
+		// set the bottom dependents
+		$(this)[0].bottomDependents = new Array();
+		if (typeof bottomDependents != 'undefined') {
+			for (var i=0; i < bottomDependents.length; i++) {
+				$(this)[0].bottomDependents.push(document.getElementById(bottomDependents[i]));
+			}
+		}
+		
+		// make it draggable
+		var axis = $(this).data("drag-axis");
+		var ext = $(this).attr("id").substring($(this).attr("id").indexOf("-"))
+		var dragFunction = function(event, ui) {
+				handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
+				ui.originalPosition.left = ui.position.left;
+			};
+		if (axis === "y") {
+			dragFunction = function(event, ui) {
+				handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+				ui.originalPosition.top = ui.position.top;
+			}
+		}
+		$(this).draggable({
+			axis: axis,
+			containment: "#divider-container"+ext,
+			drag: dragFunction
+		});
+
+	});
 }

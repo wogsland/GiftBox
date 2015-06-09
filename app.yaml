@@ -45,6 +45,9 @@ handlers:
 - url: /about-us
   static_dir: about-us
 
+- url: /templates
+  static_dir: templates
+
 - url: /
   script: index.php
 

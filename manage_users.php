@@ -147,7 +147,7 @@
 			</div>
 			<div class="container">
 				<table  class="table-hover" id="manage-table">
-					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Administrator</th><th></th><th></th></tr></thead>
+					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Administrator</th><th></th><th></th></tr></thead>
 					<tbody>
 					<?php
 						$sql = "SELECT * from user WHERE 1 = 1";
@@ -171,6 +171,7 @@
 								<td id="first-name-'.$user->id.'">'.$user->first_name.'</td>
 								<td id="last-name-'.$user->id.'">'.$user->last_name.'</td>
 								<td id="email-'.$user->id.'">'.$user->email_address.'</td>
+								<td id="level-'.$user->id.'">'.($user->level == 1 ? "Basic" : "Standard").'</td>
 								<td id="admin-'.$user->id.'">'.$user->admin.'</td>
 								<td><a class="pure-button open-popup-link" href="javascript:void(0)" onclick="editUser('.$user->id.')"><i class="fa fa-edit fa-lg"></i> Edit</a></td>
 								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td></tr>';
@@ -191,6 +192,9 @@
 			<input id="first-name" name="first_name" type="text" placeholder="First Name">
 			<input id="last-name" name="last_name" type="text" placeholder="Last Name">
 			<input id="email" name="email" type="email" placeholder="Email">
+			<select id="level" name="level">
+				<option value="1">Basic</option>>
+				<option value="2">Standard</option>
 			<label for="admin-edit">
 				<input id="admin" name="admin" type="checkbox" value="Y"> Administrator
 			</label>

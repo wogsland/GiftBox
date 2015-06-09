@@ -30,6 +30,7 @@
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
 	<script src="js/facebook_init.js"></script>
+	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>
 	
@@ -81,7 +82,7 @@
 					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
 
 					<div class="template-thumbnail-container">
-						<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="stack('template-1', 'template-2', 'template-3')">
+						<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="selectTemplate('template-1')">
 							<div class="thumb-padded column height100 width33"></div>
 							<div class="thumb-padded column height100 width33"></div>
 							<div class="thumb-column height100 width33">
@@ -90,7 +91,7 @@
 							</div>
 						</div>
 
-						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="stack('template-2', 'template-3', 'template-1')">
+						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="selectTemplate('template-2')">
 							<div class="thumb-column height100 width50">
 								<div class="thumb-padded thumb-column height50 width100"></div>
 								<div class="thumb-padded thumb-column height50 width100"></div>
@@ -102,7 +103,7 @@
 							</div>
 						</div>
 
-						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="stack('template-3', 'template-1', 'template-2')">
+						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="selectTemplate('template-3')">
 							<div class="thumb-column height100 width33">
 								<div class="thumb-padded thumb-column height33 width100"></div>
 								<div class="thumb-padded thumb-column height66 width100"></div>
@@ -144,156 +145,6 @@
 			</div>
 			<div id="template-scroll-container">
 				<div id="template-container">
-					<div class="template" id="template-3">
-						<div class="divider-container" id="divider-container-3-1"></div>
-						<div class="divider-container" id="divider-container-3-2"></div>
-						<div class="divider-container" id="divider-container-3-3"></div>
-						<div class="divider-container" id="divider-container-3-4"></div>
-						<div class="divider-container" id="divider-container-3-5"></div>
-						<div id="column-3-1" class="column height100 width33">
-							<div id="column-3-4" class="padded column height33 width100">
-								<div class="bento" id="bento-3-1" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-1-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-1-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-3-5" class="padded column height66 width100">
-								<div class="bento" id="bento-3-2" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-2-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-2-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div id="column-3-2" class="column height100 width33">
-							<div id="column-3-6" class="padded column height50 width100">
-								<div class="bento" id="bento-3-3" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-3-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-3-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-3-7" class="padded column height50 width100">
-								<div class="bento" id="bento-3-4" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-4-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-4-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div id="column-3-3" class="column height100 width33">
-							<div id="column-3-8" class="padded column height66 width100">
-								<div class="bento" id="bento-3-5" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-5-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-5-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-3-9" class="padded column height33 width100">
-								<div class="bento" id="bento-3-6" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-3-6-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-3-6-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div class="vertical divider" id="divider-3-1"></div>
-						<div class="vertical divider" id="divider-3-2"></div>
-						<div class="horizontal divider" id="divider-3-3"></div>
-						<div class="horizontal divider" id="divider-3-4"></div>
-						<div class="horizontal divider" id="divider-3-5"></div>
-					</div>
-
-					<div class="template" id="template-2">
-						<div class="divider-container" id="divider-container-2-1"></div>
-						<div class="divider-container" id="divider-container-2-2"></div>
-						<div class="divider-container" id="divider-container-2-3"></div>
-						<div class="divider-container" id="divider-container-2-4"></div>
-						<div id="column-2-1" class="column height100 width50">
-							<div id="column-2-3" class="padded column height50 width100">
-								<div class="bento" id="bento-2-1" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-2-1-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-2-1-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-2-4" class="padded column height50 width100">
-								<div class="bento" id="bento-2-2" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-2-2-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-2-2-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div id="column-2-2" class="column height100 width50">
-							<div id="column-2-5" class="padded column height33 width100">
-								<div class="bento" id="bento-2-3" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-2-3-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-2-3-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-2-6" class="padded column height33 width100">
-								<div class="bento" id="bento-2-4" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-2-4-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-2-4-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-2-7" class="padded column height33 width100">
-								<div class="bento" id="bento-2-5" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-2-5-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-2-5-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div class="vertical divider" id="divider-2-1"></div>
-						<div class="horizontal divider" id="divider-2-2"></div>
-						<div class="horizontal divider" id="divider-2-3"></div>
-						<div class="horizontal divider" id="divider-2-4"></div>
-					</div>
-
-					<div class="template" id="template-1">
-						<div class="divider-container" id="divider-container-1-1"></div>
-						<div class="divider-container" id="divider-container-1-2"></div>
-						<div class="divider-container" id="divider-container-1-3"></div>
-						<div id="column-1-1" class="column padded height100 width33">
-							<div class="bento" id="bento-1-1" onclick="bentoClick(this)">
-								<p class="click-to-add">click to add</p>
-								<div class="image-slider" id="bento-1-1-slider"></div>
-								<i class="close-button icon_close_alt" id="bento-1-1-close" onclick="closeClicked(event, this)"></i>
-								<i class="bento-link-icon icon-link fa fa-link fa-lg" id="bento-1-1-link-icon"></i>
-							</div>
-						</div>
-						<div id="column-1-2" class="column padded height100 width33">
-							<div class="bento" id="bento-1-2" onclick="bentoClick(this)">
-								<p class="click-to-add">click to add</p>
-								<div class="image-slider" id="bento-1-2-slider"></div>
-								<i class="close-button icon_close_alt" id="bento-1-2-close" onclick="closeClicked(event, this)"></i>
-							</div>
-						</div>
-						<div id="column-1-3" class="column height100 width33">
-							<div id="column-1-4" class="column padded height50 width100">
-								<div class="bento" id="bento-1-3" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-1-3-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-1-3-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-							<div id="column-1-5" class="column padded height50 width100">
-								<div class="bento" id="bento-1-4" onclick="bentoClick(this)">
-									<p class="click-to-add">click to add</p>
-									<div class="image-slider" id="bento-1-4-slider"></div>
-									<i class="close-button icon_close_alt" id="bento-1-4-close" onclick="closeClicked(event, this)"></i>
-								</div>
-							</div>
-						</div>
-						<div class="vertical divider" id="divider-1-1"></div>
-						<div class="vertical divider" id="divider-1-2"></div>
-						<div class="horizontal divider" id="divider-1-3"></div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -415,7 +266,12 @@
 			<!------------------------ LETTER ------------------------->
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
-					<textarea id="letter-text"></textarea>
+					<br>
+					<textarea id="lettertext"></textarea>
+					<script>
+		                CKEDITOR.replace( 'lettertext' );
+		            </script>
+		            <br>
 					<div id="add-attachment-desktop"></div>
 					<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
 				</form>
@@ -467,30 +323,9 @@
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);
 		document.getElementById('select-attachment-file').addEventListener('change', handleAttachmentFileSelect, false);
 
-		var template1 = document.getElementById('template-1');
-		var template2 = document.getElementById('template-2');
-		var template3 = document.getElementById('template-3');
-
-		template1.giftboxName = "Untitled";
-		template1.giftboxId = null;
-		template1.letterText = "";
-		template1.wrapperType = "";
-		template1.unloadCount = 3;
-
-		template2.giftboxName = "Untitled";
-		template2.giftboxId = null;
-		template2.letterText = "";
-		template2.wrapperType = "";
-		template2.unloadCount = 3;
-
-		template3.giftboxName = "Untitled";
-		template3.giftboxId = null;
-		template3.letterText = "";
-		template3.wrapperType = "";
-		template3.unloadCount = 3;
-
-		window.top_template = template1;
 		$("#preview-link").val("");
+
+		selectTemplate("template-1");
 	</script>
 
 </body>
