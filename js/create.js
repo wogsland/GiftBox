@@ -373,10 +373,10 @@ function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
-		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
+		var dataURL = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key=AIzaSyArRtXJ4scccS9Dw6rcHgKhi0UCR3IHTMU&part=snippet&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-				var title = data.entry.title.$t;
+				var title = data.items[0].snippet.title.$t;
 				var img = document.createElement("img");
 				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 				img.id = videoId;
