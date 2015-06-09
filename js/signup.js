@@ -10,8 +10,8 @@ document.write('\
 				<div id="signup-alert-placeholder"></div>\
 				<form id="signup-form">\
 					<input type="hidden" id="reg_type" name="reg_type" value="">\
-					<input class="dialog-input" id="first_name" name="first_name" type="text" placeholder="First Name">\
-					<input class="dialog-input" id="last_name" name="last_name" type="text" placeholder="Last Name">\
+					<input class="dialog-input large-input" id="first_name" name="first_name" type="text" placeholder="First Name">\
+					<input class="dialog-input large-input" id="last_name" name="last_name" type="text" placeholder="Last Name">\
 					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Your Email">\
 					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
 					<select class="dialog-input large-input" id="signup_level" name="signup_level">\
