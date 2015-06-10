@@ -71,54 +71,26 @@
 
 				<div class="sidebar-tab-container" id="template-tab-container">
 					<span class="template-tab-text">PICK A TEMPLATE</span>
-					<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('all')">ALL</a>
-					<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
-					<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
-					<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
-					<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
-					<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
-					<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
-					<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
-					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
+					<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showThumbnails('all')">ALL</a>
+					<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showThumbnails(2)">2</a>
+					<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showThumbnails(3)">3</a>
+					<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showThumbnails(4)">4</a>
+					<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showThumbnails(5)">5</a>
+					<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showThumbnails(6)">6</a>
+					<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showThumbnails(7)">7</a>
+					<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showThumbnails(8)">8</a>
+					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showThumbnails(9)">9</a>
 
 					<div class="template-thumbnail-container">
-						<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="selectTemplate('template-1')">
-							<div class="thumb-padded column height100 width33"></div>
-							<div class="thumb-padded column height100 width33"></div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-						</div>
-
-						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="selectTemplate('template-2')">
-							<div class="thumb-column height100 width50">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-							<div class="thumb-column height100 width50">
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>
-						</div>
-
-						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="selectTemplate('template-3')">
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height66 width100"></div>
-							</div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height66 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>
-						</div>
-
-
+					<?php
+						$dir = "templates";
+						$files = scandir($dir);
+						foreach ($files as $filename) {
+							if (strpos($filename, "thumbnail") !== FALSE) {
+								include $dir."/".$filename;
+							}
+						}
+					?>
 					</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">

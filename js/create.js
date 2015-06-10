@@ -1323,7 +1323,7 @@ function selectSidebarTab(tab) {
 	$("#"+tab.id+"-container").css("display", "block");
 }
 
-function showTemplates(number) {
+function showThumbnails(number) {
 	var selectedButton = $("#template-number-"+number);
 
 	// restore all number buttons
@@ -1337,12 +1337,12 @@ function showTemplates(number) {
 	selectedButton.removeClass("template-number-hover");
 	selectedButton.addClass("template-number-selected");
 
-	// show only those template for the selected button
+	// show only those templates for the selected button
 	if (number === "all") {
 		$(".template-thumbnail").css("display", "inline-block");
 	} else {
 		$(".template-thumbnail").css("display", "none");
-		$("#template-thumbnail-"+number).css("display", "inline-block");
+		$("."+number+"-bento-thumbnail").css("display", "inline-block");
 	}
 }
 
