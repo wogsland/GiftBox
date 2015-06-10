@@ -482,25 +482,32 @@ function openImageFiles(files) {
 function addFacebookImage(){
 	var selected = $(".facebook-container-selected > div > img");
 	$("#facebook-photos-dialog").dialog("close");
-	var xhr = new XMLHttpRequest();
-	//only use the first one. add additional photos if possible in the future
-	xhr.open('GET', selected[0].link, true);
-	xhr.responseType = 'blob';
-	xhr.onload = function(e) {
-	  if (this.status == 200) {
-	    var myBlob = this.response;
-	    var image = selected[0];
-		$(image).attr("src", window.URL.createObjectURL(myBlob));
-		image.id = image.name;
-		image.name = "Facebook Photo";
-		myBlob.name = image.name;
-		myBlob.lastModifiedDate = new Date();
-		image.file = myBlob;
-		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
-	    // myBlob is now the blob that the object URL pointed to.
-	  }
-	};
-	xhr.send();
+	// Looping through every selected photo and sending requests to Facebook
+	for (var i = 0; i < selected.length; i++) {
+		var file = selected[i];
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', selected[i].link, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			// var headers = this.getAllResponseHeaders().toLowerCase();
+			// console.log(headers);
+			console.log(this);
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.createElement("img");
+			$(image).attr("src", window.URL.createObjectURL(myBlob));
+			image.name = "Facebook Photo";
+			image.id = image.name;
+			myBlob.name = image.name;
+			myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+			// console.log(image.src);
+			createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+		    // myBlob is now the blob that the object URL pointed to.
+		  }
+		};
+		xhr.send();
+	}
 }
 
 function openMediaFiles(files) {
@@ -1821,7 +1828,7 @@ function setFacebookPage(link, token){
 				var container = document.createElement("div");
 				container.classList.add("facebook-container");
 				container.classList.add("facebook-container-hover");
-				container.onclick = function(){ selectFacebook(this);};
+				container.onclick = function(){ selectFacebook(this); };
 
 				var inner = document.createElement("div");
 				inner.classList.add("inner-thumbnail-container");
@@ -1852,11 +1859,11 @@ function test(elem){
 }
 
 function selectFacebook(elem){
-	selection = document.getElementsByClassName("facebook-container-selected");
-	for(i = 0; i < selection.length; i++){
-		$(selection[i]).removeClass("facebook-container-selected");
+	if ($(elem).hasClass("facebook-container-selected")) {
+		$(elem).removeClass("facebook-container-selected");
+	} else {
+		$(elem).addClass("facebook-container-selected");
 	}
-	$(elem).addClass("facebook-container-selected");
 }
 
 function initTemplate(template) {
