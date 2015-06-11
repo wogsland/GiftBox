@@ -36,7 +36,8 @@ body#viewer-page{
 
 body#profile-page footer,
 body#pricing-page footer,
-body#viewer-page footer{
+body#viewer-page footer,
+body#privacy-policy footer{
 	text-align: center;
 }
 
@@ -1897,12 +1898,16 @@ footer .terms-policy li a:hover{
 /*---------------------------------------
    SECTION:  TERMS OF SERVICE
 -----------------------------------------*/
-h1#terms-header {
-    margin-top: 1em;
+body div.container-fluid {
+    padding-top: 3.5em;
 }
-div#terms-content {
+h1#terms-header {
+    margin-top: 1.5em;
+}
+summary#terms-content {
     margin: 0 auto;
     width: 78%;
+    padding-bottom: 4em;
 }
 
 
