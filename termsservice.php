@@ -131,9 +131,9 @@ include_once 'config.php';
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
-	<div>
+	<div id="terms-content">
 		<summary>
-			<h1>
+			<h1 id="terms-header">
 			    	Terms of Service
 			</h1>
 			<p>

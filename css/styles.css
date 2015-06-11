@@ -1894,6 +1894,18 @@ footer .terms-policy li a:hover{
     margin: 0;
 }
 
+/*---------------------------------------
+   SECTION:  TERMS OF SERVICE
+-----------------------------------------*/
+h1#terms-header {
+    margin-top: 1em;
+}
+div#terms-content {
+    margin: 0 auto;
+    width: 78%;
+}
+
+
 /***** 9.5 PROFILE STYLES *****/
 
 
