@@ -83,7 +83,7 @@
 
 					<div class="template-thumbnail-container">
 					<?php
-						$dir = "templates";
+						$dir = "./templates";
 						$files = scandir($dir);
 						foreach ($files as $filename) {
 							if (strpos($filename, "thumbnail") !== FALSE) {
