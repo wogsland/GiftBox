@@ -1233,13 +1233,7 @@ function loadSaved() {
 			closeStatus();
 
 			// Bring the correct template to the top
-			if (token.css_id === 'template-1') {
-				stack('template-1', 'template-2', 'template-3');
-			} else if (token.css_id === 'template-2') {
-				stack('template-2', 'template-3', 'template-1')
-			} else {
-				stack('template-3', 'template-1', 'template-2')
-			}
+			selectTemplate(token.css_id);
 
 			// Populate the top template properties
 			window.top_template.giftboxId = token.id;
