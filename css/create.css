@@ -960,8 +960,8 @@ fieldset {
 }
 
 #letter-form {
-	height: 427px;
-	width: 600px;
+	height: 385px;
+	width: 650px;
 }
 
 #letter-text {
@@ -1070,11 +1070,6 @@ fieldset {
 
 .text-overlay-hidden,
 .text-overlay-show{
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: auto;
 	z-index: 2;
 	position: relative;
 }

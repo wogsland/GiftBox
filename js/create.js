@@ -183,6 +183,40 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	unsaved();
 }
 
+function addOverlayToBento(bento, text){
+	if(!bento.imageContainer){
+		alert("You are trying to add overlay text to something other than an image. Please select an image and try again.");
+	} else {
+		bento.overlay_content = text;
+		var container = $("#"+bento.id+"-text-overlay-container");
+		if(container[0]){
+			container[0].innerHTML = text;
+			resizeText(container[0], bento);
+		} else {
+			var textContainer = document.createElement('div');
+			textContainer.innerHTML = text;
+			textContainer.id = bento.id + '-text-overlay-container';
+			textContainer.className = "text-overlay-show";
+			textContainer.style.wordWrap = "break-word";
+			console.log($(textContainer));
+			textContainer.originalWidth = $(textContainer).scrollWidth;
+			resizeText(textContainer, bento);
+			$(textContainer)
+				.draggable({ containment: "#" + bento.id})
+				.click(function(){
+		            if ( $(this).is('.ui-draggable-dragging') ) {
+		                  return;
+		            }
+		            openOverlay();
+				});
+
+			bento.appendChild(textContainer);
+		}
+		showControl(bento.id + "-show-overlay");
+		setOverlayButtons(text);
+	}
+}
+
 function addImage(bento, imageSrc, imageFile, savedBento) {
 	// Remove any previously dropped image or video
 	if (bento.imageContainer) {
@@ -697,9 +731,9 @@ function showControl(controlId, target) {
 function showOverlay(event, showButton){
 	var bento = showButton.parentNode;
 	var text = $("#"+bento.id+"-text-overlay");
-	if(bento.overlayText){
+	if(bento.overlay_content){
 		if(text[0].classList.contains("text-overlay-hidden")){
-			text[0].innerHTML = bento.overlayText;
+			text[0].innerHTML = bento.overlay_content;
 			text.removeClass("text-overlay-hidden");
 			text.addClass("text-overlay-show");
 			text.draggable({
@@ -734,7 +768,9 @@ function closeClicked(event, closeButton) {
 		hideControl(bento.id + "-slider");
 		hideControl(bento.id + "-link-icon");
 	}
-	if(bento.overlayText){
+	if(bento.overlay_content){
+		bento.removeChild($("#"+bento.id+"-text-overlay-container")[0]);
+		setOverlayButtons(null);
 		hideControl(bento.id + "-show-overlay");
 	}
 	bento.onclick=function(){bentoClick(this)};
@@ -754,6 +790,7 @@ function resizeContainer(bento, img, div) {
 	div.style.top = Math.round(0 - ((newContainerHeight - bento.offsetHeight) / 2)) + 'px';
 	img.style.left = Math.round((newContainerWidth / 2) - (img.width / 2)) + 'px';
 	img.style.top = Math.round((newContainerHeight / 2) - (img.height / 2)) + 'px';
+	
 }
 
 function resizeImage(img, bento) {
@@ -774,8 +811,25 @@ function resizeImage(img, bento) {
 	img.originalHeight = img.height;
 }
 
+function resizeText(container, bento){
+	var column = bento.id.split("nto-");
+	var columnWidth = $("#column-" + column[1])[0].style.width.split("px")[0] - 50;
+	console.log(columnWidth -50);
+	if(columnWidth < container.originalWidth){
+		$(container).width(columnWidth);
+	} else {
+		$(container).width(container.originalWidth);
+	}
+	console.log(container.style.width);
+	console.log(columnWidth < container.originalWidth);
+}
+
 function resizeBento(bento) {
 	var image = document.getElementById(bento.id + "-image");
+	var overlay = document.getElementById(bento.id + "-text-overlay-container");
+	if (overlay){
+		resizeText(overlay, bento);
+	}
 	if (image) {
 		resizeImage(image, bento);
 		var container = document.getElementById(bento.id + "-image-container");
@@ -1023,8 +1077,12 @@ function save() {
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
 		bento.gallery_file_list = [];
-		bento.auto_play = this.auto_play ? this.auto_play: 0
+		bento.auto_play = this.auto_play ? this.auto_play: 0;
 		bento.redirect_url = $("#redirect-text").val();
+		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
+		bento.overlay_left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left") : null;
+		bento.overlay_top = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("top"): null;
+		bento.overlay_width = $("#"+this.id+"-text-overlay-container").width();
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1733,6 +1791,18 @@ function setHyperlinkButtons(linkAddress) {
 	}
 }
 
+function setOverlayButtons(text){
+	if (text && text.length > 0){
+		$("#add-overlay-button").css("display", "none");
+		$("#remove-overlay-button").css("display", "block");
+		$("#change-overlay-button").css("display", "block");
+	} else {
+		$("#add-overlay-button").css("display", "block");
+		$("#remove-overlay-button").css("display", "none");
+		$("#change-overlay-button").css("display", "none");
+	}
+}
+
 function setRedirectButtons(url){
 	if(url && url.length > 0){
 		$("#add-redirect-button").css("display", "none");
@@ -1743,6 +1813,14 @@ function setRedirectButtons(url){
 		$("#remove-redirect-button").css("display", "none");
 		$("#change-redirect-button").css("display", "none");
 	}
+}
+
+function removeOverlay(){
+	addOverlayToBento(null);
+}
+
+function changeOverlay(){
+	addOverlay();
 }
 
 function removeRedirect(){
@@ -2074,15 +2152,15 @@ function openOverlay(){
 	$("#input-overlay-dialog").dialog("open");
 }
 
-function addOverlay(text){
+function addOverlay(){
+	$("#input-overlay-dialog").dialog("close");
+	text =  CKEDITOR.instances.overlayText.getData();
 	var bento;
 	bento = $(".selected-bento")[0];
-	bento.overlayText = text
-	var textbox = $("#"+bento.id+"-text-overlay");
-	if(textbox[0].classList.contains("text-overlay-show")){
-		textbox[0].innerHTML = text;
-	}
-
-
-	showControl(bento.id + "-show-overlay");
-;}
+	addOverlayToBento(bento, text);
+	//bento.overlayText = text
+	//var textbox = $("#"+bento.id+"-text-overlay");
+	//if(textbox[0].classList.contains("text-overlay-show")){
+	//	textbox[0].innerHTML = text;
+	//}
+}
