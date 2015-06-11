@@ -306,7 +306,43 @@ function addVimeo(bento, url) {
 	unsaved();
 }
 
-function addYouTube(bento, url) {
+function addRedirectUrl(){
+	var validLink = false;
+
+	// Get the link address from the hyperlink input dialog
+	var linkAddress = $("#redirect-url").val();
+	if (linkAddress.length > 0) {
+
+		// Make sure it has an 'http' or 'https' prefix
+		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {
+			linkAddress = "http://" + linkAddress;
+		}
+
+		// Validate the link address
+		validLink = true;
+	} else {
+		validLink = true;
+	}
+
+	if (validLink) {
+		setRedirect(linkAddress);
+	} else {
+		alert('The following is not a valid link: ' + linkAddress);
+	}
+}
+
+function setRedirect(linkAddress) {
+	// Set the image dialog hyperlink text
+	$("#redirect-text").val(linkAddress);
+
+	// Adjust the image dialogs buttons
+	setRedirectButtons(linkAddress)
+	
+	// Close the modal input dialog
+	$("#youtube-redirect-dialog").dialog("close");
+}
+
+function addYouTube(bento, url, auto) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -321,8 +357,24 @@ function addYouTube(bento, url) {
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	bento.auto_play = auto;
 	showControl(bento.id + "-close", iframe);
 	unsaved();
+}
+
+function addYouTubeRedirect(){
+	var youtube = false;
+	var template = window.top_template;
+	$("#"+template.id+" div.bento").each(function(i) {
+		if(this.contentURI && isYouTube(this.contentURI)){
+			youtube = true;
+		}
+	});
+	if(youtube){
+		$("#redirect-dialog").dialog("open");
+	} else {
+		alert("You must have a youtube video included in order to use this feature.");
+	}
 }
 
 function createThumbnailContainer(object, titleText, parentId) {
@@ -369,18 +421,19 @@ function openVimeo(url){
 	}
 }
 
-function openYouTube(url) {
+function openYouTube(url, auto) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
 		var dataURL = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key=AIzaSyArRtXJ4scccS9Dw6rcHgKhi0UCR3IHTMU&part=snippet&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-				var title = data.items[0].snippet.title.$t;
+				var title = data.items[0].snippet.title;
 				var img = document.createElement("img");
 				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 				img.id = videoId;
 				img.youTubeURL = url;
+				img.auto = auto;
 				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
 				error = "Youtube API call failed.\n\n" + dataURL;
@@ -948,6 +1001,8 @@ function save() {
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
 		bento.gallery_file_list = [];
+		bento.auto_play = this.auto_play ? this.auto_play: 0
+		bento.redirect_url = $("#redirect-text").val();
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1085,7 +1140,6 @@ function saveLetter() {
 	var letterTextInput = CKEDITOR.instances.lettertext.getData();
 	var newValue = letterTextInput;
 	var oldValue = window.top_template.letterText;
-	console.log(newValue);
 	if (newValue !== oldValue) {
 		window.top_template.letterText = newValue;
 		unsaved();
@@ -1108,8 +1162,31 @@ function save_wrapper() {
 
 function inputURL(site) {
 	$('#url').val("");
-	$('#url-dialog').dialog({title: site});
-	$('#url-dialog').dialog('open');
+	if(site == "YouTube"){
+		$('#youtube-url-dialog').dialog('open');
+	} else{
+		$('#url-dialog').dialog({title: site});
+		$('#url-dialog').dialog('open');
+	}
+	
+}
+
+function checkYouTube(url){
+	$("#youtube-url-dialog").dialog("close");
+	url = url ? url : document.getElementById("youtube-url").value;
+	var auto = document.getElementById("youtube-auto-play").value ? document.getElementById("youtube-auto-play").value : false;
+	if(auto){
+		auto = 1;
+	} else {
+		auto = 0;
+	}
+	if(isYouTube(url)){
+		openYouTube(url, auto)
+	} else {
+		var error = "The URL specified is not a valid YouTube URL.\n\n"+url;
+		console.log(error);
+		alert(error);
+	}
 }
 
 function openURL() {
@@ -1117,8 +1194,8 @@ function openURL() {
 	var url = document.getElementById("url").value;
 	var title = $("#url-dialog").dialog("option", "title");
 	$("#url-dialog").dialog("close");
-	if (isYouTube(url)) {
-		openYouTube(url);
+	if(isYouTube(url)){
+		checkYouTube(url);
 	} else if (isSoundCloud(url)) {
 		openSoundCloud(url);
 	} else if (isSpotify(url)) {
@@ -1330,7 +1407,7 @@ function selectSidebarTab(tab) {
 	$("#"+tab.id+"-container").css("display", "block");
 }
 
-function showTemplates(number) {
+function showThumbnails(number) {
 	var selectedButton = $("#template-number-"+number);
 
 	// restore all number buttons
@@ -1344,12 +1421,12 @@ function showTemplates(number) {
 	selectedButton.removeClass("template-number-hover");
 	selectedButton.addClass("template-number-selected");
 
-	// show only those template for the selected button
+	// show only those templates for the selected button
 	if (number === "all") {
 		$(".template-thumbnail").css("display", "inline-block");
 	} else {
 		$(".template-thumbnail").css("display", "none");
-		$("#template-thumbnail-"+number).css("display", "inline-block");
+		$("."+number+"-bento-thumbnail").css("display", "inline-block");
 	}
 }
 
@@ -1493,7 +1570,7 @@ function doAdd() {
 				addVideo(bento, null, element.file, null);
 			}
 		} else if (element.youTubeURL) {
-			addYouTube(bento, element.youTubeURL);
+			addYouTube(bento, element.youTubeURL, element.auto);
 		} else if (element.spotifyTrackId) {
 			addSpotify(bento, element.spotifyTrackId)
 		} else if (element.soundCloudURL) {
@@ -1562,6 +1639,11 @@ function deselectImage(image) {
 	}
 }
 
+function addRedirect(){
+	$("#redirect-url").val($("#redirect-text").val());
+	$("#youtube-redirect-dialog").dialog("open");
+}
+
 function openHyperlinkInput() {
 	$("#hyperlink-dialog-url").val($("#hyperlink-text").val());
 	$("#add-hyperlink-dialog").dialog("open");
@@ -1627,6 +1709,26 @@ function setHyperlinkButtons(linkAddress) {
 		$("#remove-hyperlink-button").css("display", "none");
 		$("#change-hyperlink-button").css("display", "none");
 	}
+}
+
+function setRedirectButtons(url){
+	if(url && url.length > 0){
+		$("#add-redirect-button").css("display", "none");
+		$("#remove-redirect-button").css("display", "block");
+		$("#change-redirect-button").css("display", "block");
+	} else {
+		$("#add-redirect-button").css("display", "block");
+		$("#remove-redirect-button").css("display", "none");
+		$("#change-redirect-button").css("display", "none");
+	}
+}
+
+function removeRedirect(){
+	setRedirect(null);
+}
+
+function changeRedirect(){
+	addRedirect();
 }
 
 function removeHyperlink() {
