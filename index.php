@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE TITLE -->
-<title>GiveToken.com - Give a Token of Appreciation</title>
+<title>GiveToken.com - Create your next message with GiveToken</title>
 
 <!-- =========================
       FAV AND TOUCH ICONS
@@ -186,8 +186,8 @@
 				<div class="intro-section">
 
 					<!-- WELCOM MESSAGE -->
-					<h1 class="intro">Give a Token of Appreciation</h1>
-					<h5>Send your next message with GiveToken</h5>
+					<h1 class="intro">Create with GiveToken</h1>
+					<h5>Expand your possibilities</h5>
 
 					<!-- BUTTON -->
 					<div class="buttons" id="login-button">
@@ -233,6 +233,9 @@
 		<h2 class="white-text">Amazing Features</h2>
 
 		<div class="colored-line">
+		</div>
+		<div class="section-description">
+			We Give you the tools to add everything and anything to you next Token Creation.
 		</div>
 		<div class="section-description">
 			Go ahead, we got you covered. See how our features can help you create a token you’ll love to share.
@@ -467,12 +470,13 @@
 			</div>
 
 			<p class="white-text">
-				GiveToken is your blank canvas to create a personalized digital experience.  Customize your Token™ Creation by:
+				GiveToken is your blank canvas to create an impactful message.  Customize your Token™ Creation by:
 			</p>
 			<ul class="white-text">
  				<li>Click-to-add media from your computer or the web</li>
- 				<li>Sharing your Token™ Creation on any platform</li>
- 				<li>Targeting specific individuals or groups</li>
+ 				<li>Add attachments or photo galleries</li>
+ 				<li>Embed Hyperlinks to Images, letting your audience jump to another webpage</li> 
+ 				<li>Send your Token™ Creation out on any device or platform</li>
 			</ul>
 
 
@@ -580,7 +584,7 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">GiveToken is Short and Sweet</h2>
+					<h2 class="white-text">GiveToken is Visual</h2>
 
 					<div class="white-line-left">
 					</div>
