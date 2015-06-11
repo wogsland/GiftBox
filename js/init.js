@@ -320,13 +320,12 @@ $(function(){
 		dialogClass: 'input-overlay-dialog',
 		autoOpen: false,
 		resizable: false,
-		height: 200,
-		width: 600,
+		height: 500,
+		width: 675,
 		modal: true,
 		buttons: {
 			Ok: function(){
-				addOverlay($("#overlay-dialog")[0].value);
-				$(this).dialog("close");
+				addOverlay();
 			},
 			Back: function(){
 				$(this).dialog("close");

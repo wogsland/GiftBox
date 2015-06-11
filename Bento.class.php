@@ -31,6 +31,9 @@ class Bento {
 	var $gallery_file_list = array();
 	var $redirect_url;
 	var $auto_play;
+	var $overlay_content;
+	var $overlay_left;
+	var $overlay_top;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -49,13 +52,15 @@ class Bento {
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
 			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
-			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play) "
+			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play,"
+			."overlay_content, overlay_left, overlay_top, overlay_width) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
 			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
 			."'$this->image_top_in_container', '$this->image_left_in_container', "
-			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play')";
+			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play',"
+			."'$this->overlay_content', '$this->overlay_left', '$this->overlay_top', '$this->overlay_width')";
 		$this->id = insert($sql);
 		if(sizeof($this->gallery_file_list) > 0){
 			$photo_gallery = new PhotoGallery();
@@ -113,6 +118,11 @@ class Bento {
 				}
 			}
 		}
+
+		if($this->overlay_content){
+			echo '<div id="'.$this->id.'"style="font-size:'.(($this->overlay_width/$this->css_width)*100).'%; width: '.(($this->overlay_width/$this->css_width)*100).'%; position:absolute; word-wrap: break-word; left: '.((((($this->css_width/2)-($this->overlay_width/2))+$this->overlay_left)/$this->css_width)*100).'%; top: '.(($this->overlay_top/$this->css_height)*100).'%;">'.$this->overlay_content.'</div>';
+		}
+
 		if ($this->download_file_name) {
 			$download_file_names[] = $this->download_file_name;
 			if ($google_app_engine) {

@@ -198,8 +198,8 @@ function addOverlayToBento(bento, text){
 			textContainer.id = bento.id + '-text-overlay-container';
 			textContainer.className = "text-overlay-show";
 			textContainer.style.wordWrap = "break-word";
-			console.log($(textContainer));
-			textContainer.originalWidth = $(textContainer).scrollWidth;
+			var column = bento.id.split("nto-");
+			textContainer.originalWidth = $("#column-" + column[1])[0].scrollWidth - 50;
 			resizeText(textContainer, bento);
 			$(textContainer)
 				.draggable({ containment: "#" + bento.id})
@@ -813,15 +813,14 @@ function resizeImage(img, bento) {
 
 function resizeText(container, bento){
 	var column = bento.id.split("nto-");
-	var columnWidth = $("#column-" + column[1])[0].style.width.split("px")[0] - 50;
-	console.log(columnWidth -50);
+	var columnWidth = $("#column-" + column[1])[0].scrollWidth - 50;
+	console.log(columnWidth);
 	if(columnWidth < container.originalWidth){
 		$(container).width(columnWidth);
 	} else {
 		$(container).width(container.originalWidth);
 	}
-	console.log(container.style.width);
-	console.log(columnWidth < container.originalWidth);
+	console.log(container.originalWidth);
 }
 
 function resizeBento(bento) {
@@ -1814,7 +1813,7 @@ function removeOverlay(){
 }
 
 function changeOverlay(){
-	addOverlay();
+	openOverlay();
 }
 
 function removeRedirect(){
