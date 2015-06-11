@@ -1968,15 +1968,33 @@ function selectFacebook(elem){
 	}
 }
 
+function setCSS(element, property) {
+	if (typeof element.data(property) != 'undefined') {
+		element.css(property, element.data(property));
+	}
+}
+
 function initTemplate(template) {
 	var templateId = template.attr("id");
 	var templateNumber = templateId.substring(templateId.indexOf("-")+1);
+
+	// Init the divider containers
+	$("[id^='divider-container-"+templateNumber+"']").each(function(){
+		setCSS($(this), "left");
+		setCSS($(this), "top");
+		setCSS($(this), "width");
+		setCSS($(this), "height");
+	});
+	
+	// Init the dividers
 	$("[id^='divider-"+templateNumber+"']").each(function(){
 		
 		// position the dividers
 		var left = $(this).data("left");
 		var top = $(this).data("top");
 		var width = $(this).data("width");
+		var height = $(this).data("height");
+
 		if (typeof left != 'undefined') {
 			$(this).css("left", left);
 		}
@@ -1985,6 +2003,9 @@ function initTemplate(template) {
 		}
 		if (typeof width != 'undefined') {
 			$(this).css("width", width);
+		}
+		if (typeof height != 'undefined') {
+			$(this).css("height", width);
 		}
 
 		// set up dependencies
