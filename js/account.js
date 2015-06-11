@@ -70,6 +70,8 @@ function editUser(user_id) {
 	$('#first-name').val($("#first-name-"+user_id).html());
 	$('#last-name').val($("#last-name-"+user_id).html());
 	$('#email').val($("#email-"+user_id).html());
+	var value = $("#level-"+user_id).html();
+	$('#level').val($("#level-"+user_id).html() == "Basic" ? 1 : 2);
 	if ($("#admin-"+user_id).html() === 'Y') {
 		$("#admin").prop("checked", true);
 	} else {
@@ -99,6 +101,7 @@ function saveUser() {
 	var lastName = $("#last-name");
 	var emailAddress = $("#email");
 	var admin = $("#admin");
+	var level = $("#level")
 	
 	if (!firstName.val()) {
 		editUserError("Please enter a first name.");
@@ -115,6 +118,7 @@ function saveUser() {
 			$("#first-name-" + userId).html(firstName.val());
 			$("#last-name-" + userId).html(lastName.val());
 			$("#email-" + userId).html(emailAddress.val());
+			$("#level-" + userId).html(level.val() == 1 ? "Basic" : "Standard");
 			var yesNo = admin.is(":checked") ? "Y" : "N";
 			$("#admin-" + userId).html(yesNo);
 			$.magnificPopup.close();

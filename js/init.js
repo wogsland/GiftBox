@@ -4,7 +4,7 @@ $(function() {
 		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,
-		width: 620,
+		width: 650,
 		height: 580,
 		modal: true,
 	});
@@ -120,6 +120,57 @@ $(function() {
 	});
 });
 
+$(function() {
+	$( "#youtube-url-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				checkYouTube();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#youtube-url-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					checkYouTube();
+					return false;
+				}
+			});
+		}
+	});
+});
+
+$(function() {
+	$( "#youtube-redirect-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				addRedirectUrl()
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#youtube-redirect-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					addRedirectUrl()
+					return false;
+				}
+			});
+		}
+	});
+});
 
 $(function() {
 	$( "#add-hyperlink-dialog" ).dialog({ 
@@ -149,6 +200,15 @@ $(function() {
 
 $(function() {
 	$( "#image-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:400,
+		width: 300
+	});
+});
+
+$(function() {
+	$( "#redirect-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
 		height:400,
@@ -227,4 +287,30 @@ $(function(){
 			}
 		}
 	})
-})
+});
+
+$(function(){
+	$("#choose-photos-dialog").dialog({
+		dialogClass: 'choose-photos-dialog',
+		autoOpen: false,
+		resizable: false,
+		width: 620,
+		height: 580,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				$(this).dialog("close");
+				doGalleryAdd();
+			}
+		},
+		open: function(){
+			loadPhotoOptions();
+		},
+		close: function(){
+			//call the add function for gallery
+			$("#choose-photo-options > div").each(function(i){
+				$("#add-images-desktop")[0].appendChild(this);
+			});
+		}
+	})
+});

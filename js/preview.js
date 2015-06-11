@@ -10,4 +10,12 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 
+	$(".bento").each(function(){
+		displayGallery(this);
+	});
+
 });
+
+function displayGallery(bento){
+	$("."+$(bento)[0].classList[2]).colorbox({rel:$(bento)[0].classList[2], innerWidth:640, innerHeight:390})
+}

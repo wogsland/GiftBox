@@ -306,7 +306,43 @@ function addVimeo(bento, url) {
 	unsaved();
 }
 
-function addYouTube(bento, url) {
+function addRedirectUrl(){
+	var validLink = false;
+
+	// Get the link address from the hyperlink input dialog
+	var linkAddress = $("#redirect-url").val();
+	if (linkAddress.length > 0) {
+
+		// Make sure it has an 'http' or 'https' prefix
+		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {
+			linkAddress = "http://" + linkAddress;
+		}
+
+		// Validate the link address
+		validLink = true;
+	} else {
+		validLink = true;
+	}
+
+	if (validLink) {
+		setRedirect(linkAddress);
+	} else {
+		alert('The following is not a valid link: ' + linkAddress);
+	}
+}
+
+function setRedirect(linkAddress) {
+	// Set the image dialog hyperlink text
+	$("#redirect-text").val(linkAddress);
+
+	// Adjust the image dialogs buttons
+	setRedirectButtons(linkAddress)
+	
+	// Close the modal input dialog
+	$("#youtube-redirect-dialog").dialog("close");
+}
+
+function addYouTube(bento, url, auto) {
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -321,8 +357,24 @@ function addYouTube(bento, url) {
 	bento.appendChild(iframe);
 	bento.iframe = iframe;
 	bento.contentURI = url;
+	bento.auto_play = auto;
 	showControl(bento.id + "-close", iframe);
 	unsaved();
+}
+
+function addYouTubeRedirect(){
+	var youtube = false;
+	var template = window.top_template;
+	$("#"+template.id+" div.bento").each(function(i) {
+		if(this.contentURI && isYouTube(this.contentURI)){
+			youtube = true;
+		}
+	});
+	if(youtube){
+		$("#redirect-dialog").dialog("open");
+	} else {
+		alert("You must have a youtube video included in order to use this feature.");
+	}
 }
 
 function createThumbnailContainer(object, titleText, parentId) {
@@ -369,18 +421,19 @@ function openVimeo(url){
 	}
 }
 
-function openYouTube(url) {
+function openYouTube(url, auto) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
-		var dataURL = "https://gdata.youtube.com/feeds/api/videos/"+videoId+"?v=2&alt=json";
+		var dataURL = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key=AIzaSyArRtXJ4scccS9Dw6rcHgKhi0UCR3IHTMU&part=snippet&alt=json";
 		$.getJSON(dataURL,
 			function(data){
-				var title = data.entry.title.$t;
+				var title = data.items[0].snippet.title;
 				var img = document.createElement("img");
 				img.src = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
 				img.id = videoId;
 				img.youTubeURL = url;
+				img.auto = auto;
 				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
 				error = "Youtube API call failed.\n\n" + dataURL;
@@ -482,25 +535,32 @@ function openImageFiles(files) {
 function addFacebookImage(){
 	var selected = $(".facebook-container-selected > div > img");
 	$("#facebook-photos-dialog").dialog("close");
-	var xhr = new XMLHttpRequest();
-	//only use the first one. add additional photos if possible in the future
-	xhr.open('GET', selected[0].link, true);
-	xhr.responseType = 'blob';
-	xhr.onload = function(e) {
-	  if (this.status == 200) {
-	    var myBlob = this.response;
-	    var image = selected[0];
-		$(image).attr("src", window.URL.createObjectURL(myBlob));
-		image.id = image.name;
-		image.name = "Facebook Photo";
-		myBlob.name = image.name;
-		myBlob.lastModifiedDate = new Date();
-		image.file = myBlob;
-		createThumbnailContainer(image, myBlob.name, "add-images-desktop");
-	    // myBlob is now the blob that the object URL pointed to.
-	  }
-	};
-	xhr.send();
+	// Looping through every selected photo and sending requests to Facebook
+	for (var i = 0; i < selected.length; i++) {
+		var file = selected[i];
+		var xhr = new XMLHttpRequest();
+		xhr.open('GET', selected[i].link, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+			// var headers = this.getAllResponseHeaders().toLowerCase();
+			// console.log(headers);
+			console.log(this);
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.createElement("img");
+			$(image).attr("src", window.URL.createObjectURL(myBlob));
+			image.name = "Facebook Photo";
+			image.id = image.name;
+			myBlob.name = image.name;
+			myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+			// console.log(image.src);
+			createThumbnailContainer(image, myBlob.name, "add-images-desktop");
+		    // myBlob is now the blob that the object URL pointed to.
+		  }
+		};
+		xhr.send();
+	}
 }
 
 function openMediaFiles(files) {
@@ -734,17 +794,6 @@ function handleSliderEvent(event, ui) {
 	unsaved();
 }
 
-$(function() {
-	$(".image-slider").slider({
-		orientation: "vertical",
-		min: 100,
-		max: 400,
-		slide: function(event, ui) {
-			handleSliderEvent(event, ui);
-		}
-	});
-});
-
 function handleHorizontalDrag(target, movement) {
 	var index;
 	var width;
@@ -812,202 +861,6 @@ function handleVerticalDrag(target, movement) {
 	}
 }
 
-$(function() {
-	var divider;
-
-	// Template #1
-	divider = document.getElementById("divider-1-1");
-	divider.leftDependents = [document.getElementById("column-1-1")];
-	divider.rightDependents = [
-		document.getElementById("column-1-2"),
-		document.getElementById("divider-container-1-2")];
-
-	divider = document.getElementById("divider-1-2");
-	divider.leftDependents = [
-		document.getElementById("column-1-2"),
-		document.getElementById("divider-container-1-1")];
-	divider.rightDependents = [
-		document.getElementById("column-1-3"),
-		document.getElementById("divider-1-3"),
-		document.getElementById("divider-container-1-3")];
-
-	divider = document.getElementById("divider-1-3");
-	divider.topDependents = [document.getElementById("column-1-4")];
-	divider.bottomDependents = [document.getElementById("column-1-5")];
-
-	$("#divider-1-1").draggable({
-		axis: "x",
-		containment: "#divider-container-1-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		},
-	});
-
-	$("#divider-1-2").draggable({
-		axis: "x",
-		containment: "#divider-container-1-2",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-1-3").draggable({
-		axis: "y",
-		containment: "#divider-container-1-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	// Template #2
-	divider = document.getElementById("divider-2-1");
-	divider.leftDependents = [
-		document.getElementById("column-2-1"),
-		document.getElementById("divider-2-2"),
-		document.getElementById("divider-container-2-2")];
-	divider.rightDependents = [
-		document.getElementById("column-2-2"),
-		document.getElementById("divider-2-3"),
-		document.getElementById("divider-2-4"),
-		document.getElementById("divider-container-2-3"),
-		document.getElementById("divider-container-2-4")];
-
-	divider = document.getElementById("divider-2-2");
-	divider.topDependents = [document.getElementById("column-2-3")];
-	divider.bottomDependents = [document.getElementById("column-2-4")];
-
-	divider = document.getElementById("divider-2-3");
-	divider.topDependents = [document.getElementById("column-2-5")];
-	divider.bottomDependents = [
-		document.getElementById("column-2-6"),
-		document.getElementById("divider-container-2-4")];
-
-	divider = document.getElementById("divider-2-4");
-	divider.topDependents = [
-		document.getElementById("column-2-6"),
-		document.getElementById("divider-container-2-3")];
-	divider.bottomDependents = [document.getElementById("column-2-7")];
-
-	$("#divider-2-1").draggable({
-		axis: "x",
-		containment: "#divider-container-2-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-2-2").draggable({
-		axis: "y",
-		containment: "#divider-container-2-2",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-2-3").draggable({
-		axis: "y",
-		containment: "#divider-container-2-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-2-4").draggable({
-		axis: "y",
-		containment: "#divider-container-2-4",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	// Template #3
-	divider = document.getElementById("divider-3-1");
-	divider.leftDependents = [
-		document.getElementById("column-3-1"),
-		document.getElementById("divider-3-3"),
-		document.getElementById("divider-container-3-3")];
-	divider.rightDependents = [
-		document.getElementById("column-3-2"),
-		document.getElementById("divider-3-4"),
-		document.getElementById("divider-container-3-4")];
-
-	divider = document.getElementById("divider-3-2");
-	divider.leftDependents = [
-		document.getElementById("column-3-2"),
-		document.getElementById("divider-3-4"),
-		document.getElementById("divider-container-3-4"),
-		document.getElementById("divider-container-3-1")];
-	divider.rightDependents = [
-		document.getElementById("column-3-3"),
-		document.getElementById("divider-3-5"),
-		document.getElementById("divider-container-3-5")];
-
-	divider = document.getElementById("divider-3-3");
-	divider.topDependents = [document.getElementById("column-3-4")];
-	divider.bottomDependents = [document.getElementById("column-3-5")];
-
-	divider = document.getElementById("divider-3-4");
-	divider.topDependents = [document.getElementById("column-3-6")];
-	divider.bottomDependents = [document.getElementById("column-3-7")];
-
-	divider = document.getElementById("divider-3-5");
-	divider.topDependents = [document.getElementById("column-3-8")];
-	divider.bottomDependents = [document.getElementById("column-3-9")];
-
-	$("#divider-3-1").draggable({
-		axis: "x",
-		containment: "#divider-container-3-1",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-3-2").draggable({
-		axis: "x",
-		containment: "#divider-container-3-2",
-		drag: function(event, ui) {
-			handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
-			ui.originalPosition.left = ui.position.left;
-		}
-	});
-
-	$("#divider-3-3").draggable({
-		axis: "y",
-		containment: "#divider-container-3-3",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-3-4").draggable({
-		axis: "y",
-		containment: "#divider-container-3-4",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-	$("#divider-3-5").draggable({
-		axis: "y",
-		containment: "#divider-container-3-5",
-		drag: function(event, ui) {
-			handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
-			ui.originalPosition.top = ui.position.top;
-		}
-	});
-
-});
-
 function setPreviewLink (template) {
 	var linkText;
 	if (template.wrapperType) {
@@ -1023,21 +876,48 @@ function setPreviewLink (template) {
 	}
 }
 
-function stack(top, middle, bottom) {
-	var top_template = document.getElementById(top);
-
-	// Only shuffle the stack if the top is not on top
-	if (!Object.is(top_template, window.top_template)) {
+function showTemplate(template) {
+	// Only hide the other templates and show the target if the target is not on top
+	if (!Object.is(template, window.top_template)) {
 		closeImageDialog();
-		var middle_template = document.getElementById(middle);
-		var bottom_template = document.getElementById(bottom);
-		window.top_template = top_template;
-
-		setPreviewLink(top_template);
-		top_template.style.zIndex = 3;
-		middle_template.style.zIndex = 2;
-		bottom_template.style.zIndex = 1;
+		window.top_template = template;
+		setPreviewLink(template);
+		$(".template").each(function(){
+			$(this).css("display", "none");
+		});
+		$("#"+template.id).css("display", "block");
 	}
+}
+
+function selectTemplate(templateId) {
+	var template = document.getElementById(templateId);
+	if (!template) {
+		$.get("templates/create-"+templateId+".html", function(data){
+			$("#template-container").append(data);
+			template = document.getElementById(templateId);
+			initTemplate($("#"+templateId));
+			template.giftboxName = "Untitled";
+			template.giftboxId = null;
+			template.letterText = "";
+			template.wrapperType = "";
+			template.unloadCount = 3;
+			
+			// initialize the sliders
+			$("#"+templateId+" .image-slider").slider({
+				orientation: "vertical",
+				min: 100,
+				max: 400,
+				slide: function(event, ui) {
+					handleSliderEvent(event, ui);
+				}
+			});
+			
+			showTemplate(template);
+		});
+	} else {
+		showTemplate(template);
+	}
+
 }
 
 function calcTop(bento, image, container) {
@@ -1120,6 +1000,9 @@ function save() {
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
+		bento.gallery_file_list = [];
+		bento.auto_play = this.auto_play ? this.auto_play: 0
+		bento.redirect_url = $("#redirect-text").val();
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1157,6 +1040,12 @@ function save() {
 		}
 		if (this.contentURI) {
 			bento.content_uri = this.contentURI;
+		}
+		if (this.image_file_list && this.image_file_list.length > 0){
+			for(i = 0; i < this.image_file_list.length; i++){
+				uploadFile(this.image_file_list[i][1]);
+				bento.gallery_file_list.push(this.image_file_list[i][0]);
+			}
 		}
 	});
 
@@ -1248,8 +1137,8 @@ function preview() {
 }
 
 function saveLetter() {
-	var letterTextInput = document.getElementById("letter-text");
-	var newValue = letterTextInput.value;
+	var letterTextInput = CKEDITOR.instances.lettertext.getData();
+	var newValue = letterTextInput;
 	var oldValue = window.top_template.letterText;
 	if (newValue !== oldValue) {
 		window.top_template.letterText = newValue;
@@ -1273,8 +1162,31 @@ function save_wrapper() {
 
 function inputURL(site) {
 	$('#url').val("");
-	$('#url-dialog').dialog({title: site});
-	$('#url-dialog').dialog('open');
+	if(site == "YouTube"){
+		$('#youtube-url-dialog').dialog('open');
+	} else{
+		$('#url-dialog').dialog({title: site});
+		$('#url-dialog').dialog('open');
+	}
+	
+}
+
+function checkYouTube(url){
+	$("#youtube-url-dialog").dialog("close");
+	url = url ? url : document.getElementById("youtube-url").value;
+	var auto = document.getElementById("youtube-auto-play").value ? document.getElementById("youtube-auto-play").value : false;
+	if(auto){
+		auto = 1;
+	} else {
+		auto = 0;
+	}
+	if(isYouTube(url)){
+		openYouTube(url, auto)
+	} else {
+		var error = "The URL specified is not a valid YouTube URL.\n\n"+url;
+		console.log(error);
+		alert(error);
+	}
 }
 
 function openURL() {
@@ -1282,8 +1194,8 @@ function openURL() {
 	var url = document.getElementById("url").value;
 	var title = $("#url-dialog").dialog("option", "title");
 	$("#url-dialog").dialog("close");
-	if (isYouTube(url)) {
-		openYouTube(url);
+	if(isYouTube(url)){
+		checkYouTube(url);
 	} else if (isSoundCloud(url)) {
 		openSoundCloud(url);
 	} else if (isSpotify(url)) {
@@ -1495,7 +1407,7 @@ function selectSidebarTab(tab) {
 	$("#"+tab.id+"-container").css("display", "block");
 }
 
-function showTemplates(number) {
+function showThumbnails(number) {
 	var selectedButton = $("#template-number-"+number);
 
 	// restore all number buttons
@@ -1509,12 +1421,12 @@ function showTemplates(number) {
 	selectedButton.removeClass("template-number-hover");
 	selectedButton.addClass("template-number-selected");
 
-	// show only those template for the selected button
+	// show only those templates for the selected button
 	if (number === "all") {
 		$(".template-thumbnail").css("display", "inline-block");
 	} else {
 		$(".template-thumbnail").css("display", "none");
-		$("#template-thumbnail-"+number).css("display", "inline-block");
+		$("."+number+"-bento-thumbnail").css("display", "inline-block");
 	}
 }
 
@@ -1553,22 +1465,63 @@ function selectAddNav(navId) {
 function selectThumbnail(thumbnail) {
 	var selectedThumbnail = $("#"+thumbnail.id);
 
-	// restore all number buttons
-	$(".thumbnail-container").each(function(i) {
-		$(this).removeClass("thumbnail-container-hover");
-		$(this).addClass("thumbnail-container-hover");
-		$(this).removeClass("thumbnail-container-selected");
-	});
+	if($(".thumbnail-container").parent()[0].id === "add-images-desktop"){
+		$(".thumbnail-container").each(function(i) {
+			$(this).removeClass("thumbnail-container-hover");
+			$(this).addClass("thumbnail-container-hover");
+			$(this).removeClass("thumbnail-container-selected");
+		});
 
-	// set the selected number button
-	selectedThumbnail.removeClass("thumbnail-container-hover");
-	selectedThumbnail.addClass("thumbnail-container-selected");
+		// set the selected number button
+		selectedThumbnail.removeClass("thumbnail-container-hover");
+		selectedThumbnail.addClass("thumbnail-container-selected");
+	} else {
+		if(selectedThumbnail[0].classList.contains("thumbnail-container-selected")){
+			selectedThumbnail.addClass("thumbnail-container-hover");
+			selectedThumbnail.removeClass("thumbnail-container-selected");
+		} else{
+			selectedThumbnail.removeClass("thumbnail-container-hover");
+			selectedThumbnail.addClass("thumbnail-container-selected");
+		}
+	}
+
 }
 
 function removeSelection(parentId) {
 	var jqueryContainer = $("#"+parentId+" > .thumbnail-container-selected");
 	jqueryContainer.removeClass("thumbnail-container-selected");
 	jqueryContainer.addClass("thumbnail-container-hover");
+}
+
+function doGalleryAdd(){
+	var jqueryObject;
+	var bentoId;
+	var element;
+	var bento;
+
+	bento = $(".selected-bento")[0];
+	bento.gallery = true;
+	bento.image_file_list = [];
+	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
+	if (jqueryObject.size() > 0){
+		removeSelection("add-images-desktop");
+		var element;
+		jqueryObject.each(function(i){
+			bento.image_file_list.push([this.id, this.file]);
+		});
+		unsaved();
+	}
+
+}
+
+function loadPhotoOptions(){
+	$("#add-images-desktop > div").each(function(i){
+		$("#choose-photo-options")[0].appendChild(this);
+	});
+}
+
+function createGallery(){
+	$("#choose-photos-dialog").dialog("open");
 }
 
 function doAdd() {
@@ -1617,7 +1570,7 @@ function doAdd() {
 				addVideo(bento, null, element.file, null);
 			}
 		} else if (element.youTubeURL) {
-			addYouTube(bento, element.youTubeURL);
+			addYouTube(bento, element.youTubeURL, element.auto);
 		} else if (element.spotifyTrackId) {
 			addSpotify(bento, element.spotifyTrackId)
 		} else if (element.soundCloudURL) {
@@ -1674,6 +1627,7 @@ function selectImage(image) {
 
 	// Highlight the bento
 	image.closest(".bento").addClass("selected-bento");
+	$("#choose-photos-dialog").value = "1.1";
 
 	// Show the dialog if it's not already open
 	openImageDialog();
@@ -1683,6 +1637,11 @@ function deselectImage(image) {
 	if (image) {
 		image.closest(".bento").removeClass("selected-bento");
 	}
+}
+
+function addRedirect(){
+	$("#redirect-url").val($("#redirect-text").val());
+	$("#youtube-redirect-dialog").dialog("open");
 }
 
 function openHyperlinkInput() {
@@ -1750,6 +1709,26 @@ function setHyperlinkButtons(linkAddress) {
 		$("#remove-hyperlink-button").css("display", "none");
 		$("#change-hyperlink-button").css("display", "none");
 	}
+}
+
+function setRedirectButtons(url){
+	if(url && url.length > 0){
+		$("#add-redirect-button").css("display", "none");
+		$("#remove-redirect-button").css("display", "block");
+		$("#change-redirect-button").css("display", "block");
+	} else {
+		$("#add-redirect-button").css("display", "block");
+		$("#remove-redirect-button").css("display", "none");
+		$("#change-redirect-button").css("display", "none");
+	}
+}
+
+function removeRedirect(){
+	setRedirect(null);
+}
+
+function changeRedirect(){
+	addRedirect();
 }
 
 function removeHyperlink() {
@@ -1951,7 +1930,7 @@ function setFacebookPage(link, token){
 				var container = document.createElement("div");
 				container.classList.add("facebook-container");
 				container.classList.add("facebook-container-hover");
-				container.onclick = function(){ selectFacebook(this);};
+				container.onclick = function(){ selectFacebook(this); };
 
 				var inner = document.createElement("div");
 				inner.classList.add("inner-thumbnail-container");
@@ -1982,9 +1961,109 @@ function test(elem){
 }
 
 function selectFacebook(elem){
-	selection = document.getElementsByClassName("facebook-container-selected");
-	for(i = 0; i < selection.length; i++){
-		$(selection[i]).removeClass("facebook-container-selected");
+	if ($(elem).hasClass("facebook-container-selected")) {
+		$(elem).removeClass("facebook-container-selected");
+	} else {
+		$(elem).addClass("facebook-container-selected");
 	}
-	$(elem).addClass("facebook-container-selected");
+}
+
+function setCSS(element, property) {
+	if (typeof element.data(property) != 'undefined') {
+		element.css(property, element.data(property));
+	}
+}
+
+function initTemplate(template) {
+	var templateId = template.attr("id");
+	var templateNumber = templateId.substring(templateId.indexOf("-")+1);
+
+	// Init the divider containers
+	$("[id^='divider-container-"+templateNumber+"']").each(function(){
+		setCSS($(this), "left");
+		setCSS($(this), "top");
+		setCSS($(this), "width");
+		setCSS($(this), "height");
+	});
+	
+	// Init the dividers
+	$("[id^='divider-"+templateNumber+"']").each(function(){
+		
+		// position the dividers
+		var left = $(this).data("left");
+		var top = $(this).data("top");
+		var width = $(this).data("width");
+		var height = $(this).data("height");
+
+		if (typeof left != 'undefined') {
+			$(this).css("left", left);
+		}
+		if (typeof top != 'undefined') {
+			$(this).css("top", top);
+		}
+		if (typeof width != 'undefined') {
+			$(this).css("width", width);
+		}
+		if (typeof height != 'undefined') {
+			$(this).css("height", width);
+		}
+
+		// set up dependencies
+		var leftDependents = $(this).data("left-dependents");
+		var rightDependents = $(this).data("right-dependents");
+		var topDependents = $(this).data("top-dependents");
+		var bottomDependents = $(this).data("bottom-dependents");
+		
+		// set the left dependents
+		$(this)[0].leftDependents = new Array();
+		if (typeof leftDependents != 'undefined') {
+			for (var i=0; i < leftDependents.length; i++) {
+				$(this)[0].leftDependents.push(document.getElementById(leftDependents[i]));
+			}
+		}
+
+		// set the right dependents
+		$(this)[0].rightDependents = new Array();
+		if (typeof rightDependents != 'undefined') {
+			for (var i=0; i < rightDependents.length; i++) {
+				$(this)[0].rightDependents.push(document.getElementById(rightDependents[i]));
+			}
+		}
+
+		// set the top dependents
+		$(this)[0].topDependents = new Array();
+		if (typeof topDependents != 'undefined') {
+			for (var i=0; i < topDependents.length; i++) {
+				$(this)[0].topDependents.push(document.getElementById(topDependents[i]));
+			}
+		}
+
+		// set the bottom dependents
+		$(this)[0].bottomDependents = new Array();
+		if (typeof bottomDependents != 'undefined') {
+			for (var i=0; i < bottomDependents.length; i++) {
+				$(this)[0].bottomDependents.push(document.getElementById(bottomDependents[i]));
+			}
+		}
+		
+		// make it draggable
+		var axis = $(this).data("drag-axis");
+		var ext = $(this).attr("id").substring($(this).attr("id").indexOf("-"))
+		var dragFunction = function(event, ui) {
+				handleHorizontalDrag(event.target, ui.position.left - ui.originalPosition.left);
+				ui.originalPosition.left = ui.position.left;
+			};
+		if (axis === "y") {
+			dragFunction = function(event, ui) {
+				handleVerticalDrag(event.target, ui.position.top - ui.originalPosition.top);
+				ui.originalPosition.top = ui.position.top;
+			}
+		}
+		$(this).draggable({
+			axis: axis,
+			containment: "#divider-container"+ext,
+			drag: dragFunction
+		});
+
+	});
 }
