@@ -24,6 +24,15 @@
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 	<script src="js/preview.js"></script>
 
+	<!-- CUSTOM STYLESHEETS -->
+	<link rel="stylesheet" href="css/styles.css">
+	<style>
+	body {
+		background-color: none;
+	}
+	</style>
+	<script src="js/custom.js"></script>
+
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -46,6 +55,12 @@
 </head>
 <body>
 	<?php /*include_once("analyticstracking.php")*/ ?>
+	<!-- =========================
+	     PRE LOADER       
+	============================== -->
+	<div class="preloader">
+	  <div class="status">&nbsp;</div>
+	</div>
 	<?php
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
