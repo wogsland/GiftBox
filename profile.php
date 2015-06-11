@@ -24,7 +24,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- SITE TITLE -->
-<title>GiveToken.com - Give a Token of Appreciation</title>
+<title>GiveToken.com - Profile</title>
 
 <!-- =========================
       FAV AND TOUCH ICONS
