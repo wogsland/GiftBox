@@ -66,7 +66,7 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="featureNotAvailable('Opener')"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="addYouTubeRedirect();"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
@@ -153,6 +153,25 @@
 		</form>
 	</div>
 
+	<div id="youtube-url-dialog">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="youtube-url">Paste link address here</label>
+				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
+				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" defaultValue = "true" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+		    </fieldset>
+		</form>
+	</div>
+
+	<div id="youtube-redirect-dialog">
+		<form>
+			<fieldset>
+				<label class="input-label" for="redirect-url">Paste Redirect Address here</label>
+				<input class="dialog-input" type="text" name="redirect-url" id="redirect-url">
+			</fieldset>
+		</form>
+	</div>
+
 	<div id="add-hyperlink-dialog" title="Add A Hyperlink To This Image">
 		<form>
 		    <fieldset>
@@ -160,6 +179,19 @@
 				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
+	</div>
+
+	<div id="redirect-dialog" title="Redirect">
+		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-redirect-button" onclick="addRedirect()"><i class="fa fa-link fa-lg link"></i> ADD REDIRECT</div>
+			<div  class="image-dialog-button" style="display:none" id="remove-redirect-button" onclick="removeRedirect()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
+			<div  class="image-dialog-button" style="display:none" id="change-redirect-button" onclick="changeRedirect()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
+			<input id="redirect-text" placeholder="https://www.example.com" disabled>
+			<br>
+			<br>
+			<div>This will redirect your viewers to this url after any YouTube video finishes playing on the page.</div>
+		</div>
+		<div class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#redirect-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>
 
 	<div id="facebook-album-dialog" title="CHOOSE AN ALBUM">
