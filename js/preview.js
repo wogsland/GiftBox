@@ -7,7 +7,9 @@ $(document).ready(function(){
 
   	var trig = $('#triggerTab');
 	trig.on('click', function(){
-		window.open('".$this->redirect_url."', '_blank');
+		if($("#redirect_url")[0].innerHTML != ""){
+			window.location.href = $("#redirect_url")[0].innerHTML;
+		}
 	});
 
 	$('.flip-over').click(function(e){

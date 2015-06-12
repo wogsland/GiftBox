@@ -142,20 +142,7 @@ class Bento {
 					echo "<div class=\"youtube-video\" id=\"player?".$video_id."?".$this->id."\"></div>";
 				}
 			  	if($this->redirect_url){
-			  		echo "<script>
-			  			if($('#triggerTab')){
-
-			  			} else {
-			  				trigger = document.createElement('div');
-			  				trigger.display = 'none';
-			  				trigger.onclick = function(){
-			  					window.location.href = '".$this->redirect_url."';
-			  				}
-			  				var elem = $(\"#player?".$video_id."\");
-			  				elem.appendChild(trigger);
-			  			}
-
-			  		</script>".PHP_EOL;
+			  		echo "<div id='redirect_url'>".$this->redirect_url."</div>".PHP_EOL;
 
 				};
 				//echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
