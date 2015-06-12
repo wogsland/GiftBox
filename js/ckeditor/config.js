@@ -13,21 +13,29 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
 		{ name: 'insert' },
-		{ name: 'forms' },
-		{ name: 'tools' },
-		{ name: 'document',	   groups: [ 'mode', 'document', 'doctools' ] },
-		{ name: 'others' },
-		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
 		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+		'/',
 		{ name: 'styles' },
 		{ name: 'colors' },
 		{ name: 'about' }
 	];
 
+	config.extraPlugins = 'colorbutton';
 	// Remove some buttons provided by the standard plugins, which are
 	// not needed in the Standard(s) toolbar.
-	config.removeButtons = 'Image,Underline,Subscript,Superscript';
+
+	config.colorButton_foreStyle = {
+	    element: 'font',
+	    attributes: { 'color': '#(color)' }
+	};
+
+	config.colorButton_backStyle = {
+	    element: 'font',
+	    styles: { 'background-color': '#(color)' }
+	};
+
+	config.removeButtons = 'Table,Maximize,Source,Image,Underline,Subscript,Superscript';
 
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
