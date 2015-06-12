@@ -66,59 +66,31 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="featureNotAvailable('Opener')"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="addYouTubeRedirect();"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
 					<span class="template-tab-text">PICK A TEMPLATE</span>
-					<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showTemplates('all')">ALL</a>
-					<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showTemplates(2)">2</a>
-					<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showTemplates(3)">3</a>
-					<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showTemplates(4)">4</a>
-					<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showTemplates(5)">5</a>
-					<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showTemplates(6)">6</a>
-					<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showTemplates(7)">7</a>
-					<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showTemplates(8)">8</a>
-					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showTemplates(9)">9</a>
+					<a class="template-number template-number-selected" id="template-number-all" href="javascript:void(0)" onclick="showThumbnails('all')">ALL</a>
+					<a class="template-number template-number-hover" id="template-number-2" href="javascript:void(0)" onclick="showThumbnails(2)">2</a>
+					<a class="template-number template-number-hover" id="template-number-3" href="javascript:void(0)" onclick="showThumbnails(3)">3</a>
+					<a class="template-number template-number-hover" id="template-number-4" href="javascript:void(0)" onclick="showThumbnails(4)">4</a>
+					<a class="template-number template-number-hover" id="template-number-5" href="javascript:void(0)" onclick="showThumbnails(5)">5</a>
+					<a class="template-number template-number-hover" id="template-number-6" href="javascript:void(0)" onclick="showThumbnails(6)">6</a>
+					<a class="template-number template-number-hover" id="template-number-7" href="javascript:void(0)" onclick="showThumbnails(7)">7</a>
+					<a class="template-number template-number-hover" id="template-number-8" href="javascript:void(0)" onclick="showThumbnails(8)">8</a>
+					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showThumbnails(9)">9</a>
 
 					<div class="template-thumbnail-container">
-						<div class="template-thumbnail template-4" id="template-thumbnail-4" onclick="selectTemplate('template-1')">
-							<div class="thumb-padded column height100 width33"></div>
-							<div class="thumb-padded column height100 width33"></div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-						</div>
-
-						<div class="template-thumbnail template-5" id="template-thumbnail-5" onclick="selectTemplate('template-2')">
-							<div class="thumb-column height100 width50">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-							<div class="thumb-column height100 width50">
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>
-						</div>
-
-						<div class="template-thumbnail template-6" id="template-thumbnail-6" onclick="selectTemplate('template-3')">
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height33 width100"></div>
-								<div class="thumb-padded thumb-column height66 width100"></div>
-							</div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height50 width100"></div>
-								<div class="thumb-padded thumb-column height50 width100"></div>
-							</div>
-							<div class="thumb-column height100 width33">
-								<div class="thumb-padded thumb-column height66 width100"></div>
-								<div class="thumb-padded thumb-column height33 width100"></div>
-							</div>
-						</div>
-
-
+					<?php
+						$dir = "templates";
+						$files = scandir($dir);
+						foreach ($files as $filename) {
+							if (strpos($filename, "thumbnail") !== FALSE) {
+								include $dir."/".$filename;
+							}
+						}
+					?>
 					</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
@@ -181,6 +153,25 @@
 		</form>
 	</div>
 
+	<div id="youtube-url-dialog">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="youtube-url">Paste link address here</label>
+				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
+				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" defaultValue = "true" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+		    </fieldset>
+		</form>
+	</div>
+
+	<div id="youtube-redirect-dialog">
+		<form>
+			<fieldset>
+				<label class="input-label" for="redirect-url">Paste Redirect Address here</label>
+				<input class="dialog-input" type="text" name="redirect-url" id="redirect-url">
+			</fieldset>
+		</form>
+	</div>
+
 	<div id="add-hyperlink-dialog" title="Add A Hyperlink To This Image">
 		<form>
 		    <fieldset>
@@ -188,6 +179,19 @@
 				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
 		</form>
+	</div>
+
+	<div id="redirect-dialog" title="Redirect">
+		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-redirect-button" onclick="addRedirect()"><i class="fa fa-link fa-lg link"></i> ADD REDIRECT</div>
+			<div  class="image-dialog-button" style="display:none" id="remove-redirect-button" onclick="removeRedirect()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
+			<div  class="image-dialog-button" style="display:none" id="change-redirect-button" onclick="changeRedirect()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
+			<input id="redirect-text" placeholder="https://www.example.com" disabled>
+			<br>
+			<br>
+			<div>This will redirect your viewers to this url after any YouTube video finishes playing on the page.</div>
+		</div>
+		<div class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#redirect-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>
 
 	<div id="facebook-album-dialog" title="CHOOSE AN ALBUM">

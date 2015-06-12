@@ -1008,22 +1008,24 @@ fieldset {
 	display: none;
 }
 
-#add-hyperlink-button {
+#add-hyperlink-button,
+#add-redirect-button {
 	width: 100%;
 }
 
 #close-image-dialog-button {
 	display: block;
-	margin: 200px auto 0px auto;
+	margin: 120px auto 0px auto;
 }
 
-#hyperlink-button:hover {
+#hyperlink-button:hover{
 	color: white;
 	background-color: #626c71;
 	cursor: pointer;
 }
 
-#hyperlink-text {
+#hyperlink-text,
+#redirect-text {
 	width: 100%;
 	margin-top: 5px;
 	color: black;
