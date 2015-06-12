@@ -47,6 +47,10 @@
 <body>
 	<?php /*include_once("analyticstracking.php")*/ ?>
 	<?php
+	// echo '<div class="preloader">';
+	// echo '<div class="status">&nbsp;</div>';
+	// echo '</div>';
+	// echo '<header></header>';
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
 	echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
