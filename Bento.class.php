@@ -121,6 +121,7 @@ class Bento {
 
 		if($this->overlay_content){
 			echo '<div id="'.$this->id.'"style="font-size:'.(($this->overlay_width/$this->css_width)*100).'%; width: '.(($this->overlay_width/$this->css_width)*100).'%; position:absolute; word-wrap: break-word; left: '.((((($this->css_width/2)-($this->overlay_width/2))+$this->overlay_left)/$this->css_width)*100).'%; top: '.(($this->overlay_top/$this->css_height)*100).'%;">'.$this->overlay_content.'</div>';
+			
 		}
 
 		if ($this->download_file_name) {

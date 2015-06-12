@@ -823,7 +823,7 @@ function resizeImage(img, bento) {
 
 function resizeText(container, bento){
 	var column = bento.id.split("nto-");
-	var columnWidth = $("#column-" + column[1])[0].scrollWidth - 50;
+	var columnWidth = $("#column-" + column[1]).width() - 50;
 	if(columnWidth < container.originalWidth){
 		$(container).width(columnWidth);
 	} else {
