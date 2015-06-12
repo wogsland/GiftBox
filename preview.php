@@ -75,7 +75,7 @@
 
 	echo '<div id="letter-text-container">';
 	echo '<div id="letter-text">';
-	echo '<p>'.nl2br($token->letter_text).'</p>';
+	echo '<p>'.($token->letter_text).'</p>';
 	echo '<p id="letter-attachments">';
 	foreach ($token->attachments as $attachment) {
 		if ($google_app_engine) {

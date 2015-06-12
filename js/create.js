@@ -59,7 +59,7 @@ function youTubeID(url) {
 }
 
 function vimeoId(url){
-	var result = url.split("vimeo.com/");
+	var result = url.match(/^.*(?:vimeo.com)\/(?:channels\/|channels\/\w+\/|groups\/[^\/]*\/videos\/|album‌​\/\d+\/video\/|video\/|)(\d+)(?:$|\/|\?)/);
 	if(result){
 		return result[1];
 	} else { 
