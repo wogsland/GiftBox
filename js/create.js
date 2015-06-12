@@ -343,6 +343,7 @@ function setRedirect(linkAddress) {
 }
 
 function addYouTube(bento, url, auto) {
+	console.log(auto);
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -1174,7 +1175,9 @@ function inputURL(site) {
 function checkYouTube(url){
 	$("#youtube-url-dialog").dialog("close");
 	url = url ? url : document.getElementById("youtube-url").value;
-	var auto = document.getElementById("youtube-auto-play").value ? document.getElementById("youtube-auto-play").value : false;
+	var auto_input = document.getElementById("youtube-auto-play");
+	var auto =  $(auto_input).prop('checked');
+	console.log(auto);
 	if(auto){
 		auto = 1;
 	} else {
