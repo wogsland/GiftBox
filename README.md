@@ -14,6 +14,16 @@ hosted on Google Cloud
 - production: [givetoken.com](http://givetoken.com/)
 - staging: [http://t-sunlight-757.appspot.com/](http://t-sunlight-757.appspot.com/)
 
+## <a name="database"></a>Database Management
+
+### Creating a Local Instance of your database.
+
+#### Assumptions:
+- You have downloaded and installed MySQL workbench and have created your local instance
+- You have access to the Google Developer Console linked in the following file.
+
+To create a local instance of the givetoken database. Refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing).
+
 ## <a name="branching"></a>Branching Strategy
 
 ### Basic Tenets
@@ -48,22 +58,12 @@ Branch names should follow the following convention:
 
 ### Branching Off of Master
 
-- `git pull github master`
-- `git checkout -b feature/233-example-branch-name`
-- Exhibit your brilliance
-- `git add [filename]`
-- `git commit -am "Add great new functionality to users per 223"`
-- `git push github feature/233-example-branch-name`
+This is done by gitflow
 
 
-### Merging with Staging
+### Merging with Develop
 
-to check your code on a production-like environment
-
-- `git checkout staging`
-- `git merge --no-ff bug/5-emperor-has-no-clothes`
-- `git push github staging`
-- deploy to staging site
+This should be done automatically using gitflow
 
 ### Handling Merge Conflicts
 
@@ -96,16 +96,6 @@ if you happen to run into merge conflicts:
 - `git commit -m "Fix merge conflicts"`
 - `git push origin [branch_name]` (push to the branch you were initially trying to merge into)
 
-### Sending a Pull Request
-
-once satisfied that your code is production-ready on the staging site
-
-- `git checkout feature/33-cat-videoz`
-- `git push github feature/33-cat-videoz`
-- On GH either find your branch and click "create pull request" or go to the PR page and find your branch
-
-Alternatively, you could use the [hub gem](https://github.com/github/hub) to create PRs from the command line.
-
 ###  Pushing Code Live
 
 once the PR has been approved and merged
@@ -113,26 +103,73 @@ once the PR has been approved and merged
 - `git pull github master`
 - Push code to production site, as described in the deployment procedures
 
-
-### Example Workflow from Start to Finish
+Use [gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) and [cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)for reference.
+### Example Workflow from Start to Finish Feature. 
 ___
 
-- `git pull github master`
-- `git checkout -b feature/233-example-branch-name`
+- `git checkout develop`
+- `git pull github develop`
+- Either create the issue or find it on github and have it assigned to you.
+- `git flow feature start [issue number]-<Issue Name>`
 - Exhibit your brilliance
-- `git commit -am "Add great new functionality to users per 223"`
-- `git push github feature/233-example-branch-name`
-- `git checkout staging`
-- `git merge --no-ff feature/233-example-branch-name`
-- `git push github staging`
+- `git add [files-to-add]`
+- `git commit`
+- Add commit message in vim editor that is displayed.
+- `git pull github develop`
+- `git flow feature finish [issue number]-<Issue Name>`
+- `git push`
 - [Deploy to staging site](#deploy-staging)
 - QA on the staging site
-- `git checkout feature/233-example-branch-name`
-- `git push github feature/233-example-branch-name`
-- On GH either find your branch and click "create pull request" or go to the PR page and find your branch
+- `git checkout master`
 - `git pull github master`
 - [Push code to production site](#deploy-production)
 - profit
+
+### Example Workflow from Start to Finish Hotfix. Used for bug fixes.
+___
+
+- `git checkout develop`
+- `git pull github develop`
+- Either create the issue or find it on github and have it assigned to you.
+- `git flow hotfix start [issue number]-<Issue Name>`
+- Exhibit your brilliance
+- `git add [files-to-add]`
+- `git commit`
+- Add commit message in vim editor that is displayed.
+- `git tag -a [version-bump]`
+- `git pull github develop`
+- `git flow hotfix finish [issue number]-<Issue Name>`
+- `git push`
+- [Deploy to staging site](#deploy-staging)
+- QA on the staging site
+- `git checkout master`
+- `git pull github master`
+- [Push code to production site](#deploy-production)
+- avert profit loss
+
+### Example Workflow from Start to Finish Release. Used for new releases.
+___
+
+
+### Example Workflow from Start to Finish Publish. Used when you are unable to complete a feature or you are working in collaboration
+___
+
+User A
+- `git checkout develop`
+- `git pull github develop`
+- Either create the issue or find it on github and have it assigned to you.
+- `git flow feature start [issue number]-<Issue Name>`
+- Exhibit your brilliance
+- `git add [files-to-add]`
+- `git commit`
+- Add commit message in vim editor that is displayed.
+- `git flow feature publish [issue number]-<Issue Name>`
+- Go work on something else - checkout another branch
+
+User B
+- `git flow feature pull origin [issue number]-<Issue Name>`
+- commit and finish feature and then push and deploy
+- collaborate for profit!
 
 
 ## <a name="deployment"></a>Deployment Information
@@ -162,7 +199,7 @@ ___
   - this assumes ssh; you could use `https://github.com/gp48maz1/GiftBox.git` instead of `git@...` for https if you prefer
 - `git remote -v` and you should see origin (GAE) and GH remotes listed.
 - `git fetch github`
-- `git checkout staging` to checkout and track the remote staging branch
+- `git checkout develop` to checkout and track the remote staging branch
 
 ### Follow the Branching Procedures
 
@@ -174,7 +211,7 @@ Before you deploy anything, make sure you are following the [Give Token branchin
 
 When deploying using the following procedures, *be absolutely sure* that you are on the most up-to-date version of correct branch:
 
-#### `staging` -> staging site
+#### `develop` -> staging site
 
 #### `master` -> production
 
@@ -183,17 +220,18 @@ When deploying using the following procedures, *be absolutely sure* that you are
 
 *assumptions: you have merged your topic branch into staging, pushed staging to the GH remote, and you are at the project root (i.e. `stone-timing-557/default/`)*
 
-- `git checkout staging`
-- `git pull github staging`
-- `gcloud preview app deploy ./ --project t-sunlight-757`
+- `git checkout develop`
+- `git pull github develop`
+- `gcloud preview app deploy app.yaml --project t-sunlight-757 --version 1`
 
 ### <a name="deploy-production"></a>Deploy to Production
 *assumptions: you have merged your pull request into master, pulled the GH master to your local machine, and you are at the project root (i.e. `stone-timing-557/default/`)*
 
 - `git checkout master`
 - `git pull github master`
-- `gcloud preview app deploy ./ --project stone-timing-557`
+- `gcloud preview app deploy app.yaml --project stone-timing-557 --version 1`
 
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
 
 # GMP was here
+# Testing

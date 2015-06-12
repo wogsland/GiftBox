@@ -18,9 +18,20 @@
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
+	<link rel="stylesheet" href="css/colorbox.css" />
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 	<script src="js/preview.js"></script>
+
+	<!-- CUSTOM STYLESHEETS -->
+	<link rel="stylesheet" href="css/styles.css">
+	<style>
+	body {
+		background-color: none;
+	}
+	</style>
+	<script src="js/custom.js"></script>
 
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
@@ -44,7 +55,14 @@
 </head>
 <body>
 	<?php /*include_once("analyticstracking.php")*/ ?>
+	<!-- =========================
+	     PRE LOADER       
+	============================== -->
+	<div class="preloader">
+	  <div class="status">&nbsp;</div>
+	</div>
 	<?php
+	echo '<div id="triggerTab"></div>';
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
 	echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
@@ -57,7 +75,7 @@
 
 	echo '<div id="letter-text-container">';
 	echo '<div id="letter-text">';
-	echo '<p>'.nl2br($token->letter_text).'</p>';
+	echo '<p>'.($token->letter_text).'</p>';
 	echo '<p id="letter-attachments">';
 	foreach ($token->attachments as $attachment) {
 		if ($google_app_engine) {

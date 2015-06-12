@@ -51,3 +51,7 @@ handlers:
 # Serve php scripts.
 - url: /(.+\.php)$
   script: \1
+
+- url: /templates
+  static_dir: templates
+  application_readable: true

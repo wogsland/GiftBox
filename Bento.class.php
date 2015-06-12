@@ -6,6 +6,7 @@ if ($google_app_engine) {
 }
 
 include_once 'util.php';
+include 'PhotoGallery.class.php';
 
 class Bento {
 	var $id;
@@ -27,6 +28,9 @@ class Bento {
 	var $image_left_in_container;
 	var $image_top_in_container;
 	var $image_hyperlink;
+	var $gallery_file_list = array();
+	var $redirect_url;
+	var $auto_play;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -45,20 +49,42 @@ class Bento {
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
 			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
-			."image_top_in_container, image_left_in_container, image_hyperlink) "
+			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
 			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
 			."'$this->image_top_in_container', '$this->image_left_in_container', "
-			."'$this->image_hyperlink')";
+			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play')";
 		$this->id = insert($sql);
+		if(sizeof($this->gallery_file_list) > 0){
+			$photo_gallery = new PhotoGallery();
+			$photo_gallery->setBentoId($this->id);
+			$photo_gallery->setFileNames($this->gallery_file_list);
+			$photo_gallery->save();
+		}
 	}
 	
 	public function render() {
 		include 'config.php';
-
-		echo '<div class="bento">'.PHP_EOL;
+		$gallery = PhotoGallery::fetch($this->id);
+		if(sizeof($gallery)> 0){
+			foreach($gallery as $file_name){
+				if ($google_app_engine) {
+	//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
+	//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name[2], $use_https);
+				} else {
+					$image_path = $file_storage_path.$file_name[2];
+				}
+				array_push($this->gallery_file_list, $image_path);
+			}
+		}
+		if ($this->gallery_file_list){
+			echo '<div class="bento gallery '.$this->id.'" href="'.$this->gallery_file_list[0].'">'.PHP_EOL;
+		} else {
+			echo '<div class="bento">'.PHP_EOL;
+		}
 		
 		if (is_spotify($this->content_uri)) {
 			$background_color = "black";
@@ -110,7 +136,16 @@ class Bento {
 		if ($this->content_uri) {
 			if (is_youtube($this->content_uri)) {
 				$video_id = youtube_id($this->content_uri);
-				echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
+				if($this->auto_play == 1){
+					echo "<div class=\"youtube-video auto-play\" id=\"player?".$video_id."?".$this->id."\"></div>";
+				} else { 
+					echo "<div class=\"youtube-video\" id=\"player?".$video_id."?".$this->id."\"></div>";
+				}
+			  	if($this->redirect_url){
+			  		echo "<div id='redirect_url'>".$this->redirect_url."</div>".PHP_EOL;
+
+				};
+				//echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_soundcloud($this->content_uri)) {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {
@@ -123,5 +158,12 @@ class Bento {
 			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
 		}
 		echo '</div>'.PHP_EOL;
+		if ($this->gallery_file_list){
+			foreach($this->gallery_file_list as $key => $file_name){
+				if($key != 0){
+					echo '<div id="'.$key.'"href="'.$file_name.'" class="'.$this->id.'"></div>';
+				}
+			}
+		}
 	}
 }
