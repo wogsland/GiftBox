@@ -62,6 +62,7 @@
 	  <div class="status">&nbsp;</div>
 	</div>
 	<?php
+	echo '<div id="triggerTab"></div>';
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';
 	echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
@@ -74,7 +75,7 @@
 
 	echo '<div id="letter-text-container">';
 	echo '<div id="letter-text">';
-	echo '<p>'.nl2br($token->letter_text).'</p>';
+	echo '<p>'.($token->letter_text).'</p>';
 	echo '<p id="letter-attachments">';
 	foreach ($token->attachments as $attachment) {
 		if ($google_app_engine) {
