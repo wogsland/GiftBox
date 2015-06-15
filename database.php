@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 if ($google_app_engine) {
-	$mysqli = new mysqli('127.0.0.1', $user, $password, $database, null, $socket);
+	$mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {
 	$mysqli = new mysqli('p:'.$server, $user, $password, $database);
 }
