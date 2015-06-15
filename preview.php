@@ -26,12 +26,7 @@
 
 	<!-- CUSTOM STYLESHEETS -->
 	<link rel="stylesheet" href="css/styles.css">
-	<style>
-	body {
-		background-color: none;
-	}
-	</style>
-	<script src="js/custom.js"></script>
+	<script src="js/customs.js"></script>
 
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
