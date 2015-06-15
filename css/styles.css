@@ -36,7 +36,8 @@ body#viewer-page{
 
 body#profile-page footer,
 body#pricing-page footer,
-body#viewer-page footer{
+body#viewer-page footer,
+body#privacy-policy footer{
 	text-align: center;
 }
 
@@ -1893,6 +1894,22 @@ footer .terms-policy li a:hover{
     box-shadow: 0 3px 0 #428bca;
     margin: 0;
 }
+
+/*---------------------------------------
+   SECTION:  TERMS OF SERVICE
+-----------------------------------------*/
+body div.container-fluid {
+    padding-top: 3.5em;
+}
+h1#terms-header {
+    margin-top: 1.5em;
+}
+summary#terms-content {
+    margin: 0 auto;
+    width: 78%;
+    padding-bottom: 4em;
+}
+
 
 /***** 9.5 PROFILE STYLES *****/
 

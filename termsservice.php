@@ -132,8 +132,8 @@ include_once 'config.php';
 <!-- /END COLOR OVERLAY -->
 </header>
 	<div>
-		<summary>
-			<h1>
+		<summary id="terms-content">
+			<h1 id="terms-header">
 			    	Terms of Service
 			</h1>
 			<p>
@@ -543,6 +543,44 @@ include_once 'config.php';
 			    prior and contemporaneous understandings, agreements, representations and warranties, both written and oral, with respect to the Platform.
 			</p>
 		</summary>
+		<!-- =========================
+		     FOOTER
+		============================== -->
+		<footer id="contact-footer" class="deep-dark-bg">
+
+			<div class="container-fluid">
+
+				<!-- LOGO -->
+				<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
+
+				<!-- SOCIAL ICONS -->
+				<ul class="social-icons">
+					<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
+					<li><a href="#"><i class="social_twitter_square"></i></a></li>
+					<li><a href="#"><i class="social_pinterest_square"></i></a></li>
+					<li><a href="#"><i class="social_googleplus_square"></i></a></li>
+					<li><a href="#"><i class="social_instagram_square"></i></a></li>
+					<li><a href="#"><i class="social_flickr_square"></i></a></li>
+				</ul>
+
+				<!--Terms and Policy-->
+				<ul class="terms-policy">
+					<li><a href="termsservice.php">Terms and Conditions</a></li>
+					<li><a href="privacypolicy.php">Privacy Policy</a></li>
+				</ul>
+
+
+
+				<!-- COPYRIGHT TEXT -->
+				<p class="copyright">
+					©2014 GiveToken.com &amp; Giftly Inc., All Rights Reserved
+				</p>
+
+			</div>
+			<!-- /END CONTAINER -->
+
+		</footer>
+		<!-- /END FOOTER -->
 	</div>
 </body>
 <script src="js/bootstrap.min.js"></script>

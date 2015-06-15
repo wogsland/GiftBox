@@ -158,7 +158,7 @@
 		    <fieldset>
 				<label class="input-label" for="youtube-url">Paste link address here</label>
 				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
-				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" defaultValue = "true" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
 		    </fieldset>
 		</form>
 	</div>

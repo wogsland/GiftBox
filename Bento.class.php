@@ -147,47 +147,15 @@ class Bento {
 		if ($this->content_uri) {
 			if (is_youtube($this->content_uri)) {
 				$video_id = youtube_id($this->content_uri);
-				echo "<div id=\"player\"></div>
-					  <div style='display:none' id='triggerTab'></div>
-					  <script>".PHP_EOL;
-			  	if($this->redirect_url){
-			  		echo "var trig = $('#triggerTab');
-						  trig.on('click', function(){
-						  	window.open('".$this->redirect_url."', '_blank');
-						  });".PHP_EOL;
-
-				}
-				
-				echo "	var tag = document.createElement('script');
-					  	tag.src = 'https://www.youtube.com/iframe_api';
-					  	var firstScriptTag = document.getElementsByTagName('script')[0];
-					  	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-					  	var player;
-					  	function onYouTubeIframeAPIReady(){
-					  		player = new YT.Player('player', {
-					  			videoId: '".$video_id."',
-					  			events: {
-					  				'onReady': onPlayerReady,
-					  				'onStateChange': onPlayerStateChange
-					  			}
-					  		});
-					  	}
-
-					  	function onPlayerReady(event){
-					  		console.log('video ready');";
 				if($this->auto_play == 1){
-					echo "	event.target.playVideo();";
+					echo "<div class=\"youtube-video auto-play\" id=\"player?".$video_id."?".$this->id."\"></div>";
+				} else { 
+					echo "<div class=\"youtube-video\" id=\"player?".$video_id."?".$this->id."\"></div>";
 				}
-				echo "					
-					  	}
+			  	if($this->redirect_url){
+			  		echo "<div id='redirect_url'>".$this->redirect_url."</div>".PHP_EOL;
 
-					  	function onPlayerStateChange(event){
-					  		if(event.data == YT.PlayerState.ENDED){
-					  			$('#triggerTab').trigger('click');
-					  		}
-					  	}
-					  	</script>";
+				};
 				//echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_soundcloud($this->content_uri)) {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;

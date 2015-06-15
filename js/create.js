@@ -59,7 +59,7 @@ function youTubeID(url) {
 }
 
 function vimeoId(url){
-	var result = url.split("vimeo.com/");
+	var result = url.match(/^.*(?:vimeo.com)\/(?:channels\/|channels\/\w+\/|groups\/[^\/]*\/videos\/|album‌​\/\d+\/video\/|video\/|)(\d+)(?:$|\/|\?)/);
 	if(result){
 		return result[1];
 	} else { 
@@ -387,6 +387,7 @@ function setRedirect(linkAddress) {
 }
 
 function addYouTube(bento, url, auto) {
+	console.log(auto);
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
@@ -1261,7 +1262,9 @@ function inputURL(site) {
 function checkYouTube(url){
 	$("#youtube-url-dialog").dialog("close");
 	url = url ? url : document.getElementById("youtube-url").value;
-	var auto = document.getElementById("youtube-auto-play").value ? document.getElementById("youtube-auto-play").value : false;
+	var auto_input = document.getElementById("youtube-auto-play");
+	var auto =  $(auto_input).prop('checked');
+	console.log(auto);
 	if(auto){
 		auto = 1;
 	} else {
