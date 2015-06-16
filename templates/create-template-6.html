@@ -1,0 +1,30 @@
+<div class="template" id="template-6">
+	<div class="divider-container" id="divider-container-6-1" data-top="5px" data-left="59px" data-width="560" data-height="746"></div>
+	<div class="divider-container" id="divider-container-6-2" data-top="5px" data-left="397px" data-width="560" data-height="746"></div>
+	<div class="divider-container" id="divider-container-6-3" data-top="5px" data-left="679px" data-width="326" data-height="640"></div>
+	<div id="column-6-1" class="column padded height100 width33">
+		<div class="bento" id="bento-6-1" onclick="bentoClick(this)">
+			<p class="click-to-add">click to add</p>
+			<div class="image-slider" id="bento-6-1-slider"></div>
+			<i class="close-button icon_close_alt" id="bento-6-1-close" onclick="closeClicked(event, this)"></i>
+			<i class="bento-link-icon icon-link fa fa-link fa-lg" id="bento-6-1-link-icon"></i>
+		</div>
+	</div>
+	<div id="column-6-2" class="column padded height100 width33">
+		<div class="bento" id="bento-6-2" onclick="bentoClick(this)">
+			<p class="click-to-add">click to add</p>
+			<div class="image-slider" id="bento-6-2-slider"></div>
+			<i class="close-button icon_close_alt" id="bento-6-2-close" onclick="closeClicked(event, this)"></i>
+		</div>
+	</div>
+	<div id="column-6-3" class="column padded height100 width33">
+		<div class="bento" id="bento-6-3" onclick="bentoClick(this)">
+			<p class="click-to-add">click to add</p>
+			<div class="image-slider" id="bento-6-3-slider"></div>
+			<i class="close-button icon_close_alt" id="bento-6-3-close" onclick="closeClicked(event, this)"></i>
+		</div>
+	</div>
+	<div class="vertical divider" id="divider-6-1" data-left="333px" data-drag-axis="x" data-left-dependents='["column-6-1"]' data-right-dependents='["column-6-2", "divider-container-6-2"]'></div>
+
+	<div class="vertical divider" id="divider-6-2" data-left="671px" data-drag-axis="x" data-left-dependents='["column-6-2", "divider-container-6-1"]' data-right-dependents='["column-6-3", "divider-container-6-3"]'></div>
+</div>

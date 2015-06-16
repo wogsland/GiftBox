@@ -2129,7 +2129,7 @@ function initTemplate(template) {
 			$(this).css("width", width);
 		}
 		if (typeof height != 'undefined') {
-			$(this).css("height", width);
+			$(this).css("height", height);
 		}
 
 		// set up dependencies
