@@ -1528,6 +1528,7 @@ function showThumbnails(number) {
 }
 
 function bentoClick(bento) {
+	$(".selected-bento").removeClass("selected-bento");
 	$("#add-dialog").attr("target-bento", bento.id);
 	$("#add-dialog").dialog("open");
 }
