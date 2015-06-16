@@ -184,20 +184,31 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 }
 
 function addOverlayToBento(bento, text){
-	console.log(bento + " " + text);
 	if(text){
 		if(!bento.imageContainer){
 			alert("You are trying to add overlay text to something other than an image. Please select an image and try again.");
 		} else {
 			bento.overlay_content = text;
 			var container = $("#"+bento.id+"-text-overlay-container");
-			if(container[0]){
-				container[0].innerHTML = text;
+			if(container.children().length > 0){
+				if(container.children()[3]){
+					container.children()[3].innerHTML = text;
+				} else {
+					container.children()[0].innerHTML = text;
+				}
+				container.resizable();
 			} else {
+				$("#"+bento.id)[0].resized = false;
 				var column = bento.id.split("nto-");
 				var containText = document.createElement('div');
 				containText.style.width = $("#column-" + column[1])[0].scrollWidth;
+				containText.id = bento.id + '-text-overlay-container';
 				containText.style.wordWrap = 'break-word';
+				containText.style.position = 'absolute';
+				containText.style.left = 0;
+				containText.style.top = 0;
+				containText.style.float = "left";
+				containText.className = "text-overlay-container";
 
 				var textContainer = document.createElement('div');
 				textContainer.style.wordBreak = "break-all";
@@ -205,13 +216,18 @@ function addOverlayToBento(bento, text){
 				textContainer.innerHTML = text;
 				textContainer.id = bento.id + '-text-overlay-container';
 				textContainer.className = "text-overlay-show";
-				$(textContainer)
-					.draggable({ containment: "#" + bento.id})
+				$(containText).resizable();
+				$(containText)
+					.draggable({ 
+						containment: "#" + bento.id
+					})
 					.click(function(){
 			            if ( $(this).is('.ui-draggable-dragging') ) {
 			                  return;
 			            }
-			            openOverlay();
+			            $(".selected-bento").removeClass("selected-bento");
+			            $(this.closest(".bento")).addClass("selected-bento");
+			            openOverlay(this);
 					});
 
 				containText.appendChild(textContainer);
@@ -223,7 +239,9 @@ function addOverlayToBento(bento, text){
 	} else {
 		bento.overlay_content = text;
 		var container = $("#"+bento.id+"-text-overlay-container");
-		if(container[0]){
+		bento.removeChild(container[0]);
+		$("#" + bento.id).resized = false;
+		if(container.children()[0]){
 			container.empty();
 			setOverlayButtons(null);
 		}
@@ -1077,9 +1095,15 @@ function save() {
 		bento.auto_play = this.auto_play ? this.auto_play: 0;
 		bento.redirect_url = $("#redirect-text").val();
 		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
-		bento.overlay_left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left") : null;
-		bento.overlay_top = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("top"): null;
-		bento.overlay_width = $("#"+this.id+"-text-overlay-container").width();
+		var column = this.id.split("nto-");
+		var columnWidth = $("#column-" + column[1]).width();
+		var columnHeight = $(this).height();
+		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: null;
+		bento.overlay_width = (parseInt(($("#"+this.id+"-text-overlay-container").width() / columnWidth)*10000))/100;
+		this.overlay_content ? console.log(($("#"+this.id +"-text-overlay-container").css("top").split("px")[0])) : console.log("null");
+		var left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left").split("px")[0] : null;
+		bento.overlay_left = (parseInt((left/columnWidth)*10000))/100;
+		console.log(bento.overlay_top);
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1610,9 +1634,12 @@ function doAdd() {
 	// LETTER
 	saveLetter();
 
+	bentoId = $("#add-dialog").attr("target-bento");
+	bento = $("#"+bentoId)[0];
 	// IMAGE
 	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
 	if (jqueryObject.size() > 0) {
+		bento.onclick = null;
 		removeSelection("add-images-desktop");
 		element = jqueryObject[0];
 		bento.image_file_name = element.name;
@@ -1812,7 +1839,7 @@ function removeOverlay(){
 	addOverlay("remove");
 }
 
-function changeOverlay(){
+function changeOverlay(container){
 	openOverlay();
 }
 
@@ -1849,6 +1876,13 @@ function removeImage(image) {
 }
 
 function openImageDialog() {
+	var bento;
+	bento = $(".selected-bento")[0];
+	if(!bento.overlay_content){
+		setOverlayButtons(null);
+	} else {
+		setOverlayButtons("yes");
+	}
 	$(imageDialogSelector).dialog("open");
 }
 
@@ -2157,12 +2191,23 @@ function initTemplate(template) {
 	});
 }
 
-function openOverlay(){
+function openOverlay(container){
 	//open the dialog for what text they want
 		//put button in corner of bento
 		//display text-dialog on click.
 	//add text to bento in db.
 	//change preview
+	if(container){
+		CKEDITOR.instances.overlayText.setData(container.innerHTML);
+	} else {
+		var bento = $(".selected-bento")[0];
+		var container = $(".selected-bento").find(".text-overlay-container");
+		if(container.length > 0){
+			CKEDITOR.instances.overlayText.setData(container.children()[3].innerHTML);
+		} else {
+			CKEDITOR.instances.overlayText.setData("");
+		}
+	}
 	$("#input-overlay-dialog").dialog("open");
 }
 

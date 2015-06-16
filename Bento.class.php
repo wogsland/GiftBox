@@ -120,16 +120,20 @@ class Bento {
 		}
 
 		if($this->overlay_content){
-			echo '<div id="'.$this->id.'"style="font-size:'.((($this->overlay_width/$this->css_width)*100) + 10).'%; width: '.(($this->overlay_width/$this->css_width)*100).'%; position:absolute; word-break: break-all; left: '.((((($this->css_width/2)-($this->overlay_width/2))+$this->overlay_left/2)/$this->css_width)*100).'%; top: '.(($this->overlay_top/$this->css_height)*100).'%; font-family: none; color: black; line-height: 120%; text-align: left;">'.$this->overlay_content.'</div>';
+			echo '<div class="'.$this->id.'" style="font-size: 100%; font-family: Lato-Bold, sans-serif; width: '.($this->overlay_width+2).'%; position:absolute; word-break: break-all; left: '.($this->overlay_left + 2).'%; top: '.$this->overlay_top.'%;">'.$this->overlay_content.'</div>';
 			echo '<script>
+				window.onload = function(){
+					var oHeight = $($(".'.$this->id.'")[0].parentNode).height();
+					var percentChange = ((oHeight/("'.$this->css_height.'").split("px")[0]) * 100) - 2;
+					$(".giftbox")[0].style.fontSize = percentChange + "%";
+				}
 				var originalHeight = $(window).height();
 				$(window).resize(function() { 
 					var percent = originalHeight/$(window).height();
-					console.log(percent);
 					originalHeight = $(window).height();
-					var currentSize = $("#'.$this->id.'")[0].style.fontSize;
+					var currentSize = $(".giftbox")[0].style.fontSize;
 					currentSize = parseFloat(currentSize);
-					$("#'.$this->id.'")[0].style.fontSize = (currentSize/percent) + "%";
+					$(".giftbox")[0].style.fontSize = (currentSize/percent) + "%";
 				});
 
 			</script>';
