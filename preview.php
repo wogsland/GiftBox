@@ -25,7 +25,6 @@
 	<script src="js/preview.js"></script>
 
 	<!-- CUSTOM STYLESHEETS -->
-	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/preloader.js"></script>
 
 	<!-- Favicon -->

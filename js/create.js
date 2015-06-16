@@ -193,16 +193,18 @@ function addOverlayToBento(bento, text){
 			var container = $("#"+bento.id+"-text-overlay-container");
 			if(container[0]){
 				container[0].innerHTML = text;
-				resizeText(container[0], bento);
 			} else {
+				var column = bento.id.split("nto-");
+				var containText = document.createElement('div');
+				containText.style.width = $("#column-" + column[1])[0].scrollWidth;
+				containText.style.wordWrap = 'break-word';
+
 				var textContainer = document.createElement('div');
+				textContainer.style.wordBreak = "break-all";
+				textContainer.style.minWidth = 0;
 				textContainer.innerHTML = text;
 				textContainer.id = bento.id + '-text-overlay-container';
 				textContainer.className = "text-overlay-show";
-				textContainer.style.wordWrap = "break-word";
-				var column = bento.id.split("nto-");
-				textContainer.originalWidth = $("#column-" + column[1])[0].scrollWidth - 50;
-				resizeText(textContainer, bento);
 				$(textContainer)
 					.draggable({ containment: "#" + bento.id})
 					.click(function(){
@@ -212,7 +214,8 @@ function addOverlayToBento(bento, text){
 			            openOverlay();
 					});
 
-				bento.appendChild(textContainer);
+				containText.appendChild(textContainer);
+				bento.appendChild(containText);
 			}
 			showControl(bento.id + "-show-overlay");
 			setOverlayButtons(text);
@@ -822,22 +825,8 @@ function resizeImage(img, bento) {
 	img.originalHeight = img.height;
 }
 
-function resizeText(container, bento){
-	var column = bento.id.split("nto-");
-	var columnWidth = $("#column-" + column[1]).width() - 50;
-	if(columnWidth < container.originalWidth){
-		$(container).width(columnWidth);
-	} else {
-		$(container).width(container.originalWidth);
-	}
-}
-
 function resizeBento(bento) {
 	var image = document.getElementById(bento.id + "-image");
-	var overlay = document.getElementById(bento.id + "-text-overlay-container");
-	if (overlay){
-		resizeText(overlay, bento);
-	}
 	if (image) {
 		resizeImage(image, bento);
 		var container = document.getElementById(bento.id + "-image-container");
@@ -1525,6 +1514,9 @@ function textIconClicked() {
 }
 
 function selectAddNav(navId) {
+
+    var editor = CKEDITOR.instances.overlayText;
+    editor.focusManager.hasFocus = true;
 	var selectedNav = $("#"+navId);
 
 	// restore all link styles
@@ -1618,9 +1610,6 @@ function doAdd() {
 	// LETTER
 	saveLetter();
 
-	bentoId = $("#add-dialog").attr("target-bento");
-	bento = $("#"+bentoId)[0];
-	bento.onclick = null;
 	// IMAGE
 	jqueryObject = $("#add-images-desktop > .thumbnail-container-selected > .inner-thumbnail-container > img");
 	if (jqueryObject.size() > 0) {
