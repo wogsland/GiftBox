@@ -380,6 +380,8 @@ function addDropBoxVideo(bento, url) {
 	var height = bento.offsetHeight;
 	video.width = width;
 	video.height = height;
+	$(video).css('width', '100%');
+	$(video).css('height', 'auto%');
 	video.style.border = 0;
 	video.style.position = "absolute";
 	video.style.top = "0px";
@@ -389,6 +391,7 @@ function addDropBoxVideo(bento, url) {
 	video.appendChild(source);
 	bento.appendChild(video);
 	bento.video = video;
+	$(bento).css('background-color', '#000000');
 	// THE ONLY THING THAT'S DIFFERENT
 	bento.contentURI = url;
 	showControl(bento.id + "-close", video);
@@ -826,6 +829,7 @@ function closeClicked(event, closeButton) {
 	if (target) {
 		if (target.nodeName === "VIDEO") {
 			bento.video = null;
+			$(bento).css('background-color', '#FFFFFF');
 		} else if (target.nodeName === "AUDIO") {
 			bento.audio = null;
 		} else if (target.nodeName === "DIV") {
