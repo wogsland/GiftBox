@@ -314,3 +314,22 @@ $(function(){
 		}
 	})
 });
+
+$(function(){
+	$("#input-overlay-dialog").dialog({
+		dialogClass: 'input-overlay-dialog',
+		autoOpen: false,
+		resizable: false,
+		height: 500,
+		width: 675,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				addOverlay();
+			},
+			Back: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+});

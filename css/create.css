@@ -273,7 +273,7 @@ ul {
 	cursor: ns-resize;
 }
 
-.close-button {
+.close-button{
 	display: none;
 	position: absolute;
 	top: 10px;
@@ -282,6 +282,21 @@ ul {
 	height: 20px;
 	font-size: 16px;
 	color: #B9B9B9;
+}
+
+.show-overlay{
+	display: none;
+	position: absolute;
+	margin-right: 20px;
+	top: 10px;
+	right: 10px;
+	width: 20px;
+	height: 20px;
+	font-size: 16px;
+	color: #B9B9B9;
+	background: blue;
+	height: 20px;
+	width: 20px;
 }
 
 .audio-close-button {
@@ -756,8 +771,8 @@ fieldset {
 }
 
 #letter-form {
-	height: 427px;
-	width: 650px;
+	height: 415px;
+	width: 625px;
 }
 
 #letter-text {
@@ -860,4 +875,24 @@ fieldset {
 
 #choose-photos-dialog{
 	color:black;
+}
+
+/******************** Text Overlay **********************/
+
+.text-overlay-container{	
+	border: black dashed 2px;
+}
+
+.text-overlay-hidden,
+.text-overlay-show{
+	z-index: 2;
+	position: relative;
+}
+
+.text-overlay-hidden {
+	display: none;
+}
+
+.text-overlay-show{
+	display: inline-block;
 }

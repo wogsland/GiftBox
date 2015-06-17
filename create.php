@@ -214,6 +214,16 @@
 		<div id="choose-photo-options"></div>
 	</div>
 
+	<div id="input-overlay-dialog" title="INPUT TEXT FOR OVERLAY">
+		<form id="letter-form">
+			<label class="input-label" for="overlayText">Write your message here</label>
+			<textarea name="overlayText" id="overlayText"></textarea>
+			<script>
+                CKEDITOR.replace( 'overlayText' );
+            </script>
+		</form>
+	</div>
+
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -312,6 +322,9 @@
 
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
+			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+			<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
+			<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
 			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()">CREATE GALLERY</div>
 			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
