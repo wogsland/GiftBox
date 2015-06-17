@@ -18,7 +18,8 @@ function processUpgrade(token, payFrom) {
 	$.post("upgrade_ajax.php", upgradeData, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
-				switchToLogin();
+				signupClose();
+				openMessage("Welcome!", "You have successfully signed up with GiveToken.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
 			} else {
 				location.reload();
 			}
