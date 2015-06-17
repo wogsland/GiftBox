@@ -306,6 +306,30 @@ function addVimeo(bento, url) {
 	unsaved();
 }
 
+function addDropBoxVideo(bento, url) {
+	var video = document.createElement('video');
+	var source = document.createElement('source');
+	source.src = url;
+	source.type = "video/mp4";
+	var width = bento.offsetWidth;
+	var height = bento.offsetHeight;
+	video.width = width;
+	video.height = height;
+	video.style.border = 0;
+	video.style.position = "absolute";
+	video.style.top = "0px";
+	video.style.left = "0px";
+	video.controls = "controls";
+	video.onclick = function(){videoClicked(event, this)};
+	video.appendChild(source);
+	bento.appendChild(video);
+	bento.video = video;
+	// THE ONLY THING THAT'S DIFFERENT
+	bento.contentURI = url;
+	showControl(bento.id + "-close", video);
+	unsaved();
+}
+
 function addRedirectUrl(){
 	var validLink = false;
 
@@ -343,12 +367,12 @@ function setRedirect(linkAddress) {
 }
 
 function addYouTube(bento, url, auto) {
-	console.log(auto);
 	var iframe = document.createElement('iframe');
 	var videoId =  youTubeID(url);
 	iframe.src = "//www.youtube.com/embed/"+videoId;
 	var width = bento.offsetWidth;
 	var height = bento.offsetHeight;
+	console.log("Youtube width and height: " + width + ", " + height);
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
@@ -412,12 +436,10 @@ function openVimeo(url){
 				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
 				error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
-				console.log(error);
 				alert(error);
 			});
 	} else {
 		error = "Unable to extract a Vimeo video ID from the URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	}
 }
@@ -438,12 +460,10 @@ function openYouTube(url, auto) {
 				createThumbnailContainer(img, title, "add-av-desktop");
 			}).fail(function() {
 				error = "Youtube API call failed.\n\n" + dataURL;
-				console.log(error);
 				alert(error);
 			});
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	}
 }
@@ -461,7 +481,6 @@ function openSoundCloud(url) {
 		createThumbnailContainer(img, data.title, "add-av-desktop");
 	}).fail(function(){
 		var error = "The URL specified is not a valid SoundCloud track or playlist URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	});
 }
@@ -476,7 +495,6 @@ function openSpotify(url) {
 		createThumbnailContainer(img, data.name, "add-av-desktop");
 	}).fail(function() {
 		var error = "The URL specified is not a valid Spotify track URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	});
 }
@@ -517,6 +535,33 @@ function openDropBoxImage(){
     });
 }
 
+function openDropBoxVideo(){
+
+    Dropbox.choose({
+        linkType: "direct",
+        success: function(files){
+			for (var i=0; i < files.length; i++){
+				var file = files[i];
+			    var image = document.createElement("img");
+			    // Thumbnail styling, making it bigger
+				var baseThumbnail = file.thumbnailLink.split('?')[0];
+				var cropped = baseThumbnail + '?' + $.param({ mode: 'crop', bounding_box: 800 });
+				image.src = cropped;
+				console.log(image.src);
+				image.dropBoxUrl = file.link;
+				image.id = file.name;
+				image.name = file.name;
+				createThumbnailContainer(image, image.name, "add-av-desktop");
+			}
+        },
+
+        multiselect:true,
+
+        extensions: ['.mp4'],
+
+    });
+}
+
 function openImageFiles(files) {
 	for (var i = 0; i < files.length; i++) {
 		var file = files[i];
@@ -544,8 +589,6 @@ function addFacebookImage(){
 		xhr.responseType = 'blob';
 		xhr.onload = function(e) {
 			// var headers = this.getAllResponseHeaders().toLowerCase();
-			// console.log(headers);
-			console.log(this);
 		  if (this.status == 200) {
 		    var myBlob = this.response;
 		    var image = document.createElement("img");
@@ -555,7 +598,6 @@ function addFacebookImage(){
 			myBlob.name = image.name;
 			myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
-			// console.log(image.src);
 			createThumbnailContainer(image, myBlob.name, "add-images-desktop");
 		    // myBlob is now the blob that the object URL pointed to.
 		  }
@@ -697,20 +739,21 @@ function showControl(controlId, target) {
 
 function closeClicked(event, closeButton) {
 	var bento = closeButton.parentNode;
-	if (closeButton.target) {
-		if (closeButton.target.nodeName === "VIDEO") {
+	var target = closeButton.target;
+	if (target) {
+		if (target.nodeName === "VIDEO") {
 			bento.video = null;
-		} else if (closeButton.target.nodeName === "AUDIO") {
+		} else if (target.nodeName === "AUDIO") {
 			bento.audio = null;
-		} else if (closeButton.target.nodeName === "DIV") {
+		} else if (target.nodeName === "DIV") {
 			bento.imageContainer = null;
-			removeImage($("#"+closeButton.target.id).find("img"));
+			removeImage($("#"+target.id).find("img"));
 		}
-		bento.removeChild(closeButton.target);
+		bento.removeChild(target);
 		bento.iframe = null;
 		bento.contentURI = null;
 	}
-	if (closeButton.target.nodeName === "AUDIO") {
+	if (target.nodeName === "AUDIO") {
 		bento.removeChild(closeButton);
 	} else {
 		hideControl(closeButton.id);
@@ -804,7 +847,6 @@ function handleHorizontalDrag(target, movement) {
 		for (index = 0; index < target.leftDependents.length; ++index) {
 			var leftDependent = target.leftDependents[index];
 			width = parseFloat(getComputedStyle(leftDependent).width);
-// console.log("movement: "+movement+", left: "+leftDependent.id+", width: "+width);
 			newWidth = width + movement;
 			leftDependent.style.width = newWidth + "px";
 
@@ -817,7 +859,6 @@ function handleHorizontalDrag(target, movement) {
 		for (index = 0; index < target.rightDependents.length; ++index) {
 			var rightDependent = target.rightDependents[index];
 			width = parseFloat(getComputedStyle(rightDependent).width);
-// console.log("movement: "+movement+", right: "+rightDependent.id+", width: "+width);
 			newWidth = width - movement;
 			newLeft = parseFloat(getComputedStyle(rightDependent).left, 10) + movement;
 			rightDependent.style.left = newLeft + "px";
@@ -1177,7 +1218,6 @@ function checkYouTube(url){
 	url = url ? url : document.getElementById("youtube-url").value;
 	var auto_input = document.getElementById("youtube-auto-play");
 	var auto =  $(auto_input).prop('checked');
-	console.log(auto);
 	if(auto){
 		auto = 1;
 	} else {
@@ -1187,7 +1227,6 @@ function checkYouTube(url){
 		openYouTube(url, auto)
 	} else {
 		var error = "The URL specified is not a valid YouTube URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	}
 }
@@ -1207,7 +1246,6 @@ function openURL() {
 		openVimeo(url);
 	} else {
 		var error = "The URL specified is not a valid "+title+" URL.\n\n"+url;
-		console.log(error);
 		alert(error);
 	}
 }
@@ -1574,6 +1612,8 @@ function doAdd() {
 			addSoundCloud(bento, element.soundCloudURL);
 		} else if (element.vimeoURL){
 			addVimeo(bento, element.vimeoURL);
+		} else if (element.dropBoxUrl) {
+			addDropBoxVideo(bento, element.dropBoxUrl);
 		}
 	}
 
@@ -1601,6 +1641,11 @@ function imageClicked(image) {
 }
 
 function videoClicked(event, video) {
+	if (video.paused) {
+		video.play();
+	} else {
+		video.pause();
+	}
 	event.stopPropagation();
 }
 

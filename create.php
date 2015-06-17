@@ -257,7 +257,7 @@
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('SoundCloud')"><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Spotify')"><i class="fa fa-spotify fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="openDropBoxVideo()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
