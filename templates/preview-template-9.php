@@ -7,7 +7,7 @@
 			<?php $this->bentos["bento-9-2"]->render(); ?>
 		</div>
 	</div>
-	<div id="column-9-2" class="padded column height100 width50" <?php $this->columns['column-9-1']->width_percentage(); ?>>
+	<div id="column-9-2" class="padded column height100 width50" <?php $this->columns['column-9-2']->width_percentage(); ?>>
 		<?php $this->bentos["bento-9-3"]->render(); ?>
 	</div>
 </div>
