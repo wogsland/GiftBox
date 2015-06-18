@@ -11,7 +11,7 @@
 	$user_id = null;
 	
 	if (logged_in()) {
-		header('Location: '.$app_root.'my_account.php');
+		//header('Location: '.$app_root.'my_account.php');
 	}
 ?>
 <!doctype html>

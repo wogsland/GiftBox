@@ -1,4 +1,5 @@
-runtime: php55
+application: giftbox
+runtime: php
 api_version: 1
 threadsafe: yes
 

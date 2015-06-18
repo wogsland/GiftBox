@@ -1,5 +1,6 @@
 <?php
 include_once 'util.php';
+include_once 'Social.class.php';
 
 class User {
 	private $id;
@@ -14,6 +15,10 @@ class User {
 	public $active_until;
 	public $facebook_email;
 	public $access_token;
+	public $location;
+	public $position;
+	public $about;
+	public $social;
 	
 	static function exists ($email_address) {
 		$exists = FALSE;
@@ -51,18 +56,28 @@ class User {
 			execute_query("UPDATE user set access_token = '".$token."' WHERE id = '$this->id'");
 		}
 	}
+
+	public function get_social($social_id){
+		$val = null;
+		if($val !== null && $social_id !== null){
+			$val = Social($social_id);
+		}
+		return $val;
+	}
 	
 	public function save() {
 		if (!$this->id) {
-			$sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level) "
-				."VALUES ("
+			
+			$sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level, access_token "
+				.", location, position, company, about, social) VALUES ("
 				."'".escape_string($this->email_address)."'"
 				.", '".escape_string($this->first_name)."'"
 				.", '".escape_string($this->last_name)."'"
 				.", ".($this->password ? "'".$this->password."'" : "null")
 				.", ".($this->activation_key ? "'".$this->activation_key."'" : "null")
 				.", '$this->admin'"
-				.", $this->level)";
+				.", $this->level, '$this->access_token', '$this->location', '$this->position'"
+				.", '$this->company', '$this->about')";
 			$this->id = insert($sql);
 		} else {
 			$sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
@@ -73,7 +88,13 @@ class User {
 				. "admin = '$this->admin', "
 				. "level = $this->level, "
 				. "stripe_id = ".($this->stripe_id ? "'".$this->stripe_id."'" : "null").", "
-				. "active_until =  ".($this->active_until ? "'".$this->active_until."'" : "null")." "
+				. "active_until =  ".($this->active_until ? "'".$this->active_until."'" : "null").", "
+				. "access_token = '$this->access_token', "
+				. "location = '$this->location', "
+				. "position = '$this->position', "
+				. "company = '$this->company', "
+				. "about = '$this->about', "
+				. "social = '$this->social' "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}

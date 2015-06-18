@@ -9,6 +9,10 @@ $user->first_name = $_POST['first_name'];
 $user->last_name = $_POST['last_name'];
 $user->email_address = $_POST['email'];
 $user->level = $_POST['level'];
+$user->location = $_POST['location'];
+$user->position = $_POST['position'];
+$user->about = $_POST['about'];
+$user->social = $_POST['social'];
 if (isset($_POST['admin'])) {
 	$user->admin = $_POST['admin'];
 } else {

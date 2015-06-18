@@ -1,12 +1,51 @@
 // this is a shared clientside data model
 // it's just populated with mock data for now
+function getSession() {
+   var session = null;
+   $.ajax({
+     url: "get_session_ajax.php",
+     async: false
+   }).done(function(data, textStatus, jqXHR){
+     session = data;
+   });
+   return session;
+}
+
+function getUser(){
+  var user = null;
+  $.ajax({
+     url: "get_current_user_ajax.php",
+     async: false
+   }).done(function(data, textStatus, jqXHR){
+     user = data;
+   });
+   return user;
+}
+
+function getTokens(){
+  var tokens = null;
+  $.ajax({
+    url: "get_user_tokens_ajax.php",
+    async: false
+  }).done(function(data, textStatus, jqXHR){
+    tokens = data;
+  });
+  return tokens;
+}
+
+var user = getUser()[0];
+var tokens = getTokens();
+console.log(tokens);
+
+//get user information
+
 
 var Model = {
 
   profile: {
-    email: 'benstucki@gmail.com',
-    username: 'mock',
-    name: 'Mock User',
+    email: user.email_address,
+    username: user.username ? user.username : "",
+    name: user.first_name + " " + user.last_name,
     views: 'XX',
     location: 'Nashville, TN, United States',
     position: 'Marketing Director',
@@ -18,12 +57,7 @@ var Model = {
     ]
   },
 
-  tokens: [
-    {id: 0, name: 'GiveToken1', for: 'Angela L.', variant: '01'},
-    {id: 1, name: 'GiveToken2', for: 'Angela L.', variant: '02'},
-    {id: 2, name: 'GiveToken3', for: 'Angela L.', variant: '03'},
-    {id: 3, name: 'GiveToken4', for: 'Angela L.', variant: '04'}
-  ],
+  tokens: tokens,
 
   viewers: [
     {id: 0, email:'username@yourdomain.com', firstName: 'John', lastName: 'Smith', type: 'viewer'},
@@ -50,6 +84,20 @@ var Model = {
       result = item.id === id ? item : result;
     });
     return result;
+  },
+
+  saveChanges: function(){
+    console.log("saving new model...");
+    
+    var response = null;
+    $.ajax({
+      type: "POST",
+      data: ,
+      url: "update_user_ajax.php",
+      async: false
+    }).done(function(data, textStatus, jqXHR){
+      response = textStatus;
+    });
   }
 
 };
