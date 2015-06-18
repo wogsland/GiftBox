@@ -50,8 +50,12 @@ function onYouTubeIframeAPIReady(){
 }
 	
 function onPlayerReady(event){
-	if(event.target.c.classList.contains('auto-play')){
-		event.target.playVideo();
+	for(key in event.target){
+		if(event.target[key].classList){
+			if(event.target[key].classList.contains('auto-play')){
+				event.target.playVideo();
+			}
+		}
 	}
 }
 
