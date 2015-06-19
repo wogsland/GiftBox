@@ -57,6 +57,8 @@ var AccountStore = {
 
   editProfile: function(profile) {
     jQuery.extend(Model.profile, profile);
+    Model.saveChanges();
+    //should I make a call to send up model here? We only care about the differences though....
     AccountStore.emitChange();
   },
 
