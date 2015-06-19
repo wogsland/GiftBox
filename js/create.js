@@ -1143,7 +1143,7 @@ function save() {
 		var column = this.id.split("nto-");
 		var columnWidth = $("#column-" + column[1]).width();
 		var columnHeight = $(this).height();
-		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: null;
+		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: 0;
 		bento.overlay_width = (parseInt(($("#"+this.id+"-text-overlay-container").width() / columnWidth)*10000))/100;
 		this.overlay_content ? console.log(($("#"+this.id +"-text-overlay-container").css("top").split("px")[0])) : console.log("null");
 		var left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left").split("px")[0] : null;
