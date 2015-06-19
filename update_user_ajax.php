@@ -9,6 +9,22 @@ $user->first_name = $_POST['first_name'];
 $user->last_name = $_POST['last_name'];
 $user->email_address = $_POST['email'];
 $user->level = $_POST['level'];
+$user->location = $_POST['location'];
+$user->company = $_POST['company'];
+$user->position = $_POST['position'];
+$user->about = $_POST['about'];
+$user->social = $_POST['social'];
+$user->username = $_POST['username'];
+if(is_array($user->social)){
+	$social = new Social(null);
+	foreach ($user->social as $category){
+		$social->network = $category["name"];
+		$social->user_id = $user_id;
+		$social->url = $category["url"];
+		$social->save();
+	}
+}
+
 if (isset($_POST['admin'])) {
 	$user->admin = $_POST['admin'];
 } else {

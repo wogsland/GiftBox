@@ -51,7 +51,7 @@ var AccountProfile = React.createClass({
   },
 
   renderSocial: function(social) {
-    return <li key={social.name}><i className={'fa ' + social.icon}></i> <a href="">{social.url}</a></li>
+    return <li key={social.name}><i className={'fa ' + social.icon}></i> <a href= {"https://" + social.url} >{social.url}</a></li>
   }
 
 });

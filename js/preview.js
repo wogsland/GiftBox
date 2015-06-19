@@ -37,7 +37,6 @@ var player = [];
 function onYouTubeIframeAPIReady(){
 	$(".youtube-video").each(function(){
 		var vid_id = this.id.split('?');
-		console.log(vid_id);
 		player.push(new YT.Player(this.id, {
 			videoId: vid_id[1],
 			events: {
@@ -50,8 +49,12 @@ function onYouTubeIframeAPIReady(){
 }
 	
 function onPlayerReady(event){
-	if(event.target.c.classList.contains('auto-play')){
-		event.target.playVideo();
+	for(key in event.target){
+		if(event.target[key].classList){
+			if(event.target[key].classList.contains('auto-play')){
+				event.target.playVideo();
+			}
+		}
 	}
 }
 
