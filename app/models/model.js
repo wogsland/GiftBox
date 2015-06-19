@@ -33,9 +33,29 @@ function getTokens(){
   return tokens;
 }
 
+function getSocial(){
+  var social = null;
+  $.ajax({
+    url: "get_social_ajax.php",
+    async: false
+  }).done(function(data, textStatus, jqXHR){
+    social = data;
+  });
+  return social;
+}
+
 var user = getUser()[0];
 var tokens = getTokens();
-console.log(tokens);
+var social = getSocial();
+for(i = 0; i < social.length; i++){
+  social[i].name = social[i].network;
+  if(social[i].name == "Facebook"){
+    social[i].icon = "fa-facebook";
+  } else if (social[i].name == "Twitter"){
+    social[i].icon = "fa-twitter";
+  }
+}
+console.log(user);
 
 //get user information
 
@@ -43,18 +63,19 @@ console.log(tokens);
 var Model = {
 
   profile: {
+    user_id: user.id,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    level: user.level,
     email: user.email_address,
     username: user.username ? user.username : "",
     name: user.first_name + " " + user.last_name,
     views: 'XX',
-    location: 'Nashville, TN, United States',
-    position: 'Marketing Director',
-    company: 'Company, Inc.',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu commodo leo. Ut ac mollis nulla, et imperdiet tortor. Donec ornare accumsan ipsum, placerat consectetur odio suscipit nec. Praesent tempor dignissim semper. In sapien lectus, pellentesque in risus id, tincidunt faucibus lacus. Donec venenatis lectus elementum, hendrerit sem a, luctus nisi. Cras malesuada vestibulum nulla sed laoreet. Curabitur laoreet urna sed facilisis tempus. Sed sodales lobortis nisi commodo fringilla. Praesent et purus vel neque consectetur commodo id ut diam. Fusce sem sapien, tristique vel turpis et, dapibus euismod diam. Vivamus a blandit erat, non bibendum nibh. Suspendisse nisi dui, porttitor ac sagittis vel, egestas ac est. Pellentesque diam enim, dictum ut nisl at, cursus iaculis lorem.',
-    social: [
-      {name:'Twitter', icon:'fa-twitter', url:'twitter.com/#'},
-      {name:'Facebook', icon:'fa-facebook', url:'facebook.com/#'}
-    ]
+    location: user.location,
+    position: user.position,
+    company: user.company,
+    about: user.about,
+    social: social
   },
 
   tokens: tokens,
@@ -88,11 +109,11 @@ var Model = {
 
   saveChanges: function(){
     console.log("saving new model...");
-    
     var response = null;
+    console.log(this.profile.social);
     $.ajax({
       type: "POST",
-      data: ,
+      data: this.profile,
       url: "update_user_ajax.php",
       async: false
     }).done(function(data, textStatus, jqXHR){
