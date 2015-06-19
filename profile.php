@@ -135,14 +135,14 @@
 				<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand" href="index.html#"><img src="assets/img/logo-light.png" alt=""></a>
+				<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
 
 			</div>
 
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
-					<li><a href="index.html#home" class="external">Home</a></li>
+					<li><a href="index.php" class="external">Home</a></li>
 					<li><a href="#">My Account</a></li>
 					<li><a href="#">Login</a></li>
 				</ul>
