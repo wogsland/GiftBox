@@ -325,7 +325,7 @@
 			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
 			<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
 			<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
-			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()">CREATE GALLERY</div>
+			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
 			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
 			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
