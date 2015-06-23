@@ -111,8 +111,9 @@
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
-					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
-					<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>VIEW</a></li>
+					<!-- Used to be selectSaved() -->
+					<li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
 				</ul>
 			</div>
 			<div id="template-scroll-container">
