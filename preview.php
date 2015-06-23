@@ -45,6 +45,12 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+	<meta property="og:title" content= <?php echo $token->name ?> />
+	<meta property="og:site_name" content="Givetoken"/>
+	<meta property="og:url" content=<?php echo "https://www.givetoken.com/preview.php?".$token->id ?>/>
+	<meta property="og:description" content="This is dummy data"/>
+	<meta property="fb:app_id" content="1498055593756885" />
+	<meta property="og:type" content="Token" />
 	<!-- endFavicon -->
 </head>
 <body>
