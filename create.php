@@ -158,7 +158,7 @@
 		    <fieldset>
 				<label class="input-label" for="youtube-url">Paste link address here</label>
 				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
-				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+				<?php echo intval($_SESSION["level"]) > 1 ? '<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>' : "<br><label><strong>Enable YouTube auto-play when you upgrade to a Standard Account</strong></label>"; ?>
 		    </fieldset>
 		</form>
 	</div>
