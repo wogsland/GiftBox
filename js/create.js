@@ -1839,6 +1839,7 @@ function setHyperlink(linkAddress) {
 	
 	// Show the link icon
 	var icon = getImageDialogImage().parent().parent().children(".bento-link-icon");
+	icon.addClass('fa-link').addClass('fa-lg');
 	if (linkAddress && linkAddress.length > 0) {
 		showControl(icon.attr("id"), null);
 	} else {

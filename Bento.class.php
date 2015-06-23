@@ -87,6 +87,7 @@ class Bento {
 		}
 		if ($this->gallery_file_list){
 			echo '<div class="bento gallery '.$this->id.'" href="'.$this->gallery_file_list[0].'">'.PHP_EOL;
+			echo '<i class="bento-link-icon visible icon-link fa fa-picture-o fa-lg"></i>'.PHP_EOL;
 		} else {
 			echo '<div class="bento">'.PHP_EOL;
 		}

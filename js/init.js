@@ -307,6 +307,14 @@ $(function(){
 			loadPhotoOptions();
 		},
 		close: function(){
+			var icon = getImageDialogImage().parent().parent().children(".bento-link-icon");
+			icon.addClass('fa-picture-o').addClass('fa-lg');
+			var numItems = $('.thumbnail-container-selected').length;
+			if (numItems) {
+				showControl(icon.attr("id"), null);
+			} else {
+				hideControl(icon.attr("id"));
+			}
 			//call the add function for gallery
 			$("#choose-photo-options > div").each(function(i){
 				$("#add-images-desktop")[0].appendChild(this);
