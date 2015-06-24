@@ -174,6 +174,9 @@ class Token {
 	}
 
 	public function save() {
+		if(!$this->unload_count){
+			$this->unload_count = 0;
+		}
 		if (!$this->id) {
 			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent) "
 				."VALUES ('".escape_string($this->name)."', '$this->css_id', '$this->css_width', '$this->css_height', $this->user_id, '".escape_string($this->letter_text)."', "

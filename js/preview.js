@@ -37,7 +37,6 @@ var player = [];
 function onYouTubeIframeAPIReady(){
 	$(".youtube-video").each(function(){
 		var vid_id = this.id.split('?');
-		console.log(vid_id);
 		player.push(new YT.Player(this.id, {
 			videoId: vid_id[1],
 			events: {

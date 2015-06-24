@@ -77,12 +77,12 @@ var AccountInfo = React.createClass({
         <div className="form-group">
           <label className="col-sm-1 control-label">Password</label>
           <div className="col-sm-10">
-            <input type="password" placeholder="*******" className="form-control tooltips" />
+            <input type="password" placeholder="Not Active" className="form-control tooltips" />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
         <div className="form-group">
-          <label className="col-sm-1 control-label">Networks</label>
+          <label className="col-sm-1 control-label">Company</label>
           <div className="col-sm-10">
             <input type="text" placeholder="Company Name" className="form-control tooltips" name="company" value={this.state.company} onChange={this.handleChange} />
           </div>
@@ -174,6 +174,25 @@ var AccountInfo = React.createClass({
             </div>
       </form>
 */}
+      <h2>Account Information</h2>
+      <form className="form-horizontal form-bordered">
+        <div className="form-group">
+          <label className="col-sm-1 control-label">Level</label>
+          <div className="col-sm-10">
+            <input placeholder={this.state.level_text} className="form-control tooltips" readOnly/>
+          </div>
+          <label className="col-sm-1 control-label"><a href="/pricing.php">Edit</a></label>
+        </div>
+        <div className="form-group">
+          <label className="col-sm-1 control-label">Admin</label>
+          <div className="col-sm-10">
+            <input placeholder={this.state.admin == "N" ? "No -- Contact your account admin to gain access" : "Yes"} className="form-control tooltips" readOnly/>
+          </div>
+          <label className="col-sm-1 control-label"><a>Edit</a></label>
+        </div>
+      </form>
+
+
       <h2>Social Integrations</h2>
       <form className="form-horizontal form-bordered">
         {this.state.social ? this.state.social.map(this.renderSocial) : null}

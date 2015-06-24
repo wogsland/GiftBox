@@ -66,7 +66,7 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="addYouTubeRedirect();"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
@@ -111,8 +111,9 @@
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
-					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
-					<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>VIEW</a></li>
+					<!-- Used to be selectSaved() -->
+					<li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
 				</ul>
 			</div>
 			<div id="template-scroll-container">
@@ -158,7 +159,7 @@
 		    <fieldset>
 				<label class="input-label" for="youtube-url">Paste link address here</label>
 				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
-				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+				<?php echo intval($_SESSION["level"]) > 1 ? '<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>' : "<br><label><strong>Enable YouTube auto-play when you upgrade to a Standard Account</strong></label>"; ?>
 		    </fieldset>
 		</form>
 	</div>
@@ -214,6 +215,16 @@
 		<div id="choose-photo-options"></div>
 	</div>
 
+	<div id="input-overlay-dialog" title="INPUT TEXT FOR OVERLAY">
+		<form id="letter-form">
+			<label class="input-label" for="overlayText">Write your message here</label>
+			<textarea name="overlayText" id="overlayText"></textarea>
+			<script>
+                CKEDITOR.replace( 'overlayText' );
+            </script>
+		</form>
+	</div>
+
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -257,7 +268,7 @@
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Vimeo')"><i class="fa fa-vimeo-square fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('SoundCloud')"><i class="fa fa-soundcloud fa-3x add-icon"></i></a>
 						<a class="add-icon-link" href="javascript:void(0)" onclick="inputURL('Spotify')"><i class="fa fa-spotify fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Dropbox')"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+						<a class="add-icon-link" href="javascript:void(0)" onclick="openDropBoxVideo()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-media-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
@@ -312,7 +323,10 @@
 
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
-			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()">CREATE GALLERY</div>
+			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+			<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
+			<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
+			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
 			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
 			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
