@@ -66,7 +66,7 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="addYouTubeRedirect();"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
@@ -111,8 +111,9 @@
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
-					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>PREVIEW</a></li>
-					<li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>VIEW</a></li>
+					<!-- Used to be selectSaved() -->
+					<li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
 				</ul>
 			</div>
 			<div id="template-scroll-container">
@@ -158,7 +159,7 @@
 		    <fieldset>
 				<label class="input-label" for="youtube-url">Paste link address here</label>
 				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
-				<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>
+				<?php echo intval($_SESSION["level"]) > 1 ? '<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>' : "<br><label><strong>Enable YouTube auto-play when you upgrade to a Standard Account</strong></label>"; ?>
 		    </fieldset>
 		</form>
 	</div>
