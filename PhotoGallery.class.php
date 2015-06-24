@@ -3,9 +3,10 @@ include_once 'config.php';
 include_once 'util.php';
 
 class PhotoGallery {
-	var $id;
-	var $bento_id;
-	var $file_names = array();
+	public $id;
+	public $bento_id;
+	public $file_names = array();
+	public $giftboxId;
 
 	static function fetch($bento_id) {
 		$gallery_files = null;
@@ -37,6 +38,10 @@ class PhotoGallery {
 		execute($delete_existing);
 		foreach ($this->file_names as $file){
 			$image_file = str_replace("'", "''", $file);
+			$test = explode("_", $image_file);
+			if($test[1] != $this->giftboxId){
+				$image_file = $this->giftboxId."_".$image_file;
+			}
 			$sql = "INSERT INTO gallery_photos (bento_id, file_name)"
 			."VALUES ('$this->bento_id', '$image_file')";
 			insert($sql); 
