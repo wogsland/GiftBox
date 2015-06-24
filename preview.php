@@ -13,6 +13,13 @@
 <head>
 	<meta charset="utf-8" />
 	<title><?php echo $token->name ?></title>
+	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
+	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
+	<meta name="og:url" property="og:url" content=<?php echo '"'.'http://www.t-sunlight-757.appspot.com/preview.php?id='.$token->id.'"' ?> />
+	<meta name="og:description" property="og:description" content="This is dummy data"/>
+	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
+	<meta name="og:type" property="og:type" content="article" />
+	
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
@@ -56,6 +63,15 @@
 	  <div class="status">&nbsp;</div>
 	</div>
 	<?php
+	$file_name = $token->id."-thumbnail";
+	if ($google_app_engine) {
+//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
+//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
+		$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
+	} else {
+		$image_path = $file_storage_path.$file_name;
+	}
+	echo '<img style="display: none; position: absolute;" height="630" src="'.$image_path.'">'.PHP_EOL;
 	echo '<div id="triggerTab"></div>';
 	echo '<div class="giftbox panel" id="flip-container">';
 	echo '<div class="front">';

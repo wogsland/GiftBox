@@ -56,6 +56,8 @@
 </head>
 <body>
 	<?php include_once("analyticstracking.php") ?>
+	<canvas id="thumbnail-canvas" width="1024" height="768" style="">
+	</canvas>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">

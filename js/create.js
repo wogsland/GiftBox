@@ -1090,8 +1090,8 @@ function save() {
 		$("#save-dialog" ).dialog("close");
 		window.top_template.giftboxName = giftboxName;
 	}
-	var giftboxName = window.top_template.giftboxName;
 
+	var giftboxName = window.top_template.giftboxName;
 	openStatus("Save", "Saving " + giftboxName + "...");
 	var template = window.top_template;
 	var giftboxId = template.giftboxId;
@@ -1115,6 +1115,12 @@ function save() {
 		columns: new Array(),
 		attachments: new Array()
 	};
+
+	var canvas = document.getElementById("thumbnail-canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	var height = 10;
+	var width = 10;
 
 	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
@@ -1140,15 +1146,14 @@ function save() {
 		bento.auto_play = this.auto_play ? this.auto_play: 0;
 		bento.redirect_url = $("#redirect-text").val();
 		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
+		bento.thumbnail = this.thumbnail;
 		var column = this.id.split("nto-");
 		var columnWidth = $("#column-" + column[1]).width();
 		var columnHeight = $(this).height();
 		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: 0;
 		bento.overlay_width = (parseInt(($("#"+this.id+"-text-overlay-container").width() / columnWidth)*10000))/100;
-		this.overlay_content ? console.log(($("#"+this.id +"-text-overlay-container").css("top").split("px")[0])) : console.log("null");
 		var left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left").split("px")[0] : null;
 		bento.overlay_left = (parseInt((left/columnWidth)*10000))/100;
-		console.log(bento.overlay_top);
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
@@ -1163,7 +1168,13 @@ function save() {
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
+			console.log(image.src);
 			var croppedImage = createCroppedImage(bento, image, container);
+
+			var my_image = document.createElement("img");
+			my_image.src = croppedImage.src;
+			ctx.drawImage(my_image, width, height);
+
 			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
 			if (!image.saved) {
 				if (image.file) {
@@ -1186,12 +1197,39 @@ function save() {
 		}
 		if (this.contentURI) {
 			bento.content_uri = this.contentURI;
+			var my_image = document.createElement("img");
+			my_image.src = bento.thumbnail;
+			var xhr = new XMLHttpRequest();
+			//only use the first one. add additional photos if possible in the future
+			xhr.open('GET', bento.thumbnail, true);
+			xhr.responseType = 'blob';
+			xhr.onload = function(e) {
+			  if (this.status == 200) {
+			    var myBlob = this.response;
+			    var DOMURL = window.URL || window.webkitURL || window;
+			    var objectURL = DOMURL.createObjectURL(myBlob);
+				my_image.src = objectURL;
+				ctx.drawImage(my_image, width, height);
+			    // myBlob is now the blob that the object URL pointed to.
+			  }
+			};
+			xhr.send();
+			if(columnHeight > columnWidth){
+				my_image.style.width = columnWidth + "px";
+			} else {
+				my_image.style.height = columnHeight + "px";
+			}
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
 				uploadFile(this.image_file_list[i][1]);
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
+		}
+		height += columnHeight + 10;
+		if(height >= 748){
+			height = 10;
+			width += columnWidth + 10;
 		}
 	});
 
@@ -1254,6 +1292,13 @@ function save() {
 		}
 	}).fail(function() {
 		openMessage("Save", "Save failed!");
+	}).done(function(){
+		var canvasURL = canvas.toDataURL();
+		var placeHolder = document.createElement("img");
+		placeHolder.src = canvasURL;
+		console.log(template.giftboxId + "-thumbnail");
+		uploadFileData(placeHolder.src, template.giftboxId + "-thumbnail");
+		console.log(canvasURL);
 	});
 	saved();
 }
@@ -1714,12 +1759,14 @@ function doAdd() {
 			}
 		} else if (element.youTubeURL) {
 			addYouTube(bento, element.youTubeURL, element.auto);
+			bento.thumbnail = element.src;
 		} else if (element.spotifyTrackId) {
 			addSpotify(bento, element.spotifyTrackId)
 		} else if (element.soundCloudURL) {
 			addSoundCloud(bento, element.soundCloudURL);
 		} else if (element.vimeoURL){
 			addVimeo(bento, element.vimeoURL);
+			bento.thumbnail = element.src;
 		} else if (element.dropBoxUrl) {
 			addDropBoxVideo(bento, element.dropBoxUrl);
 		}
