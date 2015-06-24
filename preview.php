@@ -15,8 +15,8 @@
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
 	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
-	<meta name="og:url" property="og:url" content=<?php echo '"'.'http://www.t-sunlight-757.appspot.com/preview.php?id='.$token->id.'"' ?> />
-	<meta name="og:description" property="og:description" content="This is dummy data"/>
+	<meta name="og:url" property="og:url" content=<?php echo '"'."http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI].'"' ?> />
+	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />
 	

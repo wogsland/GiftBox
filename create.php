@@ -56,7 +56,7 @@
 </head>
 <body>
 	<?php include_once("analyticstracking.php") ?>
-	<canvas id="thumbnail-canvas" width="1024" height="768" style="">
+	<canvas id="thumbnail-canvas" width="1024" height="768" style="display: none; position:absolute;">
 	</canvas>
 	<div id="content-wrapper">
 		<div id="palette">
@@ -94,6 +94,10 @@
 						}
 					?>
 					</div>
+
+					<span class="template-tab-text">WRITE A DESCRIPTION</span>
+					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
+
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>

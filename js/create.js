@@ -1115,14 +1115,19 @@ function save() {
 		bentos: new Array(),
 		dividers: new Array(),
 		columns: new Array(),
-		attachments: new Array()
+		attachments: new Array(),
+		description: document.getElementById("token-description").value
 	};
 
 	var canvas = document.getElementById("thumbnail-canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#33383B";
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	var height = 10;
 	var width = 10;
+	var maxWidth = 10;
+	var maxHeight = 10;
 
 	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
@@ -1150,7 +1155,7 @@ function save() {
 		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
 		bento.thumbnail = this.thumbnail;
 		var column = this.id.split("nto-");
-		var columnWidth = $("#column-" + column[1]).width();
+		var columnWidth = $(this).width() + 10;
 		var columnHeight = $(this).height();
 		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: 0;
 		bento.overlay_width = (parseInt(($("#"+this.id+"-text-overlay-container").width() / columnWidth)*10000))/100;
@@ -1170,6 +1175,13 @@ function save() {
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
+
+			console.log(image.src);
+			var croppedImage = createCroppedImage(bento, image, container);
+
+			var my_image = document.createElement("img");
+			my_image.src = croppedImage.src;
+			ctx.drawImage(my_image, width, height);
 		}
 		if (this.video || this.audio) {
 			bento.download_file_name = this.download_file_name;
@@ -1190,14 +1202,22 @@ function save() {
 			img.src = 'http://cors-anywhere.herokuapp.com/' + bento.thumbnail;
 			img.onload = function(){
 				var array = this.id.split(" ");
+				var left = parseInt(array[0]);
+				var top = parseInt(array[1]);
+				var width = parseInt(array[2]);
+				var height = parseInt(array[3]);
+				if(left + width >= 1024){
+					width = width -10;
+				}
 				ctx.fillStyle = "black";
-				ctx.fillRect(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]) + 10, parseInt(array[3]) + 10);
-				if(parseInt(array[3]) > parseInt(array[2])){
-					var imageHeight = parseInt(array[2]) * $(this)[0].height / $(this)[0].width;
-					ctx.drawImage(this, parseInt(array[0]), parseInt(array[3])/2 - imageHeight/2, parseInt(array[2]), imageHeight);
+				ctx.fillRect(left, top, width, height);
+				console.log(left + " " + top + " " + width + " " + height);
+				if(height > width){
+					var imageHeight = width * $(this)[0].height / $(this)[0].width;
+					ctx.drawImage(this, left, top + height/2 - imageHeight/2, width, imageHeight);
 				} else {
-					var imageWidth = parseInt(array[3]) * $(this)[0].width / $(this)[0].height;
-					ctx.drawImage(this, parseInt(array[2])/2 - imageWidth/2, parseInt(array[1]), imageWidth, parseInt(array[3]));
+					var imageWidth = height * $(this)[0].width / $(this)[0].height;
+					ctx.drawImage(this, left + width/2 - imageWidth/2, top, imageWidth, height);
 				}
 			}
 		}
@@ -1206,10 +1226,18 @@ function save() {
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
 		}
+		console.log("bento: " + bento.css_id);
+		console.log("top: " + height);
+		console.log("left: " + width);
 		height += columnHeight + 10;
+		width += columnWidth + 10;
 		if(height >= 748){
-			height = 10;
-			width += columnWidth + 10;
+			height = maxHeight;
+			maxWidth = width;
+		}
+		if(width >= 1024){
+			width = maxWidth;
+			maxHeight = height;
 		}
 	});
 
