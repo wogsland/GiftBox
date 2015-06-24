@@ -47,6 +47,10 @@ class Bento {
 	
 	public function save() {
 		$image_file_name = str_replace("'", "''", $this->image_file_name);
+		$test = explode("_", $image_file_name);
+		if(strlen($this->image_file_name) > 0 && $test[0] != $this->giftbox_id){
+			$image_file_name = $this->giftbox_id."_".$image_file_name;
+		}
 		$download_file_name = str_replace("'", "''", $this->download_file_name);
 		$slider_value = $this->slider_value ? $this->slider_value : 'null';
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
@@ -64,6 +68,7 @@ class Bento {
 		$this->id = insert($sql);
 		if(sizeof($this->gallery_file_list) > 0){
 			$photo_gallery = new PhotoGallery();
+			$photo_gallery->giftboxId = $this->giftbox_id;
 			$photo_gallery->setBentoId($this->id);
 			$photo_gallery->setFileNames($this->gallery_file_list);
 			$photo_gallery->save();
