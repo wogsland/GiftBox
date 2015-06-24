@@ -1194,30 +1194,27 @@ function save() {
 				uploadFile(this.file);
 				this.file = null;
 			}
+			ctx.fillStyle = "black";
+			ctx.fillRect(width, height, columnWidth, columnHeight);
 		}
 		if (this.contentURI) {
 			bento.content_uri = this.contentURI;
-			var my_image = document.createElement("img");
-			my_image.src = bento.thumbnail;
-			var xhr = new XMLHttpRequest();
-			//only use the first one. add additional photos if possible in the future
-			xhr.open('GET', bento.thumbnail, true);
-			xhr.responseType = 'blob';
-			xhr.onload = function(e) {
-			  if (this.status == 200) {
-			    var myBlob = this.response;
-			    var DOMURL = window.URL || window.webkitURL || window;
-			    var objectURL = DOMURL.createObjectURL(myBlob);
-				my_image.src = objectURL;
-				ctx.drawImage(my_image, width, height);
-			    // myBlob is now the blob that the object URL pointed to.
-			  }
-			};
-			xhr.send();
-			if(columnHeight > columnWidth){
-				my_image.style.width = columnWidth + "px";
-			} else {
-				my_image.style.height = columnHeight + "px";
+
+			var img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.id = width + " " + height + " " + columnWidth + " " + columnHeight;
+			img.src = 'http://cors-anywhere.herokuapp.com/' + bento.thumbnail;
+			img.onload = function(){
+				var array = this.id.split(" ");
+				ctx.fillStyle = "black";
+				ctx.fillRect(parseInt(array[0]), parseInt(array[1]), parseInt(array[2]) + 10, parseInt(array[3]) + 10);
+				if(parseInt(array[3]) > parseInt(array[2])){
+					var imageHeight = parseInt(array[2]) * $(this)[0].height / $(this)[0].width;
+					ctx.drawImage(this, parseInt(array[0]), parseInt(array[3])/2 - imageHeight/2, parseInt(array[2]), imageHeight);
+				} else {
+					var imageWidth = parseInt(array[3]) * $(this)[0].width / $(this)[0].height;
+					ctx.drawImage(this, parseInt(array[2])/2 - imageWidth/2, parseInt(array[1]), imageWidth, parseInt(array[3]));
+				}
 			}
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
