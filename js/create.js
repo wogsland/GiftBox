@@ -1165,18 +1165,6 @@ function save() {
 			bento.image_left_in_container = image.style.left;
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
-			var croppedImage = createCroppedImage(bento, image, container);
-			uploadFileData(croppedImage.src, bento.css_id+"-cropped_"+this.image_file_name);
-			if (!image.saved) {
-				if (image.file) {
-					uploadFile(image.file);
-				} else {
-					//alert(image.src);
-					//alert(this.image_file_name);
-					uploadFileData(image.src, this.image_file_name);
-				}
-				image.saved = true;
-			}
 		}
 		if (this.video || this.audio) {
 			bento.download_file_name = this.download_file_name;
@@ -1191,7 +1179,6 @@ function save() {
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
-				uploadFile(this.image_file_list[i][1]);
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
 		}
@@ -1247,6 +1234,34 @@ function save() {
 		closeStatus();
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
+			$("#"+template.id+" div.bento").each(function(i) {
+				if (this.image_file_list && this.image_file_list.length > 0){
+					for(i = 0; i < this.image_file_list.length; i++){
+						this.image_file_list[i][1].name = template.giftboxId +"_"+ this.image_file_list[i][1].name;
+						uploadFile(this.image_file_list[i][1]);
+					}
+				}
+			});
+			for(i = 0; i < giftbox.bentos.length; i++){
+				var image = document.getElementById(giftbox.bentos[i].css_id + "-image");
+				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
+				if (image) {
+					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
+					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
+					if (!image.saved) {
+						if (image.file) {
+							image.file.name = template.giftboxId + image.file.name;
+							uploadFile(image.file);
+						} else {
+							//alert(image.src);
+							//alert(this.image_file_name);
+							uploadFileData(image.src, + template.giftboxId+"_"+ giftbox.bentos[i].image_file_name);
+						}
+						image.saved = true;
+					}
+				}
+			}
+
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
