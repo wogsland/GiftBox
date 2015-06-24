@@ -662,8 +662,9 @@ function addFacebookImage(){
 		    var image = document.createElement("img");
 			$(image).attr("src", window.URL.createObjectURL(myBlob));
 			image.crossOrigin = "Anonymous";
-			image.name = "Facebook Photo";
+			image.name = "Facebook-Photo-" + $(".Facebook-Photo").size() + ".png";
 			image.id = image.name;
+			image.className = "Facebook-Photo";
 			myBlob.name = image.name;
 			myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
