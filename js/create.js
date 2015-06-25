@@ -1132,7 +1132,7 @@ function save() {
 	$("#"+template.id+" div.bento").each(function(i){
 		var columnWidth = $(this).width() + 24;
 		console.log(columnWidth);
-		if(columnWidth >= 1244){
+		if(columnWidth >= 1024){
 			horizontal = true;
 		}
 
