@@ -1125,14 +1125,14 @@ function save() {
 	ctx.fillStyle = "#33383B";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	var height = 10;
-	var width = 10;
-	var maxWidth = 10;
+	var width = 230;
+	var maxWidth = 230;
 	var maxHeight = 10;
 	var horizontal = false;
 	$("#"+template.id+" div.bento").each(function(i){
 		var columnWidth = $(this).width() + 24;
 		console.log(columnWidth);
-		if(columnWidth >= 1024){
+		if(columnWidth >= 1244){
 			horizontal = true;
 		}
 
@@ -1215,7 +1215,7 @@ function save() {
 				var top = parseInt(array[1]);
 				var width = parseInt(array[2]);
 				var height = parseInt(array[3]);
-				if(left + width >= 1024){
+				if(left + width >= 1244){
 					width = width -10;
 				}
 				ctx.fillStyle = "black";
@@ -1245,11 +1245,11 @@ function save() {
 			height = maxHeight;
 			maxWidth = width;
 		} 
-		if(width >= 1024) {
+		if(width >= 1244) {
 			width = maxWidth;
 			maxHeight = height;
 		}
-		if(height < 748 && width < 1024){
+		if(height < 748 && width < 1244){
 			if(horizontal){
 				height = maxHeight;
 			} else {
