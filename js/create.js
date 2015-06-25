@@ -1128,7 +1128,16 @@ function save() {
 	var width = 10;
 	var maxWidth = 10;
 	var maxHeight = 10;
+	var horizontal = false;
+	$("#"+template.id+" div.bento").each(function(i){
+		var columnWidth = $(this).width() + 24;
+		console.log(columnWidth);
+		if(columnWidth >= 1024){
+			horizontal = true;
+		}
 
+	});
+	console.log(horizontal);
 	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
 		bento.giftbox_id = giftboxId;
@@ -1229,16 +1238,26 @@ function save() {
 		console.log("bento: " + bento.css_id);
 		console.log("top: " + height);
 		console.log("left: " + width);
-		height += columnHeight + 10;
 		width += columnWidth + 10;
+		height += columnHeight + 10;
+		
 		if(height >= 748){
 			height = maxHeight;
 			maxWidth = width;
-		}
-		if(width >= 1024){
+		} 
+		if(width >= 1024) {
 			width = maxWidth;
 			maxHeight = height;
 		}
+		if(height < 748 && width < 1024){
+			if(horizontal){
+				height = maxHeight;
+			} else {
+				width = maxWidth;
+			}
+		}
+		console.log("top-2: " + height);
+		console.log("left-2: " + width);
 	});
 
 	$("#add-attachment-desktop > a").each(function(i) {
