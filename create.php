@@ -182,6 +182,8 @@
 	<div id="add-hyperlink-dialog" title="Add A Hyperlink To This Image">
 		<form>
 		    <fieldset>
+		    	<div id="hyperlinkError">
+		    	</div>
 				<label class="input-label" for="url">Paste link address here</label>
 				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
