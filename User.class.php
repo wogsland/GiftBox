@@ -68,7 +68,7 @@ class User {
 	public function save() {
 		if (!$this->id) {
 			$sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level, access_token "
-				.", location, position, company, about, social, username) VALUES ("
+				.", location, position, company, about, username) VALUES ("
 				."'".escape_string($this->email_address)."'"
 				.", '".escape_string($this->first_name)."'"
 				.", '".escape_string($this->last_name)."'"
