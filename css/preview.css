@@ -341,7 +341,7 @@ iframe {
 }
 
 .panel-open{
-	-webkit-animation: panel-open 1s ease;
+	-webkit-animation: panel-open 1.5s ease;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-delay: .5s;
 }
@@ -353,5 +353,5 @@ iframe {
 }
 
 .shake{
-	-webkit-animation: shake .5s infinite;
+	-webkit-animation: shake .4s infinite;
 }

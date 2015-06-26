@@ -26,10 +26,13 @@ $(document).ready(function(){
 		displayGallery(this);
 	});
 
+	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 500);
+
 	$(".shrink-box").click(function(e){
 		$(".opener").addClass("open");
+		setTimeout(function(){$(".opener").css('z-index', '-10');}, 500);
 		$(".shrink-box").removeClass("shake");
-		setTimeout(function(){ $(".opener").css('z-index', '-10'); $(".envelope").css('z-index', '-10'); }, 1000);
+		setTimeout(function(){ $(".envelope").css('z-index', '-10'); }, 1000);
 		$(".panel").addClass('panel-open');
 		e.preventDefault;
 	})
