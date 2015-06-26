@@ -234,6 +234,7 @@ iframe {
 
 
 /** OPENER FOR TOKEN **/
+/** Currently only absolutely supported on Chrome. Others are unknown **/
 
 .envelope-back{
 	width: 107.95vw;
