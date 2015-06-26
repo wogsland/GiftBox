@@ -75,35 +75,43 @@
 	<div class="preloader">
 	  <div class="status">&nbsp;</div>
 	</div>
-	<?php
-	echo '<div id="triggerTab"></div>';
-	echo '<div class="giftbox panel" id="flip-container">';
-	echo '<div class="front">';
-	echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
+	<div class="shrink-box">
+		<div class="envelope">
+		</div>
+		<div class="envelope-back">
+		</div>
+		<div class="opener">
+		</div>
+		<?php
+		echo '<div id="triggerTab"></div>';
+		echo '<div class="giftbox panel" id="flip-container">';
+		echo '<div class="front">';
+		echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
 
-	$token->render();
+		$token->render();
 
-	echo "</div>";
-	echo '<div class="back">';
-	echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
+		echo "</div>";
+		echo '<div class="back">';
+		echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
 
-	echo '<div id="letter-text-container">';
-	echo '<div id="letter-text">';
-	echo '<p>'.($token->letter_text).'</p>';
-	echo '<p id="letter-attachments">';
-	foreach ($token->attachments as $attachment) {
-		if ($google_app_engine) {
-			$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$attachment->download_file_name, $use_https);
-		} else {
-			$image_path = $file_storage_path.$attachment->download_file_name;
+		echo '<div id="letter-text-container">';
+		echo '<div id="letter-text">';
+		echo '<p>'.($token->letter_text).'</p>';
+		echo '<p id="letter-attachments">';
+		foreach ($token->attachments as $attachment) {
+			if ($google_app_engine) {
+				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$attachment->download_file_name, $use_https);
+			} else {
+				$image_path = $file_storage_path.$attachment->download_file_name;
+			}
+			echo '<a href="'.$image_path.'" target="_blank"><i class="fa fa-file fa-x2"></i> '.$attachment->file_name.'</a>';
 		}
-		echo '<a href="'.$image_path.'" target="_blank"><i class="fa fa-file fa-x2"></i> '.$attachment->file_name.'</a>';
-	}
-	echo '</p>';
-	echo '</div>'; // letter-text
-	echo "</div>"; // letter-text-container
-	echo "</div>"; // back
-	echo "</div>"; // flip-container
-	?>
+		echo '</p>';
+		echo '</div>'; // letter-text
+		echo "</div>"; // letter-text-container
+		echo "</div>"; // back
+		echo "</div>"; // flip-container
+		?>
+	</div>
 </body>
 </html>

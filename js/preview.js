@@ -26,6 +26,13 @@ $(document).ready(function(){
 		displayGallery(this);
 	});
 
+	$(".shrink-box").click(function(e){
+		$(".opener").addClass("open");
+		setTimeout(function(){ $(".opener").css('z-index', '-10'); $(".envelope").css('z-index', '-10'); }, 1000);
+		$(".panel").addClass('panel-open');
+		e.preventDefault;
+	})
+
 });
 
 function displayGallery(bento){
