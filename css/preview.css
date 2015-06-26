@@ -345,3 +345,13 @@ iframe {
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-delay: .5s;
 }
+
+@-webkit-keyframes shake{
+	0%{}
+	50%{transform: scale(.5) rotateZ(10deg);}
+	100%{transform: scale(.5) rotateZ(-10deg);}
+}
+
+.shake{
+	-webkit-animation: shake .5s infinite;
+}

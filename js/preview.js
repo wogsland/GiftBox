@@ -28,6 +28,7 @@ $(document).ready(function(){
 
 	$(".shrink-box").click(function(e){
 		$(".opener").addClass("open");
+		$(".shrink-box").removeClass("shake");
 		setTimeout(function(){ $(".opener").css('z-index', '-10'); $(".envelope").css('z-index', '-10'); }, 1000);
 		$(".panel").addClass('panel-open');
 		e.preventDefault;

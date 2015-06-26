@@ -75,7 +75,7 @@
 	<div class="preloader">
 	  <div class="status">&nbsp;</div>
 	</div>
-	<div class="shrink-box">
+	<div class="shrink-box shake">
 		<div class="envelope">
 		</div>
 		<div class="envelope-back">
