@@ -216,7 +216,7 @@
 	</div>
 
 	<div id="browser-dialog" title="BROWSER WARNING">
-		<div>Please Note: Our product currently works best with Chrome or Opera. For best result, use one of those browsers.</div>
+		<div>Please Note: Our product currently works best with Chrome. For best result, use Chrome.</div>
 	</div>
 
 	<div id="choose-photos-dialog" title="CHOOSE COVER FOR GALLERY" value="">
