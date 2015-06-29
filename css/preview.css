@@ -142,7 +142,7 @@ iframe {
     margin: auto;
     position: absolute;
     top:0;bottom:0; /* vertical center */
-    left:0;right:0; /* horizontal center */
+    left:1.5em;right:0; /* horizontal center */
 	overflow: hidden;
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
@@ -297,8 +297,7 @@ iframe {
 
 .opener {
 	transform-origin: 0 0;
-	max-height: 33vh;
-    max-width: 137.5vh; /* 1024/778 = 1.32 */
+
 	z-index: 900;
 	content: ' ';
 	top: -45vh;
@@ -310,8 +309,8 @@ iframe {
 	position: absolute;
 	width: 0;
 	height: 0;
-	border-left: 68.5vh solid transparent;
-	border-right: 70vh solid transparent;
+	border-left: 53.975vw solid transparent;
+	border-right: 53.975vw solid transparent;
 	border-top: 52vh solid #34495E;
 }
 
@@ -331,8 +330,6 @@ iframe {
 	transform:scale(0.5);
 }
 
-
-/* What does this animation do?*/
 @-webkit-keyframes open{
 	0% {}
 	50% {transform: rotateX(180deg);}

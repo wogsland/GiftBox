@@ -26,7 +26,7 @@ $(document).ready(function(){
 		displayGallery(this);
 	});
 
-	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 100000);
+	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 10000000);
 
 	$(".shrink-box").click(function(e){
 		$(".opener").addClass("open");
