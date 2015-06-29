@@ -76,11 +76,13 @@
 	  <div class="status">&nbsp;</div>
 	</div>
 	<div class="shrink-box shake">
+		<div>
 		<div class="envelope">
 		</div>
 		<div class="envelope-back">
 		</div>
 		<div class="opener">
+		</div>
 		</div>
 		<?php
 		echo '<div id="triggerTab"></div>';

@@ -238,14 +238,16 @@ iframe {
 
 .envelope-back{
 	width: 107.95vw;
-    height: 100vh; /* 100/1.32 = 75.75757575 */
-    background: #A9DFEF;
+    height: 94vh; /* 100/1.32 = 75.75757575 */
+    background: #336E7B;
     max-height: 100vh;
     max-width: 137.5vh; /* 1024/778 = 1.32 */
     margin: auto;
     position: absolute;
-    top: -3vh; bottom:0; /* vertical center */
-    left:0;right:0; /* horizontal center */
+    top: -3vh; 
+    bottom:0; /* vertical center */
+    left:0;
+    right:0; /* horizontal center */
     border-radius: 3px;
 }
 
@@ -253,14 +255,17 @@ iframe {
 	z-index: 900;
 	width: 107.95vw;
     height: 33vh; /* 100/1.32 = 75.75757575 */
-    background: #A9DFEF;
+    background: #336E7B;
     max-height: 33vh;
     max-width: 137.5vh; /* 1024/778 = 1.32 */
     margin: auto;
     position: absolute;
-    top: 63vh; bottom:0; /* vertical center */
-    left:0;right:0; /* horizontal center */
-    border-radius: 3px;
+    top: 63vh; 
+    bottom:0; /* vertical center */
+    left:0;
+    right:0; /* horizontal center */
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .envelope::before{
@@ -273,7 +278,7 @@ iframe {
 	position: absolute;
 	border-style: solid;
 	border-width: 65vh 0 0 86vh;
-	border-color: transparent transparent transparent #A9DFEF;
+	border-color: transparent transparent transparent #336E93;
 }
 
 .envelope::after{
@@ -287,14 +292,16 @@ iframe {
 	position: absolute;
 	border-style: solid;
 	border-width: 0 0 65vh 86vh;
-	border-color: transparent transparent #A9DFEF transparent;
+	border-color: transparent transparent #336E85 transparent;
 }
 
 .opener {
 	transform-origin: 0 0;
+	max-height: 33vh;
+    max-width: 137.5vh; /* 1024/778 = 1.32 */
 	z-index: 900;
 	content: ' ';
-	top: -46vh;
+	top: -45vh;
 	bottom: 0;
 	left: 0;
 	right: 0;
@@ -303,9 +310,9 @@ iframe {
 	position: absolute;
 	width: 0;
 	height: 0;
-	border-left: 70vh solid transparent;
+	border-left: 68.5vh solid transparent;
 	border-right: 70vh solid transparent;
-	border-top: 57vh solid #f00;
+	border-top: 52vh solid #34495E;
 }
 
 .shrink-box{
@@ -324,6 +331,8 @@ iframe {
 	transform:scale(0.5);
 }
 
+
+/* What does this animation do?*/
 @-webkit-keyframes open{
 	0% {}
 	50% {transform: rotateX(180deg);}
@@ -337,11 +346,11 @@ iframe {
 
 @-webkit-keyframes panel-open{
 	0%{}
-	50% {transform: translateY(-200vh)}
+	50% {transform: translateY(-100vh)}
 	100% {transform: translateY(0vh) scale(2); }
 }
 
-.panel-open{
+.panel-open {
 	-webkit-animation: panel-open 1.5s ease;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-delay: .5s;
@@ -353,6 +362,6 @@ iframe {
 	100%{transform: scale(.5) rotateZ(-10deg);}
 }
 
-.shake{
+/*.shake{
 	-webkit-animation: shake .4s infinite;
-}
+}*/
