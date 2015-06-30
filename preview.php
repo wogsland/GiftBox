@@ -13,6 +13,14 @@
 <head>
 	<meta charset="utf-8" />
 	<title><?php echo $token->name ?></title>
+	<meta name="theme-color" content="#ffffff">
+	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
+	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
+	<meta name="og:url" property="og:url" content=<?php echo '"'.'http://www.t-sunlight-757.appspot.com/preview.php?id='.$token->id.'"' ?> />
+	<meta name="og:description" property="og:description" content="This is dummy data"/>
+	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
+	<meta name="og:type" property="og:type" content="article" />
+	
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
@@ -25,7 +33,6 @@
 	<script src="js/preview.js"></script>
 
 	<!-- CUSTOM STYLESHEETS -->
-	<link rel="stylesheet" href="css/styles.css">
 	<script src="js/preloader.js"></script>
 
 	<!-- Favicon -->
@@ -45,11 +52,10 @@
 	<link rel="manifest" href="assets/gt-favicons.ico/manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
 </head>
 <body>
-	<?php /*include_once("analyticstracking.php")*/ ?>
+	<?php include_once("analyticstracking.php"); ?>
 	<!-- =========================
 	     PRE LOADER       
 	============================== -->

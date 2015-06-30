@@ -136,5 +136,5 @@ function processSignup(userInfo, signupType) {
 
 function switchToLogin() {
 	signupClose();
-	loginOpen();	
+	loginOpen();
 }

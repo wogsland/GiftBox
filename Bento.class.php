@@ -31,6 +31,9 @@ class Bento {
 	var $gallery_file_list = array();
 	var $redirect_url;
 	var $auto_play;
+	var $overlay_content;
+	var $overlay_left;
+	var $overlay_top;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -44,21 +47,28 @@ class Bento {
 	
 	public function save() {
 		$image_file_name = str_replace("'", "''", $this->image_file_name);
+		$test = explode("_", $image_file_name);
+		if(strlen($this->image_file_name) > 0 && $test[0] != $this->giftbox_id){
+			$image_file_name = $this->giftbox_id."_".$image_file_name;
+		}
 		$download_file_name = str_replace("'", "''", $this->download_file_name);
 		$slider_value = $this->slider_value ? $this->slider_value : 'null';
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
 			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
-			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play) "
+			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play,"
+			."overlay_content, overlay_left, overlay_top, overlay_width) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
 			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
 			."'$this->image_top_in_container', '$this->image_left_in_container', "
-			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play')";
+			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play',"
+			."'$this->overlay_content', '$this->overlay_left', '$this->overlay_top', '$this->overlay_width')";
 		$this->id = insert($sql);
 		if(sizeof($this->gallery_file_list) > 0){
 			$photo_gallery = new PhotoGallery();
+			$photo_gallery->giftboxId = $this->giftbox_id;
 			$photo_gallery->setBentoId($this->id);
 			$photo_gallery->setFileNames($this->gallery_file_list);
 			$photo_gallery->save();
@@ -113,6 +123,28 @@ class Bento {
 				}
 			}
 		}
+
+		if($this->overlay_content){
+			echo '<div class="'.$this->id.'" style="font-size: 100%; font-family: Lato-Bold, sans-serif; width: '.($this->overlay_width+2).'%; position:absolute; word-break: break-all; left: '.($this->overlay_left + 2).'%; top: '.$this->overlay_top.'%;">'.$this->overlay_content.'</div>';
+			echo '<script>
+				window.onload = function(){
+					var oHeight = $($(".'.$this->id.'")[0].parentNode).height();
+					var percentChange = ((oHeight/("'.$this->css_height.'").split("px")[0]) * 100) - 2;
+					$(".giftbox")[0].style.fontSize = percentChange + "%";
+				}
+				var originalHeight = $(window).height();
+				$(window).resize(function() { 
+					var percent = originalHeight/$(window).height();
+					originalHeight = $(window).height();
+					var currentSize = $(".giftbox")[0].style.fontSize;
+					currentSize = parseFloat(currentSize);
+					$(".giftbox")[0].style.fontSize = (currentSize/percent) + "%";
+				});
+
+			</script>';
+			
+		}
+
 		if ($this->download_file_name) {
 			$download_file_names[] = $this->download_file_name;
 			if ($google_app_engine) {
