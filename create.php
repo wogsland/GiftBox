@@ -221,20 +221,16 @@
 
 	<div id="browser-dialog" title="BROWSER WARNING">
 		<div>Please Note: Our product currently works best with Chrome. For best result, use Chrome.</div>
-<<<<<<< HEAD
-=======
 	</div>
 
 	<div id="use-fail-dialog" title="Failed to choose a file">
 		<div><h4>Please choose a file to upload to a bento.</h4></div>
->>>>>>> hotfix/v1.3.3
 	</div>
 
 	<div id="choose-photos-dialog" title="CHOOSE COVER FOR GALLERY" value="">
 		<div id="choose-photo-options"></div>
 	</div>
 
-<<<<<<< HEAD
 	<div id="input-overlay-dialog" title="INPUT TEXT FOR OVERLAY">
 		<form id="letter-form">
 			<label class="input-label" for="overlayText">Write your message here</label>
@@ -244,9 +240,7 @@
             </script>
 		</form>
 	</div>
-=======
->>>>>>> hotfix/v1.3.3
-
+	
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
