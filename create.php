@@ -218,7 +218,6 @@
 		<div id="choose-photo-options"></div>
 	</div>
 
-
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
