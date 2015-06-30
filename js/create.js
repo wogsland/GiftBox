@@ -1753,7 +1753,35 @@ function doAdd() {
 	var bentoId;
 	var element;
 	var bento;
-	$('#add-dialog').dialog('close');
+	var selected;
+
+	$( "#use-fail-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+
+	// console.log($('.add-content-container'));
+	$.each($('.add-content-container'), function(index, element) {
+		if ($(element).css('display') == 'block') {
+			selectedContainer = $(element).attr('id');
+			// console.log(selectedContainer);
+		}
+	})
+
+	selected = $("#" + selectedContainer + " > .thumbnail-container-selected");
+	// console.log(selected);
+	// console.log(selected.size());
+	if (selected.size() == 0) {
+		$('#use-fail-dialog').dialog('open');
+	} else {
+		$('#add-dialog').dialog('close');
+	}
 
 	// LETTER
 	saveLetter();

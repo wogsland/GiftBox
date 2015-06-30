@@ -118,8 +118,12 @@
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
 					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>VIEW</a></li>
+<<<<<<< HEAD
 					<!-- Used to be selectSaved() -->
 					<li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
+=======
+					<!-- <li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li> -->
+>>>>>>> hotfix/v1.3.3
 				</ul>
 			</div>
 			<div id="template-scroll-container">
@@ -217,12 +221,20 @@
 
 	<div id="browser-dialog" title="BROWSER WARNING">
 		<div>Please Note: Our product currently works best with Chrome. For best result, use Chrome.</div>
+<<<<<<< HEAD
+=======
+	</div>
+
+	<div id="use-fail-dialog" title="Failed to choose a file">
+		<div><h4>Please choose a file to upload to a bento.</h4></div>
+>>>>>>> hotfix/v1.3.3
 	</div>
 
 	<div id="choose-photos-dialog" title="CHOOSE COVER FOR GALLERY" value="">
 		<div id="choose-photo-options"></div>
 	</div>
 
+<<<<<<< HEAD
 	<div id="input-overlay-dialog" title="INPUT TEXT FOR OVERLAY">
 		<form id="letter-form">
 			<label class="input-label" for="overlayText">Write your message here</label>
@@ -232,6 +244,8 @@
             </script>
 		</form>
 	</div>
+=======
+>>>>>>> hotfix/v1.3.3
 
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
@@ -253,7 +267,7 @@
 			</div>
 
 			<!--------------------- IMAGES ---------------------------->
-			<div id="add-images-container" class="add-content-container">
+			<div id="add-images-container" class="add-content-container" style="display: block;">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
 						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook fa-3x add-icon"></i></a>
