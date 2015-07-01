@@ -159,7 +159,7 @@
 	<div class="main-body">
 		<div class="row">
 			<div class="col-sm-4" id="thumbnail">
-				<h2><?= $token->name; ?></h2>
+				<h3><?= $token->name; ?></h3>
 				<?= "<img src=". $token->image_path .">" ;?>
 			</div>
 			<div class="col-sm-6" id="generalInfo">
