@@ -2746,6 +2746,30 @@ div.fill img {
 	float: left;
 }
 
+.analytics-btn {
+    padding: 1px 14px;
+    margin-bottom: 8px;
+}
+
+.edit-btn {
+    float:right;
+    background-color: #dbdbdb;
+    padding: 0px 5px;
+    margin-bottom: 1px;
+}
+
+.edit-btn-group {
+    margin-left: 12.5em;
+    margin-right: 5em;
+}
+
+.token-edit-thumb {
+    margin-top: -3em;
+}
+
+.edit-btn-group span {
+    font-size: 9px;
+}
 
 /************************* SMARTPHONES *************************/
 

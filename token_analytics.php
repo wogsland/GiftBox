@@ -140,8 +140,7 @@
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.php" class="external">Home</a></li>
-					<li><a href="#">My Account</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a href="profile.php" class="external">My Account</a></li>
 				</ul>
 			</div>
 		</div> <!-- /END CONTAINER -->
