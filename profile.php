@@ -167,6 +167,7 @@
 <script type="text/jsx" src="/app/account/profile.js"></script>
 <script type="text/jsx" src="/app/account/activities.js"></script>
 <script type="text/jsx" src="/app/account/tokens.js"></script>
+<script type="text/jsx" src="/app/account/token_analytics.js"></script>
 <script type="text/jsx" src="/app/account/viewers.js"></script>
 <script type="text/jsx" src="/app/account/viewer_edit.js"></script>
 <script type="text/jsx" src="/app/account/info.js"></script>

@@ -1,0 +1,66 @@
+body {
+	background-color: #EEEEEE;
+	color: #636e7b;
+
+}
+
+body h4 {
+	line-height: 30px;
+}
+
+body h5 {
+	margin-left: 5em;
+	font-size: 15px;
+}
+
+section {
+	margin: 0 auto;
+	margin-bottom:2em;
+}
+
+.soon {
+	color: #a3a3a3;
+	font-size: 10px;
+}
+.main-body {
+	text-align: left;
+	background-color: white;
+	padding: 5em;
+	font-family: 'Lane' sans-serif;
+}
+
+#thumbnail img {
+	height: 204px;
+	width: 100%;
+}
+
+#generalInfo {
+	margin-top: 5em;
+}
+
+#analytics-panel {
+	margin-top: 3em;
+}
+
+.tab-content {
+	padding:0;
+	margin:0;
+}
+
+.pull-up {
+	margin-top: -4em !important;
+}
+
+.list-group {
+	margin: 0;
+	margin-top: 0.82em;
+}
+
+.list-group-item {
+	padding: 0;
+	padding-left: 2em;
+}
+
+.odd {
+	background-color: #EEEEEE;
+}
