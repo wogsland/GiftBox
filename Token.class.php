@@ -1,8 +1,13 @@
 <?php
 include_once 'Mobile_Detect.php';
 include_once 'util.php';
+include_once 'config.php';
 include 'Bento.class.php';
 include 'Divider.class.php';
+use google\appengine\api\cloud_storage\CloudStorageTools;
+if ($google_app_engine) {
+	include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+}
 
 class Token {
 	var $id;
@@ -10,6 +15,8 @@ class Token {
 	var $css_width;
 	var $css_height;
 	var $name;
+	var $thumbnail_name;
+	var $image_path;
 	var $user_id;
 	var $letter_text;
 	var $wrapper_type;
@@ -28,6 +35,7 @@ class Token {
 			foreach (get_object_vars($token) as $key => $value) {
 				$this->$key = $value;
 			}
+			$this->thumbnail_name = $token->id."-thumbnail";
 			$this->load_bentos();
 			$this->load_dividers();
 			$this->load_columns();

@@ -18,6 +18,23 @@ function printResults($results) {
   }
 }
 
+function printTimeResults($results) {
+  // Parses the response from the Core Reporting API and prints
+  // the profile name and total sessions.
+  if (count($results->getRows()) > 0) {
+
+    // Get the entry for the first entry in the first row.
+    $rows = $results->getRows();
+    $results = $rows[0][0];
+
+    // Print the results.
+    $time = gmdate("H:i:s", $results);
+    print($time);
+  } else {
+    print "No results found.\n";
+  }
+}
+
 function getTotalResults($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the number of pageviews
   // for the last 30 days.
@@ -156,7 +173,7 @@ function getFacebookResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:socialNetwork==Facebook',
+    'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Facebook',
     'output' => 'dataTable', 
     );
 
@@ -172,7 +189,7 @@ function facebookResults($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the total number of pageviews
   // for the last 30 days.
   $options = array(
-    'filters' => 'ga:pagepath==' . $page . ',ga:socialNetwork==Facebook',
+    'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Facebook',
     );
 
   return $analytics->data_ga->get(
@@ -189,7 +206,7 @@ function getTwitterResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:socialNetwork==Twitter',
+    'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Twitter',
     'output' => 'dataTable', 
     );
 
@@ -205,7 +222,7 @@ function twitterResults($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the total number of pageviews
   // for the last 30 days.
   $options = array(
-    'filters' => 'ga:pagepath==' . $page . ',ga:socialNetwork==Twitter',
+    'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Twitter',
     );
 
   return $analytics->data_ga->get(
@@ -222,7 +239,7 @@ function getEmailResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:channelGrouping==Direct',
+    'filters' => 'ga:pagepath==' . $page . ';ga:channelGrouping==Direct',
     'output' => 'dataTable', 
     );
 
@@ -238,7 +255,7 @@ function emailResults($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the total number of pageviews
   // for the last 30 days.
   $options = array(
-    'filters' => 'ga:pagepath==' . $page . ',ga:channelGrouping==Direct',
+    'filters' => 'ga:pagepath==' . $page . ';ga:channelGrouping==Direct',
     );
 
   return $analytics->data_ga->get(
@@ -327,7 +344,7 @@ function getDesktopResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:deviceCategory==desktop',
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==desktop',
     'output' => 'dataTable', 
     );
 
@@ -337,6 +354,21 @@ function getDesktopResults($analytics, $profileId, $page) {
      'today',
      'ga:pageViews',
      $options);
+}
+
+function desktopResults($analytics, $profileId, $page) {
+  // Calls the Core Reporting API and queries for the total number of pageviews
+  // for the last 30 days.
+  $options = array(
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==desktop',
+    );
+
+  return $analytics->data_ga->get(
+    'ga:' . $profileId,
+    '30daysAgo',
+    'today',
+    'ga:pageViews',
+    $options);
 }
 
 function getTabletResults($analytics, $profileId, $page) {
@@ -345,7 +377,7 @@ function getTabletResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:deviceCategory==tablet',
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==tablet',
     'output' => 'dataTable', 
     );
 
@@ -355,6 +387,21 @@ function getTabletResults($analytics, $profileId, $page) {
      'today',
      'ga:pageViews',
      $options);
+}
+
+function tabletResults($analytics, $profileId, $page) {
+  // Calls the Core Reporting API and queries for the total number of pageviews
+  // for the last 30 days.
+  $options = array(
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==tablet',
+    );
+
+  return $analytics->data_ga->get(
+    'ga:' . $profileId,
+    '30daysAgo',
+    'today',
+    'ga:pageViews',
+    $options);
 }
 
 function getMobileResults($analytics, $profileId, $page) {
@@ -363,7 +410,7 @@ function getMobileResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page . ',ga:deviceCategory==mobile',
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==mobile',
     'output' => 'dataTable', 
     );
 
@@ -375,6 +422,20 @@ function getMobileResults($analytics, $profileId, $page) {
      $options);
 }
 
+function mobileResults($analytics, $profileId, $page) {
+  // Calls the Core Reporting API and queries for the total number of pageviews
+  // for the last 30 days.
+  $options = array(
+    'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==mobile',
+    );
+
+  return $analytics->data_ga->get(
+    'ga:' . $profileId,
+    '30daysAgo',
+    'today',
+    'ga:pageViews',
+    $options);
+}
 
 try {
 
@@ -399,19 +460,22 @@ try {
   $emailResults = getEmailResults($analytics, $profile, $tokenPath);
   $numEmailResults = emailResults($analytics, $profile, $tokenPath);
 
-  $genderResults = getGenderResults($analytics, $profile, '/index.php');
+  $genderResults = getGenderResults($analytics, $profile, $tokenPath);
 
-  $ageResults = getAgeResults($analytics, $profile, '/index.php');
+  $ageResults = getAgeResults($analytics, $profile, $tokenPath);
 
   $geoResults = getGeoResults($analytics, $profile, $tokenPath);
 
   $deviceResults = getDeviceResults($analytics, $profile, $tokenPath);
 
   $desktopResults = getDesktopResults($analytics, $profile, $tokenPath);
+  $numDesktopResults = desktopResults($analytics, $profile, $tokenPath);
 
   $tabletResults = getTabletResults($analytics, $profile, $tokenPath);
+  $numTabletResults = tabletResults($analytics, $profile, $tokenPath);
 
   $mobileResults = getMobileResults($analytics, $profile, $tokenPath);
+  $numMobileResults = mobileResults($analytics, $profile, $tokenPath);
 
 
 } catch (apiServiceException $e) {

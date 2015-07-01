@@ -3,6 +3,11 @@
 	include_once 'config.php';
 	include_once 'analyticsauth.php';
 	include_once 'analyticsqueries.php';
+	include_once 'Token.class.php';
+	use google\appengine\api\cloud_storage\CloudStorageTools;
+	if ($google_app_engine) {
+		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+	}
 	
 	_session_start();
 	
@@ -11,6 +16,14 @@
 	$last_name = null;
 	$email = null;
 	$user_id = null;
+
+	$token = new Token($_GET['id']);
+
+	if ($google_app_engine) {
+		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
+	} else {
+		$token->image_path = $file_storage_path.$token->thumbnail_name;
+	}
 
 ?>
 <!doctype html>
@@ -86,25 +99,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script src="js/draw.js"></script>
 
-<script>
-
-function getToken(){
-  var token = null;
-  $.ajax({
-    url: "get_token_detail_ajax.php",
-    async: false
-  }).done(function(data, textStatus, jqXHR){
-  	console.log("done");
-    token = data;
-    console.log(data);
-  });
-  return token;
-}
-
-var token = getToken();
-
-</script>
-
 </head>
 
 <body id="analytics-page">
@@ -163,38 +157,44 @@ var token = getToken();
 ============================== -->
 
 <div class="container">
-	<div class="main-body" style="margin-top: 69px">
+	<div class="main-body">
 		<div class="row">
 			<div class="col-sm-4" id="thumbnail">
-				<h1><?php echo $_GET['id']; ?></h1>
-				<img src="assets/img/token-varied-01.png">
+				<h2><?= $token->name; ?></h2>
+				<?= "<img src=". $token->image_path .">" ;?>
 			</div>
-			<div class="col-sm-6 col-sm-offset-1" id="generalInfo">
-				<h3>Total Views: <?= printResults($numTotalResults); ?></h3>
+			<div class="col-sm-6" id="generalInfo">
+				<ul class="list-group">
+				  <li class="list-group-item odd"><h4>Total Views: <?= printResults($numTotalResults); ?></h4></li>
+				  <li class="list-group-item"><h4>Unique Views: <?= printResults($numUniqueResults); ?></h4></li>
+				  <li class="list-group-item odd"><h4>Average Time on the Token: <?= printTimeResults($numAverageResults); ?></h4></li>
+				  <li class="list-group-item"><h4>Bounces: <?= printResults($numBouncesResults); ?></h4></li>
+				</ul>
+<!-- 				<h3>Total Views: <?= printResults($numTotalResults); ?></h3>
 				<h3>Unique Views: <?= printResults($numUniqueResults); ?></h3>
-				<h3>Average Time on the Token: <?= printResults($numAverageResults); ?></h3>
-				<h3>Bounces: <?= printResults($numBouncesResults); ?></h3>
+				<h3>Average Time on the Token: <?= printTimeResults($numAverageResults); ?></h3>
+				<h3>Bounces: <?= printResults($numBouncesResults); ?></h3> -->
 			</div>
 		</div>
 		<div class="row" id="analytics-panel">
 
-			<div class="col-xs-3"> <!-- required for floating -->
+			<div class="col-xs-2"> <!-- required for floating -->
 			    <!-- Nav tabs -->
 			    <ul class="nav nav-tabs tabs-left">
 			      <li class="active"><a href="#general" data-toggle="tab">General</a></li>
 			      <li><a href="#social" data-toggle="tab">Social Media</a></li>
 			      <li><a href="#audience" data-toggle="tab">Audience</a></li>
 			      <li><a href="#technology" data-toggle="tab">Technology</a></li>
-			      <li><a data-toggle="tab">Popular Trends</a></li>
-			      <li><a data-toggle="tab">Custom Search</a></li>
+			      <li class="disabled"><a>Popular Trends <span class="soon">(coming soon)</span></a></li>
+			      <li class="disabled"><a>Custom Search <span class="soon">(coming soon)</span></a></li>
 			    </ul>
 			</div>
 
-			<div class="col-xs-9">
+			<div class="col-xs-10">
 			    <!-- Tab panes -->
 			    <div class="tab-content">
 
-			      <div class="tab-pane pull-up active" id="general">
+			      <div class="tab-pane active" id="general">
 			      		<div class="col-sm-6">
 
 			            <section id="total-timeline"></section>
@@ -203,15 +203,13 @@ var token = getToken();
 			                  echo json_encode($totalResults->getDataTable()->toSimpleObject())
 			              ?>;
 			              </script>
-			              <h5>Total pageviews: <?= printResults($numTotalResults); ?></h5>
-
+			              
 			            <section id="unique-timeline"></section>
 			              <script>
 			              uniqueChartData = <?php
 			                  echo json_encode($uniqueResults->getDataTable()->toSimpleObject())
 			              ?>;
 			              </script>
-			              <h5>Total Unique Pageviews: <?= printResults($numUniqueResults); ?></h5>
 
 			          </div>
 			          <div class="col-sm-6">
@@ -222,7 +220,6 @@ var token = getToken();
 			                  echo json_encode($averageResults->getDataTable()->toSimpleObject())
 			              ?>;
 			              </script>
-			              <h5>Average Time on a Page: <?= printResults($numAverageResults); ?></h5>
 
 			            <section id="bounces-timeline"></section>
 			              <script>
@@ -230,12 +227,11 @@ var token = getToken();
 			                  echo json_encode($bouncesResults->getDataTable()->toSimpleObject())
 			              ?>;
 			              </script>
-			              <h5>Bounces: <?= printResults($numBouncesResults); ?></h5>
 
 			          </div>
 			      </div>
 
-			      <div class="tab-pane pull-up" id="social">
+			      <div class="tab-pane" id="social">
 			      		<div class="col-sm-6">
 
 			            <section id="facebook-timeline"></section>
@@ -269,7 +265,7 @@ var token = getToken();
 			      </div>
 
 
-			      <div class="tab-pane pull-up" id="audience">
+			      <div class="tab-pane" id="audience">
 			      	<div class="row">
 			      		<div class="col-sm-6">
 			            <section id="gender-timeline"></section>
@@ -290,6 +286,7 @@ var token = getToken();
 			        </div>
 		            <div class="row">
 		            	<div class="col-sm-6 col-sm-offset-3">
+		            	<p>Cities</p>
 		            	<section id="geo-timeline"></section>
 			              <script>
 			              geoChartData = <?php
@@ -301,7 +298,7 @@ var token = getToken();
 			      </div>
 
 
-			      <div class="tab-pane pull-up" id="technology">
+			      <div class="tab-pane" id="technology">
 			      		<div class="row">
 				      		<div class="col-sm-6">
 
@@ -311,6 +308,7 @@ var token = getToken();
 				                  echo json_encode($deviceResults->getDataTable()->toSimpleObject())
 				              ?>;
 				              </script>
+				              <h5>Device Visitor Groups</h5>
 
 				            <section id="desktop-timeline"></section>
 				              <script>
@@ -318,6 +316,7 @@ var token = getToken();
 				                  echo json_encode($desktopResults->getDataTable()->toSimpleObject())
 				              ?>;
 				              </script>
+				              <h5>Desktop Opens: <?= printResults($numDesktopResults); ?></h5>
 
 				            </div>
 				            <div class="col-sm-6">
@@ -328,6 +327,7 @@ var token = getToken();
 				                  echo json_encode($tabletResults->getDataTable()->toSimpleObject())
 				              ?>;
 				              </script>
+				              <h5>Tablet Opens: <?= printResults($numTabletResults); ?></h5>
 
 				            <section id="mobile-timeline"></section>
 				              <script>
@@ -335,6 +335,7 @@ var token = getToken();
 				                  echo json_encode($mobileResults->getDataTable()->toSimpleObject())
 				              ?>;
 				              </script>
+				              <h5>Mobile Opens: <?= printResults($numMobileResults); ?></h5>
 				            </div>
 				        </div>
 			      </div>

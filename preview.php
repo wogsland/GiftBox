@@ -7,22 +7,17 @@
 	}
 
 	$token = new Token($_GET['id']);
+
+	if ($google_app_engine) {
+		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
+	} else {
+		$token->image_path = $file_storage_path.$token->thumbnail_name;
+	}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
-	<?php
-	$image_path = null;
-	$file_name = $token->id."-thumbnail";
-	if ($google_app_engine) {
-//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
-//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
-		$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
-	} else {
-		$image_path = $file_storage_path.$file_name;
-	}
-	?>
 
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
@@ -31,7 +26,7 @@
 	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />
-	<meta name="og:image" property="og:image" content=<?php echo $image_path ?>
+	<meta name="og:image" property="og:image" content=<?php echo $token->image_path; ?>
 	
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />

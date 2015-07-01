@@ -46,10 +46,15 @@ function renderTotalChart() {
 
   // Set chart options
   var options = {
-    title: 'Total PageViews',
-    width: 400,
-    height: 300
+    title: 'Total Page Views',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'}, 
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Page Views');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('total-timeline'));
@@ -68,10 +73,15 @@ function renderUniqueChart() {
 
   // Set chart options
   var options = {
-    title: 'Unique PageViews',
-    width: 400,
-    height: 300
+    title: 'Unique Page Views',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Unique Views');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('unique-timeline'));
@@ -90,10 +100,15 @@ function renderAverageChart() {
 
   // Set chart options
   var options = {
-    title: 'Average Time on Page',
-    width: 400,
-    height: 300
+    title: 'Average Time on the Page',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Averga Time');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('average-time-timeline'));
@@ -113,9 +128,14 @@ function renderBouncesChart() {
   // Set chart options
   var options = {
     title: 'Bounces',
-    width: 400,
-    height: 300
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Bounces');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('bounces-timeline'));
@@ -134,10 +154,15 @@ function renderFacebookChart() {
 
   // Set chart options
   var options = {
-    title: 'facebook',
-    width: 400,
-    height: 300
+    title: 'Facebook Visitors',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('facebook-timeline'));
@@ -156,10 +181,15 @@ function renderTwitterChart() {
 
   // Set chart options
   var options = {
-    title: 'twitter',
-    width: 400,
-    height: 300
+    title: 'Twitter Visitors',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('twitter-timeline'));
@@ -178,10 +208,15 @@ function renderEmailChart() {
 
   // Set chart options
   var options = {
-    title: 'email',
-    width: 400,
-    height: 300
+    title: 'Email Opens',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Opens');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('email-timeline'));
@@ -196,10 +231,15 @@ function renderGenderChart() {
 
   // Set chart options
   var options = {
-    title: 'gender PageViews',
-    width: 400,
-    height: 300
+    title: 'Gender',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'User');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.ColumnChart(document.getElementById('gender-timeline'));
@@ -214,10 +254,15 @@ function renderAgeChart() {
 
   // Set chart options
   var options = {
-    title: 'age PageViews',
-    width: 400,
-    height: 300
+    title: 'Age',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'User');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.ColumnChart(document.getElementById('age-timeline'));
@@ -232,9 +277,14 @@ function renderGeoChart() {
 
   // Set chart options
   var options = {
+    title: 'Cities',
     region: 'US',
     displayMode: 'markers',
-    colorAxis: {colors: ['green', 'blue']}
+    colorAxis: {colors: ['green', 'blue']},
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane',
+    width: 370,
+    height: 200,
   };
 
   // Instantiate and draw our chart, passing in some options.
@@ -249,11 +299,16 @@ function renderDeviceChart() {
   console.log(data);
 
   // Set chart options
-  var options = {
-    title: 'device PageViews',
-    width: 400,
-    height: 300
+    var options = {
+    title: 'Devices',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.ColumnChart(document.getElementById('device-timeline'));
@@ -267,11 +322,16 @@ function renderDesktopChart() {
   console.log(data);
 
   // Set chart options
-  var options = {
-    title: 'desktop PageViews',
-    width: 400,
-    height: 300
+    var options = {
+    title: 'Desktop Visitors',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('desktop-timeline'));
@@ -285,11 +345,16 @@ function renderTabletChart() {
   console.log(data);
 
   // Set chart options
-  var options = {
-    title: 'tablet PageViews',
-    width: 400,
-    height: 300
+    var options = {
+    title: 'Tablet Visitors',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('tablet-timeline'));
@@ -303,11 +368,16 @@ function renderMobileChart() {
   console.log(data);
 
   // Set chart options
-  var options = {
-    title: 'mobile PageViews',
-    width: 400,
-    height: 300
+    var options = {
+    title: 'Mobile Visitors',
+    width: 370,
+    height: 200,
+    chartArea:{width:'65%',height:'65%'},
+    fontName: 'Lane'
   };
+
+  console.log(data.getColumnLabel(1));
+  data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('mobile-timeline'));
