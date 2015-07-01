@@ -207,5 +207,10 @@ class Token {
 	public function render() {
 		include "./templates/preview-$this->css_id.php";
 	}
+	
+	public function delete() {
+		$sql = "DELETE FROM giftbox WHERE id = $this->id";
+		execute($sql);
+	}
 
 }
