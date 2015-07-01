@@ -1,0 +1,30 @@
+body {
+	background-color: white;
+	color: #636e7b;
+}
+.main-body {
+	text-align: left;
+	margin-bottom:3em;
+}
+
+#thumbnail img {
+	height: 204px;
+	width: 373px;
+}
+
+#generalInfo {
+	margin-top: 5em;
+}
+
+#analytics-panel {
+	margin-top: 3em;
+}
+
+.tab-content {
+	padding:0;
+	margin:0;
+}
+
+.pull-up {
+	margin-top: -4em !important;
+}

@@ -32,7 +32,7 @@ function getService()
   return $analytics;
 }
 
-function getFirstprofileId(&$analytics) {
+function getFirstprofileId($analytics) {
   // Get the user's first view (profile) ID.
 
   // Get the list of accounts for the authorized user.
