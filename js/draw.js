@@ -3,7 +3,7 @@
 google.load('visualization', '1.0', {'packages':['corechart']});
 google.load("visualization", "1", {packages:["geochart"]});
 
-Set a callback to run when the Google Visualization API is loaded.
+// Set a callback to run when the Google Visualization API is loaded.
 google.setOnLoadCallback(renderTotalChart);
 google.setOnLoadCallback(renderUniqueChart);
 google.setOnLoadCallback(renderAverageChart);
