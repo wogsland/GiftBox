@@ -20,19 +20,29 @@ google.setOnLoadCallback(renderTabletChart);
 google.setOnLoadCallback(renderMobileChart);
 
 var totalChartData = null;
+var totalChartNumber = null;
 var uniqueChartData = null;
+var uniqueChartNumber = null;
 var averageChartData = null;
+var averageChartNumber = null;
 var bouncesChartData = null;
+var bouncesChartNumber = null;
 var facebookChartData = null;
+var facebookChartNumber = null;
 var twitterChartData = null;
+var twitterChartNumber = null;
 var emailChartData = null;
+var emailChartNumber = null;
 var genderChartData = null;
 var ageChartData = null;
 var geoChartData = null;
 var deviceChartData = null;
 var desktopChartData = null;
+var desktopChartNumber = null;
 var tabletChartData = null;
+var tabletChartNumber = null;
 var mobileChartData = null;
+var mobileChartNumber = null;
 
 function renderTotalChart() {
 
@@ -40,20 +50,24 @@ function renderTotalChart() {
       totalChartData.rows[i].c[1].v = parseInt(totalChartData.rows[i].c[1].v);
   }
 
-  console.log(totalChartData);
   var data = new google.visualization.DataTable(totalChartData);
-  console.log(data);
+
+  var title = 'Total Page Views: ' + totalChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Total Page Views',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'}, 
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Page Views');
 
   // Instantiate and draw our chart, passing in some options.
@@ -67,20 +81,24 @@ function renderUniqueChart() {
       uniqueChartData.rows[i].c[1].v = parseInt(uniqueChartData.rows[i].c[1].v);
   }
 
-  console.log(uniqueChartData);
   var data = new google.visualization.DataTable(uniqueChartData);
-  console.log(data);
+
+  var title = 'Unique Page Views: ' + uniqueChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Unique Page Views',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Unique Views');
 
   // Instantiate and draw our chart, passing in some options.
@@ -94,20 +112,24 @@ function renderAverageChart() {
       averageChartData.rows[i].c[1].v = parseInt(averageChartData.rows[i].c[1].v);
   }
 
-  console.log(averageChartData);
   var data = new google.visualization.DataTable(averageChartData);
-  console.log(data);
+
+  var title = 'Average Time: ' + averageChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Average Time on the Page',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Averga Time');
 
   // Instantiate and draw our chart, passing in some options.
@@ -121,17 +143,22 @@ function renderBouncesChart() {
       bouncesChartData.rows[i].c[1].v = parseInt(bouncesChartData.rows[i].c[1].v);
   }
 
-  console.log(bouncesChartData);
   var data = new google.visualization.DataTable(bouncesChartData);
-  console.log(data);
+
+  var title = 'Bounces: ' + bouncesChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Bounces',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
   console.log(data.getColumnLabel(1));
@@ -148,20 +175,24 @@ function renderFacebookChart() {
       facebookChartData.rows[i].c[1].v = parseInt(facebookChartData.rows[i].c[1].v);
   }
 
-  console.log(facebookChartData);
   var data = new google.visualization.DataTable(facebookChartData);
-  console.log(data);
+
+  var title = 'Facebook Visitors: ' + facebookChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Facebook Visitors',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
@@ -175,20 +206,24 @@ function renderTwitterChart() {
       twitterChartData.rows[i].c[1].v = parseInt(twitterChartData.rows[i].c[1].v);
   }
 
-  console.log(twitterChartData);
   var data = new google.visualization.DataTable(twitterChartData);
-  console.log(data);
+
+  var title = 'Twitter Visitors: ' + twitterChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Twitter Visitors',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
@@ -202,20 +237,24 @@ function renderEmailChart() {
       emailChartData.rows[i].c[1].v = parseInt(emailChartData.rows[i].c[1].v);
   }
 
-  console.log(emailChartData);
   var data = new google.visualization.DataTable(emailChartData);
-  console.log(data);
+
+  var title = 'Email Opens: ' + emailChartNumber;
 
   // Set chart options
   var options = {
-    title: 'Email Opens',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Opens');
 
   // Instantiate and draw our chart, passing in some options.
@@ -225,20 +264,22 @@ function renderEmailChart() {
 
 function renderGenderChart() {
 
-  console.log(genderChartData);
   var data = new google.visualization.DataTable(genderChartData);
-  console.log(data);
 
   // Set chart options
   var options = {
     title: 'Gender',
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'User');
 
   // Instantiate and draw our chart, passing in some options.
@@ -248,20 +289,22 @@ function renderGenderChart() {
 
 function renderAgeChart() {
 
-  console.log(ageChartData);
   var data = new google.visualization.DataTable(ageChartData);
-  console.log(data);
 
   // Set chart options
   var options = {
     title: 'Age',
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'User');
 
   // Instantiate and draw our chart, passing in some options.
@@ -271,18 +314,14 @@ function renderAgeChart() {
 
 function renderGeoChart() {
 
-  console.log(geoChartData);
   var data = new google.visualization.DataTable(geoChartData);
-  console.log(data);
 
   // Set chart options
   var options = {
-    title: 'Cities',
     region: 'US',
     displayMode: 'markers',
     colorAxis: {colors: ['green', 'blue']},
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane',
     width: 370,
     height: 200,
   };
@@ -294,20 +333,22 @@ function renderGeoChart() {
 
 function renderDeviceChart() {
 
-  console.log(deviceChartData);
   var data = new google.visualization.DataTable(deviceChartData);
-  console.log(data);
 
   // Set chart options
     var options = {
     title: 'Devices',
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
@@ -317,20 +358,24 @@ function renderDeviceChart() {
 
 function renderDesktopChart() {
 
-  console.log(desktopChartData);
   var data = new google.visualization.DataTable(desktopChartData);
-  console.log(data);
+
+  var title = 'Desktop Visitors: ' + desktopChartNumber;
 
   // Set chart options
     var options = {
-    title: 'Desktop Visitors',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
@@ -340,20 +385,24 @@ function renderDesktopChart() {
 
 function renderTabletChart() {
 
-  console.log(tabletChartData);
   var data = new google.visualization.DataTable(tabletChartData);
-  console.log(data);
+
+  var title = 'Tablet Visitors: ' + tabletChartNumber;
 
   // Set chart options
     var options = {
-    title: 'Tablet Visitors',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.
@@ -363,20 +412,24 @@ function renderTabletChart() {
 
 function renderMobileChart() {
 
-  console.log(mobileChartData);
   var data = new google.visualization.DataTable(mobileChartData);
-  console.log(data);
+
+  var title = 'Mobile Visitors: ' + mobileChartNumber;
 
   // Set chart options
     var options = {
-    title: 'Mobile Visitors',
+    title: title,
+    titleTextStyle: {
+      color: '#929292',
+      fontName: 'Lane',
+      fontSize: 20,
+      bold: true
+    },
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
-    fontName: 'Lane'
   };
 
-  console.log(data.getColumnLabel(1));
   data.setColumnLabel(1, 'Visitors');
 
   // Instantiate and draw our chart, passing in some options.

@@ -14,7 +14,7 @@ function printResults($results) {
     // Print the results.
     print $results;
   } else {
-    print "No results found.\n";
+    print "0";
   }
 }
 
@@ -32,6 +32,22 @@ function printTimeResults($results) {
     print($time);
   } else {
     print "No results found.\n";
+  }
+}
+
+function printBounceResults($results) {
+  // Parses the response from the Core Reporting API and prints
+  // the profile name and total sessions.
+  if (count($results->getRows()) > 0) {
+
+    // Get the entry for the first entry in the first row.
+    $rows = $results->getRows();
+    $results = $rows[0][0];
+
+    // Print the results.
+    print($results);
+  } else {
+    print "0";
   }
 }
 
@@ -140,7 +156,7 @@ function getBouncesResults($analytics, $profileId, $page) {
 
   $options = array(
     'dimensions' => 'ga:date',
-    'filters' => 'ga:pagepath==' . $page,
+    'filters' => 'ga:pagepath==' . $page . ';ga:timeOnPage<60',
     'output' => 'dataTable', 
     );
 
@@ -148,7 +164,7 @@ function getBouncesResults($analytics, $profileId, $page) {
      'ga:' . $profileId,
      '30daysAgo',
      'today',
-     'ga:bounces',
+     'ga:pageviews',
      $options);
 }
 
@@ -156,14 +172,15 @@ function bouncesResults($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the total number of pageviews
   // for the last 30 days.
   $options = array(
-    'filters' => 'ga:pagepath==' . $page,
+    'filters' => 'ga:pagepath==' . $page . ';ga:timeOnPage<60',
+    'output' => 'dataTable'
     );
 
   return $analytics->data_ga->get(
     'ga:' . $profileId,
     '30daysAgo',
     'today',
-    'ga:bounces',
+    'ga:pageviews',
     $options);
 }
 
@@ -218,7 +235,7 @@ function getTwitterResults($analytics, $profileId, $page) {
      $options);
 }
 
-function twitterResults($analytics, $profileId, $page) {
+function twitterResultsNum($analytics, $profileId, $page) {
   // Calls the Core Reporting API and queries for the total number of pageviews
   // for the last 30 days.
   $options = array(
@@ -455,7 +472,7 @@ try {
   $numFacebookResults = facebookResults($analytics, $profile, $tokenPath);
 
   $twitterResults = getTwitterResults($analytics, $profile, $tokenPath);
-  $numTwitterResults = twitterResults($analytics, $profile, $tokenPath);
+  $numTwitterResults = twitterResultsNum($analytics, $profile, $tokenPath);
 
   $emailResults = getEmailResults($analytics, $profile, $tokenPath);
   $numEmailResults = emailResults($analytics, $profile, $tokenPath);

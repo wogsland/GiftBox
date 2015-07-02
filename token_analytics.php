@@ -167,7 +167,7 @@
 				  <li class="list-group-item odd"><h4>Total Views: <?= printResults($numTotalResults); ?></h4></li>
 				  <li class="list-group-item"><h4>Unique Views: <?= printResults($numUniqueResults); ?></h4></li>
 				  <li class="list-group-item odd"><h4>Average Time on the Token: <?= printTimeResults($numAverageResults); ?></h4></li>
-				  <li class="list-group-item"><h4>Bounces: <?= printResults($numBouncesResults); ?></h4></li>
+				  <li class="list-group-item"><h4>Bounces: <?= printBounceResults($numBouncesResults); ?></h4></li>
 				</ul>
 <!-- 				<h3>Total Views: <?= printResults($numTotalResults); ?></h3>
 				<h3>Unique Views: <?= printResults($numUniqueResults); ?></h3>
@@ -201,6 +201,7 @@
 			              totalChartData = <?php
 			                  echo json_encode($totalResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              totalChartNumber = "<?= printResults($numTotalResults); ?>";
 			              </script>
 			              
 			            <section id="unique-timeline"></section>
@@ -208,6 +209,7 @@
 			              uniqueChartData = <?php
 			                  echo json_encode($uniqueResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              uniqueChartNumber = "<?= printResults($numUniqueResults); ?>";
 			              </script>
 
 			          </div>
@@ -218,6 +220,7 @@
 			              averageChartData = <?php
 			                  echo json_encode($averageResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              averageChartNumber = "<?= printTimeResults($numAverageResults); ?>";
 			              </script>
 
 			            <section id="bounces-timeline"></section>
@@ -225,6 +228,7 @@
 			              bouncesChartData = <?php
 			                  echo json_encode($bouncesResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              bouncesChartNumber = "<?= printBounceResults($numBouncesResults); ?>";
 			              </script>
 
 			          </div>
@@ -238,16 +242,18 @@
 			              facebookChartData = <?php
 			                  echo json_encode($facebookResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              facebookChartNumber = "<?= printResults($numFacebookResults); ?>";
 			              </script>
-			              <h5>Facebook Visitors: <?= printResults($numFacebookResults); ?></h5>
 
 			            <section id="twitter-timeline"></section>
 			              <script>
 			              twitterChartData = <?php
 			                  echo json_encode($twitterResults->getDataTable()->toSimpleObject())
 			              ?>;
+			              twitterChartNumber = "<?= printBounceResults($numTwitterResults); ?>";
 			              </script>
-			              <h5>Twitter Visitors: <?= printResults($numTwitterResults); ?></h5>
+			             <!-- twitterChartNumber = "<?= printResults($numTwitterResults); ?>"; -->
+
 
 			          	</div>
 			          	<div class="col-sm-6">
@@ -257,9 +263,8 @@
 				              emailChartData = <?php
 				                  echo json_encode($emailResults->getDataTable()->toSimpleObject())
 				              ?>;
+				              emailChartNumber = "<?= printResults($numEmailResults); ?>";
 				              </script>
-				              <h5>Email Opens: <?= printResults($numEmailResults); ?></h5>
-
 			          	</div>
 			      </div>
 
@@ -307,15 +312,14 @@
 				                  echo json_encode($deviceResults->getDataTable()->toSimpleObject())
 				              ?>;
 				              </script>
-				              <h5>Device Visitor Groups</h5>
 
 				            <section id="desktop-timeline"></section>
 				              <script>
 				              desktopChartData = <?php
 				                  echo json_encode($desktopResults->getDataTable()->toSimpleObject())
 				              ?>;
+				              desktopChartNumber = "<?= printResults($numDesktopResults); ?>";
 				              </script>
-				              <h5>Desktop Opens: <?= printResults($numDesktopResults); ?></h5>
 
 				            </div>
 				            <div class="col-sm-6">
@@ -325,17 +329,17 @@
 				              tabletChartData = <?php
 				                  echo json_encode($tabletResults->getDataTable()->toSimpleObject())
 				              ?>;
+				              tabletChartNumber = "<?= printResults($numTabletResults); ?>";
 				              </script>
-				              <h5>Tablet Opens: <?= printResults($numTabletResults); ?></h5>
 
 				            <section id="mobile-timeline"></section>
 				              <script>
 				              mobileChartData = <?php
 				                  echo json_encode($mobileResults->getDataTable()->toSimpleObject())
 				              ?>;
+				              mobileChartNumber = "<?= printResults($numMobileResults); ?>";
 				              </script>
-				              <h5>Mobile Opens: <?= printResults($numMobileResults); ?></h5>
-				            </div>
+				              				            </div>
 				        </div>
 			      </div>
 			    </div>
