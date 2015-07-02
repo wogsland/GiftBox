@@ -1774,34 +1774,36 @@ function doAdd() {
 	var bento;
 	var selected;
 
-	$( "#use-fail-dialog" ).dialog({ 
-		autoOpen: false,
-		resizable: false,
-		modal: true,
-		buttons: {
-			Ok: function(){
-				$(this).dialog("close");
-			}
-		}
-	});
-
-	// console.log($('.add-content-container'));
+	// HADNLING SELECTION. TWO MAJOR CONTAINERS - PHOTOS AND AV
 	$.each($('.add-content-container'), function(index, element) {
 		if ($(element).css('display') == 'block') {
 			selectedContainer = $(element).attr('id');
-			// console.log(selectedContainer);
+			if (selectedContainer == "add-images-container") {
+				selected = selected = $("#" + selectedContainer + " > .add-content > #add-images-desktop > .thumbnail-container-selected");
+			} else if (selectedContainer == "add-video-audio-container") {
+				selected = $("#" + selectedContainer + " > .add-content > #add-av-desktop > .thumbnail-container-selected");
+			}
 		}
 	})
 
-	selected = $("#" + selectedContainer + " > .thumbnail-container-selected");
-	// console.log(selected);
-	// console.log(selected.size());
-	if (selected.size() == 0) {
-		$('#use-fail-dialog').dialog('open');
-	} else {
-		$('#add-dialog').dialog('close');
+	if (selectedContainer != "add-letter-container") {
+		if (selected.length == 0) {
+			console.log("size is equal to 0");
+			$( "#use-fail-dialog" ).dialog({ 
+				autoOpen: false,
+				resizable: false,
+				modal: true,
+				buttons: {
+					Ok: function(){
+						$(this).dialog("close");
+					}
+				}
+			});
+			$('#use-fail-dialog').dialog('open');
+		} else {
+			$('#add-dialog').dialog('close');
+		}
 	}
-
 	// LETTER
 	saveLetter();
 
