@@ -3,7 +3,7 @@
 google.load('visualization', '1.0', {'packages':['corechart']});
 google.load("visualization", "1", {packages:["geochart"]});
 
-// Set a callback to run when the Google Visualization API is loaded.
+Set a callback to run when the Google Visualization API is loaded.
 google.setOnLoadCallback(renderTotalChart);
 google.setOnLoadCallback(renderUniqueChart);
 google.setOnLoadCallback(renderAverageChart);
@@ -119,17 +119,53 @@ function renderUniqueChart() {
   }
 }
 
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    var time    = hours+':'+minutes+':'+seconds;
+    return time;
+}
+
 function renderAverageChart() {
 
   for (var i = 0; i < averageChartData.rows.length; i++) {
-      averageChartData.rows[i].c[1].v = parseInt(averageChartData.rows[i].c[1].v);
+    averageChartData.rows[i].c[1].v = parseInt(averageChartData.rows[i].c[1].v);
+    // console.log(averageChartData.rows[i].c[1].v);
   }
 
   var data = new google.visualization.DataTable(averageChartData);
 
   var title = 'Average Time: ' + averageChartNumber;
 
+  var numOfRows = data.getNumberOfRows();
+  console.log(numOfRows);
+  var highest_tick = 0;
+  for (var i = 0; i < numOfRows; i++) {
+    var seconds_string = data.getFormattedValue(i, 1);
+    if (parseInt(seconds_string) > highest_tick) {
+      highest_tick = parseInt(seconds_string);
+      console.log(highest_tick);
+    }
+    var formattedTime = seconds_string.toHHMMSS();
+    data.setFormattedValue(i, 1, formattedTime);
+  }
 
+  var ticks = []
+
+  for (i = 0; i < highest_tick + 150; i += 100) {
+    console.log(i);
+    second_string = i.toString();
+    console.log(second_string);
+    time_string = second_string.toHHMMSS();
+    console.log(time_string);
+    ticks.push({v: i, f: time_string});
+  }
 
   // Set chart options
   var options = {
@@ -143,9 +179,12 @@ function renderAverageChart() {
     width: 370,
     height: 200,
     chartArea:{width:'65%',height:'65%'},
+    vAxis: {
+        ticks: ticks
+    }
   };
 
-  data.setColumnLabel(1, 'Averga Time');
+  data.setColumnLabel(1, 'Average Time');
 
   // Instantiate and draw our chart, passing in some options.
   var chart = new google.visualization.LineChart(document.getElementById('average-time-timeline'));
