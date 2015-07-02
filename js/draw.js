@@ -44,6 +44,11 @@ var tabletChartNumber = null;
 var mobileChartData = null;
 var mobileChartNumber = null;
 
+function notifyLittleData(selector, container) {
+
+  $(selector).html("<h5 class='empty_header'>" + container + "</h5><h5 class='empty_warning'>Not enough data to display a chart.</h5><span class='glyphicon glyphicon-stats empty_icon'></span>");
+}
+
 function renderTotalChart() {
 
   for (var i = 0; i < totalChartData.rows.length; i++) {
@@ -54,25 +59,29 @@ function renderTotalChart() {
 
   var title = 'Total Page Views: ' + totalChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'}, 
-  };
+  if (totalChartNumber == "0") {
+    notifyLittleData($('#total-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'}, 
+    };
 
-  data.setColumnLabel(1, 'Page Views');
+    data.setColumnLabel(1, 'Page Views');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('total-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('total-timeline'));
+    chart.draw(data, options);
+  }
 }
 
 function renderUniqueChart() {
@@ -85,25 +94,29 @@ function renderUniqueChart() {
 
   var title = 'Unique Page Views: ' + uniqueChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (uniqueChartNumber == "0") {
+    notifyLittleData($('#unique-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Unique Views');
+    data.setColumnLabel(1, 'Unique Views');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('unique-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('unique-timeline'));
+    chart.draw(data, options);
+  }
 }
 
 function renderAverageChart() {
@@ -115,6 +128,8 @@ function renderAverageChart() {
   var data = new google.visualization.DataTable(averageChartData);
 
   var title = 'Average Time: ' + averageChartNumber;
+
+
 
   // Set chart options
   var options = {
@@ -147,26 +162,30 @@ function renderBouncesChart() {
 
   var title = 'Bounces: ' + bouncesChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (bouncesChartNumber == "0") {
+    notifyLittleData($('#bounces-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  console.log(data.getColumnLabel(1));
-  data.setColumnLabel(1, 'Bounces');
+    console.log(data.getColumnLabel(1));
+    data.setColumnLabel(1, 'Bounces');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('bounces-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('bounces-timeline'));
+    chart.draw(data, options);
+  }
 }
 
 function renderFacebookChart() {
@@ -179,25 +198,30 @@ function renderFacebookChart() {
 
   var title = 'Facebook Visitors: ' + facebookChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (facebookChartNumber == "0") {
+    notifyLittleData($('#facebook-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('facebook-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('facebook-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderTwitterChart() {
@@ -210,25 +234,29 @@ function renderTwitterChart() {
 
   var title = 'Twitter Visitors: ' + twitterChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (twitterChartNumber == "0") {
+    notifyLittleData($('#twitter-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('twitter-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('twitter-timeline'));
+    chart.draw(data, options);
+  }
 }
 
 function renderEmailChart() {
@@ -241,119 +269,144 @@ function renderEmailChart() {
 
   var title = 'Email Opens: ' + emailChartNumber;
 
-  // Set chart options
-  var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (emailChartNumber == "0") {
+    notifyLittleData($('#email-timeline'), title);
+  } else {
+    // Set chart options
+    var options = {
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Opens');
+    data.setColumnLabel(1, 'Opens');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('email-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('email-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderGenderChart() {
 
   var data = new google.visualization.DataTable(genderChartData);
+  console.log(data.getNumberOfRows());
 
-  // Set chart options
-  var options = {
-    title: 'Gender',
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (data.getNumberOfRows() == 0) {
+    notifyLittleData($('#gender-timeline'), 'Gender');
+  } else {
+    // Set chart options
+    var options = {
+      title: 'Gender',
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'User');
+    data.setColumnLabel(1, 'User');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.ColumnChart(document.getElementById('gender-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.ColumnChart(document.getElementById('gender-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderAgeChart() {
 
   var data = new google.visualization.DataTable(ageChartData);
 
-  // Set chart options
-  var options = {
-    title: 'Age',
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+  if (data.getNumberOfRows() == 0) {
+    notifyLittleData($('#age-timeline'), 'Age');
+  } else {
+    // Set chart options
+    var options = {
+      title: 'Age',
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'User');
+    data.setColumnLabel(1, 'User');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.ColumnChart(document.getElementById('age-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.ColumnChart(document.getElementById('age-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderGeoChart() {
 
   var data = new google.visualization.DataTable(geoChartData);
 
-  // Set chart options
-  var options = {
-    region: 'US',
-    displayMode: 'markers',
-    colorAxis: {colors: ['green', 'blue']},
-    chartArea:{width:'65%',height:'65%'},
-    width: 370,
-    height: 200,
-  };
+  if (data.getNumberOfRows() == 0) {
+    notifyLittleData($('#geo-timeline'), 'Cities');
+  } else {
+    // Set chart options
+    var options = {
+      region: 'US',
+      displayMode: 'markers',
+      colorAxis: {colors: ['green', 'blue']},
+      chartArea:{width:'65%',height:'65%'},
+      width: 370,
+      height: 200,
+    };
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.GeoChart(document.getElementById('geo-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.GeoChart(document.getElementById('geo-timeline'));
+    chart.draw(data, options);
+  }
 }
 
 function renderDeviceChart() {
 
   var data = new google.visualization.DataTable(deviceChartData);
 
-  // Set chart options
+  if (data.getNumberOfRows() == 0) {
+    notifyLittleData($('#device-timeline'), 'Devices');
+  } else {
+    // Set chart options
     var options = {
-    title: 'Devices',
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+      title: 'Devices',
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.ColumnChart(document.getElementById('device-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.ColumnChart(document.getElementById('device-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderDesktopChart() {
@@ -362,25 +415,30 @@ function renderDesktopChart() {
 
   var title = 'Desktop Visitors: ' + desktopChartNumber;
 
-  // Set chart options
+  if (desktopChartNumber == "0") {
+    notifyLittleData($('#desktop-timeline'), title);
+  } else {
+    // Set chart options
     var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('desktop-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('desktop-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderTabletChart() {
@@ -389,25 +447,30 @@ function renderTabletChart() {
 
   var title = 'Tablet Visitors: ' + tabletChartNumber;
 
-  // Set chart options
+  if (tabletChartNumber == "0") {
+    notifyLittleData($('#tablet-timeline'), title);
+  } else {
+    // Set chart options
     var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('tablet-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('tablet-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 function renderMobileChart() {
@@ -416,25 +479,30 @@ function renderMobileChart() {
 
   var title = 'Mobile Visitors: ' + mobileChartNumber;
 
-  // Set chart options
+  if (mobileChartNumber == "0") {
+    notifyLittleData($('#mobile-timeline'), title);
+  } else {
+    // Set chart options
     var options = {
-    title: title,
-    titleTextStyle: {
-      color: '#929292',
-      fontName: 'Lane',
-      fontSize: 20,
-      bold: true
-    },
-    width: 370,
-    height: 200,
-    chartArea:{width:'65%',height:'65%'},
-  };
+      title: title,
+      titleTextStyle: {
+        color: '#929292',
+        fontName: 'Lane',
+        fontSize: 20,
+        bold: true
+      },
+      width: 370,
+      height: 200,
+      chartArea:{width:'65%',height:'65%'},
+    };
 
-  data.setColumnLabel(1, 'Visitors');
+    data.setColumnLabel(1, 'Visitors');
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.LineChart(document.getElementById('mobile-timeline'));
-  chart.draw(data, options);
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('mobile-timeline'));
+    chart.draw(data, options);
+  }
+
 }
 
 

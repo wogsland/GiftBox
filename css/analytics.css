@@ -60,3 +60,19 @@ section {
 .odd {
 	background-color: #EEEEEE;
 }
+
+.empty_header {
+	font-size: 20px;
+	margin-left: 3em;
+	font-color: #A3A3A3;
+}
+
+.empty_icon {
+	font-size: 8em;
+	margin-left: 1em;
+}
+
+.empty_warning {
+	margin-left: 6em;
+	margin-bottom: 0px;
+}
