@@ -134,12 +134,12 @@ iframe {
 
 #flip-container {
 	box-sizing: border-box;
-    width: 100%;
-    height: 100%; /* 100/1.32 = 75.75757575 */
+    width: 92%;
+    height: 105%; /* 100/1.32 = 75.75757575 */
     background: white;
     margin: auto;
     position: absolute;
-    top:1em; /* vertical center */
+    top:0em; /* vertical center */
     left:0;right:0; /* horizontal center */
 	overflow: hidden;
 	border: 1px solid #DCDCDC;;
@@ -298,7 +298,6 @@ iframe {
 }
 
 .panel-open {
-	bottom: 2em;
 	-webkit-animation: panel-open 1.5s ease;
 	-webkit-animation-fill-mode: forwards;
 	-webkit-animation-delay: .5s;
