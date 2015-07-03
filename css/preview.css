@@ -294,7 +294,7 @@ iframe {
 @-webkit-keyframes panel-open{
 	0%{}
 	50% {transform: translateY(-100vh)}
-	100% {transform: translateY(0vh) scale(2.8); }
+	100% {transform: translateY(0vh) scale(2.5); }
 }
 
 .panel-open {
