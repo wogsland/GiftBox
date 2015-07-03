@@ -310,6 +310,6 @@ iframe {
 	100%{transform: scale(.5) rotateZ(-10deg);}
 }
 
-/*.shake{
+.shake{
 	-webkit-animation: shake .4s infinite;
-}*/
+}
