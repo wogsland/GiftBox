@@ -1774,6 +1774,7 @@ function doAdd() {
 	var bento;
 	var selected;
 
+	var selectedContainer = null;
 	// HADNLING SELECTION. TWO MAJOR CONTAINERS - PHOTOS AND AV
 	$.each($('.add-content-container'), function(index, element) {
 		if ($(element).css('display') == 'block') {
@@ -1784,9 +1785,12 @@ function doAdd() {
 				selected = $("#" + selectedContainer + " > .add-content > #add-av-desktop > .thumbnail-container-selected");
 			}
 		}
-	})
+	});
+
+	console.log(selectedContainer);
 
 	if (selectedContainer != "add-letter-container") {
+		console.log(selectedContainer);
 		if (selected.length == 0) {
 			console.log("size is equal to 0");
 			$( "#use-fail-dialog" ).dialog({ 
@@ -1803,7 +1807,10 @@ function doAdd() {
 		} else {
 			$('#add-dialog').dialog('close');
 		}
+	} else {
+		$('#add-dialog').dialog('close');
 	}
+
 	// LETTER
 	saveLetter();
 
