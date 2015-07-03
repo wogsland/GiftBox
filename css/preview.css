@@ -134,29 +134,23 @@ iframe {
 
 #flip-container {
 	box-sizing: border-box;
-    width: 95vw;
-    height: 71.97vw; /* 100/1.32 = 75.75757575 */
+    width: 100%;
+    height: 100%; /* 100/1.32 = 75.75757575 */
     background: white;
-    max-height: 95vh;
-    max-width: 131.62vh; /* 1024/778 = 1.32 */
     margin: auto;
     position: absolute;
-    top:0;bottom:0; /* vertical center */
+    top:1em; /* vertical center */
     left:0;right:0; /* horizontal center */
 	overflow: hidden;
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
-//	box-shadow: 5px 5px 10px #DCDCDC;
-}
-
-.panel {
-	width: 100%;
-	height: 100%;
+	box-shadow: 5px 5px 10px #DCDCDC;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective: 3000px;
 }
+
 
 .panel .front {
 	z-index: 900;
@@ -231,3 +225,91 @@ iframe {
 	width: 100%;
 	height: 100%;
 }
+
+
+/** OPENER FOR TOKEN **/
+/** Currently only absolutely supported on Chrome. Others are unknown **/
+
+.envelope{
+	width: 100%;
+    height: 100%;  
+    background: #336E7B;
+    max-height: 100%;
+    max-width: 100%;  
+    margin: auto;
+    position: relative;
+	margin: 0 auto;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.envelope #base {
+	z-index: 900;
+	position: relative;
+}
+
+.opener {
+	top: 0em;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	position: absolute;
+	width: 0;
+	height: 0;
+	z-index: 1000;
+}
+
+.opener #top {
+	width: 52em;
+	height: 25em;
+}
+.shrink-box{
+	text-align: center;
+	width: 52em;
+  	height: 34em;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin:auto;
+	position: absolute;
+	-webkit-transform:scale(0.5);
+	-moz-transform:scale(0.5);
+	-ms-transform:scale(0.5);
+	transform:scale(0.5);
+}
+
+@-webkit-keyframes open{
+	0% {}
+	50% {transform: rotateX(180deg);}
+	100% { transform: rotateX(0deg);}
+}
+
+.open {
+	-webkit-animation: open 2s ease; /* Chrome, Safari, Opera */
+	-webkit-animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes panel-open{
+	0%{}
+	50% {transform: translateY(-100vh)}
+	100% {transform: translateY(0vh) scale(2.8); }
+}
+
+.panel-open {
+	bottom: 2em;
+	-webkit-animation: panel-open 1.5s ease;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-delay: .5s;
+}
+
+@-webkit-keyframes shake{
+	0%{}
+	50%{transform: scale(.5) rotateZ(10deg);}
+	100%{transform: scale(.5) rotateZ(-10deg);}
+}
+
+/*.shake{
+	-webkit-animation: shake .4s infinite;
+}*/
