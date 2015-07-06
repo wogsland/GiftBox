@@ -72,12 +72,12 @@
 	</div>
 	<div class="shrink-box shake">
 		<div class="envelope">
-			<div class="svg-container">
+			<div class="svg-container base">
 			<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
 			<svg version="1.1"
-				 id="base"
-				 viewBox="0 0 1270.8 1007.1"
-				 preserveAspectRatio="xMinYMin meet" class="svg-content">
+					 id="base"
+					 viewBox="0 0 1327.4 974.6"
+					 preserveAspectRatio="xMinYMin meet" class="svg-content">
 			<style type="text/css">
 				.st0{fill:url(#SVGID_1_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
 				.st1{fill:url(#SVGID_2_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
@@ -90,22 +90,22 @@
 			</style>
 			<defs>
 			</defs>
-			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="268.6937" y1="765.8865" x2="-243.7052" y2="253.4877">
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="277.4933" y1="758.0084" x2="-235.2553" y2="245.2598">
 				<stop  offset="0" style="stop-color:#447193"/>
 				<stop  offset="1" style="stop-color:#578CAA"/>
 			</linearGradient>
-			<polygon class="st0" points="6.7,3.1 6.7,1004.8 446.1,588.5 "/>
-			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="1509.9323" y1="761.5882" x2="1009.0633" y2="260.7192">
+			<polygon class="st0" points="7.1,2.9 7.1,972.4 466,569.5 "/>
+			<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="1550.1256" y1="745.3784" x2="1065.3538" y2="260.6064">
 				<stop  offset="0" style="stop-color:#447193"/>
 				<stop  offset="1" style="stop-color:#578CAA"/>
 			</linearGradient>
-			<polygon class="st1" points="830.5,597.5 1266.7,1004.8 1266.7,3.1 "/>
-			<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="478.2293" y1="1277.5892" x2="866.7679" y2="604.6205">
+			<polygon class="st1" points="867.5,578.2 1323.1,972.4 1323.1,2.9 "/>
+			<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="499.5696" y1="1257.3304" x2="890.646" y2="579.9663">
 				<stop  offset="0" style="stop-color:#447193"/>
 				<stop  offset="1" style="stop-color:#578CAA"/>
 			</linearGradient>
-			<path class="st2" d="M5.7,1004.8h1260l-473.4-443c-30.4-22.9-283.3-24.2-312.5-1C299,704.6,186.6,861,5.7,1004.8z"/>
-			<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="1024.7603" y1="835.127" x2="1495.4231" y2="162.9507">
+			<path class="st2" d="M6.1,972.4h1316L827.7,543.7c-31.8-22.1-295.9-23.4-326.3-1C312.4,681.9,195,833.2,6.1,972.4z"/>
+			<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="1077.6912" y1="800.3622" x2="1533.2278" y2="149.7885">
 				<stop  offset="0" style="stop-color:#000000;stop-opacity:0.15"/>
 				<stop  offset="6.872708e-02" style="stop-color:#142128;stop-opacity:0.1397"/>
 				<stop  offset="0.1431" style="stop-color:#263D4A;stop-opacity:0.1285"/>
@@ -116,9 +116,8 @@
 				<stop  offset="0.689" style="stop-color:#568AA8;stop-opacity:4.664386e-02"/>
 				<stop  offset="1" style="stop-color:#578CAA;stop-opacity:0"/>
 			</linearGradient>
-			<polygon class="st3" points="830.5,597.5 1266.7,1004.6 1266.7,2.8 "/>
+			<polygon class="st3" points="867.5,578.2 1323.1,972.2 1323.1,2.6 "/>
 			</svg>
-
 			</div>
 		</div> <!--  END ENVELOPE -->
 		<div class="opener">

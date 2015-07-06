@@ -145,8 +145,8 @@ iframe {
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
-	box-shadow: 5px 5px 10px #DCDCDC;
-	-webkit-perspective: 600px;
+/*	box-shadow: 5px 5px 10px #DCDCDC;
+*/	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective: 3000px;
 }
@@ -293,7 +293,7 @@ iframe {
 @-webkit-keyframes panel-open{
 	0%{}
 	50% {transform: translateY(-100vh)}
-	100% {transform: translateY(0vh) scale(2.5); }
+	100% {transform: translateY(0vh) scale(2.65); }
 }
 
 .panel-open {
@@ -322,6 +322,11 @@ iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.base {
+	width: 101%;
+  	left: -4px;
 }
 
 /*.shake{
