@@ -1,3 +1,17 @@
+/* =================================
+   LOADER                     
+=================================== */
+// makes sure the whole site is loaded
+jQuery(window).load(function() {
+	    
+    // will first fade out the loading animation
+	jQuery(".status").fadeOut();
+        // will fade out the whole DIV that covers the website.
+	jQuery(".preloader").delay(1000).fadeOut("slow");
+
+    setTimeout(function(){ $(".shrink-box").trigger("click"); }, 500);
+});
+
 $(document).ready(function(){
 
 	var tag = document.createElement('script');
@@ -26,16 +40,14 @@ $(document).ready(function(){
 		displayGallery(this);
 	});
 
-	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 500);
-
 	$(".shrink-box").click(function(e){
-		$(".opener").addClass("open");
+		$(".opener > .svg-container").addClass("open");
 		setTimeout(function(){$(".opener").css('z-index', '-10');}, 500);
-		$(".shrink-box").removeClass("shake");
+		$(".animated").removeClass("tada");
 		setTimeout(function(){ $(".envelope").css('z-index', '-10'); }, 1000);
 		$(".panel").addClass('panel-open');
 		e.preventDefault;
-	})
+	});
 
 });
 
