@@ -1102,6 +1102,13 @@ function save() {
 	var wrapperType = template.wrapperType;
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
+	var description = document.getElementById("token-description").value;
+	if ($("#envelope_loader").attr('checked')) {
+		var envelope_loader = 1;
+	} else {
+		var envelope_loader = 0;
+	}
+	console.log(envelope_loader);
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
@@ -1116,7 +1123,8 @@ function save() {
 		dividers: new Array(),
 		columns: new Array(),
 		attachments: new Array(),
-		description: document.getElementById("token-description").value
+		description: description,
+		envelope_loader: envelope_loader
 	};
 
 	var canvas = document.getElementById("thumbnail-canvas");

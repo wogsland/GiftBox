@@ -134,6 +134,32 @@ iframe {
 
 #flip-container {
 	box-sizing: border-box;
+    width: 95vw;
+    height: 71.97vw; /* 100/1.32 = 75.75757575 */
+    background: white;
+    max-height: 95vh;
+    max-width: 131.62vh; /* 1024/778 = 1.32 */
+    margin: auto;
+    position: absolute;
+    top:0;bottom:0; /* vertical center */
+    left:0;right:0; /* horizontal center */
+	overflow: hidden;
+	border: 1px solid #DCDCDC;;
+	border-radius: 5px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
+	box-shadow: 5px 5px 10px #DCDCDC;
+}
+
+.panel {
+	width: 100%;
+	height: 100%;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective: 3000px;
+}
+
+#flip-container-envelope {
+	box-sizing: border-box;
     width: 100%;
     height: 100%; /* 100/1.32 = 75.75757575 */
     background: white;
@@ -145,8 +171,7 @@ iframe {
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
-/*	box-shadow: 5px 5px 10px #DCDCDC;
-*/	-webkit-perspective: 600px;
+	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective: 3000px;
 }
@@ -302,12 +327,6 @@ iframe {
 	-webkit-animation-delay: .5s;
 }
 
-@-webkit-keyframes shake{
-	0%{}
-	50%{transform: scale(.5) rotateZ(10deg);}
-	100%{transform: scale(.5) rotateZ(-10deg);}
-}
-
 .svg-container {
 	display: inline-block;
 	position: relative;
@@ -329,6 +348,8 @@ iframe {
   	left: -4px;
 }
 
-/*.shake{
-	-webkit-animation: shake .4s infinite;
-}*/
+#shaking-box {
+	height: 100%;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+}

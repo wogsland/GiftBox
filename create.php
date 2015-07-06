@@ -97,7 +97,9 @@
 
 					<span class="template-tab-text">WRITE A DESCRIPTION</span>
 					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
-
+					<br>
+					<span class="template-tab-text">WRITE A LOADING ANIMATION</span>
+					<input type="checkbox" name="envelope_loader" id="envelope_loader" value="1"> Dancing Envelope
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
