@@ -171,6 +171,7 @@ iframe {
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
+	box-shadow: 5px 5px 10px #DCDCDC;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
 	perspective: 3000px;
@@ -254,6 +255,32 @@ iframe {
 
 /** OPENER FOR TOKEN **/
 /** Currently only absolutely supported on Chrome. Others are unknown **/
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fefefe;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    overflow: hidden !important;
+}
+
+.status {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image: url("../assets/img/loading.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+            background-size: cover;
+    margin: -20px 0 0 -20px;
+}
 
 .envelope{
 	width: 100%;

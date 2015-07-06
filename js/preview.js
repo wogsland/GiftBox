@@ -13,6 +13,9 @@ jQuery(window).load(function() {
 });
 
 $(document).ready(function(){
+	
+	// cache the window object
+   $window = $(window);
 
 	var tag = document.createElement('script');
   	tag.src = 'https://www.youtube.com/iframe_api';
