@@ -26,10 +26,10 @@ $(document).ready(function(){
 		displayGallery(this);
 	});
 
-	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 500);
+	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 5000000);
 
 	$(".shrink-box").click(function(e){
-		$(".opener").addClass("open");
+		$(".opener > .svg-container").addClass("open");
 		setTimeout(function(){$(".opener").css('z-index', '-10');}, 500);
 		$(".shrink-box").removeClass("shake");
 		setTimeout(function(){ $(".envelope").css('z-index', '-10'); }, 1000);
