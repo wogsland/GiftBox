@@ -440,7 +440,6 @@ function addYouTube(bento, url, auto) {
 	iframe.src = "//www.youtube.com/embed/"+videoId;
 	var width = bento.offsetWidth;
 	var height = bento.offsetHeight;
-	console.log("Youtube width and height: " + width + ", " + height);
 	iframe.width = width;
 	iframe.height = height;
 	iframe.style.border = 0;
@@ -468,6 +467,11 @@ function addYouTubeRedirect(){
 	} else {
 		alert("You must have a youtube video included in order to use this feature.");
 	}
+}
+
+function addEntranceAnimation() {
+	$("#entrance-animation-dialog").dialog("option", "title", "Choose an animation");
+	$("#entrance-animation-dialog").dialog("open");
 }
 
 function createThumbnailContainer(object, titleText, parentId) {
@@ -615,7 +619,6 @@ function openDropBoxVideo(){
 				var baseThumbnail = file.thumbnailLink.split('?')[0];
 				var cropped = baseThumbnail + '?' + $.param({ mode: 'crop', bounding_box: 800 });
 				image.src = cropped;
-				console.log(image.src);
 				image.dropBoxUrl = file.link;
 				image.id = file.name;
 				image.name = file.name;
@@ -1103,12 +1106,11 @@ function save() {
 	var unloadCount = template.unloadCount;
 	var userAgent = navigator.userAgent;
 	var description = document.getElementById("token-description").value;
-	if ($("#envelope_loader").attr('checked')) {
-		var envelope_loader = 1;
-	} else {
-		var envelope_loader = 0;
-	}
-	console.log(envelope_loader);
+	// Checking for animation selected in the closed dialog
+	var selectedAnimationColor = $('#select-envelope-color-option').val();
+	var selectedAnimationStyle = $('#select-envelope-style-option').val();
+	console.log("Color: " + selectedAnimationColor);
+	console.log("Style: " + selectedAnimationStyle);
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
@@ -1124,7 +1126,8 @@ function save() {
 		columns: new Array(),
 		attachments: new Array(),
 		description: description,
-		envelope_loader: envelope_loader
+		animation_color: selectedAnimationColor,
+		animation_style: selectedAnimationStyle
 	};
 
 	var canvas = document.getElementById("thumbnail-canvas");
@@ -1139,13 +1142,11 @@ function save() {
 	var horizontal = false;
 	$("#"+template.id+" div.bento").each(function(i){
 		var columnWidth = $(this).width() + 24;
-		console.log(columnWidth);
 		if(columnWidth >= 1024){
 			horizontal = true;
 		}
 
 	});
-	console.log(horizontal);
 	$("#"+template.id+" div.bento").each(function(i) {
 		var bento = new Object();
 		bento.giftbox_id = giftboxId;
@@ -1193,7 +1194,6 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
-			console.log(image.src);
 			var croppedImage = createCroppedImage(bento, image, container);
 
 			var my_image = document.createElement("img");
@@ -1228,7 +1228,6 @@ function save() {
 				}
 				ctx.fillStyle = "black";
 				ctx.fillRect(left, top, width, height);
-				console.log(left + " " + top + " " + width + " " + height);
 				if(height > width){
 					var imageHeight = width * $(this)[0].height / $(this)[0].width;
 					ctx.drawImage(this, left, top + height/2 - imageHeight/2, width, imageHeight);
@@ -1243,9 +1242,6 @@ function save() {
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
 		}
-		console.log("bento: " + bento.css_id);
-		console.log("top: " + height);
-		console.log("left: " + width);
 		width += columnWidth + 10;
 		height += columnHeight + 10;
 		
@@ -1264,8 +1260,6 @@ function save() {
 				width = maxWidth;
 			}
 		}
-		console.log("top-2: " + height);
-		console.log("left-2: " + width);
 	});
 
 	$("#add-attachment-desktop > a").each(function(i) {
@@ -1359,9 +1353,7 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
-		console.log(template.giftboxId + "-thumbnail");
 		uploadFileData(placeHolder.src, template.giftboxId + "-thumbnail");
-		console.log(canvasURL);
 	});
 	saved();
 }
@@ -1795,12 +1787,9 @@ function doAdd() {
 		}
 	});
 
-	console.log(selectedContainer);
 
 	if (selectedContainer != "add-letter-container") {
-		console.log(selectedContainer);
 		if (selected.length == 0) {
-			console.log("size is equal to 0");
 			$( "#use-fail-dialog" ).dialog({ 
 				autoOpen: false,
 				resizable: false,
@@ -1957,7 +1946,6 @@ function addImageHyperlink() {
 
 	if (linkAddress.length > 0) {
 
-		console.log(validateUrl(linkAddress));
 
 		// Make sure it has an 'http' or 'https' prefix
 		if (linkAddress.substring(0, 4).toLowerCase() !== 'http') {

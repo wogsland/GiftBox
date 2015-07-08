@@ -173,6 +173,24 @@ $(function() {
 });
 
 $(function() {
+	$( "#entrance-animation-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+	});
+});
+
+$(function() {
 	$( "#add-hyperlink-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,

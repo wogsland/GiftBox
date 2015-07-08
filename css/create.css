@@ -405,8 +405,13 @@ iframe {
 	background-position: 0px -116px;
 }
 
-#opener-tab {
-	background-position: 0px -233px;
+.opener-tab {
+	background-position: 0px -233px
+}
+
+.opener-tab-selected {
+	background-position: 0px -291px;
+	pointer-events: none;
 }
 
 .send-tab {
@@ -453,9 +458,26 @@ iframe {
 	pointer-events: none;
 }
 
+#opener-tab-container {
+	display: none;
+	margin-top: 20px;
+}
+
 #send-tab-container {
 	display: none;
 	margin-top: 20px;
+}
+
+.opener-button {
+	background-image: url('../images/ui-buttons-sprite.png');
+	background-repeat: no-repeat;
+	height: 30px;
+  	width: 101px;
+	border: solid 1px #23282B;
+	margin: auto;
+	outline: none;
+	margin-top: 10px;
+	cursor: pointer;
 }
 
 .send-button {

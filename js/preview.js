@@ -2,15 +2,29 @@
    LOADER                     
 =================================== */
 // makes sure the whole site is loaded
+var selectedAnimationColor = null;
+var selectedAnimationStyle = null;
+var animationEnterCss = null;
+var animationPopCss = null;
 jQuery(window).load(function() {
-	    
-    // will first fade out the loading animation
-	jQuery(".status").fadeOut();
-        // will fade out the whole DIV that covers the website.
-	jQuery(".preloader").delay(1000).fadeOut("slow");
 
-    setTimeout(function(){ $(".shrink-box").trigger("click"); }, 500);
+	if (selectedAnimationStyle == "none") {
+			// will first fade out the loading animation
+		jQuery(".status").fadeOut();
+	        // will fade out the whole DIV that covers the website.
+		jQuery(".preloader").delay(1000).fadeOut("slow");
+	} else {
+		setTimeout(function(){ $('#shaking-box').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', animate()); }, 1800);
+	}
+
 });
+
+function animate() {
+	$('.animated').removeClass(animationEnterCss);
+	$('.animated').addClass(animationPopCss);
+	$('#shaking-box').css('-webkit-animation-duration', '1s');
+	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 2000);
+}
 
 $(document).ready(function(){
 	
@@ -46,7 +60,7 @@ $(document).ready(function(){
 	$(".shrink-box").click(function(e){
 		$(".opener > .svg-container").addClass("open");
 		setTimeout(function(){$(".opener").css('z-index', '-10');}, 500);
-		$(".animated").removeClass("tada");
+		$(".animated").removeClass(animationPopCss);
 		setTimeout(function(){ $(".envelope").css('z-index', '-10'); }, 1000);
 		$(".panel").addClass('panel-open');
 		e.preventDefault;

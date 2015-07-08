@@ -377,6 +377,7 @@ iframe {
 
 #shaking-box {
 	height: 100%;
-	-webkit-animation-duration: 1s;
+	-webkit-animation-duration: 2s;
 	-webkit-animation-iteration-count: infinite;
 }
+

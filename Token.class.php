@@ -28,7 +28,8 @@ class Token {
 	var $columns;
 	var $attachments;
 	var $description;
-	var $envelope_loader;
+	var $animation_color;
+	var $animation_style;
 
 	public function __construct($id = null) {
 		if ($id !== null) {
@@ -188,14 +189,14 @@ class Token {
 			$this->unload_count = 0;
 		}
 		if (!$this->id) {
-			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent, description, envelope_loader) "
+			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent, description, animation_color, animation_style) "
 				."VALUES ('".escape_string($this->name)."', '$this->css_id', '$this->css_width', '$this->css_height', $this->user_id, '".escape_string($this->letter_text)."', "
-				."'$this->wrapper_type', $this->unload_count, '$this->user_agent', '$this->description', '$this->envelope_loader')";
+				."'$this->wrapper_type', $this->unload_count, '$this->user_agent', '$this->description', '$this->animation_color', '$this->animation_style')";
 			$this->setId(insert($sql));
 		} else {
 			$sql = "UPDATE giftbox SET name = '".escape_string($this->name)."', letter_text = '".escape_string($this->letter_text)."', "
 				. "wrapper_type = '$this->wrapper_type', unload_count = $this->unload_count, "
-				. "last_modified = CURRENT_TIMESTAMP(), description = '$this->description', envelope_loader = '$this->envelope_loader' "
+				. "last_modified = CURRENT_TIMESTAMP(), description = '$this->description', animation_color = '$this->animation_color', animation_style = '$this->animation_style' "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}

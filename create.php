@@ -68,7 +68,7 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
@@ -97,9 +97,10 @@
 
 					<span class="template-tab-text">WRITE A DESCRIPTION</span>
 					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
-					<br>
-					<span class="template-tab-text">WRITE A LOADING ANIMATION</span>
-					<input type="checkbox" name="envelope_loader" id="envelope_loader" value="1"> Dancing Envelope
+				</div>
+				<div class="sidebar-tab-container" id="opener-tab-container">
+					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()"></div>
+					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
@@ -169,6 +170,33 @@
 				<input class="dialog-input" type="text" name="youtube-url" id="youtube-url">
 				<?php echo intval($_SESSION["level"]) > 1 ? '<input class="auto-play-box" type="checkbox" name="youtube-auto-play" id="youtube-auto-play"><label for="youtube-auto-play">Auto Play</label>' : "<br><label><strong>Enable YouTube auto-play when you upgrade to a Standard Account</strong></label>"; ?>
 		    </fieldset>
+		</form>
+	</div>
+
+	<div id="entrance-animation-dialog">
+		<form>
+		<fieldset class="container">
+			<div class="row select-envelope-color" id="select-envelope-color-container">
+				<label for="animation-color">Color: </label>
+				<select id="select-envelope-color-option">
+				  <option value="blue">blue</option>
+<!-- 				  <option value="red">red</option>
+				  <option value="green">green</option>
+				  <option value="white">white</option>
+				  <option value="yellow">yellow</option> -->
+				</select>
+			</div>
+			<hr>
+			<div class="row select-envelope-style" id="select-envelope-style-container">
+				<label for="animation-style">Style: </label>
+				<select id="select-envelope-style-option">
+				  <option value="none">None</option>
+				  <option value="default">Default</option>
+				  <option value="business">Business</option>
+				  <option value="casual">Casual</option>
+				</select>
+			</div>
+		</fieldset>
 		</form>
 	</div>
 

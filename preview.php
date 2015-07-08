@@ -13,6 +13,25 @@
 	} else {
 		$token->image_path = $file_storage_path.$token->thumbnail_name;
 	}
+
+	$animation_color = $token->animation_color;
+	$animation_style = $token->animation_style;
+
+	if ($animation_style == "none") {
+		$container_id = "flip-container";
+	} else {
+		if ($animation_style == "default") {
+			$animation_enter_css = "bounceInLeft";
+			$animation_pop_css = "swing";
+		} else if ($animation_style == "business") {
+			$animation_enter_css = "fadeIn";
+			$animation_pop_css = "pulse";
+		} else if ($animation_style == "casual") {
+			$animation_enter_css = "flipInX";
+			$animation_pop_css = "tada";
+		}
+		$container_id = "flip-container-envelope";
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,69 +81,74 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
+
+	<script> 
+		selectedAnimationColor = "<?= $token->animation_color; ?>";
+		selectedAnimationStyle = "<?= $token->animation_style; ?>";
+		animationEnterCss = "<?= $animation_enter_css; ?>";
+		animationPopCss = "<?= $animation_pop_css; ?>";
+	</script>
 </head>
 <body>
 	<?php include_once("analyticstracking.php"); ?>
-	<!-- =========================
-	     PRE LOADER       
-	============================== -->
-	<?php if ($token->envelope_loader == 0): ?>
+
+	<?php if ($animation_style == "none"): ?>
 	<div class="preloader">
 	  <div class="status">&nbsp;</div>
 	</div>
 	<?php endif; ?>
-	<?php if ($token->envelope_loader == 1): ?>
+
+	<?php if ($animation_style != "none"): ?>
 	<div class="shrink-box">
-		<div class="animated tada" id="shaking-box">
-<!-- 		<?php echo "<script> alert(" . $token->envelope_loader . "); </script>" ?>
- -->
+		<?= '<div class="animated ' . $animation_enter_css . '" id="shaking-box">'; ?>
+
 			<div class="envelope">
 				<div class="svg-container base">
-				<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
-				<svg version="1.1"
-						 id="base"
-						 viewBox="0 0 1327.4 974.6"
-						 preserveAspectRatio="xMinYMin meet" class="svg-content">
-				<style type="text/css">
-					.st0{fill:url(#SVGID_1_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
-					.st1{fill:url(#SVGID_2_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
-					.st2{fill:url(#SVGID_3_);stroke:#6C9BB6;stroke-width:4;stroke-miterlimit:10;}
-					.st3{fill:url(#SVGID_4_);}
-					.st4{fill:url(#SVGID_5_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
-					.st5{fill:url(#SVGID_6_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
-					.st6{fill:url(#SVGID_7_);stroke:#6C9BB6;stroke-width:4;stroke-miterlimit:10;}
-					.st7{fill:url(#SVGID_8_);}
-				</style>
-				<defs>
-				</defs>
-				<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="277.4933" y1="758.0084" x2="-235.2553" y2="245.2598">
-					<stop  offset="0" style="stop-color:#447193"/>
-					<stop  offset="1" style="stop-color:#578CAA"/>
-				</linearGradient>
-				<polygon class="st0" points="7.1,2.9 7.1,972.4 466,569.5 "/>
-				<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="1550.1256" y1="745.3784" x2="1065.3538" y2="260.6064">
-					<stop  offset="0" style="stop-color:#447193"/>
-					<stop  offset="1" style="stop-color:#578CAA"/>
-				</linearGradient>
-				<polygon class="st1" points="867.5,578.2 1323.1,972.4 1323.1,2.9 "/>
-				<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="499.5696" y1="1257.3304" x2="890.646" y2="579.9663">
-					<stop  offset="0" style="stop-color:#447193"/>
-					<stop  offset="1" style="stop-color:#578CAA"/>
-				</linearGradient>
-				<path class="st2" d="M6.1,972.4h1316L827.7,543.7c-31.8-22.1-295.9-23.4-326.3-1C312.4,681.9,195,833.2,6.1,972.4z"/>
-				<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="1077.6912" y1="800.3622" x2="1533.2278" y2="149.7885">
-					<stop  offset="0" style="stop-color:#000000;stop-opacity:0.15"/>
-					<stop  offset="6.872708e-02" style="stop-color:#142128;stop-opacity:0.1397"/>
-					<stop  offset="0.1431" style="stop-color:#263D4A;stop-opacity:0.1285"/>
-					<stop  offset="0.2251" style="stop-color:#355668;stop-opacity:0.1162"/>
-					<stop  offset="0.3152" style="stop-color:#426A80;stop-opacity:0.1027"/>
-					<stop  offset="0.4164" style="stop-color:#4B7993;stop-opacity:8.753419e-02"/>
-					<stop  offset="0.5355" style="stop-color:#5284A0;stop-opacity:6.967628e-02"/>
-					<stop  offset="0.689" style="stop-color:#568AA8;stop-opacity:4.664386e-02"/>
-					<stop  offset="1" style="stop-color:#578CAA;stop-opacity:0"/>
-				</linearGradient>
-				<polygon class="st3" points="867.5,578.2 1323.1,972.2 1323.1,2.6 "/>
-				</svg>
+					<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In  -->
+					<svg version="1.1"
+							 id="base"
+							 viewBox="0 0 1327.4 974.6"
+							 preserveAspectRatio="xMinYMin meet" class="svg-content">
+					<style type="text/css">
+						.st0{fill:url(#SVGID_1_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
+						.st1{fill:url(#SVGID_2_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
+						.st2{fill:url(#SVGID_3_);stroke:#6C9BB6;stroke-width:4;stroke-miterlimit:10;}
+						.st3{fill:url(#SVGID_4_);}
+						.st4{fill:url(#SVGID_5_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
+						.st5{fill:url(#SVGID_6_);stroke:#6C9BB6;stroke-width:2;stroke-miterlimit:10;}
+						.st6{fill:url(#SVGID_7_);stroke:#6C9BB6;stroke-width:4;stroke-miterlimit:10;}
+						.st7{fill:url(#SVGID_8_);}
+					</style>
+					<defs>
+					</defs>
+					<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="277.4933" y1="758.0084" x2="-235.2553" y2="245.2598">
+						<stop  offset="0" style="stop-color:#447193"/>
+						<stop  offset="1" style="stop-color:#578CAA"/>
+					</linearGradient>
+					<polygon class="st0" points="7.1,2.9 7.1,972.4 466,569.5 "/>
+					<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="1550.1256" y1="745.3784" x2="1065.3538" y2="260.6064">
+						<stop  offset="0" style="stop-color:#447193"/>
+						<stop  offset="1" style="stop-color:#578CAA"/>
+					</linearGradient>
+					<polygon class="st1" points="867.5,578.2 1323.1,972.4 1323.1,2.9 "/>
+					<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="499.5696" y1="1257.3304" x2="890.646" y2="579.9663">
+						<stop  offset="0" style="stop-color:#447193"/>
+						<stop  offset="1" style="stop-color:#578CAA"/>
+					</linearGradient>
+					<path class="st2" d="M6.1,972.4h1316L827.7,543.7c-31.8-22.1-295.9-23.4-326.3-1C312.4,681.9,195,833.2,6.1,972.4z"/>
+					<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="1077.6912" y1="800.3622" x2="1533.2278" y2="149.7885">
+						<stop  offset="0" style="stop-color:#000000;stop-opacity:0.15"/>
+						<stop  offset="6.872708e-02" style="stop-color:#142128;stop-opacity:0.1397"/>
+						<stop  offset="0.1431" style="stop-color:#263D4A;stop-opacity:0.1285"/>
+						<stop  offset="0.2251" style="stop-color:#355668;stop-opacity:0.1162"/>
+						<stop  offset="0.3152" style="stop-color:#426A80;stop-opacity:0.1027"/>
+						<stop  offset="0.4164" style="stop-color:#4B7993;stop-opacity:8.753419e-02"/>
+						<stop  offset="0.5355" style="stop-color:#5284A0;stop-opacity:6.967628e-02"/>
+						<stop  offset="0.689" style="stop-color:#568AA8;stop-opacity:4.664386e-02"/>
+						<stop  offset="1" style="stop-color:#578CAA;stop-opacity:0"/>
+					</linearGradient>
+					<polygon class="st3" points="867.5,578.2 1323.1,972.2 1323.1,2.6 "/>
+					</svg>
 				</div>
 			</div> <!--  END ENVELOPE -->
 			<div class="opener">
@@ -149,11 +173,6 @@
 			</div>
 			<?php endif; ?>
 			<?php
-			if ($token->envelope_loader == 1) {
-				$container_id = "flip-container-envelope";
-			} else {
-				$container_id = "flip-container";
-			}
 			echo '<div id="triggerTab"></div>';
 			echo '<div class="giftbox panel" id="' . $container_id . '">';
 			echo '<div class="front">';
@@ -183,10 +202,12 @@
 			echo "</div>"; // back
 			echo "</div>"; // flip-container
 			?>
-		</div>
+
 	<!-- Closing down a shrink box -->
-	<?php if ($token->envelope_loader == 1): ?>
+	<?php if ($animation_style != "none"): ?>
+		</div>
 	</div>
 	<?php endif; ?>
+
 </body>
 </html>
