@@ -100,7 +100,7 @@
 
 	<?php if ($animation_style != "none"): ?>
 	<div class="shrink-box">
-		<?= '<div class="animated ' . $animation_enter_css . '" id="shaking-box">'; ?>
+		<?= '<div class="shaking-box animated ' . $animation_enter_css .'" id="shaking-box">'; ?>
 
 			<div class="envelope">
 				<div class="svg-container base">

@@ -14,17 +14,17 @@ jQuery(window).load(function() {
 	        // will fade out the whole DIV that covers the website.
 		jQuery(".preloader").delay(1000).fadeOut("slow");
 	} else {
-		setTimeout(function(){ $('#shaking-box').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', animate()); }, 1800);
+		$('.shaking-box.animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', animate() );
 	}
 
+	function animate() {
+		setTimeout(function() { $('.shaking-box.animated').removeClass(animationEnterCss); }, 1000);
+		$('.shaking-box.animated').addClass(animationPopCss);
+		setTimeout(function() { $('.shaking-box.animated.' + animationPopCss).css('-webkit-animation-duration', '1s'); }, 1000);
+		setTimeout(function() { $('.shaking-box.animated.' + animationPopCss).css('-webkit-animation-iteration-count', 'infinite'); }, 1000);
+		setTimeout(function() { $(".shrink-box").trigger("click"); }, 2000);
+	}
 });
-
-function animate() {
-	$('.animated').removeClass(animationEnterCss);
-	$('.animated').addClass(animationPopCss);
-	$('#shaking-box').css('-webkit-animation-duration', '1s');
-	setTimeout(function(){ $(".shrink-box").trigger("click"); }, 2000);
-}
 
 $(document).ready(function(){
 	
