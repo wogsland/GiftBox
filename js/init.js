@@ -221,7 +221,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		height:500,
-		width: 400
+		width: 300
 	});
 });
 
