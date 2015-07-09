@@ -393,7 +393,7 @@
 				GALLERY
 			</div>
 			<div class="image-dialog-tab-container" id="image-interact-tab-container">
-				<h4 class="interact-header">MAKE THIS IMAGE INTERACTIVE</h4>
+				<h5 class="interact-header">MAKE THIS IMAGE INTERACTIVE</h5>
 				<span class="interact-subheader">HYPERLINK</span>
 				<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
 				<div class="image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
