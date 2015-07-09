@@ -103,15 +103,14 @@
 					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
+					<span class="template-tab-text">QUICK SEND</span>
 					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
-					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
-					<div class="send-button" id="pinterest-send-button" onclick="featureNotAvailable('Pinterest')"></div>
-					<div class="send-button" id="instagram-send-button" onclick="featureNotAvailable('Instagram')"></div>
 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
-					<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
+					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
-					<button class="palette-button" onclick="send()">ADVANCED SEND</button>
+					<span class="template-tab-text">THUMBNAILS</span>
+					<button>CLICK TO SEE THUMBNAILS</button>
 				</div>
 			</div>
 		</div>

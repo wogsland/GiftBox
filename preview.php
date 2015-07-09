@@ -41,7 +41,7 @@
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
 	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
-	<meta name="og:url" property="og:url" content=<?php echo '"'."http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI].'"' ?> />
+	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER[HTTP_HOST]) and isset($_SERVER[REQUEST_URI])) { echo '"'."http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI].'"'; } ?> />
 	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />
@@ -100,7 +100,7 @@
 
 	<?php if ($animation_style != "none"): ?>
 	<div class="shrink-box">
-		<?= '<div class="shaking-box animated ' . $animation_enter_css .'" id="shaking-box">'; ?>
+		<?= '<div class="shaking-box animated ' . $animation_enter_css . '" id="shaking-box">'; ?>
 
 			<div class="envelope">
 				<div class="svg-container base">
