@@ -99,8 +99,8 @@
 					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
 				</div>
 				<div class="sidebar-tab-container" id="opener-tab-container">
-					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()"></div>
-					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
+					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()">ENTRANCE</div>
+					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>">EXIT</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<span class="template-tab-text">QUICK SEND</span>
@@ -131,7 +131,7 @@
 		</div>
 	</div>
 
-	<!-- DIALOGS -------------------------------------------------------------------------------------------------------->
+	<!-- DIALOGS -->
 
 	<div id="send-dialog" title="Advanced Send">
 		<p class="dialog-message" id="send-message"></p>
@@ -279,13 +279,13 @@
 			</ul>
 		</div>
 
-			<!------------------ STOCK LIBRARY ------------------------>
+			<!-- STOCK LIBRARY -->
 			<div id="add-stock-container" class="add-content-container">
 				<div class="add-content add-content-no-icons">
 				</div>
 			</div>
 
-			<!--------------------- IMAGES ---------------------------->
+			<!-- IMAGES -->
 			<div id="add-images-container" class="add-content-container" style="display: block;">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
@@ -301,7 +301,7 @@
 				</div>
 			</div>
 
-			<!--------------------- VIDEO & AUDIO --------------------->
+			<!-- VIDEO AND AUDIO -->
 			<div id="add-video-audio-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
@@ -319,7 +319,7 @@
 				</div>
 			</div>
 
-			<!------------------------ LETTER ------------------------->
+			<!-- LETTER -->
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
 					<br>
@@ -339,6 +339,7 @@
 		</div>
 	</div>
 
+	<!-- WRAPPER -->
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
 			<fieldset>
@@ -355,6 +356,7 @@
 		</form>
 	</div>
 
+	<!-- OPEN DIALOG -->
 	<div id="open-dialog" title="Open">
 		<fieldset>
 			<label class="input-label" for="token-list">Select a Token to open:</label>
@@ -362,16 +364,45 @@
 		</fieldset>
 	</div>
 
+	<!-- IMAGE DIALOG -->
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
-			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
-			<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
-			<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
-			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
-			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
-			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
-			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
-			<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+			<div class="container image-dialog-nav-tabs">
+				<div class="row">
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="featureNotAvailable('Filter')" disabled></div>
+					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ></div>
+				</div>
+			</div>
+			<div class="image-dialog-tab-container" id="image-filter-tab-container">
+				FILTER
+				
+			</div>
+			<div class="image-dialog-tab-container" id="image-text-tab-container">
+				TEXT
+				<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+				<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
+				<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
+				DISPLAY
+				<div class="image-dialog-button">INLINE</div>
+				<div class="image-dialog-button">LAYOVER</div>
+				<div class="image-dialog-button">BEHIND</div>
+			</div>
+			<div class="image-dialog-tab-container" id="image-gallery-tab-container">
+				GALLERY
+			</div>
+			<div class="image-dialog-tab-container" id="image-interact-tab-container">
+				<h4 class="interact-header">MAKE THIS IMAGE INTERACTIVE</h4>
+				<span class="interact-subheader">HYPERLINK</span>
+				<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
+				<div class="image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
+				<div class="image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
+				<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+				<span class="interact-subheader">GALLERY</span>
+				<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
+				<span class="interact-subheader">AN EFFECT</span>
+			</div>
 		</div>
 		<div  class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#image-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>

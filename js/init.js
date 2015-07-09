@@ -220,8 +220,8 @@ $(function() {
 	$( "#image-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
-		height:400,
-		width: 300
+		height:500,
+		width: 400
 	});
 });
 

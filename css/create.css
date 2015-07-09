@@ -468,7 +468,7 @@ iframe {
 	margin-top: 20px;
 }
 
-.opener-button {
+/*.opener-button {
 	background-image: url('../images/ui-buttons-sprite.png');
 	background-repeat: no-repeat;
 	height: 30px;
@@ -478,6 +478,18 @@ iframe {
 	outline: none;
 	margin-top: 10px;
 	cursor: pointer;
+}*/
+
+.opener-button {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: white;
+	background-color: #476FB6;
+	font-weight: bold;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-top: 5px;
 }
 
 .send-button {
@@ -917,4 +929,42 @@ fieldset {
 
 .text-overlay-show{
 	display: inline-block;
+}
+
+/******************** IMAGE DIALOG *********************/
+.image-dialog-nav-tabs {
+	text-align: center;
+}
+
+.image-dialog-nav-tab.first {
+	margin-left: 0px;
+}
+
+.image-dialog-nav-tab {
+/*	background-image: url('../images/ui-sidebar-tabs-sprite.png'); */
+	background-repeat: no-repeat;
+	height: 51px;
+	width: 51px;
+	display: inline-block;
+	border: solid 1px #23282B;
+	margin-left: 10px;
+	outline: none;
+}
+
+.image-dialog-tab-container {
+	padding: 2em;
+	display: none;
+}
+
+#image-text-tab-container {
+	display: block;
+}
+
+.interact-header {
+	margin:0;
+	margin-left: 3em;
+}
+
+.interact-subheader {
+	margin-top: 20px;
 }

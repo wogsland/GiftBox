@@ -1996,8 +1996,8 @@ function setHyperlink(linkAddress) {
 function setHyperlinkButtons(linkAddress) {
 	if (linkAddress && linkAddress.length > 0) {
 		$("#add-hyperlink-button").css("display", "none");
-		$("#remove-hyperlink-button").css("display", "inline-block");
-		$("#change-hyperlink-button").css("display", "inline-block");
+		$("#remove-hyperlink-button").css("display", "block");
+		$("#change-hyperlink-button").css("display", "block");
 	} else {
 		$("#add-hyperlink-button").css("display", "block");
 		$("#remove-hyperlink-button").css("display", "none");
@@ -2419,4 +2419,29 @@ function addOverlay(par){
 	//if(textbox[0].classList.contains("text-overlay-show")){
 	//	textbox[0].innerHTML = text;
 	//}
+}
+
+function selectImageDialogTab(tab) {
+	var selectedIcon = $("#"+tab.id);
+	console.log(selectedIcon);
+
+	// restore all icons
+	$(".image-dialog-nav-tab").each(function(i) {
+		$(this).removeClass("image-dialog-tab-hover");
+		$(this).addClass("image-dialog-tab-hover");
+		$(this).removeClass($(this).attr("id"));
+		$(this).addClass($(this).attr("id"));
+		$(this).removeClass($(this).attr("id")+"-selected");
+	});
+
+	// set the selected icon
+	selectedIcon.removeClass("image-dialog-tab-hover");
+	selectedIcon.removeClass(tab.id);
+	selectedIcon.addClass(tab.id+"-selected");
+
+	// hide all sidebar tab containers
+	$(".image-dialog-tab-container").css("display", "none");
+
+	// show the selected container
+	$("#"+tab.id+"-container").css("display", "block");
 }
