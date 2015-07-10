@@ -89,6 +89,12 @@ function sendToken() {
 	}
 }
 
+function sendFacebook() {
+	$('.token-description-div').css('display', 'block');
+	$('.token-description-div').addClass('animated');
+	$('.token-description-div').addClass('slideInRight');
+}
+
 function uploadFileData(fileData, fileName) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
@@ -1618,6 +1624,10 @@ function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
 }
 
+function featureNotAvailableBrowser(feature) {
+	openMessage(feature, "This feature is only available in Chrome.");
+}
+
 function standardFeature() {
 	openMessage("Add Hyperlink", "This feature is only available to \"Standard\" level and higher members.");
 }
@@ -1790,16 +1800,6 @@ function doAdd() {
 
 	if (selectedContainer != "add-letter-container") {
 		if (selected.length == 0) {
-			$( "#use-fail-dialog" ).dialog({ 
-				autoOpen: false,
-				resizable: false,
-				modal: true,
-				buttons: {
-					Ok: function(){
-						$(this).dialog("close");
-					}
-				}
-			});
 			$('#use-fail-dialog').dialog('open');
 		} else {
 			$('#add-dialog').dialog('close');

@@ -1,12 +1,14 @@
 <?php
 	include_once 'Token.class.php';
 	include_once 'config.php';
+	include_once 'Mobile_Detect.php';
 	use google\appengine\api\cloud_storage\CloudStorageTools;
 	if ($google_app_engine) {
 		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
 	}
 
 	$token = new Token($_GET['id']);
+	$detect = new Mobile_Detect();
 
 	if ($google_app_engine) {
 		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
@@ -14,8 +16,17 @@
 		$token->image_path = $file_storage_path.$token->thumbnail_name;
 	}
 
-	$animation_color = $token->animation_color;
-	$animation_style = $token->animation_style;
+	$animation_color = null;
+	$animation_style = null;
+	$animation_enter_css = null;
+	$animation_pop_css = null;
+
+	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
+		$animation_style = "none";
+	} else {
+		$animation_color = $token->animation_color;
+		$animation_style = $token->animation_style;
+	}
 
 	if ($animation_style == "none") {
 		$container_id = "flip-container";
@@ -32,6 +43,8 @@
 		}
 		$container_id = "flip-container-envelope";
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +54,7 @@
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
 	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
-	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER[HTTP_HOST]) and isset($_SERVER[REQUEST_URI])) { echo '"'."http://".$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI].'"'; } ?> />
+	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER['HTTP_HOST']) and isset($_SERVER['REQUEST_URI'])) { echo '"'."http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'"'; } ?> />
 	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />

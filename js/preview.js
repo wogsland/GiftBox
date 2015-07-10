@@ -92,7 +92,11 @@ function onPlayerReady(event){
 	for(key in event.target){
 		if(event.target[key].classList){
 			if(event.target[key].classList.contains('auto-play')){
-				event.target.playVideo();
+				if (selectedAnimationStyle != "none") {
+					setTimeout(function() { event.target.playVideo(); }, 3500);
+				} else {
+					event.target.playVideo();
+				}
 			}
 		}
 	}
