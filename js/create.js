@@ -1800,16 +1800,6 @@ function doAdd() {
 
 	if (selectedContainer != "add-letter-container") {
 		if (selected.length == 0) {
-			$( "#use-fail-dialog" ).dialog({ 
-				autoOpen: false,
-				resizable: false,
-				modal: true,
-				buttons: {
-					Ok: function(){
-						$(this).dialog("close");
-					}
-				}
-			});
 			$('#use-fail-dialog').dialog('open');
 		} else {
 			$('#add-dialog').dialog('close');

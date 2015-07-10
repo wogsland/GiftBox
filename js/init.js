@@ -359,3 +359,16 @@ $(function(){
 		}
 	});
 });
+
+$(function(){
+	$( "#use-fail-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		modal: true,
+		buttons: {
+			Ok: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+});
