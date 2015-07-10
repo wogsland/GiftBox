@@ -89,6 +89,12 @@ function sendToken() {
 	}
 }
 
+function sendFacebook() {
+	$('.token-description-div').css('display', 'block');
+	$('.token-description-div').addClass('animated');
+	$('.token-description-div').addClass('slideInRight');
+}
+
 function uploadFileData(fileData, fileName) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {

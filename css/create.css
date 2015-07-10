@@ -807,6 +807,7 @@ fieldset {
 #letter-form {
 	height: 415px;
 	width: 625px;
+	margin-left: 14px;
 }
 
 #letter-text {
@@ -978,5 +979,18 @@ fieldset {
 	color: #a5a5a5;
 	margin: 3em;
 	font-size: 13px;
+}
 
+.token-description-save {
+	color: #5ebb46;
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+
+#token-description {
+	height: 60px;
+	width: 189px;
+	margin-left: 20px;
 }

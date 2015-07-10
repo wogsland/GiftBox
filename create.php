@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
 	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 
@@ -95,8 +96,6 @@
 					?>
 					</div>
 
-					<span class="template-tab-text">WRITE A DESCRIPTION</span>
-					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
 				</div>
 				<div class="sidebar-tab-container" id="opener-tab-container">
 					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()">ENTRANCE</div>
@@ -104,13 +103,17 @@
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<span class="template-tab-text">QUICK SEND</span>
-					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
+					<div class="send-button" id="facebook-send-button" onclick="sendFacebook()"></div>
+					<div class="token-description-div" style="display: none">
+						<span class="template-tab-text">WRITE A DESCRIPTION <i onclick="saveButton()" class="fa fa-save fa-lg token-description-save"></i></span>
+						<textarea id="token-description" maxlength="150"></textarea>
+					</div>
 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
-					<span class="template-tab-text">THUMBNAILS</span>
-					<button>CLICK TO SEE THUMBNAILS</button>
+					<!-- <span class="template-tab-text">THUMBNAILS</span>
+					<button>CLICK TO SEE THUMBNAILS</button> -->
 				</div>
 			</div>
 		</div>
