@@ -1,12 +1,14 @@
 <?php
 	include_once 'Token.class.php';
 	include_once 'config.php';
+	include_once 'Mobile_Detect.php';
 	use google\appengine\api\cloud_storage\CloudStorageTools;
 	if ($google_app_engine) {
 		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
 	}
 
 	$token = new Token($_GET['id']);
+	$detect = new Mobile_Detect();
 
 	if ($google_app_engine) {
 		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
@@ -19,7 +21,7 @@
 	$animation_enter_css = null;
 	$animation_pop_css = null;
 
-	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
+	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE && !(($detect->isMobile()) || ($detect->isTablet()))) {
 		$animation_style = "none";
 	} else {
 		$animation_color = $token->animation_color;
