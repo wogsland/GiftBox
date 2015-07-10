@@ -1,8 +1,13 @@
 <?php
 include_once 'Mobile_Detect.php';
 include_once 'util.php';
+include_once 'config.php';
 include 'Bento.class.php';
 include 'Divider.class.php';
+use google\appengine\api\cloud_storage\CloudStorageTools;
+if ($google_app_engine) {
+	include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+}
 
 class Token {
 	var $id;
@@ -10,6 +15,8 @@ class Token {
 	var $css_width;
 	var $css_height;
 	var $name;
+	var $thumbnail_name;
+	var $image_path;
 	var $user_id;
 	var $letter_text;
 	var $wrapper_type;
@@ -20,6 +27,9 @@ class Token {
 	var $dividers;
 	var $columns;
 	var $attachments;
+	var $description;
+	var $animation_color;
+	var $animation_style;
 
 	public function __construct($id = null) {
 		if ($id !== null) {
@@ -27,6 +37,7 @@ class Token {
 			foreach (get_object_vars($token) as $key => $value) {
 				$this->$key = $value;
 			}
+			$this->thumbnail_name = $token->id."-thumbnail";
 			$this->load_bentos();
 			$this->load_dividers();
 			$this->load_columns();
@@ -178,14 +189,14 @@ class Token {
 			$this->unload_count = 0;
 		}
 		if (!$this->id) {
-			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent) "
+			$sql = "INSERT into giftbox (name, css_id, css_width, css_height, user_id, letter_text, wrapper_type, unload_count, user_agent, description, animation_color, animation_style) "
 				."VALUES ('".escape_string($this->name)."', '$this->css_id', '$this->css_width', '$this->css_height', $this->user_id, '".escape_string($this->letter_text)."', "
-				."'$this->wrapper_type', $this->unload_count, '$this->user_agent')";
+				."'$this->wrapper_type', $this->unload_count, '$this->user_agent', '$this->description', '$this->animation_color', '$this->animation_style')";
 			$this->setId(insert($sql));
 		} else {
 			$sql = "UPDATE giftbox SET name = '".escape_string($this->name)."', letter_text = '".escape_string($this->letter_text)."', "
 				. "wrapper_type = '$this->wrapper_type', unload_count = $this->unload_count, "
-				. "last_modified = CURRENT_TIMESTAMP() "
+				. "last_modified = CURRENT_TIMESTAMP(), description = '$this->description', animation_color = '$this->animation_color', animation_style = '$this->animation_style' "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}
@@ -197,6 +208,11 @@ class Token {
 
 	public function render() {
 		include "./templates/preview-$this->css_id.php";
+	}
+	
+	public function delete() {
+		$sql = "DELETE FROM giftbox WHERE id = $this->id";
+		execute($sql);
 	}
 
 }

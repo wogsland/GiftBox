@@ -17,6 +17,7 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
 	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/animate.min.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 
@@ -56,6 +57,8 @@
 </head>
 <body>
 	<?php include_once("analyticstracking.php") ?>
+	<canvas id="thumbnail-canvas" width="1462" height="768" style="display: none; position:absolute;">
+	</canvas>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">
@@ -66,7 +69,7 @@
 				<a href="<?php echo $app_root ?>"><img id="give-token-palette-logo" src="assets/img/logo-light.png" width="225"></a>
 				<div class="sidebar-tab selected-sidebar-tab template-tab-selected" id="template-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover text-tab" id="text-tab" onclick="textIconClicked()"></div>
-				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
+				<div class="sidebar-tab sidebar-tab-hover opener-tab" id="opener-tab" onclick="selectSidebarTab(this)"></div>
 				<div class="sidebar-tab sidebar-tab-hover send-tab" id="send-tab" onclick="selectSidebarTab(this)"></div>
 
 				<div class="sidebar-tab-container" id="template-tab-container">
@@ -92,17 +95,25 @@
 						}
 					?>
 					</div>
+
+				</div>
+				<div class="sidebar-tab-container" id="opener-tab-container">
+					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()">ENTRANCE</div>
+					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>">EXIT</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
-					<div class="send-button" id="facebook-send-button" onclick="featureNotAvailable('Facebook')"></div>
-					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
-					<div class="send-button" id="pinterest-send-button" onclick="featureNotAvailable('Pinterest')"></div>
-					<div class="send-button" id="instagram-send-button" onclick="featureNotAvailable('Instagram')"></div>
+					<span class="template-tab-text">QUICK SEND</span>
+					<div class="send-button" id="facebook-send-button" onclick="sendFacebook()"></div>
+					<div class="token-description-div" style="display: none">
+						<span class="template-tab-text">WRITE A DESCRIPTION <i onclick="saveButton()" class="fa fa-save fa-lg token-description-save"></i></span>
+						<textarea id="token-description" maxlength="150"></textarea>
+					</div>
 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
-					<button class="palette-button" onclick="featureNotAvailable('Send For Corporate')">SEND FOR CORPORATE</button>
+					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
-					<button class="palette-button" onclick="send()">ADVANCED SEND</button>
+					<!-- <span class="template-tab-text">THUMBNAILS</span>
+					<button>CLICK TO SEE THUMBNAILS</button> -->
 				</div>
 			</div>
 		</div>
@@ -114,8 +125,9 @@
 					<li><a href="javascript:void(0)" onclick="preview()"><i class="fa fa-eye fa-lg"></i>VIEW</a></li>
 					<!-- <li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li> -->
 					<!-- Used to be selectSaved() -->
-					<li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li>
-				</ul>
+					<!-- Used to be selectSaved() -->
+					<!-- <li><a href="javascript:void(0)" onclick="featureNotAvailable('Open')"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li> -->
+					<!-- <li><a href="javascript:void(0)" onclick="selectSaved()"><i class="fa fa-folder-open fa-lg"></i>OPEN</a></li> -->				</ul>
 			</div>
 			<div id="template-scroll-container">
 				<div id="template-container">
@@ -124,7 +136,7 @@
 		</div>
 	</div>
 
-	<!-- DIALOGS -------------------------------------------------------------------------------------------------------->
+	<!-- DIALOGS -->
 
 	<div id="send-dialog" title="Advanced Send">
 		<p class="dialog-message" id="send-message"></p>
@@ -165,6 +177,36 @@
 		</form>
 	</div>
 
+	<div id="entrance-animation-dialog">
+		<span class="browser-warning">Animations are currently only supported on Chrome and Opera.</span>
+		<br>
+		<span class="browser-warning"> Other browsers will show a default loading feature.</span>
+		<form>
+		<fieldset class="container">
+			<div class="row select-envelope-color" id="select-envelope-color-container">
+				<label for="animation-color">Color: </label>
+				<select id="select-envelope-color-option">
+				  <option value="blue">blue</option>
+<!-- 				  <option value="red">red</option>
+				  <option value="green">green</option>
+				  <option value="white">white</option>
+				  <option value="yellow">yellow</option> -->
+				</select>
+			</div>
+			<hr>
+			<div class="row select-envelope-style" id="select-envelope-style-container">
+				<label for="animation-style">Style: </label>
+				<select id="select-envelope-style-option">
+				  <option value="none">None</option>
+				  <option value="default">Default</option>
+				  <option value="business">Business</option>
+				  <option value="casual">Casual</option>
+				</select>
+			</div>
+		</fieldset>
+		</form>
+	</div>
+
 	<div id="youtube-redirect-dialog">
 		<form>
 			<fieldset>
@@ -177,6 +219,8 @@
 	<div id="add-hyperlink-dialog" title="Add A Hyperlink To This Image">
 		<form>
 		    <fieldset>
+		    	<div id="hyperlinkError">
+		    	</div>
 				<label class="input-label" for="url">Paste link address here</label>
 				<input class="dialog-input" id="hyperlink-dialog-url" type="text" name="url" id="url">
 		    </fieldset>
@@ -229,7 +273,7 @@
             </script>
 		</form>
 	</div>
-
+	
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -243,13 +287,13 @@
 			</ul>
 		</div>
 
-			<!------------------ STOCK LIBRARY ------------------------>
+			<!-- STOCK LIBRARY -->
 			<div id="add-stock-container" class="add-content-container">
 				<div class="add-content add-content-no-icons">
 				</div>
 			</div>
 
-			<!--------------------- IMAGES ---------------------------->
+			<!-- IMAGES -->
 			<div id="add-images-container" class="add-content-container" style="display: block;">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
@@ -265,7 +309,7 @@
 				</div>
 			</div>
 
-			<!--------------------- VIDEO & AUDIO --------------------->
+			<!-- VIDEO AND AUDIO -->
 			<div id="add-video-audio-container" class="add-content-container">
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
@@ -283,7 +327,7 @@
 				</div>
 			</div>
 
-			<!------------------------ LETTER ------------------------->
+			<!-- LETTER -->
 			<div id="add-letter-container" class="add-content-container">
 				<form id="letter-form">
 					<br>
@@ -303,6 +347,7 @@
 		</div>
 	</div>
 
+	<!-- WRAPPER -->
 	<div id="wrapper-dialog" title="Wrapper">
 		<form>
 			<fieldset>
@@ -319,6 +364,7 @@
 		</form>
 	</div>
 
+	<!-- OPEN DIALOG -->
 	<div id="open-dialog" title="Open">
 		<fieldset>
 			<label class="input-label" for="token-list">Select a Token to open:</label>
@@ -326,16 +372,45 @@
 		</fieldset>
 	</div>
 
+	<!-- IMAGE DIALOG -->
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
-			<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
-			<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
-			<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
-			<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
-			<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
-			<div  class="image-dialog-button small-image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
-			<div  class="image-dialog-button  small-image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
-			<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+			<div class="container image-dialog-nav-tabs">
+				<div class="row">
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="featureNotAvailable('Filter')" disabled><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
+				</div>
+			</div>
+			<div class="image-dialog-tab-container" id="image-filter-tab-container">
+				FILTER
+				
+			</div>
+			<div class="image-dialog-tab-container" id="image-text-tab-container">
+				TEXT
+				<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+				<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
+				<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
+				<!-- DISPLAY
+				<div class="image-dialog-button">INLINE</div>
+				<div class="image-dialog-button">LAYOVER</div>
+				<div class="image-dialog-button">BEHIND</div> -->
+			</div>
+			<div class="image-dialog-tab-container" id="image-gallery-tab-container">
+				GALLERY
+			</div>
+			<div class="image-dialog-tab-container" id="image-interact-tab-container">
+				<h5 class="interact-header">MAKE THIS IMAGE INTERACTIVE</h5>
+				<span class="interact-subheader">HYPERLINK</span>
+				<div class="image-dialog-button" id="add-hyperlink-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "openHyperlinkInput()" : "standardFeature()"; ?>"><i class="fa fa-link fa-lg link"></i> ADD HYPERLINK</div>
+				<div class="image-dialog-button" id="remove-hyperlink-button" onclick="removeHyperlink()"><i class="fa fa-remove fa-lg remove"></i> REMOVE HYPERLINK</div>
+				<div class="image-dialog-button" id="change-hyperlink-button" onclick="changeHyperlink()"><i class="fa fa-edit fa-lg edit"></i> CHANGE HYPERLINK</div>
+				<input id="hyperlink-text" placeholder="https://www.example.com" disabled>
+				<span class="interact-subheader">GALLERY</span>
+				<div class="image-dialog-button" id="add-gallery-button" onclick="createGallery()"><i class="fa fa-picture-o fa-lg picture-o"></i> CREATE GALLERY</div>
+				<!-- <span class="interact-subheader">AN EFFECT</span> -->
+			</div>
 		</div>
 		<div  class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#image-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>

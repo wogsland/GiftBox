@@ -94,7 +94,7 @@ ul {
 }
 
 .template-thumbnail-container {
-	max-height: 230px;
+	max-height: 210px;
 	overflow-y: auto;
 	margin-top: 20px;
 
@@ -405,8 +405,13 @@ iframe {
 	background-position: 0px -116px;
 }
 
-#opener-tab {
-	background-position: 0px -233px;
+.opener-tab {
+	background-position: 0px -233px
+}
+
+.opener-tab-selected {
+	background-position: 0px -291px;
+	pointer-events: none;
 }
 
 .send-tab {
@@ -453,9 +458,38 @@ iframe {
 	pointer-events: none;
 }
 
+#opener-tab-container {
+	display: none;
+	margin-top: 20px;
+}
+
 #send-tab-container {
 	display: none;
 	margin-top: 20px;
+}
+
+/*.opener-button {
+	background-image: url('../images/ui-buttons-sprite.png');
+	background-repeat: no-repeat;
+	height: 30px;
+  	width: 101px;
+	border: solid 1px #23282B;
+	margin: auto;
+	outline: none;
+	margin-top: 10px;
+	cursor: pointer;
+}*/
+
+.opener-button {
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: white;
+	background-color: #476FB6;
+	font-weight: bold;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-top: 5px;
 }
 
 .send-button {
@@ -538,6 +572,7 @@ fieldset {
 .add-dialog-class .ui-dialog-title {
 	margin: 0px;
 	padding: 17px 30px;
+	text-align: center;
 }
 
 #add-dialog {
@@ -773,6 +808,7 @@ fieldset {
 #letter-form {
 	height: 415px;
 	width: 625px;
+	margin-left: 14px;
 }
 
 #letter-text {
@@ -895,4 +931,67 @@ fieldset {
 
 .text-overlay-show{
 	display: inline-block;
+}
+
+/******************** IMAGE DIALOG *********************/
+.image-dialog-nav-tabs {
+	text-align: center;
+}
+
+.image-dialog-nav-tab.first {
+	margin-left: 0px;
+}
+
+.image-dialog-nav-tab {
+/*	background-image: url('../images/ui-sidebar-tabs-sprite.png'); */
+	background-repeat: no-repeat;
+	height: 51px;
+	width: 51px;
+	display: inline-block;
+	border: solid 1px #23282B;
+	margin-left: 10px;
+	outline: none;
+}
+
+.image-dialog-tab-container {
+	padding: 2em;
+	display: none;
+}
+
+#image-text-tab-container {
+	display: block;
+}
+
+.interact-header {
+	margin:0;
+	margin-left: 3em;
+}
+
+.interact-subheader {
+	margin-top: 20px;
+}
+
+.image-dialog-nav-tab > .fa-3x {
+	padding-left: 4px;
+	padding-top: 5px;
+}
+
+.browser-warning {
+	color: #a5a5a5;
+	margin: 3em;
+	font-size: 13px;
+}
+
+.token-description-save {
+	color: #5ebb46;
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+
+#token-description {
+	height: 60px;
+	width: 189px;
+	margin-left: 20px;
 }

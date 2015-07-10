@@ -39,7 +39,7 @@ class PhotoGallery {
 		foreach ($this->file_names as $file){
 			$image_file = str_replace("'", "''", $file);
 			$test = explode("_", $image_file);
-			if($test[1] != $this->giftboxId){
+			if($test[0] != $this->giftboxId){
 				$image_file = $this->giftboxId."_".$image_file;
 			}
 			$sql = "INSERT INTO gallery_photos (bento_id, file_name)"

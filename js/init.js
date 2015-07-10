@@ -173,6 +173,24 @@ $(function() {
 });
 
 $(function() {
+	$( "#entrance-animation-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 600,
+		modal: true,
+		buttons: {
+			Ok: function() {
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+	});
+});
+
+$(function() {
 	$( "#add-hyperlink-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
@@ -202,7 +220,7 @@ $(function() {
 	$( "#image-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
-		height:400,
+		height:500,
 		width: 300
 	});
 });
@@ -307,6 +325,14 @@ $(function(){
 			loadPhotoOptions();
 		},
 		close: function(){
+			var icon = getImageDialogImage().parent().parent().children(".bento-link-icon");
+			icon.addClass('fa-picture-o').addClass('fa-lg');
+			var numItems = $('.thumbnail-container-selected').length;
+			if (numItems) {
+				showControl(icon.attr("id"), null);
+			} else {
+				hideControl(icon.attr("id"));
+			}
 			//call the add function for gallery
 			$("#choose-photo-options > div").each(function(i){
 				$("#add-images-desktop")[0].appendChild(this);
@@ -328,6 +354,19 @@ $(function(){
 				addOverlay();
 			},
 			Back: function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+});
+
+$(function(){
+	$( "#use-fail-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		modal: true,
+		buttons: {
+			Ok: function(){
 				$(this).dialog("close");
 			}
 		}

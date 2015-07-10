@@ -143,7 +143,7 @@
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.php" class="external">Home</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="profile.php" class="external">My Account</a></li>
 					<li><a href="#">Login</a></li>
 				</ul>
 			</div>
@@ -167,6 +167,7 @@
 <script type="text/jsx" src="/app/account/profile.js"></script>
 <script type="text/jsx" src="/app/account/activities.js"></script>
 <script type="text/jsx" src="/app/account/tokens.js"></script>
+<script type="text/jsx" src="/app/account/token_analytics.js"></script>
 <script type="text/jsx" src="/app/account/viewers.js"></script>
 <script type="text/jsx" src="/app/account/viewer_edit.js"></script>
 <script type="text/jsx" src="/app/account/info.js"></script>

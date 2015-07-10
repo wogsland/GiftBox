@@ -147,7 +147,7 @@ iframe {
 	border: 1px solid #DCDCDC;;
 	border-radius: 5px;
 	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
-//	box-shadow: 5px 5px 10px #DCDCDC;
+	box-shadow: 5px 5px 10px #DCDCDC;
 }
 
 .panel {
@@ -157,6 +157,26 @@ iframe {
 	-moz-perspective: 600px;
 	perspective: 3000px;
 }
+
+#flip-container-envelope {
+	box-sizing: border-box;
+    width: 100%;
+    height: 100%; /* 100/1.32 = 75.75757575 */
+    background: white;
+    margin: auto;
+    position: absolute;
+    top:0em; /* vertical center */
+    left:0;right:0; /* horizontal center */
+	overflow: hidden;
+	border: 1px solid #DCDCDC;;
+	border-radius: 5px;
+	box-shadow: 0 0 22px rgba(10, 10, 10, 0.42);	
+	box-shadow: 5px 5px 10px #DCDCDC;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	perspective: 3000px;
+}
+
 
 .panel .front {
 	z-index: 900;
@@ -231,3 +251,131 @@ iframe {
 	width: 100%;
 	height: 100%;
 }
+
+
+/** OPENER FOR TOKEN **/
+/** Currently only absolutely supported on Chrome. Others are unknown **/
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fefefe;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    overflow: hidden !important;
+}
+
+.status {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image: url("../assets/img/loading.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+            background-size: cover;
+    margin: -20px 0 0 -20px;
+}
+
+.envelope{
+	width: 100%;
+    height: 100%;  
+    background: #336E7B;
+    max-height: 100%;
+    max-width: 100%;  
+    margin: auto;
+    position: relative;
+	margin: 0 auto;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.envelope #base {
+	z-index: 900;
+	position: relative;
+}
+
+.opener {
+	top: 0em;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+
+.shrink-box{
+	text-align: center;
+	width: 72.2vw;
+  	height: 54.6516vw;
+  	max-height: 72.2vh;
+  	max-width: 100.0312vh;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin:auto;
+	position: absolute;
+	-webkit-transform:scale(0.5);
+	-moz-transform:scale(0.5);
+	-ms-transform:scale(0.5);
+	transform:scale(0.5);
+}
+
+@-webkit-keyframes open{
+	0% {}
+	50% {transform: rotateX(180deg);}
+	100% { transform: rotateX(0deg);}
+}
+
+.open {
+	-webkit-animation: open 2s ease; /* Chrome, Safari, Opera */
+	-webkit-animation-fill-mode: forwards;
+	-webkit-transform-origin: 0% 0%;    
+}
+
+@-webkit-keyframes panel-open{
+	0%{}
+	50% {transform: translateY(-100vh)}
+	100% {transform: translateY(0vh) scale(2.65); }
+}
+
+.panel-open {
+	-webkit-animation: panel-open 1.5s ease;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-delay: .5s;
+}
+
+.svg-container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 100%;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.svg-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.base {
+	width: 101%;
+  	left: -4px;
+}
+
+.shaking-box {
+	height: 100%;
+}
+

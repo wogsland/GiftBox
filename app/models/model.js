@@ -127,6 +127,18 @@ var Model = {
     return result;
   },
 
+  deleteToken: function(tokenId) {
+    console.log("tokenId=" + tokenId);
+    $.ajax({
+       type: "POST",
+       url: "delete_token_ajax.php",
+       data: "tokenId=" + tokenId,
+       async: false
+     }).done(function(data, textStatus, jqXHR){
+       console.log("Success!");
+     });
+  },
+
   saveChanges: function(){
     console.log("saving new model...");
     var response = null;

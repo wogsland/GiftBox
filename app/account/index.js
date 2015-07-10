@@ -28,6 +28,7 @@ var Account = React.createClass({
           </ul>
           <div className="tab-content nopadding noborder">
             <AccountActivities />
+            <AccountTokenAnalytics />
             <AccountTokens tokens={this.props.model.tokens} />
             {/* <!-- Messages --> */}
             <AccountViewers viewers={this.props.model.viewers} />
