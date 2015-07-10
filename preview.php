@@ -14,10 +14,17 @@
 		$token->image_path = $file_storage_path.$token->thumbnail_name;
 	}
 
-	$animation_color = $token->animation_color;
-	$animation_style = $token->animation_style;
+	$animation_color = null;
+	$animation_style = null;
 	$animation_enter_css = null;
 	$animation_pop_css = null;
+
+	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
+		$animation_style = "none";
+	} else {
+		$animation_color = $token->animation_color;
+		$animation_style = $token->animation_style;
+	}
 
 	if ($animation_style == "none") {
 		$container_id = "flip-container";
@@ -34,6 +41,8 @@
 		}
 		$container_id = "flip-container-envelope";
 	}
+
+
 ?>
 <!DOCTYPE html>
 <html>
