@@ -1618,6 +1618,10 @@ function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
 }
 
+function featureNotAvailableBrowser(feature) {
+	openMessage(feature, "This feature is only available in Chrome.");
+}
+
 function standardFeature() {
 	openMessage("Add Hyperlink", "This feature is only available to \"Standard\" level and higher members.");
 }

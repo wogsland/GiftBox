@@ -99,7 +99,10 @@
 					<textarea id="token-description" style="height: 100px" maxlength="150"></textarea>
 				</div>
 				<div class="sidebar-tab-container" id="opener-tab-container">
-					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()">ENTRANCE</div>
+					<script>
+						console.log("<?= strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome');?>");
+					</script>
+					<div class="opener-button" id="opener-entrance-button" onclick="<?php echo strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') == TRUE ? "addEntranceAnimation()" : "featureNotAvailableBrowser('Animations')"; ?>">ENTRANCE</div>
 					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>">EXIT</div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
