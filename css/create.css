@@ -973,3 +973,10 @@ fieldset {
 	padding-left: 4px;
 	padding-top: 5px;
 }
+
+.browser-warning {
+	color: #a5a5a5;
+	margin: 3em;
+	font-size: 13px;
+
+}
