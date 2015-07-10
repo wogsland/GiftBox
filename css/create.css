@@ -572,6 +572,7 @@ fieldset {
 .add-dialog-class .ui-dialog-title {
 	margin: 0px;
 	padding: 17px 30px;
+	text-align: center;
 }
 
 #add-dialog {
