@@ -21,7 +21,7 @@
 	$animation_enter_css = null;
 	$animation_pop_css = null;
 
-	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE && !(($detect->isMobile()) || ($detect->isTablet()))) {
+	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
 		$animation_style = "none";
 	} else {
 		$animation_color = $token->animation_color;
