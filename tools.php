@@ -9,7 +9,7 @@ if ($google_app_engine) {
 $tokens = execute_query("SELECT giftbox.id, name, first_name, last_name  FROM giftbox, user where giftbox.user_id = user.id ORDER BY id")->fetch_all(MYSQLI_ASSOC);
 
 foreach ($tokens as $token) {
-	echo "<br><b>{$token['name']} ({$token['first_name']} {$token['last_name']})</b><br>";
+	echo "<br><b>Token-{$token['id']} {$token['name']} ({$token['first_name']} {$token['last_name']})</b><br>";
 	$bentos = execute_query("SELECT * FROM bento WHERE giftbox_id = {$token['id']} ORDER BY css_id")->fetch_all(MYSQLI_ASSOC);
 	foreach ($bentos as $bento) {
 		echo "{$bento['css_id']}: ";
