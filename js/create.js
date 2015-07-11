@@ -1617,7 +1617,6 @@ function createCroppedImage (bento, image, container) {
 	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
 	var croppedImage = new Image();
 	croppedImage.src = croppedCanvas.toDataURL();
-	console.log(croppedImage.src);
 	return croppedImage;
 }
 
