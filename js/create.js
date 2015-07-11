@@ -104,12 +104,15 @@ function uploadFileData(fileData, fileName) {
     }
 }
 
-function uploadFile(file) {
+function uploadFile(file, fileName) {
+	// If no fileName is passed, use the file.name as default
+	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
+	
 	var reader  = new FileReader();
+	reader.fileName = fileName;
 	reader.onloadend = function () {
 		uploadFileData(reader.result, reader.fileName);
 	};
-	reader.fileName = file.name;
 	reader.readAsDataURL(file);
 }
 
@@ -1156,6 +1159,7 @@ function save() {
 		bento.css_top = $(this).css("top");
 		bento.css_left = $(this).css("left");
 		bento.image_file_name = null;
+		bento.cropped_image_file_name = null;
 		bento.download_file_name = null;
 		bento.download_mime_type = null;
 		bento.content_uri = null;
@@ -1184,6 +1188,9 @@ function save() {
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
 			bento.image_file_name = this.image_file_name;
+			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
+			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
+			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
@@ -1325,15 +1332,12 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
+					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
-							image.file.name = template.giftboxId + image.file.name;
-							uploadFile(image.file);
+							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 						} else {
-							//alert(image.src);
-							//alert(this.image_file_name);
-							uploadFileData(image.src, + template.giftboxId+"_"+ giftbox.bentos[i].image_file_name);
+							uploadFileData(image.src, + template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 						}
 						image.saved = true;
 					}
@@ -1353,7 +1357,7 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
-		uploadFileData(placeHolder.src, template.giftboxId + "-thumbnail");
+		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
 	saved();
 }
