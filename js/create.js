@@ -1201,13 +1201,9 @@ function save() {
 			bento.image_hyperlink = image.hyperlink;
 
 			var croppedImage = createCroppedImage(bento, image, container);
+
 			var my_image = document.createElement("img");
-			if(bento.image_file_name.indexOf(".gif") == image.length - 4) {
-			    my_image.src = image.src;
-			} else {
-				my_image.src = croppedImage.src;
-			}
-			console.log(my_image.src);
+			my_image.src = croppedImage.src;
 			ctx.drawImage(my_image, width, height);
 		}
 		if (this.video || this.audio) {
@@ -1335,7 +1331,7 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					uploadFileData(image.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
+					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
 					if (!image.saved) {
 						if (image.file) {
 							image.file.name = template.giftboxId + image.file.name;
