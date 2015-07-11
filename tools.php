@@ -1,6 +1,10 @@
 <?php
 include_once "util.php";
 include_once "config.php";
+use google\appengine\api\cloud_storage\CloudStorageTools;
+if ($google_app_engine) {
+	include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
+}
 
 $tokens = execute_query("SELECT giftbox.id, name, first_name, last_name  FROM giftbox, user where giftbox.user_id = user.id ORDER BY id")->fetch_all(MYSQLI_ASSOC);
 
