@@ -1013,12 +1013,16 @@ function handleVerticalDrag(target, movement) {
 
 function setPreviewLink (template) {
 	var linkText;
+
 	if (template.wrapperType) {
+		// Wrapper Tyoe is a very specific Second Harvest Thingy. So is unload_count???
 		linkText = "second-harvest.php?ut=" + template.wrapperType + "&uc=" + template.unloadCount + "&tid=" + template.giftboxId;
 	} else {
 		linkText = "preview.php?id=" + template.giftboxId;
 	}
 	$("#preview-link").val(template.appURL + linkText);
+	console.log($("#preview-link"));
+	console.log("The value of #preview-link was set to: " + template.appURL + linkText);
 	if (template.giftboxId) {
 		$("#send-link-input").val(template.appURL + linkText);
 	} else {
@@ -1028,10 +1032,10 @@ function setPreviewLink (template) {
 
 function showTemplate(template) {
 	// Only hide the other templates and show the target if the target is not on top
+	// putting the chosen template into the window variable and displaying it/\.
 	if (!Object.is(template, window.top_template)) {
 		closeImageDialog();
 		window.top_template = template;
-		setPreviewLink(template);
 		$(".template").each(function(){
 			$(this).css("display", "none");
 		});
@@ -1041,6 +1045,8 @@ function showTemplate(template) {
 
 function selectTemplate(templateId) {
 	var template = document.getElementById(templateId);
+
+	// DON"T QUITE UNDERSTAND WHAT THIS IS FOR
 	if (!template) {
 		$.get("templates/create-"+templateId+".html", function(data){
 			$("#template-container").append(data);
@@ -1165,7 +1171,6 @@ function save() {
 		bento.css_top = $(this).css("top");
 		bento.css_left = $(this).css("left");
 		bento.image_file_name = null;
-		bento.cropped_image_file_name = null;
 		bento.download_file_name = null;
 		bento.download_mime_type = null;
 		bento.content_uri = null;
@@ -1194,9 +1199,6 @@ function save() {
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
 			bento.image_file_name = this.image_file_name;
-			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
-			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
@@ -1338,12 +1340,15 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
 					if (!image.saved) {
 						if (image.file) {
-							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+							image.file.name = template.giftboxId + image.file.name;
+							uploadFile(image.file);
 						} else {
-							uploadFileData(image.src, + template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+							//alert(image.src);
+							//alert(this.image_file_name);
+							uploadFileData(image.src, + template.giftboxId+"_"+ giftbox.bentos[i].image_file_name);
 						}
 						image.saved = true;
 					}
@@ -1363,7 +1368,7 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
-		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
+		uploadFileData(placeHolder.src, template.giftboxId + "-thumbnail");
 	});
 	saved();
 }
@@ -1485,7 +1490,9 @@ function loadSaved() {
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
+			console.log("Token data from AJAX: " + token);
 			closeStatus();
+			console.log("Token css_id: " + token.css_id);
 
 			// Bring the correct template to the top
 			selectTemplate(token.css_id);
@@ -1497,6 +1504,7 @@ function loadSaved() {
 			window.top_template.letterText = token.letter_text;
 			window.top_template.wrapperType = token.wrapper_type;
 			window.top_template.unloadCount = token.unload_count;
+			console.log(window.top_template);
 			setPreviewLink(window.top_template);
 
 			// Bento properties
