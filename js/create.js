@@ -192,13 +192,20 @@ function addVideo (bento, videoSrc, videoFile, savedBento) {
 	unsaved();
 }
 
-function addOverlayToBento(bento, text){
+function addOverlayToBento(bento, options){
+	var text = options[0];
+	var left;
+	var top;
+	if (options.length > 1) {
+		left = options[1];
+		top = options[2];
+	}
 	if(text){
 		if(!bento.imageContainer){
 			alert("You are trying to add overlay text to something other than an image. Please select an image and try again.");
 		} else {
 			bento.overlay_content = text;
-			var container = $("#"+bento.id+"-text-overlay-container");
+			var container = $("#"+bento.id+"-out-text-overlay-container");
 			if(container.children().length > 0){
 				if(container.children()[3]){
 					container.children()[3].innerHTML = text;
@@ -211,11 +218,19 @@ function addOverlayToBento(bento, text){
 				var column = bento.id.split("nto-");
 				var containText = document.createElement('div');
 				containText.style.width = $("#column-" + column[1])[0].scrollWidth;
-				containText.id = bento.id + '-text-overlay-container';
+				containText.id = bento.id + '-out-text-overlay-container';
 				containText.style.wordWrap = 'break-word';
 				containText.style.position = 'absolute';
-				containText.style.left = 0;
-				containText.style.top = 0;
+				if (left) {
+					containText.style.left = left + "%";
+				} else {
+					containText.style.left = 0;
+				}
+				if (top) {
+					containText.style.top = top + "%";
+				} else {
+					containText.style.top = 0;
+				}
 				containText.style.float = "left";
 				containText.className = "text-overlay-container";
 
@@ -223,7 +238,7 @@ function addOverlayToBento(bento, text){
 				textContainer.style.wordBreak = "break-all";
 				textContainer.style.minWidth = 0;
 				textContainer.innerHTML = text;
-				textContainer.id = bento.id + '-text-overlay-container';
+				textContainer.id = bento.id + '-in-text-overlay-container';
 				textContainer.className = "text-overlay-show";
 				$(containText).resizable();
 				$(containText)
@@ -247,7 +262,7 @@ function addOverlayToBento(bento, text){
 		}
 	} else {
 		bento.overlay_content = text;
-		var container = $("#"+bento.id+"-text-overlay-container");
+		var container = $("#"+bento.id+"-out-text-overlay-container");
 		bento.removeChild(container[0]);
 		$("#" + bento.id).resized = false;
 		if(container.children()[0]){
@@ -862,7 +877,7 @@ function closeClicked(event, closeButton) {
 		hideControl(bento.id + "-link-icon");
 	}
 	if(bento.overlay_content){
-		bento.removeChild($("#"+bento.id+"-text-overlay-container")[0]);
+		bento.removeChild($("#"+bento.id+"-out-text-overlay-container")[0]);
 		setOverlayButtons(null);
 		hideControl(bento.id + "-show-overlay");
 	}
@@ -1013,7 +1028,9 @@ function handleVerticalDrag(target, movement) {
 
 function setPreviewLink (template) {
 	var linkText;
+
 	if (template.wrapperType) {
+		// Wrapper Tyoe is a very specific Second Harvest Thingy. So is unload_count???
 		linkText = "second-harvest.php?ut=" + template.wrapperType + "&uc=" + template.unloadCount + "&tid=" + template.giftboxId;
 	} else {
 		linkText = "preview.php?id=" + template.giftboxId;
@@ -1028,10 +1045,10 @@ function setPreviewLink (template) {
 
 function showTemplate(template) {
 	// Only hide the other templates and show the target if the target is not on top
+	// putting the chosen template into the window variable and displaying it/\.
 	if (!Object.is(template, window.top_template)) {
 		closeImageDialog();
 		window.top_template = template;
-		setPreviewLink(template);
 		$(".template").each(function(){
 			$(this).css("display", "none");
 		});
@@ -1041,6 +1058,8 @@ function showTemplate(template) {
 
 function selectTemplate(templateId) {
 	var template = document.getElementById(templateId);
+
+	// DON"T QUITE UNDERSTAND WHAT THIS IS FOR
 	if (!template) {
 		$.get("templates/create-"+templateId+".html", function(data){
 			$("#template-container").append(data);
@@ -1118,8 +1137,6 @@ function save() {
 	// Checking for animation selected in the closed dialog
 	var selectedAnimationColor = $('#select-envelope-color-option').val();
 	var selectedAnimationStyle = $('#select-envelope-style-option').val();
-	console.log("Color: " + selectedAnimationColor);
-	console.log("Style: " + selectedAnimationStyle);
 	var giftbox = {
 		id: giftboxId,
 		css_id: cssId,
@@ -1165,7 +1182,6 @@ function save() {
 		bento.css_top = $(this).css("top");
 		bento.css_left = $(this).css("left");
 		bento.image_file_name = null;
-		bento.cropped_image_file_name = null;
 		bento.download_file_name = null;
 		bento.download_mime_type = null;
 		bento.content_uri = null;
@@ -1185,18 +1201,16 @@ function save() {
 		var column = this.id.split("nto-");
 		var columnWidth = $(this).width() + 10;
 		var columnHeight = $(this).height();
-		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: 0;
-		bento.overlay_width = (parseInt(($("#"+this.id+"-text-overlay-container").width() / columnWidth)*10000))/100;
-		var left = this.overlay_content ? $("#"+this.id +"-text-overlay-container").css("left").split("px")[0] : null;
+		bento.overlay_top = this.overlay_content ? parseInt((($("#"+this.id +"-out-text-overlay-container").css("top").split("px")[0] /  columnHeight))*10000)/100: 0;
+		bento.overlay_width = (parseInt(($("#"+this.id+"-out-text-overlay-container").width() / columnWidth)*10000))/100;
+		var left = this.overlay_content ? $("#"+this.id +"-out-text-overlay-container").css("left").split("px")[0] : null;
 		bento.overlay_left = (parseInt((left/columnWidth)*10000))/100;
+		console.log("Saving overlay css: " + bento.overlay_top + "(top) and " + bento.overlay_left + "(left)");
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
 			bento.image_file_name = this.image_file_name;
-			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
-			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
@@ -1338,12 +1352,15 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
 					if (!image.saved) {
 						if (image.file) {
-							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+							image.file.name = template.giftboxId + "_" +image.file.name;
+							uploadFile(image.file);
 						} else {
-							uploadFileData(image.src, + template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+							//alert(image.src);
+							//alert(this.image_file_name);
+							uploadFileData(image.src, + template.giftboxId+"_"+ giftbox.bentos[i].image_file_name);
 						}
 						image.saved = true;
 					}
@@ -1363,7 +1380,7 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
-		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
+		uploadFileData(placeHolder.src, template.giftboxId + "-thumbnail");
 	});
 	saved();
 }
@@ -1487,50 +1504,171 @@ function loadSaved() {
 			var token = data;
 			closeStatus();
 
-			// Bring the correct template to the top
-			selectTemplate(token.css_id);
+			// Set the animation styles
+			$('#select-envelope-color-option').val(token.animation_color);
+			$('#select-envelope-style-option').val(token.animation_style);
 
-			// Populate the top template properties
-			window.top_template.giftboxId = token.id;
-			window.top_template.giftboxName = token.name;
-			window.top_template.appURL = token.app_url;
-			window.top_template.letterText = token.letter_text;
-			window.top_template.wrapperType = token.wrapper_type;
-			window.top_template.unloadCount = token.unload_count;
-			setPreviewLink(window.top_template);
+			var templateId = token.css_id;
 
-			// Bento properties
-			var index;
-			var bento;
-			for (index = 0; index < token.bentos.length; ++index) {
-				bento = document.getElementById(token.bentos[index].css_id);
-				bento.style.width = "100%";
-				bento.style.height = "100%";
-				bento.style.top = "0px";
-				bento.style.left = "0px";
-				clearBento(bento);
-				loadBento(bento, token.bentos[index]);
-			}
+			var template = document.getElementById(templateId);
 
-			// Divider properties
-			var divider;
-			for (index = 0; index < token.dividers.length; ++index) {
-				divider = document.getElementById(token.dividers[index].css_id);
-				if (token.dividers[index].parent_css_id.indexOf("column") > -1) {
-					divider.style.width = "100%";
-				} else {
-					divider.style.width = token.dividers[index].css_width;
+			if (!template) {
+				$.get("templates/create-"+templateId+".html", function(data){
+					$("#template-container").append(data);
+					template = document.getElementById(templateId);
+					initTemplate($("#"+templateId));
+					template.giftboxName = "Untitled";
+					template.giftboxId = null;
+					template.letterText = "";
+					template.wrapperType = "";
+					template.unloadCount = 3;
+
+					// initialize the sliders
+					$("#"+templateId+" .image-slider").slider({
+						orientation: "vertical",
+						min: 100,
+						max: 400,
+						slide: function(event, ui) {
+							handleSliderEvent(event, ui);
+						}
+					});
+					
+					showTemplate(template);
+				}).done(function() {
+					// Populate the top template properties
+					window.top_template.giftboxId = token.id;
+					window.top_template.giftboxName = token.name;
+					window.top_template.appURL = token.app_url;
+					window.top_template.letterText = token.letter_text;
+					window.top_template.wrapperType = token.wrapper_type;
+					window.top_template.unloadCount = token.unload_count;
+					// Set the link where you can view this token
+					setPreviewLink(window.top_template);
+
+					// Bento properties
+					var index;
+					var bento;
+					for (index = 0; index < token.bentos.length; ++index) {
+						// Choosing the bento by it's id
+						bento = document.getElementById(token.bentos[index].css_id);
+						bento.style.width = "100%";
+						bento.style.height = "100%";
+						bento.style.top = "0px";
+						bento.style.left = "0px";
+						// clearing out the bento in case there is already something there
+						clearBento(bento);
+						loadBento(bento, token.bentos[index]);
+					}
+
+					// Divider properties
+					var divider;
+					var classes;
+					var width_class;
+					var width;
+					var height;
+					for (index = 0; index < token.dividers.length; ++index) {
+						divider = document.getElementById(token.dividers[index].css_id);
+						classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
+
+						// First if statement to check whether this is a divider and type
+						if (classes[1] == "divider") {
+							if (classes[0] == "vertical") {
+								divider.style.left = token.dividers[index].css_left;
+								divider.style.height = token.dividers[index].css_height;
+							} else if (classes[0] == "horizontal") {
+								divider.style.top = token.dividers[index].css_top;
+								divider.style.width = token.dividers[index].css_width;
+							}
+						} else if (classes[0] == "divider-container") {
+							divider.style.width = token.dividers[index].css_width;
+							divider.style.height = token.dividers[index].css_height;
+						} else {
+							if (classes[classes.length - 1] != "width100") {
+								divider.style.width = token.dividers[index].css_width;
+							} else {
+								divider.style.width = "100%";
+							}
+							if (classes[classes.length - 2] != "height100") {
+								divider.style.height = token.dividers[index].css_height;
+							} else {
+								divider.style.height = "100%";
+							}
+						}
+					}
+
+					$("#add-attachment-desktop").empty();
+					for (index = 0; index < token.attachments.length; ++index) {
+						appendAttachmentDisplay(token.attachments[index]);
+					}
+				});
+			} else {
+				showTemplate(template);
+
+				// Populate the top template properties
+				window.top_template.giftboxId = token.id;
+				window.top_template.giftboxName = token.name;
+				window.top_template.appURL = token.app_url;
+				window.top_template.letterText = token.letter_text;
+				window.top_template.wrapperType = token.wrapper_type;
+				window.top_template.unloadCount = token.unload_count;
+				// Set the link where you can view this token
+				setPreviewLink(window.top_template);
+
+				// Bento properties
+				var index;
+				var bento;
+				for (index = 0; index < token.bentos.length; ++index) {
+					// Choosing the bento by it's id
+					bento = document.getElementById(token.bentos[index].css_id);
+					bento.style.width = "100%";
+					bento.style.height = "100%";
+					bento.style.top = "0px";
+					bento.style.left = "0px";
+					// clearing out the bento in case there is already something there
+					clearBento(bento);
+					loadBento(bento, token.bentos[index]);
 				}
-				divider.style.height = token.dividers[index].css_height;
-				divider.style.top = token.dividers[index].css_top;
-				divider.style.left = token.dividers[index].css_left;
-			}
 
-			$("#add-attachment-desktop").empty();
-			for (index = 0; index < token.attachments.length; ++index) {
-				appendAttachmentDisplay(token.attachments[index]);
-			}
+				// Divider properties
+				var divider;
+				var classes;
+				var width_class;
+				var width;
+				var height;
+				for (index = 0; index < token.dividers.length; ++index) {
+					divider = document.getElementById(token.dividers[index].css_id);
+					classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
+					// First if statement to check whether this is a divider and type
+					if (classes[1] == "divider") {
+						if (classes[0] == "vertical") {
+							divider.style.left = token.dividers[index].css_left;
+							divider.style.height = token.dividers[index].css_height;
+						} else if (classes[0] == "horizontal") {
+							divider.style.top = token.dividers[index].css_top;
+							divider.style.width = token.dividers[index].css_width;
+						}
+					} else if (classes[0] == "divider-container") {
+						divider.style.width = token.dividers[index].css_width;
+						divider.style.height = token.dividers[index].css_height;
+					} else {
+						if (classes[classes.length - 1] != "width100") {
+							divider.style.width = token.dividers[index].css_width;
+						} else {
+							divider.style.width = "100%";
+						}
+						if (classes[classes.length - 2] != "height100") {
+							divider.style.height = token.dividers[index].css_height;
+						} else {
+							divider.style.height = "100%";
+						}
+					}
+				}
 
+				$("#add-attachment-desktop").empty();
+				for (index = 0; index < token.attachments.length; ++index) {
+					appendAttachmentDisplay(token.attachments[index]);
+				}
+			}
 		});
 	}
 	closeImageDialog();
@@ -1563,6 +1701,7 @@ function clearBento(bento) {
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
+		console.log("Content URI is present");
 		if (isYouTube(savedBento.content_uri)) {
 			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
@@ -1573,8 +1712,11 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
+		// console.log('Image file name is present');
+		// console.log('Image File Path is: ' + savedBento.image_file_path);
 		addImage(bento, savedBento.image_file_path, null, savedBento);
 		bento.image_file_name = savedBento.image_file_name;
+		console.log(bento.image_file_name);
 		if (savedBento.image_hyperlink) {
 			var image = $("#"+bento.id+"-image");
 			image[0].hyperlink = savedBento.image_hyperlink;
@@ -1590,6 +1732,14 @@ function loadBento(bento, savedBento) {
 		if (bento.download_mime_type.match(audioType)) {
 			addAudio(bento, savedBento.download_file_path, null, savedBento);
 		}
+	}
+
+	if (savedBento.overlay_content) {
+		console.log("Saved overlay left: " + savedBento.overlay_left);
+		console.log("Saved overlay top: " + savedBento.overlay_top);
+		console.log(savedBento);
+		arr = [savedBento.overlay_content, savedBento.overlay_left, savedBento.overlay_top];
+		addOverlayToBento(bento, arr);
 	}
 }
 
@@ -2417,12 +2567,7 @@ function addOverlay(par){
 	}
 	var bento;
 	bento = $(".selected-bento")[0];
-	addOverlayToBento(bento, text);
-	//bento.overlayText = text
-	//var textbox = $("#"+bento.id+"-text-overlay");
-	//if(textbox[0].classList.contains("text-overlay-show")){
-	//	textbox[0].innerHTML = text;
-	//}
+	addOverlayToBento(bento, [text]);
 }
 
 function selectImageDialogTab(tab) {
