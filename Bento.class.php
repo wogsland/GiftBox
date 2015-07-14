@@ -149,12 +149,19 @@ class Bento {
 		}
 
 		if ($this->cropped_image_file_name) {
+			$ext = pathinfo($this->cropped_image_file_name, PATHINFO_EXTENSION);			
 			if ($google_app_engine) {
-//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
-//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
-				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$this->cropped_image_file_name, $use_https);
+				if ($ext == "gif") {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$this->image_file_name, $use_https);
+				} else {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$this->cropped_image_file_name, $use_https);
+				}
 			} else {
-				$image_path = $file_storage_path.$this->cropped_image_file_name;
+				if ($ext == "gif") {
+					$image_path = $file_storage_path.$this->image_file_name;
+				} else {
+					$image_path = $file_storage_path.$this->cropped_image_file_name;
+				}
 			}
 			if ($this->download_file_name && (strpos($this->download_mime_type, 'audio') === 0)) {
 				// Show the image as a poster in the audio player
@@ -222,7 +229,6 @@ class Bento {
 			  		echo "<div id='redirect_url'>".$this->redirect_url."</div>".PHP_EOL;
 
 				};
-				//echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_soundcloud($this->content_uri)) {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {

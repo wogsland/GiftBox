@@ -1206,13 +1206,13 @@ function save() {
 		bento.overlay_width = (parseInt(($("#"+this.id+"-out-text-overlay-container").width() / columnWidth)*10000))/100;
 		var left = this.overlay_content ? $("#"+this.id +"-out-text-overlay-container").css("left").split("px")[0] : null;
 		bento.overlay_left = (parseInt((left/columnWidth)*10000))/100;
-		console.log("Saving overlay css: " + bento.overlay_top + "(top) and " + bento.overlay_left + "(left)");
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
+			console.log("extension: " + extension);
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
@@ -1764,6 +1764,7 @@ function createCroppedImage (bento, image, container) {
 	var imageTop = parseInt(imageStyle.top, 10);
 	var sourceY = (containerTop * -1) - imageTop;
 	var croppedCanvas = document.createElement('canvas');
+	console.log(croppedCanvas);
 	croppedCanvas.width = parseInt(bento.css_width, 10);
 	croppedCanvas.height = parseInt(bento.css_height, 10);
 	var croppedContext = croppedCanvas.getContext('2d');
@@ -1771,6 +1772,7 @@ function createCroppedImage (bento, image, container) {
 	var cropHeight = parseInt(bento.css_height, 10);
 	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
 	var croppedImage = new Image();
+
 	croppedImage.src = croppedCanvas.toDataURL();
 	return croppedImage;
 }
