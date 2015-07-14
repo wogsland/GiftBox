@@ -1199,6 +1199,7 @@ function save() {
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
 			bento.image_file_name = this.image_file_name;
+			console.log(bento.image_file_name);
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
@@ -1343,7 +1344,7 @@ function save() {
 					uploadFileData(croppedImage.src,giftbox.bentos[i].css_id+"-cropped_"+ template.giftboxId+"_"+giftbox.bentos[i].image_file_name);
 					if (!image.saved) {
 						if (image.file) {
-							image.file.name = template.giftboxId + image.file.name;
+							image.file.name = template.giftboxId + "_" +image.file.name;
 							uploadFile(image.file);
 						} else {
 							//alert(image.src);
@@ -1490,55 +1491,194 @@ function loadSaved() {
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
-			console.log("Token data from AJAX: " + token);
+			console.log("Token data from AJAX: ");
+			console.log(token);
 			closeStatus();
-			console.log("Token css_id: " + token.css_id);
 
-			// Bring the correct template to the top
-			selectTemplate(token.css_id);
+			// Set the animation styles
+			$('#select-envelope-color-option').val(token.animation_color);
+			$('#select-envelope-style-option').val(token.animation_style);
 
-			// Populate the top template properties
-			window.top_template.giftboxId = token.id;
-			window.top_template.giftboxName = token.name;
-			window.top_template.appURL = token.app_url;
-			window.top_template.letterText = token.letter_text;
-			window.top_template.wrapperType = token.wrapper_type;
-			window.top_template.unloadCount = token.unload_count;
-			console.log(window.top_template);
-			setPreviewLink(window.top_template);
+			var templateId = token.css_id;
 
-			// Bento properties
-			var index;
-			var bento;
-			for (index = 0; index < token.bentos.length; ++index) {
-				bento = document.getElementById(token.bentos[index].css_id);
-				bento.style.width = "100%";
-				bento.style.height = "100%";
-				bento.style.top = "0px";
-				bento.style.left = "0px";
-				clearBento(bento);
-				loadBento(bento, token.bentos[index]);
-			}
+			var template = document.getElementById(templateId);
 
-			// Divider properties
-			var divider;
-			for (index = 0; index < token.dividers.length; ++index) {
-				divider = document.getElementById(token.dividers[index].css_id);
-				if (token.dividers[index].parent_css_id.indexOf("column") > -1) {
-					divider.style.width = "100%";
-				} else {
-					divider.style.width = token.dividers[index].css_width;
+			if (!template) {
+				$.get("templates/create-"+templateId+".html", function(data){
+					$("#template-container").append(data);
+					template = document.getElementById(templateId);
+					initTemplate($("#"+templateId));
+					template.giftboxName = "Untitled";
+					template.giftboxId = null;
+					template.letterText = "";
+					template.wrapperType = "";
+					template.unloadCount = 3;
+
+					// initialize the sliders
+					$("#"+templateId+" .image-slider").slider({
+						orientation: "vertical",
+						min: 100,
+						max: 400,
+						slide: function(event, ui) {
+							handleSliderEvent(event, ui);
+						}
+					});
+					
+					showTemplate(template);
+				}).done(function() {
+					// Populate the top template properties
+					window.top_template.giftboxId = token.id;
+					window.top_template.giftboxName = token.name;
+					window.top_template.appURL = token.app_url;
+					window.top_template.letterText = token.letter_text;
+					window.top_template.wrapperType = token.wrapper_type;
+					window.top_template.unloadCount = token.unload_count;
+					// Set the link where you can view this token
+					setPreviewLink(window.top_template);
+
+					// Bento properties
+					var index;
+					var bento;
+					for (index = 0; index < token.bentos.length; ++index) {
+						// Choosing the bento by it's id
+						bento = document.getElementById(token.bentos[index].css_id);
+						console.log(token.bentos[index]);
+						bento.style.width = "100%";
+						bento.style.height = "100%";
+						bento.style.top = "0px";
+						bento.style.left = "0px";
+						// clearing out the bento in case there is already something there
+						clearBento(bento);
+						loadBento(bento, token.bentos[index]);
+					}
+
+					// Divider properties
+					var divider;
+					var classes;
+					var width_class;
+					var width;
+					var height;
+					for (index = 0; index < token.dividers.length; ++index) {
+						divider = document.getElementById(token.dividers[index].css_id);
+						console.log(divider);
+						console.log("Parent: " + token.dividers[index].parent_css_id);
+						classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
+						console.log(classes);
+						console.log("Saved top: " + token.dividers[index].css_top);
+						console.log("Saved left: " + token.dividers[index].css_left);
+						console.log("Saved width: " + token.dividers[index].css_width);
+						console.log("Saved height: " + token.dividers[index].css_height);
+
+						// First if statement to check whether this is a divider and type
+						if (classes[1] == "divider") {
+							console.log("This is a divider");
+							if (classes[0] == "vertical") {
+								divider.style.left = token.dividers[index].css_left;
+								divider.style.height = token.dividers[index].css_height;
+							} else if (classes[0] == "horizontal") {
+								divider.style.top = token.dividers[index].css_top;
+								divider.style.width = token.dividers[index].css_width;
+							}
+						} else if (classes[0] == "divider-container") {
+							console.log("This is a divider-container");
+							divider.style.width = token.dividers[index].css_width;
+							divider.style.height = token.dividers[index].css_height;
+						} else {
+							console.log("This is a column");
+							if (classes[classes.length - 1] != "width100") {
+								divider.style.width = token.dividers[index].css_width;
+							} else {
+								divider.style.width = "100%";
+							}
+							if (classes[classes.length - 2] != "height100") {
+								divider.style.height = token.dividers[index].css_height;
+							} else {
+								divider.style.height = "100%";
+							}
+						}
+					}
+
+					$("#add-attachment-desktop").empty();
+					for (index = 0; index < token.attachments.length; ++index) {
+						appendAttachmentDisplay(token.attachments[index]);
+					}
+				});
+			} else {
+				showTemplate(template);
+
+				// Populate the top template properties
+				window.top_template.giftboxId = token.id;
+				window.top_template.giftboxName = token.name;
+				window.top_template.appURL = token.app_url;
+				window.top_template.letterText = token.letter_text;
+				window.top_template.wrapperType = token.wrapper_type;
+				window.top_template.unloadCount = token.unload_count;
+				// Set the link where you can view this token
+				setPreviewLink(window.top_template);
+
+				// Bento properties
+				var index;
+				var bento;
+				for (index = 0; index < token.bentos.length; ++index) {
+					// Choosing the bento by it's id
+					bento = document.getElementById(token.bentos[index].css_id);
+					console.log(token.bentos[index]);
+					bento.style.width = "100%";
+					bento.style.height = "100%";
+					bento.style.top = "0px";
+					bento.style.left = "0px";
+					// clearing out the bento in case there is already something there
+					clearBento(bento);
+					loadBento(bento, token.bentos[index]);
 				}
-				divider.style.height = token.dividers[index].css_height;
-				divider.style.top = token.dividers[index].css_top;
-				divider.style.left = token.dividers[index].css_left;
-			}
 
-			$("#add-attachment-desktop").empty();
-			for (index = 0; index < token.attachments.length; ++index) {
-				appendAttachmentDisplay(token.attachments[index]);
-			}
+				// Divider properties
+				var divider;
+				var classes;
+				var width_class;
+				var width;
+				var height;
+				for (index = 0; index < token.dividers.length; ++index) {
+					divider = document.getElementById(token.dividers[index].css_id);
+					classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
+					console.log("Saved top: " + token.dividers[index].css_top);
+					console.log("Saved left: " + token.dividers[index].css_left);
+					console.log("Saved width: " + token.dividers[index].css_width);
+					console.log("Saved height: " + token.dividers[index].css_height);
+					// First if statement to check whether this is a divider and type
+					if (classes[1] == "divider") {
+						console.log("This is a divider");
+						if (classes[0] == "vertical") {
+							divider.style.left = token.dividers[index].css_left;
+							divider.style.height = token.dividers[index].css_height;
+						} else if (classes[0] == "horizontal") {
+							divider.style.top = token.dividers[index].css_top;
+							divider.style.width = token.dividers[index].css_width;
+						}
+					} else if (classes[0] == "divider-container") {
+						console.log("This is a divider-container");
+						divider.style.width = token.dividers[index].css_width;
+						divider.style.height = token.dividers[index].css_height;
+					} else {
+						console.log("This is a column");
+						if (classes[classes.length - 1] != "width100") {
+							divider.style.width = token.dividers[index].css_width;
+						} else {
+							divider.style.width = "100%";
+						}
+						if (classes[classes.length - 2] != "height100") {
+							divider.style.height = token.dividers[index].css_height;
+						} else {
+							divider.style.height = "100%";
+						}
+					}
+				}
 
+				$("#add-attachment-desktop").empty();
+				for (index = 0; index < token.attachments.length; ++index) {
+					appendAttachmentDisplay(token.attachments[index]);
+				}
+			}
 		});
 	}
 	closeImageDialog();
@@ -1571,6 +1711,7 @@ function clearBento(bento) {
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
+		console.log("Content URI is present");
 		if (isYouTube(savedBento.content_uri)) {
 			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
@@ -1581,8 +1722,11 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
+		// console.log('Image file name is present');
+		// console.log('Image File Path is: ' + savedBento.image_file_path);
 		addImage(bento, savedBento.image_file_path, null, savedBento);
 		bento.image_file_name = savedBento.image_file_name;
+		console.log(bento.image_file_name);
 		if (savedBento.image_hyperlink) {
 			var image = $("#"+bento.id+"-image");
 			image[0].hyperlink = savedBento.image_hyperlink;
