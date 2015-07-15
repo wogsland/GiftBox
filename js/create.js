@@ -1378,8 +1378,15 @@ function save() {
 	}).fail(function() {
 		openMessage("Save", "Save failed!");
 	}).done(function(){
+		
 		var canvasURL = canvas.toDataURL();
 		window.top_template.thumbnailURL = canvasURL;
+		console.log(canvasURL);
+
+		// var half_envelope = document.createElement("img");
+		// half_envelope.src = "../images/halfenvelope.png";
+		// console.log(clearedCanvasURL);
+
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
@@ -2601,10 +2608,14 @@ function selectImageDialogTab(tab) {
 
 function displayThumbnails() {
 	var giftboxId = window.top_template.giftboxId;
-	if (!giftboxId) {
+	var thumbnailURL = window.top_template.thumbnailURL;
+	if (!thumbnailURL) {
 		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
 	} else {
-		$('.thumbnails-display').css('display', 'block');
-		console.log(window.top_template.thumbnailURL);
+		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
+												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
+												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
+												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">');
+		$('#thumbnail-dialog').dialog('open');
 	}
 }

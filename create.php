@@ -108,14 +108,12 @@
 						<span class="template-tab-text">WRITE A DESCRIPTION <i onclick="saveButton()" class="fa fa-save fa-lg token-description-save"></i></span>
 						<textarea id="token-description" maxlength="150"></textarea>
 					</div>
-					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
-					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
+<!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
+					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
 					<span class="template-tab-text">THUMBNAILS</span>
 					<div class="send-button" id="thumbnails-send-button" onclick="displayThumbnails()"></div>
-					<div class="thumbnails-display" style="display: none;">
-					</div>
 				</div>
 			</div>
 		</div>
@@ -345,6 +343,16 @@
 		<div id="add-button-container">
 			<div class="add-button" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</div>
 			<div class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</div>
+		</div>
+	</div>
+
+	<div id="thumbnail-dialog" title="COPY THUMBNAILS">
+		<div id="thumbnail-dialog-container">
+			
+		</div>
+
+		<div id="thumbnail-button-container">
+			<div class="thumbnail-button" onclick="$('#thumbnail-dialog').dialog('close');">CLOSE</div>
 		</div>
 	</div>
 
