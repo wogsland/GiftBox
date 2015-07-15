@@ -72,7 +72,6 @@ if(user.level == 1){
 }
 //get user information
 
-
 var Model = {
 
   profile: {
