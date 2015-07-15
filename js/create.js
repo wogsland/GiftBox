@@ -1159,7 +1159,7 @@ function save() {
 	var canvas = document.getElementById("thumbnail-canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "#33383B";
+	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	var height = 10;
 	var width = 230;
@@ -1379,6 +1379,7 @@ function save() {
 		openMessage("Save", "Save failed!");
 	}).done(function(){
 		var canvasURL = canvas.toDataURL();
+		window.top_template.thumbnailURL = canvasURL;
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
@@ -2600,12 +2601,10 @@ function selectImageDialogTab(tab) {
 
 function displayThumbnails() {
 	var giftboxId = window.top_template.giftboxId;
-	var unloadType = window.top_template.wrapperType;
-	var unloadCount = window.top_template.unloadCount
 	if (!giftboxId) {
 		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
 	} else {
 		$('.thumbnails-display').css('display', 'block');
-		console.log(giftboxId);
+		console.log(window.top_template.thumbnailURL);
 	}
 }
