@@ -112,8 +112,10 @@
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div>
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
-					<!-- <span class="template-tab-text">THUMBNAILS</span>
-					<button>CLICK TO SEE THUMBNAILS</button> -->
+					<span class="template-tab-text">THUMBNAILS</span>
+					<div class="send-button" id="thumbnails-send-button" onclick="displayThumbnails()"></div>
+					<div class="thumbnails-display" style="display: none;">
+					</div>
 				</div>
 			</div>
 		</div>

@@ -995,3 +995,7 @@ fieldset {
 	width: 189px;
 	margin-left: 20px;
 }
+
+#thumbnails-send-button {
+	background-position: -1px -768px;
+}

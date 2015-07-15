@@ -2597,3 +2597,15 @@ function selectImageDialogTab(tab) {
 	// show the selected container
 	$("#"+tab.id+"-container").css("display", "block");
 }
+
+function displayThumbnails() {
+	var giftboxId = window.top_template.giftboxId;
+	var unloadType = window.top_template.wrapperType;
+	var unloadCount = window.top_template.unloadCount
+	if (!giftboxId) {
+		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
+	} else {
+		$('.thumbnails-display').css('display', 'block');
+		console.log(giftboxId);
+	}
+}
