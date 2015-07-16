@@ -1659,12 +1659,16 @@ function loadSaved() {
 					if (classes[1] == "divider") {
 						if (classes[0] == "vertical") {
 							divider.style.left = token.dividers[index].css_left;
+							divider.style.top = token.dividers[index].css_top;
 							divider.style.height = token.dividers[index].css_height;
 						} else if (classes[0] == "horizontal") {
+							divider.style.left = token.dividers[index].css_left;
 							divider.style.top = token.dividers[index].css_top;
 							divider.style.width = token.dividers[index].css_width;
 						}
 					} else if (classes[0] == "divider-container") {
+						divider.style.left = token.dividers[index].css_left;
+						divider.style.top = token.dividers[index].css_top;
 						divider.style.width = token.dividers[index].css_width;
 						divider.style.height = token.dividers[index].css_height;
 					} else {
