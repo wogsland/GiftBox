@@ -1212,8 +1212,7 @@ function save() {
 		if (image) {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			console.log("extension: " + extension);
-			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
+						var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
@@ -1381,16 +1380,14 @@ function save() {
 		
 		var canvasURL = canvas.toDataURL();
 		window.top_template.thumbnailURL = canvasURL;
-		console.log(canvasURL);
-
+		
 		var half_envelope = document.createElement("img");
 		half_envelope.src = "../images/halfenvelope.png";
 		ctx.drawImage(half_envelope, 10, 10);
 		ctx.font = "30px Arial";
 		ctx.strokeText("Hello World",10,50);
 		clearedCanvasURL = canvas.toDataURL();
-		console.log(clearedCanvasURL);
-
+		
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
@@ -1614,8 +1611,10 @@ function loadSaved() {
 					}
 
 					$("#add-attachment-desktop").empty();
-					for (index = 0; index < token.attachments.length; ++index) {
-						appendAttachmentDisplay(token.attachments[index]);
+					if (token.attachments) {
+						for (index = 0; index < token.attachments.length; ++index) {
+							appendAttachmentDisplay(token.attachments[index]);
+						}
 					}
 				});
 			} else {
@@ -1686,8 +1685,10 @@ function loadSaved() {
 				}
 
 				$("#add-attachment-desktop").empty();
-				for (index = 0; index < token.attachments.length; ++index) {
-					appendAttachmentDisplay(token.attachments[index]);
+				if (token.attachments) {
+					for (index = 0; index < token.attachments.length; ++index) {
+						appendAttachmentDisplay(token.attachments[index]);
+					}
 				}
 			}
 		});
@@ -1722,8 +1723,7 @@ function clearBento(bento) {
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
-		console.log("Content URI is present");
-		if (isYouTube(savedBento.content_uri)) {
+			if (isYouTube(savedBento.content_uri)) {
 			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
 			addSoundCloud(bento, savedBento.content_uri);
@@ -1733,12 +1733,9 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
-		// console.log('Image file name is present');
-		// console.log('Image File Path is: ' + savedBento.image_file_path);
-		addImage(bento, savedBento.image_file_path, null, savedBento);
+			addImage(bento, savedBento.image_file_path, null, savedBento);
 		bento.image_file_name = savedBento.image_file_name;
-		console.log(bento.image_file_name);
-		if (savedBento.image_hyperlink) {
+				if (savedBento.image_hyperlink) {
 			var image = $("#"+bento.id+"-image");
 			image[0].hyperlink = savedBento.image_hyperlink;
 			showControl(bento.id+"-link-icon");
@@ -1756,10 +1753,7 @@ function loadBento(bento, savedBento) {
 	}
 
 	if (savedBento.overlay_content) {
-		console.log("Saved overlay left: " + savedBento.overlay_left);
-		console.log("Saved overlay top: " + savedBento.overlay_top);
-		console.log(savedBento);
-		arr = [savedBento.overlay_content, savedBento.overlay_left, savedBento.overlay_top];
+			arr = [savedBento.overlay_content, savedBento.overlay_left, savedBento.overlay_top];
 		addOverlayToBento(bento, arr);
 	}
 }
@@ -1784,8 +1778,7 @@ function createCroppedImage (bento, image, container) {
 	var imageTop = parseInt(imageStyle.top, 10);
 	var sourceY = (containerTop * -1) - imageTop;
 	var croppedCanvas = document.createElement('canvas');
-	console.log(croppedCanvas);
-	croppedCanvas.width = parseInt(bento.css_width, 10);
+		croppedCanvas.width = parseInt(bento.css_width, 10);
 	croppedCanvas.height = parseInt(bento.css_height, 10);
 	var croppedContext = croppedCanvas.getContext('2d');
 	var cropWidth = parseInt(bento.css_width, 10);
@@ -2595,8 +2588,7 @@ function addOverlay(par){
 
 function selectImageDialogTab(tab) {
 	var selectedIcon = $("#"+tab.id);
-	console.log(selectedIcon);
-
+	
 	// restore all icons
 	$(".image-dialog-nav-tab").each(function(i) {
 		$(this).removeClass("image-dialog-tab-hover");
