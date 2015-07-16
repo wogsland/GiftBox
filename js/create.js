@@ -1383,9 +1383,13 @@ function save() {
 		window.top_template.thumbnailURL = canvasURL;
 		console.log(canvasURL);
 
-		// var half_envelope = document.createElement("img");
-		// half_envelope.src = "../images/halfenvelope.png";
-		// console.log(clearedCanvasURL);
+		var half_envelope = document.createElement("img");
+		half_envelope.src = "../images/halfenvelope.png";
+		ctx.drawImage(half_envelope, 10, 10);
+		ctx.font = "30px Arial";
+		ctx.strokeText("Hello World",10,50);
+		clearedCanvasURL = canvas.toDataURL();
+		console.log(clearedCanvasURL);
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
@@ -2612,10 +2616,11 @@ function displayThumbnails() {
 	if (!thumbnailURL) {
 		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
 	} else {
-		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
-												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
-												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">'
-												+ '<img class="thumbnail-image" src="' + thumbnailURL + '" style="width: 45%;">');
+		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												/* + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												 * + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
+												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
 		$('#thumbnail-dialog').dialog('open');
 	}
 }
