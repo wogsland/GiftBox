@@ -1159,7 +1159,7 @@ function save() {
 	var canvas = document.getElementById("thumbnail-canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "#33383B";
+	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	var height = 10;
 	var width = 230;
@@ -1378,7 +1378,19 @@ function save() {
 	}).fail(function() {
 		openMessage("Save", "Save failed!");
 	}).done(function(){
+		
 		var canvasURL = canvas.toDataURL();
+		window.top_template.thumbnailURL = canvasURL;
+		console.log(canvasURL);
+
+		var half_envelope = document.createElement("img");
+		half_envelope.src = "../images/halfenvelope.png";
+		ctx.drawImage(half_envelope, 10, 10);
+		ctx.font = "30px Arial";
+		ctx.strokeText("Hello World",10,50);
+		clearedCanvasURL = canvas.toDataURL();
+		console.log(clearedCanvasURL);
+
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
@@ -2596,4 +2608,19 @@ function selectImageDialogTab(tab) {
 
 	// show the selected container
 	$("#"+tab.id+"-container").css("display", "block");
+}
+
+function displayThumbnails() {
+	var giftboxId = window.top_template.giftboxId;
+	var thumbnailURL = window.top_template.thumbnailURL;
+	if (!thumbnailURL) {
+		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
+	} else {
+		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												/* + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
+												 * + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
+												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
+		$('#thumbnail-dialog').dialog('open');
+	}
 }
