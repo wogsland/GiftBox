@@ -47,7 +47,7 @@ function payWithStripe(email, payFrom) {
 	// Open Checkout with further options
 	handler.open({
 		name: 'GiveToken',
-		description: "GiveToken Standard ($9.99/month)",
-		amount: 999
+		description: "GiveToken Standard ($24.99/month)",
+		amount: 2499
 	});
 }

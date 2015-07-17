@@ -16,7 +16,7 @@ document.write('\
 					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
 					<select class="dialog-input large-input" id="signup_level" name="signup_level">\
 					<option value="1">Basic (Free)</option>\
-					<option value="2">Standard ($9.99)</option>\
+					<option value="2">Standard ($24.99)</option>\
 					</select>\
 					Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>\
 				</form>\
