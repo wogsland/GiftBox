@@ -274,6 +274,11 @@ function addOverlayToBento(bento, options){
 
 function addImage(bento, imageSrc, imageFile, savedBento) {
 	// Remove any previously dropped image or video
+	if (imageFile.type == "image/gif") {
+		console.log("Trying to upload a gif");
+		console.log($(bento));
+		$(bento).css('background-color', 'black');
+	}
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
 		bento.imageContainer = null;
@@ -282,7 +287,6 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.video = null;
 	}
 	if (imageFile) {
-		//need to figure out where imageFile.name is being set!!!!!!!!!!!!!
 		bento.image_file_name = imageFile.name;
 	}
 
@@ -303,8 +307,10 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
+	img.imgType = imageFile.type;
 	img.onload = function() {
-		resizeImage(this, this.parentBento);
+		resizeImage(this, imageFile.type, this.parentBento);
+
 		if (this.savedBento) {
 			this.style.width = this.savedBento.image_width;
 			this.style.height = this.savedBento.image_height;
@@ -312,8 +318,14 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 			$("#"+bento.id+"-slider").slider("value", this.savedBento.slider_value);
 		} else {
 		}
-		// resize the image container so that the image has scroll containment
-		resizeContainer(this.parentBento, this, this.imageContainer);
+
+		if (imageFile.type != "image/gif") {
+			// resize the image container so that the image has scroll containment
+			resizeContainer(this.parentBento, this, this.imageContainer);
+		} else if (imageFile.type == "image/gif") {
+			resizeGifContainer(this.parentBento, this, this.imageContainer);
+		}
+
 		if (this.savedBento) {
 			this.style.top = this.savedBento.image_top_in_container;
 			this.style.left = this.savedBento.image_left_in_container;
@@ -324,19 +336,21 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
 
-	// make the IMG draggable inside the DIV
-	$('#'+ img.id)
-		.draggable({ containment: "#" + imageContainer.id})
-		.click(function(){
-            if ( $(this).is('.ui-draggable-dragging') ) {
-                  return;
-            }
-            imageClicked($('#'+ img.id));
-		});
+	if (imageFile.type != "image/gif") {
+		// make the IMG draggable inside the DIV
+		$('#'+ img.id)
+			.draggable({ containment: "#" + imageContainer.id})
+			.click(function(){
+	            if ( $(this).is('.ui-draggable-dragging') ) {
+	                  return;
+	            }
+	            imageClicked($('#'+ img.id));
+			});
+		showControl(bento.id + "-slider", img);
+	}
 
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
-	showControl(bento.id + "-slider", img);
 }
 
 function addSpotify(bento, trackId) {
@@ -815,7 +829,7 @@ function showControl(controlId, target) {
 	var control = $("#"+controlId);
 	if (control.length > 0) {
 		control.css("display", "block");
-		control.css("zIndex", 2);
+		control.css("zIndex", 1000);
 		control[0].target = target;
 	}
 /*	
@@ -854,6 +868,7 @@ function showOverlay(event, showButton){
 
 function closeClicked(event, closeButton) {
 	var bento = closeButton.parentNode;
+	$(bento).css('background-color', 'white');
 	var target = closeButton.target;
 	if (target) {
 		if (target.nodeName === "VIDEO") {
@@ -901,16 +916,44 @@ function resizeContainer(bento, img, div) {
 	
 }
 
-function resizeImage(img, bento) {
+function resizeGifContainer(bento, img, div) {
+	// resize the container so that the image covers the bento with no white space
+	var widthDiff = img.width - bento.offsetWidth;
+	var heightDiff = img.height - bento.offsetHeight;
+	var newContainerWidth = bento.offsetWidth + (widthDiff * 2);
+	var newContainerHeight = bento.offsetHeight + (heightDiff * 2);
+	div.style.width = newContainerWidth + 'px';
+	div.style.height = newContainerHeight + 'px';
+	div.style.left = Math.round((0 - ((newContainerWidth - bento.offsetWidth) / 2)) / 2) + 'px';
+	div.style.top = Math.round((0 - ((newContainerHeight - bento.offsetHeight) / 2)) / 2) + 'px';
+	img.style.left = Math.round((newContainerWidth / 2) - (img.width / 2)) + 'px';
+	img.style.top = Math.round((newContainerHeight / 2) - (img.height / 2)) + 'px';
+	
+}
+
+function resizeImage(img, imgFileType, bento) {
 	var imgAspectRatio = img.height / img.width;
 	var bentoAspectRatio = bento.offsetHeight / bento.offsetWidth;
-	if (bentoAspectRatio < imgAspectRatio) {
-		img.style.width = bento.offsetWidth + "px";
-		img.style.height = "auto";
+	if (imgFileType == "image/gif") {
+		if (bentoAspectRatio < imgAspectRatio) {
+			console.log("bentoAspectRatio < imgAspectRatio");
+			img.style.width = "auto";
+			img.style.height = bento.offsetHeight + "px";
+		} else {
+			console.log("bentoAspectRatio > imgAspectRatio");
+			img.style.height = "auto";
+			img.style.width = bento.offsetWidth + "px";
+		}
 	} else {
-		img.style.height = bento.offsetHeight + "px";
-		img.style.width = "auto";
+		if (bentoAspectRatio < imgAspectRatio) {
+			img.style.width = bento.offsetWidth + "px";
+			img.style.height = "auto";
+		} else {
+			img.style.height = bento.offsetHeight + "px";
+			img.style.width = "auto";
+		}
 	}
+
 	img.style.top = 0;
 	img.style.left = 0;
 
@@ -919,12 +962,18 @@ function resizeImage(img, bento) {
 	img.originalHeight = img.height;
 }
 
+
 function resizeBento(bento) {
 	var image = document.getElementById(bento.id + "-image");
 	if (image) {
-		resizeImage(image, bento);
+		console.log(image.imgType);
+		resizeImage(image, image.imgType, bento);
 		var container = document.getElementById(bento.id + "-image-container");
-		resizeContainer(bento, image, container);
+		if (image.imgType == "image/gif") {
+			resizeGifContainer(bento, image, container);
+		} else {
+			resizeContainer(bento, image, container);
+		}
 	}
 }
 
@@ -947,6 +996,7 @@ function handleSliderEvent(event, ui) {
 	var bento = event.target.parentNode;
 	var nameRoot = bento.id;
 	var image = document.getElementById(nameRoot + "-image");
+	console.log(image);
 	var container = document.getElementById(nameRoot + "-image-container");
 
 	// change the value into a float (e.g. 1.5);
