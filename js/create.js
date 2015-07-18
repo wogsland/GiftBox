@@ -829,7 +829,7 @@ function showControl(controlId, target) {
 	var control = $("#"+controlId);
 	if (control.length > 0) {
 		control.css("display", "block");
-		control.css("zIndex", 1000);
+		control.css("zIndex", 2);
 		control[0].target = target;
 	}
 /*	
