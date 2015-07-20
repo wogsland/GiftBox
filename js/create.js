@@ -277,8 +277,6 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	// Remove any previously dropped image or video
 	if (imageFile) {
 		if (imageFile.type == "image/gif" || imageFileType == "gif") {
-			console.log("Trying to upload a gif");
-			console.log($(bento));
 			$(bento).css('background', 'black');
 		}
 	}
@@ -931,7 +929,6 @@ function resizeContainer(bento, img, div) {
 }
 
 function resizeGifContainer(bento, img, div) {
-	console.log("resizng a gif container");
 	// resize the container so that the image covers the bento with no white space
 	var widthDiff = img.width - bento.offsetWidth;
 	var heightDiff = img.height - bento.offsetHeight;
@@ -951,11 +948,9 @@ function resizeImage(img, imgFileType, bento) {
 	var bentoAspectRatio = bento.offsetHeight / bento.offsetWidth;
 	if (imgFileType == "image/gif" || imgFileType == "gif") {
 		if (bentoAspectRatio < imgAspectRatio) {
-			console.log("bentoAspectRatio < imgAspectRatio");
 			img.style.width = "auto";
 			img.style.height = bento.offsetHeight + "px";
 		} else {
-			console.log("bentoAspectRatio > imgAspectRatio");
 			img.style.height = "auto";
 			img.style.width = bento.offsetWidth + "px";
 		}
@@ -983,7 +978,6 @@ function resizeBento(bento, imageFileType) {
 
 	var image = document.getElementById(bento.id + "-image");
 	if (image) {
-		console.log(image.imgType);
 		resizeImage(image, image.imgType, bento);
 		var container = document.getElementById(bento.id + "-image-container");
 		if (image.imgType == "image/gif" || image.imgType == "gif") {
@@ -1013,7 +1007,6 @@ function handleSliderEvent(event, ui) {
 	var bento = event.target.parentNode;
 	var nameRoot = bento.id;
 	var image = document.getElementById(nameRoot + "-image");
-	console.log(image);
 	var container = document.getElementById(nameRoot + "-image-container");
 
 	// change the value into a float (e.g. 1.5);
@@ -1042,7 +1035,6 @@ function handleHorizontalDrag(target, movement) {
 
 			var bentos = leftDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
-				console.log(bentos[i]);
 				resizeBento(bentos[i]);
 			}
 		}
@@ -1057,7 +1049,6 @@ function handleHorizontalDrag(target, movement) {
 
 			var bentos = rightDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
-				console.log(bentos[i]);
 				resizeBento(bentos[i]);
 			}
 		}
@@ -1278,14 +1269,11 @@ function save() {
 
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
-		console.log(image);
 		if (image) {
 			bento.image_file_name = this.image_file_name;
-			console.log(bento.image_file_name);
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
-			console.log(bento.cropped_image_file_name);
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
 			bento.image_width = image.style.width;
@@ -1296,10 +1284,6 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
-			console.log("three parameters that go into createCroppedImage");
-			console.log(bento);
-			console.log(image);
-			console.log(container);
 
 			var croppedImage = createCroppedImage(bento, image, container);
 
@@ -1810,7 +1794,6 @@ function loadBento(bento, savedBento) {
 	}
 	if (savedBento.image_file_name) {
 		if (savedBento.image_file_name.substr(savedBento.image_file_name.length - 3) == "gif") {
-			console.log("Loading back a gif");
 			$(bento).css('background', 'black');
 			addImage(bento, savedBento.image_file_path, null, savedBento, "gif");
 		} else {
@@ -1867,7 +1850,6 @@ function createCroppedImage (bento, image, container) {
 	var cropHeight = parseInt(bento.css_height, 10);
 	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
 	var croppedImage = new Image();
-	console.log(croppedCanvas);
 
 	croppedImage.src = croppedCanvas.toDataURL();
 	return croppedImage;

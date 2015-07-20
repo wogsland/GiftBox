@@ -170,16 +170,20 @@ class Bento {
 					echo '<a href="'.$this->image_hyperlink.'" target="_blank">'.PHP_EOL;
 				}
 				if ($ext == "gif") {
-					echo "<h2>" . $this->image_width . "</h2>";
-					echo "<h2>" . $this->css_width . "</h2>";
-					echo "<h2>" . $this->image_height . "</h2>";
-					echo "<h2>" . $this->css_height . "</h2>";
 					if ($this->image_width == "auto") {
 						echo '<img class="image-horizontal-gif" src="'.$image_path.'">'.PHP_EOL;
-						echo '<script>$(".image-horizontal-gif").parent().css("background", "black");</script>';
+						echo '<script>if ($(".image-horizontal-gif").parent().is("a")) { 
+											$(".image-horizontal-gif").parent().parent().css("background", "black");
+										} else { 
+											$(".image-horizontal-gif").parent().css("background", "black"); 
+										}</script>';
 					} else if ($this->image_height == "auto") {
 						echo '<img class="image-vertical-gif" src="'.$image_path.'">'.PHP_EOL;
-						echo '<script>$(".image-vertical-gif").parent().css("background", "black");</script>';
+						echo '<script>if ($(".image-vertical-gif").parent().is("a")) { 
+											$(".image-vertical-gif").parent().parent().css("background", "black");
+										} else { 
+											$(".image-vertical-gif").parent().css("background", "black"); 
+										}</script>';
 					}
 				} else {
 					echo '<img src="'.$image_path.'">'.PHP_EOL;

@@ -103,7 +103,6 @@ iframe {
 
 .bento img.image-horizontal-gif {
 	width: auto;
-	height: inherit;
 	margin: auto;
 	left: 0;
 	right: 0;
@@ -113,7 +112,6 @@ iframe {
 }
 
 .bento img.image-vertical-gif {
-	width: inherit;
 	height: auto;
 	margin: auto;
 	left: 0;
