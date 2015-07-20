@@ -926,6 +926,7 @@ function resizeContainer(bento, img, div) {
 }
 
 function resizeGifContainer(bento, img, div) {
+	console.log("resizng a gif container");
 	// resize the container so that the image covers the bento with no white space
 	var widthDiff = img.width - bento.offsetWidth;
 	var heightDiff = img.height - bento.offsetHeight;
@@ -943,7 +944,7 @@ function resizeGifContainer(bento, img, div) {
 function resizeImage(img, imgFileType, bento) {
 	var imgAspectRatio = img.height / img.width;
 	var bentoAspectRatio = bento.offsetHeight / bento.offsetWidth;
-	if (imgFileType == "image/gif") {
+	if (imgFileType == "image/gif" || imgFileType == "gif") {
 		if (bentoAspectRatio < imgAspectRatio) {
 			console.log("bentoAspectRatio < imgAspectRatio");
 			img.style.width = "auto";
@@ -972,13 +973,15 @@ function resizeImage(img, imgFileType, bento) {
 }
 
 
-function resizeBento(bento) {
+function resizeBento(bento, imageFileType) {
+	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
+
 	var image = document.getElementById(bento.id + "-image");
 	if (image) {
 		console.log(image.imgType);
 		resizeImage(image, image.imgType, bento);
 		var container = document.getElementById(bento.id + "-image-container");
-		if (image.imgType == "image/gif") {
+		if (image.imgType == "image/gif" || image.imgType == "gif") {
 			resizeGifContainer(bento, image, container);
 		} else {
 			resizeContainer(bento, image, container);
@@ -1034,6 +1037,7 @@ function handleHorizontalDrag(target, movement) {
 
 			var bentos = leftDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
+				console.log(bentos[i]);
 				resizeBento(bentos[i]);
 			}
 		}
@@ -1048,6 +1052,7 @@ function handleHorizontalDrag(target, movement) {
 
 			var bentos = rightDependent.getElementsByClassName("bento");
 			for (var i = 0; i < bentos.length; ++i) {
+				console.log(bentos[i]);
 				resizeBento(bentos[i]);
 			}
 		}
