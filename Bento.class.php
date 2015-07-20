@@ -170,11 +170,14 @@ class Bento {
 					echo '<a href="'.$this->image_hyperlink.'" target="_blank">'.PHP_EOL;
 				}
 				if ($ext == "gif") {
-					$background_color = "black";
-					if ($this->css_width > $this->css_height) {
+					echo "<h2>" . $this->image_width . "</h2>";
+					echo "<h2>" . $this->css_width . "</h2>";
+					echo "<h2>" . $this->image_height . "</h2>";
+					echo "<h2>" . $this->css_height . "</h2>";
+					if ($this->image_width == "auto") {
 						echo '<img class="image-horizontal-gif" src="'.$image_path.'">'.PHP_EOL;
 						echo '<script>$(".image-horizontal-gif").parent().css("background", "black");</script>';
-					} else if ($this->css_width < $this->css_height) {
+					} else if ($this->image_height == "auto") {
 						echo '<img class="image-vertical-gif" src="'.$image_path.'">'.PHP_EOL;
 						echo '<script>$(".image-vertical-gif").parent().css("background", "black");</script>';
 					}
