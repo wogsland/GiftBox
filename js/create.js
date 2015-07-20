@@ -356,6 +356,11 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	            imageClicked($('#'+ img.id));
 			});
 		showControl(bento.id + "-slider", img);
+	} else {
+		$('#'+ img.id)
+			.click(function(){
+	            imageClicked($('#'+ img.id));
+			});
 	}
 
 	// change the hover for the bento to show the slider and close button
