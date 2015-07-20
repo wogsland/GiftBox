@@ -274,11 +274,14 @@ function addOverlayToBento(bento, options){
 
 function addImage(bento, imageSrc, imageFile, savedBento) {
 	// Remove any previously dropped image or video
-	if (imageFile.type == "image/gif") {
-		console.log("Trying to upload a gif");
-		console.log($(bento));
-		$(bento).css('background-color', 'black');
+	if (imageFile) {
+		if (imageFile.type == "image/gif") {
+			console.log("Trying to upload a gif");
+			console.log($(bento));
+			$(bento).css('background-color', 'black');
+		}
 	}
+
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
 		bento.imageContainer = null;
@@ -307,9 +310,12 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
-	img.imgType = imageFile.type;
+	img.imgType = null;
+	if (imageFile) {
+		img.imgType = imageFile.type;
+	}
 	img.onload = function() {
-		resizeImage(this, imageFile.type, this.parentBento);
+		resizeImage(this, this.imgType, this.parentBento);
 
 		if (this.savedBento) {
 			this.style.width = this.savedBento.image_width;
@@ -319,7 +325,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		} else {
 		}
 
-		if (imageFile.type != "image/gif") {
+		if (img.imgType != "image/gif") {
 			// resize the image container so that the image has scroll containment
 			resizeContainer(this.parentBento, this, this.imageContainer);
 		} else if (imageFile.type == "image/gif") {
@@ -336,7 +342,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
 
-	if (imageFile.type != "image/gif") {
+	if (img.imgType != "image/gif") {
 		// make the IMG draggable inside the DIV
 		$('#'+ img.id)
 			.draggable({ containment: "#" + imageContainer.id})
