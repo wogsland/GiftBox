@@ -272,13 +272,14 @@ function addOverlayToBento(bento, options){
 	}
 }
 
-function addImage(bento, imageSrc, imageFile, savedBento) {
+function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
+	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
 	// Remove any previously dropped image or video
 	if (imageFile) {
-		if (imageFile.type == "image/gif") {
+		if (imageFile.type == "image/gif" || imageFileType == "gif") {
 			console.log("Trying to upload a gif");
 			console.log($(bento));
-			$(bento).css('background-color', 'black');
+			$(bento).css('background', 'black');
 		}
 	}
 
@@ -313,6 +314,8 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.imgType = null;
 	if (imageFile) {
 		img.imgType = imageFile.type;
+	} else if (imageFileType) {
+		img.imgType = imageFileType;
 	}
 	img.onload = function() {
 		resizeImage(this, this.imgType, this.parentBento);
@@ -325,10 +328,10 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		} else {
 		}
 
-		if (img.imgType != "image/gif") {
+		if (img.imgType != "image/gif" && imageFileType != "gif") {
 			// resize the image container so that the image has scroll containment
 			resizeContainer(this.parentBento, this, this.imageContainer);
-		} else if (imageFile.type == "image/gif") {
+		} else if (img.imgType == "image/gif" || imageFileType == "gif") {
 			resizeGifContainer(this.parentBento, this, this.imageContainer);
 		}
 
@@ -342,7 +345,7 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
 
-	if (img.imgType != "image/gif") {
+	if (img.imgType != "image/gif" && imageFileType != "gif") {
 		// make the IMG draggable inside the DIV
 		$('#'+ img.id)
 			.draggable({ containment: "#" + imageContainer.id})
@@ -1796,7 +1799,13 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
-		addImage(bento, savedBento.image_file_path, null, savedBento);
+		if (savedBento.image_file_name.substr(savedBento.image_file_name.length - 3) == "gif") {
+			console.log("Loading back a gif");
+			$(bento).css('background', 'black');
+			addImage(bento, savedBento.image_file_path, null, savedBento, "gif");
+		} else {
+			addImage(bento, savedBento.image_file_path, null, savedBento);
+		}
 		bento.image_file_name = savedBento.image_file_name;
 			if (savedBento.image_hyperlink) {
 			var image = $("#"+bento.id+"-image");
