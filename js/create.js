@@ -1446,7 +1446,7 @@ function save() {
 		half_envelope.src = "../images/halfenvelope.png";
 		ctx.drawImage(half_envelope, 10, 10);
 		ctx.font = "30px Arial";
-		clearedCanvasURL = canvas.toDataURL();
+		// clearedCanvasURL = canvas.toDataURL();
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
