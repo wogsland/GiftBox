@@ -306,7 +306,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.file = imageFile;
 	img.parentBento = bento;
 	img.imageContainer = imageContainer;
-	// img.crossOrigin = "Anonymous";
+	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
 	img.hyperlink = null;
 	img.className = "bento-image";
@@ -716,7 +716,7 @@ function addFacebookImage(){
 		    var myBlob = this.response;
 		    var image = document.createElement("img");
 			$(image).attr("src", window.URL.createObjectURL(myBlob));
-			// image.crossOrigin = "Anonymous";
+			image.crossOrigin = "Anonymous";
 			image.name = "Facebook-Photo-" + $(".Facebook-Photo").size() + ".png";
 			image.id = image.name;
 			image.className = "Facebook-Photo";
@@ -1287,6 +1287,7 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
+			console.log("Going into the body of createCroppedImage");
 			var croppedImage = createCroppedImage(bento, image, container);
 
 			var my_image = document.createElement("img");
@@ -1828,6 +1829,7 @@ function loadBento(bento, savedBento) {
 
 function createCroppedImage (bento, image, container) {
 	// draw the original image to a scaled canvas
+	console.log(image);
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
 	var width = parseInt(imageStyle.width, 10);
