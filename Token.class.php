@@ -37,7 +37,7 @@ class Token {
 			foreach (get_object_vars($token) as $key => $value) {
 				$this->$key = $value;
 			}
-			$this->thumbnail_name = $token->id."-thumbnail";
+			$this->thumbnail_name = $token->id."_thumbnail";
 			$this->load_bentos();
 			$this->load_dividers();
 			$this->load_columns();
@@ -105,7 +105,6 @@ class Token {
 	}
 
 	private function saveBentos() {
-		execute("DELETE FROM bento WHERE giftbox_id = $this->id");
 		foreach ($this->bentos as $bento) {
 			$bento->save();
 		}

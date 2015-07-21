@@ -11,6 +11,18 @@ $(function() {
 });
 
 $(function() {
+	$( "#thumbnail-dialog" ).dialog({
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		dialogClass: 'thumbnail-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 650,
+		height: 580,
+		modal: true,
+	});
+});
+
+$(function() {
 	$( "#send-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,

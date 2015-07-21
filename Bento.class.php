@@ -17,6 +17,7 @@ class Bento {
 	var $css_top;
 	var $css_left;
 	var $image_file_name;
+	var $cropped_image_file_name;
 	var $image_width;
 	var $image_height;
 	var $image_top;
@@ -41,25 +42,69 @@ class Bento {
 		}
 	}
 	
+	public function load() {
+		$bento = execute_query("SELECT * FROM bento WHERE giftbox_id = $this->giftbox_id AND css_id = '$this->css_id'")->fetch_object("Bento");
+		return $bento;
+	}
+	
+	public function delete() {
+		execute("DELETE FROM bento WHERE giftbox_id = $this->giftbox_id AND css_id = '$this->css_id'");
+	}
+	
 	public function setGiftboxId($id) {
 		$this->giftbox_id = $id;
 	}
 	
 	public function save() {
-		$image_file_name = str_replace("'", "''", $this->image_file_name);
+		include 'config.php';
+		
+		$slider_value = $this->slider_value ? $this->slider_value : 'null';
+		$image_file_name = $this->image_file_name;
+		$cropped_image_file_name = $this->cropped_image_file_name;
+		$download_file_name = $this->download_file_name;
+
+		// Prefix the file names with the token ID to avoid file name collisions
 		$test = explode("_", $image_file_name);
 		if(strlen($this->image_file_name) > 0 && $test[0] != $this->giftbox_id){
 			$image_file_name = $this->giftbox_id."_".$image_file_name;
 		}
-		$download_file_name = str_replace("'", "''", $this->download_file_name);
-		$slider_value = $this->slider_value ? $this->slider_value : 'null';
+		$test = explode("_", $cropped_image_file_name);
+		if(strlen($this->cropped_image_file_name) > 0 && $test[0] != $this->giftbox_id){
+			$cropped_image_file_name = $this->giftbox_id."_".$cropped_image_file_name;
+		}
+
+		// Delete any old images files before deleting the old bento record
+		$bento = $this->load();
+		if ($bento) {
+			if (strlen($bento->cropped_image_file_name) > 0 && $bento->cropped_image_file_name != $cropped_image_file_name) {
+				if ($google_app_engine) {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->cropped_image_file_name, $use_https);
+				} else {
+					$image_path = $file_storage_path.$bento->cropped_image_file_name;
+				}
+				unlink($image_path);
+			}
+			if (strlen($bento->image_file_name) > 0 && $bento->image_file_name != $image_file_name) {
+				if ($google_app_engine) {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->image_file_name, $use_https);
+				} else {
+					$image_path = $file_storage_path.$bento->image_file_name;
+				}
+				unlink($image_path);
+			}
+		}
+		$this->delete();
+		
+		$image_file_name = str_replace("'", "''", $image_file_name);
+		$cropped_image_file_name = str_replace("'", "''", $cropped_image_file_name);
+		$download_file_name = str_replace("'", "''", $download_file_name);
 		$sql = "INSERT INTO bento (giftbox_id, css_id, css_width, css_height, css_top, css_left, "
-			."image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
+			."image_file_name, cropped_image_file_name, image_width, image_height, image_top, image_left, download_file_name, "
 			."download_mime_type, content_uri, slider_value, "
 			."image_top_in_container, image_left_in_container, image_hyperlink, redirect_url, auto_play,"
 			."overlay_content, overlay_left, overlay_top, overlay_width) "
 			."VALUES ($this->giftbox_id, '$this->css_id', '$this->css_width', '$this->css_height', "
-			."'$this->css_top', '$this->css_left', '$image_file_name', '$this->image_width', "
+			."'$this->css_top', '$this->css_left', '$image_file_name', '$cropped_image_file_name', '$this->image_width', "
 			."'$this->image_height', '$this->image_top', '$this->image_left', '$download_file_name', "
 			."'$this->download_mime_type', '$this->content_uri', $slider_value, "
 			."'$this->image_top_in_container', '$this->image_left_in_container', "
@@ -103,14 +148,20 @@ class Bento {
 			$background_color = "white";
 		}
 
-		if ($this->image_file_name) {
-			$file_name = $this->css_id."-cropped_".$this->image_file_name;
+		if ($this->cropped_image_file_name) {
+			$ext = pathinfo($this->cropped_image_file_name, PATHINFO_EXTENSION);			
 			if ($google_app_engine) {
-//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
-//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
-				$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name, $use_https);
+				if ($ext == "gif") {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$this->image_file_name, $use_https);
+				} else {
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$this->cropped_image_file_name, $use_https);
+				}
 			} else {
-				$image_path = $file_storage_path.$file_name;
+				if ($ext == "gif") {
+					$image_path = $file_storage_path.$this->image_file_name;
+				} else {
+					$image_path = $file_storage_path.$this->cropped_image_file_name;
+				}
 			}
 			if ($this->download_file_name && (strpos($this->download_mime_type, 'audio') === 0)) {
 				// Show the image as a poster in the audio player
@@ -118,7 +169,25 @@ class Bento {
 				if ($this->image_hyperlink) {
 					echo '<a href="'.$this->image_hyperlink.'" target="_blank">'.PHP_EOL;
 				}
-				echo '<img src="'.$image_path.'">'.PHP_EOL;
+				if ($ext == "gif") {
+					if ($this->image_width == "auto") {
+						echo '<img class="image-horizontal-gif" src="'.$image_path.'">'.PHP_EOL;
+						echo '<script>if ($(".image-horizontal-gif").parent().is("a")) { 
+											$(".image-horizontal-gif").parent().parent().css("background", "black");
+										} else { 
+											$(".image-horizontal-gif").parent().css("background", "black"); 
+										}</script>';
+					} else if ($this->image_height == "auto") {
+						echo '<img class="image-vertical-gif" src="'.$image_path.'">'.PHP_EOL;
+						echo '<script>if ($(".image-vertical-gif").parent().is("a")) { 
+											$(".image-vertical-gif").parent().parent().css("background", "black");
+										} else { 
+											$(".image-vertical-gif").parent().css("background", "black"); 
+										}</script>';
+					}
+				} else {
+					echo '<img src="'.$image_path.'">'.PHP_EOL;
+				}
 				if ($this->image_hyperlink) {
 					echo '</a>'.PHP_EOL;
 				}
@@ -178,7 +247,6 @@ class Bento {
 			  		echo "<div id='redirect_url'>".$this->redirect_url."</div>".PHP_EOL;
 
 				};
-				//echo "<iframe class=\"youtube-player\" type=\"text/html\" src=\"//www.youtube.com/embed/".$video_id."?wmode=opaque\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_soundcloud($this->content_uri)) {
 				echo "<iframe src=\"https://w.soundcloud.com/player/?url=".$this->content_uri."\" frameborder=\"0\"></iframe>".PHP_EOL;
 			} elseif (is_spotify($this->content_uri)) {

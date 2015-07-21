@@ -995,3 +995,67 @@ fieldset {
 	width: 189px;
 	margin-left: 20px;
 }
+
+#thumbnails-send-button {
+	background-position: -1px -768px;
+}
+
+/******************* THUMBNAIL DIALOG *******************/
+.thumbnail-dialog-class {
+	border: none;
+	border-radius: 0px;
+	padding: 0px;
+	background: #33383b;
+}
+
+.thumbnail-dialog-class .ui-widget-header {
+	height: 50px;
+	background: none;
+	border: none;
+	border-radius: 0px;
+	color: white;
+	padding: 0px;
+}
+
+.thumbnail-dialog-class .ui-dialog-title {
+	margin: 0px;
+	padding: 17px 30px;
+	text-align: center;
+}
+
+#thumbnail-dialog {
+	overflow: auto;
+	padding: 0px;
+	display: inline;
+}
+
+/********************** THUMBNAIL BUTTONS ****************************/
+
+#thumbnail-button-container {
+	box-sizing: border-box;
+	height: 40px;
+	display: table;
+	width: 100%;
+}
+
+.thumbnail-button {
+	display: table-cell;
+	width: 49.5%;
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+	color: #aaadaf;
+}
+
+.thumbnail-button:hover {
+	color: white;
+	background-color: #626c71;
+	cursor: pointer;
+}
+
+.thumbnail-image {
+	margin-left: 26%;
+	margin-top: 1px;
+	margin-bottom: 6px;
+	width: 46%;
+}

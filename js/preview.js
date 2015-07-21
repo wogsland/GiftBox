@@ -6,6 +6,7 @@ var selectedAnimationColor = null;
 var selectedAnimationStyle = null;
 var animationEnterCss = null;
 var animationPopCss = null;
+
 jQuery(window).load(function() {
 
 	if (selectedAnimationStyle == "none") {

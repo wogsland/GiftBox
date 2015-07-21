@@ -101,6 +101,26 @@ iframe {
 	height: 100%;
 }
 
+.bento img.image-horizontal-gif {
+	width: auto;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+}
+
+.bento img.image-vertical-gif {
+	height: auto;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+}
+
 .download-container {
 	width: 1024px;
 	margin: 10px auto;
