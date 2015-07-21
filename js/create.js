@@ -1413,9 +1413,8 @@ function save() {
 			for(i = 0; i < giftbox.bentos.length; i++){
 				var image = document.getElementById(giftbox.bentos[i].css_id + "-image");
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
-				if (image) {
-					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+				if (image) {			
+					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container, null, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
 							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
@@ -1822,8 +1821,9 @@ function loadBento(bento, savedBento) {
 	}
 }
 
-function createCroppedImage (bento, image, container, my_image) {
+function createCroppedImage (bento, image, container, my_image, name) {
 	my_image = typeof my_image !== 'undefined' ? my_image : null;
+	name = typeof name !== 'undefined' ? name : null;
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
@@ -1856,6 +1856,9 @@ function createCroppedImage (bento, image, container, my_image) {
 		if (my_image) {
 			my_image.src = croppedImage.src;
 		}
+		if (name) {
+			uploadFileData(croppedImage.src, name);
+		}
 		console.log(croppedImage);
 		return croppedImage;
 	} else {
@@ -1868,6 +1871,9 @@ function createCroppedImage (bento, image, container, my_image) {
                 var croppedImage = loadCanvas(data, context);
                 if (my_image) {
                 	my_image.src = croppedImage.src;
+                }
+                if (name) {
+                	uploadFileData(croppedImage.src, name);
                 }
             }
         });
