@@ -1864,9 +1864,6 @@ function createCroppedImage (bento, image, container, my_image) {
 		$.ajax({
             type: "GET",
             url: image.src,
-            xhrFields: {
-			    withCredentials: true
-			},
             success: function (data) {
                 var croppedImage = loadCanvas(data, context);
                 if (my_image) {
