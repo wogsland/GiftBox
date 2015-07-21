@@ -272,8 +272,15 @@ function addOverlayToBento(bento, options){
 	}
 }
 
-function addImage(bento, imageSrc, imageFile, savedBento) {
+function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
+	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
 	// Remove any previously dropped image or video
+	if (imageFile) {
+		if (imageFile.type == "image/gif" || imageFileType == "gif") {
+			$(bento).css('background', 'black');
+		}
+	}
+
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
 		bento.imageContainer = null;
@@ -282,7 +289,6 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 		bento.video = null;
 	}
 	if (imageFile) {
-		//need to figure out where imageFile.name is being set!!!!!!!!!!!!!
 		bento.image_file_name = imageFile.name;
 	}
 
@@ -303,8 +309,15 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
+	img.imgType = null;
+	if (imageFile) {
+		img.imgType = imageFile.type;
+	} else if (imageFileType) {
+		img.imgType = imageFileType;
+	}
 	img.onload = function() {
-		resizeImage(this, this.parentBento);
+		resizeImage(this, this.imgType, this.parentBento);
+
 		if (this.savedBento) {
 			this.style.width = this.savedBento.image_width;
 			this.style.height = this.savedBento.image_height;
@@ -312,8 +325,14 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 			$("#"+bento.id+"-slider").slider("value", this.savedBento.slider_value);
 		} else {
 		}
-		// resize the image container so that the image has scroll containment
-		resizeContainer(this.parentBento, this, this.imageContainer);
+
+		if (img.imgType != "image/gif" && imageFileType != "gif") {
+			// resize the image container so that the image has scroll containment
+			resizeContainer(this.parentBento, this, this.imageContainer);
+		} else if (img.imgType == "image/gif" || imageFileType == "gif") {
+			resizeGifContainer(this.parentBento, this, this.imageContainer);
+		}
+
 		if (this.savedBento) {
 			this.style.top = this.savedBento.image_top_in_container;
 			this.style.left = this.savedBento.image_left_in_container;
@@ -324,19 +343,26 @@ function addImage(bento, imageSrc, imageFile, savedBento) {
 	imageContainer.appendChild(img);
 	bento.appendChild(imageContainer);
 
-	// make the IMG draggable inside the DIV
-	$('#'+ img.id)
-		.draggable({ containment: "#" + imageContainer.id})
-		.click(function(){
-            if ( $(this).is('.ui-draggable-dragging') ) {
-                  return;
-            }
-            imageClicked($('#'+ img.id));
-		});
+	if (img.imgType != "image/gif" && imageFileType != "gif") {
+		// make the IMG draggable inside the DIV
+		$('#'+ img.id)
+			.draggable({ containment: "#" + imageContainer.id})
+			.click(function(){
+	            if ( $(this).is('.ui-draggable-dragging') ) {
+	                  return;
+	            }
+	            imageClicked($('#'+ img.id));
+			});
+		showControl(bento.id + "-slider", img);
+	} else {
+		$('#'+ img.id)
+			.click(function(){
+	            imageClicked($('#'+ img.id));
+			});
+	}
 
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
-	showControl(bento.id + "-slider", img);
 }
 
 function addSpotify(bento, trackId) {
@@ -854,6 +880,7 @@ function showOverlay(event, showButton){
 
 function closeClicked(event, closeButton) {
 	var bento = closeButton.parentNode;
+	$(bento).css('background-color', 'white');
 	var target = closeButton.target;
 	if (target) {
 		if (target.nodeName === "VIDEO") {
@@ -901,16 +928,42 @@ function resizeContainer(bento, img, div) {
 	
 }
 
-function resizeImage(img, bento) {
+function resizeGifContainer(bento, img, div) {
+	// resize the container so that the image covers the bento with no white space
+	var widthDiff = img.width - bento.offsetWidth;
+	var heightDiff = img.height - bento.offsetHeight;
+	var newContainerWidth = bento.offsetWidth + (widthDiff * 2);
+	var newContainerHeight = bento.offsetHeight + (heightDiff * 2);
+	div.style.width = newContainerWidth + 'px';
+	div.style.height = newContainerHeight + 'px';
+	div.style.left = Math.round((0 - ((newContainerWidth - bento.offsetWidth) / 2)) / 2) + 'px';
+	div.style.top = Math.round((0 - ((newContainerHeight - bento.offsetHeight) / 2)) / 2) + 'px';
+	img.style.left = Math.round((newContainerWidth / 2) - (img.width / 2)) + 'px';
+	img.style.top = Math.round((newContainerHeight / 2) - (img.height / 2)) + 'px';
+	
+}
+
+function resizeImage(img, imgFileType, bento) {
 	var imgAspectRatio = img.height / img.width;
 	var bentoAspectRatio = bento.offsetHeight / bento.offsetWidth;
-	if (bentoAspectRatio < imgAspectRatio) {
-		img.style.width = bento.offsetWidth + "px";
-		img.style.height = "auto";
+	if (imgFileType == "image/gif" || imgFileType == "gif") {
+		if (bentoAspectRatio < imgAspectRatio) {
+			img.style.width = "auto";
+			img.style.height = bento.offsetHeight + "px";
+		} else {
+			img.style.height = "auto";
+			img.style.width = bento.offsetWidth + "px";
+		}
 	} else {
-		img.style.height = bento.offsetHeight + "px";
-		img.style.width = "auto";
+		if (bentoAspectRatio < imgAspectRatio) {
+			img.style.width = bento.offsetWidth + "px";
+			img.style.height = "auto";
+		} else {
+			img.style.height = bento.offsetHeight + "px";
+			img.style.width = "auto";
+		}
 	}
+
 	img.style.top = 0;
 	img.style.left = 0;
 
@@ -919,12 +972,19 @@ function resizeImage(img, bento) {
 	img.originalHeight = img.height;
 }
 
-function resizeBento(bento) {
+
+function resizeBento(bento, imageFileType) {
+	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
+
 	var image = document.getElementById(bento.id + "-image");
 	if (image) {
-		resizeImage(image, bento);
+		resizeImage(image, image.imgType, bento);
 		var container = document.getElementById(bento.id + "-image-container");
-		resizeContainer(bento, image, container);
+		if (image.imgType == "image/gif" || image.imgType == "gif") {
+			resizeGifContainer(bento, image, container);
+		} else {
+			resizeContainer(bento, image, container);
+		}
 	}
 }
 
@@ -1229,8 +1289,10 @@ function save() {
 
 			var my_image = document.createElement("img");
 			my_image.src = croppedImage.src;
+			console.log(croppedImage.src);
 			ctx.drawImage(my_image, width, height);
 		}
+
 		if (this.video || this.audio) {
 			bento.download_file_name = this.download_file_name;
 			bento.download_mime_type = this.download_mime_type;
@@ -1341,8 +1403,10 @@ function save() {
 	// Save the template first
 	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
+		console.log("After closeStatus()");
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
+			console.log("result.status === 'SUCCESS'");
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
@@ -1356,6 +1420,8 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
+					console.log("Upload file cropped: " + croppedImage.src);
+					console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name)
 					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
@@ -1381,21 +1447,17 @@ function save() {
 		
 		var canvasURL = canvas.toDataURL();
 		window.top_template.thumbnailURL = canvasURL;
-		console.log(canvasURL);
 
 		var half_envelope = document.createElement("img");
 		half_envelope.src = "../images/halfenvelope.png";
 		ctx.drawImage(half_envelope, 10, 10);
 		ctx.font = "30px Arial";
-		ctx.strokeText("Hello World",10,50);
-		clearedCanvasURL = canvas.toDataURL();
-		console.log(clearedCanvasURL);
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
-	saved();
+	// saved();
 }
 
 function send() {
@@ -1614,8 +1676,10 @@ function loadSaved() {
 					}
 
 					$("#add-attachment-desktop").empty();
-					for (index = 0; index < token.attachments.length; ++index) {
-						appendAttachmentDisplay(token.attachments[index]);
+					if (token.attachments) {
+						for (index = 0; index < token.attachments.length; ++index) {
+							appendAttachmentDisplay(token.attachments[index]);
+						}
 					}
 				});
 			} else {
@@ -1659,12 +1723,16 @@ function loadSaved() {
 					if (classes[1] == "divider") {
 						if (classes[0] == "vertical") {
 							divider.style.left = token.dividers[index].css_left;
+							divider.style.top = token.dividers[index].css_top;
 							divider.style.height = token.dividers[index].css_height;
 						} else if (classes[0] == "horizontal") {
+							divider.style.left = token.dividers[index].css_left;
 							divider.style.top = token.dividers[index].css_top;
 							divider.style.width = token.dividers[index].css_width;
 						}
 					} else if (classes[0] == "divider-container") {
+						divider.style.left = token.dividers[index].css_left;
+						divider.style.top = token.dividers[index].css_top;
 						divider.style.width = token.dividers[index].css_width;
 						divider.style.height = token.dividers[index].css_height;
 					} else {
@@ -1682,8 +1750,10 @@ function loadSaved() {
 				}
 
 				$("#add-attachment-desktop").empty();
-				for (index = 0; index < token.attachments.length; ++index) {
-					appendAttachmentDisplay(token.attachments[index]);
+				if (token.attachments) {
+					for (index = 0; index < token.attachments.length; ++index) {
+						appendAttachmentDisplay(token.attachments[index]);
+					}
 				}
 			}
 		});
@@ -1718,7 +1788,6 @@ function clearBento(bento) {
 
 function loadBento(bento, savedBento) {
 	if (savedBento.content_uri) {
-		console.log("Content URI is present");
 		if (isYouTube(savedBento.content_uri)) {
 			addYouTube(bento, savedBento.content_uri);
 		} else if (isSoundCloud(savedBento.content_uri)) {
@@ -1729,12 +1798,14 @@ function loadBento(bento, savedBento) {
 		}
 	}
 	if (savedBento.image_file_name) {
-		// console.log('Image file name is present');
-		// console.log('Image File Path is: ' + savedBento.image_file_path);
-		addImage(bento, savedBento.image_file_path, null, savedBento);
+		if (savedBento.image_file_name.substr(savedBento.image_file_name.length - 3) == "gif") {
+			$(bento).css('background', 'black');
+			addImage(bento, savedBento.image_file_path, null, savedBento, "gif");
+		} else {
+			addImage(bento, savedBento.image_file_path, null, savedBento);
+		}
 		bento.image_file_name = savedBento.image_file_name;
-		console.log(bento.image_file_name);
-		if (savedBento.image_hyperlink) {
+			if (savedBento.image_hyperlink) {
 			var image = $("#"+bento.id+"-image");
 			image[0].hyperlink = savedBento.image_hyperlink;
 			showControl(bento.id+"-link-icon");
@@ -1752,9 +1823,6 @@ function loadBento(bento, savedBento) {
 	}
 
 	if (savedBento.overlay_content) {
-		console.log("Saved overlay left: " + savedBento.overlay_left);
-		console.log("Saved overlay top: " + savedBento.overlay_top);
-		console.log(savedBento);
 		arr = [savedBento.overlay_content, savedBento.overlay_left, savedBento.overlay_top];
 		addOverlayToBento(bento, arr);
 	}
@@ -2591,7 +2659,6 @@ function addOverlay(par){
 
 function selectImageDialogTab(tab) {
 	var selectedIcon = $("#"+tab.id);
-	console.log(selectedIcon);
 
 	// restore all icons
 	$(".image-dialog-nav-tab").each(function(i) {

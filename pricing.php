@@ -226,7 +226,7 @@
 					</ul>
 
 					<div class="price">
-						<h3><span class="symbol">$</span>9.99</h3>
+						<h3><span class="symbol">$</span>24.99</h3>
 						<h4>per month</h4>
 					</div>
 
@@ -271,7 +271,7 @@
                 </ul>
 
                 <div class="price">
-                  <h3><span class="symbol">$</span>49.99</h3>
+                  <h3><span class="symbol">$</span>74.99</h3>
                   <h4>per month + step 2</h4>
                 </div>
 
