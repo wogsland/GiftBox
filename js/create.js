@@ -1829,7 +1829,6 @@ function loadBento(bento, savedBento) {
 
 function createCroppedImage (bento, image, container) {
 	// draw the original image to a scaled canvas
-	console.log(image);
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
 	var width = parseInt(imageStyle.width, 10);
@@ -1858,6 +1857,7 @@ function createCroppedImage (bento, image, container) {
 	var croppedImage = new Image();
 
 	croppedImage.src = croppedCanvas.toDataURL();
+	console.log(croppedImage.src);
 	return croppedImage;
 }
 
