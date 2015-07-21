@@ -96,8 +96,6 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
-	// console.log(fileData);
-	// console.log(fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -1457,7 +1455,6 @@ function save() {
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
-		// console.log("Calling upload file data to save the thumbnail");
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
 	// saved();
@@ -1861,7 +1858,6 @@ function createCroppedImage (bento, image, container) {
 	var croppedImage = new Image();
 
 	croppedImage.src = croppedCanvas.toDataURL();
-	console.log(croppedImage.src);
 	return croppedImage;
 }
 
