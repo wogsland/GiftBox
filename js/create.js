@@ -96,6 +96,7 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
+	console.log(fileData);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -1857,9 +1858,9 @@ function createCroppedImage (bento, image, container, my_image, name) {
 			my_image.src = croppedImage.src;
 		}
 		if (name) {
+			console.log(croppedImage.src);
 			uploadFileData(croppedImage.src, name);
 		}
-		console.log(croppedImage);
 		return croppedImage;
 	} else {
 		console.log(image.src);
@@ -1869,10 +1870,13 @@ function createCroppedImage (bento, image, container, my_image, name) {
             url: image.src,
             success: function (data) {
                 var croppedImage = loadCanvas(data, context);
+                console.log(croppedImage.src);
                 if (my_image) {
                 	my_image.src = croppedImage.src;
                 }
                 if (name) {
+                	console.log("whatever");
+                	console.log(croppedImage.src);
                 	uploadFileData(croppedImage.src, name);
                 }
             }
@@ -1889,7 +1893,6 @@ function loadCanvas(dataURL, context) {
 
     imageObj.src = dataURL;
 
-    console.log(imageObj);
     return imageObj;
   }
 
