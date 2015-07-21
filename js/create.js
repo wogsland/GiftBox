@@ -96,7 +96,8 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
-	console.log(fileData);
+	// console.log(fileData);
+	// console.log(fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -1287,7 +1288,10 @@ function save() {
 
 			var my_image = document.createElement("img");
 
+			// console.log("Going into the body of createCroppedImage for a single bento? (1)");
 			var croppedImage = createCroppedImage(bento, image, container, my_image);
+			// console.log(croppedImage);
+			// console.log(my_image.src);
 
 			ctx.drawImage(my_image, width, height);
 		}
@@ -1305,7 +1309,7 @@ function save() {
 			bento.content_uri = this.contentURI;
 
 			var img = new Image();
-			// img.crossOrigin = 'Anonymous';
+			img.crossOrigin = 'Anonymous';
 			img.id = width + " " + height + " " + columnWidth + " " + columnHeight;
 			img.src = 'http://cors-anywhere.herokuapp.com/' + bento.thumbnail;
 			img.onload = function(){
@@ -1414,7 +1418,8 @@ function save() {
 			for(i = 0; i < giftbox.bentos.length; i++){
 				var image = document.getElementById(giftbox.bentos[i].css_id + "-image");
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
-				if (image) {			
+				if (image) {
+					// console.log("Going into the body of createCroppedImage");			
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container, null, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
@@ -1445,13 +1450,13 @@ function save() {
 		half_envelope.src = "../images/halfenvelope.png";
 		ctx.drawImage(half_envelope, 10, 10);
 		ctx.font = "30px Arial";
-		// clearedCanvasURL = canvas.toDataURL();
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
+		// console.log("Calling upload file data to save the thumbnail");
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
-	saved();
+	// saved();
 }
 
 function send() {
@@ -1825,6 +1830,8 @@ function loadBento(bento, savedBento) {
 function createCroppedImage (bento, image, container, my_image, name) {
 	my_image = typeof my_image !== 'undefined' ? my_image : null;
 	name = typeof name !== 'undefined' ? name : null;
+	// console.log("Parameters (createCroppedImage): my_image - " + my_image);
+	// console.log("Parameters (createCroppedImage): name - " + name);
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
@@ -1850,7 +1857,6 @@ function createCroppedImage (bento, image, container, my_image, name) {
 	var cropWidth = parseInt(bento.css_width, 10);
 	var cropHeight = parseInt(bento.css_height, 10);
 	if (image.src.substring(0, 4) == "blob") {
-		console.log("saving an uploaded picture cropped");
 		croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
 		var croppedImage = new Image();
 		croppedImage.src = croppedCanvas.toDataURL();
@@ -1858,44 +1864,47 @@ function createCroppedImage (bento, image, container, my_image, name) {
 			my_image.src = croppedImage.src;
 		}
 		if (name) {
-			console.log(croppedImage.src);
 			uploadFileData(croppedImage.src, name);
 		}
 		return croppedImage;
 	} else {
-		console.log(image.src);
+		// console.log("Making an AJAX REQUEST in createCroppedImage");
+		var urlToReturn;
+		var croppedImage = new Image();
+		croppedImage.onload = function() {
+    		context.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
+    	}
 		// make ajax call to get image data url
 		$.ajax({
             type: "GET",
             url: image.src,
             success: function (data) {
-                var croppedImage = loadCanvas(data, context);
-                console.log(croppedImage.src);
-                if (my_image) {
-                	my_image.src = croppedImage.src;
-                }
-                if (name) {
-                	console.log("whatever");
-                	console.log(croppedImage.src);
-                	uploadFileData(croppedImage.src, name);
-                }
+            	urlToReturn = data;
+
             }
         });
+
+        croppedImage.src = urlToReturn;
+
+        if (my_image) {
+        	my_image.src = croppedImage.src;
+        }
+        if (name) {
+        	// console.log("An existing filw being uploaded???!!!");
+        	uploadFileData(croppedImage.src, name);
+        }
+
+        // console.log("Returning!!!");
+        // console.log(croppedImage);
+        return croppedImage;
 	}
 }
-
-function loadCanvas(dataURL, context) {
-    // load image from data url
-    var imageObj = new Image();
-    imageObj.onload = function() {
-      context.drawImage(this, 0, 0);
-    };
-
-    imageObj.src = dataURL;
-
-    return imageObj;
-  }
-
+function getImagetoCanvas(imageSource) {
+	return $.ajax({
+		        type: "GET",
+		        url: image.src,
+		    });
+}
 function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
 }
