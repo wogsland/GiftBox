@@ -1274,6 +1274,7 @@ function save() {
 		if (image) {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
+			console.log("extension: " + extension);
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
@@ -1286,15 +1287,13 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
+			var croppedImage = createCroppedImage(bento, image, container);
+
 			var my_image = document.createElement("img");
-
-			// console.log("Going into the body of createCroppedImage for a single bento? (1)");
-			var croppedImage = createCroppedImage(bento, image, container, my_image);
-			// console.log(croppedImage);
-			// console.log(my_image.src);
-
+			my_image.src = croppedImage.src;
 			ctx.drawImage(my_image, width, height);
 		}
+
 		if (this.video || this.audio) {
 			bento.download_file_name = this.download_file_name;
 			bento.download_mime_type = this.download_mime_type;
@@ -1419,8 +1418,8 @@ function save() {
 				var image = document.getElementById(giftbox.bentos[i].css_id + "-image");
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
-					// console.log("Going into the body of createCroppedImage");			
-					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container, null, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
+					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
 							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
@@ -1827,11 +1826,7 @@ function loadBento(bento, savedBento) {
 	}
 }
 
-function createCroppedImage (bento, image, container, my_image, name) {
-	my_image = typeof my_image !== 'undefined' ? my_image : null;
-	name = typeof name !== 'undefined' ? name : null;
-	// console.log("Parameters (createCroppedImage): my_image - " + my_image);
-	// console.log("Parameters (createCroppedImage): name - " + name);
+function createCroppedImage (bento, image, container) {
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
@@ -1851,60 +1846,19 @@ function createCroppedImage (bento, image, container, my_image, name) {
 	var imageTop = parseInt(imageStyle.top, 10);
 	var sourceY = (containerTop * -1) - imageTop;
 	var croppedCanvas = document.createElement('canvas');
+	console.log(croppedCanvas);
 	croppedCanvas.width = parseInt(bento.css_width, 10);
 	croppedCanvas.height = parseInt(bento.css_height, 10);
 	var croppedContext = croppedCanvas.getContext('2d');
 	var cropWidth = parseInt(bento.css_width, 10);
 	var cropHeight = parseInt(bento.css_height, 10);
-	if (image.src.substring(0, 4) == "blob") {
-		croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
-		var croppedImage = new Image();
-		croppedImage.src = croppedCanvas.toDataURL();
-		if (my_image) {
-			my_image.src = croppedImage.src;
-		}
-		if (name) {
-			uploadFileData(croppedImage.src, name);
-		}
-		return croppedImage;
-	} else {
-		// console.log("Making an AJAX REQUEST in createCroppedImage");
-		var urlToReturn;
-		var croppedImage = new Image();
-		croppedImage.onload = function() {
-    		context.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
-    	}
-		// make ajax call to get image data url
-		$.ajax({
-            type: "GET",
-            url: image.src,
-            success: function (data) {
-            	urlToReturn = data;
+	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
+	var croppedImage = new Image();
 
-            }
-        });
-
-        croppedImage.src = urlToReturn;
-
-        if (my_image) {
-        	my_image.src = croppedImage.src;
-        }
-        if (name) {
-        	// console.log("An existing filw being uploaded???!!!");
-        	uploadFileData(croppedImage.src, name);
-        }
-
-        // console.log("Returning!!!");
-        // console.log(croppedImage);
-        return croppedImage;
-	}
+	croppedImage.src = croppedCanvas.toDataURL();
+	return croppedImage;
 }
-function getImagetoCanvas(imageSource) {
-	return $.ajax({
-		        type: "GET",
-		        url: image.src,
-		    });
-}
+
 function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
 }
