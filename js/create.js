@@ -1287,11 +1287,11 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
-			console.log("Going into the body of createCroppedImage");
 			var croppedImage = createCroppedImage(bento, image, container);
 
 			var my_image = document.createElement("img");
 			my_image.src = croppedImage.src;
+			console.log(croppedImage.src);
 			ctx.drawImage(my_image, width, height);
 		}
 
@@ -1405,8 +1405,10 @@ function save() {
 	// Save the template first
 	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
+		console.log("After closeStatus()");
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
+			console.log("result.status === 'SUCCESS'");
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
@@ -1420,6 +1422,7 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
+					console.log("Upload file cropped: " + croppedImage.src);
 					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
