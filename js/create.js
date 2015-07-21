@@ -1284,11 +1284,10 @@ function save() {
 			bento.image_top_in_container = image.style.top;
 			bento.image_hyperlink = image.hyperlink;
 
-
-			var croppedImage = createCroppedImage(bento, image, container);
-
 			var my_image = document.createElement("img");
-			my_image.src = croppedImage.src;
+
+			var croppedImage = createCroppedImage(bento, image, container, my_image);
+
 			ctx.drawImage(my_image, width, height);
 		}
 		if (this.video || this.audio) {
@@ -1823,11 +1822,11 @@ function loadBento(bento, savedBento) {
 	}
 }
 
-function createCroppedImage (bento, image, container) {
+function createCroppedImage (bento, image, container, my_image) {
+	my_image = typeof my_image !== 'undefined' ? my_image : null;
 	// draw the original image to a scaled canvas
 	var canvas = document.createElement('canvas');
 	var imageStyle = getComputedStyle(image);
-	console.log(imageStyle);
 	var width = parseInt(imageStyle.width, 10);
 	var height = parseInt(imageStyle.height, 10);
 	canvas.width = width;
@@ -1849,11 +1848,47 @@ function createCroppedImage (bento, image, container) {
 	var croppedContext = croppedCanvas.getContext('2d');
 	var cropWidth = parseInt(bento.css_width, 10);
 	var cropHeight = parseInt(bento.css_height, 10);
-	croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
-	var croppedImage = new Image();
-
-	return croppedImage;
+	if (image.src.substring(0, 4) == "blob") {
+		console.log("saving an uploaded picture cropped");
+		croppedContext.drawImage(canvas, sourceX, sourceY, cropWidth, cropHeight, 0, 0,cropWidth, cropHeight);
+		var croppedImage = new Image();
+		croppedImage.src = croppedCanvas.toDataURL();
+		if (my_image) {
+			my_image.src = croppedImage.src;
+		}
+		console.log(croppedImage);
+		return croppedImage;
+	} else {
+		console.log(image.src);
+		// make ajax call to get image data url
+		$.ajax({
+            type: "GET",
+            url: image.src,
+            xhrFields: {
+			    withCredentials: true
+			},
+            success: function (data) {
+                var croppedImage = loadCanvas(data, context);
+                if (my_image) {
+                	my_image.src = croppedImage.src;
+                }
+            }
+        });
+	}
 }
+
+function loadCanvas(dataURL, context) {
+    // load image from data url
+    var imageObj = new Image();
+    imageObj.onload = function() {
+      context.drawImage(this, 0, 0);
+    };
+
+    imageObj.src = dataURL;
+
+    console.log(imageObj);
+    return imageObj;
+  }
 
 function featureNotAvailable(feature) {
 	openMessage(feature, "This feature is not available yet.");
