@@ -1423,6 +1423,7 @@ function save() {
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
 					console.log("Upload file cropped: " + croppedImage.src);
+					console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name)
 					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					if (!image.saved) {
 						if (image.file) {
