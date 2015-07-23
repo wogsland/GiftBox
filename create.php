@@ -57,12 +57,12 @@
 </head>
 <body>
 	<?php include_once("analyticstracking.php") ?>
-	<canvas id="thumbnail-canvas" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-1" width="1462" height="768" style="display: none; position:absolute;">
 	</canvas>
-<!-- 	<canvas id="thumbnail-canvas-2" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-2" width="1462" height="768" style="display: none; position:absolute;">
 	</canvas>
 	<canvas id="thumbnail-canvas-3" width="1462" height="768" style="display: none; position:absolute;">
-	</canvas> -->
+	</canvas>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">
@@ -112,7 +112,7 @@
 						<span class="template-tab-text">WRITE A DESCRIPTION <i onclick="saveButton()" class="fa fa-save fa-lg token-description-save"></i></span>
 						<textarea id="token-description" maxlength="150"></textarea>
 					</div>
-<!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
+<!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">

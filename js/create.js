@@ -1216,7 +1216,7 @@ function save() {
 		animation_style: selectedAnimationStyle
 	};
 
-	var canvas = document.getElementById("thumbnail-canvas");
+	var canvas = document.getElementById("thumbnail-canvas-1");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "white";
@@ -1456,10 +1456,48 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		window.top_template.thumbnailURL = canvasURL;
 
-		var half_envelope = document.createElement("img");
-		half_envelope.src = "../images/halfenvelope.png";
-		ctx.drawImage(half_envelope, 10, 10);
-		ctx.font = "30px Arial";
+		var halfEnvelopeCanvas = document.getElementById("thumbnail-canvas-2");
+		var ctx2 = halfEnvelopeCanvas.getContext("2d");
+		var fullEnvelopeCanvas = document.getElementById("thumbnail-canvas-3");
+		var ctx3 = fullEnvelopeCanvas.getContext("2d");
+		var background = new Image();
+		background.crossOrigin = "Anonymous";
+		background.src = canvasURL;
+		console.log(canvasURL);
+		background.onload = function(){
+		    ctx2.drawImage(background,0,0);
+		    ctx2.fillStyle = "#447ea0";
+			ctx2.fillRect(0,0,1482, 786);
+			ctx2.scale(0.8,0.8);
+	    	ctx2.drawImage(background,170,0);
+			var halfenvelope = new Image();
+			halfenvelope.src = "../images/halfenvelope.png";
+			console.log(halfenvelope);
+			halfenvelope.onload = function() {
+				ctx2.scale(1.25,1.25);
+		    	ctx2.drawImage(halfenvelope,0,-410);
+			    halfThumbnailCanvasURL = halfEnvelopeCanvas.toDataURL();
+				window.top_template.halfEnvelopeThumbnailURL = halfThumbnailCanvasURL;
+			}
+		}
+
+		var fullenvelope = new Image();
+		fullenvelope.src = "../images/halfenvelope.png";
+		console.log(fullenvelope);
+		fullenvelope.onload = function() {
+			ctx3.fillStyle = "#447ea0";
+			ctx3.fillRect(0,0,1482, 786);
+	    	ctx3.drawImage(fullenvelope,0,-410);
+	    	var fullbackground = new Image();
+			fullbackground.crossOrigin = "Anonymous";
+			fullbackground.src = canvasURL;
+			fullbackground.onload = function(){
+				ctx3.scale(0.8, 0.8);
+				ctx3.drawImage(fullbackground,170,100);
+				fullThumbnailCanvasURL = fullEnvelopeCanvas.toDataURL();
+				window.top_template.fullEnvelopeThumbnailURL = fullThumbnailCanvasURL;  
+			}
+		}
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
@@ -2692,13 +2730,15 @@ function selectImageDialogTab(tab) {
 function displayThumbnails() {
 	var giftboxId = window.top_template.giftboxId;
 	var thumbnailURL = window.top_template.thumbnailURL;
+	var halfEnvelopeThumbnailURL = window.top_template.halfEnvelopeThumbnailURL;
+	var fullEnvelopeThumbnailURL = window.top_template.fullEnvelopeThumbnailURL;
 	if (!thumbnailURL) {
 		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
 	} else {
 		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												/* + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												 * + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
+												 + '<img class="thumbnail-image" src="' + halfEnvelopeThumbnailURL + '">'
+												 + '<img class="thumbnail-image" src="' + fullEnvelopeThumbnailURL + '">'
+												 /* + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
 												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
 		$('#thumbnail-dialog').dialog('open');
 	}
