@@ -1272,7 +1272,7 @@ function save() {
 		if (image) {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			console.log("extension: " + extension);
+			// console.log("extension: " + extension);
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
@@ -1289,7 +1289,7 @@ function save() {
 
 			var my_image = document.createElement("img");
 			my_image.src = croppedImage.src;
-			console.log(croppedImage.src);
+			// console.log(croppedImage.src);
 			ctx.drawImage(my_image, width, height);
 		}
 
@@ -1403,10 +1403,10 @@ function save() {
 	// Save the template first
 	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
-		console.log("After closeStatus()");
+		// console.log("After closeStatus()");
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
-			console.log("result.status === 'SUCCESS'");
+			// console.log("result.status === 'SUCCESS'");
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
@@ -1420,9 +1420,17 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					console.log("Upload file cropped: " + croppedImage.src);
-					console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name)
-					uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) > -1) {
+						// console.log("From Open feature");
+						// console.log("Upload file cropped: " + croppedImage.src);
+						// console.log("Upload file name: " + giftbox.bentos[i].cropped_image_file_name);
+						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
+					} else {
+						// console.log("NOT From Open feature");
+						// console.log("Upload file cropped: " + croppedImage.src);
+						// console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
+					}
 					if (!image.saved) {
 						if (image.file) {
 							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
@@ -1848,7 +1856,7 @@ function createCroppedImage (bento, image, container) {
 	var imageTop = parseInt(imageStyle.top, 10);
 	var sourceY = (containerTop * -1) - imageTop;
 	var croppedCanvas = document.createElement('canvas');
-	console.log(croppedCanvas);
+	// console.log(croppedCanvas);
 	croppedCanvas.width = parseInt(bento.css_width, 10);
 	croppedCanvas.height = parseInt(bento.css_height, 10);
 	var croppedContext = croppedCanvas.getContext('2d');
