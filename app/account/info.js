@@ -44,7 +44,6 @@ var AccountInfo = React.createClass({
     state.selectedUrl = '';
     state.selectedSocial = this.findUnusedSocial(state.social)[0].name;
     this.setState(state);
-    //this.editProfile();
     var profile = jQuery.extend({}, this.props.profile, this.state, state);
     AccountStore.editProfile(profile);
   },
@@ -60,13 +59,14 @@ var AccountInfo = React.createClass({
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
-        <div className="form-group">
+    {/*    <div className="form-group">
           <label className="col-sm-1 control-label">Username</label>
           <div className="col-sm-10">
             <input type="text" placeholder="Username" className="form-control tooltips" name="username" value={this.state.username} onChange={this.handleChange} />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
+    */}
         <div className="form-group">
           <label className="col-sm-1 control-label">Email</label>
           <div className="col-sm-10">
@@ -81,13 +81,14 @@ var AccountInfo = React.createClass({
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
-        <div className="form-group">
+    {/*    <div className="form-group">
           <label className="col-sm-1 control-label">Company</label>
           <div className="col-sm-10">
             <input type="text" placeholder="Company Name" className="form-control tooltips" name="company" value={this.state.company} onChange={this.handleChange} />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
+    */}
       </form>
 {/*
       <h2>Account Information</h2>
