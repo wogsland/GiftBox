@@ -143,6 +143,7 @@ var Model = {
     var response = null;
     this.profile.first_name = this.profile.name.split(' ')[0];
     this.profile.last_name = this.profile.name.substring(this.profile.name.indexOf(' ') + 1);
+    this.profile.password = 
     $.ajax({
       type: "POST",
       data: this.profile,
