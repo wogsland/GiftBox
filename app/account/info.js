@@ -77,7 +77,7 @@ var AccountInfo = React.createClass({
         <div className="form-group">
           <label className="col-sm-1 control-label">Password</label>
           <div className="col-sm-10">
-            <input type="password" placeholder="Not Active" className="form-control tooltips" />
+            <input type="password" placeholder="Not Active" className="form-control tooltips" name="new_password" value={this.state.new_password} onChange={this.handleChange} />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
