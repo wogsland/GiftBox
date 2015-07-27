@@ -298,8 +298,8 @@
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
 						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
-						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+<!-- 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
+ -->						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
