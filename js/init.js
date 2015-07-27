@@ -11,9 +11,9 @@ $(function() {
 });
 
 $(function() {
-	$( "#thumbnail-dialog" ).dialog({
+	$( "#letter-dialog" ).dialog({
 		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
-		dialogClass: 'thumbnail-dialog-class',
+		dialogClass: 'letter-dialog-class',
 		autoOpen: false,
 		resizable: false,
 		width: 650,
@@ -21,6 +21,8 @@ $(function() {
 		modal: true,
 	});
 });
+
+
 
 $(function() {
 	$( "#send-dialog" ).dialog({

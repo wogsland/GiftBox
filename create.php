@@ -283,7 +283,6 @@
 				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
 				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
 				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
-				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this.id)">LETTER & ATTACHMENTS</div></li>
 			</ul>
 		</div>
 
@@ -327,23 +326,30 @@
 				</div>
 			</div>
 
-			<!-- LETTER -->
-			<div id="add-letter-container" class="add-content-container">
-				<form id="letter-form">
-					<br>
-					<textarea id="lettertext"></textarea>
-					<script>
-		                CKEDITOR.replace( 'lettertext' );
-		            </script>
-		            <br>
-					<div id="add-attachment-desktop"></div>
-					<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
-				</form>
-			</div>
-
 		<div id="add-button-container">
 			<div class="add-button" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</div>
 			<div class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</div>
+		</div>
+	</div>
+
+	<div id="letter-dialog" title="LETTER & ATTACHMENTS">
+		<!-- LETTER -->
+		<div id="letter-container" class="letter-content-container">
+			<form id="letter-form">
+				<br>
+				<textarea id="lettertext"></textarea>
+				<script>
+	                CKEDITOR.replace( 'lettertext' );
+	            </script>
+	            <br>
+				<div id="add-attachment-desktop"></div>
+				<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
+			</form>
+		</div>
+
+		<div id="letter-button-container">
+			<div class="letter-button" onclick="$('#letter-dialog').dialog('close');">CLOSE</div>
+			<div class="letter-button" href="javascript:void(0)" onclick="saveLetterAttachments()">USE</div>
 		</div>
 	</div>
 

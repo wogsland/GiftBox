@@ -1973,8 +1973,7 @@ function bentoClick(bento) {
 }
 
 function textIconClicked() {
-	$("#add-dialog").dialog("open");
-	selectAddNav("add-letter");
+	$("#letter-dialog").dialog("open");
 }
 
 function selectAddNav(navId) {
@@ -2095,9 +2094,6 @@ function doAdd() {
 		$('#add-dialog').dialog('close');
 	}
 
-	// LETTER
-	saveLetter();
-
 	bentoId = $("#add-dialog").attr("target-bento");
 	bento = $("#"+bentoId)[0];
 	// IMAGE
@@ -2148,8 +2144,15 @@ function doAdd() {
 		}
 	}
 
-	// ATTACHMENT
+}
 
+function saveLetterAttachments() {
+	// LETTER
+	saveLetter();
+
+	// ATTACHMENTS
+
+	$('#letter-dialog').dialog('close');
 }
 
 function hidePalette() {
