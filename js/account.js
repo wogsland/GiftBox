@@ -19,7 +19,7 @@ function changePassword() {
 	} else if (newPassword !== confirmPassword) {
 		$("#change-password-message").text("Passwords do not match.");
 	} else {
-		$.post("change_password_ajax.php", newPassword, function(data, textStatus, jqXHR){
+		$.post("change_password_ajax.php", {new_password: newPassword, user_id: 125}, function(data, textStatus, jqXHR){
 			$.magnificPopup.close();
 			$("#my-account-message").text("Your password has been changed.");
 		}).fail(function(){
