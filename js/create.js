@@ -1463,7 +1463,6 @@ function save() {
 		var background = new Image();
 		background.crossOrigin = "Anonymous";
 		background.src = canvasURL;
-		console.log(canvasURL);
 		background.onload = function(){
 		    ctx2.drawImage(background,0,0);
 		    ctx2.fillStyle = "#447ea0";
@@ -1495,7 +1494,8 @@ function save() {
 				ctx3.scale(0.8, 0.8);
 				ctx3.drawImage(fullbackground,170,100);
 				fullThumbnailCanvasURL = fullEnvelopeCanvas.toDataURL();
-				window.top_template.fullEnvelopeThumbnailURL = fullThumbnailCanvasURL;  
+				window.top_template.fullEnvelopeThumbnailURL = fullThumbnailCanvasURL;
+				ctx3.scale(1.25,1.25);  
 			}
 		}
 
