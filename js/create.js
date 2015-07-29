@@ -2,6 +2,31 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 var imageDialogSelector = "#image-dialog";
+var featherEditor = new Aviary.Feather({
+    apiKey: '680c55b009074d4eabaa3a117af2e22e',
+    onSave: function(imageID, newURL) {
+        var img = document.getElementById(imageID);
+        img.src = newURL;
+    },
+    onError: function(error) {
+    	console.log(error);
+    }
+});
+
+function chooseEditor() {
+	var image = getImageDialogImage()[0];
+	var id = image.id;
+	var src = image.src;
+	return launchEditor(id, src);
+}
+
+function launchEditor(id, src) {
+    featherEditor.launch({
+        image: id,
+        url: src
+    });
+    return false;
+}
 
 window.onload = function(){
     var browser = get_browser_info();
@@ -274,12 +299,6 @@ function addOverlayToBento(bento, options){
 
 function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
-	// Remove any previously dropped image or video
-	// if (imageFile) {
-	// 	if (imageFile.type == "image/gif" || imageFileType == "gif") {
-	// 		$(bento).css('background', 'black');
-	// 	}
-	// }
 
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -306,6 +325,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
+	console.log(imageSrc);
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
