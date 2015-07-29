@@ -1,7 +1,7 @@
 var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
-var imageDialogSelector = "#image-dialog"
+var imageDialogSelector = "#image-dialog";
 
 window.onload = function(){
     var browser = get_browser_info();
