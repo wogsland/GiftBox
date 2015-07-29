@@ -275,11 +275,11 @@ function addOverlayToBento(bento, options){
 function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
 	// Remove any previously dropped image or video
-	if (imageFile) {
-		if (imageFile.type == "image/gif" || imageFileType == "gif") {
-			$(bento).css('background', 'black');
-		}
-	}
+	// if (imageFile) {
+	// 	if (imageFile.type == "image/gif" || imageFileType == "gif") {
+	// 		$(bento).css('background', 'black');
+	// 	}
+	// }
 
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
