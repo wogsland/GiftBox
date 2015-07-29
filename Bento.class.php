@@ -172,18 +172,18 @@ class Bento {
 				if ($ext == "gif") {
 					if ($this->image_width == "auto") {
 						echo '<img class="image-horizontal-gif" src="'.$image_path.'">'.PHP_EOL;
-						echo '<script>if ($(".image-horizontal-gif").parent().is("a")) { 
-											$(".image-horizontal-gif").parent().parent().css("background", "black");
-										} else { 
-											$(".image-horizontal-gif").parent().css("background", "black"); 
-										}</script>';
+						// echo '<script>if ($(".image-horizontal-gif").parent().is("a")) { 
+						// 					$(".image-horizontal-gif").parent().parent().css("background", "black");
+						// 				} else { 
+						// 					$(".image-horizontal-gif").parent().css("background", "black"); 
+						// 				}</script>';
 					} else if ($this->image_height == "auto") {
 						echo '<img class="image-vertical-gif" src="'.$image_path.'">'.PHP_EOL;
-						echo '<script>if ($(".image-vertical-gif").parent().is("a")) { 
-											$(".image-vertical-gif").parent().parent().css("background", "black");
-										} else { 
-											$(".image-vertical-gif").parent().css("background", "black"); 
-										}</script>';
+						// echo '<script>if ($(".image-vertical-gif").parent().is("a")) { 
+						// 					$(".image-vertical-gif").parent().parent().css("background", "black");
+						// 				} else { 
+						// 					$(".image-vertical-gif").parent().css("background", "black"); 
+						// 				}</script>';
 					}
 				} else {
 					echo '<img src="'.$image_path.'">'.PHP_EOL;
