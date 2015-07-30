@@ -6,7 +6,7 @@ if ($google_app_engine) {
 }
 
 include_once 'util.php';
-include 'PhotoGallery.class.php';
+include 'BentoFiles.class.php';
 
 class Bento {
 	var $id;
@@ -29,7 +29,7 @@ class Bento {
 	var $image_left_in_container;
 	var $image_top_in_container;
 	var $image_hyperlink;
-	var $gallery_file_list = array();
+	var $bento_file_list = array();
 	var $redirect_url;
 	var $auto_play;
 	var $overlay_content;
@@ -111,32 +111,30 @@ class Bento {
 			."'$this->image_hyperlink', '$this->redirect_url', '$this->auto_play',"
 			."'$this->overlay_content', '$this->overlay_left', '$this->overlay_top', '$this->overlay_width')";
 		$this->id = insert($sql);
-		if(sizeof($this->gallery_file_list) > 0){
-			$photo_gallery = new PhotoGallery();
-			$photo_gallery->giftboxId = $this->giftbox_id;
-			$photo_gallery->setBentoId($this->id);
-			$photo_gallery->setFileNames($this->gallery_file_list);
-			$photo_gallery->save();
+		if(sizeof($this->bento_file_list) > 0){
+			$bento_files = new BentoFiles();
+			$bento_files->giftboxId = $this->giftbox_id;
+			$bento_files->setBentoId($this->id);
+			$bento_files->setFileNames($this->bento_file_list);
+			$bento_files->save();
 		}
 	}
 	
 	public function render() {
 		include 'config.php';
-		$gallery = PhotoGallery::fetch($this->id);
-		if(sizeof($gallery)> 0){
-			foreach($gallery as $file_name){
+		$bento_files = BentoFiles::fetch($this->id);
+		if(sizeof($bento_files)> 0){
+			foreach($bento_files as $file){
 				if ($google_app_engine) {
-	//				CloudStorageTools::deleteImageServingUrl($file_storage_path.$file_name);
-	//				$image_path = CloudStorageTools::getImageServingUrl($file_storage_path.$file_name, ['secure_url' => $use_https]);
-					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file_name[2], $use_https);
+					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$file['file_name'], $use_https);
 				} else {
-					$image_path = $file_storage_path.$file_name[2];
+					$image_path = $file_storage_path.$file['file_name'];
 				}
-				array_push($this->gallery_file_list, $image_path);
+				array_push($this->bento_file_list, $image_path);
 			}
 		}
-		if ($this->gallery_file_list){
-			echo '<div class="bento gallery '.$this->id.'" href="'.$this->gallery_file_list[0].'">'.PHP_EOL;
+		if ($this->bento_file_list){
+			echo '<div class="bento gallery '.$this->id.'" href="'.$this->bento_file_list[0].'">'.PHP_EOL;
 			echo '<i class="bento-link-icon visible icon-link fa fa-picture-o fa-lg"></i>'.PHP_EOL;
 		} else {
 			echo '<div class="bento">'.PHP_EOL;
@@ -259,8 +257,8 @@ class Bento {
 			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
 		}
 		echo '</div>'.PHP_EOL;
-		if ($this->gallery_file_list){
-			foreach($this->gallery_file_list as $key => $file_name){
+		if ($this->bento_file_list){
+			foreach($this->bento_file_list as $key => $file_name){
 				if($key != 0){
 					echo '<div id="'.$key.'"href="'.$file_name.'" class="'.$this->id.'"></div>';
 				}
