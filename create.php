@@ -25,6 +25,7 @@
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
+	<script src="js/aviary.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
 	<script src="js/init.js"></script>
@@ -122,7 +123,7 @@
 			</div>
 		</div>
 
-		<div id="templates">
+		<div id="templates">                 
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
@@ -393,7 +394,7 @@
 		<div id="image-dialog-container">
 			<div class="container image-dialog-nav-tabs">
 				<div class="row">
-					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="featureNotAvailable('Filter')" disabled><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="return chooseEditor();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>

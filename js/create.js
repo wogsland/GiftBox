@@ -1,7 +1,79 @@
 var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
-var imageDialogSelector = "#image-dialog"
+var imageDialogSelector = "#image-dialog";
+var featherEditor = new Aviary.Feather({
+    apiKey: '680c55b009074d4eabaa3a117af2e22e',
+    onSave: function(imageID, newURL) {
+        var img = document.getElementById(imageID);
+        img.src = newURL;
+    },
+    onError: function(error) {
+    	console.log(error);
+    }
+});
+
+function chooseEditor() {
+	var image = getImageDialogImage()[0];
+	console.log(image);
+	var src = image.src;
+	var id = image.id;
+	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
+		console.log("If statement enter");
+		save();
+		var output;
+		setTimeout( function() { 
+			$.get("get_user_tokens_ajax.php", function(data) {
+				console.log(data[0]);
+				loadJustSavedBento(data[0]['id'], id);
+				}
+			) },
+		1000);
+	} else {
+		return launchEditor(id, src);
+	}
+}
+
+function loadJustSavedBento(tokenId, bentoId) {
+	tokenId = tokenId;
+	console.log(tokenId);
+	if (tokenId) {
+		$('#open-dialog').dialog('close');
+		openStatus("Loading", "Loading saved Token...");
+		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			var token = data;
+			console.log(token);
+			closeStatus();
+
+			// Bento properties
+			var index;
+			var bento;
+			for (index = 0; index < token.bentos.length; ++index) {
+				// Choosing the bento by it's id
+				bento = document.getElementById(token.bentos[index].css_id);
+				var savedBento = token.bentos[index];
+				bento.style.width = "100%";
+				bento.style.height = "100%";
+				bento.style.top = "0px";
+				bento.style.left = "0px";
+				if (bentoId.indexOf(savedBento.css_id) == 0) {
+					// clearing out the bento in case there is already something there
+					console.log("has");
+					console.log(savedBento.image_file_path);
+					return launchEditor(bentoId, savedBento.image_file_path);
+				}
+			}
+		});
+	}
+}
+
+function launchEditor(id, src) {
+    featherEditor.launch({
+        image: id,
+        url: src
+    });
+    return false;
+}
 
 window.onload = function(){
     var browser = get_browser_info();
@@ -274,12 +346,6 @@ function addOverlayToBento(bento, options){
 
 function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
-	// Remove any previously dropped image or video
-	// if (imageFile) {
-	// 	if (imageFile.type == "image/gif" || imageFileType == "gif") {
-	// 		$(bento).css('background', 'black');
-	// 	}
-	// }
 
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -306,6 +372,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
+	console.log(imageSrc);
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
@@ -1272,7 +1339,6 @@ function save() {
 		if (image) {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			// console.log("extension: " + extension);
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
@@ -1403,10 +1469,8 @@ function save() {
 	// Save the template first
 	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
-		// console.log("After closeStatus()");
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
-			// console.log("result.status === 'SUCCESS'");
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
@@ -1421,23 +1485,15 @@ function save() {
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
 					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) > -1) {
-						// console.log("From Open feature");
-						// console.log("Upload file cropped: " + croppedImage.src);
-						// console.log("Upload file name: " + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
 					} else {
-						// console.log("NOT From Open feature");
-						// console.log("Upload file cropped: " + croppedImage.src);
-						// console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
-					if (!image.saved) {
-						if (image.file) {
-							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						} else {
-							uploadFileData(image.src, + template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						}
-						image.saved = true;
+					if (image.file) {
+						uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+					} else {
+						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+						uploadFileData(image.src, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 					}
 				}
 			}
@@ -1482,7 +1538,6 @@ function save() {
 
 		var fullenvelope = new Image();
 		fullenvelope.src = "../images/halfenvelope.png";
-		console.log(fullenvelope);
 		fullenvelope.onload = function() {
 			ctx3.fillStyle = "#447ea0";
 			ctx3.fillRect(0,0,1482, 786);
@@ -1618,11 +1673,13 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
+	console.log(tokenId);
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
+			console.log(token);
 			closeStatus();
 
 			// Set the animation styles
