@@ -185,7 +185,10 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	
+	console.log(fileName);
+	while(fileName.indexOf(" ") != -1){
+		fileName = fileName.replace(" ", "");
+	}
 	var reader  = new FileReader();
 	reader.fileName = fileName;
 	reader.onloadend = function () {
@@ -1337,6 +1340,9 @@ function save() {
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
+			while(this.image_file_name.indexOf(" ") != -1){
+				this.image_file_name = this.image_file_name.replace(" ", "");
+			}
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
@@ -1398,6 +1404,9 @@ function save() {
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
+				while(this.image_file_list[i][0].indexOf(" ") != -1){
+					this.image_file_list[i][0] = this.image_file_list[i][0].replace(" ", "");
+				}
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
 		}
@@ -1474,8 +1483,12 @@ function save() {
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
-						this.image_file_list[i][1].name = template.giftboxId +"_"+ this.image_file_list[i][1].name;
-						uploadFile(this.image_file_list[i][1]);
+						var str = this.image_file_list[i][1].name;
+						while(str.indexOf(" ") != -1){
+							str = str.replace(" ", "");
+							console.log(str);
+						}
+						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
 			});
