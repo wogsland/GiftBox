@@ -1410,6 +1410,11 @@ function save() {
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
+						var str = this.image_file_list[i][1].name;
+						while(str.indexOf(" ") != -1){
+							str = str.replace(" ", "");
+							console.log(str);
+						}
 						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
