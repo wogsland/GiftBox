@@ -25,7 +25,7 @@
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
-	<script src="http://feather.aviary.com/imaging/v2/editor.js"></script>
+	<script src="js/aviary.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
 	<script src="js/init.js"></script>
