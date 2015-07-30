@@ -1410,8 +1410,7 @@ function save() {
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
-						this.image_file_list[i][1].name = template.giftboxId +"_"+ this.image_file_list[i][1].name;
-						uploadFile(this.image_file_list[i][1]);
+						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
 			});
