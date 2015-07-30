@@ -1497,7 +1497,10 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) > -1) {
+					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) == 0) {
+						// console.log("From Open feature");
+						// console.log("Upload file cropped: " + croppedImage.src);
+						// console.log("Upload file name: " + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
 					} else {
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
