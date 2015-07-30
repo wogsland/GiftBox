@@ -113,7 +113,10 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	
+	console.log(fileName);
+	while(fileName.indexOf(" ") != -1){
+		fileName = fileName.replace(" ", "");
+	}
 	var reader  = new FileReader();
 	reader.fileName = fileName;
 	reader.onloadend = function () {
