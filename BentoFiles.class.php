@@ -2,19 +2,18 @@
 include_once 'config.php';
 include_once 'util.php';
 
-class PhotoGallery {
-	public $id;
+class BentoFiles {
 	public $bento_id;
 	public $file_names = array();
 	public $giftboxId;
 
 	static function fetch($bento_id) {
-		$gallery_files = null;
-		$result = execute_query("SELECT * FROM gallery_photos WHERE bento_id = '".$bento_id."'");
+		$bento_files = null;
+		$result = execute_query("SELECT * FROM bento_files WHERE bento_id = '".$bento_id."'");
 		if ($result->num_rows > 0) {
-			$gallery_files = $result->fetch_all();
+			$bento_files = $result->fetch_all(MYSQLI_ASSOC);
 		}
-		return $gallery_files;
+		return $bento_files;
 	}
 	
 	public function init($object) {
@@ -34,17 +33,14 @@ class PhotoGallery {
 	}
 	
 	public function save() {
-		$delete_existing = "DELETE FROM gallery_photos WHERE bento_id = '$this->bento_id'";
-		execute($delete_existing);
+		execute("DELETE FROM bento_files WHERE bento_id = '$this->bento_id'");
 		foreach ($this->file_names as $file){
 			$image_file = str_replace("'", "''", $file);
 			$test = explode("_", $image_file);
 			if($test[0] != $this->giftboxId){
 				$image_file = $this->giftboxId."_".$image_file;
 			}
-			$sql = "INSERT INTO gallery_photos (bento_id, file_name)"
-			."VALUES ('$this->bento_id', '$image_file')";
-			insert($sql); 
+			insert("INSERT INTO bento_files (bento_id, file_name) VALUES ('$this->bento_id', '$image_file')"); 
 		}
 	}
 }
