@@ -1254,7 +1254,7 @@ function save() {
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
-		bento.gallery_file_list = [];
+		bento.bento_file_list = [];
 		bento.auto_play = this.auto_play ? this.auto_play: 0;
 		bento.redirect_url = $("#redirect-text").val();
 		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
@@ -1332,7 +1332,7 @@ function save() {
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
-				bento.gallery_file_list.push(this.image_file_list[i][0]);
+				bento.bento_file_list.push(this.image_file_list[i][0]);
 			}
 		}
 		width += columnWidth + 10;
