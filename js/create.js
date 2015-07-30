@@ -1270,6 +1270,9 @@ function save() {
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
+			while(this.image_file_name.indexOf(" ") != -1){
+				this.image_file_name = this.image_file_name.replace(" ", "");
+			}
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			// console.log("extension: " + extension);
@@ -1332,6 +1335,9 @@ function save() {
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
+				while(this.image_file_list[i][0].indexOf(" ") != -1){
+					this.image_file_list[i][0] = this.image_file_list[i][0].replace(" ", "");
+				}
 				bento.gallery_file_list.push(this.image_file_list[i][0]);
 			}
 		}
