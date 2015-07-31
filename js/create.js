@@ -48,6 +48,7 @@ function loadJustSavedBento(tokenId, bentoId) {
 			// Bento properties
 			var index;
 			var bento;
+			var image_file_path;
 			for (index = 0; index < token.bentos.length; ++index) {
 				// Choosing the bento by it's id
 				bento = document.getElementById(token.bentos[index].css_id);
@@ -56,16 +57,24 @@ function loadJustSavedBento(tokenId, bentoId) {
 				bento.style.height = "100%";
 				bento.style.top = "0px";
 				bento.style.left = "0px";
+				console.log("Before changing from blob");
+				console.log(savedBento.css_id + "-image");
+				var image = document.getElementById(savedBento.css_id + "-image");
+				console.log(image);
+				if (token.bentos[index].image_file_path) {
+					console.log("Has an image file path");
+					console.log("After changing from blob");
+					image.src = token.bentos[index].image_file_path;
+				}
 				if (bentoId.indexOf(savedBento.css_id) == 0) {
-					// clearing out the bento in case there is already something there
-					console.log("has");
-					console.log(savedBento.image_file_path);
-					return launchEditor(bentoId, savedBento.image_file_path);
+					image_file_path = savedBento.image_file_path;
 				}
 			}
+			return launchEditor(bentoId, savedBento.image_file_path);
 		});
 	}
 }
+
 
 function launchEditor(id, src) {
     featherEditor.launch({
