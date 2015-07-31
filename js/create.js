@@ -30,7 +30,7 @@ function chooseEditor() {
 			) },
 		1000);
 	} else {
-		return launchEditor(id, src);
+		launchEditor(id, src);
 	}
 }
 
@@ -67,10 +67,9 @@ function loadJustSavedBento(tokenId, bentoId) {
 					image.src = token.bentos[index].image_file_path;
 				}
 				if (bentoId.indexOf(savedBento.css_id) == 0) {
-					image_file_path = savedBento.image_file_path;
+					launchEditor(bentoId, savedBento.image_file_path);
 				}
 			}
-			return launchEditor(bentoId, savedBento.image_file_path);
 		});
 	}
 }
