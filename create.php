@@ -159,6 +159,14 @@
 		</form>
 	</div>
 
+	<div id="save-editor-dialog" title="Save to open the editor">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="save-editor-name">Name</label>
+				<input class="dialog-input" type="text" name="save-editor-name" id="save-editor-name">
+		</form>
+	</div>
+
 	<div id="url-dialog">
 		<form>
 		    <fieldset>
@@ -394,7 +402,7 @@
 		<div id="image-dialog-container">
 			<div class="container image-dialog-nav-tabs">
 				<div class="row">
-					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="return chooseEditor();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="saveEditorButton();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
