@@ -19,7 +19,6 @@ function chooseEditor() {
 	var src = image.src;
 	var id = image.id;
 	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
-		// console.log("If statement enter");
 		save();
 		var output;
 		setTimeout( function() { 
@@ -1527,15 +1526,18 @@ function save() {
 					} else {
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
+					var imageName;
+					if (giftbox.bentos[i].image_file_name.indexOf(template.giftboxId) == 0) {
+						imageName = giftbox.bentos[i].image_file_name;
+					} else {
+						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
+					}
 					if (image.file && image.src.substring(0, 4).toLowerCase() == 'blob') {
-						console.log(image.file);
-						console.log(image);
-						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+						uploadFile(image.file, imageName);
 					} else {
 						console.log(image.src);
-						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						uploadFileData(image.src, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+						console.log(imageName);
+						uploadFileData(image.src, imageName);
 					}
 				}
 			}
