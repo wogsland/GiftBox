@@ -1527,8 +1527,9 @@ function save() {
 					} else {
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
-					if (image.file) {
+					if (image.file && image.src.substring(0, 4).toLowerCase() == 'blob') {
 						console.log(image.file);
+						console.log(image);
 						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 						uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 					} else {
