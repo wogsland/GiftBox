@@ -28,7 +28,7 @@ function chooseEditor() {
 				loadJustSavedBento(data[0]['id'], id);
 				}
 			) },
-		1000);
+		4000);
 	} else {
 		launchEditor(id, src);
 	}
@@ -1523,16 +1523,16 @@ function save() {
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
 					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) == 0) {
-						// console.log("From Open feature");
-						// console.log("Upload file cropped: " + croppedImage.src);
-						// console.log("Upload file name: " + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
 					} else {
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
 					if (image.file) {
+						console.log(image.file);
+						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 						uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 					} else {
+						console.log(image.src);
 						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 						uploadFileData(image.src, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
 					}
