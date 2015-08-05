@@ -5,8 +5,22 @@ var imageDialogSelector = "#image-dialog";
 var featherEditor = new Aviary.Feather({
     apiKey: '680c55b009074d4eabaa3a117af2e22e',
     onSave: function(imageID, newURL) {
-        var img = document.getElementById(imageID);
-        img.src = newURL;
+		var xhr = new XMLHttpRequest();
+		//only use the first one. add additional photos if possible in the future
+		xhr.open('GET', newURL, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.getElementById(imageID);
+			image.src = newURL;
+			console.log(image.name);
+			myBlob.name = image.name;
+			myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+		  }
+		};
+		xhr.send();
     },
     onError: function(error) {
     	console.log(error);
@@ -184,6 +198,7 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
+	console.log("Uploading: " + fileData + ", under " + fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -1532,7 +1547,10 @@ function save() {
 					} else {
 						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
 					}
-					if (image.file && image.src.substring(0, 4).toLowerCase() == 'blob') {
+					if (image.file) {
+						console.log("Uploading a file requested from the AVIARY SDK");
+						console.log(image.file);
+						console.log(imageName);
 						uploadFile(image.file, imageName);
 					} else {
 						console.log(image.src);
