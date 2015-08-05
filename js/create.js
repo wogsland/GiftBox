@@ -14,9 +14,9 @@ var featherEditor = new Aviary.Feather({
 		    var myBlob = this.response;
 		    var image = document.getElementById(imageID);
 			image.src = newURL;
-			image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
-			image.className = "Aviary-Photo";
-			myBlob.name = image.name;
+			// image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
+			// image.className = "Aviary-Photo";
+			// myBlob.name = image.name;
 			myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
 		  }
