@@ -35,7 +35,6 @@ function chooseEditor() {
 	var id = image.id;
 	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
 		save();
-		var output;
 		setTimeout( function() { 
 			$.get("get_user_tokens_ajax.php", function(data) {
 				// console.log(data[0]);
@@ -87,7 +86,14 @@ function loadJustSavedBento(tokenId, bentoId) {
 				if (token.bentos[index].image_file_path && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
 					// console.log("Has an image file path");
 					// console.log("After changing from blob");
-					image.src = token.bentos[index].image_file_path;
+					UrlExists(token.bentos[index].image_file_path, function(status){
+					    if(status === 200){
+					       image.src = token.bentos[index].image_file_path;
+					    }
+					    else if(status === 404){
+					       console.log("Didn't change the url for this time");
+					    }
+					});
 				}
 				if (bentoId.indexOf(savedBento.css_id) == 0) {
 					launchEditor(bentoId, savedBento.image_file_path);
@@ -97,6 +103,17 @@ function loadJustSavedBento(tokenId, bentoId) {
 	}
 }
 
+function UrlExists(url, cb){
+    jQuery.ajax({
+        url:      url,
+        dataType: 'text',
+        type:     'GET',
+        complete:  function(xhr){
+            if(typeof cb === 'function')
+               cb.apply(this, [xhr.status]);
+        }
+    });
+}
 
 function launchEditor(id, src) {
     featherEditor.launch({
