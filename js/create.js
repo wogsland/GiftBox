@@ -14,7 +14,8 @@ var featherEditor = new Aviary.Feather({
 		    var myBlob = this.response;
 		    var image = document.getElementById(imageID);
 			image.src = newURL;
-			console.log(image.name);
+			image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
+			image.className = "Aviary-Photo";
 			myBlob.name = image.name;
 			myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
@@ -1735,13 +1736,11 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
-	console.log(tokenId);
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
-			console.log(token);
 			closeStatus();
 
 			// Set the animation styles
