@@ -75,6 +75,8 @@ function loadJustSavedBento(tokenId, bentoId) {
 				// Choosing the bento by it's id
 				bento = document.getElementById(token.bentos[index].css_id);
 				var savedBento = token.bentos[index];
+				var url = savedBento.image_file_path;
+				console.log(url);
 				bento.style.width = "100%";
 				bento.style.height = "100%";
 				bento.style.top = "0px";
@@ -83,11 +85,9 @@ function loadJustSavedBento(tokenId, bentoId) {
 				// console.log(savedBento.css_id + "-image");
 				var image = document.getElementById(savedBento.css_id + "-image");
 				// console.log(image);
-				if (token.bentos[index].image_file_path && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
+				if (url && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
 					// console.log("Has an image file path");
 					// console.log("After changing from blob");
-					var url = token.bentos[index].image_file_path;
-					console.log(url);
 					var http = new XMLHttpRequest();
 				    http.open('HEAD', url, false);
 				    http.send();
@@ -98,7 +98,14 @@ function loadJustSavedBento(tokenId, bentoId) {
 				        console.log("Didn't change the url for this time");
 				}
 				if (bentoId.indexOf(savedBento.css_id) == 0) {
-					launchEditor(bentoId, savedBento.image_file_path);
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    console.log(image.src);
+				    if (http.status != 404)
+				   		launchEditor(bentoId, url);
+				    else
+				    	setTimeout(function() { launchEditor(bentoId, url) }, 3000);
 				}
 			}
 		});
