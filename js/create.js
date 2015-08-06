@@ -2,123 +2,6 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 var imageDialogSelector = "#image-dialog";
-var featherEditor = new Aviary.Feather({
-    apiKey: '680c55b009074d4eabaa3a117af2e22e',
-    onSave: function(imageID, newURL) {
-		var xhr = new XMLHttpRequest();
-		//only use the first one. add additional photos if possible in the future
-		xhr.open('GET', newURL, true);
-		xhr.responseType = 'blob';
-		xhr.onload = function(e) {
-		  if (this.status == 200) {
-		    var myBlob = this.response;
-		    var image = document.getElementById(imageID);
-			image.src = newURL;
-			// image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
-			// image.className = "Aviary-Photo";
-			myBlob.name = image.name;
-			myBlob.lastModifiedDate = new Date();
-			image.file = myBlob;
-		  }
-		};
-		xhr.send();
-    },
-    onError: function(error) {
-    	console.log(error);
-    }
-});
-
-function chooseEditor() {
-	var image = getImageDialogImage()[0];
-	// console.log(image);
-	var src = image.src;
-	var id = image.id;
-	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
-		save();
-		setTimeout( function() { 
-			$.get("get_user_tokens_ajax.php", function(data) {
-				// console.log(data[0]);
-				loadJustSavedBento(data[0]['id'], id);
-				}
-			) },
-		1000);
-	} else {
-		launchEditor(id, src);
-	}
-}
-
-function saveEditorButton() {
-	if (!window.top_template.giftboxId) {
-		$('#save-editor-name').val(window.top_template.giftboxName);
-		$('#save-editor-dialog').dialog('open');
-	} else {
-		return chooseEditor();
-	}
-}
-
-function loadJustSavedBento(tokenId, bentoId) {
-	tokenId = tokenId;
-	// console.log(tokenId);
-	if (tokenId) {
-		$('#open-dialog').dialog('close');
-		openStatus("Loading", "Loading saved Token...");
-		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
-			var token = data;
-			// console.log(token);
-			closeStatus();
-
-			// Bento properties
-			var index;
-			var bento;
-			var image_file_path;
-			for (index = 0; index < token.bentos.length; ++index) {
-				// Choosing the bento by it's id
-				bento = document.getElementById(token.bentos[index].css_id);
-				var savedBento = token.bentos[index];
-				var url = savedBento.image_file_path;
-				console.log(url);
-				bento.style.width = "100%";
-				bento.style.height = "100%";
-				bento.style.top = "0px";
-				bento.style.left = "0px";
-				// console.log("Before changing from blob");
-				// console.log(savedBento.css_id + "-image");
-				var image = document.getElementById(savedBento.css_id + "-image");
-				// console.log(image);
-				if (url && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
-					// console.log("Has an image file path");
-					// console.log("After changing from blob");
-					var http = new XMLHttpRequest();
-				    http.open('HEAD', url, false);
-				    http.send();
-				    console.log(image.src);
-				    if (http.status != 404)
-				   		image.src = url;
-				    else
-				        console.log("Didn't change the url for this time");
-				}
-				if (bentoId.indexOf(savedBento.css_id) == 0) {
-					var http = new XMLHttpRequest();
-				    http.open('HEAD', url, false);
-				    http.send();
-				    console.log(image.src);
-				    if (http.status != 404)
-				   		launchEditor(bentoId, url);
-				    else
-				    	setTimeout(function() { launchEditor(bentoId, url) }, 3000);
-				}
-			}
-		});
-	}
-}
-
-function launchEditor(id, src) {
-    featherEditor.launch({
-        image: id,
-        url: src
-    });
-    return false;
-}
 
 window.onload = function(){
     var browser = get_browser_info();
@@ -2877,4 +2760,122 @@ function displayThumbnails() {
 												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
 		$('#thumbnail-dialog').dialog('open');
 	}
+}
+
+var featherEditor = new Aviary.Feather({
+    apiKey: '680c55b009074d4eabaa3a117af2e22e',
+    onSave: function(imageID, newURL) {
+		var xhr = new XMLHttpRequest();
+		//only use the first one. add additional photos if possible in the future
+		xhr.open('GET', newURL, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.getElementById(imageID);
+			image.src = newURL;
+			// image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
+			// image.className = "Aviary-Photo";
+			myBlob.name = image.name;
+			myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+		  }
+		};
+		xhr.send();
+    },
+    onError: function(error) {
+    	console.log(error);
+    }
+});
+
+function chooseEditor() {
+	var image = getImageDialogImage()[0];
+	// console.log(image);
+	var src = image.src;
+	var id = image.id;
+	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
+		save();
+		setTimeout( function() { 
+			$.get("get_user_tokens_ajax.php", function(data) {
+				// console.log(data[0]);
+				loadJustSavedBento(data[0]['id'], id);
+				}
+			) },
+		1000);
+	} else {
+		launchEditor(id, src);
+	}
+}
+
+function saveEditorButton() {
+	if (!window.top_template.giftboxId) {
+		$('#save-editor-name').val(window.top_template.giftboxName);
+		$('#save-editor-dialog').dialog('open');
+	} else {
+		return chooseEditor();
+	}
+}
+
+function loadJustSavedBento(tokenId, bentoId) {
+	tokenId = tokenId;
+	// console.log(tokenId);
+	if (tokenId) {
+		$('#open-dialog').dialog('close');
+		openStatus("Loading", "Loading saved Token...");
+		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			var token = data;
+			// console.log(token);
+			closeStatus();
+
+			// Bento properties
+			var index;
+			var bento;
+			var image_file_path;
+			for (index = 0; index < token.bentos.length; ++index) {
+				// Choosing the bento by it's id
+				bento = document.getElementById(token.bentos[index].css_id);
+				var savedBento = token.bentos[index];
+				var url = savedBento.image_file_path;
+				console.log(url);
+				bento.style.width = "100%";
+				bento.style.height = "100%";
+				bento.style.top = "0px";
+				bento.style.left = "0px";
+				// console.log("Before changing from blob");
+				// console.log(savedBento.css_id + "-image");
+				var image = document.getElementById(savedBento.css_id + "-image");
+				// console.log(image);
+				if (url && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
+					// console.log("Has an image file path");
+					// console.log("After changing from blob");
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    console.log(image.src);
+				    if (http.status != 404)
+				   		image.src = url;
+				    else
+				        console.log("Didn't change the url for this time");
+				}
+				if (bentoId.indexOf(savedBento.css_id) == 0) {
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    console.log(image.src);
+				    if (http.status != 404)
+				   		launchEditor(bentoId, url);
+				    else
+				    	setTimeout(function() { launchEditor(bentoId, url) }, 3000);
+				}
+			}
+		});
+	}
+}
+
+function launchEditor(id, src) {
+    featherEditor.launch({
+        image: id,
+        url: src
+    });
+    return false;
 }
