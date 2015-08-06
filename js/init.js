@@ -119,6 +119,32 @@ $(function() {
 });
 
 $(function() {
+	$( "#save-editor-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 400,
+		modal: true,
+		buttons: {
+			Save: function() {
+				return chooseEditor();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#save-editor-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					chooseEditor();
+					return false;
+				}
+			});
+		}
+	});
+});
+
+$(function() {
 	$( "#url-dialog" ).dialog({ 
 		autoOpen: false,
 		resizable: false,
