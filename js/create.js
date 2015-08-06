@@ -41,7 +41,7 @@ function chooseEditor() {
 				loadJustSavedBento(data[0]['id'], id);
 				}
 			) },
-		4000);
+		1000);
 	} else {
 		launchEditor(id, src);
 	}
