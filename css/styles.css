@@ -1631,6 +1631,9 @@ footer .terms-policy li a:hover{
     color: white;
 }
 
+footer .form-control {
+    color: white;
+}
 
 /*---------------------------------------
    SECTION:  FORM CONTROLS
@@ -2748,7 +2751,8 @@ div.fill img {
 
 .analytics-btn {
     padding: 1px 14px;
-    margin-bottom: 8px;
+    margin-bottom: 2em;
+    margin-top: 0.5em;
 }
 
 .edit-btn {

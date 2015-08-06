@@ -2,78 +2,6 @@ var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
 var imageDialogSelector = "#image-dialog";
-var featherEditor = new Aviary.Feather({
-    apiKey: '680c55b009074d4eabaa3a117af2e22e',
-    onSave: function(imageID, newURL) {
-        var img = document.getElementById(imageID);
-        img.src = newURL;
-    },
-    onError: function(error) {
-    	console.log(error);
-    }
-});
-
-function chooseEditor() {
-	var image = getImageDialogImage()[0];
-	console.log(image);
-	var src = image.src;
-	var id = image.id;
-	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
-		console.log("If statement enter");
-		save();
-		var output;
-		setTimeout( function() { 
-			$.get("get_user_tokens_ajax.php", function(data) {
-				console.log(data[0]);
-				loadJustSavedBento(data[0]['id'], id);
-				}
-			) },
-		1000);
-	} else {
-		return launchEditor(id, src);
-	}
-}
-
-function loadJustSavedBento(tokenId, bentoId) {
-	tokenId = tokenId;
-	console.log(tokenId);
-	if (tokenId) {
-		$('#open-dialog').dialog('close');
-		openStatus("Loading", "Loading saved Token...");
-		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
-			var token = data;
-			console.log(token);
-			closeStatus();
-
-			// Bento properties
-			var index;
-			var bento;
-			for (index = 0; index < token.bentos.length; ++index) {
-				// Choosing the bento by it's id
-				bento = document.getElementById(token.bentos[index].css_id);
-				var savedBento = token.bentos[index];
-				bento.style.width = "100%";
-				bento.style.height = "100%";
-				bento.style.top = "0px";
-				bento.style.left = "0px";
-				if (bentoId.indexOf(savedBento.css_id) == 0) {
-					// clearing out the bento in case there is already something there
-					console.log("has");
-					console.log(savedBento.image_file_path);
-					return launchEditor(bentoId, savedBento.image_file_path);
-				}
-			}
-		});
-	}
-}
-
-function launchEditor(id, src) {
-    featherEditor.launch({
-        image: id,
-        url: src
-    });
-    return false;
-}
 
 window.onload = function(){
     var browser = get_browser_info();
@@ -168,6 +96,7 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
+	// console.log("Uploading: " + fileData + ", under " + fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -185,7 +114,7 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	console.log(fileName);
+	// console.log(fileName);
 	while(fileName.indexOf(" ") != -1){
 		fileName = fileName.replace(" ", "");
 	}
@@ -375,7 +304,6 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
-	console.log(imageSrc);
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
@@ -1244,15 +1172,24 @@ function saveButton() {
 	} else {
 		save();
 	}
-
 }
-function save() {
+
+function saveName() {
 	if ($("#save-dialog" ).dialog("isOpen")) {
 		// Get the name
 		var giftboxName = $("#save-name").val();
 		$("#save-dialog" ).dialog("close");
 		window.top_template.giftboxName = giftboxName;
+	} else if ($("#save-editor-dialog" ).dialog("isOpen")) {
+		// Get the name
+		var giftboxName = $("#save-editor-name").val();
+		$("#save-editor-dialog" ).dialog("close");
+		window.top_template.giftboxName = giftboxName;
 	}
+}
+
+function save() {
+	saveName();
 
 	var giftboxName = window.top_template.giftboxName;
 	openStatus("Save", "Saving " + giftboxName + "...");
@@ -1497,16 +1434,26 @@ function save() {
 				var container = document.getElementById(giftbox.bentos[i].css_id + '-image-container');
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
-					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) > -1) {
+					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) == 0) {
 						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
 					} else {
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
-					if (image.file) {
-						uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+					var imageName;
+					if (giftbox.bentos[i].image_file_name.indexOf(template.giftboxId) == 0) {
+						imageName = giftbox.bentos[i].image_file_name;
 					} else {
-						console.log(template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						uploadFileData(image.src, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
+						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
+					}
+					if (image.file) {
+						// console.log("Uploading a file requested from the AVIARY SDK");
+						// console.log(image.file);
+						// console.log(imageName);
+						uploadFile(image.file, imageName);
+					} else {
+						// console.log(image.src);
+						// console.log(imageName);
+						uploadFileData(image.src, imageName);
 					}
 				}
 			}
@@ -1540,7 +1487,7 @@ function save() {
 	    	ctx2.drawImage(background,170,0);
 			var halfenvelope = new Image();
 			halfenvelope.src = "../images/halfenvelope.png";
-			console.log(halfenvelope);
+			// console.log(halfenvelope);
 			halfenvelope.onload = function() {
 				ctx2.scale(1.25,1.25);
 		    	ctx2.drawImage(halfenvelope,0,-410);
@@ -1686,13 +1633,11 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
-	console.log(tokenId);
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
 			var token = data;
-			console.log(token);
 			closeStatus();
 
 			// Set the animation styles
@@ -2815,4 +2760,122 @@ function displayThumbnails() {
 												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
 		$('#thumbnail-dialog').dialog('open');
 	}
+}
+
+var featherEditor = new Aviary.Feather({
+    apiKey: '680c55b009074d4eabaa3a117af2e22e',
+    onSave: function(imageID, newURL) {
+		var xhr = new XMLHttpRequest();
+		//only use the first one. add additional photos if possible in the future
+		xhr.open('GET', newURL, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.getElementById(imageID);
+			image.src = newURL;
+			// image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
+			// image.className = "Aviary-Photo";
+			myBlob.name = image.name;
+			myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+		  }
+		};
+		xhr.send();
+    },
+    onError: function(error) {
+    	console.log(error);
+    }
+});
+
+function chooseEditor() {
+	var image = getImageDialogImage()[0];
+	// console.log(image);
+	var src = image.src;
+	var id = image.id;
+	if (image.src.substring(0, 4).toLowerCase() == 'blob') {
+		save();
+		setTimeout( function() { 
+			$.get("get_user_tokens_ajax.php", function(data) {
+				// console.log(data[0]);
+				loadJustSavedBento(data[0]['id'], id);
+				}
+			) },
+		1000);
+	} else {
+		launchEditor(id, src);
+	}
+}
+
+function saveEditorButton() {
+	if (!window.top_template.giftboxId) {
+		$('#save-editor-name').val(window.top_template.giftboxName);
+		$('#save-editor-dialog').dialog('open');
+	} else {
+		return chooseEditor();
+	}
+}
+
+function loadJustSavedBento(tokenId, bentoId) {
+	tokenId = tokenId;
+	// console.log(tokenId);
+	if (tokenId) {
+		$('#open-dialog').dialog('close');
+		openStatus("Loading", "Loading saved Token...");
+		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			var token = data;
+			// console.log(token);
+			closeStatus();
+
+			// Bento properties
+			var index;
+			var bento;
+			var image_file_path;
+			for (index = 0; index < token.bentos.length; ++index) {
+				// Choosing the bento by it's id
+				bento = document.getElementById(token.bentos[index].css_id);
+				var savedBento = token.bentos[index];
+				var url = savedBento.image_file_path;
+				// console.log(url);
+				bento.style.width = "100%";
+				bento.style.height = "100%";
+				bento.style.top = "0px";
+				bento.style.left = "0px";
+				// console.log("Before changing from blob");
+				// console.log(savedBento.css_id + "-image");
+				var image = document.getElementById(savedBento.css_id + "-image");
+				// console.log(image);
+				if (url && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
+					// console.log("Has an image file path");
+					// console.log("After changing from blob");
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    // console.log(image.src);
+				    if (http.status != 404)
+				   		image.src = url;
+				    else
+				        console.log("Didn't change the url for this time");
+				}
+				if (bentoId.indexOf(savedBento.css_id) == 0) {
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    // console.log(image.src);
+				    if (http.status != 404)
+				   		launchEditor(bentoId, url);
+				    else
+				    	setTimeout(function() { launchEditor(bentoId, url) }, 3000);
+				}
+			}
+		});
+	}
+}
+
+function launchEditor(id, src) {
+    featherEditor.launch({
+        image: id,
+        url: src
+    });
+    return false;
 }

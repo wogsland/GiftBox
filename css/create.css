@@ -468,19 +468,18 @@ iframe {
 	margin-top: 20px;
 }
 
-/*.opener-button {
-	background-image: url('../images/ui-buttons-sprite.png');
+.opener-button {
 	background-repeat: no-repeat;
-	height: 30px;
-  	width: 101px;
+	height: 38px;
+	width: 196px;
 	border: solid 1px #23282B;
 	margin: auto;
 	outline: none;
 	margin-top: 10px;
 	cursor: pointer;
-}*/
+}
 
-.opener-button {
+/*.opener-button {
 	text-align: center;
 	height: 30px;
 	line-height: 30px;
@@ -490,6 +489,14 @@ iframe {
 	border-radius: 3px;
 	cursor: pointer;
 	margin-top: 5px;
+}*/
+
+#opener-entrance-button {
+	background-image: url('../images/entrance.png');
+}
+
+#opener-exit-button {
+	background-image: url('../images/exit.png');
 }
 
 .send-button {
@@ -997,7 +1004,7 @@ fieldset {
 }
 
 #thumbnails-send-button {
-	background-position: -1px -768px;
+	background-image: url('../images/choosethumb.png');
 }
 
 /******************* THUMBNAIL DIALOG *******************/
