@@ -96,7 +96,7 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
-	console.log("Uploading: " + fileData + ", under " + fileName);
+	// console.log("Uploading: " + fileData + ", under " + fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -114,7 +114,7 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	console.log(fileName);
+	// console.log(fileName);
 	while(fileName.indexOf(" ") != -1){
 		fileName = fileName.replace(" ", "");
 	}
@@ -1446,13 +1446,13 @@ function save() {
 						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
 					}
 					if (image.file) {
-						console.log("Uploading a file requested from the AVIARY SDK");
-						console.log(image.file);
-						console.log(imageName);
+						// console.log("Uploading a file requested from the AVIARY SDK");
+						// console.log(image.file);
+						// console.log(imageName);
 						uploadFile(image.file, imageName);
 					} else {
-						console.log(image.src);
-						console.log(imageName);
+						// console.log(image.src);
+						// console.log(imageName);
 						uploadFileData(image.src, imageName);
 					}
 				}
@@ -1487,7 +1487,7 @@ function save() {
 	    	ctx2.drawImage(background,170,0);
 			var halfenvelope = new Image();
 			halfenvelope.src = "../images/halfenvelope.png";
-			console.log(halfenvelope);
+			// console.log(halfenvelope);
 			halfenvelope.onload = function() {
 				ctx2.scale(1.25,1.25);
 		    	ctx2.drawImage(halfenvelope,0,-410);
@@ -2836,7 +2836,7 @@ function loadJustSavedBento(tokenId, bentoId) {
 				bento = document.getElementById(token.bentos[index].css_id);
 				var savedBento = token.bentos[index];
 				var url = savedBento.image_file_path;
-				console.log(url);
+				// console.log(url);
 				bento.style.width = "100%";
 				bento.style.height = "100%";
 				bento.style.top = "0px";
@@ -2851,7 +2851,7 @@ function loadJustSavedBento(tokenId, bentoId) {
 					var http = new XMLHttpRequest();
 				    http.open('HEAD', url, false);
 				    http.send();
-				    console.log(image.src);
+				    // console.log(image.src);
 				    if (http.status != 404)
 				   		image.src = url;
 				    else
@@ -2861,7 +2861,7 @@ function loadJustSavedBento(tokenId, bentoId) {
 					var http = new XMLHttpRequest();
 				    http.open('HEAD', url, false);
 				    http.send();
-				    console.log(image.src);
+				    // console.log(image.src);
 				    if (http.status != 404)
 				   		launchEditor(bentoId, url);
 				    else
