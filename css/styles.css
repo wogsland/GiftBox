@@ -1631,6 +1631,9 @@ footer .terms-policy li a:hover{
     color: white;
 }
 
+footer .form-control {
+    color: white;
+}
 
 /*---------------------------------------
    SECTION:  FORM CONTROLS
