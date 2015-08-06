@@ -1913,6 +1913,21 @@ summary#terms-content {
     padding-bottom: 4em;
 }
 
+/*---------------------------------------
+   SECTION:  PRIVACY POLICY
+-----------------------------------------*/
+body div.container-fluid {
+    padding-top: 3.5em;
+}
+h1#privacy-header {
+    margin-top: 1.5em;
+}
+summary#privacy-content {
+    margin: 0 auto;
+    width: 78%;
+    padding-bottom: 4em;
+}
+
 
 /***** 9.5 PROFILE STYLES *****/
 
