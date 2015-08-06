@@ -16,7 +16,7 @@ var featherEditor = new Aviary.Feather({
 			image.src = newURL;
 			// image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
 			// image.className = "Aviary-Photo";
-			// myBlob.name = image.name;
+			myBlob.name = image.name;
 			myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
 		  }
@@ -86,14 +86,16 @@ function loadJustSavedBento(tokenId, bentoId) {
 				if (token.bentos[index].image_file_path && image && image.src.substring(0, 4).toLowerCase() == 'blob') {
 					// console.log("Has an image file path");
 					// console.log("After changing from blob");
-					UrlExists(token.bentos[index].image_file_path, function(status){
-					    if(status === 200){
-					       image.src = token.bentos[index].image_file_path;
-					    }
-					    else if(status === 404){
-					       console.log("Didn't change the url for this time");
-					    }
-					});
+					var url = token.bentos[index].image_file_path;
+					console.log(url);
+					var http = new XMLHttpRequest();
+				    http.open('HEAD', url, false);
+				    http.send();
+				    console.log(image.src);
+				    if (http.status != 404)
+				   		image.src = url;
+				    else
+				        console.log("Didn't change the url for this time");
 				}
 				if (bentoId.indexOf(savedBento.css_id) == 0) {
 					launchEditor(bentoId, savedBento.image_file_path);
@@ -101,18 +103,6 @@ function loadJustSavedBento(tokenId, bentoId) {
 			}
 		});
 	}
-}
-
-function UrlExists(url, cb){
-    jQuery.ajax({
-        url:      url,
-        dataType: 'text',
-        type:     'GET',
-        complete:  function(xhr){
-            if(typeof cb === 'function')
-               cb.apply(this, [xhr.status]);
-        }
-    });
 }
 
 function launchEditor(id, src) {
