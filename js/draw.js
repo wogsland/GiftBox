@@ -141,7 +141,7 @@ function renderAverageChart() {
 
   var data = new google.visualization.DataTable(averageChartData);
 
-  var title = 'Average Time: ' + averageChartNumber;
+  var title = 'Average Time: ' + averageChartNumber + " (hh:mm:ss)";
 
   var numOfRows = data.getNumberOfRows();
   console.log(numOfRows);
