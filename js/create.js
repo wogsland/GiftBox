@@ -1479,6 +1479,11 @@ function save() {
 		var background = new Image();
 		background.crossOrigin = "Anonymous";
 		background.src = canvasURL;
+		// var bottomEnvelope = new Image();
+		// bottomEnvelope.src = "../images/halfbottomenvelope.png";
+		// bottomEnvelope.onload = function(){
+		// 	ctx2.drawImage(bottomEnvelope,0,0);
+		// } 
 		background.onload = function(){
 		    ctx2.drawImage(background,0,0);
 		    ctx2.fillStyle = "#447ea0";
@@ -1486,11 +1491,11 @@ function save() {
 			ctx2.scale(0.8,0.8);
 	    	ctx2.drawImage(background,170,0);
 			var halfenvelope = new Image();
-			halfenvelope.src = "../images/halfenvelope.png";
+			halfenvelope.src = "../images/halftopenvelope.png";
 			// console.log(halfenvelope);
 			halfenvelope.onload = function() {
 				ctx2.scale(1.25,1.25);
-		    	ctx2.drawImage(halfenvelope,0,-410);
+		    	ctx2.drawImage(halfenvelope,0,0);
 			    halfThumbnailCanvasURL = halfEnvelopeCanvas.toDataURL();
 				window.top_template.halfEnvelopeThumbnailURL = halfThumbnailCanvasURL;
 			}
@@ -1501,7 +1506,7 @@ function save() {
 		fullenvelope.onload = function() {
 			ctx3.fillStyle = "#447ea0";
 			ctx3.fillRect(0,0,1482, 786);
-	    	ctx3.drawImage(fullenvelope,0,-410);
+	    	ctx3.drawImage(fullenvelope,0,0);
 	    	var fullbackground = new Image();
 			fullbackground.crossOrigin = "Anonymous";
 			fullbackground.src = canvasURL;
