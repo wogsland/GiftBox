@@ -60,9 +60,9 @@
 	<?php include_once("analyticstracking.php") ?>
 	<canvas id="thumbnail-canvas-1" width="1462" height="768" style="display: none; position:absolute;">
 	</canvas>
-	<canvas id="thumbnail-canvas-2" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-2" width="1462" height="1355" style="display: none; position:absolute;">
 	</canvas>
-	<canvas id="thumbnail-canvas-3" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-3" width="1462" height="1355" style="display: none; position:absolute;">
 	</canvas>
 	<div id="content-wrapper">
 		<div id="palette">
