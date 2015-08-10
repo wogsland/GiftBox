@@ -1518,7 +1518,7 @@ function save() {
 					ctx3.drawImage(fullbackground,100,650);
 					fullThumbnailCanvasURL = fullEnvelopeCanvas.toDataURL();
 					window.top_template.fullEnvelopeThumbnailURL = fullThumbnailCanvasURL;
-					ctx3.scale(1.25,1.25);  
+					ctx3.scale(1.15,1.15);
 				}
 			}
 		}
