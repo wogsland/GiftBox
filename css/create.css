@@ -598,7 +598,8 @@ fieldset {
 }
 
 #add-nav-bar {
-	float: left;
+	float: none;
+	text-align: center;
 	height: 100%;
 }
 
