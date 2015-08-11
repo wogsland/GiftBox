@@ -397,15 +397,19 @@
 		</fieldset>
 	</div>
 
+<!-- 	<div id="advanced-editor-box">
+	</div> -->
+	
 	<!-- IMAGE DIALOG -->
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">
 			<div class="container image-dialog-nav-tabs">
 				<div class="row">
 					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="chooseBasicEditor();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="chooseAdvancedEditor();" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
+<!-- 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
+ -->					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
 				</div>
 			</div>
 			<div class="image-dialog-tab-container" id="image-filter-tab-container">
