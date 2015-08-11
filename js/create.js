@@ -916,7 +916,8 @@ function closeClicked(event, closeButton) {
 
 function refreshImage(event, refreshButton) {
 	var bento = refreshButton.parentNode;
-	var bentoId = refreshButton.id.substring(9, 0);
+	var length = refreshButton.id.length;
+	var bentoId = refreshButton.id.substring(length - 8, 0);
 	var imageId = bentoId + '-image';
 	var image = document.getElementById(imageId);
 	if (image && image.originalSrc != image.src) {
