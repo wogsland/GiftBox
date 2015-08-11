@@ -2783,6 +2783,7 @@ var featherEditor = new Aviary.Feather({
     apiKey: '680c55b009074d4eabaa3a117af2e22e',
     tools: ['enhance', 'orientation', 'lighting'],
     enableCORS: true,
+    appendTo: 'advanced-editor-box',
     onSave: function(imageID, newURL) {
 		var xhr = new XMLHttpRequest();
 		//only use the first one. add additional photos if possible in the future
@@ -2803,6 +2804,9 @@ var featherEditor = new Aviary.Feather({
 		xhr.send();
 		featherEditor.close();
     },
+    onClose: function() {
+    	$('#advanced-editor-box').css('display', 'none');
+    },
     onError: function(error) {
     	console.log(error);
     }
@@ -2812,10 +2816,10 @@ function chooseBasicEditor() {
 	var image = getImageDialogImage()[0];
 	var src = image.src;
 	var id = image.id;
-	featherEditor.launch({
-        image: id,
-        url: src
-    });
+	$('#advanced-editor-box').css('display', 'block');
+	basicConfigObj['image'] = id;
+	basicConfigObj['url'] = src;
+	console.log(basicConfigObj);
 	featherEditor.launch(basicConfigObj);
     return false;
 }
@@ -2824,6 +2828,10 @@ function chooseAdvancedEditor() {
 	var image = getImageDialogImage()[0];
 	var src = image.src;
 	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	advancedConfigObj['image'] = id;
+	advancedConfigObj['url'] = src;
+	console.log(advancedConfigObj);
 	featherEditor.launch(advancedConfigObj);
     return false;
 }

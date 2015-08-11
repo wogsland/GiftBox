@@ -268,10 +268,12 @@ $(function() {
 
 $(function() {
 	$( "#image-dialog" ).dialog({ 
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
 		autoOpen: false,
 		resizable: false,
 		height:500,
-		width: 300
+		width: 300, 
+		modal: true
 	});
 });
 

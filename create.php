@@ -64,6 +64,8 @@
 	</canvas>
 	<canvas id="thumbnail-canvas-3" width="1462" height="1355" style="display: none; position:absolute;">
 	</canvas>
+	<div id="advanced-editor-box">
+	</div>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">
@@ -397,9 +399,6 @@
 		</fieldset>
 	</div>
 
-<!-- 	<div id="advanced-editor-box">
-	</div> -->
-	
 	<!-- IMAGE DIALOG -->
 	<div id="image-dialog" title="Image">
 		<div id="image-dialog-container">

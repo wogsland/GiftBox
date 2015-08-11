@@ -1128,12 +1128,13 @@ fieldset {
 	width: 46%;
 }
 
-/*#advanced-editor-box {
+#advanced-editor-box {
+	display: none;
     z-index: 9999999;
     top: 10%;
-    right: 19%;
+    right: 15%;
     bottom: 10%;
     width: 64%;
     position: absolute;
-}*/
+}
 
