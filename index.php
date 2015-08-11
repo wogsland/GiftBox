@@ -172,9 +172,9 @@
 		<!-- ONLY LOGO ON HEADER -->
 		<div class="only-logo">
 			<div class="navbar">
-				<div class="navbar-header">
+<!-- 				<div class="navbar-header">
 					<img src="assets/img/logo-light.png" alt="">
-				</div>
+				</div> -->
 			</div>
 		</div> <!-- /END ONLY LOGO ON HEADER -->
 

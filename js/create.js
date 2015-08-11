@@ -2802,9 +2802,10 @@ var featherEditor = new Aviary.Feather({
 		  }
 		};
 		xhr.send();
-		featherEditor.close();
+		// featherEditor.close();
     },
     onClose: function() {
+    	// $('#image-dialog').dialog("close");
     	$('#advanced-editor-box').css('display', 'none');
     },
     onError: function(error) {
