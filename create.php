@@ -198,7 +198,7 @@
 				<label for="animation-color">Color: </label>
 				<select id="select-envelope-color-option">
 				  <option value="blue">blue</option>
-<!-- 				  <option value="red">red</option>
+<!-- 		      <option value="red">red</option>
 				  <option value="green">green</option>
 				  <option value="white">white</option>
 				  <option value="yellow">yellow</option> -->
