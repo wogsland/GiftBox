@@ -127,7 +127,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Save: function() {
-				return chooseEditor();
+				return chooseBasicEditor();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -136,7 +136,7 @@ $(function() {
 		open: function() {
 			$("#save-editor-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					chooseEditor();
+					chooseBasicEditor();
 					return false;
 				}
 			});
