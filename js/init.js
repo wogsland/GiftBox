@@ -1,9 +1,6 @@
 $(function() {
 	$( "#add-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide();
-			console.log(event);
-			console.log(ui);
-			},
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide() },
 		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,

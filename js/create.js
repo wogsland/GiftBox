@@ -2798,15 +2798,11 @@ var advancedConfigObj = {
 }
 
 var textConfigObj = {
-    tools: ['text']
-}
-
-var memeConfigObj = {
-    tools: ['meme']
+    tools: ['text', 'meme']
 }
 
 var featherEditor = new Aviary.Feather({
-    apiKey: '680c55b009074d4eabaa3a117af2e22e',
+    apiKey: 'fbedb10c9b4b4a82aae5c4db13ed70b5',
     tools: ['enhance', 'orientation', 'lighting'],
     enableCORS: true,
     appendTo: 'advanced-editor-box',
@@ -2823,7 +2819,7 @@ var featherEditor = new Aviary.Feather({
 			image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
 			image.className = "Aviary-Photo";
 			myBlob.name = image.name;
-			myBlob.lastModifiedDate = new Date();
+			// myBlob.lastModifiedDate = new Date();
 			image.file = myBlob;
 		  }
 		};
@@ -2848,6 +2844,7 @@ function chooseBasicEditor() {
 	basicConfigObj['url'] = src;
 	console.log(basicConfigObj);
 	featherEditor.launch(basicConfigObj);
+	// $('#image-dialog').dialog("close");
     return false;
 }
 
@@ -2860,6 +2857,7 @@ function chooseAdvancedEditor() {
 	advancedConfigObj['url'] = src;
 	console.log(advancedConfigObj);
 	featherEditor.launch(advancedConfigObj);
+	// $('#image-dialog').dialog("close");
     return false;
 }
 
@@ -2872,17 +2870,6 @@ function chooseTextEditor() {
 	textConfigObj['url'] = src;
 	console.log(textConfigObj);
 	featherEditor.launch(textConfigObj);
-    return false;
-}
-
-function chooseMemeEditor() {
-	var image = getImageDialogImage()[0];
-	var src = image.src;
-	var id = image.id;
-	$('#advanced-editor-box').css('display', 'block');
-	memeConfigObj['image'] = id;
-	memeConfigObj['url'] = src;
-	console.log(memeConfigObj);
-	featherEditor.launch(memeConfigObj);
+	$('#image-dialog').dialog("close");
     return false;
 }

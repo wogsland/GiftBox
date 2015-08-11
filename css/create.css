@@ -1141,7 +1141,7 @@ fieldset {
 
 #advanced-editor-box {
 	display: none;
-    z-index: 9999999;
+    z-index: 400;
     top: 10%;
     right: 15%;
     bottom: 10%;
