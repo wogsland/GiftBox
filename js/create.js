@@ -304,6 +304,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
+	img.originalSrc = imageSrc;
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
@@ -361,6 +362,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 
 	// change the hover for the bento to show the slider and close button
 	showControl(bento.id + "-close", imageContainer);
+	showControl(bento.id + "-refresh", imageContainer);
 }
 
 function addSpotify(bento, trackId) {
@@ -839,7 +841,7 @@ function showControl(controlId, target) {
 	var control = $("#"+controlId);
 	if (control.length > 0) {
 		control.css("display", "block");
-		control.css("zIndex", 2);
+		control.css("zIndex", 10);
 		control[0].target = target;
 	}
 /*	
@@ -899,12 +901,26 @@ function closeClicked(event, closeButton) {
 	} else {
 		hideControl(closeButton.id);
 		hideControl(bento.id + "-slider");
+		hideControl(bento.id + "-refresh");
 		hideControl(bento.id + "-link-icon");
 	}
 	if(bento.overlay_content){
 		bento.removeChild($("#"+bento.id+"-out-text-overlay-container")[0]);
 		setOverlayButtons(null);
 		hideControl(bento.id + "-show-overlay");
+	}
+	bento.onclick=function(){bentoClick(this)};
+	event.stopPropagation();
+	unsaved();
+}
+
+function refreshImage(event, refreshButton) {
+	var bento = refreshButton.parentNode;
+	var bentoId = refreshButton.id.substring(9, 0);
+	var imageId = bentoId + '-image';
+	var image = document.getElementById(imageId);
+	if (image && image.originalSrc != image.src) {
+		image.src = image.originalSrc;
 	}
 	bento.onclick=function(){bentoClick(this)};
 	event.stopPropagation();
@@ -1833,6 +1849,7 @@ function loadSaved() {
 
 function clearBento(bento) {
 	hideControl(bento.id+"-close");
+	hideControl(bento.id+"-refresh");
 	hideControl(bento.id+"-slider");
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -2776,7 +2793,15 @@ var basicConfigObj = {
 }
 
 var advancedConfigObj = {
-    tools: ['enhance', 'effects', 'frames', 'orientation', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'colorsplash'],
+    tools: ['enhance', 'effects', 'frames', 'orientation', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'colorsplash']
+}
+
+var textConfigObj = {
+    tools: ['text']
+}
+
+var memeConfigObj = {
+    tools: ['meme']
 }
 
 var featherEditor = new Aviary.Feather({
@@ -2834,5 +2859,29 @@ function chooseAdvancedEditor() {
 	advancedConfigObj['url'] = src;
 	console.log(advancedConfigObj);
 	featherEditor.launch(advancedConfigObj);
+    return false;
+}
+
+function chooseTextEditor() {
+	var image = getImageDialogImage()[0];
+	var src = image.src;
+	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	textConfigObj['image'] = id;
+	textConfigObj['url'] = src;
+	console.log(textConfigObj);
+	featherEditor.launch(textConfigObj);
+    return false;
+}
+
+function chooseMemeEditor() {
+	var image = getImageDialogImage()[0];
+	var src = image.src;
+	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	memeConfigObj['image'] = id;
+	memeConfigObj['url'] = src;
+	console.log(memeConfigObj);
+	featherEditor.launch(memeConfigObj);
     return false;
 }

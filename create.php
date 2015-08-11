@@ -417,7 +417,9 @@
 			</div>
 			<div class="image-dialog-tab-container" id="image-text-tab-container">
 				TEXT
-				<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+				<div class="image-dialog-button" id="add-overlay-button" onclick="chooseTextEditor()">ADD TEXT OVERLAY</div>
+				MEME
+				<div class="image-dialog-button" id="add-meme-button" onclick="chooseMemeEditor()">ADD MEME</div>
 				<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
 				<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
 				<!-- DISPLAY
