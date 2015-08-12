@@ -1300,7 +1300,7 @@ function save() {
 			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
-			bento.image_file_name = root + "_" + Date.now() + "_" + bento.css_id + extension;
+			// bento.image_file_name = root + "_" + Date.now() + "_" + bento.css_id + extension;
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
@@ -1443,6 +1443,9 @@ function save() {
 							str = str.replace(" ", "");
 							console.log(str);
 						}
+						console.log("WHAT UP IS THIS?");
+						console.log(this.image_file_list[i][1]);
+						console.log(template.giftboxId + "_" + this.image_file_list[i][1].name);
 						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
@@ -1464,19 +1467,13 @@ function save() {
 						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
 					}
 					if (image.file) {
-						// console.log("Uploading a file requested from the AVIARY SDK");
-						// console.log(image.file);
-						// console.log(imageName);
 						console.log(imageName);
 						uploadFile(image.file, imageName);
 					} else {
-						// console.log(image.src);
-						// console.log(imageName);
 						uploadFileData(image.src, imageName);
 					}
 				}
 			}
-
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
@@ -1546,7 +1543,7 @@ function save() {
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
-	// saved();
+	saved();
 }
 
 function send() {
