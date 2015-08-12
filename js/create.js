@@ -1297,7 +1297,7 @@ function save() {
 			while(this.image_file_name.indexOf(" ") != -1){
 				this.image_file_name = this.image_file_name.replace(" ", "");
 			}
-			// bento.image_file_name = this.image_file_name;
+			bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
 			bento.image_file_name = root + "_" + Date.now() + "_" + bento.css_id + extension;
