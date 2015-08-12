@@ -1297,9 +1297,10 @@ function save() {
 			while(this.image_file_name.indexOf(" ") != -1){
 				this.image_file_name = this.image_file_name.replace(" ", "");
 			}
-			bento.image_file_name = this.image_file_name;
+			// bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
+			bento.image_file_name = root + "_" + Date.now() + "_" + bento.css_id + extension;
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
@@ -1466,6 +1467,7 @@ function save() {
 						// console.log("Uploading a file requested from the AVIARY SDK");
 						// console.log(image.file);
 						// console.log(imageName);
+						console.log(imageName);
 						uploadFile(image.file, imageName);
 					} else {
 						// console.log(image.src);
