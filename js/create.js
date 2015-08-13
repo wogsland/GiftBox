@@ -1383,6 +1383,7 @@ function save() {
 				width = maxWidth;
 			}
 		}
+		console.log(giftbox.bentos[i]);
 	});
 
 	$("#add-attachment-desktop > a").each(function(i) {
@@ -1659,10 +1660,12 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
+	console.log("Logging saved");
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			console.log("IN GET");
 			var token = data;
 			closeStatus();
 
@@ -1885,6 +1888,9 @@ function loadBento(bento, savedBento) {
 		} else if (isSpotify(savedBento.content_uri)) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
 			addSpotify(bento, trackId);
+		} else if (isVimeo(savedBento.content_uri)) {
+			console.log("VIMEO");
+			addVimeo(bento, savedBento.content_uri);
 		}
 	}
 	if (savedBento.image_file_name) {
