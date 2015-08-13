@@ -921,6 +921,7 @@ function refreshImage(event, refreshButton) {
 	var image = document.getElementById(imageId);
 	if (image && image.originalSrc != image.src) {
 		image.src = image.originalSrc;
+		hideControl(bentoId+"-refresh");
 	}
 	bento.onclick=function(){bentoClick(this)};
 	event.stopPropagation();
