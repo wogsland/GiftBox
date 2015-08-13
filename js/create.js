@@ -1396,6 +1396,7 @@ function save() {
 	});
 
 	$("#"+template.id+" div.divider").each(function(i) {
+		console.log("#"+template.id+" div.divider");
 		var divider = new Object();
 		divider.giftbox_id = giftboxId;
 		divider.css_id = $(this).attr("id");
@@ -1405,7 +1406,7 @@ function save() {
 		divider.css_left = $(this).css("left");
 		giftbox.dividers[i] = divider;
 	});
-
+	console.log(giftbox.dividers);
 	$("#"+template.id+" div.divider-container").each(function(i) {
 		var container = new Object();
 		container.giftbox_id = giftboxId;
@@ -1728,6 +1729,7 @@ function loadSaved() {
 					var height;
 					for (index = 0; index < token.dividers.length; ++index) {
 						divider = document.getElementById(token.dividers[index].css_id);
+						console.log(divider);
 						classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
 
 						// First if statement to check whether this is a divider and type
@@ -1736,6 +1738,7 @@ function loadSaved() {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
 								divider.style.height = token.dividers[index].css_height;
+								console.log(divider.style.height);
 							} else if (classes[0] == "horizontal") {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
