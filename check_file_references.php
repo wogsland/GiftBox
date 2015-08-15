@@ -2,6 +2,12 @@
 include_once "util.php";
 include_once "config.php";
 
+_session_start();
+if (!logged_in() || !is_admin()) {
+	echo 'You must be a logged in as a GiveToken admin to view this page.';
+	exit;
+}
+
 $tokens = execute_query("SELECT giftbox.id, name, first_name, last_name  FROM giftbox, user where giftbox.user_id = user.id ORDER BY id")->fetch_all(MYSQLI_ASSOC);
 
 foreach ($tokens as $token) {
