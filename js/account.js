@@ -77,6 +77,13 @@ function editUser(user_id) {
 	} else {
 		$("#admin").prop("checked", false);
 	}
+	var groupName = $("#group-"+user_id).html();
+	$("#group > option").each(function() {
+		if (this.text == groupName) {
+			$("#group").val(this.value);
+		}
+	});	
+	
 	
 	$.magnificPopup.open({
 	  items: {

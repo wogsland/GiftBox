@@ -36,29 +36,28 @@
 </head>
 <body>
 	<div id="content-wrapper">
-		<div class="header-wrapper" id="create-header-wrapper">
-			<header>
-				<h1>
-					<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
-				</h1>
-				<nav id="create-top-nav">
-					<ul>
-						<li>
-							<a href="<?php echo $app_root ?>">Home</a>
-						</li>
-						<li>
-							<a href="business-solutions/business-solutions.html">Business Solutions</a>
-						</li>
-						<li>
-							<a href="about-us/about-us.html">About Us</a>
-						</li>
-					</ul>
-				</nav>
-			</header>
-		</div>
-		<div id="centering-wrapper">
-			<a class="pure-button" href="manage_users.php">Manage Users</a>
-		</div>
+		<h1>
+			<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">Giftbox</a>
+		</h1>
+		<nav id="create-top-nav">
+			<ul>
+				<li>
+					<a href="<?php echo $app_root ?>">Home</a>
+				</li>
+				<li>
+					<a href="business-solutions/business-solutions.html">Business Solutions</a>
+				</li>
+				<li>
+					<a href="about-us/about-us.html">About Us</a>
+				</li>
+				<li>
+					<a href="manage_users.php">Manage Users</a>
+				</li>
+				<li>
+					<a href="manage_groups.php">Manage Groups</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </body>
 </html>
