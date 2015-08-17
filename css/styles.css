@@ -415,7 +415,7 @@ header .full-screen {
 
 header .only-logo .navbar {
     background: none;
-    padding: 60px;
+    padding: 30px;
 }
 
 header .only-logo .navbar .navbar-header {
@@ -1631,6 +1631,9 @@ footer .terms-policy li a:hover{
     color: white;
 }
 
+footer .form-control {
+    color: white;
+}
 
 /*---------------------------------------
    SECTION:  FORM CONTROLS
@@ -1905,6 +1908,21 @@ h1#terms-header {
     margin-top: 1.5em;
 }
 summary#terms-content {
+    margin: 0 auto;
+    width: 78%;
+    padding-bottom: 4em;
+}
+
+/*---------------------------------------
+   SECTION:  PRIVACY POLICY
+-----------------------------------------*/
+body div.container-fluid {
+    padding-top: 3.5em;
+}
+h1#privacy-header {
+    margin-top: 1.5em;
+}
+summary#privacy-content {
     margin: 0 auto;
     width: 78%;
     padding-bottom: 4em;
@@ -2748,7 +2766,8 @@ div.fill img {
 
 .analytics-btn {
     padding: 1px 14px;
-    margin-bottom: 8px;
+    margin-bottom: 2em;
+    margin-top: 0.5em;
 }
 
 .edit-btn {
@@ -2775,6 +2794,7 @@ div.fill img {
 .token-row {
 /*    margin-top: 1em;
 */}
+
 
 /************************* SMARTPHONES *************************/
 

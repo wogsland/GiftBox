@@ -36,7 +36,7 @@ if (User::exists($email)) {
 		} else {
 			if ($user->activation_key) {
 				$response['status'] = "ERROR";
-				$response['message'] = "The account exists but has not been activated yet.";
+				$response['message'] = $user->activation_key;
 			} else {
 				$event_type = LOGIN_USING_EMAIL;
 				$response['status'] = 'SUCCESS';

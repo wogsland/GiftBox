@@ -137,8 +137,8 @@ include_once 'config.php';
 	<div>
 
 		<!--CSS is really bad here, alot of overlap...-->
-		<summary>
-			<h1>
+		<summary id="privacy-content">
+			<h1 id="privacy-header">
     			Privacy Policy
 			</h1>
 			<p>

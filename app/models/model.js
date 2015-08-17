@@ -77,6 +77,7 @@ var Model = {
   profile: {
     admin: user.admin,
     user_id: user.id,
+    new_password: null,
     first_name: user.first_name,
     last_name: user.last_name,
     level: user.level,
@@ -151,6 +152,17 @@ var Model = {
     }).done(function(data, textStatus, jqXHR){
       response = textStatus;
     });
+    if (this.profile.new_password) {
+      $.ajax({
+        type: "POST",
+        data: this.profile,
+        url: "change_password_ajax.php",
+        async: false
+      }).done(function(data, textStatus, jqXHR){
+        response = textStatus;
+      });
+      alert("You have successfully changed your password");
+    }
   }
 
 };
