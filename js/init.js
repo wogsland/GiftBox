@@ -1,6 +1,6 @@
 $(function() {
 	$( "#add-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide() },
 		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,
@@ -127,7 +127,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Save: function() {
-				return chooseEditor();
+				return chooseBasicEditor();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -136,7 +136,7 @@ $(function() {
 		open: function() {
 			$("#save-editor-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					chooseEditor();
+					chooseBasicEditor();
 					return false;
 				}
 			});
@@ -268,10 +268,12 @@ $(function() {
 
 $(function() {
 	$( "#image-dialog" ).dialog({ 
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
 		autoOpen: false,
 		resizable: false,
 		height:500,
-		width: 300
+		width: 300, 
+		modal: true
 	});
 });
 

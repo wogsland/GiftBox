@@ -64,6 +64,8 @@
 	</canvas>
 	<canvas id="thumbnail-canvas-3" width="1462" height="1355" style="display: none; position:absolute;">
 	</canvas>
+	<div id="advanced-editor-box">
+	</div>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">
@@ -196,7 +198,7 @@
 				<label for="animation-color">Color: </label>
 				<select id="select-envelope-color-option">
 				  <option value="blue">blue</option>
-<!-- 				  <option value="red">red</option>
+<!-- 		      <option value="red">red</option>
 				  <option value="green">green</option>
 				  <option value="white">white</option>
 				  <option value="yellow">yellow</option> -->
@@ -289,8 +291,8 @@
 		<input class="hidden-file-input" type="file" multiple id="select-attachment-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
-				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
+<!-- 				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
+ -->				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
 				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
 			</ul>
 		</div>
@@ -402,10 +404,11 @@
 		<div id="image-dialog-container">
 			<div class="container image-dialog-nav-tabs">
 				<div class="row">
-					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="saveEditorButton();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="chooseBasicEditor();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="chooseAdvancedEditor();" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
+<!-- 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
+ -->					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
 				</div>
 			</div>
 			<div class="image-dialog-tab-container" id="image-filter-tab-container">
@@ -414,7 +417,7 @@
 			</div>
 			<div class="image-dialog-tab-container" id="image-text-tab-container">
 				TEXT
-				<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+				<div class="image-dialog-button" id="add-overlay-button" onclick="chooseTextEditor()">ADD TEXT OVERLAY</div>
 				<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
 				<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
 				<!-- DISPLAY

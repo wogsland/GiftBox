@@ -77,20 +77,10 @@ class Bento {
 		$bento = $this->load();
 		if ($bento) {
 			if (strlen($bento->cropped_image_file_name) > 0 && $bento->cropped_image_file_name != $cropped_image_file_name) {
-				if ($google_app_engine) {
-					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->cropped_image_file_name, $use_https);
-				} else {
-					$image_path = $file_storage_path.$bento->cropped_image_file_name;
-				}
-				unlink($image_path);
+				unlink($file_storage_path.$bento->cropped_image_file_name);
 			}
 			if (strlen($bento->image_file_name) > 0 && $bento->image_file_name != $image_file_name) {
-				if ($google_app_engine) {
-					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$bento->image_file_name, $use_https);
-				} else {
-					$image_path = $file_storage_path.$bento->image_file_name;
-				}
-				unlink($image_path);
+				unlink($file_storage_path.$bento->image_file_name);
 			}
 		}
 		$this->delete();

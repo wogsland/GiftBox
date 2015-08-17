@@ -61,6 +61,8 @@ GREEN COLOR CODE: #5ebb47
 
 .main-color {
     color: #476fb6;
+    font-weight: bolder;
+    font-size: larger;
 }
 
 h4.main-color {
