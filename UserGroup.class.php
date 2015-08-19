@@ -1,0 +1,50 @@
+<?php
+	include_once 'util.php';
+/*
+
+CREATE TABLE user_group (
+	id		INT(11) NOT NULL AUTO_INCREMENT,
+	name	VARCHAR(200) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+ALTER TABLE user ADD COLUMN user_group INT(11) NULL DEFAULT NULL AFTER access_token, ADD INDEX idx_user_group_id (user_group ASC);
+
+ALTER TABLE user ADD CONSTRAINT fk_user_group_id FOREIGN KEY (user_group) REFERENCES user_group(id) ON DELETE NO ACTION ON UPDATE NO ACTION; 
+
+*/
+class UserGroup {
+	var $id;
+	var $name;
+	
+	static function all_user_groups() {
+		$groups = execute_query("SELECT * FROM user_group order by upper(name)")->fetch_all(MYSQLI_ASSOC);
+		return $groups;
+	}
+	
+	public function __construct($id = null) {
+		if ($id !== null) {
+			$user_group = execute_query("SELECT * from user_group where id = $id")->fetch_object("UserGroup");
+			foreach (get_object_vars($user_group) as $key => $value) {
+				$this->$key = $value;
+			}
+		}
+	}
+	
+	public function save() {
+		if (!$this->id) {
+			$sql = "INSERT into user_group (name) VALUES ('".escape_string($this->name)."')";
+			$this->id = insert($sql);
+		} else {
+			$sql = "UPDATE user_group SET name = '".escape_string($this->name)."' WHERE id = $this->id";
+			execute($sql);
+		}
+		
+	}
+	
+	public function delete() {
+		execute("DELETE FROM user_group WHERE id = $this->id");
+		$this->id = null;
+	}
+	
+}

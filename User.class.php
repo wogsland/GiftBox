@@ -19,6 +19,7 @@ class User {
 	public $position;
 	public $about;
 	public $username;
+	public $user_group;
 	
 	static function exists ($email_address) {
 		$exists = FALSE;
@@ -68,7 +69,7 @@ class User {
 	public function save() {
 		if (!$this->id) {
 			$sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level, access_token "
-				.", location, position, company, about, username) VALUES ("
+				.", location, position, company, about, username, user_group) VALUES ("
 				."'".escape_string($this->email_address)."'"
 				.", '".escape_string($this->first_name)."'"
 				.", '".escape_string($this->last_name)."'"
@@ -76,7 +77,8 @@ class User {
 				.", ".($this->activation_key ? "'".$this->activation_key."'" : "null")
 				.", '$this->admin'"
 				.", $this->level, '$this->access_token', '$this->location', '$this->position'"
-				.", '$this->company', '$this->about', '$this->username')";
+				.", '$this->company', '$this->about', '$this->username'"
+				.", ".($this->user_group ? $this->user_group : "null").")";
 			$this->id = insert($sql);
 		} else {
 			$sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
@@ -93,7 +95,8 @@ class User {
 				. "position = '$this->position', "
 				. "company = '$this->company', "
 				. "about = '$this->about', "
-				. "username = '$this->username' "
+				. "username = '$this->username', "
+				. "user_group = ".($this->user_group ? $this->user_group : "null")." "
 				. "WHERE id = $this->id";
 			execute($sql);
 		}
