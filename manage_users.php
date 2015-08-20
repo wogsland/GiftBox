@@ -1,6 +1,8 @@
 <?php
 	include_once 'config.php';
 	include_once 'util.php';
+	include_once 'UserGroup.class.php';
+	
 	_session_start();
 	if (!logged_in() || !is_admin()) {
 		header('Location: '.$app_root);
@@ -113,13 +115,7 @@
 						<div class="navbar-collapse collapse" id="kane-navigation">
 							<ul class="nav navbar-nav navbar-right main-navigation">
 								<li><a href="index.php" class="external">Home</a></li>
-								<?php
-								if (logged_in()) {
-									echo '<li><a href="profile.php" class="external">My Account</a></li>';
-								} else {
-									echo '<li><a href="#">Login</a></li>';
-								}
-								?>
+								<li><a href="admin.php" class="external">Admin</a></li>
 							</ul>
 						</div>
 					</div> <!-- /END CONTAINER -->
@@ -147,10 +143,10 @@
 			</div>
 			<div class="container">
 				<table  class="table-hover" id="manage-table">
-					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Administrator</th><th></th><th></th></tr></thead>
+					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Group</th><th>Administrator</th><th></th><th></th></tr></thead>
 					<tbody>
 					<?php
-						$sql = "SELECT * from user WHERE 1 = 1";
+						$sql = "SELECT user.*, user_group.name as group_name FROM user LEFT JOIN user_group ON user.user_group = user_group.id  WHERE 1 = 1";
 						if (isset($_GET['last-name-search']) && strlen($_GET['last-name-search']) > 0) {
 							$sql .= " AND upper(last_name) = upper('".$_GET['last-name-search']."')";
 						}
@@ -172,6 +168,7 @@
 								<td id="last-name-'.$user->id.'">'.$user->last_name.'</td>
 								<td id="email-'.$user->id.'">'.$user->email_address.'</td>
 								<td id="level-'.$user->id.'">'.($user->level == 1 ? "Basic" : "Standard").'</td>
+								<td id="group-'.$user->id.'">'.$user->group_name.'</td>
 								<td id="admin-'.$user->id.'">'.$user->admin.'</td>
 								<td><a class="pure-button open-popup-link" href="javascript:void(0)" onclick="editUser('.$user->id.')"><i class="fa fa-edit fa-lg"></i> Edit</a></td>
 								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td></tr>';
@@ -195,6 +192,16 @@
 			<select id="level" name="level">
 				<option value="1">Basic</option>>
 				<option value="2">Standard</option>
+			</select>
+			<select id="group" name="group">
+				<option value=""></option>
+				<?php
+					$groups = UserGroup::all_user_groups();
+					foreach ($groups as $group) {
+						echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
+					}
+				?>
+			</select>
 			<label for="admin-edit">
 				<input id="admin" name="admin" type="checkbox" value="Y"> Administrator
 			</label>

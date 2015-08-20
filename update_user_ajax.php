@@ -15,6 +15,7 @@ $user->position = $_POST['position'];
 $user->about = $_POST['about'];
 $user->social = $_POST['social'];
 $user->username = $_POST['username'];
+$user->user_group = $_POST['group'];
 if(is_array($user->social)){
 	$social = new Social(null);
 	foreach ($user->social as $category){
