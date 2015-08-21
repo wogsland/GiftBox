@@ -143,7 +143,7 @@
 			</div>
 			<div class="container">
 				<table  class="table-hover" id="manage-table">
-					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Group</th><th>Administrator</th><th></th><th></th></tr></thead>
+					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Group</th><th>Group<br>Administrator</th><th>Givetoken<br>Administrator</th><th></th><th></th></tr></thead>
 					<tbody>
 					<?php
 						$sql = "SELECT user.*, user_group.name as group_name FROM user LEFT JOIN user_group ON user.user_group = user_group.id  WHERE 1 = 1";
@@ -169,6 +169,7 @@
 								<td id="email-'.$user->id.'">'.$user->email_address.'</td>
 								<td id="level-'.$user->id.'">'.($user->level == 1 ? "Basic" : "Standard").'</td>
 								<td id="group-'.$user->id.'">'.$user->group_name.'</td>
+								<td id="group-admin-'.$user->id.'">'.$user->group_admin.'</td>
 								<td id="admin-'.$user->id.'">'.$user->admin.'</td>
 								<td><a class="pure-button open-popup-link" href="javascript:void(0)" onclick="editUser('.$user->id.')"><i class="fa fa-edit fa-lg"></i> Edit</a></td>
 								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td></tr>';
@@ -202,6 +203,9 @@
 					}
 				?>
 			</select>
+			<label for="group-admin-edit">
+				<input id="group-admin" name="group_admin" type="checkbox" value="Y"> Group Administrator
+			</label>
 			<label for="admin-edit">
 				<input id="admin" name="admin" type="checkbox" value="Y"> Administrator
 			</label>

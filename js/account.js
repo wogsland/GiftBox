@@ -83,6 +83,12 @@ function editUser(user_id) {
 			$("#group").val(this.value);
 		}
 	});	
+	if ($("#group-admin-"+user_id).html() === 'Y') {
+		$("#group-admin").prop("checked", true);
+	} else {
+		$("#group-admin").prop("checked", false);
+	}
+
 	
 	
 	$.magnificPopup.open({
@@ -108,7 +114,11 @@ function saveUser() {
 	var lastName = $("#last-name");
 	var emailAddress = $("#email");
 	var admin = $("#admin");
-	var level = $("#level")
+	var group = $("#group");
+	var groupValue = group.val();
+	var groupAdmin = $("#group-admin");
+	var groupAdminChecked = groupAdmin.checked;
+	var level = $("#level");
 	
 	if (!firstName.val()) {
 		editUserError("Please enter a first name.");
@@ -116,9 +126,12 @@ function saveUser() {
 		editUserError("Please enter a last name");
 	} else if (!emailAddress.val()) {
 		editUserError("Please enter a valid email.");
+	} else if (group.val().length == 0 && groupAdmin.attr("checked")) {
+		editUserError("A group must be selected in order for a user to be a 'Group Aministrator'.");		
 	} else {
 		editUserStatus("Saving user information...");
 		var posting = $.post("update_user_ajax.php", $("#edit-user-form").serialize());
+		
 
 		posting.done(function(data) {
 			var userId = $("#user-id").val();
@@ -126,7 +139,10 @@ function saveUser() {
 			$("#last-name-" + userId).html(lastName.val());
 			$("#email-" + userId).html(emailAddress.val());
 			$("#level-" + userId).html(level.val() == 1 ? "Basic" : "Standard");
-			var yesNo = admin.is(":checked") ? "Y" : "N";
+			$("#group-" + userId).html($("#group option:selected").text());
+			var yesNo = groupAdmin.is(":checked") ? "Y" : "N";
+			$("#group-admin-" + userId).html(yesNo);
+			yesNo = admin.is(":checked") ? "Y" : "N";
 			$("#admin-" + userId).html(yesNo);
 			$.magnificPopup.close();
 		});

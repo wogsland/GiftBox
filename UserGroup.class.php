@@ -12,6 +12,8 @@ ALTER TABLE user ADD COLUMN user_group INT(11) NULL DEFAULT NULL AFTER access_to
 
 ALTER TABLE user ADD CONSTRAINT fk_user_group_id FOREIGN KEY (user_group) REFERENCES user_group(id) ON DELETE NO ACTION ON UPDATE NO ACTION; 
 
+ALTER TABLE user ADD COLUMN group_admin VARCHAR(1) NOT NULL DEFAULT 'N' AFTER user_group;
+
 */
 class UserGroup {
 	var $id;
