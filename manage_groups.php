@@ -13,7 +13,8 @@
 	<title>GiveToken.com - Manage Groups</title>
 	
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/users_groups.css">
+	
 	
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -73,6 +74,7 @@
 	<table class="group-table">
 		<tr>
 			<th>Group Name</th>
+			<th>Max Users</th>
 			<th align="right"><button type="button" class="btn btn-success table-button" onclick="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add A Group</button></th>
 		</tr>
 		<?php
@@ -81,6 +83,7 @@
 			foreach ($groups as $group) {
 				echo '<tr>';
 				echo '<td id="group-name-'.$group['id'].'">'.$group['name'].'</td>';
+				echo '<td id="group-max-users-'.$group['id'].'">'.$group['max_users'].'</td>';
 				echo '<td>';
 				echo '<button class="btn btn-primary table-button" onclick="editGroup('.$group['id'].')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>';
 				echo '<button class="btn btn-danger table-button" onclick="deleteGroup('.$group['id'].')"><span class="glyphicon glyphicon-remove"></span> Delete</button>';
@@ -102,7 +105,14 @@
 					<form id="group-form">
 						<input type="hidden" id="action" name="action" value="">
 						<input type="hidden" id="group-id" name="group_id" value="">
-						<input type="text" id="group-name" name="group_name" size="50" placeholder="Group Name">
+						<div class="form-group">
+							<label for=group-name"">Group Name</label>
+							<input type="text" class="form-control" id="group-name" name="group_name" size="50" placeholder="Group Name">
+						</div>
+						<div class="form-group">
+							<label for=group-name"">Max Users</label>
+							<input type="text" class="form-control" id="group-max-users" name="max_users" size="10" placeholder="Max Users">
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">

@@ -14,10 +14,14 @@ ALTER TABLE user ADD CONSTRAINT fk_user_group_id FOREIGN KEY (user_group) REFERE
 
 ALTER TABLE user ADD COLUMN group_admin VARCHAR(1) NOT NULL DEFAULT 'N' AFTER user_group;
 
+ALTER TABLE user_group ADD COLUMN max_users INT(11) NOT NULL DEFAULT 0 AFTER `name`;
+
+
 */
 class UserGroup {
 	var $id;
 	var $name;
+	var $max_users;
 	
 	static function all_user_groups() {
 		$groups = execute_query("SELECT * FROM user_group order by upper(name)")->fetch_all(MYSQLI_ASSOC);
@@ -35,10 +39,10 @@ class UserGroup {
 	
 	public function save() {
 		if (!$this->id) {
-			$sql = "INSERT into user_group (name) VALUES ('".escape_string($this->name)."')";
+			$sql = "INSERT into user_group (name) VALUES ('".escape_string($this->name)."', ".escape_string($this->max_users).")";
 			$this->id = insert($sql);
 		} else {
-			$sql = "UPDATE user_group SET name = '".escape_string($this->name)."' WHERE id = $this->id";
+			$sql = "UPDATE user_group SET name = '".escape_string($this->name)."', max_users = ".escape_string($this->max_users)." WHERE id = $this->id";
 			execute($sql);
 		}
 		
