@@ -9,6 +9,7 @@ function resetAlert() {
 function openModal() {
 	resetAlert();
 	$("#group-name").attr('readonly', false);
+	$("#group-max-users").attr('readonly', false);
 	$("#group-dialog").modal();
 	
 }
@@ -58,12 +59,13 @@ function deleteGroup(id) {
 function saveGroup() {
 	var id = $("#group-id").val();
 	var name = $("#group-name").val();
-	var maxUsers = $("#group-max-users").val();
-	var users = $("#group-max-users-"+id).html();
+	var maxUsersText = $("#group-max-users").val();
+	var maxUsers = parseInt($("#group-max-users").val());
+	var users = parseInt($("#group-max-users-"+id).html());
 	var action = $("#action").val();
 	if (name.length === 0) {
 		alertGroup("danger", "The group name cannot be left blank.");
-	} else if (maxUsers.length === 0) {
+	} else if (maxUsersText.length === 0) {
 		alertGroup("danger", "The maximum number of users cannot be left blank.");
 	} else if (maxUsers < users) {
 		alertGroup("danger", "The maximum number of users cannot be less than the current number of users.");
