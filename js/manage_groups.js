@@ -33,32 +33,53 @@ function editGroup(id) {
 	$("#action").val("EDIT");
 	$("#group-id").val(id);
 	$("#group-name").val($("#group-name-"+id).html());
+	$("#group-max-users").val($("#group-max-users-"+id).html());
 	openModal();
 }
 
 function deleteGroup(id) {
-	$("#modal-title").html("Delete Group");
-	$("#action-button").html("Delete");
-	$("#action").val("DELETE");
-	$("#group-id").val(id);
-	$("#group-name").val($("#group-name-"+id).html());
-	openModal();
-	alertGroup("warning", "Are you sure you want to delete this group?")
-	$("#group-name").attr('readonly', true);
-	
+	var users = $("#group-users-"+id).html();
+	if (users > 0) {
+		
+	} else {
+		$("#modal-title").html("Delete Group");
+		$("#action-button").html("Delete");
+		$("#action").val("DELETE");
+		$("#group-id").val(id);
+		$("#group-name").val($("#group-name-"+id).html());
+		$("#group-max-users").val($("#group-max-users-"+id).html());
+		openModal();
+		alertGroup("warning", "Are you sure you want to delete this group?")
+		$("#group-name").attr('readonly', true);
+		$("#group-max-users").attr('readonly', true);
+	}	
 }
 
 function saveGroup() {
 	var id = $("#group-id").val();
 	var name = $("#group-name").val();
+	var maxUsers = $("#group-max-users").val();
+	var users = $("#group-max-users-"+id).html();
+	var action = $("#action").val();
 	if (name.length === 0) {
 		alertGroup("danger", "The group name cannot be left blank.");
+	} else if (maxUsers.length === 0) {
+		alertGroup("danger", "The maximum number of users cannot be left blank.");
+	} else if (maxUsers < users) {
+		alertGroup("danger", "The maximum number of users cannot be less than the current number of users.");
 	} else {
 		alertGroup("info", "Saving...")
 		$.post("save_group_ajax.php", $("#group-form").serialize(), function(data, textStatus){
 			if(data.status === "SUCCESS") {
-				$("#group-dialog").modal('hide');
-				location.reload();
+				if (action === "DELETE") {
+					$("#row-"+id).remove();
+				} else if (action === "ADD") {
+					location.reload();
+				} else {	
+					$("#group-name-"+id).html(name);
+					$("#group-max-users-"+id).html(maxUsers);
+					$("#group-dialog").modal('hide');
+				}
 			} else if (data.status === "ERROR") {
 				alertGroup("danger", textStatus)
 			}  else {

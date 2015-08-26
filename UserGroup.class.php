@@ -24,7 +24,7 @@ class UserGroup {
 	var $max_users;
 	
 	static function all_user_groups() {
-		$groups = execute_query("SELECT * FROM user_group order by upper(name)")->fetch_all(MYSQLI_ASSOC);
+		$groups = execute_query("SELECT user_group.id, name, max_users, count(user.id) as user_count FROM user_group LEFT JOIN user ON user_group.id = user.user_group GROUP BY id, name, max_users ORDER BY upper(name)")->fetch_all(MYSQLI_ASSOC);
 		return $groups;
 	}
 	
@@ -39,7 +39,7 @@ class UserGroup {
 	
 	public function save() {
 		if (!$this->id) {
-			$sql = "INSERT into user_group (name) VALUES ('".escape_string($this->name)."', ".escape_string($this->max_users).")";
+			$sql = "INSERT into user_group (name, max_users) VALUES ('".escape_string($this->name)."', ".escape_string($this->max_users).")";
 			$this->id = insert($sql);
 		} else {
 			$sql = "UPDATE user_group SET name = '".escape_string($this->name)."', max_users = ".escape_string($this->max_users)." WHERE id = $this->id";

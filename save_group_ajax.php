@@ -10,6 +10,7 @@ try {
 		$user_group->id = $_POST['group_id'];
 	}
 	$user_group->name = $_POST['group_name'];
+	$user_group->max_users = $_POST['max_users'];
 	
 	if($action == "ADD" || $action == "EDIT") {
 		$user_group->save();

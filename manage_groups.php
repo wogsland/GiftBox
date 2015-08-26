@@ -71,22 +71,30 @@
 	</header>	
 	
 	
-	<table class="group-table">
+	<table class="group-table" id="group-table">
 		<tr>
 			<th>Group Name</th>
+			<th>Users</th>
 			<th>Max Users</th>
 			<th align="right"><button type="button" class="btn btn-success table-button" onclick="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add A Group</button></th>
 		</tr>
 		<?php
 			include_once 'UserGroup.class.php';
 			$groups = UserGroup::all_user_groups();
+			$disabled = "";
 			foreach ($groups as $group) {
-				echo '<tr>';
+				echo '<tr id="row-'.$group['id'].'">';
 				echo '<td id="group-name-'.$group['id'].'">'.$group['name'].'</td>';
+				echo '<td id="group-users-'.$group['id'].'">'.$group['user_count'].'</td>';
 				echo '<td id="group-max-users-'.$group['id'].'">'.$group['max_users'].'</td>';
 				echo '<td>';
 				echo '<button class="btn btn-primary table-button" onclick="editGroup('.$group['id'].')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>';
-				echo '<button class="btn btn-danger table-button" onclick="deleteGroup('.$group['id'].')"><span class="glyphicon glyphicon-remove"></span> Delete</button>';
+				if ($group['user_count'] > 0) {
+					$disabled = "disabled='disabled'";
+				} else {
+					$disabled = "";
+				}
+				echo '<button class="btn btn-danger table-button" '.$disabled.' onclick="deleteGroup('.$group['id'].')"><span class="glyphicon glyphicon-remove"></span> Delete</button>';
 				echo '</td>';
 				echo '</tr>';
 			}
