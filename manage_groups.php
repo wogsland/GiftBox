@@ -20,17 +20,32 @@
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="js/manage_groups.js"></script>
 	<style>
+		body {
+			background: #232323;
+		}
+
 		.group-table {
 			margin: 80px auto;
+			border: 1px solid white;
+			color: white;
 		}
 		
 		td, th {
 			padding: 5px;
 			text-align: left;
+			border: 1px solid white;
+		}
+		th {
+			text-align: center;
 		}
 		.table-button {
-			margin-left: 10px;
+			margin-left: 5px;
 		}
+		
+		header img {
+			max-height: 30px;
+		}
+
 	</style>
 </head>
 <body>

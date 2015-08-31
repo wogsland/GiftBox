@@ -33,37 +33,63 @@
 
 
 	<!--<link rel="stylesheet" href="css/style.css" />-->
-	<link rel="stylesheet" href="css/create.css" />
-	<link rel="stylesheet" href="css/magnific-popup.css">
+	<!--<link rel="stylesheet" href="css/create.css" />-->
+	<!--<link rel="stylesheet" href="css/magnific-popup.css">-->
 	<!--<link rel="stylesheet" href="css/pure/pure-min.css">-->
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 	
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="js/jquery.magnific-popup.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="js/account.js"></script>
-
+	<script src="js/manage_users.js"></script>
+	
 	<!-- ANIMATIONS -->
 	<link rel="stylesheet" href="css/animate.min.css">
 
-	<!-- CUSTOM STYLESHEETS -->
+	<!-- CUSTOM STYLESHEETS
 	<link rel="stylesheet" href="css/styles.css">
-
+-->
 	<!-- COLORS -->
 	<link rel="stylesheet" href="css/colors.css">
 
 	<!-- RESPONSIVE FIXES -->
 	<link rel="stylesheet" href="css/responsive.css">
-
-
-
-	<!--[if lt IE 9]>
-				<script src="js/html5shiv.js"></script>
-				<script src="js/respond.min.js"></script>
-	<![endif]-->
-
-
+	
+	<style>
+		body {
+			background: #232323;
+			padding-top: 70px;
+		}
+		
+		.user-table {
+			margin: 10px auto;
+			border: 1px solid white;
+			color: white;
+		}
+		
+		td, th {
+			padding: 5px;
+			text-align: left;
+			border: 1px solid white;
+		}
+		
+		th {
+			text-align: center;
+		}
+		
+		.table-button {
+			margin-left: 10px;
+		}
+		
+		#manage-jumbo {
+			margin-top: 80px;
+		}
+		
+		header img {
+			max-height: 30px;
+		}
+	</style>
+	
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -126,24 +152,39 @@
 			</header>
 		
 		<div class="container">
-
-			<div class="container">
-				<form class="jumbotron" id="manage-jumbo" method="get" action="manage_users.php">
-					<fieldset>
-						<legend id="searchHeader">Search for a user</legend>
-						<input name="first-name-search" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name-search'])) {echo $_GET['first-name-search'];} ?>">
-						<input name="last-name-search" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name-search'])) {echo $_GET['last-name-search'];} ?>">
-						<input name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];} ?>">
-						<label for="admin">
-							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) echo "checked" ?>> Administrator
-						</label>
-						<input type="submit" class="pure-button pure-button-primary" value="Search">
-					</fieldset>
-				</form>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Search For A User</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-inline" method="get" action="manage_users.php">
+						<div class="form-group">
+							<input class="form-control" name="first-name-search" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name-search'])) {echo $_GET['first-name-search'];} ?>">
+							<input class="form-control" name="last-name-search" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name-search'])) {echo $_GET['last-name-search'];} ?>">
+							<input class="form-control" name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];} ?>">
+							<label for="admin">
+								<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) echo "checked" ?>> Administrator
+							</label>
+							<input type="submit" class="btn btn-primary" value="Search">
+						</div>
+					</form>
+				</div>
 			</div>
 			<div class="container">
-				<table  class="table-hover" id="manage-table">
-					<thead><tr><th>First Name</th><th>Last Name</th><th>Email Address</th><th>Level</th><th>Group</th><th>Group<br>Administrator</th><th>Givetoken<br>Administrator</th><th></th><th></th></tr></thead>
+				<table class="user-table">
+					<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email Address</th>
+							<th>Level</th>
+							<th>Group</th>
+							<th>Group<br>Administrator</th>
+							<th>Givetoken<br>Administrator</th>
+							<th><button type="button" class="btn btn-success table-button" onclick="addUser()"><span class="glyphicon glyphicon-plus"></span> Add A User</button></th>
+							<th></th>
+						</tr>
+					</thead>
 					<tbody>
 					<?php
 						$sql = "SELECT user.*, user_group.name as group_name FROM user LEFT JOIN user_group ON user.user_group = user_group.id  WHERE 1 = 1";
@@ -171,8 +212,8 @@
 								<td id="group-'.$user->id.'">'.$user->group_name.'</td>
 								<td id="group-admin-'.$user->id.'">'.$user->group_admin.'</td>
 								<td id="admin-'.$user->id.'">'.$user->admin.'</td>
-								<td><a class="pure-button open-popup-link" href="javascript:void(0)" onclick="editUser('.$user->id.')"><i class="fa fa-edit fa-lg"></i> Edit</a></td>
-								<td><a class="pure-button" href="event_history.php?user_id='.$user->id.'" target="_blank""><i class="fa fa-history fa-lg"></i> History</a></td></tr>';
+								<td><button class="btn btn-primary table-button" onclick="editUser('.$user->id.')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+								<td><a class="btn btn-default" href="event_history.php?user_id='.$user->id.'" role="button" target="_blank""><span class="glyphicon glyphicon-user"></span> History</a></td></tr>';
 						}
 						?>
 						
@@ -182,36 +223,72 @@
 		</div>
 	</div>
 	
-	<form class="white-popup mfp-hide" id="edit-user-form" name="edit-user-form">
-		<fieldset>
-			<legend>Edit a user</legend>
-			<p id="edit-user-message"></p>
-			<input id="user-id" name="user_id" type="hidden">
-			<input id="first-name" name="first_name" type="text" placeholder="First Name">
-			<input id="last-name" name="last_name" type="text" placeholder="Last Name">
-			<input id="email" name="email" type="email" placeholder="Email">
-			<select id="level" name="level">
-				<option value="1">Basic</option>>
-				<option value="2">Standard</option>
-			</select>
-			<select id="group" name="group">
-				<option value=""></option>
-				<?php
-					$groups = UserGroup::all_user_groups();
-					foreach ($groups as $group) {
-						echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
-					}
-				?>
-			</select>
-			<label for="group-admin-edit">
-				<input id="group-admin" name="group_admin" type="checkbox" value="Y"> Group Administrator
-			</label>
-			<label for="admin-edit">
-				<input id="admin" name="admin" type="checkbox" value="Y"> Administrator
-			</label>
-			<a class="pure-button pure-button-primary" href="javascript:void(0)" onclick="saveUser()">Save</a>
-		</fieldset>
-	</form>
+	<div class="modal fade" id="user-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-title">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="modal-title">Add User</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert" id="user-alert" role="alert"></div>
+					<form id="user-form">
+						<input type="hidden" id="action" name="action" value="">
+						<input type="hidden" id="user-id" name="user_id" value="">
+						<div class="form-group">
+							<label for="first-name">First Name</label>
+							<input type="text" class="form-control" id="first-name" name="first_name" size="50" placeholder="First Name">
+						</div>
+						<div class="form-group">
+							<label for="last-name">Last Name</label>
+							<input type="text" class="form-control" id="last-name" name="last_name" size="50" placeholder="Last Name">
+						</div>
+						<div class="form-group">
+							<label for=last-name"">Email</label>
+							<input type="text" class="form-control" id="email" name="email" size="50" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<label for="level">Level</label>
+							<select class="form-control" id="level" name="level">
+								<option value="1">Basic</option>>
+								<option value="2">Standard</option>
+							</select>
+						</div>
+						<div class="form-inline">
+							<div class="form-group">
+								<label for="group">Group</label>
+								<select class="form-control" id="group" name="group">
+									<option value=""></option>
+									<?php
+										$groups = UserGroup::all_user_groups();
+										foreach ($groups as $group) {
+											echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
+										}
+									?>
+								</select>
+							</div>
+							<div class="checkbox">
+							  <label>
+								<input id="group-admin" name="group_admin" type="checkbox" value="Y">
+								Group Administrator
+							  </label>
+							</div>						
+						</div>
+						<div class="checkbox">
+						  <label>
+							<input id="admin" name="admin" type="checkbox" value="Y">
+							Givetoken Administrator
+						  </label>
+						</div>						
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" id="action-button" onclick="saveUser()">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>	
 	
 </body>
 </html>
