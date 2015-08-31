@@ -25,6 +25,7 @@ function addGroup() {
 	$("#action").val("ADD");
 	$("#group-id").val("");
 	$("#group-name").val("");
+	$("#group-max-users").val(0);
 	openModal();
 }
 

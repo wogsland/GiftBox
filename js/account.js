@@ -64,41 +64,6 @@ function logout() {
 	});
 }
 
-function editUser(user_id) {
-	$("#edit-user-message").html("");
-	$("#user-id").val(user_id);
-	$('#first-name').val($("#first-name-"+user_id).html());
-	$('#last-name').val($("#last-name-"+user_id).html());
-	$('#email').val($("#email-"+user_id).html());
-	var value = $("#level-"+user_id).html();
-	$('#level').val($("#level-"+user_id).html() == "Basic" ? 1 : 2);
-	if ($("#admin-"+user_id).html() === 'Y') {
-		$("#admin").prop("checked", true);
-	} else {
-		$("#admin").prop("checked", false);
-	}
-	var groupName = $("#group-"+user_id).html();
-	$("#group > option").each(function() {
-		if (this.text == groupName) {
-			$("#group").val(this.value);
-		}
-	});	
-	if ($("#group-admin-"+user_id).html() === 'Y') {
-		$("#group-admin").prop("checked", true);
-	} else {
-		$("#group-admin").prop("checked", false);
-	}
-
-	
-	
-	$.magnificPopup.open({
-	  items: {
-	    src: '#edit-user-form',
-	    type: 'inline'
-	  }
-	});
-}
-
 function editUserStatus(text) {
 	$("#edit-user-message").removeClass("red-text");
 	$("#edit-user-message").text(text);

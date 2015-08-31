@@ -1,15 +1,15 @@
 function resetAlert() {
-	$("#group-alert").removeClass("alert-success");
-	$("#group-alert").removeClass("alert-info");
-	$("#group-alert").removeClass("alert-warning");
-	$("#group-alert").removeClass("alert-danger");
-	$("#group-alert").html(null);
+	$("#dialog-alert").removeClass("alert-success");
+	$("#dialog-alert").removeClass("alert-info");
+	$("#dialog-alert").removeClass("alert-warning");
+	$("#dialog-alert").removeClass("alert-danger");
+	$("#dialog-alert").html(null);
 }
 
 function dialogAlert(type, text) {
 	resetAlert();
-	$("#user-alert").addClass("alert-"+type);
-	$("#user-alert").html(text);
+	$("#dialog-alert").addClass("alert-"+type);
+	$("#dialog-alert").html(text);
 }
 
 function openModal() {
@@ -24,6 +24,12 @@ function addUser() {
 	$("#user-id").val("");
 	$("#first-name").val("");
 	$("#last-name").val("");
+	$("#email").val("");
+	$("#password").val("");
+	$("#level").val(1);
+	$("#group").val("");
+	$("#group-admin").prop("checked", false);
+	$("#admin").prop("checked", false);
 	openModal();
 }
 
@@ -35,6 +41,7 @@ function editUser(id) {
 	$("#first-name").val($("#first-name-"+id).html());
 	$("#last-name").val($("#last-name-"+id).html());
 	$("#email").val($("#email-"+id).html());
+	$("#password").val("");
 	var value = $("#level-"+id).html();
 	$('#level').val($("#level-"+id).html() == "Basic" ? 1 : 2);
 	if ($("#admin-"+id).html() === 'Y') {
@@ -76,40 +83,48 @@ function deleteUser(id) {
 }
 
 function saveUser() {
-	var firstName = $("#first-name");
-	var lastName = $("#last-name");
-	var emailAddress = $("#email");
-	var admin = $("#admin");
+	var id = $("#user-id").val();
+	var firstName = $("#first-name").val();
+	var lastName = $("#last-name").val();
+	var email = $("#email").val();
+	var level = $("#level").val();
 	var group = $("#group");
-	var groupValue = group.val();
 	var groupAdmin = $("#group-admin");
-	var groupAdminChecked = groupAdmin.checked;
-	var level = $("#level");
+	var admin = $("#admin");
+	var action = $("#action").val();
 	
-	if (!firstName.val()) {
+	if (!firstName) {
 		dialogAlert("danger", "Please enter a first name.");
-	} else if (!lastName.val()) {
+	} else if (!lastName) {
 		dialogAlert("danger", "Please enter a last name");
-	} else if (!emailAddress.val()) {
+	} else if (!email) {
 		dialogAlert("danger", "Please enter a valid email.");
-	} else if (group.val().length == 0 && groupAdmin.attr("checked")) {
+	} else if (group.val().length == 0 && groupAdmin.prop("checked")) {
 		dialogAlert("danger", "A group must be selected in order for a user to be a 'Group Aministrator'.");		
 	} else {
 		dialogAlert("info", "Saving user information...");
 		
 		$.post("update_user_ajax.php", $("#user-form").serialize(), function(data, textStatus){
 			if(data.status === "SUCCESS") {
+				dialogAlert("success", "Saved.")
 				if (action === "DELETE") {
 					$("#row-"+id).remove();
 				} else if (action === "ADD") {
 					location.reload();
 				} else {	
-					$("#group-name-"+id).html(name);
-					$("#group-max-users-"+id).html(maxUsers);
-					$("#group-dialog").modal('hide');
+					$("#first-name-"+id).html(firstName);
+					$("#last-name-"+id).html(lastName);
+					$("#email-"+id).html(email);
+					$("#level-"+id).html(level == 1 ? "Basic" : "Standard");
+					$("#group-"+id).html($("#group option:selected").text());
+					var yesNo = groupAdmin.is(":checked") ? "Y" : "N";
+					$("#group-admin-"+id).html(yesNo);
+					yesNo = admin.is(":checked") ? "Y" : "N";
+					$("#admin-"+id).html(yesNo);
+					$("#user-dialog").modal('hide');
 				}
 			} else if (data.status === "ERROR") {
-				dialogAlert("danger", textStatus);
+				dialogAlert("danger", data.message);
 			}  else {
 				dialogAlert("danger", "Save failed!");
 			}

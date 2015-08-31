@@ -41,7 +41,7 @@ class User {
 	}
 	
 	public function __construct($id = null) {
-		if ($id !== null) {
+		if ($id !== null && strlen($id) > 0) {
 			$user = execute_query("SELECT * from user WHERE id = $id")->fetch_object("User");
 			foreach (get_object_vars($user) as $key => $value) {
 				$this->$key = $value;
