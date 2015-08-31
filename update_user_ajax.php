@@ -3,43 +3,68 @@ include_once 'util.php';
 require_once('EventLogger.class.php');
 require_once('User.class.php');
 
-$user_id = $_POST['user_id'];
-$user = new User($user_id);
-$user->first_name = $_POST['first_name'];
-$user->last_name = $_POST['last_name'];
-$user->email_address = $_POST['email'];
-$user->level = $_POST['level'];
-$user->location = $_POST['location'];
-$user->company = $_POST['company'];
-$user->position = $_POST['position'];
-$user->about = $_POST['about'];
-$user->social = $_POST['social'];
-$user->username = $_POST['username'];
-$user->user_group = $_POST['group'];
-
-if(is_array($user->social)){
-	$social = new Social(null);
-	foreach ($user->social as $category){
-		$social->network = $category["name"];
-		$social->user_id = $user_id;
-		$social->url = $category["url"];
-		$social->save();
+function get_post($index) {
+	if (isset($_POST[$index])) {
+		return $_POST[$index];
+	} else {
+		return null;
 	}
 }
 
-// admin
-if (isset($_POST['admin'])) {
-	$user->admin = $_POST['admin'];
-} else {
-	$user->admin = "N";
-}
+try {
+	$user_id = get_post('user_id');
+	$user = new User($user_id);
 
-// group admin
-if (strlen($user->user_group) > 0 AND isset($_POST['group_admin'])) {
-	$user->group_admin = $_POST['group_admin'];
-} else {
-	$user->group_admin = "N";
-}
+	$user->first_name = get_post('first_name');
+	$user->last_name = get_post('last_name');
+	$user->email_address = get_post('email');
+	$user->level = get_post('level');
+	$user->location = get_post('location');
+	$user->company = get_post('company');
+	$user->position = get_post('position');
+	$user->about = get_post('about');
+	$user->social = get_post('social');
+	$user->username = get_post('username');
+	$user->user_group = get_post('group');
 
-$user->save();
+	// password
+	if (isset($_POST['password']) && strlen($_POST['password']) > 0) {
+		$user->password = password_hash($user->password, PASSWORD_DEFAULT);
+	}
+	
+	if(is_array($user->social)){
+		$social = new Social(null);
+		foreach ($user->social as $category){
+			$social->network = $category["name"];
+			$social->user_id = $user_id;
+			$social->url = $category["url"];
+			$social->save();
+		}
+	}
+
+	// admin
+	if (isset($_POST['admin'])) {
+		$user->admin = $_POST['admin'];
+	} else {
+		$user->admin = "N";
+	}
+
+	// group admin
+	if (strlen($user->user_group) > 0 AND isset($_POST['group_admin'])) {
+		$user->group_admin = $_POST['group_admin'];
+	} else {
+		$user->group_admin = "N";
+	}
+
+	$user->save();
+	
+	$response['status'] = "SUCCESS";
+	$response['user_id'] = $user->getId();
+} catch (Exception $e) {
+	$response['status'] = "ERROR";
+	$response['message'] = $e->getMessage();
+	$repsonse['object'] = $e;
+}
+header('Content-Type: application/json');
+echo json_encode($response);	
 ?>
