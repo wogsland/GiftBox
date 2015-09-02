@@ -186,8 +186,8 @@
 				<div class="intro-section">
 
 					<!-- WELCOM MESSAGE -->
-					<h1 class="intro">Create with GiveToken</h1>
-					<h5>Expand your possibilities</h5>
+					<h1 class="intro">Candidate Engagement</h1>
+					<h5>Recruiting in a matter of minutes</h5>
 
 					<!-- BUTTON -->
 					<div class="buttons" id="login-button">
@@ -235,10 +235,10 @@
 		<div class="colored-line">
 		</div>
 		<div class="section-description">
-			We Give you the tools to add everything and anything to you next Token Creation.
+			We give you the tools to add everything and anything to you next Token Creation.
 		</div>
 		<div class="section-description">
-			Go ahead, we got you covered. See how our features can help you create a token you’ll love to share.
+			Go ahead, we’ve got you covered. See how our features can help you create a Token Creation you’ll love to share.
 		</div>
 		<div class="colored-line">
 		</div>
@@ -253,96 +253,15 @@
 
 			<!-- SERVICE ICON -->
 			<div class="service-icon">
-				<i class="icon_link"></i>
-			</div>
-
-			<!-- SERVICE HEADING -->
-			<h3>Links</h3>
-
-			<!-- SERVICE DESCRIPTION -->
-			<p>
-				 Token can take you anywhere. We’ll show you how to embed links wherever you need them.
-			</p>
-
-		</div>
-		<!-- /END SINGLE SERVICE -->
-
-		<!-- SINGLE SERVICE -->
-		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-			<!-- SERVICE ICON -->
-			<div class="service-icon">
-				<i class="icon_music"></i>
-			</div>
-
-			<!-- SERVICE HEADING -->
-			<h3>Music</h3>
-
-			<!-- SERVICE DESCRIPTION -->
-			<p>
-				 Load up your token with just the right soundtrack.
-			</p>
-
-		</div>
-		<!-- /END SINGLE SERVICE -->
-
-		<!-- SINGLE SERVICE -->
-		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-			<!-- SERVICE ICON -->
-			<div class="service-icon">
-				<i class="icon_pencil-edit"></i>
-			</div>
-
-			<!-- SERVICE HEADING -->
-			<h3>Customize</h3>
-
-			<!-- SERVICE DESCRIPTION -->
-			<p>
-				 Completely customizable for that personal touch.
-			</p>
-
-		</div>
-		<!-- /END SINGLE SERVICE -->
-
-	</div>
-	<!-- /END ROW -->
-
-	<div class="row">
-
-		<!-- SINGLE SERVICE -->
-		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-			<!-- SERVICE ICON -->
-			<div class="service-icon">
 				<i class="icon_film"></i>
 			</div>
 
 			<!-- SERVICE HEADING -->
-			<h3>Video</h3>
+			<h3>Videos</h3>
 
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 Sometimes they just have to see it. Token has plenty of space for your “you­-just-­had-­to-be­-there” moments.
-			</p>
-
-		</div>
-		<!-- /END SINGLE SERVICE -->
-
-		<!-- SINGLE SERVICE -->
-		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-			<!-- SERVICE ICON -->
-			<div class="service-icon">
-				<i class="social_facebook"></i>
-			</div>
-
-			<!-- SERVICE HEADING -->
-			<h3>Social Media</h3>
-
-			<!-- SERVICE DESCRIPTION -->
-			<p>
-				 Search your social media or upload pictures, videos, or notes. Then add them to your personal library.
+				 Don't just give information to recruits, show them something!
 			</p>
 
 		</div>
@@ -361,11 +280,93 @@
 
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 We give you space to cover your token with photos of any shape and size.
+				 Pictures are worth 1000 words, use them to connect with a candidate.
 			</p>
 
 		</div>
 		<!-- /END SINGLE SERVICE -->
+
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_quotations_alt"></i>
+			</div>
+
+			<!-- SERVICE HEADING -->
+			<h3>Text</h3>
+
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				Some details are just too important to leave out, so don't forget to make it personal.
+			</p>
+
+		</div>
+		<!-- /END SINGLE SERVICE -->
+		
+	</div>
+	<!-- /END ROW -->
+
+	<div class="row">
+
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_mail"></i>
+			</div>
+
+			<!-- SERVICE HEADING -->
+			<h3>Attachments</h3>
+
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				 Add an offer letter or job details to complete the interaction.
+			</p>
+
+		</div>
+		<!-- /END SINGLE SERVICE -->
+
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_link"></i>
+			</div>
+
+			<!-- SERVICE HEADING -->
+			<h3>Links</h3>
+
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				 Make the message interactive by using links to show more about the company and opportunity.
+			</p>
+
+		</div>
+		<!-- /END SINGLE SERVICE -->
+
+		<!-- SINGLE SERVICE -->
+		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+			<!-- SERVICE ICON -->
+			<div class="service-icon">
+				<i class="icon_gift"></i>
+			</div>
+
+			<!-- SERVICE HEADING -->
+			<h3>Wrapper</h3>
+
+			<!-- SERVICE DESCRIPTION -->
+			<p>
+				 Utilize our interactive wrappers to invite the candidate into the recruiting experience.
+			</p>
+
+		</div>
+		<!-- /END SINGLE SERVICE -->
+
 
 	</div>
 	<!-- /END ROW -->
@@ -382,34 +383,16 @@
 			</div>
 
 			<!-- SERVICE HEADING -->
-			<h3>Collage</h3>
+			<h3>Analytics</h3>
 
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				 GiveToken lets you package content into a dynamic collage, to add that personal touch.
+				 Verify what messages work and what leaves something to be desired.
 			</p>
 
 		</div>
 		<!-- /END SINGLE SERVICE -->
 
-		<!-- SINGLE SERVICE -->
-		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-			<!-- SERVICE ICON -->
-			<div class="service-icon">
-				<i class="icon_quotations_alt"></i>
-			</div>
-
-			<!-- SERVICE HEADING -->
-			<h3>Text & Quotes</h3>
-
-			<!-- SERVICE DESCRIPTION -->
-			<p>
-				Never underestimate the power of words. Personalize your token with text of your own.
-			</p>
-
-		</div>
-		<!-- /END SINGLE SERVICE -->
 
 		<!-- SINGLE SERVICE -->
 		<div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
@@ -420,11 +403,11 @@
 			</div>
 
 			<!-- SERVICE HEADING -->
-			<h3>Share on any Platform</h3>
+			<h3>Sharable</h3>
 
 			<!-- SERVICE DESCRIPTION -->
 			<p>
-				Once your token looks just the way you want it, we make it simple to share.
+				Reach a candidate with any form of messaging, whether thats email, text, or social media.
 			</p>
 
 		</div>
@@ -462,25 +445,15 @@
 
 		<!-- RIGHT SIDE WITH BRIEF -->
 		<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-
 			<!-- SECTION TITLE -->
-			<h2 class="white-text">What We Do</h2>
+			<h2 class="white-text">Tell Your Story</h2>
 
 			<div class="white-line-left">
 			</div>
 
 			<p class="white-text">
-				GiveToken is your blank canvas to create an impactful message.  Customize your Token™ Creation by:
+				With GiveToken, recruiters combine multi-media content with a personal message to connect with candidates and fill job openings faster and more efficiently.
 			</p>
-			<ul class="white-text">
- 				<li>Click-to-add media from your computer or the web</li>
- 				<li>Add attachments or photo galleries</li>
- 				<li>Embed Hyperlinks to Images, letting your audience jump to another webpage</li> 
- 				<li>Send your Token™ Creation out on any device or platform</li>
-			</ul>
-
-
-
 		</div>
 		<!-- /END RIGHT BRIEF -->
 
@@ -508,18 +481,15 @@
 
 				<!-- RIGHT SIDE WITH BRIEF -->
 				<div class="col-md-6 left-align wow fadeInLeft animated deep-grey-bg" data-wow-offset="10" data-wow-duration="1.5s">
-
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">GiveToken is Content</h2>
+					<h2 class="white-text">Sell the Job</h2>
 
 					<div class="white-line-left">
 					</div>
 
 					<p class="white-text">
-						GiveToken allows you to combine digital content of all media types into one easy-to-view and easy-to-access webpage.  It can be personalized for any business, event, or customer to turn a bland interaction into a memorable experience.
+						The candidate is engaged and wants to hear more about the job. It's time to combine pictures, videos, text and attachments to show the candidate the kind of job and company that they have been searching for.
 					</p>
-
-
 				</div>
 				<!-- /END RIGHT BRIEF -->
 
@@ -543,13 +513,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" style="margin-top: 15%;" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="dark-text">Experiences with GiveToken</h2>
+					<h2 class="dark-text">Put a bow on it</h2>
 
 					<div class="colored-line-left">
 					</div>
 
 					<p class="dark-text">
-						You know those “you just had to be there” moments? Your customers know them too. With GiveToken's help, you can combine the best clips and sounds that highlight your company in one Token™ Creation. The best part?  Your customers can show off the same Token™ Creation on any platform at any time, all while preserving a consistent message and experience.
+						Candidates want personalization, not just a salary and set of skills. Using our "wrapper" functionality, create a message that stands out from other recruiters and other opportunities.
 					</p>
 
 
@@ -584,13 +554,13 @@
 				<div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 					<!-- SECTION TITLE -->
-					<h2 class="white-text">GiveToken is Visual</h2>
+					<h2 class="white-text">Figure out what works</h2>
 
 					<div class="white-line-left">
 					</div>
 
 					<p>
-						We all know the simplest, most genuine way to share information is through media.  Combine both sights and sounds with a Token™ Creation to develop a compact, shareable, and impactful experience.
+						Recruiters send hundreds of messages and need a way to track the success of each message. GiveToken provides an analytics package that allows the recruiter to see what candidates actually engage with.
 					</p>
 
 
