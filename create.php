@@ -25,6 +25,7 @@
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
+	<script src="js/aviary.js"></script>
 	<script src="js/util.js"></script>
 	<script src="js/create.js"></script>
 	<script src="js/init.js"></script>
@@ -57,12 +58,14 @@
 </head>
 <body>
 	<?php include_once("analyticstracking.php") ?>
-	<canvas id="thumbnail-canvas" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-1" width="1462" height="768" style="display: none; position:absolute;">
 	</canvas>
-<!-- 	<canvas id="thumbnail-canvas-2" width="1462" height="768" style="display: none; position:absolute;">
+	<canvas id="thumbnail-canvas-2" width="1462" height="1355" style="display: none; position:absolute;">
 	</canvas>
-	<canvas id="thumbnail-canvas-3" width="1462" height="768" style="display: none; position:absolute;">
-	</canvas> -->
+	<canvas id="thumbnail-canvas-3" width="1462" height="1355" style="display: none; position:absolute;">
+	</canvas>
+	<div id="advanced-editor-box">
+	</div>
 	<div id="content-wrapper">
 		<div id="palette">
 			<div id="palette-top">
@@ -102,8 +105,8 @@
 
 				</div>
 				<div class="sidebar-tab-container" id="opener-tab-container">
-					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()">ENTRANCE</div>
-					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>">EXIT</div>
+					<div class="opener-button" id="opener-entrance-button" onclick="addEntranceAnimation()"></div>
+					<div class="opener-button" id="opener-exit-button" onclick="<?php echo intval($_SESSION["level"]) > 1 ? "addYouTubeRedirect()" : "standardFeature()"; ?>"></div>
 				</div>
 				<div class="sidebar-tab-container" id="send-tab-container">
 					<span class="template-tab-text">QUICK SEND</span>
@@ -112,7 +115,7 @@
 						<span class="template-tab-text">WRITE A DESCRIPTION <i onclick="saveButton()" class="fa fa-save fa-lg token-description-save"></i></span>
 						<textarea id="token-description" maxlength="150"></textarea>
 					</div>
-<!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google+')"></div>
+<!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
 					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
@@ -122,7 +125,7 @@
 			</div>
 		</div>
 
-		<div id="templates">
+		<div id="templates">                 
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
@@ -158,6 +161,14 @@
 		</form>
 	</div>
 
+	<div id="save-editor-dialog" title="Save to open the editor">
+		<form>
+		    <fieldset>
+				<label class="input-label" for="save-editor-name">Name</label>
+				<input class="dialog-input" type="text" name="save-editor-name" id="save-editor-name">
+		</form>
+	</div>
+
 	<div id="url-dialog">
 		<form>
 		    <fieldset>
@@ -187,7 +198,7 @@
 				<label for="animation-color">Color: </label>
 				<select id="select-envelope-color-option">
 				  <option value="blue">blue</option>
-<!-- 				  <option value="red">red</option>
+<!-- 		      <option value="red">red</option>
 				  <option value="green">green</option>
 				  <option value="white">white</option>
 				  <option value="yellow">yellow</option> -->
@@ -280,10 +291,9 @@
 		<input class="hidden-file-input" type="file" multiple id="select-attachment-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
-				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
+<!-- 				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
+ -->				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
 				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
-				<li><div class="add-nav-item add-nav-item-hover" id="add-letter" href="javascript:void(0)" onclick="selectAddNav(this.id)">LETTER & ATTACHMENTS</div></li>
 			</ul>
 		</div>
 
@@ -298,8 +308,8 @@
 				<div class="add-content-icon-bar">
 					<div class="add-icon-container">
 						<a class="add-icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook fa-3x add-icon"></i></a>
-						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
-						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
+<!-- 						<a class="add-icon-link" href="javascript:void(0)" onclick="featureNotAvailable('Flickr')"><i class="fa fa-flickr fa-3x add-icon"></i></a>
+ -->						<a class="add-icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-3x add-icon"></i></a>
 						<a class="add-icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-desktop fa-3x add-icon"></i></a>
 					</div>
 				</div>
@@ -327,23 +337,30 @@
 				</div>
 			</div>
 
-			<!-- LETTER -->
-			<div id="add-letter-container" class="add-content-container">
-				<form id="letter-form">
-					<br>
-					<textarea id="lettertext"></textarea>
-					<script>
-		                CKEDITOR.replace( 'lettertext' );
-		            </script>
-		            <br>
-					<div id="add-attachment-desktop"></div>
-					<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
-				</form>
-			</div>
-
 		<div id="add-button-container">
 			<div class="add-button" onclick="$('#add-dialog').dialog('close'); removeSelection('add-images-desktop'); removeSelection('add-av-desktop');">CANCEL</div>
 			<div class="add-button" href="javascript:void(0)" onclick="doAdd()">USE</div>
+		</div>
+	</div>
+
+	<div id="letter-dialog" title="LETTER & ATTACHMENTS">
+		<!-- LETTER -->
+		<div id="letter-container" class="letter-content-container">
+			<form id="letter-form">
+				<br>
+				<textarea id="lettertext"></textarea>
+				<script>
+	                CKEDITOR.replace( 'lettertext' );
+	            </script>
+	            <br>
+				<div id="add-attachment-desktop"></div>
+				<a class="add-icon-link" id="attachment-icon-link" href="javascript:void(0)" onclick="$('#select-attachment-file').trigger('click')"><i class="fa fa-paperclip fa-2x add-icon"></i> <span>ADD ATTACHMENT</span></a>
+			</form>
+		</div>
+
+		<div id="letter-button-container">
+			<div class="letter-button" onclick="$('#letter-dialog').dialog('close');">CLOSE</div>
+			<div class="letter-button" href="javascript:void(0)" onclick="saveLetterAttachments()">USE</div>
 		</div>
 	</div>
 
@@ -387,10 +404,11 @@
 		<div id="image-dialog-container">
 			<div class="container image-dialog-nav-tabs">
 				<div class="row">
-					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="featureNotAvailable('Filter')" disabled><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab first image-dialog-tab-hover image-filter-tab" id="image-filter-tab" onclick="chooseBasicEditor();"><i class="fa fa-user fa-3x">&nbsp;</i></div>
+					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="chooseAdvancedEditor();" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
 					<div class="image-dialog-nav-tab image-text-tab-selected" id="image-text-tab" onclick="selectImageDialogTab(this)"><i class="fa fa-font fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
-					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
+<!-- 					<div class="image-dialog-nav-tab image-dialog-tab-hover image-gallery-tab" id="image-gallery-tab" onclick="featureNotAvailable('Gallery')" ><i class="fa fa-picture-o fa-3x">&nbsp;</i></div>
+ -->					<div class="image-dialog-nav-tab image-dialog-tab-hover image-interact-tab" id="image-interact-tab" onclick="selectImageDialogTab(this)" ><i class="fa fa-hand-o-up fa-3x">&nbsp;</i></div>
 				</div>
 			</div>
 			<div class="image-dialog-tab-container" id="image-filter-tab-container">
@@ -399,7 +417,7 @@
 			</div>
 			<div class="image-dialog-tab-container" id="image-text-tab-container">
 				TEXT
-				<div class="image-dialog-button" id="add-overlay-button" onclick="openOverlay()">ADD TEXT OVERLAY</div>
+				<div class="image-dialog-button" id="add-overlay-button" onclick="chooseTextEditor()">ADD TEXT OVERLAY</div>
 				<div class="image-dialog-button" style="display:none" id="remove-overlay-button" onclick="removeOverlay()">REMOVE TEXT OVERLAY</div>
 				<div class="image-dialog-button" style="display:none" id="change-overlay-button" onclick="changeOverlay()">CHANGE TEXT OVERLAY</div>
 				<!-- DISPLAY

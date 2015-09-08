@@ -1,7 +1,7 @@
 var imageType = /image.*/;
 var videoType = /video.*/;
 var audioType = /audio.*/;
-var imageDialogSelector = "#image-dialog"
+var imageDialogSelector = "#image-dialog";
 
 window.onload = function(){
     var browser = get_browser_info();
@@ -96,6 +96,7 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
+	// console.log("Uploading: " + fileData + ", under " + fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -113,7 +114,10 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	
+	// console.log(fileName);
+	while(fileName.indexOf(" ") != -1){
+		fileName = fileName.replace(" ", "");
+	}
 	var reader  = new FileReader();
 	reader.fileName = fileName;
 	reader.onloadend = function () {
@@ -274,12 +278,6 @@ function addOverlayToBento(bento, options){
 
 function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	imageFileType = typeof imageFileType !== 'undefined' ? imageFileType : null;
-	// Remove any previously dropped image or video
-	// if (imageFile) {
-	// 	if (imageFile.type == "image/gif" || imageFileType == "gif") {
-	// 		$(bento).css('background', 'black');
-	// 	}
-	// }
 
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -306,6 +304,7 @@ function addImage(bento, imageSrc, imageFile, savedBento, imageFileType) {
 	img.imageContainer = imageContainer;
 	img.crossOrigin = "Anonymous";
 	img.src = imageSrc;
+	img.originalSrc = imageSrc;
 	img.hyperlink = null;
 	img.className = "bento-image";
 	img.savedBento = savedBento;
@@ -841,7 +840,7 @@ function showControl(controlId, target) {
 	var control = $("#"+controlId);
 	if (control.length > 0) {
 		control.css("display", "block");
-		control.css("zIndex", 2);
+		control.css("zIndex", 10);
 		control[0].target = target;
 	}
 /*	
@@ -901,12 +900,28 @@ function closeClicked(event, closeButton) {
 	} else {
 		hideControl(closeButton.id);
 		hideControl(bento.id + "-slider");
+		hideControl(bento.id + "-refresh");
 		hideControl(bento.id + "-link-icon");
 	}
 	if(bento.overlay_content){
 		bento.removeChild($("#"+bento.id+"-out-text-overlay-container")[0]);
 		setOverlayButtons(null);
 		hideControl(bento.id + "-show-overlay");
+	}
+	bento.onclick=function(){bentoClick(this)};
+	event.stopPropagation();
+	unsaved();
+}
+
+function refreshImage(event, refreshButton) {
+	var bento = refreshButton.parentNode;
+	var length = refreshButton.id.length;
+	var bentoId = refreshButton.id.substring(length - 8, 0);
+	var imageId = bentoId + '-image';
+	var image = document.getElementById(imageId);
+	if (image && image.originalSrc != image.src) {
+		image.src = image.originalSrc;
+		hideControl(bentoId+"-refresh");
 	}
 	bento.onclick=function(){bentoClick(this)};
 	event.stopPropagation();
@@ -1174,15 +1189,24 @@ function saveButton() {
 	} else {
 		save();
 	}
-
 }
-function save() {
+
+function saveName() {
 	if ($("#save-dialog" ).dialog("isOpen")) {
 		// Get the name
 		var giftboxName = $("#save-name").val();
 		$("#save-dialog" ).dialog("close");
 		window.top_template.giftboxName = giftboxName;
+	} else if ($("#save-editor-dialog" ).dialog("isOpen")) {
+		// Get the name
+		var giftboxName = $("#save-editor-name").val();
+		$("#save-editor-dialog" ).dialog("close");
+		window.top_template.giftboxName = giftboxName;
 	}
+}
+
+function save() {
+	saveName();
 
 	var giftboxName = window.top_template.giftboxName;
 	openStatus("Save", "Saving " + giftboxName + "...");
@@ -1216,7 +1240,7 @@ function save() {
 		animation_style: selectedAnimationStyle
 	};
 
-	var canvas = document.getElementById("thumbnail-canvas");
+	var canvas = document.getElementById("thumbnail-canvas-1");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.fillStyle = "white";
@@ -1254,7 +1278,7 @@ function save() {
 		bento.image_left_in_container = null;
 		bento.image_top_in_container = null;
 		bento.image_hyperlink = null;
-		bento.gallery_file_list = [];
+		bento.bento_file_list = [];
 		bento.auto_play = this.auto_play ? this.auto_play: 0;
 		bento.redirect_url = $("#redirect-text").val();
 		bento.overlay_content = this.overlay_content ? this.overlay_content : null;
@@ -1270,10 +1294,13 @@ function save() {
 		giftbox.bentos[i] = bento;
 		var image = document.getElementById(bento.css_id + "-image");
 		if (image) {
-			bento.image_file_name = this.image_file_name;
+			while(this.image_file_name.indexOf(" ") != -1){
+				this.image_file_name = this.image_file_name.replace(" ", "");
+			}
+			// bento.image_file_name = this.image_file_name;
 			var extension = this.image_file_name.substr(this.image_file_name.lastIndexOf('.'));
-			// console.log("extension: " + extension);
 			var root = this.image_file_name.substr(0, this.image_file_name.lastIndexOf('.'));
+			bento.image_file_name = root + "_" + Date.now() + "_" + bento.css_id + extension;
 			bento.cropped_image_file_name = root + "_" + bento.css_id + "_" + Date.now() + extension;
 			bento.slider_value = $("#"+bento.css_id+"-slider").slider("value");
 			var container = document.getElementById(bento.css_id + '-image-container');
@@ -1332,7 +1359,10 @@ function save() {
 		}
 		if (this.image_file_list && this.image_file_list.length > 0){
 			for(i = 0; i < this.image_file_list.length; i++){
-				bento.gallery_file_list.push(this.image_file_list[i][0]);
+				while(this.image_file_list[i][0].indexOf(" ") != -1){
+					this.image_file_list[i][0] = this.image_file_list[i][0].replace(" ", "");
+				}
+				bento.bento_file_list.push(this.image_file_list[i][0]);
 			}
 		}
 		width += columnWidth + 10;
@@ -1353,6 +1383,7 @@ function save() {
 				width = maxWidth;
 			}
 		}
+		console.log(giftbox.bentos[i]);
 	});
 
 	$("#add-attachment-desktop > a").each(function(i) {
@@ -1367,6 +1398,7 @@ function save() {
 	});
 
 	$("#"+template.id+" div.divider").each(function(i) {
+		console.log("#"+template.id+" div.divider");
 		var divider = new Object();
 		divider.giftbox_id = giftboxId;
 		divider.css_id = $(this).attr("id");
@@ -1376,7 +1408,7 @@ function save() {
 		divider.css_left = $(this).css("left");
 		giftbox.dividers[i] = divider;
 	});
-
+	console.log(giftbox.dividers);
 	$("#"+template.id+" div.divider-container").each(function(i) {
 		var container = new Object();
 		container.giftbox_id = giftboxId;
@@ -1403,15 +1435,20 @@ function save() {
 	// Save the template first
 	$.post("save_token_ajax.php", giftbox, function(result) {
 		closeStatus();
-		// console.log("After closeStatus()");
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
-			// console.log("result.status === 'SUCCESS'");
 			$("#"+template.id+" div.bento").each(function(i) {
 				if (this.image_file_list && this.image_file_list.length > 0){
 					for(i = 0; i < this.image_file_list.length; i++){
-						this.image_file_list[i][1].name = template.giftboxId +"_"+ this.image_file_list[i][1].name;
-						uploadFile(this.image_file_list[i][1]);
+						var str = this.image_file_list[i][1].name;
+						while(str.indexOf(" ") != -1){
+							str = str.replace(" ", "");
+							console.log(str);
+						}
+						console.log("WHAT UP IS THIS?");
+						console.log(this.image_file_list[i][1]);
+						console.log(template.giftboxId + "_" + this.image_file_list[i][1].name);
+						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
 			});
@@ -1421,27 +1458,24 @@ function save() {
 				if (image) {
 					var croppedImage = createCroppedImage(giftbox.bentos[i], image, container);
 					if (giftbox.bentos[i].cropped_image_file_name.indexOf(template.giftboxId) == 0) {
-						// console.log("From Open feature");
-						// console.log("Upload file cropped: " + croppedImage.src);
-						// console.log("Upload file name: " + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, giftbox.bentos[i].cropped_image_file_name);
 					} else {
-						// console.log("NOT From Open feature");
-						// console.log("Upload file cropped: " + croppedImage.src);
-						// console.log("Upload file name: " + template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 						uploadFileData(croppedImage.src, template.giftboxId + "_" + giftbox.bentos[i].cropped_image_file_name);
 					}
-					if (!image.saved) {
-						if (image.file) {
-							uploadFile(image.file, template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						} else {
-							uploadFileData(image.src, + template.giftboxId + "_" + giftbox.bentos[i].image_file_name);
-						}
-						image.saved = true;
+					var imageName;
+					if (giftbox.bentos[i].image_file_name.indexOf(template.giftboxId) == 0) {
+						imageName = giftbox.bentos[i].image_file_name;
+					} else {
+						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
+					}
+					if (image.file) {
+						console.log(imageName);
+						uploadFile(image.file, imageName);
+					} else {
+						uploadFileData(image.src, imageName);
 					}
 				}
 			}
-
 			template.appURL = result.app_url;
 			setPreviewLink(template);
 		} else if (result.status === "ERROR") {
@@ -1456,16 +1490,62 @@ function save() {
 		var canvasURL = canvas.toDataURL();
 		window.top_template.thumbnailURL = canvasURL;
 
-		var half_envelope = document.createElement("img");
-		half_envelope.src = "../images/halfenvelope.png";
-		ctx.drawImage(half_envelope, 10, 10);
-		ctx.font = "30px Arial";
+		var halfEnvelopeCanvas = document.getElementById("thumbnail-canvas-2");
+		var ctx2 = halfEnvelopeCanvas.getContext("2d");
+		var fullEnvelopeCanvas = document.getElementById("thumbnail-canvas-3");
+		var ctx3 = fullEnvelopeCanvas.getContext("2d");
+		var bottomEnvelope = new Image();
+		bottomEnvelope.src = "../images/halfbottomenvelope.png";
+		bottomEnvelope.onload = function(){
+			ctx2.drawImage(bottomEnvelope,0,587);
+			var topEnvelope = new Image();
+			topEnvelope.src = '../images/topenvelope.png';
+			topEnvelope.onload = function() {
+				ctx2.drawImage(topEnvelope, 0, 0);
+				var background = new Image();
+				background.crossOrigin = "Anonymous";
+				background.src = canvasURL;
+				background.onload = function(){
+					ctx2.scale(0.8,0.8);
+			    	ctx2.drawImage(background,170,587);
+					var halfenvelope = new Image();
+					halfenvelope.src = "../images/halftopenvelope.png";
+					halfenvelope.onload = function() {
+						ctx2.scale(1.25,1.25);
+				    	ctx2.drawImage(halfenvelope,0,587);
+					    halfThumbnailCanvasURL = halfEnvelopeCanvas.toDataURL();
+						window.top_template.halfEnvelopeThumbnailURL = halfThumbnailCanvasURL;
+					}
+				}
+			}
+		}
+
+		var fullenvelope = new Image();
+		fullenvelope.src = "../images/halfenvelope.png";
+		fullenvelope.onload = function() {
+			var topEnvelope = new Image();
+			topEnvelope.src = '../images/topenvelope.png';
+			topEnvelope.onload = function() {
+				ctx3.drawImage(topEnvelope, 0, 0);
+				ctx3.drawImage(fullenvelope,0,587);
+		    	var fullbackground = new Image();
+				fullbackground.crossOrigin = "Anonymous";
+				fullbackground.src = canvasURL;
+				fullbackground.onload = function(){
+					ctx3.scale(0.87, 0.87);
+					ctx3.drawImage(fullbackground,100,650);
+					fullThumbnailCanvasURL = fullEnvelopeCanvas.toDataURL();
+					window.top_template.fullEnvelopeThumbnailURL = fullThumbnailCanvasURL;
+					ctx3.scale(1.15,1.15);
+				}
+			}
+		}
 
 		var placeHolder = document.createElement("img");
 		placeHolder.src = canvasURL;
 		uploadFileData(placeHolder.src, template.giftboxId + "_thumbnail");
 	});
-	// saved();
+	saved();
 }
 
 function send() {
@@ -1580,10 +1660,12 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
+	console.log("Logging saved");
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+			console.log("IN GET");
 			var token = data;
 			closeStatus();
 
@@ -1651,6 +1733,7 @@ function loadSaved() {
 					var height;
 					for (index = 0; index < token.dividers.length; ++index) {
 						divider = document.getElementById(token.dividers[index].css_id);
+						console.log(divider);
 						classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
 
 						// First if statement to check whether this is a divider and type
@@ -1659,6 +1742,7 @@ function loadSaved() {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
 								divider.style.height = token.dividers[index].css_height;
+								console.log(divider.style.height);
 							} else if (classes[0] == "horizontal") {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
@@ -1771,6 +1855,7 @@ function loadSaved() {
 
 function clearBento(bento) {
 	hideControl(bento.id+"-close");
+	hideControl(bento.id+"-refresh");
 	hideControl(bento.id+"-slider");
 	if (bento.imageContainer) {
 		bento.removeChild(bento.imageContainer);
@@ -1803,6 +1888,9 @@ function loadBento(bento, savedBento) {
 		} else if (isSpotify(savedBento.content_uri)) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
 			addSpotify(bento, trackId);
+		} else if (isVimeo(savedBento.content_uri)) {
+			console.log("VIMEO");
+			addVimeo(bento, savedBento.content_uri);
 		}
 	}
 	if (savedBento.image_file_name) {
@@ -1935,8 +2023,7 @@ function bentoClick(bento) {
 }
 
 function textIconClicked() {
-	$("#add-dialog").dialog("open");
-	selectAddNav("add-letter");
+	$("#letter-dialog").dialog("open");
 }
 
 function selectAddNav(navId) {
@@ -2057,9 +2144,6 @@ function doAdd() {
 		$('#add-dialog').dialog('close');
 	}
 
-	// LETTER
-	saveLetter();
-
 	bentoId = $("#add-dialog").attr("target-bento");
 	bento = $("#"+bentoId)[0];
 	// IMAGE
@@ -2110,8 +2194,15 @@ function doAdd() {
 		}
 	}
 
-	// ATTACHMENT
+}
 
+function saveLetterAttachments() {
+	// LETTER
+	saveLetter();
+
+	// ATTACHMENTS
+
+	$('#letter-dialog').dialog('close');
 }
 
 function hidePalette() {
@@ -2692,14 +2783,105 @@ function selectImageDialogTab(tab) {
 function displayThumbnails() {
 	var giftboxId = window.top_template.giftboxId;
 	var thumbnailURL = window.top_template.thumbnailURL;
+	var halfEnvelopeThumbnailURL = window.top_template.halfEnvelopeThumbnailURL;
+	var fullEnvelopeThumbnailURL = window.top_template.fullEnvelopeThumbnailURL;
 	if (!thumbnailURL) {
 		openMessage("Thumbnails", "The Token must be saved before you can view thumbnails.");
 	} else {
 		$('#thumbnail-dialog-container').html('<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												/* + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">'
-												 * + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
+												 + '<img class="thumbnail-image" src="' + halfEnvelopeThumbnailURL + '">'
+												 + '<img class="thumbnail-image" src="' + fullEnvelopeThumbnailURL + '">'
+												 /* + '<img src="../images/halfenvelope.png" style="width: 41%; margin-left: -20em;">'
 												 * + '<img class="thumbnail-image" src="' + thumbnailURL + '">' */ );
 		$('#thumbnail-dialog').dialog('open');
 	}
+}
+
+var basicConfigObj = {
+	tools: ['enhance', 'orientation', 'lighting']
+}
+
+var advancedConfigObj = {
+    tools: ['enhance', 'effects', 'frames', 'orientation', 'lighting', 'color', 'sharpness', 'focus', 'vignette', 'colorsplash']
+}
+
+var textConfigObj = {
+    tools: ['text', 'meme']
+}
+
+var featherEditor = new Aviary.Feather({
+    apiKey: 'fbedb10c9b4b4a82aae5c4db13ed70b5',
+    tools: ['enhance', 'orientation', 'lighting'],
+    enableCORS: true,
+    appendTo: 'advanced-editor-box',
+    onSave: function(imageID, newURL) {
+		var xhr = new XMLHttpRequest();
+		//only use the first one. add additional photos if possible in the future
+		xhr.open('GET', newURL, true);
+		xhr.responseType = 'blob';
+		xhr.onload = function(e) {
+		  if (this.status == 200) {
+		    var myBlob = this.response;
+		    var image = document.getElementById(imageID);
+			image.src = newURL;
+			image.name = "Aviary-Photo-" + $(".Aviary-Photo").size() + ".png";
+			image.className = "Aviary-Photo";
+			myBlob.name = image.name;
+			// myBlob.lastModifiedDate = new Date();
+			image.file = myBlob;
+		  }
+		};
+		xhr.send();
+		// featherEditor.close();
+    },
+    onClose: function() {
+    	// $('#image-dialog').dialog("close");
+    	$('#advanced-editor-box').css('display', 'none');
+    	var image = getImageDialogImage()[0];
+    	var bentoId = image.id.substring(9, 0);
+    	var imageContainer =  bentoId + '-image-container';
+    	showControl(bentoId + "-refresh", imageContainer);
+    },
+    onError: function(error) {
+    	console.log(error);
+    }
+});
+
+function chooseBasicEditor() {
+	var image = getImageDialogImage()[0];
+	var src = image.src;
+	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	basicConfigObj['image'] = id;
+	basicConfigObj['url'] = src;
+	console.log(basicConfigObj);
+	featherEditor.launch(basicConfigObj);
+	// $('#image-dialog').dialog("close");
+    return false;
+}
+
+function chooseAdvancedEditor() {
+	var image = getImageDialogImage()[0];
+	var src = image.src;
+	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	advancedConfigObj['image'] = id;
+	advancedConfigObj['url'] = src;
+	console.log(advancedConfigObj);
+	featherEditor.launch(advancedConfigObj);
+	// $('#image-dialog').dialog("close");
+    return false;
+}
+
+function chooseTextEditor() {
+	var image = getImageDialogImage()[0];
+	var src = image.src;
+	var id = image.id;
+	$('#advanced-editor-box').css('display', 'block');
+	textConfigObj['image'] = id;
+	textConfigObj['url'] = src;
+	console.log(textConfigObj);
+	featherEditor.launch(textConfigObj);
+	$('#image-dialog').dialog("close");
+    return false;
 }

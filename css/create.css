@@ -284,6 +284,17 @@ ul {
 	color: #B9B9B9;
 }
 
+.refresh-button{
+	display: none;
+    position: absolute;
+    top: 10px;
+    right: 34px;
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+    color: #B9B9B9;
+}
+
 .show-overlay{
 	display: none;
 	position: absolute;
@@ -468,19 +479,18 @@ iframe {
 	margin-top: 20px;
 }
 
-/*.opener-button {
-	background-image: url('../images/ui-buttons-sprite.png');
+.opener-button {
 	background-repeat: no-repeat;
-	height: 30px;
-  	width: 101px;
+	height: 38px;
+	width: 196px;
 	border: solid 1px #23282B;
 	margin: auto;
 	outline: none;
 	margin-top: 10px;
 	cursor: pointer;
-}*/
+}
 
-.opener-button {
+/*.opener-button {
 	text-align: center;
 	height: 30px;
 	line-height: 30px;
@@ -490,6 +500,14 @@ iframe {
 	border-radius: 3px;
 	cursor: pointer;
 	margin-top: 5px;
+}*/
+
+#opener-entrance-button {
+	background-image: url('../images/entrance.png');
+}
+
+#opener-exit-button {
+	background-image: url('../images/exit.png');
 }
 
 .send-button {
@@ -591,7 +609,8 @@ fieldset {
 }
 
 #add-nav-bar {
-	float: left;
+	float: none;
+	text-align: center;
 	height: 100%;
 }
 
@@ -997,7 +1016,7 @@ fieldset {
 }
 
 #thumbnails-send-button {
-	background-position: -1px -768px;
+	background-image: url('../images/choosethumb.png');
 }
 
 /******************* THUMBNAIL DIALOG *******************/
@@ -1054,8 +1073,79 @@ fieldset {
 }
 
 .thumbnail-image {
+	margin-left: 3%;
+	margin-top: 41px;
+	margin-bottom: 6px;
+	width: 46%;
+}
+
+/******************* letter DIALOG *******************/
+.letter-dialog-class {
+	border: none;
+	border-radius: 0px;
+	padding: 0px;
+	background: #33383b;
+}
+
+.letter-dialog-class .ui-widget-header {
+	height: 50px;
+	background: none;
+	border: none;
+	border-radius: 0px;
+	color: white;
+	padding: 0px;
+}
+
+.letter-dialog-class .ui-dialog-title {
+	margin: 0px;
+	padding: 17px 30px;
+	text-align: center;
+}
+
+#letter-dialog {
+	overflow: auto;
+	padding: 0px;
+	display: inline;
+}
+
+/********************** letter BUTTONS ****************************/
+
+#letter-button-container {
+	box-sizing: border-box;
+	height: 40px;
+	display: table;
+	width: 100%;
+}
+
+.letter-button {
+	display: table-cell;
+	width: 49.5%;
+	text-align: center;
+	vertical-align: middle;
+	height: 40px;
+	color: #aaadaf;
+}
+
+.letter-button:hover {
+	color: white;
+	background-color: #626c71;
+	cursor: pointer;
+}
+
+.letter-image {
 	margin-left: 26%;
 	margin-top: 1px;
 	margin-bottom: 6px;
 	width: 46%;
 }
+
+#advanced-editor-box {
+	display: none;
+    z-index: 400;
+    top: 10%;
+    right: 15%;
+    bottom: 10%;
+    width: 64%;
+    position: absolute;
+}
+

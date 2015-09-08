@@ -1,7 +1,19 @@
 $(function() {
 	$( "#add-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide() },
 		dialogClass: 'add-dialog-class',
+		autoOpen: false,
+		resizable: false,
+		width: 650,
+		height: 580,
+		modal: true,
+	});
+});
+
+$(function() {
+	$( "#letter-dialog" ).dialog({
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		dialogClass: 'letter-dialog-class',
 		autoOpen: false,
 		resizable: false,
 		width: 650,
@@ -99,6 +111,32 @@ $(function() {
 			$("#save-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
 					save();
+					return false;
+				}
+			});
+		}
+	});
+});
+
+$(function() {
+	$( "#save-editor-dialog" ).dialog({ 
+		autoOpen: false,
+		resizable: false,
+		height:200,
+		width: 400,
+		modal: true,
+		buttons: {
+			Save: function() {
+				return chooseBasicEditor();
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		},
+		open: function() {
+			$("#save-editor-dialog").keypress(function(e) {
+				if (e.keyCode == $.ui.keyCode.ENTER) {
+					chooseBasicEditor();
 					return false;
 				}
 			});
@@ -230,10 +268,12 @@ $(function() {
 
 $(function() {
 	$( "#image-dialog" ).dialog({ 
+		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
 		autoOpen: false,
 		resizable: false,
 		height:500,
-		width: 300
+		width: 300, 
+		modal: true
 	});
 });
 
