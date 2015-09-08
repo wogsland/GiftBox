@@ -142,12 +142,12 @@
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.html#home">Home</a></li>
-					<li><a href="index.html#features">Features</a></li>
+					<!--<li><a href="index.html#features">Features</a></li>-->
 					<li><a href="community.php" class="external">Community</a></li>
-					<li><a href="index.html#brief1">How It Works?</a></li>
-					<li><a href="index.html#screenshot-section">Examples</a></li>
+					<!--<li><a href="index.html#brief1">How It Works?</a></li>-->
+					<!--<li><a href="index.html#screenshot-section">Examples</a></li>-->
 					<li><a href="pricing.php" class="external">Pricing</a></li>
-					<li><a href="index.html#contact">Contact</a></li>
+					<!--<li><a href="index.html#contact">Contact</a></li>-->
 					<?php
 					if (logged_in()) {
 						echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
@@ -172,9 +172,9 @@
 		<!-- ONLY LOGO ON HEADER -->
 		<div class="only-logo">
 			<div class="navbar">
-				<div class="navbar-header">
+<!-- 				<div class="navbar-header">
 					<img src="assets/img/logo-light.png" alt="">
-				</div>
+				</div> -->
 			</div>
 		</div> <!-- /END ONLY LOGO ON HEADER -->
 
