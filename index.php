@@ -142,12 +142,8 @@
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
 					<li><a href="index.html#home">Home</a></li>
-					<!--<li><a href="index.html#features">Features</a></li>-->
 					<li><a href="community.php" class="external">Community</a></li>
-					<!--<li><a href="index.html#brief1">How It Works?</a></li>-->
-					<!--<li><a href="index.html#screenshot-section">Examples</a></li>-->
 					<li><a href="pricing.php" class="external">Pricing</a></li>
-					<!--<li><a href="index.html#contact">Contact</a></li>-->
 					<?php
 					if (logged_in()) {
 						echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
@@ -661,8 +657,7 @@
 			<div class="col-md-8 col-md-offset-2">
 
 				<!-- FORM -->
-				<form class="contact-form" id="contact" role="form" action = "sendemail.php" method="POST">
-
+				<form class="contact-form" id="contact" role="form">
 					<!-- IF MAIL SENT SUCCESSFULLY -->
 					<h4 class="success">
 						<i class="icon_check"></i> Your message has been sent successfully.
@@ -686,7 +681,7 @@
 						<textarea class="form-control textarea-box" id="message" name="message" rows="8" placeholder="Message"></textarea>
 					</div>
 
-					<button class="btn btn-primary standard-button2 ladda-button" type="submit" id="submit" name="submit" data-style="expand-left">Send Message</button>
+					<button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
 
 				</form>
 				<!-- /END FORM -->
@@ -736,58 +731,49 @@
 ============================== -->
 <script>
 
-(function() {
+function sendMessage(event) {
 
-function isEmail( str ) {
-    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( str );
-}
+	function isEmail(str) {
+		return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( str );
+	}
 
-// When the user submits the contact form...
-var contactForm = $( "#contact" ).on( "submit", function( event ) {
-    // Prevent the form from actually submitting
-    // We do this so that the user stays on the current page
-    event.preventDefault();
+	// When the user submits the contact form...
+	var contactForm = $( "#contact" );
 
-    // Hide any messages from previous send attempts
-    contactForm.find( ".success" ).hide();
-    contactForm.find( ".error" ).hide();
+	// Hide any messages from previous send attempts
+	contactForm.find( ".success" ).hide();
+	contactForm.find( ".error" ).hide();
 
-    var name = $( "#name" ).val();
-    var email = $( "#email" ).val();
-    var subject = $( "#subject" ).val();
-    var message = $( "#message" ).val();
+	var name = $( "#name" ).val();
+	var email = $( "#email" ).val();
+	var subject = $( "#subject" ).val();
+	var message = $( "#message" ).val();
 
-    // If any field isn't filled in, show the error message and stop processing
-    if ( !name.length || !isEmail(email) || !subject.length || !message.length ) {
-        contactForm.find( ".error" ).show();
-        return;
-    }
+	// If any field isn't filled in, show the error message and stop processing
+	if ( !name.length || !isEmail(email) || !subject.length || !message.length ) {
+		contactForm.find( ".error" ).show();
+		return;
+	}
 
-    // Submit the form via Ajax
-	$.post(
-	    // Get the URL from the form
-	    contactForm.attr("action"),
-	    // Get the data from the form
-	    contactForm.serialize(),
-	    // Set up a callback for successfully posting the data
-	    function(data, textStatus, jqXHR){
-    		if(data.status === "SUCCESS") {
-    		    contactForm.find( ".success" ).show();
-    		} else if (data.status === "ERROR") {
-    			// TODO
-    			alert( "error1" );
-    		} else {
-    			// TODO
-    			alert( "error2" );
-    		}
-	    }
+	// Submit the form via Ajax
+	$.post("sendemail.php", contactForm.serialize(), 
+		function(data, textStatus, jqXHR){
+			if(data.status === "SUCCESS") {
+				contactForm.find( ".success" ).show();
+			} else if (data.status === "ERROR") {
+				// TODO
+				alert( "error1" );
+			} else {
+				// TODO
+				alert( "error2" );
+			}
+		}
 	).fail(function() {
 		// TODO
 		alert( "error3" );
 	});
-});
 
-})();
+};
 
 </script>
 <script src="js/bootstrap.min.js"></script>
