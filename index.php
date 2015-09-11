@@ -204,7 +204,7 @@
 
 			</div>
 
-			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="assets/img/macbook01.jpg" alt="GiveToken Screenshot"></div>
+			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
 		</div>
 		<!-- /END ROW -->
 
