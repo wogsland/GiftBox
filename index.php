@@ -523,7 +523,7 @@
 				<!-- /END LEFT BRIEF -->
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-iphone-cropped.png" alt="token-iphone-cropped" width="585" height="794">
+					<img class="img-responsive" src="assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
 				</div>
 
 			</div>
