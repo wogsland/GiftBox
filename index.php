@@ -231,7 +231,7 @@
 		<div class="colored-line">
 		</div>
 		<div class="section-description">
-			We give you the tools to add everything and anything to you next Token Creation.
+			We give you the tools to add everything and anything to your next Token Creation.
 		</div>
 		<div class="section-description">
 			Go ahead, we’ve got you covered. See how our features can help you create a Token Creation you’ll love to share.
