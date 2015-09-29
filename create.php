@@ -291,15 +291,31 @@
 		<input class="hidden-file-input" type="file" multiple id="select-attachment-file" />
 		<div id="add-nav-container">
 			<ul id="add-nav-bar">
-<!-- 				<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>
- -->				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
+<!-- 			<li><div class="add-nav-item add-nav-item-hover" id="add-stock" onclick="selectAddNav(this.id)">STOCK LIBRARY</div></li>  -->
+				<li><div class="add-nav-item add-nav-item-selected" id="add-images" class="nav-selected" href="javascript:void(0)" onclick="selectAddNav(this.id)">IMAGES</div></li>
 				<li><div class="add-nav-item add-nav-item-hover" id="add-video-audio" href="javascript:void(0)" onclick="selectAddNav(this.id)">VIDEO & AUDIO</div></li>
+				<li><div class="add-nav-item add-nav-item-hover" id="add-buttons" href="javascript:void(0)" onclick="selectAddNav(this.id)">BUTTONS</div></li>
 			</ul>
 		</div>
 
 			<!-- STOCK LIBRARY -->
 			<div id="add-stock-container" class="add-content-container">
 				<div class="add-content add-content-no-icons">
+				</div>
+			</div>
+
+			<!-- BUTTONS -->
+			<div id="add-buttons-container" class="add-content-container">
+				<div class="add-content-icon-bar">
+					<div class="add-icon-container">
+						<a class="add-icon-link" href="javascript:void(0)" onclick="selectButtonType()">RSVP</a>
+					</div>
+				</div>
+				<div class="add-content" id="add-buttons">
+					<div id="add-buttons-vertical">
+					</div>
+					<div id="add-images-horizontal">
+					</div>
 				</div>
 			</div>
 

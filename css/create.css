@@ -653,6 +653,10 @@ fieldset {
 	display: none;
 }
 
+#add-buttons-container {
+	display: none;
+}
+
 #add-images-container {
 	overflow: hidden;
 }
