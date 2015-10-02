@@ -2121,18 +2121,17 @@ function doAdd() {
 	var selected;
 
 	var selectedContainer = null;
-	// HADNLING SELECTION. TWO MAJOR CONTAINERS - PHOTOS AND AV
+	// Handling selection. Three containers: IMAGES, VIDEO & AUDIO, and BUTTONS
 	$.each($('.add-content-container'), function(index, element) {
 		if ($(element).css('display') == 'block') {
 			selectedContainer = $(element).attr('id');
 			if (selectedContainer == "add-images-container") {
-				selected = selected = $("#" + selectedContainer + " > .add-content > #add-images-desktop > .thumbnail-container-selected");
+				selected = $("#" + selectedContainer + " > .add-content > #add-images-desktop > .thumbnail-container-selected");
 			} else if (selectedContainer == "add-video-audio-container") {
 				selected = $("#" + selectedContainer + " > .add-content > #add-av-desktop > .thumbnail-container-selected");
 			}
 		}
 	});
-
 
 	if (selectedContainer != "add-letter-container") {
 		if (selected.length == 0) {
