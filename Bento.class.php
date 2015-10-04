@@ -35,6 +35,9 @@ class Bento {
 	var $overlay_content;
 	var $overlay_left;
 	var $overlay_top;
+	var $button_type;
+	var $button_title;
+	var $job_title;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -245,6 +248,17 @@ class Bento {
 		}
 		if ($this->image_hyperlink) {
 			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
+		}
+		if ($this->button_type) {
+			$button_class = null;
+			if ($this->button_type == 'V') {
+				$button_class = 'vertical';
+			} elseif ($this->button_type == 'H') {
+				$button_class = 'horizontal';
+			}
+			echo '<button class="bento-button '.$button_class.'" id="yes-button" onclick="bentoButtonPressed('.$this->giftbox_id.', \'YES\)">YES</button>';
+			echo '<button class="bento-button '.$button_class.'" id="maybe-button" onclick="bentoButtonPressed('.$this->giftbox_id.', "NO")">MAYBE</button>';
+			echo '<button class="bento-button '.$button_class.'" id="no-button" onclick="bentoButtonPressed('.$this->giftbox_id.', "MAYBE")">NO</button>';
 		}
 		echo '</div>'.PHP_EOL;
 		if ($this->bento_file_list){

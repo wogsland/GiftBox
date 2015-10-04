@@ -109,3 +109,6 @@ function onPlayerStateChange(event){
 	}
 }
 
+function bentoButtonPressed(tokenId, buttonText) {
+	alert(buttonText);
+}
