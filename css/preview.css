@@ -404,9 +404,19 @@ iframe {
 }
 .horizontal {
 	width: 33%;
+	height: 50%;
 }
 .vertical {
 	width: 100%;
+	height: 25%;
+}
+.horizontal-title {
+	width: 100%;
+	height: 50%;
+}
+.vertical-title {
+	width: 100%;
+	height: 25%;
 }
 #yes-button {
 	background-color: #74BC75;
