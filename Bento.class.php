@@ -35,6 +35,9 @@ class Bento {
 	var $overlay_content;
 	var $overlay_left;
 	var $overlay_top;
+	var $button_type;
+	var $button_title;
+	var $job_title;
 	
 	public function init($object) {
 		foreach (get_object_vars($object) as $key => $value) {
@@ -245,6 +248,47 @@ class Bento {
 		}
 		if ($this->image_hyperlink) {
 			echo '<i class="bento-link-icon visible icon-link fa fa-link fa-lg"></i>'.PHP_EOL;
+		}
+		if ($this->button_type) {
+			$button_class = null;
+			$title_class = null;
+			if ($this->button_type == 'V') {
+				$button_class = 'vertical';
+			} elseif ($this->button_type == 'H') {
+				$button_class = 'horizontal';
+			}
+			$title_class = $button_class."-title";
+
+			echo '<div class="'.$title_class.'">Button Title...</div>';
+			echo '<button class="bento-button '.$button_class.'" id="yes-button" onclick="bentoButtonPressed('.$this->giftbox_id.', \'YES\')">YES</button>'.PHP_EOL;
+			echo '<button class="bento-button '.$button_class.'" id="maybe-button" onclick="bentoButtonPressed('.$this->giftbox_id.', \'MAYBE\')">MAYBE</button>'.PHP_EOL;
+			echo '<button class="bento-button '.$button_class.'" id="no-button" onclick="bentoButtonPressed('.$this->giftbox_id.', \'NO\')">NO</button>'.PHP_EOL;
+/*			
+			echo '
+				<div class="modal fade" id="token-button-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="token-button-dialog-title"></h4>
+							</div>
+							<div class="modal-body message-body">
+								<div class="alert" id="token-button-email-alert" role="alert"></div>
+								<form id="token-button-email-form">
+									<div class="form-group">
+										<label for="token-button-email">Email Address</label>
+										<input type="email" class="form-control" id="token-button-email" placeholder="Email">
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-default" onclick="bentoButtonEmail()">OK</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			';		
+*/			
 		}
 		echo '</div>'.PHP_EOL;
 		if ($this->bento_file_list){

@@ -15,6 +15,7 @@ var AccountTokens = React.createClass({
       </div>
       <img className="token-edit-thumb" href='token_analytics.php' onClick = {function(){window.open('preview.php?id=' + token.id)}} src={'assets/img/token-varied-' + token.variant + '.png'} alt={token.name} width="78" /><br/>
       <button className="btn btn-primary btn-xs btn-bordered analytics-btn" onClick = {function(){window.open('token_analytics.php?id=' + token.id)}}>Analytics</button>
+      <button className="btn btn-success btn-xs btn-bordered analytics-btn" onClick = {function(){window.open('token_responses.php?id=' + token.id)}}>Responses</button>
     </div>;
   }
 
