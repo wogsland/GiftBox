@@ -60,6 +60,7 @@
 	<meta name="og:type" property="og:type" content="article" />
 	<meta name="og:image" property="og:image" content=<?php echo $token->image_path; ?>
 	
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
@@ -70,11 +71,14 @@
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
+	
 	<script src="js/preview.js"></script>
 
 	<!-- CUSTOM STYLESHEETS -->
 	<script src="js/preloader.js"></script>
 
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">

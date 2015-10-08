@@ -109,3 +109,21 @@ function onPlayerStateChange(event){
 	}
 }
 
+function bentoButtonPressed(tokenId, buttonText) {
+	var url = "token_button_pressed.php?id="+tokenId+"&button="+buttonText;
+	$.post(url, function(data, textStatus){
+		if(data.status === "SUCCESS") {
+			$("#token-button-dialog-title").html(buttonText);
+			$("#token-button-dialog").modal();
+		}  else {
+			alert("data.status: "+data.status);
+		}
+	}).fail(function() {
+		alert(".post failed");
+	});
+	
+}
+
+function bentoButtonEmail() {
+	
+}

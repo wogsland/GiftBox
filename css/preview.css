@@ -399,3 +399,31 @@ iframe {
 	height: 100%;
 }
 
+.bento-button {
+	color: white;
+}
+.horizontal {
+	width: 33%;
+	height: 50%;
+}
+.vertical {
+	width: 100%;
+	height: 25%;
+}
+.horizontal-title {
+	width: 100%;
+	height: 50%;
+}
+.vertical-title {
+	width: 100%;
+	height: 25%;
+}
+#yes-button {
+	background-color: #74BC75;
+}
+#maybe-button {
+	background-color: #FFC200;
+}
+#no-button {
+	background-color: #F7412D
+}

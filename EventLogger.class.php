@@ -1,7 +1,5 @@
 <?php
 include_once 'util.php';
-include_once 'EventLogger.class.php';
-
 
 define('REGISTER_USING_EMAIL', 1);
 define('REGISTER_USING_FACEBOOK', 2);
