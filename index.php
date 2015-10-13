@@ -17,26 +17,26 @@ _session_start();
 <!-- =========================
       FAV AND TOUCH ICONS
 
-<link rel="icon" href="assets/img/favicon.ico">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png">
+<link rel="icon" href="/assets/img/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/apple-touch-icon-114x114.png">
 ============================== -->
 	<!-- Favicon -->
-	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="assets/gt-favicons.ico/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/gt-favicons.ico/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="assets/gt-favicons.ico/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="assets/gt-favicons.ico/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="assets/gt-favicons.ico/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="assets/gt-favicons.ico/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/gt-favicons.ico/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="assets/gt-favicons.ico/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/gt-favicons.ico/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/gt-favicons.ico/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="assets/gt-favicons.ico/favicon-16x16.png">
-	<link rel="manifest" href="assets/gt-favicons.ico/manifest.json">
+	<link rel="apple-touch-icon" sizes="57x57" href="/assets/gt-favicons.ico/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/gt-favicons.ico/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/gt-favicons.ico/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/gt-favicons.ico/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/gt-favicons.ico/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/gt-favicons.ico/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/gt-favicons.ico/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/gt-favicons.ico/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/gt-favicons.ico/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/assets/gt-favicons.ico/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/gt-favicons.ico/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/assets/gt-favicons.ico/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/gt-favicons.ico/favicon-16x16.png">
+	<link rel="manifest" href="/assets/gt-favicons.ico/manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
@@ -48,40 +48,40 @@ _session_start();
      STYLESHEETS
 ============================== -->
 <!-- BOOTSTRAP -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
 
 <!-- FONT ICONS -->
-<link rel="stylesheet" href="assets/elegant-icons/style.css">
-<link rel="stylesheet" href="assets/app-icons/styles.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/elegant-icons/style.css">
+<link rel="stylesheet" href="/assets/app-icons/styles.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
 <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
-<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
+<link rel="stylesheet" href="/css/jquery-ui-1.10.4.min.css" />
 
 <!-- WEB FONTS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
 
 <!-- CAROUSEL AND LIGHTBOX -->
-<link rel="stylesheet" href="css/owl.theme.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/nivo-lightbox.css">
-<link rel="stylesheet" href="css/nivo_themes/default/default.css">
+<link rel="stylesheet" href="/css/owl.theme.css">
+<link rel="stylesheet" href="/css/owl.carousel.css">
+<link rel="stylesheet" href="/css/nivo-lightbox.css">
+<link rel="stylesheet" href="/css/nivo_themes/default/default.css">
 
 <!-- ANIMATIONS -->
-<link rel="stylesheet" href="css/animate.min.css">
+<link rel="stylesheet" href="/css/animate.min.css">
 
 <!-- CUSTOM STYLESHEETS -->
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="/css/styles.css">
 
 <!-- COLORS -->
-<link rel="stylesheet" href="css/colors.css">
+<link rel="stylesheet" href="/css/colors.css">
 
 <!-- RESPONSIVE FIXES -->
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="/css/responsive.css">
 
 <!--[if lt IE 9]>
-			<script src="js/html5shiv.js"></script>
-			<script src="js/respond.min.js"></script>
+			<script src="/js/html5shiv.js"></script>
+			<script src="/js/respond.min.js"></script>
 <![endif]-->
 
 <!-- JQUERY -->
@@ -133,7 +133,7 @@ _session_start();
 				<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand" href="<?php echo $app_root ?>"><img src="assets/img/logo-light.png" alt=""></a>
+				<a class="navbar-brand" href="<?php echo $app_root ?>"><img src="/assets/img/logo-light.png" alt=""></a>
 
 			</div>
 
@@ -168,7 +168,7 @@ _session_start();
 		<div class="only-logo">
 			<div class="navbar">
 <!-- 				<div class="navbar-header">
-					<img src="assets/img/logo-light.png" alt="">
+					<img src="/assets/img/logo-light.png" alt="">
 				</div> -->
 			</div>
 		</div> <!-- /END ONLY LOGO ON HEADER -->
@@ -203,7 +203,7 @@ _session_start();
 
 			</div>
 
-			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
+			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="/assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
 		</div>
 		<!-- /END ROW -->
 
@@ -471,7 +471,7 @@ _session_start();
 			<div class="row">
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-ipad.png" alt="token-ipad" width="585" height="418">
+					<img class="img-responsive" src="/assets/img/token-ipad.png" alt="token-ipad" width="585" height="418">
 				</div>
 
 				<!-- RIGHT SIDE WITH BRIEF -->
@@ -522,7 +522,7 @@ _session_start();
 				<!-- /END LEFT BRIEF -->
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
+					<img class="img-responsive" src="/assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
 				</div>
 
 			</div>
@@ -542,7 +542,7 @@ _session_start();
 			<div class="row">
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-macbook.png" alt="token-macbook" width="585" height="311">
+					<img class="img-responsive" src="/assets/img/token-macbook.png" alt="token-macbook" width="585" height="311">
 				</div>
 
 				<!-- RIGHT SIDE WITH BRIEF -->
@@ -599,31 +599,31 @@ _session_start();
 		<div id="screenshots" class="owl-carousel owl-theme">
 
 			<div class="shot">
-				<a href="assets/img/tokens/acentertainment.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/acentertainment.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/acentertainment.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/acentertainment.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/boca-hh.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/boca-hh.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/boca-hh.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/boca-hh.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/fedex.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/fedex.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/fedex.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/fedex.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/home-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/home-depot.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/home-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/home-depot.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/office-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/office-depot.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/office-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/office-depot.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/second-harvest.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/second-harvest.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/second-harvest.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/second-harvest.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/stjudes.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/stjudes.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/stjudes.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/stjudes.jpg" alt="Screenshot"></a>
 			</div>
 
 		</div>
@@ -694,7 +694,7 @@ _session_start();
 	<!-- /END CONTACT BOX -->
 
 	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
+	<img src="/assets/img/logo-light.png" alt="LOGO" class="responsive-img">
 
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
@@ -775,28 +775,28 @@ function sendMessage(event) {
 };
 
 </script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/facebook_init.js"></script>
-<script src="js/util.js"></script>
-<script src="pay_with_stripe.php"></script>
-<script src="js/login.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/account.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/smoothscroll.js"></script>
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery.localScroll.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/nivo-lightbox.min.js"></script>
+<script src="/js/simple-expand.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/retina-1.1.0.min.js"></script>
+<script src="/js/jquery.nav.js"></script>
+<script src="/js/matchMedia.js"></script>
+<script src="/js/jquery.ajaxchimp.min.js"></script>
+<script src="/js/jquery.fitvids.js"></script>
+<script src="/js/custom.js"></script>
+<script src="/js/facebook_init.js"></script>
+<script src="/js/util.js"></script>
+<script src="/pay_with_stripe.php"></script>
+<script src="/js/login.js"></script>
+<script src="/js/signup.js"></script>
+<script src="/js/account.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 </body>

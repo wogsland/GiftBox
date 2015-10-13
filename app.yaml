@@ -42,7 +42,7 @@ handlers:
 - url: /
   script: index.php
 
-- url: /src/User.php
+- url: /src/(.+\.php)$
   script: index.php
 
 # Serve php scripts.
