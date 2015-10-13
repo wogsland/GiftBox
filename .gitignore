@@ -1,3 +1,10 @@
 .DS_Store
+Thumbs.db
+ehthumbs.db
 Icon
 /uploads
+
+# Composer #
+############
+/vendor
+composer.lock
