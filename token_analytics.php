@@ -1,30 +1,26 @@
 <?php
-	include_once 'util.php';
-	include_once 'config.php';
-	include_once 'analyticsauth.php';
-	include_once 'analyticsqueries.php';
-	include_once 'Token.class.php';
-	use google\appengine\api\cloud_storage\CloudStorageTools;
-	if ($google_app_engine) {
-		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
-	}
-	
-	_session_start();
-	
-	$message = null;
-	$first_name = null;
-	$last_name = null;
-	$email = null;
-	$user_id = null;
+use \GiveToken\Token;
+use google\appengine\api\cloud_storage\CloudStorageTools;
 
-	$token = new Token($_GET['id']);
+include_once 'config.php';
+include_once 'analyticsauth.php';
+include_once 'analyticsqueries.php';
 
-	if ($google_app_engine) {
-		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
-	} else {
-		$token->image_path = $file_storage_path.$token->thumbnail_name;
-	}
+_session_start();
 
+$message = null;
+$first_name = null;
+$last_name = null;
+$email = null;
+$user_id = null;
+
+$token = new Token($_GET['id']);
+
+if ($google_app_engine) {
+    $token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
+} else {
+    $token->image_path = $file_storage_path.$token->thumbnail_name;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -57,7 +53,7 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
-	
+
 <!-- =========================
      STYLESHEETS
 ============================== -->
@@ -203,7 +199,7 @@
 			              ?>;
 			              totalChartNumber = "<?= printResults($numTotalResults); ?>";
 			              </script>
-			              
+
 			            <section id="unique-timeline"></section>
 			              <script>
 			              uniqueChartData = <?php
@@ -343,7 +339,7 @@
 				        </div>
 			      </div>
 			    </div>
-			</div>  
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,6 @@
 <?php
-	include_once 'util.php';
-	include_once 'config.php';
-	_session_start();
+include_once __DIR__.'/config.php';
+_session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -300,7 +299,7 @@
 
 		</div>
 		<!-- /END SINGLE SERVICE -->
-		
+
 	</div>
 	<!-- /END ROW -->
 
@@ -756,7 +755,7 @@ function sendMessage(event) {
 	}
 
 	// Submit the form via Ajax
-	$.post("sendemail.php", contactForm.serialize(), 
+	$.post("sendemail.php", contactForm.serialize(),
 		function(data, textStatus, jqXHR){
 			if(data.status === "SUCCESS") {
 				contactForm.find( ".success" ).show();

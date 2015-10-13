@@ -1,6 +1,6 @@
 <?php
 use google\appengine\api\cloud_storage\CloudStorageTools;
-include_once 'util.php';
+
 include_once 'config.php';
 _session_start();
 

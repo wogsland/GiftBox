@@ -1,8 +1,7 @@
 <?php
+use \GiveToken\EventLogger;
+
 include_once 'config.php';
-include_once 'util.php';
-include_once 'password.php';
-include_once 'EventLogger.class.php';
 
 $message = "Unable to change password at this time.";
 $user_id = $_POST['user_id'];

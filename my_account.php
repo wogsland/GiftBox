@@ -1,16 +1,16 @@
 <?php
+use \GiveToken\User;
+
 	include_once 'util.php';
-	include_once 'config.php';
-	require_once('User.class.php');
-	
+
 	_session_start();
-	
+
 	$message = null;
 	$first_name = null;
 	$last_name = null;
 	$email = null;
 	$user_id = null;
-	
+
 	if (!logged_in()) {
 		header('Location: '.$app_root);
 	} else {
@@ -60,7 +60,7 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
-	
+
 		<!-- =========================
 		     STYLESHEETS
 		============================== -->
@@ -93,7 +93,7 @@
 
 		<!-- RESPONSIVE FIXES -->
 		<link rel="stylesheet" href="css/responsive.css">
-		
+
 	<script>
 		$(document).ready(function() {
 			$('.open-popup-link').magnificPopup({
@@ -102,13 +102,13 @@
 			});
 		});
 	</script>
-	
+
 </head>
 <body>
 	<div id="content-wrapper">
 		<div class="header-wrapper" id="create-header-wrapper">
 			<!-- =========================
-			     HEADER   
+			     HEADER
 			============================== -->
 			<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
@@ -119,7 +119,7 @@
 				<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 					<div class="container">
 						<div class="navbar-header">
-							
+
 							<!-- LOGO ON STICKY NAV BAR -->
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 							<span class="sr-only">Toggle navigation</span>
@@ -129,9 +129,9 @@
 							</button>
 
 							<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
-							
+
 						</div>
-						
+
 						<!-- NAVIGATION LINKS -->
 						<div class="navbar-collapse collapse" id="kane-navigation">
 							<ul class="nav navbar-nav navbar-right main-navigation">
@@ -141,12 +141,12 @@
 						</div>
 					</div> <!-- /END CONTAINER -->
 				</div> <!-- /END STICKY NAVIGATION -->
-				
+
 			</div>
 			<!-- /END COLOR OVERLAY -->
 			</header>
 		</div>
-		
+
 		<div class = "container" id="my-account-form-wrapper">
 			<p id="my-account-message"></p>
 			<form class="jumbotron" id="account-form" name="account-form">
@@ -160,7 +160,7 @@
 							<?php
 							if (isset($_SESSION["level"]) && $_SESSION["level"] < 2) {
 								echo '<button id="upgrade-button" type="button" class="btn success" onclick="payWithStripe(\''.$user->email_address.'\', \'MY_ACCOUNT\')">Upgrade</button>';
-							}	
+							}
 							?>
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 						<label for="button"></label>
 						<a class="pure-button open-popup-link" href="#change-password-form">Change Password</a>
 					</div>
-					
+
 					<input type="button" id="save-my-account-button" class="pure-button pure-button-primary" value="Save Changes" onclick="saveMyAccount()">
 				</fieldset>
 			</form>

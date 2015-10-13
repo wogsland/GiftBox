@@ -10,11 +10,11 @@ class AnalyticsAuthTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
-     *
+     * Requires the php file being tested.
      */
     public static function setUpBeforeClass()
     {
-        require __DIR__.'/../../analyticsauth.php';
+        require_once __DIR__.'/../../analyticsauth.php';
     }
 
     /**

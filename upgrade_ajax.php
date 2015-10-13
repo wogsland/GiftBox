@@ -1,8 +1,8 @@
 <?php
-require_once('./stripe-php/init.php');
-require_once 'EventLogger.class.php';
-require_once 'User.class.php';
-require_once 'util.php';
+use \GiveToken\User;
+use \GiveToken\EventLogger;
+
+require_once __DIR__.'/vendor/stripe/stripe-php/init.php';
 require_once 'config.php';
 
 _session_start();
@@ -39,7 +39,7 @@ try {
 if ($response['status'] == "SUCCESS") {
 	$active_until = new DateTime("now");
 	$active_until->add(new DateInterval("P1M"));
-	
+
 	// Update the user properties
 	$user->level = $new_level;
 	$user->stripe_id = $customer->id;
@@ -47,11 +47,11 @@ if ($response['status'] == "SUCCESS") {
 
 	// Save the user
 	$user->save();
-	
+
 	// Log an event
 	$event = new EventLogger($user->getId(), UPGRADE, 'Stripe Token: '.$token);
 	$event->log();
-	
+
 	// Set the session variable
 	if (isset($_SESSION['level'])) {
 		$_SESSION['level'] = $new_level;

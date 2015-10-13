@@ -1,6 +1,7 @@
 <?php
+use \GiveToken\Token;
+
 include_once 'config.php';
-include_once 'Token.class.php';
 
 _session_start();
 

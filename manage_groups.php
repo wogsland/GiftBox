@@ -1,12 +1,11 @@
 <?php
-	include_once 'config.php';
-	include_once 'util.php';
-	include_once 'UserGroup.class.php';
-	
-	_session_start();
-	if (!logged_in() || !is_admin()) {
-		header('Location: '.$app_root);
-	}
+use \GiveToken\UserGroup;
+
+include_once 'config.php';
+_session_start();
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_root);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,8 +42,8 @@
 				</div>
 			</div>
 		</div>
-	</header>	
-	
+	</header>
+
 	<table>
 		<tr>
 			<th>Group Name</th>
@@ -73,7 +72,7 @@
 			}
 			?>
 	</table>
-	
+
 	<div class="modal fade" id="group-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-title">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -102,7 +101,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 
 </body>
 </html>

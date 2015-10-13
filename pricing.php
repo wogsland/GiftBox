@@ -1,7 +1,9 @@
 <?php
+use \GiveToken\User;
+
 	include_once 'util.php';
-	include_once 'config.php';
-	require 'User.class.php';
+
+
 	_session_start();
 ?>
 <!doctype html>
@@ -17,7 +19,7 @@
 <title>GiveToken.com - Give a Token of Appreciation</title>
 
 <!-- =========================
-      FAV AND TOUCH ICONS  
+      FAV AND TOUCH ICONS
 
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -46,7 +48,7 @@
   <!-- endFavicon -->
 
 <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
 ============================== -->
 <link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
 
@@ -95,14 +97,14 @@
 
 <body id="pricing-page">
 <!-- =========================
-     PRE LOADER       
+     PRE LOADER
 ============================== -->
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
 
 <!-- =========================
-     HEADER   
+     HEADER
 ============================== -->
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
@@ -113,7 +115,7 @@
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<!-- LOGO ON STICKY NAV BAR -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 				<span class="sr-only">Toggle navigation</span>
@@ -123,9 +125,9 @@
 				</button>
 
 				<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
-				
+
 			</div>
-			
+
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
@@ -141,7 +143,7 @@
 			</div>
 		</div> <!-- /END CONTAINER -->
 	</div> <!-- /END STICKY NAVIGATION -->
-	
+
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -158,13 +160,13 @@
         <h1 id="attached-narrow">Pricing Step One</h1>
         <div class="row">
           <div class="col-sm-3 col-md-3">
-           
+
            <div class="plan first basic plan-hover" id="basic" data-plan="basic">
 
               <div class="head">
                 <h2>Basic</h2>
-              
-              </div>    
+
+              </div>
 
               <!-- button was here -->
               <div class="not-btn solid-blue"></div>
@@ -199,8 +201,8 @@
 			  </div>
 
            </div>
-             
-            
+
+
           </div>
 
 
@@ -209,7 +211,7 @@
 
 					<div class="head">
 						<h2>Standard</h2>
-					</div>    
+					</div>
 
 					<div class="not-btn solid-lt-blue"></div>
 
@@ -238,7 +240,7 @@
 								} else {
 									$user = new User($_SESSION["user_id"]);
 									echo '<button type="button" class="btn dark-grey" onclick="payWithStripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
-								}	
+								}
 							} else {
 								echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
 							}
@@ -249,13 +251,13 @@
 
 
           <div class="col-sm-3 col-md-3 ">
-              
+
               <div class="plan recommended plan-hover" id="premium" data-plan="premium">
 <!--								<div class="popular-badge">MOST POPULAR</div>  -->
                 <div class="head">
                   <h2>Premium</h2>
-                </div>    
-	
+                </div>
+
 		            <div class="select-btn solid-lt-green"></div>
 
                 <ul class="item-list">
@@ -282,15 +284,15 @@
           </div>
 
           <div class="col-sm-3 col-md-3 ">
-              
+
               <div class="plan last enterprise plan-hover" id="enterprise" data-plan="enterprise">
 
                 <div class="head">
                   <h2>Enterprise</h2>
-                </div>  
-	
+                </div>
+
 		            <div class="select-btn solid-green"></div>
-		            
+
                 <ul class="item-list">
 									<li>24/7 Response Support</li>
 									<li>Open Saved Tokens</li>
@@ -309,7 +311,7 @@
                 </div>
 
                 <div class="select-btn solid-green"><button type="button" class="btn dark-grey">Pre-Order <i class="fa fa-chevron-right"></i></button></div>
-                
+
            </div>
 
           </div>
@@ -347,7 +349,7 @@
 
 
 <!-- =========================
-     FOOTER 
+     FOOTER
 ============================== -->
 <footer id="contact" class="deep-dark-bg mt20">
 
@@ -355,7 +357,7 @@
 	<div class="verticleHeight40"></div>
 	<!-- LOGO -->
 	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
-	
+
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
 		<li><a href="#"><i class="social_facebook_square"></i></a></li>
@@ -365,7 +367,7 @@
 		<li><a href="#"><i class="social_instagram_square"></i></a></li>
 		<li><a href="#"><i class="social_flickr_square"></i></a></li>
 	</ul>
-	
+
 	<!-- COPYRIGHT TEXT -->
 	<p class="copyright">
 		©2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
@@ -373,7 +375,7 @@
 
 </div>
 <!-- /END CONTAINER -->
- 
+
 </footer>
 <!-- /END FOOTER -->
 
@@ -417,7 +419,7 @@
           Thanks for looking at GiveToken! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
         </p>
         <p>
-          We can be reached at rzettler@givetoken.com 
+          We can be reached at rzettler@givetoken.com
       </div>
       <div class ="modal-footer">
         GiveToken
@@ -429,14 +431,14 @@
 
 
 <!-- =========================
-     SCRIPTS 
+     SCRIPTS
 ============================== -->
 <script>
 	function selectBasic() {
 		selectPlan("basic");
 		$('#signup-dialog').modal();
 	}
-	
+
 	function selectStandard() {
 		selectPlan("standard");
 	}
@@ -454,12 +456,12 @@
 		selectedPlan.removeClass("plan-hover");
 		selectedPlan.addClass("plan-selected");
 	}
-	
+
 // Immediately Invoked Function Expression (IIFE)
 // Used to be referred to as a self executing function
 // Avoids creating global variables and functions which can interfere with other scripts
 (function() {
-      
+
   var plans = {
     basic: {
       pricingChart: false,
@@ -482,21 +484,21 @@
       basePrice: 120
     }
   };
-      
+
   var viewerLevels = {
     500: 10.99,
     2500: 20.99,
     5000: 30.99,
     10000: 40.99
   };
-  
+
   var userLevels = {
     1: 100.59,
     2: 200.59,
     3: 300.59,
     4: 400.59
   };
-  
+
 
   var selectedPlan = "basic";
   var viewerLevel = null;
@@ -509,7 +511,7 @@
       $( ".plan .select-btn" ).on( "click", function( event ) {
 		  	$("#premium-dialog").modal();
 
-/*		  
+/*
         // Read the plan type from the data-plan attribute on the div with class plan
         selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
 		selectPlan(selectedPlan);
@@ -524,7 +526,7 @@
           viewerLevel = null;
           $('.pricingLevelOn').removeClass('pricingLevelOn');
         }
-        
+
         if ( planInfo.pricingChart2 ) {
           $( "#pricingChart2" ).removeClass( "not" );
         } else {
@@ -544,16 +546,16 @@
         $( "html,body" ).animate({
           scrollTop: $( showPricingChart ).offset().top
         }, "slow" );
-        
+
         updatePrice();
-*/		
-		
+*/
+
       });
-      
+
       $( ".pricingLevel" ).on( "click", function() {
         // Update the "global" viewer level
         viewerLevel = $( this ).attr( "data-viewer" );
-        
+
         // Update the color/ selected element
         var size = viewerLevel
         $('.pricingLevelOn').removeClass('pricingLevelOn');
@@ -561,9 +563,9 @@
         tab.addClass('pricingLevelOn');
 
         // update the price
-        updatePrice();  
+        updatePrice();
       });
-  
+
       $( ".pricingLevel2" ).on( "click", function() {
         userLevel = $( this ).attr( "data-user" );
 
@@ -574,7 +576,7 @@
 
         updatePrice();
       });
-      
+
           function updatePrice() {
             var basePrice = plans[ selectedPlan ].basePrice;
 
@@ -582,12 +584,12 @@
             if ( viewerLevel ) {
               viewerPrice = viewerLevels[ viewerLevel ];
             }
-      
+
             var userPrice = 0;
             if ( userLevel ) {
               userPrice = userLevels[ userLevel ];
             }
-              
+
             var totalPrice = basePrice + viewerPrice + userPrice;
           $( ".pricingLargeAmount" ).text( strip(totalPrice) );
           }
@@ -635,7 +637,7 @@
         });
 
 })();
-	
+
 </script>
 
 <script src="js/bootstrap.min.js"></script>

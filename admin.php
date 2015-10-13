@@ -1,10 +1,9 @@
 <?php
-	include_once 'config.php';
-	include_once 'util.php';
-	_session_start();
-	if (!logged_in() || !is_admin()) {
-		header('Location: '.$app_root);
-	}
+include_once 'config.php';
+_session_start();
+if (!logged_in() || !is_admin()) {
+	header('Location: '.$app_root);
+}
 ?>
 <!DOCTYPE html>
 <html>

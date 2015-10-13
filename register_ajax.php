@@ -1,11 +1,10 @@
 <?php
-include_once 'util.php';
+use \GiveToken\User;
+use \GiveToken\EventLogger;
+
 include_once 'config.php';
 include_once 'mail.php';
-include_once 'password.php';
-include_once 'EventLogger.class.php';
 include_once 'database.php';
-require 'User.class.php';
 
 $event = null;
 $user_id = null;

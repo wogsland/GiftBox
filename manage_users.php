@@ -1,12 +1,12 @@
 <?php
-	include_once 'config.php';
-	include_once 'util.php';
-	include_once 'UserGroup.class.php';
-	
-	_session_start();
-	if (!logged_in() || !is_admin()) {
-		header('Location: '.$app_root);
-	}
+use \GiveToken\UserGroup;
+
+include_once 'config.php';
+
+_session_start();
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_root);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 	</header>
-		
+
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -115,7 +115,7 @@
 			</table>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="user-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-title">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -169,14 +169,14 @@
 								<input id="group-admin" name="group_admin" type="checkbox" value="Y">
 								Group Administrator
 							  </label>
-							</div>						
+							</div>
 						</div>
 						<div class="checkbox">
 						  <label>
 							<input id="admin" name="admin" type="checkbox" value="Y">
 							Givetoken Administrator
 						  </label>
-						</div>						
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -185,6 +185,6 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

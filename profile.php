@@ -1,18 +1,17 @@
 <?php
-	include_once 'util.php';
-	include_once 'config.php';
-	
-	_session_start();
-	
-	$message = null;
-	$first_name = null;
-	$last_name = null;
-	$email = null;
-	$user_id = null;
-	
-	if (logged_in()) {
-		//header('Location: '.$app_root.'my_account.php');
-	}
+include_once 'config.php';
+
+_session_start();
+
+$message = null;
+$first_name = null;
+$last_name = null;
+$email = null;
+$user_id = null;
+
+if (logged_in()) {
+    //header('Location: '.$app_root.'my_account.php');
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -54,7 +53,7 @@
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
-	
+
 <!-- =========================
      STYLESHEETS
 ============================== -->

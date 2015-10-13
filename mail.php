@@ -1,5 +1,6 @@
 <?php
 use google\appengine\api\mail\Message;
+
 include_once 'config.php';
 if ($google_app_engine) {
 	require_once 'google/appengine/api/mail/Message.php';
@@ -15,7 +16,7 @@ function sendMail($to, $subject, $message, $from) {
 			"htmlBody" => $message
 		];
 		$message = new Message($mail_options);
-		$message->send();	
+		$message->send();
 	} else {
 //		mail($to, $subject, $message, "From: ".$from."\r\n"."Content-Type: text/html; charset=ISO-8859-1\r\n");
 	}
