@@ -1,25 +1,23 @@
 <?php
-	include_once 'Token.class.php';
-	include_once 'config.php';
-	include_once 'Mobile_Detect.php';
-	use google\appengine\api\cloud_storage\CloudStorageTools;
-	if ($google_app_engine) {
-		include_once 'google/appengine/api/cloud_storage/CloudStorageTools.php';
-	}
+use \Detection\MobileDetect as Mobile_Detect;
+use \GiveToken\Token;
+use google\appengine\api\cloud_storage\CloudStorageTools;
 
-	$token = new Token($_GET['id']);
-	$detect = new Mobile_Detect();
+include_once 'config.php';
 
-	if ($google_app_engine) {
-		$token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
-	} else {
-		$token->image_path = $file_storage_path.$token->thumbnail_name;
-	}
+$token = new Token($_GET['id']);
+$detect = new Mobile_Detect();
 
-	$animation_color = null;
-	$animation_style = null;
-	$animation_enter_css = null;
-	$animation_pop_css = null;
+if ($google_app_engine) {
+    $token->image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token->thumbnail_name, $use_https);
+} else {
+    $token->image_path = $file_storage_path.$token->thumbnail_name;
+}
+
+$animation_color = null;
+$animation_style = null;
+$animation_enter_css = null;
+$animation_pop_css = null;
 
 	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
 		$animation_style = "none";
@@ -59,7 +57,7 @@
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />
 	<meta name="og:image" property="og:image" content=<?php echo $token->image_path; ?>
-	
+
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/preview.css" />
@@ -71,14 +69,14 @@
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
-	
+
 	<script src="js/preview.js"></script>
 
 	<!-- CUSTOM STYLESHEETS -->
 	<script src="js/preloader.js"></script>
 
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	
+
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -99,7 +97,7 @@
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
 
-	<script> 
+	<script>
 		selectedAnimationColor = "<?= $token->animation_color; ?>";
 		selectedAnimationStyle = "<?= $token->animation_style; ?>";
 		animationEnterCss = "<?= $animation_enter_css; ?>";

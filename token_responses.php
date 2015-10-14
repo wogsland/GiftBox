@@ -1,5 +1,5 @@
 <?php
-include_once 'ButtonLog.class.php';
+use \GiveToken\ButtonLog;
 
 $token_id = null;
 if (isset($_GET['id'])) {

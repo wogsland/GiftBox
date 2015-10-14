@@ -1,7 +1,7 @@
 <?php
-include_once 'config.php';
-include_once ('EventLogger.class.php');
+use \GiveToken\EventLogger;
 
+include_once 'config.php';
 
 $session = _session_start();
 

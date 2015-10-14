@@ -1,5 +1,4 @@
 <?php
-	include_once 'util.php';
 	include_once 'config.php';
 	_session_start();
 	if (!logged_in()) {
@@ -35,7 +34,7 @@
 	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>
-	
+
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -125,7 +124,7 @@
 			</div>
 		</div>
 
-		<div id="templates">                 
+		<div id="templates">
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
@@ -284,7 +283,7 @@
             </script>
 		</form>
 	</div>
-	
+
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -382,7 +381,7 @@
 
 	<div id="thumbnail-dialog" title="COPY THUMBNAILS">
 		<div id="thumbnail-dialog-container">
-			
+
 		</div>
 
 		<div id="thumbnail-button-container">
@@ -429,7 +428,7 @@
 			</div>
 			<div class="image-dialog-tab-container" id="image-filter-tab-container">
 				FILTER
-				
+
 			</div>
 			<div class="image-dialog-tab-container" id="image-text-tab-container">
 				TEXT
@@ -459,7 +458,7 @@
 		<div  class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#image-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>
 
-	
+
 	<script>
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);

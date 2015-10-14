@@ -1,6 +1,8 @@
 <?php
+use \GiveToken\UserGroup;
+
 include_once 'config.php';
-include_once 'UserGroup.class.php';
+//include_once 'UserGroup.class.php';
 
 try {
 	// Save the group
@@ -11,7 +13,7 @@ try {
 	}
 	$user_group->name = $_POST['group_name'];
 	$user_group->max_users = $_POST['max_users'];
-	
+
 	if($action == "ADD" || $action == "EDIT") {
 		$user_group->save();
 	} else if ($action == "DELETE") {

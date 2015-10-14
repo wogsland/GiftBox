@@ -1,5 +1,4 @@
 <?php
-include_once 'util.php';
 include_once 'config.php';
 
 	_session_start();
@@ -9,7 +8,7 @@ include_once 'config.php';
 	$last_name = null;
 	$email = null;
 	$user_id = null;
-	
+
 	if (logged_in()){
 		$results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
 		if ($results->num_rows == 1) {
@@ -37,7 +36,7 @@ include_once 'config.php';
 <title>GiveToken.com - Community Page</title>
 
 <!-- =========================
-      FAV AND TOUCH ICONS  
+      FAV AND TOUCH ICONS
 
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -66,7 +65,7 @@ include_once 'config.php';
 	<!-- endFavicon -->
 
 <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
 ============================== -->
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -114,14 +113,14 @@ include_once 'config.php';
 
 <body id="profile-page">
 <!-- =========================
-     PRE LOADER       
+     PRE LOADER
 ============================== -->
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
 
 <!-- =========================
-     HEADER   
+     HEADER
 ============================== -->
 
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
@@ -133,7 +132,7 @@ include_once 'config.php';
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<!-- LOGO ON STICKY NAV BAR -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 				<span class="sr-only">Toggle navigation</span>
@@ -142,9 +141,9 @@ include_once 'config.php';
 				<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.php#"><img src="assets/img/logo-light.png" alt=""></a>
-				
+
 			</div>
-			
+
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
@@ -165,7 +164,7 @@ include_once 'config.php';
 			</div>
 		</div> <!-- /END CONTAINER -->
 	</div> <!-- /END STICKY NAVIGATION -->
-	
+
 </div>
 
 </header>
@@ -185,14 +184,14 @@ include_once 'config.php';
 					            <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
 					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>
 					            <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
-					        
+
 					            <div class="mb20"></div>
-					        
+
 					            <div class="btn-group">
 					                <a href="create.php" class="btn btn-primary btn-bordered">Create GiveToken</a>
 					                <a href="create.php" class="btn btn-primary btn-bordered">Send GiveToken</a>
 					            </div>
-					            
+
 					            <div class="mb20"></div>
 					        </div>
 					        <h5 class="md-title">Welcome to the Community Page!</h5>
@@ -402,7 +401,7 @@ include_once 'config.php';
 							            	</div>
 							            	<div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 							        	</div>
@@ -535,7 +534,7 @@ include_once 'config.php';
 								            </div>
 								            <div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 										</div>
@@ -554,7 +553,7 @@ include_once 'config.php';
 								            </div>
 								            <div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 										</div>
@@ -668,7 +667,7 @@ include_once 'config.php';
 										<p>
 										    GiveToken adds an increased level of sharability through social media and email. Mixing that with key-words and videos will have a drastic impact in search
 										    engine rankings and site visits
-										</p>					            	
+										</p>
 									</div>
 					        	</div>
 					        </li>
@@ -681,7 +680,7 @@ include_once 'config.php';
 						            </div>
 						            <div class="timeline-body">
 				    					<div class="video">
-											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 										</div>
 									</div>
 								</div>
@@ -693,7 +692,7 @@ include_once 'config.php';
 			    		<ul class="videos">
 			    			<li>
 					    		<div class="video">
-									<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+									<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 								</div>
 							</li>
 						</ul>
@@ -788,7 +787,7 @@ include_once 'config.php';
 		    				 	<div class="timeline-panel">
 			    				 	<div class="text-center">
 							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Juice Plus, Inc.</a></h4>							            
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Juice Plus, Inc.</a></h4>
 							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Memphis, Tenneessee, USA</div>
 							        </div>
 								</div>

@@ -1,8 +1,8 @@
 <?php
+use \GiveToken\EventLogger;
+
 include_once 'config.php';
-include_once 'util.php';
 include_once 'database.php';
-include_once 'EventLogger.class.php';
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
 	$user_id = $_GET['uid'];
@@ -22,5 +22,5 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
 } else {
 	echo '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
 }
- 
+
 ?>

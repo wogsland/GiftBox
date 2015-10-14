@@ -39,13 +39,10 @@ handlers:
 - url: /assets/elegant-icons
   static_dir: assets/elegant-icons
 
-- url: /business-solutions
-  static_dir: business-solutions
-
-- url: /about-us
-  static_dir: about-us
-
 - url: /
+  script: index.php
+
+- url: /src/(.+\.php)$
   script: index.php
 
 # Serve php scripts.

@@ -1,7 +1,8 @@
 <?php
-include_once 'util.php';
-require_once('EventLogger.class.php');
-require_once('User.class.php');
+use \GiveToken\User;
+use \GiveToken\EventLogger;
+
+include_once 'config.php';
 
 function get_post($index) {
 	if (isset($_POST[$index])) {
@@ -31,7 +32,7 @@ try {
 	if (isset($_POST['password']) && strlen($_POST['password']) > 0) {
 		$user->password = password_hash($user->password, PASSWORD_DEFAULT);
 	}
-	
+
 	if(is_array($user->social)){
 		$social = new Social(null);
 		foreach ($user->social as $category){
@@ -57,7 +58,7 @@ try {
 	}
 
 	$user->save();
-	
+
 	$response['status'] = "SUCCESS";
 	$response['user_id'] = $user->getId();
 } catch (Exception $e) {
@@ -66,5 +67,5 @@ try {
 	$repsonse['object'] = $e;
 }
 header('Content-Type: application/json');
-echo json_encode($response);	
+echo json_encode($response);
 ?>
