@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="assets/elegant-icons/style.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/create.css?v=1.7.1" />
 	<link rel="stylesheet" href="css/animate.min.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
@@ -26,7 +26,7 @@
 	<script src="js/id3-minimized.js"></script>
 	<script src="js/aviary.js"></script>
 	<script src="js/util.js"></script>
-	<script src="js/create.js"></script>
+	<script src="js/create.js?v=1.7.1"></script>
 	<script src="js/init.js"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
@@ -117,7 +117,9 @@
 <!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
-					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
+					<input id="send-link-input" type="text" readonly="readonly" placeholder="Save token to see link">
+					<span class="template-tab-text">EMBED CODE</span>
+					<input id="embed-code-input" type="text" readonly="readonly" placeholder="Save token to see code">
 					<span class="template-tab-text">THUMBNAILS</span>
 					<div class="send-button" id="thumbnails-send-button" onclick="displayThumbnails()"></div>
 				</div>

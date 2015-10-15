@@ -148,6 +148,14 @@ ul {
 	display: block;
 }
 
+#embed-code-input {
+	height: 20px;
+	width: 213px;
+	margin: auto;
+	outline: none;
+	display: block;
+}
+
 /*----------------------------------------*/
 /*          	TEMPLATES                 */
 /*----------------------------------------*/
@@ -938,7 +946,7 @@ fieldset {
 
 /******************** Text Overlay **********************/
 
-.text-overlay-container{	
+.text-overlay-container{
 	border: black dashed 2px;
 }
 
@@ -1152,4 +1160,3 @@ fieldset {
     width: 64%;
     position: absolute;
 }
-
