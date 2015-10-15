@@ -1,6 +1,6 @@
 <?php
 namespace GiveToken;
-echo 'fail';
+
 use GiveToken\Social;
 
 class User {
@@ -23,7 +23,7 @@ class User {
 	public $user_group;
 	public $group_admin;
 
-	static function exists ($email_address) {
+	public static function exists ($email_address) {
 		$exists = FALSE;
 		$user = User::fetch($email_address);
 		if ($user) {
@@ -32,11 +32,11 @@ class User {
 		return $exists;
 	}
 
-	static function fetch($email_address) {
+	public static function fetch($email_address) {
 		$user = null;
 		$result = execute_query("SELECT * FROM user WHERE upper(email_address) = '".strtoupper($email_address)."'");
 		if ($result->num_rows > 0) {
-			$user = $result->fetch_object("User");
+			$user = $result->fetch_object("GiveToken\User");
 		}
 		return $user;
 	}
