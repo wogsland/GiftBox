@@ -140,20 +140,18 @@ ul {
 	font-family: 'Lato-Bold';
 }
 
-#send-link-input {
+.gt-copy-input {
 	height: 20px;
-	width: 213px;
+	width: 197px;
 	margin: auto;
 	outline: none;
 	display: block;
 }
 
-#embed-code-input {
-	height: 20px;
-	width: 213px;
-	margin: auto;
-	outline: none;
-	display: block;
+.gt-copy-icon {
+	float: right;
+  padding-top: 5px;
+  visibility: hidden;
 }
 
 /*----------------------------------------*/
