@@ -19,7 +19,7 @@ class ButtonLog {
 
 	public function __construct($id = null) {
 		if ($id !== null) {
-			$button_logger = execute_query("SELECT * from button_log where id = '$id'")->fetch_object("ButtonLogger");
+			$button_logger = execute_query("SELECT * from button_log where id = '$id'")->fetch_object("ButtonLogger");//should this be GiveToken\ButtonLog?
 			foreach (get_object_vars($button_logger) as $key => $value) {
 				$this->$key = $value;
 			}

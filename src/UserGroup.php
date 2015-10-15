@@ -31,7 +31,7 @@ class UserGroup {
 
 	public function __construct($id = null) {
 		if ($id !== null) {
-			$user_group = execute_query("SELECT * from user_group where id = $id")->fetch_object("UserGroup");
+			$user_group = execute_query("SELECT * from user_group where id = $id")->fetch_object("GiveToken\UserGroup");
 			foreach (get_object_vars($user_group) as $key => $value) {
 				$this->$key = $value;
 			}
