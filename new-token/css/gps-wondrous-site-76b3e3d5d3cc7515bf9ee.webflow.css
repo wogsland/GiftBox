@@ -43,27 +43,20 @@
   display: block;
   margin: 33px auto;
   padding: 18px;
-}
-.interested-button.yes {
   border-radius: 4px;
-  background-color: #4caf50;
   box-shadow: rgba(0, 0, 0, 0.09) 0px 0px 2px 0px, rgba(0, 0, 0, 0.2) 0px 2px 2px 0px;
   font-family: Roboto, sans-serif;
   font-size: 30px;
   text-align: center;
 }
+.interested-button.yes {
+  background-color: #4caf50;
+}
 .interested-button.maybe {
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 0px 2px 0px, rgba(0, 0, 0, 0.2) 0px 2px 2px 0px;
-  font-size: 30px;
-  text-align: center;
+
 }
 .interested-button.no {
-  border-radius: 4px;
   background-color: #f44336;
-  box-shadow: rgba(0, 0, 0, 0.09) 0px 0px 2px 0px, rgba(0, 0, 0, 0.2) 0px 2px 2px 0px;
-  font-size: 30px;
-  text-align: center;
 }
 .logo {
   display: block;
@@ -116,6 +109,7 @@
   background-image: url('../images/Nashville.png');
   background-position: 0px 0px;
   background-size: cover;
+  text-align: center;
 }
 .block.perk {
   margin-top: 6px;
@@ -347,4 +341,3 @@ html.w-mod-js *[data-ix="load-reveal-mid-values"] {
     margin-top: -410px;
   }
 }
-
