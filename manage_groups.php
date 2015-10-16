@@ -6,13 +6,10 @@ _session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
+define('TITLE', 'GiveToken.com - Manage Groups');
+include __DIR__.'/header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>GiveToken.com - Manage Groups</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+
 	<link rel="stylesheet" href="css/users_groups.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
