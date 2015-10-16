@@ -14,7 +14,7 @@ include_once 'config.php';
 <title>GiveToken.com - Terms of Service</title>
 
 <!-- =========================
-      FAV AND TOUCH ICONS  
+      FAV AND TOUCH ICONS
 
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -41,7 +41,7 @@ include_once 'config.php';
 	<meta name="theme-color" content="#ffffff">
 	<!-- endFavicon -->
 <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
 ============================== -->
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -87,14 +87,14 @@ include_once 'config.php';
 
 <body id="privacy-policy">
 <!-- =========================
-     PRE LOADER       
+     PRE LOADER
 ============================== -->
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
 
 <!-- =========================
-     HEADER   
+     HEADER
 ============================== -->
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
@@ -105,7 +105,7 @@ include_once 'config.php';
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<!-- LOGO ON STICKY NAV BAR -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 				<span class="sr-only">Toggle navigation</span>
@@ -115,9 +115,9 @@ include_once 'config.php';
 				</button>
 
 				<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
-				
+
 			</div>
-			
+
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
@@ -127,7 +127,7 @@ include_once 'config.php';
 			</div>
 		</div> <!-- /END CONTAINER -->
 	</div> <!-- /END STICKY NAVIGATION -->
-	
+
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -210,7 +210,7 @@ include_once 'config.php';
 			</p>
 			<p>
 			    · Modify copies of any materials from this site.
-			    
+
 			</p>
 			<p>
 			    · Delete or alter any copyright, trademark or other proprietary rights notices from copies of materials from this site.
@@ -543,59 +543,8 @@ include_once 'config.php';
 			    prior and contemporaneous understandings, agreements, representations and warranties, both written and oral, with respect to the Platform.
 			</p>
 		</summary>
-		<!-- =========================
-		     FOOTER
-		============================== -->
-		<footer id="contact-footer" class="deep-dark-bg">
-
-			<div class="container-fluid">
-
-				<!-- LOGO -->
-				<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
-
-				<!-- SOCIAL ICONS -->
-				<ul class="social-icons">
-					<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
-					<li><a href="#"><i class="social_twitter_square"></i></a></li>
-					<li><a href="#"><i class="social_pinterest_square"></i></a></li>
-					<li><a href="#"><i class="social_googleplus_square"></i></a></li>
-					<li><a href="#"><i class="social_instagram_square"></i></a></li>
-					<li><a href="#"><i class="social_flickr_square"></i></a></li>
-				</ul>
-
-				<!--Terms and Policy-->
-				<ul class="terms-policy">
-					<li><a href="termsservice.php">Terms and Conditions</a></li>
-					<li><a href="privacypolicy.php">Privacy Policy</a></li>
-				</ul>
-
-
-
-				<!-- COPYRIGHT TEXT -->
-				<p class="copyright">
-					©2014 GiveToken.com &amp; Giftly Inc., All Rights Reserved
-				</p>
-
-			</div>
-			<!-- /END CONTAINER -->
-
-		</footer>
-		<!-- /END FOOTER -->
 	</div>
+	
+	<?php include __DIR__.'/footer.php';?>
 </body>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
 </html>

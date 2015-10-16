@@ -14,7 +14,7 @@ include_once 'config.php';
 <title>GiveToken.com - Privacy Policy</title>
 
 <!-- =========================
-      FAV AND TOUCH ICONS  
+      FAV AND TOUCH ICONS
 
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -43,7 +43,7 @@ include_once 'config.php';
 	<!-- endFavicon -->
 
 <!-- =========================
-     STYLESHEETS   
+     STYLESHEETS
 ============================== -->
 <!-- BOOTSTRAP -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -89,14 +89,14 @@ include_once 'config.php';
 
 <body id="privacy-policy">
 <!-- =========================
-     PRE LOADER       
+     PRE LOADER
 ============================== -->
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
 
 <!-- =========================
-     HEADER   
+     HEADER
 ============================== -->
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 
@@ -107,7 +107,7 @@ include_once 'config.php';
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<!-- LOGO ON STICKY NAV BAR -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 				<span class="sr-only">Toggle navigation</span>
@@ -117,9 +117,9 @@ include_once 'config.php';
 				</button>
 
 				<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
-				
+
 			</div>
-			
+
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
@@ -129,7 +129,7 @@ include_once 'config.php';
 			</div>
 		</div> <!-- /END CONTAINER -->
 	</div> <!-- /END STICKY NAVIGATION -->
-	
+
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -178,18 +178,18 @@ include_once 'config.php';
 			    information and some Site pages may not display properly.
 			</p>
 			<p>
-				Google Analytics is a web analysis service provided by Google. Google utilizes the data collected to track and examine the use of https://www.givetoken.com, to prepare reports on its activities and share them with other Google services. 
+				Google Analytics is a web analysis service provided by Google. Google utilizes the data collected to track and examine the use of https://www.givetoken.com, to prepare reports on its activities and share them with other Google services.
 				Google may use the data collected to contextualize and personalize the ads of its own advertising network.
 			</p>
 			<p>
 				Personal data collected: Cookie and Usage Data. Place of processing: USA. Find Google's <a href= "http://www.google.com/intl/en/policies/privacy/">privacy policy here.</a>
 			</p>
 			<p>
-				The Google Analytics features GiveToken has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting). 
+				The Google Analytics features GiveToken has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting).
 				Visitors can <a href="https://tools.google.com/dlpage/gaoptout/"> opt-out </a> of Google Analytics for Display Advertising and customize Google Display Network ads using the Ads Settings.
 			</p>
 			<p>
-				Via Google's 'Opt-Out Method' you will not facilitate the merging of personally-identifiable information with non-personally identifiable information previously collected from Display Advertising features that is based on the DoubleClick 
+				Via Google's 'Opt-Out Method' you will not facilitate the merging of personally-identifiable information with non-personally identifiable information previously collected from Display Advertising features that is based on the DoubleClick
 				cookie unless you have robust notice of, and the user's prior affirmative (i.e., opt-in) consent to, that merger.
 			</p>
 			<h2>
@@ -249,21 +249,6 @@ include_once 'config.php';
 			</p>
 		</summary>
 	</div>
+	<?php include __DIR__.'/footer.php';?>
 </body>
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
 </html>

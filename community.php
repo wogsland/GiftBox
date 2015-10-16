@@ -839,67 +839,12 @@ include_once 'config.php';
 	</div>
 </section>
 
+<header class="header" data-stellar-background-ratio="0.5" id="account-profile"></header>
 
-<script>
+<?php include __DIR__.'/footer.php';?>
 
-function togglePost(){
-	var val = this.id.substring('post-title'.length);
-	if (document.getElementById('full-post' + val).style.display == 'none'){
-		expandPost(this);
-	} else {
-		shrinkPost(this);
-	}
-}
-
-function expandPost(el){
-	var val = el.id.substring('post-title'.length);
-	document.getElementById('full-post' + val).style.display = 'initial';
-	document.getElementById('preview' + val).style.display = 'none';
-
-	var li = document.getElementsByClassName('headers');
-	for(i = 0; i < li.length; i++){
-		var val2 = li[i].id.substring('post-title'.length);
-		if(val != val2){
-			shrinkPost(li[i]);
-		}
-	}
-}
-
-function shrinkPost(el){
-	var val = el.id.substring('post-title'.length);
-	document.getElementById('full-post' + val).style.display = 'none';
-	document.getElementById('preview' + val).style.display = 'initial';
-}
-
-var els = document.getElementsByClassName('headers');
-for(i = 0; i < els.length; i++){
-	els[i].onclick = togglePost;
-}
-</script>
-
-<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
+<script src="js/community.js"></script>
 <script src="js/jquery.magnific-popup.js"></script>
-<script src="js/facebook_init.js"></script>
-<script src="js/login.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/account.js"></script>
 
 </body>
 </html>

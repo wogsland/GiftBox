@@ -181,68 +181,6 @@ if (logged_in()) {
   React.render(<Account model={Model} />, document.getElementById('account-profile'));
 </script>
 
-
-<!-- =========================
-     FOOTER
-============================== -->
-<footer id="contact" class="deep-dark-bg">
-
-<div class="container">
-	<div class="verticleHeight40"></div>
-	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
-
-	<!-- SOCIAL ICONS -->
-	<ul class="social-icons">
-		<li><a href="#"><i class="social_facebook_square"></i></a></li>
-		<li><a href="#"><i class="social_twitter_square"></i></a></li>
-		<li><a href="#"><i class="social_pinterest_square"></i></a></li>
-		<li><a href="#"><i class="social_googleplus_square"></i></a></li>
-		<li><a href="#"><i class="social_instagram_square"></i></a></li>
-		<li><a href="#"><i class="social_flickr_square"></i></a></li>
-	</ul>
-
-	<!-- COPYRIGHT TEXT -->
-	<p class="copyright">
-		©2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
-	</p>
-
-</div>
-<!-- /END CONTAINER -->
-
-</footer>
-<!-- /END FOOTER -->
-
-
-<!-- =========================
-     SCRIPTS
-============================== -->
-<!--
-<script>
-		function add(text){
-	    var TheTextBox = document.getElementById("Mytextbox");
-	    TheTextBox.value = TheTextBox.value + text;
-		}
-
-</script>
--->
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
-
+<?php include __DIR__.'/footer.php';?>
 </body>
 </html>
