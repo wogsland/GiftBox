@@ -620,6 +620,12 @@ include __DIR__.'/header.php';
     PAGE SPECIFIC SCRIPTS
 ============================== -->
 <script src="/js/contact.js"></script>
+<script>
+$(document).ready(function(){
+  url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
+  $.post(url);
+});
+</script>
 
 </body>
 </html>
