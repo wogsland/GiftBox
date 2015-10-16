@@ -11,6 +11,7 @@ include __DIR__.'/header.php';
 </head>
 <body>
 	<div id="content-wrapper">
+		<?php include __DIR__.'/navbar.php';?>
 		<h1>
 			<a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">GiveToken</a>
 		</h1>
