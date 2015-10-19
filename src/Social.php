@@ -9,7 +9,7 @@ class Social{
 
 	public function __construct($id = null) {
 		if ($id !== null) {
-			$social = execute_query("SELECT * from social where id = $id")->fetch_object("Social");
+			$social = execute_query("SELECT * from social where id = $id")->fetch_object("GiveToken\Social");
 			foreach (get_object_vars($social) as $key => $value) {
 				$this->$key = $value;
 			}
@@ -25,7 +25,7 @@ class Social{
 		if(strpos($this->url, 'https://') == true){
 			$this->url = substr($this->url, 8);
 		}
-		$social = execute_query("SELECT * from social where user_id = $this->user_id and network = '$this->network'")->fetch_object("Social");
+		$social = execute_query("SELECT * from social where user_id = $this->user_id and network = '$this->network'")->fetch_object("GiveToken\Social");
 		foreach(get_object_vars($social) as $key => $value){
 			$hold->$key = $value;
 		}

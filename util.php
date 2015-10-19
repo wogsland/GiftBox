@@ -1,11 +1,11 @@
 <?php
 	function escape_string($string) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		return $mysqli->real_escape_string($string);
 	}
 
 	function execute_query($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		if ($result = $mysqli->query($sql)) {
 			return $result;
 		} else {
@@ -15,7 +15,7 @@
 	}
 
 	function execute($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -24,7 +24,7 @@
 	}
 
 	function insert($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -34,7 +34,7 @@
 	}
 
 	function update($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -122,7 +122,7 @@
 	}
 
 	function _session_start() {
-		include_once __DIR__.'/database.php';
+		include __DIR__.'/database.php';
 		$session = new Zebra_Session($mysqli, 'sEcUr1tY_c0dE');
 		return $session;
 	}

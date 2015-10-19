@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="css/animate.min.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
+	<link rel="stylesheet" href="/css/octicons/octicons.css">
 
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
@@ -117,7 +118,11 @@
 <!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
-					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
+					<span id="send-link-copy" class="octicon octicon-clippy gt-copy-icon"></span>
+					<input id="send-link-input" class="gt-copy-input" type="text" readonly="readonly" placeholder="Save token to see link">
+					<span class="template-tab-text">EMBED CODE</span>
+					<span id="embed-code-copy" class="octicon octicon-clippy gt-copy-icon"></span>
+					<input id="embed-code-input" class="gt-copy-input" type="text" readonly="readonly" placeholder="Save token to see code">
 					<span class="template-tab-text">THUMBNAILS</span>
 					<div class="send-button" id="thumbnails-send-button" onclick="displayThumbnails()"></div>
 				</div>
