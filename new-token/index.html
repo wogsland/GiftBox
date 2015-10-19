@@ -8,7 +8,13 @@
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/webflow.css">
   <link rel="stylesheet" type="text/css" href="css/gps-wondrous-site-76b3e3d5d3cc7515bf9ee.webflow.css">
+
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/extra.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>
     WebFont.load({
       google: {
@@ -25,7 +31,11 @@
 <body>
   <div class="w-container card">
     <div class="w-section section01" data-ix="load-reveal-title">
-      <div class="w-container title-container"><img class="title" src="images/Title.png" data-ix="load-reveal-title">
+      <div class="w-container title-container">
+        <img class="title" src="images/Title.png" data-ix="load-reveal-title" />
+        <div class="title-text">
+          Senior Director of Executiveness
+        </div>
       </div>
     </div>
     <div class="w-section">
@@ -39,44 +49,49 @@
         <div class="w-col w-col-6">
           <div><img class="logo" src="images/Logo 002.png" data-ix="load-reveal-title-2">
           </div>
-          <div class="w-row">
-            <div class="w-col w-col-6">
-              <div class="block medium overview" data-ix="load-reveal-overview">
-                <div class="info-icon"><img class="info-icon-img" src="images/fa-info-circle.png">
+          <div class="bs-example" data-example-id="embedded-scrollspy">
+            <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+              <div class="w-row">
+                <div class="w-col w-col-6">
+                  <div class="block medium overview" data-ix="load-reveal-overview">
+                    <div class="info-icon"><img class="info-icon-img" src="images/fa-info-circle.png">
+                    </div>
+                    <div class="med-text">OVERVIEW</div>
+                  </div>
+                  <div class="block medium responsibilities" data-ix="load-reveal-mid-respon">
+                    <div class="info-icon"><img class="info-icon-img" src="images/fa-briefcase.png">
+                    </div>
+                    <div class="respond-text">RESPONSIBILITIES</div>
+                  </div>
+                  <div class="w-col w-col-6">
+                    <div class="block medium skillsreq" data-ix="load-reveal-skills">
+                      <div class="info-icon"><img class="skills-icon" src="images/fa-code.png">
+                      </div>
+                      <div class="med-text">SKILLS&nbsp;REQUIRED</div>
+                    </div>
+                    <div class="block medium values" data-ix="load-reveal-mid-values">
+                      <div class="info-icon"><img class="skills-icon" src="images/fa-globe.png">
+                      </div>
+                      <div class="med-text">VALUES</div>
+                    </div>
+                  </div>
                 </div>
-                <div class="med-text">OVERVIEW</div>
               </div>
-              <div class="block medium responsibilities" data-ix="load-reveal-mid-respon">
-                <div class="info-icon"><img class="info-icon-img" src="images/fa-briefcase.png">
-                </div>
-                <div class="respond-text">RESPONSIBILITIES</div>
+              <div class="block city" data-ix="load-reveal-mid-low"><img class="map-icon" src="images/fa-map-marker.png">
+                <div class="large-text">Nashville</div>
               </div>
-            </div>
-            <div class="w-col w-col-6">
-              <div class="block medium skillsreq" data-ix="load-reveal-skills">
-                <div class="info-icon"><img class="skills-icon" src="images/fa-code.png">
-                </div>
-                <div class="med-text">SKILLS&nbsp;REQUIRED</div>
+              <div class="block perk long" data-ix="scroll-reveal"><img class="star-icon" src="images/star.png">
+                <div class="med-text">PERKS</div>
               </div>
-              <div class="block medium values" data-ix="load-reveal-mid-values">
-                <div class="info-icon"><img class="skills-icon" src="images/fa-globe.png">
-                </div>
-                <div class="med-text">VALUES</div>
+              <div class="block office" data-ix="scroll-reveal"><img class="img-icon" src="images/img-icon.png">
+                <div class="large-text img-text">IMAGES</div>
               </div>
-            </div>
+              <div class="block video long" data-ix="scroll-reveal"><img class="star-icon" src="images/fa-video-camera.png">
+                <div class="med-text">VIDEO</div>
+              </div>
+            </div><!-- /example -->
           </div>
-          <div class="block city" data-ix="load-reveal-mid-low"><img class="map-icon" src="images/fa-map-marker.png">
-            <div class="large-text">Nashville</div>
-          </div>
-          <div class="block perk long" data-ix="scroll-reveal"><img class="star-icon" src="images/star.png">
-            <div class="med-text">PERKS</div>
-          </div>
-          <div class="block office" data-ix="scroll-reveal"><img class="img-icon" src="images/img-icon.png">
-            <div class="large-text img-text">IMAGES</div>
-          </div>
-          <div class="block video long" data-ix="scroll-reveal"><img class="star-icon" src="images/fa-video-camera.png">
-            <div class="med-text">VIDEO</div>
-          </div>
+
         </div>
         <div class="w-col w-col-3">
           <div class="float-fab"></div>
