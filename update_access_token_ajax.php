@@ -20,8 +20,6 @@ if($user != null && isset($_POST['access_token'])){
 	$access_token = $_POST['access_token'];
 	$user->update_token($access_token, $user->getId());
 	$response['status'] = 'SUCCESS';
-	$event = new EventLogger($user->getId(), UPDATE_ACCOUNT_INFO);
-	$event->log();
 }
 
 header('Content-Type: application/json');

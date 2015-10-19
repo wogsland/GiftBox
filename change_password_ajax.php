@@ -12,7 +12,7 @@ if ($user_id and $new_password) {
 	print_r($new_password);
 	execute("UPDATE user set password = '".$hash."' WHERE id = ".$user_id);
 }
-$event = new EventLogger($_POST['user_id'], CHANGE_PASSWORD);
+$event = new EventLogger($_POST['user_id'], EventLogger::CHANGE_PASSWORD);
 $event->log();
 $message = "SUCCESS";
 

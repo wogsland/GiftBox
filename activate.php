@@ -12,7 +12,7 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
 		if ($rows_affected != 1) {
 			throw new Exception('Update failed');
 		}
-		$event = new EventLogger($user_id, ACTIVATE_ACCOUNT);
+		$event = new EventLogger($user_id, EventLogger::ACTIVATE_ACCOUNT);
 		$event->log();
 		echo '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
 	} catch (Exception $e) {
