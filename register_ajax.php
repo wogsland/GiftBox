@@ -32,11 +32,11 @@ if (User::exists($user->email_address)) {
 	if ($reg_type == 'EMAIL') {
 		$user->activation_key = md5(uniqid(mt_rand(), false));
 		$user->password = password_hash($user->password, PASSWORD_DEFAULT);
-		$event = REGISTER_USING_EMAIL;
+		$event = EventLogger::REGISTER_USING_EMAIL;
 	} else if ($reg_type == 'FACEBOOK') {
 		$user->activation_key = null;
 		$user->password = null;
-		$event = REGISTER_USING_FACEBOOK;
+		$event = EventLogger::REGISTER_USING_FACEBOOK;
 	}
 	$user->save();
 	$event = new EventLogger($user->getId(), $event);

@@ -23,7 +23,7 @@ if (isset($_POST['password'])) {
 if (User::exists($email)) {
 	$user = User::fetch($email);
 	if ($login_type == 'FACEBOOK') {
-			$event_type = LOGIN_USING_FACEBOOK;
+			$event_type = EventLogger::LOGIN_USING_FACEBOOK;
 			$response['status'] = 'SUCCESS';
 	} else if ($login_type == 'EMAIL') {
 		if (!$user->password) {
@@ -37,7 +37,7 @@ if (User::exists($email)) {
 				$response['status'] = "ERROR";
 				$response['message'] = $user->activation_key;
 			} else {
-				$event_type = LOGIN_USING_EMAIL;
+				$event_type = EventLogger::LOGIN_USING_EMAIL;
 				$response['status'] = 'SUCCESS';
 			}
 		}
