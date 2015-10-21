@@ -55,3 +55,7 @@ handlers:
 - url: /templates
   static_dir: templates
   application_readable: true
+
+# Googly Prototype
+- url: /mdl-prototype/
+  static_dir: mdl-prototype/
