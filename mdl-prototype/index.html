@@ -62,9 +62,6 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
-    <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.blue-green.min.css">
@@ -170,7 +167,25 @@
     #winter-location {
       background: url('images/winter.jpg') center / cover;
     }
+    google-map {
+      height: 256px;
+      width: 256px;
+    }
     </style>
+
+    <!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <!-- Polymer -->
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="/bower_components/google-map/google-map.html">
+    <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+    <link rel="import" href="/bower_components/neon-animation/neon-animated-pages.html">
+    <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
+    <link rel="import" href="yes-button.html">
+    <link rel="import" href="x-card.html">
+    <link rel="import" href="x-cards-list.html">
+
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -435,6 +450,7 @@
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <div class="mdl-card mdl-cell mdl-cell--12-col">
               <div class="mdl-card__supporting-text">
+                <table><tr><td>
                 <h4>City, USA</h4>
                 <table class="mdl-data-table mdl-js-data-table">
                   <tbody>
@@ -452,6 +468,9 @@
                     </tr>
                   </tbody>
                 </table>
+              </td><td>
+                <google-map latitude="36.166667" longitude="-86.783333"></google-map>
+              </td></tr></table>
               </div>
             </div>
           </section>
@@ -580,6 +599,9 @@
     </div>
     <a href="https://github.com/google/material-design-lite/blob/master/templates/text-only/" target="_blank" id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Maybe</a>
     <a href="https://github.com/google/material-design-lite/blob/master/templates/text-only/" target="_blank" id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">No</a>
+
+    <!-- JavaScript -->
+
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
 
     <script>
@@ -618,5 +640,6 @@
         });
       });
     </script>
+
   </body>
 </html>

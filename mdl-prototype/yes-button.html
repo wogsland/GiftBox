@@ -1,0 +1,65 @@
+<link rel="import"
+      href="/bower_components/polymer/polymer.html">
+
+<dom-module id="yes-button">
+
+  <template>
+    <a href="https://github.com/gp48maz1/GiftBox"
+      id="interested-yes-button"
+      class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-dark-contrast">{{buttonVerb}}</a>
+  </template>
+
+  <script>
+    Polymer({
+      is: "yes-button",
+      behaviors: [
+        Polymer.NeonAnimationRunnerBehavior
+      ],
+      properties: {
+        buttonVerb: {
+          type: String,
+          value: "Yes"
+        },
+        opened: {
+          type: Boolean
+        },
+        animationConfig: {
+          value: function() {
+            return {
+              'entry': {
+                // provided by neon-animation/animations/scale-up-animation.html
+                name: 'scale-up-animation',
+                node: this
+              },
+              'exit': {
+                // provided by neon-animation-animations/fade-out-animation.html
+                name: 'fade-out-animation',
+                node: this
+              }
+            }
+          }
+        }
+      },
+      listeners: {
+        'neon-animation-finish': '_onNeonAnimationFinish'
+      },
+      show: function() {
+        this.opened = true;
+        this.style.display = 'inline-block';
+        // run scale-up-animation
+        this.playAnimation('entry');
+      },
+      hide: function() {
+        this.opened = false;
+        // run fade-out-animation
+        this.playAnimation('exit');
+      },
+      _onNeonAnimationFinish: function() {
+        if (!this.opened) {
+          this.style.display = 'none';
+        }
+      }
+    });
+  </script>
+
+</dom-module>
