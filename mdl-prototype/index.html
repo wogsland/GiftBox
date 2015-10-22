@@ -447,14 +447,7 @@
                           </div>
                         </div>
                       </section>
-                      <a id="videos-section"></a>
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                        <div class="mdl-card mdl-cell mdl-cell--12-col">
-                          <div class="mdl-card__title">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/sGbxmsDFVnE" frameborder="0" allowfullscreen></iframe>
-                          </div>
-                        </div>
-                      </section>
+
                       <section class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
@@ -652,7 +645,6 @@
               </div>
             </div>
           </x-card>
-
           <x-card>
             <div class="fit layout vertical center-center" id="images-x-card">
               <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
@@ -682,6 +674,41 @@
                           <div class="mdl-card__title mdl-card--expand"></div>
                           <div class="mdl-card__actions">
                             <span class="demo-card-image__filename">Team.jpg</span>
+                          </div>
+                        </div>
+                      </section>
+                      <section class="section--footer mdl-color--light-grey mdl-grid">
+                      </section>
+                    </div>
+                  </main>
+                </div>
+                <button id="interested-disabled-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
+                <div id="interested-yes-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                  YES
+                </div>
+                <div id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                  MAYBE
+                </div>
+                <div id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                  NO
+                </div>
+              </div>
+            </div>
+          </x-card>
+          <x-card>
+            <div class="fit layout vertical center-center" id="videos-x-card">
+              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+                BACK
+              </div>
+              <div class="fit layout horizontal large">
+                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+                  <main class="mdl-layout__content">
+                    <div class="mdl-layout__tab-panel is-active" id="overview">
+                      <a id="videos-section"></a>
+                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                        <div class="mdl-card mdl-cell mdl-cell--12-col">
+                          <div class="mdl-card__title">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/sGbxmsDFVnE" frameborder="0" allowfullscreen></iframe>
                           </div>
                         </div>
                       </section>
@@ -761,8 +788,13 @@
     };
 
     scope._onVideosClick = function(event) {
-      $('.current-section').text('Videos');
+      //$('.current-section').text('Videos');
       $('.mdl-layout__drawer').toggleClass('is-visible');
+      this.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      this.$.pages.selected = 6;
     };
 
     scope._onYesClick = function(event) {
