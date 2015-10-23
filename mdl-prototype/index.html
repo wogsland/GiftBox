@@ -1,20 +1,4 @@
 <!doctype html>
-<!--
-  Material Design Lite
-  Copyright 2015 Google Inc. All rights reserved.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      https://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -66,131 +50,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.blue-green.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-    #interested-disabled-button {
-      color: white;
-      position: fixed;
-      display: block;
-      left: 0;
-      bottom: 0;
-      margin-bottom: 0px;
-      z-index: 900;
-    }
-    #interested-yes-button {
-      background-color: green;
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 50%;
-      margin-bottom: 0px;
-      z-index: 900;
-    }
-    #interested-maybe-button {
-      background-color: yellow;
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 25%;
-      margin-bottom: 0px;
-      z-index: 900;
-    }
-    #interested-no-button {
-      background-color: red;
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-bottom: 0px;
-      z-index: 900;
-    }
-    .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-      padding-right: 0;
-    }
-    .long-title {
-      padding-left: 25px;
-    }
-    .current-section {
-      font-style: normal;
-    }
-    /* image stuph */
-    .demo-card-image.mdl-card {
-      width: 256px;
-      height: 256px;
-    }
-    .demo-card-image > .mdl-card__actions {
-      height: 52px;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.2);
-    }
-    .demo-card-image__filename {
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    #image-1 {
-      background: url('images/Nashville.png') center / cover;
-    }
-    #image-2 {
-      background: url('images/Parthenon.jpg') center / cover;
-    }
-    #image-3 {
-      background: url('images/Team.jpg') center / cover;
-    }
-    /* location stuph */
-    .location-card-image.mdl-card {
-      width: 192px;
-      height: 192px;
-    }
-    .location-card-image > .mdl-card__actions {
-      height: 120px;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.2);
-      text-align: center;
-    }
-    .location-card-season {
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    #spring-location {
-      background: url('images/spring.jpg') center / cover;
-    }
-    #summer-location {
-      background: url('images/summer.jpg') center / cover;
-    }
-    #fall-location {
-      background: url('images/autumn.jpg') center / cover;
-    }
-    #winter-location {
-      background: url('images/winter.jpg') center / cover;
-    }
-    google-map {
-      height: 256px;
-      width: 256px;
-    }
-    neon-animated-pages {
-      height: 100%;
-    }
-    .large {
-      width: 100%
-    }
-    .back-button {
-      position: fixed;
-      top: 30px;
-      left: 30px;
-      z-index: 900;
-      background-color: white;
-    }
-    #location-x-card {
-      background: url('images/Nashville.png') center / cover;
-    }
-    .location-box {
-      opacity: 0.8;
-      background-color: #ffffff;
-    }
-    </style>
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -203,6 +62,7 @@
     <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
     <link rel="import" href="yes-button.html">
     <link rel="import" href="x-card.html">
+    <link rel="import" href="video-x-card.html">
     <link rel="import" href="x-cards-list.html">
 
   </head>
@@ -682,136 +542,27 @@
               </div>
             </div>
           </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center" id="videos-x-card">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <div class="fit layout horizontal large">
-                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <main class="mdl-layout__content">
-                    <div class="mdl-layout__tab-panel is-active" id="overview">
-                      <a id="videos-section"></a>
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                        <div class="mdl-card mdl-cell mdl-cell--12-col">
-                          <div class="mdl-card__title">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/sGbxmsDFVnE" frameborder="0" allowfullscreen></iframe>
-                          </div>
-                        </div>
-                      </section>
-                      <section class="section--footer mdl-color--light-grey mdl-grid">
-                      </section>
-                    </div>
-                  </main>
-                </div>
-                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                  YES
-                </div>
-                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                  MAYBE
-                </div>
-                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                  NO
-                </div>
-              </div>
+          <video-x-card>
+            <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+              BACK
             </div>
-          </x-card>
+            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+              YES
+            </div>
+            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+              MAYBE
+            </div>
+            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+              NO
+            </div>
+          </video-x-card>
       </neon-animated-pages>
     </template>
 
 
     <!-- JavaScript -->
-
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-    <script>
-
-    var scope = document.querySelector('template[is="dom-bind"]');
-    //console.log(scope);
-
-    scope._onOverviewClick = function(event) {
-      $('.current-section').text('Overview');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-    };
-
-    scope._onSkillsClick = function(event) {
-      $('.current-section').text('Skills Required');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-    };
-
-    scope._onValuesClick = function(event) {
-      $('.current-section').text('Values');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-    };
-
-    scope._onResponsibilitiesClick = function(event) {
-      $('.current-section').text('Responsibilities');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-    };
-
-    scope._onPerksClick = function(event) {
-      $('.current-section').text('Perks');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-    };
-
-    scope._onLocationClick = function(event) {
-      //$('.current-section').text('Location');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
-        'fade-in': event.target,
-        'fade-out': event.target
-      };
-      this.$.pages.selected = 4;
-    };
-
-    scope._onImagesClick = function(event) {
-      //$('.current-section').text('Images');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
-        'fade-in': event.target,
-        'fade-out': event.target
-      };
-      this.$.pages.selected = 5;
-    };
-
-    scope._onVideosClick = function(event) {
-      //$('.current-section').text('Videos');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
-        'fade-in': event.target,
-        'fade-out': event.target
-      };
-      this.$.pages.selected = 6;
-    };
-
-    scope._onYesClick = function(event) {
-      this.$.list.sharedElements = {
-        'ripple': event.target,
-        'reverse-ripple': event.target
-      };
-      this.$.pages.selected = 1;
-    };
-
-    scope._onMaybeClick = function(event) {
-      this.$.list.sharedElements = {
-        'ripple': event.target,
-        'reverse-ripple': event.target
-      };
-      this.$.pages.selected = 2;
-    };
-
-    scope._onNoClick = function(event) {
-      this.$.list.sharedElements = {
-        'ripple': event.target,
-        'reverse-ripple': event.target
-      };
-      this.$.pages.selected = 3;
-    };
-
-    scope._onBackClick = function(event) {
-      this.$.pages.selected = 0;
-    };
-
-    </script>
+    <script src="prototype.js"></script>
   </body>
 </html>

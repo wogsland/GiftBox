@@ -1,19 +1,3 @@
-/**
- * Copyright 2015 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   margin: 0;
@@ -205,4 +189,127 @@ html, body {
 }
 .mdl-demo .mdl-menu__container {
   z-index: 99;
+}
+#interested-disabled-button {
+  color: white;
+  position: fixed;
+  display: block;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 0px;
+  z-index: 900;
+}
+#interested-yes-button {
+  background-color: green;
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 50%;
+  margin-bottom: 0px;
+  z-index: 900;
+}
+#interested-maybe-button {
+  background-color: yellow;
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 25%;
+  margin-bottom: 0px;
+  z-index: 900;
+}
+#interested-no-button {
+  background-color: red;
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 0px;
+  z-index: 900;
+}
+.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
+  padding-right: 0;
+}
+.long-title {
+  padding-left: 25px;
+}
+.current-section {
+  font-style: normal;
+}
+/* image stuph */
+.demo-card-image.mdl-card {
+  width: 256px;
+  height: 256px;
+}
+.demo-card-image > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.demo-card-image__filename {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+#image-1 {
+  background: url('images/Nashville.png') center / cover;
+}
+#image-2 {
+  background: url('images/Parthenon.jpg') center / cover;
+}
+#image-3 {
+  background: url('images/Team.jpg') center / cover;
+}
+/* location stuph */
+.location-card-image.mdl-card {
+  width: 192px;
+  height: 192px;
+}
+.location-card-image > .mdl-card__actions {
+  height: 120px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+.location-card-season {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+#spring-location {
+  background: url('images/spring.jpg') center / cover;
+}
+#summer-location {
+  background: url('images/summer.jpg') center / cover;
+}
+#fall-location {
+  background: url('images/autumn.jpg') center / cover;
+}
+#winter-location {
+  background: url('images/winter.jpg') center / cover;
+}
+google-map {
+  height: 256px;
+  width: 256px;
+}
+neon-animated-pages {
+  height: 100%;
+}
+.large {
+  width: 100%
+}
+.back-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 900;
+  background-color: white;
+}
+#location-x-card {
+  background: url('images/Nashville.png') center / cover;
+}
+.location-box {
+  opacity: 0.8;
+  background-color: #ffffff;
 }

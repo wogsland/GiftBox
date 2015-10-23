@@ -1,7 +1,7 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 <link rel="import" href="/bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
-<dom-module id="x-card">
+<dom-module id="video-x-card">
   <style>
 
     :host {
@@ -20,6 +20,26 @@
     <div id="placeholder" class="fit"></div>
 
     <div id="container">
+      <div class="fit layout vertical center-center" id="videos-x-card">
+        <div class="fit layout horizontal large">
+          <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <main class="mdl-layout__content">
+              <div class="mdl-layout__tab-panel is-active" id="overview">
+                <a id="videos-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__title">
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/sGbxmsDFVnE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                </section>
+                <section class="section--footer mdl-color--light-grey mdl-grid">
+                </section>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
       <content select="div"></content>
     </div>
 
@@ -29,7 +49,7 @@
 <script>
 (function() {
   Polymer({
-    is: 'x-card',
+    is: 'video-x-card',
 
     behaviors: [
       Polymer.NeonSharedElementAnimatableBehavior
