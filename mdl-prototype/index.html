@@ -21,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Material Design Lite</title>
+    <title>Company Hiring - Super Long Job Title</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -68,12 +68,12 @@
     <link rel="stylesheet" href="styles.css">
     <style>
     #interested-disabled-button {
+      color: white;
       position: fixed;
       display: block;
-      right: 0;
+      left: 0;
       bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 160px;
+      margin-bottom: 0px;
       z-index: 900;
     }
     #interested-yes-button {
@@ -82,8 +82,8 @@
       display: block;
       right: 0;
       bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 120px;
+      margin-right: 50%;
+      margin-bottom: 0px;
       z-index: 900;
     }
     #interested-maybe-button {
@@ -92,8 +92,8 @@
       display: block;
       right: 0;
       bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 80px;
+      margin-right: 25%;
+      margin-bottom: 0px;
       z-index: 900;
     }
     #interested-no-button {
@@ -102,8 +102,7 @@
       display: block;
       right: 0;
       bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
+      margin-bottom: 0px;
       z-index: 900;
     }
     .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
@@ -234,7 +233,7 @@
                       <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
                       <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
                       <a id="perks-drawer"  class="mdl-navigation__link" href="#perks-section" on-click="_onPerksClick">Perks</a>
-                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onLocationClick">Location</a>
+                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" href="#location-section" on-click="_onLocationClick">Location</a>
                       <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" href="#images-section" on-click="_onImagesClick">Images</a>
                       <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" href="#videos-section" on-click="_onVideosClick">Videos</a>
                     </nav>
@@ -454,14 +453,14 @@
                   </main>
                 </div>
 
-                <button id="interested-disabled-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-dark-contrast" on-click="_onYesClick">
+                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</button>
+                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-dark-contrast" on-click="_onYesClick">
                   YES
                 </div>
-                <div id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
                   MAYBE
                 </div>
-                <div id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
                   NO
                 </div>
 
@@ -632,14 +631,14 @@
                     </div>
                   </main>
                 </div>
-                <button id="interested-disabled-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
+                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
                   YES
                 </div>
-                <div id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
                   MAYBE
                 </div>
-                <div id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
                   NO
                 </div>
               </div>
@@ -682,14 +681,14 @@
                     </div>
                   </main>
                 </div>
-                <button id="interested-disabled-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</button>
+                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
                   YES
                 </div>
-                <div id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
                   MAYBE
                 </div>
-                <div id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
                   NO
                 </div>
               </div>
@@ -717,14 +716,14 @@
                     </div>
                   </main>
                 </div>
-                <button id="interested-disabled-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color-text--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</button>
+                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
                   YES
                 </div>
-                <div id="interested-maybe-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
                   MAYBE
                 </div>
-                <div id="interested-no-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
                   NO
                 </div>
               </div>
