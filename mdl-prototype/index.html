@@ -62,6 +62,7 @@
     <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
     <link rel="import" href="yes-button.html">
     <link rel="import" href="x-card.html">
+    <link rel="import" href="image-x-card.html">
     <link rel="import" href="video-x-card.html">
     <link rel="import" href="x-cards-list.html">
 
@@ -492,56 +493,21 @@
               </div>
             </div>
           </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center" id="images-x-card">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <div class="fit layout horizontal large">
-                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <main class="mdl-layout__content">
-                    <div class="mdl-layout__tab-panel is-active" id="overview">
-                      <a id="images-section"></a>
-                      <section class="section--center mdl-grid mdl-grid--no-spacing">
-                        <div id="image-1" class="demo-card-image mdl-card mdl-shadow--2dp">
-                          <div class="mdl-card__title mdl-card--expand"></div>
-                          <div class="mdl-card__actions">
-                            <span class="demo-card-season">Nashville.png</span>
-                          </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                        <div id="image-2" class="demo-card-image mdl-card mdl-shadow--2dp">
-                          <div class="mdl-card__title mdl-card--expand"></div>
-                          <div class="mdl-card__actions">
-                            <span class="demo-card-image__filename">Parthenon.jpg</span>
-                          </div>
-                        </div>
-                        <div class="mdl-layout-spacer"></div>
-                        <div id="image-3" class="demo-card-image mdl-card mdl-shadow--2dp">
-                          <div class="mdl-card__title mdl-card--expand"></div>
-                          <div class="mdl-card__actions">
-                            <span class="demo-card-image__filename">Team.jpg</span>
-                          </div>
-                        </div>
-                      </section>
-                      <section class="section--footer mdl-color--light-grey mdl-grid">
-                      </section>
-                    </div>
-                  </main>
-                </div>
-                <button id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</button>
-                <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                  YES
-                </div>
-                <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                  MAYBE
-                </div>
-                <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                  NO
-                </div>
-              </div>
+          <image-x-card>
+            <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+              BACK
             </div>
-          </x-card>
+            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+              YES
+            </div>
+            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+              MAYBE
+            </div>
+            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+              NO
+            </div>
+          </image-x-card>
           <video-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
