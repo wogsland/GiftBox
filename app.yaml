@@ -59,3 +59,5 @@ handlers:
 # Googly Prototype
 - url: /mdl-prototype/
   static_dir: mdl-prototype/
+- url: /bower_components/
+  static_dir: bower_components/
