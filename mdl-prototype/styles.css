@@ -327,6 +327,9 @@ neon-animated-pages {
 i.huge-icon {
   font-size:200px;
 }
+i.big-icon {
+  font-size:50px;
+}
 .job-description-option {
   background-color: white;
   padding: 0;
@@ -335,4 +338,18 @@ i.huge-icon {
 #location-frontpage {
   text-align:center;
   background: url('images/Nashville.png') center / cover;
+}
+.social-section {
+  background-image: linear-gradient(45deg, #ff7d78, #8e78ff);
+}
+.frontpage-social-button {
+  /*height: 100px;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-right: 1px;
+  border-color: white;
+}
+.mdl-layout__header .mdl-layout__drawer-button {
+  background: rgba(0, 0, 0, 0);
 }
