@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="/css/jquery-ui-1.10.4.min.css" />
 
   <!-- WEB FONTS -->
-  <link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
   <!-- CAROUSEL AND LIGHTBOX -->
   <link rel="stylesheet" href="/css/owl.theme.css">
