@@ -111,3 +111,8 @@ scope._onNoClick = function(event) {
 scope._onBackClick = function(event) {
   this.$.pages.selected = 0;
 };
+
+scope._onTrack = function(event) {
+  //console.log(this.$);
+  $('.current-section').text(' - Super Long Job Title');
+};
