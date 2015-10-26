@@ -4,26 +4,51 @@ var scope = document.querySelector('template[is="dom-bind"]');
 scope._onOverviewClick = function(event) {
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').toggleClass('is-visible');
+  this.$.list.sharedElements = {
+    'fade-in': event.target,
+    'fade-out': event.target
+  };
+  this.$.pages.selected = 7;
 };
 
 scope._onSkillsClick = function(event) {
   $('.current-section').text('Skills Required');
   $('.mdl-layout__drawer').toggleClass('is-visible');
+  this.$.list.sharedElements = {
+    'fade-in': event.target,
+    'fade-out': event.target
+  };
+  this.$.pages.selected = 7;
 };
 
 scope._onValuesClick = function(event) {
   $('.current-section').text('Values');
   $('.mdl-layout__drawer').toggleClass('is-visible');
+  this.$.list.sharedElements = {
+    'fade-in': event.target,
+    'fade-out': event.target
+  };
+  this.$.pages.selected = 7;
 };
 
 scope._onResponsibilitiesClick = function(event) {
   $('.current-section').text('Responsibilities');
   $('.mdl-layout__drawer').toggleClass('is-visible');
+  this.$.list.sharedElements = {
+    'fade-in': event.target,
+    'fade-out': event.target
+  };
+  this.$.pages.selected = 7;
 };
 
 scope._onPerksClick = function(event) {
   $('.current-section').text('Perks');
   $('.mdl-layout__drawer').toggleClass('is-visible');
+  this.$.list.sharedElements = {
+    'fade-in': event.target,
+    'fade-out': event.target
+  };
+  this.$.pages.selected = 7;
 };
 
 scope._onLocationClick = function(event) {
