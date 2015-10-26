@@ -277,6 +277,62 @@
       Polymer.NeonSharedElementAnimatableBehavior
     ],
 
+    _onOverviewClick: function(event) {
+      $('.current-section').text('Overview');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onSkillsClick: function(event) {
+      $('.current-section').text('Skills Required');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onValuesClick: function(event) {
+      $('.current-section').text('Values');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onResponsibilitiesClick: function(event) {
+      $('.current-section').text('Responsibilities');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onPerksClick: function(event) {
+      $('.current-section').text('Perks');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onLocationClick: function(event) {
+      console.log(this.$);
+      //$('.current-section').text('Location');
+      $('.mdl-layout__drawer').toggleClass('is-visible');
+      this.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      this.$.pages.selected = 4;
+    },
+
+    _onImagesClick: function(event) {
+      //$('.current-section').text('Images');
+      $('.mdl-layout__drawer').toggleClass('is-visible');
+      this.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      this.$.pages.selected = 5;
+    },
+
+    _onVideosClick: function(event) {
+      //$('.current-section').text('Videos');
+      $('.mdl-layout__drawer').toggleClass('is-visible');
+      this.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      this.$.pages.selected = 6;
+    },
+
     properties: {
       animationConfig: {
         value: function() {

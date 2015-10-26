@@ -313,3 +313,34 @@ neon-animated-pages {
   opacity: 0.8;
   background-color: #ffffff;
 }
+
+#job-description-icon {
+  background-color:#8E78FF;
+}
+.mdl-demo .mdl-card .mdl-card__supporting-icon {
+  margin: 40px;
+  flex-grow: 1;
+  padding: 0;
+  width: calc(100% - 80px);
+  text-align: center;
+}
+.mdl-demo .mdl-card .mdl-card__supporting-icon i {
+  font-size:200px;
+}
+.job-description-option {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+}
+.job-description-option .overview {
+  margin-right: 75%;
+}
+.job-description-option .skills {
+  margin-right: 50%;
+}
+.job-description-option .responsibilities {
+  margin-right: 25%;
+}
+.job-description-option .values {
+  margin-right: 0%;
+}
