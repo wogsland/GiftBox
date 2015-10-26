@@ -79,11 +79,25 @@
               <div class="fit layout horizontal large">
 
                 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <header class="mdl-layout__header mdl-color--primary-dark">
+                  <header class="mdl-layout__header mdl-layout__header--waterfall mdl-color--primary-dark">
+                    <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row mdl-color--primary-dark">
                       <span class="mdl-layout-title long-title">
                         Company Hiring - Super Long Job Title - <i class="current-section">Overview</i>
                       </span>
+                      <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <!-- Bottom rows, not visible on scroll -->
+                    <div class="mdl-layout__header-row mdl-color--primary-dark">
+                      <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-layout__header-row mdl-color--primary-dark">
+                      <span class="mdl-layout-title">
+                        <h1>Super Long Job Title</h1>
+                      </span>
+                      <div class="mdl-layout-spacer"></div>
+                    </div>
+                    <div class="mdl-layout__header-row mdl-color--primary-dark">
                       <div class="mdl-layout-spacer"></div>
                     </div>
                   </header>
@@ -103,7 +117,7 @@
                   </div>
                   <main class="mdl-layout__content">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
-            
+
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                         <div class="mdl-card mdl-cell mdl-cell--12-col">
                           <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">

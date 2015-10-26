@@ -83,8 +83,8 @@ scope._onVideosClick = function(event) {
 
 scope._onYesClick = function(event) {
   $('#placeholder').css('background-color', 'green');
-  console.log('yes clicked');
-  console.log($('#placeholder'));
+  //console.log('yes clicked');
+  //console.log($('#placeholder'));
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
