@@ -53,7 +53,7 @@ scope._onPerksClick = function(event) {
 
 scope._onLocationClick = function(event) {
   //$('.current-section').text('Location');
-  $('.mdl-layout__drawer').toggleClass('is-visible');
+  $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target
@@ -63,7 +63,7 @@ scope._onLocationClick = function(event) {
 
 scope._onImagesClick = function(event) {
   //$('.current-section').text('Images');
-  $('.mdl-layout__drawer').toggleClass('is-visible');
+  $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target
@@ -73,7 +73,7 @@ scope._onImagesClick = function(event) {
 
 scope._onVideosClick = function(event) {
   //$('.current-section').text('Videos');
-  $('.mdl-layout__drawer').toggleClass('is-visible');
+  $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target

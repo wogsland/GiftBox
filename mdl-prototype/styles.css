@@ -324,7 +324,7 @@ neon-animated-pages {
   width: calc(100% - 80px);
   text-align: center;
 }
-.mdl-demo .mdl-card .mdl-card__supporting-icon i {
+i.huge-icon {
   font-size:200px;
 }
 .job-description-option {
@@ -332,19 +332,7 @@ neon-animated-pages {
   padding: 0;
   margin: 0;
 }
-/*
-.job-description-option .overview {
-  margin-right: 80%;
+#location-frontpage {
+  text-align:center;
+  background: url('images/Nashville.png') center / cover;
 }
-.job-description-option .skills {
-  margin-right: 60%;
-}
-.job-description-option .responsibilities {
-  margin-right: 40%;
-}
-.job-description-option .values {
-  margin-right: 20%;
-}
-.job-description-option .perks {
-  margin-right: 0%;
-}*/
