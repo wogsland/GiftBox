@@ -11,3 +11,4 @@ composer.lock
 # Bower #
 #########
 bower_components
+components

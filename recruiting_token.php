@@ -54,11 +54,11 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Polymer -->
-    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="/bower_components/google-map/google-map.html">
-    <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
-    <link rel="import" href="/bower_components/neon-animation/neon-animated-pages.html">
-    <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
+    <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="/components/google-map/google-map.html">
+    <link rel="import" href="/components/paper-styles/paper-styles.html">
+    <link rel="import" href="/components/neon-animation/neon-animated-pages.html">
+    <link rel="import" href="/components/neon-animation/neon-animations.html">
     <link rel="import" href="/elements/description-x-card.html">
     <link rel="import" href="/elements/image-x-card.html">
     <link rel="import" href="/elements/location-x-card.html">
