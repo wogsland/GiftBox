@@ -27,13 +27,23 @@ To create a local instance of the givetoken database. Refer [here](https://docs.
 ## <a name="composer"></a>Composer
 
 [Composer](https://getcomposer.org/) is the PHP package manager used to bring in
-3rd party code. Once you have it in installed, cd to the project directory and
+3rd party PHP code. Once you have it in installed, cd to the project directory and
 run
 
     composer install
     composer update
 
 which will create everything you need in the untracked vendor directory.
+
+## <a name="bower"></a>Bower
+
+[Bower](http://bower.io/) is a package manager used to bring in Polymer
+components. Once you have it in installed, cd to the project directory and
+run
+
+    bower install
+
+which will create everything you need in the untracked components directory.
 
 ## <a name="branching"></a>Branching Strategy
 
