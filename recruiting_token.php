@@ -180,21 +180,13 @@
                       </section>
                       <section class="section--center mdl-grid">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="images-frontpage" on-click="_onImagesClick">
-                          <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                            <h2 class="mdl-cell mdl-cell--12-col">
-                              <i class="material-icons huge-icon">image</i>
-                              <br />
-                              Images
-                            </h2>
+                          <div id="supporting-images">
+                            <i class="material-icons">image</i> Images
                           </div>
                         </div>
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="videos-frontpage" on-click="_onVideosClick">
-                          <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                            <h2 class="mdl-cell mdl-cell--12-col">
-                              <i class="material-icons huge-icon">videocam</i>
-                              <br />
-                              Videos
-                            </h2>
+                          <div id="supporting-videos">
+                            <i class="material-icons">videocam</i> Videos
                           </div>
                         </div>
                       </section>

@@ -309,6 +309,16 @@ i.big-icon {
   margin-left: 0px;
   margin-right: 16px;
 }
+#supporting-images, #supporting-videos {
+  margin-top: 267px;
+  height: 50px;
+  padding-top: 20px;
+  padding-left: 30px;
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: left;
+  vertical-align: middle;
+}
 #videos-frontpage {
   text-align:center;
   background: url('/images/Nashville.png') center / cover;
