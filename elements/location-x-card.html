@@ -15,9 +15,44 @@
       background-color: grey;
     }
 
+    #location-x-card {
+      background: url('/images/Nashville.png') center / cover;
+    }
+    .location-box {
+      opacity: 0.8;
+      background-color: #ffffff;
+    }
+    .location-card-image.mdl-card {
+      width: 192px;
+      height: 192px;
+    }
+    .location-card-image > .mdl-card__actions {
+      height: 120px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .location-card-season {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    #spring-location {
+      background: url('/images/spring.jpg') center / cover;
+    }
+    #summer-location {
+      background: url('/images/summer.jpg') center / cover;
+    }
+    #fall-location {
+      background: url('/images/autumn.jpg') center / cover;
+    }
+    #winter-location {
+      background: url('/images/winter.jpg') center / cover;
+    }
+
     google-map {
-      height: 256px;
-      width: 256px;
+      height: 277px;
+      width: 277px;
     }
 
   </style>
@@ -32,10 +67,9 @@
             <main class="mdl-layout__content">
               <div class="mdl-layout__tab-panel is-active" id="overview">
                 <a id="location-section"></a>
-                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                  <div class="mdl-card mdl-cell mdl-cell--12-col location-box">
+                <section class="section--center mdl-grid mdl-grid--no-spacing">
+                  <div class="mdl-card mdl-cell mdl-cell--7-col location-box mdl-shadow--2dp">
                     <div class="mdl-card__supporting-text">
-                      <table><tr><td>
                       <h4 class="mdl-color-text--primary-dark">City, USA</h4>
                       <table class="mdl-data-table mdl-js-data-table">
                         <tbody>
@@ -53,10 +87,11 @@
                           </tr>
                         </tbody>
                       </table>
-                    </td><td>
-                      <google-map latitude="36.166667" longitude="-86.783333"></google-map>
-                    </td></tr></table>
                     </div>
+                  </div>
+                  <div class="mdl-layout-spacer"></div>
+                  <div class="mdl-shadow--2dp">
+                    <google-map latitude="36.166667" longitude="-86.783333"></google-map>
                   </div>
                 </section>
 
