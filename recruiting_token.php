@@ -179,8 +179,8 @@
                           </div>
                         </div>
                       </section>
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                        <div class="mdl-card mdl-cell mdl-cell--6-col" id="images-frontpage" on-click="_onImagesClick">
+                      <section class="section--center mdl-grid">
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="images-frontpage" on-click="_onImagesClick">
                           <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                             <h2 class="mdl-cell mdl-cell--12-col">
                               <i class="material-icons huge-icon">image</i>
@@ -189,7 +189,7 @@
                             </h2>
                           </div>
                         </div>
-                        <div class="mdl-card mdl-cell mdl-cell--6-col" id="videos-frontpage" on-click="_onVideosClick">
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="videos-frontpage" on-click="_onVideosClick">
                           <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
                             <h2 class="mdl-cell mdl-cell--12-col">
                               <i class="material-icons huge-icon">videocam</i>

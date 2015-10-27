@@ -345,10 +345,14 @@ i.big-icon {
 #images-frontpage {
   text-align:center;
   background: url('/images/Nashville.png') center / cover;
+  margin-left: 0px;
+  margin-right: 16px;
 }
 #videos-frontpage {
   text-align:center;
   background: url('/images/Nashville.png') center / cover;
+  margin-right: 0px;
+  margin-left: 16px;
 }
 .mdl-layout__header {
   background-image: linear-gradient(45deg, #E500E7, #00D7FF);
@@ -366,4 +370,7 @@ i.big-icon {
 }
 .mdl-layout__header .mdl-layout__drawer-button {
   background: rgba(0, 0, 0, 0);
+}
+.mdl-layout-spacer {
+
 }
