@@ -55,8 +55,8 @@ handlers:
 # Google Polymer Components
 - url: /components/
   static_dir: components/
-- url: /bower_components/
-  static_dir: bower_components/
+- url: /elements/
+  static_dir: elements/
 
 - url: /templates
   static_dir: templates

@@ -59,12 +59,12 @@
     <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
     <link rel="import" href="/bower_components/neon-animation/neon-animated-pages.html">
     <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
-    <link rel="import" href="/components/description-x-card.html">
-    <link rel="import" href="/components/image-x-card.html">
-    <link rel="import" href="/components/location-x-card.html">
-    <link rel="import" href="/components/video-x-card.html">
-    <link rel="import" href="/components/x-card.html">
-    <link rel="import" href="/components/x-cards-list.html">
+    <link rel="import" href="/elements/description-x-card.html">
+    <link rel="import" href="/elements/image-x-card.html">
+    <link rel="import" href="/elements/location-x-card.html">
+    <link rel="import" href="/elements/video-x-card.html">
+    <link rel="import" href="/elements/x-card.html">
+    <link rel="import" href="/elements/x-cards-list.html">
 
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base fullbleed">
