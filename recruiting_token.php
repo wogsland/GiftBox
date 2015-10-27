@@ -149,17 +149,23 @@
                         </div>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
-                        <a href="http://twitter.com" target="_blank" class="mdl-cell--3-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
                           <i class="fa fa-twitter big-icon"></i>
                         </a>
-                        <a href="http://facebook.com" target="_blank" class="mdl-cell--3-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
                           <i class="fa fa-facebook big-icon"></i>
                         </a>
-                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--3-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
                           <i class="fa fa-linkedin big-icon"></i>
                         </a>
-                        <a href="http://youtube.com" target="_blank" class="mdl-cell--3-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
                           <i class="fa fa-youtube big-icon"></i>
+                        </a>
+                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                          <i class="fa fa-google-plus big-icon"></i>
+                        </a>
+                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                          <i class="fa fa-pinterest big-icon"></i>
                         </a>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
