@@ -169,12 +169,8 @@
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
                         <div class="mdl-card mdl-cell mdl-cell--12-col" id="location-frontpage">
-                          <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
-                            <h2 class="mdl-cell mdl-cell--12-col">
-                              <i class="material-icons huge-icon">room</i>
-                              <br />
-                              Location
-                            </h2>
+                          <div id="supporting-location">
+                            <i class="material-icons">room</i> Location
                           </div>
                         </div>
                       </section>

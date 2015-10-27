@@ -309,12 +309,12 @@ i.big-icon {
   margin-left: 0px;
   margin-right: 16px;
 }
-#supporting-images, #supporting-videos {
+#supporting-images, #supporting-videos, #supporting-location {
   margin-top: 267px;
   height: 50px;
   padding-top: 20px;
   padding-left: 30px;
-  font-size: 30px;
+  font-size: 40px;
   background: rgba(0, 0, 0, 0.2);
   text-align: left;
   vertical-align: middle;
