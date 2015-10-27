@@ -267,4 +267,18 @@ To also investigate the code coverage of the tests, you'll need the
 Make sure you put any unit tests in the tests directory and name them like
 whateverTest.php.
 
+## Polybuild
+
+Polymer provides a tool to optimize & minify an app's code which you can get via
+
+    npm install -g polybuild
+
+and build the recruiting token with
+
+    polybuild --maximum-crush recruiting_token.php
+
+which creates `recruiting_token.build.html` & `recruiting_token.build.js`. This
+will be useful if we're doing all our DB interaction via AJAX (it treats PHP
+like a comment and removes it).
+
 # GMP was here

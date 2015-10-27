@@ -12,3 +12,8 @@ composer.lock
 #########
 bower_components
 components
+
+# Polybuild #
+#############
+recruiting_token.build.html
+recruiting_token.build.js

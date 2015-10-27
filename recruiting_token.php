@@ -47,23 +47,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.blue-green.min.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/recruiting-token.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/recruiting-token.css">
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Polymer -->
-    <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="/components/paper-styles/paper-styles.html">
-    <link rel="import" href="/components/neon-animation/neon-animated-pages.html">
-    <link rel="import" href="/components/neon-animation/neon-animations.html">
-    <link rel="import" href="/elements/description-x-card.html">
-    <link rel="import" href="/elements/image-x-card.html">
-    <link rel="import" href="/elements/location-x-card.html">
-    <link rel="import" href="/elements/video-x-card.html">
-    <link rel="import" href="/elements/x-card.html">
-    <link rel="import" href="/elements/x-cards-list.html">
+    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/neon-animation/neon-animated-pages.html">
+    <link rel="import" href="components/neon-animation/neon-animations.html">
+    <link rel="import" href="elements/description-x-card.html">
+    <link rel="import" href="elements/image-x-card.html">
+    <link rel="import" href="elements/location-x-card.html">
+    <link rel="import" href="elements/video-x-card.html">
+    <link rel="import" href="elements/x-card.html">
+    <link rel="import" href="elements/x-cards-list.html">
 
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base fullbleed">
@@ -318,6 +318,6 @@
 
     <!-- JavaScript -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-    <script src="/js/recruiting-token.js"></script>
+    <script src="js/recruiting-token.js"></script>
   </body>
 </html>
