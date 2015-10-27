@@ -351,10 +351,10 @@ i.big-icon {
   background: url('images/Nashville.png') center / cover;
 }
 .mdl-layout__header {
-  background-image: linear-gradient(45deg, #b066fe, #63e2ff);
+  background-image: linear-gradient(45deg, #E500E7, #00D7FF);
 }
 .social-section {
-  background-image: linear-gradient(45deg, #ff7d78, #8e78ff);
+  background-image: linear-gradient(45deg, #E500E7, #00D7FF);
 }
 .frontpage-social-button {
   /*height: 100px;*/
