@@ -9,16 +9,14 @@
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <meta name="apple-mobile-web-app-title" content="GiveToken">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <!-- Favicon -->
@@ -50,7 +48,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.blue-green.min.css">
     <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/recruiting-token.css">
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -61,13 +59,12 @@
     <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
     <link rel="import" href="/bower_components/neon-animation/neon-animated-pages.html">
     <link rel="import" href="/bower_components/neon-animation/neon-animations.html">
-    <link rel="import" href="yes-button.html">
-    <link rel="import" href="x-card.html">
-    <link rel="import" href="description-x-card.html">
-    <link rel="import" href="location-x-card.html">
-    <link rel="import" href="image-x-card.html">
-    <link rel="import" href="video-x-card.html">
-    <link rel="import" href="x-cards-list.html">
+    <link rel="import" href="/components/description-x-card.html">
+    <link rel="import" href="/components/image-x-card.html">
+    <link rel="import" href="/components/location-x-card.html">
+    <link rel="import" href="/components/video-x-card.html">
+    <link rel="import" href="/components/x-card.html">
+    <link rel="import" href="/components/x-cards-list.html">
 
   </head>
   <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base fullbleed">
@@ -322,9 +319,8 @@
       </neon-animated-pages>
     </template>
 
-
     <!-- JavaScript -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
-    <script src="prototype.js"></script>
+    <script src="/js/recruiting-token.js"></script>
   </body>
 </html>

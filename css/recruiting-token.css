@@ -253,13 +253,13 @@ html, body {
   font-weight: 500;
 }
 #image-1 {
-  background: url('images/Nashville.png') center / cover;
+  background: url('/images/Nashville.png') center / cover;
 }
 #image-2 {
-  background: url('images/Parthenon.jpg') center / cover;
+  background: url('/images/Parthenon.jpg') center / cover;
 }
 #image-3 {
-  background: url('images/Team.jpg') center / cover;
+  background: url('/images/Team.jpg') center / cover;
 }
 /* location stuph */
 .location-card-image.mdl-card {
@@ -278,16 +278,16 @@ html, body {
   font-weight: 500;
 }
 #spring-location {
-  background: url('images/spring.jpg') center / cover;
+  background: url('/images/spring.jpg') center / cover;
 }
 #summer-location {
-  background: url('images/summer.jpg') center / cover;
+  background: url('/images/summer.jpg') center / cover;
 }
 #fall-location {
-  background: url('images/autumn.jpg') center / cover;
+  background: url('/images/autumn.jpg') center / cover;
 }
 #winter-location {
-  background: url('images/winter.jpg') center / cover;
+  background: url('/images/winter.jpg') center / cover;
 }
 google-map {
   height: 256px;
@@ -307,7 +307,7 @@ neon-animated-pages {
   background-color: white;
 }
 #location-x-card {
-  background: url('images/Nashville.png') center / cover;
+  background: url('/images/Nashville.png') center / cover;
 }
 .location-box {
   opacity: 0.8;
@@ -340,15 +340,15 @@ i.big-icon {
 }
 #location-frontpage {
   text-align:center;
-  background: url('images/Nashville.png') center / cover;
+  background: url('/images/Nashville.png') center / cover;
 }
 #images-frontpage {
   text-align:center;
-  background: url('images/Nashville.png') center / cover;
+  background: url('/images/Nashville.png') center / cover;
 }
 #videos-frontpage {
   text-align:center;
-  background: url('images/Nashville.png') center / cover;
+  background: url('/images/Nashville.png') center / cover;
 }
 .mdl-layout__header {
   background-image: linear-gradient(45deg, #E500E7, #00D7FF);
