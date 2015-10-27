@@ -55,7 +55,6 @@
 
     <!-- Polymer -->
     <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="/components/google-map/google-map.html">
     <link rel="import" href="/components/paper-styles/paper-styles.html">
     <link rel="import" href="/components/neon-animation/neon-animated-pages.html">
     <link rel="import" href="/components/neon-animation/neon-animations.html">

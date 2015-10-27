@@ -59,6 +59,7 @@ scope._onLocationClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
+  $('google-map').resize();
 };
 
 scope._onImagesClick = function(event) {

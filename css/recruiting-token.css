@@ -289,10 +289,6 @@ html, body {
 #winter-location {
   background: url('/images/winter.jpg') center / cover;
 }
-google-map {
-  height: 256px;
-  width: 256px;
-}
 neon-animated-pages {
   height: 100%;
 }
