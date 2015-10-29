@@ -2,6 +2,7 @@ var scope = document.querySelector('template[is="dom-bind"]');
 //console.log(scope);
 
 scope._onOverviewClick = function(event) {
+  console.log(this);
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {

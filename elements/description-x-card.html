@@ -303,34 +303,36 @@
     },
 
     _onLocationClick: function(event) {
-      console.log(this.$);
+      scope = document.querySelector('template[is="dom-bind"]');
       //$('.current-section').text('Location');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
         'fade-in': event.target,
         'fade-out': event.target
       };
-      this.$.pages.selected = 4;
+      scope.$.pages.selected = 4;
     },
 
     _onImagesClick: function(event) {
+      scope = document.querySelector('template[is="dom-bind"]');
       //$('.current-section').text('Images');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
         'fade-in': event.target,
         'fade-out': event.target
       };
-      this.$.pages.selected = 5;
+      scope.$.pages.selected = 5;
     },
 
     _onVideosClick: function(event) {
+      scope = document.querySelector('template[is="dom-bind"]');
       //$('.current-section').text('Videos');
-      $('.mdl-layout__drawer').toggleClass('is-visible');
-      this.$.list.sharedElements = {
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
         'fade-in': event.target,
         'fade-out': event.target
       };
-      this.$.pages.selected = 6;
+      scope.$.pages.selected = 6;
     },
 
     properties: {
