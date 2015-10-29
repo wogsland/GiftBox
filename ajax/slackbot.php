@@ -1,9 +1,5 @@
 <?php
-include_once __DIR__.'/../config.php';
-_session_start();
-
-//if ($google_app_engine && $application_id === "s~stone-timing-557") {
-if ($google_app_engine) {
+if ($google_app_engine && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
     $url = "http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}";
     $ch = curl_init();

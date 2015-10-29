@@ -45,8 +45,8 @@ handlers:
 - url: /src/(.+\.php)$
   script: index.php
 
-- url: /ajax/(.+)/(.+)
-  script: ajax/\1.php
+- url: /ajax/(.+)
+  script: ajax/route.php
 
 # Serve php scripts.
 - url: /(.+\.php)$
