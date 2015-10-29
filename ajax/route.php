@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__.'/../config.php';
+require_once __DIR__.'/../config.php';
 _session_start();
 
 // Parse URI
@@ -18,7 +18,7 @@ foreach ($gets as $get) {
 $file1 = $endpoint_parts[2] . '.php';
 $file2 = $endpoint_parts[2] . '/' . $endpoint_parts[3] . '.php';
 if (file_exists($file1)) {
-    require $file1;
+    include $file1;
 } elseif (file_exists($file2)) {
-    require $file2;
+    include $file2;
 }
