@@ -80,7 +80,7 @@
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
-                        <i class="gt-info-company">Company Hiring</i>
+                        <i class="gt-info-company"></i>
                         <i class="current-section"></i>
                       </span>
                       <div class="mdl-layout-spacer"></div>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title">
-                        <h1 class="gt-info-jobtitle">Super Long Job Title</h1>
+                        <h1 class="gt-info-jobtitle"></h1>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>
@@ -125,9 +125,7 @@
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Job Description</h4>
-                            <p class="gt-info-overview">
-                              Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
-                            </p>
+                            <p class="gt-info-overview"></p>
                           </div>
                           <div class="mdl-row">
                             <a href="#overview-section" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option overview" on-click="_onOverviewClick">
@@ -149,29 +147,30 @@
                         </div>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
-                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
                           <i class="fa fa-twitter big-icon"></i>
                         </a>
-                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
                           <i class="fa fa-facebook big-icon"></i>
                         </a>
-                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
                           <i class="fa fa-linkedin big-icon"></i>
                         </a>
-                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
                           <i class="fa fa-youtube big-icon"></i>
                         </a>
-                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
                           <i class="fa fa-google-plus big-icon"></i>
                         </a>
-                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button">
+                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
                           <i class="fa fa-pinterest big-icon"></i>
                         </a>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
                         <div class="mdl-card mdl-cell mdl-cell--12-col" id="location-frontpage">
                           <div id="supporting-location">
-                            <i class="material-icons">room</i> Location
+                            <i class="material-icons">room</i>
+                            <i class="gt-info-location"></i>
                           </div>
                         </div>
                       </section>
@@ -316,30 +315,5 @@
     <!-- JavaScript -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
     <script src="js/recruiting-token.js"></script>
-    <script>
-    $(document).ready(function(){
-      function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-          vars[key] = value;
-        });
-        return vars;
-      }
-      url = '/ajax/recruiting_token/get/' + getUrlVars()['id'];
-      $.post(url, '', function(data) {
-        if (data.success == 'false') {
-          window.location.href = 'https://www.givetoken.com';
-        }
-        $('title').text(data.data.company+' - '+data.data.job_title);
-        $('.gt-info-company').text(data.data.company);
-        $('.gt-info-jobtitle').text(data.data.job_title);
-        $('.gt-info-overview').html(data.data.job_description);
-        $('.gt-info-skills').html(data.data.skills_required);
-        $('.gt-info-responsibilities').html(data.data.responsibilities);
-        $('.gt-info-values').html(data.data.company_values);
-        $('.gt-info-perks').html(data.data.perks);
-      },'json');
-    });
-    </script>
   </body>
 </html>

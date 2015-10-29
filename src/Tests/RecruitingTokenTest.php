@@ -1,14 +1,14 @@
 <?php
 namespace GiveToken\Tests;
 
-use \GiveToken\RecruitingToken;
+use \GiveToken\User;
 
 /**
- * This class tests the RecruitingToken class
+ * This class tests the User class
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/RecruitingTokenTest
+ * phpunit --bootstrap src/tests/autoload.php src/tests/UserTest
  */
-class RecruitingTokenTest
+class UserTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -24,8 +24,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        // $id = null case
-        $result = new RecruitingToken();
-        $this->assertEquals('GiveToken\RecruitingToken', get_class($result));
+        $result = new User();
+        $this->assertEquals('GiveToken\User', get_class($result));
+        $this->assertFalse(isset($result->email_address));
     }
 }

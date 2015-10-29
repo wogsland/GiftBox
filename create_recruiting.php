@@ -102,10 +102,10 @@ if (!logged_in() || !is_admin()) {
 			</div>
 			<div class="input-section" id="social-media-info">
 				<h1>Social Media Info</h1>
-				<?php text_input('Company\'s Facebook', 'company-facebook'); ?>
-				<?php text_input('Company\'s LinkedIn', 'company-linkedin'); ?>
-				<?php text_input('Company\'s Twitter', 'company-twitter'); ?>
-				<?php text_input('Company\'s YouTube Channel', 'company-youtube'); ?>
+				<?php text_input('Company\'s Facebook http://facebook.com/', 'company-facebook'); ?>
+				<?php text_input('Company\'s LinkedIn http://linkedin.com/', 'company-linkedin'); ?>
+				<?php text_input('Company\'s Twitter http://twitter.com/', 'company-twitter'); ?>
+				<?php text_input('Company\'s YouTube Channel http://youtube.com/', 'company-youtube'); ?>
 			</div>
 			<div class="input-section" id="button-section">
 				<button type="button" class="btn btn-primary btn-lg" id="save-button" onclick="saveRecruitingToken()">Save</button>

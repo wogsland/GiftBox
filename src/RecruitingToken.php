@@ -3,32 +3,32 @@ namespace GiveToken;
 
 class RecruitingToken
 {
-    var $id;
-    var $user_id;
-    var $job_title;
-    var $job_description;
-    var $skills_required;
-    var $responsibilities;
-    var $perks;
-    var $job_locations;
-    var $company;
-    var $salary_range;
-    var $full_time_part_time;
-    var $ask_interested;
-    var $ask_salary;
-    var $ask_remote;
-    var $company_video;
-    var $company_picture;
-    var $company_tagline;
-    var $company_values;
-    var $backdrop_picture;
-    var $backdrop_color;
-    var $style;
-    var $special_size;
-    var $company_facebook;
-    var $company_linkedin;
-    var $company_twitter;
-    var $company_youtube;
+    public $id;
+    public $user_id;
+    public $job_title;
+    public $job_description;
+    public $skills_required;
+    public $responsibilities;
+    public $perks;
+    public $job_locations;
+    public $company;
+    public $salary_range;
+    public $full_time_part_time;
+    public $ask_interested;
+    public $ask_salary;
+    public $ask_remote;
+    public $company_video;
+    public $company_picture;
+    public $company_tagline;
+    public $company_values;
+    public $backdrop_picture;
+    public $backdrop_color;
+    public $style;
+    public $special_size;
+    public $company_facebook;
+    public $company_linkedin;
+    public $company_twitter;
+    public $company_youtube;
 
     public function __construct($id = null)
     {

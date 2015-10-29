@@ -117,3 +117,36 @@ scope._onBackClick = function(event) {
 scope._onTrack = function(event) {
   $('.current-section').text(' - '+$('.gt-info-jobtitle')[0].innerHTML);
 };
+
+$(document).ready(function(){
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+    });
+    return vars;
+  }
+  url = '/ajax/recruiting_token/get/' + getUrlVars().id;
+  $.post(url, '', function(data) {
+    if (data.success == 'false') {
+      window.location.href = 'https://www.givetoken.com';
+    }
+    $('title').text(data.data.company+' - '+data.data.job_title);
+    $('.gt-info-company').text(data.data.company);
+    $('.gt-info-jobtitle').text(data.data.job_title);
+    $('.gt-info-overview').html(data.data.job_description);
+    $('.gt-info-skills').html(data.data.skills_required);
+    $('.gt-info-responsibilities').html(data.data.responsibilities);
+    $('.gt-info-values').html(data.data.company_values);
+    $('.gt-info-perks').html(data.data.perks);
+    $('.gt-info-location').html(data.data.job_locations);
+    $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
+    $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
+    $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
+    $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
+    //$('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
+    //$('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
+    $('.gt-info-gplus').attr('href', 'http://plus.google.com/');
+    $('.gt-info-pinterest').attr('href', 'http://pinterest.com/');
+  },'json');
+});
