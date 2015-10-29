@@ -1,10 +1,10 @@
 <?php
-	include_once 'config.php';
-	_session_start();
-	if (!logged_in()) {
-            header('Location: '.$app_url);
-	}
-	
+include_once 'config.php';
+_session_start();
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_url);
+}
+
 	function text_input($label, $id) {
 		echo PHP_EOL;
 		echo '			<div class="form-group form-group-lg">'.PHP_EOL;
@@ -50,7 +50,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/recruiting_token.css">
-</head>	
+</head>
 <body>
 	<div id="center-column">
 		<form class="form-horizontal" id="recruiting-token-form">
@@ -87,16 +87,16 @@
 				<?php text_input('Company Values', 'company-values'); ?>
 				<?php file_input('Backdrop Picture', 'backdrop-picture'); ?>
 				<?php text_input('Backdrop Color', 'backdrop-color'); ?>
-				<?php 
+				<?php
 					$styles[0] = 'engineering';
 					$styles[1] = 'business';
 					$styles[2] = 'creative';
-					select_input('Style', 'style', $styles); 
+					select_input('Style', 'style', $styles);
 				?>
-				<?php 
+				<?php
 					$sizes[0] = 'start-up';
 					$sizes[1] = 'fortune 100/500';
-					select_input('Special Size', 'special-size', $sizes); 
+					select_input('Special Size', 'special-size', $sizes);
 				?>
 
 			</div>
@@ -112,7 +112,7 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<script src="js/create_recruiting.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

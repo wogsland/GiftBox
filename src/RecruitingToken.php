@@ -62,7 +62,7 @@ class RecruitingToken
         foreach (get_object_vars($this) as $key => $value) {
             if ($key !== 'id') {
                 $columns .= $comma.$key;
-                $values .= $comma."'".$value."'";
+                $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';
             }
         }
@@ -113,7 +113,7 @@ class RecruitingToken
         $sql = 'UPDATE recruiting_token SET ';
         foreach (get_object_vars($this) as $key => $value) {
             if ($key !== 'id') {
-                $sql .= $comma.$key." = '".$value."'";
+                $sql .= $comma.$key." = '".escape_string($value)."'";
                 $comma = ', ';
             }
         }
@@ -135,10 +135,4 @@ class RecruitingToken
             $this->update();
         }
     }
-
-    public function render()
-    {
-    }
-
-
 }

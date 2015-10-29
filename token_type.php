@@ -1,10 +1,10 @@
 <?php
-	include_once 'config.php';
-	_session_start();
-	if (!logged_in()) {
-            header('Location: '.$app_url);
-	}
-	
+include_once 'config.php';
+_session_start();
+if (!logged_in()) {
+    header('Location: '.$app_url);
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Select Type</title>
 	<link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-	<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>	
+	<link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
   	<style>
 		html, body {
 			width: 100%;
@@ -85,9 +85,9 @@
 			height: 260px;
 			width: 260px;
 		}
-		
+
 	</style>
-</head>	
+</head>
 <body>
 	<div id="button-wrapper">
 		<div class="button-container">
@@ -104,20 +104,22 @@
 				</div>
 			</a>
 		</div>
-		<div class="button-container">
-			<a href="create_recruiting.php" class="recruiting button-link">
-				<div class="left-container">
-					<svg class="circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
-						<circle cx="130" cy="130" r="130 "fill="#43A047" />
-					</svg>
-					<i class="material-icons button-icon">work</i>
-				</div>
-				<div class="right-container">
-					<span class="button-title">Recruiting</span>
-					<p class="button-text">A Recruiting Token is an engaging way to reach out to potential candidates.  Recruiting Tokens turn plain text job descriptions into interactive experiences.  Recruiting Tokens have a proven track record of drawing larger audiances -- meaning you not only have more people clicking on your job description, but also responding to it.</p>
-				</div>
-			</a>
-		</div>
+		<?php if (is_admin()) { ?>
+			<div class="button-container">
+				<a href="create_recruiting.php" class="recruiting button-link">
+					<div class="left-container">
+						<svg class="circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
+							<circle cx="130" cy="130" r="130 "fill="#43A047" />
+						</svg>
+						<i class="material-icons button-icon">work</i>
+					</div>
+					<div class="right-container">
+						<span class="button-title">Recruiting</span>
+						<p class="button-text">A Recruiting Token is an engaging way to reach out to potential candidates.  Recruiting Tokens turn plain text job descriptions into interactive experiences.  Recruiting Tokens have a proven track record of drawing larger audiances -- meaning you not only have more people clicking on your job description, but also responding to it.</p>
+					</div>
+				</a>
+			</div>
+		<?php }?>
 	</div>
 </body>
 </html>

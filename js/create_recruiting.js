@@ -17,16 +17,16 @@ function handleImageFileSelect(evt) {
 		}
 		var baseId = this.id.replace("-input", "");
 		var img = $("#"+baseId+"-img");
-		
+
 		// Set the value of the hidden field to the file name
 		$("#"+baseId).val(file.name);
-		
+
 		// Set the src of the img element
 		img.attr("src", window.URL.createObjectURL(file));
-		
+
 		// Save a reference to the file Object for later saving
 		img.data("file", file);
-		
+
 		// Set the dirty flag so the file gets saved
 		img.data("saved", false);
 	}
@@ -61,9 +61,9 @@ function saveRecruitingToken() {
 	var tokenId = null;
 	var userId = null;
 	$("#save-button").html("Saving...");
-	
+
 	// Save the token first so we can use the ID in the file path:  userId/tokenId/fileName
-	$.post("save_recruiting_token_ajax.php", $("#recruiting-token-form").serialize(), function(data, textStatus){
+	$.post("/ajax/recruiting_token/save/", $("#recruiting-token-form").serialize(), function(data, textStatus){
 		if(data.status === "SUCCESS") {
 			$("#id").val(data.token_id);
 			tokenId = data.token_id;
@@ -93,14 +93,16 @@ function saveRecruitingToken() {
 					$("#company-picture").val(companyfileName);
 				}
 			}
-			$("#save-button").html("Save");
+			// redirect to newly created token
+			window.location.href = "/recruiting_token.php?id="+data.token_id;
 		} else if (data.status === "ERROR") {
 			alert(data.message);
 		}  else {
 			alert(textStatus);
 		}
-	}).fail(function() {
+		$("#save-button").html("Save");
+	},'json').fail(function() {
 		alert("Save failed");
 	});
-	
+
 }

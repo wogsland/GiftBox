@@ -115,6 +115,5 @@ scope._onBackClick = function(event) {
 };
 
 scope._onTrack = function(event) {
-  //console.log(this.$);
-  $('.current-section').text(' - Super Long Job Title');
+  $('.current-section').text(' - '+$('.gt-info-jobtitle')[0].innerHTML);
 };

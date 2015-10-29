@@ -80,7 +80,8 @@
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
-                        Company Hiring <i class="current-section"></i>
+                        <i class="gt-info-company">Company Hiring</i>
+                        <i class="current-section"></i>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>
@@ -90,7 +91,7 @@
                     </div>
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title">
-                        <h1>Super Long Job Title</h1>
+                        <h1 class="gt-info-jobtitle">Super Long Job Title</h1>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>
@@ -124,7 +125,7 @@
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Job Description</h4>
-                            <p>
+                            <p class="gt-info-overview">
                               Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
                             </p>
                           </div>
@@ -315,5 +316,30 @@
     <!-- JavaScript -->
     <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
     <script src="js/recruiting-token.js"></script>
+    <script>
+    $(document).ready(function(){
+      function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+      }
+      url = '/ajax/recruiting_token/get/' + getUrlVars()['id'];
+      $.post(url, '', function(data) {
+        if (data.success == 'false') {
+          window.location.href = 'https://www.givetoken.com';
+        }
+        $('title').text(data.data.company+' - '+data.data.job_title);
+        $('.gt-info-company').text(data.data.company);
+        $('.gt-info-jobtitle').text(data.data.job_title);
+        $('.gt-info-overview').html(data.data.job_description);
+        $('.gt-info-skills').html(data.data.skills_required);
+        $('.gt-info-responsibilities').html(data.data.responsibilities);
+        $('.gt-info-values').html(data.data.company_values);
+        $('.gt-info-perks').html(data.data.perks);
+      },'json');
+    });
+    </script>
   </body>
 </html>
