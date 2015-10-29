@@ -81,7 +81,7 @@ if (!logged_in() || !is_admin()) {
 			</div>
 			<div class="input-section" id="advanced-info">
 				<h1>Advanced Info</h1>
-				<?php text_input('Company Video', 'company-video'); ?>
+				<?php text_input('Company Video (must be embed link)', 'company-video'); ?>
 				<?php file_input('Company Picture', 'company-picture'); ?>
 				<?php text_input('Company TagLine (14-0 char)', 'company-tagline'); ?>
 				<?php text_input('Company Values', 'company-values'); ?>

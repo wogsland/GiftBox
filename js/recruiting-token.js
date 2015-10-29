@@ -148,5 +148,8 @@ $(document).ready(function(){
     //$('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
     $('.gt-info-gplus').attr('href', 'http://plus.google.com/');
     $('.gt-info-pinterest').attr('href', 'http://pinterest.com/');
+    if (data.data.company_video !== '') {
+      $('.gt-info-video').attr('src', data.data.company_video);
+    }
   },'json');
 });
