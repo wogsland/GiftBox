@@ -16,4 +16,4 @@ components
 # Polybuild #
 #############
 recruiting_token.build.html
-recruiting_token.build.js
+js/recruiting_token.min.js

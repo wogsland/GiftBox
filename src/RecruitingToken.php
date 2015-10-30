@@ -4,6 +4,7 @@ namespace GiveToken;
 class RecruitingToken
 {
     public $id;
+    public $long_id;
     public $user_id;
     public $job_title;
     public $job_description;
@@ -30,10 +31,20 @@ class RecruitingToken
     public $company_twitter;
     public $company_youtube;
 
-    public function __construct($id = null)
+    /**
+     * This function constructs the class
+     *
+     * @param mixed $value - optional id of the token
+     * @param string $key - optional parameter to test $value against: 'id' (default) or 'long_id'
+     */
+    public function __construct($value = null, $key = null)
     {
-        if ($id !== null) {
-            $token = execute_query("SELECT * from recruiting_token where id = '$id'")->fetch_object("GiveToken\RecruitingToken");
+        if ($value !== null) {
+            if ($key == null || !in_array($key, array('id','long_id'))) {
+              $key = 'id';
+            }
+            $token = execute_query("SELECT * FROM recruiting_token
+                WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
             foreach (get_object_vars($token) as $key => $value) {
                 $this->$key = $value;
             }
@@ -133,6 +144,27 @@ class RecruitingToken
             $this->insert();
         } else {
             $this->update();
+        }
+    }
+
+    /**
+     * This function tests a long_id for uniqueness
+     *
+     * @param string $long_id - optional id to test (defaults to class property)
+     *
+     * @return boolean - is it unique
+     */
+    public function uniqueLongId($long_id = '')
+    {
+        if ('' == $long_id) {
+            $long_id = $this->long_id;
+        }
+        $sql = "SELECT id FROM recruiting_token WHERE long_id = '$long_id'";
+        $result = execute_query($sql);
+        if (0 == $result->num_rows) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

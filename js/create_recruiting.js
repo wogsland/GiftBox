@@ -94,7 +94,7 @@ function saveRecruitingToken() {
 				}
 			}
 			// redirect to newly created token
-			window.location.href = "/recruiting_token.php?id="+data.token_id;
+			window.location.href = "/token/recruiting/"+data.token_id;
 		} else if (data.status === "ERROR") {
 			alert(data.message);
 		}  else {

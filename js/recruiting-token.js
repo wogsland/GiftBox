@@ -126,30 +126,47 @@ $(document).ready(function(){
     });
     return vars;
   }
-  url = '/ajax/recruiting_token/get/' + getUrlVars().id;
-  $.post(url, '', function(data) {
-    if (data.success == 'false') {
-      window.location.href = 'https://www.givetoken.com';
-    }
-    $('title').text(data.data.company+' - '+data.data.job_title);
-    $('.gt-info-company').text(data.data.company);
-    $('.gt-info-jobtitle').text(data.data.job_title);
-    $('.gt-info-overview').html(data.data.job_description);
-    $('.gt-info-skills').html(data.data.skills_required);
-    $('.gt-info-responsibilities').html(data.data.responsibilities);
-    $('.gt-info-values').html(data.data.company_values);
-    $('.gt-info-perks').html(data.data.perks);
-    $('.gt-info-location').html(data.data.job_locations);
-    $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
-    $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
-    $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
-    $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
-    //$('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
-    //$('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
-    $('.gt-info-gplus').attr('href', 'http://plus.google.com/');
-    $('.gt-info-pinterest').attr('href', 'http://pinterest.com/');
-    if (data.data.company_video !== '') {
-      $('.gt-info-video').attr('src', data.data.company_video);
-    }
-  },'json');
+  function getUrlPath() {
+    var vars = {};
+    i = 0;
+    var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
+      vars[i] = value;
+      i++;
+    });
+    return vars;
+  }
+  //url = '/ajax/recruiting_token/get/' + getUrlVars().id;
+  path = getUrlPath();
+  console.log(path);
+  if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
+    url = '/ajax/recruiting_token/get' + path[4];
+    $.post(url, '', function(data) {
+      if (data.success == 'false') {
+        //window.location.href = 'https://www.givetoken.com';
+      }
+      $('title').text(data.data.company+' - '+data.data.job_title);
+      $('.gt-info-company').text(data.data.company);
+      $('.gt-info-jobtitle').text(data.data.job_title);
+      $('.gt-info-overview').html(data.data.job_description);
+      $('.gt-info-skills').html(data.data.skills_required);
+      $('.gt-info-responsibilities').html(data.data.responsibilities);
+      $('.gt-info-values').html(data.data.company_values);
+      $('.gt-info-perks').html(data.data.perks);
+      $('.gt-info-location').html(data.data.job_locations);
+      $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
+      $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
+      $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
+      $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
+      //$('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
+      //$('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
+      $('.gt-info-gplus').attr('href', 'http://plus.google.com/');
+      $('.gt-info-pinterest').attr('href', 'http://pinterest.com/');
+      if (data.data.company_video !== '') {
+        $('.gt-info-video').attr('src', data.data.company_video);
+      }
+    },'json');
+  } else {
+    console.log('redirecting...');
+    //window.location.href = 'https://www.givetoken.com';
+  }
 });
