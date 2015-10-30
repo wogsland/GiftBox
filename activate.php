@@ -1,8 +1,8 @@
 <?php
+use \GiveToken\EventLogger;
+
 include_once 'config.php';
-include_once 'util.php';
 include_once 'database.php';
-include_once 'EventLogger.class.php';
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
 	$user_id = $_GET['uid'];
@@ -12,7 +12,7 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
 		if ($rows_affected != 1) {
 			throw new Exception('Update failed');
 		}
-		$event = new EventLogger($user_id, ACTIVATE_ACCOUNT);
+		$event = new EventLogger($user_id, EventLogger::ACTIVATE_ACCOUNT);
 		$event->log();
 		echo '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
 	} catch (Exception $e) {
@@ -22,5 +22,5 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
 } else {
 	echo '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
 }
- 
+
 ?>

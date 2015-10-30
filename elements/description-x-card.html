@@ -1,0 +1,316 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<dom-module id="description-x-card">
+  <style>
+
+    :host {
+      display: block;
+      overflow: hidden;
+    }
+
+    #placeholder {
+      opacity: 0;
+      background-color: grey;
+    }
+
+  </style>
+  <template>
+
+    <div id="placeholder" class="fit"></div>
+
+    <div id="container">
+      <div class="fit layout vertical center-center">
+        <div class="fit layout horizontal large">
+
+          <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+              <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title long-title">
+                  <i class="gt-info-company"></i>
+                  - <i class="gt-info-jobtitle"></i>
+                  - <i class="current-section">Overview</i>
+                </span>
+                <div class="mdl-layout-spacer"></div>
+              </div>
+            </header>
+            <div class="mdl-layout__drawer" id="menuDrawer">
+              <!--<span class="mdl-layout-title">Job Description</span>-->
+              <nav class="mdl-navigation">
+                <a class="mdl-layout-title mdl-navigation__link">Job Description</a>
+                <a id="overview-drawer" class="mdl-navigation__link" href="#overview-section" on-click="_onOverviewClick">Overview</a>
+                <a id="skills-drawer"  class="mdl-navigation__link" href="#skills-section" on-click="_onSkillsClick">Skills Required</a>
+                <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
+                <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
+                <a id="perks-drawer"  class="mdl-navigation__link" href="#perks-section" on-click="_onPerksClick">Perks</a>
+                <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" href="#location-section" on-click="_onLocationClick">Location</a>
+                <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" href="#images-section" on-click="_onImagesClick">Images</a>
+                <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" href="#videos-section" on-click="_onVideosClick">Videos</a>
+              </nav>
+            </div>
+            <main class="mdl-layout__content">
+              <div class="mdl-layout__tab-panel is-active" id="overview">
+      <!--
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                      <h4 class="mdl-cell mdl-cell--12-col">Job Description</h4>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>Overview</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>Skills Required</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>Responsibilites</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>Values</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>Perks</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text mdl-grid mdl-grid--no-spacing">
+                      <h4 class="mdl-cell mdl-cell--12-col">Overview</h4>
+                      <div class="section__circle-container mdl-cell mdl-cell--2-col mdl-cell--1-col-phone">
+                        <div class="section__circle-container__circle mdl-color--primary"></div>
+                      </div>
+                      <div class="section__text mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
+                        <h5>High Level Description</h5>
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Duis nulla tempor do aute et eiusmod velit exercitation nostrud quis <a href="#">proident minim</a>.
+                      </div>
+                    </div>
+                    <div class="mdl-card__actions">
+                      <a href="#" class="mdl-button">Read more</a>
+                    </div>
+                  </div>
+                </section>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text mdl-color--primary">
+                      <h4 class="mdl-color--primary">Overview</h4>
+                      Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                    </div>
+                    <div class="mdl-card__actions">
+                      <a href="#" class="mdl-button">Read more</a>
+                    </div>
+                  </div>
+                </section>
+      -->
+                <a id="overview-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+      <!--              <div class="mdl-card__title mdl-color--primary">
+                      <h2 class="mdl-card__title-text mdl-color-text--primary-contrast">Overview</h2>
+                    </div>
+      -->
+                    <div class="mdl-card__supporting-text">
+                      <h4 class="mdl-color-text--primary-dark">Overview</h4>
+                      <p class="gt-info-overview">
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+                <a id="skills-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text">
+                      <h4 class="mdl-color-text--primary-dark">Skills Required</h4>
+                      <p class="gt-info-skills">
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+                <a id="responsibilities-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text">
+                      <h4 class="mdl-color-text--primary-dark">Responsibilities</h4>
+                      <p class="gt-info-responsibilities">
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+                <a id="values-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text">
+                      <h4 class="mdl-color-text--primary-dark">Values</h4>
+                      <p class="gt-info-values">
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+                <a id="perks-section"></a>
+                <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                  <div class="mdl-card mdl-cell mdl-cell--12-col">
+                    <div class="mdl-card__supporting-text">
+                      <h4 class="mdl-color-text--primary-dark">Perks</h4>
+                      <p class="gt-info-perks">
+                        Dolore ex deserunt aute fugiat aute nulla ea sunt aliqua nisi cupidatat eu. Nostrud in laboris labore nisi amet do dolor eu fugiat consectetur elit cillum esse. Pariatur occaecat nisi laboris tempor laboris eiusmod qui id Lorem esse commodo in. Exercitation aute dolore deserunt culpa consequat elit labore incididunt elit anim.
+                      </p>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="section--footer mdl-color--light-grey mdl-grid">
+                </section>
+              </div>
+            </main>
+          </div>
+        </div>
+      </div>
+      <content select="div"></content>
+    </div>
+
+  </template>
+</dom-module>
+
+<script>
+(function() {
+  Polymer({
+    is: 'description-x-card',
+
+    behaviors: [
+      Polymer.NeonSharedElementAnimatableBehavior
+    ],
+
+    _onOverviewClick: function(event) {
+      $('.current-section').text('Overview');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onSkillsClick: function(event) {
+      $('.current-section').text('Skills Required');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onValuesClick: function(event) {
+      $('.current-section').text('Values');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onResponsibilitiesClick: function(event) {
+      $('.current-section').text('Responsibilities');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onPerksClick: function(event) {
+      $('.current-section').text('Perks');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+    },
+
+    _onLocationClick: function(event) {
+      scope = document.querySelector('template[is="dom-bind"]');
+      //$('.current-section').text('Location');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      scope.$.pages.selected = 4;
+    },
+
+    _onImagesClick: function(event) {
+      scope = document.querySelector('template[is="dom-bind"]');
+      //$('.current-section').text('Images');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      scope.$.pages.selected = 5;
+    },
+
+    _onVideosClick: function(event) {
+      scope = document.querySelector('template[is="dom-bind"]');
+      //$('.current-section').text('Videos');
+      $('.mdl-layout__drawer').removeClass('is-visible');
+      scope.$.list.sharedElements = {
+        'fade-in': event.target,
+        'fade-out': event.target
+      };
+      scope.$.pages.selected = 6;
+    },
+
+    properties: {
+      animationConfig: {
+        value: function() {
+          return {
+            'entry': [{
+              name: 'ripple-animation',
+              id: 'ripple',
+              toPage: this
+            }, {
+              name: 'fade-out-animation',
+              node: this.$.placeholder,
+              timing: {
+                delay: 250
+              }
+            }, {
+              name: 'fade-in-animation',
+              node: this.$.container,
+              timing: {
+                delay: 50
+              }
+            }],
+
+            'exit': [{
+              name: 'opaque-animation',
+              node: this.$.placeholder
+            }, {
+              name: 'fade-out-animation',
+              node: this.$.container,
+              timing: {
+                duration: 0
+              }
+            }, {
+              name: 'reverse-ripple-animation',
+              id: 'reverse-ripple',
+              fromPage: this
+            }]
+          };
+        }
+      },
+
+      sharedElements: {
+        value: function() {
+          return {
+            'ripple': this.$.placeholder,
+            'reverse-ripple': this.$.placeholder
+          };
+        }
+      }
+    }
+  });
+})();
+</script>

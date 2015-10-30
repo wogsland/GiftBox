@@ -1,11 +1,11 @@
 <?php
 	function escape_string($string) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		return $mysqli->real_escape_string($string);
 	}
-	
+
 	function execute_query($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		if ($result = $mysqli->query($sql)) {
 			return $result;
 		} else {
@@ -15,7 +15,7 @@
 	}
 
 	function execute($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -24,7 +24,7 @@
 	}
 
 	function insert($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -34,7 +34,7 @@
 	}
 
 	function update($sql) {
-		include 'database.php';
+		include __DIR__.'/database.php';
 		debug_output($sql);
 		if (!$mysqli->query($sql)) {
 			error_log($sql);
@@ -42,7 +42,7 @@
 		}
 		return $mysqli->affected_rows;
 	}
-	
+
 	function logged_in() {
 		$logged_in = FALSE;
 		if (isset($_SESSION['user_id'])) {
@@ -50,7 +50,7 @@
 		}
 		return $logged_in;
 	}
-	
+
 	function is_admin() {
 		$retval = FALSE;
 		if (isset($_SESSION['admin'])) {
@@ -70,7 +70,7 @@
 		}
 		return $debug;
 	}
-	
+
 	function debug_output($text) {
 		if (debug()) {
 			echo "<pre>";
@@ -80,7 +80,7 @@
 			echo $text."</pre>\n";
 		}
 	}
-	
+
 	function youtube_id($url) {
 		$id = null;
 		if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
@@ -88,7 +88,7 @@
 		}
 		return $id;
 	}
-	
+
 	function is_youtube($url) {
 		$retval = false;
 		if (strpos($url, 'youtube.com') !== FALSE || strpos($url, 'youtu.be') !== FALSE) {
@@ -104,7 +104,7 @@
 		}
 		return $retval;
 	}
-	
+
 	function is_soundcloud($url) {
 		$retval = false;
 		if (strpos($url, 'soundcloud.com') !== FALSE) {
@@ -112,7 +112,7 @@
 		}
 		return $retval;
 	}
-	
+
 	function is_selected($field_value, $data_value, $select_string = 'selected') {
 		$retval = null;
 		if ($field_value == $data_value) {
@@ -120,10 +120,9 @@
 		}
 		return $retval;
 	}
-	
+
 	function _session_start() {
-		include 'database.php';
-		require 'Zebra_Session.php';
+		include __DIR__.'/database.php';
 		$session = new Zebra_Session($mysqli, 'sEcUr1tY_c0dE');
 		return $session;
 	}

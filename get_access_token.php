@@ -1,5 +1,5 @@
 <?php
-include_once 'util.php';
+include_once 'config.php';
 _session_start();
 
 if (isset($_SESSION['user_id'])) {

@@ -24,6 +24,27 @@ hosted on Google Cloud
 
 To create a local instance of the givetoken database. Refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing).
 
+## <a name="composer"></a>Composer
+
+[Composer](https://getcomposer.org/) is the PHP package manager used to bring in
+3rd party PHP code. Once you have it in installed, cd to the project directory and
+run
+
+    composer install
+    composer update
+
+which will create everything you need in the untracked vendor directory.
+
+## <a name="bower"></a>Bower
+
+[Bower](http://bower.io/) is a package manager used to bring in Polymer
+components. Once you have it in installed, cd to the project directory and
+run
+
+    bower install
+
+which will create everything you need in the untracked components directory.
+
 ## <a name="branching"></a>Branching Strategy
 
 ### Basic Tenets
@@ -104,7 +125,7 @@ once the PR has been approved and merged
 - Push code to production site, as described in the deployment procedures
 
 Use [gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) and [cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)for reference.
-### Example Workflow from Start to Finish Feature. 
+### Example Workflow from Start to Finish Feature.
 ___
 
 - `git checkout develop`
@@ -233,5 +254,31 @@ When deploying using the following procedures, *be absolutely sure* that you are
 
 *protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
 
+## <a name="testing"></a>Testing
+
+Presuming you have set up [Composer](#composer), then PHPUnit will be available
+in your /vendor/bin directory. To run all the tests, just reference the
+configuration file:
+
+    phpunit --bootstrap src/tests/autoload.php -c tests.xml
+
+To also investigate the code coverage of the tests, you'll need the
+[Xdebug PHP extension](http://xdebug.org/docs/install).
+Make sure you put any unit tests in the tests directory and name them like
+whateverTest.php.
+
+## Polybuild
+
+Polymer provides a tool to optimize & minify an app's code which you can get via
+
+    npm install -g polybuild
+
+and build the recruiting token with
+
+    polybuild --maximum-crush recruiting_token.php
+
+which creates `recruiting_token.build.html` & `recruiting_token.build.js`. This
+will be useful if we're doing all our DB interaction via AJAX (it treats PHP
+like a comment and removes it).
+
 # GMP was here
-# Testing

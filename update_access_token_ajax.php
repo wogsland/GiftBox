@@ -1,10 +1,10 @@
 <?php
+use \GiveToken\User;
+use \GiveToken\EventLogger;
+
 include_once 'config.php';
 include_once 'util.php';
-include_once 'EventLogger.class.php';
-require 'User.class.php';
 _session_start();
-
 
 $response['status'] = 'ERROR';
 if(isset($_SESSION['user_id'])){
@@ -20,8 +20,6 @@ if($user != null && isset($_POST['access_token'])){
 	$access_token = $_POST['access_token'];
 	$user->update_token($access_token, $user->getId());
 	$response['status'] = 'SUCCESS';
-	$event = new EventLogger($user->getId(), UPDATE_ACCOUNT_INFO);
-	$event->log();
 }
 
 header('Content-Type: application/json');

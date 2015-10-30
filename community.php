@@ -1,127 +1,43 @@
 <?php
-include_once 'util.php';
 include_once 'config.php';
 
-	_session_start();
+_session_start();
 
-	$message = null;
-	$first_name = null;
-	$last_name = null;
-	$email = null;
-	$user_id = null;
-	
-	if (logged_in()){
-		$results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
-		if ($results->num_rows == 1) {
-			$user = $results->fetch_object();
-			$first_name = $user->first_name;
-			$last_name = $user->last_name;
-			$email = $user->email_address;
-			$level = $user->name;
-			$user_id = $user->id;
-		}
-	}
+$message = null;
+$first_name = null;
+$last_name = null;
+$email = null;
+$user_id = null;
 
+if (logged_in()){
+    $results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
+    if ($results->num_rows == 1) {
+        $user = $results->fetch_object();
+        $first_name = $user->first_name;
+        $last_name = $user->last_name;
+        $email = $user->email_address;
+        $level = $user->name;
+        $user_id = $user->id;
+    }
+}
+
+define('TITLE', 'GiveToken.com - Community Page');
+include __DIR__.'/header.php';
 ?>
-
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="Gary Peters">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<!-- SITE TITLE -->
-<title>GiveToken.com - Community Page</title>
-
-<!-- =========================
-      FAV AND TOUCH ICONS  
-
-<link rel="icon" href="assets/img/favicon.ico">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png">
-============================== -->
-
-	<!-- Favicon -->
-	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="assets/gt-favicons.ico/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/gt-favicons.ico/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="assets/gt-favicons.ico/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="assets/gt-favicons.ico/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="assets/gt-favicons.ico/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="assets/gt-favicons.ico/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/gt-favicons.ico/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="assets/gt-favicons.ico/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/gt-favicons.ico/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/gt-favicons.ico/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="assets/gt-favicons.ico/favicon-16x16.png">
-	<link rel="manifest" href="assets/gt-favicons.ico/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<!-- endFavicon -->
-
-<!-- =========================
-     STYLESHEETS   
-============================== -->
-<!-- BOOTSTRAP -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-<!-- FONT ICONS -->
-<link rel="stylesheet" href="assets/elegant-icons/style.css">
-<link rel="stylesheet" href="assets/app-icons/styles.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
-
-<!-- WEB FONTS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
-
-<!-- CAROUSEL AND LIGHTBOX -->
-<link rel="stylesheet" href="css/owl.theme.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/nivo-lightbox.css">
-<link rel="stylesheet" href="css/nivo_themes/default/default.css">
-
-<!-- ANIMATIONS -->
-<link rel="stylesheet" href="css/animate.min.css">
-
-<!-- CUSTOM STYLESHEETS -->
-<link rel="stylesheet" href="css/styles.css">
-
-<!-- COLORS -->
-<link rel="stylesheet" href="css/colors.css">
-
-<!-- RESPONSIVE FIXES -->
-<link rel="stylesheet" href="css/responsive.css">
-
 <link rel="stylesheet" href="css/magnific-popup.css">
-
-
-
-<!--[if lt IE 9]>
-			<script src="js/html5shiv.js"></script>
-			<script src="js/respond.min.js"></script>
-<![endif]-->
-
-<!-- JQUERY -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </head>
 
 <body id="profile-page">
 <!-- =========================
-     PRE LOADER       
+     PRE LOADER
 ============================== -->
 <div class="preloader">
   <div class="status">&nbsp;</div>
 </div>
 
 <!-- =========================
-     HEADER   
+     HEADER
 ============================== -->
 
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile">
@@ -133,7 +49,7 @@ include_once 'config.php';
 	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
 		<div class="container">
 			<div class="navbar-header">
-				
+
 				<!-- LOGO ON STICKY NAV BAR -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
 				<span class="sr-only">Toggle navigation</span>
@@ -142,9 +58,9 @@ include_once 'config.php';
 				<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.php#"><img src="assets/img/logo-light.png" alt=""></a>
-				
+
 			</div>
-			
+
 			<!-- NAVIGATION LINKS -->
 			<div class="navbar-collapse collapse" id="kane-navigation">
 				<ul class="nav navbar-nav navbar-right main-navigation">
@@ -165,7 +81,7 @@ include_once 'config.php';
 			</div>
 		</div> <!-- /END CONTAINER -->
 	</div> <!-- /END STICKY NAVIGATION -->
-	
+
 </div>
 
 </header>
@@ -185,14 +101,14 @@ include_once 'config.php';
 					            <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
 					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>
 					            <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
-					        
+
 					            <div class="mb20"></div>
-					        
+
 					            <div class="btn-group">
-					                <a href="create.php" class="btn btn-primary btn-bordered">Create GiveToken</a>
-					                <a href="create.php" class="btn btn-primary btn-bordered">Send GiveToken</a>
+					                <a href="token_type.php" class="btn btn-primary btn-bordered">Create GiveToken</a>
+					                <a href="token_type.php" class="btn btn-primary btn-bordered">Send GiveToken</a>
 					            </div>
-					            
+
 					            <div class="mb20"></div>
 					        </div>
 					        <h5 class="md-title">Welcome to the Community Page!</h5>
@@ -402,7 +318,7 @@ include_once 'config.php';
 							            	</div>
 							            	<div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 							        	</div>
@@ -535,7 +451,7 @@ include_once 'config.php';
 								            </div>
 								            <div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 										</div>
@@ -554,7 +470,7 @@ include_once 'config.php';
 								            </div>
 								            <div class="timeline-body">
 						    					<div class="video">
-													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+													<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 												</div>
 											</div>
 										</div>
@@ -668,7 +584,7 @@ include_once 'config.php';
 										<p>
 										    GiveToken adds an increased level of sharability through social media and email. Mixing that with key-words and videos will have a drastic impact in search
 										    engine rankings and site visits
-										</p>					            	
+										</p>
 									</div>
 					        	</div>
 					        </li>
@@ -681,7 +597,7 @@ include_once 'config.php';
 						            </div>
 						            <div class="timeline-body">
 				    					<div class="video">
-											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+											<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 										</div>
 									</div>
 								</div>
@@ -693,7 +609,7 @@ include_once 'config.php';
 			    		<ul class="videos">
 			    			<li>
 					    		<div class="video">
-									<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> 
+									<iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 								</div>
 							</li>
 						</ul>
@@ -788,7 +704,7 @@ include_once 'config.php';
 		    				 	<div class="timeline-panel">
 			    				 	<div class="text-center">
 							            <img src="assets/img/user.png" class="img-circle img-offline img-responsive img-profile" alt="">
-							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Juice Plus, Inc.</a></h4>							            
+							            <h4 class="profile-name mb5"><i class="fa fa-briefcase"></i><a href=""> Juice Plus, Inc.</a></h4>
 							            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Memphis, Tenneessee, USA</div>
 							        </div>
 								</div>
@@ -840,67 +756,12 @@ include_once 'config.php';
 	</div>
 </section>
 
+<header class="header" data-stellar-background-ratio="0.5" id="account-profile"></header>
 
-<script>
+<?php include __DIR__.'/footer.php';?>
 
-function togglePost(){
-	var val = this.id.substring('post-title'.length);
-	if (document.getElementById('full-post' + val).style.display == 'none'){
-		expandPost(this);
-	} else {
-		shrinkPost(this);
-	}
-}
-
-function expandPost(el){
-	var val = el.id.substring('post-title'.length);
-	document.getElementById('full-post' + val).style.display = 'initial';
-	document.getElementById('preview' + val).style.display = 'none';
-
-	var li = document.getElementsByClassName('headers');
-	for(i = 0; i < li.length; i++){
-		var val2 = li[i].id.substring('post-title'.length);
-		if(val != val2){
-			shrinkPost(li[i]);
-		}
-	}
-}
-
-function shrinkPost(el){
-	var val = el.id.substring('post-title'.length);
-	document.getElementById('full-post' + val).style.display = 'none';
-	document.getElementById('preview' + val).style.display = 'initial';
-}
-
-var els = document.getElementsByClassName('headers');
-for(i = 0; i < els.length; i++){
-	els[i].onclick = togglePost;
-}
-</script>
-
-<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
-
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
+<script src="js/community.js"></script>
 <script src="js/jquery.magnific-popup.js"></script>
-<script src="js/facebook_init.js"></script>
-<script src="js/login.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/account.js"></script>
 
 </body>
 </html>

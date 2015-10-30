@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include __DIR__.'/config.php';
 if ($google_app_engine) {
 	$mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {

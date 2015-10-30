@@ -1,92 +1,10 @@
 <?php
-	include_once 'util.php';
-	include_once 'config.php';
-	_session_start();
+include_once __DIR__.'/config.php';
+_session_start();
+
+define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
+include __DIR__.'/header.php';
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="description" content="">
-<meta name="keywords" content="">
-<meta name="author" content="Gary Peters">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-<!-- SITE TITLE -->
-<title>GiveToken.com - Create your next message with GiveToken</title>
-
-<!-- =========================
-      FAV AND TOUCH ICONS
-
-<link rel="icon" href="assets/img/favicon.ico">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png">
-============================== -->
-	<!-- Favicon -->
-	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="assets/gt-favicons.ico/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/gt-favicons.ico/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="assets/gt-favicons.ico/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="assets/gt-favicons.ico/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="assets/gt-favicons.ico/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="assets/gt-favicons.ico/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="assets/gt-favicons.ico/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="assets/gt-favicons.ico/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="assets/gt-favicons.ico/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/gt-favicons.ico/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="assets/gt-favicons.ico/favicon-16x16.png">
-	<link rel="manifest" href="assets/gt-favicons.ico/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
-	<!-- endFavicon -->
-
-
-
-<!-- =========================
-     STYLESHEETS
-============================== -->
-<!-- BOOTSTRAP -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-<!-- FONT ICONS -->
-<link rel="stylesheet" href="assets/elegant-icons/style.css">
-<link rel="stylesheet" href="assets/app-icons/styles.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
-
-<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-
-<!-- WEB FONTS -->
-<link href='//fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
-
-<!-- CAROUSEL AND LIGHTBOX -->
-<link rel="stylesheet" href="css/owl.theme.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/nivo-lightbox.css">
-<link rel="stylesheet" href="css/nivo_themes/default/default.css">
-
-<!-- ANIMATIONS -->
-<link rel="stylesheet" href="css/animate.min.css">
-
-<!-- CUSTOM STYLESHEETS -->
-<link rel="stylesheet" href="css/styles.css">
-
-<!-- COLORS -->
-<link rel="stylesheet" href="css/colors.css">
-
-<!-- RESPONSIVE FIXES -->
-<link rel="stylesheet" href="css/responsive.css">
-
-<!--[if lt IE 9]>
-			<script src="js/html5shiv.js"></script>
-			<script src="js/respond.min.js"></script>
-<![endif]-->
-
-<!-- JQUERY -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 <script>
 	function changePage(event) {
@@ -102,7 +20,6 @@
 </script>
 
 </head>
-
 <body>
 	<?php include_once("analyticstracking.php") ?>
 
@@ -134,7 +51,7 @@
 				<span class="icon-bar"></span>
 				</button>
 
-				<a class="navbar-brand" href="<?php echo $app_root ?>"><img src="assets/img/logo-light.png" alt=""></a>
+				<a class="navbar-brand" href="<?php echo $app_root ?>"><img src="/assets/img/logo-light.png" alt=""></a>
 
 			</div>
 
@@ -169,7 +86,7 @@
 		<div class="only-logo">
 			<div class="navbar">
 <!-- 				<div class="navbar-header">
-					<img src="assets/img/logo-light.png" alt="">
+					<img src="/assets/img/logo-light.png" alt="">
 				</div> -->
 			</div>
 		</div> <!-- /END ONLY LOGO ON HEADER -->
@@ -189,7 +106,7 @@
 					<div class="buttons" id="login-button">
 						<?php
 						if (logged_in()) {
-							echo '<a href="create.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
+							echo '<a href="token_type.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
 						} else {
 							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
 							echo ' or ';
@@ -204,7 +121,7 @@
 
 			</div>
 
-			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
+			<div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="/assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
 		</div>
 		<!-- /END ROW -->
 
@@ -300,7 +217,7 @@
 
 		</div>
 		<!-- /END SINGLE SERVICE -->
-		
+
 	</div>
 	<!-- /END ROW -->
 
@@ -472,7 +389,7 @@
 			<div class="row">
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-ipad.png" alt="token-ipad" width="585" height="418">
+					<img class="img-responsive" src="/assets/img/token-ipad.png" alt="token-ipad" width="585" height="418">
 				</div>
 
 				<!-- RIGHT SIDE WITH BRIEF -->
@@ -523,7 +440,7 @@
 				<!-- /END LEFT BRIEF -->
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
+					<img class="img-responsive" src="/assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
 				</div>
 
 			</div>
@@ -543,7 +460,7 @@
 			<div class="row">
 
 				<div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-					<img class="img-responsive" src="assets/img/token-macbook.png" alt="token-macbook" width="585" height="311">
+					<img class="img-responsive" src="/assets/img/token-macbook.png" alt="token-macbook" width="585" height="311">
 				</div>
 
 				<!-- RIGHT SIDE WITH BRIEF -->
@@ -600,31 +517,31 @@
 		<div id="screenshots" class="owl-carousel owl-theme">
 
 			<div class="shot">
-				<a href="assets/img/tokens/acentertainment.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/acentertainment.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/acentertainment.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/acentertainment.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/boca-hh.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/boca-hh.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/boca-hh.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/boca-hh.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/fedex.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/fedex.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/fedex.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/fedex.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/home-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/home-depot.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/home-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/home-depot.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/office-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/office-depot.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/office-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/office-depot.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/second-harvest.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/second-harvest.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/second-harvest.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/second-harvest.jpg" alt="Screenshot"></a>
 			</div>
 
 			<div class="shot">
-				<a href="assets/img/tokens/stjudes.jpg" data-lightbox-gallery="screenshots-gallery"><img src="assets/img/tokens/stjudes.jpg" alt="Screenshot"></a>
+				<a href="/assets/img/tokens/stjudes.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/stjudes.jpg" alt="Screenshot"></a>
 			</div>
 
 		</div>
@@ -694,111 +611,21 @@
 	</div>
 	<!-- /END CONTACT BOX -->
 
-	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img">
-
-	<!-- SOCIAL ICONS -->
-	<ul class="social-icons">
-		<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
-		<li><a href="https://twitter.com/give_token"><i class="social_twitter_square"></i></a></li>
-		<li><a href="https://www.pinterest.com/GiveToken/"><i class="social_pinterest_square"></i></a></li>
-		<li><a href="#"><i class="social_googleplus_square"></i></a></li>
-		<li><a href="#"><i class="social_instagram_square"></i></a></li>
-		<li><a href="#"><i class="social_flickr_square"></i></a></li>
-	</ul>
-
-	<!--Terms and Policy-->
-	<ul class="terms-policy">
-		<li><a href="termsservice.php">Terms and Conditions</a></li>
-		<li><a href="privacypolicy.php">Privacy Policy</a></li>
-	</ul>
-
-
-
-	<!-- COPYRIGHT TEXT -->
-	<p class="copyright">
-		©2014 GiveToken.com &amp; Giftly Inc., All Rights Reserved
-	</p>
-
 </div>
 <!-- /END CONTAINER -->
 
-</footer>
-<!-- /END FOOTER -->
+<?php include __DIR__.'/footer.php';?>
 
 <!-- =========================
-     SCRIPTS
+    PAGE SPECIFIC SCRIPTS
 ============================== -->
+<script src="/js/contact.js"></script>
 <script>
-
-function sendMessage(event) {
-
-	function isEmail(str) {
-		return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( str );
-	}
-
-	// When the user submits the contact form...
-	var contactForm = $( "#contact" );
-
-	// Hide any messages from previous send attempts
-	contactForm.find( ".success" ).hide();
-	contactForm.find( ".error" ).hide();
-
-	var name = $( "#name" ).val();
-	var email = $( "#email" ).val();
-	var subject = $( "#subject" ).val();
-	var message = $( "#message" ).val();
-
-	// If any field isn't filled in, show the error message and stop processing
-	if ( !name.length || !isEmail(email) || !subject.length || !message.length ) {
-		contactForm.find( ".error" ).show();
-		return;
-	}
-
-	// Submit the form via Ajax
-	$.post("sendemail.php", contactForm.serialize(), 
-		function(data, textStatus, jqXHR){
-			if(data.status === "SUCCESS") {
-				contactForm.find( ".success" ).show();
-			} else if (data.status === "ERROR") {
-				// TODO
-				alert( "error1" );
-			} else {
-				// TODO
-				alert( "error2" );
-			}
-		}
-	).fail(function() {
-		// TODO
-		alert( "error3" );
-	});
-
-};
-
+$(document).ready(function(){
+  url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
+  $.post(url);
+});
 </script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/smoothscroll.js"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/nivo-lightbox.min.js"></script>
-<script src="js/simple-expand.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/retina-1.1.0.min.js"></script>
-<script src="js/jquery.nav.js"></script>
-<script src="js/matchMedia.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/facebook_init.js"></script>
-<script src="js/util.js"></script>
-<script src="pay_with_stripe.php"></script>
-<script src="js/login.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/account.js"></script>
-<script src="https://checkout.stripe.com/checkout.js"></script>
 
 </body>
 </html>

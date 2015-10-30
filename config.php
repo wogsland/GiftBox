@@ -1,4 +1,12 @@
 <?php
+// autoload classes
+require_once __DIR__.'/src/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
+
+//load functions
+require_once __DIR__.'/util.php';
+
 $google_app_engine = false;
 $server = $_SERVER['SERVER_NAME'];
 $prefix = "http://";

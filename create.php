@@ -1,5 +1,4 @@
 <?php
-	include_once 'util.php';
 	include_once 'config.php';
 	_session_start();
 	if (!logged_in()) {
@@ -20,6 +19,7 @@
 	<link rel="stylesheet" href="css/animate.min.css" />
 	<link rel="stylesheet" href="css/create_and_preview.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
+	<link rel="stylesheet" href="/css/octicons/octicons.css">
 
 	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
@@ -35,7 +35,7 @@
 	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>
-	
+
 	<!-- Favicon -->
 	<link rel="apple-touch-icon" sizes="57x57" href="assets/gt-favicons.ico/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="assets/gt-favicons.ico/apple-icon-60x60.png">
@@ -118,14 +118,18 @@
 <!-- 					<div class="send-button" id="googleplus-send-button" onclick="featureNotAvailable('Google')"></div>
 					<div class="send-button" id="twitter-send-button" onclick="featureNotAvailable('Twitter')"></div> -->
 					<span class="template-tab-text">LINK</span>
-					<input id="send-link-input" type="text"  readonly="readonly" placeholder="Save token to see link">
+					<span id="send-link-copy" class="octicon octicon-clippy gt-copy-icon"></span>
+					<input id="send-link-input" class="gt-copy-input" type="text" readonly="readonly" placeholder="Save token to see link">
+					<span class="template-tab-text">EMBED CODE</span>
+					<span id="embed-code-copy" class="octicon octicon-clippy gt-copy-icon"></span>
+					<input id="embed-code-input" class="gt-copy-input" type="text" readonly="readonly" placeholder="Save token to see code">
 					<span class="template-tab-text">THUMBNAILS</span>
 					<div class="send-button" id="thumbnails-send-button" onclick="displayThumbnails()"></div>
 				</div>
 			</div>
 		</div>
 
-		<div id="templates">                 
+		<div id="templates">
 			<div id="template-nav-container">
 				<ul class="template-nav-bar">
 					<li><a href="javascript:void(0)" onclick="saveButton()"><i class="fa fa-save fa-lg"></i>SAVE</a></li>
@@ -284,7 +288,7 @@
             </script>
 		</form>
 	</div>
-	
+
 	<div id="add-dialog" title="SELECT AN IMAGE TO ADD TO YOUR TOKEN">
 		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
 		<input class="hidden-file-input" type="file" multiple id="select-media-file" />
@@ -382,7 +386,7 @@
 
 	<div id="thumbnail-dialog" title="COPY THUMBNAILS">
 		<div id="thumbnail-dialog-container">
-			
+
 		</div>
 
 		<div id="thumbnail-button-container">
@@ -429,7 +433,7 @@
 			</div>
 			<div class="image-dialog-tab-container" id="image-filter-tab-container">
 				FILTER
-				
+
 			</div>
 			<div class="image-dialog-tab-container" id="image-text-tab-container">
 				TEXT
@@ -459,7 +463,7 @@
 		<div  class="image-dialog-button  small-image-dialog-button" id="close-image-dialog-button" onclick="$('#image-dialog').dialog('close')"><i class="fa fa-close fa-lg close"></i> CLOSE</div>
 	</div>
 
-	
+
 	<script>
 		document.getElementById('select-image-file').addEventListener('change', handleImageFileSelect, false);
 		document.getElementById('select-media-file').addEventListener('change', handleMediaFileSelect, false);

@@ -39,18 +39,24 @@ handlers:
 - url: /assets/elegant-icons
   static_dir: assets/elegant-icons
 
-- url: /business-solutions
-  static_dir: business-solutions
-
-- url: /about-us
-  static_dir: about-us
-
 - url: /
   script: index.php
+
+- url: /src/(.+\.php)$
+  script: index.php
+
+- url: /ajax/(.+)
+  script: ajax/route.php
 
 # Serve php scripts.
 - url: /(.+\.php)$
   script: \1
+
+# Google Polymer Components
+- url: /components/
+  static_dir: components/
+- url: /elements/
+  static_dir: elements/
 
 - url: /templates
   static_dir: templates

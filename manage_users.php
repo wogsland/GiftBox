@@ -1,19 +1,15 @@
 <?php
-	include_once 'config.php';
-	include_once 'util.php';
-	include_once 'UserGroup.class.php';
-	
-	_session_start();
-	if (!logged_in() || !is_admin()) {
-		header('Location: '.$app_root);
-	}
+use \GiveToken\UserGroup;
+
+include_once 'config.php';
+
+_session_start();
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_root);
+}
+define('TITLE', 'GiveToken.com - Manage Users');
+include __DIR__.'/header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<title>GiveToken.com - Manage Users</title>
-	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/users_groups.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -44,7 +40,7 @@
 			</div>
 		</div>
 	</header>
-		
+
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -115,7 +111,7 @@
 			</table>
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="user-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-title">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -169,14 +165,14 @@
 								<input id="group-admin" name="group_admin" type="checkbox" value="Y">
 								Group Administrator
 							  </label>
-							</div>						
+							</div>
 						</div>
 						<div class="checkbox">
 						  <label>
 							<input id="admin" name="admin" type="checkbox" value="Y">
 							Givetoken Administrator
 						  </label>
-						</div>						
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -185,6 +181,6 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

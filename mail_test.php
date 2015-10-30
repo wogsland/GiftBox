@@ -1,7 +1,8 @@
 <?php
+use \google\appengine\api\mail\Message;
+
 include_once 'config.php';
 include_once 'mail.php';
-use \google\appengine\api\mail\Message;
 
 try {
 	$email_message = " To activate your GiveToken account, please click on this link:\n\n";

@@ -1,0 +1,13 @@
+{
+    "require": {
+        "google/apiclient": "~1.1",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "ircmaxell/password-compat": "^1.0",
+        "stefangabos/zebra_session": "^2.1",
+        "stripe/stripe-php": "^3.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "~2.3"
+    }
+}
