@@ -43,15 +43,4 @@ then
     "staging") gcloud preview app deploy app.yaml --project t-sunlight-757 --promote ;;
     *) gcloud preview app deploy app.yaml --project t-sunlight-757 --version $1 ;;
   esac
-#  if [ "$1" = "master"]
-#  then
-#    gcloud preview app deploy app.yaml --project stone-timing-557 --promote
-#  else
-#    if [ "$1" = "staging"]
-#    then
-#      gcloud preview app deploy app.yaml --project t-sunlight-757 --promote
-#    else
-#      gcloud preview app deploy app.yaml --project t-sunlight-757 --version $1
-#    fi
-#  fi
 fi

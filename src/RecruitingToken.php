@@ -83,12 +83,16 @@ class RecruitingToken
 
         if (strlen($this->backdrop_picture) > 0) {
             $new_file_name = $this->changeFileName($this->backdrop_picture);
-            execute("UPDATE recruiting_token SET backdrop_picture  = '$new_file_name' WHERE id = $this->id");
+            execute("UPDATE recruiting_token
+                SET backdrop_picture  = '$new_file_name'
+                WHERE id = '$this->id'");
             $this->backdrop_picture = $new_file_name;
         }
         if (strlen($this->company_picture) > 0) {
             $new_file_name = $this->changeFileName($this->company_picture);
-            execute("UPDATE recruiting_token SET backdrop_picture  = '$new_file_name' WHERE id = $this->id");
+            execute("UPDATE recruiting_token
+                SET backdrop_picture  = '$new_file_name'
+                WHERE id = '$this->id'");
             $this->company_picture = $new_file_name;
         }
     }
@@ -128,13 +132,13 @@ class RecruitingToken
                 $comma = ', ';
             }
         }
-        $sql .= " WHERE id = $this->id";
+        $sql .= " WHERE id = '$this->id'";
         execute($sql);
     }
 
     public function delete()
     {
-        $sql = "DELETE FROM recruiting_token WHERE id = $this->id";
+        $sql = "DELETE FROM recruiting_token WHERE id = '$this->id'";
         execute($sql);
     }
 

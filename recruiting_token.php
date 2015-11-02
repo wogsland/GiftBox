@@ -54,15 +54,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Polymer -->
-    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <link rel="import" href="components/paper-styles/paper-styles.html">
-    <link rel="import" href="components/neon-animation/neon-animated-pages.html">
-    <link rel="import" href="components/neon-animation/neon-animations.html">
-    <link rel="import" href="elements/description-x-card.html">
-    <link rel="import" href="elements/image-x-card.html">
-    <link rel="import" href="elements/location-x-card.html">
-    <link rel="import" href="elements/video-x-card.html">
-    <link rel="import" href="elements/x-card.html">
+    <link rel="import" href="components/neon-animation/neon-animated-pages.html" async>
+    <link rel="import" href="components/neon-animation/neon-animations.html" async>
+    <link rel="import" href="elements/description-x-card.html" async>
+    <link rel="import" href="elements/image-x-card.html" async>
+    <link rel="import" href="elements/location-x-card.html" async>
+    <link rel="import" href="elements/video-x-card.html" async>
+    <link rel="import" href="elements/x-card.html" async>
     <link rel="import" href="elements/x-cards-list.html">
 
   </head>
