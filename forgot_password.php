@@ -6,7 +6,7 @@ define('TITLE', 'GiveToken.com - Password Reset');
 include __DIR__.'/header.php';
 ?>
 <style>
-#forgot-password {
+#forgot-password-container {
 	margin:200px auto 0 auto;
 	text-align:center;
 	color: white;
@@ -19,7 +19,7 @@ include __DIR__.'/header.php';
 </head>
 <body onload="document.forms[0].email.focus()">
 	<?php include __DIR__.'/navbar.php';?>
-	<div id="forgot-password">
+	<div id="forgot-password-container">
 		<p id="login-message"></p>
 		<h5>Please enter the email address used to register your account.
 			<br />We will email you a link to reset your password.

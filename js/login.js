@@ -13,7 +13,7 @@ document.write('\
 					<input class="dialog-input large-input" id="login_email" name="login_email" type="text" placeholder="Email address" size="25">\
 					<input class="dialog-input large-input" id="password" name="password" type="password" placeholder="Password" size="25">\
 				</form>\
-				<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>\
+				<!--<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>-->\
 			</div>\
 			<div class="modal-footer">\
 				<div id="fb-root"></div>\
