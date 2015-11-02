@@ -35,7 +35,12 @@ function forgotPassword() {
 }
 
 function sendPassword(email) {
-	alert('Email: ' + email);
+	if (document.forms[0].email.value.length === 0) {
+		alert('Please provide an email address.');
+	}
+	else {
+		alert('Email: ' + email);
+	}
 }
 
 function logout() {
@@ -46,7 +51,7 @@ function logout() {
 					// are they currently logged into Facebook?
 					console.log(response);
 					if (response.status === 'connected') {
-						//they were authed so do the logout		
+						//they were authed so do the logout
 						FB.logout(function(response) {
 							console.log(response);
 						});
