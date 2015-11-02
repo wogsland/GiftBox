@@ -18,7 +18,7 @@
     <!-- NAVIGATION LINKS -->
     <div class="navbar-collapse collapse" id="kane-navigation">
       <ul class="nav navbar-nav navbar-right main-navigation">
-        <li><a href="/">Home</a></li>
+        <li><a href="/" class="external">Home</a></li>
         <li><a href="/community.php" class="external">Community</a></li>
         <li><a href="/pricing.php" class="external">Pricing</a></li>
         <?php

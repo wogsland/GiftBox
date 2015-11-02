@@ -36,7 +36,7 @@ include __DIR__.'/header.php';
      HEADER
 ============================== -->
 <header class="header" data-stellar-background-ratio="0.5">
-  <div style="padding-bottom: 60;">
+  <div>
     <?php include __DIR__.'/navbar.php';?>
   </div>
   <div id="account-profile">
