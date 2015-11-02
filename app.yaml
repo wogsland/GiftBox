@@ -45,13 +45,24 @@ handlers:
 - url: /src/(.+\.php)$
   script: index.php
 
-- url: /ajax/(.+)/(.+)
-  script: ajax/\1.php
+- url: /templates
+  static_dir: templates
+  application_readable: true
+
+# Ajax Routing
+- url: /ajax/(.+)
+  script: ajax/route.php
 
 # Serve php scripts.
 - url: /(.+\.php)$
   script: \1
 
-- url: /templates
-  static_dir: templates
-  application_readable: true
+# Google Polymer Components
+- url: /components/
+  static_dir: components/
+- url: /elements/
+  static_dir: elements/
+
+# Token
+- url: /token/recruiting/(.+)
+  script: recruiting_token.build.html

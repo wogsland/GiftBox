@@ -49,7 +49,7 @@ if ($response['status'] == "SUCCESS") {
 	$user->save();
 
 	// Log an event
-	$event = new EventLogger($user->getId(), UPGRADE, 'Stripe Token: '.$token);
+	$event = new EventLogger($user->getId(), EventLogger::UPGRADE, 'Stripe Token: '.$token);
 	$event->log();
 
 	// Set the session variable

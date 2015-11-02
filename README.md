@@ -27,13 +27,23 @@ To create a local instance of the givetoken database. Refer [here](https://docs.
 ## <a name="composer"></a>Composer
 
 [Composer](https://getcomposer.org/) is the PHP package manager used to bring in
-3rd party code. Once you have it in installed, cd to the project directory and
+3rd party PHP code. Once you have it in installed, cd to the project directory and
 run
 
     composer install
     composer update
 
 which will create everything you need in the untracked vendor directory.
+
+## <a name="bower"></a>Bower
+
+[Bower](http://bower.io/) is a package manager used to bring in Polymer
+components. Once you have it in installed, cd to the project directory and
+run
+
+    bower install
+
+which will create everything you need in the untracked components directory.
 
 ## <a name="branching"></a>Branching Strategy
 
@@ -256,5 +266,19 @@ To also investigate the code coverage of the tests, you'll need the
 [Xdebug PHP extension](http://xdebug.org/docs/install).
 Make sure you put any unit tests in the tests directory and name them like
 whateverTest.php.
+
+## Polybuild
+
+Polymer provides a tool to optimize & minify an app's code which you can get via
+
+    npm install -g polybuild
+
+and build the recruiting token with
+
+    polybuild --maximum-crush recruiting_token.php
+
+which creates `recruiting_token.build.html` & `recruiting_token.build.js`. This
+will be useful if we're doing all our DB interaction via AJAX (it treats PHP
+like a comment and removes it).
 
 # GMP was here

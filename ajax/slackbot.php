@@ -1,9 +1,5 @@
 <?php
-include_once __DIR__.'/../config.php';
-_session_start();
-
-//if ($google_app_engine && $application_id === "s~stone-timing-557") {
-if ($google_app_engine) {
+if ($google_app_engine && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
     $url = "http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}";
     $ch = curl_init();
@@ -23,7 +19,7 @@ if ($google_app_engine) {
     $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
     $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
     $data = "payload=$message";
-    $url = "https://givetoken.slack.com/services/hooks/slackbot?token=abmmCzTPQPszuDhcKUY4sgWe&channel=%23random";
+    $url = "https://givetoken.slack.com/services/hooks/slackbot?token=abmmCzTPQPszuDhcKUY4sgWe&channel=%23website-visitors";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);

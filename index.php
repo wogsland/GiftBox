@@ -67,7 +67,7 @@ include __DIR__.'/header.php';
 					<div class="buttons" id="login-button">
 						<?php
 						if (logged_in()) {
-							echo '<a href="create.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
+							echo '<a href="token_type.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
 						} else {
 							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
 							echo ' or ';

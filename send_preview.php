@@ -8,7 +8,7 @@ _session_start();
 
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];
-$event = SEND_GIFTBOX;
+$event = EventLogger::SEND_GIFTBOX;
 $user_id = $_SESSION["user_id"];
 
 $event = new EventLogger($user_id, $event);

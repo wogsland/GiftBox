@@ -14,7 +14,7 @@ extends \PHPUnit_Framework_TestCase
      */
     public static function setUpBeforeClass()
     {
-        require_once __DIR__.'/../../analyticsauth.php';
+        include_once __DIR__.'/../../analyticsauth.php';
     }
 
     /**
