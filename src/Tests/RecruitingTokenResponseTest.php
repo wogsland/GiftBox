@@ -54,17 +54,17 @@ extends \PHPUnit_Framework_TestCase
         $email = rand() . '@gmail.com';
         $this->assertEquals($RecruitingToken->id, (int) $RecruitingToken->id);
         $this->assertTrue((bool) filter_var($email, FILTER_VALIDATE_EMAIL));
-        $id = $RecruitingTokenResponse->create($RecruitingToken->id, $email, 'Yes');
+        $id = $RecruitingTokenResponse->create($RecruitingToken->long_id, $email, 'Yes');
         $this->assertGreaterThan(0, $id);
-        $id = $RecruitingTokenResponse->create($RecruitingToken->id, $email, 'No');
+        $id = $RecruitingTokenResponse->create($RecruitingToken->long_id, $email, 'No');
         $this->assertGreaterThan(0, $id);
-        $id = $RecruitingTokenResponse->create($RecruitingToken->id, $email, 'Maybe');
+        $id = $RecruitingTokenResponse->create($RecruitingToken->long_id, $email, 'Maybe');
         $this->assertGreaterThan(0, $id);
 
         // Test function fails
-        $id = $RecruitingTokenResponse->create($RecruitingToken->id, $email, 'T');
+        $id = $RecruitingTokenResponse->create($RecruitingToken->long_id, $email, 'T');
         $this->assertEquals(0, $id);
-        $id = $RecruitingTokenResponse->create($RecruitingToken->id, 'T', 'Yes');
+        $id = $RecruitingTokenResponse->create($RecruitingToken->long_id, 'T', 'Yes');
         $this->assertEquals(0, $id);
         $id = $RecruitingTokenResponse->create('T', $email, 'Yes');
         $this->assertEquals(0, $id);

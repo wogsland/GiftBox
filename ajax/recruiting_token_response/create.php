@@ -2,7 +2,7 @@
 use GiveToken\RecruitingTokenResponse;
 
 // collect info from url
-$id = isset($endpoint_parts[4]) ? (int) $endpoint_parts[4] : '';
+$id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
 $email = isset($endpoint_parts[5]) ? escape_string($endpoint_parts[5]) : '';
 $email = urldecode($email);
 $response = isset($endpoint_parts[6]) ? escape_string($endpoint_parts[6]) : '';

@@ -11,7 +11,7 @@ class RecruitingTokenResponse
     /**
      * This function constructs the class
      *
-     * @param int $recruiting_token_id - id of the token
+     * @param int $recruiting_token_id - long id of the token
      * @param string $email - email address of respondent
      * @param string $response - Yes, No or Maybe
      *
@@ -20,12 +20,12 @@ class RecruitingTokenResponse
     public function create($recruiting_token_id, $email, $response)
     {
         $id = 0;
-        if ($recruiting_token_id === (int) $recruiting_token_id
-        && filter_var($email, FILTER_VALIDATE_EMAIL)
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)
         && in_array($response, array('Yes', 'No', 'Maybe'))) {
             $result = execute_query("SELECT id from recruiting_token
-                WHERE id = '$recruiting_token_id'");
-            if ($result->num_rows == 1) {
+                WHERE long_id = '$recruiting_token_id'");
+            if ($row = $result->fetch_assoc()) {
+                $recruiting_token_id = $row['id'];
                 $id = insert("INSERT into recruiting_token_response
                     (`recruiting_token_id`, `email`, `response`)
                     VALUES ('$recruiting_token_id', '$email', '$response')");

@@ -1,6 +1,16 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 //console.log(scope);
 
+function getUrlPath() {
+  var vars = {};
+  i = 0;
+  var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
+    vars[i] = value;
+    i++;
+  });
+  return vars;
+}
+
 scope._onOverviewClick = function(event) {
   console.log(this);
   $('.current-section').text('Overview');
@@ -92,6 +102,16 @@ scope._onYesClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 1;
+  $('#yes-submit').click(function( event ) {
+    event.preventDefault();
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('#yes-content').text('Thanks for your interest!');
+      }
+    },'json');
+  });
 };
 
 scope._onMaybeClick = function(event) {
@@ -100,6 +120,16 @@ scope._onMaybeClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 2;
+  $('#maybe-submit').click(function( event ) {
+    event.preventDefault();
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#maybe-email').val()) + '/maybe';
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('#maybe-content').text('Thanks for your interest!');
+      }
+    },'json');
+  });
 };
 
 scope._onNoClick = function(event) {
@@ -108,6 +138,16 @@ scope._onNoClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 3;
+  $('#no-submit').click(function( event ) {
+    event.preventDefault();
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#no-email').val()) + '/no';
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('#no-content').text("Thanks for telling us. We'll take you off our list!");
+      }
+    },'json');
+  });
 };
 
 scope._onBackClick = function(event) {
@@ -119,25 +159,7 @@ scope._onTrack = function(event) {
 };
 
 $(document).ready(function(){
-  function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-      vars[key] = value;
-    });
-    return vars;
-  }
-  function getUrlPath() {
-    var vars = {};
-    i = 0;
-    var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
-      vars[i] = value;
-      i++;
-    });
-    return vars;
-  }
-  //url = '/ajax/recruiting_token/get/' + getUrlVars().id;
   path = getUrlPath();
-  console.log(path);
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', function(data) {
