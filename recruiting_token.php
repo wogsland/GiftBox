@@ -76,26 +76,13 @@
               <div class="fit layout horizontal large">
 
                 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <header class="mdl-layout__header mdl-layout__header--waterfall">
+                  <header class="mdl-layout__header">
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
                         <i class="gt-info-company"></i>
-                        <i class="current-section"></i>
+                        - <i class="gt-info-jobtitle"></i>
                       </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <!-- Bottom rows, not visible on scroll -->
-                    <div class="mdl-layout__header-row">
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-layout__header-row">
-                      <span class="mdl-layout-title">
-                        <h1 class="gt-info-jobtitle"></h1>
-                      </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-layout__header-row">
                       <div class="mdl-layout-spacer"></div>
                     </div>
                   </header>
