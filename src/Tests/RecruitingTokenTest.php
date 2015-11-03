@@ -45,7 +45,7 @@ extends \PHPUnit_Framework_TestCase
 
         // save for 1 param
         $result->user_id = $this->User->getId();
-        $result->long_id = substr(md5(microtime()),rand(0,26),20);
+        $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->save();
 
         // test with id
@@ -70,7 +70,7 @@ extends \PHPUnit_Framework_TestCase
         // Create token to dup against
         $RecruitingToken = new RecruitingToken();
         $RecruitingToken->user_id = $this->User->getId();
-        $RecruitingToken->long_id = substr(md5(microtime()),rand(0,26),20);
+        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 
         // Test function with param

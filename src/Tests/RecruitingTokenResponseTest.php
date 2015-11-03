@@ -46,7 +46,7 @@ extends \PHPUnit_Framework_TestCase
         // setup test token
         $RecruitingToken = new RecruitingToken();
         $RecruitingToken->user_id = $this->User->getId();
-        $RecruitingToken->long_id = substr(md5(microtime()),rand(0,26),20);
+        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 
         // Test function success
