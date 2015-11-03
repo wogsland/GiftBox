@@ -23,9 +23,13 @@ class RecruitingTokenResponse
         if ($recruiting_token_id === (int) $recruiting_token_id
         && filter_var($email, FILTER_VALIDATE_EMAIL)
         && in_array($response, array('Yes', 'No', 'Maybe'))) {
-            $id = insert("INSERT into recruiting_token_response
-                (`recruiting_token_id`, `email`, `response`)
-                VALUES ('$recruiting_token_id', '$email', '$response')");
+            $result = execute_query("SELECT id from recruiting_token
+                WHERE id = '$recruiting_token_id'");
+            if ($result->num_rows == 1) {
+                $id = insert("INSERT into recruiting_token_response
+                    (`recruiting_token_id`, `email`, `response`)
+                    VALUES ('$recruiting_token_id', '$email', '$response')");
+            }
         }
         return $id;
     }
