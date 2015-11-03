@@ -3,10 +3,10 @@ require __DIR__.'/config.php';
 if ($google_app_engine) {
     $mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {
-    if ('' == $server) {
-      $mysql_server = "127.0.0.1";
+    if (in_array($server,array('','givetoken.local'))) {
+        $mysql_server = "127.0.0.1";
     } else {
-      $mysql_server = 'p:'.$server;
+        $mysql_server = 'p:'.$server;
     }
     $mysqli = new mysqli($mysql_server, $user, $password, $database);
 }
