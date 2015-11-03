@@ -13,4 +13,5 @@ if ($id != '') {
         $data = $token;
     }
 }
+header('Content-Type: application/json');
 echo json_encode(array('success'=>$success, 'data'=>$data));
