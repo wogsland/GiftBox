@@ -10,11 +10,12 @@
 
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
-    <li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
+		<li><a href="https://www.linkedin.com/company/4788844"><i class="social_linkedin_square"></i></a></li>
+		<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
 		<li><a href="https://twitter.com/give_token"><i class="social_twitter_square"></i></a></li>
 		<li><a href="https://www.pinterest.com/GiveToken/"><i class="social_pinterest_square"></i></a></li>
 <!--		<li><a href="#"><i class="social_googleplus_square"></i></a></li> -->
-<!--		<li><a href="#"><i class="social_instagram_square"></i></a></li> -->
+		<li><a href="https://instagram.com/givetoken"><i class="social_instagram_square"></i></a></li>
 <!--		<li><a href="#"><i class="social_flickr_square"></i></a></li> -->
 	</ul>
 
