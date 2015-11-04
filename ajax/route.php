@@ -6,12 +6,14 @@ _session_start();
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
 $endpoint = $pieces[0];
 $endpoint_parts = explode('/', $endpoint);
-$gets = $pieces[1];
-$gets = explode('&', $gets);
-$get_parts = array();
-foreach ($gets as $get) {
-    $parts = explode('=', $get);
-    $get_parts[$parts[0]] = $parts[1];
+if (isset($pieces[1])) {
+    $gets = $pieces[1];
+    $gets = explode('&', $gets);
+    $get_parts = array();
+    foreach ($gets as $get) {
+        $parts = explode('=', $get);
+        $get_parts[$parts[0]] = $parts[1];
+    }
 }
 
 // Execute script if exists
