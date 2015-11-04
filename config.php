@@ -1,4 +1,12 @@
 <?php
+//echo '<pre>';
+//print_r($_SERVER); die;
+$server = $_SERVER['SERVER_NAME'];
+if('givetoken.com' == strtolower($server)
+|| 'stone-timing-557.appspot.com' == strtolower($server)) {
+	header("Location: https://www.givetoken.com ", true, 301);
+}
+
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
 require_once __DIR__.'/vendor/autoload.php';
@@ -8,7 +16,6 @@ require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
 require_once __DIR__.'/util.php';
 
 $google_app_engine = false;
-$server = $_SERVER['SERVER_NAME'];
 $prefix = "http://";
 $app_root = "/";
 $use_https = false;
