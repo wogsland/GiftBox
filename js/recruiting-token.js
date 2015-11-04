@@ -177,10 +177,6 @@ scope._onBackClick = function(event) {
   this.$.pages.selected = 0;
 };
 
-scope._onTrack = function(event) {
-  $('.current-section').text(' - '+$('.gt-info-jobtitle')[0].innerHTML);
-};
-
 $(document).ready(function(){
   path = getUrlPath();
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
