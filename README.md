@@ -6,8 +6,6 @@
 1. [Testing](#testing)
 1. [Deployment](#deployment)
 
-View at
-
 ## <a id="set-up"></a>Set Up
 
 ### URLs
@@ -17,7 +15,7 @@ hosted on Google Cloud
 
 ### Github
 
-Make sure you have access & set your remote
+Make sure you have access & set your project remote
 
     git remote add github git@github.com:GiveToken/GiftBox.git`
 
@@ -25,10 +23,10 @@ Make sure you have access & set your remote
 
 ### <a id="database"></a>Database Management
 
-- Download and install MySQL workbench
-- Get access to the Google Developer Console.
+- Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
+- Get access to the [Google Developer Console](https://console.developers.google.com).
 
-To create a local instance of the givetoken database. Refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+To create a local instance of the givetoken database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
 
 ### Google Cloud SDK
 
@@ -75,9 +73,8 @@ and build the recruiting token with
 
     polybuild --maximum-crush recruiting_token.php
 
-which creates `recruiting_token.build.html` & `recruiting_token.build.js`. This
-will be useful if we're doing all our DB interaction via AJAX (it treats PHP
-like a comment and removes it).
+which creates `recruiting_token.build.html` & `recruiting_token.build.js`.
+NB: it treats PHP like a comment and removes it.
 
 ## <a id="branching"></a>Branching Strategy
 
@@ -133,7 +130,6 @@ once the PR has been approved and merged
 Use [gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) and [cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)for reference.
 
 ### Example Workflow from Start to Finish Feature.
-___
 
 - `git checkout develop`
 - `git pull github develop`
@@ -154,7 +150,6 @@ ___
 - profit
 
 ### Example Workflow from Start to Finish Hotfix. Used for bug fixes.
-___
 
 - `git checkout develop`
 - `git pull github develop`
@@ -175,12 +170,7 @@ ___
 - [Push code to production site](#deploy-production)
 - avert profit loss
 
-### Example Workflow from Start to Finish Release. Used for new releases.
-___
-
-
 ### Example Workflow from Start to Finish Publish. Used when you are unable to complete a feature or you are working in collaboration
-___
 
 User A
 - `git checkout develop`
@@ -209,8 +199,8 @@ configuration file:
 
 To also investigate the code coverage of the tests, you'll need the
 [Xdebug PHP extension](http://xdebug.org/docs/install).
-Make sure you put any unit tests in the tests directory and name them like
-whateverTest.php.
+Make sure you put any unit tests in the `src/tests` directory and name them like
+MyAwesomeTest.php.
 
 ## <a id="deployment"></a>Deployment
 
@@ -224,7 +214,7 @@ When deploying using the following procedures, *be absolutely sure* that you are
 
 #### `master` -> production
 
-### build script
+### Build Script
 The build script (`build.sh`) runs unit tests, warns you of any untracked or
 uncommited files (**these will be included in the optional release to glcoud, but
 are not yet tracked in github**), minifies the token JavaScript, concatenates the HTML
