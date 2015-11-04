@@ -209,6 +209,9 @@ html, body {
   margin-bottom: 0px;
   z-index: 900;
 }
+#yes-submit {
+  background-color: green;
+}
 #interested-maybe-button {
   background-color: yellow;
   position: fixed;
@@ -219,6 +222,9 @@ html, body {
   margin-bottom: 0px;
   z-index: 900;
 }
+#maybe-submit {
+  background-color: yellow;
+}
 #interested-no-button {
   background-color: red;
   position: fixed;
@@ -227,6 +233,9 @@ html, body {
   bottom: 0;
   margin-bottom: 0px;
   z-index: 900;
+}
+#no-submit {
+  background-color: red;
 }
 .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
   padding-right: 0;
@@ -344,4 +353,7 @@ i.big-icon {
 }
 .mdl-layout-spacer {
 
+}
+.gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg {
+  font-style:normal;
 }

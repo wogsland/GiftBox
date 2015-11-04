@@ -34,17 +34,19 @@ class RecruitingToken
     /**
      * This function constructs the class
      *
-     * @param mixed $value - optional id of the token
-     * @param string $key - optional parameter to test $value against: 'id' (default) or 'long_id'
+     * @param mixed  $value - optional id of the token
+     * @param string $key   - optional parameter to test $value against: 'id' (default) or 'long_id'
      */
     public function __construct($value = null, $key = null)
     {
         if ($value !== null) {
             if ($key == null || !in_array($key, array('id','long_id'))) {
-              $key = 'id';
+                $key = 'id';
             }
-            $token = execute_query("SELECT * FROM recruiting_token
-                WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
+            $token = execute_query(
+                "SELECT * FROM recruiting_token
+                WHERE $key = '$value'"
+            )->fetch_object("GiveToken\RecruitingToken");
             foreach (get_object_vars($token) as $key => $value) {
                 $this->$key = $value;
             }
@@ -83,16 +85,20 @@ class RecruitingToken
 
         if (strlen($this->backdrop_picture) > 0) {
             $new_file_name = $this->changeFileName($this->backdrop_picture);
-            execute("UPDATE recruiting_token
+            execute(
+                "UPDATE recruiting_token
                 SET backdrop_picture  = '$new_file_name'
-                WHERE id = '$this->id'");
+                WHERE id = '$this->id'"
+            );
             $this->backdrop_picture = $new_file_name;
         }
         if (strlen($this->company_picture) > 0) {
             $new_file_name = $this->changeFileName($this->company_picture);
-            execute("UPDATE recruiting_token
+            execute(
+                "UPDATE recruiting_token
                 SET backdrop_picture  = '$new_file_name'
-                WHERE id = '$this->id'");
+                WHERE id = '$this->id'"
+            );
             $this->company_picture = $new_file_name;
         }
     }
