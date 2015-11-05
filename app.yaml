@@ -66,3 +66,7 @@ handlers:
 # Token
 - url: /token/recruiting/(.+)
   script: recruiting_token.build.html
+
+# catchall for 404
+- url: /.*
+  script: error.php
