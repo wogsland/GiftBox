@@ -6,7 +6,7 @@
 <div class="container">
 	<div class="verticleHeight40"></div>
 	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
+	<img src="/assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
 
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
@@ -21,8 +21,8 @@
 
   <!--Terms and Policy-->
   <ul class="terms-policy">
-    <li><a href="termsservice.php">Terms and Conditions</a></li>
-    <li><a href="privacypolicy.php">Privacy Policy</a></li>
+    <li><a href="/termsservice.php">Terms and Conditions</a></li>
+    <li><a href="/privacypolicy.php">Privacy Policy</a></li>
   </ul>
 
 	<!-- COPYRIGHT TEXT -->
