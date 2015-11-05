@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
         $token->init((object)$_POST, (object)$_FILES);
         $token->user_id = $user_id;
         do {
-          $token->long_id = substr(md5(microtime()),rand(0,26),20);
+            $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
         } while (!$token->uniqueLongId());
         $token->save();
 

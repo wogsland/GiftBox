@@ -59,7 +59,9 @@
 <script src="/js/facebook_init.js"></script>
 <script src="/js/util.js"></script>
 <script src="/pay_with_stripe.php"></script>
-<script src="/js/login.js"></script>
-<script src="/js/signup.js"></script>
+<?php if (!logged_in()) { ?>
+	<script src="/js/login.js"></script>
+	<script src="/js/signup.js"></script>
+<?php }?>
 <script src="/js/account.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
