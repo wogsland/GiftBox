@@ -19,6 +19,11 @@ if (isset($_SERVER['HTTPS'])) {
 	if ($_SERVER['HTTPS'] === "on") {
 		$prefix = "https://";
 		$use_https = true;
+	} else {
+		if('www.givetoken.com' == $server) {
+			$url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
+			header("Location: $url ");
+		}
 	}
 }
 if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
