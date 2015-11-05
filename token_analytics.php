@@ -2,9 +2,9 @@
 use \GiveToken\Token;
 use google\appengine\api\cloud_storage\CloudStorageTools;
 
-include_once 'config.php';
-include_once 'analyticsauth.php';
-include_once 'analyticsqueries.php';
+require_once 'config.php';
+require_once 'analyticsauth.php';
+require_once 'analyticsqueries.php';
 
 _session_start();
 
@@ -23,7 +23,7 @@ if ($google_app_engine) {
 }
 
 define('TITLE', 'GiveToken.com - Analytics');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 
 <!-- CUSTOM STYLESHEETS -->
@@ -52,7 +52,7 @@ include __DIR__.'/header.php';
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
-  <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -106,16 +106,16 @@ include __DIR__.'/header.php';
 			            <section id="total-timeline"></section>
 			              <script>
 			              totalChartData = <?php
-			                  echo json_encode($totalResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($totalResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              totalChartNumber = "<?= printResults($numTotalResults); ?>";
 			              </script>
 
 			            <section id="unique-timeline"></section>
 			              <script>
 			              uniqueChartData = <?php
-			                  echo json_encode($uniqueResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($uniqueResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              uniqueChartNumber = "<?= printResults($numUniqueResults); ?>";
 			              </script>
 
@@ -125,16 +125,16 @@ include __DIR__.'/header.php';
 			            <section id="average-time-timeline"></section>
 			              <script>
 			              averageChartData = <?php
-			                  echo json_encode($averageResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($averageResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              averageChartNumber = "<?= printTimeResults($numAverageResults); ?>";
 			              </script>
 
 			            <section id="bounces-timeline"></section>
 			              <script>
 			              bouncesChartData = <?php
-			                  echo json_encode($bouncesResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($bouncesResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              bouncesChartNumber = "<?= printBounceResults($numBouncesResults); ?>";
 			              </script>
 
@@ -147,16 +147,16 @@ include __DIR__.'/header.php';
 			            <section id="facebook-timeline"></section>
 			              <script>
 			              facebookChartData = <?php
-			                  echo json_encode($facebookResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($facebookResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              facebookChartNumber = "<?= printResults($numFacebookResults); ?>";
 			              </script>
 
 			            <section id="twitter-timeline"></section>
 			              <script>
 			              twitterChartData = <?php
-			                  echo json_encode($twitterResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($twitterResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              twitterChartNumber = "<?= printBounceResults($numTwitterResults); ?>";
 			              </script>
 			             <!-- twitterChartNumber = "<?= printResults($numTwitterResults); ?>"; -->
@@ -168,8 +168,8 @@ include __DIR__.'/header.php';
 				            <section id="email-timeline"></section>
 				              <script>
 				              emailChartData = <?php
-				                  echo json_encode($emailResults->getDataTable()->toSimpleObject())
-				              ?>;
+                                  echo json_encode($emailResults->getDataTable()->toSimpleObject())
+                    ?>;
 				              emailChartNumber = "<?= printResults($numEmailResults); ?>";
 				              </script>
 			          	</div>
@@ -182,16 +182,16 @@ include __DIR__.'/header.php';
 			            <section id="gender-timeline"></section>
 			              <script>
 			              genderChartData = <?php
-			                  echo json_encode($genderResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($genderResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              </script>
 			            </div>
 			            <div class="col-sm-6">
 			            <section id="age-timeline"></section>
 			              <script>
 			              ageChartData = <?php
-			                  echo json_encode($ageResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($ageResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              </script>
 			            </div>
 			        </div>
@@ -201,8 +201,8 @@ include __DIR__.'/header.php';
 		            	<section id="geo-timeline"></section>
 			              <script>
 			              geoChartData = <?php
-			                  echo json_encode($geoResults->getDataTable()->toSimpleObject())
-			              ?>;
+                              echo json_encode($geoResults->getDataTable()->toSimpleObject())
+                    ?>;
 			              </script>
 		            	</div>
 		            </div>
@@ -216,15 +216,15 @@ include __DIR__.'/header.php';
 				            <section id="device-timeline"></section>
 				              <script>
 				              deviceChartData = <?php
-				                  echo json_encode($deviceResults->getDataTable()->toSimpleObject())
-				              ?>;
+                                  echo json_encode($deviceResults->getDataTable()->toSimpleObject())
+                    ?>;
 				              </script>
 
 				            <section id="desktop-timeline"></section>
 				              <script>
 				              desktopChartData = <?php
-				                  echo json_encode($desktopResults->getDataTable()->toSimpleObject())
-				              ?>;
+                                  echo json_encode($desktopResults->getDataTable()->toSimpleObject())
+                    ?>;
 				              desktopChartNumber = "<?= printResults($numDesktopResults); ?>";
 				              </script>
 
@@ -234,16 +234,16 @@ include __DIR__.'/header.php';
 				            <section id="tablet-timeline"></section>
 				              <script>
 				              tabletChartData = <?php
-				                  echo json_encode($tabletResults->getDataTable()->toSimpleObject())
-				              ?>;
+                                  echo json_encode($tabletResults->getDataTable()->toSimpleObject())
+                    ?>;
 				              tabletChartNumber = "<?= printResults($numTabletResults); ?>";
 				              </script>
 
 				            <section id="mobile-timeline"></section>
 				              <script>
 				              mobileChartData = <?php
-				                  echo json_encode($mobileResults->getDataTable()->toSimpleObject())
-				              ?>;
+                                  echo json_encode($mobileResults->getDataTable()->toSimpleObject())
+                    ?>;
 				              mobileChartNumber = "<?= printResults($numMobileResults); ?>";
 				              </script>
 				              				            </div>
@@ -255,6 +255,6 @@ include __DIR__.'/header.php';
 	</div>
 </div>
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <?php
 use \GiveToken\User;
 
-include_once 'util.php';
+require_once 'util.php';
 _session_start();
 
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 
 /*
 <!-- JQUERY - why are these alternate versions here?-->
@@ -30,7 +30,7 @@ include __DIR__.'/header.php';
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
-  <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -77,14 +77,14 @@ include __DIR__.'/header.php';
 
               <div class="not-btn solid-blue">
 				<?php
-					if (logged_in()) {
-						if (isset($_SESSION["level"]) && $_SESSION["level"] == 1) {
-							echo 'Already a member!';
-						}
-					} else {
-						echo '<button type="button" class="btn dark-grey" onclick="signupOpen(1)">Sign Up <i class="fa fa-chevron-right"></i></button>';
-					}
-				?>
+    if (logged_in()) {
+        if (isset($_SESSION["level"]) && $_SESSION["level"] == 1) {
+            echo 'Already a member!';
+        }
+    } else {
+        echo '<button type="button" class="btn dark-grey" onclick="signupOpen(1)">Sign Up <i class="fa fa-chevron-right"></i></button>';
+    }
+                ?>
 			  </div>
 
            </div>
@@ -120,18 +120,18 @@ include __DIR__.'/header.php';
 					</div>
 
 					<div class="not-btn solid-lt-blue">
-						<?php
-							if (logged_in()) {
-								if (isset($_SESSION["level"]) && $_SESSION["level"] == 2) {
-									echo 'Already a member!';
-								} else {
-									$user = new User($_SESSION["user_id"]);
-									echo '<button type="button" class="btn dark-grey" onclick="payWithStripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
-								}
-							} else {
-								echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
-							}
-						?>
+        <?php
+        if (logged_in()) {
+            if (isset($_SESSION["level"]) && $_SESSION["level"] == 2) {
+                echo 'Already a member!';
+            } else {
+                $user = new User($_SESSION["user_id"]);
+                echo '<button type="button" class="btn dark-grey" onclick="payWithStripe(\''.$user->email_address.'\', \'PRICING\')">Upgrade <i class="fa fa-chevron-right"></i></button>';
+            }
+        } else {
+            echo '<button type="button" class="btn dark-grey" onclick="signupOpen(2)">Sign Up And Pay <i class="fa fa-chevron-right"></i></button>';
+        }
+        ?>
 					</div>
 				</div>
 			</div>
@@ -283,7 +283,7 @@ include __DIR__.'/header.php';
   </div>
 </div>
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->

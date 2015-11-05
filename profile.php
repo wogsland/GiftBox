@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+require_once 'config.php';
 _session_start();
 
 $message = null;
@@ -12,7 +12,7 @@ if (logged_in()) {
     //header('Location: '.$app_root.'my_account.php');
 }
 define('TITLE', 'GiveToken.com - Profile');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 
 <!-- REACT -->
@@ -37,7 +37,7 @@ include __DIR__.'/header.php';
 ============================== -->
 <header class="header" data-stellar-background-ratio="0.5">
   <div>
-    <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
   </div>
   <div id="account-profile">
   </div>
@@ -71,6 +71,6 @@ include __DIR__.'/header.php';
   React.render(<Account model={Model} />, document.getElementById('account-profile'));
 </script>
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 </body>
 </html>

@@ -1,9 +1,9 @@
 <?php
-	include_once 'config.php';
-	_session_start();
-	if (!logged_in()) {
-            header('Location: '.$app_url);
-	}
+    require_once 'config.php';
+    _session_start();
+if (!logged_in()) {
+           header('Location: '.$app_url);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,7 +57,7 @@
 	<!-- endFavicon -->
 </head>
 <body>
-	<?php include_once("analyticstracking.php") ?>
+    <?php require_once "analyticstracking.php" ?>
 	<canvas id="thumbnail-canvas-1" width="1462" height="768" style="display: none; position:absolute;">
 	</canvas>
 	<canvas id="thumbnail-canvas-2" width="1462" height="1355" style="display: none; position:absolute;">
@@ -92,15 +92,15 @@
 					<a class="template-number template-number-hover" id="template-number-9" href="javascript:void(0)" onclick="showThumbnails(9)">9</a>
 
 					<div class="template-thumbnail-container">
-					<?php
-						$dir = "./templates";
-						$files = scandir($dir);
-						foreach ($files as $filename) {
-							if (strpos($filename, "thumbnail") !== FALSE) {
-								include $dir."/".$filename;
-							}
-						}
-					?>
+        <?php
+        $dir = "./templates";
+        $files = scandir($dir);
+        foreach ($files as $filename) {
+            if (strpos($filename, "thumbnail") !== false) {
+                include $dir."/".$filename;
+            }
+        }
+        ?>
 					</div>
 
 				</div>

@@ -1,8 +1,8 @@
 <?php
 use \GiveToken\EventLogger;
 
-include_once 'config.php';
-include_once 'mail.php';
+require_once 'config.php';
+require_once 'mail.php';
 
 _session_start();
 

@@ -1,7 +1,7 @@
 <?php
 use \GiveToken\ButtonLog;
 
-include_once 'config.php';
+require_once 'config.php';
 
 _session_start();
 

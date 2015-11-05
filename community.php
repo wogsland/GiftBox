@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+require_once 'config.php';
 
 _session_start();
 
@@ -9,7 +9,7 @@ $last_name = null;
 $email = null;
 $user_id = null;
 
-if (logged_in()){
+if (logged_in()) {
     $results = execute_query("SELECT user.*, level.id, level.name FROM user, level WHERE user.level = level.id and user.id = ".$_SESSION['user_id']);
     if ($results->num_rows == 1) {
         $user = $results->fetch_object();
@@ -22,7 +22,7 @@ if (logged_in()){
 }
 
 define('TITLE', 'GiveToken.com - Community Page');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" href="css/magnific-popup.css">
 
@@ -44,7 +44,7 @@ include __DIR__.'/header.php';
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
-  <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 </div>
 
 </header>
@@ -56,8 +56,8 @@ include __DIR__.'/header.php';
 			<!-- Sidebar -->
 			<div class="col-sm-4 col-md-3">
 				<?php
-					if (logged_in()) {
-						echo '<div class="text-center">
+    if (logged_in()) {
+        echo '<div class="text-center">
 					            <img src="assets/gt-favicons.ico/favicon-96x96.png" class="img-circle img-offline img-responsive img-profile" alt="">
 					            <h4 class="profile-name mb5">' . " $first_name  $last_name " . '</h4>
 					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
@@ -85,15 +85,15 @@ include __DIR__.'/header.php';
 					            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
 					            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
 					        </ul>';
-					} else {
-						echo '<h5 class="md-title">Welcome to the Community Page!</h5>
+    } else {
+        echo '<h5 class="md-title">Welcome to the Community Page!</h5>
 								<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>';
-						echo '<div class="btn-group buttons login-button text-center">
+        echo '<div class="btn-group buttons login-button text-center">
 								<button href="#login-form" class="open-popup-link btn btn-primary btn-bordered">Login</button>
 								<button href="#signup-form" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
 							  </div>';
-					}
-				?>
+    }
+                ?>
 			</div><!-- /Sidebar -->
 			<div class="col-sm-8 col-md-9">
 				<!-- Tab Navigation -->
@@ -104,11 +104,11 @@ include __DIR__.'/header.php';
 			        <li class=""><a href="#blog" data-toggle="tab"><strong>GiveToken Blog</strong></a></li>
 			        <li class=""><a href="#spotlight" data-toggle="tab"><strong>Spotlight</strong></a></li>
 			        <li class="" style="float: right;"><a href="index.php"><strong>Home</strong></a></li>
-			       	<?php
-				        if (is_admin()) {
-								echo '<li><a href="admin.php" data-toggle="tab"><strong>Admin</strong></a></li>';
-						}
-					?>
+            <?php
+            if (is_admin()) {
+                echo '<li><a href="admin.php" data-toggle="tab"><strong>Admin</strong></a></li>';
+            }
+        ?>
 			    </ul>
 
 			    <div class="tab-content nopadding noborder">
@@ -721,7 +721,7 @@ include __DIR__.'/header.php';
 
 <header class="header" data-stellar-background-ratio="0.5" id="account-profile"></header>
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 
 <script src="js/community.js"></script>
 <script src="js/jquery.magnific-popup.js"></script>

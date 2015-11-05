@@ -1,8 +1,8 @@
 <?php
-include_once 'config.php';
+require_once 'config.php';
 _session_start();
 define('TITLE', 'GiveToken.com - Privacy Policy');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 </head>
 <body id="privacy-policy">
@@ -20,7 +20,7 @@ include __DIR__.'/header.php';
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
-  <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -140,6 +140,6 @@ include __DIR__.'/header.php';
 			</p>
 		</summary>
 	</div>
-	<?php include __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
 </body>
 </html>

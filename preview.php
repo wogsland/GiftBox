@@ -3,7 +3,7 @@ use \Detection\MobileDetect as Mobile_Detect;
 use \GiveToken\Token;
 use google\appengine\api\cloud_storage\CloudStorageTools;
 
-include_once 'config.php';
+require_once 'config.php';
 
 $token = new Token($_GET['id']);
 $detect = new Mobile_Detect();
@@ -19,28 +19,28 @@ $animation_style = null;
 $animation_enter_css = null;
 $animation_pop_css = null;
 
-	if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != TRUE) {
-		$animation_style = "none";
-	} else {
-		$animation_color = $token->animation_color;
-		$animation_style = $token->animation_style;
-	}
+if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') != true) {
+    $animation_style = "none";
+} else {
+    $animation_color = $token->animation_color;
+    $animation_style = $token->animation_style;
+}
 
-	if ($animation_style == "none") {
-		$container_id = "flip-container";
-	} else {
-		if ($animation_style == "default") {
-			$animation_enter_css = "bounceInLeft";
-			$animation_pop_css = "swing";
-		} else if ($animation_style == "business") {
-			$animation_enter_css = "fadeIn";
-			$animation_pop_css = "pulse";
-		} else if ($animation_style == "casual") {
-			$animation_enter_css = "flipInX";
-			$animation_pop_css = "tada";
-		}
-		$container_id = "flip-container-envelope";
-	}
+if ($animation_style == "none") {
+    $container_id = "flip-container";
+} else {
+    if ($animation_style == "default") {
+        $animation_enter_css = "bounceInLeft";
+        $animation_pop_css = "swing";
+    } else if ($animation_style == "business") {
+        $animation_enter_css = "fadeIn";
+        $animation_pop_css = "pulse";
+    } else if ($animation_style == "casual") {
+        $animation_enter_css = "flipInX";
+        $animation_pop_css = "tada";
+    }
+    $container_id = "flip-container-envelope";
+}
 
 
 ?>
@@ -52,7 +52,8 @@ $animation_pop_css = null;
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
 	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
-	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER['HTTP_HOST']) and isset($_SERVER['REQUEST_URI'])) { echo '"'."http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'"'; } ?> />
+	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER['HTTP_HOST']) and isset($_SERVER['REQUEST_URI'])) { echo '"'."http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'"'; 
+} ?> />
 	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
 	<meta name="og:type" property="og:type" content="article" />
@@ -105,17 +106,17 @@ $animation_pop_css = null;
 	</script>
 </head>
 <body>
-	<?php include_once("analyticstracking.php"); ?>
+    <?php require_once "analyticstracking.php"; ?>
 
-	<?php if ($animation_style == "none"): ?>
+    <?php if ($animation_style == "none") : ?>
 	<div class="preloader">
 	  <div class="status">&nbsp;</div>
 	</div>
-	<?php endif; ?>
+    <?php endif; ?>
 
-	<?php if ($animation_style != "none"): ?>
+    <?php if ($animation_style != "none") : ?>
 	<div class="shrink-box">
-		<?= '<div class="shaking-box animated ' . $animation_enter_css . '" id="shaking-box">'; ?>
+    <?= '<div class="shaking-box animated ' . $animation_enter_css . '" id="shaking-box">'; ?>
 
 			<div class="envelope">
 				<div class="svg-container base">
@@ -186,43 +187,43 @@ $animation_pop_css = null;
 					</svg>
 				</div>
 			</div>
-			<?php endif; ?>
-			<?php
-			echo '<div id="triggerTab"></div>';
-			echo '<div class="giftbox panel" id="' . $container_id . '">';
-			echo '<div class="front">';
-			echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : NULL;
+    <?php endif; ?>
+    <?php
+    echo '<div id="triggerTab"></div>';
+    echo '<div class="giftbox panel" id="' . $container_id . '">';
+    echo '<div class="front">';
+    echo ($token->letter_text || $token->attachments)  ? '<a class="flip-over flip-tab" id="view-letter" href="javascript:void(0);">View Letter</a>'.PHP_EOL : null;
 
-			$token->render();
+    $token->render();
 
-			echo "</div>";
-			echo '<div class="back">';
-			echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : NULL;
+    echo "</div>";
+    echo '<div class="back">';
+    echo ($token->letter_text || $token->attachments) ? '<a class="flip-back flip-tab" id="close-letter" href="javascript:void(0);">View Token</a>'.PHP_EOL : null;
 
-			echo '<div id="letter-text-container">';
-			echo '<div id="letter-text">';
-			echo '<p>'.($token->letter_text).'</p>';
-			echo '<p id="letter-attachments">';
-			foreach ($token->attachments as $attachment) {
-				if ($google_app_engine) {
-					$image_path = CloudStorageTools::getPublicUrl($file_storage_path.$attachment->download_file_name, $use_https);
-				} else {
-					$image_path = $file_storage_path.$attachment->download_file_name;
-				}
-				echo '<a href="'.$image_path.'" target="_blank"><i class="fa fa-file fa-x2"></i> '.$attachment->file_name.'</a>';
-			}
-			echo '</p>';
-			echo '</div>'; // letter-text
-			echo "</div>"; // letter-text-container
-			echo "</div>"; // back
-			echo "</div>"; // flip-container
-			?>
+    echo '<div id="letter-text-container">';
+    echo '<div id="letter-text">';
+    echo '<p>'.($token->letter_text).'</p>';
+    echo '<p id="letter-attachments">';
+    foreach ($token->attachments as $attachment) {
+        if ($google_app_engine) {
+            $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$attachment->download_file_name, $use_https);
+        } else {
+            $image_path = $file_storage_path.$attachment->download_file_name;
+        }
+        echo '<a href="'.$image_path.'" target="_blank"><i class="fa fa-file fa-x2"></i> '.$attachment->file_name.'</a>';
+    }
+    echo '</p>';
+    echo '</div>'; // letter-text
+    echo "</div>"; // letter-text-container
+    echo "</div>"; // back
+    echo "</div>"; // flip-container
+    ?>
 
 	<!-- Closing down a shrink box -->
-	<?php if ($animation_style != "none"): ?>
+    <?php if ($animation_style != "none") : ?>
 		</div>
 	</div>
-	<?php endif; ?>
+    <?php endif; ?>
 
 </body>
 </html>
