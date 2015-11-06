@@ -21,13 +21,14 @@
 
   <!--Terms and Policy-->
   <ul class="terms-policy">
-    <li><a href="/termsservice.php">Terms and Conditions</a></li>
+		<li><a href="/about">About Us</a></li>
+		<li><a href="/termsservice.php">Terms and Conditions</a></li>
     <li><a href="/privacypolicy.php">Privacy Policy</a></li>
   </ul>
 
 	<!-- COPYRIGHT TEXT -->
 	<p class="copyright">
-		©2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
+		&copy;2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
 	</p>
 
 </div>
