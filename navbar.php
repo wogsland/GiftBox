@@ -11,8 +11,14 @@
       <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand" href="<?php echo $app_root ?>"><img src="/assets/img/logo-light.png" alt=""></a>
+      <a class="navbar-brand" href="<?php echo $app_root ?>">
+        <img src="/assets/img/logo-light.png" alt="">
+      </a>
+      <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
 
+      <?php if ($development) { ?>
+        <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
+      <?php }?>
     </div>
 
     <!-- NAVIGATION LINKS -->
