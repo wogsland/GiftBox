@@ -24,7 +24,9 @@
     <!-- NAVIGATION LINKS -->
     <div class="navbar-collapse collapse" id="kane-navigation">
       <ul class="nav navbar-nav navbar-right main-navigation">
-        <li><a href="/" class="external">Home</a></li>
+        <?php if (!logged_in()) { ?>
+            <li><a href="/" class="external">Home</a></li>
+        <?php } ?>
         <li><a href="/community" class="external">Community</a></li>
         <li><a href="/pricing" class="external">Pricing</a></li>
         <?php
