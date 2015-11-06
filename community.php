@@ -103,7 +103,7 @@ require __DIR__.'/header.php';
 			        <li class=""><a href="#promotional" data-toggle="tab"><strong>Promotional Videos</strong></a></li>
 			        <li class=""><a href="#blog" data-toggle="tab"><strong>GiveToken Blog</strong></a></li>
 			        <li class=""><a href="#spotlight" data-toggle="tab"><strong>Spotlight</strong></a></li>
-			        <li class="" style="float: right;"><a href="index.php"><strong>Home</strong></a></li>
+			        <li class="" style="float: right;"><a href="/"><strong>Home</strong></a></li>
             <?php
             if (is_admin()) {
                 echo '<li><a href="admin.php" data-toggle="tab"><strong>Admin</strong></a></li>';

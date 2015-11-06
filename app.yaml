@@ -73,6 +73,22 @@ handlers:
 - url: /about
   script: about.php
 
+# Community Page
+- url: /community
+  script: community.php
+
+# Pricing Page
+- url: /pricing
+  script: pricing.php
+
+# Terms Page
+- url: /terms
+  script: termsservice.php
+
+# Privacy Policy
+- url: /privacy
+  script: privacypolicy.php
+
 # catchall for 404
 - url: /.*
   script: error.php

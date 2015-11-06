@@ -26,7 +26,7 @@ var Account = React.createClass({
                 <li className=""><a href="#account" data-toggle="tab"><strong>Account Info</strong></a></li>
                 {/* <!-- Manage Users will only be for enterprise --> */}
                 <li className=""><a href="#users" data-toggle="tab"><strong>Manage Users</strong></a></li>
-                <li className="navbar-right"><a href="index.php"><strong>Home</strong></a></li>
+                <li className="navbar-right"><a href="/"><strong>Home</strong></a></li>
             </ul>
             <div className="tab-content nopadding noborder">
               <AccountActivities />
@@ -57,7 +57,7 @@ var Account = React.createClass({
                 {/* <li className=""><a href="#viewers" data-toggle="tab"><strong>Viewers</strong></a></li> */}
                 <li className=""><a href="#account" data-toggle="tab"><strong>Account Info</strong></a></li>
                 {/* <!-- Manage Users will only be for enterprise --> */}
-                <li className="navbar-right"><a href="index.php"><strong>Home</strong></a></li>
+                <li className="navbar-right"><a href="/"><strong>Home</strong></a></li>
             </ul>
             <div className="tab-content nopadding noborder">
               <AccountActivities />
