@@ -54,15 +54,15 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!-- Polymer -->
-    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <link rel="import" href="components/paper-styles/paper-styles.html">
-    <link rel="import" href="components/neon-animation/neon-animated-pages.html">
-    <link rel="import" href="components/neon-animation/neon-animations.html">
-    <link rel="import" href="elements/description-x-card.html">
-    <link rel="import" href="elements/image-x-card.html">
-    <link rel="import" href="elements/location-x-card.html">
-    <link rel="import" href="elements/video-x-card.html">
-    <link rel="import" href="elements/x-card.html">
+    <link rel="import" href="components/neon-animation/neon-animated-pages.html" async>
+    <link rel="import" href="components/neon-animation/neon-animations.html" async>
+    <link rel="import" href="elements/description-x-card.html" async>
+    <link rel="import" href="elements/image-x-card.html" async>
+    <link rel="import" href="elements/location-x-card.html" async>
+    <link rel="import" href="elements/video-x-card.html" async>
+    <link rel="import" href="elements/x-card.html" async>
     <link rel="import" href="elements/x-cards-list.html">
 
   </head>
@@ -76,26 +76,13 @@
               <div class="fit layout horizontal large">
 
                 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <header class="mdl-layout__header mdl-layout__header--waterfall">
+                  <header class="mdl-layout__header">
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
                         <i class="gt-info-company"></i>
-                        <i class="current-section"></i>
+                        - <i class="gt-info-jobtitle"></i>
                       </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <!-- Bottom rows, not visible on scroll -->
-                    <div class="mdl-layout__header-row">
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-layout__header-row">
-                      <span class="mdl-layout-title">
-                        <h1 class="gt-info-jobtitle"></h1>
-                      </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                    <div class="mdl-layout__header-row">
                       <div class="mdl-layout-spacer"></div>
                     </div>
                   </header>
@@ -210,14 +197,20 @@
                 BACK
               </div>
               <h2 class="mdl-color-text--primary-dark">Yes</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+              <div id="yes-content">
+                <p>
+                  I'm interested in this position. Tell me more.
+                </p>
+                <form id="yes-email-form">
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <input type="email" class="mdl-textfield__input" id="yes-email" name="email">
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                  </div>
+                </form>
+                <div>
+                  <button id="yes-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
+                </div>
+              </div>
             </div>
           </x-card>
           <x-card>
@@ -225,15 +218,21 @@
               <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
                 BACK
               </div>
-              <h2 class="mdl-color-text--primary-dark">Maybe, I'm indecisive</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+              <h2 class="mdl-color-text--primary-dark">Maybe</h2>
+              <div id="maybe-content">
+                <p>
+                  I might be interested in this position. Tell me more.
+                </p>
+                <form id="maybe-email-form">
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <input type="email" class="mdl-textfield__input" id="maybe-email" name="email">
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                  </div>
+                </form>
+                <div>
+                  <button id="maybe-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
+                </div>
+              </div>
             </div>
           </x-card>
           <x-card>
@@ -241,15 +240,22 @@
               <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
                 BACK
               </div>
-              <h2 class="mdl-color-text--primary-dark">No No No!</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+              <h2 class="mdl-color-text--primary-dark">No</h2>
+              <div id="no-content">
+                <p>
+                  No, I'm not interested right now. Please don't contact me again
+                  about this position.
+                </p>
+                <form id="no-email-form">
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <input type="email" class="mdl-textfield__input" id="no-email" name="email">
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                  </div>
+                </form>
+                <div>
+                  <button id="no-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
+                </div>
+              </div>
             </div>
           </x-card>
           <location-x-card>

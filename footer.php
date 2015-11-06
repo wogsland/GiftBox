@@ -6,22 +6,23 @@
 <div class="container">
 	<div class="verticleHeight40"></div>
 	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
+	<img src="/assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
 
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
-    <li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
+		<li><a href="https://www.linkedin.com/company/4788844"><i class="social_linkedin_square"></i></a></li>
+		<li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
 		<li><a href="https://twitter.com/give_token"><i class="social_twitter_square"></i></a></li>
 		<li><a href="https://www.pinterest.com/GiveToken/"><i class="social_pinterest_square"></i></a></li>
 <!--		<li><a href="#"><i class="social_googleplus_square"></i></a></li> -->
-<!--		<li><a href="#"><i class="social_instagram_square"></i></a></li> -->
+		<li><a href="https://instagram.com/givetoken"><i class="social_instagram_square"></i></a></li>
 <!--		<li><a href="#"><i class="social_flickr_square"></i></a></li> -->
 	</ul>
 
   <!--Terms and Policy-->
   <ul class="terms-policy">
-    <li><a href="termsservice.php">Terms and Conditions</a></li>
-    <li><a href="privacypolicy.php">Privacy Policy</a></li>
+    <li><a href="/termsservice.php">Terms and Conditions</a></li>
+    <li><a href="/privacypolicy.php">Privacy Policy</a></li>
   </ul>
 
 	<!-- COPYRIGHT TEXT -->
@@ -58,7 +59,9 @@
 <script src="/js/facebook_init.js"></script>
 <script src="/js/util.js"></script>
 <script src="/pay_with_stripe.php"></script>
-<script src="/js/login.js"></script>
-<script src="/js/signup.js"></script>
+<?php if (!logged_in()) { ?>
+	<script src="/js/login.js"></script>
+	<script src="/js/signup.js"></script>
+<?php }?>
 <script src="/js/account.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>

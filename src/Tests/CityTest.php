@@ -1,14 +1,14 @@
 <?php
 namespace GiveToken\Tests;
 
-use \GiveToken\UserGroup;
+use \GiveToken\City;
 
 /**
- * This class tests the UserGroup class
+ * This class tests the City class
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/UserGroupTest
+ * phpunit --bootstrap src/tests/autoload.php src/tests/CityTest
  */
-class UserGroupTest
+class CityTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -25,8 +25,8 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         // $id = null case
-        $result = new UserGroup();
-        $this->assertEquals('GiveToken\UserGroup', get_class($result));
+        $result = new City();
+        $this->assertEquals('GiveToken\City', get_class($result));
         $this->assertFalse(isset($result->name));
     }
 }

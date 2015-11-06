@@ -50,11 +50,11 @@ function signupClose() {
 }
 
 function signupError(message) {
-	$('#signup-alert-placeholder').html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>')
+	$('#signup-alert-placeholder').html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>');
 }
 
 function signupInfo(message) {
-	$('#signup-alert-placeholder').html('<div class="alert alert-info"><span>'+message+'</span></div>')
+	$('#signup-alert-placeholder').html('<div class="alert alert-info"><span>'+message+'</span></div>');
 }
 
 function signupSuccess(app_root, signupType, userInfo) {
@@ -121,7 +121,7 @@ function handleFBReg(response) {
 
 function processSignup(userInfo, signupType) {
 	signupInfo("Processing your registration.  Please wait...");
-	$.post("register_ajax.php", userInfo, function(data, textStatus, jqXHR){
+	$.post("/ajax/signup", userInfo, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
 			signupSuccess(data.app_root, signupType, userInfo);
 		} else if (data.status === "ERROR") {

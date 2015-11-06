@@ -1,30 +1,48 @@
-# GiftBox
+# GiveToken
 
 ## Table of Contents
-1. [General Info](#general-info)
-2. [Branching Strategy](#branching)
-3. [Deployment Information](#deployment)
+1. [Set Up](#set-up)
+1. [Branching Strategy](#branching)
+1. [Testing](#testing)
+1. [Deployment](#deployment)
 
-View at stone-timing-557.appspot.com
-
-## <a name="general-info"></a>General Info
+## <a id="set-up"></a>Set Up
 
 ### URLs
 hosted on Google Cloud
-- production: [givetoken.com](http://givetoken.com/)
-- staging: [http://t-sunlight-757.appspot.com/](http://t-sunlight-757.appspot.com/)
+- production: [www.givetoken.com](https://www.givetoken.com/) ([stone-timing-557.appspot.com](https://stone-timing-557.appspot.com/))
+- staging: [http://t-sunlight-757.appspot.com/](https://t-sunlight-757.appspot.com/)
 
-## <a name="database"></a>Database Management
+### Github
 
-### Creating a Local Instance of your database.
+Make sure you have access & set your project remote
 
-#### Assumptions:
-- You have downloaded and installed MySQL workbench and have created your local instance
-- You have access to the Google Developer Console linked in the following file.
+    git remote add github git@github.com:GiveToken/GiftBox.git`
 
-To create a local instance of the givetoken database. Refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing).
+*this assumes ssh; you could use `https://github.com/GiveToken/GiftBox.git` instead of `git@...` for https if you prefer*
 
-## <a name="composer"></a>Composer
+### <a id="database"></a>Database Management
+
+- Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
+- Get access to the [Google Developer Console](https://console.developers.google.com).
+
+To create a local instance of the givetoken database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+
+### Google Cloud SDK
+
+- Follow the instructions on the [sdk instructions page](https://cloud.google.com/sdk/)
+- Be sure to restart your terminal
+- `gcloud auth login`
+- oAuth your Google account that has access to the project
+
+#### Initialize/Configure the `gcloud` CLI
+
+- `gcloud init PROJECT_ID` this is `stone-timing-557` for the production app. Thank Google for the awesome naming.
+- For safety, open up the `.glcoud` file in the `stone-timing-557/` dir and remove the line `project = stone-timing-557`
+  - this is to ensure that you always specify which project you are pushing your code to. You do not want to push staging code to production.
+- `gcloud components update app` to add the neccessary gcloud CLI components
+
+### <a id="composer"></a>Composer
 
 [Composer](https://getcomposer.org/) is the PHP package manager used to bring in
 3rd party PHP code. Once you have it in installed, cd to the project directory and
@@ -35,7 +53,7 @@ run
 
 which will create everything you need in the untracked vendor directory.
 
-## <a name="bower"></a>Bower
+### <a id="bower"></a>Bower
 
 [Bower](http://bower.io/) is a package manager used to bring in Polymer
 components. Once you have it in installed, cd to the project directory and
@@ -45,19 +63,32 @@ run
 
 which will create everything you need in the untracked components directory.
 
-## <a name="branching"></a>Branching Strategy
+### Polybuild
+
+Polymer provides a tool to optimize & minify an app's code which you can get via
+
+    npm install -g polybuild
+
+and build the recruiting token with
+
+    polybuild --maximum-crush recruiting_token.php
+
+which creates `recruiting_token.build.html` & `recruiting_token.build.js`.
+NB: it treats PHP like a comment and removes it.
+
+## <a id="branching"></a>Branching Strategy
 
 ### Basic Tenets
 
 1. All code on the `master` branch will always be production-ready. If it is not production-ready it should not be on `master`
-2. The `staging` branch is not a sacred cow. It will be wise to occasionally blow away the `staging` branch and create a new one off of master.
+2. The `develop` branch is not a sacred cow. It will be wise to occasionally blow away the `develop` branch and create a new one off of master.
 3. Branch all topic branches off of the tip of `master`
-4. All code gets merged into `master` via pull request.
+4. All code gets merged into `master` via pull request (PR).
 5. All code get approved by the project lead before being merged via PR.
 6. Once code is approved for production and the PR has been merged, delete the branch on GH to declutter the branches view.
 7. Commit messages begin with a present-tense verb and describe some combination of what was done, where it was done, and why-- Extra points for referencing the GH issue number.
 8. Commit messages <= 50 columns. Anything longer should be broken up. Make use of the message paragraph-- i.e. `git commit` as opposed to `git commit -m "message"`
-9. NEVER EVER EVER merge `staging` into `master`.
+9. NEVER EVER EVER merge `develop` into `master`.
 
 ### Branch Naming
 
@@ -81,41 +112,13 @@ Branch names should follow the following convention:
 
 This is done by gitflow
 
-
 ### Merging with Develop
 
 This should be done automatically using gitflow
 
 ### Handling Merge Conflicts
 
-if you happen to run into merge conflicts:
-
-- `git checkout [branch_youre_trying_to_merge_to]`
-- `git status`
-- Open the file that contains conflicts in your text editor of choice
-- Look for `<<<<<<< HEAD` The conflict starts here and there can be more than one.
-- Everything bewteen `<<<<<<< HEAD` and `=======` represents the code that's on the branch you are **merging to**
-- Everything bewteen `=======` and `======= branch name or commit id` represents the code that's on the branch you want to **merge in**
-
-<code><<<<<<< HEAD
-<br>
-  some code that does cool stuff (usually from master or staging)
-<br>
-=======</code>
-
-<code>
-  some new code that does even cooler stuff (from the branch you are merging in)
-<br>
-======= Name of branch that is being merged in or commit id
-</code>
-
-- Keep or remove any code that you don't want or shouldn't be included
-- Delete all `<<<<<<< HEAD` and `=======` lines
-- Save the file and switch to your terminal
-- `git status`
-- `git add [name_of_file]` or `git add .` (adds all files that were changed)
-- `git commit -m "Fix merge conflicts"`
-- `git push origin [branch_name]` (push to the branch you were initially trying to merge into)
+Github has a great reference [here](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/).
 
 ###  Pushing Code Live
 
@@ -125,8 +128,8 @@ once the PR has been approved and merged
 - Push code to production site, as described in the deployment procedures
 
 Use [gitflow](http://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/) and [cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)for reference.
+
 ### Example Workflow from Start to Finish Feature.
-___
 
 - `git checkout develop`
 - `git pull github develop`
@@ -147,7 +150,6 @@ ___
 - profit
 
 ### Example Workflow from Start to Finish Hotfix. Used for bug fixes.
-___
 
 - `git checkout develop`
 - `git pull github develop`
@@ -168,12 +170,7 @@ ___
 - [Push code to production site](#deploy-production)
 - avert profit loss
 
-### Example Workflow from Start to Finish Release. Used for new releases.
-___
-
-
 ### Example Workflow from Start to Finish Publish. Used when you are unable to complete a feature or you are working in collaboration
-___
 
 User A
 - `git checkout develop`
@@ -192,69 +189,7 @@ User B
 - commit and finish feature and then push and deploy
 - collaborate for profit!
 
-
-## <a name="deployment"></a>Deployment Information
-
-### Assumptions
-
-- You have access to the Google App Engine (GAE) and Github (GH) projects
-
-### Install the Google Cloud SDK
-
-- Follow the instructions on the [sdk instructions page](https://cloud.google.com/sdk/)
-- Be sure to restart your terminal
-- `gcloud auth login`
-- oAuth your Google account that has access to the project
-
-### Initialize/Configure the `gcloud` CLI
-
-- `gcloud init PROJECT_ID` this is `stone-timing-557` for the production app. Thank Google for the awesome naming.
-- For safety, open up the `.glcoud` file in the `stone-timing-557/` dir and remove the line `project = stone-timing-557`
-  - this is to ensure that you always specify which project you are pushing your code to. You do not want to push staging code to production.
-- `gcloud components update app` to add the neccessary gcloud CLI components
-
-### Add GH to the Mix
-
-- `cd stone-timing-557/default/`
-- `git remote add github git@github.com:gp48maz1/GiftBox.git`
-  - this assumes ssh; you could use `https://github.com/gp48maz1/GiftBox.git` instead of `git@...` for https if you prefer
-- `git remote -v` and you should see origin (GAE) and GH remotes listed.
-- `git fetch github`
-- `git checkout develop` to checkout and track the remote staging branch
-
-### Follow the Branching Procedures
-
-Before you deploy anything, make sure you are following the [Give Token branching strategy](#branching).
-
-
-
-## Most Important Caveat!
-
-When deploying using the following procedures, *be absolutely sure* that you are on the most up-to-date version of correct branch:
-
-#### `develop` -> staging site
-
-#### `master` -> production
-
-
-### <a name="deploy-staging"></a>Deploy to Staging
-
-*assumptions: you have merged your topic branch into staging, pushed staging to the GH remote, and you are at the project root (i.e. `stone-timing-557/default/`)*
-
-- `git checkout develop`
-- `git pull github develop`
-- `gcloud preview app deploy app.yaml --project t-sunlight-757 --version 1`
-
-### <a name="deploy-production"></a>Deploy to Production
-*assumptions: you have merged your pull request into master, pulled the GH master to your local machine, and you are at the project root (i.e. `stone-timing-557/default/`)*
-
-- `git checkout master`
-- `git pull github master`
-- `gcloud preview app deploy app.yaml --project stone-timing-557 --version 1`
-
-*protip: you could alias those two deployment commands in your shell of choice to reduce the typing*
-
-## <a name="testing"></a>Testing
+## <a id="testing"></a>Testing
 
 Presuming you have set up [Composer](#composer), then PHPUnit will be available
 in your /vendor/bin directory. To run all the tests, just reference the
@@ -264,21 +199,52 @@ configuration file:
 
 To also investigate the code coverage of the tests, you'll need the
 [Xdebug PHP extension](http://xdebug.org/docs/install).
-Make sure you put any unit tests in the tests directory and name them like
-whateverTest.php.
+Make sure you put any unit tests in the `src/tests` directory and name them like
+MyAwesomeTest.php.
 
-## Polybuild
+## <a id="deployment"></a>Deployment
 
-Polymer provides a tool to optimize & minify an app's code which you can get via
+### Follow the Branching Procedures
 
-    npm install -g polybuild
+Before you deploy anything, make sure you are following the [Give Token branching strategy](#branching).
 
-and build the recruiting token with
+When deploying using the following procedures, *be absolutely sure* that you are on the most up-to-date version of correct branch:
 
-    polybuild --maximum-crush recruiting_token.php
+#### `develop` -> staging site
 
-which creates `recruiting_token.build.html` & `recruiting_token.build.js`. This
-will be useful if we're doing all our DB interaction via AJAX (it treats PHP
-like a comment and removes it).
+#### `master` -> production
+
+### Build Script
+The build script (`build.sh`) runs unit tests, warns you of any untracked or
+uncommited files (**these will be included in the optional release to glcoud, but
+are not yet tracked in github**), minifies the token JavaScript, concatenates the HTML
+files and optionally pushes to gcloud. For example, to deploy a test build,
+
+    ./build.sh username
+
+will do the above mentioned things and deploy to gcloud at
+[username-dot-t-sunlight-757.appspot.com](https://username-dot-t-sunlight-757.appspot.com).
+If we stick to using github usernames we can avoid collisions :smile:.
+The full set of options is available in the help menu
+
+    ./build.sh -h
+
+The important caveat is that this script was written on OSX and may not work on
+Cygwin or your favorite Windows version of Linux.
+
+### <a id="deploy-staging"></a>Deploy to Staging
+
+*assumptions: you have merged your topic branch into develop, pushed develop to the GH remote, and you are at the project root (i.e. `stone-timing-557/default/`)*
+
+    git checkout develop
+    git pull github develop
+    ./build.sh staging
+
+### <a id="deploy-production"></a>Deploy to Production
+*assumptions: you have merged your pull request into master, pulled the GH master to your local machine, and you are at the project root (i.e. `stone-timing-557/default/`)*
+
+    git checkout master
+    git pull github master
+    ./build.sh master
 
 # GMP was here

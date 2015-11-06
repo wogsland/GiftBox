@@ -18,26 +18,7 @@ include __DIR__.'/header.php';
 <body>
 	<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 		<div class="">
-			<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation">
-				<div class="container">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#kane-navigation">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="index.php"><img src="assets/img/logo-light.png" alt=""></a>
-					</div>
-					<!-- NAVIGATION LINKS -->
-					<div class="navbar-collapse collapse" id="kane-navigation">
-						<ul class="nav navbar-nav navbar-right main-navigation">
-							<li><a href="index.php" class="external">HOME</a></li>
-							<li><a href="admin.php" class="external">ADMIN</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+      <?php include __DIR__.'/navbar.php';?>
 		</div>
 	</header>
 
