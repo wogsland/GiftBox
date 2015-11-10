@@ -2,9 +2,7 @@
 use \GiveToken\User;
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-
-function get_post($index) 
+function get_post($index)
 {
     if (isset($_POST[$index])) {
         return $_POST[$index];

@@ -1,10 +1,6 @@
 <?php
 use \GiveToken\ButtonLog;
 
-require_once 'config.php';
-
-_session_start();
-
 // Save the button press
 $button_log = new ButtonLog();
 $button_log->giftbox_id = $_GET['id'];

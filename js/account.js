@@ -1,7 +1,7 @@
 function getSession() {
 	var session = null;
 	$.ajax({
-		url: "get_session_ajax.php",
+		url: "/ajax/get_session",
 		async: false
 	}).done(function(data, textStatus, jqXHR){
 		session = data;
@@ -19,7 +19,7 @@ function changePassword() {
 	} else if (newPassword !== confirmPassword) {
 		$("#change-password-message").text("Passwords do not match.");
 	} else {
-		$.post("change_password_ajax.php", {new_password: newPassword, user_id: 125}, function(data, textStatus, jqXHR){
+		$.post("/ajax/change_password", {new_password: newPassword, user_id: 125}, function(data, textStatus, jqXHR){
 			$.magnificPopup.close();
 			$("#my-account-message").text("Your password has been changed.");
 		}).fail(function(){
@@ -44,7 +44,7 @@ function sendPassword(email) {
 }
 
 function logout() {
-	$.post("logout_ajax.php", function(data, textStatus, jqXHR){
+	$.post("/ajax/logout", function(data, textStatus, jqXHR){
 		if (data.status === "SUCCESS") {
 			if (data.login_type === "FACEBOOK") {
 				FB.getLoginStatus(function(response) {
@@ -88,7 +88,7 @@ function saveMyAccount() {
 		showError("#my-account-message", "Please enter a valid email.");
 	} else {
 		showStatus("#my-account-message", "Saving account information...");
-		var posting = $.post("update_user_ajax.php", $("#account-form").serialize());
+		var posting = $.post("/ajax/user/update", $("#account-form").serialize());
 
 		posting.done(function(data) {
 			showStatus("#my-account-message", "Your account changes have been saved.");

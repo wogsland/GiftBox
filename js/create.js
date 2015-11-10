@@ -1443,7 +1443,7 @@ function save() {
 	});
 
 	// Save the template first
-	$.post("save_token_ajax.php", giftbox, function(result) {
+	$.post("/ajax/token/save", giftbox, function(result) {
 		closeStatus();
 		if (result.status === "SUCCESS") {
 			template.giftboxId = result.giftbox_id;
@@ -1657,7 +1657,7 @@ function openURL() {
 
 function selectSaved() {
 	openStatus("Open", "Retrieving saved Tokens...");
-	$.get("get_user_tokens_ajax.php", function(data) {
+	$.get("/ajax/user/get_tokens", function(data) {
 		var output = [];
 		$.each(data, function(key, value)
 		{
@@ -1675,7 +1675,7 @@ function loadSaved() {
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
-		$.get("get_token_ajax.php", {id: tokenId}, function(data) {
+		$.get("/ajax/token/get", {id: tokenId}, function(data) {
 			console.log("IN GET");
 			var token = data;
 			closeStatus();
@@ -2461,7 +2461,7 @@ function getFacebookAlbums(state, link){
 	var token;
 	$('#facebook-albums ul div').empty();
 	$('#facebook-album-dialog').html('<div id="facebook-albums"><a id="previous-album" style="display:none">Previous</a><a id="next-album" style="display:none">Next</a></div>');
-	$.get("get_access_token.php", function(data){
+	$.get("/ajax/user/get_access_token", function(data){
 		token = data[0].access_token;
 		FB.api('/me?access_token='+token, function(response){
 			//Will be empty or null if the user is not logged in and the token hasn't been updated.
@@ -2523,7 +2523,7 @@ function getFacebookAlbums(state, link){
 				FB.login(function(response){
 					if (response.status === 'connected') {
 						response["access_token"] = FB.getAuthResponse().accessToken;
-						$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
+						$.post("/ajax/user/update_access_token", response, function(data, textStatus, jqXHR){
 							if(data.status === "SUCCESS"){
 								if(state == 1){
 									getFacebookAlbums(2);
@@ -2555,7 +2555,7 @@ function getFacebookPhotos(elem){
 	$( "#facebook-album-dialog" ).dialog("close");
 	$( "#facebook-album-dialog" ).html('<div id="facebook-albums" onclick="getFacebookAlbums()"></div>');
 	$('#facebook-photos-dialog').dialog("open");
-	$.get("get_access_token.php", function(data){
+	$.get("/ajax/user/get_access_token", function(data){
 		token = data[0].access_token;
 		if(album_id){
 			var link = '/'+album_id+'/photos?access_token='+token;

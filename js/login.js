@@ -63,7 +63,7 @@ function loginFacebook() {
 
 function processLogin(userInfo) {
 	loginInfo("Logging into GiveToken.  Please wait...");
-	$.post("login_ajax.php", userInfo, function(data, textStatus, jqXHR){
+	$.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
 			loginSuccess(data.app_root);
 		} else if (data.status === "ERROR") {
@@ -93,7 +93,7 @@ function handleFBLogin(response) {
 			api_response["login_email"] = api_response["email"];
 			response["email"] = api_response["email"];
 			response["access_token"] = FB.getAuthResponse().accessToken;
-			$.post("update_access_token_ajax.php", response, function(data, textStatus, jqXHR){
+			$.post("ajax/user/update_access_token", response, function(data, textStatus, jqXHR){
 				if(data.status === "SUCCESS"){
 					processLogin(api_response);
 				} else if (data.status === "ERROR"){

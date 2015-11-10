@@ -1,10 +1,6 @@
 <?php
 use \GiveToken\Token;
 
-require_once 'config.php';
-
-_session_start();
-
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     try {
