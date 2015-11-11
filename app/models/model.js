@@ -3,7 +3,7 @@
 function getSession() {
    var session = null;
    $.ajax({
-     url: "get_session_ajax.php",
+     url: "/ajax/get_session",
      async: false
    }).done(function(data, textStatus, jqXHR){
      session = data;
@@ -14,7 +14,7 @@ function getSession() {
 function getUser(){
   var user = null;
   $.ajax({
-     url: "get_current_user_ajax.php",
+     url: "/ajax/user/get_current",
      async: false
    }).done(function(data, textStatus, jqXHR){
      user = data;
@@ -25,7 +25,7 @@ function getUser(){
 function getTokens(){
   var tokens = null;
   $.ajax({
-    url: "get_user_tokens_ajax.php",
+    url: "/ajax/user/get_tokens",
     async: false
   }).done(function(data, textStatus, jqXHR){
     tokens = data;
@@ -36,7 +36,7 @@ function getTokens(){
 function getSocial(){
   var social = null;
   $.ajax({
-    url: "get_social_ajax.php",
+    url: "/ajax/user/get_social",
     async: false
   }).done(function(data, textStatus, jqXHR){
     social = data;
@@ -66,7 +66,7 @@ if(user.level == 1){
 } else if (user.level == 2){
   user.user_level = "Standard";
 } else if (user.level == 3){
-  user.user_level = "Premium";  
+  user.user_level = "Premium";
 } else if (user.level == 4){
   user.user_level = "Enterprise";
 }
@@ -131,7 +131,7 @@ var Model = {
     console.log("tokenId=" + tokenId);
     $.ajax({
        type: "POST",
-       url: "delete_token_ajax.php",
+       url: "/ajax/token/delete",
        data: "tokenId=" + tokenId,
        async: false
      }).done(function(data, textStatus, jqXHR){
@@ -147,7 +147,7 @@ var Model = {
     $.ajax({
       type: "POST",
       data: this.profile,
-      url: "update_user_ajax.php",
+      url: "/ajax/user/update",
       async: false
     }).done(function(data, textStatus, jqXHR){
       response = textStatus;
@@ -156,7 +156,7 @@ var Model = {
       $.ajax({
         type: "POST",
         data: this.profile,
-        url: "change_password_ajax.php",
+        url: "/ajax/change_password",
         async: false
       }).done(function(data, textStatus, jqXHR){
         response = textStatus;

@@ -2,10 +2,6 @@
 use \GiveToken\User;
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-
-_session_start();
-
 $user = null;
 $event_type = null;
 $response['status'] = "ERROR";

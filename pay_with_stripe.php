@@ -1,5 +1,5 @@
-<?php 
-    require_once 'config.php'; 
+<?php
+    require_once 'config.php';
     header('Content-Type: text/javascript');
 ?>
 
@@ -14,8 +14,8 @@ function processUpgrade(token, payFrom) {
 		stripeToken: token.id,
 		email: token.email,
 	};
-	
-	$.post("upgrade_ajax.php", upgradeData, function(data, textStatus, jqXHR){
+
+	$.post("/ajax/upgrade", upgradeData, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
 				signupClose();
@@ -34,7 +34,7 @@ function processUpgrade(token, payFrom) {
 }
 
 function payWithStripe(email, payFrom) {
-	
+
 	var handler = StripeCheckout.configure({
 		key: '<?php echo $stripe_publishable_key ?>',
 //		image: '../images/logoicon.png',

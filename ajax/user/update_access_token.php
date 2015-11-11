@@ -2,10 +2,6 @@
 use \GiveToken\User;
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-require_once 'util.php';
-_session_start();
-
 $response['status'] = 'ERROR';
 if(isset($_SESSION['user_id'])) {
     $user = new User($_SESSION['user_id']);

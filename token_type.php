@@ -17,7 +17,7 @@ require __DIR__.'/header.php';
   </div>
 	<div id="select-button-wrapper">
 		<div class="select-button-container">
-			<a href="create.php" class="select-personal select-button-link">
+			<a href="/create" class="select-personal select-button-link">
 				<div class="select-left-container">
 					<svg class="circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
 						<circle cx="130" cy="130" r="130 "fill="#1E88E5" />

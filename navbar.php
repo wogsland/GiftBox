@@ -32,9 +32,9 @@
         <?php
         if (logged_in()) {
             echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
-            echo '<li><a href="/profile.php" class="external">Account</a></li>';
+            echo '<li><a href="/profile" class="external">Account</a></li>';
             if (is_admin()) {
-                echo '<li><a href="/admin.php" class="external">Admin</a></li>';
+                echo '<li><a href="/admin" class="external">Admin</a></li>';
             }
         } else {
             echo '<li><a href="javascript:void(0)" onclick="$(\'#login-dialog\').modal()">Login</a></li>';

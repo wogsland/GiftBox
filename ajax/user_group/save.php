@@ -1,9 +1,6 @@
 <?php
 use \GiveToken\UserGroup;
 
-require_once 'config.php';
-//include_once 'UserGroup.class.php';
-
 try {
     // Save the group
     $user_group = new UserGroup();

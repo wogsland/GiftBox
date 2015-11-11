@@ -1,8 +1,6 @@
 <?php
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-
 $session = _session_start();
 
 $response['login_type'] = $_SESSION['login_type'];

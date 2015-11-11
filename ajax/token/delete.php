@@ -1,7 +1,4 @@
 <?php
-require_once 'util.php';
-_session_start();
-
 if (isset($_SESSION['user_id'])) {
     if (isset($_POST['tokenId']) && (int) $_POST['tokenId'] == $_POST['tokenId']) {
         $sql = "DELETE FROM giftbox WHERE id = '{$_POST['tokenId']}'";

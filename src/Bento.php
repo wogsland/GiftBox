@@ -65,8 +65,6 @@ class Bento
 
     public function save()
     {
-        include 'config.php';
-
         $slider_value = $this->slider_value ? $this->slider_value : 'null';
         $image_file_name = $this->image_file_name;
         $cropped_image_file_name = $this->cropped_image_file_name;

@@ -3,9 +3,6 @@ use \GiveToken\User;
 use \GiveToken\EventLogger;
 
 require_once __DIR__.'/vendor/stripe/stripe-php/init.php';
-require_once 'config.php';
-
-_session_start();
 
 $response['status'] = "ERROR";
 $response['message'] = "Unable to upgrade at this time.";

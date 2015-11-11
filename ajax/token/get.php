@@ -1,9 +1,6 @@
 <?php
 use google\appengine\api\cloud_storage\CloudStorageTools;
 
-require_once 'config.php';
-_session_start();
-
 if (isset($_SESSION['user_id'])) {
     if (isset($_GET['id'])) {
         $sql = "SELECT * FROM giftbox where user_id = ".$_SESSION['user_id']." and id = ".$_GET['id'];

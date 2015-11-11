@@ -471,7 +471,7 @@ require __DIR__.'/header.php';
 										<p>
 										    Send out a special invite to an event before the release of tickets to the public for only the VIP members, along with a custom snippet of what they’ll
 										    experience at the event. What better way to get them excited about an event or fundraiser than to get glimpse of what it will entail and what the benefits
-										    will be. Plus, giving clients a “pre-sale” offer will make them feel like they are getting a deal.<a href="https://www.givetoken.com/preview.php?id=316">Click Here!</a>
+										    will be. Plus, giving clients a “pre-sale” offer will make them feel like they are getting a deal.<a href="https://www.givetoken.com/preview?id=316">Click Here!</a>
 										</p>
 										<p>
 										    <strong>3. Simply Say Hello!</strong>
@@ -542,7 +542,7 @@ require __DIR__.'/header.php';
 										    leads to longer stays on your page. Adding keywords to the Token™ creation boosts the probability of users finding you in a search engine.
 										</p>
 										<p>
-										    <a href="https://www.givetoken.com/preview.php?id=320">Click Here</a>
+										    <a href="https://www.givetoken.com/preview?id=320">Click Here</a>
 										</p>
 										<p>
 										    GiveToken adds an increased level of sharability through social media and email. Mixing that with key-words and videos will have a drastic impact in search
@@ -696,7 +696,7 @@ require __DIR__.'/header.php';
 										</p>
 										<br/>
 										<p>
-										    <a href="https://www.givetoken.com/preview.php?id=315"> Click Me! </a>
+										    <a href="https://www.givetoken.com/preview?id=315"> Click Me! </a>
 										</p>
 										<br/>
 										<p>
