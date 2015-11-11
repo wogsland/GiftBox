@@ -6,7 +6,7 @@
 <div class="container">
 	<div class="verticleHeight40"></div>
 	<!-- LOGO -->
-	<img src="assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
+	<img src="/assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
 
 	<!-- SOCIAL ICONS -->
 	<ul class="social-icons">
@@ -21,13 +21,14 @@
 
   <!--Terms and Policy-->
   <ul class="terms-policy">
-    <li><a href="termsservice.php">Terms and Conditions</a></li>
-    <li><a href="privacypolicy.php">Privacy Policy</a></li>
+		<li><a href="/about">About Us</a></li>
+		<li><a href="/terms">Terms and Conditions</a></li>
+    <li><a href="/privacy">Privacy Policy</a></li>
   </ul>
 
 	<!-- COPYRIGHT TEXT -->
 	<p class="copyright">
-		©2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
+		&copy;2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
 	</p>
 
 </div>
@@ -59,7 +60,9 @@
 <script src="/js/facebook_init.js"></script>
 <script src="/js/util.js"></script>
 <script src="/pay_with_stripe.php"></script>
-<script src="/js/login.js"></script>
-<script src="/js/signup.js"></script>
+<?php if (!logged_in()) { ?>
+	<script src="/js/login.js"></script>
+	<script src="/js/signup.js"></script>
+<?php }?>
 <script src="/js/account.js"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>

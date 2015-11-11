@@ -1,23 +1,23 @@
 <?php
-include_once __DIR__.'/config.php';
+require_once __DIR__.'/config.php';
 _session_start();
 if (!logged_in()) {
     header('Location: '.$app_url);
 }
 
 define('TITLE', 'GiveToken.com - Select Type');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="/css/token-type.css">
 </head>
 <body>
   <div>
-    <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
   </div>
 	<div id="select-button-wrapper">
 		<div class="select-button-container">
-			<a href="create.php" class="select-personal select-button-link">
+			<a href="/create" class="select-personal select-button-link">
 				<div class="select-left-container">
 					<svg class="circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
 						<circle cx="130" cy="130" r="130 "fill="#1E88E5" />
@@ -30,7 +30,7 @@ include __DIR__.'/header.php';
 				</div>
 			</a>
 		</div>
-		<?php if (is_admin()) { ?>
+    <?php if (is_admin()) { ?>
 			<div class="select-button-container">
 				<a href="create_recruiting.php" class="select-recruiting select-button-link">
 					<div class="select-left-container">
@@ -45,7 +45,7 @@ include __DIR__.'/header.php';
 					</div>
 				</a>
 			</div>
-		<?php }?>
+    <?php }?>
 	</div>
 </body>
 </html>

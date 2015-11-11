@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php';
+require_once 'config.php';
 _session_start();
 if (!logged_in()) {
     header('Location: '.$app_url);
@@ -156,7 +156,6 @@ function paper_card_end() {
                         <?php paper_textarea('Perks (copy and paste from word doc)', 'perks'); ?>
                     </div>
                 <?php paper_card_end(); ?>
-
                 <?php paper_card('Important Company Info'); ?>
                     <div class="field-container">
                         <?php paper_text('Company Name', 'company', 'domain'); ?>

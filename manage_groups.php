@@ -1,13 +1,13 @@
 <?php
 use \GiveToken\UserGroup;
 
-include_once 'config.php';
+require_once 'config.php';
 _session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 define('TITLE', 'GiveToken.com - Manage Groups');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 
 	<link rel="stylesheet" href="css/users_groups.css">
@@ -18,7 +18,7 @@ include __DIR__.'/header.php';
 <body>
 	<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 		<div class="">
-      <?php include __DIR__.'/navbar.php';?>
+        <?php require __DIR__.'/navbar.php';?>
 		</div>
 	</header>
 
@@ -29,26 +29,26 @@ include __DIR__.'/header.php';
 			<th>Max Users</th>
 			<th align="right"><button type="button" class="btn btn-success" onclick="addGroup()"><span class="glyphicon glyphicon-plus"></span> Add A Group</button></th>
 		</tr>
-		<?php
-			$groups = UserGroup::all_user_groups();
-			$disabled = "";
-			foreach ($groups as $group) {
-				echo '<tr id="row-'.$group['id'].'">';
-				echo '<td id="group-name-'.$group['id'].'">'.$group['name'].'</td>';
-				echo '<td id="group-users-'.$group['id'].'" class="centered">'.$group['user_count'].'</td>';
-				echo '<td id="group-max-users-'.$group['id'].'" class="centered">'.$group['max_users'].'</td>';
-				echo '<td>';
-				echo '<button class="btn btn-primary" onclick="editGroup('.$group['id'].')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>';
-				if ($group['user_count'] > 0) {
-					$disabled = "disabled='disabled'";
-				} else {
-					$disabled = "";
-				}
-				echo '<button class="btn btn-danger spaced" '.$disabled.' onclick="deleteGroup('.$group['id'].')"><span class="glyphicon glyphicon-remove"></span> Delete</button>';
-				echo '</td>';
-				echo '</tr>';
-			}
-			?>
+    <?php
+    $groups = UserGroup::all_user_groups();
+    $disabled = "";
+    foreach ($groups as $group) {
+        echo '<tr id="row-'.$group['id'].'">';
+        echo '<td id="group-name-'.$group['id'].'">'.$group['name'].'</td>';
+        echo '<td id="group-users-'.$group['id'].'" class="centered">'.$group['user_count'].'</td>';
+        echo '<td id="group-max-users-'.$group['id'].'" class="centered">'.$group['max_users'].'</td>';
+        echo '<td>';
+        echo '<button class="btn btn-primary" onclick="editGroup('.$group['id'].')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>';
+        if ($group['user_count'] > 0) {
+            $disabled = "disabled='disabled'";
+        } else {
+            $disabled = "";
+        }
+        echo '<button class="btn btn-danger spaced" '.$disabled.' onclick="deleteGroup('.$group['id'].')"><span class="glyphicon glyphicon-remove"></span> Delete</button>';
+        echo '</td>';
+        echo '</tr>';
+    }
+    ?>
 	</table>
 
 	<div class="modal fade" id="group-dialog" tabindex="-1" role="dialog" aria-labelledby="modal-title">

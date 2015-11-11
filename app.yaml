@@ -14,6 +14,8 @@ handlers:
 
 - url: /images
   static_dir: images
+- url: /images/team
+  static_dir: images/team
 
 - url: /models
   static_dir: models
@@ -66,3 +68,48 @@ handlers:
 # Token
 - url: /token/recruiting/(.+)
   script: recruiting_token.build.html
+
+# About Page
+- url: /about
+  script: about.php
+
+# Community Page
+- url: /community
+  script: community.php
+
+# Pricing Page
+- url: /pricing
+  script: pricing.php
+
+# Terms Page
+- url: /terms
+  script: termsservice.php
+
+# Privacy Policy
+- url: /privacy
+  script: privacypolicy.php
+
+# Profile
+- url: /profile
+  script: profile.php
+- url: /token_responses
+  script: token_responses.php
+- url: /token_analytics
+  script: token_analytics.php
+
+# Personal Token
+- url: /preview
+  script: preview.php
+- url: /create
+  script: create.php
+- url: /token_type
+  script: token_type.php
+
+# Admin
+- url: /admin
+  script: admin.php
+
+
+# catchall for 404
+- url: /.*
+  script: error.php

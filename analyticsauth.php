@@ -2,73 +2,74 @@
 
 function getService()
 {
-  // Creates and returns the Analytics service object.
+    // Creates and returns the Analytics service object.
 
-  // Load the Google API PHP Client Library.
-  require_once __DIR__.'/vendor/autoload.php';
+    // Load the Google API PHP Client Library.
+    include_once __DIR__.'/vendor/autoload.php';
 
-  // Use the developers console and replace the values with your
-  // service account email, and relative location of your key file.
-  $service_account_email = '118800867949-n0be83m9v5oi36a62604obukjh5fl0kv@developer.gserviceaccount.com';
-  $key_file_location = 'MyProject.p12';
+    // Use the developers console and replace the values with your
+    // service account email, and relative location of your key file.
+    $service_account_email = '118800867949-n0be83m9v5oi36a62604obukjh5fl0kv@developer.gserviceaccount.com';
+    $key_file_location = 'MyProject.p12';
 
-  // Create and configure a new client object.
-  $client = new Google_Client();
-  $client->setApplicationName("HelloAnalytics");
-  $analytics = new Google_Service_Analytics($client);
+    // Create and configure a new client object.
+    $client = new Google_Client();
+    $client->setApplicationName("HelloAnalytics");
+    $analytics = new Google_Service_Analytics($client);
 
-  // Read the generated client_secrets.p12 key.
-  $key = file_get_contents($key_file_location);
-  $cred = new Google_Auth_AssertionCredentials(
-      $service_account_email,
-      array(Google_Service_Analytics::ANALYTICS_READONLY),
-      $key
-  );
-  $client->setAssertionCredentials($cred);
-  if($client->getAuth()->isAccessTokenExpired()) {
-    $client->getAuth()->refreshTokenWithAssertion($cred);
-  }
+    // Read the generated client_secrets.p12 key.
+    $key = file_get_contents($key_file_location);
+    $cred = new Google_Auth_AssertionCredentials(
+        $service_account_email,
+        array(Google_Service_Analytics::ANALYTICS_READONLY),
+        $key
+    );
+    $client->setAssertionCredentials($cred);
+    if($client->getAuth()->isAccessTokenExpired()) {
+        $client->getAuth()->refreshTokenWithAssertion($cred);
+    }
 
-  return $analytics;
+    return $analytics;
 }
 
-function getFirstprofileId($analytics) {
-  // Get the user's first view (profile) ID.
+function getFirstprofileId($analytics) 
+{
+    // Get the user's first view (profile) ID.
 
-  // Get the list of accounts for the authorized user.
-  $accounts = $analytics->management_accounts->listManagementAccounts();
+    // Get the list of accounts for the authorized user.
+    $accounts = $analytics->management_accounts->listManagementAccounts();
 
-  if (count($accounts->getItems()) > 0) {
-    $items = $accounts->getItems();
-    $firstAccountId = $items[0]->getId();
+    if (count($accounts->getItems()) > 0) {
+        $items = $accounts->getItems();
+        $firstAccountId = $items[0]->getId();
 
-    // Get the list of properties for the authorized user.
-    $properties = $analytics->management_webproperties
-        ->listManagementWebproperties($firstAccountId);
+        // Get the list of properties for the authorized user.
+        $properties = $analytics->management_webproperties
+            ->listManagementWebproperties($firstAccountId);
 
-    if (count($properties->getItems()) > 0) {
-      $items = $properties->getItems();
-      $firstPropertyId = $items[0]->getId();
+        if (count($properties->getItems()) > 0) {
+            $items = $properties->getItems();
+            $firstPropertyId = $items[0]->getId();
 
-      // Get the list of views (profiles) for the authorized user.
-      $profiles = $analytics->management_profiles
-          ->listManagementProfiles($firstAccountId, $firstPropertyId);
+            // Get the list of views (profiles) for the authorized user.
+            $profiles = $analytics->management_profiles
+                ->listManagementProfiles($firstAccountId, $firstPropertyId);
 
-      if (count($profiles->getItems()) > 0) {
-        $items = $profiles->getItems();
+            if (count($profiles->getItems()) > 0) {
+                $items = $profiles->getItems();
 
-        // Return the first view (profile) ID.
-        return $items[0]->getId();
+                // Return the first view (profile) ID.
+                return $items[0]->getId();
 
-      } else {
-        throw new Exception('No views (profiles) found for this user.');
-      }
+            } else {
+                throw new Exception('No views (profiles) found for this user.');
+            }
+        } else {
+            throw new Exception('No properties found for this user.');
+        }
     } else {
-      throw new Exception('No properties found for this user.');
+        throw new Exception('No accounts found for this user.');
     }
-  } else {
-    throw new Exception('No accounts found for this user.');
-  }
 }
 
 $analytics = getService();
