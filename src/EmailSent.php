@@ -2,9 +2,9 @@
 namespace GiveToken;
 
 /**
- * This class is for database interaction with email credentials.
+ * This class is for database interaction with emails sent by customers.
  */
-class EmailCredential
+class EmailSent
 {
     protected $id;
     protected $email_credential_id;
@@ -63,7 +63,7 @@ class EmailCredential
     public function create($details)
     {
         $id = 0;
-        if (isset($details['to'], $details['from'], $details['subject'],
+        if (is_array($details) && isset($details['to'], $details['from'], $details['subject'],
         $details['body'], $details['email_credential_id'], $details['success'])) {
             // details contains minimal subset
 
@@ -73,13 +73,15 @@ class EmailCredential
             $keys = get_class_vars(get_class($this));
             foreach ($details as $key=>$value) {
                 if (array_key_exists($key, $keys)) {
-                    $columns .= ', ' . $key;
-                    $values .= ', ' . $value;
+                    $columns .= ", `$key`";
+                    $values .= ", '$value'";
+                    $this->$key = $value;
                 }
             }
             $columns = ltrim($columns, ', ');
             $values = ltrim($values, ', ');
             $query = "INSERT INTO email_sent ($columns) VALUES ($values)";
+            $id = insert($query);
         }
         return $id;
     }
