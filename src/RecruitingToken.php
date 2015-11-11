@@ -6,30 +6,36 @@ class RecruitingToken
     public $id;
     public $long_id;
     public $user_id;
+
     public $job_title;
     public $job_description;
+    public $city_id;
+
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $job_locations;
+
     public $company;
-    public $salary_range;
-    public $full_time_part_time;
-    public $ask_interested;
-    public $ask_salary;
-    public $ask_remote;
-    public $company_video;
-    public $company_picture;
+//    public $salary_range;
+//    public $full_time_part_time;
+//    public $ask_interested;
+//    public $ask_salary;
+//    public $ask_remote;
     public $company_tagline;
+    public $company_website;
+//    public $company_video;
+//    public $company_picture;
     public $company_values;
-    public $backdrop_picture;
-    public $backdrop_color;
-    public $style;
-    public $special_size;
+    public $company_size;
+//    public $backdrop_picture;
+//    public $backdrop_color;
+//    public $style;
+//    public $special_size;
     public $company_facebook;
     public $company_linkedin;
-    public $company_twitter;
     public $company_youtube;
+    public $company_twitter;
+    public $company_google_plus;
 
     /**
      * This function constructs the class
@@ -56,7 +62,9 @@ class RecruitingToken
     public function init($post)
     {
         foreach (get_object_vars($post) as $key => $value) {
-            $this->$key = $value;
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
         }
     }
 

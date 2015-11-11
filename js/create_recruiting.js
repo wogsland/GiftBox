@@ -60,10 +60,13 @@ function uploadFile(file, fileName) {
 function saveRecruitingToken() {
 	var tokenId = null;
 	var userId = null;
+	var serializedForm = null;
 	$("#save-button").html("Saving...");
 
 	// Save the token first so we can use the ID in the file path:  userId/tokenId/fileName
-	$.post("/ajax/recruiting_token/save/", $("#recruiting-token-form").serialize(), function(data, textStatus){
+	// serializedForm = $("#recruiting-token-form").serialize();
+	serializedForm = document.getElementById("recruiting-token-form").serialize();
+	$.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
 		if(data.status === "SUCCESS") {
 			$("#id").val(data.token_id);
 			tokenId = data.token_id;
