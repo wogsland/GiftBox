@@ -1108,7 +1108,7 @@ function setPreviewLink (template) {
 		// Wrapper Tyoe is a very specific Second Harvest Thingy. So is unload_count???
 		linkText = "second-harvest.php?ut=" + template.wrapperType + "&uc=" + template.unloadCount + "&tid=" + template.giftboxId;
 	} else {
-		linkText = "preview.php?id=" + template.giftboxId;
+		linkText = "preview?id=" + template.giftboxId;
 	}
 	$("#preview-link").val(template.appURL + linkText);
 	if (template.giftboxId) {
@@ -1124,7 +1124,7 @@ function setEmbedCode (template) {
 
   if (template.giftboxId) {
     embedCode += '<iframe width="400" height="300" src="';
-    embedCode += template.appURL + "preview.php?id=" + template.giftboxId;
+    embedCode += template.appURL + "preview?id=" + template.giftboxId;
     embedCode += '" frameborder="0"></iframe>';
     $("#embed-code-copy").css('visibility', 'visible');
   }
@@ -1578,7 +1578,7 @@ function preview() {
 		if (window.top_template.wrapperType) {
 			window.open("second-harvest.php?ut=" + unloadType + "&uc=" + unloadCount + "&tid=" + giftboxId, "_blank");
 		} else {
-			window.open("preview.php?id=" + giftboxId, "_blank");
+			window.open("/preview?id=" + giftboxId, "_blank");
 		}
 	}
 }

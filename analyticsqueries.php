@@ -1,8 +1,8 @@
 <?php
 
-$tokenPath = '/preview.php?id=' . $_GET['id'];
+$tokenPath = '/preview?id=' . $_GET['id'];
 
-function printResults($results) 
+function printResults($results)
 {
     // Parses the response from the Core Reporting API and prints
     // the profile name and total sessions.
@@ -19,7 +19,7 @@ function printResults($results)
     }
 }
 
-function printTimeResults($results) 
+function printTimeResults($results)
 {
     // Parses the response from the Core Reporting API and prints
     // the profile name and total sessions.
@@ -37,7 +37,7 @@ function printTimeResults($results)
     }
 }
 
-function printBounceResults($results) 
+function printBounceResults($results)
 {
     // Parses the response from the Core Reporting API and prints
     // the profile name and total sessions.
@@ -54,7 +54,7 @@ function printBounceResults($results)
     }
 }
 
-function getTotalResults($analytics, $profileId, $page) 
+function getTotalResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -62,7 +62,7 @@ function getTotalResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -74,7 +74,7 @@ function getTotalResults($analytics, $profileId, $page)
     );
 }
 
-function totalResults($analytics, $profileId, $page) 
+function totalResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -91,7 +91,7 @@ function totalResults($analytics, $profileId, $page)
     );
 }
 
-function getUniqueResults($analytics, $profileId, $page) 
+function getUniqueResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -99,7 +99,7 @@ function getUniqueResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -111,7 +111,7 @@ function getUniqueResults($analytics, $profileId, $page)
     );
 }
 
-function uniqueResults($analytics, $profileId, $page) 
+function uniqueResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -128,7 +128,7 @@ function uniqueResults($analytics, $profileId, $page)
     );
 }
 
-function getAverageResults($analytics, $profileId, $page) 
+function getAverageResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -136,7 +136,7 @@ function getAverageResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -148,7 +148,7 @@ function getAverageResults($analytics, $profileId, $page)
     );
 }
 
-function averageResults($analytics, $profileId, $page) 
+function averageResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -165,7 +165,7 @@ function averageResults($analytics, $profileId, $page)
     );
 }
 
-function getBouncesResults($analytics, $profileId, $page) 
+function getBouncesResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -173,7 +173,7 @@ function getBouncesResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:timeOnPage<60',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -185,7 +185,7 @@ function getBouncesResults($analytics, $profileId, $page)
     );
 }
 
-function bouncesResults($analytics, $profileId, $page) 
+function bouncesResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -203,7 +203,7 @@ function bouncesResults($analytics, $profileId, $page)
     );
 }
 
-function getFacebookResults($analytics, $profileId, $page) 
+function getFacebookResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -211,7 +211,7 @@ function getFacebookResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Facebook',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -223,7 +223,7 @@ function getFacebookResults($analytics, $profileId, $page)
     );
 }
 
-function facebookResults($analytics, $profileId, $page) 
+function facebookResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -240,7 +240,7 @@ function facebookResults($analytics, $profileId, $page)
     );
 }
 
-function getTwitterResults($analytics, $profileId, $page) 
+function getTwitterResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -248,7 +248,7 @@ function getTwitterResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:socialNetwork==Twitter',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -260,7 +260,7 @@ function getTwitterResults($analytics, $profileId, $page)
     );
 }
 
-function twitterResultsNum($analytics, $profileId, $page) 
+function twitterResultsNum($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -277,7 +277,7 @@ function twitterResultsNum($analytics, $profileId, $page)
     );
 }
 
-function getEmailResults($analytics, $profileId, $page) 
+function getEmailResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -285,7 +285,7 @@ function getEmailResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:channelGrouping==Direct',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -297,7 +297,7 @@ function getEmailResults($analytics, $profileId, $page)
     );
 }
 
-function emailResults($analytics, $profileId, $page) 
+function emailResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -314,7 +314,7 @@ function emailResults($analytics, $profileId, $page)
     );
 }
 
-function getGenderResults($analytics, $profileId, $page) 
+function getGenderResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -322,7 +322,7 @@ function getGenderResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:userGender',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -334,7 +334,7 @@ function getGenderResults($analytics, $profileId, $page)
     );
 }
 
-function getAgeResults($analytics, $profileId, $page) 
+function getAgeResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -342,7 +342,7 @@ function getAgeResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:userAgeBracket',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -354,7 +354,7 @@ function getAgeResults($analytics, $profileId, $page)
     );
 }
 
-function getGeoResults($analytics, $profileId, $page) 
+function getGeoResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -362,7 +362,7 @@ function getGeoResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:city',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -374,7 +374,7 @@ function getGeoResults($analytics, $profileId, $page)
     );
 }
 
-function getDeviceResults($analytics, $profileId, $page) 
+function getDeviceResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -382,7 +382,7 @@ function getDeviceResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:deviceCategory',
     'filters' => 'ga:pagepath==' . $page,
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -394,7 +394,7 @@ function getDeviceResults($analytics, $profileId, $page)
     );
 }
 
-function getDesktopResults($analytics, $profileId, $page) 
+function getDesktopResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -402,7 +402,7 @@ function getDesktopResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==desktop',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -414,7 +414,7 @@ function getDesktopResults($analytics, $profileId, $page)
     );
 }
 
-function desktopResults($analytics, $profileId, $page) 
+function desktopResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -431,7 +431,7 @@ function desktopResults($analytics, $profileId, $page)
     );
 }
 
-function getTabletResults($analytics, $profileId, $page) 
+function getTabletResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -439,7 +439,7 @@ function getTabletResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==tablet',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -451,7 +451,7 @@ function getTabletResults($analytics, $profileId, $page)
     );
 }
 
-function tabletResults($analytics, $profileId, $page) 
+function tabletResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
@@ -468,7 +468,7 @@ function tabletResults($analytics, $profileId, $page)
     );
 }
 
-function getMobileResults($analytics, $profileId, $page) 
+function getMobileResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the number of pageviews
     // for the last 30 days.
@@ -476,7 +476,7 @@ function getMobileResults($analytics, $profileId, $page)
     $options = array(
     'dimensions' => 'ga:date',
     'filters' => 'ga:pagepath==' . $page . ';ga:deviceCategory==mobile',
-    'output' => 'dataTable', 
+    'output' => 'dataTable',
     );
 
     return $analytics->data_ga->get(
@@ -488,7 +488,7 @@ function getMobileResults($analytics, $profileId, $page)
     );
 }
 
-function mobileResults($analytics, $profileId, $page) 
+function mobileResults($analytics, $profileId, $page)
 {
     // Calls the Core Reporting API and queries for the total number of pageviews
     // for the last 30 days.
