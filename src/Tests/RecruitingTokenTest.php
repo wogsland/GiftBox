@@ -5,7 +5,7 @@ use \GiveToken\RecruitingToken;
 use \GiveToken\User;
 
 /**
- * This class tests the User class
+ * This class tests the RecruitingToken class
  *
  * phpunit --bootstrap src/tests/autoload.php src/tests/RecruitingTokenTest
  */
