@@ -1,7 +1,7 @@
 var AccountTokens = React.createClass({
 
   render: function() {
-    return <div className="tab-pane" id="givetokens">
+    return <div className="tab-pane active" id="givetokens">
       <h2>My Tokens</h2>
       {this.props.tokens.map(this.renderToken)}
     </div>;
@@ -15,7 +15,7 @@ var AccountTokens = React.createClass({
       </div>
       <img className="token-edit-thumb" href='/token_analytics' onClick = {function(){window.open('/preview?id=' + token.id)}} src={'assets/img/token-varied-' + token.variant + '.png'} alt={token.name} width="78" /><br/>
       <button className="btn btn-primary btn-xs btn-bordered analytics-btn" onClick = {function(){window.open('/token_analytics?id=' + token.id)}}>Analytics</button>
-      <button className="btn btn-success btn-xs btn-bordered analytics-btn" onClick = {function(){window.open('/token_responses?id=' + token.id)}}>Responses</button>
+      {/*<button className="btn btn-success btn-xs btn-bordered analytics-btn" onClick = {function(){window.open('/token_responses?id=' + token.id)}}>Responses</button>*/}
     </div>;
   }
 

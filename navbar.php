@@ -26,6 +26,8 @@
       <ul class="nav navbar-nav navbar-right main-navigation">
         <?php if (!logged_in()) { ?>
             <li><a href="/" class="external">Home</a></li>
+        <?php } else { ?>
+            <li><a href="/token_type" class="external">Create Token</a></li>
         <?php } ?>
         <li><a href="/community" class="external">Community</a></li>
         <li><a href="/pricing" class="external">Pricing</a></li>

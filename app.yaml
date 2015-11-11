@@ -102,6 +102,8 @@ handlers:
   script: preview.php
 - url: /create
   script: create.php
+- url: /token_type
+  script: token_type.php
 
 # Admin
 - url: /admin

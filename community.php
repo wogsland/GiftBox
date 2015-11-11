@@ -68,8 +68,8 @@ require __DIR__.'/header.php';
 					            <div class="mb20"></div>
 
 					            <div class="btn-group">
-					                <a href="token_type.php" class="btn btn-primary btn-bordered">Create GiveToken</a>
-					                <a href="token_type.php" class="btn btn-primary btn-bordered">Send GiveToken</a>
+					                <a href="/token_type" class="btn btn-primary btn-bordered">Create GiveToken</a>
+					                <a href="/token_type" class="btn btn-primary btn-bordered">Send GiveToken</a>
 					            </div>
 
 					            <div class="mb20"></div>
