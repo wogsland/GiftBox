@@ -1,8 +1,9 @@
 <?php
-require_once 'config.php';
+require_once  __DIR__.'/util.php';
 _session_start();
+
 if (!logged_in()) {
-    header('Location: '.$app_url);
+    header('Location: /');
 }
 
 function paper_text($label, $id, $icon = NULL, $suffix = NULL) {
@@ -130,9 +131,9 @@ function paper_card_end() {
 <body>
     <paper-header-panel mode="waterfall" class="flex">
         <paper-toolbar>
-            <a href="<?php echo $app_url; ?>"><img src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
+            <a href="/"><img src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
             <span class="title"> </span>
-            <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo $app_url; ?>'"></paper-icon-button>
+            <paper-icon-button icon="home" id="home-icon" onclick="window.location = '/'"></paper-icon-button>
         </paper-toolbar>
     </paper-header-panel>
     <div id="center-column">
