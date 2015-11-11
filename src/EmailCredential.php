@@ -23,7 +23,7 @@ class EmailCredential
     {
         if ($id !== null && (int) $id == $id) {
             $token = execute_query(
-                "SELECT * FROM email_credentials
+                "SELECT * FROM email_credential
                 WHERE id = '$id'
                 AND deleted IS NULL"
             )->fetch_object("GiveToken\EmailCredential");
@@ -48,7 +48,7 @@ class EmailCredential
     }
 
     /**
-     * This function creates an entry in the email_credentials table
+     * This function creates an entry in the email_credential table
      *
      * @param int    $user_id - id of the user
      * @param string $username - credential username
@@ -61,7 +61,7 @@ class EmailCredential
     public function create($user_id, $username, $password, $smtp_host, $smtp_port)
     {
         $query = "INSERT INTO
-            email_credentials (user_id, username, password, smtp_host, smtp_port)
+            email_credential (user_id, username, password, smtp_host, smtp_port)
             VALUES
             ('$user_id', '$username', '$password', '$smtp_host', '$smtp_port')";
         $id = insert($query);
@@ -77,7 +77,7 @@ class EmailCredential
     }
 
     /**
-     * This function updates the email_credentials table by marking the old
+     * This function updates the email_credential table by marking the old
      * credentials deleted and creating new ones. This is so we still have any
      * old credentials used to send emails for a robust audit trail since
      * we're sending emails with their credentials.
@@ -101,7 +101,7 @@ class EmailCredential
     }
 
     /**
-     * This function marks an entry deleted in the email_credentials table
+     * This function marks an entry deleted in the email_credential table
      *
      * @return boolean - success of deletion
      */
@@ -109,7 +109,7 @@ class EmailCredential
     {
         $success = false;
         if (isset($this->id)) {
-          $sql = "UPDATE email_credentials SET deleted = NOW() WHERE id = {$this->id}";
+          $sql = "UPDATE email_credential SET deleted = NOW() WHERE id = {$this->id}";
           execute($sql);
           $vars = get_class_vars(get_class($this));
           foreach ($vars as $key=>$value) {
