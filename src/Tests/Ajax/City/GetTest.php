@@ -86,7 +86,7 @@ extends \PHPUnit_Framework_TestCase
         $id = insert($query);
 
         // test created city
-        $url = "http://givetoken.local/ajax/city/get/$id";
+        $url = TEST_URL . "/ajax/city/get/$id";
         //$fields = array();
         //$fields_string = "";
         //foreach ($fields as $key=>$value) {
@@ -133,7 +133,7 @@ extends \PHPUnit_Framework_TestCase
    */
     public function testFail()
     {
-        $url = "http://givetoken.local/ajax/city/get";
+        $url = TEST_URL . "/ajax/city/get";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
