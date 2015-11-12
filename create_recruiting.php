@@ -5,7 +5,7 @@ if (!logged_in() || !is_admin()) {
     header('Location: '.$app_url);
 }
 
-function text_input($label, $id) 
+function text_input($label, $id)
 {
     echo PHP_EOL;
     echo '			<div class="form-group form-group-lg">'.PHP_EOL;
@@ -15,7 +15,7 @@ function text_input($label, $id)
     echo '				</div>'.PHP_EOL;
     echo '			</div>'.PHP_EOL;
 }
-function file_input($label, $id) 
+function file_input($label, $id)
 {
     echo PHP_EOL;
     echo '			<div class="form-group form-group-lg">'.PHP_EOL;
@@ -30,7 +30,7 @@ function file_input($label, $id)
     echo '				</div>'.PHP_EOL;
     echo '			</div>'.PHP_EOL;
 }
-function select_input($label, $id, $options) 
+function select_input($label, $id, $options)
 {
     echo '			<div class="form-group form-group-lg">'.PHP_EOL;
     echo '				<label for="'.$id.'" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
@@ -65,7 +65,7 @@ function select_input($label, $id, $options)
 			</div>
 			<div class="input-section" id="basic-info">
 				<h1>Basic Info</h1>
-				<?php text_input('Job Location(s)', 'job-locations'); ?>
+				<?php text_input('Job Location(s)', 'city-id'); ?>
 				<?php text_input('Skills Required', 'skills-required'); ?>
 				<?php text_input('Responsibilities', 'responsibilities'); ?>
 				<?php text_input('Perks', 'perks'); ?>

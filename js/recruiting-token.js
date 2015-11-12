@@ -193,7 +193,7 @@ $(document).ready(function(){
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
       $('.gt-info-perks').html(data.data.perks);
-      $('.gt-info-location').html(data.data.job_locations);
+      //$('.gt-info-location').html(data.data.job_locations);
       $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
       $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
       $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);

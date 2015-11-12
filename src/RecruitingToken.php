@@ -11,7 +11,7 @@ class RecruitingToken
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $job_locations;
+    public $city_id;
     public $company;
     public $salary_range;
     public $full_time_part_time;
