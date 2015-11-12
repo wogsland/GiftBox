@@ -7,7 +7,7 @@ require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
 //load functions
 require_once __DIR__.'/util.php';
 
-$server = $_SERVER['SERVER_NAME'];
+$server = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
 if ('givetoken.com' == strtolower($server)
     || 'stone-timing-557.appspot.com' == strtolower($server)
 ) {
