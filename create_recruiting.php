@@ -208,7 +208,6 @@ function paper_card_end() {
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
 		$('#company-picture-input').on('change', handleImageFileSelect);
-		$('#backdrop-picture-input').on('change', handleImageFileSelect);
 		$('#company-picture-img').data("saved", true);
 		$('#backdrop-picture-img').data("saved", true);
 	</script>
