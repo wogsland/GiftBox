@@ -31,8 +31,10 @@ class Token
     public function __construct($id = null)
     {
         if ($id !== null) {
-            $token = execute_query("SELECT * from giftbox
-                where id = $id")->fetch_object("GiveToken\Token");
+            $token = execute_query(
+                "SELECT * from giftbox
+                where id = $id"
+            )->fetch_object("GiveToken\Token");
             foreach (get_object_vars($token) as $key => $value) {
                 $this->$key = $value;
             }
@@ -146,8 +148,10 @@ class Token
 
     private function load_bentos()
     {
-        $results = execute_query("SELECT * FROM bento
-            WHERE giftbox_id = $this->id ORDER by css_id");
+        $results = execute_query(
+            "SELECT * FROM bento
+            WHERE giftbox_id = $this->id ORDER by css_id"
+        );
         while ($bento = $results->fetch_object("GiveToken\Bento")) {
             $this->bentos[$bento->css_id] = $bento;
         }
@@ -155,10 +159,12 @@ class Token
 
     private function load_dividers()
     {
-        $results = execute_query("SELECT * FROM divider
+        $results = execute_query(
+            "SELECT * FROM divider
             WHERE giftbox_id = $this->id
             AND css_id LIKE 'divider%'
-            ORDER BY css_id");
+            ORDER BY css_id"
+        );
         while ($divider = $results->fetch_object("GiveToken\Divider")) {
             $this->dividers[$divider->css_id] = $divider;
         }
@@ -166,10 +172,12 @@ class Token
 
     private function load_columns()
     {
-        $results = execute_query("SELECT * FROM divider
+        $results = execute_query(
+            "SELECT * FROM divider
             WHERE giftbox_id = $this->id
             AND css_id LIKE 'column%'
-            ORDER BY css_id");
+            ORDER BY css_id"
+        );
         while ($column = $results->fetch_object("GiveToken\Divider")) {
             $this->columns[$column->css_id] = $column;
         }

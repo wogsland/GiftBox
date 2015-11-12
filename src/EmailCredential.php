@@ -39,20 +39,34 @@ class EmailCredential
      * This function gets a protected property
      *
      * @param string $var - the class property desired
+     *
+     * @return mixed - the class property
      */
     public function __get($var)
     {
         if (isset($this->$var)) {
-          return $this->$var;
+            return $this->$var;
         }
+    }
+
+    /**
+     * This function checks if a protected property is set
+     *
+     * @param string $var - the class property to check
+     *
+     * @return bool - if the property is set
+     */
+    public function __isset($var)
+    {
+        return isset($this->$var);
     }
 
     /**
      * This function creates an entry in the email_credential table
      *
-     * @param int    $user_id - id of the user
-     * @param string $username - credential username
-     * @param string $password - credential password
+     * @param int    $user_id   - id of the user
+     * @param string $username  - credential username
+     * @param string $password  - credential password
      * @param string $smtp_host - the SMTP host to connect to
      * @param string $smtp_port - the SMTP port to connect to on that host
      *
@@ -66,12 +80,12 @@ class EmailCredential
             ('$user_id', '$username', '$password', '$smtp_host', '$smtp_port')";
         $id = insert($query);
         if ($id > 0) {
-          $this->id = $id;
-          $this->user_id = $user_id;
-          $this->username = $username;
-          $this->password = $password;
-          $this->smtp_host = $smtp_host;
-          $this->smtp_port = $smtp_port;
+            $this->id = $id;
+            $this->user_id = $user_id;
+            $this->username = $username;
+            $this->password = $password;
+            $this->smtp_host = $smtp_host;
+            $this->smtp_port = $smtp_port;
         }
         return $id;
     }
@@ -82,8 +96,8 @@ class EmailCredential
      * old credentials used to send emails for a robust audit trail since
      * we're sending emails with their credentials.
      *
-     * @param string $username - credential username
-     * @param string $password - credential password
+     * @param string $username  - credential username
+     * @param string $password  - credential password
      * @param string $smtp_host - the SMTP host to connect to
      * @param string $smtp_port - the SMTP port to connect to on that host
      *
@@ -109,13 +123,13 @@ class EmailCredential
     {
         $success = false;
         if (isset($this->id)) {
-          $sql = "UPDATE email_credential SET deleted = NOW() WHERE id = {$this->id}";
-          execute($sql);
-          $vars = get_class_vars(get_class($this));
-          foreach ($vars as $key=>$value) {
-              unset($this->$key);
-          }
-          $success = true;
+            $sql = "UPDATE email_credential SET deleted = NOW() WHERE id = {$this->id}";
+            execute($sql);
+            $vars = get_class_vars(get_class($this));
+            foreach ($vars as $key=>$value) {
+                unset($this->$key);
+            }
+            $success = true;
         }
         return $success;
     }

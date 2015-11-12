@@ -63,8 +63,8 @@ class EmailSent
     public function create($details)
     {
         $id = 0;
-        if (is_array($details) && isset($details['to'], $details['from'], $details['subject'],
-        $details['body'], $details['email_credential_id'], $details['success'])) {
+        if (is_array($details) && isset($details['to'], $details['from'], $details['subject'],$details['body'], $details['email_credential_id'], $details['success'])
+        ) {
             // details contains minimal subset
 
             // create list of columns & values

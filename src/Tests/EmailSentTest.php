@@ -38,8 +38,8 @@ extends \PHPUnit_Framework_TestCase
         $user_id = $this->User->getId();
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port = rand(1,1000);
+        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port = rand(1, 1000);
 
         // Create credentials
         $this->EmailCredential = new EmailCredential();

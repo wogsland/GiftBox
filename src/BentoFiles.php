@@ -10,8 +10,10 @@ class BentoFiles
     static function fetch($bento_id)
     {
         $bento_files = null;
-        $result = execute_query("SELECT * FROM bento_files
-            WHERE bento_id = '".$bento_id."'");
+        $result = execute_query(
+            "SELECT * FROM bento_files
+            WHERE bento_id = '".$bento_id."'"
+        );
         if ($result->num_rows > 0) {
             $bento_files = $result->fetch_all(MYSQLI_ASSOC);
         }
@@ -46,8 +48,10 @@ class BentoFiles
             if ($test[0] != $this->giftboxId) {
                 $image_file = $this->giftboxId."_".$image_file;
             }
-            insert("INSERT INTO bento_files (bento_id, file_name)
-                VALUES ('$this->bento_id', '$image_file')");
+            insert(
+                "INSERT INTO bento_files (bento_id, file_name)
+                VALUES ('$this->bento_id', '$image_file')"
+            );
         }
     }
 }

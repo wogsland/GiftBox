@@ -29,8 +29,8 @@ extends \PHPUnit_Framework_TestCase
         $fields = array(
             'username'=>'user'.rand(),
             'password'=>'my'.rand(),
-            'smtp_host'=>rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255),
-            'smtp_port'=>rand(1,1000)
+            'smtp_host'=>rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255),
+            'smtp_port'=>rand(1, 1000)
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -81,8 +81,8 @@ extends \PHPUnit_Framework_TestCase
         $fields = array(
             'username'=>'user'.rand(),
             'password'=>'my'.rand(),
-            'smtp_host'=>rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255),
-            'smtp_port'=>rand(1,1000)
+            'smtp_host'=>rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255),
+            'smtp_port'=>rand(1, 1000)
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {

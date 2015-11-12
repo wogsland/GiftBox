@@ -59,8 +59,8 @@ extends \PHPUnit_Framework_TestCase
         $user_id = $this->User->getId();
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port = rand(1,1000);
+        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port = rand(1, 1000);
 
         // Create credentials
         $EmailCredential = new EmailCredential();
@@ -93,16 +93,16 @@ extends \PHPUnit_Framework_TestCase
         $user_id = $this->User->getId();
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port = rand(1,1000);
+        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port = rand(1, 1000);
         $EmailCredential = new EmailCredential();
         $id = $EmailCredential->create($user_id, $username, $password, $smtp_host, $smtp_port);
 
         // Update credentials
         $username2 = 'user'.rand();
         $password2 = 'my'.rand();
-        $smtp_host2 = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port2 = rand(1,1000);
+        $smtp_host2 = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port2 = rand(1, 1000);
         $success = $EmailCredential->update($username2, $password2, $smtp_host2, $smtp_port2);
         $this->assertTrue($success);
         $this->assertEquals($EmailCredential->user_id, $user_id);
@@ -125,8 +125,8 @@ extends \PHPUnit_Framework_TestCase
         $user_id = $this->User->getId();
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port = rand(1,1000);
+        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port = rand(1, 1000);
         $EmailCredential = new EmailCredential();
         $id = $EmailCredential->create($user_id, $username, $password, $smtp_host, $smtp_port);
 

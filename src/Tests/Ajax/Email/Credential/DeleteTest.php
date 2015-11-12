@@ -13,8 +13,8 @@ class DeleteTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
-   * Requires the util.php file of functions
-   */
+     * Requires the util.php file of functions
+     */
     public static function setUpBeforeClass()
     {
         include_once __DIR__.'/../../../../../util.php';
@@ -34,8 +34,8 @@ extends \PHPUnit_Framework_TestCase
         $user_id = $User->getId();
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0,255).'.'.rand(0,255).'.'.rand(0,255).'.'.rand(0,255);
-        $smtp_port = rand(1,1000);
+        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
+        $smtp_port = rand(1, 1000);
         $EmailCredential = new EmailCredential();
         $id = $EmailCredential->create($user_id, $username, $password, $smtp_host, $smtp_port);
 
