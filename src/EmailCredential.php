@@ -115,6 +115,7 @@ class EmailCredential
           foreach ($vars as $key=>$value) {
               unset($this->$key);
           }
+          $success = true;
         }
         return $success;
     }

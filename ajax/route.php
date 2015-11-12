@@ -19,8 +19,11 @@ if (isset($pieces[1])) {
 // Execute script if exists
 $file1 = $endpoint_parts[2] . '.php';
 $file2 = $endpoint_parts[2] . '/' . $endpoint_parts[3] . '.php';
+$file3 = $endpoint_parts[2] . '/' . $endpoint_parts[3]  . '/' . $endpoint_parts[4] . '.php';
 if (file_exists($file1)) {
     include $file1;
 } elseif (file_exists($file2)) {
     include $file2;
+} elseif (file_exists($file3)) {
+    include $file3;
 }
