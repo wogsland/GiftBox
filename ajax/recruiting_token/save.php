@@ -20,6 +20,7 @@ if (isset($_SESSION['user_id'])) {
         $response['company_picture'] = $token->company_picture;
 
     } catch (Exception $e) {
+        error_log($e->getMessage());
         $response['status'] = "ERROR";
         $response['message'] = $e->getMessage();
         $repsonse['object'] = $e;
