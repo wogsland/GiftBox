@@ -45,17 +45,21 @@ class Bento
 
     public function load()
     {
-        $bento = execute_query("SELECT * FROM bento
+        $bento = execute_query(
+            "SELECT * FROM bento
             WHERE giftbox_id = $this->giftbox_id
-            AND css_id = '$this->css_id'")->fetch_object("GiveToken\Bento");
+            AND css_id = '$this->css_id'"
+        )->fetch_object("GiveToken\Bento");
         return $bento;
     }
 
     public function delete()
     {
-        execute("DELETE FROM bento
+        execute(
+            "DELETE FROM bento
             WHERE giftbox_id = $this->giftbox_id
-            AND css_id = '$this->css_id'");
+            AND css_id = '$this->css_id'"
+        );
     }
 
     public function setGiftboxId($id)
