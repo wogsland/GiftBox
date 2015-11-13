@@ -33,21 +33,25 @@ class UserGroup
 
     static function all_user_groups()
     {
-        $groups = execute_query("SELECT user_group.id,
+        $groups = execute_query(
+            "SELECT user_group.id,
             name, max_users,
             count(user.id) as user_count
             FROM user_group
             LEFT JOIN user ON user_group.id = user.user_group
             GROUP BY id, name, max_users
-            ORDER BY upper(name)")->fetch_all(MYSQLI_ASSOC);
+            ORDER BY upper(name)"
+        )->fetch_all(MYSQLI_ASSOC);
         return $groups;
     }
 
     public function __construct($id = null)
     {
         if ($id !== null) {
-            $user_group = execute_query("SELECT * from user_group
-                where id = $id")->fetch_object("GiveToken\UserGroup");
+            $user_group = execute_query(
+                "SELECT * from user_group
+                where id = $id"
+            )->fetch_object("GiveToken\UserGroup");
             foreach (get_object_vars($user_group) as $key => $value) {
                 $this->$key = $value;
             }

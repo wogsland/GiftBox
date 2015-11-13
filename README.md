@@ -192,7 +192,11 @@ User B
 ## <a id="testing"></a>Testing
 
 Presuming you have set up [Composer](#composer), then PHPUnit will be available
-in your /vendor/bin directory. To run all the tests, just reference the
+in your /vendor/bin directory. You'll need to setup your local parameters by
+
+    cp src/Tests/local.php.example src/Tests/local.php
+
+and making any necessary changes to `local.php`. To run all the tests, just reference the
 configuration file:
 
     phpunit --bootstrap src/tests/autoload.php -c tests.xml

@@ -1,14 +1,14 @@
 <?php
 use \GiveToken\UserGroup;
 
-include_once 'config.php';
+require_once 'config.php';
 
 _session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 define('TITLE', 'GiveToken.com - Manage Users');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 	<link rel="stylesheet" href="css/users_groups.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
@@ -18,7 +18,7 @@ include __DIR__.'/header.php';
 <body>
 	<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
 		<div class="">
-      <?php include __DIR__.'/navbar.php';?>
+        <?php require __DIR__.'/navbar.php';?>
 		</div>
 	</header>
 
@@ -30,11 +30,15 @@ include __DIR__.'/header.php';
 			<div class="panel-body">
 				<form class="form-inline" method="get" action="manage_users.php">
 					<div class="form-group">
-						<input class="form-control" name="first-name-search" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name-search'])) {echo $_GET['first-name-search'];} ?>">
-						<input class="form-control" name="last-name-search" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name-search'])) {echo $_GET['last-name-search'];} ?>">
-						<input class="form-control" name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];} ?>">
+						<input class="form-control" name="first-name-search" type="text" placeholder="First Name" value="<?php if (isset($_GET['first-name-search'])) {echo $_GET['first-name-search'];
+     } ?>">
+						<input class="form-control" name="last-name-search" type="text" placeholder="Last Name" value="<?php if (isset($_GET['last-name-search'])) {echo $_GET['last-name-search'];
+     } ?>">
+						<input class="form-control" name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];
+     } ?>">
 						<label for="admin">
-							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) echo "checked" ?>> Administrator
+							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) { echo "checked"; 
+      } ?>> Administrator
 						</label>
 						<input type="submit" class="btn btn-primary" value="Search">
 					</div>
@@ -58,23 +62,23 @@ include __DIR__.'/header.php';
 				</thead>
 				<tbody>
 				<?php
-					$sql = "SELECT user.*, user_group.name as group_name FROM user LEFT JOIN user_group ON user.user_group = user_group.id  WHERE 1 = 1";
-					if (isset($_GET['last-name-search']) && strlen($_GET['last-name-search']) > 0) {
-						$sql .= " AND upper(last_name) = upper('".$_GET['last-name-search']."')";
-					}
-					if (isset($_GET['first-name-search']) && strlen($_GET['first-name-search']) > 0) {
-						$sql .= " AND upper(first_name) = upper('".$_GET['first-name-search']."')";
-					}
-					if (isset($_GET['email-search']) && strlen($_GET['email-search']) > 0) {
-						$sql .= " AND upper(email_address) = upper('".$_GET['email-search']."')";
-					}
-					if (isset($_GET['admin-search'])) {
-						$sql .= " AND admin = 'Y'";
-					}
-					$sql .= " ORDER BY last_name, first_name";
-					$results = execute_query($sql);
-					while ($user = $results->fetch_object()) {
-						print '
+                    $sql = "SELECT user.*, user_group.name as group_name FROM user LEFT JOIN user_group ON user.user_group = user_group.id  WHERE 1 = 1";
+    if (isset($_GET['last-name-search']) && strlen($_GET['last-name-search']) > 0) {
+        $sql .= " AND upper(last_name) = upper('".$_GET['last-name-search']."')";
+    }
+    if (isset($_GET['first-name-search']) && strlen($_GET['first-name-search']) > 0) {
+        $sql .= " AND upper(first_name) = upper('".$_GET['first-name-search']."')";
+    }
+    if (isset($_GET['email-search']) && strlen($_GET['email-search']) > 0) {
+        $sql .= " AND upper(email_address) = upper('".$_GET['email-search']."')";
+    }
+    if (isset($_GET['admin-search'])) {
+        $sql .= " AND admin = 'Y'";
+    }
+                    $sql .= " ORDER BY last_name, first_name";
+                    $results = execute_query($sql);
+    while ($user = $results->fetch_object()) {
+        print '
 						<tr id="row-'.$user->id.'">
 							<td id="first-name-'.$user->id.'">'.$user->first_name.'</td>
 							<td id="last-name-'.$user->id.'">'.$user->last_name.'</td>
@@ -86,8 +90,8 @@ include __DIR__.'/header.php';
 							<td class="centered"><button class="btn btn-primary" onclick="editUser('.$user->id.')"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
 							<td class="centered"><a class="btn btn-default" href="event_history.php?user_id='.$user->id.'" role="button" target="_blank""><span class="glyphicon glyphicon-user"></span> History</a></td>
 						</tr>';
-					}
-					?>
+    }
+        ?>
 				</tbody>
 			</table>
 		</div>
@@ -133,12 +137,12 @@ include __DIR__.'/header.php';
 								<label for="group">Group</label>
 								<select class="form-control" id="group" name="group">
 									<option value=""></option>
-									<?php
-										$groups = UserGroup::all_user_groups();
-										foreach ($groups as $group) {
-											echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
-										}
-									?>
+            <?php
+            $groups = UserGroup::all_user_groups();
+            foreach ($groups as $group) {
+                echo '<option value="'.$group['id'].'">'.$group['name'].'</option>';
+            }
+            ?>
 								</select>
 							</div>
 							<div class="checkbox">

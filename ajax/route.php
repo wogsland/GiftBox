@@ -17,10 +17,20 @@ if (isset($pieces[1])) {
 }
 
 // Execute script if exists
-$file1 = $endpoint_parts[2] . '.php';
-$file2 = $endpoint_parts[2] . '/' . $endpoint_parts[3] . '.php';
-if (file_exists($file1)) {
+if (isset($endpoint_parts[2])) {
+    $file1 = $endpoint_parts[2] . '.php';
+    if (isset($endpoint_parts[3])) {
+        $file2 = $endpoint_parts[2] . '/' . $endpoint_parts[3] . '.php';
+        if (isset($endpoint_parts[4])) {
+            $file3 = $endpoint_parts[2] . '/';
+            $file3 .= $endpoint_parts[3]  . '/' . $endpoint_parts[4] . '.php';
+        }
+    }
+}
+if (isset($file1) && file_exists($file1)) {
     include $file1;
-} elseif (file_exists($file2)) {
+} elseif (isset($file2) && file_exists($file2)) {
     include $file2;
+} elseif (isset($file3) && file_exists($file3)) {
+    include $file3;
 }

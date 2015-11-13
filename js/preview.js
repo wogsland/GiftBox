@@ -1,5 +1,5 @@
 /* =================================
-   LOADER                     
+   LOADER
 =================================== */
 // makes sure the whole site is loaded
 var selectedAnimationColor = null;
@@ -28,7 +28,7 @@ jQuery(window).load(function() {
 });
 
 $(document).ready(function(){
-	
+
 	// cache the window object
    $window = $(window);
 
@@ -48,7 +48,7 @@ $(document).ready(function(){
 		$('.giftbox').addClass('flip');
 		e.preventDefault();
 	});
-	
+
 	$('.flip-back').click(function(e){
 		$('.giftbox').removeClass('flip');
 		e.preventDefault();
@@ -84,11 +84,11 @@ function onYouTubeIframeAPIReady(){
 				'onReady': onPlayerReady,
 				'onStateChange': onPlayerStateChange
 			}
-		}));	  	
+		}));
 	});
-	
+
 }
-	
+
 function onPlayerReady(event){
 	for(key in event.target){
 		if(event.target[key].classList){
@@ -110,7 +110,7 @@ function onPlayerStateChange(event){
 }
 
 function bentoButtonPressed(tokenId, buttonText) {
-	var url = "token_button_pressed.php?id="+tokenId+"&button="+buttonText;
+	var url = "/ajax/token/button_pressed/?id="+tokenId+"&button="+buttonText;
 	$.post(url, function(data, textStatus){
 		if(data.status === "SUCCESS") {
 			$("#token-button-dialog-title").html(buttonText);
@@ -121,9 +121,9 @@ function bentoButtonPressed(tokenId, buttonText) {
 	}).fail(function() {
 		alert(".post failed");
 	});
-	
+
 }
 
 function bentoButtonEmail() {
-	
+
 }

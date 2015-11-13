@@ -1,9 +1,9 @@
 <?php
-include_once __DIR__.'/config.php';
+require_once __DIR__.'/config.php';
 _session_start();
 
 define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 
 <script>
@@ -21,7 +21,7 @@ include __DIR__.'/header.php';
 
 </head>
 <body>
-	<?php include_once "analyticstracking.php"; ?>
+    <?php require_once "analyticstracking.php"; ?>
 
 <!-- =========================
      PRE LOADER
@@ -38,7 +38,7 @@ include __DIR__.'/header.php';
 <!-- SOLID COLOR BG -->
 <div class="deep-dark-bg"> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
 
-	<?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 
 	<!-- CONTAINER -->
 	<div class="container">
@@ -65,15 +65,15 @@ include __DIR__.'/header.php';
 
 					<!-- BUTTON -->
 					<div class="buttons" id="login-button">
-						<?php
-						if (logged_in()) {
-							echo '<a href="token_type.php" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
-						} else {
-							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
-							echo ' or ';
-							echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
-						}
-						?>
+        <?php
+        if (logged_in()) {
+            echo '<a href="/token_type" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
+        } else {
+            echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
+            echo ' or ';
+            echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
+        }
+        ?>
 					</div>
 					<!-- /END BUTTONS -->
 
@@ -575,7 +575,7 @@ include __DIR__.'/header.php';
 </div>
 <!-- /END CONTAINER -->
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 
 <!-- =========================
     PAGE SPECIFIC SCRIPTS

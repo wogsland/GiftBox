@@ -11,7 +11,7 @@ class RecruitingToken
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $job_locations;
+    public $city_id;
     public $company;
     public $salary_range;
     public $full_time_part_time;
@@ -73,7 +73,7 @@ class RecruitingToken
         $values = null;
         $sql = 'INSERT INTO recruiting_token (';
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'id') {
+            if ($key !== 'id' && isset($value)) {
                 $columns .= $comma.$key;
                 $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';

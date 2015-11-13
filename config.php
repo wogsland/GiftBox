@@ -1,11 +1,4 @@
 <?php
-$server = $_SERVER['SERVER_NAME'];
-if ('givetoken.com' == strtolower($server)
-    || 'stone-timing-557.appspot.com' == strtolower($server)
-) {
-    header("Location: https://www.givetoken.com ", true, 301);
-}
-
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
 require_once __DIR__.'/vendor/autoload.php';
@@ -14,6 +7,16 @@ require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
 //load functions
 require_once __DIR__.'/util.php';
 
+$server = $_SERVER['SERVER_NAME'];
+if ('givetoken.com' == strtolower($server)
+    || 'stone-timing-557.appspot.com' == strtolower($server)
+) {
+    $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
+    header("Location: $url ", true, 301);
+}
+if (!defined('DEVELOPMENT')) {
+    define('DEVELOPMENT', ('www.givetoken.com' != $server));
+}
 $google_app_engine = false;
 $prefix = "http://";
 $app_root = "/";
@@ -28,7 +31,7 @@ if (isset($_SERVER['HTTPS'])) {
     } else {
         if('www.givetoken.com' == $server) {
             $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
-            header("Location: $url ");
+            header("Location: $url ", true, 301);
         }
     }
 }

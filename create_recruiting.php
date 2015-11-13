@@ -1,45 +1,48 @@
 <?php
-include_once 'config.php';
+require_once 'config.php';
 _session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_url);
 }
 
-	function text_input($label, $id) {
-		echo PHP_EOL;
-		echo '			<div class="form-group form-group-lg">'.PHP_EOL;
-		echo '				<label for="'.$id.'" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
-		echo '				<div class="col-sm-8">'.PHP_EOL;
-		echo '					<input type="text" class="form-control" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-		echo '				</div>'.PHP_EOL;
-		echo '			</div>'.PHP_EOL;
-	}
-	function file_input($label, $id) {
-		echo PHP_EOL;
-		echo '			<div class="form-group form-group-lg">'.PHP_EOL;
-		echo '				<label for="'.$id.'-input" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
-		echo '				<div class="col-sm-4">'.PHP_EOL;
-		echo '					<input type="hidden" id="'.$id.'" name="'.str_replace('-', '_', $id).'" value="">'.PHP_EOL;
-		echo '					<input type="file" id="'.$id.'-input" name="'.str_replace('-', '_', $id).'_input">'.PHP_EOL;
-		echo '				</div>'.PHP_EOL;
-		echo '				<div class="col-sm-4">'.PHP_EOL;
-		echo '					<img id="'.$id.'-img"  src="" alt="No '.$label.' Selected" height="100" width="100">'.PHP_EOL;
-		echo '					<button  type="button" class="btn btn-default btn-sm" onclick="clearImage(\''.$id.'\')">Clear Image</button>'.PHP_EOL;
-		echo '				</div>'.PHP_EOL;
-		echo '			</div>'.PHP_EOL;
-	}
-	function select_input($label, $id, $options) {
-		echo '			<div class="form-group form-group-lg">'.PHP_EOL;
-		echo '				<label for="'.$id.'" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
-		echo '				<div class="col-sm-8">'.PHP_EOL;
-		echo '					<select class="form-control" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-		foreach ($options as $option) {
-			echo "						<option value=\"$option\">".ucwords($option)."</option>".PHP_EOL;
-		}
-		echo '					</select>'.PHP_EOL;
-		echo '				</div>'.PHP_EOL;
-		echo '			</div>'.PHP_EOL;
-	}
+function text_input($label, $id)
+{
+    echo PHP_EOL;
+    echo '			<div class="form-group form-group-lg">'.PHP_EOL;
+    echo '				<label for="'.$id.'" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
+    echo '				<div class="col-sm-8">'.PHP_EOL;
+    echo '					<input type="text" class="form-control" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
+    echo '				</div>'.PHP_EOL;
+    echo '			</div>'.PHP_EOL;
+}
+function file_input($label, $id)
+{
+    echo PHP_EOL;
+    echo '			<div class="form-group form-group-lg">'.PHP_EOL;
+    echo '				<label for="'.$id.'-input" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
+    echo '				<div class="col-sm-4">'.PHP_EOL;
+    echo '					<input type="hidden" id="'.$id.'" name="'.str_replace('-', '_', $id).'" value="">'.PHP_EOL;
+    echo '					<input type="file" id="'.$id.'-input" name="'.str_replace('-', '_', $id).'_input">'.PHP_EOL;
+    echo '				</div>'.PHP_EOL;
+    echo '				<div class="col-sm-4">'.PHP_EOL;
+    echo '					<img id="'.$id.'-img"  src="" alt="No '.$label.' Selected" height="100" width="100">'.PHP_EOL;
+    echo '					<button  type="button" class="btn btn-default btn-sm" onclick="clearImage(\''.$id.'\')">Clear Image</button>'.PHP_EOL;
+    echo '				</div>'.PHP_EOL;
+    echo '			</div>'.PHP_EOL;
+}
+function select_input($label, $id, $options)
+{
+    echo '			<div class="form-group form-group-lg">'.PHP_EOL;
+    echo '				<label for="'.$id.'" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
+    echo '				<div class="col-sm-8">'.PHP_EOL;
+    echo '					<select class="form-control" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
+    foreach ($options as $option) {
+        echo "						<option value=\"$option\">".ucwords($option)."</option>".PHP_EOL;
+    }
+    echo '					</select>'.PHP_EOL;
+    echo '				</div>'.PHP_EOL;
+    echo '			</div>'.PHP_EOL;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +65,7 @@ if (!logged_in() || !is_admin()) {
 			</div>
 			<div class="input-section" id="basic-info">
 				<h1>Basic Info</h1>
-				<?php text_input('Job Location(s)', 'job-locations'); ?>
+				<?php text_input('Job Location(s)', 'city-id'); ?>
 				<?php text_input('Skills Required', 'skills-required'); ?>
 				<?php text_input('Responsibilities', 'responsibilities'); ?>
 				<?php text_input('Perks', 'perks'); ?>
@@ -88,16 +91,16 @@ if (!logged_in() || !is_admin()) {
 				<?php file_input('Backdrop Picture', 'backdrop-picture'); ?>
 				<?php text_input('Backdrop Color', 'backdrop-color'); ?>
 				<?php
-					$styles[0] = 'engineering';
-					$styles[1] = 'business';
-					$styles[2] = 'creative';
-					select_input('Style', 'style', $styles);
-				?>
+                    $styles[0] = 'engineering';
+                    $styles[1] = 'business';
+                    $styles[2] = 'creative';
+                    select_input('Style', 'style', $styles);
+                ?>
 				<?php
-					$sizes[0] = 'start-up';
-					$sizes[1] = 'fortune 100/500';
-					select_input('Special Size', 'special-size', $sizes);
-				?>
+                    $sizes[0] = 'start-up';
+                    $sizes[1] = 'fortune 100/500';
+                    select_input('Special Size', 'special-size', $sizes);
+                ?>
 
 			</div>
 			<div class="input-section" id="social-media-info">

@@ -1,9 +1,9 @@
 <?php
-include_once __DIR__.'/config.php';
+require_once __DIR__.'/config.php';
 _session_start();
 
 define('TITLE', 'GiveToken.com - Password Reset');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 <style>
 #forgot-password-container {
@@ -18,7 +18,7 @@ include __DIR__.'/header.php';
 </style>
 </head>
 <body onload="document.forms[0].email.focus()">
-	<?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 	<div id="forgot-password-container">
 		<p id="login-message"></p>
 		<h5>Please enter the email address used to register your account.
@@ -30,6 +30,6 @@ include __DIR__.'/header.php';
 			<a class="btn btn-default btn-lg standard-button" id="send-password-button" href="javascript:void(0)" onClick="sendPassword(document.forms[0].email.value);">Continue</a>
 		</form>
 	</div>
-	<?php include __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
 </body>
 </html>

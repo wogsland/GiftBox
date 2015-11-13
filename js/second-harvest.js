@@ -20,13 +20,13 @@
     $('.open-truck').hide();
     beginAnimation();
   }
-  
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}  
+}
 
   function beginAnimation(){
     boxLimit = getParameterByName("uc");
@@ -396,8 +396,8 @@ function getParameterByName(name) {
        }
     });
     $.play();
-    setTimeout(function(){window.location = "preview.php?id="+tokenId}, 3000);
-    
+    setTimeout(function(){window.location = "/preview?id="+tokenId;}, 3000);
+
   }
 
 })();

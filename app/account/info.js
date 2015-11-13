@@ -182,7 +182,7 @@ var AccountInfo = React.createClass({
           <div className="col-sm-10">
             <input placeholder={this.state.level_text} className="form-control tooltips" readOnly/>
           </div>
-          <label className="col-sm-1 control-label"><a href="/pricing.php">Edit</a></label>
+          <label className="col-sm-1 control-label"><a href="/pricing">Edit</a></label>
         </div>
         <div className="form-group">
           <label className="col-sm-1 control-label">Admin</label>
