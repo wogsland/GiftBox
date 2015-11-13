@@ -14,7 +14,6 @@ if ('givetoken.com' == strtolower($server)
     $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
 }
-define('DEVELOPMENT', ('www.givetoken.com' != $server));
 $google_app_engine = false;
 $prefix = "http://";
 $app_root = "/";
