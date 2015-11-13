@@ -1,7 +1,7 @@
 <?php
 use \GiveToken\User;
 
-require_once 'util.php';
+require_once 'config.php';
 _session_start();
 
 define('TITLE', 'GiveToken.com - Error');
