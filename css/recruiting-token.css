@@ -261,15 +261,6 @@ html, body {
   font-size: 14px;
   font-weight: 500;
 }
-#image-1 {
-  background: url('/images/Nashville.png') center / cover;
-}
-#image-2 {
-  background: url('/images/Parthenon.jpg') center / cover;
-}
-#image-3 {
-  background: url('/images/Team.jpg') center / cover;
-}
 neon-animated-pages {
   height: 100%;
 }
@@ -310,11 +301,11 @@ i.big-icon {
 }
 #location-frontpage {
   text-align:center;
-  background: url('/images/Nashville.png') center / cover;
+  background: url('/images/MountainView.jpg') center / cover;
 }
 #images-frontpage {
   text-align:center;
-  background: url('/images/Nashville.png') center / cover;
+  background: url('/images/bloom5.jpg') center / cover;
   margin-left: 0px;
   margin-right: 16px;
 }
@@ -327,10 +318,11 @@ i.big-icon {
   background: rgba(0, 0, 0, 0.2);
   text-align: left;
   vertical-align: middle;
+  color: whitesmoke;
 }
 #videos-frontpage {
   text-align:center;
-  background: url('/images/Nashville.png') center / cover;
+  background: url('https://i.ytimg.com/vi_webp/AY-Sxu8Itsw/mqdefault.webp') center / cover;
   margin-right: 0px;
   margin-left: 16px;
 }
