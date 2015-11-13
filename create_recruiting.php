@@ -11,7 +11,7 @@ function paper_text($label, $id, $icon = NULL, $suffix = NULL) {
     echo '              <paper-input label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
     echo '                  <iron-icon icon="'.$icon.'" prefix></iron-icon>'.PHP_EOL;
     if ($suffix) {
-        echo '<paper-icon-button suffix onclick="" icon="'.$suffix.'" alt="clear" title="clear" tabindex="0">';
+    echo '                  <paper-icon-button class="dialog-button" suffix onclick="document.getElementById(\'video-dialog\').open()" icon="'.$suffix.'" alt="video" title="video" tabindex="0"></paper-icon-button>';
     }
     echo '              </paper-input>'.PHP_EOL;
 }
@@ -126,6 +126,7 @@ function paper_card_end() {
     <link rel="import" href="components/paper-button/paper-button.html">
     <link rel="import" href="components/paper-input/paper-textarea.html">
     <link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
 
 </head>
 <body>
@@ -162,11 +163,14 @@ function paper_card_end() {
                         <?php paper_text('Company Name', 'company', 'domain'); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', 'local offer'); ?>
                         <?php paper_text('Company Website', 'company-website', 'http'); ?>
-                        <?php paper_text('Company Video (paste YouTube or Vimeo link or select from library)', 'company-video', 'videocam', 'add to photos'); ?>
+                        <span class="label">Company Videos</span>
                         <?php paper_text('Company Values', 'company-values'); ?>
                         <?php $sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large'); ?>
                         <?php paper_dropdown('Company Size', 'company-size', $sizes); ?>
-                        <?php paper_file('Company Images', 'company-picture'); ?>
+                        <div class="dialog-field-container">
+                            <i class="material-icons label-icon">images</i> <span class="label">Company Images</span>
+                            <paper-button raised class="dialog-button">ADD VIDEO</paper-button>
+                        </div>
                     </div>
                 <?php paper_card_end(); ?>
 
@@ -184,8 +188,7 @@ function paper_card_end() {
                     <paper-button raised>FINISH</paper-button>
                 </div>
             </form>
-        </div>
-        <div id="right-column">
+        </div><div id="right-column">
             <paper-card heading="Token Strength" id="token-strength">
             </paper-card>
             <div class="button-container">
@@ -203,6 +206,15 @@ function paper_card_end() {
             <?php endif; ?>
        </div>
     </div>
+
+    <paper-dialog id="video-dialog" modal>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="buttons">
+            <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
+        </div>
+    </paper-dialog>
+
+
     <!-- JavaScript -->
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
