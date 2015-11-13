@@ -69,7 +69,7 @@ scope._onLocationClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  url = '/ajax/city/get/1';
+  url = '/ajax/city/get/2';
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
       console.log(data);
