@@ -1,4 +1,5 @@
 <?php
+use GiveToken\Config;
 require_once  __DIR__.'/util.php';
 _session_start();
 
@@ -83,7 +84,6 @@ function paper_card_end() {
         paper-button {
             background: #009688;
             color: white;
-            width: 100px;
         }
         .library-button {
             margin: 10px 0px;
@@ -102,10 +102,19 @@ function paper_card_end() {
         #progress-bar {
             width: 100%;
             height: 70px;
+            padding: 7px 0px 0px 70px;
         }
         #token-strength {
             width: 100%;
             height: 300px;
+        }
+        paper-fab{
+            --paper-fab-background: #2193ED;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        paper-fab.progress-fab {
+            margin-left: 10px;
         }
     </style>
 
@@ -127,18 +136,28 @@ function paper_card_end() {
     <link rel="import" href="components/paper-input/paper-textarea.html">
     <link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/paper-fab/paper-fab.html">
 
 </head>
 <body>
     <paper-header-panel mode="waterfall" class="flex">
         <paper-toolbar>
-            <a href="/"><img src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
+            <a href="<?php echo Config::getInstance()->app_url; ?>"><img src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
             <span class="title"> </span>
-            <paper-icon-button icon="home" id="home-icon" onclick="window.location = '/'"></paper-icon-button>
+            <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo Config::getInstance()->app_url; ?>'"></paper-icon-button>
         </paper-toolbar>
     </paper-header-panel>
     <div id="center-column">
-        <paper-card id="progress-bar"></paper-card>
+        <paper-card id="progress-bar">
+                <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
+                <span class="progress-text">Fill Out Token Form</span>
+                <div class="progress-line"></div>
+                <paper-fab icon="looks one" class="progress-fab"></paper-fab>
+                <span class="progress-text">Preview Token</span>
+                <div class="progress-line"></div>
+                <paper-fab icon="looks one" class="progress-fab"></paper-fab>
+                <span class="progress-text">Send Token</span>
+        </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
                 <input type="hidden" id="id" name="id" value="<?php echo (isset($_GET['id']) ? $_GET['id'] : null); ?>">
@@ -163,13 +182,20 @@ function paper_card_end() {
                         <?php paper_text('Company Name', 'company', 'domain'); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', 'local offer'); ?>
                         <?php paper_text('Company Website', 'company-website', 'http'); ?>
-                        <span class="label">Company Videos</span>
+                        <div class="dialog-field-container">
+                            <i class="material-icons label-icon">videocam</i> <span class="label">Company Videos</span>
+                            <paper-button raised class="dialog-button" onclick="document.getElementById('video-dialog').open()">ADD VIDEOS</paper-button>
+                        </div>
+                        <div class="thumbnail-container">
+                        </div>
                         <?php paper_text('Company Values', 'company-values'); ?>
                         <?php $sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large'); ?>
                         <?php paper_dropdown('Company Size', 'company-size', $sizes); ?>
                         <div class="dialog-field-container">
                             <i class="material-icons label-icon">images</i> <span class="label">Company Images</span>
-                            <paper-button raised class="dialog-button">ADD VIDEO</paper-button>
+                            <paper-button raised class="dialog-button" onclick="document.getElementById('image-dialog').open()">ADD IMAGES</paper-button>
+                        </div>
+                        <div class="thumbnail-container">
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
@@ -184,8 +210,8 @@ function paper_card_end() {
                     </div>
                 <?php paper_card_end(); ?>
                 <div class="button-container">
-                    <paper-button raised>PREVIEW</paper-button>
-                    <paper-button raised>FINISH</paper-button>
+                    <paper-button raised class="bottom-button">PREVIEW</paper-button>
+                    <paper-button raised class="bottom-button">FINISH</paper-button>
                 </div>
             </form>
         </div><div id="right-column">
@@ -208,7 +234,14 @@ function paper_card_end() {
     </div>
 
     <paper-dialog id="video-dialog" modal>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h2>Upload videos from...</h2>
+        <div class="buttons">
+            <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
+        </div>
+    </paper-dialog>
+
+    <paper-dialog class="" id="image-dialog" modal>
+        <h2>Upload photos from...</h2>
         <div class="buttons">
             <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
         </div>
