@@ -1,7 +1,7 @@
 <?php
 use \GiveToken\User;
 
-include_once 'util.php';
+include_once 'config.php';
 _session_start();
 
 define('TITLE', 'GiveToken.com - About');
