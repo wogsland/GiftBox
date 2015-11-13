@@ -67,7 +67,7 @@ class RecruitingToken
         $values = null;
         $sql = 'INSERT INTO recruiting_token (';
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'id') {
+            if ($key !== 'id' && isset($value)) {
                 $columns .= $comma.$key;
                 $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';
