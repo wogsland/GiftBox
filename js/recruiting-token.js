@@ -193,15 +193,64 @@ $(document).ready(function(){
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
       $('.gt-info-perks').html(data.data.perks);
-      //$('.gt-info-location').html(data.data.job_locations);
-      $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
-      $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
-      $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
-      $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
-      //$('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
-      //$('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
-      $('.gt-info-gplus').attr('href', 'http://plus.google.com/');
-      $('.gt-info-pinterest').attr('href', 'http://pinterest.com/');
+      $('.gt-info-location').text(data.data.job_locations);
+      var socialCount = 0;
+      if ('' !== data.data.company_twitter) {
+        $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
+        socialCount++;
+      } else {
+        $('.gt-info-twitter').remove();
+      }
+      if ('' !== data.data.company_facebook) {
+        $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
+        socialCount++;
+      } else {
+        $('.gt-info-facebook').remove();
+      }
+      if ('' !== data.data.company_linkedin) {
+        $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
+        socialCount++;
+      } else {
+        $('.gt-info-linkedin').remove();
+      }
+      if ('' !== data.data.company_youtube) {
+        $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
+        socialCount++;
+      } else {
+        $('.gt-info-youtube').remove();
+      }
+      if ('' !== data.data.company_google_plus) {
+        $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
+        socialCount++;
+      } else {
+        $('.gt-info-gplus').remove();
+      }
+      if ('' !== data.data.company_pinterest) {
+        $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
+        socialCount++;
+      } else {
+        $('.gt-info-pinterest').remove();
+      }
+      if (socialCount < 6) {
+        switch (socialCount) {
+          case 4:
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').addClass('mdl-cell--3-col');
+          break;
+          case 3:
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').addClass('mdl-cell--4-col');
+          break;
+          case 2:
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').addClass('mdl-cell--6-col');
+          break;
+          case 1:
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').addClass('mdl-cell--12-col');
+          break;
+        }
+      }
       if (data.data.company_video !== '') {
         $('.gt-info-video').attr('src', data.data.company_video);
       }
