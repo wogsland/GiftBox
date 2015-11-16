@@ -267,6 +267,14 @@ neon-animated-pages {
 .large {
   width: 100%
 }
+.back-button-lower {
+  position: fixed;
+  top: 90px;
+  left: 30px;
+  z-index: 900;
+  background-color: white;
+}
+
 .back-button {
   position: fixed;
   top: 30px;

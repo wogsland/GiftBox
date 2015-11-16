@@ -304,6 +304,9 @@
             </div>
           </video-x-card>
           <description-x-card>
+            <div class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
+              BACK
+            </div>
             <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
             <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
               YES
