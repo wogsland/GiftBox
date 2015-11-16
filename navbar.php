@@ -11,7 +11,7 @@
       <span class="icon-bar"></span>
       </button>
 
-      <?php if ('www.givetoken.com' != isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null) { ?>
+      <?php if (DEVELOPMENT) { ?>
         <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
       <?php }?>
 

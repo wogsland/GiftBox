@@ -4,7 +4,7 @@ namespace GiveToken;
 class Config
 {
     private static $instance = null;
-	public $server = null;
+    public $server = null;
     public $google_app_engine = false;
     public $application_id = null;
     public $prefix = "http://";
