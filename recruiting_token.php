@@ -95,9 +95,9 @@
                       <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
                       <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
                       <a id="perks-drawer"  class="mdl-navigation__link" href="#perks-section" on-click="_onPerksClick">Perks</a>
-                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" href="#location-section" on-click="_onLocationClick">Location</a>
-                      <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" href="#images-section" on-click="_onImagesClick">Images</a>
-                      <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" href="#videos-section" on-click="_onVideosClick">Videos</a>
+                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onLocationClick">Location</a>
+                      <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onImagesClick">Images</a>
+                      <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onVideosClick">Videos</a>
                     </nav>
                   </div>
                   <main class="mdl-layout__content" on-scroll="_onTrack">
@@ -304,6 +304,9 @@
             </div>
           </video-x-card>
           <description-x-card>
+            <div class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
+              BACK
+            </div>
             <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
             <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
               YES
