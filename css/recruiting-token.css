@@ -315,7 +315,8 @@ i.big-icon {
   text-align:center;
   background: url('/images/bloom5.jpg') center / cover;
   margin-left: 0px;
-  margin-right: 16px;
+  margin-right: 0px;
+  margin-bottom: 48px;
 }
 #supporting-images, #supporting-videos, #supporting-location {
   margin-top: 267px;
@@ -332,7 +333,8 @@ i.big-icon {
   text-align:center;
   background: url('https://i.ytimg.com/vi_webp/AY-Sxu8Itsw/mqdefault.webp') center / cover;
   margin-right: 0px;
-  margin-left: 16px;
+  margin-left: 0px;
+  margin-bottom: 48px;
 }
 .mdl-layout__header {
   background-image: linear-gradient(45deg, #E500E7, #00D7FF);

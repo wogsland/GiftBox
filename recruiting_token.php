@@ -161,11 +161,13 @@
                           </div>
                         </div>
                       </section>
-                      <section class="section--center mdl-grid">
+                      <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="images-frontpage" on-click="_onImagesClick">
                           <div id="supporting-images">
                             <i class="material-icons">image</i> Images
                           </div>
+                        </div>
+                        <div class="mdl-layout-spacer">
                         </div>
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="videos-frontpage" on-click="_onVideosClick">
                           <div id="supporting-videos">
