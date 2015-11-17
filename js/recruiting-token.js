@@ -239,6 +239,7 @@ $(document).ready(function(){
           break;
           case 3:
           $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
           $('.frontpage-social-button').addClass('mdl-cell--4-col');
           break;
           case 2:
@@ -247,6 +248,7 @@ $(document).ready(function(){
           break;
           case 1:
           $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
           $('.frontpage-social-button').addClass('mdl-cell--12-col');
           break;
         }

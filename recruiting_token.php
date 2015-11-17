@@ -131,22 +131,22 @@
                         </div>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
-                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
+                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
                           <i class="fa fa-twitter big-icon"></i>
                         </a>
-                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
+                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
                           <i class="fa fa-facebook big-icon"></i>
                         </a>
-                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
+                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
                           <i class="fa fa-linkedin big-icon"></i>
                         </a>
-                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
+                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
                           <i class="fa fa-youtube big-icon"></i>
                         </a>
-                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
+                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
                           <i class="fa fa-google-plus big-icon"></i>
                         </a>
-                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
+                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
                           <i class="fa fa-pinterest big-icon"></i>
                         </a>
                       </section>
