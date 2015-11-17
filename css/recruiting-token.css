@@ -190,52 +190,42 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
-#interested-disabled-button {
+#interested-row {
+  margin-bottom: 0px;
+}
+.interested-button{
   color: white;
   position: fixed;
   display: block;
-  left: 0;
   bottom: 0;
-  margin-bottom: 0px;
   z-index: 900;
+}
+#interested-disabled-button {
+  color: white;
+  left: 0;
 }
 #interested-yes-button {
-  background-color: green;
-  position: fixed;
-  display: block;
+  background-color: #4CAF50;
   right: 0;
-  bottom: 0;
   margin-right: 50%;
-  margin-bottom: 0px;
-  z-index: 900;
-}
-#yes-submit {
-  background-color: green;
 }
 #interested-maybe-button {
-  background-color: yellow;
-  position: fixed;
-  display: block;
+  background-color: #FFC107;
   right: 0;
-  bottom: 0;
   margin-right: 25%;
-  margin-bottom: 0px;
-  z-index: 900;
-}
-#maybe-submit {
-  background-color: yellow;
 }
 #interested-no-button {
-  background-color: red;
-  position: fixed;
-  display: block;
+  background-color: #D0021B;
   right: 0;
-  bottom: 0;
-  margin-bottom: 0px;
-  z-index: 900;
+}
+#yes-submit {
+  background-color: #4CAF50;
+}
+#maybe-submit {
+  background-color: #FFC107;
 }
 #no-submit {
-  background-color: red;
+  background-color: #D0021B;
 }
 .demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
   padding-right: 0;
