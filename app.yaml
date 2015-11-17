@@ -68,7 +68,7 @@ handlers:
 # Token
 - url: /token/recruiting/(.+)
   script: recruiting_token.build.html
-  - url: /create_recruiting
+- url: /create_recruiting
   script: create_recruiting.php
 
 # About Page
