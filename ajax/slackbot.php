@@ -1,5 +1,5 @@
 <?php
-//if ($google_app_engine && $application_id === "s~stone-timing-557") {
+if ($google_app_engine && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
     $url = "http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}";
     $ch = curl_init();
@@ -38,4 +38,4 @@
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
     $response = curl_exec($ch);
     curl_close($ch);
-//}
+}

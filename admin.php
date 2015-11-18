@@ -22,6 +22,9 @@ require __DIR__.'/header.php';
         <li>
           <a href="manage_groups.php">Manage Groups</a>
         </li>
+        <li>
+          <a href="/admin/visitors">Website Vistors</a>
+        </li>
       </ul>
     </nav>
   </div>

@@ -110,7 +110,8 @@ handlers:
 # Admin
 - url: /admin
   script: admin.php
-
+- url: /admin/visitors
+  script: admin/visitors.php
 
 # catchall for 404
 - url: /.*
