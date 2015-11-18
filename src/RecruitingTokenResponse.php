@@ -9,7 +9,7 @@ class RecruitingTokenResponse
     public $created;
 
     /**
-     * This function constructs the class
+     * This function creates a resonse in the database
      *
      * @param int    $recruiting_token_id - long id of the token
      * @param string $email               - email address of respondent
@@ -37,6 +37,47 @@ class RecruitingTokenResponse
             }
         }
         return $id;
+    }
+
+    /**
+     * This function gets the responses to a token or all user tokens
+     *
+     * @param int $user_id - id of the user
+     * @param int $long_id - optional long id of the token
+     *
+     * @return array - responses
+     */
+    public function get($user_id, $long_id = '')
+    {
+        $responses = array();
+        if (isset($user_id) && $user_id == (int) $user_id){
+            if ('' != $long_id) {
+                $result = execute_query(
+                    "SELECT id from recruiting_token
+                    WHERE long_id = '$long_id'"
+                );
+                if ($row = $result->fetch_assoc()) {
+                    $recruiting_token_id = $row['id'];
+                } else {
+                    return $responses;
+                }
+            }
+            $query = "SELECT recruiting_token_response.id,
+                      recruiting_token_response.`email`,
+                      recruiting_token_response.`response`,
+                      recruiting_token_response.`created`,
+                      recruiting_token.long_id
+                      FROM recruiting_token_response, recruiting_token
+                      WHERE recruiting_token_response.recruiting_token_id = recruiting_token.id
+                      AND recruiting_token.user_id = '$user_id' ";
+            $query .= isset($recruiting_token_id) ? "AND recruiting_token.id = '$recruiting_token_id'" : '';
+            //echo $query;
+            $result = execute_query($query);
+            while ($row = $result->fetch_assoc()) {
+                $responses[] = $row;
+            }
+        }
+        return $responses;
     }
 
 }
