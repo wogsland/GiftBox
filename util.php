@@ -1,51 +1,49 @@
 <?php
+use GiveToken\Connection;
+require_once __DIR__.'/src/autoload.php';
+
 function escape_string($string)
 {
-    global $mysqli;
-    return $mysqli->real_escape_string($string);
+    return Connection::$mysqli->real_escape_string($string);
 }
 
 function execute_query($sql)
 {
-    global $mysqli;
-    if ($result = $mysqli->query($sql)) {
+    if ($result = Connection::$mysqli->query($sql)) {
         return $result;
     } else {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
 }
 
 function execute($sql)
 {
-    global $mysqli;
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
 }
 
 function insert($sql)
 {
-    global $mysqli;
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
-    return $mysqli->insert_id;
+    return Connection::$mysqli->insert_id;
 }
 
 function update($sql)
 {
-    global $mysqli;
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
-    return $mysqli->affected_rows;
+    return Connection::$mysqli->affected_rows;
 }
 
 function logged_in()
@@ -137,7 +135,6 @@ function is_selected($field_value, $data_value, $select_string = 'selected')
 
 function _session_start()
 {
-    global $mysqli;
-    $session = new Zebra_Session($mysqli, 'sEcUr1tY_c0dE');
+    $session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
     return $session;
 }

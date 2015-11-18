@@ -74,6 +74,7 @@ if ($google_app_engine) {
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 }
+new GiveToken\Connection($mysqli);
 
 // start session
 $session = _session_start();

@@ -6,6 +6,9 @@ require_once __DIR__.'/local.php';
 require_once __DIR__.'/../../vendor/autoload.php';
 require_once __DIR__.'/../autoload.php';
 
+// connect to database
+new GiveToken\Connection();
+
 //load functions
 require_once __DIR__.'/../../util.php';
 
@@ -14,7 +17,7 @@ require_once __DIR__.'/../../util.php';
  *
  * @return string - a cookie to access a logged in session
  */
-function getTestCookie() 
+function getTestCookie()
 {
     $password = 'nachos';
     $hash = password_hash($password, PASSWORD_DEFAULT);
