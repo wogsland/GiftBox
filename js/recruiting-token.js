@@ -12,7 +12,6 @@ function getUrlPath() {
 }
 
 scope._onOverviewClick = function(event) {
-  console.log(this);
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
@@ -20,6 +19,7 @@ scope._onOverviewClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onSkillsClick = function(event) {
@@ -30,6 +30,7 @@ scope._onSkillsClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onValuesClick = function(event) {
@@ -40,6 +41,7 @@ scope._onValuesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onResponsibilitiesClick = function(event) {
@@ -50,6 +52,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onPerksClick = function(event) {
@@ -60,6 +63,7 @@ scope._onPerksClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onLocationClick = function(event) {
@@ -183,7 +187,7 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', function(data) {
       if (data.success == 'false') {
-        //window.location.href = 'https://www.givetoken.com';
+        window.location.href = 'https://www.givetoken.com';
       }
       $('title').text(data.data.company+' - '+data.data.job_title);
       $('.gt-info-company').text(data.data.company);
@@ -259,6 +263,14 @@ $(document).ready(function(){
     },'json');
   } else {
     console.log('redirecting...');
-    //window.location.href = 'https://www.givetoken.com';
+    window.location.href = 'https://www.givetoken.com';
   }
 });
+
+function smallScreen() {
+  if ( $(window).width() < 739) {
+    // small screens adjustments
+    $('.back-button-lower').addClass('back-button-lower-right');
+    $('.back-button-lower-right').removeClass('back-button-lower');
+  }
+}
