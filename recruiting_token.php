@@ -244,8 +244,7 @@
               <h2 class="mdl-color-text--primary-dark">No</h2>
               <div id="no-content">
                 <p>
-                  No, I'm not interested right now. Please don't contact me again
-                  about this position.
+                  No, I'm not interested right now.
                 </p>
                 <form id="no-email-form">
                   <div class="mdl-textfield mdl-js-textfield">
