@@ -2,7 +2,6 @@
 use \GiveToken\User;
 
 require_once 'config.php';
-_session_start();
 
 define('TITLE', 'GiveToken.com - Error');
 require __DIR__.'/header.php';

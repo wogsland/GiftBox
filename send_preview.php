@@ -4,8 +4,6 @@ use \GiveToken\EventLogger;
 require_once 'config.php';
 require_once 'mail.php';
 
-_session_start();
-
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];
 $event = EventLogger::SEND_GIFTBOX;

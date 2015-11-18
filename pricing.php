@@ -1,8 +1,7 @@
 <?php
 use \GiveToken\User;
 
-require_once 'config.php';
-_session_start();
+require_once __DIR__.'/config.php';
 
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
 require __DIR__.'/header.php';

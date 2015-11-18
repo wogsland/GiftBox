@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-_session_start();
 
 $message = null;
 $first_name = null;

@@ -2,7 +2,6 @@
 use \GiveToken\User;
 
 include_once 'config.php';
-_session_start();
 
 define('TITLE', 'GiveToken.com - About');
 include __DIR__.'/header.php';

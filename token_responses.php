@@ -2,7 +2,6 @@
 use \GiveToken\RecruitingTokenResponse;
 
 require_once __DIR__.'/config.php';
-_session_start();
 if (!logged_in()) {
     header('Location: '.$app_root);
 }
