@@ -90,7 +90,7 @@
                     <!--<span class="mdl-layout-title">Job Description</span>-->
                     <nav class="mdl-navigation">
                       <a class="mdl-layout-title mdl-navigation__link">Job Description</a>
-                      <a id="overview-drawer" class="mdl-navigation__link" href="#overview-section" on-click="_onOverviewClick">Overview</a>
+                      <a id="overview-drawer" class="mdl-navigation__link" href="#" on-click="_onOverviewClick">Overview</a>
                       <a id="skills-drawer"  class="mdl-navigation__link" href="#skills-section" on-click="_onSkillsClick">Skills Required</a>
                       <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
                       <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
@@ -115,7 +115,8 @@
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Job Description</h4>
-                            <p class="gt-info-overview"></p>
+                            <p class="gt-info-overview-short" on-click="_onOverviewClick">
+                            </p>
                           </div>
                           <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
                             <a href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">

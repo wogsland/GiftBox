@@ -360,3 +360,6 @@ i.big-icon {
 .gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg, .gt-info-company, .gt-info-jobtitle {
   font-style:normal;
 }
+#read-more {
+  color: blue;
+}

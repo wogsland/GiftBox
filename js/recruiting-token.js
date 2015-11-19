@@ -193,6 +193,17 @@ $(document).ready(function(){
       $('.gt-info-company').text(data.data.company);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
+      var overview = '' + data.data.job_description;
+      var words = overview.split(' ');
+      var shortDescription = '';
+      for (i = 0; i < 27; i++) {
+        shortDescription += words[i] + ' ';
+      }
+      if (words.length >= 27) {
+        shortDescription += ' ... ';
+        shortDescription += '<a href="#" id="read-more">read more</a>';
+      }
+      $('.gt-info-overview-short').html(shortDescription);
       $('.gt-info-skills').html(data.data.skills_required);
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
