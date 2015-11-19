@@ -5,18 +5,18 @@ require_once __DIR__.'/config.php';
 if (!logged_in()) {
     header('Location: '.$app_root);
 }
-//echo '<pre>';print_r($_SESSION);die;
 
 define('TITLE', 'GiveToken.com - Token Responses');
 require __DIR__.'/header.php';
 ?>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.css"/>
 <style>
 body {
   background-color: white;
 }
 #datatable-div {
   margin-top: 100px;
+  margin-bottom: 150px;
 }
 #responses-table {
   color: black;
@@ -52,11 +52,16 @@ body {
       </table>
     </div>
   </div>
-  <?php //require __DIR__.'/footer.php';?>
-  <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+  <?php require __DIR__.'/footer.php';?>
+  <script type="text/javascript" src="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.js"></script>
   <script>
   $(document).ready(function() {
-    $('#responses-table').DataTable();
+      var table = $('#responses-table').DataTable({
+          dom: 'B<"clear">lfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf','print'
+          ]
+      });
   });
   </script>
 </body>
