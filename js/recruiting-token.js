@@ -257,6 +257,7 @@ $(document).ready(function(){
           break;
         }
       }
+      $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
       if (data.data.company_video !== '') {
         $('.gt-info-video').attr('src', data.data.company_video);
       }
@@ -265,6 +266,7 @@ $(document).ready(function(){
     console.log('redirecting...');
     window.location.href = 'https://www.givetoken.com';
   }
+  smallScreen();
 });
 
 function smallScreen() {
