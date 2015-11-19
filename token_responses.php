@@ -10,12 +10,15 @@ if (!logged_in()) {
 define('TITLE', 'GiveToken.com - Token Responses');
 require __DIR__.'/header.php';
 ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
 <style>
 body {
   background-color: white;
 }
-#responses-table {
+#datatable-div {
   margin-top: 100px;
+}
+#responses-table {
   color: black;
 }
 </style>
@@ -24,8 +27,8 @@ body {
   <div>
     <?php require __DIR__.'/navbar.php';?>
   </div>
-  <div class="row">
-    <div class="col-sm-offset-3 col-sm-6">
+  <div class="row" id="datatable-div">
+    <div class="col-sm-offset-2 col-sm-8">
       <table id="responses-table" class="table table-striped table-hover">
         <thead>
           <th>Token</th>
@@ -50,5 +53,11 @@ body {
     </div>
   </div>
   <?php //require __DIR__.'/footer.php';?>
+  <script src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('#responses-table').DataTable();
+  });
+  </script>
 </body>
 </html>
