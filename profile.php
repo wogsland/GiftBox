@@ -7,8 +7,8 @@ $last_name = null;
 $email = null;
 $user_id = null;
 
-if (logged_in()) {
-    //header('Location: '.$app_root.'my_account.php');
+if (!logged_in()) {
+    header('Location: '.$app_root);
 }
 define('TITLE', 'GiveToken.com - Profile');
 require __DIR__.'/header.php';
