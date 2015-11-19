@@ -282,7 +282,7 @@ neon-animated-pages {
 }
 
 #job-description-icon {
-  background-color:#8E78FF;
+  background-color: rgb(44,152,240);
 }
 .mdl-demo .mdl-card .mdl-card__supporting-icon {
   margin: 40px;
@@ -338,10 +338,10 @@ i.big-icon {
   margin-bottom: 48px;
 }
 .mdl-layout__header {
-  background-image: linear-gradient(45deg, #E500E7, #00D7FF);
+  background-image: linear-gradient(45deg, #4F00BC, #29ABE2);
 }
 .social-section {
-  background-image: linear-gradient(45deg, #E500E7, #00D7FF);
+  background-color: rgb(114,188,245);
 }
 .frontpage-social-button {
   /*height: 100px;*/

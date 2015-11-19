@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Company Hiring - Super Long Job Title">
+    <meta name="description" content="GiveToken - Recruiting Token">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Company Hiring - Super Long Job Title</title>
+    <title></title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
