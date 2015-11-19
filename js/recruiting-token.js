@@ -196,12 +196,12 @@ $(document).ready(function(){
       var overview = '' + data.data.job_description;
       var words = overview.split(' ');
       var shortDescription = '';
-      for (i = 0; i < 27; i++) {
+      for (i = 0; i < 25; i++) {
         shortDescription += words[i] + ' ';
       }
-      if (words.length >= 27) {
+      if (words.length >= 25) {
         shortDescription += ' ... ';
-        shortDescription += '<a href="#" id="read-more">read more</a>';
+        shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
       $('.gt-info-overview-short').html(shortDescription);
       $('.gt-info-skills').html(data.data.skills_required);
