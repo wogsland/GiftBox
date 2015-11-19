@@ -77,7 +77,8 @@ scope._onLocationClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
       console.log(data);
-      $('.gt-city-population').text(data.data.population);
+      var population = numberWithCommas(data.data.population)
+      $('.gt-city-population').text(population);
       $('.gt-city-timezone').text(data.data.timezone);
       $('.gt-city-county').text(data.data.county);
       $('google-map')[0].latitude = data.data.latitude;
@@ -286,4 +287,8 @@ function smallScreen() {
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
   }
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
