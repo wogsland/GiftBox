@@ -77,7 +77,7 @@ scope._onLocationClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
       console.log(data);
-      var population = numberWithCommas(data.data.population)
+      var population = numberWithCommas(data.data.population);
       $('.gt-city-population').text(population);
       $('.gt-city-timezone').text(data.data.timezone);
       $('.gt-city-county').text(data.data.county);
