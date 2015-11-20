@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-_session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_url);
 }

@@ -3,7 +3,6 @@ use \GiveToken\UserGroup;
 
 require_once 'config.php';
 
-_session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
@@ -37,7 +36,7 @@ require __DIR__.'/header.php';
 						<input class="form-control" name="email-search" type="email" placeholder="Email" value="<?php if (isset($_GET['email-search'])) {echo $_GET['email-search'];
      } ?>">
 						<label for="admin">
-							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) { echo "checked"; 
+							<input name="admin-search" id="admin-search" type="checkbox" <?php if (isset($_GET['admin-search'])) { echo "checked";
       } ?>> Administrator
 						</label>
 						<input type="submit" class="btn btn-primary" value="Search">

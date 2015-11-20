@@ -17,3 +17,7 @@ components
 #############
 recruiting_token.build.html
 js/recruiting_token.min.js
+
+# Testing #
+###########
+/test.php

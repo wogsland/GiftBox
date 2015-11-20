@@ -32,7 +32,7 @@ require __DIR__.'/header.php';
 		</div>
     <?php if (is_admin()) { ?>
 			<div class="select-button-container">
-				<a href="create_recruiting.php" class="select-recruiting select-button-link">
+				<a href="create_recruiting" class="select-recruiting select-button-link">
 					<div class="select-left-container">
 						<svg class="circle" xmlns="http://www.w3.org/2000/svg" version="1.1">
 							<circle cx="130" cy="130" r="130 "fill="#43A047" />
@@ -47,5 +47,6 @@ require __DIR__.'/header.php';
 			</div>
     <?php }?>
 	</div>
+  <?php require __DIR__.'/footer.php';?>
 </body>
 </html>

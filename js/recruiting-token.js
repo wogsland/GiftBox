@@ -12,7 +12,6 @@ function getUrlPath() {
 }
 
 scope._onOverviewClick = function(event) {
-  console.log(this);
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
@@ -20,6 +19,7 @@ scope._onOverviewClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onSkillsClick = function(event) {
@@ -30,6 +30,7 @@ scope._onSkillsClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onValuesClick = function(event) {
@@ -40,6 +41,7 @@ scope._onValuesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onResponsibilitiesClick = function(event) {
@@ -50,6 +52,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onPerksClick = function(event) {
@@ -60,6 +63,7 @@ scope._onPerksClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 7;
+  smallScreen();
 };
 
 scope._onLocationClick = function(event) {
@@ -73,7 +77,8 @@ scope._onLocationClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
       console.log(data);
-      $('.gt-city-population').text(data.data.population);
+      var population = numberWithCommas(data.data.population);
+      $('.gt-city-population').text(population);
       $('.gt-city-timezone').text(data.data.timezone);
       $('.gt-city-county').text(data.data.county);
       $('google-map')[0].latitude = data.data.latitude;
@@ -183,12 +188,23 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', function(data) {
       if (data.success == 'false') {
-        //window.location.href = 'https://www.givetoken.com';
+        window.location.href = 'https://www.givetoken.com';
       }
       $('title').text(data.data.company+' - '+data.data.job_title);
       $('.gt-info-company').text(data.data.company);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
+      var overview = '' + data.data.job_description;
+      var words = overview.split(' ');
+      var shortDescription = '';
+      for (i = 0; i < 25; i++) {
+        shortDescription += words[i] + ' ';
+      }
+      if (words.length >= 25) {
+        shortDescription += ' ... ';
+        shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
+      }
+      $('.gt-info-overview-short').html(shortDescription);
       $('.gt-info-skills').html(data.data.skills_required);
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
@@ -239,6 +255,7 @@ $(document).ready(function(){
           break;
           case 3:
           $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
           $('.frontpage-social-button').addClass('mdl-cell--4-col');
           break;
           case 2:
@@ -247,16 +264,31 @@ $(document).ready(function(){
           break;
           case 1:
           $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
           $('.frontpage-social-button').addClass('mdl-cell--12-col');
           break;
         }
       }
+      $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
       if (data.data.company_video !== '') {
         $('.gt-info-video').attr('src', data.data.company_video);
       }
     },'json');
   } else {
     console.log('redirecting...');
-    //window.location.href = 'https://www.givetoken.com';
+    window.location.href = 'https://www.givetoken.com';
   }
+  smallScreen();
 });
+
+function smallScreen() {
+  if ( $(window).width() < 739) {
+    // small screens adjustments
+    $('.back-button-lower').addClass('back-button-lower-right');
+    $('.back-button-lower-right').removeClass('back-button-lower');
+  }
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

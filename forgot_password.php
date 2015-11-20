@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__.'/config.php';
-_session_start();
 
 define('TITLE', 'GiveToken.com - Password Reset');
 require __DIR__.'/header.php';

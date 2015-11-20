@@ -22,7 +22,13 @@ var AccountProfile = React.createClass({
           <div className="mb20"></div>
 
           <div className="btn-group">
-              <a href="token_type"><button className="btn btn-primary btn-bordered">Create GiveToken</button></a>
+              <a href="/token_type">
+                  <button className="btn btn-primary btn-bordered">Create GiveToken</button>
+              </a>
+              <br /><br />
+              <a href="/token_responses">
+                  <button className="btn btn-primary btn-bordered">See Responses</button>
+              </a>
               {/* <button className="btn btn-primary btn-bordered">Send GiveToken</button> */}
           </div>
 
