@@ -77,7 +77,8 @@ scope._onLocationClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
       console.log(data);
-      $('.gt-city-population').text(data.data.population);
+      var population = numberWithCommas(data.data.population);
+      $('.gt-city-population').text(population);
       $('.gt-city-timezone').text(data.data.timezone);
       $('.gt-city-county').text(data.data.county);
       $('google-map')[0].latitude = data.data.latitude;
@@ -193,6 +194,17 @@ $(document).ready(function(){
       $('.gt-info-company').text(data.data.company);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
+      var overview = '' + data.data.job_description;
+      var words = overview.split(' ');
+      var shortDescription = '';
+      for (i = 0; i < 25; i++) {
+        shortDescription += words[i] + ' ';
+      }
+      if (words.length >= 25) {
+        shortDescription += ' ... ';
+        shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
+      }
+      $('.gt-info-overview-short').html(shortDescription);
       $('.gt-info-skills').html(data.data.skills_required);
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
@@ -275,4 +287,8 @@ function smallScreen() {
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
   }
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

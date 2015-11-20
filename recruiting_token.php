@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Company Hiring - Super Long Job Title">
+    <meta name="description" content="GiveToken - Recruiting Token">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Company Hiring - Super Long Job Title</title>
+    <title></title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -90,7 +90,7 @@
                     <!--<span class="mdl-layout-title">Job Description</span>-->
                     <nav class="mdl-navigation">
                       <a class="mdl-layout-title mdl-navigation__link">Job Description</a>
-                      <a id="overview-drawer" class="mdl-navigation__link" href="#overview-section" on-click="_onOverviewClick">Overview</a>
+                      <a id="overview-drawer" class="mdl-navigation__link" href="#" on-click="_onOverviewClick">Overview</a>
                       <a id="skills-drawer"  class="mdl-navigation__link" href="#skills-section" on-click="_onSkillsClick">Skills Required</a>
                       <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
                       <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
@@ -106,13 +106,17 @@
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                         <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
                           <div class="mdl-card__supporting-icon">
-                            <h4 class="mdl-color-text--primary-contrast"><i class="material-icons huge-icon">work</i></h4>
+                            <h4 class="mdl-color-text--primary-contrast">
+                              <!--<i class="material-icons huge-icon">work</i>-->
+                              <img src="/images/bloom-logo.png" width=200>
+                            </h4>
                           </div>
                         </div>
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Job Description</h4>
-                            <p class="gt-info-overview"></p>
+                            <p class="gt-info-overview-short" on-click="_onOverviewClick">
+                            </p>
                           </div>
                           <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
                             <a href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
