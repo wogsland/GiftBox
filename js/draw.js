@@ -73,7 +73,7 @@ function renderTotalChart() {
       },
       width: 370,
       height: 200,
-      chartArea:{width:'65%',height:'65%'}, 
+      chartArea:{width:'65%',height:'65%'},
     };
 
     data.setColumnLabel(1, 'Page Views');
@@ -130,7 +130,7 @@ String.prototype.toHHMMSS = function () {
     if (seconds < 10) {seconds = "0"+seconds;}
     var time    = hours+':'+minutes+':'+seconds;
     return time;
-}
+};
 
 function renderAverageChart() {
 
@@ -156,7 +156,7 @@ function renderAverageChart() {
     data.setFormattedValue(i, 1, formattedTime);
   }
 
-  var ticks = []
+  var ticks = [];
 
   for (i = 0; i < highest_tick + 150; i += 100) {
     console.log(i);
@@ -339,7 +339,7 @@ function renderGenderChart() {
   var data = new google.visualization.DataTable(genderChartData);
   console.log(data.getNumberOfRows());
 
-  if (data.getNumberOfRows() == 0) {
+  if (data.getNumberOfRows() === 0) {
     notifyLittleData($('#gender-timeline'), 'Gender');
   } else {
     // Set chart options
@@ -369,7 +369,7 @@ function renderAgeChart() {
 
   var data = new google.visualization.DataTable(ageChartData);
 
-  if (data.getNumberOfRows() == 0) {
+  if (data.getNumberOfRows() === 0) {
     notifyLittleData($('#age-timeline'), 'Age');
   } else {
     // Set chart options
@@ -399,7 +399,7 @@ function renderGeoChart() {
 
   var data = new google.visualization.DataTable(geoChartData);
 
-  if (data.getNumberOfRows() == 0) {
+  if (data.getNumberOfRows() === 0) {
     notifyLittleData($('#geo-timeline'), 'Cities');
   } else {
     // Set chart options
@@ -422,7 +422,7 @@ function renderDeviceChart() {
 
   var data = new google.visualization.DataTable(deviceChartData);
 
-  if (data.getNumberOfRows() == 0) {
+  if (data.getNumberOfRows() === 0) {
     notifyLittleData($('#device-timeline'), 'Devices');
   } else {
     // Set chart options
@@ -543,5 +543,3 @@ function renderMobileChart() {
   }
 
 }
-
-
