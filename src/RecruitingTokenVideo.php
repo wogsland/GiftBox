@@ -5,7 +5,7 @@ class RecruitingTokenVideo
 {
     public $id;
     public $recruiting_token_id;
-    public $Video_file_name;
+    public $url;
 
     /**
      * Constructs the class
@@ -15,12 +15,14 @@ class RecruitingTokenVideo
     public function __construct($id = null)
     {
         if ($id !== null && strlen($id) > 0) {
-            $user = execute_query(
+            $result = execute_query(
                 "SELECT * from recruiting_token_video
                 WHERE id = '$id'"
             )->fetch_object("GiveToken\RecruitingTokenVideo");
-            foreach (get_object_vars($user) as $key => $value) {
-                $this->$key = $value;
+            if (isset($result)) {
+                foreach (get_object_vars($result) as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
     }
