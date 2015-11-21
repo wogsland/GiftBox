@@ -1,6 +1,8 @@
 $(function() {
 	$( "#add-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide() },
+		open: function(event, ui) {
+			$(".ui-dialog-titlebar-close").hide();
+		},
 		dialogClass: 'add-dialog-class',
 		autoOpen: false,
 		resizable: false,
@@ -12,7 +14,9 @@ $(function() {
 
 $(function() {
 	$( "#letter-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		open: function(event, ui) {
+			$(".ui-dialog-titlebar-close").hide();
+		},
 		dialogClass: 'letter-dialog-class',
 		autoOpen: false,
 		resizable: false,
@@ -24,7 +28,9 @@ $(function() {
 
 $(function() {
 	$( "#thumbnail-dialog" ).dialog({
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+		open: function(event, ui) {
+			$(".ui-dialog-titlebar-close").hide();
+		},
 		dialogClass: 'thumbnail-dialog-class',
 		autoOpen: false,
 		resizable: false,
@@ -73,7 +79,7 @@ $(function() {
 $(function() {
 	$("#unload-count").bind("keydown", function (event) {
 		event.preventDefault();
-	});			
+	});
 	$( "#unload-count" ).spinner({min: 0, max: 20});
 	$( "#wrapper-dialog" ).dialog({
 		autoOpen: false,
@@ -93,7 +99,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#save-dialog" ).dialog({ 
+	$( "#save-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -119,7 +125,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#save-editor-dialog" ).dialog({ 
+	$( "#save-editor-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -145,7 +151,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#url-dialog" ).dialog({ 
+	$( "#url-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -171,7 +177,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#youtube-url-dialog" ).dialog({ 
+	$( "#youtube-url-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -197,7 +203,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#youtube-redirect-dialog" ).dialog({ 
+	$( "#youtube-redirect-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -205,7 +211,7 @@ $(function() {
 		modal: true,
 		buttons: {
 			Ok: function() {
-				addRedirectUrl()
+				addRedirectUrl();
 			},
 			Cancel: function() {
 				$( this ).dialog( "close" );
@@ -214,7 +220,7 @@ $(function() {
 		open: function() {
 			$("#youtube-redirect-dialog").keypress(function(e) {
 				if (e.keyCode == $.ui.keyCode.ENTER) {
-					addRedirectUrl()
+					addRedirectUrl();
 					return false;
 				}
 			});
@@ -223,7 +229,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#entrance-animation-dialog" ).dialog({ 
+	$( "#entrance-animation-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -241,7 +247,7 @@ $(function() {
 });
 
 $(function() {
-	$( "#add-hyperlink-dialog" ).dialog({ 
+	$( "#add-hyperlink-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:200,
@@ -267,18 +273,20 @@ $(function() {
 });
 
 $(function() {
-	$( "#image-dialog" ).dialog({ 
-		open: function(event, ui) { $(".ui-dialog-titlebar-close").hide()},
+	$( "#image-dialog" ).dialog({
+		open: function(event, ui) {
+			$(".ui-dialog-titlebar-close").hide();
+		},
 		autoOpen: false,
 		resizable: false,
 		height:500,
-		width: 300, 
+		width: 300,
 		modal: true
 	});
 });
 
 $(function() {
-	$( "#redirect-dialog" ).dialog({ 
+	$( "#redirect-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		height:400,
@@ -288,7 +296,9 @@ $(function() {
 
 $(function() {
 	$( "#facebook-album-dialog" ).dialog({
-		open: function(){ $("#facebook-albums").trigger("click"); },
+		open: function(){
+			$("#facebook-albums").trigger("click");
+		},
 		dialogClass: 'facebook-dialog-class',
 		autoOpen: false,
 		resizable: false,
@@ -356,7 +366,7 @@ $(function(){
 				$(this).dialog("close");
 			}
 		}
-	})
+	});
 });
 
 $(function(){
@@ -390,7 +400,7 @@ $(function(){
 				$("#add-images-desktop")[0].appendChild(this);
 			});
 		}
-	})
+	});
 });
 
 $(function(){
@@ -413,7 +423,7 @@ $(function(){
 });
 
 $(function(){
-	$( "#use-fail-dialog" ).dialog({ 
+	$( "#use-fail-dialog" ).dialog({
 		autoOpen: false,
 		resizable: false,
 		modal: true,

@@ -121,7 +121,7 @@ var userLevel = null;
       viewerLevel = $( this ).attr( "data-viewer" );
 
       // Update the color/ selected element
-      var size = viewerLevel
+      var size = viewerLevel;
       $('.pricingLevelOn').removeClass('pricingLevelOn');
       var tab = $('#pricing' + size.toString());
       tab.addClass('pricingLevelOn');
@@ -133,7 +133,7 @@ var userLevel = null;
     $( ".pricingLevel2" ).on( "click", function() {
       userLevel = $( this ).attr( "data-user" );
 
-      var size2 = userLevel
+      var size2 = userLevel;
       $('.pricingLevelOn2').removeClass('pricingLevelOn2');
       var tab = $('#pricingU' + size2.toString());
       tab.addClass('pricingLevelOn2');
@@ -174,25 +174,25 @@ var userLevel = null;
           //CHANGE TO
           //1st accept credit card info
           //2nd tell the user the service is not yet ready
-          $( '#myModal2 .modal-header' ).text( 'Enterprise Plan' )
-          $('#myModal2').modal()
+          $( '#myModal2 .modal-header' ).text( 'Enterprise Plan' );
+          $('#myModal2').modal();
         } else if ( selectedPlan  == "premium" ){
           //CHANGE TO
           //1st accept credit card info
           //2nd tell the user the service is not yet ready
-          $( '#myModal2 .modal-header' ).text( 'Premium Plan' )
-          $('#myModal2').modal()
+          $( '#myModal2 .modal-header' ).text( 'Premium Plan' );
+          $('#myModal2').modal();
         } else if ( selectedPlan  == "standard" ){
           //CHANGE TO
           //1st If click Log In have them Log In then go to Stripe Collectio OR if they hit sign up do all in one: sign up and collect credit info
           //2nd lead user to create screen with activated service
-          $( '#myModal .modal-header' ).text( 'Standard Plan' )
-          $('#myModal').modal()
+          $( '#myModal .modal-header' ).text( 'Standard Plan' );
+          $('#myModal').modal();
 
         } else if ( selectedPlan  == "basic" ){
           //this is the free option... the user should not see the continue button... they should only click sign up
-          $( '#myModal .modal-header' ).text( 'Basic Plan' )
-          $('#myModal').modal()
+          $( '#myModal .modal-header' ).text( 'Basic Plan' );
+          $('#myModal').modal();
 
         } else {
           alert("How did you get to this option??");

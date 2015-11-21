@@ -33,12 +33,14 @@ class City
     public function __construct($id = null)
     {
         if ($id !== null && strlen($id) > 0) {
-            $user = execute_query(
+            $city = execute_query(
                 "SELECT * from city
                 WHERE id = '$id'"
             )->fetch_object("GiveToken\City");
-            foreach (get_object_vars($user) as $key => $value) {
-                $this->$key = $value;
+            if (isset($city)) {
+                foreach (get_object_vars($city) as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
     }

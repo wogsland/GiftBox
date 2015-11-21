@@ -1,54 +1,52 @@
 <?php
-function escape_string($string) 
+use GiveToken\Connection;
+require_once __DIR__.'/src/autoload.php';
+
+function escape_string($string)
 {
-    include __DIR__.'/database.php';
-    return $mysqli->real_escape_string($string);
+    return Connection::$mysqli->real_escape_string($string);
 }
 
-function execute_query($sql) 
+function execute_query($sql)
 {
-    include __DIR__.'/database.php';
-    if ($result = $mysqli->query($sql)) {
+    if ($result = Connection::$mysqli->query($sql)) {
         return $result;
     } else {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
 }
 
-function execute($sql) 
+function execute($sql)
 {
-    include __DIR__.'/database.php';
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
 }
 
-function insert($sql) 
+function insert($sql)
 {
-    include __DIR__.'/database.php';
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
-    return $mysqli->insert_id;
+    return Connection::$mysqli->insert_id;
 }
 
-function update($sql) 
+function update($sql)
 {
-    include __DIR__.'/database.php';
     debug_output($sql);
-    if (!$mysqli->query($sql)) {
+    if (!Connection::$mysqli->query($sql)) {
         error_log($sql);
-        throw new Exception($mysqli->error);
+        throw new Exception(Connection::$mysqli->error);
     }
-    return $mysqli->affected_rows;
+    return Connection::$mysqli->affected_rows;
 }
 
-function logged_in() 
+function logged_in()
 {
     $logged_in = false;
     if (isset($_SESSION['user_id'])) {
@@ -57,7 +55,7 @@ function logged_in()
     return $logged_in;
 }
 
-function is_admin() 
+function is_admin()
 {
     $retval = false;
     if (isset($_SESSION['admin'])) {
@@ -68,7 +66,7 @@ function is_admin()
     return $retval;
 }
 
-function debug() 
+function debug()
 {
     $debug = false;
     if (isset($_SESSION['debug'])) {
@@ -79,7 +77,7 @@ function debug()
     return $debug;
 }
 
-function debug_output($text) 
+function debug_output($text)
 {
     if (debug()) {
         echo "<pre>";
@@ -90,7 +88,7 @@ function debug_output($text)
     }
 }
 
-function youtube_id($url) 
+function youtube_id($url)
 {
     $id = null;
     if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
@@ -99,7 +97,7 @@ function youtube_id($url)
     return $id;
 }
 
-function is_youtube($url) 
+function is_youtube($url)
 {
     $retval = false;
     if (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
@@ -108,7 +106,7 @@ function is_youtube($url)
     return $retval;
 }
 
-function is_spotify($url) 
+function is_spotify($url)
 {
     $retval = false;
     if (strpos($url, 'spotify.com') !== false) {
@@ -117,7 +115,7 @@ function is_spotify($url)
     return $retval;
 }
 
-function is_soundcloud($url) 
+function is_soundcloud($url)
 {
     $retval = false;
     if (strpos($url, 'soundcloud.com') !== false) {
@@ -126,7 +124,7 @@ function is_soundcloud($url)
     return $retval;
 }
 
-function is_selected($field_value, $data_value, $select_string = 'selected') 
+function is_selected($field_value, $data_value, $select_string = 'selected')
 {
     $retval = null;
     if ($field_value == $data_value) {
@@ -135,9 +133,8 @@ function is_selected($field_value, $data_value, $select_string = 'selected')
     return $retval;
 }
 
-function _session_start() 
+function _session_start()
 {
-    include __DIR__.'/database.php';
-    $session = new Zebra_Session($mysqli, 'sEcUr1tY_c0dE');
+    $session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
     return $session;
 }

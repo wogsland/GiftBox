@@ -2,7 +2,6 @@
 use \GiveToken\EventLogger;
 
 require_once 'config.php';
-require_once 'database.php';
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
     $user_id = $_GET['uid'];

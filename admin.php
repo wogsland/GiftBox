@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-_session_start();
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
@@ -22,6 +21,9 @@ require __DIR__.'/header.php';
         </li>
         <li>
           <a href="manage_groups.php">Manage Groups</a>
+        </li>
+        <li>
+          <a href="/admin/visitors">Website Vistors</a>
         </li>
       </ul>
     </nav>

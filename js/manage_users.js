@@ -76,7 +76,7 @@ function deleteUser(id) {
 		$("#group-name").val($("#group-name-"+id).html());
 		$("#group-max-users").val($("#group-max-users-"+id).html());
 		openModal();
-		alertGroup("warning", "Are you sure you want to delete this group?")
+		alertGroup("warning", "Are you sure you want to delete this group?");
 		$("#group-name").attr('readonly', true);
 		$("#group-max-users").attr('readonly', true);
 	}
@@ -99,14 +99,14 @@ function saveUser() {
 		dialogAlert("danger", "Please enter a last name");
 	} else if (!email) {
 		dialogAlert("danger", "Please enter a valid email.");
-	} else if (group.val().length == 0 && groupAdmin.prop("checked")) {
+	} else if (group.val().length === 0 && groupAdmin.prop("checked")) {
 		dialogAlert("danger", "A group must be selected in order for a user to be a 'Group Aministrator'.");
 	} else {
 		dialogAlert("info", "Saving user information...");
 
 		$.post("/ajax/user/update", $("#user-form").serialize(), function(data, textStatus){
 			if(data.status === "SUCCESS") {
-				dialogAlert("success", "Saved.")
+				dialogAlert("success", "Saved.");
 				if (action === "DELETE") {
 					$("#row-"+id).remove();
 				} else if (action === "ADD") {

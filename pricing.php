@@ -1,8 +1,7 @@
 <?php
 use \GiveToken\User;
 
-require_once 'config.php';
-_session_start();
+require_once __DIR__.'/config.php';
 
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
 require __DIR__.'/header.php';
@@ -39,7 +38,11 @@ require __DIR__.'/header.php';
 <!-- =========================
      PRICNG SECTION
 ============================== -->
-
+<center style="margin-top:100px;margin-bottom:500px;">
+  <h3>For pricing information please contact Robbie Zettler at</h3>
+  <a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@givetoken.com</b></h3></a>
+</center>
+<?php /*
 <section class="" id="pricing-table">
 	<div class="container mb30">
 		<div class="pricing-tables attached">
@@ -232,7 +235,7 @@ require __DIR__.'/header.php';
           		</div>
 	</div>
 </section>
-
+*/ ?>
 <!-- These modals will be deleted when Stripe is used -->
 
 <div class="modal fade"  id="premium-dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -240,7 +243,7 @@ require __DIR__.'/header.php';
 		<div class="modal-content">
 			<div class ="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title" id="gridSystemModalLabel"><b>Pre-order</b></h3>
+				<h3 class="modal-title" id="gridSystemModalLabel"><b>Pricing Information</b></h3>
 			</div>
 			<div class ="modal-body">
 				<center>

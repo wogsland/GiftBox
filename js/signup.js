@@ -99,15 +99,19 @@ function signupEmail() {
 function signupFacebook() {
 	$("#reg_type").val("FACEBOOK");
 	signupInfo("Checking Facebook login status.  Please wait...");
-	FB.login(function(response){handleFBReg(response)}, {scope: 'user_photos, public_profile, email'});
+	FB.login(function(response){
+		handleFBReg(response);
+	}, {
+		scope: 'user_photos, public_profile, email'
+	});
 }
 
 function handleFBReg(response) {
     if (response.status === 'connected') {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			api_response["reg_type"] = "FACEBOOK";
-			api_response["signup_email"] = api_response["email"];
-			api_response["signup_level"] = "1";
+			api_response.reg_type = "FACEBOOK";
+			api_response.signup_email = api_response.email;
+			api_response.signup_level = "1";
 			processSignup(api_response, "FACEBOOK");
 		});
 	} else if (response.status === 'not_authorized') {

@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__.'/config.php';
-_session_start();
 
 define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
 require __DIR__.'/header.php';

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Company Hiring - Super Long Job Title">
+    <meta name="description" content="GiveToken - Recruiting Token">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Company Hiring - Super Long Job Title</title>
+    <title></title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -90,14 +90,14 @@
                     <!--<span class="mdl-layout-title">Job Description</span>-->
                     <nav class="mdl-navigation">
                       <a class="mdl-layout-title mdl-navigation__link">Job Description</a>
-                      <a id="overview-drawer" class="mdl-navigation__link" href="#overview-section" on-click="_onOverviewClick">Overview</a>
+                      <a id="overview-drawer" class="mdl-navigation__link" href="#" on-click="_onOverviewClick">Overview</a>
                       <a id="skills-drawer"  class="mdl-navigation__link" href="#skills-section" on-click="_onSkillsClick">Skills Required</a>
                       <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
                       <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
                       <a id="perks-drawer"  class="mdl-navigation__link" href="#perks-section" on-click="_onPerksClick">Perks</a>
-                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" href="#location-section" on-click="_onLocationClick">Location</a>
-                      <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" href="#images-section" on-click="_onImagesClick">Images</a>
-                      <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" href="#videos-section" on-click="_onVideosClick">Videos</a>
+                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onLocationClick">Location</a>
+                      <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onImagesClick">Images</a>
+                      <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onVideosClick">Videos</a>
                     </nav>
                   </div>
                   <main class="mdl-layout__content" on-scroll="_onTrack">
@@ -106,50 +106,51 @@
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                         <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
                           <div class="mdl-card__supporting-icon">
-                            <h4 class="mdl-color-text--primary-contrast"><i class="material-icons huge-icon">work</i></h4>
+                            <h4 class="mdl-color-text--primary-contrast">
+                              <!--<i class="material-icons huge-icon">work</i>-->
+                              <img src="/images/bloom-logo.png" width=200>
+                            </h4>
                           </div>
                         </div>
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Job Description</h4>
-                            <p class="gt-info-overview"></p>
+                            <p class="gt-info-overview-short" on-click="_onOverviewClick">
+                            </p>
                           </div>
-                          <div class="mdl-row">
-                            <a href="#overview-section" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option overview" on-click="_onOverviewClick">
-                              Overview
-                            </a>
-                            <a href="#skills-section" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option skills" on-click="_onSkillsClick">
+                          <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
+                            <a href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
                               Skills Required
                             </a>
-                            <a href="#responsibilities-section" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option responsibilities" on-click="_onResponsibilitiesClick">
+                            <a href="#responsibilities-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onResponsibilitiesClick">
                               Responsibilities
                             </a>
-                            <a href="#values-section" class="mdl-cell--2-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option values" on-click="_onValuesClick">
+                            <a href="#values-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onValuesClick">
                               Values
                             </a>
-                            <a href="#perks-section" class="mdl-cell--2-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option perks" on-click="_onPerksClick">
+                            <a href="#perks-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onPerksClick">
                               Perks
                             </a>
                           </div>
                         </div>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
-                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
+                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
                           <i class="fa fa-twitter big-icon"></i>
                         </a>
-                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
+                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
                           <i class="fa fa-facebook big-icon"></i>
                         </a>
-                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
+                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
                           <i class="fa fa-linkedin big-icon"></i>
                         </a>
-                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
+                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
                           <i class="fa fa-youtube big-icon"></i>
                         </a>
-                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
+                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
                           <i class="fa fa-google-plus big-icon"></i>
                         </a>
-                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
+                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
                           <i class="fa fa-pinterest big-icon"></i>
                         </a>
                       </section>
@@ -161,15 +162,17 @@
                           </div>
                         </div>
                       </section>
-                      <section class="section--center mdl-grid">
+                      <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="images-frontpage" on-click="_onImagesClick">
                           <div id="supporting-images">
-                            <i class="material-icons">image</i> Images
+                            <i class="material-icons">image</i> IMAGES
                           </div>
+                        </div>
+                        <div class="mdl-layout-spacer">
                         </div>
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="videos-frontpage" on-click="_onVideosClick">
                           <div id="supporting-videos">
-                            <i class="material-icons">videocam</i> Videos
+                            <i class="material-icons">videocam</i> VIDEOS
                           </div>
                         </div>
                       </section>
@@ -180,15 +183,17 @@
                 </div>
               </div>
             </div>
-            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
-            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-              YES
-            </div>
-            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-              MAYBE
-            </div>
-            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-              NO
+            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
+              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                YES
+              </div>
+              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                MAYBE
+              </div>
+              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                NO
+              </div>
             </div>
           </x-cards-list>
           <x-card>
@@ -243,8 +248,7 @@
               <h2 class="mdl-color-text--primary-dark">No</h2>
               <div id="no-content">
                 <p>
-                  No, I'm not interested right now. Please don't contact me again
-                  about this position.
+                  No, I'm not interested right now.
                 </p>
                 <form id="no-email-form">
                   <div class="mdl-textfield mdl-js-textfield">
@@ -262,57 +266,68 @@
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
-            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-              YES
-            </div>
-            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-              MAYBE
-            </div>
-            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-              NO
+            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
+              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                YES
+              </div>
+              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                MAYBE
+              </div>
+              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                NO
+              </div>
             </div>
           </location-x-card>
           <image-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
-            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-              YES
-            </div>
-            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-              MAYBE
-            </div>
-            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-              NO
+            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
+              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                YES
+              </div>
+              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                MAYBE
+              </div>
+              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                NO
+              </div>
             </div>
           </image-x-card>
           <video-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
-            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-              YES
-            </div>
-            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-              MAYBE
-            </div>
-            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-              NO
+            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
+              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                YES
+              </div>
+              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                MAYBE
+              </div>
+              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                NO
+              </div>
             </div>
           </video-x-card>
           <description-x-card>
-            <div id="interested-disabled-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
-            <div id="interested-yes-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-              YES
+            <div class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
+              BACK
             </div>
-            <div id="interested-maybe-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-              MAYBE
-            </div>
-            <div id="interested-no-button" class="mdl-cell--3-col mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-              NO
+            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
+              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark" disabled>Interested?</div>
+              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
+                YES
+              </div>
+              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
+                MAYBE
+              </div>
+              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
+                NO
+              </div>
             </div>
           </description-x-card>
       </neon-animated-pages>

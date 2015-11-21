@@ -1,8 +1,7 @@
 <?php
-    require_once 'config.php';
-    _session_start();
+require_once 'config.php';
 if (!logged_in()) {
-           header('Location: '.$app_url);
+    header('Location: '.$app_url);
 }
 ?>
 <!DOCTYPE html>

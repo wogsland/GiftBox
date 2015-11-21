@@ -39,7 +39,7 @@ $(document).ready(function(){
 
   	var trig = $('#triggerTab');
 	trig.on('click', function(){
-		if($("#redirect_url")[0].innerHTML != ""){
+		if($("#redirect_url")[0].innerHTML !== ""){
 			window.location.href = $("#redirect_url")[0].innerHTML;
 		}
 	});
@@ -64,13 +64,13 @@ $(document).ready(function(){
 		$(".animated").removeClass(animationPopCss);
 		setTimeout(function(){ $(".envelope").css('z-index', '-10'); }, 1000);
 		$(".panel").addClass('panel-open');
-		e.preventDefault;
+		e.preventDefault();
 	});
 
 });
 
 function displayGallery(bento){
-	$("."+$(bento)[0].classList[2]).colorbox({rel:$(bento)[0].classList[2], innerWidth:640, innerHeight:390})
+	$("."+$(bento)[0].classList[2]).colorbox({rel:$(bento)[0].classList[2], innerWidth:640, innerHeight:390});
 }
 
 
@@ -90,11 +90,13 @@ function onYouTubeIframeAPIReady(){
 }
 
 function onPlayerReady(event){
-	for(key in event.target){
+	for(var key in event.target){
 		if(event.target[key].classList){
 			if(event.target[key].classList.contains('auto-play')){
 				if (selectedAnimationStyle != "none") {
-					setTimeout(function() { event.target.playVideo(); }, 3500);
+					setTimeout(function() {
+						event.target.playVideo();
+					}, 3500);
 				} else {
 					event.target.playVideo();
 				}

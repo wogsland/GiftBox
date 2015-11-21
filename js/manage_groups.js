@@ -51,7 +51,7 @@ function deleteGroup(id) {
 		$("#group-name").val($("#group-name-"+id).html());
 		$("#group-max-users").val($("#group-max-users-"+id).html());
 		openModal();
-		alertGroup("warning", "Are you sure you want to delete this group?")
+		alertGroup("warning", "Are you sure you want to delete this group?");
 		$("#group-name").attr('readonly', true);
 		$("#group-max-users").attr('readonly', true);
 	}
@@ -71,7 +71,7 @@ function saveGroup() {
 	} else if (maxUsers < users) {
 		alertGroup("danger", "The maximum number of users cannot be less than the current number of users.");
 	} else {
-		alertGroup("info", "Saving...")
+		alertGroup("info", "Saving...");
 		$.post("/ajax/user_group/save", $("#group-form").serialize(), function(data, textStatus){
 			if(data.status === "SUCCESS") {
 				if (action === "DELETE") {
@@ -84,12 +84,12 @@ function saveGroup() {
 					$("#group-dialog").modal('hide');
 				}
 			} else if (data.status === "ERROR") {
-				alertGroup("danger", textStatus)
+				alertGroup("danger", textStatus);
 			}  else {
-				alertGroup("danger", "Save failed!")
+				alertGroup("danger", "Save failed!");
 			}
 		}).fail(function() {
-			alertGroup("danger", "Save failed!")
+			alertGroup("danger", "Save failed!");
 		});
 	}
 }

@@ -2,9 +2,7 @@
 use \GiveToken\User;
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-require_once 'mail.php';
-require_once 'database.php';
+require_once __DIR__.'/../mail.php';
 
 $event = null;
 $user_id = null;
