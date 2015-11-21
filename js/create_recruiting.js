@@ -8,6 +8,24 @@ function clearImage(id) {
 	img.data("saved", true);
 }
 
+function removeImage() {
+	alert("removeImage()");
+}
+
+function createThumbnailContainer(object, titleText, parentId) {
+	var container = document.createElement("div");
+	var inner = document.createElement("div");
+	var button = $('<button type="button" class="image-remove-button">REMOVE</buton>').click(function(){removeImage();});
+	inner.classList.add("inner-thumbnail-container");
+	object.classList.add("photo-thumbnail");
+	container.classList.add("thumbnail-container");
+	container.id = "thumbnail-container-"+($(".thumbnail-container").size()+1);
+	inner.appendChild(object);
+	inner.appendChild(button[0]);
+	container.appendChild(inner);
+	document.getElementById(parentId).appendChild(container);
+}
+
 function handleImageFileSelect(evt) {
 	for (var i = 0; i < evt.target.files.length; i++) {
 		var file = evt.target.files[i];
@@ -15,20 +33,14 @@ function handleImageFileSelect(evt) {
 			alert(file.name+" is not an image file (.jpg, .png, etc.).");
 			continue;
 		}
-		var baseId = this.id.replace("-input", "");
-		var img = $("#"+baseId+"-img");
 
-		// Set the value of the hidden field to the file name
-		$("#"+baseId).val(file.name);
-
-		// Set the src of the img element
-		img.attr("src", window.URL.createObjectURL(file));
-
-		// Save a reference to the file Object for later saving
-		img.data("file", file);
-
-		// Set the dirty flag so the file gets saved
-		img.data("saved", false);
+		// Create an image element to show the thumbnail
+		var img = document.createElement("img");
+		img.src = window.URL.createObjectURL(file);
+		img.file = file;
+		img.id = file.name;
+		createThumbnailContainer(img, file.name, "company-images-container");
+		
 	}
 }
 
@@ -57,7 +69,7 @@ function uploadFile(file, fileName) {
 	reader.readAsDataURL(file);
 }
 
-function saveRecruitingToken() {
+function saveRecruitingToken(preview) {
 	var tokenId = null;
 	var userId = null;
 	var serializedForm = null;
@@ -68,12 +80,9 @@ function saveRecruitingToken() {
 	serializedForm = document.getElementById("recruiting-token-form").serialize();
 	$.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
 		if(data.status === "SUCCESS") {
-			$("#id").val(data.token_id);
-			tokenId = data.token_id;
-			userId = data.user_id;
-			backdropfileName = data.backdrop_picture;
-			companyfileName = data.company_picture;
-
+			$("#id").val(data.id);
+			$("#long-id").val(data.long_id);
+/*			
 			// Save the files
 			if (tokenId && userId) {
 
@@ -96,8 +105,9 @@ function saveRecruitingToken() {
 					$("#company-picture").val(companyfileName);
 				}
 			}
-			// redirect to newly created token
-			window.location.href = "/token/recruiting/"+data.token_id;
+*/			if (preview) {
+				window.open('/token/recruiting/'+data.long_id , '_blank');
+			}
 		} else if (data.status === "ERROR") {
 			alert(data.message);
 		}  else {

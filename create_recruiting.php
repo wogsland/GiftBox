@@ -66,7 +66,28 @@ function paper_card_end() {
 	<title>GiveToken.com - Create Recruiting Token</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/create_recruiting.css">
+
+    <!-- Polymer -->
+    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <link rel="import" href="components/iron-icons/iron-icons.html">
+    <link rel="import" href="components/iron-icon/iron-icon.html">
+    <link rel="import" href="components/iron-form/iron-form.html">
+    <link rel="import" href="components/paper-menu/paper-menu.html">
+    <link rel="import" href="components/paper-item/paper-item.html">
+    <link rel="import" href="components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="components/paper-input/paper-input.html">
+    <link rel="import" href="components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/paper-card/paper-card.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
+    <link rel="import" href="components/paper-input/paper-textarea.html">
+    <link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/paper-fab/paper-fab.html">
 
     <style is="custom-style">
         paper-card {
@@ -116,27 +137,12 @@ function paper_card_end() {
         paper-fab.progress-fab {
             margin-left: 10px;
         }
+        paper-dialog {
+            --paper-dialog-background-color: #424242;
+            color: white;
+             --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
+        }
     </style>
-
-    <!-- Polymer -->
-    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
-
-    <link rel="import" href="components/iron-icons/iron-icons.html">
-    <link rel="import" href="components/iron-icon/iron-icon.html">
-    <link rel="import" href="components/iron-form/iron-form.html">
-    <link rel="import" href="components/paper-menu/paper-menu.html">
-    <link rel="import" href="components/paper-item/paper-item.html">
-    <link rel="import" href="components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="components/paper-input/paper-input.html">
-    <link rel="import" href="components/paper-header-panel/paper-header-panel.html">
-    <link rel="import" href="components/paper-toolbar/paper-toolbar.html">
-    <link rel="import" href="components/paper-styles/paper-styles.html">
-    <link rel="import" href="components/paper-card/paper-card.html">
-    <link rel="import" href="components/paper-button/paper-button.html">
-    <link rel="import" href="components/paper-input/paper-textarea.html">
-    <link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
-    <link rel="import" href="components/paper-dialog/paper-dialog.html">
-    <link rel="import" href="components/paper-fab/paper-fab.html">
 
 </head>
 <body>
@@ -160,7 +166,8 @@ function paper_card_end() {
         </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
-                <input type="hidden" id="id" name="id" value="<?php echo (isset($_GET['id']) ? $_GET['id'] : null); ?>">
+                <input type="hidden" id="id" name="id" value="">
+                <input type="hidden" id="long-id" name="long_id" value="<?php echo (isset($_GET['id']) ? $_GET['id'] : null); ?>">
 
                 <?php paper_card('Required Info'); ?>
                     <div class="field-container">
@@ -182,35 +189,55 @@ function paper_card_end() {
                         <?php paper_text('Company Name', 'company', 'domain'); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', 'local offer'); ?>
                         <?php paper_text('Company Website', 'company-website', 'http'); ?>
-                        <div class="dialog-field-container">
-                            <i class="material-icons label-icon">videocam</i> <span class="label">Company Videos</span>
-                            <paper-button raised class="dialog-button" onclick="document.getElementById('video-dialog').open()">ADD VIDEOS</paper-button>
-                        </div>
-                        <div class="thumbnail-container">
-                        </div>
                         <?php paper_text('Company Values', 'company-values'); ?>
                         <?php $sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large'); ?>
                         <?php paper_dropdown('Company Size', 'company-size', $sizes); ?>
-                        <div class="dialog-field-container">
-                            <i class="material-icons label-icon">images</i> <span class="label">Company Images</span>
-                            <paper-button raised class="dialog-button" onclick="document.getElementById('image-dialog').open()">ADD IMAGES</paper-button>
+                    </div>
+                <?php paper_card_end(); ?>
+                <?php paper_card('Company Images'); ?>
+                    <div class="field-container">
+                        <div class="icon-bar">
+                            <span class="icon-bar-text">Add Images From: </span>
+                            <div class="icon-container">
+                                <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
+<!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
+                                <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
+                                <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
+                                <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
+-->                            </div>
                         </div>
-                        <div class="thumbnail-container">
+                        <div class="thumbnail-list-container" id="company-images-container">
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
-
+                <?php paper_card('Company Videos'); ?>
+                    <div class="field-container">
+                        <div class="icon-bar">
+                            <span class="icon-bar-text">Add Videos From: </span>
+                            <div class="icon-container">
+                                <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
+<!--                            <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-video-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
+                                <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
+                                <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
+                                <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
+-->
+                            </div>
+                        </div>
+                        <div class="thumbnail-list-container" id="company-videos-container">
+                        </div>
+                    </div>
+                <?php paper_card_end(); ?>
                 <?php paper_card('Company Social Media'); ?>
                     <div class="field-container">
                         <?php paper_text('Facebook', 'company-facebook'); ?>
                         <?php paper_text('LinkedIn', 'company-linkedin'); ?>
                         <?php paper_text('Youtube Channel', 'company-youtube'); ?>
                         <?php paper_text('Twitter', 'company-twitter'); ?>
-                        <?php paper_text('Google+', 'company-twitter'); ?>
+                        <?php paper_text('Google+', 'company-google-plus'); ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <div class="button-container">
-                    <paper-button raised class="bottom-button">PREVIEW</paper-button>
+                    <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">PREVIEW</paper-button>
                     <paper-button raised class="bottom-button">FINISH</paper-button>
                 </div>
             </form>
@@ -233,18 +260,12 @@ function paper_card_end() {
        </div>
     </div>
 
-    <paper-dialog id="video-dialog" modal>
+    <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload videos from...</h2>
-        <div class="buttons">
-            <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
-        </div>
     </paper-dialog>
 
-    <paper-dialog class="" id="image-dialog" modal>
+    <paper-dialog class="recruiting-dialog" id="image-dialog" modal>
         <h2>Upload photos from...</h2>
-        <div class="buttons">
-            <paper-button dialog-confirm autofocus>Tap me to close</paper-button>
-        </div>
     </paper-dialog>
 
 
@@ -252,9 +273,8 @@ function paper_card_end() {
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
-		$('#company-picture-input').on('change', handleImageFileSelect);
-		$('#company-picture-img').data("saved", true);
-		$('#backdrop-picture-img').data("saved", true);
+		$('#select-image-file').on('change', handleImageFileSelect);
+		$('#select-video-file').on('change', handleVideoFileSelect);
 	</script>
 </body>
 </html>
