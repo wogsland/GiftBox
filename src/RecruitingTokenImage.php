@@ -3,9 +3,9 @@ namespace GiveToken;
 
 class RecruitingTokenImage
 {
-    public $id;
-    public $recruiting_token_id;
-    public $file_name;
+    protected $id;
+    protected $recruiting_token_id;
+    protected $file_name;
 
     /**
      * Constructs the class
@@ -25,5 +25,77 @@ class RecruitingTokenImage
                 }
             }
         }
+    }
+
+    /**
+     * This function gets a protected property
+     *
+     * @param string $var - the class property desired
+     *
+     * @return mixed - the class property
+     */
+    public function __get($var)
+    {
+        if (isset($this->$var)) {
+            return $this->$var;
+        }
+    }
+
+    /**
+     * This function checks if a protected property is set
+     *
+     * @param string $var - the class property to check
+     *
+     * @return bool - if the property is set
+     */
+    public function __isset($var)
+    {
+        return isset($this->$var);
+    }
+
+    /**
+     * This function creates an entry in the recruiting_token_image table
+     *
+     * @param int $recruiting_token_id - id of the token
+     * @param string $file_name  - name of image file
+     *
+     * @return int $id - id of inserted row or 0 on fail
+     */
+    public function create($recruiting_token_id, $file_name)
+    {
+        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
+                  VALUES ('$recruiting_token_id', '$file_name')";
+        $id = insert($query);
+        if ($id > 0) {
+            $this->id = $id;
+            $this->recruiting_token_id = $recruiting_token_id;
+            $this->file_name = $file_name;
+        }
+        return $id;
+    }
+
+    /**
+     * This function deletes the database entry & the image file
+     *
+     * @return boolean - success of deletion
+     */
+    public function delete()
+    {
+        $success = false;
+        if (isset($this->id)) {
+            // delete from db
+            $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
+            execute($sql);
+            $vars = get_class_vars(get_class($this));
+            foreach ($vars as $key=>$value) {
+                unset($this->$key);
+            }
+
+            // delete from filesystem
+            // TBD
+
+            $success = true;
+        }
+        return $success;
     }
 }

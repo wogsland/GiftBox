@@ -69,4 +69,50 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result->url, $url);
         $this->assertEquals($result->recruiting_token_id, $this->RecruitingToken->id);
     }
+
+    /**
+     * Tests the create function.
+     */
+    public function testCreate()
+    {
+        // create token video
+        $url = 'http://server'.rand().'.givetoken.com';
+        $RecruitingTokenVideo = new RecruitingTokenVideo();
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url);
+        $this->assertEquals($RecruitingTokenVideo->id, $id);
+        $this->assertEquals($RecruitingTokenVideo->url, $url);
+        $this->assertEquals($RecruitingTokenVideo->recruiting_token_id, $this->RecruitingToken->id);
+
+        // check it's in the DB
+        $RecruitingTokenVideo2 = new RecruitingTokenVideo($id);
+        $this->assertEquals($RecruitingTokenVideo2->id, $id);
+        $this->assertEquals($RecruitingTokenVideo2->url, $url);
+        $this->assertEquals($RecruitingTokenVideo2->recruiting_token_id, $this->RecruitingToken->id);
+    }
+
+    /**
+     * Tests the delete function.
+     */
+    public function testDelete()
+    {
+        // create token video
+        $url = 'http://server'.rand().'.givetoken.com';
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url)
+                  VALUES ('{$this->RecruitingToken->id}', '$url')";
+        $id = insert($query);
+        $result = new RecruitingTokenVideo($id);
+
+
+        // delete token video
+        $result->delete();
+
+        // check class variables get unset
+        $this->assertFalse(isset($result->id));
+        $this->assertFalse(isset($result->recruiting_token_id));
+        $this->assertFalse(isset($result->url));
+
+        // check it's gone from DB
+        $result2 = new RecruitingTokenVideo($id);
+        $this->assertFalse(isset($result2->id));
+    }
 }

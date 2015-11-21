@@ -69,4 +69,53 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result->file_name, $file_name);
         $this->assertEquals($result->recruiting_token_id, $this->RecruitingToken->id);
     }
+
+    /**
+     * Tests the create function.
+     */
+    public function testCreate()
+    {
+        // create token video
+        $file_name = rand().'.jpg';
+        $RecruitingTokenImage = new RecruitingTokenImage();
+        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name);
+        $this->assertEquals($RecruitingTokenImage->id, $id);
+        $this->assertEquals($RecruitingTokenImage->file_name, $file_name);
+        $this->assertEquals($RecruitingTokenImage->recruiting_token_id, $this->RecruitingToken->id);
+
+        // check it's in the DB
+        $RecruitingTokenImage2 = new RecruitingTokenImage($id);
+        $this->assertEquals($RecruitingTokenImage2->id, $id);
+        $this->assertEquals($RecruitingTokenImage2->file_name, $file_name);
+        $this->assertEquals($RecruitingTokenImage2->recruiting_token_id, $this->RecruitingToken->id);
+    }
+
+    /**
+     * Tests the delete function.
+     */
+    public function testDelete()
+    {
+        // creaete image
+        $file_name = rand().'.jpg';
+        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
+                  VALUES ('{$this->RecruitingToken->id}', '$file_name')";
+        $id = insert($query);
+        $result = new RecruitingTokenImage($id);
+        $this->assertTrue(isset($result->id));
+
+        // delete image
+        $result->delete();
+
+        // check class variables get unset
+        $this->assertFalse(isset($result->id));
+        $this->assertFalse(isset($result->recruiting_token_id));
+        $this->assertFalse(isset($result->file_name));
+
+        // check it's gone from DB
+        $result2 = new RecruitingTokenImage($id);
+        $this->assertFalse(isset($result2->id));
+
+        //check it's deleted from the filesystem
+        $this->markTestIncomplete();
+    }
 }
