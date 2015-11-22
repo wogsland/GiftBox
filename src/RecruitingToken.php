@@ -8,28 +8,20 @@ class RecruitingToken
     public $user_id;
     public $job_title;
     public $job_description;
+    public $city_id;
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $city_id;
     public $company;
-    public $salary_range;
-    public $full_time_part_time;
-    public $ask_interested;
-    public $ask_salary;
-    public $ask_remote;
-    public $company_video;
-    public $company_picture;
     public $company_tagline;
+    public $company_website;
     public $company_values;
-    public $backdrop_picture;
-    public $backdrop_color;
-    public $style;
-    public $special_size;
+    public $company_size;
     public $company_facebook;
     public $company_linkedin;
-    public $company_twitter;
     public $company_youtube;
+    public $company_twitter;
+    public $company_google_plus;
 
     /**
      * This function constructs the class
@@ -56,7 +48,9 @@ class RecruitingToken
     public function init($post)
     {
         foreach (get_object_vars($post) as $key => $value) {
-            $this->$key = $value;
+            if (property_exists($this, $key)) {
+                $this->$key = $value;
+            }
         }
     }
 
@@ -68,12 +62,13 @@ class RecruitingToken
 
     private function insert()
     {
+        $omitted = ['id','company_images','company_videos'];
         $comma = null;
         $columns = null;
         $values = null;
         $sql = 'INSERT INTO recruiting_token (';
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'id' && isset($value)) {
+            if (!in_array($key, $omitted) && isset($value)) {
                 $columns .= $comma.$key;
                 $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';
@@ -82,59 +77,23 @@ class RecruitingToken
         $sql .= $columns.') VALUES (';
         $sql .= $values.')';
         $this->id = insert($sql);
-
-        if (strlen($this->backdrop_picture) > 0) {
-            $new_file_name = $this->changeFileName($this->backdrop_picture);
-            execute(
-                "UPDATE recruiting_token
-                SET backdrop_picture  = '$new_file_name'
-                WHERE id = '$this->id'"
-            );
-            $this->backdrop_picture = $new_file_name;
-        }
-        if (strlen($this->company_picture) > 0) {
-            $new_file_name = $this->changeFileName($this->company_picture);
-            execute(
-                "UPDATE recruiting_token
-                SET backdrop_picture  = '$new_file_name'
-                WHERE id = '$this->id'"
-            );
-            $this->company_picture = $new_file_name;
-        }
     }
 
     private function update()
     {
-        include 'config.php';
         $saved = new RecruitingToken($this->id);
 
-        // Manage replacement of backdrop picture
-        if (strlen($this->backdrop_picture) > 0) {
-            if ($this->backdrop_picture !== $saved->backdrop_picture) {
-                if (strlen($saved->backdrop_picture) > 0) {
-                    unlink($file_storage_path.$saved->backdrop_picture);
-                }
-                $this->backdrop_picture = $this->changeFileName($this->backdrop_picture);
-            }
-        } else {
-            if (strlen($saved->backdrop_picture) > 0) {
-                unlink($file_storage_path.$saved->backdrop_picture);
-            }
-        }
-
-        // Manage replacement of company picture
-        if ((strlen($this->company_picture) > 0) && ($this->company_picture !== $saved->company_picture)) {
-            if (strlen($saved->company_picture) > 0) {
-                unlink($file_storage_path.$saved->company_picture);
-            }
-            $this->company_picture = $this->changeFileName($this->company_picture);
-        }
-
+        $omitted = ['id','company_images','company_videos'];
         $comma = null;
         $sql = 'UPDATE recruiting_token SET ';
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'id') {
-                $sql .= $comma.$key." = '".escape_string($value)."'";
+            if (!in_array($key, $omitted)) {
+                $sql .= $comma.$key." = ";
+                if (strlen($value) > 0) {
+                    $sql .= "'".escape_string($value)."'";
+                } else {
+                    $sql .= 'NULL';
+                }
                 $comma = ', ';
             }
         }

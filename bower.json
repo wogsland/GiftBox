@@ -23,6 +23,8 @@
     "polymer": "Polymer/polymer#^1.1.0",
     "iron-input": "PolymerElements/iron-input#~1.0.6",
     "neon-animation": "PolymerElements/neon-animation#~1.0.7",
-    "google-map": "GoogleWebComponents/google-map#~1.1.4"
+    "google-map": "GoogleWebComponents/google-map#~1.1.4",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.5",
+    "iron-form": "PolymerElements/iron-form#~1.0.11"
   }
 }

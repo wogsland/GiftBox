@@ -5,7 +5,7 @@ class RecruitingTokenVideo
 {
     protected $id;
     protected $recruiting_token_id;
-    protected $url;
+    protected $video_url;
 
     /**
      * Constructs the class
@@ -57,19 +57,19 @@ class RecruitingTokenVideo
      * This function creates an entry in the recruiting_token_video table
      *
      * @param int $recruiting_token_id - id of the token
-     * @param string $url  - url of video file
+     * @param string $video_url  - url of video file
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $url)
+    public function create($recruiting_token_id, $video_url)
     {
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url)
-                  VALUES ('$recruiting_token_id', '$url')";
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, video_url)
+                  VALUES ('$recruiting_token_id', '$video_url')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
             $this->recruiting_token_id = $recruiting_token_id;
-            $this->url = $url;
+            $this->video_url = $video_url;
         }
         return $id;
     }

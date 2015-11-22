@@ -44,4 +44,30 @@ class City
             }
         }
     }
+
+    /**
+     * Gets all the cities sorted by name
+     */
+    public static function getAll() {
+		$cities = array();
+        $results = execute_query("SELECT * FROM city ORDER BY name");
+		if ($results) {
+			while($object = $results->fetch_object()) {
+				$cities[count($cities)] = $object;
+			}
+			$results->free();
+			return $cities;
+        }
+	}
+
+    /**
+     * Gets the city id given the city name
+     *
+     * @param string $name - the name of the city to pull from the database
+     */
+    public static function getIdFromName($name) {
+        $id = execute_query("SELECT id FROM city WHERE name = '$name'")->fetch_object()->id;
+        return $id;
+    }
+
 }
