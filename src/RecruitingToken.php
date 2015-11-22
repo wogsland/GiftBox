@@ -81,7 +81,6 @@ class RecruitingToken
 
     private function update()
     {
-        include 'config.php';
         $saved = new RecruitingToken($this->id);
 
         $omitted = ['id','company_images','company_videos'];

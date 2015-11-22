@@ -1,19 +1,14 @@
 <?php
-use GiveToken\Config;
-require_once  __DIR__.'/util.php';
-_session_start();
+use GiveToken\City;
 
-if (!logged_in()) {
-    header('Location: /');
+require_once 'config.php';
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_url);
 }
 
-function paper_text($label, $id, $icon = NULL, $suffix = NULL) {
+function paper_text($label, $id) {
     echo PHP_EOL;
     echo '              <paper-input label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '                  <iron-icon icon="'.$icon.'" prefix></iron-icon>'.PHP_EOL;
-    if ($suffix) {
-    echo '                  <paper-icon-button class="dialog-button" suffix onclick="document.getElementById(\'video-dialog\').open()" icon="'.$suffix.'" alt="video" title="video" tabindex="0"></paper-icon-button>';
-    }
     echo '              </paper-input>'.PHP_EOL;
 }
 function paper_textarea($label, $id, $icon = NULL) {
@@ -21,29 +16,8 @@ function paper_textarea($label, $id, $icon = NULL) {
     echo '              <paper-textarea label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
     echo '              </paper-textarea>'.PHP_EOL;
 }
-function file_input($label, $id) {
-    echo PHP_EOL;
-    echo '			<div class="form-group form-group-lg">'.PHP_EOL;
-    echo '				<label for="'.$id.'-input" class="col-sm-4 control-label">'.$label.'</label>'.PHP_EOL;
-    echo '				<div class="col-sm-4">'.PHP_EOL;
-    echo '					<input type="hidden" id="'.$id.'" name="'.str_replace('-', '_', $id).'" value="">'.PHP_EOL;
-    echo '					<input type="file" id="'.$id.'-input" name="'.str_replace('-', '_', $id).'_input">'.PHP_EOL;
-    echo '				</div>'.PHP_EOL;
-    echo '				<div class="col-sm-4">'.PHP_EOL;
-    echo '					<img id="'.$id.'-img"  src="" alt="No '.$label.' Selected" height="100" width="100">'.PHP_EOL;
-    echo '					<button  type="button" class="btn btn-default btn-sm" onclick="clearImage(\''.$id.'\')">Clear Image</button>'.PHP_EOL;
-    echo '				</div>'.PHP_EOL;
-    echo '			</div>'.PHP_EOL;
-}
-function paper_file($label, $id) {
-    echo PHP_EOL;
-    echo '					<input type="hidden" id="'.$id.'" name="'.str_replace('-', '_', $id).'" value="">'.PHP_EOL;
-    echo '					<paper-input label="'.$label.'" type="file" placeholder="Choose a file" id="'.$id.'-input" name="'.str_replace('-', '_', $id).'_input">'.PHP_EOL;
-    echo '					<img id="'.$id.'-img"  src="" alt="No '.$label.' Selected" height="100" width="100">'.PHP_EOL;
-    echo '					<button  type="button" class="btn btn-default btn-sm" onclick="clearImage(\''.$id.'\')">Clear Image</button>'.PHP_EOL;
-}
-function paper_dropdown($label, $id, $options, $icon = NULL) {
-    echo '			<paper-dropdown-menu class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
+function paper_dropdown($label, $id, $options, $required = false) {
+    echo '			<paper-dropdown-menu '.($required ? 'required' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
     echo '				<paper-menu class="dropdown-content">'.PHP_EOL;
     foreach ($options as $value => $option) {
         echo '  				<paper-item value="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
@@ -106,6 +80,10 @@ function paper_card_end() {
             background: #009688;
             color: white;
         }
+        paper-button.dialog-button {
+            background: #2193ED;
+            font-size: 14px;
+        }
         .library-button {
             margin: 10px 0px;
             width: 100%;
@@ -146,14 +124,15 @@ function paper_card_end() {
 
 </head>
 <body>
-    <paper-header-panel mode="waterfall" class="flex">
+    <paper-header-panel class="flex">
         <paper-toolbar>
-            <a href="<?php echo Config::getInstance()->app_url; ?>"><img src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
-            <span class="title"> </span>
-            <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo Config::getInstance()->app_url; ?>'"></paper-icon-button>
+            <div class="center-column" id="navbar">
+                <a id="logo-link" href="<?php echo $app_url; ?>"><img id="nav-logo" src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
+                <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo $app_url; ?>'"></paper-icon-button>
+            </div>
         </paper-toolbar>
     </paper-header-panel>
-    <div id="center-column">
+    <div class="center-column">
         <paper-card id="progress-bar">
                 <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
                 <span class="progress-text">Fill Out Token Form</span>
@@ -171,10 +150,16 @@ function paper_card_end() {
 
                 <?php paper_card('Required Info'); ?>
                     <div class="field-container">
-                        <?php paper_text('Job Title', 'job-title', 'label'); ?>
-                        <?php paper_textarea('Job Description', 'job-description', 'description'); ?>
-                        <?php $cities = array(1 => 'Nashville', 2 => 'Miami', 3 => 'Tallahassee'); ?>
-                        <?php paper_dropdown('Job Location', 'city-id', $cities, 'room'); ?>
+                        <paper-input autofocus label="Job Title" id="job-title" name="job_title" required auto-validate error-message="This is a required field"></paper-input>
+                        <paper-input label="Job Description" id="job-description" name="job_description" required auto-validate error-message="This is a required field"></paper-input>
+                        <?php
+                            $all_cities = City::getAll();
+                            $cities = array();
+                            foreach($all_cities as $city) {
+                                $cities[$city->id] = $city->name;
+                            }
+                            paper_dropdown('Job Location', 'city-id', $cities, true);
+                        ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <?php paper_card('Basic Info'); ?>
@@ -199,6 +184,7 @@ function paper_card_end() {
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Images From: </span>
                             <div class="icon-container">
+                        		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
                                 <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
 <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
                                 <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
@@ -206,7 +192,7 @@ function paper_card_end() {
                                 <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
 -->                            </div>
                         </div>
-                        <div class="thumbnail-list-container" id="company-images-container">
+                        <div class="thumbnail-list-container" id="company-image-container">
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
@@ -215,7 +201,7 @@ function paper_card_end() {
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Videos From: </span>
                             <div class="icon-container">
-                                <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
+                                <paper-button class="icon-button" raised onclick="openVideoDialog()">WEB ADDRESS</paper-button>
 <!--                            <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-video-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
                                 <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
                                 <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
@@ -223,7 +209,7 @@ function paper_card_end() {
 -->
                             </div>
                         </div>
-                        <div class="thumbnail-list-container" id="company-videos-container">
+                        <div class="thumbnail-list-container" id="company-video-container">
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
@@ -251,9 +237,9 @@ function paper_card_end() {
             <?php if (is_admin()): ?>
                 <paper-card heading="Add To Library" id="add-to-library">
                     <div id="library-button-container">
-                        <paper-button class="library-button" raised><iron-icon icon="domain"></iron-icon> Company</paper-button>
-                        <paper-button class="library-button" raised><iron-icon icon="image"></iron-icon> Images</paper-button>
-                        <paper-button class="library-button" raised><iron-icon icon="videocam"></iron-icon> Video</paper-button>
+                        <paper-button class="library-button" raised>Company</paper-button>
+                        <paper-button class="library-button" raised>Images</paper-button>
+                        <paper-button class="library-button" raised>Video</paper-button>
                     </div>
                 </paper-card>
             <?php endif; ?>
@@ -261,20 +247,31 @@ function paper_card_end() {
     </div>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
-        <h2>Upload videos from...</h2>
+        <h2>Upload video from web address</h2>
+        <paper-input id="video-dialog-url" label="Paste video URL here" patter="^https:\/\/youtube.com|https:\/\/youtu.be|https:\/\/vimeo.com" error-message="Not a valid video URL!" autofocus></paper-input>
+        <div class="buttons">
+            <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
+            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
+        </div>
     </paper-dialog>
 
-    <paper-dialog class="recruiting-dialog" id="image-dialog" modal>
-        <h2>Upload photos from...</h2>
+    <paper-dialog class="recruiting-dialog" id="validation-dialog" modal>
+        <h2>Problem...</h2>
+        <p id="validation-message">No message supplied</p>
+        <div class="buttons">
+            <paper-button dialog-dismiss class="dialog-button" id="validation-button">OK</paper-button>
+        </div>
     </paper-dialog>
 
 
     <!-- JavaScript -->
+	<script src="js/create_common.js"></script>
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
 		$('#select-image-file').on('change', handleImageFileSelect);
-		$('#select-video-file').on('change', handleVideoFileSelect);
+        $('#company-image-container').data('deleted', []);
+        $('#company-video-container').data('deleted', []);
 	</script>
 </body>
 </html>

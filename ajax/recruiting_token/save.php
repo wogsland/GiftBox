@@ -1,5 +1,6 @@
 <?php
 use \GiveToken\RecruitingToken;
+use \GiveToken\City;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -11,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 
         // Polymer bug: convert the city name into an id
         if (isset($_POST['city_id'])) {
-            $token->city_id = execute_query("SELECT id FROM city WHERE name = '$token->city_id'")->fetch_object()->id;
+            $token->city_id = City::getIdFromName($token->city_id);
         }
 
         // Generate a long_id if this is a new token
