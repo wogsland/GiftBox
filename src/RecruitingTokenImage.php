@@ -82,20 +82,22 @@ class RecruitingTokenImage
     public function delete()
     {
         $success = false;
-        if (isset($this->id)) {
-            // delete from db
-            $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
-            execute($sql);
-            $image_file_name = $this->image_file_name;
-            $vars = get_class_vars(get_class($this));
-            foreach ($vars as $key=>$value) {
-                unset($this->$key);
+
+        // Delete from file system
+        $full_path = FILE_STORAGE_PATH.$this->image_file_name;
+        $success = unlink($full_path);
+
+        // Delete from database
+        if ($success) {
+            if (isset($this->id)) {
+                // delete from db
+                $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
+                execute($sql);
+                $vars = get_class_vars(get_class($this));
+                foreach ($vars as $key=>$value) {
+                    unset($this->$key);
+                }
             }
-
-            // Delete from file system
-//            unlink($file_storage_path.$image_file_name);
-
-            $success = true;
         }
         return $success;
     }

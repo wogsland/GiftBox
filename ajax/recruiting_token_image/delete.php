@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
                 $response['status'] = "SUCCESS";
             } else {
                 $response['status'] = "ERROR";
-                $response['message'] = "Recruiting token image delete() failed.";
+                $response['message'] = "RecruitingTokenImage->delete() failed.";
             }
         } catch (Exception $e) {
             error_log($e->getMessage());
