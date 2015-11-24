@@ -1,9 +1,10 @@
 var imageType = /image.*/;
 
-function createVideoThumbnail(id, src, url) {
+function createVideoImage(id, src, url) {
 	var img = $('<img class="recruiting-token-video" id="'+id+'">');
 	img.attr('src', src);
 	img.data('url', url);
+	img.data('thumbnail_src', src);
 	img.data('saved', false);
 	
 	return img;
@@ -17,8 +18,8 @@ function openVimeo(url){
 		$.getJSON(dataURL,
 			function(data){
 				var title = data[0].title;
-				var img = createVideoThumbnail(videoId, data[0].thumbnail_medium, url);
-				createThumbnailContainer(img, 'company-video-container');
+				var img = createVideoImage(videoId, data[0].thumbnail_medium, url);
+				createThumbnail(img, 'company-video-container');
 			}).fail(function() {
 				error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
 				alert(error);
@@ -33,8 +34,8 @@ function openYouTube(url) {
 	var videoId = youTubeID(url);
 	var error = null;
 	if (videoId) {
-		var img = createVideoThumbnail(videoId, "https://img.youtube.com/vi/"+videoId+"/0.jpg", url);
-		createThumbnailContainer(img, 'company-video-container');
+		var img = createVideoImage(videoId, "https://img.youtube.com/vi/"+videoId+"/0.jpg", url);
+		createThumbnail(img, 'company-video-container');
 	} else {
 		error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
 		alert(error);
@@ -68,7 +69,9 @@ function getDeleted(type) {
 }
 
 function addDeleted(type, id) {
-	$('#company-'+type+'-container').data('deleted').push(id);
+	var container = $('#company-'+type+'-container');
+	var deleted = container.data('deleted');
+	deleted.push(id);
 }
 
 function removeDeleted(type, id) {
@@ -77,8 +80,9 @@ function removeDeleted(type, id) {
 	deleted.splice(start, 1);
 }
 
-function remove(img) {
-	if (img.data('saved') == true) {
+function removeImage(img) {
+	var saved = img.data('saved');
+	if (saved == true) {
 		var id = img.data('id');
 		if (img.hasClass("recruiting-token-image")) {
 			addDeleted('image', id);
@@ -89,10 +93,14 @@ function remove(img) {
 	img.parent().parent().remove();
 }
 
-function createThumbnailContainer(object, parentId) {
+function removeImageById(imageId) {
+	removeImage($('#'+imageId));
+}
+
+function createThumbnail(object, parentId) {
 	var container = $('<div>');
 	var inner = $('<div>');
-	var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){remove(object);});
+	var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){removeImage(object);});
 	inner.addClass("inner-thumbnail-container");
 	object.addClass("photo-thumbnail");
 	container.addClass("thumbnail-container");
@@ -113,11 +121,11 @@ function handleImageFileSelect(evt) {
 
 		// Create an image element to show the thumbnail
 		
-		var img = $('<img class="recruiting-token-image" id="'+file.name+'">');
+		var img = $('<img class="recruiting-token-image" id="'+file.name.replace('.', '_')+'">');
 		img.attr('src', window.URL.createObjectURL(file));
 		img.data('file', file);
 		img.data('saved', false);
-		createThumbnailContainer(img, "company-image-container");
+		createThumbnail(img, "company-image-container");
 	}
 }
 
@@ -190,7 +198,7 @@ function saveTokenImage(img, fileName) {
 
 function saveTokenVideo(img) {
 	var url = '/ajax/recruiting_token_video/save/';
-	var params = {recruiting_token_id: img.data('token_id'), video_url: img.data('url')};
+	var params = {recruiting_token_id: img.data('token_id'), video_url: img.data('url'), thumbnail_src: img.data('thumbnail_src')};
 	postSave(img, url, params);
 }
 
@@ -213,8 +221,7 @@ function saveRecruitingToken(preview) {
 	var userId = null;
 	var serializedForm = null;
 	if ($('#recruiting-token-form')[0].validate()) {
-//	if (isValid('job-title') && isValid('job-description') && isValid('city-id')) {
-		// Save the token first so we can use the ID in the file path:  userId/tokenId/fileName
+		setStatus("Saving token...");
 		serializedForm = document.getElementById("recruiting-token-form").serialize();
 		$.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
 			if(data.status === "SUCCESS") {
@@ -253,6 +260,7 @@ function saveRecruitingToken(preview) {
 
 				}
 
+				closeStatus();
 				if (preview) {
 					window.open('/token/recruiting/'+data.long_id , '_blank');
 				}
@@ -266,4 +274,29 @@ function saveRecruitingToken(preview) {
 			alert("Save failed");
 		});
 	}
+}
+
+function openToken() {
+	var dropdown = $("#token-to-open");
+	var menu = $("#token-to-open")[0].contentElement;
+	menu.selected = null;
+	$('#open-dialog')[0].open();
+}
+
+function processOpen() {
+	if ($("#open-token-form")[0].validate()) {
+		setStatus("Opening token...");
+		var menu = $("#token-to-open")[0].contentElement;
+		var long_id = menu.selectedItem.id;
+		$('#open-dialog')[0].close();
+		window.location = "/create_recruiting.php?id="+long_id;
+	}
+}
+
+function setStatus(message) {
+	$('#status-message').html(message);
+	$('#status-dialog')[0].open();
+}
+function closeStatus() {
+	$('#status-dialog')[0].close();
 }

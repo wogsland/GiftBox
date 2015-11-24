@@ -6,6 +6,7 @@ class RecruitingTokenVideo
     protected $id;
     protected $recruiting_token_id;
     protected $video_url;
+    protected $thumbnail_src;
 
     /**
      * Constructs the class
@@ -25,6 +26,16 @@ class RecruitingTokenVideo
                 }
             }
         }
+    }
+
+    public static function getTokenVideos($recruiting_token_id) {
+        $results =  execute_query("SELECT * FROM recruiting_token_video where recruiting_token_id = $recruiting_token_id");
+        $token_videos = array();
+        while($token_video = $results->fetch_object()) {
+            $token_videos[count($token_videos)] = $token_video;
+        }
+        $results->free();
+        return $token_videos;
     }
 
     /**
@@ -61,15 +72,16 @@ class RecruitingTokenVideo
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $video_url)
+    public function create($recruiting_token_id, $video_url, $thumbnail_src)
     {
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, video_url)
-                  VALUES ('$recruiting_token_id', '$video_url')";
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, video_url, thumbnail_src)
+                  VALUES ('$recruiting_token_id', '$video_url', '$thumbnail_src')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
             $this->recruiting_token_id = $recruiting_token_id;
             $this->video_url = $video_url;
+            $this->thumbnail_src = $thumbnail_src;
         }
         return $id;
     }

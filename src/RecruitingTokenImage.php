@@ -27,6 +27,16 @@ class RecruitingTokenImage
         }
     }
 
+    public static function getTokenImages($recruiting_token_id) {
+        $results =  execute_query("SELECT * FROM recruiting_token_image where recruiting_token_id = $recruiting_token_id");
+        $token_images = array();
+        while($token_image = $results->fetch_object()) {
+            $token_images[count($token_images)] = $token_image;
+        }
+        $results->free();
+        return $token_images;
+    }
+
     /**
      * This function gets a protected property
      *
@@ -84,6 +94,7 @@ class RecruitingTokenImage
         $success = false;
 
         // Delete from file system
+        $cwd = getcwd();
         $full_path = FILE_STORAGE_PATH.$this->image_file_name;
         $success = unlink($full_path);
 

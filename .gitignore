@@ -6,6 +6,7 @@ Icon
 # Local storage #
 #################
 /uploads
+/ajax/uploads
 
 # Composer #
 ############

@@ -50,7 +50,7 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
         $file_storage_path = 'gs://tokenstorage/';
     }
 } else {
-    $file_storage_path = __DIR__.'/uploads/';
+    $file_storage_path = 'uploads/';
 }
 if (!defined('FILE_STORAGE_PATH')) {
     define('FILE_STORAGE_PATH', $file_storage_path);

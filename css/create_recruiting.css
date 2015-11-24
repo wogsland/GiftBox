@@ -97,8 +97,16 @@ body {
 	height: 170px;
 	width: 600px;
 }
+#status-dialog {
+	height: 170px;
+	width: 600px;
+}
 #video-dialog {
 	height: 200px;
+	width: 660px;
+}
+#open-dialog {
+	height: 220px;
 	width: 650px;
 }
 .dialog-content-container {
@@ -180,4 +188,10 @@ body {
 	text-align: center;
 	font-size: 18px;
 	font-weight: normal;
+}
+#status-message {
+	text-align: center;
+	font-size: 30px;
+	font-weight: normal;
+	margin-top: 50px;
 }

@@ -35,14 +35,23 @@ class RecruitingToken
             if ($key == null || !in_array($key, array('id','long_id'))) {
                 $key = 'id';
             }
-            $token = execute_query(
-                "SELECT * FROM recruiting_token
-                WHERE $key = '$value'"
-            )->fetch_object("GiveToken\RecruitingToken");
-            foreach (get_object_vars($token) as $key => $value) {
-                $this->$key = $value;
+            $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
+            if ($token) {
+                foreach (get_object_vars($token) as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
+    }
+
+    public static function getUserTokens($user_id) {
+        $results =  execute_query("SELECT * FROM recruiting_token where user_id = $user_id ORDER BY company, job_title");
+        $user_tokens = array();
+        while($token = $results->fetch_object()) {
+            $user_tokens[count($user_tokens)] = $token;
+        }
+        $results->free();
+        return $user_tokens;
     }
 
     public function init($post)

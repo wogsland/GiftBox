@@ -1,26 +1,38 @@
 <?php
 use GiveToken\City;
+use GiveToken\RecruitingToken;
+use GiveToken\RecruitingTokenImage;
+use GiveToken\RecruitingTokenVideo;
 
 require_once 'config.php';
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_url);
 }
 
-function paper_text($label, $id) {
-    echo PHP_EOL;
-    echo '              <paper-input label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '              </paper-input>'.PHP_EOL;
+if (isset($_GET['id'])) {
+    $token = new RecruitingToken($_GET['id'], 'long_id');
+    $token_images = RecruitingTokenImage::getTokenImages($token->id);
+    $token_videos = RecruitingTokenVideo::getTokenVideos($token->id);
+} else {
+    $token = new RecruitingToken();
+    $token_images = array();
+    $token_videos = array();
 }
-function paper_textarea($label, $id, $icon = NULL) {
+
+function paper_text($label, $id, $value, $required = false) {
     echo PHP_EOL;
-    echo '              <paper-textarea label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
+    echo '              <paper-input value="'.$value.'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'"></paper-input>'.PHP_EOL;
+}
+function paper_textarea($label, $id, $value) {
+    echo PHP_EOL;
+    echo '              <paper-textarea value="'.$value.'" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
     echo '              </paper-textarea>'.PHP_EOL;
 }
-function paper_dropdown($label, $id, $options, $required = false) {
-    echo '			<paper-dropdown-menu '.($required ? 'required' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '				<paper-menu class="dropdown-content">'.PHP_EOL;
+function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
+    echo '			<paper-dropdown-menu '.($required ? 'required error-message="This is a required field"' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
+    echo '				<paper-menu class="dropdown-content" '.($selected_index ? 'selected="'.$selected_index.'"' : null).'>'.PHP_EOL;
     foreach ($options as $value => $option) {
-        echo '  				<paper-item value="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
+        echo '  				<paper-item id="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
     }
     echo '				</paper-menu>'.PHP_EOL;
     echo '			</paper-dropdown-menu>'.PHP_EOL;
@@ -145,38 +157,46 @@ function paper_card_end() {
         </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
-                <input type="hidden" id="id" name="id" value="">
-                <input type="hidden" id="long-id" name="long_id" value="<?php echo (isset($_GET['id']) ? $_GET['id'] : null); ?>">
+                <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
+                <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
 
                 <?php paper_card('Required Info'); ?>
                     <div class="field-container">
-                        <paper-input autofocus label="Job Title" id="job-title" name="job_title" required auto-validate error-message="This is a required field"></paper-input>
-                        <paper-input label="Job Description" id="job-description" name="job_description" required auto-validate error-message="This is a required field"></paper-input>
                         <?php
+                            paper_text('Job Title', 'job-title', $token->job_title, true);
+                            paper_text('Job Description', 'job-description', $token->job_description, true);
+
                             $all_cities = City::getAll();
                             $cities = array();
-                            foreach($all_cities as $city) {
+                            $selected_city = null;
+                            foreach($all_cities as $index => $city) {
                                 $cities[$city->id] = $city->name;
+                                if ($city->id == $token->city_id) {
+                                    $selected_city = $index;
+                                }
                             }
-                            paper_dropdown('Job Location', 'city-id', $cities, true);
+                            paper_dropdown('Job Location', 'city-id', $cities, $selected_city, true);
                         ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <?php paper_card('Basic Info'); ?>
                     <div class="field-container">
-                        <?php paper_textarea('Skills Required (copy and paste from word doc)', 'skills-required'); ?>
-                        <?php paper_textarea('Responsibilities (copy and paste from word doc)', 'responsibilities'); ?>
-                        <?php paper_textarea('Perks (copy and paste from word doc)', 'perks'); ?>
+                        <?php paper_textarea('Skills Required (copy and paste from word doc)', 'skills-required', $token->skills_required); ?>
+                        <?php paper_textarea('Responsibilities (copy and paste from word doc)', 'responsibilities', $token->responsibilities); ?>
+                        <?php paper_textarea('Perks (copy and paste from word doc)', 'perks', $token->perks); ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <?php paper_card('Important Company Info'); ?>
                     <div class="field-container">
-                        <?php paper_text('Company Name', 'company', 'domain'); ?>
-                        <?php paper_text('Company TagLine', 'company-tagline', 'local offer'); ?>
-                        <?php paper_text('Company Website', 'company-website', 'http'); ?>
-                        <?php paper_text('Company Values', 'company-values'); ?>
-                        <?php $sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large'); ?>
-                        <?php paper_dropdown('Company Size', 'company-size', $sizes); ?>
+                        <?php paper_text('Company Name', 'company', $token->company); ?>
+                        <?php paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
+                        <?php paper_text('Company Website', 'company-website', $token->company_website); ?>
+                        <?php paper_text('Company Values', 'company-values', $token->company_values); ?>
+                        <?php
+                            $company_sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large');
+                            $selected_index = array_search($token->company_size, $company_sizes);
+                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_index);
+                        ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <?php paper_card('Company Images'); ?>
@@ -193,6 +213,17 @@ function paper_card_end() {
 -->                            </div>
                         </div>
                         <div class="thumbnail-list-container" id="company-image-container">
+                        <?php
+                        foreach($token_images as $token_image) {
+                            $image_id = str_replace('.', '_', $token_image->image_file_name);
+                            echo '<div class="thumbnail-container">';
+                            echo '  <div class="inner-thumbnail-container">';
+                            echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.FILE_STORAGE_PATH.$token_image->image_file_name.'">';
+                            echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                            echo ' </div>';
+                            echo '</div>';
+                        }
+                        ?>
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
@@ -210,16 +241,27 @@ function paper_card_end() {
                             </div>
                         </div>
                         <div class="thumbnail-list-container" id="company-video-container">
+                        <?php
+                        foreach($token_videos as $token_video) {
+                            $image_id = substr($token_video->video_url, strrpos($token_video->video_url, '/')+1);
+                            echo '<div class="thumbnail-container">';
+                            echo '  <div class="inner-thumbnail-container">';
+                            echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video->id.'" src="'.$token_video->thumbnail_src.'">';
+                            echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                            echo ' </div>';
+                            echo '</div>';
+                        }
+                        ?>
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
                 <?php paper_card('Company Social Media'); ?>
                     <div class="field-container">
-                        <?php paper_text('Facebook', 'company-facebook'); ?>
-                        <?php paper_text('LinkedIn', 'company-linkedin'); ?>
-                        <?php paper_text('Youtube Channel', 'company-youtube'); ?>
-                        <?php paper_text('Twitter', 'company-twitter'); ?>
-                        <?php paper_text('Google+', 'company-google-plus'); ?>
+                        <?php paper_text('Facebook', 'company-facebook', $token->company_facebook); ?>
+                        <?php paper_text('LinkedIn', 'company-linkedin', $token->company_linkedin); ?>
+                        <?php paper_text('Youtube Channel', 'company-youtube', $token->company_youtube); ?>
+                        <?php paper_text('Twitter', 'company-twitter', $token->company_twitter); ?>
+                        <?php paper_text('Google+', 'company-google-plus', $token->company_google_plus); ?>
                     </div>
                 <?php paper_card_end(); ?>
                 <div class="button-container">
@@ -231,7 +273,7 @@ function paper_card_end() {
             <paper-card heading="Token Strength" id="token-strength">
             </paper-card>
             <div class="button-container">
-                <paper-button raised>OPEN</paper-button>
+                <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
             </div>
             <?php if (is_admin()): ?>
@@ -245,6 +287,26 @@ function paper_card_end() {
             <?php endif; ?>
        </div>
     </div>
+
+    <paper-dialog class="recruiting-dialog" id="open-dialog" modal>
+        <h2>Open</h2>
+        <form is="iron-form" id="open-token-form">
+            <div class="field-container">
+            <?php
+                $user_tokens = RecruitingToken::getUserTokens($_SESSION['user_id']);
+                $tokens = array();
+                foreach($user_tokens as $token) {
+                    $tokens[$token->long_id] = $token->company." - ".$token->job_title;
+                }
+                paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
+            ?>
+            </div>
+        </form>
+        <div class="buttons">
+            <paper-button class="dialog-button" onclick="processOpen()">Open</paper-button>
+            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
+        </div>
+    </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
@@ -263,15 +325,29 @@ function paper_card_end() {
         </div>
     </paper-dialog>
 
+    <paper-dialog class="recruiting-dialog" id="status-dialog">
+        <p id="status-message">No message supplied</p>
+    </paper-dialog>
+
 
     <!-- JavaScript -->
 	<script src="js/create_common.js"></script>
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script>
-		$('#select-image-file').on('change', handleImageFileSelect);
-        $('#company-image-container').data('deleted', []);
-        $('#company-video-container').data('deleted', []);
+        $( document ).ready(function() {
+            $('#select-image-file').on('change', handleImageFileSelect);
+            $('#company-image-container').data('deleted', []);
+            $('#company-video-container').data('deleted', []);
+            $('.recruiting-token-image').each(function() {
+                var img = $(this);
+                img.data('saved', true);
+            });
+            $('.recruiting-token-video').each(function() {
+                var img = $(this);
+                img.data('saved', true);
+            });
+        });
 	</script>
 </body>
 </html>
