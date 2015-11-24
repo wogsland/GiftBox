@@ -3,6 +3,7 @@ use GiveToken\City;
 use GiveToken\RecruitingToken;
 use GiveToken\RecruitingTokenImage;
 use GiveToken\RecruitingTokenVideo;
+use google\appengine\api\cloud_storage\CloudStorageTools;
 
 require_once 'config.php';
 if (!logged_in() || !is_admin()) {
@@ -215,10 +216,15 @@ function paper_card_end() {
                         <div class="thumbnail-list-container" id="company-image-container">
                         <?php
                         foreach($token_images as $token_image) {
+                            if ($google_app_engine) {
+                                $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->image_file_name, $use_https);
+                            } else {
+                                $image_path = $file_storage_path.$token_image->image_file_name;
+                            }
                             $image_id = str_replace('.', '_', $token_image->image_file_name);
                             echo '<div class="thumbnail-container">';
                             echo '  <div class="inner-thumbnail-container">';
-                            echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.FILE_STORAGE_PATH.$token_image->image_file_name.'">';
+                            echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.$image_path.'">';
                             echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
                             echo ' </div>';
                             echo '</div>';
