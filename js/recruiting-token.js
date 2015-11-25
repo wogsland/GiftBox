@@ -76,7 +76,6 @@ scope._onLocationClick = function(event) {
   url = '/ajax/city/get/2';
   $.post(url, '', function(data) {
     if (data.data.id !== undefined & data.data.id > 0) {
-      console.log(data);
       var population = numberWithCommas(data.data.population);
       $('.gt-city-population').text(population);
       $('.gt-city-timezone').text(data.data.timezone);
@@ -109,6 +108,24 @@ scope._onImagesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 5;
+  path = getUrlPath();
+  url = '/ajax/recruiting_token/get_images' + path[4];
+  $.post(url, '', function(data) {
+    if (data.data !== undefined) {
+      console.log(data);
+      i=1;
+      $.each(data.data, function(){
+        console.log('Each!');
+        console.log(data.data.file_name);
+        $('#image-' + i).css('background',"url('/uploads/"+data.data.file_name+"') center / cover");
+        i++;
+      });
+      while (i < 7) {
+        $('#image-' + i).hide();
+        i++;
+      }
+    }
+  });
 };
 
 scope._onVideosClick = function(event) {
