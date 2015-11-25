@@ -217,11 +217,11 @@ function paper_card_end() {
                         <?php
                         foreach($token_images as $token_image) {
                             if ($google_app_engine) {
-                                $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->image_file_name, $use_https);
+                                $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
                             } else {
-                                $image_path = $file_storage_path.$token_image->image_file_name;
+                                $image_path = $file_storage_path.$token_image->file_name;
                             }
-                            $image_id = str_replace('.', '_', $token_image->image_file_name);
+                            $image_id = str_replace('.', '_', $token_image->file_name);
                             echo '<div class="thumbnail-container">';
                             echo '  <div class="inner-thumbnail-container">';
                             echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.$image_path.'">';
@@ -249,7 +249,7 @@ function paper_card_end() {
                         <div class="thumbnail-list-container" id="company-video-container">
                         <?php
                         foreach($token_videos as $token_video) {
-                            $image_id = substr($token_video->video_url, strrpos($token_video->video_url, '/')+1);
+                            $image_id = substr($token_video->url, strrpos($token_video->url, '/')+1);
                             echo '<div class="thumbnail-container">';
                             echo '  <div class="inner-thumbnail-container">';
                             echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video->id.'" src="'.$token_video->thumbnail_src.'">';

@@ -36,3 +36,6 @@ function getTestCookie()
     return 'PHPSESSID=' . $userCookie . ';';
 }
 define('TEST_COOKIE', getTestCookie());
+if (!defined('FILE_STORAGE_PATH')) {
+    define('FILE_STORAGE_PATH', 'uploads/');
+}
