@@ -300,3 +300,30 @@ function setStatus(message) {
 function closeStatus() {
 	$('#status-dialog')[0].close();
 }
+
+function shrink(item) {
+	item.animate(
+		{
+		height: "toggle"
+		}, 1000, function() {});
+}
+
+function fadeIn(item) {
+	item.animate(
+		{
+		opacity: 1
+		}, 1000, function() {});
+}
+
+function finish() {
+	shrink($("#company-social-media"));
+	shrink($("#company-videos"));
+	shrink($("#company-images"));
+	shrink($("#company-info"));
+	shrink($("#basic-info"));
+	shrink($("#required-info"));
+	$(".bottom-button").each(function() {
+		shrink($(this));
+	});
+	fadeIn($("#send-token-via"));
+}
