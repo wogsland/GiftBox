@@ -85,6 +85,25 @@ class RecruitingTokenImage
     }
 
     /**
+     * This function gets information from the recruiting_token_image table
+     *
+     * @param int $recruiting_token_id - id of the token to get images for
+     *
+     * @return array - images associated witht the token
+     */
+    public function getByRecruitingTokenId($recruiting_token_id)
+    {
+        $return = array();
+        $query = "SELECT id, file_name FROM recruiting_token_image
+                  WHERE recruiting_token_id = '$recruiting_token_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
+
+    /**
      * This function deletes the database entry & the image file
      *
      * @return boolean - success of deletion

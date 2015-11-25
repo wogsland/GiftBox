@@ -75,7 +75,7 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        // create token video
+        // create token image
         $file_name = rand().'.jpg';
         $RecruitingTokenImage = new RecruitingTokenImage();
         $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name);
@@ -117,5 +117,33 @@ extends \PHPUnit_Framework_TestCase
 
         //check it's deleted from the filesystem
         $this->markTestIncomplete();
+    }
+
+    /**
+     * Tests the getByRecruitingTokenId function.
+     */
+    public function testGetByRecruitingTokenId()
+    {
+        $RecruitingTokenImage = new RecruitingTokenImage();
+
+        // token with no images should return empty array
+        $images = $RecruitingTokenImage->getByRecruitingTokenId($this->RecruitingToken->id);
+        $this->assertTrue(is_array($images));
+        $this->assertTrue(empty($images));
+
+        // create token images
+        $file_name[1] = rand().'.jpg';
+        $file_name[2] = rand().'.jpg';
+        $file_name[3] = rand().'.jpg';
+        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[1]);
+        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[2]);
+        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[3]);
+        $images = $RecruitingTokenImage->getByRecruitingTokenId($this->RecruitingToken->id);
+        $this->assertTrue(is_array($images));
+        $this->assertEquals(count($images), 3);
+        foreach ($images as $image) {
+            $this->assertTrue($image['id'] > 0);
+            $this->assertTrue(in_array($image['file_name'], $file_name));
+        }
     }
 }
