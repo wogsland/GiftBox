@@ -79,13 +79,34 @@ class RecruitingTokenImage
      *
      * @param int $recruiting_token_id - id of the token to get images for
      *
-     * @return array - images associated witht the token
+     * @return array - images associated with the token
      */
     public function getByRecruitingTokenId($recruiting_token_id)
     {
         $return = array();
         $query = "SELECT id, file_name FROM recruiting_token_image
                   WHERE recruiting_token_id = '$recruiting_token_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
+
+    /**
+     * This function gets information from the recruiting_token_image table
+     *
+     * @param int $long_id - long id of the token to get images for
+     *
+     * @return array - images associated with the token
+     */
+    public function getByRecruitingTokenLongId($long_id)
+    {
+        $return = array();
+        $query = "SELECT recruiting_token_image.id, recruiting_token_image.file_name
+                  FROM recruiting_token_image, recruiting_token
+                  WHERE recruiting_token_image.recruiting_token_id = recruiting_token.id
+                  AND recruiting_token.long_id = '$long_id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
             $return[] = $row;
