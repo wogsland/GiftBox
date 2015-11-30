@@ -165,7 +165,6 @@ scope._onVideosClick = function(event) {
       });
       videos += '<section class="section--footer mdl-color--light-grey mdl-grid">';
       videos += '</section>';
-      console.log(videos);
       $('#videos-container').html(videos);
     } else {
 
@@ -321,10 +320,10 @@ $(document).ready(function(){
           break;
         }
       }
-      $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
+      /*$('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
       if (data.data.company_video !== '') {
         $('.gt-info-video').attr('src', data.data.company_video);
-      }
+      }*/
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
@@ -338,8 +337,16 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
-        assetHost = getAssetHost();
-        $('#videos-frontpage').css('background',"url('"+data.data[0].url+"') center / cover");
+        var vars = {};
+        i = 0;
+        var parts = data.data[0].url.replace(/\/([a-zA-Z0-9\-]*)/gi, function(value) {
+          vars[i] = value;
+          i++;
+        });
+        console.log(vars);
+        var videoId = vars[i-1];
+        console.log(videoId);
+        $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
       } else {
         $('#videos-frontpage').hide();
       }
