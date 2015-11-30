@@ -25,7 +25,7 @@ function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
   function beginAnimation(){
@@ -52,7 +52,7 @@ function getParameterByName(name) {
           start: 0,
           stop: 100,
           time: 1,
-          duration: .5,
+          duration: 0.5,
           units: 'px',
           effect: 'easeInOut',
           onStop: function(){
@@ -141,7 +141,7 @@ function getParameterByName(name) {
           start: 0,
           stop: 100,
           time: 1,
-          duration: .5,
+          duration: 0.5,
           units: 'px',
           effect: 'easeInOut'
        }
@@ -155,7 +155,7 @@ function getParameterByName(name) {
           start: 50,
           stop: 100,
           time: 0,
-          duration: .7,
+          duration: 0.7,
           units: 'vw',
           effect: 'easeInOut'
        }
@@ -166,7 +166,7 @@ function getParameterByName(name) {
           start: 50,
           stop: 100,
           time: 0,
-          duration: .7,
+          duration: 0.7,
           units: 'vw',
           effect: 'easeInOut',
           onStop: function(){
@@ -186,7 +186,7 @@ function getParameterByName(name) {
           start: 0,
           stop: 100,
           time: 1,
-          duration: .5,
+          duration: 0.5,
           units: 'px',
           effect: 'easeInOut'
        }
@@ -197,7 +197,7 @@ function getParameterByName(name) {
           start: 0,
           stop: 100,
           time: 1,
-          duration: .5,
+          duration: 0.5,
           units: 'px',
           effect: 'easeInOut'
        }
@@ -257,7 +257,7 @@ function getParameterByName(name) {
             start: 52,
             stop: 48,
             time: 0,
-            duration: .3,
+            duration: 0.3,
             units: 'vw',
             effect: 'easeInOut',
             onStop: function(){
@@ -275,7 +275,7 @@ function getParameterByName(name) {
           start: 0,
           stop: -5,
           time: 0,
-          duration: .3,
+          duration: 0.3,
           units: 'deg',
           effect: 'easeInOut'
        },
@@ -314,7 +314,7 @@ function getParameterByName(name) {
          start: -5,
          stop: 0,
          time: 0,
-         duration: .3,
+         duration: 0.3,
          units: 'deg',
          effect: 'easeInOut'
       },
@@ -323,7 +323,7 @@ function getParameterByName(name) {
           start: 33,
           stop: 20,
           time: 0,
-          duration: .7,
+          duration: 0.7,
           units: 'vw',
           effect: 'easeOut',
           onStop: function(){
@@ -357,7 +357,7 @@ function getParameterByName(name) {
        'top':{
           start: 95,
           stop: 57,
-          time: .5,
+          time: 0.5,
           duration: 1,
           units: 'vh',
           effect: 'easeInOut',

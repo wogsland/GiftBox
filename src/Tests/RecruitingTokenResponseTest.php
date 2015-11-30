@@ -22,7 +22,7 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Requires the util.php file of functions
+     * Creates testing items in the database
      */
     public function setUp()
     {

@@ -52,6 +52,10 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
 } else {
     $file_storage_path = 'uploads/';
 }
+if (!defined('FILE_STORAGE_PATH')) {
+    define('FILE_STORAGE_PATH', $file_storage_path);
+}
+
 $database = "giftbox";
 $user = "giftbox";
 $password = "giftbox";

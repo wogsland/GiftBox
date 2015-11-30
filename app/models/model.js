@@ -128,19 +128,17 @@ var Model = {
   },
 
   deleteToken: function(tokenId) {
-    console.log("tokenId=" + tokenId);
     $.ajax({
        type: "POST",
        url: "/ajax/token/delete",
        data: "tokenId=" + tokenId,
        async: false
      }).done(function(data, textStatus, jqXHR){
-       console.log("Success!");
+
      });
   },
 
   saveChanges: function(){
-    console.log("saving new model...");
     var response = null;
     this.profile.first_name = this.profile.name.split(' ')[0];
     this.profile.last_name = this.profile.name.substring(this.profile.name.indexOf(' ') + 1);

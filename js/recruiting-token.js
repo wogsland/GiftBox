@@ -1,5 +1,4 @@
 var scope = document.querySelector('template[is="dom-bind"]');
-//console.log(scope);
 
 function getUrlPath() {
   var vars = {};
@@ -9,6 +8,17 @@ function getUrlPath() {
     i++;
   });
   return vars;
+}
+
+function getAssetHost() {
+  switch (window.location.hostname) {
+    case 'www.givetoken.com':
+    return 'https://tokenstorage.storage.googleapis.com';
+    case 'dev.givetoken.com':
+    return 'https://tokenstorage-staging.storage.googleapis.com';
+    default:
+    return '/uploads';
+  }
 }
 
 scope._onOverviewClick = function(event) {
@@ -66,6 +76,7 @@ scope._onPerksClick = function(event) {
   smallScreen();
 };
 
+var cityId = 1;
 scope._onLocationClick = function(event) {
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
@@ -73,32 +84,7 @@ scope._onLocationClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  url = '/ajax/city/get/2';
-  $.post(url, '', function(data) {
-    if (data.data.id !== undefined & data.data.id > 0) {
-      console.log(data);
-      var population = numberWithCommas(data.data.population);
-      $('.gt-city-population').text(population);
-      $('.gt-city-timezone').text(data.data.timezone);
-      $('.gt-city-county').text(data.data.county);
-      $('google-map')[0].latitude = data.data.latitude;
-      $('google-map')[0].longitude = data.data.longitude;
-      $('google-map').resize();
-      $('.gt-city-spring-hi').text(data.data.temp_hi_spring);
-      $('.gt-city-spring-lo').text(data.data.temp_lo_spring);
-      $('.gt-city-spring-avg').text(data.data.temp_avg_spring);
-      $('.gt-city-summer-hi').text(data.data.temp_hi_summer);
-      $('.gt-city-summer-lo').text(data.data.temp_lo_summer);
-      $('.gt-city-summer-avg').text(data.data.temp_avg_summer);
-      $('.gt-city-fall-hi').text(data.data.temp_hi_fall);
-      $('.gt-city-fall-lo').text(data.data.temp_lo_fall);
-      $('.gt-city-fall-avg').text(data.data.temp_avg_fall);
-      $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
-      $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
-      $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
-    }
-  },'json');
-
+  $('google-map').resize();
 };
 
 scope._onImagesClick = function(event) {
@@ -109,6 +95,22 @@ scope._onImagesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 5;
+  path = getUrlPath();
+  url = '/ajax/recruiting_token/get_images' + path[4];
+  $.post(url, '', function(data) {
+    if (data.data !== undefined) {
+      assetHost = getAssetHost();
+      i=1;
+      $.each(data.data, function(index, value){
+        $('#image-' + i).css('background',"url('"+assetHost+"/"+value.file_name+"') center / cover");
+        i++;
+      });
+      while (i < 7) {
+        $('#image-' + i).hide();
+        i++;
+      }
+    }
+  });
 };
 
 scope._onVideosClick = function(event) {
@@ -119,12 +121,36 @@ scope._onVideosClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 6;
+  path = getUrlPath();
+  url = '/ajax/recruiting_token/get_videos' + path[4];
+  $.post(url, '', function(data) {
+    if (data.data !== undefined && data.data.length > 0) {
+      var videos = '';
+      $.each(data.data, function(index, vid) {
+        videos += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+        videos += '<div class="mdl-card mdl-cell mdl-cell--12-col">';
+        videos += '<div class="mdl-card__title">';
+        videos += '<iframe class="gt-info-video"';
+        videos += '  width="853"';
+        videos += '  height="480"';
+        videos += '  src="'+vid.url+'"';
+        videos += '  frameborder="0" allowfullscreen>';
+        videos += '</iframe>';
+        videos += '</div>';
+        videos += '</div>';
+        videos += '</section>';
+      });
+      videos += '<section class="section--footer mdl-color--light-grey mdl-grid">';
+      videos += '</section>';
+      $('#videos-container').html(videos);
+    } else {
+
+    }
+  });
 };
 
 scope._onYesClick = function(event) {
   $('#placeholder').css('background-color', 'green');
-  //console.log('yes clicked');
-  //console.log($('#placeholder'));
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -198,7 +224,9 @@ $(document).ready(function(){
       var words = overview.split(' ');
       var shortDescription = '';
       for (i = 0; i < 25; i++) {
-        shortDescription += words[i] + ' ';
+        if (words[i] !== undefined) {
+          shortDescription += words[i] + ' ';
+        }
       }
       if (words.length >= 25) {
         shortDescription += ' ... ';
@@ -209,39 +237,65 @@ $(document).ready(function(){
       $('.gt-info-responsibilities').html(data.data.responsibilities);
       $('.gt-info-values').html(data.data.company_values);
       $('.gt-info-perks').html(data.data.perks);
-      $('.gt-info-location').text(data.data.job_locations);
+      cityId = data.data.city_id;
+      url = '/ajax/city/get/'+cityId;
+      $.post(url, '', function(data) {
+        if (data.data.id !== undefined & data.data.id > 0) {
+          $('.gt-info-location').text(data.data.name);
+          var population = numberWithCommas(data.data.population);
+          $('.gt-city-population').text(population);
+          $('.gt-city-timezone').text(data.data.timezone);
+          $('.gt-city-county').text(data.data.county);
+          $('google-map')[0].latitude = data.data.latitude;
+          $('google-map')[0].longitude = data.data.longitude;
+          $('.gt-city-spring-hi').text(data.data.temp_hi_spring);
+          $('.gt-city-spring-lo').text(data.data.temp_lo_spring);
+          $('.gt-city-spring-avg').text(data.data.temp_avg_spring);
+          $('.gt-city-summer-hi').text(data.data.temp_hi_summer);
+          $('.gt-city-summer-lo').text(data.data.temp_lo_summer);
+          $('.gt-city-summer-avg').text(data.data.temp_avg_summer);
+          $('.gt-city-fall-hi').text(data.data.temp_hi_fall);
+          $('.gt-city-fall-lo').text(data.data.temp_lo_fall);
+          $('.gt-city-fall-avg').text(data.data.temp_avg_fall);
+          $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
+          $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
+          $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
+          $('#location-frontpage').css('background',"url('/images/"+data.data.image_file+"') center / cover");
+          $('#location-back').css('background',"url('/images/"+data.data.image_file+"') center / cover");
+        }
+      });
       var socialCount = 0;
-      if ('' !== data.data.company_twitter) {
+      if (data.data.company_twitter !== undefined && '' !== data.data.company_twitter) {
         $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
         socialCount++;
       } else {
         $('.gt-info-twitter').remove();
       }
-      if ('' !== data.data.company_facebook) {
+      if (data.data.company_facebook !== undefined && '' !== data.data.company_facebook) {
         $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
         socialCount++;
       } else {
         $('.gt-info-facebook').remove();
       }
-      if ('' !== data.data.company_linkedin) {
+      if (data.data.company_linkedin !== undefined && '' !== data.data.company_linkedin) {
         $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
         socialCount++;
       } else {
         $('.gt-info-linkedin').remove();
       }
-      if ('' !== data.data.company_youtube) {
+      if (data.data.company_youtube !== undefined && '' !== data.data.company_youtube) {
         $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
         socialCount++;
       } else {
         $('.gt-info-youtube').remove();
       }
-      if ('' !== data.data.company_google_plus) {
+      if (data.data.company_google_plus !== undefined && '' !== data.data.company_google_plus) {
         $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
         socialCount++;
       } else {
         $('.gt-info-gplus').remove();
       }
-      if ('' !== data.data.company_pinterest) {
+      if (data.data.company_pinterest !== undefined && '' !== data.data.company_pinterest) {
         $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
         socialCount++;
       } else {
@@ -269,13 +323,35 @@ $(document).ready(function(){
           break;
         }
       }
-      $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
-      if (data.data.company_video !== '') {
-        $('.gt-info-video').attr('src', data.data.company_video);
+      if (data.data.company_logo !== '') {
+        $('#briefcase-or-logo').html('<img src="'+assetHost+"/"+data.data.company_logo+'" width=200>');
       }
     },'json');
+    url = '/ajax/recruiting_token/get_images' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined && data.data.length > 0) {
+        assetHost = getAssetHost();
+        $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+      } else {
+        $('#images-frontpage').hide();
+      }
+    });
+    url = '/ajax/recruiting_token/get_videos' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined && data.data.length > 0) {
+        var vars = {};
+        i = 0;
+        var parts = data.data[0].url.replace(/\/([a-zA-Z0-9\-]*)/gi, function(value) {
+          vars[i] = value;
+          i++;
+        });
+        var videoId = vars[i-1];
+        $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
+      } else {
+        $('#videos-frontpage').hide();
+      }
+    });
   } else {
-    console.log('redirecting...');
     window.location.href = 'https://www.givetoken.com';
   }
   smallScreen();

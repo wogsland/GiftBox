@@ -10,16 +10,16 @@ class GetTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
-   * Requires the util.php file of functions
-   */
+     * Requires the util.php file of functions
+     */
     public static function setUpBeforeClass()
     {
         include_once __DIR__.'/../../../../util.php';
     }
 
     /**
-   * Tests request via ajax endpoint.
-   */
+     * Tests request via ajax endpoint.
+     */
     public function testRequest()
     {
         // create a city
@@ -129,8 +129,8 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-   * Tests request failure via ajax endpoint.
-   */
+     * Tests request failure via ajax endpoint.
+     */
     public function testFail()
     {
         $url = TEST_URL . "/ajax/city/get";

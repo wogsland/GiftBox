@@ -41,11 +41,11 @@ function loginClose() {
 }
 
 function loginError(message) {
-	$('#login-alert-placeholder').html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>')
+	$('#login-alert-placeholder').html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>'+message+'</span></div>');
 }
 
 function loginInfo(message) {
-	$('#login-alert-placeholder').html('<div class="alert alert-info"><span>'+message+'</span></div>')
+	$('#login-alert-placeholder').html('<div class="alert alert-info"><span>'+message+'</span></div>');
 }
 
 function loginSuccess(app_root) {
@@ -58,14 +58,18 @@ function loginSuccess(app_root) {
 
 function loginFacebook() {
 	loginInfo("Logging in with Facebook...");
-	FB.login(function(response){handleFBLogin(response)}, {scope: 'user_photos, public_profile, email'});
+	FB.login(function(response){
+		handleFBLogin(response);
+	}, {
+		scope: 'user_photos, public_profile, email'
+	});
 }
 
 function processLogin(userInfo) {
 	loginInfo("Logging into GiveToken.  Please wait...");
 	$.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
-			loginSuccess(data.app_root);
+			loginSuccess(data.app_root+'profile');
 		} else if (data.status === "ERROR") {
 			loginError("Login failed. "+data.message);
 		}  else {
@@ -84,15 +88,15 @@ function loginEmail() {
 	} else {
 		processLogin($("#login-form").serialize());
 	}
-};
+}
 
 function handleFBLogin(response) {
     if (response.status === 'connected') {
 		FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-			api_response["login_type"] = "FACEBOOK";
-			api_response["login_email"] = api_response["email"];
-			response["email"] = api_response["email"];
-			response["access_token"] = FB.getAuthResponse().accessToken;
+			api_response.login_type = "FACEBOOK";
+			api_response.login_email = api_response.email;
+			response.email = api_response.email;
+			response.access_token = FB.getAuthResponse().accessToken;
 			$.post("ajax/user/update_access_token", response, function(data, textStatus, jqXHR){
 				if(data.status === "SUCCESS"){
 					processLogin(api_response);

@@ -3,6 +3,11 @@ Thumbs.db
 ehthumbs.db
 Icon
 
+# Local storage #
+#################
+/uploads
+/ajax/uploads
+
 # Composer #
 ############
 /vendor
