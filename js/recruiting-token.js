@@ -308,6 +308,15 @@ $(document).ready(function(){
         $('#images-frontpage').hide();
       }
     });
+    url = '/ajax/recruiting_token/get_videos' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined && data.data.length > 0) {
+        assetHost = getAssetHost();
+        //$('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+      } else {
+        $('#videos-frontpage').hide();
+      }
+    });
   } else {
     window.location.href = 'https://www.givetoken.com';
   }
