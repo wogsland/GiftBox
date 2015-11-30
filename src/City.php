@@ -5,6 +5,7 @@ class City
 {
     public $id;
     public $name;
+    public $image_file;
     public $population;
     public $longitude;
     public $latitude;

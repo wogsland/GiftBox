@@ -310,7 +310,7 @@ i.big-icon {
 }
 #location-frontpage {
   text-align:center;
-  background: url('/images/MountainView.jpg') center / cover;
+  /*background: url('/images/MountainView.jpg') center / cover;*/
 }
 #images-frontpage {
   text-align:center;
@@ -332,7 +332,7 @@ i.big-icon {
 }
 #videos-frontpage {
   text-align:center;
-  background: url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover;
+  /*background: url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover;*/
   margin-right: 0px;
   margin-left: 0px;
   margin-bottom: 48px;

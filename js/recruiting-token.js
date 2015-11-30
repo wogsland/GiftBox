@@ -260,6 +260,8 @@ $(document).ready(function(){
           $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
           $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
           $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
+          $('#location-frontpage').css('background',"url('/images/"+data.data.image_file+"') center / cover");
+          $('#location-back').css('background',"url('/images/"+data.data.image_file+"') center / cover");
         }
       });
       var socialCount = 0;
@@ -344,9 +346,7 @@ $(document).ready(function(){
           vars[i] = value;
           i++;
         });
-        console.log(vars);
         var videoId = vars[i-1];
-        console.log(videoId);
         $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
       } else {
         $('#videos-frontpage').hide();
