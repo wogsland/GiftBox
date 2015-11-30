@@ -19,6 +19,7 @@ class User
     public $access_token;
     public $location;
     public $position;
+    public $company;
     public $about;
     public $username;
     public $user_group;

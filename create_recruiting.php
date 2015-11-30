@@ -31,15 +31,15 @@ function paper_textarea($label, $id, $value) {
 }
 function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
     echo '			<paper-dropdown-menu '.($required ? 'required error-message="This is a required field"' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '				<paper-menu class="dropdown-content" '.($selected_index ? 'selected="'.$selected_index.'"' : null).'>'.PHP_EOL;
+    echo '				<paper-menu class="dropdown-content"'.(is_null($selected_index) ? null : ' selected="'.$selected_index.'"').'>'.PHP_EOL;
     foreach ($options as $value => $option) {
         echo '  				<paper-item id="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
     }
     echo '				</paper-menu>'.PHP_EOL;
     echo '			</paper-dropdown-menu>'.PHP_EOL;
 }
-function paper_card($title) {
-    echo '<paper-card heading="'.$title.'">'.PHP_EOL;
+function paper_card($title, $id) {
+    echo '<paper-card id="'.$id.'" heading="'.$title.'">'.PHP_EOL;
 }
 function paper_card_end() {
     echo '</paper-card>'.PHP_EOL;
@@ -84,6 +84,8 @@ function paper_card_end() {
             margin-top: 20px;
             --paper-card-header-color: white;
             --paper-card-header-text: {font-weight: normal;}
+        }
+        paper-card#send-token-via {
         }
         paper-input, paper-textarea, paper-dropdown-menu {
             --paper-input-container-focus-color: #1094F7;
@@ -133,6 +135,9 @@ function paper_card_end() {
             color: white;
              --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
         }
+        paper-dialog#status-dialog {
+            --paper-dialog-background-color: #303030;
+        }
     </style>
 
 </head>
@@ -161,7 +166,41 @@ function paper_card_end() {
                 <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
                 <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
 
-                <?php paper_card('Required Info'); ?>
+                <?php paper_card('Send Token via', 'send-token-via'); ?>
+                    <div id="send-link-list-container">
+                        <div class="send-link-container send-link-container-hover">
+                            <div class="inner-send-link-container">
+                                <div><i class="material-icons send-link-icon">image</i></div>
+                                <div class="send-link-text-container">Linked Image</div>
+                            </div>
+                        </div>
+                        <div class="send-link-container send-link-container-hover">
+                            <div class="inner-send-link-container">
+                                <i class="material-icons send-link-icon">insert_link</i>
+                                <div class="send-link-text-container">Link</div>
+                            </div>
+                        </div>
+                        <div class="send-link-container send-link-container-hover">
+                            <div class="inner-send-link-container">
+                                <i class="material-icons send-link-icon">email</i>
+                                <div class="send-link-text-container">Token e-Mail</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="send-link-content-container">
+                        <div class="send-link-content">
+                            <p>A linked image has been copied to your clipboard.  Simply go to your email, paste the image in, and send out the email.</p>
+                            <p>Certain email providers require an image to be linked separately. All information is provided below.</p>
+                        </div>
+                        <div class="send-link-content">
+                        </div>
+                        <div class="send-link-content">
+                            <p>Have us email out your Token.  This option will provide you with the greatest analytics and potential for A/B split testing.</p>
+                        </div>
+                    </div>
+                <?php paper_card_end(); ?>
+
+                <?php paper_card('Required Info', 'required-info'); ?>
                     <div class="field-container">
                         <?php
                             paper_text('Job Title', 'job-title', $token->job_title, true);
@@ -180,14 +219,14 @@ function paper_card_end() {
                         ?>
                     </div>
                 <?php paper_card_end(); ?>
-                <?php paper_card('Basic Info'); ?>
+                <?php paper_card('Basic Info', 'basic-info'); ?>
                     <div class="field-container">
                         <?php paper_textarea('Skills Required (copy and paste from word doc)', 'skills-required', $token->skills_required); ?>
                         <?php paper_textarea('Responsibilities (copy and paste from word doc)', 'responsibilities', $token->responsibilities); ?>
                         <?php paper_textarea('Perks (copy and paste from word doc)', 'perks', $token->perks); ?>
                     </div>
                 <?php paper_card_end(); ?>
-                <?php paper_card('Important Company Info'); ?>
+                <?php paper_card('Important Company Info', 'company-info'); ?>
                     <div class="field-container">
                         <?php paper_text('Company Name', 'company', $token->company); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
@@ -200,7 +239,7 @@ function paper_card_end() {
                         ?>
                     </div>
                 <?php paper_card_end(); ?>
-                <?php paper_card('Company Images'); ?>
+                <?php paper_card('Company Images', 'company-images'); ?>
                     <div class="field-container">
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Images From: </span>
@@ -233,7 +272,7 @@ function paper_card_end() {
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
-                <?php paper_card('Company Videos'); ?>
+                <?php paper_card('Company Videos', 'company-videos'); ?>
                     <div class="field-container">
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Videos From: </span>
@@ -261,7 +300,7 @@ function paper_card_end() {
                         </div>
                     </div>
                 <?php paper_card_end(); ?>
-                <?php paper_card('Company Social Media'); ?>
+                <?php paper_card('Company Social Media', 'company-social-media'); ?>
                     <div class="field-container">
                         <?php paper_text('Facebook', 'company-facebook', $token->company_facebook); ?>
                         <?php paper_text('LinkedIn', 'company-linkedin', $token->company_linkedin); ?>
@@ -272,7 +311,7 @@ function paper_card_end() {
                 <?php paper_card_end(); ?>
                 <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">PREVIEW</paper-button>
-                    <paper-button raised class="bottom-button">FINISH</paper-button>
+                    <paper-button raised class="bottom-button" onclick="finish()">FINISH</paper-button>
                 </div>
             </form>
         </div><div id="right-column">
