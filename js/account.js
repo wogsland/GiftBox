@@ -49,11 +49,9 @@ function logout() {
 			if (data.login_type === "FACEBOOK") {
 				FB.getLoginStatus(function(response) {
 					// are they currently logged into Facebook?
-					console.log(response);
 					if (response.status === 'connected') {
 						//they were authed so do the logout
 						FB.logout(function(response) {
-							console.log(response);
 						});
 					}
 				});
@@ -96,7 +94,6 @@ function saveMyAccount() {
 
 		posting.fail(function(data, textStatus) {
 			showError("#my-account-message", textStatus);
-			console.log(textStatus);
 		});
 	}
 }

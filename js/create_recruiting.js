@@ -6,7 +6,7 @@ function createVideoImage(id, src, url) {
 	img.data('url', url);
 	img.data('thumbnail_src', src);
 	img.data('saved', false);
-	
+
 	return img;
 }
 
@@ -120,7 +120,7 @@ function handleImageFileSelect(evt) {
 		}
 
 		// Create an image element to show the thumbnail
-		
+
 		var img = $('<img class="recruiting-token-image" id="'+file.name.replace('.', '_')+'">');
 		img.attr('src', window.URL.createObjectURL(file));
 		img.data('file', file);
@@ -132,10 +132,9 @@ function handleImageFileSelect(evt) {
 function uploadFileData(fileData, fileName, img) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
-		console.log("Uploading " + fileName);
 		xhr.upload.onprogress = function(e) {
 			if (e.lengthComputable) {
-				console.log("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
+
 			}
 		};
         xhr.open("POST", "upload.php", true);
