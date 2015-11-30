@@ -299,9 +299,11 @@ $(document).ready(function(){
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
-      if (data.data !== undefined) {
+      if (data.data !== undefined && data.data.length > 0) {
         assetHost = getAssetHost();
         $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+      } else {
+        $('#images-frontpage').hide();
       }
     });
   } else {
