@@ -5,7 +5,7 @@ class RecruitingTokenImage
 {
     protected $id;
     protected $recruiting_token_id;
-    protected $image_file_name;
+    protected $file_name;
 
     /**
      * Constructs the class
@@ -67,19 +67,19 @@ class RecruitingTokenImage
      * This function creates an entry in the recruiting_token_image table
      *
      * @param int $recruiting_token_id - id of the token
-     * @param string $image_file_name  - name of image file
+     * @param string $file_name  - name of image file
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $image_file_name)
+    public function create($recruiting_token_id, $file_name)
     {
-        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, image_file_name)
-                  VALUES ('$recruiting_token_id', '$image_file_name')";
+        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
+                  VALUES ('$recruiting_token_id', '$file_name')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
             $this->recruiting_token_id = $recruiting_token_id;
-            $this->image_file_name = $image_file_name;
+            $this->file_name = $file_name;
         }
         return $id;
     }
@@ -135,19 +135,19 @@ class RecruitingTokenImage
 
         // Delete from file system
         $cwd = getcwd();
-        $full_path = FILE_STORAGE_PATH.$this->image_file_name;
-        $success = unlink($full_path);
+        $full_path = FILE_STORAGE_PATH.$this->file_name;
+        if (file_exists($full_path)) {
+            $success = unlink($full_path);
+        }
 
         // Delete from database
-        if ($success) {
-            if (isset($this->id)) {
-                // delete from db
-                $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
-                execute($sql);
-                $vars = get_class_vars(get_class($this));
-                foreach ($vars as $key=>$value) {
-                    unset($this->$key);
-                }
+        if (isset($this->id)) {
+            // delete from db
+            $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
+            execute($sql);
+            $vars = get_class_vars(get_class($this));
+            foreach ($vars as $key=>$value) {
+                unset($this->$key);
             }
         }
         return $success;

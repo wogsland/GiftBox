@@ -11,6 +11,18 @@ function getUrlPath() {
   return vars;
 }
 
+function getAssetHost() {
+  console.log(window.location.hostname);
+  switch (window.location.hostname) {
+    case 'www.givetoken.com':
+    return 'https://tokenstorage.storage.googleapis.com';
+    case 'dev.givetoken.com':
+    return 'https://tokenstorage-staging.storage.googleapis.com';
+    default:
+    return '/uploads';
+  }
+}
+
 scope._onOverviewClick = function(event) {
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
@@ -112,12 +124,10 @@ scope._onImagesClick = function(event) {
   url = '/ajax/recruiting_token/get_images' + path[4];
   $.post(url, '', function(data) {
     if (data.data !== undefined) {
-      console.log(data);
+      assetHost = getAssetHost();
       i=1;
-      $.each(data.data, function(){
-        console.log('Each!');
-        console.log(data.data.file_name);
-        $('#image-' + i).css('background',"url('/uploads/"+data.data.file_name+"') center / cover");
+      $.each(data.data, function(index, value){
+        $('#image-' + i).css('background',"url('"+assetHost+"/"+value.file_name+"') center / cover");
         i++;
       });
       while (i < 7) {
@@ -291,6 +301,14 @@ $(document).ready(function(){
         $('.gt-info-video').attr('src', data.data.company_video);
       }
     },'json');
+    url = '/ajax/recruiting_token/get_images' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined) {
+        assetHost = getAssetHost();
+        console.log(assetHost);
+        $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+      }
+    });
   } else {
     console.log('redirecting...');
     window.location.href = 'https://www.givetoken.com';

@@ -314,7 +314,7 @@ i.big-icon {
 }
 #images-frontpage {
   text-align:center;
-  background: url('/images/bloom5.jpg') center / cover;
+  /*background: url('/images/bloom5.jpg') center / cover;*/
   margin-left: 0px;
   margin-right: 0px;
   margin-bottom: 48px;
