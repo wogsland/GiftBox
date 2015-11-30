@@ -91,6 +91,34 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the getByRecruitingTokenLongId function.
+     */
+    public function testGetByRecruitingTokenLongId()
+    {
+        $RecruitingTokenVideo = new RecruitingTokenVideo();
+
+        // token with no images should return empty array
+        $images = $RecruitingTokenVideo->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $this->assertTrue(is_array($images));
+        $this->assertTrue(empty($images));
+
+        // create token images
+        $url[1] = 'https://givetoken.com/video/'.rand();
+        $url[2] = 'https://givetoken.com/video/'.rand();
+        $url[3] = 'https://givetoken.com/video/'.rand();
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[1]);
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[2]);
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[3]);
+        $images = $RecruitingTokenVideo->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $this->assertTrue(is_array($images));
+        $this->assertEquals(count($images), 3);
+        foreach ($images as $image) {
+            $this->assertTrue($image['id'] > 0);
+            $this->assertTrue(in_array($image['url'], $url));
+        }
+    }
+
+    /**
      * Tests the delete function.
      */
     public function testDelete()
