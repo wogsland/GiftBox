@@ -31,7 +31,7 @@ function paper_textarea($label, $id, $value) {
 }
 function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
     echo '			<paper-dropdown-menu '.($required ? 'required error-message="This is a required field"' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '				<paper-menu class="dropdown-content" '.($selected_index ? 'selected="'.$selected_index.'"' : null).'>'.PHP_EOL;
+    echo '				<paper-menu class="dropdown-content"'.(is_null($selected_index) ? null : ' selected="'.$selected_index.'"').'>'.PHP_EOL;
     foreach ($options as $value => $option) {
         echo '  				<paper-item id="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
     }
@@ -134,6 +134,9 @@ function paper_card_end() {
             --paper-dialog-background-color: #424242;
             color: white;
              --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
+        }
+        paper-dialog#status-dialog {
+            --paper-dialog-background-color: #303030;
         }
     </style>
 
