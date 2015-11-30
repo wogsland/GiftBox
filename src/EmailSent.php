@@ -16,7 +16,6 @@ class EmailSent
     protected $bcc;
     protected $reply_to;
     protected $subject;
-    protected $email_template_id;
     protected $success;
     protected $error_message;
     protected $created;
