@@ -136,7 +136,6 @@ function renderAverageChart() {
 
   for (var i = 0; i < averageChartData.rows.length; i++) {
     averageChartData.rows[i].c[1].v = parseInt(averageChartData.rows[i].c[1].v);
-    // console.log(averageChartData.rows[i].c[1].v);
   }
 
   var data = new google.visualization.DataTable(averageChartData);
@@ -144,13 +143,11 @@ function renderAverageChart() {
   var title = 'Average Time: ' + averageChartNumber + " (hh:mm:ss)";
 
   var numOfRows = data.getNumberOfRows();
-  console.log(numOfRows);
   var highest_tick = 0;
   for (var i = 0; i < numOfRows; i++) {
     var seconds_string = data.getFormattedValue(i, 1);
     if (parseInt(seconds_string) > highest_tick) {
       highest_tick = parseInt(seconds_string);
-      console.log(highest_tick);
     }
     var formattedTime = seconds_string.toHHMMSS();
     data.setFormattedValue(i, 1, formattedTime);
@@ -159,11 +156,8 @@ function renderAverageChart() {
   var ticks = [];
 
   for (i = 0; i < highest_tick + 150; i += 100) {
-    console.log(i);
     second_string = i.toString();
-    console.log(second_string);
     time_string = second_string.toHHMMSS();
-    console.log(time_string);
     ticks.push({v: i, f: time_string});
   }
 
@@ -218,7 +212,6 @@ function renderBouncesChart() {
       chartArea:{width:'65%',height:'65%'},
     };
 
-    console.log(data.getColumnLabel(1));
     data.setColumnLabel(1, 'Bounces');
 
     // Instantiate and draw our chart, passing in some options.
@@ -337,7 +330,6 @@ function renderEmailChart() {
 function renderGenderChart() {
 
   var data = new google.visualization.DataTable(genderChartData);
-  console.log(data.getNumberOfRows());
 
   if (data.getNumberOfRows() === 0) {
     notifyLittleData($('#gender-timeline'), 'Gender');

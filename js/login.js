@@ -69,7 +69,6 @@ function processLogin(userInfo) {
 	loginInfo("Logging into GiveToken.  Please wait...");
 	$.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
-			console.log(data);
 			loginSuccess(data.app_root+'profile');
 		} else if (data.status === "ERROR") {
 			loginError("Login failed. "+data.message);

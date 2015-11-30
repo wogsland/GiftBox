@@ -1,5 +1,4 @@
 var scope = document.querySelector('template[is="dom-bind"]');
-//console.log(scope);
 
 function getUrlPath() {
   var vars = {};
@@ -12,7 +11,6 @@ function getUrlPath() {
 }
 
 function getAssetHost() {
-  console.log(window.location.hostname);
   switch (window.location.hostname) {
     case 'www.givetoken.com':
     return 'https://tokenstorage.storage.googleapis.com';
@@ -150,8 +148,6 @@ scope._onVideosClick = function(event) {
 
 scope._onYesClick = function(event) {
   $('#placeholder').css('background-color', 'green');
-  //console.log('yes clicked');
-  //console.log($('#placeholder'));
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -225,7 +221,9 @@ $(document).ready(function(){
       var words = overview.split(' ');
       var shortDescription = '';
       for (i = 0; i < 25; i++) {
-        shortDescription += words[i] + ' ';
+        if (words[i] !== undefined) {
+          shortDescription += words[i] + ' ';
+        }
       }
       if (words.length >= 25) {
         shortDescription += ' ... ';
@@ -303,14 +301,14 @@ $(document).ready(function(){
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
-      if (data.data !== undefined) {
+      if (data.data !== undefined && data.data.length > 0) {
         assetHost = getAssetHost();
-        console.log(assetHost);
         $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+      } else {
+        $('#images-frontpage').hide();
       }
     });
   } else {
-    console.log('redirecting...');
     window.location.href = 'https://www.givetoken.com';
   }
   smallScreen();

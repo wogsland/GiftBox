@@ -96,7 +96,6 @@ function sendFacebook() {
 }
 
 function uploadFileData(fileData, fileName) {
-	// console.log("Uploading: " + fileData + ", under " + fileName);
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
 		setStatus("Uploading " + fileName);
@@ -114,7 +113,6 @@ function uploadFileData(fileData, fileName) {
 function uploadFile(file, fileName) {
 	// If no fileName is passed, use the file.name as default
 	fileName = typeof fileName !== 'undefined' ? fileName : file.name;
-	// console.log(fileName);
 	while(fileName.indexOf(" ") != -1){
 		fileName = fileName.replace(" ", "");
 	}
@@ -1329,7 +1327,6 @@ function save() {
 
 			var my_image = document.createElement("img");
 			my_image.src = croppedImage.src;
-			// console.log(croppedImage.src);
 			ctx.drawImage(my_image, width, height);
 		}
 
@@ -1453,11 +1450,7 @@ function save() {
 						var str = this.image_file_list[i][1].name;
 						while(str.indexOf(" ") != -1){
 							str = str.replace(" ", "");
-							console.log(str);
 						}
-						console.log("WHAT UP IS THIS?");
-						console.log(this.image_file_list[i][1]);
-						console.log(template.giftboxId + "_" + this.image_file_list[i][1].name);
 						uploadFile(this.image_file_list[i][1], template.giftboxId + "_" + this.image_file_list[i][1].name);
 					}
 				}
@@ -1479,7 +1472,6 @@ function save() {
 						imageName = template.giftboxId + "_" + giftbox.bentos[i].image_file_name;
 					}
 					if (image.file) {
-						console.log(imageName);
 						uploadFile(image.file, imageName);
 					} else {
 						uploadFileData(image.src, imageName);
@@ -1671,12 +1663,10 @@ function selectSaved() {
 
 function loadSaved() {
 	var tokenId = $('#token-list').find(":selected").val();
-	console.log("Logging saved");
 	if (tokenId) {
 		$('#open-dialog').dialog('close');
 		openStatus("Loading", "Loading saved Token...");
 		$.get("/ajax/token/get", {id: tokenId}, function(data) {
-			console.log("IN GET");
 			var token = data;
 			closeStatus();
 
@@ -1745,7 +1735,6 @@ function loadSaved() {
 					var height;
 					for (index = 0; index < token.dividers.length; ++index) {
 						divider = document.getElementById(token.dividers[index].css_id);
-						console.log(divider);
 						classes = $('#' + token.dividers[index].css_id).attr('class').split(" ");
 
 						// First if statement to check whether this is a divider and type
@@ -1754,7 +1743,6 @@ function loadSaved() {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
 								divider.style.height = token.dividers[index].css_height;
-								console.log(divider.style.height);
 							} else if (classes[0] == "horizontal") {
 								divider.style.left = token.dividers[index].css_left;
 								divider.style.top = token.dividers[index].css_top;
@@ -1902,7 +1890,6 @@ function loadBento(bento, savedBento) {
 			var trackId = spotifyTrackId(savedBento.content_uri);
 			addSpotify(bento, trackId);
 		} else if (isVimeo(savedBento.content_uri)) {
-			console.log("VIMEO");
 			addVimeo(bento, savedBento.content_uri);
 		}
 	}
@@ -1957,7 +1944,6 @@ function createCroppedImage (bento, image, container) {
 	var imageTop = parseInt(imageStyle.top, 10);
 	var sourceY = (containerTop * -1) - imageTop;
 	var croppedCanvas = document.createElement('canvas');
-	// console.log(croppedCanvas);
 	croppedCanvas.width = parseInt(bento.css_width, 10);
 	croppedCanvas.height = parseInt(bento.css_height, 10);
 	var croppedContext = croppedCanvas.getContext('2d');
@@ -2866,7 +2852,6 @@ function chooseBasicEditor() {
 	$('#advanced-editor-box').css('display', 'block');
 	basicConfigObj['image'] = id;
 	basicConfigObj['url'] = src;
-	console.log(basicConfigObj);
 	featherEditor.launch(basicConfigObj);
 	// $('#image-dialog').dialog("close");
     return false;
@@ -2879,7 +2864,6 @@ function chooseAdvancedEditor() {
 	$('#advanced-editor-box').css('display', 'block');
 	advancedConfigObj['image'] = id;
 	advancedConfigObj['url'] = src;
-	console.log(advancedConfigObj);
 	featherEditor.launch(advancedConfigObj);
 	// $('#image-dialog').dialog("close");
     return false;
@@ -2892,7 +2876,6 @@ function chooseTextEditor() {
 	$('#advanced-editor-box').css('display', 'block');
 	textConfigObj['image'] = id;
 	textConfigObj['url'] = src;
-	console.log(textConfigObj);
 	featherEditor.launch(textConfigObj);
 	$('#image-dialog').dialog("close");
     return false;
