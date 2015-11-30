@@ -38,7 +38,11 @@ class RecruitingToken
             $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
             if ($token) {
                 foreach (get_object_vars($token) as $key => $value) {
-                    $this->$key = $value;
+                    if (isset($value)) {
+                        $this->$key = $value;
+                    } else {
+                        unset($this->$key);
+                    }
                 }
             }
         }

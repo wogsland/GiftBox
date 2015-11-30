@@ -236,37 +236,37 @@ $(document).ready(function(){
       $('.gt-info-perks').html(data.data.perks);
       $('.gt-info-location').text(data.data.job_locations);
       var socialCount = 0;
-      if ('' !== data.data.company_twitter) {
+      if (data.data.company_twitter !== undefined && '' !== data.data.company_twitter) {
         $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
         socialCount++;
       } else {
         $('.gt-info-twitter').remove();
       }
-      if ('' !== data.data.company_facebook) {
+      if (data.data.company_facebook !== undefined && '' !== data.data.company_facebook) {
         $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
         socialCount++;
       } else {
         $('.gt-info-facebook').remove();
       }
-      if ('' !== data.data.company_linkedin) {
+      if (data.data.company_linkedin !== undefined && '' !== data.data.company_linkedin) {
         $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
         socialCount++;
       } else {
         $('.gt-info-linkedin').remove();
       }
-      if ('' !== data.data.company_youtube) {
+      if (data.data.company_youtube !== undefined && '' !== data.data.company_youtube) {
         $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
         socialCount++;
       } else {
         $('.gt-info-youtube').remove();
       }
-      if ('' !== data.data.company_google_plus) {
+      if (data.data.company_google_plus !== undefined && '' !== data.data.company_google_plus) {
         $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
         socialCount++;
       } else {
         $('.gt-info-gplus').remove();
       }
-      if ('' !== data.data.company_pinterest) {
+      if (data.data.company_pinterest !== undefined && '' !== data.data.company_pinterest) {
         $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
         socialCount++;
       } else {
