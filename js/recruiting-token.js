@@ -1,5 +1,4 @@
 var scope = document.querySelector('template[is="dom-bind"]');
-//console.log(scope);
 
 function getUrlPath() {
   var vars = {};
@@ -12,7 +11,6 @@ function getUrlPath() {
 }
 
 function getAssetHost() {
-  console.log(window.location.hostname);
   switch (window.location.hostname) {
     case 'www.givetoken.com':
     return 'https://tokenstorage.storage.googleapis.com';
@@ -150,8 +148,6 @@ scope._onVideosClick = function(event) {
 
 scope._onYesClick = function(event) {
   $('#placeholder').css('background-color', 'green');
-  //console.log('yes clicked');
-  //console.log($('#placeholder'));
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -305,12 +301,10 @@ $(document).ready(function(){
     $.post(url, '', function(data) {
       if (data.data !== undefined) {
         assetHost = getAssetHost();
-        console.log(assetHost);
         $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
       }
     });
   } else {
-    console.log('redirecting...');
     window.location.href = 'https://www.givetoken.com';
   }
   smallScreen();
