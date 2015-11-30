@@ -221,7 +221,9 @@ $(document).ready(function(){
       var words = overview.split(' ');
       var shortDescription = '';
       for (i = 0; i < 25; i++) {
-        shortDescription += words[i] + ' ';
+        if (words[i] !== undefined) {
+          shortDescription += words[i] + ' ';
+        }
       }
       if (words.length >= 25) {
         shortDescription += ' ... ';
