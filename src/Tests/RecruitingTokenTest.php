@@ -63,6 +63,22 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Benchmarks the save function.
+     */
+    public function benchmarkSave($b = 100)
+    {
+        echo "in benchmarkSave\n";
+        $result = new RecruitingToken();
+
+        // save for 1 param
+        for ($i=0; $i<$b; $i++) {
+            $result->user_id = $this->User->getId();
+            $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
+            $result->save();
+        }
+    }
+
+    /**
      * Tests the uniqueLongId function.
      */
     public function testUniqueLongId()
