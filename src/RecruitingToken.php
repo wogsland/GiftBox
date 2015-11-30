@@ -13,6 +13,7 @@ class RecruitingToken
     public $responsibilities;
     public $perks;
     public $company;
+    public $company_logo;
     public $company_tagline;
     public $company_website;
     public $company_values;

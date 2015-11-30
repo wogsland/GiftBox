@@ -323,10 +323,9 @@ $(document).ready(function(){
           break;
         }
       }
-      /*$('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover");
-      if (data.data.company_video !== '') {
-        $('.gt-info-video').attr('src', data.data.company_video);
-      }*/
+      if (data.data.company_logo !== '') {
+        $('#briefcase-or-logo').html('<img src="'+assetHost+"/"+data.data.company_logo+'" width=200>');
+      }
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {

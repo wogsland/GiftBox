@@ -106,9 +106,8 @@
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                         <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
                           <div class="mdl-card__supporting-icon">
-                            <h4 class="mdl-color-text--primary-contrast">
-                              <!--<i class="material-icons huge-icon">work</i>-->
-                              <img src="/images/bloom-logo.png" width=200>
+                            <h4 class="mdl-color-text--primary-contrast" id="briefcase-or-logo">
+                              <i class="material-icons huge-icon">work</i>
                             </h4>
                           </div>
                         </div>
