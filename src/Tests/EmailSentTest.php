@@ -134,7 +134,6 @@ extends \PHPUnit_Framework_TestCase
 
         // test creation with all details
         $details = $allDetails;
-        $details['email_template_id'] = rand();
         $details['reply_to'] = rand() . '@givetoken.com';
         $details['cc'] = rand() . '@givetoken.com';
         $details['bcc'] = rand() . '@givetoken.com';
@@ -147,7 +146,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($EmailSent->body, $details['body']);
         $this->assertEquals($EmailSent->email_credential_id, $details['email_credential_id']);
         $this->assertEquals($EmailSent->success, $details['success']);
-        $this->assertEquals($EmailSent->email_template_id, $details['email_template_id']);
         $this->assertEquals($EmailSent->reply_to, $details['reply_to']);
         $this->assertEquals($EmailSent->cc, $details['cc']);
         $this->assertEquals($EmailSent->bcc, $details['bcc']);
