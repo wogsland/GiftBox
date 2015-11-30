@@ -191,13 +191,13 @@ function postSave(img, url, params) {
 function saveTokenImage(img, fileName) {
 	img.data('file').name = fileName;
 	var url = '/ajax/recruiting_token_image/save/';
-	var params = {recruiting_token_id: img.data('token_id'), image_file_name: fileName};
+	var params = {recruiting_token_id: img.data('token_id'), file_name: fileName};
 	postSave(img, url, params);
 }
 
 function saveTokenVideo(img) {
 	var url = '/ajax/recruiting_token_video/save/';
-	var params = {recruiting_token_id: img.data('token_id'), video_url: img.data('url'), thumbnail_src: img.data('thumbnail_src')};
+	var params = {recruiting_token_id: img.data('token_id'), url: img.data('url'), thumbnail_src: img.data('thumbnail_src')};
 	postSave(img, url, params);
 }
 

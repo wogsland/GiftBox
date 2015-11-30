@@ -86,6 +86,7 @@ function paper_card_end() {
             --paper-card-header-text: {font-weight: normal;}
         }
         paper-card#send-token-via {
+            display: none;
         }
         paper-input, paper-textarea, paper-dropdown-menu {
             --paper-input-container-focus-color: #1094F7;
@@ -311,7 +312,7 @@ function paper_card_end() {
                 <?php paper_card_end(); ?>
                 <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">PREVIEW</paper-button>
-                    <paper-button raised class="bottom-button" onclick="finish()">FINISH</paper-button>
+                    <paper-button raised class="bottom-button" onclick="finish()" disabled>FINISH</paper-button>
                 </div>
             </form>
         </div><div id="right-column">
