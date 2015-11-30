@@ -149,7 +149,7 @@ scope._onVideosClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data !== undefined && data.data.length > 0) {
       var videos = '';
-      $.each(data.data, function(vid) {
+      $.each(data.data, function(index, vid) {
         videos += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
         videos += '<div class="mdl-card mdl-cell mdl-cell--12-col">';
         videos += '<div class="mdl-card__title">';
@@ -163,6 +163,8 @@ scope._onVideosClick = function(event) {
         videos += '</div>';
         videos += '</section>';
       });
+      videos += '<section class="section--footer mdl-color--light-grey mdl-grid">';
+      videos += '</section>';
       console.log(videos);
       $('#videos-container').html(videos);
     } else {
