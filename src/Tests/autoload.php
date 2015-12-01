@@ -1,4 +1,7 @@
 <?php
+// always run tests in strict mode
+error_reporting(E_ALL);
+
 // local settings
 require_once __DIR__.'/local.php';
 
