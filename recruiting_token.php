@@ -13,7 +13,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="GiveToken">
+    <meta name="apple-mobile-web-app-title" content="GiveToken - Recruiting Token">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
@@ -81,7 +81,7 @@
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
                         <i class="gt-info-company"></i>
-                        - <i class="gt-info-jobtitle"></i>
+                        <i class="gt-info-jobtitle"></i>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>

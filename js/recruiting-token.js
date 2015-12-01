@@ -216,8 +216,14 @@ $(document).ready(function(){
       if (data.success == 'false') {
         window.location.href = 'https://www.givetoken.com';
       }
-      $('title').text(data.data.company+' - '+data.data.job_title);
-      $('.gt-info-company').text(data.data.company);
+      var tokenTitle;
+      if (data.data.company !== undefined && data.data.company !== null && '' !== data.data.company) {
+        $('.gt-info-company').text(data.data.company+' -');
+        tokenTitle = data.data.company+' - '+data.data.job_title;
+      } else {
+        tokenTitle = data.data.job_title;
+      }
+      $('title').text(tokenTitle);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
       var overview = '' + data.data.job_description;
