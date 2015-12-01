@@ -218,10 +218,29 @@ $(document).ready(function(){
         shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
       $('.gt-info-overview-short').html(shortDescription);
-      $('.gt-info-skills').html(data.data.skills_required);
-      $('.gt-info-responsibilities').html(data.data.responsibilities);
-      $('.gt-info-values').html(data.data.company_values);
-      $('.gt-info-perks').html(data.data.perks);
+      if (!dataExists(data.data.job_description)) {
+        $('#overview-section-2').hide();
+      }
+      if (dataExists(data.data.skills_required)) {
+        $('.gt-info-skills').html(data.data.skills_required);
+      } else {
+        $('#skills-section-2').hide();
+      }
+      if (dataExists(data.data.responsibilities)) {
+        $('.gt-info-responsibilities').html(data.data.responsibilities);
+      } else {
+        $('#responsibilities-section-2').hide();
+      }
+      if (dataExists(data.data.company_values)) {
+        $('.gt-info-values').html(data.data.company_values);
+      } else {
+        $('#values-section-2').hide();
+      }
+      if (dataExists(data.data.perks)) {
+        $('.gt-info-perks').html(data.data.perks);
+      } else {
+        $('#perks-section-2').hide();
+      }
       cityId = data.data.city_id;
       url = '/ajax/city/get/'+cityId;
       $.post(url, '', function(data) {
