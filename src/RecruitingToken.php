@@ -41,8 +41,6 @@ class RecruitingToken
                 foreach (get_object_vars($token) as $key => $value) {
                     if (isset($value)) {
                         $this->$key = $value;
-                    } else {
-                        unset($this->$key);
                     }
                 }
             }
