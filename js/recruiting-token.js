@@ -278,33 +278,37 @@ $(document).ready(function(){
           break;
         }
       }
-      cityId = data.data.city_id;
-      url = '/ajax/city/get/'+cityId;
-      $.post(url, '', function(data) {
-        if (data.data.id !== undefined & data.data.id > 0) {
-          $('.gt-info-location').text(data.data.name);
-          var population = numberWithCommas(data.data.population);
-          $('.gt-city-population').text(population);
-          $('.gt-city-timezone').text(data.data.timezone);
-          $('.gt-city-county').text(data.data.county);
-          $('google-map')[0].latitude = data.data.latitude;
-          $('google-map')[0].longitude = data.data.longitude;
-          $('.gt-city-spring-hi').text(data.data.temp_hi_spring);
-          $('.gt-city-spring-lo').text(data.data.temp_lo_spring);
-          $('.gt-city-spring-avg').text(data.data.temp_avg_spring);
-          $('.gt-city-summer-hi').text(data.data.temp_hi_summer);
-          $('.gt-city-summer-lo').text(data.data.temp_lo_summer);
-          $('.gt-city-summer-avg').text(data.data.temp_avg_summer);
-          $('.gt-city-fall-hi').text(data.data.temp_hi_fall);
-          $('.gt-city-fall-lo').text(data.data.temp_lo_fall);
-          $('.gt-city-fall-avg').text(data.data.temp_avg_fall);
-          $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
-          $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
-          $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
-          $('#location-frontpage').css('background',"url('/images/"+data.data.image_file+"') center / cover");
-          $('#location-back').css('background',"url('/images/"+data.data.image_file+"') center / cover");
-        }
-      });
+      if(dataExists(data.data.city_id)) {
+        cityId = data.data.city_id;
+        url = '/ajax/city/get/'+cityId;
+        $.post(url, '', function(data) {
+          if (data.data.id !== undefined & data.data.id > 0) {
+            $('.gt-info-location').text(data.data.name);
+            var population = numberWithCommas(data.data.population);
+            $('.gt-city-population').text(population);
+            $('.gt-city-timezone').text(data.data.timezone);
+            $('.gt-city-county').text(data.data.county);
+            $('google-map')[0].latitude = data.data.latitude;
+            $('google-map')[0].longitude = data.data.longitude;
+            $('.gt-city-spring-hi').text(data.data.temp_hi_spring);
+            $('.gt-city-spring-lo').text(data.data.temp_lo_spring);
+            $('.gt-city-spring-avg').text(data.data.temp_avg_spring);
+            $('.gt-city-summer-hi').text(data.data.temp_hi_summer);
+            $('.gt-city-summer-lo').text(data.data.temp_lo_summer);
+            $('.gt-city-summer-avg').text(data.data.temp_avg_summer);
+            $('.gt-city-fall-hi').text(data.data.temp_hi_fall);
+            $('.gt-city-fall-lo').text(data.data.temp_lo_fall);
+            $('.gt-city-fall-avg').text(data.data.temp_avg_fall);
+            $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
+            $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
+            $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
+            $('#location-frontpage').css('background',"url('/images/"+data.data.image_file+"') center / cover");
+            $('#location-back').css('background',"url('/images/"+data.data.image_file+"') center / cover");
+          }
+        });
+      } else {
+        $('#location-frontpage').remove();
+      }
       var socialCount = 0;
       if (dataExists(data.data.company_twitter)) {
         $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
