@@ -24,6 +24,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // create a city
         $name = "City #" . rand(0, 100);
+        $image_file = "city.png";
         $population = rand(10000, 10000000);
         $longitude = rand(0, 100);
         $latitude = rand(0, 100);
@@ -44,6 +45,7 @@ extends \PHPUnit_Framework_TestCase
         $temp_avg_winter = rand(0, 100);
         $query = "INSERT INTO `city` (
            `name`,
+           `image_file`,
            `population`,
            `longitude`,
            `latitude`,
@@ -64,6 +66,7 @@ extends \PHPUnit_Framework_TestCase
            `temp_avg_winter`
         ) VALUES (
            '$name',
+           '$image_file',
            '$population',
            '$longitude',
            '$latitude',
@@ -108,6 +111,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('true', $return->success);
         $this->assertEquals($id, $return->data->id);
         $this->assertEquals($name, $return->data->name);
+        $this->assertEquals($image_file, $return->data->image_file);
         $this->assertEquals($population, $return->data->population);
         $this->assertEquals($longitude, $return->data->longitude);
         $this->assertEquals($latitude, $return->data->latitude);
