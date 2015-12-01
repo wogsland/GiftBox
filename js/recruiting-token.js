@@ -1,26 +1,5 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 
-function getUrlPath() {
-  var vars = {};
-  i = 0;
-  var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
-    vars[i] = value;
-    i++;
-  });
-  return vars;
-}
-
-function getAssetHost() {
-  switch (window.location.hostname) {
-    case 'www.givetoken.com':
-    return 'https://tokenstorage.storage.googleapis.com';
-    case 'dev.givetoken.com':
-    return 'https://tokenstorage-staging.storage.googleapis.com';
-    default:
-    return '/uploads';
-  }
-}
-
 scope._onOverviewClick = function(event) {
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
@@ -217,7 +196,7 @@ $(document).ready(function(){
         window.location.href = 'https://www.givetoken.com';
       }
       var tokenTitle;
-      if (data.data.company !== undefined && data.data.company !== null && '' !== data.data.company) {
+      if (dataExists(data.data.company)) {
         $('.gt-info-company').text(data.data.company+' -');
         tokenTitle = data.data.company+' - '+data.data.job_title;
       } else {
@@ -271,37 +250,37 @@ $(document).ready(function(){
         }
       });
       var socialCount = 0;
-      if (data.data.company_twitter !== undefined && data.data.company_twitter !== null && '' !== data.data.company_twitter) {
+      if (dataExists(data.data.company_twitter)) {
         $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
         socialCount++;
       } else {
         $('.gt-info-twitter').remove();
       }
-      if (data.data.company_facebook !== undefined && data.data.company_facebook !== null && '' !== data.data.company_facebook) {
+      if (dataExists(data.data.company_facebook)) {
         $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
         socialCount++;
       } else {
         $('.gt-info-facebook').remove();
       }
-      if (data.data.company_linkedin !== undefined && data.data.company_linkedin !== null && '' !== data.data.company_linkedin) {
+      if (dataExists(data.data.company_linkedin)) {
         $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
         socialCount++;
       } else {
         $('.gt-info-linkedin').remove();
       }
-      if (data.data.company_youtube !== undefined && data.data.company_youtube !== null && '' !== data.data.company_youtube) {
+      if (dataExists(data.data.company_youtube)) {
         $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
         socialCount++;
       } else {
         $('.gt-info-youtube').remove();
       }
-      if (data.data.company_google_plus !== undefined && data.data.company_google_plus !== null && '' !== data.data.company_google_plus) {
+      if (dataExists(data.data.company_google_plus)) {
         $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
         socialCount++;
       } else {
         $('.gt-info-gplus').remove();
       }
-      if (data.data.company_pinterest !== undefined && data.data.company_pinterest !== null && '' !== data.data.company_pinterest) {
+      if (dataExists(data.data.company_pinterest)) {
         $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
         socialCount++;
       } else {
@@ -329,7 +308,7 @@ $(document).ready(function(){
           break;
         }
       }
-      if (data.data.company_logo !== '') {
+      if (dataExists(data.data.company_logo)) {
         $('#briefcase-or-logo').html('<img src="'+assetHost+"/"+data.data.company_logo+'" width=200>');
       }
     },'json');
@@ -363,6 +342,9 @@ $(document).ready(function(){
   smallScreen();
 });
 
+/**
+ * Makes adjustments for small screens
+ */
 function smallScreen() {
   if ( $(window).width() < 739) {
     // small screens adjustments
@@ -371,6 +353,53 @@ function smallScreen() {
   }
 }
 
+/**
+ * Takes a number and adds commas to it every third digit
+ *
+ * @param {number} x The number to add commas to
+ * @return {string} The number with commas added
+ */
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+/**
+ * Checks if data is defined, not null and not the empty string
+ *
+ * @param {mixed} data The data to check
+ * @return {boolean} If data exists
+ */
+function dataExists (data) {
+  return data !== undefined && data !== null && '' !== data;
+}
+
+/**
+ * Returns the URL path broken into pieces
+ *
+ * @return {array} The URL path broken into pieces
+ */
+function getUrlPath() {
+  var vars = {};
+  i = 0;
+  var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
+    vars[i] = value;
+    i++;
+  });
+  return vars;
+}
+
+/**
+ * Returns the host for referencing assets based on environment
+ *
+ * @return {string} The host for referencing assets
+ */
+function getAssetHost() {
+  switch (window.location.hostname) {
+    case 'www.givetoken.com':
+    return 'https://tokenstorage.storage.googleapis.com';
+    case 'dev.givetoken.com':
+    return 'https://tokenstorage-staging.storage.googleapis.com';
+    default:
+    return '/uploads';
+  }
 }
