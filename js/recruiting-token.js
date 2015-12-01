@@ -393,6 +393,8 @@ $(document).ready(function(){
         $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
       } else {
         $('#videos-frontpage').hide();
+        $('#images-frontpage').removeClass('mdl-cell--6-col');
+        $('#images-frontpage').addClass('mdl-cell--12-col');
         $('#videos-drawer').hide();
       }
     });
