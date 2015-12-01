@@ -24,9 +24,9 @@ function paper_text($label, $id, $value, $required = false) {
     echo PHP_EOL;
     echo '              <paper-input value="'.$value.'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'"></paper-input>'.PHP_EOL;
 }
-function paper_textarea($label, $id, $value) {
+function paper_textarea($label, $id, $value, $required = false) {
     echo PHP_EOL;
-    echo '              <paper-textarea value="'.$value.'" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
+    echo '              <paper-textarea value="'.$value.'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
     echo '              </paper-textarea>'.PHP_EOL;
 }
 function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
@@ -205,7 +205,7 @@ function paper_card_end() {
                     <div class="field-container">
                         <?php
                             paper_text('Job Title', 'job-title', $token->job_title, true);
-                            paper_text('Job Description', 'job-description', $token->job_description, true);
+                            paper_textarea('Job Description', 'job-description', $token->job_description, true);
 
                             $all_cities = City::getAll();
                             $cities = array();
@@ -232,11 +232,14 @@ function paper_card_end() {
                         <?php paper_text('Company Name', 'company', $token->company); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
                         <?php paper_text('Company Website', 'company-website', $token->company_website); ?>
-                        <?php paper_text('Company Values', 'company-values', $token->company_values); ?>
+                        <?php paper_textarea('Company Values', 'company-values', $token->company_values); ?>
                         <?php
-                            $company_sizes = array(0 => 'Extra Small', 1 => 'Small', 2 => 'Medium', 3 => 'Large', 4 => 'Extra Large');
-                            $selected_index = array_search($token->company_size, $company_sizes);
-                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_index);
+                            $company_sizes = array('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large');
+                            $selected_size = null;
+                            if (isset($token->company_size) && $token->company_size) {
+                                $selected_size = array_search($token->company_size, $company_sizes);
+                            }
+                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_size);
                         ?>
                     </div>
                 <?php paper_card_end(); ?>
