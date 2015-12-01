@@ -22,11 +22,11 @@ if (isset($_GET['id'])) {
 
 function paper_text($label, $id, $value, $required = false) {
     echo PHP_EOL;
-    echo '              <paper-input value="'.$value.'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'"></paper-input>'.PHP_EOL;
+    echo '              <paper-input value="'.htmlspecialchars($value).'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'"></paper-input>'.PHP_EOL;
 }
 function paper_textarea($label, $id, $value, $required = false) {
     echo PHP_EOL;
-    echo '              <paper-textarea value="'.$value.'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
+    echo '              <paper-textarea value="'.htmlspecialchars($value).'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
     echo '              </paper-textarea>'.PHP_EOL;
 }
 function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
@@ -380,6 +380,7 @@ function paper_card_end() {
 
 
     <!-- JavaScript -->
+    <script src="js/Autolinker.min.js"></script>
 	<script src="js/create_common.js"></script>
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

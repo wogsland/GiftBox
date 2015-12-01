@@ -215,11 +215,25 @@ function isValid(id) {
 
 	return valid;
 }
+
+function linkifyText() {
+	$("#job-title")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-title").val()));
+	$("#job-description")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-description").val()));
+	$("#skills-required")[0].updateValueAndPreserveCaret(Autolinker.link($("#skills-required").val()));
+	$("#responsibilities")[0].updateValueAndPreserveCaret(Autolinker.link($("#responsibilities").val()));
+	$("#perks")[0].updateValueAndPreserveCaret(Autolinker.link($("#perks").val()));
+	$("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
+	$("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
+	$("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
+	$("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
+}
+
 function saveRecruitingToken(preview) {
 	var tokenId = null;
 	var userId = null;
 	var serializedForm = null;
 	if ($('#recruiting-token-form')[0].validate()) {
+		linkifyText();
 		setStatus("Saving token...");
 		serializedForm = document.getElementById("recruiting-token-form").serialize();
 		$.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
