@@ -375,6 +375,8 @@ $(document).ready(function(){
         $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
       } else {
         $('#images-frontpage').hide();
+        $('#videos-frontpage').removeClass('mdl-cell--6-col');
+        $('#videos-frontpage').addClass('mdl-cell--12-col');
         $('#images-drawer').hide();
       }
     });
