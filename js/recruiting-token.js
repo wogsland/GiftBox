@@ -219,27 +219,64 @@ $(document).ready(function(){
       }
       $('.gt-info-overview-short').html(shortDescription);
       if (!dataExists(data.data.job_description)) {
+        $('#overview-drawer').hide();
         $('#overview-section-2').hide();
       }
+      var descriptionCount = 0;
       if (dataExists(data.data.skills_required)) {
         $('.gt-info-skills').html(data.data.skills_required);
+        descriptionCount++;
       } else {
+        $('#skills-drawer').hide();
+        $('#skills-button').hide();
+        $('#skills-section').hide();
         $('#skills-section-2').hide();
       }
       if (dataExists(data.data.responsibilities)) {
         $('.gt-info-responsibilities').html(data.data.responsibilities);
+        descriptionCount++;
       } else {
+        $('#responsibilities-button').hide();
+        $('#responsibilities-drawer').hide();
+        $('#responsibilities-section').hide();
         $('#responsibilities-section-2').hide();
       }
       if (dataExists(data.data.company_values)) {
         $('.gt-info-values').html(data.data.company_values);
+        descriptionCount++;
       } else {
+        $('#values-button').hide();
+        $('#values-drawer').hide();
+        $('#values-section').hide();
         $('#values-section-2').hide();
       }
       if (dataExists(data.data.perks)) {
         $('.gt-info-perks').html(data.data.perks);
+        descriptionCount++;
       } else {
+        $('#perks-button').hide();
+        $('#perks-drawer').hide();
+        $('#perks-section').hide();
         $('#perks-section-2').hide();
+      }
+
+      if (descriptionCount < 4) {
+        switch (descriptionCount) {
+          case 3:
+          $('.job-description-option').removeClass('mdl-cell--3-col');
+          //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
+          $('.job-description-option').addClass('mdl-cell--4-col');
+          break;
+          case 2:
+          $('.job-description-option').removeClass('mdl-cell--3-col');
+          $('.job-description-option').addClass('mdl-cell--6-col');
+          break;
+          case 1:
+          $('.job-description-option').removeClass('mdl-cell--3-col');
+          //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
+          $('.job-description-option').addClass('mdl-cell--12-col');
+          break;
+        }
       }
       cityId = data.data.city_id;
       url = '/ajax/city/get/'+cityId;
@@ -338,6 +375,7 @@ $(document).ready(function(){
         $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
       } else {
         $('#images-frontpage').hide();
+        $('#images-drawer').hide();
       }
     });
     url = '/ajax/recruiting_token/get_videos' + path[4];
@@ -353,6 +391,7 @@ $(document).ready(function(){
         $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
       } else {
         $('#videos-frontpage').hide();
+        $('#videos-drawer').hide();
       }
     });
   } else {

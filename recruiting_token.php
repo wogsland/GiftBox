@@ -118,16 +118,16 @@
                             </p>
                           </div>
                           <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
-                            <a href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
+                            <a id="skills-button" href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
                               Skills Required
                             </a>
-                            <a href="#responsibilities-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onResponsibilitiesClick">
+                            <a id="responsibilities-button"  href="#responsibilities-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onResponsibilitiesClick">
                               Responsibilities
                             </a>
-                            <a href="#values-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onValuesClick">
+                            <a id="values-button"  href="#values-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onValuesClick">
                               Values
                             </a>
-                            <a href="#perks-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onPerksClick">
+                            <a id="perks-button"  href="#perks-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onPerksClick">
                               Perks
                             </a>
                           </div>
