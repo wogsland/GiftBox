@@ -308,6 +308,7 @@ $(document).ready(function(){
         });
       } else {
         $('#location-frontpage').remove();
+        $('#location-drawer').remove();
       }
       var socialCount = 0;
       if (dataExists(data.data.company_twitter)) {
