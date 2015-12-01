@@ -24,20 +24,24 @@ fi
 
 # run unit tests
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
+echo ""
 
 # see what's changed
 git status
+echo ""
 
 # build polymer
 polybuild --maximum-crush recruiting_token.php
 mv recruiting_token.build.js js/recruiting_token.min.js
 sed -i '' -e 's/recruiting_token\.build\.js/\/js\/recruiting_token\.min\.js/g' recruiting_token.build.html
 sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
+echo ""
 echo "Polybuild finished."
 
 # push it up to gcloud
 if [ "$#" -gt 0 ]
 then
+  echo ""
   case $1 in
     "master") gcloud preview app deploy app.yaml --project stone-timing-557 --promote ;;
     "staging") gcloud preview app deploy app.yaml --project t-sunlight-757 --promote ;;
