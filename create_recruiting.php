@@ -401,7 +401,7 @@ function paper_card_end() {
 
 
     <!-- JavaScript -->
-    <script src="js/Autolinker.min.js"></script>
+    <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
 	<script src="js/create_common.js"></script>
 	<script src="js/create_recruiting.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
