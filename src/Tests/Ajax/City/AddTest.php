@@ -23,8 +23,8 @@ extends \PHPUnit_Framework_TestCase
     public function testRequest()
     {
         // create a city
-        $name = "City #" . rand(0, 100);
-        $image_file = "city.png";
+        $name = "City #" . rand();
+        $image_file = rand().".png";
         $population = rand(10000, 10000000);
         $longitude = rand(0, 100);
         $latitude = rand(0, 100);
@@ -43,93 +43,75 @@ extends \PHPUnit_Framework_TestCase
         $temp_hi_winter = rand(0, 100);
         $temp_lo_winter = rand(0, 100);
         $temp_avg_winter = rand(0, 100);
-        $query = "INSERT INTO `city` (
-           `name`,
-           `image_file`,
-           `population`,
-           `longitude`,
-           `latitude`,
-           `county`,
-           `country`,
-           `timezone`,
-           `temp_hi_spring`,
-           `temp_lo_spring`,
-           `temp_avg_spring`,
-           `temp_hi_summer`,
-           `temp_lo_summer`,
-           `temp_avg_summer`,
-           `temp_hi_fall`,
-           `temp_lo_fall`,
-           `temp_avg_fall`,
-           `temp_hi_winter`,
-           `temp_lo_winter`,
-           `temp_avg_winter`
-        ) VALUES (
-           '$name',
-           '$image_file',
-           '$population',
-           '$longitude',
-           '$latitude',
-           '$county',
-           '$country',
-           '$timezone',
-           '$temp_hi_spring',
-           '$temp_lo_spring',
-           '$temp_avg_spring',
-           '$temp_hi_summer',
-           '$temp_lo_summer',
-           '$temp_avg_summer',
-           '$temp_hi_fall',
-           '$temp_lo_fall',
-           '$temp_avg_fall',
-           '$temp_hi_winter',
-           '$temp_lo_winter',
-           '$temp_avg_winter'
-        )";
-        $id = insert($query);
 
         // test created city
         $url = TEST_URL . "/ajax/city/add";
-        //$fields = array();
-        //$fields_string = "";
-        //foreach ($fields as $key=>$value) {
-        //    $fields_string .= $key.'='.$value.'&';
-        //}
-        //$fields_string = rtrim($fields_string, '&');
+        $fields = array(
+            'name'=>$name,
+            'image_file'=>$image_file,
+            'population'=>$population,
+            'longitude'=>$longitude,
+            'latitude'=>$latitude,
+            'county'=>$county,
+            'country'=>$country,
+            'timezone'=>$timezone,
+            'temp_hi_spring'=>$temp_hi_spring,
+            'temp_lo_spring'=>$temp_lo_spring,
+            'temp_avg_spring'=>$temp_avg_spring,
+            'temp_hi_summer'=>$temp_hi_summer,
+            'temp_lo_summer'=>$temp_lo_summer,
+            'temp_avg_summer'=>$temp_avg_summer,
+            'temp_hi_fall'=>$temp_hi_fall,
+            'temp_lo_fall'=>$temp_lo_fall,
+            'temp_avg_fall'=>$temp_avg_fall,
+            'temp_hi_winter'=>$temp_hi_winter,
+            'temp_lo_winter'=>$temp_lo_winter,
+            'temp_avg_winter'=>$temp_avg_winter
+        );
+        $fields_string = "";
+        foreach ($fields as $key=>$value) {
+            $fields_string .= $key.'='.$value.'&';
+        }
+        $fields_string = rtrim($fields_string, '&');
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
-        //curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        //curl_setopt($ch, CURLOPT_COOKIE, ChocolateChip);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_COOKIE, TEST_COOKIE);
         curl_setopt($ch, CURLOPT_URL, $url);
         $response = curl_exec($ch);
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
         ob_end_clean();
-        //print_r($return);
         $return = json_decode($json);
         $this->assertEquals('true', $return->success);
-        $this->assertEquals($id, $return->data->id);
-        $this->assertEquals($name, $return->data->name);
-        $this->assertEquals($image_file, $return->data->image_file);
-        $this->assertEquals($population, $return->data->population);
-        $this->assertEquals($longitude, $return->data->longitude);
-        $this->assertEquals($latitude, $return->data->latitude);
-        $this->assertEquals($county, $return->data->county);
-        $this->assertEquals($country, $return->data->country);
-        $this->assertEquals($timezone, $return->data->timezone);
-        $this->assertEquals($temp_hi_spring, $return->data->temp_hi_spring);
-        $this->assertEquals($temp_lo_spring, $return->data->temp_lo_spring);
-        $this->assertEquals($temp_avg_spring, $return->data->temp_avg_spring);
-        $this->assertEquals($temp_hi_summer, $return->data->temp_hi_summer);
-        $this->assertEquals($temp_lo_summer, $return->data->temp_lo_summer);
-        $this->assertEquals($temp_avg_summer, $return->data->temp_avg_summer);
-        $this->assertEquals($temp_hi_fall, $return->data->temp_hi_fall);
-        $this->assertEquals($temp_lo_fall, $return->data->temp_lo_fall);
-        $this->assertEquals($temp_avg_fall, $return->data->temp_avg_fall);
-        $this->assertEquals($temp_hi_winter, $return->data->temp_hi_winter);
-        $this->assertEquals($temp_lo_winter, $return->data->temp_lo_winter);
-        $this->assertEquals($temp_avg_winter, $return->data->temp_avg_winter);
+        $this->assertEquals('', $return->data);
+
+        // grab it from the database
+        $query = "SELECT * FROM city WHERE `name` = '{$name}'";
+        $result = execute_query($query);
+        $this->assertEquals(1, $result->num_rows);
+        $row = $result->fetch_assoc();
+        $this->assertEquals($name, $row['name']);
+        //$this->assertEquals($image_file, $row['image_file']);
+        $this->assertEquals($population, $row['population']);
+        $this->assertEquals($longitude, $row['longitude']);
+        $this->assertEquals($latitude, $row['latitude']);
+        $this->assertEquals($county, $row['county']);
+        $this->assertEquals($country, $row['country']);
+        $this->assertEquals($timezone, $row['timezone']);
+        $this->assertEquals($temp_hi_spring, $row['temp_hi_spring']);
+        $this->assertEquals($temp_lo_spring, $row['temp_lo_spring']);
+        $this->assertEquals($temp_avg_spring, $row['temp_avg_spring']);
+        $this->assertEquals($temp_hi_summer, $row['temp_hi_summer']);
+        $this->assertEquals($temp_lo_summer, $row['temp_lo_summer']);
+        $this->assertEquals($temp_avg_summer, $row['temp_avg_summer']);
+        $this->assertEquals($temp_hi_fall, $row['temp_hi_fall']);
+        $this->assertEquals($temp_lo_fall, $row['temp_lo_fall']);
+        $this->assertEquals($temp_avg_fall, $row['temp_avg_fall']);
+        $this->assertEquals($temp_hi_winter, $row['temp_hi_winter']);
+        $this->assertEquals($temp_lo_winter, $row['temp_lo_winter']);
+        $this->assertEquals($temp_avg_winter, $row['temp_avg_winter']);
     }
 
     /**
