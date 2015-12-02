@@ -80,14 +80,42 @@ scope._onImagesClick = function(event) {
     if (data.data !== undefined) {
       assetHost = getAssetHost();
       i=1;
+      images = '';
+      $.each(data.data, function(index, value){
+        if (i%3 === 1) {
+          images += '<section class="section--center mdl-grid mdl-grid--no-spacing">';
+        }
+        images += '<div id="image-'+i+'" class="demo-card-image mdl-card mdl-cell--4-col-phone mdl-shadow--2dp">';
+        images += '<div class="mdl-card__title mdl-card--expand"></div>';
+        images += '</div>';
+        if (i%3 === 0) {
+          images += '</section>';
+        } else {
+          images += '<div class="mdl-layout-spacer"></div>';
+        }
+        i++;
+      });
+      if ((i-1)%3 !== 0) {
+        // the last line has only one or two images
+        images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
+        images += '<div class="mdl-card__title mdl-card--expand"></div>';
+        images += '</div>';
+        if ((i-1)%3 === 1) {
+          // the last line has only one image
+          images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
+          images += '<div class="mdl-card__title mdl-card--expand"></div>';
+          images += '</div>';
+        }
+        images += '</section>';
+      }
+      images += '<section class="section--footer mdl-color--light-grey mdl-grid">';
+      images += '</section>';
+      $('#images-container').html(images);
+      i=1;
       $.each(data.data, function(index, value){
         $('#image-' + i).css('background',"url('"+assetHost+"/"+value.file_name+"') center / cover");
         i++;
       });
-      while (i < 7) {
-        $('#image-' + i).hide();
-        i++;
-      }
     }
   });
 };
