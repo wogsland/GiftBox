@@ -33,7 +33,7 @@ body {
         </div>
         <div class="form-group">
           <label for="exampleInputFile">File input</label>
-          <input type="file" id="exampleInputFile">
+          <input type="file" id="exampleInputFile" name="image_file">
           <p class="help-block">Please only upload public domain photos.</p>
         </div>
         <div class="form-group">

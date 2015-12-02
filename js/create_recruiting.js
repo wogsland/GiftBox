@@ -82,7 +82,7 @@ function removeDeleted(type, id) {
 
 function removeImage(img) {
 	var saved = img.data('saved');
-	if (saved == true) {
+	if (saved === true) {
 		var id = img.data('id');
 		if (img.hasClass("recruiting-token-image")) {
 			addDeleted('image', id);
@@ -204,7 +204,7 @@ function saveTokenVideo(img) {
 function isValid(id) {
 	var valid = false;
 	var field = $('#'+id);
-	var value = field[0].value
+	var value = field[0].value;
 	if (typeof value == 'undefined' || !value) {
 		var fieldName = field[0].label;
 		$('#validation-message').html(fieldName+" is a required field.");
