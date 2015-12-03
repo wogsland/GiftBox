@@ -12,7 +12,7 @@ implements \JsonSerializable
     use \GiveToken\Traits\CamelToUnderscore;
 
     protected $id;
-    protected $read_only = ['id','read_only'];
+    protected $readOnly = ['id','readOnly'];
 
     /**
      * Constructs the class
@@ -54,7 +54,7 @@ implements \JsonSerializable
      */
     public function __set($property, $value)
     {
-        if (!in_array($property, $this->read_only)) {
+        if (!in_array($property, $this->readOnly)) {
             $this->$property = $value;
         }
     }
@@ -80,11 +80,11 @@ implements \JsonSerializable
     }
 
     /**
-     * Appends to the list of read-only columns
+     * Appends to the list of read only columns
      */
     protected function addReadOnly($column)
     {
-        array_push($this->read_only, $column);
+        array_push($this->readOnly, $column);
     }
 
     /**
@@ -97,7 +97,7 @@ implements \JsonSerializable
         $values = null;
         $sql = "INSERT INTO {$this->tableName()} (";
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'read_only' && !in_array($key, $this->read_only) && isset($value)) {
+            if ($key !== 'readOnly' && !in_array($key, $this->readOnly) && isset($value)) {
                 $columns .= $comma.$key;
                 $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';
@@ -116,7 +116,7 @@ implements \JsonSerializable
         $comma = null;
         $sql = "UPDATE {$this->tableName()} SET ";
         foreach (get_object_vars($this) as $key => $value) {
-            if ($key !== 'read_only' && !in_array($key, $this->read_only)) {
+            if ($key !== 'readOnly' && !in_array($key, $this->readOnly)) {
                 $sql .= $comma.$key." = ";
                 if (strlen($value) > 0) {
                     $sql .= "'".escape_string($value)."'";
