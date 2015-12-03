@@ -17,6 +17,9 @@ require __DIR__.'/header.php';
     <nav id="create-top-nav">
       <ul>
         <li>
+          <a href="/admin/top_ten">*** Top Ten Tokens ***</a>
+        </li>
+        <li>
           <a href="manage_users.php">Manage Users</a>
         </li>
         <li>
