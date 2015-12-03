@@ -36,20 +36,11 @@ class City extends DatabaseEntity
     }
 
     /**
-     * Overrides DatabaseEntity::insert() to get the created date
-     * after calling parent::insert()
-     */
-    protected function insert()
-    {
-        parent::insert();
-        $sql = "SELECT created FROM {$this->tableName()} WHERE id = $this->id";
-        $this->created = execute_query($sql)->fetch_object()->created;
-    }
-
-    /**
      * Gets all the cities sorted by name
+     *
+     * @return array - the cities
      */
-    public static function getAll() 
+    public static function getAll()
     {
         $cities = array();
         $results = execute_query("SELECT * FROM city ORDER BY name");
@@ -66,12 +57,67 @@ class City extends DatabaseEntity
      * Gets the city id given the city name
      *
      * @param string $name - the name of the city to pull from the database
+     *
+     * @return int - the id of the named city
      */
-    public static function getIdFromName($name) 
+    public static function getIdFromName($name)
     {
         $sql = "SELECT id FROM city WHERE name = '$name'";
         $id = execute_query($sql)->fetch_object()->id;
         return $id;
     }
 
+    /**
+     * Inserts or updates a city in the database
+     *
+     * @return boolean - success of update or insert
+     */
+    public function save()
+    {
+        if (!$this->id) {
+            return $this->insert();
+        } else {
+            return $this->update();
+        }
+    }
+
+    /**
+     * Inserts a city into the database if all required fields are set
+     *
+     * @return boolean - success of insert
+     */
+    protected function insert()
+    {
+      $success = true;
+
+      // check for required columns
+      foreach (get_object_vars($this) as $key => $value) {
+          if (!in_array($key, $this->readOnly)) {
+              $success = $success && isset($value);
+          }
+      }
+      if ($success) {
+          parent::insert();
+          if($success = $success && ((int) $this->id > 0)) {
+              $sql = "SELECT created
+                      FROM {$this->tableName()}
+                      WHERE id = $this->id";
+              $this->created = execute_query($sql)->fetch_object()->created;
+          }
+      }
+
+      // return results
+      return $success;
+    }
+
+    /**
+     * Updates a city in the database
+     *
+     * @return boolean - success of update
+     */
+    protected function update()
+    {
+        $success = false;
+        return $success;
+    }
 }

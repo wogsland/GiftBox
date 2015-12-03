@@ -90,10 +90,9 @@ implements \JsonSerializable
      */
     protected function insert()
     {
-        $comma = null;
-        $columns = null;
-        $values = null;
-        $sql = "INSERT INTO {$this->tableName()} (";
+        $comma = '';
+        $columns = '';
+        $values = '';
         foreach (get_object_vars($this) as $key => $value) {
             if ($key !== 'readOnly' && !in_array($key, $this->readOnly) && isset($value)) {
                 $columns .= $comma.$key;
@@ -101,8 +100,7 @@ implements \JsonSerializable
                 $comma = ', ';
             }
         }
-        $sql .= $columns.') VALUES (';
-        $sql .= $values.')';
+        $sql = "INSERT INTO {$this->tableName()} ($columns) VALUES ($values)";
         $this->id = insert($sql);
     }
 
@@ -153,7 +151,7 @@ implements \JsonSerializable
     /**
      * Specifies json_encode behavior with magic methods
      */
-    public function jsonSerialize() 
+    public function jsonSerialize()
     {
         return (object) get_object_vars($this);
     }
