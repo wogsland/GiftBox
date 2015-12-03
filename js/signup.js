@@ -4,20 +4,17 @@ document.write('\
 		<div class="modal-content">\
 			<div class ="modal-header">\
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
-				<h2 class="modal-title" id="gridSystemModalLabel"><b>Sign Up With GiveToken</b></h2>\
+				<h2 class="modal-title" id="gridSystemModalLabel"><b>Sign Up</b></h2>\
 			</div>\
 			<div class="modal-body">\
 				<div id="signup-alert-placeholder"></div>\
 				<form id="signup-form">\
 					<input type="hidden" id="reg_type" name="reg_type" value="">\
-					<input class="dialog-input large-input" id="first_name" name="first_name" type="text" placeholder="First Name">\
-					<input class="dialog-input large-input" id="last_name" name="last_name" type="text" placeholder="Last Name">\
+					<input id="first_name" name="first_name" type="hidden" value="">\
+					<input id="last_name" name="last_name" type="hidden" value="">\
 					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Your Email">\
 					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
-					<select class="dialog-input large-input" id="signup_level" name="signup_level">\
-					<option value="1">Basic (Free)</option>\
-					<option value="2">Standard ($24.99)</option>\
-					</select>\
+					<input type=hidden id="signup_level" name="signup_level" value="1">\
 					Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>\
 				</form>\
 				 <div class="modal-footer">\
