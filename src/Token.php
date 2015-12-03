@@ -214,7 +214,7 @@ class Token
 
     public function save()
     {
-        if(!$this->unload_count) {
+        if (!$this->unload_count) {
             $this->unload_count = 0;
         }
         if (!$this->id) {

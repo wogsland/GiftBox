@@ -49,24 +49,26 @@ class City extends DatabaseEntity
     /**
      * Gets all the cities sorted by name
      */
-    public static function getAll() {
-		$cities = array();
+    public static function getAll() 
+    {
+        $cities = array();
         $results = execute_query("SELECT * FROM city ORDER BY name");
-		if ($results) {
-			while($object = $results->fetch_object()) {
-				$cities[count($cities)] = $object;
-			}
-			$results->free();
-			return $cities;
+        if ($results) {
+            while($object = $results->fetch_object()) {
+                $cities[count($cities)] = $object;
+            }
+            $results->free();
+            return $cities;
         }
-	}
+    }
 
     /**
      * Gets the city id given the city name
      *
      * @param string $name - the name of the city to pull from the database
      */
-    public static function getIdFromName($name) {
+    public static function getIdFromName($name) 
+    {
         $sql = "SELECT id FROM city WHERE name = '$name'";
         $id = execute_query($sql)->fetch_object()->id;
         return $id;

@@ -27,7 +27,8 @@ class RecruitingTokenImage
         }
     }
 
-    public static function getTokenImages($recruiting_token_id) {
+    public static function getTokenImages($recruiting_token_id) 
+    {
         $results =  execute_query("SELECT * FROM recruiting_token_image where recruiting_token_id = $recruiting_token_id");
         $token_images = array();
         while($token_image = $results->fetch_object()) {
@@ -66,8 +67,8 @@ class RecruitingTokenImage
     /**
      * This function creates an entry in the recruiting_token_image table
      *
-     * @param int $recruiting_token_id - id of the token
-     * @param string $file_name  - name of image file
+     * @param int    $recruiting_token_id - id of the token
+     * @param string $file_name           - name of image file
      *
      * @return int $id - id of inserted row or 0 on fail
      */

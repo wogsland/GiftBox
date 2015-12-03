@@ -4,7 +4,8 @@ namespace GiveToken\Traits;
 /**
  * Function to convert camel case to underscore
  */
-trait CamelToUnderscore {
+trait CamelToUnderscore
+{
 
     /**
      * Turns a camel case input into an underscored one
@@ -13,7 +14,8 @@ trait CamelToUnderscore {
      *
      * @return string - underscore string
      */
-    public function fromCamelCase($input) {
+    public function fromCamelCase($input) 
+    {
         preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
         $ret = $matches[0];
         foreach ($ret as &$match) {

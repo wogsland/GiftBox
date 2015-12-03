@@ -50,7 +50,7 @@ class RecruitingTokenResponse
     public function get($user_id, $long_id = '')
     {
         $responses = array();
-        if (isset($user_id) && $user_id == (int) $user_id){
+        if (isset($user_id) && $user_id == (int) $user_id) {
             if ('' != $long_id) {
                 $result = execute_query(
                     "SELECT id from recruiting_token
@@ -71,7 +71,6 @@ class RecruitingTokenResponse
                       WHERE recruiting_token_response.recruiting_token_id = recruiting_token.id
                       AND recruiting_token.user_id = '$user_id' ";
             $query .= isset($recruiting_token_id) ? "AND recruiting_token.id = '$recruiting_token_id'" : '';
-            //echo $query;
             $result = execute_query($query);
             while ($row = $result->fetch_assoc()) {
                 $responses[] = $row;

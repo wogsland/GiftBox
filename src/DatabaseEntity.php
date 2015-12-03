@@ -3,8 +3,6 @@ namespace GiveToken;
 
 /**
  * This class implements basic database access functionality.
- *
- * phpunit --bootstrap src/tests/autoload.php src/tests/DatabaseEntityTest
  */
 class DatabaseEntity
 implements \JsonSerializable
@@ -50,7 +48,7 @@ implements \JsonSerializable
      * This function sets a protected property if it's not read only
      *
      * @param string $property - the class property to set
-     * @param mixed $value - the value to set the property to
+     * @param mixed  $value    - the value to set the property to
      */
     public function __set($property, $value)
     {
@@ -108,7 +106,7 @@ implements \JsonSerializable
         $this->id = insert($sql);
     }
 
-   /**
+    /**
      * Updates the database using $this->id
      */
     protected function update()
@@ -155,7 +153,8 @@ implements \JsonSerializable
     /**
      * Specifies json_encode behavior with magic methods
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() 
+    {
         return (object) get_object_vars($this);
     }
 }

@@ -28,7 +28,8 @@ class RecruitingTokenVideo
         }
     }
 
-    public static function getTokenVideos($recruiting_token_id) {
+    public static function getTokenVideos($recruiting_token_id) 
+    {
         $results =  execute_query("SELECT * FROM recruiting_token_video where recruiting_token_id = $recruiting_token_id");
         $token_videos = array();
         while($token_video = $results->fetch_object()) {
@@ -67,8 +68,8 @@ class RecruitingTokenVideo
     /**
      * This function creates an entry in the recruiting_token_video table
      *
-     * @param int $recruiting_token_id - id of the token
-     * @param string $url  - url of video file
+     * @param int    $recruiting_token_id - id of the token
+     * @param string $url                 - url of video file
      *
      * @return int $id - id of inserted row or 0 on fail
      */
