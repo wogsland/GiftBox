@@ -330,8 +330,9 @@ $(document).ready(function(){
             $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
             $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
             $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
-            $('#location-frontpage').css('background',"url('/uploads/"+data.data.image_file+"') center / cover");
-            $('#location-back').css('background',"url('/uploads/"+data.data.image_file+"') center / cover");
+            assetHost = getAssetHost();
+            $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.data.image_file+"') center / cover");
+            $('#location-back').css('background',"url('"+assetHost+"/"+data.data.image_file+"') center / cover");
           }
         });
       } else {

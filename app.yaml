@@ -114,6 +114,8 @@ handlers:
   script: admin/visitors.php
 - url: /admin/add_city
   script: admin/add_city.php
+- url: /admin/top_ten
+  script: admin/top_ten.php
 
 # Signup
 - url: /activate
