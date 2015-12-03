@@ -93,7 +93,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result->num_rows);
         $row = $result->fetch_assoc();
         $this->assertEquals($name, $row['name']);
-        //$this->assertEquals($image_file, $row['image_file']);
+        $this->assertEquals($image_file, $row['image_file']);
         $this->assertEquals($population, $row['population']);
         $this->assertEquals($longitude, $row['longitude']);
         $this->assertEquals($latitude, $row['latitude']);

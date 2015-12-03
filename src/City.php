@@ -98,7 +98,7 @@ class City extends DatabaseEntity
       }
       if ($success) {
           parent::insert();
-          if($success = $success && ((int) $this->id > 0)) {
+          if ($success = $success && ((int) $this->id > 0)) {
               $sql = "SELECT created
                       FROM {$this->tableName()}
                       WHERE id = $this->id";

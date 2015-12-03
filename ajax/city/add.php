@@ -5,7 +5,7 @@ $success = 'false';
 $data = '';
 $vars = [
    'name',
-   //'image_file',
+   'image_file',
    'population',
    'longitude',
    'latitude',
@@ -37,7 +37,6 @@ foreach ($vars as $var) {
 }
 //echo $missing_var ? "missing\n" : "not missing\n";
 if (!$missing_var) {
-    $City->image_file = rand().'.jpg';
     $success = $City->save() ? 'true' : 'false';
 }
 

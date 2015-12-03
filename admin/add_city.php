@@ -33,7 +33,8 @@ body {
         </div>
         <div class="form-group">
           <label for="exampleInputFile">File input</label>
-          <input type="file" id="exampleInputFile" name="image_file">
+          <input type="file" id="exampleInputFile" name="exampleInputFile">
+          <input type="hidden" id="image_file" name="image_file">
           <p class="help-block">Please only upload public domain photos.</p>
         </div>
         <div class="form-group">
@@ -84,8 +85,24 @@ body {
   $(document).ready(function(){
     $('#submit-city').on('click', function (event) {
       event.preventDefault();
+
+      //save image
+      var file = $('#exampleInputFile')[0].files[0];
+      var reader  = new FileReader();
+      reader.fileName = file.name;
+      reader.onloadend = function () {
+        var xhr = new XMLHttpRequest();
+        if (xhr.upload) {
+          xhr.open("POST", "/upload.php", true);
+          xhr.setRequestHeader("X-FILENAME", file.name);
+          xhr.send(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+      $('#image_file').val(file.name);
+
+      // save info in the database
       url = '/ajax/city/add';
-      console.log($('form').serialize());
       $.post(url, $('form').serialize(), function(data) {
         if (data.success === 'true') {
           $('#city-form').html("<h1>New City Created!</h1>It's like Sim City around here, but without Godzilla.");
