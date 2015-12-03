@@ -1,9 +1,8 @@
 <?php
 namespace GiveToken;
 
-class City
+class City extends DatabaseEntity
 {
-    public $id;
     public $name;
     public $image_file;
     public $population;
@@ -27,23 +26,24 @@ class City
     public $created;
 
     /**
-     * Constructs the class
-     *
-     * @param int $id - the id of the city to pull from the database
+     * Overrides DatabaseEntity::__construct() to set created as read-only
+     * after calling parent::__construct()
      */
     public function __construct($id = null)
     {
-        if ($id !== null && strlen($id) > 0) {
-            $city = execute_query(
-                "SELECT * from city
-                WHERE id = '$id'"
-            )->fetch_object("GiveToken\City");
-            if (isset($city)) {
-                foreach (get_object_vars($city) as $key => $value) {
-                    $this->$key = $value;
-                }
-            }
-        }
+        parent::__construct($id);
+        $this->addReadOnly('created');
+    }
+    
+    /**
+     * Overrides DatabaseEntity::insert() to get the created date
+     * after calling parent::insert()
+     */
+    protected function insert()
+    {
+        parent::insert();
+        $sql = "SELECT created FROM {$this->tableName()} WHERE id = $this->id";
+        $this->created = execute_query($sql)->fetch_object()->created;
     }
 
     /**
@@ -67,7 +67,8 @@ class City
      * @param string $name - the name of the city to pull from the database
      */
     public static function getIdFromName($name) {
-        $id = execute_query("SELECT id FROM city WHERE name = '$name'")->fetch_object()->id;
+        $sql = "SELECT id FROM city WHERE name = '$name'";
+        $id = execute_query($sql)->fetch_object()->id;
         return $id;
     }
 
