@@ -7,11 +7,12 @@ namespace GiveToken;
  * phpunit --bootstrap src/tests/autoload.php src/tests/DatabaseEntityTest
  */
 class DatabaseEntity
+implements \JsonSerializable
 {
     use \GiveToken\Traits\CamelToUnderscore;
 
-    protected $read_only = ['id'];
-    public $id;
+    protected $id;
+    protected $read_only = ['id','read_only'];
 
     /**
      * Constructs the class
@@ -29,6 +30,45 @@ class DatabaseEntity
                 }
             }
         }
+    }
+
+    /**
+     * This function gets a protected property
+     *
+     * @param string $property - the class property desired
+     *
+     * @return mixed - the class property
+     */
+    public function __get($property)
+    {
+        if (isset($this->$property)) {
+            return $this->$property;
+        }
+    }
+
+    /**
+     * This function sets a protected property if it's not read only
+     *
+     * @param string $property - the class property to set
+     * @param mixed $value - the value to set the property to
+     */
+    public function __set($property, $value)
+    {
+        if (!in_array($property, $this->read_only)) {
+            $this->$property = $value;
+        }
+    }
+
+    /**
+     * This function checks if a protected property is set
+     *
+     * @param string $property - the class property to check
+     *
+     * @return bool - if the property is set
+     */
+    public function __isset($property)
+    {
+        return isset($this->$property);
     }
 
     /**
@@ -90,7 +130,7 @@ class DatabaseEntity
         execute($sql);
     }
 
-   /**
+    /**
      * Deletes from the database using $this->id
      */
     public function delete()
@@ -100,7 +140,7 @@ class DatabaseEntity
         execute($sql);
     }
 
-   /**
+    /**
      * Inserts into or updates the database
      */
     public function save()
@@ -110,5 +150,12 @@ class DatabaseEntity
         } else {
             $this->update();
         }
+    }
+
+    /**
+     * Specifies json_encode behavior with magic methods
+     */
+    public function jsonSerialize() {
+        return (object) get_object_vars($this);
     }
 }

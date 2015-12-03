@@ -71,8 +71,9 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
         ob_end_clean();
-        //print_r($return);
+        //print_r($json);
         $return = json_decode($json);
+        //print_r($return);
         $this->assertEquals('true', $return->success);
         $this->assertEquals($city->id, $return->data->id);
         $this->assertEquals($city->name, $return->data->name);

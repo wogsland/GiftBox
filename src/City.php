@@ -3,27 +3,27 @@ namespace GiveToken;
 
 class City extends DatabaseEntity
 {
-    public $name;
-    public $image_file;
-    public $population;
-    public $longitude;
-    public $latitude;
-    public $county;
-    public $country;
-    public $timezone;
-    public $temp_hi_spring;
-    public $temp_lo_spring;
-    public $temp_avg_spring;
-    public $temp_hi_summer;
-    public $temp_lo_summer;
-    public $temp_avg_summer;
-    public $temp_hi_fall;
-    public $temp_lo_fall;
-    public $temp_avg_fall;
-    public $temp_hi_winter;
-    public $temp_lo_winter;
-    public $temp_avg_winter;
-    public $created;
+    protected $name;
+    protected $image_file;
+    protected $population;
+    protected $longitude;
+    protected $latitude;
+    protected $county;
+    protected $country;
+    protected $timezone;
+    protected $temp_hi_spring;
+    protected $temp_lo_spring;
+    protected $temp_avg_spring;
+    protected $temp_hi_summer;
+    protected $temp_lo_summer;
+    protected $temp_avg_summer;
+    protected $temp_hi_fall;
+    protected $temp_lo_fall;
+    protected $temp_avg_fall;
+    protected $temp_hi_winter;
+    protected $temp_lo_winter;
+    protected $temp_avg_winter;
+    protected $created;
 
     /**
      * Overrides DatabaseEntity::__construct() to set created as read-only
@@ -34,7 +34,7 @@ class City extends DatabaseEntity
         parent::__construct($id);
         $this->addReadOnly('created');
     }
-    
+
     /**
      * Overrides DatabaseEntity::insert() to get the created date
      * after calling parent::insert()
