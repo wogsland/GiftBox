@@ -21,7 +21,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $sql = "CREATE TABLE databaseentity ("
+        $sql = "CREATE TABLE database_entity ("
             . "id   INT(11) NOT NULL AUTO_INCREMENT,"
             . "name VARCHAR(100) NOT NULL,"
             . "PRIMARY KEY (id),"
@@ -29,7 +29,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
             . ")";
         execute($sql);
 
-        $sql = "INSERT into databaseentity (name) VALUES ('test name')";
+        $sql = "INSERT into database_entity (name) VALUES ('test name')";
         $this->existing_entity_id = insert($sql);
     }
 
@@ -102,7 +102,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
 
     protected function tearDown()
     {
-        $sql = "DROP TABLE databaseentity";
+        $sql = "DROP TABLE database_entity";
         execute($sql);
     }
 }

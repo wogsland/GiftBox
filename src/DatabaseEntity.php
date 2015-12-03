@@ -1,8 +1,15 @@
 <?php
 namespace GiveToken;
 
+/**
+ * This class implements basic database access functionality.
+ *
+ * phpunit --bootstrap src/tests/autoload.php src/tests/DatabaseEntityTest
+ */
 class DatabaseEntity
 {
+    use \GiveToken\Traits\CamelToUnderscore;
+
     protected $read_only = ['id'];
     public $id;
 
@@ -29,7 +36,7 @@ class DatabaseEntity
      */
     protected function tableName()
     {
-        return substr(get_class($this), strrpos(get_class(), '\\')+1);
+        return $this->fromCamelCase(substr(get_class($this), strrpos(get_class(), '\\')+1));
     }
 
     /**
