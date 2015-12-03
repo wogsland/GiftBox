@@ -80,11 +80,7 @@ function signupSuccess(app_root, signupType, userInfo) {
 
 function signupEmail() {
 	$("#reg_type").val("EMAIL");
-	if (!$("#first_name").val()) {
-		signupError("Please enter a first name.");
-	} else if (!$("#last_name").val()) {
-		signupError("Please enter a last name");
-	} else if (!$("#signup_email").val()) {
+	if (!$("#signup_email").val()) {
 		signupError("Please enter a valid email.");
 	} else if (!$("#signup_password").val()) {
 		signupError("Please enter a password.");
