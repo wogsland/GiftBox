@@ -112,6 +112,12 @@ handlers:
   script: admin.php
 - url: /admin/visitors
   script: admin/visitors.php
+- url: /admin/add_city
+  script: admin/add_city.php
+
+# Signup
+- url: /activate
+  script: activate.php
 
 # catchall for 404
 - url: /.*

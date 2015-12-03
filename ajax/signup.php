@@ -42,9 +42,10 @@ if (User::exists($user->email_address)) {
 
     if ($reg_type == 'EMAIL') {
         // Send the email
-        $link = $app_url . 'activate.php?uid=' . $user->getId() . "&key=$user->activation_key";
+        $link = $app_url . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
         $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
         $email_message = str_replace('{{link}}', $link, $email_message);
+        $sender_email = 'GiveToken <founder@givetoken.com>';
         sendMail($user->email_address, 'GiveToken Signup Confirmation', $email_message, $sender_email);
     }
     $response['status'] = "SUCCESS";

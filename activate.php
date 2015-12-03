@@ -13,13 +13,14 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
         }
         $event = new EventLogger($user_id, EventLogger::ACTIVATE_ACCOUNT);
         $event->log();
-        echo '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
+        $message = '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
     } catch (Exception $e) {
-        echo '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
-        echo $e->getMessage();
+        $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
     }
 } else {
-    echo '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+    $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
 }
+
+header('Location: '.$app_root.'?action=login');
 
 ?>

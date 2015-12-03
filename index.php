@@ -585,6 +585,11 @@ $(document).ready(function(){
   url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
   $.post(url);
 });
+<?php
+if (isset($_GET['action']) && 'login' == $_GET['action']) {
+	echo '$("#login-dialog").modal();';
+}
+?>
 </script>
 
 </body>
