@@ -66,7 +66,7 @@ include __DIR__.'/header.php';
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="js/pricing.js"></script>
+<script src="js/pricing.js?v=<?php echo VERSION;?>"></script>
 
 </body>
 </html>

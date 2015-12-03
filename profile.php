@@ -48,21 +48,21 @@ require __DIR__.'/header.php';
 ============================== -->
 
 <script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
-<script type="text/javascript" src="/app/models/model.js"></script>
-<script type="text/jsx" src="/app/account/AccountStore.js"></script>
+<script type="text/javascript" src="/app/models/model.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/AccountStore.js?v=<?php echo VERSION;?>"></script>
 
 <!-- React Components -->
-<script type="text/jsx" src="/app/account/profile.js"></script>
-<script type="text/jsx" src="/app/account/activities.js"></script>
-<script type="text/jsx" src="/app/account/tokens.js"></script>
-<script type="text/jsx" src="/app/account/token_analytics.js"></script>
-<script type="text/jsx" src="/app/account/viewers.js"></script>
-<script type="text/jsx" src="/app/account/viewer_edit.js"></script>
-<script type="text/jsx" src="/app/account/info.js"></script>
-<script type="text/jsx" src="/app/account/users.js"></script>
-<script type="text/jsx" src="/app/account/user_edit.js"></script>
-<script type="text/jsx" src="/app/account/user_remove.js"></script>
-<script type="text/jsx" src="/app/account/index.js"></script>
+<script type="text/jsx" src="/app/account/profile.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/activities.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/tokens.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/token_analytics.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/viewers.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/viewer_edit.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/info.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/users.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/user_edit.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/user_remove.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/index.js?v=<?php echo VERSION;?>"></script>
 
 
 <section class="profile" id="account-profile"></section>

@@ -12,7 +12,7 @@ require __DIR__.'/header.php';
 	<link rel="stylesheet" href="css/users_groups.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<script src="js/manage_users.js"></script>
+	<script src="js/manage_users.js?v=<?php echo VERSION;?>"></script>
 </head>
 <body>
 	<header class="header" data-stellar-background-ratio="0.5" id="account-profile">

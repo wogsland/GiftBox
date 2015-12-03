@@ -25,12 +25,12 @@ if (!logged_in()) {
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
 	<script src="js/aviary.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/create.js"></script>
-	<script src="js/init.js"></script>
+	<script src="js/util.js?v=<?php echo VERSION;?>"></script>
+	<script src="js/create.js?v=<?php echo VERSION;?>"></script>
+	<script src="js/init.js?v=<?php echo VERSION;?>"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
-	<script src="js/facebook_init.js"></script>
+	<script src="js/facebook_init.js?v=<?php echo VERSION;?>"></script>
 	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>

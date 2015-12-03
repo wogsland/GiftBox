@@ -721,7 +721,7 @@ require __DIR__.'/header.php';
 
 <?php require __DIR__.'/footer.php';?>
 
-<script src="js/community.js"></script>
+<script src="js/community.js?v=<?php echo VERSION;?>"></script>
 <script src="js/jquery.magnific-popup.js"></script>
 
 </body>
