@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="">
+<meta name="description" content="GiveToken">
 <meta name="keywords" content="">
 <meta name="author" content="Gary Peters">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -66,12 +66,6 @@
 
   <!-- CUSTOM STYLESHEETS -->
   <link rel="stylesheet" href="/css/styles.css">
-
-  <!-- COLORS -->
-  <link rel="stylesheet" href="/css/colors.css">
-
-  <!-- RESPONSIVE FIXES -->
-  <link rel="stylesheet" href="/css/responsive.css">
 
   <!--[if lt IE 9]>
   			<script src="/js/html5shiv.js"></script>
