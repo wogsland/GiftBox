@@ -67,7 +67,7 @@ if ($animation_style == "none") {
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
 	<link rel="stylesheet" href="css/colorbox.css" />
 	<link rel="stylesheet" href="css/animate.min.css" />
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 

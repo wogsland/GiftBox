@@ -6,11 +6,6 @@ require_once 'config.php';
 define('TITLE', 'GiveToken.com - Error');
 require __DIR__.'/header.php';
 
-/*
-<!-- JQUERY - why are these alternate versions here?-->
-<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-*/
 ?>
 </head>
 

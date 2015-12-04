@@ -20,7 +20,7 @@ if (!logged_in()) {
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 	<link rel="stylesheet" href="/css/octicons/octicons.css">
 
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
