@@ -87,8 +87,8 @@ require __DIR__.'/header.php';
         echo '<h5 class="md-title">Welcome to the Community Page!</h5>
 								<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>';
         echo '<div class="btn-group buttons login-button text-center">
-								<button href="#login-form" class="open-popup-link btn btn-primary btn-bordered">Login</button>
-								<button href="#signup-form" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
+								<button id="login-community-button" class="open-popup-link btn btn-primary btn-bordered">Login</button>
+								<button id="signup-community-button" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
 							  </div>';
     }
                 ?>
