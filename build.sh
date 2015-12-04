@@ -26,10 +26,6 @@ fi
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
 echo ""
 
-# see what's changed
-git status
-echo ""
-
 # build polymer
 polybuild --maximum-crush recruiting_token.php
 mv recruiting_token.build.js js/recruiting_token.min.js
@@ -57,6 +53,10 @@ yuicompressor js/util.js -o js/util.min.js
 yuicompressor js/account.js -o js/account.min.js
 yuicompressor js/pricing.js -o js/pricing.min.js
 echo "JavaScript minified"
+echo ""
+
+# see what's changed
+git status
 
 # push it up to gcloud
 if [ "$#" -gt 0 ]

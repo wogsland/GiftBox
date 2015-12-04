@@ -1,34 +1,3 @@
-document.write('\
-<div class="modal fade" id="login-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-	<div class="modal-dialog">\
-		<div class="modal-content">\
-			<div class ="modal-header" style="border-bottom: 0px;">\
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
-			</div>\
-			<div class="modal-body">\
-				<div id="fb-root"></div>\
-				<div type="button" class="btn-lg dialog-button-center btn-facebook" onclick="loginFacebook()" style="margin-right: 20px; margin-left: 20px;">\
-					<i class="fa fa-facebook"></i> Log In With Facebook\
-				</div>\
-				<div style="margin-top: 20px;">\
-					<span class="center">Or</span>\
-				</div>\
-				<div id="login-alert-placeholder"></div>\
-				<form id="login-form">\
-					<input type="hidden" name="login_type" value="EMAIL">\
-					<input class="dialog-input large-input" id="login_email" name="login_email" type="text" placeholder="Email address" size="25">\
-					<input class="dialog-input large-input" id="password" name="password" type="password" placeholder="Password" size="25">\
-				</form>\
-				<!--<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>-->\
-				<div type="button" class="btn-lg btn-primary dialog-button-center" onclick="loginEmail()" style="border: 1px solid #e5e5e5; margin-top: 15px;margin-right: 20px; margin-left: 20px;">\
-					Log In With Email\
-				</div>\
-			</div>\
-		</div>\
-	</div>\
-</div>\
-');
-
 function loginOpen() {
 	loginClear();
 	$("#login-dialog").modal();
