@@ -11,7 +11,8 @@
 ### URLs
 hosted on Google Cloud
 - production: [www.givetoken.com](https://www.givetoken.com/) ([stone-timing-557.appspot.com](https://stone-timing-557.appspot.com/))
-- staging: [http://t-sunlight-757.appspot.com/](https://t-sunlight-757.appspot.com/)
+- staging: [dev.givetoken.com](http://dev.givetoken.com)
+([http://t-sunlight-757.appspot.com/](https://t-sunlight-757.appspot.com/))
 
 ### Github
 
@@ -63,7 +64,7 @@ run
 
 which will create everything you need in the untracked components directory.
 
-### Polybuild
+### Optimization
 
 Polymer provides a tool to optimize & minify an app's code which you can get via
 
@@ -75,6 +76,10 @@ and build the recruiting token with
 
 which creates `recruiting_token.build.html` & `recruiting_token.build.js`.
 NB: it treats PHP like a comment and removes it.
+
+Additionally, YUI compressor is the tool we use for general minimization:
+
+    npm install -g yuicompressor
 
 ## <a id="branching"></a>Branching Strategy
 
@@ -221,8 +226,8 @@ When deploying using the following procedures, *be absolutely sure* that you are
 ### Build Script
 The build script (`build.sh`) runs unit tests, warns you of any untracked or
 uncommited files (**these will be included in the optional release to glcoud, but
-are not yet tracked in github**), minifies the token JavaScript, concatenates the HTML
-files and optionally pushes to gcloud. For example, to deploy a test build,
+are not yet tracked in github**), minifies JavaScript & CSS, Polybuilds the token
+and optionally pushes to gcloud. For example, to deploy a test build,
 
     ./build.sh username
 
