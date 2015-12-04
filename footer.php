@@ -42,7 +42,7 @@
      SCRIPTS
 ============================== -->
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/smoothscroll.js"></script>
+<script src="/js/smoothscroll.min.js"></script>
 <script src="/js/jquery.scrollTo.min.js"></script>
 <script src="/js/jquery.localScroll.min.js"></script>
 <script src="/js/jquery-ui.min.js"></script>
@@ -56,13 +56,13 @@
 <script src="/js/matchMedia.js"></script>
 <script src="/js/jquery.ajaxchimp.min.js"></script>
 <script src="/js/jquery.fitvids.js"></script>
-<script src="/js/custom.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/facebook_init.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/util.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/pay_with_stripe.php?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>
 	<script src="/js/login.js?v=<?php echo VERSION;?>"></script>
 	<script src="/js/signup.js?v=<?php echo VERSION;?>"></script>
 <?php }?>
-<script src="/js/account.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/account.min.js?v=<?php echo VERSION;?>"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>

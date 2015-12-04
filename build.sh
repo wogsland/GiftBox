@@ -49,6 +49,15 @@ yuicompressor css/users_groups.css -o css/users_groups.min.css
 echo "CSS minified"
 echo ""
 
+# minify javascript
+yuicompressor js/smoothscroll.js -o js/smoothscroll.min.js
+yuicompressor js/custom.js -o js/custom.min.js
+yuicompressor js/facebook_init.js -o js/facebook_init.min.js
+yuicompressor js/util.js -o js/util.min.js
+yuicompressor js/account.js -o js/account.min.js
+yuicompressor js/pricing.js -o js/pricing.min.js
+echo "JavaScript minified"
+
 # push it up to gcloud
 if [ "$#" -gt 0 ]
 then

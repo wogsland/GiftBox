@@ -6,11 +6,6 @@ require_once __DIR__.'/config.php';
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 
-/*
-<!-- JQUERY - why are these alternate versions here?-->
-<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
-*/
 ?>
 </head>
 
@@ -97,7 +92,7 @@ require __DIR__.'/header.php';
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="js/pricing.js?v=<?php echo VERSION;?>"></script>
+<script src="js/pricing.min.js?v=<?php echo VERSION;?>"></script>
 
 </body>
 </html>
