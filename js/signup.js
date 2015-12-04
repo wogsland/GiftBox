@@ -2,25 +2,29 @@ document.write('\
 <div class="modal fade" id="signup-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
 	<div class="modal-dialog">\
 		<div class="modal-content">\
-			<div class ="modal-header">\
+			<div class ="modal-header" style="border-bottom: 0px;">\
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
-				<h2 class="modal-title" id="gridSystemModalLabel"><b>Sign Up</b></h2>\
 			</div>\
-			<div class="modal-body">\
+			<div class="modal-body center">\
+				<div id="fb-root"></div>\
+				<div type="button" class="btn-lg dialog-button-center btn-facebook" onclick="signupFacebook()" style="margin-right: 20px; margin-left: 20px;">\
+					<i class="fa fa-facebook"></i> Sign Up With Facebook\
+				</div>\
+				<div style="margin-top: 20px;">\
+					<span class="center">Or</span>\
+				</div>\
 				<div id="signup-alert-placeholder"></div>\
-				<form id="signup-form">\
+				<form id="signup-form" class="text-center">\
 					<input type="hidden" id="reg_type" name="reg_type" value="">\
 					<input id="first_name" name="first_name" type="hidden" value="">\
 					<input id="last_name" name="last_name" type="hidden" value="">\
-					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Your Email">\
-					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
+					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Email">\
+					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="Password">\
 					<input type=hidden id="signup_level" name="signup_level" value="1">\
 					Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>\
 				</form>\
-				 <div class="modal-footer">\
-					<div id="fb-root"></div>\
-					<button type="button" class="btn-lg btn-primary dialog-button-left" onclick="signupFacebook()"><i class="fa fa-facebook"></i> Sign Up Using Facebook</button>\
-					<button type="button" class="btn-lg btn-default dialog-button-right" onclick="signupEmail()">Sign Up</button>\
+				<div type="button" class="btn-lg btn-primary dialog-button-center" onclick="signupEmail()" style="border: 1px solid #e5e5e5; margin-top: 15px;margin-right: 20px; margin-left: 20px;">\
+					Sign Up With Email\
 				</div>\
 			</div>\
 		</div>\

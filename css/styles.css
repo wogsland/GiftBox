@@ -2853,3 +2853,8 @@ td.visible-xs{display:none!important}
 @media (min-width:1200px){.hidden-lg,tr.hidden-lg,th.hidden-lg,td.hidden-lg{display:none!important}}.visible-print,tr.visible-print,th.visible-print,td.visible-print{display:none!important}
 
 @media print{.visible-print{display:block!important}table.visible-print{display:table}tr.visible-print{display:table-row!important}th.visible-print,td.visible-print{display:table-cell!important}}@media print{.hidden-print,tr.hidden-print,th.hidden-print,td.hidden-print{display:none!important}}
+
+.btn-facebook {
+  color: white;
+  background-color: rgb(58,87,149);
+}
