@@ -22,7 +22,7 @@ if (logged_in()) {
 define('TITLE', 'GiveToken.com - Community Page');
 require __DIR__.'/header.php';
 ?>
-<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/magnific-popup.min.css">
 
 </head>
 

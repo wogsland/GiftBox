@@ -36,6 +36,18 @@ mv recruiting_token.build.js js/recruiting_token.min.js
 sed -i '' -e 's/recruiting_token\.build\.js/\/js\/recruiting_token\.min\.js/g' recruiting_token.build.html
 sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
 echo "Polybuild finished."
+echo ""
+
+# minify css
+yuicompressor css/styles.css -o css/styles.min.css
+yuicompressor css/magnific-popup.css -o css/magnific-popup.min.css
+yuicompressor css/create_recruiting.css -o css/create_recruiting.min.css
+yuicompressor css/create.css -o css/create.min.css
+yuicompressor css/create_and_preview.css -o css/create_and_preview.min.css
+yuicompressor css/preview.css -o css/preview.min.css
+yuicompressor css/users_groups.css -o css/users_groups.min.css
+echo "CSS minified"
+echo ""
 
 # push it up to gcloud
 if [ "$#" -gt 0 ]

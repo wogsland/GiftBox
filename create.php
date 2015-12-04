@@ -14,9 +14,9 @@ if (!logged_in()) {
 	<link rel="stylesheet" href="assets/elegant-icons/style.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/create.min.css" />
 	<link rel="stylesheet" href="css/animate.min.css" />
-	<link rel="stylesheet" href="css/create_and_preview.css" />
+	<link rel="stylesheet" href="css/create_and_preview.min.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 	<link rel="stylesheet" href="/css/octicons/octicons.css">
 

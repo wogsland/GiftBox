@@ -61,8 +61,8 @@ if ($animation_style == "none") {
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/preview.css" />
-	<link rel="stylesheet" href="css/create_and_preview.css" />
+	<link rel="stylesheet" href="css/preview.min.css" />
+	<link rel="stylesheet" href="css/create_and_preview.min.css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
 	<link rel="stylesheet" href="css/colorbox.css" />

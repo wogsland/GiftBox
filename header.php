@@ -65,7 +65,7 @@
   <link rel="stylesheet" href="/css/animate.min.css">
 
   <!-- CUSTOM STYLESHEETS -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.min.css">
 
   <!--[if lt IE 9]>
   			<script src="/js/html5shiv.js"></script>
