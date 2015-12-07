@@ -7,11 +7,12 @@ $email = isset($endpoint_parts[5]) ? escape_string($endpoint_parts[5]) : '';
 $email = urldecode($email);
 $response = isset($endpoint_parts[6]) ? escape_string($endpoint_parts[6]) : '';
 $response = ucfirst(strtolower($response));
+$cookie = isset($_COOKIE['visitor']) ? escape_string($_COOKIE['visitor']) : '';
 
 $success = 'false';
 $data = '';
 $RecruitingTokenResponse = new RecruitingTokenResponse();
-$id = $RecruitingTokenResponse->create($id, $email, $response);
+$id = $RecruitingTokenResponse->create($id, $email, $response, $cookie);
 if ($id > 0) {
     $success = 'true';
     $data = array('id'=>$id);
