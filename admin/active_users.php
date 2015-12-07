@@ -33,7 +33,7 @@ body {
         </thead>
         <tbody>
           <?php
-          $sql = "SELECT user.id, user.email_address, user.first_name, user.last_name, (web_request.created) AS last_access
+          $sql = "SELECT user.id, user.email_address, user.first_name, user.last_name, MAX(web_request.created) AS last_access
                   FROM user, web_request
                   WHERE user.id = web_request.user_id
                   GROUP BY user.id, user.email_address
