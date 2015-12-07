@@ -82,6 +82,8 @@ handlers:
 # Pricing Page
 - url: /pricing
   script: pricing.php
+- url: /upgrade
+  script: upgrade.php
 
 # Terms Page
 - url: /terms

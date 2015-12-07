@@ -45,6 +45,7 @@ if (User::exists($email)) {
         $_SESSION['app_root'] = $app_root;
         $_SESSION['app_url'] = $app_url;
         $_SESSION['level'] = $user->level;
+        $_SESSION['email'] = $email;
         $event = new EventLogger($user->getId(), $event_type);
         $event->log();
     }
