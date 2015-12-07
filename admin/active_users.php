@@ -25,7 +25,7 @@ body {
   </div>
   <div class="row">
     <div class="col-sm-offset-3 col-sm-6" id="top-ten-table">
-      <h2>TOP TEN TOKENS</h2>
+      <h2>Active Users</h2>
       <table class="table table-striped table-hover">
         <thead>
           <th>User</th>
