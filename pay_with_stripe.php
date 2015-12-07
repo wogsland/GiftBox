@@ -10,7 +10,7 @@ function upgradeError(message) {
 function processUpgrade(token, payFrom) {
 	var upgradeData = {
 		newLevel: 2,
-		plan: 'standard',
+		plan: 'recruiting',
 		stripeToken: token.id,
 		email: token.email,
 	};
