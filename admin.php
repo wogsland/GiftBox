@@ -20,16 +20,19 @@ require __DIR__.'/header.php';
           <a href="/admin/top_ten">*** Top Ten Tokens ***</a>
         </li>
         <li>
-          <a href="manage_users.php">Manage Users</a>
-        </li>
-        <li>
-          <a href="manage_groups.php">Manage Groups</a>
+          <a href="/admin/active_users">Active Users</a>
         </li>
         <li>
           <a href="/admin/visitors">Website Vistors</a>
         </li>
         <li>
           <a href="/admin/add_city">Add Recruiting Token City</a>
+        </li>
+        <li>
+          <a href="manage_users.php">Manage Users</a>
+        </li>
+        <li>
+          <a href="manage_groups.php">Manage Groups</a>
         </li>
       </ul>
     </nav>

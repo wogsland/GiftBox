@@ -118,6 +118,8 @@ handlers:
   script: admin/add_city.php
 - url: /admin/top_ten
   script: admin/top_ten.php
+- url: /admin/active_users
+  script: admin/active_users.php
 
 # Signup
 - url: /activate
