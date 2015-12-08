@@ -81,11 +81,15 @@ handlers:
 - url: /community
   script: community.php
 
-# Pricing Page
+# Money
 - url: /pricing
   script: pricing.php
 - url: /upgrade
   script: upgrade.php
+- url: /payments
+  script: payments.php
+- url: /invoice
+  script: invoice.php
 
 # Terms Page
 - url: /terms
