@@ -4,13 +4,7 @@ define('TITLE', 'GiveToken.com - Terms of Service');
 require __DIR__.'/header.php';
 ?>
 </head>
-<body id="privacy-policy">
-<!-- =========================
-     PRE LOADER
-============================== -->
-<div class="preloader">
-  <div class="status">&nbsp;</div>
-</div>
+<body id="terms">
 
 <!-- =========================
      HEADER

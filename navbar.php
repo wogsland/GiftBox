@@ -31,22 +31,28 @@
         <?php } ?>
         <?php if (!logged_in()) { ?>
           <li><a href="/pricing" class="external">Pricing</a></li>
-        <?php } else { ?>
-          <li><a href="/upgrade" class="external">Upgrade</a></li>
         <?php } ?>
         <li><a href="/community" class="external">Community</a></li>
-        <?php
-        if (logged_in()) {
-            echo '<li><a href="/profile" class="external">Account</a></li>';
-            if (is_admin()) {
-                echo '<li><a href="/admin" class="external">Admin</a></li>';
-            }
-            echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
-        } else {
-            echo '<li><a href="javascript:void(0)" onclick="$(\'#login-dialog\').modal()">Login</a></li>';
-            echo '<li><a href="javascript:void(0)" onclick="$(\'#signup-dialog\').modal()">Sign Up</a></li>';
-        }
-        ?>
+        <?php if (logged_in()) { ?>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/upgrade" class="external" id="upgrade-dropdown">Upgrade</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="/profile" class="external">My Tokens</a></li>
+                <li><a href="/profile" class="external">Profile</a></li>
+                <li><a href="/payments" class="external">Payments</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>
+              </ul>
+            </li>
+            <?php if (is_admin()) { ?>
+                <li><a href="/admin" class="external">Admin</a></li>
+            <?php }?>
+        <?php } else { ?>
+            <li><a href="javascript:void(0)" onclick="loginOpen()">Login</a></li>
+            <li><a href="javascript:void(0)" onclick="signupOpen(1)">Sign Up</a></li>
+        <?php }?>
       </ul>
     </div>
   </div> <!-- /END CONTAINER -->

@@ -10,12 +10,6 @@ require __DIR__.'/header.php';
 </head>
 
 <body id="pricing-page">
-<!-- =========================
-     PRE LOADER
-============================== -->
-<div class="preloader">
-  <div class="status">&nbsp;</div>
-</div>
 
 <!-- =========================
      HEADER
