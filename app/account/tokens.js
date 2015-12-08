@@ -1,7 +1,7 @@
 var AccountTokens = React.createClass({
 
   render: function() {
-    return <div className="tab-pane active" id="givetokens">
+    return <div className="tab-pane" id="givetokens">
       <h2>My Tokens</h2>
       {this.props.tokens.map(this.renderToken)}
     </div>;

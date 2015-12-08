@@ -49,7 +49,7 @@ var AccountInfo = React.createClass({
   },
 
   render: function() {
-    return <div className="tab-pane" id="account">
+    return <div className="tab-pane active" id="account">
       <h2>Profile Settings</h2>
       <form className="form-horizontal form-bordered">
         <div className="form-group">
@@ -193,7 +193,7 @@ var AccountInfo = React.createClass({
         </div>
       </form>
 
-
+{/*
       <h2>Social Integrations</h2>
       <form className="form-horizontal form-bordered">
         {this.state.social ? this.state.social.map(this.renderSocial) : null}
@@ -206,7 +206,7 @@ var AccountInfo = React.createClass({
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.addSocial}>Add</a></label>
         </div>
-      </form>
+      </form>*/}
    </div>;
  },
 

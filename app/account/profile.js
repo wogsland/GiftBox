@@ -13,7 +13,7 @@ var AccountProfile = React.createClass({
       <div className="text-center">
           <img src={this.getAvatar(this.props.model.profile)} className="img-circle img-offline img-responsive img-profile" alt={this.props.model.profile.name} />
           <h4 className="profile-name mb5">{this.props.model.profile.name}</h4>
-          <div className="small-txt mb5"><i className="fa fa-gift"></i> {this.props.model.tokens.length} Tokens</div>
+          <div className="small-txt mb5"><a href="/tokens">Tokens</a></div>
           {/*<!--<div className="small-txt mb5"><i className="fa fa-star"></i> XXYYZZ Token Views</div>-->*/}
           {/*
             <div className="small-txt mb5"><i className="fa fa-map-marker"></i> {this.props.model.profile.location}</div>
