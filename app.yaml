@@ -70,6 +70,8 @@ handlers:
   script: public/index.php
 - url: /create_recruiting
   script: create_recruiting.php
+- url: /tokens
+  script: tokens.php
 
 # About Page
 - url: /about

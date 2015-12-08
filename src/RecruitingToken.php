@@ -47,9 +47,9 @@ class RecruitingToken
         }
     }
 
-    public static function getUserTokens($user_id) 
+    public static function getUserTokens($user_id)
     {
-        $results =  execute_query("SELECT * FROM recruiting_token where user_id = $user_id ORDER BY company, job_title");
+        $results =  execute_query("SELECT * FROM recruiting_token where user_id = '$user_id' ORDER BY company, job_title");
         $user_tokens = array();
         while($token = $results->fetch_object()) {
             $user_tokens[count($user_tokens)] = $token;

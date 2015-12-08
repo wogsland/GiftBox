@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\RecruitingTokenResponse;
+use \GiveToken\RecruitingToken;
 
 require_once __DIR__.'/config.php';
 if (!logged_in()) {
@@ -33,24 +33,22 @@ button.dt-button, div.dt-button, a.dt-button {
   </div>
   <div class="row" id="datatable-div">
     <div class="col-sm-offset-2 col-sm-8">
-      <h2>Token Responses</h2>
+      <h2>Tokens</h2>
       <table id="responses-table" class="table table-striped table-hover">
         <thead>
           <th>Token</th>
-          <th>Email</th>
-          <th>Response</th>
-          <th>Date &amp; Time (CST)</th>
+          <th>Created</th>
         </thead>
         <tbody>
           <?php
-          $RecruitingTokenResponse = new RecruitingTokenResponse();
-          $responses = $RecruitingTokenResponse->get($_SESSION['user_id']);
+          $responses = RecruitingToken::getUserTokens($_SESSION['user_id']);
           foreach ($responses as $response) {
               echo '<tr>';
-              echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['long_id']}</a></td>";
-              echo "<td>{$response['email']}</td>";
-              echo "<td>{$response['response']}</td>";
-              echo "<td>{$response['created']}</td>";
+              echo "<td align=left>";
+              echo "<a href=\"/create_recruiting?id={$response->long_id}\">{$response->job_title}</a>";
+              echo " (<a href=\"/token/recruiting/{$response->long_id}\">Preview</a>)";
+              echo "</td>";
+              echo "<td>{$response->created}</td>";
               echo '</tr>';
           }?>
         </tbody>
