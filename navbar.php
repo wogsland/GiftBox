@@ -27,7 +27,7 @@
         <?php if (!logged_in()) { ?>
             <li><a href="/" class="external">Home</a></li>
         <?php } else { ?>
-            <li><a href="/token_type" class="external">Create Token</a></li>
+            <li><a href="/create_recruiting" class="external">Create Token</a></li>
         <?php } ?>
         <?php if (!logged_in()) { ?>
           <li><a href="/pricing" class="external">Pricing</a></li>
