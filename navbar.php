@@ -37,13 +37,13 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/upgrade" class="external" id="upgrade-dropdown">Upgrade</a></li>
+                <li><a href="/upgrade" class=" account-dropdown" id="upgrade-dropdown">Upgrade</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="/profile" class="external">My Tokens</a></li>
-                <li><a href="/profile" class="external">Profile</a></li>
-                <li><a href="/payments" class="external">Payments</a></li>
+                <li><a href="/profile" class=" account-dropdown">My Tokens</a></li>
+                <li><a href="/profile" class=" account-dropdown">Profile</a></li>
+                <li><a href="/payments" class=" account-dropdown">Payments</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>
+                <li><a href="javascript:void(0)" class="account-dropdown" onclick="logout();">Logout</a></li>
               </ul>
             </li>
             <?php if (is_admin()) { ?>

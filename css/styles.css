@@ -2703,3 +2703,6 @@ RESPONSIVE FIXES
 #upgrade-dropdown {
   color: green;
 }
+.account-dropdown {
+  text-align: left;
+}
