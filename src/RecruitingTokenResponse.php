@@ -14,10 +14,11 @@ class RecruitingTokenResponse
      * @param int    $recruiting_token_id - long id of the token
      * @param string $email               - email address of respondent
      * @param string $response            - Yes, No or Maybe
+     * @param string $cookie              - unique cookie for this visitor
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $email, $response)
+    public function create($recruiting_token_id, $email, $response, $cookie = '')
     {
         $id = 0;
         if (filter_var($email, FILTER_VALIDATE_EMAIL)
@@ -31,8 +32,8 @@ class RecruitingTokenResponse
                 $recruiting_token_id = $row['id'];
                 $id = insert(
                     "INSERT into recruiting_token_response
-                    (`recruiting_token_id`, `email`, `response`)
-                    VALUES ('$recruiting_token_id', '$email', '$response')"
+                    (`recruiting_token_id`, `email`, `response`, `visitor_cookie`)
+                    VALUES ('$recruiting_token_id', '$email', '$response', '$cookie')"
                 );
             }
         }
