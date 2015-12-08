@@ -10,6 +10,13 @@ if (!logged_in()) {
     header('Location: '.$app_root);
 }
 
+Stripe::setApiKey($stripe_secret_key);
+$success = 'true';
+$data = Invoice::retrieve(array('id'=>$_GET['id']));
+$invoice = json_decode(ltrim($data,'Stripe\Invoice JSON: '));
+$paid = ($invoice->ending_balance == 0);
+//echo '<pre>';print_r($invoice);die;
+
 define('TITLE', 'GiveToken.com - Invoice Details');
 require __DIR__.'/header.php';
 ?>
@@ -37,6 +44,11 @@ button.dt-button, div.dt-button, a.dt-button {
   </div>
   <div class="row" id="datatable-div">
     <div class="col-sm-offset-2 col-sm-8">
+      <?php if ($paid) {?>
+        <button class="btn btn-xs btn-success pull-right">Paid</button>
+      <?php } else { ?>
+        <button class="btn btn-xs btn-danger pull-right">Unpaid</button>
+      <?php }?>
       <h2>Invoice Details</h2>
       <?php if (isset($_SESSION['stripe_id'])) { ?>
         <table id="payments-table" class="table table-striped table-hover">
@@ -47,11 +59,7 @@ button.dt-button, div.dt-button, a.dt-button {
           </thead>
           <tbody>
             <?php
-            Stripe::setApiKey($stripe_secret_key);
-            $success = 'true';
-            $data = Invoice::retrieve(array('id'=>$_GET['id']));
-            $lines = json_decode(ltrim($data,'Stripe\Invoice JSON: '))->lines->data;
-            foreach ($lines as $line) {
+            foreach ($invoice->lines->data as $line) {
                 echo '<tr>';
                 echo "<td>$ {$line->amount}</td>";
                 echo "<td>{$line->plan->name}</td>";
