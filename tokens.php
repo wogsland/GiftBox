@@ -38,6 +38,7 @@ button.dt-button, div.dt-button, a.dt-button {
         <thead>
           <th>Token</th>
           <th>Created</th>
+          <th>Repsonses</th>
         </thead>
         <tbody>
           <?php
@@ -49,6 +50,7 @@ button.dt-button, div.dt-button, a.dt-button {
               echo " (<a href=\"/token/recruiting/{$response->long_id}\">Preview</a>)";
               echo "</td>";
               echo "<td>{$response->created}</td>";
+              echo "<td><a href=\"/token_responses?id={$response->long_id}\">responses</a></td>";
               echo '</tr>';
           }?>
         </tbody>

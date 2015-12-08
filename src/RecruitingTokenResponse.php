@@ -67,6 +67,7 @@ class RecruitingTokenResponse
                       recruiting_token_response.`email`,
                       recruiting_token_response.`response`,
                       recruiting_token_response.`created`,
+                      recruiting_token.job_title,
                       recruiting_token.long_id
                       FROM recruiting_token_response, recruiting_token
                       WHERE recruiting_token_response.recruiting_token_id = recruiting_token.id

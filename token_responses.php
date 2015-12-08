@@ -47,7 +47,7 @@ button.dt-button, div.dt-button, a.dt-button {
           $responses = $RecruitingTokenResponse->get($_SESSION['user_id']);
           foreach ($responses as $response) {
               echo '<tr>';
-              echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['long_id']}</a></td>";
+              echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['job_title']}</a></td>";
               echo "<td>{$response['email']}</td>";
               echo "<td>{$response['response']}</td>";
               echo "<td>{$response['created']}</td>";
@@ -67,6 +67,14 @@ button.dt-button, div.dt-button, a.dt-button {
               'copy', 'csv', 'excel', 'pdf','print'
           ]
       });
+      $('input').val("<?php echo $_GET['id'];?>");
+      $('input').focus();
+
+      // this actually does nothing
+      var e = jQuery.Event("keypress");
+      e.which = 13;
+      e.keyCode = 13;
+      $("input").trigger(e);
   });
   </script>
 </body>
