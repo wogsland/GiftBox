@@ -1,0 +1,21 @@
+body {
+  background-color: white;
+}
+#datatable-div {
+  margin-top: 100px;
+  margin-bottom: 150px;
+}
+#responsive-table {
+  color: black;
+}
+button.dt-button, div.dt-button, a.dt-button {
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+thead {
+  color: white;
+  background-color: rgb(69, 111, 182);
+}
+#responsive-table_length {
+  margin-left: 20px;
+}
