@@ -38,10 +38,6 @@ require __DIR__.'/header.php';
 </section>
 
 <?php require __DIR__.'/footer.php';?>
-<!-- =========================
-     PAGE SPECIFIC SCRIPTS
-============================== -->
-<script src="js/pricing.js"></script>
 
 </body>
 </html>

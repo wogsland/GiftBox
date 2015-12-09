@@ -13,6 +13,13 @@ handlers:
 - url: /css
   static_dir: public/css
 
+# JavaScript
+- url: /js/pay_with_stripe.js
+  script: pay_with_stripe.php
+- url: /js/JSXTransformer.js
+  script: js/JSXTransformer.js
+- url: /js/create.js
+  script: js/create.js
 - url: /js
   static_dir: public/js
 
@@ -57,8 +64,8 @@ handlers:
 #  script: \1
 
 # Google Polymer Components
-#- url: /components/
-#  static_dir: components/
+- url: /components/
+  static_dir: components/
 #- url: /elements/
 #  static_dir: elements/
 
