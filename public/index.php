@@ -36,5 +36,9 @@ if ('token' == $endpoint_parts[1] && 'recruiting' == $endpoint_parts[2]) {
 switch ($endpoint_parts[1]) {
     case 'about':
     include __DIR__.'/../about.php';
+    case 'ajax':
+    include __DIR__.'/../ajax/route.php';
+    default:
+    include __DIR__.'/../error.php';
 }
 ?>

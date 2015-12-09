@@ -28,7 +28,7 @@ echo ""
 
 # build polymer
 polybuild --maximum-crush recruiting_token.php
-mv recruiting_token.build.js js/recruiting_token.min.js
+mv recruiting_token.build.js public/js/recruiting_token.min.js
 sed -i '' -e 's/recruiting_token\.build\.js/\/js\/recruiting_token\.min\.js/g' recruiting_token.build.html
 sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
 echo "Polybuild finished."

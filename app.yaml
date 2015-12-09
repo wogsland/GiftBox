@@ -73,10 +73,6 @@ handlers:
 - url: /tokens
   script: tokens.php
 
-# About Page
-- url: /about
-  script: about.php
-
 # Community Page
 - url: /community
   script: community.php
