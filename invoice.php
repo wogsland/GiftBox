@@ -30,9 +30,9 @@ require __DIR__.'/header.php';
   <div class="row" id="datatable-div">
     <div class="col-sm-offset-2 col-sm-8">
       <?php if ($paid) {?>
-        <button class="btn btn-xs btn-success pull-right">Paid</button>
+        <button class="btn btn-sm btn-success pull-right">Paid</button>
       <?php } else { ?>
-        <button class="btn btn-xs btn-danger pull-right">Unpaid</button>
+        <button class="btn btn-sm btn-primary pull-right" id="pay-now-button">Pay Now</button>
       <?php }?>
       <h2>Invoice Details</h2>
       <?php if (isset($_SESSION['stripe_id'])) { ?>
@@ -46,7 +46,7 @@ require __DIR__.'/header.php';
             <?php
             foreach ($invoice->lines->data as $line) {
                 echo '<tr>';
-                echo "<td>$ {$line->amount}</td>";
+                echo "<td>$".money_format('%i',$line->amount/100)."</td>";
                 echo "<td>{$line->plan->name}</td>";
                 echo "<td>".date('d/m/Y', $line->period->start).' - '.date('d/m/Y', $line->period->end)."</td>";
                 echo '</tr>';
@@ -68,7 +68,25 @@ require __DIR__.'/header.php';
               'copy', 'csv', 'excel', 'pdf','print'
           ]
       });
+      $('#pay-now-button').on('click', function (email, payFrom) {
+        var handler = StripeCheckout.configure({
+          key: '<?php echo $stripe_publishable_key; ?>',
+          email: '<?php echo $_SESSION['email']; ?>',
+          token: function(token) {
+            console.log(token);
+          }
+        });
+
+        // Open Checkout with further options
+        handler.open({
+          name: 'GiveToken',
+          description: "GiveToken Invoice Balance",
+          amount: <?php echo $invoice->ending_balance; ?>
+        });
+      })
   });
+
+
   </script>
 </body>
 </html>
