@@ -4,13 +4,13 @@ threadsafe: yes
 
 handlers:
 - url: /app
-  static_dir: app
+  static_dir: public/app
 
 - url: /css
   static_dir: css
 
 - url: /js
-  static_dir: js
+  static_dir: public/js
 
 - url: /images
   static_dir: images
@@ -18,7 +18,7 @@ handlers:
   static_dir: images/team
 
 - url: /models
-  static_dir: models
+  static_dir: public/models
 
 - url: /assets/images
   static_dir: assets/images
