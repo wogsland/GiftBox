@@ -308,9 +308,11 @@ function processOpen() {
 
 function setStatus(message) {
 	$('#status-message').html(message);
+	$('#status-dialog').css('height', '170px');
 	$('#status-dialog')[0].open();
 }
 function closeStatus() {
+	$('#status-dialog').css('height', '0px');
 	$('#status-dialog')[0].close();
 }
 

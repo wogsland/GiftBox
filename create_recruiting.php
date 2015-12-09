@@ -6,12 +6,12 @@ use GiveToken\RecruitingTokenVideo;
 use google\appengine\api\cloud_storage\CloudStorageTools;
 
 require_once 'config.php';
-if (!logged_in() || !is_admin()) {
+if (!logged_in()) {
     header('Location: '.$app_url);
 }
 
 if (isset($_GET['id'])) {
-    $token = new RecruitingToken($_GET['id'], 'long_id');
+    $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
     $token_images = RecruitingTokenImage::getTokenImages($token->id);
     $token_videos = RecruitingTokenVideo::getTokenVideos($token->id);
 } else {
@@ -20,57 +20,31 @@ if (isset($_GET['id'])) {
     $token_videos = array();
 }
 
-function paper_text($label, $id, $value, $required = false) {
+function paper_text($label, $id, $value, $required = false)
+{
     echo PHP_EOL;
     echo '              <paper-input value="'.htmlspecialchars($value).'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'"></paper-input>'.PHP_EOL;
 }
-function paper_textarea($label, $id, $value, $required = false) {
+function paper_textarea($label, $id, $value, $required = false)
+{
     echo PHP_EOL;
     echo '              <paper-textarea value="'.htmlspecialchars($value).'" '.($required ? 'required error-message="This is a required field"' : null).' label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'" rows="1">'.PHP_EOL;
     echo '              </paper-textarea>'.PHP_EOL;
 }
-function paper_dropdown($label, $id, $options, $selected_index = null, $required = false) {
-    echo '			<paper-dropdown-menu '.($required ? 'required error-message="This is a required field"' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
-    echo '				<paper-menu class="dropdown-content"'.(is_null($selected_index) ? null : ' selected="'.$selected_index.'"').'>'.PHP_EOL;
+function paper_dropdown($label, $id, $options, $selected_index = null, $required = false)
+{
+    echo '      <paper-dropdown-menu '.($required ? 'required error-message="This is a required field"' : null).' class="recruiting-field" label="'.$label.'" id="'.$id.'" name="'.str_replace('-', '_', $id).'">'.PHP_EOL;
+    echo '        <paper-menu class="dropdown-content"'.(is_null($selected_index) ? null : ' selected="'.$selected_index.'"').'>'.PHP_EOL;
     foreach ($options as $value => $option) {
-        echo '  				<paper-item id="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
+        echo '          <paper-item id="'.$value.'">'.ucwords($option).'</paper-item>'.PHP_EOL;
     }
-    echo '				</paper-menu>'.PHP_EOL;
-    echo '			</paper-dropdown-menu>'.PHP_EOL;
+    echo '        </paper-menu>'.PHP_EOL;
+    echo '      </paper-dropdown-menu>'.PHP_EOL;
 }
-function paper_card($title, $id) {
-    echo '<paper-card id="'.$id.'" heading="'.$title.'">'.PHP_EOL;
-}
-function paper_card_end() {
-    echo '</paper-card>'.PHP_EOL;
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>GiveToken.com - Create Recruiting Token</title>
 
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="57x57" href="/assets/gt-favicons.ico/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="/assets/gt-favicons.ico/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/assets/gt-favicons.ico/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="/assets/gt-favicons.ico/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="/assets/gt-favicons.ico/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="/assets/gt-favicons.ico/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/assets/gt-favicons.ico/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="/assets/gt-favicons.ico/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/gt-favicons.ico/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"  href="/assets/gt-favicons.ico/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/gt-favicons.ico/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/assets/gt-favicons.ico/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/gt-favicons.ico/favicon-16x16.png">
-  <link rel="manifest" href="/assets/gt-favicons.ico/manifest.json">
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-  <!-- endFavicon -->
+define('TITLE', 'GiveToken.com - Create Recruiting Token');
+require __DIR__.'/header.php';
+?>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -98,6 +72,12 @@ function paper_card_end() {
     <link rel="import" href="components/paper-fab/paper-fab.html">
 
     <style is="custom-style">
+        .center-column {
+          margin-top: 100px;
+        }
+        .field-container {
+          text-align: left;
+        }
         paper-card {
             display: block;
             width: 100%;
@@ -164,16 +144,19 @@ function paper_card_end() {
 
 </head>
 <body>
-    <paper-header-panel class="flex">
+  <div>
+    <?php require_once __DIR__.'/navbar.php';?>
+  </div>
+<!--    <paper-header-panel class="flex">
         <paper-toolbar>
             <div class="center-column" id="navbar">
                 <a id="logo-link" href="<?php echo $app_url; ?>"><img id="nav-logo" src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
                 <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo $app_url; ?>'"></paper-icon-button>
             </div>
         </paper-toolbar>
-    </paper-header-panel>
+    </paper-header-panel>-->
     <div class="center-column">
-        <paper-card id="progress-bar">
+        <!--<paper-card id="progress-bar">
                 <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
                 <span class="progress-text">Fill Out Token Form</span>
                 <div class="progress-line"></div>
@@ -182,13 +165,13 @@ function paper_card_end() {
                 <div class="progress-line"></div>
                 <paper-fab icon="looks one" class="progress-fab"></paper-fab>
                 <span class="progress-text">Send Token</span>
-        </paper-card>
+        </paper-card>-->
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
                 <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
                 <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
 
-                <?php paper_card('Send Token via', 'send-token-via'); ?>
+                <paper-card id="send-token-via" heading="Send Token via">
                     <div id="send-link-list-container">
                         <div class="send-link-container send-link-container-hover">
                             <div class="inner-send-link-container">
@@ -220,9 +203,9 @@ function paper_card_end() {
                             <p>Have us email out your Token.  This option will provide you with the greatest analytics and potential for A/B split testing.</p>
                         </div>
                     </div>
-                <?php paper_card_end(); ?>
+                </paper-card>
 
-                <?php paper_card('Required Info', 'required-info'); ?>
+                <paper-card id="required-info" heading="Required Info">
                     <div class="field-container">
                         <?php
                             paper_text('Job Title', 'job-title', $token->job_title, true);
@@ -231,7 +214,7 @@ function paper_card_end() {
                             $all_cities = City::getAll();
                             $cities = array();
                             $selected_city = null;
-                            foreach($all_cities as $index => $city) {
+                            foreach ($all_cities as $index => $city) {
                                 $cities[$city->id] = $city->name;
                                 if ($city->id == $token->city_id) {
                                     $selected_city = $index;
@@ -240,15 +223,15 @@ function paper_card_end() {
                             paper_dropdown('Job Location', 'city-id', $cities, $selected_city, true);
                         ?>
                     </div>
-                <?php paper_card_end(); ?>
-                <?php paper_card('Basic Info', 'basic-info'); ?>
+                </paper-card>
+                <paper-card id="basic-info" heading="Basic Info">
                     <div class="field-container">
                         <?php paper_textarea('Skills Required (copy and paste from word doc)', 'skills-required', $token->skills_required); ?>
                         <?php paper_textarea('Responsibilities (copy and paste from word doc)', 'responsibilities', $token->responsibilities); ?>
                         <?php paper_textarea('Perks (copy and paste from word doc)', 'perks', $token->perks); ?>
                     </div>
-                <?php paper_card_end(); ?>
-                <?php paper_card('Important Company Info', 'company-info'); ?>
+                </paper-card>
+                <paper-card id="company-info" heading="Important Company Info">
                     <div class="field-container">
                         <?php paper_text('Company Name', 'company', $token->company); ?>
                         <?php paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
@@ -263,13 +246,13 @@ function paper_card_end() {
                             paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_size);
                         ?>
                     </div>
-                <?php paper_card_end(); ?>
-                <?php paper_card('Company Images', 'company-images'); ?>
+                </paper-card>
+                <paper-card id="company-images" heading="Company Images">
                     <div class="field-container">
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Images From: </span>
                             <div class="icon-container">
-                        		<input class="hidden-file-input" type="file" multiple id="select-image-file" />
+                            <input class="hidden-file-input" type="file" multiple id="select-image-file" />
                                 <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
 <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
                                 <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
@@ -279,7 +262,7 @@ function paper_card_end() {
                         </div>
                         <div class="thumbnail-list-container" id="company-image-container">
                         <?php
-                        foreach($token_images as $token_image) {
+                        foreach ($token_images as $token_image) {
                             if ($google_app_engine) {
                                 $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
                             } else {
@@ -296,8 +279,8 @@ function paper_card_end() {
                         ?>
                         </div>
                     </div>
-                <?php paper_card_end(); ?>
-                <?php paper_card('Company Videos', 'company-videos'); ?>
+                </paper-card>
+                <paper-card id="company-videos" heading="Company Videos">
                     <div class="field-container">
                         <div class="icon-bar">
                             <span class="icon-bar-text">Add Videos From: </span>
@@ -312,7 +295,7 @@ function paper_card_end() {
                         </div>
                         <div class="thumbnail-list-container" id="company-video-container">
                         <?php
-                        foreach($token_videos as $token_video) {
+                        foreach ($token_videos as $token_video) {
                             $image_id = substr($token_video->url, strrpos($token_video->url, '/')+1);
                             echo '<div class="thumbnail-container">';
                             echo '  <div class="inner-thumbnail-container">';
@@ -324,8 +307,8 @@ function paper_card_end() {
                         ?>
                         </div>
                     </div>
-                <?php paper_card_end(); ?>
-                <?php paper_card('Company Social Media', 'company-social-media'); ?>
+                </paper-card>
+                <paper-card id="company-social-media" heading="Company Social Media">
                     <div class="field-container">
                         <?php paper_text('Facebook', 'company-facebook', $token->company_facebook); ?>
                         <?php paper_text('LinkedIn', 'company-linkedin', $token->company_linkedin); ?>
@@ -333,20 +316,21 @@ function paper_card_end() {
                         <?php paper_text('Twitter', 'company-twitter', $token->company_twitter); ?>
                         <?php paper_text('Google+', 'company-google-plus', $token->company_google_plus); ?>
                     </div>
-                <?php paper_card_end(); ?>
+                </paper-card>
                 <div class="button-container">
-                    <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">PREVIEW</paper-button>
-                    <paper-button raised class="bottom-button" onclick="finish()" disabled>FINISH</paper-button>
+                    <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
+                    <!--<paper-button raised class="bottom-button" onclick="finish()" disabled>FINISH</paper-button>-->
                 </div>
             </form>
-        </div><div id="right-column">
+        </div>
+        <!--<div id="right-column">
             <paper-card heading="Token Strength" id="token-strength">
             </paper-card>
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
             </div>
-            <?php if (is_admin()): ?>
+            <?php if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">
                     <div id="library-button-container">
                         <paper-button class="library-button" raised>Company</paper-button>
@@ -355,7 +339,7 @@ function paper_card_end() {
                     </div>
                 </paper-card>
             <?php endif; ?>
-       </div>
+       </div>-->
     </div>
 
     <paper-dialog class="recruiting-dialog" id="open-dialog" modal>
@@ -365,7 +349,7 @@ function paper_card_end() {
             <?php
                 $user_tokens = RecruitingToken::getUserTokens($_SESSION['user_id']);
                 $tokens = array();
-                foreach($user_tokens as $token) {
+                foreach ($user_tokens as $token) {
                     $tokens[$token->long_id] = $token->company." - ".$token->job_title;
                 }
                 paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
@@ -399,13 +383,14 @@ function paper_card_end() {
         <p id="status-message">No message supplied</p>
     </paper-dialog>
 
+    <?php require_once __DIR__.'/footer.php';?>
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-	<script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
-	<script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script>
+    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
+    <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
         $( document ).ready(function() {
             $('#select-image-file').on('change', handleImageFileSelect);
             $('#company-image-container').data('deleted', []);
@@ -419,6 +404,6 @@ function paper_card_end() {
                 img.data('saved', true);
             });
         });
-	</script>
+    </script>
 </body>
 </html>
