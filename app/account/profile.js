@@ -31,7 +31,7 @@ var AccountProfile = React.createClass({
               </a>
               <br /><br />
               <a href="/upgrade">
-                <button type="button" className="btn btn-success">Upgrade</button>
+                <button type="button" className="btn btn-success" id="upgrade-button">Upgrade</button>
               </a>
               {/* <button className="btn btn-primary btn-bordered">Send GiveToken</button> */}
           </div>

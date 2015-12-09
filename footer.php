@@ -125,6 +125,15 @@
 <?php if (!logged_in()) { ?>
 	<script src="/js/login.js?v=<?php echo VERSION;?>"></script>
 	<script src="/js/signup.js?v=<?php echo VERSION;?>"></script>
-<?php }?>
+<?php } elseif (isset($_SESSION['stripe_id'])) { ?>
+	<script>
+	$(document).ready(function() {
+		setTimeout(function () {
+			$('#upgrade-dropdown').hide();
+			$('#upgrade-divider').hide();
+		}, 500);
+	});
+	</script>
+<?php }?>?>
 <script src="/js/account.min.js?v=<?php echo VERSION;?>"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>

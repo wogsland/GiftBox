@@ -38,7 +38,7 @@
               <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="/upgrade" class="external account-dropdown" id="upgrade-dropdown">Upgrade</a></li>
-                <li role="separator" class="divider"></li>
+                <li role="separator" class="divider" id="upgrade-divider"></li>
                 <li><a href="/tokens" class="external account-dropdown">My Tokens</a></li>
                 <li><a href="/profile" class="external account-dropdown">Profile</a></li>
                 <li><a href="/payments" class="external account-dropdown">Payments</a></li>

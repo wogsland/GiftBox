@@ -62,5 +62,27 @@ require __DIR__.'/header.php';
 </script>
 
 <?php require __DIR__.'/footer.php';?>
+<?php if (isset($_SESSION['stripe_id'])) { ?>
+  <script>
+  $(document).ready(function() {
+    // normal load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 500);
+    // normal load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 1000);
+    // slowish load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 5000);
+    //snail load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 30000);
+  });
+  </script>
+<?php }?>
 </body>
 </html>
