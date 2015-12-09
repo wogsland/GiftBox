@@ -46,12 +46,12 @@ echo "CSS minified"
 echo ""
 
 # minify javascript
-yuicompressor js/smoothscroll.js -o js/smoothscroll.min.js
-yuicompressor js/custom.js -o js/custom.min.js
-yuicompressor js/facebook_init.js -o js/facebook_init.min.js
-yuicompressor js/util.js -o js/util.min.js
-yuicompressor js/account.js -o js/account.min.js
-yuicompressor js/pricing.js -o js/pricing.min.js
+yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
+yuicompressor js/custom.js -o public/js/custom.min.js
+yuicompressor js/facebook_init.js -o public/js/facebook_init.min.js
+yuicompressor js/util.js -o public/js/util.min.js
+yuicompressor js/account.js -o public/js/account.min.js
+yuicompressor js/pricing.js -o public/js/pricing.min.js
 echo "JavaScript minified"
 echo ""
 
