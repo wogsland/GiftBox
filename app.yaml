@@ -13,9 +13,9 @@ handlers:
   static_dir: public/js
 
 - url: /images
-  static_dir: images
+  static_dir: public/images
 - url: /images/team
-  static_dir: images/team
+  static_dir: public/images/team
 
 - url: /models
   static_dir: public/models
