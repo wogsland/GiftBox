@@ -16,7 +16,6 @@ function processUpgrade(token, payFrom) {
 	};
 
 	$.post("/ajax/upgrade", upgradeData, function(data, textStatus, jqXHR){
-    console.log(data);
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
 				signupClose();

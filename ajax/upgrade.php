@@ -53,10 +53,11 @@ if ($response['status'] == "SUCCESS") {
     $event = new EventLogger($user->getId(), EventLogger::UPGRADE, 'Stripe Token: '.$token);
     $event->log();
 
-    // Set the session variable
+    // Set the session variables
     if (isset($_SESSION['level'])) {
         $_SESSION['level'] = $new_level;
     }
+    $_SESSION['strip_id'] = $customer->id;
 }
 
 header('Content-Type: application/json');

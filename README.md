@@ -18,16 +18,38 @@ hosted on Google Cloud
 
 Make sure you have access & set your project remote
 
-    git remote add github git@github.com:GiveToken/GiftBox.git`
+    git remote add github git@github.com:GiveToken/GiftBox.git
 
 *this assumes ssh; you could use `https://github.com/GiveToken/GiftBox.git` instead of `git@...` for https if you prefer*
 
-### <a id="database"></a>Database Management
+### <a id="database"></a>MySQL Database
 
 - Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
 - Get access to the [Google Developer Console](https://console.developers.google.com).
 
 To create a local instance of the givetoken database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+
+### Apache
+
+If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like
+
+    <VirtualHost *:80>
+        ServerAdmin username@givetoken.com
+        ServerName givetoken.local
+        DocumentRoot "/Library/Webserver/Documents/GiftBox/public"
+
+        <Directory "/Library/Webserver/Documents/GiftBox/public">
+            Options -Indexes +FollowSymLinks +MultiViews
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+    </VirtualHost>
+
+and  restart Apache.
 
 ### Google Cloud SDK
 

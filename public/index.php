@@ -30,5 +30,11 @@ if ('token' == $endpoint_parts[1] && 'recruiting' == $endpoint_parts[2]) {
         }
     }
     include __DIR__.'/../recruiting_token.build.html';
+    die;
+}
+
+switch ($endpoint_parts[1]) {
+    case 'about':
+    include __DIR__.'/../about.php';
 }
 ?>
