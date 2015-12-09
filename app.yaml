@@ -31,105 +31,18 @@ handlers:
 - url: /fonts
   static_dir: public/fonts
 
-# assets
-- url: /assets/app-icons
-  static_dir: public/assets/app-icons
-- url: /assets/elegant-icons
-  static_dir: public/assets/elegant-icons
-- url: /assets/fonts
-  static_dir: public/assets/fonts
-- url: /assets/gt-favicons.ico
-  static_dir: public/assets/gt-favicons.ico
-- url: /assets/images
-  static_dir: public/assets/images
-- url: /assets/img
-  static_dir: public/assets/img
+- url: /assets
+  static_dir: public/assets
 
-#- url: /
-#  script: index.php
-
-#- url: /src/(.+\.php)$
-#  script: index.php
-
-#- url: /templates
-#  static_dir: templates
-#  application_readable: true
-
-# Ajax Routing
-#- url: /ajax/(.+)
-#  script: ajax/route.php
-
-# Serve php scripts.
-#- url: /(.+\.php)$
-#  script: \1
+- url: /templates
+  static_dir: public/templates
+  application_readable: true
 
 # Google Polymer Components
 - url: /components/
   static_dir: components/
 #- url: /elements/
 #  static_dir: elements/
-
-# Token
-#- url: /token/recruiting/(.+)
-#  script: public/index.php
-#- url: /create_recruiting
-#  script: create_recruiting.php
-#- url: /tokens
-#  script: tokens.php
-
-# Community Page
-#- url: /community
-#  script: community.php
-
-# Money
-#- url: /pricing
-#  script: pricing.php
-#- url: /upgrade
-#  script: upgrade.php
-#- url: /payments
-#  script: payments.php
-#- url: /invoice
-#  script: invoice.php
-
-# Terms Page
-#- url: /terms
-#  script: termsservice.php
-
-# Privacy Policy
-#- url: /privacy
-#  script: privacypolicy.php
-
-# Profile
-#- url: /profile
-#  script: profile.php
-#- url: /token_responses
-#  script: token_responses.php
-#- url: /token_analytics
-#  script: token_analytics.php
-
-# Personal Token
-#- url: /preview
-#  script: preview.php
-#- url: /create
-#  script: create.php
-#- url: /token_type
-#  script: token_type.php
-
-# Admin
-#- url: /admin
-#  script: admin.php
-#- url: /admin/visitors
-#  script: admin/visitors.php
-#- url: /admin/add_city
-#  script: admin/add_city.php
-#- url: /admin/top_ten
-#  script: admin/top_ten.php
-#- url: /admin/active_users
-#  script: admin/active_users.php
-
-# Signup
-#- url: /activate
-#  script: activate.php
 
 # catchall for php routing
 - url: /.*
