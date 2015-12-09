@@ -121,7 +121,7 @@
 <script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>
 	<script src="/js/login.min.js?v=<?php echo VERSION;?>"></script>
 	<script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>

@@ -15,7 +15,7 @@ require __DIR__.'/header.php';
 ?>
 
 <!-- REACT -->
-<script src="/js/react.js"></script>
+<script src="/js/react.min.js"></script>
 <script src="/js/JSXTransformer.js"></script>
 
 </head>

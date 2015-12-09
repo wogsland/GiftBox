@@ -35,6 +35,7 @@ echo "Polybuild finished."
 echo ""
 
 # minify css
+yuicompressor css/colorbox.css -o public/css/colorbox.min.css
 yuicompressor css/styles.css -o public/css/styles.min.css
 yuicompressor css/magnific-popup.css -o public/css/magnific-popup.min.css
 yuicompressor css/create_recruiting.css -o public/css/create_recruiting.min.css
@@ -51,11 +52,12 @@ echo ""
 
 # minify javascript
 yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
-yuicompressor js/create.js -o public/js/create.min.js
+#yuicompressor js/create.js -o public/js/create.min.js <-- this one has errors
 yuicompressor js/create_common.js -o public/js/create_common.min.js
 yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
 yuicompressor js/custom.js -o public/js/custom.min.js
 yuicompressor js/facebook_init.js -o public/js/facebook_init.min.js
+yuicompressor js/init.js -o public/js/init.min.js
 yuicompressor js/util.js -o public/js/util.min.js
 yuicompressor js/account.js -o public/js/account.min.js
 yuicompressor js/pricing.js -o public/js/pricing.min.js
@@ -63,6 +65,8 @@ yuicompressor js/matchMedia.js -o public/js/matchMedia.min.js
 yuicompressor js/contact.js -o public/js/contact.min.js
 yuicompressor js/login.js -o public/js/login.min.js
 yuicompressor js/signup.js -o public/js/signup.min.js
+yuicompressor js/preview.js -o public/js/preview.min.js
+yuicompressor js/preloader.js -o public/js/preloader.min.js
 yuicompressor js/jquery.nav.js -o public/js/jquery.nav.min.js
 yuicompressor js/jquery.fitvids.js -o public/js/jquery.fitvids.min.js
 echo "JavaScript minified"

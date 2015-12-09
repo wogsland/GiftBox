@@ -85,44 +85,44 @@ handlers:
 #  script: invoice.php
 
 # Terms Page
-- url: /terms
-  script: termsservice.php
+#- url: /terms
+#  script: termsservice.php
 
 # Privacy Policy
-- url: /privacy
-  script: privacypolicy.php
+#- url: /privacy
+#  script: privacypolicy.php
 
 # Profile
-- url: /profile
-  script: profile.php
-- url: /token_responses
-  script: token_responses.php
-- url: /token_analytics
-  script: token_analytics.php
+#- url: /profile
+#  script: profile.php
+#- url: /token_responses
+#  script: token_responses.php
+#- url: /token_analytics
+#  script: token_analytics.php
 
 # Personal Token
-- url: /preview
-  script: preview.php
-- url: /create
-  script: create.php
-- url: /token_type
-  script: token_type.php
+#- url: /preview
+#  script: preview.php
+#- url: /create
+#  script: create.php
+#- url: /token_type
+#  script: token_type.php
 
 # Admin
-- url: /admin
-  script: admin.php
-- url: /admin/visitors
-  script: admin/visitors.php
-- url: /admin/add_city
-  script: admin/add_city.php
-- url: /admin/top_ten
-  script: admin/top_ten.php
-- url: /admin/active_users
-  script: admin/active_users.php
+#- url: /admin
+#  script: admin.php
+#- url: /admin/visitors
+#  script: admin/visitors.php
+#- url: /admin/add_city
+#  script: admin/add_city.php
+#- url: /admin/top_ten
+#  script: admin/top_ten.php
+#- url: /admin/active_users
+#  script: admin/active_users.php
 
 # Signup
-- url: /activate
-  script: activate.php
+#- url: /activate
+#  script: activate.php
 
 # catchall for php routing
 - url: /.*
