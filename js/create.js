@@ -104,7 +104,7 @@ function uploadFileData(fileData, fileName) {
 				setStatus("Uploading " + fileName + " " + (Math.round((e.loaded / e.total) * 100))+"%");
 			}
 		};
-        xhr.open("POST", "upload.php", true);
+        xhr.open("POST", "/upload", true);
         xhr.setRequestHeader("X-FILENAME", fileName);
         xhr.send(fileData);
     }

@@ -51,16 +51,16 @@ require __DIR__.'/header.php';
         <div class="text-center">
           <img src="assets/gt-favicons.ico/favicon-96x96.png" class="img-circle img-offline img-responsive img-profile" alt="">
           <h4 class="profile-name mb5"><?php echo " $first_name  $last_name ";?></h4>
-          <div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
+          <!--<<div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
           <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
-          <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>
+          <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>-->
           <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
 
           <div class="mb20"></div>
 
           <div class="btn-group">
-            <a href="/token_type" class="btn btn-primary btn-bordered">Create GiveToken</a>
-            <a href="/token_type" class="btn btn-primary btn-bordered">Send GiveToken</a>
+            <a href="/create_recruiting" class="btn btn-primary btn-bordered">Create GiveToken</a>
+            <a href="/tokens" class="btn btn-primary btn-bordered">Send GiveToken</a>
           </div>
 
           <div class="mb20"></div>

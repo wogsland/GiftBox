@@ -114,17 +114,17 @@
 <script src="/js/wow.min.js"></script>
 <script src="/js/jquery.stellar.min.js"></script>
 <script src="/js/retina-1.1.0.min.js"></script>
-<script src="/js/jquery.nav.js"></script>
-<script src="/js/matchMedia.js"></script>
+<script src="/js/jquery.nav.min.js"></script>
+<script src="/js/matchMedia.min.js"></script>
 <script src="/js/jquery.ajaxchimp.min.js"></script>
-<script src="/js/jquery.fitvids.js"></script>
+<script src="/js/jquery.fitvids.min.js"></script>
 <script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/pay_with_stripe.php?v=<?php echo VERSION;?>"></script>
+<script src="/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>
-	<script src="/js/login.js?v=<?php echo VERSION;?>"></script>
-	<script src="/js/signup.js?v=<?php echo VERSION;?>"></script>
+	<script src="/js/login.min.js?v=<?php echo VERSION;?>"></script>
+	<script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>
 <?php } elseif (isset($_SESSION['stripe_id'])) { ?>
 	<script>
 	$(document).ready(function() {
@@ -134,6 +134,6 @@
 		}, 500);
 	});
 	</script>
-<?php }?>?>
+<?php }?>
 <script src="/js/account.min.js?v=<?php echo VERSION;?>"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>

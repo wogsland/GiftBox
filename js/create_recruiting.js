@@ -137,7 +137,7 @@ function uploadFileData(fileData, fileName, img) {
 				// progress indicator goes here
 			}
 		};
-        xhr.open("POST", "upload.php", true);
+        xhr.open("POST", "/upload", true);
         xhr.setRequestHeader("X-FILENAME", fileName);
         xhr.send(fileData);
 		saveTokenImage(img, fileName);

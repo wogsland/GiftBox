@@ -17,28 +17,89 @@ if (isset($pieces[1])) {
     }
 }
 
-
-if ('token' == $endpoint_parts[1] && 'recruiting' == $endpoint_parts[2]) {
-    // don't display in native android browser
-    $detect = new Mobile_Detect;
-    if ($detect->isMobile()) {
-        //echo '<pre>';print_r($detect);die;
-        if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
-        && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {
-            include __DIR__.'/../get_chrome.html';
-            die;
+// route to the appropriate endpoint
+if (!isset($endpoint_parts[1])) {
+    include __DIR__.'/../index.php';
+} else {
+    switch ($endpoint_parts[1]) {
+        case '':
+        case 'index.html':
+        include __DIR__.'/../index.php';
+        break;
+        case 'about':
+        include __DIR__.'/../about.php';
+        break;
+        case 'admin':
+        if (!isset($endpoint_parts[2]) || '' == $endpoint_parts[2]) {
+            include __DIR__.'/../admin.php';
+        } else {
+            switch ($endpoint_parts[2]) {
+                case 'active_users':
+                include __DIR__.'/../admin/active_users.php';
+                break;
+                case 'add_city':
+                include __DIR__.'/../admin/add_city.php';
+                break;
+                case 'top_ten':
+                include __DIR__.'/../admin/top_ten.php';
+                break;
+                case 'visitors':
+                include __DIR__.'/../admin/visitors.php';
+                break;
+                default:
+                include __DIR__.'/../error.php';
+            }
         }
+        break;
+        case 'ajax':
+        include __DIR__.'/../ajax/route.php';
+        break;
+        case 'community':
+        include __DIR__.'/../community.php';
+        break;
+        case 'create_recruiting':
+        include __DIR__.'/../create_recruiting.php';
+        break;
+        case 'invoice':
+        include __DIR__.'/../invoice.php';
+        break;
+        case 'payments':
+        include __DIR__.'/../payments.php';
+        break;
+        case 'pay_with_stripe.js':
+        include __DIR__.'/../pay_with_stripe.php';
+        break;
+        case 'profile':
+        include __DIR__.'/../profile.php';
+        break;
+        case 'pricing':
+        include __DIR__.'/../pricing.php';
+        break;
+        case 'token':
+        if ('recruiting' == $endpoint_parts[2]) {
+            // don't display in native android browser
+            $detect = new Mobile_Detect;
+            if ($detect->isMobile()) {
+                //echo '<pre>';print_r($detect);die;
+                if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
+                && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {
+                    include __DIR__.'/../get_chrome.html';
+                    die;
+                }
+            }
+            include __DIR__.'/../recruiting_token.build.html';
+        }
+        break;
+        case 'tokens':
+        include __DIR__.'/../tokens.php';
+        break;
+        case 'upgrade':
+        include __DIR__.'/../upgrade.php';
+        break;
+        case 'upload':
+        include __DIR__.'/../upload.php';
+        break;
+        default:
+        include __DIR__.'/../error.php';
     }
-    include __DIR__.'/../recruiting_token.build.html';
-    die;
 }
-
-switch ($endpoint_parts[1]) {
-    case 'about':
-    include __DIR__.'/../about.php';
-    case 'ajax':
-    include __DIR__.'/../ajax/route.php';
-    default:
-    include __DIR__.'/../error.php';
-}
-?>

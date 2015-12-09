@@ -93,7 +93,7 @@ body {
       reader.onloadend = function () {
         var xhr = new XMLHttpRequest();
         if (xhr.upload) {
-          xhr.open("POST", "/upload.php", true);
+          xhr.open("POST", "/upload", true);
           xhr.setRequestHeader("X-FILENAME", file.name);
           xhr.send(reader.result);
         }

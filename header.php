@@ -56,9 +56,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
   <!-- CAROUSEL AND LIGHTBOX -->
-  <link rel="stylesheet" href="/css/owl.theme.css">
-  <link rel="stylesheet" href="/css/owl.carousel.css">
-  <link rel="stylesheet" href="/css/nivo-lightbox.css">
+  <link rel="stylesheet" href="/css/owl.theme.min.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/nivo-lightbox.min.css">
   <link rel="stylesheet" href="/css/nivo_themes/default/default.css">
 
   <!-- ANIMATIONS -->

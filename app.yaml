@@ -3,11 +3,15 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+
+# react profile page
 - url: /app
   static_dir: public/app
+- url: /models
+  static_dir: public/models
 
 - url: /css
-  static_dir: css
+  static_dir: public/css
 
 - url: /js
   static_dir: public/js
@@ -17,75 +21,68 @@ handlers:
 - url: /images/team
   static_dir: public/images/team
 
-- url: /models
-  static_dir: public/models
-
-- url: /assets/images
-  static_dir: assets/images
-
-- url: /assets/img
-  static_dir: assets/img
-
-- url: /assets/fonts
-  static_dir: assets/fonts
-
 - url: /fonts
-  static_dir: fonts
+  static_dir: public/fonts
 
+# assets
 - url: /assets/app-icons
-  static_dir: assets/app-icons
-
-- url: /assets/gt-favicons.ico
-  static_dir: assets/gt-favicons.ico
-
+  static_dir: public/assets/app-icons
 - url: /assets/elegant-icons
-  static_dir: assets/elegant-icons
+  static_dir: public/assets/elegant-icons
+- url: /assets/fonts
+  static_dir: public/assets/fonts
+- url: /assets/gt-favicons.ico
+  static_dir: public/assets/gt-favicons.ico
+- url: /assets/images
+  static_dir: public/assets/images
+- url: /assets/img
+  static_dir: public/assets/img
 
-- url: /
-  script: index.php
+#- url: /
+#  script: index.php
 
-- url: /src/(.+\.php)$
-  script: index.php
+#- url: /src/(.+\.php)$
+#  script: index.php
 
-- url: /templates
-  static_dir: templates
-  application_readable: true
+#- url: /templates
+#  static_dir: templates
+#  application_readable: true
 
 # Ajax Routing
-- url: /ajax/(.+)
-  script: ajax/route.php
+#- url: /ajax/(.+)
+#  script: ajax/route.php
 
 # Serve php scripts.
-- url: /(.+\.php)$
-  script: \1
+#- url: /(.+\.php)$
+#  script: \1
 
 # Google Polymer Components
-- url: /components/
-  static_dir: components/
-- url: /elements/
-  static_dir: elements/
+#- url: /components/
+#  static_dir: components/
+#- url: /elements/
+#  static_dir: elements/
 
 # Token
-- url: /token/recruiting/(.+)
-  script: public/index.php
-- url: /create_recruiting
-  script: create_recruiting.php
-- url: /tokens
-  script: tokens.php
+#- url: /token/recruiting/(.+)
+#  script: public/index.php
+#- url: /create_recruiting
+#  script: create_recruiting.php
+#- url: /tokens
+#  script: tokens.php
 
 # Community Page
-- url: /community
-  script: community.php
+#- url: /community
+#  script: community.php
 
 # Money
-- url: /pricing
-  script: pricing.php
-- url: /upgrade
-  script: upgrade.php
-- url: /payments
-  script: payments.php
-- url: /invoice
-  script: invoice.php
+#- url: /pricing
+#  script: pricing.php
+#- url: /upgrade
+#  script: upgrade.php
+#- url: /payments
+#  script: payments.php
+#- url: /invoice
+#  script: invoice.php
 
 # Terms Page
 - url: /terms
@@ -127,6 +124,6 @@ handlers:
 - url: /activate
   script: activate.php
 
-# catchall for 404
+# catchall for php routing
 - url: /.*
-  script: error.php
+  script: public/index.php

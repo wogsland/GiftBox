@@ -579,7 +579,7 @@ require __DIR__.'/header.php';
 <!-- =========================
     PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="/js/contact.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/contact.min.js?v=<?php echo VERSION;?>"></script>
 <script>
 $(document).ready(function(){
   url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
