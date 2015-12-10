@@ -57,7 +57,13 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
         $visitor = "Baiduspider (http://www.baidu.com)";
     } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'yahoo! slurp') !== false) {
         $visitor = "Yahoo! Slurp";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot/') !== false) {
+    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'megaindex.ru') !== false) {
+        $visitor = "MegaIndex.ru crawler (http://megaindex.com/crawler)";
+    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'crazywebcrawler') !== false) {
+        $visitor = "crazywebcrawler (http://www.crazywebcrawler.com)";
+    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
+    || strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'crawler') !== false
+    || strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'spider') !== false) {
         $visitor = "unknown bot: {$_SERVER['HTTP_USER_AGENT']}";
     } else {
         $visitor = 'visitor';
