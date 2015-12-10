@@ -53,6 +53,10 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
         $visitor = "spbot (http://OpenLinkProfiler.org/bot)";
     } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'duckduckgo-favicons-bot') !== false) {
         $visitor = "DuckDuckGo-Favicons-Bot (http://duckduckgo.com)";
+    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'baiduspider') !== false) {
+        $visitor = "Baiduspider (http://www.baidu.com)";
+    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'yahoo! slurp') !== false) {
+        $visitor = "Yahoo! Slurp";
     } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot/') !== false) {
         $visitor = "unknown bot: {$_SERVER['HTTP_USER_AGENT']}";
     } else {
