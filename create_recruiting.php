@@ -140,6 +140,17 @@ require __DIR__.'/header.php';
         paper-dialog#status-dialog {
             --paper-dialog-background-color: #303030;
         }
+        .company-social-site-td {
+          border:0;
+          font-size: 18px;
+        }
+        .company-social-user-td {
+          border:0;
+          padding-bottom: 20px;
+          padding-left: 5px;
+          width: 500px;
+          font-size: 18px;
+        }
     </style>
 
 </head>
@@ -226,9 +237,9 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="basic-info" heading="Basic Info">
                     <div class="field-container">
-                        <?php paper_textarea('Skills Required (copy and paste from word doc)', 'skills-required', $token->skills_required); ?>
-                        <?php paper_textarea('Responsibilities (copy and paste from word doc)', 'responsibilities', $token->responsibilities); ?>
-                        <?php paper_textarea('Perks (copy and paste from word doc)', 'perks', $token->perks); ?>
+                        <?php paper_textarea('Skills Required', 'skills-required', $token->skills_required); ?>
+                        <?php paper_textarea('Responsibilities', 'responsibilities', $token->responsibilities); ?>
+                        <?php paper_textarea('Perks', 'perks', $token->perks); ?>
                     </div>
                 </paper-card>
                 <paper-card id="company-info" heading="Important Company Info">
@@ -310,11 +321,56 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="company-social-media" heading="Company Social Media">
                     <div class="field-container">
-                        <?php paper_text('Facebook', 'company-facebook', $token->company_facebook); ?>
-                        <?php paper_text('LinkedIn', 'company-linkedin', $token->company_linkedin); ?>
-                        <?php paper_text('Youtube Channel', 'company-youtube', $token->company_youtube); ?>
-                        <?php paper_text('Twitter', 'company-twitter', $token->company_twitter); ?>
-                        <?php paper_text('Google+', 'company-google-plus', $token->company_google_plus); ?>
+                        <table>
+                          <tr>
+                            <td class="company-social-site-td">
+                              https://facebook.com/
+                            </td>
+                            <td class="company-social-user-td">
+                              <?php paper_text('', 'company-facebook', $token->company_facebook); ?>
+                            </td>
+                          </tr>
+                        </table>
+                        <table>
+                          <tr>
+                            <td class="company-social-site-td">
+                              https://linkedin.com/
+                            </td>
+                            <td class="company-social-user-td">
+                              <?php paper_text('', 'company-linkedin', $token->company_linkedin); ?>
+                            </td>
+                          </tr>
+                        </table>
+                        <table>
+                          <tr>
+                            <td class="company-social-site-td">
+                              https://youtube.com/
+                            </td>
+                            <td class="company-social-user-td">
+                              <?php paper_text('', 'company-youtube', $token->company_youtube); ?>
+                            </td>
+                          </tr>
+                        </table>
+                        <table>
+                          <tr>
+                            <td class="company-social-site-td">
+                              https://twitter.com/
+                            </td>
+                            <td class="company-social-user-td">
+                              <?php paper_text('', 'company-twitter', $token->company_twitter); ?>
+                            </td>
+                          </tr>
+                        </table>
+                        <table>
+                          <tr>
+                            <td class="company-social-site-td">
+                              https://plus.google.com/
+                            </td>
+                            <td class="company-social-user-td">
+                              <?php paper_text('', 'company-google-plus', $token->company_google_plus); ?>
+                            </td>
+                          </tr>
+                        </table>
                     </div>
                 </paper-card>
                 <div class="button-container">
@@ -364,7 +420,7 @@ require __DIR__.'/header.php';
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
-        <paper-input id="video-dialog-url" label="Paste video URL here" patter="^https:\/\/youtube.com|https:\/\/youtu.be|https:\/\/vimeo.com" error-message="Not a valid video URL!" autofocus></paper-input>
+        <paper-input id="video-dialog-url" label="Paste video embed URL here" patter="^https:\/\/youtube.com|https:\/\/youtu.be|https:\/\/vimeo.com" error-message="Not a valid video URL!" autofocus></paper-input>
         <div class="buttons">
             <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
             <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
