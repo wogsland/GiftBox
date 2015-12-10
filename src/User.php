@@ -24,6 +24,7 @@ class User
     public $username;
     public $user_group;
     public $group_admin;
+    public $reset_code;
 
     public static function exists($email_address)
     {
@@ -115,7 +116,8 @@ class User
             . "about = '$this->about', "
             . "username = '$this->username', "
             . "user_group = ".($this->user_group ? $this->user_group : "null").", "
-            . "group_admin = '$this->group_admin' "
+            . "group_admin = '$this->group_admin', "
+            . "reset_code = '$this->reset_code' "
             . "WHERE id = '$this->id'";
             execute($sql);
         }
