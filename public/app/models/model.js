@@ -62,7 +62,7 @@ for (i=0; i < tokens.length; i++){
 }
 
 if(user.level == 1){
-  user.user_level = "Free";
+  user.user_level = "Free Trial";
 } else if (user.level == 2){
   user.user_level = "Standard";
 } else if (user.level == 3){

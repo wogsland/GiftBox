@@ -27,18 +27,18 @@ body {
 body#profile-page,
 body#pricing-page,
 body#viewer-page{
-	background-color: #fff;
-	text-align: left;
-	font-size: 13px;
-	color: #636E7B;
-	line-height: 1.42857143;
+  background-color: #fff;
+  text-align: left;
+  font-size: 13px;
+  color: #636E7B;
+  line-height: 1.42857143;
 }
 
 body#profile-page footer,
 body#pricing-page footer,
 body#viewer-page footer,
 body#privacy-policy footer{
-	text-align: center;
+  text-align: center;
 }
 
 /* Internet Explorer 10 in Windows 8 and Windows Phone 8 Bug fix */
@@ -132,7 +132,7 @@ li {
 }
 
 .modal-title {
-	color: black;
+  color: black;
 }
 
 
@@ -301,9 +301,9 @@ h5 {
 
 .small-txt,
 .social-list > li{
-	font-size: 13px;
-	color: #636E7B;
-	line-height: 1.42857143;
+  font-size: 13px;
+  color: #636E7B;
+  line-height: 1.42857143;
 }
 
 
@@ -536,7 +536,7 @@ object {
 }
 
 .token-iphone .left-align {
-	margin-top: 20%;
+  margin-top: 20%;
 }
 
 .token-macbook {
@@ -545,13 +545,13 @@ object {
 }
 
 .token-macbook img {
-	padding-right: 10px;
+  padding-right: 10px;
 }
 
 .token-ipad .left-align,
 .token-iphone .left-align,
 .token-macbook .left-align {
-	text-align: left;
+  text-align: left;
 }
 
 .token-ipad .left-align p,
@@ -563,35 +563,35 @@ object {
 }
 
 .token-ipad {
-		background: url(../assets/img/bg-1.jpg) 50% 0 fixed;
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		height: auto;
-		margin: 0 auto;
+    background: url(../assets/img/bg-1.jpg) 50% 0 fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: auto;
+    margin: 0 auto;
     width: 100%;
     position: relative;
 }
 .token-iphone {
-		background: url(../assets/img/bg-2.jpg) 50% 0 fixed;
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		height: auto;
-		margin: 0 auto;
+    background: url(../assets/img/bg-2.jpg) 50% 0 fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: auto;
+    margin: 0 auto;
     width: 100%;
     position: relative;
 }
 .token-macbook {
-		background: url(../assets/img/bg-3.jpg) 50% 0 fixed;
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		height: auto;
-		margin: 0 auto;
+    background: url(../assets/img/bg-3.jpg) 50% 0 fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: auto;
+    margin: 0 auto;
     width: 100%;
     position: relative;
     color: #fff;
@@ -667,19 +667,19 @@ object {
 }
 
 /*---------------------------------------
-	SECTION:	PRICING
+  SECTION:  PRICING
 -----------------------------------------*/
 .pricing-section {
-	padding: 78px 0;
+  padding: 78px 0;
 }
 
 /* Use a wide full screen for small screens like tablets. */
 @media (min-width: 768px) and (max-width:992px) {
     .container {
-		width: initial;
+    width: initial;
         padding-left: 2em;
         padding-right: 2em;
-	}
+  }
 }
 
 /* --- Features ------------------------- */
@@ -1806,8 +1806,8 @@ summary#privacy-content {
 //  SECTION - GiveTokens
 /////////////////////////////////////////////////////////////////////*/
 #givetokens img {
-	background-color: #232323;
-	padding: 5px;
+  background-color: #232323;
+  padding: 5px;
 }
 
 
@@ -1883,23 +1883,23 @@ summary#privacy-content {
 
 
 .tokens i {
-	color: #fff;
-	display: table-cell;
-	vertical-align: middle;
+  color: #fff;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .title-header {
-	height: 100px !important;
+  height: 100px !important;
 }
 
 .tokens .logo img {
-	max-width:100%;
-	max-height:100%;
+  max-width:100%;
+  max-height:100%;
 }
 
 .tokens .element {
-	border: #fff solid 6px;
-	position:relative;
+  border: #fff solid 6px;
+  position:relative;
   overflow:hidden;
 }
 
@@ -1956,61 +1956,62 @@ div.fill img {
 /************************* POPUP DIALOGS *************************/
 
 #login-form {
-	max-width: 600px;
+  max-width: 600px;
 }
 
 #signup-form {
-	max-width: 700px;
+  max-width: 700px;
 }
 
 .large-input {
-	width: 90%;
+  width: 90%;
 }
 
 .white-popup {
-	position: relative;
-	background: #FFFFFF;
-	padding: 20px;
-	width: auto;
-	margin: 20px auto;
-	border-radius: 20px;
+  position: relative;
+  background: #FFFFFF;
+  padding: 20px;
+  width: auto;
+  margin: 20px auto;
+  border-radius: 20px;
 }
 
 #dialog-form-container {
-	width: 100%;
-	position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .dialog-header {
-	color: black;
+  color: black;
 }
 
 .dialog-input {
-	border: 1px solid;
-	border-radius: 5px;
-	font-size: 200%;
-	margin: 20px;
-	padding: 10px;
-	display: block;
-	color: black;
+  border: 1px solid;
+  border-radius: 5px;
+  font-size: 200%;
+  margin: 20px;
+  padding: 10px;
+  display: block;
+  color: black;
 }
 
 .dialog-input:focus {
-	color: black;
+  color: black;
 }
 
 .dialog-message {
-	color: red;
-	margin-top: 10px;
-	text-align: center;
-	width: 100%;
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
 }
 
 #forgot-password {
-	width: 100%;
-	display: block;
-	text-align: right;
-	color: black;
+  margin-left: 20px;
+  width: 100%;
+  display: block;
+  text-align: left;
+  color: black;
 }
 
 #forgot-password:hover {
@@ -2018,15 +2019,15 @@ div.fill img {
 }
 
 .dialog-button {
-	color: white;
-	border:1px solid;
-	border-top-width: 0px;
-	padding: 10px;
-	border-radius: 10px;
-	background-color: #293133;
-	margin-top: 20px;
-	display: inline-block;
-	font-size: 150%;
+  color: white;
+  border:1px solid;
+  border-top-width: 0px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #293133;
+  margin-top: 20px;
+  display: inline-block;
+  font-size: 150%;
 }
 
 .dialog-button:hover {
@@ -2034,11 +2035,11 @@ div.fill img {
 }
 
 .dialog-button-right {
-	float: right;
+  float: right;
 }
 
 .dialog-button-left {
-	float: left;
+  float: left;
 }
 
 .btn-facebook {
@@ -2107,11 +2108,11 @@ th.visible-xs,
 td.visible-xs{display:none!important}
 
 @media (max-width:767px){
-	.visible-xs{display:block!important}
-	table.visible-xs{display:table}
-	tr.visible-xs{display:table-row!important}
-	th.visible-xs,
-	td.visible-xs{display:table-cell!important}
+  .visible-xs{display:block!important}
+  table.visible-xs{display:table}
+  tr.visible-xs{display:table-row!important}
+  th.visible-xs,
+  td.visible-xs{display:table-cell!important}
 }
 .visible-sm,tr.visible-sm,th.visible-sm,td.visible-sm{display:none!important}
 
@@ -2151,15 +2152,15 @@ GREEN COLOR CODE: #5ebb47
 }
 
 .solid-lt-blue {
-	background: rgba(171,223,236, 1) !important;
+  background: rgba(171,223,236, 1) !important;
 }
 
 .solid-lt-green {
-	background: rgba(98,185,77, 1) !important;
+  background: rgba(98,185,77, 1) !important;
 }
 
 .solid-green {
-	background: rgba(38,163,78, 1) !important;
+  background: rgba(38,163,78, 1) !important;
 }
 
 .standard-button {
@@ -2204,18 +2205,18 @@ GREEN COLOR CODE: #5ebb47
 }
 
 h4.main-color {
-	text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .color-bg {
-	background: #476fb6;
-	color: #FFFFFF;
+  background: #476fb6;
+  color: #FFFFFF;
 }
 
 
 
 /* ---------------------------------------------------------------------- */
-/*	Buttons
+/*  Buttons
 /* ---------------------------------------------------------------------- */
 .teal {
     color: white;

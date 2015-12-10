@@ -66,6 +66,9 @@ if (!isset($endpoint_parts[1])) {
         case 'create_recruiting':
         include __DIR__.'/../create_recruiting.php';
         break;
+        case 'forgot_password':
+        include __DIR__.'/../forgot_password.php';
+        break;
         case 'invoice':
         include __DIR__.'/../invoice.php';
         break;

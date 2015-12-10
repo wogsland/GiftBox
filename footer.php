@@ -51,7 +51,7 @@
 						<input class="dialog-input large-input" id="login_email" name="login_email" type="text" placeholder="Email address" size="25">
 						<input class="dialog-input large-input" id="password" name="password" type="password" placeholder="Password" size="25">
 					</form>
-					<!--<a id="forgot-password" href="javascript:void(0)" onClick="forgotPassword()">Forgot your password?</a>-->
+					<a id="forgot-password" href="/forgot_password">Forgot your password?</a>
 					<div type="button" class="btn-lg btn-primary dialog-button-center" onclick="loginEmail()" style="border: 1px solid #e5e5e5; margin-top: 15px;margin-right: 20px; margin-left: 20px; text-align: center;">
 						Log In With Email
 					</div>
