@@ -91,6 +91,9 @@ if (!isset($endpoint_parts[1])) {
             }
         }
         break;
+        case 'password_reset':
+        include __DIR__.'/../password_reset.php';
+        break;
         case 'payments':
         include __DIR__.'/../payments.php';
         break;

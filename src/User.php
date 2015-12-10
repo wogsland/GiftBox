@@ -36,12 +36,30 @@ class User
         return $exists;
     }
 
-    public static function fetch($email_address)
+    /**
+     * Fetches a user object by email or reset code
+     *
+     * @param string $value - the value of the key
+     * @param string key    - email_address or reset_code
+     *
+     * @param User - the corresponding object
+     */
+    public static function fetch($value, $key = 'email_address')
     {
         $user = null;
+        switch ($key) {
+            case 'email_address':
+            $condition = "upper(email_address) = '".strtoupper($value)."'";
+            break;
+            case 'reset_code':
+            $condition = "reset_code = '$value'";
+            break;
+            default:
+            return $user;
+        }
         $result = execute_query(
             "SELECT * FROM user
-            WHERE upper(email_address) = '".strtoupper($email_address)."'"
+            WHERE $condition"
         );
         if ($result->num_rows > 0) {
             $user = $result->fetch_object("GiveToken\User");
