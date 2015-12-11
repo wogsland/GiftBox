@@ -14,23 +14,23 @@ if (!logged_in()) {
 	<link rel="stylesheet" href="assets/elegant-icons/style.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css" />
-	<link rel="stylesheet" href="css/create.css" />
+	<link rel="stylesheet" href="css/create.min.css" />
 	<link rel="stylesheet" href="css/animate.min.css" />
-	<link rel="stylesheet" href="css/create_and_preview.css" />
+	<link rel="stylesheet" href="css/create_and_preview.min.css" />
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.7/video-js.css">
 	<link rel="stylesheet" href="/css/octicons/octicons.css">
 
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 	<script src="js/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
 	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
 	<script src="js/id3-minimized.js"></script>
-	<script src="js/aviary.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/create.js"></script>
-	<script src="js/init.js"></script>
+	<script src="js/aviary.min.js"></script>
+	<script src="js/util.min.js?v=<?php echo VERSION;?>"></script>
+	<script src="js/create.js?v=<?php echo VERSION;?>"></script>
+	<script src="js/init.min.js?v=<?php echo VERSION;?>"></script>
 	<script src="//vjs.zencdn.net/4.7/video.js"></script>
 	<script src="//w.soundcloud.com/player/api.js" type="text/javascript"></script>
-	<script src="js/facebook_init.js"></script>
+	<script src="js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
 	<script src="js/ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="50r9wt4kpyz9pcj"></script>

@@ -74,46 +74,6 @@ var userLevel = null;
     // Bind to click events on those elements
     $( ".plan .select-btn" ).on( "click", function( event ) {
       $("#premium-dialog").modal();
-
-/*
-      // Read the plan type from the data-plan attribute on the div with class plan
-      selectedPlan = $( this ).closest( ".plan" ).attr( "data-plan" );
-  selectPlan(selectedPlan);
-
-      // Get the plan information from the plans variable, based on the key that we just read from the attribute
-      var planInfo = plans[ selectedPlan ];
-
-      if ( planInfo.pricingChart ) {
-        $( "#pricingChart" ).removeClass( "not" );
-      } else {
-        $( "#pricingChart" ).addClass( "not" );
-        viewerLevel = null;
-        $('.pricingLevelOn').removeClass('pricingLevelOn');
-      }
-
-      if ( planInfo.pricingChart2 ) {
-        $( "#pricingChart2" ).removeClass( "not" );
-      } else {
-        $( "#pricingChart2" ).addClass( "not" );
-        userLevel = null;
-        $('.pricingLevelOn2').removeClass('pricingLevelOn2');
-      }
-
-      // Determine which pricing chart to scroll to
-      var showPricingChart = "#topPricingChart";
-      if ( planInfo.pricingChart ) {
-        showPricingChart = "#pricingChart";
-      }
-
-      // Scroll to the pricing chart
-      // https://github.com/jquery/api.jquery.com/issues/417
-      $( "html,body" ).animate({
-        scrollTop: $( showPricingChart ).offset().top
-      }, "slow" );
-
-      updatePrice();
-*/
-
     });
 
     $( ".pricingLevel" ).on( "click", function() {

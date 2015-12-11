@@ -10,7 +10,7 @@ function upgradeError(message) {
 function processUpgrade(token, payFrom) {
 	var upgradeData = {
 		newLevel: 2,
-		plan: 'standard',
+		plan: 'recruiting',
 		stripeToken: token.id,
 		email: token.email,
 	};
@@ -20,7 +20,9 @@ function processUpgrade(token, payFrom) {
 			if (payFrom === "SIGNUP") {
 				signupClose();
 				openMessage("Welcome!", "You have successfully signed up with GiveToken.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
-			} else {
+			} else if (payFrom === "UPGRADE") {
+        window.location.href = '/profile';
+      } else {
 				location.reload();
 			}
 		} else if (data.status === "ERROR") {
@@ -47,7 +49,7 @@ function payWithStripe(email, payFrom) {
 	// Open Checkout with further options
 	handler.open({
 		name: 'GiveToken',
-		description: "GiveToken Standard ($24.99/month)",
-		amount: 2499
+		description: "GiveToken ($100/month)",
+		amount: 10000
 	});
 }

@@ -22,17 +22,11 @@ if (logged_in()) {
 define('TITLE', 'GiveToken.com - Community Page');
 require __DIR__.'/header.php';
 ?>
-<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="css/magnific-popup.min.css">
 
 </head>
 
 <body id="profile-page">
-<!-- =========================
-     PRE LOADER
-============================== -->
-<div class="preloader">
-  <div class="status">&nbsp;</div>
-</div>
 
 <!-- =========================
      HEADER
@@ -53,45 +47,40 @@ require __DIR__.'/header.php';
 		<div class="row">
 			<!-- Sidebar -->
 			<div class="col-sm-4 col-md-3">
-				<?php
-    if (logged_in()) {
-        echo '<div class="text-center">
-					            <img src="assets/gt-favicons.ico/favicon-96x96.png" class="img-circle img-offline img-responsive img-profile" alt="">
-					            <h4 class="profile-name mb5">' . " $first_name  $last_name " . '</h4>
-					            <div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
-					            <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
-					            <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>
-					            <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
+				<?php if (logged_in()) { ?>
+        <div class="text-center">
+          <img src="assets/gt-favicons.ico/favicon-96x96.png" class="img-circle img-offline img-responsive img-profile" alt="">
+          <h4 class="profile-name mb5"><?php echo " $first_name  $last_name ";?></h4>
+          <!--<<div class="small-txt mb5"><i class="fa fa-gift"></i> 0 Give Tokens</div>
+          <div class="small-txt mb5"><i class="fa fa-star"></i> 0 Token Views</div>
+          <div class="small-txt mb5"><i class="fa fa-map-marker"></i> Las Vegas, Nevada, USA</div>-->
+          <!--<div class="small-txt mb5"><i class="fa fa-briefcase"></i> Marketing Director at <a href="">Company, Inc.</a></div>-->
 
-					            <div class="mb20"></div>
+          <div class="mb20"></div>
 
-					            <div class="btn-group">
-					                <a href="/token_type" class="btn btn-primary btn-bordered">Create GiveToken</a>
-					                <a href="/token_type" class="btn btn-primary btn-bordered">Send GiveToken</a>
-					            </div>
+          <div class="btn-group">
+            <a href="/create_recruiting" class="btn btn-primary btn-bordered">Create GiveToken</a>
+            <a href="/tokens" class="btn btn-primary btn-bordered">Send GiveToken</a>
+          </div>
 
-					            <div class="mb20"></div>
-					        </div>
-					        <h5 class="md-title">Welcome to the Community Page!</h5>
-							<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!</p>
-					        <h5 class="md-title">Connect</h5>
-							<ul class="list-unstyled social-list">
-					            <li><i class="fa fa-twitter"></i> <a href="">twitter.com/#</a></li>
-					            <li><i class="fa fa-facebook"></i> <a href="">facebook.com/#</a></li>
-					            <li><i class="fa fa-youtube"></i> <a href="">youtube.com/#</a></li>
-					            <li><i class="fa fa-linkedin"></i> <a href="">linkedin.com/#</a></li>
-					            <li><i class="fa fa-pinterest"></i> <a href="">pinterest.com/#</a></li>
-					            <li><i class="fa fa-instagram"></i> <a href="">instagram.com/#</a></li>
-					        </ul>';
-    } else {
-        echo '<h5 class="md-title">Welcome to the Community Page!</h5>
-								<p class="mb30 small-txt">This is a space to collaborate with other users and learn practices that allow you to make the most of our product!<a href="">Show More</a></p>';
-        echo '<div class="btn-group buttons login-button text-center">
-								<button href="#login-form" class="open-popup-link btn btn-primary btn-bordered">Login</button>
-								<button href="#signup-form" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
-							  </div>';
-    }
-                ?>
+          <div class="mb20"></div>
+        </div>
+        <h5 class="md-title">Welcome to the Community Page!</h5>
+        <p class="mb30 small-txt">
+          This is a space to collaborate with other users and learn practices
+          that allow you to make the most of our product!
+        </p>
+    <?php } else { ?>
+      <h5 class="md-title">Welcome to the Community Page!</h5>
+      <p class="mb30 small-txt">
+        This is a space to collaborate with other users and learn
+        practices that allow you to make the most of our product!
+      </p>
+      <div class="btn-group buttons login-button text-center">
+        <button id="login-community-button" class="open-popup-link btn btn-primary btn-bordered">Login</button>
+        <button id="signup-community-button" class="open-popup-link btn btn-primary btn-bordered">Sign Up</button>
+      </div>
+    <?php }?>
 			</div><!-- /Sidebar -->
 			<div class="col-sm-8 col-md-9">
 				<!-- Tab Navigation -->
@@ -721,7 +710,7 @@ require __DIR__.'/header.php';
 
 <?php require __DIR__.'/footer.php';?>
 
-<script src="js/community.js"></script>
+<script src="js/community.js?v=<?php echo VERSION;?>"></script>
 <script src="js/jquery.magnific-popup.js"></script>
 
 </body>

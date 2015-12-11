@@ -15,21 +15,12 @@ require __DIR__.'/header.php';
 ?>
 
 <!-- REACT -->
-<script src="/js/react.js"></script>
+<script src="/js/react.min.js"></script>
 <script src="/js/JSXTransformer.js"></script>
 
 </head>
 
 <body id="profile-page">
-<!-- =========================
-     PRE LOADER
-============================== -->
-
-<div class="preloader" >
-  <div class="status">&nbsp;</div>
-</div>
-
-
 
 <!-- =========================
      HEADER
@@ -48,21 +39,21 @@ require __DIR__.'/header.php';
 ============================== -->
 
 <script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
-<script type="text/javascript" src="/app/models/model.js"></script>
-<script type="text/jsx" src="/app/account/AccountStore.js"></script>
+<script type="text/javascript" src="/app/models/model.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/AccountStore.js?v=<?php echo VERSION;?>"></script>
 
 <!-- React Components -->
-<script type="text/jsx" src="/app/account/profile.js"></script>
-<script type="text/jsx" src="/app/account/activities.js"></script>
-<script type="text/jsx" src="/app/account/tokens.js"></script>
-<script type="text/jsx" src="/app/account/token_analytics.js"></script>
-<script type="text/jsx" src="/app/account/viewers.js"></script>
-<script type="text/jsx" src="/app/account/viewer_edit.js"></script>
-<script type="text/jsx" src="/app/account/info.js"></script>
-<script type="text/jsx" src="/app/account/users.js"></script>
-<script type="text/jsx" src="/app/account/user_edit.js"></script>
-<script type="text/jsx" src="/app/account/user_remove.js"></script>
-<script type="text/jsx" src="/app/account/index.js"></script>
+<script type="text/jsx" src="/app/account/profile.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/activities.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/tokens.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/token_analytics.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/viewers.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/viewer_edit.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/info.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/users.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/user_edit.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/user_remove.js?v=<?php echo VERSION;?>"></script>
+<script type="text/jsx" src="/app/account/index.js?v=<?php echo VERSION;?>"></script>
 
 
 <section class="profile" id="account-profile"></section>
@@ -71,5 +62,27 @@ require __DIR__.'/header.php';
 </script>
 
 <?php require __DIR__.'/footer.php';?>
+<?php if (isset($_SESSION['stripe_id'])) { ?>
+  <script>
+  $(document).ready(function() {
+    // normal load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 500);
+    // normal load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 1000);
+    // slowish load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 5000);
+    //snail load
+    setTimeout(function () {
+      $('#upgrade-button').hide();
+    }, 30000);
+  });
+  </script>
+<?php }?>
 </body>
 </html>

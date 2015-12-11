@@ -66,7 +66,7 @@ require __DIR__.'/header.php';
 					<div class="buttons" id="login-button">
         <?php
         if (logged_in()) {
-            echo '<a href="/token_type" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
+            echo '<a href="/create_recruiting" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
         } else {
             echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
             echo ' or ';
@@ -579,12 +579,17 @@ require __DIR__.'/header.php';
 <!-- =========================
     PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="/js/contact.js"></script>
+<script src="/js/contact.min.js?v=<?php echo VERSION;?>"></script>
 <script>
 $(document).ready(function(){
   url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
   $.post(url);
 });
+<?php
+if (isset($_GET['action']) && 'login' == $_GET['action']) {
+	echo '$("#login-dialog").modal();';
+}
+?>
 </script>
 
 </body>

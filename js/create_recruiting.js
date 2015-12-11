@@ -82,7 +82,7 @@ function removeDeleted(type, id) {
 
 function removeImage(img) {
 	var saved = img.data('saved');
-	if (saved == true) {
+	if (saved === true) {
 		var id = img.data('id');
 		if (img.hasClass("recruiting-token-image")) {
 			addDeleted('image', id);
@@ -137,7 +137,7 @@ function uploadFileData(fileData, fileName, img) {
 				// progress indicator goes here
 			}
 		};
-        xhr.open("POST", "upload.php", true);
+        xhr.open("POST", "/upload", true);
         xhr.setRequestHeader("X-FILENAME", fileName);
         xhr.send(fileData);
 		saveTokenImage(img, fileName);
@@ -204,7 +204,7 @@ function saveTokenVideo(img) {
 function isValid(id) {
 	var valid = false;
 	var field = $('#'+id);
-	var value = field[0].value
+	var value = field[0].value;
 	if (typeof value == 'undefined' || !value) {
 		var fieldName = field[0].label;
 		$('#validation-message').html(fieldName+" is a required field.");
@@ -215,11 +215,25 @@ function isValid(id) {
 
 	return valid;
 }
+
+function linkifyText() {
+	$("#job-title")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-title").val()));
+	$("#job-description")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-description").val()));
+	$("#skills-required")[0].updateValueAndPreserveCaret(Autolinker.link($("#skills-required").val()));
+	$("#responsibilities")[0].updateValueAndPreserveCaret(Autolinker.link($("#responsibilities").val()));
+	$("#perks")[0].updateValueAndPreserveCaret(Autolinker.link($("#perks").val()));
+	$("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
+	$("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
+	$("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
+	$("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
+}
+
 function saveRecruitingToken(preview) {
 	var tokenId = null;
 	var userId = null;
 	var serializedForm = null;
 	if ($('#recruiting-token-form')[0].validate()) {
+		linkifyText();
 		setStatus("Saving token...");
 		serializedForm = document.getElementById("recruiting-token-form").serialize();
 		$.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
@@ -294,9 +308,11 @@ function processOpen() {
 
 function setStatus(message) {
 	$('#status-message').html(message);
+	$('#status-dialog').css('height', '170px');
 	$('#status-dialog')[0].open();
 }
 function closeStatus() {
+	$('#status-dialog').css('height', '0px');
 	$('#status-dialog')[0].close();
 }
 

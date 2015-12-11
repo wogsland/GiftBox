@@ -52,7 +52,7 @@ if ($animation_style == "none") {
 	<title><?php echo $token->name ?></title>
 	<meta name="og:title" property="og:title" content= <?php echo '"'.$token->name.'"' ?> />
 	<meta name="og:site_name" property="og:site_name" content="Givetoken"/>
-	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER['HTTP_HOST']) and isset($_SERVER['REQUEST_URI'])) { echo '"'."http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'"'; 
+	<meta name="og:url" property="og:url" content=<?php if (isset($_SERVER['HTTP_HOST']) and isset($_SERVER['REQUEST_URI'])) { echo '"'."http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].'"';
 } ?> />
 	<meta name="og:description" property="og:description" content=<?php echo '"'.$token->description.'"'?>/>
 	<meta name="fb:app_id" property="fb:app_id" content="1498055593756885" />
@@ -61,20 +61,20 @@ if ($animation_style == "none") {
 
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/preview.css" />
-	<link rel="stylesheet" href="css/create_and_preview.css" />
+	<link rel="stylesheet" href="css/preview.min.css" />
+	<link rel="stylesheet" href="css/create_and_preview.min.css" />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="//vjs.zencdn.net/4.11/video-js.css">
-	<link rel="stylesheet" href="css/colorbox.css" />
+	<link rel="stylesheet" href="css/colorbox.min.css" />
 	<link rel="stylesheet" href="css/animate.min.css" />
-	<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
 	<script src="js/jquery.colorbox-min.js"></script>
 	<script src="//vjs.zencdn.net/4.11/video.js"></script>
 
-	<script src="js/preview.js"></script>
+	<script src="js/preview.min.js?v=<?php echo VERSION;?>"></script>
 
 	<!-- CUSTOM STYLESHEETS -->
-	<script src="js/preloader.js"></script>
+	<script src="js/preloader.min.js?v=<?php echo VERSION;?>"></script>
 
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 

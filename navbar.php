@@ -27,22 +27,32 @@
         <?php if (!logged_in()) { ?>
             <li><a href="/" class="external">Home</a></li>
         <?php } else { ?>
-            <li><a href="/token_type" class="external">Create Token</a></li>
+            <li><a href="/create_recruiting" class="external">Create Token</a></li>
+        <?php } ?>
+        <?php if (!logged_in()) { ?>
+          <li><a href="/pricing" class="external">Pricing</a></li>
         <?php } ?>
         <li><a href="/community" class="external">Community</a></li>
-        <li><a href="/pricing" class="external">Pricing</a></li>
-        <?php
-        if (logged_in()) {
-            echo '<li><a href="javascript:void(0)" onclick="logout();">Logout</a></li>';
-            echo '<li><a href="/profile" class="external">Account</a></li>';
-            if (is_admin()) {
-                echo '<li><a href="/admin" class="external">Admin</a></li>';
-            }
-        } else {
-            echo '<li><a href="javascript:void(0)" onclick="$(\'#login-dialog\').modal()">Login</a></li>';
-            echo '<li><a href="javascript:void(0)" onclick="$(\'#signup-dialog\').modal()">Sign Up</a></li>';
-        }
-        ?>
+        <?php if (logged_in()) { ?>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/upgrade" class="external account-dropdown" id="upgrade-dropdown">Upgrade</a></li>
+                <li role="separator" class="divider" id="upgrade-divider"></li>
+                <li><a href="/tokens" class="external account-dropdown">My Tokens</a></li>
+                <li><a href="/profile" class="external account-dropdown">Profile</a></li>
+                <li><a href="/payments" class="external account-dropdown">Payments</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="javascript:void(0)" class="account-dropdown" onclick="logout();">Logout</a></li>
+              </ul>
+            </li>
+            <?php if (is_admin()) { ?>
+                <li><a href="/admin" class="external">Admin</a></li>
+            <?php }?>
+        <?php } else { ?>
+            <li><a href="javascript:void(0)" onclick="loginOpen()">Login</a></li>
+            <li><a href="javascript:void(0)" onclick="signupOpen(1)">Sign Up</a></li>
+        <?php }?>
       </ul>
     </div>
   </div> <!-- /END CONTAINER -->

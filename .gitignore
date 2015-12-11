@@ -5,13 +5,12 @@ Icon
 
 # Local storage #
 #################
-/uploads
+/public/uploads
 /ajax/uploads
 
 # Composer #
 ############
 /vendor
-composer.lock
 
 # Bower #
 #########
@@ -20,8 +19,8 @@ components
 
 # Polybuild #
 #############
-recruiting_token.build.html
-js/recruiting_token.min.js
+#recruiting_token.build.html
+#js/recruiting_token.min.js
 
 # Testing #
 ###########

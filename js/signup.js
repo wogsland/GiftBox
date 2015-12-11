@@ -1,36 +1,3 @@
-document.write('\
-<div class="modal fade" id="signup-dialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-	<div class="modal-dialog">\
-		<div class="modal-content">\
-			<div class ="modal-header">\
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
-				<h2 class="modal-title" id="gridSystemModalLabel"><b>Sign Up With GiveToken</b></h2>\
-			</div>\
-			<div class="modal-body">\
-				<div id="signup-alert-placeholder"></div>\
-				<form id="signup-form">\
-					<input type="hidden" id="reg_type" name="reg_type" value="">\
-					<input class="dialog-input large-input" id="first_name" name="first_name" type="text" placeholder="First Name">\
-					<input class="dialog-input large-input" id="last_name" name="last_name" type="text" placeholder="Last Name">\
-					<input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Your Email">\
-					<input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="New Password">\
-					<select class="dialog-input large-input" id="signup_level" name="signup_level">\
-					<option value="1">Basic (Free)</option>\
-					<option value="2">Standard ($24.99)</option>\
-					</select>\
-					Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>\
-				</form>\
-				 <div class="modal-footer">\
-					<div id="fb-root"></div>\
-					<button type="button" class="btn-lg btn-primary dialog-button-left" onclick="signupFacebook()"><i class="fa fa-facebook"></i> Sign Up Using Facebook</button>\
-					<button type="button" class="btn-lg btn-default dialog-button-right" onclick="signupEmail()">Sign Up</button>\
-				</div>\
-			</div>\
-		</div>\
-	</div>\
-</div>\
-');
-
 function signupOpen(level) {
 	signupClear();
 	$("#signup_level").val(level);
@@ -83,11 +50,7 @@ function signupSuccess(app_root, signupType, userInfo) {
 
 function signupEmail() {
 	$("#reg_type").val("EMAIL");
-	if (!$("#first_name").val()) {
-		signupError("Please enter a first name.");
-	} else if (!$("#last_name").val()) {
-		signupError("Please enter a last name");
-	} else if (!$("#signup_email").val()) {
+	if (!$("#signup_email").val()) {
 		signupError("Please enter a valid email.");
 	} else if (!$("#signup_password").val()) {
 		signupError("Please enter a password.");

@@ -41,16 +41,15 @@ class RecruitingToken
                 foreach (get_object_vars($token) as $key => $value) {
                     if (isset($value)) {
                         $this->$key = $value;
-                    } else {
-                        unset($this->$key);
                     }
                 }
             }
         }
     }
 
-    public static function getUserTokens($user_id) {
-        $results =  execute_query("SELECT * FROM recruiting_token where user_id = $user_id ORDER BY company, job_title");
+    public static function getUserTokens($user_id)
+    {
+        $results =  execute_query("SELECT * FROM recruiting_token where user_id = '$user_id' ORDER BY company, job_title");
         $user_tokens = array();
         while($token = $results->fetch_object()) {
             $user_tokens[count($user_tokens)] = $token;

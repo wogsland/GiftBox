@@ -24,20 +24,68 @@ fi
 
 # run unit tests
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
+echo ""
+
+# build polymer
+polybuild --maximum-crush recruiting_token.php
+mv recruiting_token.build.js public/js/recruiting_token.min.js
+sed -i '' -e 's/recruiting_token\.build\.js/\/js\/recruiting_token\.min\.js/g' recruiting_token.build.html
+sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
+echo "Polybuild finished."
+echo ""
+
+# minify css
+yuicompressor css/colorbox.css -o public/css/colorbox.min.css
+yuicompressor css/styles.css -o public/css/styles.min.css
+yuicompressor css/magnific-popup.css -o public/css/magnific-popup.min.css
+yuicompressor css/create_recruiting.css -o public/css/create_recruiting.min.css
+yuicompressor css/create.css -o public/css/create.min.css
+yuicompressor css/create_and_preview.css -o public/css/create_and_preview.min.css
+yuicompressor css/preview.css -o public/css/preview.min.css
+yuicompressor css/users_groups.css -o public/css/users_groups.min.css
+yuicompressor css/datatables.css -o public/css/datatables.min.css
+yuicompressor css/owl.theme.css -o public/css/owl.theme.min.css
+yuicompressor css/owl.carousel.css -o public/css/owl.carousel.min.css
+yuicompressor css/nivo-lightbox.css -o public/css/nivo-lightbox.min.css
+yuicompressor css/at-at.css -o public/css/at-at.min.css
+echo "CSS minified"
+echo ""
+
+# minify javascript
+yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
+#yuicompressor js/create.js -o public/js/create.min.js <-- this one has errors
+yuicompressor js/create_common.js -o public/js/create_common.min.js
+yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
+yuicompressor js/custom.js -o public/js/custom.min.js
+yuicompressor js/facebook_init.js -o public/js/facebook_init.min.js
+yuicompressor js/init.js -o public/js/init.min.js
+yuicompressor js/util.js -o public/js/util.min.js
+yuicompressor js/account.js -o public/js/account.min.js
+yuicompressor js/pricing.js -o public/js/pricing.min.js
+yuicompressor js/matchMedia.js -o public/js/matchMedia.min.js
+yuicompressor js/contact.js -o public/js/contact.min.js
+yuicompressor js/login.js -o public/js/login.min.js
+yuicompressor js/signup.js -o public/js/signup.min.js
+yuicompressor js/preview.js -o public/js/preview.min.js
+yuicompressor js/preloader.js -o public/js/preloader.min.js
+yuicompressor js/jquery.nav.js -o public/js/jquery.nav.min.js
+yuicompressor js/jquery.fitvids.js -o public/js/jquery.fitvids.min.js
+echo "JavaScript minified"
+echo ""
+
+# update public components - this needs tweeking
+rm -rf public/components
+cp -r components public/components
+echo "Components updated"
+echo ""
 
 # see what's changed
 git status
 
-# build polymer
-polybuild --maximum-crush recruiting_token.php
-mv recruiting_token.build.js js/recruiting_token.min.js
-sed -i '' -e 's/recruiting_token\.build\.js/\/js\/recruiting_token\.min\.js/g' recruiting_token.build.html
-sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
-echo "Polybuild finished."
-
 # push it up to gcloud
 if [ "$#" -gt 0 ]
 then
+  echo ""
   case $1 in
     "master") gcloud preview app deploy app.yaml --project stone-timing-557 --promote ;;
     "staging") gcloud preview app deploy app.yaml --project t-sunlight-757 --promote ;;

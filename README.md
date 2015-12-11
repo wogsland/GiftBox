@@ -11,22 +11,45 @@
 ### URLs
 hosted on Google Cloud
 - production: [www.givetoken.com](https://www.givetoken.com/) ([stone-timing-557.appspot.com](https://stone-timing-557.appspot.com/))
-- staging: [http://t-sunlight-757.appspot.com/](https://t-sunlight-757.appspot.com/)
+- staging: [dev.givetoken.com](http://dev.givetoken.com)
+([http://t-sunlight-757.appspot.com/](https://t-sunlight-757.appspot.com/))
 
 ### Github
 
 Make sure you have access & set your project remote
 
-    git remote add github git@github.com:GiveToken/GiftBox.git`
+    git remote add github git@github.com:GiveToken/GiftBox.git
 
 *this assumes ssh; you could use `https://github.com/GiveToken/GiftBox.git` instead of `git@...` for https if you prefer*
 
-### <a id="database"></a>Database Management
+### <a id="database"></a>MySQL Database
 
 - Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
 - Get access to the [Google Developer Console](https://console.developers.google.com).
 
 To create a local instance of the givetoken database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+
+### Apache
+
+If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like
+
+    <VirtualHost *:80>
+        ServerAdmin username@givetoken.com
+        ServerName givetoken.local
+        DocumentRoot "/Library/Webserver/Documents/GiftBox/public"
+
+        <Directory "/Library/Webserver/Documents/GiftBox/public">
+            Options -Indexes +FollowSymLinks +MultiViews
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+    </VirtualHost>
+
+and  restart Apache.
 
 ### Google Cloud SDK
 
@@ -63,7 +86,7 @@ run
 
 which will create everything you need in the untracked components directory.
 
-### Polybuild
+### Optimization
 
 Polymer provides a tool to optimize & minify an app's code which you can get via
 
@@ -75,6 +98,10 @@ and build the recruiting token with
 
 which creates `recruiting_token.build.html` & `recruiting_token.build.js`.
 NB: it treats PHP like a comment and removes it.
+
+Additionally, YUI compressor is the tool we use for general minimization:
+
+    npm install -g yuicompressor
 
 ## <a id="branching"></a>Branching Strategy
 
@@ -221,8 +248,8 @@ When deploying using the following procedures, *be absolutely sure* that you are
 ### Build Script
 The build script (`build.sh`) runs unit tests, warns you of any untracked or
 uncommited files (**these will be included in the optional release to glcoud, but
-are not yet tracked in github**), minifies the token JavaScript, concatenates the HTML
-files and optionally pushes to gcloud. For example, to deploy a test build,
+are not yet tracked in github**), minifies JavaScript & CSS, Polybuilds the token
+and optionally pushes to gcloud. For example, to deploy a test build,
 
     ./build.sh username
 

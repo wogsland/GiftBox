@@ -3,116 +3,47 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+
+# react profile page
 - url: /app
-  static_dir: app
+  static_dir: public/app
+- url: /models
+  static_dir: public/models
 
 - url: /css
-  static_dir: css
+  static_dir: public/css
 
+# JavaScript
+- url: /js/pay_with_stripe.js
+  script: pay_with_stripe.php
+- url: /js/JSXTransformer.js
+  script: js/JSXTransformer.js
+- url: /js/create.js
+  script: js/create.js
 - url: /js
-  static_dir: js
+  static_dir: public/js
 
 - url: /images
-  static_dir: images
+  static_dir: public/images
 - url: /images/team
-  static_dir: images/team
-
-- url: /models
-  static_dir: models
-
-- url: /assets/images
-  static_dir: assets/images
-
-- url: /assets/img
-  static_dir: assets/img
-
-- url: /assets/fonts
-  static_dir: assets/fonts
+  static_dir: public/images/team
 
 - url: /fonts
-  static_dir: fonts
+  static_dir: public/fonts
 
-- url: /assets/app-icons
-  static_dir: assets/app-icons
-
-- url: /assets/gt-favicons.ico
-  static_dir: assets/gt-favicons.ico
-
-- url: /assets/elegant-icons
-  static_dir: assets/elegant-icons
-
-- url: /
-  script: index.php
-
-- url: /src/(.+\.php)$
-  script: index.php
+- url: /assets
+  static_dir: public/assets
 
 - url: /templates
-  static_dir: templates
+  static_dir: public/templates
   application_readable: true
-
-# Ajax Routing
-- url: /ajax/(.+)
-  script: ajax/route.php
-
-# Serve php scripts.
-- url: /(.+\.php)$
-  script: \1
 
 # Google Polymer Components
 - url: /components/
   static_dir: components/
-- url: /elements/
-  static_dir: elements/
+#- url: /elements/
+#  static_dir: elements/
 
-# Token
-- url: /token/recruiting/(.+)
-  script: recruiting_token.build.html
-- url: /create_recruiting
-  script: create_recruiting.php
-
-# About Page
-- url: /about
-  script: about.php
-
-# Community Page
-- url: /community
-  script: community.php
-
-# Pricing Page
-- url: /pricing
-  script: pricing.php
-
-# Terms Page
-- url: /terms
-  script: termsservice.php
-
-# Privacy Policy
-- url: /privacy
-  script: privacypolicy.php
-
-# Profile
-- url: /profile
-  script: profile.php
-- url: /token_responses
-  script: token_responses.php
-- url: /token_analytics
-  script: token_analytics.php
-
-# Personal Token
-- url: /preview
-  script: preview.php
-- url: /create
-  script: create.php
-- url: /token_type
-  script: token_type.php
-
-# Admin
-- url: /admin
-  script: admin.php
-- url: /admin/visitors
-  script: admin/visitors.php
-
-# catchall for 404
+# catchall for php routing
 - url: /.*
-  script: error.php
+  script: public/index.php

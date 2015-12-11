@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="">
+<meta name="description" content="GiveToken">
 <meta name="keywords" content="">
 <meta name="author" content="Gary Peters">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,22 +56,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
   <!-- CAROUSEL AND LIGHTBOX -->
-  <link rel="stylesheet" href="/css/owl.theme.css">
-  <link rel="stylesheet" href="/css/owl.carousel.css">
-  <link rel="stylesheet" href="/css/nivo-lightbox.css">
+  <link rel="stylesheet" href="/css/owl.theme.min.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/nivo-lightbox.min.css">
   <link rel="stylesheet" href="/css/nivo_themes/default/default.css">
 
   <!-- ANIMATIONS -->
   <link rel="stylesheet" href="/css/animate.min.css">
 
   <!-- CUSTOM STYLESHEETS -->
-  <link rel="stylesheet" href="/css/styles.css">
-
-  <!-- COLORS -->
-  <link rel="stylesheet" href="/css/colors.css">
-
-  <!-- RESPONSIVE FIXES -->
-  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/styles.min.css">
 
   <!--[if lt IE 9]>
   			<script src="/js/html5shiv.js"></script>
@@ -79,4 +73,4 @@
   <![endif]-->
 
   <!-- JQUERY -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

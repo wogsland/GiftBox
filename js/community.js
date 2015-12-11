@@ -31,3 +31,10 @@ var els = document.getElementsByClassName('headers');
 for(i = 0; i < els.length; i++){
 	els[i].onclick = togglePost;
 }
+
+$('#login-community-button').on('click', function(){
+	$('#login-dialog').modal();
+});
+$('#signup-community-button').on('click', function(){
+	$('#signup-dialog').modal();
+});

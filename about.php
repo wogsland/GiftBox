@@ -15,17 +15,11 @@ include __DIR__.'/header.php';
 </head>
 
 <body id="about-page">
-<!-- =========================
-     PRE LOADER
-============================== -->
-<div class="preloader">
-  <div class="status">&nbsp;</div>
-</div>
 
 <!-- =========================
      HEADER
 ============================== -->
-<header class="header" data-stellar-background-ratio="0.5" id="account-profile">
+<header class="header" data-stellar-background-ratio="0.5">
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
@@ -66,7 +60,7 @@ include __DIR__.'/header.php';
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="js/pricing.js"></script>
+<script src="js/pricing.min.js?v=<?php echo VERSION;?>"></script>
 
 </body>
 </html>

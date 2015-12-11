@@ -31,7 +31,7 @@ require __DIR__.'/header.php';
 <link rel="stylesheet" href="css/bootstrap.vertical-tabs.min.css">
 <link rel="stylesheet" href="css/analytics.css">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script src="js/draw.js"></script>
+<script src="js/draw.js?v=<?php echo VERSION;?>"></script>
 
 </head>
 

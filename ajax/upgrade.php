@@ -2,7 +2,9 @@
 use \GiveToken\User;
 use \GiveToken\EventLogger;
 
-require_once __DIR__.'/vendor/stripe/stripe-php/init.php';
+date_default_timezone_set('America/Chicago');
+
+require_once __DIR__.'/../vendor/stripe/stripe-php/init.php';
 
 $response['status'] = "ERROR";
 $response['message'] = "Unable to upgrade at this time.";
@@ -29,6 +31,7 @@ try {
     );
 
     $response['status'] = "SUCCESS";
+    $response['message'] = 'Successful upgrade';
 } catch(Exception $e) {
     $response['status'] = "ERROR";
     $response['message'] = "Stripe error: ". $e->getMessage();
@@ -50,10 +53,11 @@ if ($response['status'] == "SUCCESS") {
     $event = new EventLogger($user->getId(), EventLogger::UPGRADE, 'Stripe Token: '.$token);
     $event->log();
 
-    // Set the session variable
+    // Set the session variables
     if (isset($_SESSION['level'])) {
         $_SESSION['level'] = $new_level;
     }
+    $_SESSION['strip_id'] = $customer->id;
 }
 
 header('Content-Type: application/json');

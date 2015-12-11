@@ -1,14 +1,16 @@
 <?php
 namespace GiveToken\Tests\Ajax\City;
 
+use GiveToken\City;
+
 /**
  * This class tests the ajax endpoint to get a city.
  *
  * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/City/GetTest
  */
-class GetTest
-extends \PHPUnit_Framework_TestCase
+class GetTest extends \PHPUnit_Framework_TestCase
 {
+    protected $city;
     /**
      * Requires the util.php file of functions
      */
@@ -17,76 +19,42 @@ extends \PHPUnit_Framework_TestCase
         include_once __DIR__.'/../../../../util.php';
     }
 
+    protected function setUp()
+    {
+        // create a city
+        $city = new City();
+        $city->name = "City #" . rand(0, 100);
+        $city->image_file = "city.png";
+        $city->population = rand(10000, 10000000);
+        $city->longitude = rand(0, 100);
+        $city->latitude = rand(0, 100);
+        $city->county = "County " . rand(0, 100);
+        $city->country = "CT";
+        $city->timezone = "Awesome Standard Time";
+        $city->temp_hi_spring = rand(0, 100);
+        $city->temp_lo_spring = rand(0, 100);
+        $city->temp_avg_spring = rand(0, 100);
+        $city->temp_hi_summer = rand(0, 100);
+        $city->temp_lo_summer = rand(0, 100);
+        $city->temp_avg_summer = rand(0, 100);
+        $city->temp_hi_fall = rand(0, 100);
+        $city->temp_lo_fall = rand(0, 100);
+        $city->temp_avg_fall = rand(0, 100);
+        $city->temp_hi_winter = rand(0, 100);
+        $city->temp_lo_winter = rand(0, 100);
+        $city->temp_avg_winter = rand(0, 100);
+        $city->save();
+        $this->city = $city;
+    }
+
     /**
      * Tests request via ajax endpoint.
      */
     public function testRequest()
     {
-        // create a city
-        $name = "City #" . rand(0, 100);
-        $population = rand(10000, 10000000);
-        $longitude = rand(0, 100);
-        $latitude = rand(0, 100);
-        $county = "County " . rand(0, 100);
-        $country = "CT";
-        $timezone = "Awesome Standard Time";
-        $temp_hi_spring = rand(0, 100);
-        $temp_lo_spring = rand(0, 100);
-        $temp_avg_spring = rand(0, 100);
-        $temp_hi_summer = rand(0, 100);
-        $temp_lo_summer = rand(0, 100);
-        $temp_avg_summer = rand(0, 100);
-        $temp_hi_fall = rand(0, 100);
-        $temp_lo_fall = rand(0, 100);
-        $temp_avg_fall = rand(0, 100);
-        $temp_hi_winter = rand(0, 100);
-        $temp_lo_winter = rand(0, 100);
-        $temp_avg_winter = rand(0, 100);
-        $query = "INSERT INTO `city` (
-           `name`,
-           `population`,
-           `longitude`,
-           `latitude`,
-           `county`,
-           `country`,
-           `timezone`,
-           `temp_hi_spring`,
-           `temp_lo_spring`,
-           `temp_avg_spring`,
-           `temp_hi_summer`,
-           `temp_lo_summer`,
-           `temp_avg_summer`,
-           `temp_hi_fall`,
-           `temp_lo_fall`,
-           `temp_avg_fall`,
-           `temp_hi_winter`,
-           `temp_lo_winter`,
-           `temp_avg_winter`
-        ) VALUES (
-           '$name',
-           '$population',
-           '$longitude',
-           '$latitude',
-           '$county',
-           '$country',
-           '$timezone',
-           '$temp_hi_spring',
-           '$temp_lo_spring',
-           '$temp_avg_spring',
-           '$temp_hi_summer',
-           '$temp_lo_summer',
-           '$temp_avg_summer',
-           '$temp_hi_fall',
-           '$temp_lo_fall',
-           '$temp_avg_fall',
-           '$temp_hi_winter',
-           '$temp_lo_winter',
-           '$temp_avg_winter'
-        )";
-        $id = insert($query);
-
         // test created city
-        $url = TEST_URL . "/ajax/city/get/$id";
+        $city = $this->city;
+        $url = TEST_URL . "/ajax/city/get/$city->id";
         //$fields = array();
         //$fields_string = "";
         //foreach ($fields as $key=>$value) {
@@ -103,29 +71,31 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
         ob_end_clean();
-        //print_r($return);
+        //print_r($json);
         $return = json_decode($json);
+        //print_r($return);
         $this->assertEquals('true', $return->success);
-        $this->assertEquals($id, $return->data->id);
-        $this->assertEquals($name, $return->data->name);
-        $this->assertEquals($population, $return->data->population);
-        $this->assertEquals($longitude, $return->data->longitude);
-        $this->assertEquals($latitude, $return->data->latitude);
-        $this->assertEquals($county, $return->data->county);
-        $this->assertEquals($country, $return->data->country);
-        $this->assertEquals($timezone, $return->data->timezone);
-        $this->assertEquals($temp_hi_spring, $return->data->temp_hi_spring);
-        $this->assertEquals($temp_lo_spring, $return->data->temp_lo_spring);
-        $this->assertEquals($temp_avg_spring, $return->data->temp_avg_spring);
-        $this->assertEquals($temp_hi_summer, $return->data->temp_hi_summer);
-        $this->assertEquals($temp_lo_summer, $return->data->temp_lo_summer);
-        $this->assertEquals($temp_avg_summer, $return->data->temp_avg_summer);
-        $this->assertEquals($temp_hi_fall, $return->data->temp_hi_fall);
-        $this->assertEquals($temp_lo_fall, $return->data->temp_lo_fall);
-        $this->assertEquals($temp_avg_fall, $return->data->temp_avg_fall);
-        $this->assertEquals($temp_hi_winter, $return->data->temp_hi_winter);
-        $this->assertEquals($temp_lo_winter, $return->data->temp_lo_winter);
-        $this->assertEquals($temp_avg_winter, $return->data->temp_avg_winter);
+        $this->assertEquals($city->id, $return->data->id);
+        $this->assertEquals($city->name, $return->data->name);
+        $this->assertEquals($city->image_file, $return->data->image_file);
+        $this->assertEquals($city->population, $return->data->population);
+        $this->assertEquals($city->longitude, $return->data->longitude);
+        $this->assertEquals($city->latitude, $return->data->latitude);
+        $this->assertEquals($city->county, $return->data->county);
+        $this->assertEquals($city->country, $return->data->country);
+        $this->assertEquals($city->timezone, $return->data->timezone);
+        $this->assertEquals($city->temp_hi_spring, $return->data->temp_hi_spring);
+        $this->assertEquals($city->temp_lo_spring, $return->data->temp_lo_spring);
+        $this->assertEquals($city->temp_avg_spring, $return->data->temp_avg_spring);
+        $this->assertEquals($city->temp_hi_summer, $return->data->temp_hi_summer);
+        $this->assertEquals($city->temp_lo_summer, $return->data->temp_lo_summer);
+        $this->assertEquals($city->temp_avg_summer, $return->data->temp_avg_summer);
+        $this->assertEquals($city->temp_hi_fall, $return->data->temp_hi_fall);
+        $this->assertEquals($city->temp_lo_fall, $return->data->temp_lo_fall);
+        $this->assertEquals($city->temp_avg_fall, $return->data->temp_avg_fall);
+        $this->assertEquals($city->temp_hi_winter, $return->data->temp_hi_winter);
+        $this->assertEquals($city->temp_lo_winter, $return->data->temp_lo_winter);
+        $this->assertEquals($city->temp_avg_winter, $return->data->temp_avg_winter);
     }
 
     /**
@@ -146,5 +116,9 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $return->data);
         ob_end_clean();
     }
+
+    protected function tearDown()
+    {
+        $this->city->delete();
+    }
 }
-?>
