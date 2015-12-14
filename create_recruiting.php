@@ -151,6 +151,9 @@ require __DIR__.'/header.php';
           width: 500px;
           font-size: 18px;
         }
+        .dialog-error {
+          color: red;
+        }
     </style>
 
 </head>
@@ -420,10 +423,10 @@ require __DIR__.'/header.php';
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
-        <paper-input id="video-dialog-url" label="Paste video embed URL here" patter="^https:\/\/youtube.com|https:\/\/youtu.be|https:\/\/vimeo.com" error-message="Not a valid video URL!" autofocus></paper-input>
+        <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
         <div class="buttons">
             <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
+            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
         </div>
     </paper-dialog>
 
