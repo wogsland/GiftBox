@@ -58,15 +58,15 @@ extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($result->id));
 
         // valid id case
-        $url = 'http://server'.rand().'.givetoken.com';
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url)
-                  VALUES ('{$this->RecruitingToken->id}', '$url')";
+        $source_id = rand();
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, source_id)
+                  VALUES ('{$this->RecruitingToken->id}', '$source_id')";
         $id = insert($query);
         $result = new RecruitingTokenVideo($id);
         $this->assertEquals('GiveToken\RecruitingTokenVideo', get_class($result));
         $this->assertTrue(isset($result->id));
         $this->assertEquals($result->id, $id);
-        $this->assertEquals($result->url, $url);
+        $this->assertEquals($result->source_id, $source_id);
         $this->assertEquals($result->recruiting_token_id, $this->RecruitingToken->id);
     }
 
