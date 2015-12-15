@@ -5,8 +5,8 @@ class RecruitingTokenVideo
 {
     protected $id;
     protected $recruiting_token_id;
-    protected $url;
-    protected $thumbnail_src;
+    protected $source;
+    protected $source_id;
 
     /**
      * Constructs the class
@@ -28,7 +28,7 @@ class RecruitingTokenVideo
         }
     }
 
-    public static function getTokenVideos($recruiting_token_id) 
+    public static function getTokenVideos($recruiting_token_id)
     {
         $results =  execute_query("SELECT * FROM recruiting_token_video where recruiting_token_id = $recruiting_token_id");
         $token_videos = array();
@@ -69,20 +69,21 @@ class RecruitingTokenVideo
      * This function creates an entry in the recruiting_token_video table
      *
      * @param int    $recruiting_token_id - id of the token
-     * @param string $url                 - url of video file
+     * @param string $source              - youtube or vimeo
+     * @param string $source_id           - video id from their site
      *
-     * @return int $id - id of inserted row or 0 on fail
+     * @return int - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $url, $thumbnail_src = '')
+    public function create($recruiting_token_id, $source, $source_id)
     {
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url, thumbnail_src)
-                  VALUES ('$recruiting_token_id', '$url', '$thumbnail_src')";
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, source, source_id)
+                  VALUES ('$recruiting_token_id', '$source', '$source_id')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
             $this->recruiting_token_id = $recruiting_token_id;
-            $this->url = $url;
-            $this->thumbnail_src = $thumbnail_src;
+            $this->source = $source;
+            $this->source_id = $source_id;
         }
         return $id;
     }
@@ -97,7 +98,9 @@ class RecruitingTokenVideo
     public function getByRecruitingTokenLongId($long_id)
     {
         $return = array();
-        $query = "SELECT recruiting_token_video.id, recruiting_token_video.url
+        $query = "SELECT recruiting_token_video.id,
+                  recruiting_token_video.source,
+                  recruiting_token_video.source_id
                   FROM recruiting_token_video, recruiting_token
                   WHERE recruiting_token_video.recruiting_token_id = recruiting_token.id
                   AND recruiting_token.long_id = '$long_id'";

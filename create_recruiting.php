@@ -245,16 +245,16 @@ require __DIR__.'/header.php';
                 <paper-card id="company-info" heading="Important Company Info">
                     <div class="field-container">
                         <?php paper_text('Company Name', 'company', $token->company); ?>
-                        <?php paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
-                        <?php paper_text('Company Website', 'company-website', $token->company_website); ?>
+                        <?php //paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
+                        <?php //paper_text('Company Website', 'company-website', $token->company_website); ?>
                         <?php paper_textarea('Company Values', 'company-values', $token->company_values); ?>
                         <?php
-                            $company_sizes = array('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large');
+                            /*$company_sizes = array('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large');
                             $selected_size = null;
                             if (isset($token->company_size) && $token->company_size) {
                                 $selected_size = array_search($token->company_size, $company_sizes);
                             }
-                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_size);
+                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_size);*/
                         ?>
                     </div>
                 </paper-card>
@@ -420,10 +420,10 @@ require __DIR__.'/header.php';
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
-        <paper-input id="video-dialog-url" label="Paste video embed URL here" patter="^https:\/\/youtube.com|https:\/\/youtu.be|https:\/\/vimeo.com" error-message="Not a valid video URL!" autofocus></paper-input>
+        <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
         <div class="buttons">
             <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
+            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
         </div>
     </paper-dialog>
 

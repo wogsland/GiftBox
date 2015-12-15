@@ -43,12 +43,13 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test images
         $RecruitingTokenVideo = new RecruitingTokenVideo();
-        $urls[1] = 'https://givetoken.com/video/'.rand();
-        $urls[2] = 'https://givetoken.com/video/'.rand();
-        $urls[3] = 'https://givetoken.com/video/'.rand();
-        $id[1] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $urls[1]);
-        $id[2] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $urls[2]);
-        $id[3] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $urls[3]);
+        $source = 'vimeo';
+        $source_id[1] = rand();
+        $source_id[2] = rand();
+        $source_id[3] = rand();
+        $id[1] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[1]);
+        $id[2] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[2]);
+        $id[3] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[3]);
 
         // test for created images
         $url = TEST_URL . "/ajax/recruiting_token/get_videos/{$RecruitingToken->long_id}";
@@ -65,7 +66,7 @@ extends \PHPUnit_Framework_TestCase
         //print_r($return);
         foreach ($return->data as $image) {
             $this->assertTrue(in_array($image->id, $id));
-            $this->assertTrue(in_array($image->url, $urls));
+            $this->assertTrue(in_array($image->source_id, $source_id));
         }
     }
 

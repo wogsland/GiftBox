@@ -1,5 +1,5 @@
 <?php
-define('VERSION', '1.7.6');
+define('VERSION', '1.8.0');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
