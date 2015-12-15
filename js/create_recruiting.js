@@ -10,32 +10,52 @@ function createVideoImage(id, src, url) {
   return img;
 }
 
-function openVimeo(url){
-  var videoId = vimeoId(url);
-  var error = null;
+/**
+ * Opens a Vimeo URL to a thumbnail if it's valid
+ *
+ * @param {String} url The URL of a Vimeo video
+ * @return {Boolean} The validity of the URL
+ */
+function openVimeo(vimeoUrl){
+  var videoId = vimeoId(vimeoUrl);
+  var fileFound = false;
   if (videoId) {
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
-    $.getJSON(dataURL,
-      function(data){
-        var title = data[0].title;
-        var img = createVideoImage(videoId, data[0].thumbnail_medium, url);
-        createThumbnail(img, 'company-video-container');
-        $('label').css('color', '');
-      }).fail(function() {
-        error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
-        alert(error);
-      });
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      async: false,
+      url: '/ajax/url-valid',
+      data: {
+        url: dataURL
+      },
+      success: function(data){
+        $.getJSON(
+          dataURL,
+          function(data){
+            var img = createVideoImage(videoId, data[0].thumbnail_medium, vimeoUrl);
+            createThumbnail(img, 'company-video-container');
+          }
+        );
+        fileFound = true;
+      },
+      error: function() {
+        $('label').css('color', 'red');
+        $('#video-dialog-url').attr('label', 'Please choose a valid Vimeo URL.');
+      }
+    });
   } else {
-    error = "Unable to extract a Vimeo video ID from the URL.\n\n"+url;
-    alert(error);
+    $('label').css('color', 'red');
+    $('#video-dialog-url').attr('label', 'Unable to extract a Vimeo video ID from the URL.');
   }
-  return true;
+  return fileFound;
 }
 
 /**
  * Opens a YouTube URL to a thumbnail if it's valid
  *
  * @param {String} url The URL of a YouTube video
+ * @return {Boolean} The validity of the URL
  */
 function openYouTube(url) {
   var videoId = youTubeID(url);
@@ -44,6 +64,7 @@ function openYouTube(url) {
     var fileFound = false;
     $.ajax({
       type: 'POST',
+      dataType: 'json',
       async: false,
       url: '/ajax/url-valid',
       data: {
@@ -53,15 +74,13 @@ function openYouTube(url) {
         if (data.data.httpCode == '200') {
           var img = createVideoImage(videoId, imageUrl, url);
           createThumbnail(img, 'company-video-container');
-          $('label').css('color', '');
           fileFound = true;
         } else {
           $('label').css('color', 'red');
           $('#video-dialog-url').attr('label', 'Please choose a valid Youtube URL.');
-          fileFound = false;
         }
       }
-    }, 'json');
+    });
     return fileFound;
   } else {
     $('label').css('color', 'red');
@@ -86,6 +105,7 @@ function processVideoURL() {
   if (valid) {
     $('#video-dialog')[0].close();
     $('label').css('color', '');
+    $('#video-dialog-url').attr('label', 'Please choose a Youtube or Vimeo video.');
   } else if (!isYouTubeVid && !isVimeoVid) {
     $('label').css('color', 'red');
     $('#video-dialog-url').attr('label', 'Please choose a Youtube or Vimeo video.');
