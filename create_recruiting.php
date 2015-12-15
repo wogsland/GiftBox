@@ -151,9 +151,6 @@ require __DIR__.'/header.php';
           width: 500px;
           font-size: 18px;
         }
-        .dialog-error {
-          color: red;
-        }
     </style>
 
 </head>
