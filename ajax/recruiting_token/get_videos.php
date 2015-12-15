@@ -8,10 +8,10 @@ $success = 'false';
 $data = '';
 if ($id != '') {
     $RecruitingTokenVideo = new RecruitingTokenVideo();
-    $images = $RecruitingTokenVideo->getByRecruitingTokenLongId($id);
-    if (!empty($images)) {
+    $videos = $RecruitingTokenVideo->getByRecruitingTokenLongId($id);
+    if (!empty($videos)) {
         $success = 'true';
-        $data = $images;
+        $data = $videos;
     }
 }
 header('Content-Type: application/json');

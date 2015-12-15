@@ -134,13 +134,19 @@ scope._onVideosClick = function(event) {
     if (data.data !== undefined && data.data.length > 0) {
       var videos = '';
       $.each(data.data, function(index, vid) {
+        if (vid.source == 'youtube') {
+          vidUrl = 'https://www.youtube.com/embed/';
+        }
+        if (vid.source == 'vimeo') {
+          vidUrl = 'https://player.vimeo.com/video/';
+        }
         videos += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
         videos += '<div class="mdl-card mdl-cell mdl-cell--12-col">';
         videos += '<div class="mdl-card__title">';
         videos += '<iframe class="gt-info-video"';
         videos += '  width="853"';
         videos += '  height="480"';
-        videos += '  src="'+vid.url+'"';
+        videos += '  src="'+vidUrl+vid.source_id+'"';
         videos += '  frameborder="0" allowfullscreen>';
         videos += '</iframe>';
         videos += '</div>';
@@ -417,14 +423,19 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
-        var vars = {};
-        i = 0;
-        var parts = data.data[0].url.replace(/\/([a-zA-Z0-9\-]*)/gi, function(value) {
-          vars[i] = value;
-          i++;
-        });
-        var videoId = vars[i-1];
-        $('#videos-frontpage').css('background',"url('https://i.ytimg.com/vi"+videoId+"/hqdefault.jpg') center / cover");
+        var videoId = data.data[0].source_id;
+        if (data.data[0].source == 'youtube') {
+          vidUrl = 'https://i.ytimg.com/vi/'+videoId+'/hqdefault.jpg';
+          $('#videos-frontpage').css('background',"url('"+vidUrl+"') center / cover");
+        }
+        if (data.data[0].source == 'vimeo') {
+          $.getJSON(
+            "https://vimeo.com/api/v2/video/"+ videoId +".json",
+            function(data){
+              $('#videos-frontpage').css('background',"url('"+data[0].thumbnail_large+"') center / cover");
+            }
+          );
+        }
       } else {
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
