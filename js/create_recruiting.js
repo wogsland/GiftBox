@@ -1,10 +1,18 @@
 var imageType = /image.*/;
 
+/**
+ * Creates an HTML image
+ *
+ * @param {String} id The source id of the video
+ * @param {String} src Whether it's YouTube or Vimeo
+ * @param {String} url The URL of the video
+ * @return {Oject} The HTML image
+ */
 function createVideoImage(id, src, url) {
   var img = $('<img class="recruiting-token-video" id="'+id+'">');
   img.attr('src', src);
   img.data('url', url);
-  img.data('thumbnail_src', src);
+  img.data('source', src);
   img.data('saved', false);
 
   return img;
@@ -277,7 +285,12 @@ function saveTokenImage(img, fileName) {
 
 function saveTokenVideo(img) {
   var url = '/ajax/recruiting_token_video/save/';
-  var params = {recruiting_token_id: img.data('token_id'), url: img.data('url'), thumbnail_src: img.data('thumbnail_src')};
+  var params = {
+    recruiting_token_id: img.data('token_id'),
+    url: img.data('url'),
+    source: img.data('source'),
+    source_id: img.attr('id')
+  };
   postSave(img, url, params);
 }
 
