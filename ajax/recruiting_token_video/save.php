@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
             if (in_array($source, ['youtube','vimeo'])) {
                 // see is token belongs to this user
                 $recruiting_token = new RecruitingToken($recruiting_token_id, 'id');
-                if ($recruiting_token->user_id == $user_id)
+                if ($recruiting_token->user_id == $user_id) {
                     try {
                         // Save the token video
                         $recruiting_token_video = new RecruitingTokenVideo();

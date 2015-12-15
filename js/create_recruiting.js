@@ -8,11 +8,11 @@ var imageType = /image.*/;
  * @param {String} url The URL of the video
  * @return {Oject} The HTML image
  */
-function createVideoImage(id, src, url) {
+function createVideoImage(id, src, url, source) {
   var img = $('<img class="recruiting-token-video" id="'+id+'">');
   img.attr('src', src);
   img.data('url', url);
-  img.data('source', src);
+  img.data('source', source);
   img.data('saved', false);
 
   return img;
@@ -41,7 +41,7 @@ function openVimeo(vimeoUrl){
         $.getJSON(
           dataURL,
           function(data){
-            var img = createVideoImage(videoId, data[0].thumbnail_medium, vimeoUrl);
+            var img = createVideoImage(videoId, data[0].thumbnail_medium, vimeoUrl, 'vimeo');
             createThumbnail(img, 'company-video-container');
           }
         );
@@ -80,7 +80,7 @@ function openYouTube(url) {
       },
       success: function(data) {
         if (data.data.httpCode == '200') {
-          var img = createVideoImage(videoId, imageUrl, url);
+          var img = createVideoImage(videoId, imageUrl, url, 'youtube');
           createThumbnail(img, 'company-video-container');
           fileFound = true;
         } else {
@@ -180,7 +180,7 @@ function removeImageById(imageId) {
 /**
  * Create thumbnail of an image and a remove button and display them
  *
- * @param {Object} object
+ * @param {Object} object The image HTML object
  * @param {String} parentId The HTML id of the tag to plave the thumbnail in
  */
 function createThumbnail(object, parentId) {
@@ -316,8 +316,8 @@ function linkifyText() {
   $("#responsibilities")[0].updateValueAndPreserveCaret(Autolinker.link($("#responsibilities").val()));
   $("#perks")[0].updateValueAndPreserveCaret(Autolinker.link($("#perks").val()));
   $("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
-  $("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
-  $("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
+  //$("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
+  //$("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
   $("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
 }
 
