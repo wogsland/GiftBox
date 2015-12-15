@@ -20,6 +20,7 @@ function openVimeo(url){
         var title = data[0].title;
         var img = createVideoImage(videoId, data[0].thumbnail_medium, url);
         createThumbnail(img, 'company-video-container');
+        $('label').css('color', '');
       }).fail(function() {
         error = "Vimeo API call failed. Please verify that the URL you entered is correct.\n\n" + dataURL;
         alert(error);
@@ -28,38 +29,72 @@ function openVimeo(url){
     error = "Unable to extract a Vimeo video ID from the URL.\n\n"+url;
     alert(error);
   }
+  return true;
 }
 
+/**
+ * Opens a YouTube URL to a thumbnail if it's valid
+ *
+ * @param {String} url The URL of a YouTube video
+ */
 function openYouTube(url) {
   var videoId = youTubeID(url);
-  var error = null;
   if (videoId) {
-    var img = createVideoImage(videoId, "https://img.youtube.com/vi/"+videoId+"/0.jpg", url);
-    createThumbnail(img, 'company-video-container');
+    var imageUrl = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
+    var fileFound = false;
+    $.ajax({
+      type: 'POST',
+      async: false,
+      url: '/ajax/url-valid',
+      data: {
+        url: imageUrl
+      },
+      success: function(data) {
+        if (data.data.httpCode == '200') {
+          var img = createVideoImage(videoId, imageUrl, url);
+          createThumbnail(img, 'company-video-container');
+          $('label').css('color', '');
+          fileFound = true;
+        } else {
+          $('label').css('color', 'red');
+          $('#video-dialog-url').attr('label', 'Please choose a valid Youtube URL.');
+          fileFound = false;
+        }
+      }
+    }, 'json');
+    return fileFound;
   } else {
-    error = "Unable to extract a Youtube video ID from the URL.\n\n"+url;
-    alert(error);
+    $('label').css('color', 'red');
+    $('#video-dialog-url').attr('label', 'Unable to extract a Youtube video ID from the URL.');
+    return false;
   }
 }
 
+/**
+ * Adds a video URL after validating it or displays an error message
+ */
 function processVideoURL() {
   var url = $('#video-dialog-url').val();
   var valid = false;
-  if(isYouTube(url)){
-    openYouTube(url);
-    valid = true;
-  } else if (isVimeo(url)){
-    openVimeo(url);
-    valid = true;
+  var isYouTubeVid = isYouTube(url);
+  var isVimeoVid = isVimeo(url);
+  if(isYouTubeVid){
+    valid = openYouTube(url);
+  } else if (isVimeoVid){
+    valid = openVimeo(url);
   }
   if (valid) {
     $('#video-dialog')[0].close();
-  } else {
+    $('label').css('color', '');
+  } else if (!isYouTubeVid && !isVimeoVid) {
     $('label').css('color', 'red');
     $('#video-dialog-url').attr('label', 'Please choose a Youtube or Vimeo video.');
   }
 }
 
+/**
+ * Cancels input of a video URL which may have included errors
+ */
 function cancelVideoURL() {
   $('label').css('color', '');
 }
@@ -85,6 +120,12 @@ function removeDeleted(type, id) {
   deleted.splice(start, 1);
 }
 
+/**
+ * Remove an image or video from view and queue it to be removed from the
+ * database if needed when the token is saved
+ *
+ * @param {Object} img The image or video object
+ */
 function removeImage(img) {
   var saved = img.data('saved');
   if (saved === true) {
@@ -98,14 +139,28 @@ function removeImage(img) {
   img.parent().parent().remove();
 }
 
+/**
+ * Remove an image or video from view and queue it to be removed from the
+ * database if needed when the token is saved
+ *
+ * @param {String} imageId The HTML id of the image or video object
+ */
 function removeImageById(imageId) {
   removeImage($('#'+imageId));
 }
 
+/**
+ * Create thumbnail of an image and a remove button and display them
+ *
+ * @param {Object} object
+ * @param {String} parentId The HTML id of the tag to plave the thumbnail in
+ */
 function createThumbnail(object, parentId) {
   var container = $('<div>');
   var inner = $('<div>');
-  var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){removeImage(object);});
+  var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){
+    removeImage(object);
+  });
   inner.addClass("inner-thumbnail-container");
   object.addClass("photo-thumbnail");
   container.addClass("thumbnail-container");
