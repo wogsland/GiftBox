@@ -121,7 +121,6 @@ if (!isset($endpoint_parts[1])) {
             // don't display in native android browser
             $detect = new Mobile_Detect;
             if ($detect->isMobile()) {
-                //echo '<pre>';print_r($detect);die;
                 if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
                 && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
                 && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {

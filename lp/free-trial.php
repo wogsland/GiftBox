@@ -57,13 +57,14 @@
 
 <body class="page--short">
 
-<div class="signup-form-wrapper signup--hidden ">
+<div class="signup-form-wrapper signup--hidden large-screen--display">
   <form class="marketing-form signup-form stateful-form "
     novalidate="novalidate"
     autocomplete="off"
     action="/ajax/signup"
     accept-charset="UTF-8"
-    method="post">
+    method="post"
+    id="signup-form" >
 
     <div class=" email">
       <div context='email7479'>
@@ -74,13 +75,12 @@
               novalidate="novalidate"
               autocomplete="off"
               bind="state.value"
-              bind-event-focus="handleFocus()"
               bind-event-keyup="null"
               classes=""
               class="marketing-input"
-              id="7479_signup_email" />
+              id="signup_email_b" />
               <span class="marketing-form__messages">
-                <span bind="displayError()" class="error hide" bind-show="state.error == true"></span>
+                <span class="error hide" bind-show="state.error == true"></span>
               </span>
         </label>
       </div>
@@ -96,20 +96,19 @@
               novalidate="novalidate"
               autocomplete="off"
               bind="state.value"
-              bind-event-focus="handleFocus()"
               bind-event-keyup="null"
               classes=""
               class="marketing-input"
-              id="7479_signup_password" />
+              id="signup_password_b" />
             <span class="marketing-form__messages">
-              <span bind="displayError()" class="error hide" bind-show="state.error == true"></span>
+              <span class="error hide" bind-show="state.error == true"></span>
             </span>
         </label>
       </div>
     </div>
 
   <div class="">
-    <button name="button" type="submit" class="marketing-button marketing-form__button ">Create your account</button>
+    <button name="button" type="submit" class="marketing-button marketing-form__button submit-button">Create your account</button>
   </div>
 </form>
 </div>
@@ -131,7 +130,10 @@
 <div class="page-block inline-signup page-block--lowlight inline-signup--dark">
   <div class="page-width">
 
-<form class="js-signup-inline marketing-form--inline hide--mobile" action="/ajax/signup" accept-charset="UTF-8" method="post">
+<form class="js-signup-inline marketing-form--inline hide--mobile"
+  action="/ajax/signup"
+  accept-charset="UTF-8"
+  method="post">
 
       <div class="grid-container">
         <h2 class="grid-item grid-3 grid--tablet-8 marketing-form--inline__heading inline-signup__heading text-white">
@@ -156,7 +158,8 @@
     autocomplete="off"
     action="/ajax/signup"
     accept-charset="UTF-8"
-    method="post">
+    method="post"
+    id="signup-form">
 
     <h2 class="marketing-form--inline__heading text-white marketing-form--inline__heading">Start your free 1 month trial of GiveToken</h2>
 
@@ -170,13 +173,12 @@
           novalidate="novalidate"
           autocomplete="off"
           bind="state.value"
-          bind-event-focus="handleFocus()"
           bind-event-keyup="null"
           classes=""
           class="marketing-input"
-          id="6290_signup_email" />
+          id="signup_email_a" />
         <span class="marketing-form__messages">
-          <span bind="displayError()" class="error hide" bind-show="state.error == true"></span>
+          <span class="error hide" bind-show="state.error == true"></span>
         </span>
     </label>
   </div>
@@ -192,20 +194,19 @@
           novalidate="novalidate"
           autocomplete="off"
           bind="state.value"
-          bind-event-focus="handleFocus()"
           bind-event-keyup="null"
           classes=""
           class="marketing-input"
-          id="6290_signup_password" />
+          id="signup_password_a" />
         <span class="marketing-form__messages">
-          <span bind="displayError()" class="error hide" bind-show="state.error == true"></span>
+          <span class="error hide" bind-show="state.error == true"></span>
         </span>
       </label>
   </div>
 </div>
 
   <div class="signup-grid-3">
-    <button name="button" type="submit" class="marketing-button marketing-form__button marketing-button--block">Create your account</button>
+    <button name="button" type="submit" class="marketing-button marketing-form__button marketing-button--block submit-button">Create your account</button>
   </div>
 </form>
 </div>
@@ -263,7 +264,6 @@
 
         <div class="grid-item grid-1 media__image--wide-right grid--last media__image--overflow media__image--top hide--mobile">
           <span class="lazyload-image merchant-image" style="max-width: 662px; max-height: 792px;">
-            <!--<img alt="Example Token" data-sizes="100vw" data-srcset="http://givetoken.local/images/mobile_token.png 1x,http://givetoken.local/images/mobile_token.png 2x" class="lazyload">-->
             <img alt="Example Token" width=300 src="/images/mobile_token.png" class="lazyload">
           </span>
         </div>
@@ -300,13 +300,62 @@
   <script>
     window.I18n.data = {"forms":{"errors":{"throttled":"Too many requests from this IP, try again later.","shop_name":{"empty":"Please enter a store name","minlength":"Your store name must be at least 4 characters","existingAdmin":"A store with that name already exists. If you are the owner you can \u003ca href=\"https://%{err}/admin\"\u003elog in here\u003c/a\u003e","message":"%{err}","matchesPassword":"Your store name can't be the same as your password"},"email":{"empty":"Please enter an email address","invalid":"Please enter a valid email address"},"password":{"empty":"Please enter a password","minlength":"Password must be at least 5 characters","spaces":"Password cannot contain spaces"},"subdomain":{"empty":"Please enter a subdomain","multiple":"Multiple subdomains are associated with this email","suggest":"Did you mean %{err}?","invalid":"Please enter a valid subdomain"}}},"modal":{"home":"Home","close":"Close"},"signup":{"header":"Start your free 1 month trial of GiveToken","create_now":"Create your store","tooltip":"Start your free 1 month trial today!","labels":{"email":"Email","password":"Password","shop_name":"Store name"},"placeholders":{"shop_name":"Your store name","email":"Email address","password":"Password"},"checking":"Checking...","success_messages":{"email":"Got it","password":"Looks great","shop_name":"That name is available!"},"details":{"shop_name":"If you are the owner you can \u003ca href=\"https://%{admin}/admin\"\u003elog in here\u003c/a\u003e"}},"online":{"examples":{"modal":{"nav_next":"Next","nav_prev":"Prev","cta_title":"Start your free 14-day trial today!","cta_button":"Get started","themes_cta_button":"Start with this theme"}}},"home":{"login":{"page_title":"Login — Shopify","meta_description":"","log_in_heading":"Log in to your Shopify store","email_label":"Email address","password_label":"Password","store_address_label":"Store address","store_address_suffix":".myshopify.com","store_address_placeholder":"your-store","remember_label":"Remember me","shopify_mobile":"Shopify Mobile","mobile_link_alt_text":"Learn more","mobile_cta":"Manage your store on the go from your iPhone","promo_cta":{"heading_html":"Running a\u003cbr\u003e high volume store?","link":"Discover our enterprise solution"},"forgot":"Forgot?","forgot_label":"Forgot your password?","log_in":"Log in","login_suggestion":{"part_1":"You can also login by adding","slash_admin":"/admin","part_2":"to the end of your myshopify.com address.","example":"Example:","example_url":"http://examplestore.myshopify.com/admin"},"errors":{"no_match":"The email or password you entered is incorrect.","subdomain":{"empty":"Please enter your store address.","suggest":"Did you mean %{err}?","invalid":"The store address you entered is incorrect. Check the email we sent when you created your store to find  your store address.","multiple":"You have more than one store associated with your email address. Please enter your store address to login."},"email":{"empty":"Please enter an email address","invalid":"Please enter a valid email address"},"password":{"empty":"Please enter a password","minlength":"Password must be at least 5 characters","spaces":"Password cannot contain spaces"},"generic":{"invalid":"The email or password you entered is incorrect.","throttled":"There were too many login attempts from your IP. Please try again later."}},"multiple_domains":"Have multiple stores?"},"logout":{"page_title":"You’ve successfully logged out.","subhead_html":"Thank you for using Shopify. You can \u003ca href=\"/login\"\u003elog back in\u003c/a\u003e any time!","meta_description":"Everything you need to sell. Build your online store with Shopify's ecommerce software and easily sell in person with Shopify's iPad POS.\n","temperature":"Temperature","weather":"Weather","segments":{"weather":["Freezing!","It's cold out!","Chilly!","A little chilly out!","Not too bad!","Toasty!"],"product":{"thekidwho":{"header":"Maybe we should stay in today!","copy":"%{link} has the perfect indoor solution! Also powered by Shopify.","linkcopy":"The Kid Who"},"lindsayletter":{"header":"A nice warm cup of hot chocolate should be nice!","copy":"Check out %{link}'s beautifully designed mugs, also powered by Shopify!","linkcopy":"Lindsay Letter"},"leif":{"header":"A warm, cozy blanket is in order!","copy":"Check out %{link}'s fuzzy offerings! Also powered by Shopify!","linkcopy":"Leif"},"helmboots":{"header":"It's about that time of the year for boots.","copy":"Check out %{link} for some great boots. Powered by Shopify!","linkcopy":"Helm Boots"},"bestmade":{"header":"Perfect for camping!","copy":"Check out %{link}'s camping gear, also powered by Shopify!","linkcopy":"Best Made"},"purefix":{"header":"Prime biking weather!","copy":"Check out %{link}, also powered by Shopify!","linkcopy":"Pure Fix Cycles"}}}},"forgot_password":{"errors":{"email":{"empty":"Please enter an email address","error":"Sorry, we ran into an issue. Please check the email address you entered.","throttled":"There were too many attempts from your IP. Please try again later."}}}},"activemodel":{"errors":{"messages":{"ajax":"Oops! Something went wrong submitting your form. Please try again later.","bad_protocol":"We'll need a url starting with %{protocols}","bad_uri":"We'll need a valid url","email":"We'll need a valid email address"}}}};
   </script>
-  <script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>
+  <!--<script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>-->
+  <!--<script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>-->
   <script>
   $(document).ready(function() {
-    $('form').on('submit', function(e){
-      e.preventDefault();
-      signupEmail();
+    console.log('ready')
+    function formSetup() {
+      $('.submit-button').on('click', function(e){
+        console.log('form submitted')
+        e.preventDefault();
+        var email;
+        var password;
+        if ($("#signup_email_a").val()) {
+          email = $("#signup_email_a").val();
+        } else if ($("#signup_email_b").val()) {
+          email = $("#signup_email_b").val();
+        }
+        if ($("#signup_password_a").val()) {
+          password = $("#signup_password_a").val();
+        } else if ($("#signup_password_b").val()) {
+          password = $("#signup_password_b").val();
+        }
+        var userInfo = {
+          signup_email: email,
+          signup_password: password
+        };
+        $.post("/ajax/signup", userInfo, function(data, textStatus, jqXHR){
+          if(data.status === "SUCCESS") {
+            window.location.href = '/thankyou?signup'
+          } else if (data.status === "ERROR") {
+            console.log(data.message);
+          }  else {
+            console.log("Unknown return status: "+data.status);
+          }
+        }).fail(function() {
+          console.log("Sign up failed.");
+        });
+      });
+      $('.marketing-input-wrapper').on('click', function () {
+        $(this).find('.marketing-label').text('');
+      });
+    }
+    formSetup();
+    $(document).on('click',function () {
+      setTimeout(function () {
+        if ($('.large-screen--display').length > 0) {
+          formSetup();
+        }
+      }, 1000);
     });
+    if ( $(window).width() < 739) {
+      // small screens adjustments
+      console.log('small screen')
+      $('.large-screen--display').remove();
+    } else {
+      $('.display--mobile').remove();
+    }
   });
 
   </script>
