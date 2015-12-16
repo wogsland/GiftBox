@@ -1,8 +1,6 @@
 <?php
 use \GiveToken\User;
 
-require_once __DIR__.'/config.php';
-
 if (isset($_GET['signup'])) {
   $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
 } else {

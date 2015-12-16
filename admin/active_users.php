@@ -1,7 +1,6 @@
 <?php
 use \GiveToken\RecruitingTokenResponse;
 
-require_once __DIR__.'/../config.php';
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }

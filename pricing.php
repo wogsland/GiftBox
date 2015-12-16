@@ -1,11 +1,8 @@
 <?php
 use \GiveToken\User;
 
-require_once __DIR__.'/config.php';
-
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
 require __DIR__.'/header.php';
-
 ?>
 </head>
 

@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__.'/config.php';
-
 if (!isset($_SESSION['free_trial'])) {
     $_SESSION['free_trial'] = 'seen it';
     require __DIR__.'/lp/free-trial.php';

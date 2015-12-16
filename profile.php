@@ -1,6 +1,4 @@
 <?php
-require_once 'config.php';
-
 $message = null;
 $first_name = null;
 $last_name = null;

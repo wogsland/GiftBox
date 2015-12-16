@@ -1,8 +1,6 @@
 <?php
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
-
 if (isset($_GET['uid']) && isset($_GET['key'])) {
     $user_id = $_GET['uid'];
     $key = $_GET['key'];

@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__.'/../config.php';
-
 // Parse URI
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
 $endpoint = $pieces[0];

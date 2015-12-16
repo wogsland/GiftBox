@@ -1,5 +1,4 @@
 <?php
-require_once "config.php";
 if (!logged_in() || !is_admin()) {
     echo 'You must be a logged in as a GiveToken admin to view this page.';
     exit;

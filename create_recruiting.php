@@ -5,7 +5,6 @@ use GiveToken\RecruitingTokenImage;
 use GiveToken\RecruitingTokenVideo;
 use google\appengine\api\cloud_storage\CloudStorageTools;
 
-require_once 'config.php';
 if (!logged_in()) {
     header('Location: '.$app_url);
 }

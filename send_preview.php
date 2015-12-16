@@ -1,7 +1,6 @@
 <?php
 use \GiveToken\EventLogger;
 
-require_once 'config.php';
 require_once 'mail.php';
 
 $email_address = $_POST["email"];

@@ -1,8 +1,6 @@
 <?php
 use \GiveToken\User;
 
-require_once __DIR__.'/config.php';
-
 // make sure the secret is valid
 if (isset($_GET['secret'])) {
     $reset_code = escape_string($_GET['secret']);

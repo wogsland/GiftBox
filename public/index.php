@@ -1,7 +1,6 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
-//print_r($_SERVER);
-//echo $_SERVER['REQUEST_URI'];
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../config.php';
 
 // Parse URI
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
