@@ -1,7 +1,18 @@
 <?php
-if (!isset($_SESSION['free_trial']) && !isset($_GET['action'])) {
-    $_SESSION['free_trial'] = 'seen it';
-    require __DIR__.'/lp/free-trial.php';
+use \GiveToken\LandingPage;
+
+if (!isset($_GET['action'])) {
+    // If the user hasn't been here, randomize the experience
+    // Otherwise, take them to the page they saw before
+    if (!isset($_SESSION['landing_page'])) {
+      $LandingPage = new LandingPage();
+      $_SESSION['landing_page']['script'] = $LandingPage->script;
+      $_SESSION['landing_page']['id'] = $LandingPage->id;
+    } else {
+      $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
+    }
+    $LandingPage->recordHit($_COOKIE['visitor']);
+    require __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
 } else {
 
 define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
@@ -11,8 +22,8 @@ require __DIR__.'/header.php';
 <script>
   function changePage(event) {
     if($(event.target).hasClass('external')) {
-        window.location.href = $(event.target).attr('href');
-        return;
+      window.location.href = $(event.target).attr('href');
+      return;
     }
   }
 
@@ -23,7 +34,6 @@ require __DIR__.'/header.php';
 
 </head>
 <body>
-    <?php require_once "analyticstracking.php"; ?>
 
 <!-- =========================
      PRE LOADER

@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
 use \GiveToken\EventLogger;
+use \GiveToken\User;
 
 require_once __DIR__.'/../mail.php';
 
