@@ -116,6 +116,9 @@ if (!isset($endpoint_parts[1])) {
         case 'terms':
         include __DIR__.'/../termsservice.php';
         break;
+        case 'thankyou':
+        include __DIR__.'/../thankyou.php';
+        break;
         case 'token':
         if ('recruiting' == $endpoint_parts[2]) {
             // don't display in native android browser
