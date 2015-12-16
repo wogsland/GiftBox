@@ -2707,3 +2707,7 @@ RESPONSIVE FIXES
 .account-dropdown {
   text-align: left;
 }
+
+#light-free-link {
+  color: black;
+}

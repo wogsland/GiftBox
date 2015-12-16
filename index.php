@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['free_trial'])) {
+if (!isset($_SESSION['free_trial']) && !isset($_GET['action'])) {
     $_SESSION['free_trial'] = 'seen it';
     require __DIR__.'/lp/free-trial.php';
 } else {
@@ -38,7 +38,7 @@ require __DIR__.'/header.php';
 <header class="header" data-stellar-background-ratio="0.5" id="home">
 
 <!-- SOLID COLOR BG -->
-<div class="deep-dark-bg"> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
+<div class="deep-dark-bg" style="min-height:500px;">
 
     <?php require __DIR__.'/navbar.php';?>
 
@@ -48,43 +48,32 @@ require __DIR__.'/header.php';
     <!-- ONLY LOGO ON HEADER -->
     <div class="only-logo">
       <div class="navbar">
-<!--         <div class="navbar-header">
-          <img src="/assets/img/logo-light.png" alt="">
-        </div> -->
       </div>
     </div> <!-- /END ONLY LOGO ON HEADER -->
 
-
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-
         <!-- HEADING AND BUTTONS -->
         <div class="intro-section">
-
           <!-- WELCOM MESSAGE -->
           <h1 class="intro">Candidate Engagement</h1>
           <h5>Recruiting in a matter of minutes</h5>
-
           <!-- BUTTON -->
           <div class="buttons" id="login-button">
-        <?php
-        if (logged_in()) {
-            echo '<a href="/create_recruiting" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
-        } else {
-            echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
-            echo ' or ';
-            echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
-        }
-        ?>
+            <?php
+            if (logged_in()) {
+                echo '<a href="/create_recruiting" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
+            } else {
+                echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
+                echo ' or ';
+                echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
+            }
+            ?>
           </div>
           <!-- /END BUTTONS -->
-
         </div>
         <!-- /END HEADNING AND BUTTONS -->
-
       </div>
-
-      <div class="col-md-12 col-md-offset-1 macbook"><img class="img-responsive" src="/assets/img/macbook01.png" alt="GiveToken Screenshot"></div>
     </div>
     <!-- /END ROW -->
 
@@ -94,6 +83,41 @@ require __DIR__.'/header.php';
 <!-- /END COLOR OVERLAY -->
 </header>
 <!-- /END HEADER -->
+
+<!-- =========================
+     SAMPLE MACBOOK
+============================== -->
+<section class="token-macbook light-blue" id="token-macbook">
+  <div class="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <img class="img-responsive" src="/assets/images/upgraph.jpg" alt="up graph" width="585" height="311">
+        </div>
+
+        <!-- RIGHT SIDE WITH BRIEF -->
+        <div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+
+          <!-- SECTION TITLE -->
+          <h2 class="white-text">Figure out what works</h2>
+
+          <div class="white-line-left">
+          </div>
+
+          <p>
+            Recruiters send hundreds of messages and need a way to track the success of each message. GiveToken provides an analytics package that allows the recruiter to see what candidates actually engage with.
+          </p>
+
+
+        </div>
+        <!-- /END RIGHT BRIEF -->
+
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- /END SAMPLE IPAD SECTION -->
 
 <!-- =========================
      FEATURES
@@ -298,145 +322,31 @@ require __DIR__.'/header.php';
 </section>
 <!-- /END FEATURES SECTION -->
 
-
-<!-- =========================
-     BRIEF LEFT SECTION WITH VIDEO
-============================== -->
-<section class="app-brief solid-green" id="brief1" style="border-bottom: 20px solid #222222;">
-
-<div class="container">
-
-  <div class="row">
-
-    <!-- PHONES IMAGE >-->
-    <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-      <div class="video-container">
-
-        <div class="video">
-      <iframe src="//player.vimeo.com/video/119287742?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    </div>
-
-      </div>
-    </div>
-
-    <!-- RIGHT SIDE WITH BRIEF -->
-    <div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-      <!-- SECTION TITLE -->
-      <h2 class="white-text">Tell Your Story</h2>
-
-      <div class="white-line-left">
-      </div>
-
-      <p class="white-text">
-        With GiveToken, recruiters combine multi-media content with a personal message to connect with candidates and fill job openings faster and more efficiently.
-      </p>
-    </div>
-    <!-- /END RIGHT BRIEF -->
-
-  </div>
-  <!-- /END ROW -->
-
-</div>
-<!-- /END CONTAINER -->
-
-</section>
-<!-- /END SECTION -->
-
-<!-- =========================
-     SAMPLE IPAD
-============================== -->
-<section class="token-ipad solid-lt-green" id="token-ipad" style="border-bottom: 20px solid #222222;">
-
-  <div class="">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-          <img class="img-responsive" src="/assets/img/token-ipad.png" alt="token-ipad" width="585" height="418">
-        </div>
-
-        <!-- RIGHT SIDE WITH BRIEF -->
-        <div class="col-md-6 left-align wow fadeInLeft animated deep-grey-bg" data-wow-offset="10" data-wow-duration="1.5s">
-          <!-- SECTION TITLE -->
-          <h2 class="white-text">Sell the Job</h2>
-
-          <div class="white-line-left">
-          </div>
-
-          <p class="white-text">
-            The candidate is engaged and wants to hear more about the job. It's time to combine pictures, videos, text and attachments to show the candidate the kind of job and company that they have been searching for.
-          </p>
-        </div>
-        <!-- /END RIGHT BRIEF -->
-
-      </div>
-    </div>
-  </div>
-
-</section>
-<!-- /END SAMPLE IPAD SECTION -->
-
-<!-- =========================
-     SAMPLE IPHONE
-============================== -->
-<section class="token-iphone solid-lt-blue" id="token-iphone" style="border-bottom: 20px solid #222222;">
-
-  <div class="">
-    <div class="container">
-      <div class="row">
-
-        <!-- LEFT SIDE WITH BRIEF -->
-        <div class="col-md-6 left-align wow fadeInLeft animated" style="margin-top: 15%;" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SECTION TITLE -->
-          <h2 class="dark-text">Put a bow on it</h2>
-
-          <div class="colored-line-left">
-          </div>
-
-          <p class="dark-text">
-            Candidates want personalization, not just a salary and set of skills. Using our "wrapper" functionality, create a message that stands out from other recruiters and other opportunities.
-          </p>
-
-
-        </div>
-        <!-- /END LEFT BRIEF -->
-
-        <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-          <img class="img-responsive" src="/assets/img/token-iphone-cropped.png" alt="token-iphone-cropped">
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-</section>
-<!-- /END SAMPLE IPAD SECTION -->
-
 <!-- =========================
      SAMPLE MACBOOK
 ============================== -->
-<section class="token-macbook solid-blue" id="token-macbook">
+<section class="token-macbook solid-blue" id="token-fat">
 
   <div class="">
     <div class="container">
       <div class="row">
 
-        <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-          <img class="img-responsive" src="/assets/img/token-macbook.png" alt="token-macbook" width="585" height="311">
-        </div>
-
         <!-- RIGHT SIDE WITH BRIEF -->
-        <div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+        <div class="col-md-12 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
 
           <!-- SECTION TITLE -->
-          <h2 class="white-text">Figure out what works</h2>
+          <h2 class="white-text">Sell the Job!</h2>
 
           <div class="white-line-left">
           </div>
 
           <p>
-            Recruiters send hundreds of messages and need a way to track the success of each message. GiveToken provides an analytics package that allows the recruiter to see what candidates actually engage with.
+            The candidate is engaged and wants to hear more about the job. It's
+            time to combine pictures, videos, text and attachments to show the
+            candidate the kind of job and company that they have been searching
+            for. <strong>GiveToken</strong> adds that extra level of depth
+            today's candidates are looking for.
+            <a href="/free_trial" id="light-free-link">See for yourself.</a>
           </p>
 
 
@@ -462,12 +372,12 @@ require __DIR__.'/header.php';
   <div class="section-header wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 
-    <h2 class="white-text">Token Examples</h2>
+    <h2 class="white-text">Friends of GiveToken</h2>
 
     <div class="colored-line">
     </div>
     <div class="section-description">
-      Friends of GiveToken
+      Commitment to Community
     </div>
     <div class="colored-line">
     </div>
