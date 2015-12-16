@@ -120,6 +120,7 @@ if (!isset($endpoint_parts[1])) {
             if ($detect->isMobile()) {
                 //echo '<pre>';print_r($detect);die;
                 if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
+                && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
                 && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {
                     include __DIR__.'/../get_chrome.html';
                     die;
