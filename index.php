@@ -1,6 +1,11 @@
 <?php
 require_once __DIR__.'/config.php';
 
+if (!isset($_SESSION['free_trial'])) {
+    $_SESSION['free_trial'] = 'seen it';
+    header('Location: '.$app_url.'free_trial');
+}
+
 define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
 require __DIR__.'/header.php';
 ?>
