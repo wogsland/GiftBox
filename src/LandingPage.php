@@ -25,13 +25,13 @@ class LandingPage
         } else {
             $condition = "ORDER BY RAND() LIMIT 1";
         }
-        $token = execute_query(
+        $page = execute_query(
             "SELECT * FROM landing_page
             WHERE deleted IS NULL
             $condition"
-        )->fetch_object("GiveToken\LandingPage");
-        if (is_object($token)) {
-            foreach (get_object_vars($token) as $key => $value) {
+        )->fetch_object();
+        if (is_object($page)) {
+            foreach (get_object_vars($page) as $key => $value) {
                 $this->$key = $value;
             }
         }

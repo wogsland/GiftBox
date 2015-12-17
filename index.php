@@ -4,14 +4,14 @@ use \GiveToken\LandingPage;
 if (!isset($_GET['action'])) {
     // If the user hasn't been here, randomize the experience
     // Otherwise, take them to the page they saw before
-    if (!isset($_SESSION['landing_page'])) {
+    if (!isset($_SESSION['landing_page'], $_SESSION['landing_page']['script'], $_SESSION['landing_page']['id'])) {
       $LandingPage = new LandingPage();
       $_SESSION['landing_page']['script'] = $LandingPage->script;
       $_SESSION['landing_page']['id'] = $LandingPage->id;
     } else {
       $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
     }
-    $LandingPage->recordHit($_COOKIE['visitor']);
+    //$LandingPage->recordHit($_COOKIE['visitor']);
     require __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
 } else {
 
