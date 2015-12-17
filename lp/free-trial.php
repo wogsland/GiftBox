@@ -260,7 +260,7 @@
               <svg class="icon icon--green icon--small"><use xlink:href="#checked" /></svg>
               <div class="marketing-bullet__content-wrapper">
                 <p class="heading--3 lowlight__heading marketing-bullet__content">
-                  Duh...
+                  Awesome Visuals Stick in Candidate Memories
                 </p>
               </div>
             </div>
