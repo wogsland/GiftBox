@@ -11,7 +11,7 @@ if (!isset($_GET['action'])) {
     } else {
       $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
     }
-    //$LandingPage->recordHit($_COOKIE['visitor']);
+    $LandingPage->recordHit($_COOKIE['visitor']);
     require __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
 } else {
 
