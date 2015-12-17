@@ -145,6 +145,12 @@ if (!isset($endpoint_parts[1])) {
         case 'upload':
         include __DIR__.'/../upload.php';
         break;
+        case 'test':
+        // this endpoint is just for non-production testing
+        if (DEVELOPMENT) {
+          include __DIR__.'/../lp/bc1.php';
+          break;
+        }
         default:
         include __DIR__.'/../error.php';
     }

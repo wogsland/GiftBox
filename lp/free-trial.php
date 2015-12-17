@@ -307,10 +307,8 @@
   <!--<script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>-->
   <script>
   $(document).ready(function() {
-    console.log('ready')
     function formSetup() {
       $('.submit-button').on('click', function(e){
-        console.log('form submitted')
         e.preventDefault();
         var email;
         var password;
@@ -354,7 +352,6 @@
     });
     if ( $(window).width() < 739) {
       // small screens adjustments
-      console.log('small screen')
       $('.large-screen--display').remove();
     } else {
       $('.display--mobile').remove();
