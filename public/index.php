@@ -1,7 +1,6 @@
 <?php
-require __DIR__.'/../vendor/autoload.php';
-//print_r($_SERVER);
-//echo $_SERVER['REQUEST_URI'];
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../config.php';
 
 // Parse URI
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
@@ -66,6 +65,9 @@ if (!isset($endpoint_parts[1])) {
         case 'create_recruiting':
         include __DIR__.'/../create_recruiting.php';
         break;
+        case 'free_trial':
+        include __DIR__.'/../lp/free-trial.php';
+        break;
         case 'forgot_password':
         include __DIR__.'/../forgot_password.php';
         break;
@@ -113,12 +115,14 @@ if (!isset($endpoint_parts[1])) {
         case 'terms':
         include __DIR__.'/../termsservice.php';
         break;
+        case 'thankyou':
+        include __DIR__.'/../thankyou.php';
+        break;
         case 'token':
         if ('recruiting' == $endpoint_parts[2]) {
             // don't display in native android browser
             $detect = new Mobile_Detect;
             if ($detect->isMobile()) {
-                //echo '<pre>';print_r($detect);die;
                 if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
                 && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
                 && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false) {
@@ -141,6 +145,12 @@ if (!isset($endpoint_parts[1])) {
         case 'upload':
         include __DIR__.'/../upload.php';
         break;
+        case 'test':
+        // this endpoint is just for non-production testing
+        if (DEVELOPMENT) {
+          include __DIR__.'/../lp/bc1.php';
+          break;
+        }
         default:
         include __DIR__.'/../error.php';
     }

@@ -1,5 +1,4 @@
 <?php
-require_once 'config.php';
 if (!logged_in()) {
     header('Location: '.$app_url);
 }

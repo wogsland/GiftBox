@@ -175,7 +175,7 @@ var AccountInfo = React.createClass({
             </div>
       </form>
 */}
-      <h2>Account Information</h2>
+    {/*}  <h2>Account Information</h2>
       <form className="form-horizontal form-bordered">
         <div className="form-group">
           <label className="col-sm-1 control-label">Level</label>
@@ -191,7 +191,7 @@ var AccountInfo = React.createClass({
           </div>
           <label className="col-sm-1 control-label"><a>Edit</a></label>
         </div>
-      </form>
+      </form> */}
 
 {/*
       <h2>Social Integrations</h2>

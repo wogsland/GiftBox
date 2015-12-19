@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
 use \GiveToken\EventLogger;
+use \GiveToken\User;
 
 require_once __DIR__.'/../mail.php';
 
@@ -11,16 +11,21 @@ $response['message'] = "Unable to register at this time.";
 $response['app_root'] = $app_root;
 
 $user = new User();
-$user->email_address = $_POST['signup_email'];
-$user->first_name = $_POST['first_name'];
-$user->last_name = $_POST['last_name'];
+$user->email_address = escape_string($_POST['signup_email']);
+$user->first_name = escape_string($_POST['first_name']);
+$user->last_name = escape_string($_POST['last_name']);
 if (isset($_POST['signup_password'])) {
-    $user->password = $_POST['signup_password'];
+    $user->password = escape_string($_POST['signup_password']);
 } else {
     $user->password = null;
 }
-$user->level = $_POST['signup_level'];
-$reg_type = $_POST['reg_type'];
+$user->level = 1;
+$types = ['EMAIL', 'FACEBOOK'];
+if (isset($_POST['reg_type']) && in_array($_POST['reg_type'], $types)) {
+  $reg_type = $_POST['reg_type'];
+} else {
+  $reg_type = 'EMAIL';
+}
 
 // Make sure the email address is available:
 if (User::exists($user->email_address)) {
@@ -49,6 +54,7 @@ if (User::exists($user->email_address)) {
         sendMail($user->email_address, 'GiveToken Signup Confirmation', $email_message, $sender_email);
     }
     $response['status'] = "SUCCESS";
+    $response['message'] = "{$user->email_address} successsfully registered.";
 }
 
 header('Content-Type: application/json');

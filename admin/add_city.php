@@ -1,12 +1,9 @@
 <?php
 use \GiveToken\RecruitingTokenResponse;
 
-require_once __DIR__.'/../config.php';
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
-//echo '<pre>';print_r($_SESSION);die;
-//echo '<pre>';print_r($_POST);die;
 
 define('TITLE', 'GiveToken.com - Add City');
 require __DIR__.'/../header.php';

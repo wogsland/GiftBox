@@ -48,6 +48,7 @@ yuicompressor css/owl.theme.css -o public/css/owl.theme.min.css
 yuicompressor css/owl.carousel.css -o public/css/owl.carousel.min.css
 yuicompressor css/nivo-lightbox.css -o public/css/nivo-lightbox.min.css
 yuicompressor css/at-at.css -o public/css/at-at.min.css
+yuicompressor css/ball-robot.css -o public/css/ball-robot.min.css
 echo "CSS minified"
 echo ""
 

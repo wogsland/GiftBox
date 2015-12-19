@@ -58,15 +58,15 @@ extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($result->id));
 
         // valid id case
-        $url = 'http://server'.rand().'.givetoken.com';
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url)
-                  VALUES ('{$this->RecruitingToken->id}', '$url')";
+        $source_id = rand();
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, source_id)
+                  VALUES ('{$this->RecruitingToken->id}', '$source_id')";
         $id = insert($query);
         $result = new RecruitingTokenVideo($id);
         $this->assertEquals('GiveToken\RecruitingTokenVideo', get_class($result));
         $this->assertTrue(isset($result->id));
         $this->assertEquals($result->id, $id);
-        $this->assertEquals($result->url, $url);
+        $this->assertEquals($result->source_id, $source_id);
         $this->assertEquals($result->recruiting_token_id, $this->RecruitingToken->id);
     }
 
@@ -75,18 +75,31 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        // create token video
-        $url = 'http://server'.rand().'.givetoken.com';
+        // create youtube token video
+        $source = 'youtube';
+        $source_id = rand();
         $RecruitingTokenVideo = new RecruitingTokenVideo();
-        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url);
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id);
         $this->assertEquals($RecruitingTokenVideo->id, $id);
-        $this->assertEquals($RecruitingTokenVideo->url, $url);
+        $this->assertEquals($RecruitingTokenVideo->source, $source);
+        $this->assertEquals($RecruitingTokenVideo->source_id, $source_id);
+        $this->assertEquals($RecruitingTokenVideo->recruiting_token_id, $this->RecruitingToken->id);
+
+        // create vimeo token video
+        $source = 'vimeo';
+        $source_id = rand();
+        $RecruitingTokenVideo = new RecruitingTokenVideo();
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id);
+        $this->assertEquals($RecruitingTokenVideo->id, $id);
+        $this->assertEquals($RecruitingTokenVideo->source, $source);
+        $this->assertEquals($RecruitingTokenVideo->source_id, $source_id);
         $this->assertEquals($RecruitingTokenVideo->recruiting_token_id, $this->RecruitingToken->id);
 
         // check it's in the DB
         $RecruitingTokenVideo2 = new RecruitingTokenVideo($id);
         $this->assertEquals($RecruitingTokenVideo2->id, $id);
-        $this->assertEquals($RecruitingTokenVideo2->url, $url);
+        $this->assertEquals($RecruitingTokenVideo->source, $source);
+        $this->assertEquals($RecruitingTokenVideo->source_id, $source_id);
         $this->assertEquals($RecruitingTokenVideo2->recruiting_token_id, $this->RecruitingToken->id);
     }
 
@@ -103,18 +116,19 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue(empty($images));
 
         // create token images
-        $url[1] = 'https://givetoken.com/video/'.rand();
-        $url[2] = 'https://givetoken.com/video/'.rand();
-        $url[3] = 'https://givetoken.com/video/'.rand();
-        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[1]);
-        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[2]);
-        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $url[3]);
+        $source = 'vimeo';
+        $source_id[1] = rand();
+        $source_id[2] = rand();
+        $source_id[3] = rand();
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[1]);
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[2]);
+        $id = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[3]);
         $images = $RecruitingTokenVideo->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
         foreach ($images as $image) {
             $this->assertTrue($image['id'] > 0);
-            $this->assertTrue(in_array($image['url'], $url));
+            $this->assertTrue(in_array($image['source_id'], $source_id));
         }
     }
 
@@ -124,9 +138,8 @@ extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // create token video
-        $url = 'http://server'.rand().'.givetoken.com';
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, url)
-                  VALUES ('{$this->RecruitingToken->id}', '$url')";
+        $query = "INSERT INTO recruiting_token_video (recruiting_token_id)
+                  VALUES ('{$this->RecruitingToken->id}')";
         $id = insert($query);
         $result = new RecruitingTokenVideo($id);
 
@@ -137,7 +150,8 @@ extends \PHPUnit_Framework_TestCase
         // check class variables get unset
         $this->assertFalse(isset($result->id));
         $this->assertFalse(isset($result->recruiting_token_id));
-        $this->assertFalse(isset($result->url));
+        $this->assertFalse(isset($result->source));
+        $this->assertFalse(isset($result->source_id));
 
         // check it's gone from DB
         $result2 = new RecruitingTokenVideo($id);

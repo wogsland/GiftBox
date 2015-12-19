@@ -1,6 +1,5 @@
 <?php
 use google\appengine\api\log\LogService;
-require_once 'config.php';
 
 $file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
 $content_type = null;
