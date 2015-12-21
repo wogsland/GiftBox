@@ -384,6 +384,9 @@ $(document).ready(function(){
       }
       if (socialCount < 6) {
         switch (socialCount) {
+          case 5:
+          $('.frontpage-social-button').css('width','20%');
+          break;
           case 4:
           $('.frontpage-social-button').removeClass('mdl-cell--2-col');
           $('.frontpage-social-button').addClass('mdl-cell--3-col');
