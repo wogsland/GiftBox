@@ -169,6 +169,9 @@ scope._onYesClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 1;
+  $('#yes-email-form').submit(function(e) {
+    e.preventDefault();
+  });
   $('#yes-submit').click(function( event ) {
     event.preventDefault();
     url = '/ajax/recruiting_token_response/create' + path[4];
@@ -187,6 +190,9 @@ scope._onMaybeClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 2;
+  $('#maybe-email-form').submit(function(e) {
+    e.preventDefault();
+  });
   $('#maybe-submit').click(function( event ) {
     event.preventDefault();
     url = '/ajax/recruiting_token_response/create' + path[4];
@@ -205,6 +211,9 @@ scope._onNoClick = function(event) {
     'reverse-ripple': event.target
   };
   this.$.pages.selected = 3;
+  $('#no-email-form').submit(function(e) {
+    e.preventDefault();
+  });
   $('#no-submit').click(function( event ) {
     event.preventDefault();
     url = '/ajax/recruiting_token_response/create' + path[4];
