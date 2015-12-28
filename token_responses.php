@@ -34,7 +34,7 @@ require __DIR__.'/header.php';
           $responses = $RecruitingTokenResponse->get($_SESSION['user_id']);
           foreach ($responses as $response) {
               echo '<tr>';
-              echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['job_title']}</a></td>";
+              echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['job_title']}</a><i hidden>{$response['long_id']}</i></td>";
               echo "<td>{$response['email']}</td>";
               echo "<td>{$response['response']}</td>";
               echo "<td>".date('m/d/Y g:i a', strtotime($response['created']))."</td>";
