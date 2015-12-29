@@ -29,9 +29,9 @@ if (!defined('DEVELOPMENT')) {
 // setup Monolog error handler to report to Slack
 $logger = new \Monolog\Logger('bugs');
 if (DEVELOPMENT) {
-    $slackHandler = new SlackHandler('xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG', '#development', 'Dev Application');
+    $slackHandler = new SlackHandler('xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG', '#development', 'Dev Application', false);
 } else {
-    $slackHandler = new SlackHandler('xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG', '#bugs', 'Web Application');
+    $slackHandler = new SlackHandler('xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG', '#bugs', 'Web Application', false);
 }
 $slackHandler->setLevel(Logger::DEBUG);
 $logger->pushHandler($slackHandler);
