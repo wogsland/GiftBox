@@ -7,7 +7,7 @@ define('TITLE', 'GiveToken.com - Error');
 require __DIR__.'/header.php';
 
 ?>
-<link rel="stylesheet" href="css/at-at.min.css">
+<link rel="stylesheet" href="/css/at-at.min.css">
 </head>
 
 <body id="error-page">
