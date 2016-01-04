@@ -6,6 +6,8 @@ namespace GiveToken;
  */
 class HTML
 {
+    private static $bullets = ['◘','○','◙','‣','⁃','⁌','⁍','⦾','⦿'];
+
     /**
      * Converts plain text to HTML
      *
@@ -25,8 +27,9 @@ class HTML
             $text = str_replace("\r", "\n", $text);
 
             // bulleted lists
-            if (strpos($text, "\n•") !== false) {
+            if (self::hasBullet($text)) {
               // regularize bullets
+              $text = self::replaceBullets($text);
 
               // replace bullets
               $pos = strpos($text, "\n•");
@@ -72,6 +75,39 @@ class HTML
             $html = str_replace('<p>', '', $html);
             $html = str_replace('</p>', '', $html);
             $text .= $html;
+        }
+        return $text;
+    }
+
+    /**
+     * Checks if text contains a bullet (•◘○◙‣⁃⁌⁍⦾⦿)
+     *
+     * @param string $text - plain text to check for bullet
+     *
+     * @return boolean - HTML
+     */
+    private static function hasBullet($text) {
+        $has = strpos($text, "\n•") !== false;
+        $has = $has || strpos($text, "\n •") !== false;
+        $i = 0;
+        while (!$has && $i < count(self::$bullets)) {
+            $has = $has || strpos($text, "\n".self::$bullets[$i]) !== false;
+            $has = $has || strpos($text, "\n ".self::$bullets[$i]) !== false;
+            $i++;
+        }
+        return $has;
+    }
+
+    /**
+     * Replaces all bullets in string (◘○◙‣⁃⁌⁍⦾⦿) with simple ones (•)
+     *
+     * @param string $text - plain text to replace bullets in
+     *
+     * @return string - text with bullets replaced
+     */
+    private static function replaceBullets($text) {
+        foreach (self::$bullets as $bullet) {
+            $text = str_replace($bullet, '•', $text);
         }
         return $text;
     }

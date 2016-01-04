@@ -38,7 +38,7 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
         $expected = '<p>This</p><p>text</p><p>is</p><p>borken.</p>';
         $this->assertEquals($expected, HTML::to($text));
 
-        // bullets
+        // simple bullets
         $bullet_list = "This is my list\n•Nachoes\n•number 2\n•pizza\nWasn't that great?";
         //echo "\n".$bullet_list."\n";
         $expected = "<p>This is my list</p>";
@@ -47,6 +47,20 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, HTML::to($bullet_list));
 
         // multiple sections of bullets
+
+        // test all the bullets!
+        $bullets = ['◘','○','◙','‣','⁃','⁌','⁍','⦾','⦿'];
+        $bullet_list = "This is my list\n• simple bullet";
+        $expected_list = '';
+        foreach ($bullets as $bullet) {
+            $bullet_list .= "\n".$bullet." other bullet";
+            $expected_list .= '<li> other bullet</li>';
+        }
+        $bullet_list .= "\nWasn't that great?";
+        $expected = "<p>This is my list</p><p><ul><li> simple bullet</li>";
+        $expected .= $expected_list;
+        $expected .= "</ul></p><p>Wasn't that great?</p>";
+        $this->assertEquals($expected, HTML::to($bullet_list));
     }
 
     /**
