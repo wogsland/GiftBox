@@ -4,7 +4,7 @@ use Monolog\Handler\SlackHandler;
 use Monolog\Logger;
 
 // set relesae version
-define('VERSION', '1.8.0');
+define('VERSION', '1.9.0');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
