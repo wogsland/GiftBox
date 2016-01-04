@@ -22,9 +22,9 @@ if (isset($_POST['signup_password'])) {
 $user->level = 1;
 $types = ['EMAIL', 'FACEBOOK'];
 if (isset($_POST['reg_type']) && in_array($_POST['reg_type'], $types)) {
-  $reg_type = $_POST['reg_type'];
+    $reg_type = $_POST['reg_type'];
 } else {
-  $reg_type = 'EMAIL';
+    $reg_type = 'EMAIL';
 }
 
 // Make sure the email address is available:

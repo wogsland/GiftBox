@@ -11,7 +11,7 @@ try {
     $user_group->name = $_POST['group_name'];
     $user_group->max_users = $_POST['max_users'];
 
-    if($action == "ADD" || $action == "EDIT") {
+    if ($action == "ADD" || $action == "EDIT") {
         $user_group->save();
     } else if ($action == "DELETE") {
         $user_group->delete();

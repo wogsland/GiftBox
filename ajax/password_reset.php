@@ -27,7 +27,8 @@ if (isset($_SESSION['code_reset_attempt'], $_SESSION['code_reset_attempt']['date
 
 // try email
 if (isset($_POST['reset_code'], $_POST['password'])
-&& $_SESSION['code_reset_attempt']['tries'] <= 3) {
+    && $_SESSION['code_reset_attempt']['tries'] <= 3
+) {
     $reset_code = escape_string($_POST['reset_code']);
     $password = escape_string($_POST['password']);
 
