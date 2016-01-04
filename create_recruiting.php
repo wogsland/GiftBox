@@ -1,9 +1,10 @@
 <?php
-use GiveToken\City;
-use GiveToken\RecruitingToken;
-use GiveToken\RecruitingTokenImage;
-use GiveToken\RecruitingTokenVideo;
-use google\appengine\api\cloud_storage\CloudStorageTools;
+use \GiveToken\City;
+use \GiveToken\HTML;
+use \GiveToken\RecruitingToken;
+use \GiveToken\RecruitingTokenImage;
+use \GiveToken\RecruitingTokenVideo;
+use \google\appengine\api\cloud_storage\CloudStorageTools;
 
 if (!logged_in()) {
     header('Location: '.$app_url);
@@ -219,7 +220,7 @@ require __DIR__.'/header.php';
                     <div class="field-container">
                         <?php
                             paper_text('Job Title', 'job-title', $token->job_title, true);
-                            paper_textarea('Job Description', 'job-description', $token->job_description, true);
+                            paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
 
                             $all_cities = City::getAll();
                             $cities = array();
@@ -236,9 +237,9 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="basic-info" heading="Basic Info">
                     <div class="field-container">
-                        <?php paper_textarea('Skills Required', 'skills-required', $token->skills_required); ?>
-                        <?php paper_textarea('Responsibilities', 'responsibilities', $token->responsibilities); ?>
-                        <?php paper_textarea('Perks', 'perks', $token->perks); ?>
+                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required)); ?>
+                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities)); ?>
+                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks)); ?>
                     </div>
                 </paper-card>
                 <paper-card id="company-info" heading="Important Company Info">
@@ -246,7 +247,7 @@ require __DIR__.'/header.php';
                         <?php paper_text('Company Name', 'company', $token->company); ?>
                         <?php //paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
                         <?php //paper_text('Company Website', 'company-website', $token->company_website); ?>
-                        <?php paper_textarea('Company Values', 'company-values', $token->company_values); ?>
+                        <?php paper_textarea('Company Values', 'company-values', HTML::from($token->company_values)); ?>
                         <?php
                             /*$company_sizes = array('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large');
                             $selected_size = null;

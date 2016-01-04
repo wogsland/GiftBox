@@ -1,6 +1,7 @@
 <?php
-use \GiveToken\RecruitingToken;
 use \GiveToken\City;
+use \GiveToken\HTML;
+use \GiveToken\RecruitingToken;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -21,6 +22,15 @@ if (isset($_SESSION['user_id'])) {
                 $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
             } while (!$token->uniqueLongId());
         }
+
+        // format long sections to HTML
+        $token->job_description = HTML::to($token->job_description);
+        $token->skills_required = HTML::to($token->skills_required);
+        $token->responsibilities = HTML::to($token->responsibilities);
+        $token->perks = HTML::to($token->perks);
+        $token->company_values = HTML::to($token->company_values);
+
+        // save it
         $token->save();
 
         $response['status'] = "SUCCESS";

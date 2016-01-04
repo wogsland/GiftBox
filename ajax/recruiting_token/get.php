@@ -1,5 +1,6 @@
 <?php
-use GiveToken\RecruitingToken;
+use \GiveToken\HTML;
+use \GiveToken\RecruitingToken;
 
 // collect id
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
