@@ -25,6 +25,9 @@ require __DIR__.'/header.php';
           <a href="/admin/visitors">Website Vistors</a>
         </li>
         <li>
+          <a href="/admin/transfer_token">Transfer Recruiting Token Ownership</a>
+        </li>
+        <li>
           <a href="/admin/add_city">Add Recruiting Token City</a>
         </li>
         <li>
