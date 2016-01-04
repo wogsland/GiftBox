@@ -19,16 +19,16 @@ class LandingPageView
     public function __construct($id = null)
     {
         if ($id !== null && (int) $id == $id) {
-          $page = execute_query(
-              "SELECT * FROM landing_page
+            $page = execute_query(
+                "SELECT * FROM landing_page
               WHERE deleted IS NULL
               AND id = '$id'"
-          )->fetch_object();
-          if (is_object($page)) {
-              foreach (get_object_vars($page) as $key => $value) {
-                  $this->$key = $value;
-              }
-          }
+            )->fetch_object();
+            if (is_object($page)) {
+                foreach (get_object_vars($page) as $key => $value) {
+                    $this->$key = $value;
+                }
+            }
         }
     }
 

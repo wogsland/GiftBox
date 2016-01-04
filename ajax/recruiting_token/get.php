@@ -1,5 +1,4 @@
 <?php
-use \GiveToken\HTML;
 use \GiveToken\RecruitingToken;
 
 // collect id

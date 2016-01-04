@@ -35,11 +35,14 @@ body {
       <h1>Transfer Token</h1>
       <form>
         <div class="form-group" id="old-user-id">
-          <label for="old_user_id" class="col-sm-3 control-label">Current Owner</label>
+          <label for="old_user_id" class="col-sm-3 control-label">
+            Current Owner
+          </label>
           <select class="form-control" name="old_user_id" required>
             <?php foreach ($users as $user) {
                 echo "<option value=\"{$user['id']}\">";
-                echo "{$user['first_name']} {$user['last_name']} ({$user['email_address']})";
+                echo "{$user['first_name']} {$user['last_name']}";
+                echo " ({$user['email_address']})";
                 echo "</option>";
             }?>
           </select>
@@ -51,16 +54,21 @@ body {
           </select>
         </div>
         <div class="form-group" id="new-user-id" hidden>
-          <label for="new_user_id" class="col-sm-3 control-label">New Owner</label>
+          <label for="new_user_id" class="col-sm-3 control-label">
+            New Owner
+          </label>
           <select class="form-control" name="new_user_id" required>
             <?php foreach ($users as $user) {
                 echo "<option value=\"{$user['id']}\">";
-                echo "{$user['first_name']} {$user['last_name']} ({$user['email_address']})";
+                echo "{$user['first_name']} {$user['last_name']}";
+                echo " ({$user['email_address']})";
                 echo "</option>";
             }?>
           </select>
         </div>
-        <button type="submit" class="btn btn-success" id="submit-transfer-token">Submit</button>
+        <button type="submit" class="btn btn-success" id="submit-transfer-token">
+          Submit
+        </button>
       </form>
     </div>
   </div>

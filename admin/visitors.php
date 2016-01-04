@@ -32,8 +32,8 @@ body {
           <th>This Month</th>
         </thead>
         <tbody>
-          <?php
-          $sql = "SELECT 'users' type_visitors,
+            <?php
+            $sql = "SELECT 'users' type_visitors,
                   (SELECT COUNT(distinct user_id)
                   FROM giftbox.web_request
                   WHERE created > CAST(NOW() AS DATE)) today_visitors,
@@ -77,40 +77,40 @@ body {
                   (SELECT visitor_cookie
                   FROM giftbox.web_request
                   WHERE created < (CAST(NOW() AS DATE) - INTERVAL 30 DAY)))";
-          $results = execute_query($sql);
-          $rows = array();
-          while ($row = $results->fetch_assoc()) {
-              $rows[$row['type_visitors']] = $row;
-          }
-          echo '<tr>';
-          echo "<td>{$rows['total']['type_visitors']}</td>";
-          echo "<td>{$rows['total']['today_visitors']}</td>";
-          echo "<td>{$rows['total']['week_visitors']}</td>";
-          echo "<td>{$rows['total']['month_visitors']}</td>";
-          echo '</tr>';
-          echo '<tr>';
-          echo "<td>{$rows['users']['type_visitors']}</td>";
-          echo "<td>{$rows['users']['today_visitors']}</td>";
-          echo "<td>{$rows['users']['week_visitors']}</td>";
-          echo "<td>{$rows['users']['month_visitors']}</td>";
-          echo '</tr>';
-          echo '<tr>';
-          echo "<td>{$rows['returning']['type_visitors']}</td>";
-          echo "<td>{$rows['returning']['today_visitors']}</td>";
-          echo "<td>{$rows['returning']['week_visitors']}</td>";
-          echo "<td>{$rows['returning']['month_visitors']}</td>";
-          echo '</tr>';
-          echo '<tr>';
-          echo "<td>new</td>";
-          echo '<td>'.($rows['total']['today_visitors']-$rows['returning']['today_visitors']).'</td>';
-          echo '<td>'.($rows['total']['week_visitors']-$rows['returning']['week_visitors']).'</td>';
-          echo '<td>'.($rows['total']['month_visitors']-$rows['returning']['month_visitors']).'</td>';
-          echo '</tr>';
-          ?>
+            $results = execute_query($sql);
+            $rows = array();
+            while ($row = $results->fetch_assoc()) {
+                $rows[$row['type_visitors']] = $row;
+            }
+            echo '<tr>';
+            echo "<td>{$rows['total']['type_visitors']}</td>";
+            echo "<td>{$rows['total']['today_visitors']}</td>";
+            echo "<td>{$rows['total']['week_visitors']}</td>";
+            echo "<td>{$rows['total']['month_visitors']}</td>";
+            echo '</tr>';
+            echo '<tr>';
+            echo "<td>{$rows['users']['type_visitors']}</td>";
+            echo "<td>{$rows['users']['today_visitors']}</td>";
+            echo "<td>{$rows['users']['week_visitors']}</td>";
+            echo "<td>{$rows['users']['month_visitors']}</td>";
+            echo '</tr>';
+            echo '<tr>';
+            echo "<td>{$rows['returning']['type_visitors']}</td>";
+            echo "<td>{$rows['returning']['today_visitors']}</td>";
+            echo "<td>{$rows['returning']['week_visitors']}</td>";
+            echo "<td>{$rows['returning']['month_visitors']}</td>";
+            echo '</tr>';
+            echo '<tr>';
+            echo "<td>new</td>";
+            echo '<td>'.($rows['total']['today_visitors']-$rows['returning']['today_visitors']).'</td>';
+            echo '<td>'.($rows['total']['week_visitors']-$rows['returning']['week_visitors']).'</td>';
+            echo '<td>'.($rows['total']['month_visitors']-$rows['returning']['month_visitors']).'</td>';
+            echo '</tr>';
+            ?>
         </tbody>
       </table>
     </div>
   </div>
-  <?php require __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
 </body>
 </html>

@@ -77,7 +77,7 @@ body {
       </form>
     </div>
   </div>
-  <?php require __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
   <script>
   $(document).ready(function(){
     $('#submit-city').on('click', function (event) {
