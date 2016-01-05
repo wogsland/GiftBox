@@ -158,16 +158,8 @@ require __DIR__.'/header.php';
   <div>
     <?php require_once __DIR__.'/navbar.php';?>
   </div>
-<!--    <paper-header-panel class="flex">
-        <paper-toolbar>
-            <div class="center-column" id="navbar">
-                <a id="logo-link" href="<?php echo $app_url; ?>"><img id="nav-logo" src="/assets/img/logo-light.png" height="40" alt="GiveToken"></a>
-                <paper-icon-button icon="home" id="home-icon" onclick="window.location = '<?php echo $app_url; ?>'"></paper-icon-button>
-            </div>
-        </paper-toolbar>
-    </paper-header-panel>-->
     <div class="center-column">
-        <!--<paper-card id="progress-bar">
+        <?php /*<paper-card id="progress-bar">
                 <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
                 <span class="progress-text">Fill Out Token Form</span>
                 <div class="progress-line"></div>
@@ -176,7 +168,7 @@ require __DIR__.'/header.php';
                 <div class="progress-line"></div>
                 <paper-fab icon="looks one" class="progress-fab"></paper-fab>
                 <span class="progress-text">Send Token</span>
-        </paper-card>-->
+        </paper-card> */ ?>
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
                 <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
@@ -245,7 +237,6 @@ require __DIR__.'/header.php';
                 <paper-card id="company-info" heading="Important Company Info">
                     <div class="field-container">
                         <?php paper_text('Company Name', 'company', $token->company); ?>
-                        <?php //paper_text('Company TagLine', 'company-tagline', $token->company_tagline); ?>
                         <?php //paper_text('Company Website', 'company-website', $token->company_website); ?>
                         <?php paper_textarea('Company Values', 'company-values', HTML::from($token->company_values)); ?>
                         <?php
