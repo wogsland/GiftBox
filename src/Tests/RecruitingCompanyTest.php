@@ -5,7 +5,7 @@ use GiveToken\RecruitingCompany;
 use GiveToken\User;
 
 /**
- * This class tests the City class
+ * This class tests the RecruitingCompany class
  *
  * phpunit --bootstrap src/tests/autoload.php src/tests/RecruitingCompanyTest
  */
