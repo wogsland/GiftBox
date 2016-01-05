@@ -12,17 +12,15 @@ class RecruitingToken
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $company;
-    public $company_logo;
-    public $company_tagline;
+    public $recruiting_company_id;
+    /*public $company;
     public $company_website;
     public $company_values;
-    public $company_size;
     public $company_facebook;
     public $company_linkedin;
     public $company_youtube;
     public $company_twitter;
-    public $company_google_plus;
+    public $company_google_plus;*/
 
     /**
      * This function constructs the class
