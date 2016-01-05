@@ -48,28 +48,28 @@ require __DIR__.'/header.php';
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/create_recruiting.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/create_recruiting.min.css">
 
     <!-- Polymer -->
-    <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
 
-    <link rel="import" href="components/iron-icons/iron-icons.html">
-    <link rel="import" href="components/iron-icon/iron-icon.html">
-    <link rel="import" href="components/iron-form/iron-form.html">
-    <link rel="import" href="components/paper-menu/paper-menu.html">
-    <link rel="import" href="components/paper-item/paper-item.html">
-    <link rel="import" href="components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="components/paper-input/paper-input.html">
-    <link rel="import" href="components/paper-header-panel/paper-header-panel.html">
-    <link rel="import" href="components/paper-toolbar/paper-toolbar.html">
-    <link rel="import" href="components/paper-styles/paper-styles.html">
-    <link rel="import" href="components/paper-card/paper-card.html">
-    <link rel="import" href="components/paper-button/paper-button.html">
-    <link rel="import" href="components/paper-input/paper-textarea.html">
-    <link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
-    <link rel="import" href="components/paper-dialog/paper-dialog.html">
-    <link rel="import" href="components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/iron-icons/iron-icons.html">
+    <link rel="import" href="/components/iron-icon/iron-icon.html">
+    <link rel="import" href="/components/iron-form/iron-form.html">
+    <link rel="import" href="/components/paper-menu/paper-menu.html">
+    <link rel="import" href="/components/paper-item/paper-item.html">
+    <link rel="import" href="/components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="/components/paper-input/paper-input.html">
+    <link rel="import" href="/components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="/components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="/components/paper-styles/paper-styles.html">
+    <link rel="import" href="/components/paper-card/paper-card.html">
+    <link rel="import" href="/components/paper-button/paper-button.html">
+    <link rel="import" href="/components/paper-input/paper-textarea.html">
+    <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="/components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="/components/paper-fab/paper-fab.html">
 
     <style is="custom-style">
         .center-column {
@@ -100,6 +100,9 @@ require __DIR__.'/header.php';
         paper-button.dialog-button {
             background: #2193ED;
             font-size: 14px;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            border: 0px;
         }
         .library-button {
             margin: 10px 0px;
@@ -370,14 +373,16 @@ require __DIR__.'/header.php';
                 </div>
             </form>
         </div>
-        <!--<div id="right-column">
+        <div id="right-column" class="pull-right">
+            <?php /*
             <paper-card heading="Token Strength" id="token-strength">
             </paper-card>
+            */ ?>
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
             </div>
-            <?php if (is_admin()) : ?>
+            <?php /*if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">
                     <div id="library-button-container">
                         <paper-button class="library-button" raised>Company</paper-button>
@@ -385,8 +390,8 @@ require __DIR__.'/header.php';
                         <paper-button class="library-button" raised>Video</paper-button>
                     </div>
                 </paper-card>
-            <?php endif; ?>
-       </div>-->
+            <?php endif;*/ ?>
+       </div>
     </div>
 
     <paper-dialog class="recruiting-dialog" id="open-dialog" modal>

@@ -395,7 +395,7 @@ function processOpen() {
     var menu = $("#token-to-open")[0].contentElement;
     var long_id = menu.selectedItem.id;
     $('#open-dialog')[0].close();
-    window.location = "/create_recruiting.php?id="+long_id;
+    window.location = "/create_recruiting?id="+long_id;
   }
 }
 
