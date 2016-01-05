@@ -178,6 +178,7 @@ require __DIR__.'/header.php';
             <form is="iron-form" id="recruiting-token-form">
                 <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
                 <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
+                <input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="<?php echo $token->recruiting_company_id ?>">
 
                 <paper-card id="send-token-via" heading="Send Token via">
                     <div id="send-link-list-container">
