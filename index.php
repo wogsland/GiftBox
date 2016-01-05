@@ -1,6 +1,10 @@
 <?php
 use \GiveToken\LandingPage;
 
+if (logged_in()) {
+    header('Location: /profile');
+}
+
 if (!isset($_GET['action'])) {
     // If the user hasn't been here, randomize the experience
     // Otherwise, take them to the page they saw before
