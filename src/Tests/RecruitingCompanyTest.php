@@ -46,6 +46,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         // $id specified case
         $user_id = $this->User->getId();
         $name = rand().' Inc.';
+        $logo = rand().'.jpg';
         $website = 'www.'.rand().'com';
         $values = 'obaoyibrebearbvreb ivy beriyvbreyb eroyb eroayvb '.rand();
         $facebook = 'f'.rand();
@@ -55,19 +56,21 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         $google_plus = 'g'.rand();
         $pinterest = 'p'.rand();
         $query = "INSERT INTO recruiting_company (
-                      user_id,
+                      `user_id`,
                       `name`,
-                      website,
+                      `logo`,
+                      `website`,
                       `values`,
-                      facebook,
-                      linkedin,
-                      youtube,
-                      twitter,
-                      google_plus,
-                      pinterest
+                      `facebook`,
+                      `linkedin`,
+                      `youtube`,
+                      `twitter`,
+                      `google_plus`,
+                      `pinterest`
                   ) VALUES (
                       '$user_id',
                       '$name',
+                      '$logo',
                       '$website',
                       '$values',
                       '$facebook',
@@ -83,6 +86,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result->id, $id);
         $this->assertEquals($result->user_id, $user_id);
         $this->assertEquals($result->name, $name);
+        $this->assertEquals($result->logo, $logo);
         $this->assertEquals($result->website, $website);
         $this->assertEquals($result->values, $values);
         $this->assertEquals($result->facebook, $facebook);
@@ -102,6 +106,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         $RecruitingCompany = new RecruitingCompany();
         $RecruitingCompany->user_id = $this->User->getId();
         $RecruitingCompany->name = rand().' Inc.';
+        $RecruitingCompany->logo = rand().'.png';
         $RecruitingCompany->website = 'www.'.rand().'com';
         $RecruitingCompany->values = 'For great justice, '.rand();
         $RecruitingCompany->facebook = 'f'.rand();
@@ -140,6 +145,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     {
         // set new values
         $RecruitingCompany->name = rand().' Co.';
+        $RecruitingCompany->logo = rand().'.gif';
         $RecruitingCompany->website = 'test.'.rand().'com';
         $RecruitingCompany->values = 'To build a '.rand();
         $RecruitingCompany->facebook = 'fa'.rand();

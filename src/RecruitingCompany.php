@@ -6,6 +6,7 @@ class RecruitingCompany
     public $id;
     public $user_id;
     public $name;
+    public $logo;
     public $website;
     public $values;
     public $facebook;
