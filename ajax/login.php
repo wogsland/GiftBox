@@ -1,6 +1,7 @@
 <?php
-use \GiveToken\User;
 use \GiveToken\EventLogger;
+use \GiveToken\UserMilestone;
+use \GiveToken\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -55,6 +56,7 @@ if (User::exists($email)) {
             $_SESSION['stripe_id'] = $user->stripe_id;
             $event = new EventLogger($user->getId(), $event_type);
             $event->log();
+            $UserMilestone = new UserMilestone($user_id, 'Log In');
         }
     } else {
         $response['status'] = "ERROR";

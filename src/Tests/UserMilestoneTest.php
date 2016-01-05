@@ -1,8 +1,8 @@
 <?php
 namespace GiveToken\Tests;
 
-use GiveToken\UserMilestone;
-use GiveToken\User;
+use \GiveToken\UserMilestone;
+use \GiveToken\User;
 
 /**
  * This class tests the UserMilestone & Milestone classes

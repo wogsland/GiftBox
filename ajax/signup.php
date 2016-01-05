@@ -1,5 +1,6 @@
 <?php
 use \GiveToken\EventLogger;
+use \GiveToken\UserMilestone;
 use \GiveToken\User;
 
 require_once __DIR__.'/../mail.php';
@@ -55,6 +56,7 @@ if (User::exists($user->email_address)) {
     }
     $response['status'] = "SUCCESS";
     $response['message'] = "{$user->email_address} successsfully registered.";
+    $UserMilestone = new UserMilestone($user->id, 'Signup');
 }
 
 header('Content-Type: application/json');

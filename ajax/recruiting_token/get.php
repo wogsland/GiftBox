@@ -1,6 +1,7 @@
 <?php
 use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
+use \GiveToken\UserMilestone;
 
 // collect id
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
@@ -31,6 +32,9 @@ if ($id != '') {
             }
         } else {
           $data = $token;
+        }
+        if (!logged_in()) {
+            $UserMilestone = new UserMilestone($token->user_id, 'Token View By Non-User');
         }
     }
 }
