@@ -1,6 +1,7 @@
 <?php
 use \GiveToken\City;
 use \GiveToken\HTML;
+use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
 use \GiveToken\RecruitingTokenImage;
 use \GiveToken\RecruitingTokenVideo;
@@ -12,6 +13,7 @@ if (!logged_in()) {
 
 if (isset($_GET['id'])) {
     $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
+    $token_company = new RecruitingCompany($token->recruiting_company_id);
     $token_images = RecruitingTokenImage::getTokenImages($token->id);
     $token_videos = RecruitingTokenVideo::getTokenVideos($token->id);
 } else {
@@ -239,17 +241,9 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="company-info" heading="Important Company Info">
                     <div class="field-container">
-                        <?php paper_text('Company Name', 'company', $token->company); ?>
-                        <?php //paper_text('Company Website', 'company-website', $token->company_website); ?>
-                        <?php paper_textarea('Company Values', 'company-values', HTML::from($token->company_values)); ?>
-                        <?php
-                            /*$company_sizes = array('Extra Small', 'Small', 'Medium', 'Large', 'Extra Large');
-                            $selected_size = null;
-                            if (isset($token->company_size) && $token->company_size) {
-                                $selected_size = array_search($token->company_size, $company_sizes);
-                            }
-                            paper_dropdown('Company Size', 'company-size', $company_sizes, $selected_size);*/
-                        ?>
+                        <?php paper_text('Company Name', 'company', $token_company->name); ?>
+                        <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
+                        <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values)); ?>
                     </div>
                 </paper-card>
                 <paper-card id="company-images" heading="Company Images">
@@ -321,7 +315,7 @@ require __DIR__.'/header.php';
                               https://facebook.com/
                             </td>
                             <td class="company-social-user-td">
-                              <?php paper_text('', 'company-facebook', $token->company_facebook); ?>
+                              <?php paper_text('', 'company-facebook', $token_company->facebook); ?>
                             </td>
                           </tr>
                         </table>
@@ -331,7 +325,7 @@ require __DIR__.'/header.php';
                               https://linkedin.com/
                             </td>
                             <td class="company-social-user-td">
-                              <?php paper_text('', 'company-linkedin', $token->company_linkedin); ?>
+                              <?php paper_text('', 'company-linkedin', $token_company->linkedin); ?>
                             </td>
                           </tr>
                         </table>
@@ -341,7 +335,7 @@ require __DIR__.'/header.php';
                               https://youtube.com/
                             </td>
                             <td class="company-social-user-td">
-                              <?php paper_text('', 'company-youtube', $token->company_youtube); ?>
+                              <?php paper_text('', 'company-youtube', $token_company->youtube); ?>
                             </td>
                           </tr>
                         </table>
@@ -351,7 +345,7 @@ require __DIR__.'/header.php';
                               https://twitter.com/
                             </td>
                             <td class="company-social-user-td">
-                              <?php paper_text('', 'company-twitter', $token->company_twitter); ?>
+                              <?php paper_text('', 'company-twitter', $token_company->twitter); ?>
                             </td>
                           </tr>
                         </table>
@@ -361,7 +355,7 @@ require __DIR__.'/header.php';
                               https://plus.google.com/
                             </td>
                             <td class="company-social-user-td">
-                              <?php paper_text('', 'company-google-plus', $token->company_google_plus); ?>
+                              <?php paper_text('', 'company-google-plus', $token_company->google_plus); ?>
                             </td>
                           </tr>
                         </table>
