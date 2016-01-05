@@ -70,7 +70,7 @@
     <div class=" email">
       <div context='email7479'>
         <label class="marketing-input-wrapper">
-            <span class="marketing-label">Emmail address</span>
+            <span class="marketing-label">Email address</span>
             <input name="signup_email"
               type="email"
               novalidate="novalidate"
