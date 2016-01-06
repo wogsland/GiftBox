@@ -16,6 +16,9 @@ require __DIR__.'/header.php';
     <nav id="create-top-nav">
       <ul>
         <li>
+          <a href="/admin/stalled_new_customers">Stalled New Customers</a>
+        </li>
+        <li>
           <a href="/admin/top_ten">*** Top Ten Tokens ***</a>
         </li>
         <li>
@@ -30,12 +33,12 @@ require __DIR__.'/header.php';
         <li>
           <a href="/admin/add_city">Add Recruiting Token City</a>
         </li>
-        <li>
+        <?php /*<li>
           <a href="manage_users.php">Manage Users</a>
         </li>
         <li>
           <a href="manage_groups.php">Manage Groups</a>
-        </li>
+        </li>*/?>
       </ul>
     </nav>
   </div>

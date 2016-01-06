@@ -27,14 +27,16 @@ if (!defined('DEVELOPMENT')) {
 }
 
 // setup Monolog error handler to report to Slack
-$slackToken = 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG';
-$logger = new \Monolog\Logger('bugs');
+if (!defined('SLACK_TOKEN')) {
+    define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
+}
+$logger = new Logger('bugs');
 if (DEVELOPMENT) {
     $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
-    $slackHandler = new SlackHandler($slackToken, '#development', $name, false);
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
 } else {
     $name = 'Web Application: '.$_SERVER['REQUEST_URI'];
-    $slackHandler = new SlackHandler($slackToken, '#bugs', $name, false);
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs', $name, false);
 }
 $slackHandler->setLevel(Logger::DEBUG);
 $logger->pushHandler($slackHandler);

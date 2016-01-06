@@ -3,6 +3,7 @@ use \GiveToken\City;
 use \GiveToken\HTML;
 use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
+use \GiveToken\UserMilestone;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
@@ -66,7 +67,7 @@ if (isset($_SESSION['user_id'])) {
         $response['id'] = $token->id;
         $response['long_id'] = $token->long_id;
         $response['user_id'] = $token->user_id;
-
+        $UserMilestone = new UserMilestone($user_id, 'Create Token');
     } catch (Exception $e) {
         error_log($e->getMessage());
         $response['status'] = "ERROR";
