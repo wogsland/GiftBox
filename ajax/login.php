@@ -56,7 +56,7 @@ if (User::exists($email)) {
             $_SESSION['stripe_id'] = $user->stripe_id;
             $event = new EventLogger($user->getId(), $event_type);
             $event->log();
-            $UserMilestone = new UserMilestone($user_id, 'Log In');
+            $UserMilestone = new UserMilestone($user->getId(), 'Log In');
         }
     } else {
         $response['status'] = "ERROR";
