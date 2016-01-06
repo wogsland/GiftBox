@@ -53,7 +53,7 @@ class UserMilestone
                     // send it to Slack
                     $milestoneLogger = new Logger('milestones');
                     $User = new User($user_id);
-                    $name = $User->email_address;
+                    $name = 'Customer Milestone Bot';
                     if (DEVELOPMENT) {
                         $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
                     } else {
@@ -61,7 +61,7 @@ class UserMilestone
                     }
                     $slackHandler->setLevel(Logger::DEBUG);
                     $milestoneLogger->pushHandler($slackHandler);
-                    $milestoneLogger->log(200, "Achieved *{$Milestone->name}* milestone.");
+                    $milestoneLogger->log(200, "{$User->email_address} achieved the *{$Milestone->name}* milestone.");
                 } catch (Exception $e) {
                   //silent fail
                 }
