@@ -5,6 +5,8 @@ use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
 use \GiveToken\UserMilestone;
 
+date_default_timezone_set('America/Chicago');
+
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
     try {

@@ -3,6 +3,8 @@ use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
 use \GiveToken\UserMilestone;
 
+date_default_timezone_set('America/Chicago');
+
 // collect id
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
 

@@ -184,6 +184,7 @@ function removeImageById(imageId) {
  * @param {String} parentId The HTML id of the tag to plave the thumbnail in
  */
 function createThumbnail(object, parentId) {
+  $('#'+parentId).removeAttr('hidden');
   var container = $('<div>');
   var inner = $('<div>');
   var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){

@@ -261,24 +261,27 @@ require __DIR__.'/header.php';
                                 <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
 -->                            </div>
                         </div>
-                        <div class="thumbnail-list-container" id="company-image-container">
-                        <?php
-                        foreach ($token_images as $token_image) {
-                            if ($google_app_engine) {
-                                $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
-                            } else {
-                                $image_path = $file_storage_path.$token_image->file_name;
-                            }
-                            $image_id = str_replace('.', '_', $token_image->file_name);
-                            echo '<div class="thumbnail-container">';
-                            echo '  <div class="inner-thumbnail-container">';
-                            echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.$image_path.'">';
-                            echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
-                            echo ' </div>';
-                            echo '</div>';
-                        }
-                        ?>
-                        </div>
+                        <?php if (count($token_images) > 0) {?>
+                          <div class="thumbnail-list-container" id="company-image-container">
+                          <?php
+                          foreach ($token_images as $token_image) {
+                              if ($google_app_engine) {
+                                  $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
+                              } else {
+                                  $image_path = $file_storage_path.$token_image->file_name;
+                              }
+                              $image_id = str_replace('.', '_', $token_image->file_name);
+                              echo '<div class="thumbnail-container">';
+                              echo '  <div class="inner-thumbnail-container">';
+                              echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.$image_path.'">';
+                              echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                              echo ' </div>';
+                              echo '</div>';
+                          }
+                          echo '</div>';
+                        } else { ?>
+                          <div class="thumbnail-list-container" id="company-image-container" hidden></div>
+                        <?php } ?>
                     </div>
                 </paper-card>
                 <paper-card id="company-videos" heading="Company Videos">
@@ -294,19 +297,22 @@ require __DIR__.'/header.php';
 -->
                             </div>
                         </div>
-                        <div class="thumbnail-list-container" id="company-video-container">
-                        <?php
-                        foreach ($token_videos as $token_video) {
-                            $image_id = substr($token_video->url, strrpos($token_video->url, '/')+1);
-                            echo '<div class="thumbnail-container">';
-                            echo '  <div class="inner-thumbnail-container">';
-                            echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video->id.'" src="'.$token_video->thumbnail_src.'">';
-                            echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
-                            echo ' </div>';
-                            echo '</div>';
-                        }
-                        ?>
-                        </div>
+                        <?php if (count($token_images) > 0) {?>
+                          <div class="thumbnail-list-container" id="company-video-container">
+                          <?php
+                          foreach ($token_videos as $token_video) {
+                              $image_id = substr($token_video->url, strrpos($token_video->url, '/')+1);
+                              echo '<div class="thumbnail-container">';
+                              echo '  <div class="inner-thumbnail-container">';
+                              echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video->id.'" src="'.$token_video->thumbnail_src.'">';
+                              echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                              echo ' </div>';
+                              echo '</div>';
+                          }
+                          echo '</div>';
+                        } else { ?>
+                          <div class="thumbnail-list-container" id="company-video-container" hidden></div>
+                        <?php } ?>
                     </div>
                 </paper-card>
                 <paper-card id="company-social-media" heading="Company Social Media">
