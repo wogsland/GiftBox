@@ -68,4 +68,62 @@ class UserMilestone
             }
         }
     }
+
+    /**
+     * This function returns a list of customers who haven't completed the 5
+     * signup milestones that take them to a true user of the product. These
+     * are
+     * 1) 'Signup'
+     * 2) 'Add Credit Card' (currently allowing them to skip and not tracking)
+     * 3) 'Confirm Email'
+     * 4) 'Log In'
+     * 5) 'Create Token'
+     * 6) 'Token View By Non-User'
+     *
+     * @return array - array of user information
+     */
+    public static function stalledCustomers()
+    {
+        $query = "SELECT first_name, last_name, email_address,
+                  COALESCE(MAX(web_request.created), 'Never') AS last_active,
+                  (SELECT GROUP_CONCAT(milestone.`name`, ', ')
+                   FROM user_milestone
+                   JOIN milestone ON milestone.id = milestone_id
+                   WHERE user_id = user.id
+                  ) AS milestones
+                  FROM user
+                  LEFT JOIN web_request ON user.id = user_id
+                  WHERE (user.id NOT IN (
+                    SELECT user_id
+                    FROM user_milestone
+                    JOIN milestone ON milestone.id = milestone_id
+                    WHERE `name` = 'Signup'
+                  ) OR user.id NOT IN (
+                    SELECT user_id
+                    FROM user_milestone
+                    JOIN milestone ON milestone.id = milestone_id
+                    WHERE name = 'Confirm Email'
+                  ) OR user.id NOT IN (
+                    SELECT user_id
+                    FROM user_milestone
+                    JOIN milestone ON milestone.id = milestone_id
+                    WHERE name = 'Log In'
+                  ) OR user.id NOT IN (
+                    SELECT user_id
+                    FROM user_milestone
+                    JOIN milestone ON milestone.id = milestone_id
+                    WHERE name = 'Create Token'
+                  ) OR user.id NOT IN (
+                    SELECT user_id
+                    FROM user_milestone
+                    JOIN milestone ON milestone.id = milestone_id
+                    WHERE name = 'Token View By Non-User'
+                  ))
+                  AND admin = 'N'
+                  AND ignore_onboard_status = 'N'
+                  GROUP BY user.id
+                  ORDER BY last_active DESC";
+        $result = execute_query($query);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
