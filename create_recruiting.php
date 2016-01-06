@@ -18,6 +18,7 @@ if (isset($_GET['id'])) {
     $token_videos = RecruitingTokenVideo::getTokenVideos($token->id);
 } else {
     $token = new RecruitingToken();
+    $token_company = new RecruitingCompany();
     $token_images = array();
     $token_videos = array();
 }
