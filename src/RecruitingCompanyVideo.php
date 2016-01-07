@@ -34,7 +34,7 @@ class RecruitingCompanyVideo
         $results =  execute_query(
             "SELECT recruiting_company_video.id, recruiting_company_video.`source`, recruiting_company_video.source_id
             FROM recruiting_company_video, recruiting_token
-            WHERE recruiting_token_id = $recruiting_token_id
+            WHERE recruiting_token.id = $recruiting_token_id
             AND recruiting_company_video.recruiting_company_id =  recruiting_token.recruiting_company_id");
         $token_videos = array();
         while($token_video = $results->fetch_object()) {

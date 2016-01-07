@@ -29,9 +29,13 @@ class RecruitingCompanyImage
         }
     }
 
-    public static function getTokenImages($recruiting_company_id)
+    public static function getTokenImages($recruiting_token_id)
     {
-        $results =  execute_query("SELECT * FROM recruiting_company_image where recruiting_company_id = $recruiting_company_id");
+        $results =  execute_query(
+            "SELECT recruiting_company_image.id, recruiting_company_image.file_name
+            FROM recruiting_company_image, recruiting_token
+            WHERE recruiting_token.id = $recruiting_token_id
+            AND recruiting_company_image.recruiting_company_id =  recruiting_token.recruiting_company_id");
         $token_images = array();
         while($token_image = $results->fetch_object()) {
             $token_images[count($token_images)] = $token_image;
