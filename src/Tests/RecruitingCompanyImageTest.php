@@ -1,16 +1,17 @@
 <?php
 namespace GiveToken\Tests;
 
+use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingTokenImage;
+use \GiveToken\RecruitingCompanyImage;
 use \GiveToken\User;
 
 /**
- * This class tests the RecruitingTokenImage class
+ * This class tests the RecruitingCompanyImage class
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingTokenImageTest
+ * phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingCompanyImageTest
  */
-class RecruitingTokenImageTest
+class RecruitingCompanyImageTest
 extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -34,10 +35,18 @@ extends \PHPUnit_Framework_TestCase
         $User->save();
         $this->User = $User;
 
+        // setup test company
+        $RecruitingCompany = new RecruitingCompany();
+        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->name = 'The '.rand().' Company';
+        $RecruitingCompany->save();
+        $this->RecruitingCompany = $RecruitingCompany;
+
         // setup test token
         $RecruitingToken = new RecruitingToken();
         $RecruitingToken->user_id = $this->User->getId();
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();
         $this->RecruitingToken = $RecruitingToken;
     }
@@ -48,26 +57,27 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         // $id = null case
-        $result = new RecruitingTokenImage();
-        $this->assertEquals('GiveToken\RecruitingTokenImage', get_class($result));
+        $result = new RecruitingCompanyImage();
+        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
         $this->assertFalse(isset($result->id));
 
         // invalid id case
-        $result = new RecruitingTokenImage(-1);
-        $this->assertEquals('GiveToken\RecruitingTokenImage', get_class($result));
+        $result = new RecruitingCompanyImage(-1);
+        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
         $this->assertFalse(isset($result->id));
 
         // valid id case
         $file_name = rand().'.jpg';
-        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
-                  VALUES ('{$this->RecruitingToken->id}', '$file_name')";
+        $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
+                  VALUES ('{$this->RecruitingCompany->id}', '$file_name')";
         $id = insert($query);
-        $result = new RecruitingTokenImage($id);
-        $this->assertEquals('GiveToken\RecruitingTokenImage', get_class($result));
+        $result = new RecruitingCompanyImage($id);
+        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
         $this->assertTrue(isset($result->id));
         $this->assertEquals($result->id, $id);
         $this->assertEquals($result->file_name, $file_name);
-        $this->assertEquals($result->recruiting_token_id, $this->RecruitingToken->id);
+        $this->assertEquals($result->recruiting_company_id, $this->RecruitingCompany->id);
+        $this->assertTrue(isset($result->created));
     }
 
     /**
@@ -77,17 +87,19 @@ extends \PHPUnit_Framework_TestCase
     {
         // create token image
         $file_name = rand().'.jpg';
-        $RecruitingTokenImage = new RecruitingTokenImage();
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name);
-        $this->assertEquals($RecruitingTokenImage->id, $id);
-        $this->assertEquals($RecruitingTokenImage->file_name, $file_name);
-        $this->assertEquals($RecruitingTokenImage->recruiting_token_id, $this->RecruitingToken->id);
+        $RecruitingCompanyImage = new RecruitingCompanyImage();
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name);
+        $this->assertEquals($RecruitingCompanyImage->id, $id);
+        $this->assertEquals($RecruitingCompanyImage->file_name, $file_name);
+        $this->assertEquals($RecruitingCompanyImage->recruiting_company_id, $this->RecruitingCompany->id);
+        $this->assertTrue(isset($RecruitingCompanyImage->created));
 
         // check it's in the DB
-        $RecruitingTokenImage2 = new RecruitingTokenImage($id);
-        $this->assertEquals($RecruitingTokenImage2->id, $id);
-        $this->assertEquals($RecruitingTokenImage2->file_name, $file_name);
-        $this->assertEquals($RecruitingTokenImage2->recruiting_token_id, $this->RecruitingToken->id);
+        $RecruitingCompanyImage2 = new RecruitingCompanyImage($id);
+        $this->assertEquals($RecruitingCompanyImage2->id, $id);
+        $this->assertEquals($RecruitingCompanyImage2->file_name, $file_name);
+        $this->assertEquals($RecruitingCompanyImage2->recruiting_company_id, $this->RecruitingCompany->id);
+        $this->assertTrue(isset($RecruitingCompanyImage2->created));
     }
 
     /**
@@ -97,10 +109,10 @@ extends \PHPUnit_Framework_TestCase
     {
         // creaete image
         $file_name = rand().'.jpg';
-        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
-                  VALUES ('{$this->RecruitingToken->id}', '$file_name')";
+        $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
+                  VALUES ('{$this->RecruitingCompany->id}', '$file_name')";
         $id = insert($query);
-        $result = new RecruitingTokenImage($id);
+        $result = new RecruitingCompanyImage($id);
         $this->assertTrue(isset($result->id));
 
         // delete image
@@ -108,11 +120,11 @@ extends \PHPUnit_Framework_TestCase
 
         // check class variables get unset
         $this->assertFalse(isset($result->id));
-        $this->assertFalse(isset($result->recruiting_token_id));
+        $this->assertFalse(isset($result->recruiting_company_id));
         $this->assertFalse(isset($result->file_name));
 
         // check it's gone from DB
-        $result2 = new RecruitingTokenImage($id);
+        $result2 = new RecruitingCompanyImage($id);
         $this->assertFalse(isset($result2->id));
 
         //check it's deleted from the filesystem
@@ -124,10 +136,10 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testGetByRecruitingTokenId()
     {
-        $RecruitingTokenImage = new RecruitingTokenImage();
+        $RecruitingCompanyImage = new RecruitingCompanyImage();
 
         // token with no images should return empty array
-        $images = $RecruitingTokenImage->getByRecruitingTokenId($this->RecruitingToken->id);
+        $images = $RecruitingCompanyImage->getByRecruitingTokenId($this->RecruitingToken->id);
         $this->assertTrue(is_array($images));
         $this->assertTrue(empty($images));
 
@@ -135,10 +147,10 @@ extends \PHPUnit_Framework_TestCase
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[1]);
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[2]);
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[3]);
-        $images = $RecruitingTokenImage->getByRecruitingTokenId($this->RecruitingToken->id);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $images = $RecruitingCompanyImage->getByRecruitingTokenId($this->RecruitingToken->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
         foreach ($images as $image) {
@@ -152,10 +164,10 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testGetByRecruitingTokenLongId()
     {
-        $RecruitingTokenImage = new RecruitingTokenImage();
+        $RecruitingCompanyImage = new RecruitingCompanyImage();
 
         // token with no images should return empty array
-        $images = $RecruitingTokenImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $images = $RecruitingCompanyImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
         $this->assertTrue(is_array($images));
         $this->assertTrue(empty($images));
 
@@ -163,10 +175,10 @@ extends \PHPUnit_Framework_TestCase
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[1]);
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[2]);
-        $id = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[3]);
-        $images = $RecruitingTokenImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $images = $RecruitingCompanyImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
         foreach ($images as $image) {

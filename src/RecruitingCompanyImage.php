@@ -1,24 +1,26 @@
 <?php
 namespace GiveToken;
 
-class RecruitingTokenImage
+class RecruitingCompanyImage
 {
     protected $id;
-    protected $recruiting_token_id;
+    protected $recruiting_company_id;
     protected $file_name;
+    protected $created;
 
     /**
      * Constructs the class
      *
-     * @param int $id - the id of the city to pull from the database
+     * @param int $id - the id of the recruiting company image to pull from the database
      */
     public function __construct($id = null)
     {
         if ($id !== null && strlen($id) > 0) {
             $result = execute_query(
-                "SELECT * from recruiting_token_image
+                "SELECT id, recruiting_company_id, file_name, created
+                FROM recruiting_company_image
                 WHERE id = '$id'"
-            )->fetch_object("GiveToken\RecruitingTokenImage");
+            )->fetch_object("GiveToken\RecruitingCompanyImage");
             if (isset($result)) {
                 foreach (get_object_vars($result) as $key => $value) {
                     $this->$key = $value;
@@ -27,9 +29,13 @@ class RecruitingTokenImage
         }
     }
 
-    public static function getTokenImages($recruiting_token_id) 
+    public static function getTokenImages($recruiting_token_id)
     {
-        $results =  execute_query("SELECT * FROM recruiting_token_image where recruiting_token_id = $recruiting_token_id");
+        $results =  execute_query(
+            "SELECT recruiting_company_image.id, recruiting_company_image.file_name
+            FROM recruiting_company_image, recruiting_token
+            WHERE recruiting_token.id = $recruiting_token_id
+            AND recruiting_company_image.recruiting_company_id =  recruiting_token.recruiting_company_id");
         $token_images = array();
         while($token_image = $results->fetch_object()) {
             $token_images[count($token_images)] = $token_image;
@@ -65,28 +71,29 @@ class RecruitingTokenImage
     }
 
     /**
-     * This function creates an entry in the recruiting_token_image table
+     * This function creates an entry in the recruiting_company_image table
      *
-     * @param int    $recruiting_token_id - id of the token
+     * @param int    $recruiting_company_id - id of the company
      * @param string $file_name           - name of image file
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $file_name)
+    public function create($recruiting_company_id, $file_name)
     {
-        $query = "INSERT INTO recruiting_token_image (recruiting_token_id, file_name)
-                  VALUES ('$recruiting_token_id', '$file_name')";
+        $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
+                  VALUES ('$recruiting_company_id', '$file_name')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
-            $this->recruiting_token_id = $recruiting_token_id;
+            $this->recruiting_company_id = $recruiting_company_id;
             $this->file_name = $file_name;
+            $this->created = date('Y-m-d H:i:s'); //close enough
         }
         return $id;
     }
 
     /**
-     * This function gets information from the recruiting_token_image table
+     * This function gets information from the recruiting_company_image table
      *
      * @param int $recruiting_token_id - id of the token to get images for
      *
@@ -95,8 +102,10 @@ class RecruitingTokenImage
     public function getByRecruitingTokenId($recruiting_token_id)
     {
         $return = array();
-        $query = "SELECT id, file_name FROM recruiting_token_image
-                  WHERE recruiting_token_id = '$recruiting_token_id'";
+        $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
+                  FROM recruiting_company_image, recruiting_token
+                  WHERE recruiting_company_image.recruiting_company_id = recruiting_token.recruiting_company_id
+                  AND recruiting_token.id = '$recruiting_token_id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
             $return[] = $row;
@@ -105,7 +114,7 @@ class RecruitingTokenImage
     }
 
     /**
-     * This function gets information from the recruiting_token_image table
+     * This function gets information from the recruiting_company_image table
      *
      * @param int $long_id - long id of the token to get images for
      *
@@ -114,9 +123,9 @@ class RecruitingTokenImage
     public function getByRecruitingTokenLongId($long_id)
     {
         $return = array();
-        $query = "SELECT recruiting_token_image.id, recruiting_token_image.file_name
-                  FROM recruiting_token_image, recruiting_token
-                  WHERE recruiting_token_image.recruiting_token_id = recruiting_token.id
+        $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
+                  FROM recruiting_company_image, recruiting_token
+                  WHERE recruiting_company_image.recruiting_company_id = recruiting_token.recruiting_company_id
                   AND recruiting_token.long_id = '$long_id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
@@ -144,7 +153,7 @@ class RecruitingTokenImage
         // Delete from database
         if (isset($this->id)) {
             // delete from db
-            $sql = "DELETE FROM recruiting_token_image WHERE id = {$this->id}";
+            $sql = "DELETE FROM recruiting_company_image WHERE id = {$this->id}";
             execute($sql);
             $vars = get_class_vars(get_class($this));
             foreach ($vars as $key=>$value) {

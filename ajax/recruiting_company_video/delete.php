@@ -1,19 +1,19 @@
 <?php
-use GiveToken\RecruitingTokenImage;
+use GiveToken\RecruitingCompanyVideo;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     if (isset($_POST['id'])) {
         $id = $_POST['id'];
         try {
-            // Delete the token image
-            $recruiting_token_image = new RecruitingTokenImage($id);
-            $deleted = $recruiting_token_image->delete();
+            // Delete the token video
+            $recruiting_company_video = new RecruitingCompanyVideo($id);
+            $deleted = $recruiting_company_video->delete();
             if ($deleted) {
                 $response['status'] = "SUCCESS";
             } else {
                 $response['status'] = "ERROR";
-                $response['message'] = "RecruitingTokenImage->delete() failed.";
+                $response['message'] = "Recruiting token video delete() failed.";
             }
         } catch (Exception $e) {
             error_log($e->getMessage());
@@ -23,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
         }
     } else {
         $response['status'] = "ERROR";
-        $response['message'] = "Recruiting token image id unavailable.";
+        $response['message'] = "Recruiting token video id unavailable.";
     }
 } else {
     $response['status'] = "ERROR";

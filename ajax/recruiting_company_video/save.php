@@ -1,24 +1,24 @@
 <?php
 use GiveToken\RecruitingToken;
-use GiveToken\RecruitingTokenVideo;
+use GiveToken\RecruitingCompanyVideo;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
-    if (isset($_POST['recruiting_token_id'])) {
-        $recruiting_token_id = (int) $_POST['recruiting_token_id'];
+    if (isset($_POST['recruiting_company_id'])) {
+        $recruiting_company_id = (int) $_POST['recruiting_company_id'];
         if (isset($_POST['source'], $_POST['source_id'])) {
             $source = escape_string($_POST['source']);
             $source_id = escape_string($_POST['source_id']);
             if (in_array($source, ['youtube','vimeo'])) {
-                // see is token belongs to this user
-                $recruiting_token = new RecruitingToken($recruiting_token_id, 'id');
-                if ($recruiting_token->user_id == $user_id) {
+                // see if company belongs to this user
+                $RecruitingCompany = new RecruitingCompany($recruiting_company_id, 'id');
+                if ($RecruitingCompany->user_id == $user_id) {
                     try {
                         // Save the token video
-                        $recruiting_token_video = new RecruitingTokenVideo();
-                        $id = $recruiting_token_video->create($recruiting_token_id, $source, $source_id);
+                        $recruiting_company_video = new RecruitingCompanyVideo();
+                        $id = $recruiting_company_video->create($recruiting_company_id, $source, $source_id);
                         $response['status'] = "SUCCESS";
-                        $response['id'] = $recruiting_token_video->id;
+                        $response['id'] = $recruiting_company_video->id;
                     } catch (Exception $e) {
                         error_log($e->getMessage());
                         $response['status'] = "ERROR";
