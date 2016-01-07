@@ -13,31 +13,31 @@ if (isset($_SESSION['user_id'])) {
         // Save the company (if new)
         if (!isset($_POST['recruiting_company_id']) || (int)$_POST['recruiting_company_id'] <= 0) {
             $RecruitingCompany = new RecruitingCompany();
+            $RecruitingCompany->user_id = $user_id;
+            $RecruitingCompany->name = isset($_POST['company']) ? $_POST['company'] : '';
+            $RecruitingCompany->website = isset($_POST['company_website']) ? $_POST['company_website'] : '';
+            $RecruitingCompany->values = isset($_POST['company_values']) ? $_POST['company_values'] : '';
+            $RecruitingCompany->values = HTML::to($RecruitingCompany->values);
+            $RecruitingCompany->facebook = isset($_POST['company_facebook']) ? $_POST['company_facebook'] : '';
+            $RecruitingCompany->linkedin = isset($_POST['company_linkedin']) ? $_POST['company_linkedin'] : '';
+            $RecruitingCompany->youtube = isset($_POST['company_youtube']) ? $_POST['company_youtube'] : '';
+            $RecruitingCompany->twitter = isset($_POST['company_twitter']) ? $_POST['company_twitter'] : '';
+            $RecruitingCompany->google_plus = isset($_POST['company_google_plus']) ? $_POST['company_google_plus'] : '';
+            $RecruitingCompany->pinterest = isset($_POST['company_pinterest']) ? $_POST['company_pinterest'] : '';
+            $RecruitingCompany->save();
+            $_POST['recruiting_company_id'] = $RecruitingCompany->id;
+            unset($_POST['company']);
+            unset($_POST['company_website']);
+            unset($_POST['company_values']);
+            unset($_POST['company_facebook']);
+            unset($_POST['company_linkedin']);
+            unset($_POST['company_youtube']);
+            unset($_POST['company_twitter']);
+            unset($_POST['company_google_plus']);
+            unset($_POST['company_pinterest']);
         } else {
             $RecruitingCompany = new RecruitingCompany($_POST['recruiting_company_id']);
         }
-        $RecruitingCompany->user_id = $user_id;
-        $RecruitingCompany->name = isset($_POST['company']) ? $_POST['company'] : '';
-        $RecruitingCompany->website = isset($_POST['company_website']) ? $_POST['company_website'] : '';
-        $RecruitingCompany->values = isset($_POST['company_values']) ? $_POST['company_values'] : '';
-        $RecruitingCompany->values = HTML::to($RecruitingCompany->values);
-        $RecruitingCompany->facebook = isset($_POST['company_facebook']) ? $_POST['company_facebook'] : '';
-        $RecruitingCompany->linkedin = isset($_POST['company_linkedin']) ? $_POST['company_linkedin'] : '';
-        $RecruitingCompany->youtube = isset($_POST['company_youtube']) ? $_POST['company_youtube'] : '';
-        $RecruitingCompany->twitter = isset($_POST['company_twitter']) ? $_POST['company_twitter'] : '';
-        $RecruitingCompany->google_plus = isset($_POST['company_google_plus']) ? $_POST['company_google_plus'] : '';
-        $RecruitingCompany->pinterest = isset($_POST['company_pinterest']) ? $_POST['company_pinterest'] : '';
-        $RecruitingCompany->save();
-        $_POST['recruiting_company_id'] = $RecruitingCompany->id;
-        unset($_POST['company']);
-        unset($_POST['company_website']);
-        unset($_POST['company_values']);
-        unset($_POST['company_facebook']);
-        unset($_POST['company_linkedin']);
-        unset($_POST['company_youtube']);
-        unset($_POST['company_twitter']);
-        unset($_POST['company_google_plus']);
-        unset($_POST['company_pinterest']);
 
         // Save the token
         $token = new RecruitingToken();

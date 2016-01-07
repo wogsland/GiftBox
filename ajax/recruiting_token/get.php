@@ -15,7 +15,7 @@ if ($id != '') {
     if (isset($token->id)) {
         $success = 'true';
         if (isset($token->recruiting_company_id)
-            && (int) $token->recruiting_company_id == $token->recruiting_company_id
+            && (int) $token->recruiting_company_id > 0
         ) {
             $company = new RecruitingCompany($token->recruiting_company_id);
             if (isset($company->id)) {
