@@ -118,6 +118,9 @@ if (!isset($endpoint_parts[1])) {
         case 'privacy':
         include __DIR__.'/../privacypolicy.php';
         break;
+        case 'recruiting_made_easy':
+        include __DIR__.'/../lp/bc1.php';
+        break;
         case 'terms':
         include __DIR__.'/../termsservice.php';
         break;

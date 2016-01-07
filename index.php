@@ -4,7 +4,7 @@ use \GiveToken\LandingPage;
 if (logged_in()) {
     header('Location: /profile');
 }
-
+/*
 if (!isset($_GET['action'])) {
     // If the user hasn't been here, randomize the experience
     // Otherwise, take them to the page they saw before
@@ -17,7 +17,7 @@ if (!isset($_GET['action'])) {
     }
     $LandingPage->recordHit($_COOKIE['visitor']);
     include __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
-} else {
+} else {*/
 
     define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
     include __DIR__.'/header.php';
@@ -521,4 +521,4 @@ if (isset($_GET['action']) && 'login' == $_GET['action']) {
 
 </body>
 </html>
-<?php }?>
+<?php /*}*/?>
