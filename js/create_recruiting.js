@@ -246,7 +246,7 @@ function uploadFile(file, fileName, img) {
 function deleteChildren(type) {
   var ids = getDeleted(type);
   ids.forEach(function(id){
-    var url = '/ajax/recruiting_token_'+type+'/delete/';
+    var url = '/ajax/recruiting_company_'+type+'/delete/';
     var params = {id: id};
     $.post(url, params, function(data, textStatus){
       if(data.status === "SUCCESS") {
@@ -280,14 +280,14 @@ function postSave(img, url, params) {
 function saveTokenImage(img, fileName) {
   img.data('file').name = fileName;
   var url = '/ajax/recruiting_company_image/save/';
-  var params = {recruiting_token_id: img.data('token_id'), file_name: fileName};
+  var params = {recruiting_company_id: img.data('token_id'), file_name: fileName};
   postSave(img, url, params);
 }
 
 function saveTokenVideo(img) {
   var url = '/ajax/recruiting_company_video/save/';
   var params = {
-    recruiting_token_id: img.data('token_id'),
+    recruiting_company_id: img.data('token_id'),
     url: img.data('url'),
     source: img.data('source'),
     source_id: img.attr('id')
