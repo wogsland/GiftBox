@@ -229,25 +229,6 @@ if (!isset($_GET['action'])) {
 
       <!-- SERVICE ICON -->
       <div class="service-icon">
-        <i class="icon_mail"></i>
-      </div>
-
-      <!-- SERVICE HEADING -->
-      <h3>Attachments</h3>
-
-      <!-- SERVICE DESCRIPTION -->
-      <p>
-         Add an offer letter or job details to complete the interaction.
-      </p>
-
-    </div>
-    <!-- /END SINGLE SERVICE -->
-
-    <!-- SINGLE SERVICE -->
-    <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-      <!-- SERVICE ICON -->
-      <div class="service-icon">
         <i class="icon_link"></i>
       </div>
 
@@ -261,32 +242,6 @@ if (!isset($_GET['action'])) {
 
     </div>
     <!-- /END SINGLE SERVICE -->
-
-    <!-- SINGLE SERVICE -->
-    <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-      <!-- SERVICE ICON -->
-      <div class="service-icon">
-        <i class="icon_gift"></i>
-      </div>
-
-      <!-- SERVICE HEADING -->
-      <h3>Wrapper</h3>
-
-      <!-- SERVICE DESCRIPTION -->
-      <p>
-         Utilize our interactive wrappers to invite the candidate into the recruiting experience.
-      </p>
-
-    </div>
-    <!-- /END SINGLE SERVICE -->
-
-
-  </div>
-  <!-- /END ROW -->
-
-  <!--Third Row -->
-  <div class="row">
 
     <!-- SINGLE SERVICE -->
     <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
