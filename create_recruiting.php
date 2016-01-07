@@ -441,7 +441,8 @@ require __DIR__.'/header.php';
                 $user_tokens = RecruitingToken::getUserTokens($_SESSION['user_id']);
                 $tokens = array();
                 foreach ($user_tokens as $token) {
-                    $tokens[$token->long_id] = $token->company." - ".$token->job_title;
+                    $tokenCompanyName = ''!=$token->company ? $token->company : 'Unnamed Company';
+                    $tokens[$token->long_id] = $tokenCompanyName." - ".$token->job_title;
                 }
                 paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
             ?>
