@@ -1,8 +1,9 @@
 <?php
 namespace GiveToken\Tests\Ajax\RecruitingToken;
 
+use \GiveToken\RecruitingCompany;
+use \GiveToken\RecruitingCompanyImage;
 use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingTokenImage;
 use \GiveToken\User;
 
 /**
@@ -34,21 +35,29 @@ extends \PHPUnit_Framework_TestCase
         $User->save();
         $this->User = $User;
 
+        // setup test company
+        $RecruitingCompany = new RecruitingCompany();
+        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->name = 'The '.rand().' Company';
+        $RecruitingCompany->save();
+        $this->RecruitingCompany = $RecruitingCompany;
+
         // setup test token
         $RecruitingToken = new RecruitingToken();
         $RecruitingToken->user_id = $this->User->getId();
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();
         $this->RecruitingToken = $RecruitingToken;
 
         // setup test images
-        $RecruitingTokenImage = new RecruitingTokenImage();
+        $RecruitingCompanyImage = new RecruitingCompanyImage();
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id[1] = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[1]);
-        $id[2] = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[2]);
-        $id[3] = $RecruitingTokenImage->create($this->RecruitingToken->id, $file_name[3]);
+        $id[1] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $id[2] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $id[3] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
 
         // test for created images
         $url = TEST_URL . "/ajax/recruiting_token/get_images/{$RecruitingToken->long_id}";

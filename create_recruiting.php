@@ -3,8 +3,8 @@ use \GiveToken\City;
 use \GiveToken\HTML;
 use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingTokenImage;
-use \GiveToken\RecruitingTokenVideo;
+use \GiveToken\RecruitingCompanyImage;
+use \GiveToken\RecruitingCompanyVideo;
 use \google\appengine\api\cloud_storage\CloudStorageTools;
 
 if (!logged_in()) {
@@ -14,8 +14,8 @@ if (!logged_in()) {
 if (isset($_GET['id'])) {
     $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
     $token_company = new RecruitingCompany($token->recruiting_company_id);
-    $token_images = RecruitingTokenImage::getTokenImages($token->id);
-    $token_videos = RecruitingTokenVideo::getTokenVideos($token->id);
+    $token_images = RecruitingCompanyImage::getTokenImages($token->id);
+    $token_videos = RecruitingCompanyVideo::getTokenVideos($token->id);
 } else {
     $token = new RecruitingToken();
     $token_company = new RecruitingCompany();

@@ -279,13 +279,13 @@ function postSave(img, url, params) {
 
 function saveTokenImage(img, fileName) {
   img.data('file').name = fileName;
-  var url = '/ajax/recruiting_token_image/save/';
+  var url = '/ajax/recruiting_company_image/save/';
   var params = {recruiting_token_id: img.data('token_id'), file_name: fileName};
   postSave(img, url, params);
 }
 
 function saveTokenVideo(img) {
-  var url = '/ajax/recruiting_token_video/save/';
+  var url = '/ajax/recruiting_company_video/save/';
   var params = {
     recruiting_token_id: img.data('token_id'),
     url: img.data('url'),

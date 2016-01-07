@@ -1,8 +1,9 @@
 <?php
 namespace GiveToken\Tests\Ajax\RecruitingToken;
 
+use \GiveToken\RecruitingCompany;
+use \GiveToken\RecruitingCompanyVideo;
 use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingTokenVideo;
 use \GiveToken\User;
 
 /**
@@ -34,22 +35,30 @@ extends \PHPUnit_Framework_TestCase
         $User->save();
         $this->User = $User;
 
+        // setup test company
+        $RecruitingCompany = new RecruitingCompany();
+        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->name = 'The '.rand().' Company';
+        $RecruitingCompany->save();
+        $this->RecruitingCompany = $RecruitingCompany;
+
         // setup test token
         $RecruitingToken = new RecruitingToken();
         $RecruitingToken->user_id = $this->User->getId();
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();
         $this->RecruitingToken = $RecruitingToken;
 
         // setup test images
-        $RecruitingTokenVideo = new RecruitingTokenVideo();
+        $RecruitingCompanyVideo = new RecruitingCompanyVideo();
         $source = 'vimeo';
         $source_id[1] = rand();
         $source_id[2] = rand();
         $source_id[3] = rand();
-        $id[1] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[1]);
-        $id[2] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[2]);
-        $id[3] = $RecruitingTokenVideo->create($this->RecruitingToken->id, $source, $source_id[3]);
+        $id[1] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
+        $id[2] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
+        $id[3] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
 
         // test for created images
         $url = TEST_URL . "/ajax/recruiting_token/get_videos/{$RecruitingToken->long_id}";
