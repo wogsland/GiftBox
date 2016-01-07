@@ -1,6 +1,7 @@
 <?php
 namespace GiveToken\Tests;
 
+use \GiveToken\RecruitingCompany;
 use \GiveToken\RecruitingToken;
 use \GiveToken\User;
 
@@ -81,5 +82,35 @@ extends \PHPUnit_Framework_TestCase
         // Test function without param
         $RecruitingToken2->long_id = $RecruitingToken->long_id;
         $this->assertFalse($RecruitingToken2->uniqueLongId());
+    }
+
+    /**
+     * Tests the getUserCompanies function.
+     */
+    public function testGetUserCompanies()
+    {
+        // create some companies fo rthe user
+        $co1 = new RecruitingCompany();
+        $co1->name = 'Company '.rand();
+        $co1->user_id = $this->User->getId();
+        $co1->save();
+        $co2 = new RecruitingCompany();
+        $co2->name = 'Company '.rand();
+        $co2->user_id = $this->User->getId();
+        $co2->save();
+        $co3 = new RecruitingCompany();
+        $co3->name = 'Company '.rand();
+        $co3->user_id = $this->User->getId();
+        $co3->save();
+
+        $companies = RecruitingToken::getUserCompanies($this->User->getId());
+        //print_r($companies);
+        $this->assertEquals(3, count($companies));
+        $this->assertEquals($companies[0]['id'], $co1->id);
+        $this->assertEquals($companies[0]['name'], $co1->name);
+        $this->assertEquals($companies[1]['id'], $co2->id);
+        $this->assertEquals($companies[1]['name'], $co2->name);
+        $this->assertEquals($companies[2]['id'], $co3->id);
+        $this->assertEquals($companies[2]['name'], $co3->name);
     }
 }

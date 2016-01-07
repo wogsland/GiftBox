@@ -48,6 +48,20 @@ class RecruitingToken
         return $user_tokens;
     }
 
+    /**
+     * Gets information about recruiting companies owned by the user specified
+     *
+     * @param int $user_id - the user whose companies are being returned
+     */
+    public static function getUserCompanies($user_id)
+    {
+        $query = "SELECT id, `name`
+                  FROM recruiting_company
+                  WHERE user_id = '$user_id'";
+        $results = execute_query($query);
+        return $results->fetch_all(MYSQL_ASSOC);
+    }
+
     public function init($post)
     {
         foreach (get_object_vars($post) as $key => $value) {
