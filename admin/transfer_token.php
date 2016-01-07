@@ -6,10 +6,18 @@ if (!logged_in() || !is_admin()) {
 }
 
 // Get User list to choose from
-$users = execute_query(
+$from_users = execute_query(
     "SELECT user.id, user.first_name, user.last_name, user.email_address
      FROM user
      JOIN recruiting_token on user.id = recruiting_token.user_id
+     GROUP BY user.id
+     ORDER BY user.last_name, user.first_name, user.email_address"
+)->fetch_all(MYSQLI_ASSOC);
+
+// Get User list to choose to transfer to
+$to_users = execute_query(
+    "SELECT user.id, user.first_name, user.last_name, user.email_address
+     FROM user
      GROUP BY user.id
      ORDER BY user.last_name, user.first_name, user.email_address"
 )->fetch_all(MYSQLI_ASSOC);
@@ -39,7 +47,7 @@ body {
             Current Owner
           </label>
           <select class="form-control" name="old_user_id" required>
-            <?php foreach ($users as $user) {
+            <?php foreach ($from_users as $user) {
                 echo "<option value=\"{$user['id']}\">";
                 echo "{$user['first_name']} {$user['last_name']}";
                 echo " ({$user['email_address']})";
@@ -58,7 +66,7 @@ body {
             New Owner
           </label>
           <select class="form-control" name="new_user_id" required>
-            <?php foreach ($users as $user) {
+            <?php foreach ($to_users as $user) {
                 echo "<option value=\"{$user['id']}\">";
                 echo "{$user['first_name']} {$user['last_name']}";
                 echo " ({$user['email_address']})";
