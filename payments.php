@@ -23,7 +23,7 @@ require __DIR__.'/header.php';
   <div class="row" id="datatable-div">
     <div class="col-sm-offset-2 col-sm-8">
       <h2>Payments</h2>
-      <?php if (isset($_SESSION['stripe_id'])) { ?>
+        <?php if (isset($_SESSION['stripe_id'])) { ?>
         <table id="responsive-table" class="table table-striped table-hover">
           <thead>
             <th>Payment</th>
@@ -37,10 +37,10 @@ require __DIR__.'/header.php';
             Stripe::setApiKey($stripe_secret_key);
             $success = 'true';
             $data = Charge::all(array('customer'=>$_SESSION['stripe_id']));
-            $payments = json_decode(ltrim($data,'Stripe\Collection JSON: '))->data;
+            $payments = json_decode(ltrim($data, 'Stripe\Collection JSON: '))->data;
             foreach ($payments as $payment) {
                 echo '<tr>';
-                echo "<td>$".money_format('%i',$payment->amount/100)."</td>";
+                echo "<td>$".money_format('%i', $payment->amount/100)."</td>";
                 echo "<td>{$payment->status}</td>";
                 echo "<td>{$payment->source->brand} ending in {$payment->source->last4}</td>";
                 echo "<td><a href=\"/invoice?id={$payment->invoice}\" target=_blank>invoice details</a></td>";
@@ -49,12 +49,12 @@ require __DIR__.'/header.php';
             }?>
           </tbody>
         </table>
-      <?php } else { ?>
+        <?php } else { ?>
         No payments yet.
-      <?php }?>
+        <?php }?>
     </div>
   </div>
-  <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
   <script type="text/javascript" src="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.js"></script>
   <script>
   $(document).ready(function() {

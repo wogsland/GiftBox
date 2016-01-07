@@ -15,7 +15,8 @@ if ($id != '') {
     if (isset($token->id)) {
         $success = 'true';
         if (isset($token->recruiting_company_id)
-        && (int) $token->recruiting_company_id == $token->recruiting_company_id) {
+            && (int) $token->recruiting_company_id == $token->recruiting_company_id
+        ) {
             $company = new RecruitingCompany($token->recruiting_company_id);
             if (isset($company->id)) {
                 $data = get_object_vars($token);
@@ -30,10 +31,10 @@ if ($id != '') {
                 $data['company_pinterest'] = $company->pinterest;
                 $data = (object) $data;
             } else {
-              $data = $token;
+                $data = $token;
             }
         } else {
-          $data = $token;
+            $data = $token;
         }
         if (!logged_in()) {
             $UserMilestone = new UserMilestone($token->user_id, 'Token View By Non-User');

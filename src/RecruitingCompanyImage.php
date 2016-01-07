@@ -35,7 +35,8 @@ class RecruitingCompanyImage
             "SELECT recruiting_company_image.id, recruiting_company_image.file_name
             FROM recruiting_company_image, recruiting_token
             WHERE recruiting_token.id = $recruiting_token_id
-            AND recruiting_company_image.recruiting_company_id =  recruiting_token.recruiting_company_id");
+            AND recruiting_company_image.recruiting_company_id =  recruiting_token.recruiting_company_id"
+        );
         $token_images = array();
         while($token_image = $results->fetch_object()) {
             $token_images[count($token_images)] = $token_image;
@@ -74,7 +75,7 @@ class RecruitingCompanyImage
      * This function creates an entry in the recruiting_company_image table
      *
      * @param int    $recruiting_company_id - id of the company
-     * @param string $file_name           - name of image file
+     * @param string $file_name             - name of image file
      *
      * @return int $id - id of inserted row or 0 on fail
      */

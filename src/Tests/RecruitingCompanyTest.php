@@ -138,7 +138,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests the save function when an update is required.
      *
-     * @param RecruitingCompany $RecruitingCompany - an existing company
+     * @param   RecruitingCompany $RecruitingCompany - an existing company
      * @depends testSaveInsert
      */
     public function testSaveUpdate(RecruitingCompany $RecruitingCompany)

@@ -40,7 +40,7 @@ require __DIR__.'/header.php';
     Upgrade <i class="fa fa-chevron-right"></i>
   </button>
 
-  <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
   <!-- =========================
        PAGE SPECIFIC SCRIPTS
   ============================== -->

@@ -15,7 +15,7 @@ class UserMilestone
      * This function constructs the class from a valid user_id & milestone.
      * Fails silently for invalid input.
      *
-     * @param int $user_id - id of the user acheiving the milestone
+     * @param int   $user_id   - id of the user acheiving the milestone
      * @param mixed $milestone - name or id of milestone
      */
     public function __construct($user_id, $milestone)
@@ -63,7 +63,7 @@ class UserMilestone
                     $milestoneLogger->pushHandler($slackHandler);
                     $milestoneLogger->log(200, "{$User->email_address} achieved the *{$Milestone->name}* milestone.");
                 } catch (Exception $e) {
-                  //silent fail
+                    //silent fail
                 }
             }
         }

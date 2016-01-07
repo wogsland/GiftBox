@@ -9,18 +9,18 @@ if (!isset($_GET['action'])) {
     // If the user hasn't been here, randomize the experience
     // Otherwise, take them to the page they saw before
     if (!isset($_SESSION['landing_page'], $_SESSION['landing_page']['script'], $_SESSION['landing_page']['id'])) {
-      $LandingPage = new LandingPage();
-      $_SESSION['landing_page']['script'] = $LandingPage->script;
-      $_SESSION['landing_page']['id'] = $LandingPage->id;
+        $LandingPage = new LandingPage();
+        $_SESSION['landing_page']['script'] = $LandingPage->script;
+        $_SESSION['landing_page']['id'] = $LandingPage->id;
     } else {
-      $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
+        $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
     }
     $LandingPage->recordHit($_COOKIE['visitor']);
-    require __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
+    include __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
 } else {
 
-define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
-require __DIR__.'/header.php';
+    define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
+    include __DIR__.'/header.php';
 ?>
 
 <script>
@@ -54,7 +54,7 @@ require __DIR__.'/header.php';
 <!-- SOLID COLOR BG -->
 <div class="deep-dark-bg" style="min-height:500px;">
 
-    <?php require __DIR__.'/navbar.php';?>
+    <?php include __DIR__.'/navbar.php';?>
 
   <!-- CONTAINER -->
   <div class="container">
@@ -501,7 +501,7 @@ require __DIR__.'/header.php';
 </div>
 <!-- /END CONTAINER -->
 
-<?php require __DIR__.'/footer.php';?>
+<?php include __DIR__.'/footer.php';?>
 
 <!-- =========================
     PAGE SPECIFIC SCRIPTS
@@ -514,7 +514,7 @@ $(document).ready(function(){
 });
 <?php
 if (isset($_GET['action']) && 'login' == $_GET['action']) {
-  echo '$("#login-dialog").modal();';
+    echo '$("#login-dialog").modal();';
 }
 ?>
 </script>

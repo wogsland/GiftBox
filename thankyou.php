@@ -2,9 +2,9 @@
 use \GiveToken\User;
 
 if (isset($_GET['signup'])) {
-  $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
+    $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
 } else {
-  $message = 'Thank you for being awesome.<br/>';
+    $message = 'Thank you for being awesome.<br/>';
 }
 
 define('TITLE', 'GiveToken.com - Thank You!');

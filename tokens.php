@@ -28,23 +28,23 @@ require __DIR__.'/header.php';
           <th>Repsonses</th>
         </thead>
         <tbody>
-          <?php
-          $responses = RecruitingToken::getUserTokens($_SESSION['user_id']);
-          foreach ($responses as $response) {
-              echo '<tr>';
-              echo "<td align=left>";
-              echo "<a href=\"/create_recruiting?id={$response->long_id}\">{$response->job_title}</a>";
-              echo " (<a href=\"/token/recruiting/{$response->long_id}\">Preview</a>)";
-              echo "</td>";
-              echo "<td>".date('m/d/Y g:i a', strtotime($response->created))."</td>";
-              echo "<td><a href=\"/token_responses?id={$response->long_id}\">responses</a></td>";
-              echo '</tr>';
-          }?>
+            <?php
+            $responses = RecruitingToken::getUserTokens($_SESSION['user_id']);
+            foreach ($responses as $response) {
+                echo '<tr>';
+                echo "<td align=left>";
+                echo "<a href=\"/create_recruiting?id={$response->long_id}\">{$response->job_title}</a>";
+                echo " (<a href=\"/token/recruiting/{$response->long_id}\">Preview</a>)";
+                echo "</td>";
+                echo "<td>".date('m/d/Y g:i a', strtotime($response->created))."</td>";
+                echo "<td><a href=\"/token_responses?id={$response->long_id}\">responses</a></td>";
+                echo '</tr>';
+            }?>
         </tbody>
       </table>
     </div>
   </div>
-  <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
   <script type="text/javascript" src="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.js"></script>
   <script>
   $(document).ready(function() {

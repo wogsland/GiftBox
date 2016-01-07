@@ -35,7 +35,8 @@ class RecruitingCompanyVideo
             "SELECT recruiting_company_video.id, recruiting_company_video.`source`, recruiting_company_video.source_id
             FROM recruiting_company_video, recruiting_token
             WHERE recruiting_token.id = $recruiting_token_id
-            AND recruiting_company_video.recruiting_company_id =  recruiting_token.recruiting_company_id");
+            AND recruiting_company_video.recruiting_company_id =  recruiting_token.recruiting_company_id"
+        );
         $token_videos = array();
         while($token_video = $results->fetch_object()) {
             $token_videos[count($token_videos)] = $token_video;
@@ -74,8 +75,8 @@ class RecruitingCompanyVideo
      * This function creates an entry in the recruiting_company_video table
      *
      * @param int    $recruiting_company_id - id of the token
-     * @param string $source              - youtube or vimeo
-     * @param string $source_id           - video id from their site
+     * @param string $source                - youtube or vimeo
+     * @param string $source_id             - video id from their site
      *
      * @return int - id of inserted row or 0 on fail
      */
