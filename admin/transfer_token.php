@@ -47,6 +47,7 @@ body {
             Current Owner
           </label>
           <select class="form-control" name="old_user_id" required>
+            <option id="please-select">Please select a user</option>
             <?php foreach ($from_users as $user) {
                 echo "<option value=\"{$user['id']}\">";
                 echo "{$user['first_name']} {$user['last_name']}";
@@ -83,20 +84,20 @@ body {
   <?php require __DIR__.'/../footer.php';?>
   <script>
   $(document).ready(function(){
+    $('#submit-transfer-token').hide();
+
     // Get token list to choose from
     $('#old-user-id').on('change', function() {
+      $('#please-select').remove();
       $('#token-id').show();
-      console.log($('#token-id select').attr('name'));
-      console.log($('#old-user-id select').val());
       $('#new-user-id').show();
+      $('#submit-transfer-token').show();
       $.post(
         '/ajax/user/get_recruiting_tokens/'+$('#old-user-id select').val(),
         {},
         function (data) {
-          console.log(data);
           html = '';
           $.each(data.data, function (key, value) {
-            console.log(value);
             html += '<option value="'+value.long_id+'">';
             html += value.jobtitle+' ('+value.long_id+')';
             html +='</option>';
