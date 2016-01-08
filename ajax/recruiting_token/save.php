@@ -69,6 +69,7 @@ if (isset($_SESSION['user_id'])) {
         $response['id'] = $token->id;
         $response['long_id'] = $token->long_id;
         $response['user_id'] = $token->user_id;
+        $response['recruiting_company_id'] = $RecruitingCompany->id;
         $UserMilestone = new UserMilestone($user_id, 'Create Token');
     } catch (Exception $e) {
         error_log($e->getMessage());

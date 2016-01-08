@@ -280,14 +280,14 @@ function postSave(img, url, params) {
 function saveTokenImage(img, fileName) {
   img.data('file').name = fileName;
   var url = '/ajax/recruiting_company_image/save/';
-  var params = {recruiting_company_id: img.data('token_id'), file_name: fileName};
+  var params = {recruiting_company_id: img.data('recruiting_company_id'), file_name: fileName};
   postSave(img, url, params);
 }
 
 function saveTokenVideo(img) {
   var url = '/ajax/recruiting_company_video/save/';
   var params = {
-    recruiting_company_id: img.data('token_id'),
+    recruiting_company_id: img.data('recruiting_company_id'),
     url: img.data('url'),
     source: img.data('source'),
     source_id: img.attr('id')
@@ -334,10 +334,12 @@ function saveRecruitingToken(preview) {
     serializedForm = document.getElementById("recruiting-token-form").serialize();
     $.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
       if(data.status === "SUCCESS") {
+        console.log(data)
         $("#id").val(data.id);
         $("#long-id").val(data.long_id);
         var userId = data.user_id;
         var tokenId = data.id;
+        var companyId = data.recruiting_company_id;
 
         if (tokenId && userId) {
           if ($('#company-images').length) {
@@ -345,6 +347,7 @@ function saveRecruitingToken(preview) {
             $('.recruiting-token-image').each(function() {
               var img = $(this);
               img.data('token_id', tokenId);
+              img.data('recruiting_company_id', companyId);
               if (!img.data('saved')) {
                 var file = img.data("file");
                 var fileName = userId+'_'+tokenId+'_'+Date.now()+'_'+file.name;
@@ -362,6 +365,7 @@ function saveRecruitingToken(preview) {
             $('.recruiting-token-video').each(function() {
               var img = $(this);
               img.data('token_id', tokenId);
+              img.data('recruiting_company_id', companyId);
               if (!img.data('saved')) {
                 saveTokenVideo(img);
               }
