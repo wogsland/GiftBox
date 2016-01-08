@@ -1,6 +1,7 @@
 <?php
-use GiveToken\RecruitingToken;
+use GiveToken\RecruitingCompany;
 use GiveToken\RecruitingCompanyVideo;
+use GiveToken\RecruitingToken;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
