@@ -1,4 +1,8 @@
 <?php
+if (strpos($_SERVER['SERVER_NAME'], 'gosizzle.io')) {
+  echo 'This page is under construction.';die;
+}
+
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/../config.php';
 
