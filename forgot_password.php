@@ -34,7 +34,7 @@ require __DIR__.'/header.php';
     </form>
   </div>
 
-  <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
   <script>
   $(document).ready(function(){
     $('#lost-password-form').submit(function(e) {

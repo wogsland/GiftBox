@@ -39,7 +39,7 @@ class User
     /**
      * Fetches a user object by email or reset code
      *
-     * @param string $value - the value of the key
+     * @param string                                      $value - the value of the key
      * @param string key    - email_address or reset_code
      *
      * @param User - the corresponding object
@@ -48,13 +48,13 @@ class User
     {
         $user = null;
         switch ($key) {
-            case 'email_address':
+        case 'email_address':
             $condition = "upper(email_address) = '".strtoupper($value)."'";
             break;
-            case 'reset_code':
+        case 'reset_code':
             $condition = "reset_code = '$value'";
             break;
-            default:
+        default:
             return $user;
         }
         $result = execute_query(

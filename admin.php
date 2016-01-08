@@ -16,6 +16,9 @@ require __DIR__.'/header.php';
     <nav id="create-top-nav">
       <ul>
         <li>
+          <a href="/admin/stalled_new_customers">Stalled New Customers</a>
+        </li>
+        <li>
           <a href="/admin/top_ten">*** Top Ten Tokens ***</a>
         </li>
         <li>
@@ -25,17 +28,20 @@ require __DIR__.'/header.php';
           <a href="/admin/visitors">Website Vistors</a>
         </li>
         <li>
-          <a href="/admin/add_city">Add Recruiting Token City</a>
+          <a href="/admin/transfer_token">Transfer Recruiting Token Ownership</a>
         </li>
         <li>
+          <a href="/admin/add_city">Add Recruiting Token City</a>
+        </li>
+        <?php /*<li>
           <a href="manage_users.php">Manage Users</a>
         </li>
         <li>
           <a href="manage_groups.php">Manage Groups</a>
-        </li>
+        </li>*/?>
       </ul>
     </nav>
   </div>
-  <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/footer.php';?>
 </body>
 </html>

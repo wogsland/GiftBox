@@ -105,7 +105,7 @@ body {
   height: 200px;
   width: 660px;
 }
-#open-dialog {
+#open-dialog, #use-existing-company-dialog {
   height: 220px;
   width: 650px;
 }

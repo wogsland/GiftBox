@@ -32,9 +32,9 @@ try {
         $user->password = password_hash($user->password, PASSWORD_DEFAULT);
     }
 
-    if(is_array($user->social)) {
+    if (is_array($user->social)) {
         $social = new Social(null);
-        foreach ($user->social as $category){
+        foreach ($user->social as $category) {
             $social->network = $category["name"];
             $social->user_id = $user_id;
             $social->url = $category["url"];

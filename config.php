@@ -1,5 +1,10 @@
 <?php
-define('VERSION', '1.8.0');
+use Monolog\ErrorHandler;
+use Monolog\Handler\SlackHandler;
+use Monolog\Logger;
+
+// set relesae version
+define('VERSION', '1.9.0');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
@@ -9,6 +14,7 @@ require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
 //load functions
 require_once __DIR__.'/util.php';
 
+// Determine environment & fix URL as needed
 $server = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
 if ('givetoken.com' == strtolower($server)
     || 'stone-timing-557.appspot.com' == strtolower($server)
@@ -19,6 +25,23 @@ if ('givetoken.com' == strtolower($server)
 if (!defined('DEVELOPMENT')) {
     define('DEVELOPMENT', ('www.givetoken.com' != $server));
 }
+
+// setup Monolog error handler to report to Slack
+if (!defined('SLACK_TOKEN')) {
+    define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
+}
+$logger = new Logger('bugs');
+if (DEVELOPMENT) {
+    $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
+} else {
+    $name = 'Web Application: '.$_SERVER['REQUEST_URI'];
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs', $name, false);
+}
+$slackHandler->setLevel(Logger::DEBUG);
+$logger->pushHandler($slackHandler);
+ErrorHandler::register($logger);
+
 $google_app_engine = false;
 $prefix = "http://";
 $app_root = "/";

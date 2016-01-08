@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\RecruitingTokenImage;
+use \GiveToken\RecruitingCompanyImage;
 
 // collect id
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
@@ -7,8 +7,8 @@ $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
 $success = 'false';
 $data = '';
 if ($id != '') {
-    $RecruitingTokenImage = new RecruitingTokenImage();
-    $images = $RecruitingTokenImage->getByRecruitingTokenLongId($id);
+    $RecruitingCompanyImage = new RecruitingCompanyImage();
+    $images = $RecruitingCompanyImage->getByRecruitingTokenLongId($id);
     if (!empty($images)) {
         $success = 'true';
         $data = $images;

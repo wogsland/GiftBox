@@ -1,17 +1,17 @@
 <?php
-use GiveToken\RecruitingTokenImage;
+use GiveToken\RecruitingCompanyImage;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    if (isset($_POST['recruiting_token_id']) && isset($_POST['file_name'])) {
-        $recruiting_token_id = $_POST['recruiting_token_id'];
-        $file_name = $_POST['file_name'];
+    if (isset($_POST['recruiting_company_id']) && isset($_POST['file_name'])) {
+        $recruiting_company_id = (int) $_POST['recruiting_company_id'];
+        $file_name = escape_string($_POST['file_name']);
         try {
             // Save the token image
-            $recruiting_token_image = new RecruitingTokenImage();
-            $id = $recruiting_token_image->create($recruiting_token_id, $file_name);
+            $recruiting_company_image = new RecruitingCompanyImage();
+            $id = $recruiting_company_image->create($recruiting_company_id, $file_name);
             $response['status'] = "SUCCESS";
-            $response['id'] = $recruiting_token_image->id;
+            $response['id'] = $recruiting_company_image->id;
 
         } catch (Exception $e) {
             error_log($e->getMessage());

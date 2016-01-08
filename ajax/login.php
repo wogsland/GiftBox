@@ -1,6 +1,7 @@
 <?php
-use \GiveToken\User;
 use \GiveToken\EventLogger;
+use \GiveToken\UserMilestone;
+use \GiveToken\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -23,7 +24,7 @@ if (User::exists($email)) {
     $expires = isset($user->active_until) ? $user->active_until : date('Y-m-d');
     $DateTime1 = new \DateTime($expires);
     $DateTime2 = new \DateTime(date('Y-m-d'));
-    if(0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
+    if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
         if ($login_type == 'FACEBOOK') {
             $event_type = EventLogger::LOGIN_USING_FACEBOOK;
             $response['status'] = 'SUCCESS';
@@ -55,6 +56,7 @@ if (User::exists($email)) {
             $_SESSION['stripe_id'] = $user->stripe_id;
             $event = new EventLogger($user->getId(), $event_type);
             $event->log();
+            $UserMilestone = new UserMilestone($user->getId(), 'Log In');
         }
     } else {
         $response['status'] = "ERROR";

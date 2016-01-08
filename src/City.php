@@ -88,26 +88,26 @@ class City extends DatabaseEntity
      */
     protected function insert()
     {
-      $success = true;
+        $success = true;
 
-      // check for required columns
-      foreach (get_object_vars($this) as $key => $value) {
-          if (!in_array($key, $this->readOnly)) {
-              $success = $success && isset($value);
-          }
-      }
-      if ($success) {
-          parent::insert();
-          if ($success = $success && ((int) $this->id > 0)) {
-              $sql = "SELECT created
+        // check for required columns
+        foreach (get_object_vars($this) as $key => $value) {
+            if (!in_array($key, $this->readOnly)) {
+                $success = $success && isset($value);
+            }
+        }
+        if ($success) {
+            parent::insert();
+            if ($success = $success && ((int) $this->id > 0)) {
+                $sql = "SELECT created
                       FROM {$this->tableName()}
                       WHERE id = $this->id";
-              $this->created = execute_query($sql)->fetch_object()->created;
-          }
-      }
+                $this->created = execute_query($sql)->fetch_object()->created;
+            }
+        }
 
-      // return results
-      return $success;
+        // return results
+        return $success;
     }
 
     /**

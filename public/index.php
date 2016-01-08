@@ -46,8 +46,14 @@ if (!isset($endpoint_parts[1])) {
                 case 'add_city':
                 include __DIR__.'/../admin/add_city.php';
                 break;
+                case 'stalled_new_customers':
+                include __DIR__.'/../admin/stalled_new_customers.php';
+                break;
                 case 'top_ten':
                 include __DIR__.'/../admin/top_ten.php';
+                break;
+                case 'transfer_token':
+                include __DIR__.'/../admin/transfer_token.php';
                 break;
                 case 'visitors':
                 include __DIR__.'/../admin/visitors.php';
@@ -115,6 +121,9 @@ if (!isset($endpoint_parts[1])) {
         break;
         case 'privacy':
         include __DIR__.'/../privacypolicy.php';
+        break;
+        case 'recruiting_made_easy':
+        include __DIR__.'/../lp/bc1.php';
         break;
         case 'terms':
         include __DIR__.'/../termsservice.php';

@@ -1,7 +1,9 @@
 <?php
 use \GiveToken\EventLogger;
+use \GiveToken\UserMilestone;
 use \GiveToken\User;
 
+date_default_timezone_set('America/Chicago');
 require_once __DIR__.'/../mail.php';
 
 $event = null;
@@ -22,9 +24,9 @@ if (isset($_POST['signup_password'])) {
 $user->level = 1;
 $types = ['EMAIL', 'FACEBOOK'];
 if (isset($_POST['reg_type']) && in_array($_POST['reg_type'], $types)) {
-  $reg_type = $_POST['reg_type'];
+    $reg_type = $_POST['reg_type'];
 } else {
-  $reg_type = 'EMAIL';
+    $reg_type = 'EMAIL';
 }
 
 // Make sure the email address is available:
@@ -55,6 +57,7 @@ if (User::exists($user->email_address)) {
     }
     $response['status'] = "SUCCESS";
     $response['message'] = "{$user->email_address} successsfully registered.";
+    $UserMilestone = new UserMilestone($user->getId(), 'Signup');
 }
 
 header('Content-Type: application/json');

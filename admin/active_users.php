@@ -31,24 +31,24 @@ body {
           <th>Last Access</th>
         </thead>
         <tbody>
-          <?php
-          $sql = "SELECT user.id, user.email_address, user.first_name, user.last_name, MAX(web_request.created) AS last_access
+            <?php
+            $sql = "SELECT user.id, user.email_address, user.first_name, user.last_name, MAX(web_request.created) AS last_access
                   FROM user, web_request
                   WHERE user.id = web_request.user_id
                   GROUP BY user.id, user.email_address
                   ORDER BY last_access DESC";
-          $results = execute_query($sql);
-          $rows = array();
-          while ($row = $results->fetch_assoc()) { ?>
-              <tr>
-                <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
-                <td><?php echo $row['last_access'];?></td>
-              </tr>
-          <?php }?>
+            $results = execute_query($sql);
+            $rows = array();
+            while ($row = $results->fetch_assoc()) { ?>
+                <tr>
+                  <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
+                  <td><?php echo $row['last_access'];?></td>
+                </tr>
+            <?php }?>
         </tbody>
       </table>
     </div>
   </div>
-  <?php require __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<?php
+use \GiveToken\UserMilestone;
+
+if (!logged_in() || !is_admin()) {
+    header('Location: '.$app_root);
+}
+
+define('TITLE', 'GiveToken.com - Stalled Customers');
+require __DIR__.'/../header.php';
+?>
+<style>
+body {
+  background-color: white;
+}
+#customers {
+  margin-top: 100px;
+  color: black;
+}
+</style>
+</head>
+<body id="visitors">
+  <div>
+    <?php require __DIR__.'/../navbar.php';?>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6" id="customers">
+      <h2>Stalled New Customers</h2>
+      <table class="table table-striped table-hover">
+        <thead>
+          <th>Customer</th>
+          <th>Last Activity</th>
+          <th>Milestones Achieved</th>
+        </thead>
+        <tbody>
+            <?php
+            foreach (UserMilestone::stalledCustomers() as $customer) { ?>
+                <tr>
+                  <td align="left">
+                    <?php
+                    echo "{$customer['first_name']} {$customer['last_name']}";
+                    echo " (<a href=\"mailto:{$customer['email_address']}\">{$customer['email_address']}</a>)";
+                    ?>
+                  </td>
+                  <td><?php echo $customer['last_active'];?></td>
+                  <td><?php echo $customer['milestones'];?></td>
+                </tr>
+            <?php }?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <?php require __DIR__.'/../footer.php';?>
+</body>
+</html>

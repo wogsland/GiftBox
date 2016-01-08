@@ -1,12 +1,13 @@
 <?php
 namespace GiveToken;
 
-class RecruitingTokenVideo
+class RecruitingCompanyVideo
 {
     protected $id;
-    protected $recruiting_token_id;
+    protected $recruiting_company_id;
     protected $source;
     protected $source_id;
+    protected $created;
 
     /**
      * Constructs the class
@@ -17,9 +18,9 @@ class RecruitingTokenVideo
     {
         if ($id !== null && strlen($id) > 0) {
             $result = execute_query(
-                "SELECT * from recruiting_token_video
+                "SELECT * from recruiting_company_video
                 WHERE id = '$id'"
-            )->fetch_object("GiveToken\RecruitingTokenVideo");
+            )->fetch_object("GiveToken\RecruitingCompanyVideo");
             if (isset($result)) {
                 foreach (get_object_vars($result) as $key => $value) {
                     $this->$key = $value;
@@ -30,7 +31,12 @@ class RecruitingTokenVideo
 
     public static function getTokenVideos($recruiting_token_id)
     {
-        $results =  execute_query("SELECT * FROM recruiting_token_video where recruiting_token_id = $recruiting_token_id");
+        $results =  execute_query(
+            "SELECT recruiting_company_video.id, recruiting_company_video.`source`, recruiting_company_video.source_id
+            FROM recruiting_company_video, recruiting_token
+            WHERE recruiting_token.id = $recruiting_token_id
+            AND recruiting_company_video.recruiting_company_id =  recruiting_token.recruiting_company_id"
+        );
         $token_videos = array();
         while($token_video = $results->fetch_object()) {
             $token_videos[count($token_videos)] = $token_video;
@@ -66,22 +72,22 @@ class RecruitingTokenVideo
     }
 
     /**
-     * This function creates an entry in the recruiting_token_video table
+     * This function creates an entry in the recruiting_company_video table
      *
-     * @param int    $recruiting_token_id - id of the token
-     * @param string $source              - youtube or vimeo
-     * @param string $source_id           - video id from their site
+     * @param int    $recruiting_company_id - id of the token
+     * @param string $source                - youtube or vimeo
+     * @param string $source_id             - video id from their site
      *
      * @return int - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $source, $source_id)
+    public function create($recruiting_company_id, $source, $source_id)
     {
-        $query = "INSERT INTO recruiting_token_video (recruiting_token_id, source, source_id)
-                  VALUES ('$recruiting_token_id', '$source', '$source_id')";
+        $query = "INSERT INTO recruiting_company_video (recruiting_company_id, source, source_id)
+                  VALUES ('$recruiting_company_id', '$source', '$source_id')";
         $id = insert($query);
         if ($id > 0) {
             $this->id = $id;
-            $this->recruiting_token_id = $recruiting_token_id;
+            $this->recruiting_company_id = $recruiting_company_id;
             $this->source = $source;
             $this->source_id = $source_id;
         }
@@ -89,7 +95,7 @@ class RecruitingTokenVideo
     }
 
     /**
-     * This function gets information from the recruiting_token_video table
+     * This function gets information from the recruiting_company_video table
      *
      * @param int $long_id - long id of the token to get images for
      *
@@ -98,11 +104,11 @@ class RecruitingTokenVideo
     public function getByRecruitingTokenLongId($long_id)
     {
         $return = array();
-        $query = "SELECT recruiting_token_video.id,
-                  recruiting_token_video.source,
-                  recruiting_token_video.source_id
-                  FROM recruiting_token_video, recruiting_token
-                  WHERE recruiting_token_video.recruiting_token_id = recruiting_token.id
+        $query = "SELECT recruiting_company_video.id,
+                  recruiting_company_video.source,
+                  recruiting_company_video.source_id
+                  FROM recruiting_company_video, recruiting_token
+                  WHERE recruiting_company_video.recruiting_company_id = recruiting_token.recruiting_company_id
                   AND recruiting_token.long_id = '$long_id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
@@ -120,7 +126,7 @@ class RecruitingTokenVideo
     {
         $success = false;
         if (isset($this->id)) {
-            $sql = "DELETE FROM recruiting_token_video WHERE id = {$this->id}";
+            $sql = "DELETE FROM recruiting_company_video WHERE id = {$this->id}";
             execute($sql);
             $vars = get_class_vars(get_class($this));
             foreach ($vars as $key=>$value) {

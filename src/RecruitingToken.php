@@ -12,17 +12,7 @@ class RecruitingToken
     public $skills_required;
     public $responsibilities;
     public $perks;
-    public $company;
-    public $company_logo;
-    public $company_tagline;
-    public $company_website;
-    public $company_values;
-    public $company_size;
-    public $company_facebook;
-    public $company_linkedin;
-    public $company_youtube;
-    public $company_twitter;
-    public $company_google_plus;
+    public $recruiting_company_id;
 
     /**
      * This function constructs the class
@@ -49,13 +39,32 @@ class RecruitingToken
 
     public static function getUserTokens($user_id)
     {
-        $results =  execute_query("SELECT * FROM recruiting_token where user_id = '$user_id' ORDER BY company, job_title");
+        $results =  execute_query(
+            "SELECT recruiting_token.*, COALESCE(recruiting_company.`name`, 'Unnamed Company') as company
+            FROM recruiting_token
+            LEFT JOIN recruiting_company ON recruiting_company.id = recruiting_company_id
+            WHERE recruiting_token.user_id = '$user_id'
+            ORDER BY company, job_title");
         $user_tokens = array();
         while($token = $results->fetch_object()) {
             $user_tokens[count($user_tokens)] = $token;
         }
         $results->free();
         return $user_tokens;
+    }
+
+    /**
+     * Gets information about recruiting companies owned by the user specified
+     *
+     * @param int $user_id - the user whose companies are being returned
+     */
+    public static function getUserCompanies($user_id)
+    {
+        $query = "SELECT id, `name`
+                  FROM recruiting_company
+                  WHERE user_id = '$user_id'";
+        $results = execute_query($query);
+        return $results->fetch_all(MYSQL_ASSOC);
     }
 
     public function init($post)

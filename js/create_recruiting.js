@@ -184,6 +184,7 @@ function removeImageById(imageId) {
  * @param {String} parentId The HTML id of the tag to plave the thumbnail in
  */
 function createThumbnail(object, parentId) {
+  $('#'+parentId).removeAttr('hidden');
   var container = $('<div>');
   var inner = $('<div>');
   var button = $('<paper-button raised class="remove-button">REMOVE</paper-button>').click(function(){
@@ -245,7 +246,7 @@ function uploadFile(file, fileName, img) {
 function deleteChildren(type) {
   var ids = getDeleted(type);
   ids.forEach(function(id){
-    var url = '/ajax/recruiting_token_'+type+'/delete/';
+    var url = '/ajax/recruiting_company_'+type+'/delete/';
     var params = {id: id};
     $.post(url, params, function(data, textStatus){
       if(data.status === "SUCCESS") {
@@ -278,15 +279,15 @@ function postSave(img, url, params) {
 
 function saveTokenImage(img, fileName) {
   img.data('file').name = fileName;
-  var url = '/ajax/recruiting_token_image/save/';
-  var params = {recruiting_token_id: img.data('token_id'), file_name: fileName};
+  var url = '/ajax/recruiting_company_image/save/';
+  var params = {recruiting_company_id: img.data('token_id'), file_name: fileName};
   postSave(img, url, params);
 }
 
 function saveTokenVideo(img) {
-  var url = '/ajax/recruiting_token_video/save/';
+  var url = '/ajax/recruiting_company_video/save/';
   var params = {
-    recruiting_token_id: img.data('token_id'),
+    recruiting_company_id: img.data('token_id'),
     url: img.data('url'),
     source: img.data('source'),
     source_id: img.attr('id')
@@ -315,10 +316,12 @@ function linkifyText() {
   $("#skills-required")[0].updateValueAndPreserveCaret(Autolinker.link($("#skills-required").val()));
   $("#responsibilities")[0].updateValueAndPreserveCaret(Autolinker.link($("#responsibilities").val()));
   $("#perks")[0].updateValueAndPreserveCaret(Autolinker.link($("#perks").val()));
-  $("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
-  //$("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
-  //$("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
-  $("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
+  if($("#company").length) {
+    $("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
+    //$("#company-tagline")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-tagline").val()));
+    //$("#company-website")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-website").val()));
+    $("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
+  }
 }
 
 function saveRecruitingToken(preview) {
@@ -337,33 +340,36 @@ function saveRecruitingToken(preview) {
         var tokenId = data.id;
 
         if (tokenId && userId) {
-          // Upload and save the image files
-          $('.recruiting-token-image').each(function() {
-            var img = $(this);
-            img.data('token_id', tokenId);
-            if (!img.data('saved')) {
-              var file = img.data("file");
-              var fileName = userId+'_'+tokenId+'_'+Date.now()+'_'+file.name;
-              img.data('file_name', fileName);
-              uploadFile(file, fileName, img);
-            }
-          });
+          if ($('#company-images').length) {
+            // Upload and save the image files
+            $('.recruiting-token-image').each(function() {
+              var img = $(this);
+              img.data('token_id', tokenId);
+              if (!img.data('saved')) {
+                var file = img.data("file");
+                var fileName = userId+'_'+tokenId+'_'+Date.now()+'_'+file.name;
+                img.data('file_name', fileName);
+                uploadFile(file, fileName, img);
+              }
+            });
 
-          // Save the video urls
-          $('.recruiting-token-video').each(function() {
-            var img = $(this);
-            img.data('token_id', tokenId);
-            if (!img.data('saved')) {
-              saveTokenVideo(img);
-            }
-          });
+            // Delete any removed images
+            deleteChildren('image');
+          }
 
-          // Delete any removed images
-          deleteChildren('image');
+          if ($('#company-videos').length) {
+            // Save the video urls
+            $('.recruiting-token-video').each(function() {
+              var img = $(this);
+              img.data('token_id', tokenId);
+              if (!img.data('saved')) {
+                saveTokenVideo(img);
+              }
+            });
 
-          // Delete any removed videos
-          deleteChildren('video');
-
+            // Delete any removed videos
+            deleteChildren('video');
+          }
         }
 
         closeStatus();
@@ -395,7 +401,39 @@ function processOpen() {
     var menu = $("#token-to-open")[0].contentElement;
     var long_id = menu.selectedItem.id;
     $('#open-dialog')[0].close();
-    window.location = "/create_recruiting.php?id="+long_id;
+    window.location = "/create_recruiting?id="+long_id;
+  }
+}
+
+/**
+ * Open dropdown to choose existing company
+ */
+function chooseCompany() {
+  var dropdown = $("#company-to-use");
+  var menu = $("#company-to-use")[0].contentElement;
+  menu.selected = null;
+  $('#use-existing-company-dialog')[0].open();
+}
+
+/**
+ * Adds existing company choice to form & hides form elements
+ */
+function processCompany() {
+  if ($("#use-existing-company-form")[0].validate()) {
+    setStatus("Attaching company...");
+    var menu = $("#company-to-use")[0].contentElement;
+    var companyId = menu.selectedItem.id;
+    var companyName = $(menu.selectedItem).text();
+    $('#company-info').remove();
+    $('#company-images').remove();
+    $('#company-videos').remove();
+    $('#company-social-media').remove();
+    chosenCard = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
+    chosenCard += '<paper-card id="company-info" heading="'+companyName+'">';
+    chosenCard += '</paper-card>';
+    $('#recruiting-token-form').prepend(chosenCard);
+    $('#use-existing-company-dialog')[0].close();
+    $('#status-dialog')[0].close();
   }
 }
 

@@ -2,7 +2,7 @@
 use \GiveToken\User;
 
 define('TITLE', 'GiveToken.com - About');
-include __DIR__.'/header.php';
+require __DIR__.'/header.php';
 ?>
 <style>
 .employee {
@@ -21,7 +21,7 @@ include __DIR__.'/header.php';
 
 <!-- SOLID COLOR BG -->
 <div class=""> <!-- To make header full screen. Use .full-screen class with solid-color. Example: <div class="solid-color full-screen">  -->
-  <?php include __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/navbar.php';?>
 </div>
 <!-- /END COLOR OVERLAY -->
 </header>
@@ -54,7 +54,7 @@ include __DIR__.'/header.php';
   </div>
 </section>
 
-<?php include __DIR__.'/footer.php';?>
+<?php require __DIR__.'/footer.php';?>
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->

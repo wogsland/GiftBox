@@ -34,8 +34,8 @@ body {
           <th>Created</th>
         </thead>
         <tbody>
-          <?php
-          $sql = "SELECT count(*) as hits,
+            <?php
+            $sql = "SELECT count(*) as hits,
                   (SELECT count(*)
                   FROM recruiting_token_response
                   WHERE recruiting_token_response.recruiting_token_id = recruiting_token.id
@@ -49,23 +49,23 @@ body {
                   GROUP BY uri
                   ORDER BY responses DESC, hits DESC
                   LIMIT 10";
-          $results = execute_query($sql);
-          $rows = array();
-          while ($row = $results->fetch_assoc()) { ?>
-              <tr>
-                <td><?php echo $row['responses'];?></td>
-                <td><?php echo $row['hits'];?></td>
-                <td><a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
-                  <?php echo $row['job_title'];?>
-                </a></td>
-                <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
-                <td><?php echo $row['created'];?></td>
-              </tr>
-          <?php }?>
+            $results = execute_query($sql);
+            $rows = array();
+            while ($row = $results->fetch_assoc()) { ?>
+                <tr>
+                  <td><?php echo $row['responses'];?></td>
+                  <td><?php echo $row['hits'];?></td>
+                  <td><a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
+                    <?php echo $row['job_title'];?>
+                  </a></td>
+                  <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
+                  <td><?php echo $row['created'];?></td>
+                </tr>
+            <?php }?>
         </tbody>
       </table>
     </div>
   </div>
-  <?php require __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
 </body>
 </html>

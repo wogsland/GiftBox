@@ -75,11 +75,11 @@
     <img src="/assets/img/logo-light.png" class="gt-home-intro-globe">
   </div>
 
-  <h1>Recruiting emails<br> made easy</h1>
+  <h1>Recruiting made easy</h1>
   <p id="subhead">
-    GiveToken’s system gives you the tools and analytics to send effective
-    recruiting emails quickly and process responses directly to your CRM.
-    There’s nothing else like it!
+    GiveToken’s tool takes a boring recruiting email and transforms it into an
+    interactive job opportunity with every response seamlessly entering your CRM.
+    All without any additional effort by the recruiter!
   </p>
 </header>
 
@@ -108,27 +108,29 @@
 
 <section class="gt-home-reasons">
   <hr>
+  <h1>The 3 R’s of GiveToken</h1>
 
-  <h2>Reduced Time</h2>
+  <h2>Reduced Placement Time</h2>
   <p>
-    With a higher conversion rate, recruiters need to source and outreach to
-    fewer candidates, creating more time for other placements.
+    With a higher conversion rate, recruiters source and outreach to fewer
+    candidates, creating more time for other placements.
   </p>
 
   <hr>
 
-  <h2>Increased Revenue</h2>
+  <h2>Revenue Increases</h2>
   <p>
-    Improving placement rates creates more placements (revenue for contingency
-    firms) and increased business with existing customers.
+    Quicker and more frequent placements result in increased business with
+    existing customers. More business = More Revenue.
   </p>
 
   <hr>
 
-  <h2>Increased Reputation</h2>
+  <h2>Reputation Improves</h2>
   <p>
-    Quicker and more efficient placements leads to a stronger brand value to be
-    used for new customer acquisition.
+    Higher quality placements, along with a more efficient recruiting cycle,
+    creates a stronger brand to be used for new customer acquisition and
+    existing customer growth.
   </p>
 
   <img src="/images/example-bc1.png" style="height:400px;">
