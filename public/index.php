@@ -49,6 +49,9 @@ if (!isset($endpoint_parts[1])) {
                 case 'stalled_new_customers':
                 include __DIR__.'/../admin/stalled_new_customers.php';
                 break;
+                case 'tokens':
+                include __DIR__.'/../admin/token_stats.php';
+                break;
                 case 'top_ten':
                 include __DIR__.'/../admin/top_ten.php';
                 break;

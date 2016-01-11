@@ -8,10 +8,10 @@ require __DIR__.'/header.php';
 ?>
 </head>
 <body>
-  <div id="content-wrapper" style="margin-bottom: 300px;">
+  <div id="content-wrapper" style="margin-bottom: 300px; text-align:left; margin-left:50px;">
     <?php require __DIR__.'/navbar.php';?>
     <h1 style="margin-top: 100px;">
-      <a id="create-home-icon" title="Return to the Homepage" href="<?php echo $app_root ?>">GiveToken</a>
+      Admin Portal
     </h1>
     <nav id="create-top-nav">
       <ul>
@@ -19,7 +19,9 @@ require __DIR__.'/header.php';
           <a href="/admin/stalled_new_customers">Stalled New Customers</a>
         </li>
         <li>
-          <a href="/admin/top_ten">*** Top Ten Tokens ***</a>
+          Tokens:
+          <a href="/admin/top_ten">Top Ten</a> |
+          <a href="/admin/tokens">All</a>
         </li>
         <li>
           <a href="/admin/active_users">Active Users</a>

@@ -46,6 +46,7 @@ body {
                   WHERE uri LIKE '/ajax/recruiting_token/get/%'
                   AND SUBSTR(uri, LOCATE('get/', uri)+4) = recruiting_token.long_id
                   AND user.id = recruiting_token.user_id
+                  AND web_request.user_id IS NULL
                   GROUP BY uri
                   ORDER BY responses DESC, hits DESC
                   LIMIT 10";

@@ -89,6 +89,7 @@ body {
       $query = "SELECT count(*) token_views
                 FROM recruiting_token, web_request
                 WHERE recruiting_token.user_id = $user_id
+                AND web_request.user_id IS NULL
                 AND web_request.uri LIKE CONCAT('%/token/recruiting/',recruiting_token.long_id,'%')";
       $result = execute_query($query);
       if ($row = $result->fetch_assoc()) {
