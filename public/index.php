@@ -66,9 +66,6 @@ if (!isset($endpoint_parts[1])) {
         case 'ajax':
         include __DIR__.'/../ajax/route.php';
         break;
-        case 'community':
-        include __DIR__.'/../community.php';
-        break;
         case 'create':
         include __DIR__.'/../create.php';
         break;
