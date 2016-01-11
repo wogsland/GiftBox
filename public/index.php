@@ -106,10 +106,6 @@ if (!isset($endpoint_parts[1])) {
         case 'payments':
         include __DIR__.'/../payments.php';
         break;
-        case 'preview':
-        case 'preview.php':
-        include __DIR__.'/../preview.php';
-        break;
         case 'profile':
         include __DIR__.'/../profile.php';
         break;
