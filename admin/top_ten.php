@@ -41,7 +41,7 @@ body {
                   WHERE recruiting_token_response.recruiting_token_id = recruiting_token.id
                   ) AS responses,
                   recruiting_token.job_title, recruiting_token.long_id, recruiting_token.created,
-                  user.email_address, user.first_name, user.last_name
+                  user.email_address, user.first_name, user.last_name, user.id user_id
                   FROM web_request, recruiting_token, user
                   WHERE uri LIKE '/ajax/recruiting_token/get/%'
                   AND SUBSTR(uri, LOCATE('get/', uri)+4) = recruiting_token.long_id
@@ -58,7 +58,12 @@ body {
                   <td><a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
                     <?php echo $row['job_title'];?>
                   </a></td>
-                  <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
+                  <td>
+                    <?php
+                    echo "<a href=\"/user/{$row['user_id']}\">{$row['first_name']} {$row['last_name']}</a>";
+                    echo " (<a href=\"mailto:{$row['email_address']}\">{$row['email_address']}</a>)";
+                    ?>
+                  </td>
                   <td><?php echo $row['created'];?></td>
                 </tr>
             <?php }?>

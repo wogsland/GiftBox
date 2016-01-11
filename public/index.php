@@ -151,6 +151,9 @@ if (!isset($endpoint_parts[1])) {
         case 'upload':
         include __DIR__.'/../upload.php';
         break;
+        case 'user':
+        include __DIR__.'/../admin/user_info.php';
+        break;
         case 'test':
         // this endpoint is just for non-production testing
         if (DEVELOPMENT) {

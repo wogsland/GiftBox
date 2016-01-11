@@ -84,7 +84,7 @@ class UserMilestone
      */
     public static function stalledCustomers()
     {
-        $query = "SELECT first_name, last_name, email_address,
+        $query = "SELECT user.id, first_name, last_name, email_address,
                   COALESCE(MAX(web_request.created), 'Never') AS last_active,
                   (SELECT GROUP_CONCAT(milestone.`name`, ', ')
                    FROM user_milestone
