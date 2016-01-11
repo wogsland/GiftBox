@@ -69,9 +69,6 @@ if (!isset($endpoint_parts[1])) {
         case 'ajax':
         include __DIR__.'/../ajax/route.php';
         break;
-        case 'create':
-        include __DIR__.'/../create.php';
-        break;
         case 'create_recruiting':
         include __DIR__.'/../create_recruiting.php';
         break;
@@ -91,9 +88,6 @@ if (!isset($endpoint_parts[1])) {
             switch ($endpoint_parts[2]) {
                 case 'pay_with_stripe.js':
                 include __DIR__.'/../pay_with_stripe.php';
-                break;
-                case 'create.js': // this file is too broken for yuicompressor
-                include __DIR__.'/../js/create.js';
                 break;
                 case 'JSXTransformer.js': // yuicompressor also barfs on this one
                 include __DIR__.'/../js/JSXTransformer.js';

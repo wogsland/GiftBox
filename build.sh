@@ -54,7 +54,6 @@ echo ""
 
 # minify javascript
 yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
-#yuicompressor js/create.js -o public/js/create.min.js <-- this one has errors
 yuicompressor js/create_common.js -o public/js/create_common.min.js
 yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
 yuicompressor js/custom.js -o public/js/custom.min.js
