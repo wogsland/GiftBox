@@ -161,6 +161,7 @@ if (!isset($endpoint_parts[1])) {
           break;
         }
         default:
+        http_response_code(404);
         include __DIR__.'/../error.php';
     }
 }
