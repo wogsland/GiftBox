@@ -3,6 +3,8 @@ use GiveToken\RecruitingCompany;
 use GiveToken\RecruitingCompanyVideo;
 use GiveToken\RecruitingToken;
 
+date_default_timezone_set('America/Chicago');
+
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
     if (isset($_POST['recruiting_company_id'])) {
