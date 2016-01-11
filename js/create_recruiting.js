@@ -334,13 +334,15 @@ function saveRecruitingToken(preview) {
     serializedForm = document.getElementById("recruiting-token-form").serialize();
     $.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
       if(data.status === "SUCCESS") {
-        console.log(data)
         $("#id").val(data.id);
         $("#long-id").val(data.long_id);
         var userId = data.user_id;
         var tokenId = data.id;
         var companyId = data.recruiting_company_id;
-
+        if (! $('#recruiting-company-id').length) {
+          companyInput = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
+          $('#recruiting-token-form').prepend(companyInput);
+        }
         if (tokenId && userId) {
           if ($('#company-images').length) {
             // Upload and save the image files
