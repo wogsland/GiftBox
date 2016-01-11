@@ -54,10 +54,13 @@ require __DIR__.'/header.php';
               'copy', 'csv', 'excel', 'pdf','print'
           ]
       });
-      $('input').val("<?php echo $_GET['id'];?>");
-      $('input').focus();
-      table.search("<?php echo $_GET['id'];?>").draw();
+      <?php if (isset($_GET['id'])) { ?>
+          $('input').val("<?php echo $_GET['id'];?>");
+          $('input').focus();
+          table.search("<?php echo $_GET['id'];?>").draw();
+      <?php }?>
   });
   </script>
+
 </body>
 </html>
