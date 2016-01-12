@@ -20,7 +20,10 @@ if (isset($pieces[1])) {
     }
 }
 
-// route to the appropriate endpoint
+/**
+ * Route to the appropriate endpoint
+   PLEASE ADD A TEST TO src/RoutingTest.php FOR EACH ENDPOINT ADDED HERE
+ */
 if (!isset($endpoint_parts[1])) {
     include __DIR__.'/../index.php';
 } else {
@@ -103,14 +106,14 @@ if (!isset($endpoint_parts[1])) {
         case 'payments':
         include __DIR__.'/../payments.php';
         break;
-        case 'profile':
-        include __DIR__.'/../profile.php';
-        break;
         case 'pricing':
         include __DIR__.'/../pricing.php';
         break;
         case 'privacy':
         include __DIR__.'/../privacypolicy.php';
+        break;
+        case 'profile':
+        include __DIR__.'/../profile.php';
         break;
         case 'recruiting_made_easy':
         include __DIR__.'/../lp/bc1.php';
@@ -122,7 +125,7 @@ if (!isset($endpoint_parts[1])) {
         include __DIR__.'/../thankyou.php';
         break;
         case 'token':
-        if ('recruiting' == $endpoint_parts[2]) {
+        if ('recruiting' == $endpoint_parts[2] && isset($endpoint_parts[3])) {
             // don't display in native android browser
             $detect = new Mobile_Detect;
             if ($detect->isMobile()) {
@@ -134,6 +137,8 @@ if (!isset($endpoint_parts[1])) {
                 }
             }
             include __DIR__.'/../recruiting_token.build.html';
+        } else {
+            include __DIR__.'/../error.php';
         }
         break;
         case 'tokens':
@@ -158,7 +163,6 @@ if (!isset($endpoint_parts[1])) {
           break;
         }
         default:
-        http_response_code(404);
         include __DIR__.'/../error.php';
     }
 }
