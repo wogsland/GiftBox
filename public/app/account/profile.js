@@ -13,12 +13,6 @@ var AccountProfile = React.createClass({
       <div className="text-center">
           <img src={this.getAvatar(this.props.model.profile)} className="img-circle img-offline img-responsive img-profile" alt={this.props.model.profile.name} />
           <h4 className="profile-name mb5">{this.props.model.profile.name}</h4>
-          <div className="small-txt mb5"><a href="/tokens">Tokens</a></div>
-          {/*<!--<div className="small-txt mb5"><i className="fa fa-star"></i> XXYYZZ Token Views</div>-->*/}
-          {/*
-            <div className="small-txt mb5"><i className="fa fa-map-marker"></i> {this.props.model.profile.location}</div>
-            <div className="small-txt mb5"><i className="fa fa-briefcase"></i> {this.props.model.profile.position} at <a href="">{this.props.model.profile.company}</a></div>
-          */}
           <div className="mb20"></div>
 
           <div className="btn-group">
@@ -33,19 +27,10 @@ var AccountProfile = React.createClass({
               <a href="/upgrade">
                 <button type="button" className="btn btn-success" id="upgrade-button">Upgrade</button>
               </a>
-              {/* <button className="btn btn-primary btn-bordered">Send GiveToken</button> */}
           </div>
 
           <div className="mb20"></div>
       </div>
-      {/*
-          <h5 className="md-title">About</h5>
-          {this.renderAbout(this.props.model.profile.about, this.state.expanded)}
-          <h5 className="md-title">Connect</h5>
-          <ul className="list-unstyled social-list">
-          {this.props.model.profile.social.map(this.renderSocial)}
-          </ul>
-      */}
     </div>;
   },
 

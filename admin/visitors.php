@@ -35,47 +35,47 @@ body {
             <?php
             $sql = "SELECT 'users' type_visitors,
                   (SELECT COUNT(distinct user_id)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > CAST(NOW() AS DATE)) today_visitors,
                   (SELECT COUNT(distinct user_id)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 7 DAY)) week_visitors,
                   (SELECT COUNT(distinct user_id)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 30 DAY)) month_visitors
                   UNION
                   SELECT 'total',
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > CAST(NOW() AS DATE)),
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 7 DAY)),
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 30 DAY))
                   UNION
                   SELECT 'returning',
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > CAST(NOW() AS DATE)
                   AND visitor_cookie in
                   (SELECT visitor_cookie
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created < CAST(NOW() AS DATE))),
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 7 DAY)
                   AND visitor_cookie in
                   (SELECT visitor_cookie
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created < (CAST(NOW() AS DATE) - INTERVAL 7 DAY))),
                   (SELECT COUNT(distinct visitor_cookie)
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created > (CAST(NOW() AS DATE) - INTERVAL 30 DAY)
                   AND visitor_cookie in
                   (SELECT visitor_cookie
-                  FROM giftbox.web_request
+                  FROM web_request
                   WHERE created < (CAST(NOW() AS DATE) - INTERVAL 30 DAY)))";
             $results = execute_query($sql);
             $rows = array();

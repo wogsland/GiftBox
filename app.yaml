@@ -18,8 +18,6 @@ handlers:
   script: pay_with_stripe.php
 - url: /js/JSXTransformer.js
   script: js/JSXTransformer.js
-- url: /js/create.js
-  script: js/create.js
 - url: /js
   static_dir: public/js
 

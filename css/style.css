@@ -452,60 +452,6 @@ h3#big-feature {
   border: solid 1px black;
 }
 
-.bento {
-  display: inline-block;
-  border: dashed 2px gray;
-  border-radius:20px;
-}
-.bento.over {
-  border: dashed 2px white;
-}
-
-#bento-1 {
-  position: absolute;
-  top: 20px;
-  left: 15px;
-  width: 284px;
-  height: 241px;
-}
-#bento-2 {
-  position: absolute;
-  top: 20px;
-  left: 320px;
-  width: 286px;
-  height: 410px;
-}
-#bento-3 {
-  position: absolute;
-  top: 20px;
-  left: 630px;
-  width: 408px;
-  height: 285px;
-  border-radius:25px;
-}
-#bento-4 {
-  position: absolute;
-  top: 274px;
-  left: 16px;
-  width: 285px;
-  height: 412px;
-}
-#bento-5 {
-  position: absolute;
-  top: 446px;
-  left: 321px;
-  width: 285px;
-  height: 241px;
-}
-#bento-6 {
-  position: absolute;
-  top: 322px;
-  left: 629px;
-  width: 408px;
-  height: 365px;
-  border-radius:27px;
-}
-
 /*----------------------------------------*/
 /*         PERSONALIZE SECTION            */
 /*----------------------------------------*/

@@ -42,15 +42,8 @@ require __DIR__.'/header.php';
 
 <!-- React Components -->
 <script type="text/jsx" src="/app/account/profile.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/activities.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/tokens.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/token_analytics.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/viewers.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/viewer_edit.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/info.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/users.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/user_edit.js?v=<?php echo VERSION;?>"></script>
-<script type="text/jsx" src="/app/account/user_remove.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/index.js?v=<?php echo VERSION;?>"></script>
 
 
