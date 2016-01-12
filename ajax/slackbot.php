@@ -1,10 +1,13 @@
 <?php
+use \Monolog\Handler\SlackHandler;
+use \Monolog\Logger;
+
 if ($google_app_engine && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
     $url = "http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
     $response = curl_exec($ch);
@@ -78,14 +81,9 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
     $message = rtrim($message);
     $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
     $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
-    $data = "payload=$message";
-    $url = "https://givetoken.slack.com/services/hooks/slackbot?token=abmmCzTPQPszuDhcKUY4sgWe&channel=%23website-visitors";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    $response = curl_exec($ch);
-    curl_close($ch);
+    $visitorLogger = new Logger('milestones');
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'SizzleBot', false);
+    $slackHandler->setLevel(Logger::DEBUG);
+    $visitorLogger->pushHandler($slackHandler);
+    $visitorLogger->log(200, $message);
 }
