@@ -59,14 +59,6 @@ var AccountInfo = React.createClass({
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
-    {/*    <div className="form-group">
-          <label className="col-sm-1 control-label">Username</label>
-          <div className="col-sm-10">
-            <input type="text" placeholder="Username" className="form-control tooltips" name="username" value={this.state.username} onChange={this.handleChange} />
-          </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
-        </div>
-    */}
         <div className="form-group">
           <label className="col-sm-1 control-label">Email</label>
           <div className="col-sm-10">
@@ -77,136 +69,11 @@ var AccountInfo = React.createClass({
         <div className="form-group">
           <label className="col-sm-1 control-label">Password</label>
           <div className="col-sm-10">
-            <input type="password" placeholder="Not Active" className="form-control tooltips" name="new_password" value={this.state.new_password} onChange={this.handleChange} />
+            <input type="password" placeholder="*******************" className="form-control tooltips" name="new_password" value={this.state.new_password} onChange={this.handleChange} />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
-    {/*    <div className="form-group">
-          <label className="col-sm-1 control-label">Company</label>
-          <div className="col-sm-10">
-            <input type="text" placeholder="Company Name" className="form-control tooltips" name="company" value={this.state.company} onChange={this.handleChange} />
-          </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
-        </div>
-    */}
       </form>
-{/*
-      <h2>Account Information</h2>
-      <form className="form-horizontal form-bordered">
-        <div className="form-group">
-                <label className="col-sm-1 control-label">Company</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="Company Inc." title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">Address</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="123 Any Street Ste #101" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">City</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="San Francisco" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">State</label>
-                <div className="col-sm-10">
-                    <input type="password" placeholder="CA" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">Zip</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="23121" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-      </form>
-      <h2>Billing</h2>
-      <form className="form-horizontal form-bordered">
-        <div className="form-group">
-                  <label className="col-sm-1 control-label">CC Number</label>
-                  <div className="col-sm-10">
-                      <input type="text" placeholder="**** **** **** 5678" title="" className="form-control tooltips" />
-                  </div>
-                  <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-              </div>
-        <div className="form-group">
-                  <label className="col-sm-1 control-label">CCV</label>
-                  <div className="col-sm-10">
-                      <input type="text" placeholder="***" title="" className="form-control tooltips" />
-                  </div>
-                  <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-              </div>
-          <div className="form-group">
-                <label className="col-sm-1 control-label">Address</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="123 Any Street Ste #101" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">City</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="San Francisco" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">State</label>
-                <div className="col-sm-10">
-                    <input type="password" placeholder="CA" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-        <div className="form-group">
-                <label className="col-sm-1 control-label">Zip</label>
-                <div className="col-sm-10">
-                    <input type="text" placeholder="23121" title="" className="form-control tooltips" />
-                </div>
-                <label className="col-sm-1 control-label"><a href="#" target="" className="">Edit</a></label>
-            </div>
-      </form>
-*/}
-    {/*}  <h2>Account Information</h2>
-      <form className="form-horizontal form-bordered">
-        <div className="form-group">
-          <label className="col-sm-1 control-label">Level</label>
-          <div className="col-sm-10">
-            <input placeholder={this.state.level_text} className="form-control tooltips" readOnly/>
-          </div>
-          <label className="col-sm-1 control-label"><a href="/pricing">Edit</a></label>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-1 control-label">Admin</label>
-          <div className="col-sm-10">
-            <input placeholder={this.state.admin == "N" ? "No -- Contact your account admin to gain access" : "Yes"} className="form-control tooltips" readOnly/>
-          </div>
-          <label className="col-sm-1 control-label"><a>Edit</a></label>
-        </div>
-      </form> */}
-
-{/*
-      <h2>Social Integrations</h2>
-      <form className="form-horizontal form-bordered">
-        {this.state.social ? this.state.social.map(this.renderSocial) : null}
-        <div className="form-group">
-          <select className="col-sm-1" name="selectedSocial" value={this.state.selectedSocial} onChange={this.handleChange}>
-            {this.findUnusedSocial(this.state.social).map(this.renderSocialOption)}
-          </select>
-          <div className="col-sm-10">
-            <input type="text" placeholder={(this.state.selectedSocial || '') + ' Web Address'} className="form-control tooltips" name="selectedUrl" value={this.state.selectedUrl} onChange={this.handleChange} />
-          </div>
-          <label className="col-sm-1 control-label"><a onClick={this.addSocial}>Add</a></label>
-        </div>
-      </form>*/}
    </div>;
  },
 
