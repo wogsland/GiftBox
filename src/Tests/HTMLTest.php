@@ -107,6 +107,24 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
         $html .= "<p>Wasn't that great?</p>";
         $expected = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
         $this->assertEquals($expected, HTML::from($html));
+
+        // Robbie's fail case - bullets start text
+        $text = "•	No college experience needed\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "•	Ability to make an extra point with 95% accuracy\r\n";
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '<li>	Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p><p></p>';
+        $this->assertEquals($text, HTML::from($html));
+
+        // single bullet
+        $text = "•	No college experience needed";
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p>';
+        $this->assertEquals($text, HTML::from($html));
     }
 
     /**
@@ -134,12 +152,36 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
 
         // carriage return & newline test
         // (this inverse assumes bullet is always '•')
-        $expected = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
+        $text = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
         $convolution1 = HTML::from(HTML::to($text));
         $this->assertEquals($text, $convolution1);
         $html = "<p>This is my list</p>";
         $html .= "<p><ul><li>Nachoes</li><li>number 2</li><li>pizza</li></ul></p>";
         $html .= "<p>Wasn't that great?</p>";
+        $convolution2 = HTML::to(HTML::from($html));
+        $this->assertEquals($html, $convolution2);
+
+        // Robbie's fail case - bullets start text
+        $text = "•	No college experience needed\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "•	Ability to make an extra point with 95% accuracy\r\n";
+        $convolution1 = HTML::from(HTML::to($text));
+        $this->assertEquals($text, $convolution1);
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '<li>	Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p><p></p>';
+        $convolution2 = HTML::to(HTML::from($html));
+        $this->assertEquals($html, $convolution2);
+
+        // single bullet
+        $text = "•	No college experience needed";
+        $convolution1 = HTML::from(HTML::to($text));
+        $this->assertEquals($text, $convolution1);
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p>';
         $convolution2 = HTML::to(HTML::from($html));
         $this->assertEquals($html, $convolution2);
     }

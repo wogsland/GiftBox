@@ -79,9 +79,9 @@ class HTML
         $text = '';
         if ('' != $html) {
             // bullets
-            $html = str_replace('</p><p><ul><li>', "\r\n•", $html);
+            $html = str_replace('<ul><li>', "•", $html);
             $html = str_replace('</li><li>', "\r\n•", $html);
-            $html = str_replace('</li></ul></p><p>', "\r\n", $html);
+            $html = str_replace('</li></ul>', "", $html);
 
             // spacing between paragraphs
             $html = str_replace('</p><p>', "\r\n", $html);
