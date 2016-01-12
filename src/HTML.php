@@ -31,15 +31,28 @@ class HTML
                 // regularize bullets
                 $text = self::replaceBullets($text);
 
-                // replace bullets
-                $pos = strpos($text, "\n•");
-                $text = substr_replace($text, '</p><p><ul><li>', $pos, strlen("\n•"));
+                // replace first bullet
+                if (0 === strpos($text, "•")) {
+                    $text = substr_replace($text, '<ul><li>', 0, strlen("•"));
+                } else {
+                    $pos = strpos($text, "\n•");
+                    $text = substr_replace($text, '</p><p><ul><li>', $pos, strlen("\n•"));
+                }
+
+                // replace middle bullets
                 $text = str_replace("\n•", '</li><li>', $text);
+
+                //end the list
                 $pos = strrpos($text, '<li>');
                 $backend = substr($text, $pos);
-                $pos = strpos($backend, "\n");
-                $pos = $pos + strlen($text) - strlen($backend);
-                $text = substr_replace($text, '</li></ul></p><p>', $pos, strlen("\n"));
+                if (strpos($backend, "\n") !== false) {
+                    $pos = strpos($backend, "\n");
+                    $pos = $pos + strlen($text) - strlen($backend);
+                    $text = substr_replace($text, '</li></ul></p><p>', $pos, strlen("\n"));
+                } else {
+                    // the end of the list is the end of the text
+                    $text = substr_replace($text, '</li></ul>', strlen($text), strlen("\n"));
+                }
             }
 
             // spacing between paragraphs
@@ -86,10 +99,11 @@ class HTML
      *
      * @return boolean - HTML
      */
-    private static function hasBullet($text) 
+    private static function hasBullet($text)
     {
         $has = strpos($text, "\n•") !== false;
         $has = $has || strpos($text, "\n •") !== false;
+        $has = $has || strpos($text, "•") === 0;
         $i = 0;
         while (!$has && $i < count(self::$bullets)) {
             $has = $has || strpos($text, "\n".self::$bullets[$i]) !== false;
@@ -106,7 +120,7 @@ class HTML
      *
      * @return string - text with bullets replaced
      */
-    private static function replaceBullets($text) 
+    private static function replaceBullets($text)
     {
         foreach (self::$bullets as $bullet) {
             $text = str_replace($bullet, '•', $text);
