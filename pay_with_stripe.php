@@ -49,7 +49,7 @@ function payWithStripe(email, payFrom) {
 	// Open Checkout with further options
 	handler.open({
 		name: 'GiveToken',
-		description: "GiveToken ($100/month)",
-		amount: 10000
+		description: "GiveToken ($250/month)",
+		amount: 25000
 	});
 }
