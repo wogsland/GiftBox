@@ -159,7 +159,7 @@ if (!isset($endpoint_parts[1])) {
         case 'test':
         // this endpoint is just for non-production testing
         if (DEVELOPMENT) {
-          include __DIR__.'/../lp/bc1.php';
+          include __DIR__.'/../lp/sizzle1.php';
           break;
         }
         default:
