@@ -30,7 +30,7 @@ if (!isset($endpoint_parts[1])) {
     switch ($endpoint_parts[1]) {
         case '':
         case 'index.html':
-        include __DIR__.'/../index.php';
+        include __DIR__.'/../lp/old.php';
         break;
         case 'about':
         include __DIR__.'/../about.php';
@@ -117,6 +117,9 @@ if (!isset($endpoint_parts[1])) {
         break;
         case 'recruiting_made_easy':
         include __DIR__.'/../lp/bc1.php';
+        break;
+        case 'sendemail':
+        include __DIR__.'/../sendemail.php';
         break;
         case 'terms':
         include __DIR__.'/../termsservice.php';

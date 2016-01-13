@@ -23,7 +23,7 @@ function sendMessage(event) {
 	}
 
 	// Submit the form via Ajax
-	$.post("sendemail.php", contactForm.serialize(),
+	$.post("/sendemail", contactForm.serialize(),
 		function(data, textStatus, jqXHR){
 			if(data.status === "SUCCESS") {
 				contactForm.find( ".success" ).show();

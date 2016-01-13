@@ -6,8 +6,68 @@ define('TITLE', 'Sizzle - Sell the Sizzle not the Steak');
 include __DIR__.'/../header.php';
 ?>
     <style>
-    div.deep-dark-bg {
-      min-height:500px;
+    .white-line {
+      margin-bottom: 10px;
+    }
+    .show-more-btn {
+      background-color: black;
+      opacity: .3;
+    }
+    #signup-call-to-action {
+      margin-top: 125px;
+      margin-bottom: 30px;
+    }
+    #left-div-1 {
+      padding-top: 50px;
+    }
+    #signup-form-container {
+      margin-top: 35px;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+    #sizzle-signup-form {
+      width: 250px;
+      margin:auto;
+    }
+    #continue-btn {
+      width: 250px;
+      background-color: rgb(148,203,197);
+      color: black;
+    }
+    #inline-logo {
+      margin-bottom: 50px;
+    }
+    #what-is-sizzle {
+      background-image: linear-gradient(90deg, rgb(9,167,68), rgb(91,179,238));
+      padding: 50px;
+      margin: 0;
+    }
+    #sell-the-job {
+      background-image: linear-gradient(90deg, rgb(23,42,111), rgb(22,215,222));
+      padding: 50px;
+      margin: 0;
+    }
+    #put-a-bow-on-it {
+      background-image: linear-gradient(90deg, rgb(4,124,39), rgb(14,206,114));
+      padding: 50px;
+      margin: 0;
+    }
+    #live-examples {
+      background-color: white;
+      padding: 50px;
+      margin: 0;
+    }
+    #analyze-and-split-test {
+      background-image: linear-gradient(90deg, rgb(132,74,148), rgb(129,42,255));
+      padding: 50px;
+      margin: 0;
+    }
+    #sizzle-contact-footer {
+      margin: 0;
+    }
+    #contact-container {
+      background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
+      margin: 0;
     }
     </style>
   </head>
@@ -23,414 +83,173 @@ include __DIR__.'/../header.php';
     */?>
 
     <!-- =========================
-         HEADER
+        Navbar
     ============================== -->
     <header class="header" data-stellar-background-ratio="0.5" id="home">
-
-    <!-- SOLID COLOR BG -->
-    <div class="deep-dark-bg">
-
-        <?php include __DIR__.'/../navbar.php';?>
-
-      <!-- CONTAINER -->
-      <div class="container">
-
-        <!-- ONLY LOGO ON HEADER -->
-        <div class="only-logo">
-          <div class="navbar">
-          </div>
-        </div> <!-- /END ONLY LOGO ON HEADER -->
-
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <!-- HEADING AND BUTTONS -->
-            <div class="intro-section">
-              <!-- WELCOM MESSAGE -->
-              <h1 class="intro">Candidate Engagement</h1>
-              <h5>Recruiting in a matter of minutes</h5>
-              <!-- BUTTON -->
-              <div class="buttons" id="login-button">
-                <?php
-                if (logged_in()) {
-                    echo '<a href="/create_recruiting" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
-                } else {
-                    echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
-                    echo ' or ';
-                    echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
-                }
-                ?>
-              </div>
-              <!-- /END BUTTONS -->
-            </div>
-            <!-- /END HEADNING AND BUTTONS -->
-          </div>
-        </div>
-        <!-- /END ROW -->
-
-      </div>
-      <!-- /END CONTAINER -->
-    </div>
-    <!-- /END COLOR OVERLAY -->
+          <?php include __DIR__.'/../navbar.php';?>
     </header>
-    <!-- /END HEADER -->
 
-    <!-- =========================
-         SAMPLE MACBOOK
-    ============================== -->
-    <section class="token-macbook light-blue" id="token-macbook">
-      <div class="">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-              <img class="img-responsive" src="/assets/images/upgraph.jpg" alt="up graph" width="585" height="311">
+    <section id="signup-call-to-action">
+      <div class="container">
+        <div class="row">
+          <div id="left-div-1" class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>How Important is Candidate Experience?</h2>
+            Recruiting Agency, Corporation, or RPO<br />
+            First Impressions Matter<br />
+            <div id="signup-form-container">
+              <form id="sizzle-signup-form">
+                <div class="form-group" id="email-form-group">
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                </div>
+                <div class="form-group" id="password-form-group" hidden>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <?php /*
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" checked> Send me the Sizzling Newsletter
+                  </label>
+                </div>
+                */?>
+                <div id="continue-btn" class="btn">Continue</div>
+              </form>
+              30 Day Free Trial
             </div>
-
-            <!-- RIGHT SIDE WITH BRIEF -->
-            <div class="col-md-6 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-              <!-- SECTION TITLE -->
-              <h2 class="white-text">Figure out what works</h2>
-
-              <div class="white-line-left">
-              </div>
-
-              <p>
-                Recruiters send hundreds of messages and need a way to track the success of each message. GiveToken provides an analytics package that allows the recruiter to see what candidates actually engage with.
-              </p>
-
-
+            <br />
+            <h3>
+              Send engaging outbound material with Sizzle
+            </h3>
+            <div class="white-line">
             </div>
-            <!-- /END RIGHT BRIEF -->
-
+            <p>
+            Email, InMail, Text
+            <p>
+          </div>
+          <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/images/mobile_token.png" alt="mobile screenshot" width=400>
+          </div>
+          <div class="col-md-12">
+            <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="Sizzle" id="inline-logo"> not the Steak</h1>
           </div>
         </div>
       </div>
-
     </section>
-    <!-- /END SAMPLE IPAD SECTION -->
 
-    <!-- =========================
-         FEATURES
-    ============================== -->
-    <section class="features" id="features">
-
-    <div class="container">
-
-      <!-- SECTION HEADER -->
-      <div class="section-header wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-        <!-- SECTION TITLE -->
-        <h2 class="white-text">Amazing Features</h2>
-
-        <div class="colored-line">
+    <section id="what-is-sizzle">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>What is Sizzle?</h2>
+            <div class="btn show-more-btn">Show More ></div>
+          </div>
+          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+          </div>
         </div>
-        <div class="section-description">
-          We give you the tools to add everything and anything to your next Token Creation.
-        </div>
-        <div class="section-description">
-          Go ahead, we’ve got you covered. See how our features can help you create a Token Creation you’ll love to share.
-        </div>
-        <div class="colored-line">
-        </div>
-
       </div>
-      <!-- /END SECTION HEADER -->
-
-      <div class="row">
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_film"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Videos</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-             Don't just give information to recruits, show them something!
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_images"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Images</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-             Pictures are worth 1000 words, use them to connect with a candidate.
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_quotations_alt"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Text</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-            Some details are just too important to leave out, so don't forget to make it personal.
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-      </div>
-      <!-- /END ROW -->
-
-      <div class="row">
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_link"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Links</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-             Make the message interactive by using links to show more about the company and opportunity.
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_grid-2x2"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Analytics</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-             Verify what messages work and what leaves something to be desired.
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-
-        <!-- SINGLE SERVICE -->
-        <div class="col-md-4 single-service wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-          <!-- SERVICE ICON -->
-          <div class="service-icon">
-            <i class="icon_cloud-upload"></i>
-          </div>
-
-          <!-- SERVICE HEADING -->
-          <h3>Sharable</h3>
-
-          <!-- SERVICE DESCRIPTION -->
-          <p>
-            Reach a candidate with any form of messaging, whether thats email, text, or social media.
-          </p>
-
-        </div>
-        <!-- /END SINGLE SERVICE -->
-
-      </div>
-      <!-- /END ROW -->
-
-    </div>
-    <!-- /END CONTAINER -->
-
     </section>
-    <!-- /END FEATURES SECTION -->
 
-    <!-- =========================
-         SAMPLE MACBOOK
-    ============================== -->
-    <section class="token-macbook solid-blue" id="token-fat">
-
-      <div class="">
-        <div class="container">
-          <div class="row">
-
-            <!-- RIGHT SIDE WITH BRIEF -->
-            <div class="col-md-12 left-align wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-              <!-- SECTION TITLE -->
-              <h2 class="white-text">Sell the Job!</h2>
-
-              <div class="white-line-left">
-              </div>
-
-              <p>
-                The candidate is engaged and wants to hear more about the job. It's
-                time to combine pictures, videos, text and attachments to show the
-                candidate the kind of job and company that they have been searching
-                for. <strong>GiveToken</strong> adds that extra level of depth
-                today's candidates are looking for.
-                <a href="/free_trial" id="light-free-link">See for yourself.</a>
-              </p>
-
-
+    <section id="sell-the-job">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Sell the Job</h2>
+            <div class="white-line">
             </div>
-            <!-- /END RIGHT BRIEF -->
-
+            The candidate is engaged and wants to hear
+            more about the job. It's time to combine
+            pictures, videos, text and attachments to show
+            the candidate the kind of job and company
+            that they have been searching for.
+          </div>
+          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
           </div>
         </div>
       </div>
-
-    </section>
-    <!-- /END SAMPLE IPAD SECTION -->
-
-
-    <!-- =========================
-         SCREENSHOTS
-    ============================== -->
-    <section class="screenshots" id="screenshot-section">
-
-    <div class="container">
-
-
-      <div class="section-header wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-
-        <h2 class="white-text">Friends of GiveToken</h2>
-
-        <div class="colored-line">
-        </div>
-        <div class="section-description">
-          Commitment to Community
-        </div>
-        <div class="colored-line">
-        </div>
-
-      </div>
-
-
-      <div class="row wow bounceIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-        <div id="screenshots" class="owl-carousel owl-theme">
-
-          <div class="shot">
-            <a href="/assets/img/tokens/acentertainment.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/acentertainment.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/boca-hh.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/boca-hh.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/fedex.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/fedex.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/home-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/home-depot.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/office-depot.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/office-depot.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/second-harvest.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/second-harvest.jpg" alt="Screenshot"></a>
-          </div>
-
-          <div class="shot">
-            <a href="/assets/img/tokens/stjudes.jpg" data-lightbox-gallery="screenshots-gallery"><img src="/assets/img/tokens/stjudes.jpg" alt="Screenshot"></a>
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-    </div>
-
-
     </section>
 
-    <!-- =========================
-         FOOTER
-    ============================== -->
-    <footer id="contact-footer" class="deep-dark-bg">
-
-    <div class="container">
-
-      <div class="contact-box wow rotateIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-
-        <!-- CONTACT BUTTON TO EXPAND OR COLLAPSE FORM -->
-
-        <a class="btn contact-button expand-form expanded"><i class="icon_mail_alt"></i></a>
-
-        <!-- EXPANDED CONTACT FORM -->
-        <div class="row expanded-contact-form">
-
-          <div class="col-md-8 col-md-offset-2">
-
-            <!-- FORM -->
-            <form class="contact-form" id="contact" role="form">
-              <!-- IF MAIL SENT SUCCESSFULLY -->
-              <h4 class="success">
-                <i class="icon_check"></i> Your message has been sent successfully.
-              </h4>
-
-                <!-- IF MAIL SENDING UNSUCCESSFULL -->
-              <h4 class="error">
-                <i class="icon_error-circle_alt"></i> E-mail must be valid and message must be longer than 1 character.
-              </h4>
-
-              <div class="col-md-6">
-                <input class="form-control input-box" id="name" type="text" name="name" placeholder="Your Name">
-              </div>
-
-              <div class="col-md-6">
-                <input class="form-control input-box" id="email" type="email" name="email" placeholder="Your Email">
-              </div>
-
-              <div class="col-md-12">
-                <input class="form-control input-box" id="subject" type="text" name="subject" placeholder="Subject">
-                <textarea class="form-control textarea-box" id="message" name="message" rows="8" placeholder="Message"></textarea>
-              </div>
-
-              <button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
-
-            </form>
-            <!-- /END FORM -->
-
+    <section id="put-a-bow-on-it">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Put a Bow On It</h2>
+            <div class="white-line">
+            </div>
+            Candidates want personalization, not just a salary and set
+            of skills. Using our "wrapper" functionality, create a message
+            that stands out from other recruiters and other opportunities.
           </div>
-
+          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+          </div>
         </div>
-        <!-- /END EXPANDED CONTACT FORM -->
-
       </div>
-      <!-- /END CONTACT BOX -->
+    </section>
 
-    </div>
-    <!-- /END CONTAINER -->
+    <section id="live-examples">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 wow fadeInBottom animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Live Examples</h2>
+            <div class="white-line">
+            </div>
+            See Token Creations from friends of GiveToken
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="analyze-and-split-test">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+          </div>
+          <div class="col-md-3 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Analyze and Split Test</h2>
+            <div class="white-line">
+            </div>
+            Recruiters send hundreds of messages and need a way to track
+            the success of each message. GiveToken provides an analytics
+            package that allows the recruiter to see what candidates actually
+            engage with.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sizzle-contact-footer">
+      <div class="container" id="contact-container">
+        <div class="row">
+          <div class="contact-box">
+            <!-- CONTACT BUTTON TO EXPAND OR COLLAPSE FORM -->
+            <a class="btn contact-button expand-form expanded"><i class="icon_mail_alt"></i></a>
+            <div class="row expanded-contact-form">
+              <div class="col-md-8 col-md-offset-2">
+                <form class="contact-form" id="contact" role="form">
+                  <!-- IF MAIL SENT SUCCESSFULLY -->
+                  <h4 class="success">
+                    <i class="icon_check"></i> Your message has been sent successfully.
+                  </h4>
+                  <!-- IF MAIL SENDING UNSUCCESSFULL -->
+                  <h4 class="error">
+                    <i class="icon_error-circle_alt"></i> E-mail must be valid and message must be longer than 1 character.
+                  </h4>
+                  <div class="col-md-12">
+                    <input class="form-control input-box" id="email" type="email" name="email" placeholder="Your Email">
+                  </div>
+                  <div class="col-md-12">
+                    <textarea class="form-control textarea-box" id="message" name="message" rows="8" placeholder="Message"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <?php include __DIR__.'/../footer.php';?>
 
@@ -442,6 +261,10 @@ include __DIR__.'/../header.php';
     $(document).ready(function(){
       url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
       $.post(url);
+
+      $('#email-form-group').on('click', function () {
+        $('#password-form-group').show();
+      });
     });
     </script>
   </body>

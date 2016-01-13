@@ -53,6 +53,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/privacy'));
         $this->assertTrue($this->checkStatusCode('/profile', false, 302));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy'));
+        $this->assertTrue($this->checkStatusCode('/sendemail'));
         $this->assertTrue($this->checkStatusCode('/terms'));
         $this->assertTrue($this->checkStatusCode('/thankyou'));
         $this->assertTrue($this->checkStatusCode('/token', false, 404));
@@ -111,6 +112,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/privacy', true));
         $this->assertTrue($this->checkStatusCode('/profile', true));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy', true));
+        $this->assertTrue($this->checkStatusCode('/sendemail'));
         $this->assertTrue($this->checkStatusCode('/terms', true));
         $this->assertTrue($this->checkStatusCode('/thankyou', true));
         $this->assertTrue($this->checkStatusCode('/token', true, 404));
@@ -171,6 +173,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/privacy', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/profile', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/sendemail'));
         $this->assertTrue($this->checkStatusCode('/terms', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/thankyou', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/token', true, 404, true));

@@ -1,26 +1,9 @@
 <?php
-use \GiveToken\LandingPage;
-
 if (logged_in()) {
     header('Location: /profile');
 }
-/*
-if (!isset($_GET['action'])) {
-    // If the user hasn't been here, randomize the experience
-    // Otherwise, take them to the page they saw before
-    if (!isset($_SESSION['landing_page'], $_SESSION['landing_page']['script'], $_SESSION['landing_page']['id'])) {
-        $LandingPage = new LandingPage();
-        $_SESSION['landing_page']['script'] = $LandingPage->script;
-        $_SESSION['landing_page']['id'] = $LandingPage->id;
-    } else {
-        $LandingPage = new LandingPage($_SESSION['landing_page']['id']);
-    }
-    $LandingPage->recordHit($_COOKIE['visitor']);
-    include __DIR__.'/lp/'.$_SESSION['landing_page']['script'];
-} else {*/
-
-    define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
-    include __DIR__.'/header.php';
+define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
+include __DIR__.'/../header.php';
 ?>
 
 <script>
@@ -54,7 +37,7 @@ if (!isset($_GET['action'])) {
 <!-- SOLID COLOR BG -->
 <div class="deep-dark-bg" style="min-height:500px;">
 
-    <?php include __DIR__.'/navbar.php';?>
+    <?php include __DIR__.'/../navbar.php';?>
 
   <!-- CONTAINER -->
   <div class="container">
@@ -456,7 +439,7 @@ if (!isset($_GET['action'])) {
 </div>
 <!-- /END CONTAINER -->
 
-<?php include __DIR__.'/footer.php';?>
+<?php include __DIR__.'/../footer.php';?>
 
 <!-- =========================
     PAGE SPECIFIC SCRIPTS
@@ -476,4 +459,3 @@ if (isset($_GET['action']) && 'login' == $_GET['action']) {
 
 </body>
 </html>
-<?php /*}*/?>

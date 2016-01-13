@@ -66,9 +66,12 @@
 <footer id="contact" class="deep-dark-bg mt20">
 
 <div class="container">
-  <div class="verticleHeight40"></div>
   <!-- LOGO -->
-  <img src="/assets/img/logo-light.png" alt="LOGO" class="responsive-img" />
+  <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>
+      <img src="/assets/img/sizzle-logo.png" alt="LOGO">
+  <?php } else { ?>
+      <img src="/assets/img/logo-light.png" alt="LOGO">
+  <?php }?>
 
   <!-- SOCIAL ICONS -->
   <ul class="social-icons">
@@ -90,7 +93,8 @@
 
   <!-- COPYRIGHT TEXT -->
   <p class="copyright">
-    &copy;2015 GiveToken.com &amp; Giftly Inc., All Rights Reserved
+    &copy;2016
+    <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>GoSizzle.io,<?php }?> GiveToken.com &amp; Giftly Inc., All Rights Reserved.
   </p>
 
 </div>
