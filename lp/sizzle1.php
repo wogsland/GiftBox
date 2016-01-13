@@ -62,6 +62,11 @@ include __DIR__.'/../header.php';
       padding: 50px;
       margin: 0;
     }
+    #analyze-graph {
+      background-color: white;
+      padding-top: 15px;
+      width: 650px;
+    }
     #sizzle-contact-footer {
       background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
       padding: 50px;
@@ -148,11 +153,11 @@ include __DIR__.'/../header.php';
     <section id="what-is-sizzle">
       <div class="container">
         <div class="row">
-          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>What is Sizzle?</h2>
             <div class="btn show-more-btn">Show More ></div>
           </div>
-          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
           </div>
         </div>
@@ -162,7 +167,7 @@ include __DIR__.'/../header.php';
     <section id="sell-the-job">
       <div class="container">
         <div class="row">
-          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Sell the Job</h2>
             <div class="white-line">
             </div>
@@ -172,7 +177,7 @@ include __DIR__.'/../header.php';
             the candidate the kind of job and company
             that they have been searching for.
           </div>
-          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
           </div>
         </div>
@@ -182,7 +187,7 @@ include __DIR__.'/../header.php';
     <section id="put-a-bow-on-it">
       <div class="container">
         <div class="row">
-          <div class="col-md-3 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Put a Bow On It</h2>
             <div class="white-line">
             </div>
@@ -190,7 +195,7 @@ include __DIR__.'/../header.php';
             of skills. Using our "wrapper" functionality, create a message
             that stands out from other recruiters and other opportunities.
           </div>
-          <div class="col-md-9 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
           </div>
         </div>
@@ -213,10 +218,12 @@ include __DIR__.'/../header.php';
     <section id="analyze-and-split-test">
       <div class="container">
         <div class="row">
-          <div class="col-md-9 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+          <div class="col-md-8 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <div id="analyze-graph">
+              <img src="/assets/img/analyze_graph.png" alt="analyze_graph"width=600>
+            </div>
           </div>
-          <div class="col-md-3 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-4 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Analyze and Split Test</h2>
             <div class="white-line">
             </div>
