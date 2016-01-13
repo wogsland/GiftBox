@@ -31,38 +31,40 @@ class HTML
                 // regularize bullets
                 $text = self::replaceBullets($text);
 
-                // replace first bullet
-                if (0 === strpos($text, "•")) {
-                    $text = substr_replace($text, '<ul><li>', 0, strlen("•"));
-                } else {
-                    $pos = strpos($text, "\n•");
-                    $text = substr_replace($text, '</p><p><ul><li>', $pos, strlen("\n•"));
-                }
+                // find & process bulleted sections
+                $tempText = $text;
+                $sections = array();
+                while(strpos($tempText, "•") !== false) {
+                    $pos = strpos($tempText, "•");
+                    $sections[] = substr($tempText, 0, $pos);
+                    $textWithBullets = substr($tempText, $pos);
+                    //echo $textWithBullets;die;
 
-                // replace middle bullets
-                $text = str_replace("\n•", '</li><li>', $text);
-
-                //end the list
-                $pos = strrpos($text, '<li>');
-                $backend = substr($text, $pos);
-                if (strpos($backend, "\n") !== false) {
-                    $pos = strpos($backend, "\n");
-                    $pos = $pos + strlen($text) - strlen($backend);
-                    $text = substr_replace($text, '</li></ul></p><p>', $pos, strlen("\n"));
-                } else {
-                    // the end of the list is the end of the text
-                    $text = substr_replace($text, '</li></ul>', strlen($text), strlen("\n"));
+                    // find first newline not followed by bullet
+                    $pieces = explode("\n",$textWithBullets);
+                    $nextText = array_shift($pieces);
+                    //echo $nextText;die;
+                    $bulletSection = '';
+                    while (strpos($nextText, "•") === 0) {
+                        $bulletSection .= "\n".$nextText;
+                        $nextText = array_shift($pieces);
+                    }
+                    // bullets to html list tags
+                    $sections[] = self::bulletListTo($bulletSection);
+                    $tempText = $nextText."\n".implode("\n",$pieces);
                 }
+                //print_r($sections);
+                $text = implode("\n",$sections)."\n".$tempText;
             }
 
             // spacing between paragraphs
             $text = str_replace("\n", '</p><p>', $text);
 
-            // clean up empty paragraphs
-            $text = str_replace('<p></p>', '', $text);
-
             $html .= $text;
             $html .= '</p>';
+
+            // clean up empty paragraphs
+            $html = str_replace('<p></p>', '', $html);
         }
         return $html;
     }
@@ -124,6 +126,40 @@ class HTML
     {
         foreach (self::$bullets as $bullet) {
             $text = str_replace($bullet, '•', $text);
+        }
+        return $text;
+    }
+
+    /**
+     * Takes a single bulleted list with no other text and HTMLifies it
+     *
+     * @param string $text - plain text with bullets
+     *
+     * @return string - text with HTML list tags
+     */
+    private static function bulletListTo($text)
+    {
+        // replace first bullet
+        if (0 === strpos($text, "•")) {
+            $text = substr_replace($text, '<ul><li>', 0, strlen("•"));
+        } else {
+            $pos = strpos($text, "\n•");
+            $text = substr_replace($text, '</p><p><ul><li>', $pos, strlen("\n•"));
+        }
+
+        // replace middle bullets
+        $text = str_replace("\n•", '</li><li>', $text);
+
+        //end the list
+        $pos = strrpos($text, '<li>');
+        $backend = substr($text, $pos);
+        if (strpos($backend, "\n") !== false) {
+            $pos = strpos($backend, "\n");
+            $pos = $pos + strlen($text) - strlen($backend);
+            $text = substr_replace($text, '</li></ul></p><p>', $pos, strlen("\n"));
+        } else {
+            // the end of the list is the end of the text
+            $text = substr_replace($text, '</li></ul>', strlen($text), strlen("\n"));
         }
         return $text;
     }
