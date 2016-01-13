@@ -63,11 +63,21 @@ include __DIR__.'/../header.php';
       margin: 0;
     }
     #sizzle-contact-footer {
+      background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
+      padding: 50px;
       margin: 0;
     }
     #contact-container {
-      background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
       margin: 0;
+    }
+    #sizzle-contact-form {
+      background-color: black;
+      opacity: .3;
+      padding: 30px;
+    }
+    #contact-email, #contact-message {
+      margin-bottom: 20px;
+      background-color: black;
     }
     </style>
   </head>
@@ -222,30 +232,24 @@ include __DIR__.'/../header.php';
     <section id="sizzle-contact-footer">
       <div class="container" id="contact-container">
         <div class="row">
-          <div class="contact-box">
-            <!-- CONTACT BUTTON TO EXPAND OR COLLAPSE FORM -->
-            <a class="btn contact-button expand-form expanded"><i class="icon_mail_alt"></i></a>
-            <div class="row expanded-contact-form">
-              <div class="col-md-8 col-md-offset-2">
-                <form class="contact-form" id="contact" role="form">
-                  <!-- IF MAIL SENT SUCCESSFULLY -->
-                  <h4 class="success">
-                    <i class="icon_check"></i> Your message has been sent successfully.
-                  </h4>
-                  <!-- IF MAIL SENDING UNSUCCESSFULL -->
-                  <h4 class="error">
-                    <i class="icon_error-circle_alt"></i> E-mail must be valid and message must be longer than 1 character.
-                  </h4>
-                  <div class="col-md-12">
-                    <input class="form-control input-box" id="email" type="email" name="email" placeholder="Your Email">
-                  </div>
-                  <div class="col-md-12">
-                    <textarea class="form-control textarea-box" id="message" name="message" rows="8" placeholder="Message"></textarea>
-                  </div>
-                  <button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
-                </form>
+          <div class="col-md-offset-2 col-md-8">
+            <form id="sizzle-contact-form" role="form">
+              <!-- IF MAIL SENT SUCCESSFULLY -->
+              <h4 class="success">
+                <i class="icon_check"></i> Your message has been sent successfully.
+              </h4>
+              <!-- IF MAIL SENDING UNSUCCESSFULL -->
+              <h4 class="error">
+                <i class="icon_error-circle_alt"></i> E-mail must be valid and message must be longer than 1 character.
+              </h4>
+              <div class="col-md-12">
+                <input class="form-control input-box" id="contact-email" type="email" name="email" placeholder="Your Email">
               </div>
-            </div>
+              <div class="col-md-12">
+                <textarea class="form-control textarea-box" id="contact-message" name="message" rows="8" placeholder="Message"></textarea>
+              </div>
+              <button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
+            </form>
           </div>
         </div>
       </div>
@@ -259,6 +263,8 @@ include __DIR__.'/../header.php';
     <script src="/js/contact.min.js?v=<?php echo VERSION;?>"></script>
     <script>
     $(document).ready(function(){
+      $('h4.success').hide();
+      $('h4.error').hide();
       url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
       $.post(url);
 
