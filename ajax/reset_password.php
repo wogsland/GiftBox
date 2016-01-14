@@ -1,9 +1,8 @@
 <?php
+use \GiveToken\Service\GoogleMail;
 use \GiveToken\User;
 
 date_default_timezone_set('America/Chicago');
-
-require_once __DIR__.'/../mail.php';
 
 $success = 'false';
 $data = '';
@@ -43,7 +42,12 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $sender_email = 'GiveToken <founder@givetoken.com>';
-            sendMail($user->email_address, 'GiveToken Password Reset', $email_message, $sender_email);
+            $GoogleMail = new GoogleMail();
+            $GoogleMail->sendMail(
+                $user->email_address,
+                'GiveToken Password Reset',
+                $email_message, $sender_email
+            );
             $success = 'true';
             $data = 'Check your email.';
         } else {

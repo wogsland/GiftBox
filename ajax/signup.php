@@ -1,10 +1,10 @@
 <?php
 use \GiveToken\EventLogger;
+use \GiveToken\Service\GoogleMail;
 use \GiveToken\UserMilestone;
 use \GiveToken\User;
 
 date_default_timezone_set('America/Chicago');
-require_once __DIR__.'/../mail.php';
 
 $event = null;
 $user_id = null;
@@ -53,7 +53,13 @@ if (User::exists($user->email_address)) {
         $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
         $email_message = str_replace('{{link}}', $link, $email_message);
         $sender_email = 'GiveToken <founder@givetoken.com>';
-        sendMail($user->email_address, 'GiveToken Signup Confirmation', $email_message, $sender_email);
+        $GoogleMail = new GoogleMail();
+        $GoogleMail->sendMail(
+            $user->email_address,
+            'GiveToken Signup Confirmation',
+            $email_message,
+            $sender_email
+        );
     }
     $response['status'] = "SUCCESS";
     $response['message'] = "{$user->email_address} successsfully registered.";

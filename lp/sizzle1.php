@@ -46,6 +46,7 @@ include __DIR__.'/../header.php';
     }
     #left-div-2 {
       vertical-align: middle;
+      padding-top: 100px;
     }
     #sizzle-envelope {
       position: relative;
@@ -64,10 +65,18 @@ include __DIR__.'/../header.php';
       padding: 50px;
       margin: 0;
     }
+    #left-div-3 {
+      vertical-align: middle;
+      padding-top: 50px;
+    }
     #put-a-bow-on-it {
       background-image: linear-gradient(90deg, rgb(4,124,39), rgb(14,206,114));
       padding: 50px;
       margin: 0;
+    }
+    #left-div-4 {
+      vertical-align: middle;
+      padding-top: 80px;
     }
     #live-examples {
       background-color: white;
@@ -83,6 +92,10 @@ include __DIR__.'/../header.php';
       background-color: white;
       padding-top: 15px;
       width: 650px;
+    }
+    #right-div-5 {
+      vertical-align: middle;
+      padding-top: 50px;
     }
     #sizzle-contact-footer {
       background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
@@ -192,7 +205,7 @@ include __DIR__.'/../header.php';
     <section id="sell-the-job">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="left-div-3" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Sell the Job</h2>
             <div class="white-line">
             </div>
@@ -212,7 +225,7 @@ include __DIR__.'/../header.php';
     <section id="put-a-bow-on-it">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="left-div-4" class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Put a Bow On It</h2>
             <div class="white-line">
             </div>
@@ -220,7 +233,7 @@ include __DIR__.'/../header.php';
             of skills. Using our "wrapper" functionality, create a message
             that stands out from other recruiters and other opportunities.
           </div>
-          <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="right-div-4" class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=250>
           </div>
         </div>
@@ -245,10 +258,10 @@ include __DIR__.'/../header.php';
         <div class="row">
           <div class="col-md-8 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <div id="analyze-graph">
-              <img src="/assets/img/analyze_graph.png" alt="analyze_graph"width=600>
+              <img id="analyze-graph-img" src="/assets/img/analyze_graph.png" alt="analyze_graph"width=600>
             </div>
           </div>
-          <div class="col-md-4 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div  id="right-div-5" class="col-md-4 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Analyze and Split Test</h2>
             <div class="white-line">
             </div>
@@ -295,6 +308,17 @@ include __DIR__.'/../header.php';
     <script src="/js/contact.min.js?v=<?php echo VERSION;?>"></script>
     <script>
     $(document).ready(function(){
+      if ( $(window).width() < 739) {
+        // small screens adjustments
+        $('#partial-sizzle').hide();
+        $('#what-is-sizzle').hide();
+        $('#not-steak').hide();
+        setTimeout(function() {
+          $('#right-div-4').hide();
+        },1501);
+        $('#analyze-graph').width(300);
+        $('#analyze-graph-img').width(290);
+      }
       $('h4.success').hide();
       $('h4.error').hide();
       url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
