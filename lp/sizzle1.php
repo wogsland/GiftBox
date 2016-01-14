@@ -329,17 +329,18 @@ include __DIR__.'/../header.php';
       // process contact form
       $('#send-message-button').on('click',function(e) {
         e.preventDefault();
-        $.post("/ajax/sendemail", contactForm.serialize(),
+        $.post("/ajax/sendemail", $('#sizzle-contact-form').serialize(),
           function(data, textStatus, jqXHR){
             if(data.status === "SUCCESS") {
+              $( ".error" ).hide();
               $( ".success" ).show();
             } else {
+              $( ".success" ).hide();
               $( ".error" ).show();
             }
           }
         ).fail(function() {
-          // TODO
-          alert( "error3" );
+          $( ".error" ).show();
         });
       });
     });

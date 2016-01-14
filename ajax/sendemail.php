@@ -1,17 +1,27 @@
 <?php
 use \GiveToken\Service\GoogleMail;
 
-if (isset($_POST['email'], $_POST['message'])) {
-    $from = $_POST['name'] . ' <' . $_POST['email'] . '>';
+$status = 'ERROR';
+header('Content-Type: application/json');
+if (isset($_POST['email'], $_POST['message'])
+&& filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+    $vars = array('email', 'message', 'name', 'subject');
+    foreach ($vars as $var) {
+        $$var = isset($_POST[$var]) ? $_POST[$var] : '';
+    }
+    $from = $name . ' (' . $email . ')';
+    $subject = '' == $subject ? 'Message from '.$from : $subject;
+    $message .= "\r\n\r\n - $from";
+    if (DEVELOPMENT) {
+        $to = 'bwogsland@givetoken.com';
+    } else {
+        $to = 'founder@givetoken.com';
+    }
     $GoogleMail = new GoogleMail();
-    $GoogleMail->sendMail("founder@givetoken", $_POST['subject'], $_POST['message'], $from);
-
-    //This part is the response back to the AJAX object
-    // need to tell the ajax request that i am responding back with JSON
-    header('Content-Type: application/json');
-    // TODO: can we detect if sendMail() fails?
-    echo json_encode(array('status' => 'SUCCESS'));
-} else {
-    echo json_encode(array('status' => 'ERROR'));
+    if ($GoogleMail->sendMail($to, $subject, $message, 'founder@givetoken.com')) {
+        $status = 'SUCCESS';
+    }
 }
+echo json_encode(array('status' => $status));
+
 ?>
