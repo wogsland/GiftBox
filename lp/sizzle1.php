@@ -112,7 +112,6 @@ include __DIR__.'/../header.php';
     }
     #contact-email, #contact-message {
       margin-bottom: 20px;
-      background-color: black;
     }
     </style>
   </head>
@@ -276,7 +275,7 @@ include __DIR__.'/../header.php';
 
     <section id="sizzle-contact-footer">
       <div class="container" id="contact-container">
-        <div class="row">
+        <div id="contact" class="row">
           <div class="col-md-offset-2 col-md-8">
             <form id="sizzle-contact-form" role="form">
               <!-- IF MAIL SENT SUCCESSFULLY -->
@@ -285,7 +284,7 @@ include __DIR__.'/../header.php';
               </h4>
               <!-- IF MAIL SENDING UNSUCCESSFULL -->
               <h4 class="error">
-                <i class="icon_error-circle_alt"></i> E-mail must be valid and message must be longer than 1 character.
+                <i class="icon_error-circle_alt"></i> Unable to send message.
               </h4>
               <div class="col-md-12">
                 <input class="form-control input-box" id="contact-email" type="email" name="email" placeholder="Your Email">
@@ -293,7 +292,7 @@ include __DIR__.'/../header.php';
               <div class="col-md-12">
                 <textarea class="form-control textarea-box" id="contact-message" name="message" rows="8" placeholder="Message"></textarea>
               </div>
-              <button class="btn btn-primary btn-lg" id="send-message-button" onclick="sendMessage(event); return false;">Send Message</button>
+              <button class="btn btn-primary btn-lg" id="send-message-button">Send Message</button>
             </form>
           </div>
         </div>
@@ -305,7 +304,6 @@ include __DIR__.'/../header.php';
     <!-- =========================
         PAGE SPECIFIC SCRIPTS
     ============================== -->
-    <script src="/js/contact.min.js?v=<?php echo VERSION;?>"></script>
     <script>
     $(document).ready(function(){
       if ( $(window).width() < 739) {
@@ -326,6 +324,23 @@ include __DIR__.'/../header.php';
 
       $('#email-form-group').on('click', function () {
         $('#password-form-group').show();
+      });
+
+      // process contact form
+      $('#send-message-button').on('click',function(e) {
+        e.preventDefault();
+        $.post("/ajax/sendemail", contactForm.serialize(),
+          function(data, textStatus, jqXHR){
+            if(data.status === "SUCCESS") {
+              $( ".success" ).show();
+            } else {
+              $( ".error" ).show();
+            }
+          }
+        ).fail(function() {
+          // TODO
+          alert( "error3" );
+        });
       });
     });
     </script>
