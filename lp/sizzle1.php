@@ -15,7 +15,6 @@ include __DIR__.'/../header.php';
     }
     #signup-call-to-action {
       margin-top: 125px;
-      margin-bottom: 30px;
     }
     #left-div-1 {
       padding-top: 50px;
@@ -34,6 +33,9 @@ include __DIR__.'/../header.php';
       background-color: rgb(148,203,197);
       color: black;
     }
+    #partial-sizzle {
+      height: 700px;
+    }
     #inline-logo {
       margin-bottom: 50px;
     }
@@ -41,6 +43,9 @@ include __DIR__.'/../header.php';
       background-image: linear-gradient(90deg, rgb(9,167,68), rgb(91,179,238));
       padding: 50px;
       margin: 0;
+    }
+    #left-div-2 {
+      vertical-align: middle;
     }
     #sizzle-envelope {
       position: relative;
@@ -119,7 +124,7 @@ include __DIR__.'/../header.php';
     <section id="signup-call-to-action">
       <div class="container">
         <div class="row">
-          <div id="left-div-1" class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="left-div-1" class="col-md-7 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>How Important is Candidate Experience?</h2>
             Recruiting Agency, Corporation, or RPO<br />
             First Impressions Matter<br />
@@ -152,11 +157,8 @@ include __DIR__.'/../header.php';
             Email, InMail, Text
             <p>
           </div>
-          <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/images/mobile_token.png" alt="mobile screenshot" width=400>
-          </div>
-          <div class="col-md-12">
-            <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="Sizzle" id="inline-logo"> not the Steak</h1>
+          <div class="col-md-5 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/img/partial-screenshot.png" alt="screenshot" id="partial-sizzle">
           </div>
         </div>
       </div>
@@ -165,13 +167,23 @@ include __DIR__.'/../header.php';
     <section id="what-is-sizzle">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="left-div-2" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>What is Sizzle?</h2>
             <div class="btn show-more-btn">Show More ></div>
           </div>
-          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="right-div-2" class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/img/Env.png" alt="example token" id="sizzle-envelope"/>
             <img src="/assets/img/Horizontal_Token.png" alt="example token" id="sizzle-enveloped-token"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="not-steak">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="Sizzle" id="inline-logo"> not the Steak</h1>
           </div>
         </div>
       </div>
@@ -200,7 +212,7 @@ include __DIR__.'/../header.php';
     <section id="put-a-bow-on-it">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Put a Bow On It</h2>
             <div class="white-line">
             </div>
@@ -208,8 +220,8 @@ include __DIR__.'/../header.php';
             of skills. Using our "wrapper" functionality, create a message
             that stands out from other recruiters and other opportunities.
           </div>
-          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=400>
+          <div class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=250>
           </div>
         </div>
       </div>
