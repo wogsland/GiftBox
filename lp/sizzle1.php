@@ -141,12 +141,12 @@ include __DIR__.'/../header.php';
             Recruiting Agency, Corporation, or RPO<br />
             First Impressions Matter<br />
             <div id="signup-form-container">
-              <form id="sizzle-signup-form">
+              <form id="sizzle-signup-form" action="/ajax/signup" method="post">
                 <div class="form-group" id="email-form-group">
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                  <input type="email" class="form-control" id="signup_email" name="signup_email" placeholder="Email">
                 </div>
                 <div class="form-group" id="password-form-group" hidden>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control" id="signup_password" name="signup_password" placeholder="Password">
                 </div>
                 <?php /*
                 <div class="checkbox">
@@ -326,8 +326,31 @@ include __DIR__.'/../header.php';
         $('#password-form-group').show();
       });
 
+      // process sign up form
+      $('#continue-btn').on('click', function(e) {
+        //alert('click!');
+        //$('#sizzle-signup-form').submit();
+        $.post(
+          "/ajax/signup",
+          {
+            signup_email: $('#signup_email').val(),
+            signup_password: $('#signup_password').val()
+          },
+          function(data, textStatus, jqXHR){
+            if(data.status === "SUCCESS") {
+              window.location.href = '/thankyou?signup'
+            } else if (data.status === "ERROR") {
+              console.log(data.message);
+            }  else {
+              console.log("Unknown return status: "+data.status);
+            }
+        }).fail(function() {
+          console.log("Sign up failed.");
+        });
+      });
+
       // process contact form
-      $('#send-message-button').on('click',function(e) {
+      $('#send-message-button').on('click', function(e) {
         e.preventDefault();
         $.post("/ajax/sendemail", $('#sizzle-contact-form').serialize(),
           function(data, textStatus, jqXHR){
