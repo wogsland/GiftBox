@@ -42,6 +42,18 @@ include __DIR__.'/../header.php';
       padding: 50px;
       margin: 0;
     }
+    #sizzle-envelope {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 600px;
+    }
+    #sizzle-enveloped-token {
+      position: absolute;
+      top: 40px;
+      left: 50px;
+      width: 600px;
+    }
     #sell-the-job {
       background-image: linear-gradient(90deg, rgb(23,42,111), rgb(22,215,222));
       padding: 50px;
@@ -158,7 +170,8 @@ include __DIR__.'/../header.php';
             <div class="btn show-more-btn">Show More ></div>
           </div>
           <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+            <img src="/assets/img/Env.png" alt="example token" id="sizzle-envelope"/>
+            <img src="/assets/img/Horizontal_Token.png" alt="example token" id="sizzle-enveloped-token"/>
           </div>
         </div>
       </div>
@@ -178,7 +191,7 @@ include __DIR__.'/../header.php';
             that they have been searching for.
           </div>
           <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+            <img src="/assets/img/ipad.png" alt="example token" width=600>
           </div>
         </div>
       </div>
@@ -196,7 +209,7 @@ include __DIR__.'/../header.php';
             that stands out from other recruiters and other opportunities.
           </div>
           <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/images/upgraph.jpg" alt="example token" width=400>
+            <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=400>
           </div>
         </div>
       </div>
