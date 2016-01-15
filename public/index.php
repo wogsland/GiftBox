@@ -55,9 +55,6 @@ if (!isset($endpoint_parts[1])) {
                 case 'tokens':
                 include __DIR__.'/../admin/token_stats.php';
                 break;
-                case 'top_ten':
-                include __DIR__.'/../admin/top_ten.php';
-                break;
                 case 'transfer_token':
                 include __DIR__.'/../admin/transfer_token.php';
                 break;

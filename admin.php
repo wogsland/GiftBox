@@ -20,7 +20,6 @@ require __DIR__.'/header.php';
         </li>
         <li>
           Tokens:
-          <a href="/admin/top_ten">Top Ten</a> |
           <a href="/admin/tokens">All</a>
         </li>
         <li>
