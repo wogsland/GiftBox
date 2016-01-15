@@ -62,7 +62,7 @@ require __DIR__.'/header.php';
         $.post(
           '/ajax/password_reset/',
           {
-            reset_code: '<?php echo $reset_code;?>',
+            reset_code: '<?php echo isset($reset_code) ? $reset_code : '';?>',
             password: password1
           },
           function (data) {

@@ -48,22 +48,12 @@ function update($sql)
 
 function logged_in()
 {
-    $logged_in = false;
-    if (isset($_SESSION['user_id'])) {
-        $logged_in = true;;
-    }
-    return $logged_in;
+    return isset($_SESSION['user_id']);
 }
 
 function is_admin()
 {
-    $retval = false;
-    if (isset($_SESSION['admin'])) {
-        if ($_SESSION['admin'] == 'Y') {
-            $retval = true;
-        }
-    }
-    return $retval;
+    return (isset($_SESSION['admin']) && $_SESSION['admin'] == 'Y');
 }
 
 function debug()

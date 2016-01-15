@@ -11,6 +11,8 @@ if (!logged_in()) {
     header('Location: '.$app_url);
 }
 
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+
 if (isset($_GET['id'])) {
     $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
     $token_company = new RecruitingCompany($token->recruiting_company_id);
@@ -418,7 +420,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="use-existing-company-form">
             <div class="field-container">
             <?php
-                $companies = RecruitingToken::getUserCompanies($_SESSION['user_id']);
+                $companies = RecruitingToken::getUserCompanies($user_id);
                 $options = array();
                 foreach ($companies as $co) {
                     $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
@@ -438,7 +440,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="open-token-form">
             <div class="field-container">
             <?php
-                $user_tokens = RecruitingToken::getUserTokens($_SESSION['user_id']);
+                $user_tokens = RecruitingToken::getUserTokens($user_id);
                 $tokens = array();
                 foreach ($user_tokens as $token) {
                     $tokenCompanyName = ''!=$token->company ? $token->company : 'Unnamed Company';

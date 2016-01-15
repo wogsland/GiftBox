@@ -4,7 +4,7 @@ namespace GiveToken\Tests;
 /**
  * This class tests public/index.php
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/RoutingTest
+ * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/tests/RoutingTest
  */
 class RoutingTest
 extends \PHPUnit_Framework_TestCase

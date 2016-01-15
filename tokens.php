@@ -6,6 +6,8 @@ date_default_timezone_set('America/Chicago');
 if (!logged_in()) {
     header('Location: '.$app_root);
 }
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+
 
 define('TITLE', 'GiveToken.com - Tokens');
 require __DIR__.'/header.php';
@@ -29,7 +31,7 @@ require __DIR__.'/header.php';
         </thead>
         <tbody>
             <?php
-            $responses = RecruitingToken::getUserTokens($_SESSION['user_id']);
+            $responses = RecruitingToken::getUserTokens($user_id);
             foreach ($responses as $response) {
                 echo '<tr>';
                 echo "<td align=left>";

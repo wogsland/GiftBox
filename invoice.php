@@ -10,6 +10,7 @@ if (!logged_in()) {
     header('Location: '.$app_root);
 }
 
+$paid = false;
 Stripe::setApiKey($stripe_secret_key);
 if (isset($_GET['id'])) {
   $success = 'true';

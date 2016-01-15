@@ -125,7 +125,7 @@ if (!isset($endpoint_parts[1])) {
         include __DIR__.'/../thankyou.php';
         break;
         case 'token':
-        if ('recruiting' == $endpoint_parts[2] && isset($endpoint_parts[3])) {
+        if (isset($endpoint_parts[2],$endpoint_parts[3]) && 'recruiting' == $endpoint_parts[2]) {
             // don't display in native android browser
             $detect = new Mobile_Detect;
             if ($detect->isMobile()) {
