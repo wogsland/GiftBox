@@ -47,14 +47,14 @@ include __DIR__.'/../header.php';
     #sizzle-envelope {
       position: relative;
       top: 0;
-      left: 0;
+      left: 50px;
       width: 600px;
     }
     #sizzle-enveloped-token {
       position: absolute;
-      top: 40px;
-      left: 50px;
-      width: 600px;
+      top: 60px;
+      left: 0px;
+      width: 640px;
     }
     #sell-the-job {
       background-image: linear-gradient(90deg, rgb(23,42,111), rgb(22,215,222));
