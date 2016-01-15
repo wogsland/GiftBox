@@ -9,10 +9,6 @@ include __DIR__.'/../header.php';
     .white-line {
       margin-bottom: 10px;
     }
-    .show-more-btn {
-      background-color: black;
-      opacity: .3;
-    }
     #signup-call-to-action {
       margin-top: 125px;
     }
@@ -68,6 +64,18 @@ include __DIR__.'/../header.php';
     #left-div-3 {
       vertical-align: middle;
       padding-top: 50px;
+    }
+    #ipad-token-back {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 680px;
+    }
+    #ipad-token {
+      position: absolute;
+      top: 30px;
+      left: 90px;
+      width: 600px;
     }
     #put-a-bow-on-it {
       background-image: linear-gradient(90deg, rgb(4,124,39), rgb(14,206,114));
@@ -161,7 +169,7 @@ include __DIR__.'/../header.php';
             </div>
             <br />
             <h3>
-              Send engaging outbound material with Sizzle
+              Create enagaging material with Sizzle
             </h3>
             <div class="white-line">
             </div>
@@ -180,12 +188,57 @@ include __DIR__.'/../header.php';
       <div class="container">
         <div class="row">
           <div id="left-div-2" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <h2>What is Sizzle?</h2>
-            <div class="btn show-more-btn">Show More ></div>
+            <h2>Reduced Time</h2>
+            <div class="white-line"></div>
+            With more enagaging content, recruiters will see a
+            higher conversion rate. This means that recruiters will
+            need to source and outreach to fewer candidates,
+            creating more time for other placements.
           </div>
           <div id="right-div-2" class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/img/Env.png" alt="example token" id="sizzle-envelope"/>
             <img src="/assets/img/Horizontal_Token.png" alt="example token" id="sizzle-enveloped-token"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sell-the-job">
+      <div class="container">
+        <div class="row">
+          <div id="left-div-3" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Increased Revenue</h2>
+            <div class="white-line">
+            </div>
+            Improving placement rates provides value
+            for both corporate recruiters and agency
+            recruiters. Corporate recuiters spend less
+            mean lower cost per hire. Agency recruiters
+            can make placements quicker and increase
+            business.
+          </div>
+          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/img/ipad-back.png" alt="example token ipad" id="ipad-token-back">
+            <img src="/assets/img/ipad.png" alt="example token" id="ipad-token">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="put-a-bow-on-it">
+      <div class="container">
+        <div class="row">
+          <div id="left-div-4" class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>Increased Reputation</h2>
+            <div class="white-line">
+            </div>
+            Quicker, more efficient placements coupled with
+            an overall better candidate experience leads to a
+            stronger brand value, which in turn leads to new
+            customer acquisition.
+          </div>
+          <div id="right-div-4" class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=250>
           </div>
         </div>
       </div>
@@ -196,57 +249,6 @@ include __DIR__.'/../header.php';
         <div class="row">
           <div class="col-md-12">
             <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="Sizzle" id="inline-logo"> not the Steak</h1>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="sell-the-job">
-      <div class="container">
-        <div class="row">
-          <div id="left-div-3" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <h2>Sell the Job</h2>
-            <div class="white-line">
-            </div>
-            The candidate is engaged and wants to hear
-            more about the job. It's time to combine
-            pictures, videos, text and attachments to show
-            the candidate the kind of job and company
-            that they have been searching for.
-          </div>
-          <div class="col-md-8 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/img/ipad.png" alt="example token" width=600>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="put-a-bow-on-it">
-      <div class="container">
-        <div class="row">
-          <div id="left-div-4" class="col-md-6 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <h2>Put a Bow On It</h2>
-            <div class="white-line">
-            </div>
-            Candidates want personalization, not just a salary and set
-            of skills. Using our "wrapper" functionality, create a message
-            that stands out from other recruiters and other opportunities.
-          </div>
-          <div id="right-div-4" class="col-md-6 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <img src="/assets/img/token-iphone-cropped.png" alt="fake example" width=250>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="live-examples">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 wow fadeInBottom animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <h2>Live Examples</h2>
-            <div class="white-line">
-            </div>
-            See Token Creations from friends of GiveToken
           </div>
         </div>
       </div>
@@ -265,7 +267,7 @@ include __DIR__.'/../header.php';
             <div class="white-line">
             </div>
             Recruiters send hundreds of messages and need a way to track
-            the success of each message. GiveToken provides an analytics
+            the success of each message. Sizzle provides an analytics
             package that allows the recruiter to see what candidates actually
             engage with.
           </div>
