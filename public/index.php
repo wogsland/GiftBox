@@ -16,7 +16,7 @@ if (isset($pieces[1])) {
     $get_parts = array();
     foreach ($gets as $get) {
         $parts = explode('=', $get);
-        $get_parts[$parts[0]] = $parts[1];
+        $get_parts[$parts[0]] = isset($parts[1]) ? $parts[1] : null;
     }
 }
 
