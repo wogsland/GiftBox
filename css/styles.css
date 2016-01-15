@@ -851,6 +851,9 @@ object {
 /*---------------------------------------
    SECTION:  FOOTER
 -----------------------------------------*/
+footer {
+  padding-top: 20px;
+}
 
 footer .contact-box {
     margin-bottom: 78px;
