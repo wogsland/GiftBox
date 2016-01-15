@@ -30,7 +30,7 @@ if (!isset($endpoint_parts[1])) {
     switch ($endpoint_parts[1]) {
         case '':
         case 'index.html':
-        include __DIR__.'/../lp/old.php';
+        include __DIR__.'/../lp/sizzle1.php';
         break;
         case 'about':
         include __DIR__.'/../about.php';
