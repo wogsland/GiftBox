@@ -43,6 +43,7 @@ include __DIR__.'/../header.php';
     #left-div-2 {
       vertical-align: middle;
       padding-top: 100px;
+      color: white;
     }
     #sizzle-envelope {
       position: relative;
@@ -64,6 +65,7 @@ include __DIR__.'/../header.php';
     #left-div-3 {
       vertical-align: middle;
       padding-top: 50px;
+      color: white;
     }
     #ipad-token-back {
       position: relative;
@@ -85,6 +87,7 @@ include __DIR__.'/../header.php';
     #left-div-4 {
       vertical-align: middle;
       padding-top: 80px;
+      color: white;
     }
     #live-examples {
       background-color: white;
@@ -104,6 +107,7 @@ include __DIR__.'/../header.php';
     #right-div-5 {
       vertical-align: middle;
       padding-top: 50px;
+      color: white;
     }
     #sizzle-contact-footer {
       background-image: linear-gradient(135deg, rgb(11,91,229), rgb(22,211,93));
@@ -308,6 +312,12 @@ include __DIR__.'/../header.php';
     ============================== -->
     <script>
     $(document).ready(function(){
+      <?php
+      if (isset($_GET['action']) && 'login' == $_GET['action']) {
+          echo '$("#login-dialog").modal();';
+      }
+      ?>
+
       if ( $(window).width() < 739) {
         // small screens adjustments
         $('#partial-sizzle').hide();
