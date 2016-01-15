@@ -115,11 +115,16 @@ include __DIR__.'/../header.php';
       margin: 0;
     }
     #contact-container {
-      margin: 0;
+      margin: auto;
+      float: none;
+    }
+    #contact-form-column {
+      margin: auto;
+      float: none;
     }
     #sizzle-contact-form {
+      border-radius: 4px;
       background-color: black;
-      opacity: .3;
       padding: 30px;
     }
     #contact-email, #contact-message {
@@ -148,17 +153,17 @@ include __DIR__.'/../header.php';
     <section id="signup-call-to-action">
       <div class="container">
         <div class="row">
-          <div id="left-div-1" class="col-md-7 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
-            <h2>How Important is Candidate Experience?</h2>
+          <div id="left-div-1" class="col-md-7 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+            <h2>How Important is<br /> Candidate Experience?</h2>
             Recruiting Agency, Corporation, or RPO<br />
             First Impressions Matter<br />
             <div id="signup-form-container">
               <form id="sizzle-signup-form" action="/ajax/signup" method="post">
                 <div class="form-group" id="email-form-group">
-                  <input type="email" class="form-control" id="signup_email" name="signup_email" placeholder="Email">
+                  <input type="email" class="form-control" id="sizzle1_signup_email" name="sizzle1_signup_email" placeholder="Email" autocomplete="off" required>
                 </div>
                 <div class="form-group" id="password-form-group" hidden>
-                  <input type="password" class="form-control" id="signup_password" name="signup_password" placeholder="Password">
+                  <input type="password" class="form-control" id="sizzle1_signup_password" name="sizzle1_signup_password" placeholder="Password" autocomplete="off" required>
                 </div>
                 <?php /*
                 <div class="checkbox">
@@ -181,7 +186,7 @@ include __DIR__.'/../header.php';
             Email, InMail, Text
             <p>
           </div>
-          <div class="col-md-5 wow fadeInRight animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div class="col-md-5 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/img/partial-screenshot.png" alt="screenshot" id="partial-sizzle">
           </div>
         </div>
@@ -282,7 +287,7 @@ include __DIR__.'/../header.php';
     <section id="sizzle-contact-footer">
       <div class="container" id="contact-container">
         <div id="contact" class="row">
-          <div class="col-md-offset-2 col-md-8">
+          <div class="col-md-8" id="contact-form-column">
             <form id="sizzle-contact-form" role="form">
               <!-- IF MAIL SENT SUCCESSFULLY -->
               <h4 class="success">
@@ -345,8 +350,8 @@ include __DIR__.'/../header.php';
         $.post(
           "/ajax/signup",
           {
-            signup_email: $('#signup_email').val(),
-            signup_password: $('#signup_password').val()
+            signup_email: $('#sizzle1_signup_email').val(),
+            signup_password: $('#sizzle1_signup_password').val()
           },
           function(data, textStatus, jqXHR){
             if(data.status === "SUCCESS") {
