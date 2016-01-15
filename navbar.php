@@ -16,7 +16,11 @@
       <?php }?>
 
       <a class="navbar-brand" href="<?php echo $app_root ?>">
-        <img src="/assets/img/logo-light.png" alt="">
+        <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>
+            <img src="/assets/img/sizzle-logo.png" alt="">
+        <?php } else { ?>
+            <img src="/assets/img/logo-light.png" alt="">
+        <?php }?>
       </a>
 
     </div>

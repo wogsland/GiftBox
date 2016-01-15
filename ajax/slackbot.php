@@ -1,17 +1,12 @@
 <?php
+use \GiveToken\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 
 if ($google_app_engine && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
-    $url = "http://ipinfo.io/{$_SERVER['REMOTE_ADDR']}";
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-    $response = curl_exec($ch);
-    $locale = json_decode($response);
+    $IpinfoIo = new IpinfoIo();
+    $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
 
     //see if the visitor is NEW
     $new = '*New*';

@@ -41,7 +41,12 @@ body {
             $rows = array();
             while ($row = $results->fetch_assoc()) { ?>
                 <tr>
-                  <td><?php echo "{$row['first_name']} {$row['last_name']} ({$row['email_address']})";?></td>
+                  <td>
+                    <?php
+                    echo "<a href=\"/user/{$row['id']}\">{$row['first_name']} {$row['last_name']}</a>";
+                    echo " (<a href=\"mailto:{$row['email_address']}\">{$row['email_address']}</a>)";
+                    ?>
+                  </td>
                   <td><?php echo $row['last_access'];?></td>
                 </tr>
             <?php }?>

@@ -10,11 +10,14 @@ if (!logged_in()) {
     header('Location: '.$app_root);
 }
 
+$paid = false;
 Stripe::setApiKey($stripe_secret_key);
-$success = 'true';
-$data = Invoice::retrieve(array('id'=>$_GET['id']));
-$invoice = json_decode(ltrim($data, 'Stripe\Invoice JSON: '));
-$paid = ($invoice->ending_balance == 0);
+if (isset($_GET['id'])) {
+  $success = 'true';
+  $data = Invoice::retrieve(array('id'=>$_GET['id']));
+  $invoice = json_decode(ltrim($data, 'Stripe\Invoice JSON: '));
+  $paid = ($invoice->ending_balance == 0);
+}
 
 define('TITLE', 'GiveToken.com - Invoice Details');
 require __DIR__.'/header.php';
@@ -35,7 +38,7 @@ require __DIR__.'/header.php';
         <button class="btn btn-sm btn-primary pull-right" id="pay-now-button">Pay Now</button>
         <?php }?>
       <h2>Invoice Details</h2>
-        <?php if (isset($_SESSION['stripe_id'])) { ?>
+        <?php if (isset($_SESSION['stripe_id'], $invoice)) { ?>
         <table id="responsive-table" class="table table-striped table-hover">
           <thead>
             <th>Amount</th>
@@ -68,6 +71,7 @@ require __DIR__.'/header.php';
               'copy', 'csv', 'excel', 'pdf','print'
           ]
       });
+      <?php if (isset($invoice)) { ?>
       $('#pay-now-button').on('click', function (email, payFrom) {
         var handler = StripeCheckout.configure({
           key: '<?php echo $stripe_publishable_key; ?>',
@@ -83,7 +87,8 @@ require __DIR__.'/header.php';
           description: "GiveToken Invoice Balance",
           amount: <?php echo $invoice->ending_balance; ?>
         });
-      })
+      });
+      <?php }?>
   });
 
 

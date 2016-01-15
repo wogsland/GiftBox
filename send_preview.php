@@ -1,7 +1,6 @@
 <?php
 use \GiveToken\EventLogger;
-
-require_once 'mail.php';
+use \GiveToken\Service\GoogleMail;
 
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];
@@ -13,5 +12,6 @@ $event->log();
 
 // Send the email
 $message = '<a href="'.$preview_link.'">Click here to open your Token!</a>';
-sendMail($email_address, 'You have a Token to open!!!', $message, $sender_email);
+$GoogleMail = new GoogleMail();
+$GoogleMail->sendMail($email_address, 'You have a Token to open!!!', $message, $sender_email);
 ?>

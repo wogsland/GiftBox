@@ -1,5 +1,3 @@
-// <div class="modal-backdrop fade in"></div>
-
 var AccountUserEdit = React.createClass({
 
   getInitialState: function() {
@@ -50,11 +48,6 @@ var AccountUserEdit = React.createClass({
             <div className="form-group">
               <input className="form-control " type="text" placeholder="username" name="username" value={this.state.username} onChange={this.handleChange} />
             </div>
-{/*
-            <div className="form-group">
-              <textarea rows="2" className="form-control" placeholder="********"></textarea>
-            </div>
-*/}
           </div>
           <div className="modal-footer ">
             <button type="button" onClick={this.editUser} className="btn btn-lg standard-button2" style={{width: '100%'}}>

@@ -61,6 +61,43 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
         $expected .= $expected_list;
         $expected .= "</ul></p><p>Wasn't that great?</p>";
         $this->assertEquals($expected, HTML::to($bullet_list));
+
+        // Robbie's fail case - bullets start text
+        $text = "•	No college experience needed\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\n";
+        $text .= "•	Ability to make an extra point with 95% accuracy\n";
+        $expected = '<p><ul>';
+        $expected .= '<li>	No college experience needed</li>';
+        $expected .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $expected .= '<li>	Ability to make an extra point with 95% accuracy</li>';
+        $expected .= '</ul></p>';
+        $this->assertEquals($expected, HTML::to($text));
+
+        // single bullet
+        $text = "•	No college experience needed";
+        $expected = '<p><ul>';
+        $expected .= '<li>	No college experience needed</li>';
+        $expected .= '</ul></p>';
+        $this->assertEquals($expected, HTML::to($text));
+
+        // multiple bullet sections
+        $text = "•	No college experience needed\n";
+        $text .= "This is non bullet section 1.\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\n";
+        $text .= "This is non bullet section 2.\n";
+        $text .= "• Ability to make an extra point with 95% accuracy\n";
+        $text .= "This is non bullet section 3.\n";
+        $text .= "•This is bullet section 4!";
+        $expected = '<p><ul>';
+        $expected .= '<li>	No college experience needed</li>';
+        $expected .= '</ul></p><p>This is non bullet section 1.</p><p><ul>';
+        $expected .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $expected .= '</ul></p><p>This is non bullet section 2.</p><p><ul>';
+        $expected .= '<li> Ability to make an extra point with 95% accuracy</li>';
+        $expected .= '</ul></p><p>This is non bullet section 3.</p><p><ul>';
+        $expected .= '<li>This is bullet section 4!</li>';
+        $expected .= '</ul></p>';
+        $this->assertEquals($expected, HTML::to($text));
     }
 
     /**
@@ -87,6 +124,43 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
         $html .= "<p>Wasn't that great?</p>";
         $expected = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
         $this->assertEquals($expected, HTML::from($html));
+
+        // Robbie's fail case - bullets start text
+        $text = "•	No college experience needed\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "•	Ability to make an extra point with 95% accuracy\r\n";
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '<li>	Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p><p></p>';
+        $this->assertEquals($text, HTML::from($html));
+
+        // single bullet
+        $text = "•	No college experience needed";
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p>';
+        $this->assertEquals($text, HTML::from($html));
+
+        // multiple bullet sections
+        $text = "•	No college experience needed\r\n";
+        $text .= "This is non bullet section 1.\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "This is non bullet section 2.\r\n";
+        $text .= "• Ability to make an extra point with 95% accuracy\r\n";
+        $text .= "This is non bullet section 3.\r\n";
+        $text .= "•This is bullet section 4!";
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p><p>This is non bullet section 1.</p><p><ul>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '</ul></p><p>This is non bullet section 2.</p><p><ul>';
+        $html .= '<li> Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p><p>This is non bullet section 3.</p><p><ul>';
+        $html .= '<li>This is bullet section 4!</li>';
+        $html .= '</ul></p>';
+        $this->assertEquals($text, HTML::from($html));
     }
 
     /**
@@ -114,12 +188,58 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
 
         // carriage return & newline test
         // (this inverse assumes bullet is always '•')
-        $expected = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
+        $text = "This is my list\r\n•Nachoes\r\n•number 2\r\n•pizza\r\nWasn't that great?";
         $convolution1 = HTML::from(HTML::to($text));
         $this->assertEquals($text, $convolution1);
         $html = "<p>This is my list</p>";
         $html .= "<p><ul><li>Nachoes</li><li>number 2</li><li>pizza</li></ul></p>";
         $html .= "<p>Wasn't that great?</p>";
+        $convolution2 = HTML::to(HTML::from($html));
+        $this->assertEquals($html, $convolution2);
+
+        // Robbie's fail case - bullets start text
+        $text = "•	No college experience needed\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "•	Ability to make an extra point with 95% accuracy";
+        $convolution1 = HTML::from(HTML::to($text));
+        $this->assertEquals($text, $convolution1);
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '<li>	Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p>';
+        $convolution2 = HTML::to(HTML::from($html));
+        $this->assertEquals($html, $convolution2);
+
+        // single bullet
+        $text = "•	No college experience needed";
+        $convolution1 = HTML::from(HTML::to($text));
+        $this->assertEquals($text, $convolution1);
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p>';
+        $convolution2 = HTML::to(HTML::from($html));
+        $this->assertEquals($html, $convolution2);
+
+        // multiple bullet sections
+        $text = "•	No college experience needed\r\n";
+        $text .= "This is non bullet section 1.\r\n";
+        $text .= "•	Ability to kick a field goal over 45 yards with 75% accuracy\r\n";
+        $text .= "This is non bullet section 2.\r\n";
+        $text .= "• Ability to make an extra point with 95% accuracy\r\n";
+        $text .= "This is non bullet section 3.\r\n";
+        $text .= "•This is bullet section 4!";
+        $convolution1 = HTML::from(HTML::to($text));
+        $this->assertEquals($text, $convolution1);
+        $html = '<p><ul>';
+        $html .= '<li>	No college experience needed</li>';
+        $html .= '</ul></p><p>This is non bullet section 1.</p><p><ul>';
+        $html .= '<li>	Ability to kick a field goal over 45 yards with 75% accuracy</li>';
+        $html .= '</ul></p><p>This is non bullet section 2.</p><p><ul>';
+        $html .= '<li> Ability to make an extra point with 95% accuracy</li>';
+        $html .= '</ul></p><p>This is non bullet section 3.</p><p><ul>';
+        $html .= '<li>This is bullet section 4!</li>';
+        $html .= '</ul></p>';
         $convolution2 = HTML::to(HTML::from($html));
         $this->assertEquals($html, $convolution2);
     }

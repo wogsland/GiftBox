@@ -16,18 +16,21 @@ if (isset($pieces[1])) {
     $get_parts = array();
     foreach ($gets as $get) {
         $parts = explode('=', $get);
-        $get_parts[$parts[0]] = $parts[1];
+        $get_parts[$parts[0]] = isset($parts[1]) ? $parts[1] : null;
     }
 }
 
-// route to the appropriate endpoint
+/**
+ * Route to the appropriate endpoint
+   PLEASE ADD A TEST TO src/RoutingTest.php FOR EACH ENDPOINT ADDED HERE
+ */
 if (!isset($endpoint_parts[1])) {
     include __DIR__.'/../index.php';
 } else {
     switch ($endpoint_parts[1]) {
         case '':
         case 'index.html':
-        include __DIR__.'/../index.php';
+        include __DIR__.'/../lp/sizzle1.php';
         break;
         case 'about':
         include __DIR__.'/../about.php';
@@ -49,8 +52,8 @@ if (!isset($endpoint_parts[1])) {
                 case 'stalled_new_customers':
                 include __DIR__.'/../admin/stalled_new_customers.php';
                 break;
-                case 'top_ten':
-                include __DIR__.'/../admin/top_ten.php';
+                case 'tokens':
+                include __DIR__.'/../admin/token_stats.php';
                 break;
                 case 'transfer_token':
                 include __DIR__.'/../admin/transfer_token.php';
@@ -65,9 +68,6 @@ if (!isset($endpoint_parts[1])) {
         break;
         case 'ajax':
         include __DIR__.'/../ajax/route.php';
-        break;
-        case 'create':
-        include __DIR__.'/../create.php';
         break;
         case 'create_recruiting':
         include __DIR__.'/../create_recruiting.php';
@@ -89,9 +89,6 @@ if (!isset($endpoint_parts[1])) {
                 case 'pay_with_stripe.js':
                 include __DIR__.'/../pay_with_stripe.php';
                 break;
-                case 'create.js': // this file is too broken for yuicompressor
-                include __DIR__.'/../js/create.js';
-                break;
                 case 'JSXTransformer.js': // yuicompressor also barfs on this one
                 include __DIR__.'/../js/JSXTransformer.js';
                 break;
@@ -106,14 +103,14 @@ if (!isset($endpoint_parts[1])) {
         case 'payments':
         include __DIR__.'/../payments.php';
         break;
-        case 'profile':
-        include __DIR__.'/../profile.php';
-        break;
         case 'pricing':
         include __DIR__.'/../pricing.php';
         break;
         case 'privacy':
         include __DIR__.'/../privacypolicy.php';
+        break;
+        case 'profile':
+        include __DIR__.'/../profile.php';
         break;
         case 'recruiting_made_easy':
         include __DIR__.'/../lp/bc1.php';
@@ -125,7 +122,7 @@ if (!isset($endpoint_parts[1])) {
         include __DIR__.'/../thankyou.php';
         break;
         case 'token':
-        if ('recruiting' == $endpoint_parts[2]) {
+        if (isset($endpoint_parts[2],$endpoint_parts[3]) && 'recruiting' == $endpoint_parts[2]) {
             // don't display in native android browser
             $detect = new Mobile_Detect;
             if ($detect->isMobile()) {
@@ -137,6 +134,8 @@ if (!isset($endpoint_parts[1])) {
                 }
             }
             include __DIR__.'/../recruiting_token.build.html';
+        } else {
+            include __DIR__.'/../error.php';
         }
         break;
         case 'tokens':
@@ -151,10 +150,13 @@ if (!isset($endpoint_parts[1])) {
         case 'upload':
         include __DIR__.'/../upload.php';
         break;
+        case 'user':
+        include __DIR__.'/../admin/user_info.php';
+        break;
         case 'test':
         // this endpoint is just for non-production testing
         if (DEVELOPMENT) {
-          include __DIR__.'/../lp/bc1.php';
+          include __DIR__.'/../lp/sizzle1.php';
           break;
         }
         default:

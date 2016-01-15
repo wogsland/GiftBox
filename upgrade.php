@@ -3,9 +3,11 @@ use \GiveToken\User;
 
 require_once __DIR__.'/config.php';
 
-if (!logged_in()) {
+if (!logged_in() || !isset($_SESSION['email'])) {
     header('Location: '.$app_url.'pricing');
 }
+
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
 define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
 require __DIR__.'/header.php';
@@ -36,7 +38,7 @@ require __DIR__.'/header.php';
   <button type="button"
     id="upgrade-button"
     class="btn btn-success"
-    onclick="payWithStripe('<?php echo $_SESSION['email'];?>','UPGRADE')">
+    onclick="payWithStripe('<?php echo $email;?>','UPGRADE')">
     Upgrade <i class="fa fa-chevron-right"></i>
   </button>
 

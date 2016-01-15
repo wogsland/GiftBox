@@ -56,10 +56,13 @@ class UserMilestone
                     $name = 'Customer Milestone Bot';
                     if (DEVELOPMENT) {
                         $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
+                        // this is turned off to avoid spamming Slack too much
+                        // turn it on to test specific features
+                        $slackHandler->setLevel(10000);
                     } else {
                         $slackHandler = new SlackHandler(SLACK_TOKEN, '#customers', $name, false);
+                        $slackHandler->setLevel(Logger::DEBUG);
                     }
-                    $slackHandler->setLevel(Logger::DEBUG);
                     $milestoneLogger->pushHandler($slackHandler);
                     $milestoneLogger->log(200, "{$User->email_address} achieved the *{$Milestone->name}* milestone.");
                 } catch (Exception $e) {
@@ -84,7 +87,7 @@ class UserMilestone
      */
     public static function stalledCustomers()
     {
-        $query = "SELECT first_name, last_name, email_address,
+        $query = "SELECT user.id, first_name, last_name, email_address,
                   COALESCE(MAX(web_request.created), 'Never') AS last_active,
                   (SELECT GROUP_CONCAT(milestone.`name`, ', ')
                    FROM user_milestone

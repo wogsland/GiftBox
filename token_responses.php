@@ -6,6 +6,7 @@ date_default_timezone_set('America/Chicago');
 if (!logged_in()) {
     header('Location: '.$app_root);
 }
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
 
 define('TITLE', 'GiveToken.com - Token Responses');
 require __DIR__.'/header.php';
@@ -31,7 +32,7 @@ require __DIR__.'/header.php';
         <tbody>
             <?php
             $RecruitingTokenResponse = new RecruitingTokenResponse();
-            $responses = $RecruitingTokenResponse->get($_SESSION['user_id']);
+            $responses = $RecruitingTokenResponse->get($user_id);
             foreach ($responses as $response) {
                 echo '<tr>';
                 echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['job_title']}</a><i hidden>{$response['long_id']}</i></td>";
