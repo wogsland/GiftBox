@@ -69,6 +69,9 @@ if (!isset($endpoint_parts[1])) {
         case 'ajax':
         include __DIR__.'/../ajax/route.php';
         break;
+        case 'api_documentation':
+        include __DIR__.'/../api_documentation.php';
+        break;
         case 'create_recruiting':
         include __DIR__.'/../create_recruiting.php';
         break;

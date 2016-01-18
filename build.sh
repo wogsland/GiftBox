@@ -65,6 +65,7 @@ yuicompressor js/signup.js -o public/js/signup.min.js
 yuicompressor js/preloader.js -o public/js/preloader.min.js
 yuicompressor js/jquery.nav.js -o public/js/jquery.nav.min.js
 yuicompressor js/jquery.fitvids.js -o public/js/jquery.fitvids.min.js
+json-minify js/api-v1.json > public/js/api-v1.json
 echo "JavaScript minified"
 echo ""
 

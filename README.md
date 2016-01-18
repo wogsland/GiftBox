@@ -99,9 +99,10 @@ and build the recruiting token with
 which creates `recruiting_token.build.html` & `recruiting_token.build.js`.
 NB: it treats PHP like a comment and removes it.
 
-Additionally, YUI compressor is the tool we use for general minimization:
+Additionally, YUI compressor & json-minify are the tools we use for minimization:
 
     npm install -g yuicompressor
+    npm install -g json-minify
 
 ## <a id="branching"></a>Branching Strategy
 
