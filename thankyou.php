@@ -7,7 +7,7 @@ if (isset($_GET['signup'])) {
     $message = 'Thank you for being awesome.<br/>';
 }
 
-define('TITLE', 'GiveToken.com - Thank You!');
+define('TITLE', 'Sizzle - Thank You!');
 require __DIR__.'/header.php';
 
 ?>

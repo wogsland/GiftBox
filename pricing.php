@@ -1,7 +1,7 @@
 <?php
 use \GiveToken\User;
 
-define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
+define('TITLE', 'Sizzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 ?>
 </head>

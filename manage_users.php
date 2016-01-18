@@ -6,7 +6,7 @@ require_once 'config.php';
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
-define('TITLE', 'GiveToken.com - Manage Users');
+define('TITLE', 'Sizzle - Manage Users');
 require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" href="css/users_groups.min.css">

@@ -2,7 +2,7 @@
 if (logged_in()) {
     header('Location: /profile');
 }
-define('TITLE', 'GiveToken.com - Create your next message with GiveToken');
+define('TITLE', 'Sizzle - Create your next message with GiveToken');
 include __DIR__.'/../header.php';
 ?>
 

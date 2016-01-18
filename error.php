@@ -6,7 +6,7 @@ require_once 'config.php';
 // This page is to 'page not found' errors
 http_response_code(404);
 
-define('TITLE', 'GiveToken.com - Error');
+define('TITLE', 'Sizzle - Error');
 require __DIR__.'/header.php';
 
 ?>

@@ -5,7 +5,7 @@ if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'GiveToken.com - Active Users');
+define('TITLE', 'Sizzle - Active Users');
 require __DIR__.'/../header.php';
 ?>
 <style>

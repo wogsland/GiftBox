@@ -34,8 +34,8 @@ To create a local instance of the givetoken database, refer [here](https://docs.
 If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like
 
     <VirtualHost *:80>
-        ServerAdmin username@givetoken.com
-        ServerName givetoken.local
+        ServerAdmin username@gosizzle.io
+        ServerName gosizzle.local
         DocumentRoot "/Library/Webserver/Documents/GiftBox/public"
 
         <Directory "/Library/Webserver/Documents/GiftBox/public">

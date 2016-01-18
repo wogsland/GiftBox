@@ -5,7 +5,7 @@ if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'GiveToken.com - Stalled Customers');
+define('TITLE', 'Sizzle - Stalled Customers');
 require __DIR__.'/../header.php';
 ?>
 <style>

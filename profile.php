@@ -8,7 +8,7 @@ $user_id = null;
 if (!logged_in()) {
     header('Location: '.$app_root);
 }
-define('TITLE', 'GiveToken.com - Profile');
+define('TITLE', 'Sizzle - Profile');
 require __DIR__.'/header.php';
 ?>
 

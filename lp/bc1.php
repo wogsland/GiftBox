@@ -33,9 +33,9 @@
 <!-- JQUERY -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-<title>GiveToken - Get Your Recruiting Emails Sizzling!</title>
+<title>Sizzle - Get Your Recruiting Emails Sizzling!</title>
 
-<meta name="description" content="GiveToken - Get Your Recruiting Emails Sizzling!" />
+<meta name="description" content="Sizzle - Get Your Recruiting Emails Sizzling!" />
 <meta name="theme-color" content="#0066cc">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="viewport" id="viewport-iphone5" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />

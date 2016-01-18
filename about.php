@@ -1,7 +1,7 @@
 <?php
 use \GiveToken\User;
 
-define('TITLE', 'GiveToken.com - About');
+define('TITLE', 'Sizzle - About');
 require __DIR__.'/header.php';
 ?>
 <style>

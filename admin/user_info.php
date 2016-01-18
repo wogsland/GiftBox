@@ -25,7 +25,7 @@ if (isset($endpoint_parts[2]) && (int) $endpoint_parts[2] > 0) {
     $user_id = 0;
 }
 
-define('TITLE', 'GiveToken.com - UserInfo');
+define('TITLE', 'Sizzle - UserInfo');
 require __DIR__.'/../header.php';
 ?>
 <style>
