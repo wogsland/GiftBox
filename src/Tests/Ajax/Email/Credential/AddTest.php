@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests\Ajax\Email\Credential;
+namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use GiveToken\EmailCredential;
+use Sizzle\EmailCredential;
 
 /**
  * This class tests the ajax endpoint to add email credentials.

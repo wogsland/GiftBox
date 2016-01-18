@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\Social;
+use \Sizzle\Social;
 
 /**
  * This class tests the Social class
@@ -25,6 +25,6 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $result = new Social();
-        $this->assertEquals('GiveToken\Social', get_class($result));
+        $this->assertEquals('Sizzle\Social', get_class($result));
     }
 }

@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\UserMilestone;
-use \GiveToken\User;
+use \Sizzle\UserMilestone;
+use \Sizzle\User;
 
 /**
  * This class tests the UserMilestone & Milestone classes
@@ -45,7 +45,7 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     {
         // id case
         $UserMilestone = new UserMilestone($this->User->getId(), $this->milestone_id);
-        $this->assertEquals('GiveToken\UserMilestone', get_class($UserMilestone));
+        $this->assertEquals('Sizzle\UserMilestone', get_class($UserMilestone));
         $this->assertTrue(isset($UserMilestone->id));
         $this->assertEquals($this->User->getId(), $UserMilestone->user_id);
         $this->assertEquals($this->milestone_id, $UserMilestone->milestone_id);
@@ -54,7 +54,7 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
         // name case
         $UserMilestone = new UserMilestone($this->User->getId(), $this->milestone_name);
         //print_r($UserMilestone);
-        $this->assertEquals('GiveToken\UserMilestone', get_class($UserMilestone));
+        $this->assertEquals('Sizzle\UserMilestone', get_class($UserMilestone));
         $this->assertTrue(isset($UserMilestone->id));
         $this->assertEquals($this->User->getId(), $UserMilestone->user_id);
         $this->assertEquals($this->milestone_id, $UserMilestone->milestone_id);

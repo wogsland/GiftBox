@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 class RecruitingCompany
 {
@@ -27,7 +27,7 @@ class RecruitingCompany
         if ($id !== null) {
             $company = execute_query(
                 "SELECT * FROM recruiting_company WHERE id = '$id'"
-            )->fetch_object("GiveToken\RecruitingCompany");
+            )->fetch_object("Sizzle\RecruitingCompany");
             if ($company) {
                 foreach (get_object_vars($company) as $key => $value) {
                     if (isset($value)) {

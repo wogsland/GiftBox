@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\Service\IpinfoIo;
+use \Sizzle\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 

@@ -1,5 +1,5 @@
 <?php
-use GiveToken\City;
+use Sizzle\City;
 
 // collect id
 $id = isset($endpoint_parts[4]) ? (int) $endpoint_parts[4] : 0;

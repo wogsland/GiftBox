@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests\Ajax\Email;
+namespace Sizzle\Tests\Ajax\Email;
 
-use \GiveToken\EmailCredential;
-use \GiveToken\User;
+use \Sizzle\EmailCredential;
+use \Sizzle\User;
 
 /**
  * This class tests the ajax endpoint to send emails.

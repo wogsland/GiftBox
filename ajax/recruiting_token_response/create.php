@@ -1,5 +1,5 @@
 <?php
-use GiveToken\RecruitingTokenResponse;
+use Sizzle\RecruitingTokenResponse;
 
 // collect info from url
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';

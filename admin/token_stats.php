@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\RecruitingTokenResponse;
+use \Sizzle\RecruitingTokenResponse;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);

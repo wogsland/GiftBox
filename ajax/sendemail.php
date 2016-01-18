@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\Service\GoogleMail;
+use \Sizzle\Service\GoogleMail;
 
 $status = 'ERROR';
 header('Content-Type: application/json');

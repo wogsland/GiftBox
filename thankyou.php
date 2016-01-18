@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 if (isset($_GET['signup'])) {
     $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';

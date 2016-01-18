@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\EventLogger;
+use \Sizzle\EventLogger;
 
 $response['login_type'] = $_SESSION['login_type'];
 $response['app_root'] = $app_root;

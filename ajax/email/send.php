@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\EmailCredential;
-use \GiveToken\EmailSent;
+use \Sizzle\EmailCredential;
+use \Sizzle\EmailSent;
 
 $success = 'false';
 $data = '';

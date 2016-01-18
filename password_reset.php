@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 // make sure the secret is valid
 if (isset($_GET['secret'])) {

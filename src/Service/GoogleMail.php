@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Service;
+namespace Sizzle\Service;
 
 use google\appengine\api\mail\Message;
 

@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use GiveToken\HTML;
+use Sizzle\HTML;
 
 /**
  * This class tests the HTML class
@@ -17,7 +17,7 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
     {
         // instantiation check
         $result = new HTML();
-        $this->assertEquals('GiveToken\HTML', get_class($result));
+        $this->assertEquals('Sizzle\HTML', get_class($result));
     }
 
     /**
@@ -26,7 +26,7 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
     public function testTo()
     {
         // check for static method
-        $this->assertTrue(method_exists('GiveToken\HTML', 'to'));
+        $this->assertTrue(method_exists('Sizzle\HTML', 'to'));
 
         // empty string test
         $text = '';
@@ -106,7 +106,7 @@ class HTMLTest extends \PHPUnit_Framework_TestCase
     public function testFrom()
     {
         // check for static method
-        $this->assertTrue(method_exists('GiveToken\HTML', 'from'));
+        $this->assertTrue(method_exists('Sizzle\HTML', 'from'));
 
         // empty string test
         $html = '';

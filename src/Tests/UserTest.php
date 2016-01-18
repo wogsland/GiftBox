@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\User;
+use \Sizzle\User;
 
 /**
  * This class tests the User class
@@ -26,7 +26,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $result = new User();
-        $this->assertEquals('GiveToken\User', get_class($result));
+        $this->assertEquals('Sizzle\User', get_class($result));
         $this->assertFalse(isset($result->email_address));
     }
 }

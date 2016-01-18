@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use GiveToken\DatabaseEntity;
+use Sizzle\DatabaseEntity;
 /**
  * This class tests the DatabaseEntity class
  *
@@ -40,7 +40,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $result = new DatabaseEntity();
-        $this->assertEquals('GiveToken\DatabaseEntity', get_class($result));
+        $this->assertEquals('Sizzle\DatabaseEntity', get_class($result));
         $this->assertFalse(isset($result->id));
         $this->assertFalse(isset($result->name));
 

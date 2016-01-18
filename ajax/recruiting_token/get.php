@@ -1,7 +1,7 @@
 <?php
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\UserMilestone;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\UserMilestone;
 
 date_default_timezone_set('America/Chicago');
 

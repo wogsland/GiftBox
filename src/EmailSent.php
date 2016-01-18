@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 /**
  * This class is for database interaction with emails sent by customers.
@@ -31,7 +31,7 @@ class EmailSent
             $token = execute_query(
                 "SELECT * FROM email_sent
                 WHERE id = '$id'"
-            )->fetch_object("GiveToken\EmailSent");
+            )->fetch_object("Sizzle\EmailSent");
             if (is_object($token)) {
                 foreach (get_object_vars($token) as $key => $value) {
                     $this->$key = $value;

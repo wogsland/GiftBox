@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\Service\GoogleMail;
+use \Sizzle\EventLogger;
+use \Sizzle\Service\GoogleMail;
 
 $email_address = $_POST["email"];
 $preview_link = $_POST["preview-link"];

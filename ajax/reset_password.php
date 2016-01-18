@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\Service\GoogleMail;
-use \GiveToken\User;
+use \Sizzle\Service\GoogleMail;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 

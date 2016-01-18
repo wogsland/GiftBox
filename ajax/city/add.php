@@ -1,5 +1,5 @@
 <?php
-use GiveToken\City;
+use Sizzle\City;
 
 $success = 'false';
 $data = '';

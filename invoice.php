@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\RecruitingToken;
+use \Sizzle\RecruitingToken;
 use \Stripe\Invoice;
 use \Stripe\Stripe;
 

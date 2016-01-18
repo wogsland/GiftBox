@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\UserGroup;
+use \Sizzle\UserGroup;
 
 require_once 'config.php';
 

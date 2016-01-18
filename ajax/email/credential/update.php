@@ -1,2 +1,2 @@
 <?php 
-use \GiveToken\EmailCredential;
+use \Sizzle\EmailCredential;

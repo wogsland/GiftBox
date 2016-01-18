@@ -1,10 +1,10 @@
 <?php
-namespace GiveToken\Tests\Ajax\RecruitingToken;
+namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingCompanyImage;
-use \GiveToken\RecruitingToken;
-use \GiveToken\User;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingCompanyImage;
+use \Sizzle\RecruitingToken;
+use \Sizzle\User;
 
 /**
  * This class tests the ajax endpoint to get the images for a token.

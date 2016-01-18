@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);

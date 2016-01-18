@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\UserMilestone;
+use \Sizzle\UserMilestone;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);

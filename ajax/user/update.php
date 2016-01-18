@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
-use \GiveToken\EventLogger;
+use \Sizzle\User;
+use \Sizzle\EventLogger;
 
 function get_post($index)
 {

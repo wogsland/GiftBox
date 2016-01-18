@@ -1,9 +1,9 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\EmailCredential;
-use \GiveToken\EmailSent;
-use \GiveToken\User;
+use \Sizzle\EmailCredential;
+use \Sizzle\EmailSent;
+use \Sizzle\User;
 
 /**
  * This class tests the EmailSent class
@@ -53,7 +53,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // no params
         $result = new EmailSent();
-        $this->assertEquals('GiveToken\EmailSent', get_class($result));
+        $this->assertEquals('Sizzle\EmailSent', get_class($result));
 
         // test with bad id
         $result2 = new EmailSent(-1);

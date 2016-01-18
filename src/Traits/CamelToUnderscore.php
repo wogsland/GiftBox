@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Traits;
+namespace Sizzle\Traits;
 
 /**
  * Function to convert camel case to underscore

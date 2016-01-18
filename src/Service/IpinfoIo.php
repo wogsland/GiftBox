@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Service;
+namespace Sizzle\Service;
 
 /**
  * This class is for interacting with ipinfo.io

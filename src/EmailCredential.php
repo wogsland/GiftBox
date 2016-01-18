@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 /**
  * This class is for database interaction with email credentials.
@@ -26,7 +26,7 @@ class EmailCredential
                 "SELECT * FROM email_credential
                 WHERE id = '$id'
                 AND deleted IS NULL"
-            )->fetch_object("GiveToken\EmailCredential");
+            )->fetch_object("Sizzle\EmailCredential");
             if (is_object($token)) {
                 foreach (get_object_vars($token) as $key => $value) {
                     $this->$key = $value;

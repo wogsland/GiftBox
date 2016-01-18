@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 define('TITLE', 'Sizzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';

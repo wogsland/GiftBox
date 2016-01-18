@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;

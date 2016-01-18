@@ -1,5 +1,5 @@
 <?php
-use GiveToken\RecruitingCompanyImage;
+use Sizzle\RecruitingCompanyImage;
 
 date_default_timezone_set('America/Chicago');
 

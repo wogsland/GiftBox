@@ -1,7 +1,7 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\UserMilestone;
-use \GiveToken\User;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 
