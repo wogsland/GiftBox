@@ -31,19 +31,19 @@ function signupSuccess(app_root, signupType, userInfo) {
   } else {
     email = $("#signup_email").val();
   }
-  $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with GiveToken!</span></div>');
+  $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with Sizzle!</span></div>');
 
   if ($("#signup_level").val() == 2) {
     payWithStripe(email, "SIGNUP");
   } else {
     if (userInfo.reg_type == "FACEBOOK") {
-      signupInfo("Logging into GiveToken...");
+      signupInfo("Logging into Sizzle...");
       userInfo.login_email = userInfo.signup_email;
       userInfo.login_type = userInfo.reg_type;
       processLogin(userInfo);
     } else {
       signupClose();
-      openMessage("Welcome!", "You have successfully signed up with GiveToken.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
+      openMessage("Welcome!", "You have successfully signed up with Sizzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
     }
   }
 }

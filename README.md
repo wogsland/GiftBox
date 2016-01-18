@@ -1,4 +1,4 @@
-# GiveToken
+# GoSizzle.io
 
 ## Table of Contents
 1. [Set Up](#set-up)

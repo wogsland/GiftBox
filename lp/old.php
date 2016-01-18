@@ -2,7 +2,7 @@
 if (logged_in()) {
     header('Location: /profile');
 }
-define('TITLE', 'Sizzle - Create your next message with GiveToken');
+define('TITLE', 'Sizzle - Create your next message with Sizzle');
 include __DIR__.'/../header.php';
 ?>
 
@@ -102,7 +102,7 @@ include __DIR__.'/../header.php';
           </div>
 
           <p>
-            Recruiters send hundreds of messages and need a way to track the success of each message. GiveToken provides an analytics package that allows the recruiter to see what candidates actually engage with.
+            Recruiters send hundreds of messages and need a way to track the success of each message. Sizzle provides an analytics package that allows the recruiter to see what candidates actually engage with.
           </p>
 
 
@@ -296,7 +296,7 @@ include __DIR__.'/../header.php';
             The candidate is engaged and wants to hear more about the job. It's
             time to combine pictures, videos, text and attachments to show the
             candidate the kind of job and company that they have been searching
-            for. <strong>GiveToken</strong> adds that extra level of depth
+            for. <strong>Sizzle</strong> adds that extra level of depth
             today's candidates are looking for.
             <a href="/free_trial" id="light-free-link">See for yourself.</a>
           </p>
@@ -324,7 +324,7 @@ include __DIR__.'/../header.php';
   <div class="section-header wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
 
 
-    <h2 class="white-text">Friends of GiveToken</h2>
+    <h2 class="white-text">Friends of Sizzle</h2>
 
     <div class="colored-line">
     </div>

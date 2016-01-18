@@ -77,7 +77,7 @@
 
   <h1>Recruiting made easy</h1>
   <p id="subhead">
-    GiveToken’s tool takes a boring recruiting email and transforms it into an
+    Sizzle’s tool takes a boring recruiting email and transforms it into an
     interactive job opportunity with every response seamlessly entering your CRM.
     All without any additional effort by the recruiter!
   </p>
@@ -108,7 +108,7 @@
 
 <section class="gt-home-reasons">
   <hr>
-  <h1>The 3 R’s of GiveToken</h1>
+  <h1>The 3 R’s of Sizzle</h1>
 
   <h2>Reduced Placement Time</h2>
   <p>
@@ -137,9 +137,9 @@
 
   <hr>
 
-  <h2>Move fast with GiveToken</h2>
+  <h2>Move fast with Sizzle</h2>
   <p>
-    Timing is everything. GiveToken will help you widen the recruiting funnel
+    Timing is everything. Sizzle will help you widen the recruiting funnel
     by increasing candidate engagement allowing you better selection in
     choosing the right candidate to place with the right company, lowering your
     time-to-hire.
@@ -149,10 +149,10 @@
 
   <h2>Innovating, Growing, Learning</h2>
   <p>
-    GiveToken brings best in class tools to a new product in the underserved
+    Sizzle brings best in class tools to a new product in the underserved
     market of email recruiting. While email is already the most effective form
     of communication in terms of ROI, little has been done to optimize that
-    return. GiveToken will take you to the next level.
+    return. Sizzle will take you to the next level.
   </p>
 
   <p>
@@ -170,7 +170,7 @@
   <h5>Get Your Recruiting Emails Sizzling!</h5>
 
   <p>
-    Copyright &copy;2015 GiveToken. All rights reserved.
+    Copyright &copy;2016 Sizzle. All rights reserved.
   </p>
 
   <p>

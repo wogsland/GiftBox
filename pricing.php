@@ -66,13 +66,13 @@ require __DIR__.'/header.php';
         <!-- Change so that this links to the sign up -->
         <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
         <p>
-          Thanks for looking at GiveToken! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
+          Thanks for looking at Sizzle! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
         </p>
         <p>
           We can be reached at rzettler@gosizzle.io
       </div>
       <div class ="modal-footer">
-        GiveToken
+        Sizzle
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
