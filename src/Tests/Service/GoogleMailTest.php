@@ -41,10 +41,10 @@ extends \PHPUnit_Framework_TestCase
         $mock = \Mockery::mock('overload:\\Sizzle\\Service\\GoogleMail');
         $this->assertEquals('Sizzle\Service\GoogleMail', get_class($mock));
         $mock->shouldReceive('sendMail')
-             ->with('founder@givetoken.com','hi','hi','founder@givetoken.com')
+             ->with('founder@gosizzle.io','hi','hi','founder@gosizzle.io')
              ->andReturn(true);
         $GoogleMail = new GoogleMail();
-        $this->assertTrue($GoogleMail->sendMail('founder@givetoken.com','hi','hi','founder@givetoken.com'));
+        $this->assertTrue($GoogleMail->sendMail('founder@gosizzle.io','hi','hi','founder@gosizzle.io'));
     }
 
     /**

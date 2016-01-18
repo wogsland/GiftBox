@@ -26,7 +26,7 @@ require __DIR__.'/header.php';
 ============================== -->
 <center style="margin-top:100px;margin-bottom:500px;">
   <h3>For pricing information please contact Robbie Zettler at</h3>
-  <a href="mailto:rzettler@gosizzle.io?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
+  <a href="mailto:rzettler@gosizzle.io?Subject=Sizzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
 </center>
 
 <!-- These modals will be deleted when Stripe is used -->

@@ -236,7 +236,7 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', function(data) {
       if (data.success == 'false') {
-        window.location.href = 'https://www.givetoken.com';
+        window.location.href = 'https://www.gosizzle.io';
       }
       var tokenTitle;
       if (dataExists(data.data.company)) {
@@ -456,7 +456,7 @@ $(document).ready(function(){
       }
     });
   } else {
-    window.location.href = 'https://www.givetoken.com';
+    window.location.href = 'https://www.gosizzle.io';
   }
   smallScreen();
 });

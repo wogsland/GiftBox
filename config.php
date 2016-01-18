@@ -87,7 +87,6 @@ $password = "giftbox";
 $app_name = "Giftbox";
 $app_url = $prefix.$server.$app_root;
 $sender_email = "founder@givetoken.com";
-$message_recipient_email = "founder@givetoken.com";
 
 // connect to database
 if ($google_app_engine) {
