@@ -89,7 +89,7 @@
 
   <!-- COPYRIGHT TEXT -->
   <p class="copyright">
-    &copy;2016 GoS!zzle.io, GiveToken.com &amp; Giftly Inc., All Rights Reserved.
+    &copy;2016 GoSizzle.io, GiveToken.com &amp; Giftly Inc., All Rights Reserved.
   </p>
 
 </div>
