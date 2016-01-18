@@ -3,7 +3,7 @@ if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'GiveToken.com - Admin');
+define('TITLE', 'S!zzle - Admin');
 require __DIR__.'/header.php';
 ?>
 </head>

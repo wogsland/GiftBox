@@ -1,10 +1,10 @@
 <?php
-use \GiveToken\City;
-use \GiveToken\HTML;
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingCompanyImage;
-use \GiveToken\RecruitingCompanyVideo;
+use \Sizzle\City;
+use \Sizzle\HTML;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\RecruitingCompanyImage;
+use \Sizzle\RecruitingCompanyVideo;
 use \google\appengine\api\cloud_storage\CloudStorageTools;
 
 if (!logged_in()) {
@@ -46,7 +46,7 @@ function paper_dropdown($label, $id, $options, $selected_index = null, $required
     echo '      </paper-dropdown-menu>'.PHP_EOL;
 }
 
-define('TITLE', 'GiveToken.com - Create Recruiting Token');
+define('TITLE', 'S!zzle - Create Recruiting Token');
 require __DIR__.'/header.php';
 ?>
 

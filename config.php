@@ -87,13 +87,12 @@ $password = "giftbox";
 $app_name = "Giftbox";
 $app_url = $prefix.$server.$app_root;
 $sender_email = "founder@givetoken.com";
-$message_recipient_email = "founder@givetoken.com";
 
 // connect to database
 if ($google_app_engine) {
     $mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {
-    if (in_array($server, array('','givetoken.local'))) {
+    if (in_array($server, array('','gosizzle.local'))) {
         $mysql_server = "127.0.0.1";
     } else {
         $mysql_server = 'p:'.$server;
@@ -103,7 +102,7 @@ if ($google_app_engine) {
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 }
-new GiveToken\Connection($mysqli);
+new Sizzle\Connection($mysqli);
 
 // start session
 $session = _session_start();

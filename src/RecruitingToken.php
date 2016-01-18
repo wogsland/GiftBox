@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 class RecruitingToken
 {
@@ -26,7 +26,7 @@ class RecruitingToken
             if ($key == null || !in_array($key, array('id','long_id'))) {
                 $key = 'id';
             }
-            $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
+            $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("Sizzle\RecruitingToken");
             if ($token) {
                 foreach (get_object_vars($token) as $key => $value) {
                     if (isset($value)) {

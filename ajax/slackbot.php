@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\Service\IpinfoIo;
+use \Sizzle\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 
@@ -77,7 +77,7 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
     $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
     $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
     $visitorLogger = new Logger('milestones');
-    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'SizzleBot', false);
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'S!zzleBot', false);
     $slackHandler->setLevel(Logger::DEBUG);
     $visitorLogger->pushHandler($slackHandler);
     $visitorLogger->log(200, $message);

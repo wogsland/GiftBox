@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use GiveToken\City;
+use Sizzle\City;
 
 /**
  * This class tests the City class
@@ -55,7 +55,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $result = new City();
-        $this->assertEquals('GiveToken\City', get_class($result));
+        $this->assertEquals('Sizzle\City', get_class($result));
         $this->assertFalse(isset($result->name));
 
         // $id specified case

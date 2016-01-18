@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\HTML;
-use \GiveToken\RecruitingToken;
+use \Sizzle\HTML;
+use \Sizzle\RecruitingToken;
 
 // collect id
 $user_id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';

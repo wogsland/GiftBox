@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\EventLogger;
+use \Sizzle\EventLogger;
 
 $message = "Unable to change password at this time.";
 $user_id = $_POST['user_id'];

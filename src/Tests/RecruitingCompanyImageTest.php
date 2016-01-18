@@ -1,10 +1,10 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingCompanyImage;
-use \GiveToken\User;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\RecruitingCompanyImage;
+use \Sizzle\User;
 
 /**
  * This class tests the RecruitingCompanyImage class
@@ -58,12 +58,12 @@ extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $result = new RecruitingCompanyImage();
-        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
+        $this->assertEquals('Sizzle\RecruitingCompanyImage', get_class($result));
         $this->assertFalse(isset($result->id));
 
         // invalid id case
         $result = new RecruitingCompanyImage(-1);
-        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
+        $this->assertEquals('Sizzle\RecruitingCompanyImage', get_class($result));
         $this->assertFalse(isset($result->id));
 
         // valid id case
@@ -72,7 +72,7 @@ extends \PHPUnit_Framework_TestCase
                   VALUES ('{$this->RecruitingCompany->id}', '$file_name')";
         $id = insert($query);
         $result = new RecruitingCompanyImage($id);
-        $this->assertEquals('GiveToken\RecruitingCompanyImage', get_class($result));
+        $this->assertEquals('Sizzle\RecruitingCompanyImage', get_class($result));
         $this->assertTrue(isset($result->id));
         $this->assertEquals($result->id, $id);
         $this->assertEquals($result->file_name, $file_name);

@@ -1,4 +1,4 @@
-# GiveToken
+# GoSizzle.io
 
 ## Table of Contents
 1. [Set Up](#set-up)
@@ -27,15 +27,15 @@ Make sure you have access & set your project remote
 - Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
 - Get access to the [Google Developer Console](https://console.developers.google.com).
 
-To create a local instance of the givetoken database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+To create a local instance of the S!zzle database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
 
 ### Apache
 
 If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like
 
     <VirtualHost *:80>
-        ServerAdmin username@givetoken.com
-        ServerName givetoken.local
+        ServerAdmin username@gosizzle.io
+        ServerName gosizzle.local
         DocumentRoot "/Library/Webserver/Documents/GiftBox/public"
 
         <Directory "/Library/Webserver/Documents/GiftBox/public">

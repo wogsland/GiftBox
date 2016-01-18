@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 // make sure the secret is valid
 if (isset($_GET['secret'])) {
@@ -12,7 +12,7 @@ if (isset($_GET['secret'])) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'GiveToken.com - Password Reset');
+define('TITLE', 'S!zzle - Password Reset');
 require __DIR__.'/header.php';
 ?>
 <style>

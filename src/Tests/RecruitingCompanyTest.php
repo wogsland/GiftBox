@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use GiveToken\RecruitingCompany;
-use GiveToken\User;
+use Sizzle\RecruitingCompany;
+use Sizzle\User;
 
 /**
  * This class tests the RecruitingCompany class
@@ -40,7 +40,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $RecruitingCompany = new RecruitingCompany();
-        $this->assertEquals('GiveToken\RecruitingCompany', get_class($RecruitingCompany));
+        $this->assertEquals('Sizzle\RecruitingCompany', get_class($RecruitingCompany));
         $this->assertFalse(isset($RecruitingCompany->name));
 
         // $id specified case

@@ -1,11 +1,11 @@
 <?php
-use \GiveToken\RecruitingTokenResponse;
+use \Sizzle\RecruitingTokenResponse;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'GiveToken.com - Add City');
+define('TITLE', 'S!zzle - Add City');
 require __DIR__.'/../header.php';
 ?>
 <style>

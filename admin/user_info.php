@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
@@ -25,7 +25,7 @@ if (isset($endpoint_parts[2]) && (int) $endpoint_parts[2] > 0) {
     $user_id = 0;
 }
 
-define('TITLE', 'GiveToken.com - UserInfo');
+define('TITLE', 'S!zzle - UserInfo');
 require __DIR__.'/../header.php';
 ?>
 <style>

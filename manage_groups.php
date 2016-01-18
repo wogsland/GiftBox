@@ -1,10 +1,10 @@
 <?php
-use \GiveToken\UserGroup;
+use \Sizzle\UserGroup;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
-define('TITLE', 'GiveToken.com - Manage Groups');
+define('TITLE', 'S!zzle - Manage Groups');
 require __DIR__.'/header.php';
 ?>
 

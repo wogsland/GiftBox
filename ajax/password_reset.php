@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 

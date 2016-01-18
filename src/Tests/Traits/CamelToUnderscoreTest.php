@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Tests\Traits;
+namespace Sizzle\Tests\Traits;
 
 /**
  * This class tests the CamelToUnderscore trait

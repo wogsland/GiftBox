@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 /**
  * This class implements basic database access functionality.
@@ -7,7 +7,7 @@ namespace GiveToken;
 class DatabaseEntity
 implements \JsonSerializable
 {
-    use \GiveToken\Traits\CamelToUnderscore;
+    use \Sizzle\Traits\CamelToUnderscore;
 
     protected $id;
     protected $readOnly = ['id','readOnly'];

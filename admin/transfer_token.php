@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
@@ -22,7 +22,7 @@ $to_users = execute_query(
      ORDER BY user.last_name, user.first_name, user.email_address"
 )->fetch_all(MYSQLI_ASSOC);
 
-define('TITLE', 'GiveToken.com - Transfer Token');
+define('TITLE', 'S!zzle - Transfer Token');
 require __DIR__.'/../header.php';
 ?>
 <style>

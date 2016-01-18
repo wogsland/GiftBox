@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\Service\GoogleMail;
+use \Sizzle\Service\GoogleMail;
 
 $status = 'ERROR';
 header('Content-Type: application/json');
@@ -13,9 +13,9 @@ if (isset($_POST['email'], $_POST['message'])
     $subject = '' == $subject ? 'Message from '.$from : $subject;
     $message .= "\r\n\r\n - $from";
     if (DEVELOPMENT) {
-        $to = 'bwogsland@givetoken.com';
+        $to = 'bwogsland@gosizzle.io';
     } else {
-        $to = 'founder@givetoken.com';
+        $to = 'contact@gosizzle.io';
     }
     $GoogleMail = new GoogleMail();
     if ($GoogleMail->sendMail($to, $subject, $message, 'founder@givetoken.com')) {

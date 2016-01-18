@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\UserGroup;
+use \Sizzle\UserGroup;
 
 try {
     // Save the group

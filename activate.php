@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\UserMilestone;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
     $user_id = (int) $_GET['uid'];

@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\UserGroup;
+use \Sizzle\UserGroup;
 
 /**
  * This class tests the UserGroup class
@@ -26,7 +26,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $result = new UserGroup();
-        $this->assertEquals('GiveToken\UserGroup', get_class($result));
+        $this->assertEquals('Sizzle\UserGroup', get_class($result));
         $this->assertFalse(isset($result->name));
     }
 }

@@ -1,5 +1,5 @@
 <?php
-use GiveToken\RecruitingCompanyVideo;
+use Sizzle\RecruitingCompanyVideo;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];

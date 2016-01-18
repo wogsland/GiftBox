@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 class Social
 {
@@ -14,7 +14,7 @@ class Social
             $social = execute_query(
                 "SELECT * from social
                 where id = $id"
-            )->fetch_object("GiveToken\Social");
+            )->fetch_object("Sizzle\Social");
             foreach (get_object_vars($social) as $key => $value) {
                 $this->$key = $value;
             }
@@ -36,7 +36,7 @@ class Social
             "SELECT * from social
             where user_id = $this->user_id
             and network = '$this->network'"
-        )->fetch_object("GiveToken\Social");
+        )->fetch_object("Sizzle\Social");
         foreach (get_object_vars($social) as $key => $value) {
             $hold->$key = $value;
         }

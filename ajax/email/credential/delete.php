@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\EmailCredential;
+use \Sizzle\EmailCredential;
 
 $success = 'false';
 $data = '';

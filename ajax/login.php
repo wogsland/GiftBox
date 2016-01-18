@@ -1,7 +1,7 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\UserMilestone;
-use \GiveToken\User;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -64,7 +64,7 @@ if (User::exists($email)) {
     }
 } else {
     $response['status'] = "ERROR";
-    $response['message'] = "The email address \"".$email."\" does not belong to any GiveToken account. Please use the signup button to register!";
+    $response['message'] = "The email address \"".$email."\" does not belong to any S!zzle account. Please use the signup button to register!";
 }
 
 header('Content-Type: application/json');

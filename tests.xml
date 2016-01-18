@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpunit>
   <testsuites>
-    <testsuite name="GiveToken">
+    <testsuite name="S!zzle">
       <directory>src/tests</directory>
     </testsuite>
   </testsuites>

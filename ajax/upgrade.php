@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
-use \GiveToken\EventLogger;
+use \Sizzle\User;
+use \Sizzle\EventLogger;
 
 date_default_timezone_set('America/Chicago');
 
@@ -18,7 +18,7 @@ $email = $_POST['email'];
 $new_level = $_POST['newLevel'];
 $plan = $_POST['plan'];
 
-// Retrieve the GiveToken user recored
+// Retrieve the S!zzle user record
 $user = User::fetch($email);
 
 try {

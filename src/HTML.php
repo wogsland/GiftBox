@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 /**
  * This class is for parsing strings into and out of HTML

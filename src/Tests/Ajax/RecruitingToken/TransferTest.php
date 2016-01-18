@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests\Ajax\RecruitingToken;
+namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \GiveToken\RecruitingToken;
-use \GiveToken\User;
+use \Sizzle\RecruitingToken;
+use \Sizzle\User;
 
 /**
  * This class tests the ajax endpoint to get the videos for a token.

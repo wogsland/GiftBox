@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Tests\Ajax\City;
+namespace Sizzle\Tests\Ajax\City;
 
 /**
  * This class tests the ajax endpoint to add a city.
