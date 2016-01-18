@@ -37,7 +37,7 @@
 
   <meta name="description" content="GiveToken will get your recruiting emails sizzling. Start your 1 month free trial today.
 " />
-  <link rel="canonical" href="https://www.givetoken.com/free-trial">
+  <link rel="canonical" href="https://www.gosizzle.io/free-trial">
 
   <link rel="stylesheet" media="screen" href="/css/free-trial.min.css" />
   <link rel="stylesheet" media="screen" href="/css/free-trial-2.min.css" />
@@ -292,7 +292,7 @@
 
   <script>
     window.App.config = {
-      //signupHost: 'givetoken.com'
+      //signupHost: 'gosizzle.io'
     };
 
     jQuery(function () {

@@ -26,7 +26,7 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     {
         // setup test user
         $User = new User();
-        $User->email_address = 'user-'.rand().'@givetoken.com';
+        $User->email_address = 'user-'.rand().'@gosizzle.io';
         $User->first_name = rand();
         $User->last_name = rand();
         $User->save();

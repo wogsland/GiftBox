@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-define('TITLE', 'GiveToken.com - Privacy Policy');
+define('TITLE', 'Sizzle - Privacy Policy');
 require __DIR__.'/header.php';
 ?>
 </head>
@@ -38,7 +38,7 @@ require __DIR__.'/header.php';
 			    Giftly, Inc., a Delaware corporation (referred to in these Terms of Use as “Giftly,” “we,” or “us”) is committed to protecting your privacy. This Privacy
 			    Policy governs the use and sharing of personally identifiable information (“Personal Information”) and other information about users (“users” or “you”)
 			    that users voluntarily provide or make available to Giftly when they use Giftly’s web site and services delivered through the domain
-			    https://www.givetoken.com (the “Site”). By using and submitting your information through this Site you consent to this Privacy Policy and to Giftly’s
+			    https://www.gosizzle.io (the “Site”). By using and submitting your information through this Site you consent to this Privacy Policy and to Giftly’s
 			    collection and sharing of your Personal Information according to the terms of this Privacy Policy.
 			</p>
 			<p>
@@ -68,14 +68,14 @@ require __DIR__.'/header.php';
 			    information and some Site pages may not display properly.
 			</p>
 			<p>
-				Google Analytics is a web analysis service provided by Google. Google utilizes the data collected to track and examine the use of https://www.givetoken.com, to prepare reports on its activities and share them with other Google services.
+				Google Analytics is a web analysis service provided by Google. Google utilizes the data collected to track and examine the use of https://www.gosizzle.io, to prepare reports on its activities and share them with other Google services.
 				Google may use the data collected to contextualize and personalize the ads of its own advertising network.
 			</p>
 			<p>
 				Personal data collected: Cookie and Usage Data. Place of processing: USA. Find Google's <a href= "http://www.google.com/intl/en/policies/privacy/">privacy policy here.</a>
 			</p>
 			<p>
-				The Google Analytics features GiveToken has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting).
+				The Google Analytics features Sizzle has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting).
 				Visitors can <a href="https://tools.google.com/dlpage/gaoptout/"> opt-out </a> of Google Analytics for Display Advertising and customize Google Display Network ads using the Ads Settings.
 			</p>
 			<p>

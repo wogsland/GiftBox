@@ -91,7 +91,7 @@
     <form class="form-signup-email" action="/ajax/signup" data-form="gt_signup" method="post" id="gt-signup-email">
       <fieldset>
         <label>Your Email</label>
-        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@givetoken.com" required>
+        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@gosizzle.io" required>
       </fieldset>
 
       <fieldset>
@@ -175,8 +175,8 @@
 
   <p>
     Read <a href="/about">about us</a>,
-    <a href="http://blog.givetoken.com/">our company blog</a>,
-    <a href="mailto:hi@givetoken.com">email us</a>,
+    <a href="http://blog.gosizzle.io/">our company blog</a>,
+    <a href="mailto:hi@gosizzle.io">email us</a>,
     or join us on <a href="https://www.linkedin.com/company/4788844">LinkedIn</a>,
     <a href="https://twitter.com/give_token">Twitter</a>,
     <a href="https://www.facebook.com/givetokencom">Facebook</a>
@@ -187,7 +187,7 @@
     <strong>And finally, the fine print:</strong>
     <a href="/terms">Terms of service</a>,
     <a href="/privacy">privacy policy</a>,
-    <a href="https://status.givetoken.com/">system status</a>.
+    <a href="https://status.gosizzle.io/">system status</a>.
   </p>
 
   <p>Have a productive day!</p>

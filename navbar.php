@@ -36,7 +36,7 @@
         <?php if (!logged_in()) { ?>
           <li><a href="/pricing" class="external">Pricing</a></li>
         <?php } ?>
-        <!--<li><a href="blog.givetoken.com" class="external">Blog</a></li>-->
+        <!--<li><a href="blog.gosizzle.io" class="external">Blog</a></li>-->
         <?php if (logged_in()) { ?>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>

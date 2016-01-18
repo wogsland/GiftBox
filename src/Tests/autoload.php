@@ -26,7 +26,7 @@ function getTestCookie($admin = false)
 {
     $password = 'nachos';
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $username = rand().'@givetoken.com';
+    $username = rand().'@gosizzle.io';
     if ($admin) {
         $query = "INSERT INTO user (first_name, last_name, email_address, password, admin)
                   VALUES ('fake', 'user', '$username', '$hash', 'Y')";
