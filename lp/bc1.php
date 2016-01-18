@@ -33,9 +33,9 @@
 <!-- JQUERY -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-<title>Sizzle - Get Your Recruiting Emails Sizzling!</title>
+<title>S!zzle - Get Your Recruiting Emails Sizzling!</title>
 
-<meta name="description" content="Sizzle - Get Your Recruiting Emails Sizzling!" />
+<meta name="description" content="S!zzle - Get Your Recruiting Emails Sizzling!" />
 <meta name="theme-color" content="#0066cc">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="viewport" id="viewport-iphone5" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
@@ -77,7 +77,7 @@
 
   <h1>Recruiting made easy</h1>
   <p id="subhead">
-    Sizzle’s tool takes a boring recruiting email and transforms it into an
+    S!zzle’s tool takes a boring recruiting email and transforms it into an
     interactive job opportunity with every response seamlessly entering your CRM.
     All without any additional effort by the recruiter!
   </p>
@@ -108,7 +108,7 @@
 
 <section class="gt-home-reasons">
   <hr>
-  <h1>The 3 R’s of Sizzle</h1>
+  <h1>The 3 R’s of S!zzle</h1>
 
   <h2>Reduced Placement Time</h2>
   <p>
@@ -137,9 +137,9 @@
 
   <hr>
 
-  <h2>Move fast with Sizzle</h2>
+  <h2>Move fast with S!zzle</h2>
   <p>
-    Timing is everything. Sizzle will help you widen the recruiting funnel
+    Timing is everything. S!zzle will help you widen the recruiting funnel
     by increasing candidate engagement allowing you better selection in
     choosing the right candidate to place with the right company, lowering your
     time-to-hire.
@@ -149,10 +149,10 @@
 
   <h2>Innovating, Growing, Learning</h2>
   <p>
-    Sizzle brings best in class tools to a new product in the underserved
+    S!zzle brings best in class tools to a new product in the underserved
     market of email recruiting. While email is already the most effective form
     of communication in terms of ROI, little has been done to optimize that
-    return. Sizzle will take you to the next level.
+    return. S!zzle will take you to the next level.
   </p>
 
   <p>
@@ -170,7 +170,7 @@
   <h5>Get Your Recruiting Emails Sizzling!</h5>
 
   <p>
-    Copyright &copy;2016 Sizzle. All rights reserved.
+    Copyright &copy;2016 S!zzle. All rights reserved.
   </p>
 
   <p>

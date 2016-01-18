@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-define('TITLE', 'Sizzle - Privacy Policy');
+define('TITLE', 'S!zzle - Privacy Policy');
 require __DIR__.'/header.php';
 ?>
 </head>
@@ -75,7 +75,7 @@ require __DIR__.'/header.php';
 				Personal data collected: Cookie and Usage Data. Place of processing: USA. Find Google's <a href= "http://www.google.com/intl/en/policies/privacy/">privacy policy here.</a>
 			</p>
 			<p>
-				The Google Analytics features Sizzle has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting).
+				The Google Analytics features S!zzle has implemented based on Display Advertising (e.g., Remarketing, Google Display Network Impression Reporting, the DoubleClick Campaign Manager integration, or Google Analytics Demographics and Interest Reporting).
 				Visitors can <a href="https://tools.google.com/dlpage/gaoptout/"> opt-out </a> of Google Analytics for Display Advertising and customize Google Display Network ads using the Ads Settings.
 			</p>
 			<p>

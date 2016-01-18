@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\User;
 
-define('TITLE', 'Sizzle - About');
+define('TITLE', 'S!zzle - About');
 require __DIR__.'/header.php';
 ?>
 <style>
@@ -33,7 +33,7 @@ require __DIR__.'/header.php';
       <div class="col-lg-offset-2 col-lg-8">
         <h2>About Us</h2>
         <p class="text-justify">
-          Sizzle is a Nashville, TN based company dedicated to helping
+          S!zzle is a Nashville, TN based company dedicated to helping
           recruiters maximize their outreach engagement with potential recruits
           to widen the funnel and shorten the time to hire.
         </p>

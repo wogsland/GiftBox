@@ -5,7 +5,7 @@ if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'Sizzle - Visitors');
+define('TITLE', 'S!zzle - Visitors');
 require __DIR__.'/../header.php';
 ?>
 <style>

@@ -41,11 +41,11 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $link = $app_url . 'password_reset?secret=' . $user->reset_code;
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
-            $sender_email = 'Sizzle <founder@givetoken.com>';
+            $sender_email = 'S!zzle <founder@givetoken.com>';
             $GoogleMail = new GoogleMail();
             $GoogleMail->sendMail(
                 $user->email_address,
-                'Sizzle Password Reset',
+                'S!zzle Password Reset',
                 $email_message, $sender_email
             );
             $success = 'true';

@@ -9,7 +9,7 @@ if (!logged_in() || !isset($_SESSION['email'])) {
 
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
-define('TITLE', 'Sizzle - Give a Token of Appreciation');
+define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\User;
 
-define('TITLE', 'Sizzle - Give a Token of Appreciation');
+define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 ?>
 </head>
@@ -26,7 +26,7 @@ require __DIR__.'/header.php';
 ============================== -->
 <center style="margin-top:100px;margin-bottom:500px;">
   <h3>For pricing information please contact Robbie Zettler at</h3>
-  <a href="mailto:rzettler@gosizzle.io?Subject=Sizzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
+  <a href="mailto:rzettler@gosizzle.io?Subject=S!zzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
 </center>
 
 <!-- These modals will be deleted when Stripe is used -->
@@ -41,7 +41,7 @@ require __DIR__.'/header.php';
       <div class ="modal-body">
         <center>
           <h3>Please contact Robbie Zettler at</h3>
-          <a href="mailto:rzettler@gosizzle.io?Subject=Sizzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
+          <a href="mailto:rzettler@gosizzle.io?Subject=S!zzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
         </center>
       </div>
       <div class ="modal-footer">
@@ -66,13 +66,13 @@ require __DIR__.'/header.php';
         <!-- Change so that this links to the sign up -->
         <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
         <p>
-          Thanks for looking at Sizzle! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
+          Thanks for looking at S!zzle! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
         </p>
         <p>
           We can be reached at rzettler@gosizzle.io
       </div>
       <div class ="modal-footer">
-        Sizzle
+        S!zzle
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>

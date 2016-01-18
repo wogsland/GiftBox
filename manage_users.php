@@ -6,7 +6,7 @@ require_once 'config.php';
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
-define('TITLE', 'Sizzle - Manage Users');
+define('TITLE', 'S!zzle - Manage Users');
 require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" href="css/users_groups.min.css">
@@ -53,7 +53,7 @@ require __DIR__.'/header.php';
             <th>Level</th>
             <th>Group</th>
             <th>Group<br>Administrator</th>
-            <th>Sizzle<br>Administrator</th>
+            <th>S!zzle<br>Administrator</th>
             <th><button type="button" class="btn btn-success" onclick="addUser()"><span class="glyphicon glyphicon-plus"></span> Add A User</button></th>
             <th></th>
           </tr>
@@ -153,7 +153,7 @@ require __DIR__.'/header.php';
             <div class="checkbox">
               <label>
               <input id="admin" name="admin" type="checkbox" value="Y">
-              Sizzle Administrator
+              S!zzle Administrator
               </label>
             </div>
           </form>

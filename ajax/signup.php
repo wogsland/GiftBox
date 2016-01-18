@@ -57,11 +57,11 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $password) {
             $link = $app_url . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
-            $sender_email = 'Sizzle <founder@givetoken.com>';
+            $sender_email = 'S!zzle <founder@givetoken.com>';
             $GoogleMail = new GoogleMail();
             $GoogleMail->sendMail(
                 $user->email_address,
-                'Sizzle Signup Confirmation',
+                'S!zzle Signup Confirmation',
                 $email_message,
                 $sender_email
             );

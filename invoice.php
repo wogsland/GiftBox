@@ -19,7 +19,7 @@ if (isset($_GET['id'])) {
   $paid = ($invoice->ending_balance == 0);
 }
 
-define('TITLE', 'Sizzle - Invoice Details');
+define('TITLE', 'S!zzle - Invoice Details');
 require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.css"/>

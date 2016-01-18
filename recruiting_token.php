@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sizzle - Recruiting Token">
+    <meta name="description" content="S!zzle - Recruiting Token">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
 
@@ -13,7 +13,7 @@
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Sizzle - Recruiting Token">
+    <meta name="apple-mobile-web-app-title" content="S!zzle - Recruiting Token">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">

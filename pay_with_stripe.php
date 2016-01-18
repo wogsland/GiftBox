@@ -19,7 +19,7 @@ function processUpgrade(token, payFrom) {
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
 				signupClose();
-				openMessage("Welcome!", "You have successfully signed up with Sizzle.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
+				openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
 			} else if (payFrom === "UPGRADE") {
         window.location.href = '/profile';
       } else {

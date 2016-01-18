@@ -1,4 +1,4 @@
-# GoSizzle.io
+# GoS!zzle.io
 
 ## Table of Contents
 1. [Set Up](#set-up)
@@ -27,7 +27,7 @@ Make sure you have access & set your project remote
 - Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
 - Get access to the [Google Developer Console](https://console.developers.google.com).
 
-To create a local instance of the Sizzle database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
+To create a local instance of the S!zzle database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
 
 ### Apache
 

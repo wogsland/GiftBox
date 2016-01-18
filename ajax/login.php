@@ -64,7 +64,7 @@ if (User::exists($email)) {
     }
 } else {
     $response['status'] = "ERROR";
-    $response['message'] = "The email address \"".$email."\" does not belong to any Sizzle account. Please use the signup button to register!";
+    $response['message'] = "The email address \"".$email."\" does not belong to any S!zzle account. Please use the signup button to register!";
 }
 
 header('Content-Type: application/json');

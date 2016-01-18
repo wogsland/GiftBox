@@ -12,7 +12,7 @@ if (isset($_GET['secret'])) {
     header('Location: '.$app_root);
 }
 
-define('TITLE', 'Sizzle - Password Reset');
+define('TITLE', 'S!zzle - Password Reset');
 require __DIR__.'/header.php';
 ?>
 <style>

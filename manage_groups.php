@@ -4,7 +4,7 @@ use \Sizzle\UserGroup;
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }
-define('TITLE', 'Sizzle - Manage Groups');
+define('TITLE', 'S!zzle - Manage Groups');
 require __DIR__.'/header.php';
 ?>
 

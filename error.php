@@ -6,7 +6,7 @@ require_once 'config.php';
 // This page is to 'page not found' errors
 http_response_code(404);
 
-define('TITLE', 'Sizzle - Error');
+define('TITLE', 'S!zzle - Error');
 require __DIR__.'/header.php';
 
 ?>

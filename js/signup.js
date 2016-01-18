@@ -31,19 +31,19 @@ function signupSuccess(app_root, signupType, userInfo) {
   } else {
     email = $("#signup_email").val();
   }
-  $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with Sizzle!</span></div>');
+  $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with S!zzle!</span></div>');
 
   if ($("#signup_level").val() == 2) {
     payWithStripe(email, "SIGNUP");
   } else {
     if (userInfo.reg_type == "FACEBOOK") {
-      signupInfo("Logging into Sizzle...");
+      signupInfo("Logging into S!zzle...");
       userInfo.login_email = userInfo.signup_email;
       userInfo.login_type = userInfo.reg_type;
       processLogin(userInfo);
     } else {
       signupClose();
-      openMessage("Welcome!", "You have successfully signed up with Sizzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
+      openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
     }
   }
 }

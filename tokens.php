@@ -9,7 +9,7 @@ if (!logged_in()) {
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
 
 
-define('TITLE', 'Sizzle - Tokens');
+define('TITLE', 'S!zzle - Tokens');
 require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.css"/>

@@ -18,7 +18,7 @@ $email = $_POST['email'];
 $new_level = $_POST['newLevel'];
 $plan = $_POST['plan'];
 
-// Retrieve the Sizzle user record
+// Retrieve the S!zzle user record
 $user = User::fetch($email);
 
 try {

@@ -58,7 +58,7 @@ extends \PHPUnit_Framework_TestCase
 
         // no cookie, but post vars
         $fields = array(
-            'subject'=>'Sizzle Test Email',
+            'subject'=>'S!zzle Test Email',
             'body'=>'<b>Behold!</b> This is the body of an email.',
             'address'=>'test@gosizzle.io',
             'replyTo'=>'reply-to@gosizzle.io',
@@ -115,7 +115,7 @@ extends \PHPUnit_Framework_TestCase
     {
         $url = TEST_URL . "/ajax/email/send";
         $fields = array(
-            'subject'=>'Sizzle Test Email',
+            'subject'=>'S!zzle Test Email',
             'body'=>'<b>Behold!</b> This is the body of an email.',
             'address'=>'test@gosizzle.io',
             'replyTo'=>'reply-to@gosizzle.io',
