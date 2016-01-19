@@ -227,17 +227,15 @@ extends \PHPUnit_Framework_TestCase
         }
         curl_setopt($ch, CURLOPT_URL, $url);
         $response = curl_exec($ch);
-        //$this->assertEquals(true, $response);
-        //$json = ob_get_contents();
+        $page = ob_get_contents();
         ob_end_clean();
-        //print_r($json);
-        //$return = json_decode($json);
-        //print_r($return);
         $foundCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($statusCode == $foundCode) {
             return true;
         } else {
             echo "\nFound status $foundCode instead of $statusCode at '$endpoint'.\n";
+            //echo $response;
+            //echo $page;
             return false;
         }
     }

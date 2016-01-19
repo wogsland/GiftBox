@@ -77,21 +77,3 @@ function debug_output($text)
         echo $text."</pre>\n";
     }
 }
-
-function youtube_id($url)
-{
-    $id = null;
-    if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
-        $id = $match[count($match)-1];
-    }
-    return $id;
-}
-
-function is_selected($field_value, $data_value, $select_string = 'selected')
-{
-    $retval = null;
-    if ($field_value == $data_value) {
-        $retval = $select_string;
-    }
-    return $retval;
-}

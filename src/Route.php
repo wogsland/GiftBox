@@ -6,6 +6,7 @@ namespace Sizzle;
  */
 class Route
 {
+    protected $default;
     protected $endpointPieces;
     protected $endpointMap;
     protected $gets;
@@ -22,6 +23,7 @@ class Route
             $this->endpointPieces = $endpointPieces;
             $this->gets = $gets;
         }
+        $this->default = __DIR__.'/../error.php';
     }
 
     /**
@@ -69,7 +71,7 @@ class Route
                         include __DIR__.'/../admin/visitors.php';
                         break;
                     default:
-                        include __DIR__.'/../error.php';
+                        include $this->default;
                     }
                 }
                 break;
@@ -93,7 +95,7 @@ class Route
                 break;
             case 'js':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
-                    include __DIR__.'/../error.php';
+                    include $this->default;
                 } else {
                     switch ($this->endpointPieces[2]) {
                     case 'pay_with_stripe.js':
@@ -103,7 +105,7 @@ class Route
                         include __DIR__.'/../js/JSXTransformer.js';
                         break;
                     default:
-                        include __DIR__.'/../error.php';
+                        include $this->default;
                     }
                 }
                 break;
@@ -146,7 +148,7 @@ class Route
                     }
                     include __DIR__.'/../recruiting_token.build.html';
                 } else {
-                    include __DIR__.'/../error.php';
+                    include $this->default;
                 }
                 break;
             case 'tokens':
@@ -174,8 +176,93 @@ class Route
                     break;
                 }
             default:
-                include __DIR__.'/../error.php';
+                include $this->default;
             }
+        }
+    }
+
+    /**
+     * Register an endpoint for routing.
+     *
+     * @param string $endpoint   - the URI endpoint to process
+     * @param string $fileToLoad - file to load for that endpoint
+     *
+     * @return boolean - was registration successful
+     */
+    public function register($endpoint, $fileToLoad)
+    {
+        $endpoint = ltrim($endpoint,'/');
+        $endpointParts = explode('/', $endpoint);
+        switch (count($endpointParts)) {
+            case 0:
+            $this->endpointMap[''] = $fileToLoad;
+            break;
+            case 1:
+            $this->endpointMap[$endpointParts[0]] = $fileToLoad;
+            break;
+            case 2:
+            if (!isset($this->endpointMap[$endpointParts[0]])) {
+                $this->endpointMap[$endpointParts[0]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]];
+                    $this->endpointMap[$endpointParts[0]] = array();
+                    $this->endpointMap[$endpointParts[0]][''] = $temp;
+                }
+            }
+            $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = $fileToLoad;
+            break;
+            case 3:
+            if (!isset($this->endpointMap[$endpointParts[0]])) {
+                $this->endpointMap[$endpointParts[0]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]];
+                    $this->endpointMap[$endpointParts[0]] = array();
+                    $this->endpointMap[$endpointParts[0]][''] = $temp;
+                }
+            }
+            if (!isset($this->endpointMap[$endpointParts[0]][$endpointParts[1]])) {
+                $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]][$endpointParts[1]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]][$endpointParts[1]];
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = array();
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]][''] = $temp;
+                }
+            }
+            $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]] = $fileToLoad;
+            break;
+            case 4:
+            if (!isset($this->endpointMap[$endpointParts[0]])) {
+                $this->endpointMap[$endpointParts[0]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]];
+                    $this->endpointMap[$endpointParts[0]] = array();
+                    $this->endpointMap[$endpointParts[0]][''] = $temp;
+                }
+            }
+            if (!isset($this->endpointMap[$endpointParts[0]][$endpointParts[1]])) {
+                $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]][$endpointParts[1]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]][$endpointParts[1]];
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = array();
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]][''] = $temp;
+                }
+            }
+            if (!isset($this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]])) {
+                $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]] = array();
+            } else {
+                if (!is_array($this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]])) {
+                    $temp = $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]];
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]] = array();
+                    $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]][''] = $temp;
+                }
+            }
+            $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]][$endpointParts[3]] = $fileToLoad;
+            break;
         }
     }
 }
