@@ -8,16 +8,19 @@ class Route
 {
     protected $endpointPieces;
     protected $endpointMap;
+    protected $gets;
 
     /**
      * Includes appropriate file based on the provided endpoint pieces
      *
      * @param array $endpointPieces - the parsed pieces of the endpoint
+     * @param array $gets           - associative array of GET variables
      */
-    public function __construct($endpointPieces)
+    public function __construct($endpointPieces, $gets = array())
     {
         if (is_array($endpointPieces)) {
             $this->endpointPieces = $endpointPieces;
+            $this->gets = $gets;
         }
     }
 

@@ -12,15 +12,15 @@ require_once __DIR__.'/../config.php';
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
 $endpoint = $pieces[0];
 $endpoint_parts = explode('/', $endpoint);
+$get_parts = array();
 if (isset($pieces[1])) {
     $gets = $pieces[1];
     $gets = explode('&', $gets);
-    $get_parts = array();
     foreach ($gets as $get) {
         $parts = explode('=', $get);
         $get_parts[$parts[0]] = isset($parts[1]) ? $parts[1] : null;
     }
 }
 
-$route = new Route($endpoint_parts);
+$route = new Route($endpoint_parts, $get_parts);
 $route->go();

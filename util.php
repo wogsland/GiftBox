@@ -87,33 +87,6 @@ function youtube_id($url)
     return $id;
 }
 
-function is_youtube($url)
-{
-    $retval = false;
-    if (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
-function is_spotify($url)
-{
-    $retval = false;
-    if (strpos($url, 'spotify.com') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
-function is_soundcloud($url)
-{
-    $retval = false;
-    if (strpos($url, 'soundcloud.com') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
 function is_selected($field_value, $data_value, $select_string = 'selected')
 {
     $retval = null;
@@ -121,10 +94,4 @@ function is_selected($field_value, $data_value, $select_string = 'selected')
         $retval = $select_string;
     }
     return $retval;
-}
-
-function _session_start()
-{
-    $session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
-    return $session;
 }

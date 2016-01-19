@@ -2,6 +2,7 @@
 use Monolog\ErrorHandler;
 use Monolog\Handler\SlackHandler;
 use Monolog\Logger;
+use Sizzle\Connection;
 
 // set relesae version
 define('VERSION', '1.9.2');
@@ -110,10 +111,10 @@ if (GOOGLE_APP_ENGINE) {
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 }
-new Sizzle\Connection($mysqli);
+new Connection($mysqli);
 
 // start session
-$session = _session_start();
+$session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
 
 // record website hit
 if (isset($_COOKIE, $_COOKIE['visitor'])) {
