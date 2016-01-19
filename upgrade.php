@@ -2,7 +2,7 @@
 use \Sizzle\User;
 
 if (!logged_in() || !isset($_SESSION['email'])) {
-    header('Location: '.$app_url.'pricing');
+    header('Location: '.APP_URL.'pricing');
 }
 
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';

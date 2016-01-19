@@ -4,7 +4,7 @@ use \Sizzle\RecruitingTokenResponse;
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
 

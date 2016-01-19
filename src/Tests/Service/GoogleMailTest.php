@@ -34,17 +34,17 @@ extends \PHPUnit_Framework_TestCase
      * This is my first attempt at mocking...
      *
      * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * @preserveGlobalState  disabled
      */
     public function testMock()
     {
         $mock = \Mockery::mock('overload:\\Sizzle\\Service\\GoogleMail');
         $this->assertEquals('Sizzle\Service\GoogleMail', get_class($mock));
         $mock->shouldReceive('sendMail')
-             ->with('founder@gosizzle.io','hi','hi','founder@gosizzle.io')
-             ->andReturn(true);
+            ->with('founder@gosizzle.io', 'hi', 'hi', 'founder@gosizzle.io')
+            ->andReturn(true);
         $GoogleMail = new GoogleMail();
-        $this->assertTrue($GoogleMail->sendMail('founder@gosizzle.io','hi','hi','founder@gosizzle.io'));
+        $this->assertTrue($GoogleMail->sendMail('founder@gosizzle.io', 'hi', 'hi', 'founder@gosizzle.io'));
     }
 
     /**

@@ -15,7 +15,7 @@
         <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
       <?php }?>
 
-      <a class="navbar-brand" href="<?php echo $app_root ?>">
+      <a class="navbar-brand" href="<?php echo '/' ?>">
         <img src="/assets/img/sizzle-logo.png" alt="">
       </a>
 

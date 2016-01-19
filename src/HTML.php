@@ -41,7 +41,7 @@ class HTML
                     //echo $textWithBullets;die;
 
                     // find first newline not followed by bullet
-                    $pieces = explode("\n",$textWithBullets);
+                    $pieces = explode("\n", $textWithBullets);
                     $nextText = array_shift($pieces);
                     //echo $nextText;die;
                     $bulletSection = '';
@@ -51,10 +51,10 @@ class HTML
                     }
                     // bullets to html list tags
                     $sections[] = self::bulletListTo($bulletSection);
-                    $tempText = $nextText."\n".implode("\n",$pieces);
+                    $tempText = $nextText."\n".implode("\n", $pieces);
                 }
                 //print_r($sections);
-                $text = implode("\n",$sections)."\n".$tempText;
+                $text = implode("\n", $sections)."\n".$tempText;
             }
 
             // spacing between paragraphs

@@ -11,10 +11,10 @@ class GoogleMail
     /**
      * Sends mail assuming you're inside Google App Engine
      *
-     * @param string $to - who to send to
+     * @param string $to      - who to send to
      * @param string $subject - the email subject
      * @param string $message - the email message
-     * @param string $from - who email is from
+     * @param string $from    - who email is from
      *
      * @return boolean - success of send
      */
@@ -31,7 +31,7 @@ class GoogleMail
             $message->send();
             return true;
         } catch (Exception $e) {
-          return false;
+            return false;
         }
     }
 }

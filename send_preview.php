@@ -12,6 +12,7 @@ $event->log();
 
 // Send the email
 $message = '<a href="'.$preview_link.'">Click here to open your Token!</a>';
+$sender_email = "founder@givetoken.com";
 $GoogleMail = new GoogleMail();
 $GoogleMail->sendMail($email_address, 'You have a Token to open!!!', $message, $sender_email);
 ?>

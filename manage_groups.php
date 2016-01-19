@@ -2,7 +2,7 @@
 use \Sizzle\UserGroup;
 
 if (!logged_in() || !is_admin()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 define('TITLE', 'S!zzle - Manage Groups');
 require __DIR__.'/header.php';

@@ -205,10 +205,10 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Checks that a given endpoint returns the desired status code.
      *
-     * @param string $endpoint - the endpoint to test
-     * @param boolean $loggedIn - is the user logged in (defaults false)
-     * @param int $statusCode - the status code to check for (defaults to 200)
-     * @param boolean $isAdmin - is the user logged in an admin (defaults false)
+     * @param string  $endpoint   - the endpoint to test
+     * @param boolean $loggedIn   - is the user logged in (defaults false)
+     * @param int     $statusCode - the status code to check for (defaults to 200)
+     * @param boolean $isAdmin    - is the user logged in an admin (defaults false)
      *
      * @return boolean - desired status code was returned
      */

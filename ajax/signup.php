@@ -10,7 +10,7 @@ $event = null;
 $user_id = null;
 $response['status'] = "ERROR";
 $response['message'] = "Unable to register at this time.";
-$response['app_root'] = $app_root;
+$response['app_root'] = '/';
 
 $vars = array('signup_email', 'first_name', 'last_name', 'signup_password', 'reg_type');
 foreach ($vars as $var) {
@@ -54,7 +54,7 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $password) {
 
         if ($reg_type == 'EMAIL') {
             // Send the email
-            $link = $app_url . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
+            $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $sender_email = 'S!zzle <founder@givetoken.com>';

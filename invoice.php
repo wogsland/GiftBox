@@ -6,11 +6,11 @@ use \Stripe\Stripe;
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
 $paid = false;
-Stripe::setApiKey($stripe_secret_key);
+Stripe::setApiKey(STRIPE_SECRET_KEY);
 if (isset($_GET['id'])) {
   $success = 'true';
   $data = Invoice::retrieve(array('id'=>$_GET['id']));
@@ -73,7 +73,7 @@ require __DIR__.'/header.php';
       <?php if (isset($invoice)) { ?>
       $('#pay-now-button').on('click', function (email, payFrom) {
         var handler = StripeCheckout.configure({
-          key: '<?php echo $stripe_publishable_key; ?>',
+          key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
           email: '<?php echo $_SESSION['email']; ?>',
           token: function(token) {
             console.log(token);

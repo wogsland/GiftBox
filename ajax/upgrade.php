@@ -10,7 +10,7 @@ $response['status'] = "ERROR";
 $response['message'] = "Unable to upgrade at this time.";
 
 // See your keys here https://dashboard.stripe.com/account
-\Stripe\Stripe::setApiKey($stripe_secret_key);
+\Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
 // Get the credit card details submitted by the form
 $token = $_POST['stripeToken'];

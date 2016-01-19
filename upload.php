@@ -11,7 +11,7 @@ if ($file_name) {
         $content_type = substr($file_data, 5, $pos-6);
         $file_data =  base64_decode(substr($file_data, $pos + 7));
     }
-    if ($google_app_engine) {
+    if (GOOGLE_APP_ENGINE) {
         $ctx = stream_context_create(
             ['gs'=>
             [

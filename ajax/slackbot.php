@@ -3,7 +3,7 @@ use \Sizzle\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 
-if ($google_app_engine && $application_id === "s~stone-timing-557") {
+if (GOOGLE_APP_ENGINE && $application_id === "s~stone-timing-557") {
     // See from whence the vistor hails
     $IpinfoIo = new IpinfoIo();
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
@@ -69,7 +69,7 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
     }
 
     // Have Slackbot inform us of the visitor
-    $message = "$new $visitor to $app_url from ";
+    $message = "$new $visitor to " . APP_URL . " from ";
     $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
     $message .= isset($locale->region) && '' != $locale->region ? $locale->region . ', ' : '';
     $message .= isset($locale->country) && '' != $locale->country ? $locale->country : '';

@@ -2,7 +2,7 @@
 use \Sizzle\User;
 
 if (!logged_in() || !is_admin()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
 // Get User list to choose from

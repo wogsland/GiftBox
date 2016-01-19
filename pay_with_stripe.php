@@ -37,7 +37,7 @@ function processUpgrade(token, payFrom) {
 function payWithStripe(email, payFrom) {
 
 	var handler = StripeCheckout.configure({
-		key: '<?php echo $stripe_publishable_key ?>',
+		key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
 //		image: '../images/logoicon.png',
 		email: email,
 		token: function(token) {

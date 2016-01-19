@@ -2,7 +2,7 @@
 use \Sizzle\UserMilestone;
 
 if (!logged_in() || !is_admin()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
 define('TITLE', 'S!zzle - Stalled Customers');

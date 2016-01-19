@@ -38,7 +38,7 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $user->save();
 
             // send email
-            $link = $app_url . 'password_reset?secret=' . $user->reset_code;
+            $link = APP_URL . 'password_reset?secret=' . $user->reset_code;
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $sender_email = 'S!zzle <founder@givetoken.com>';

@@ -57,7 +57,7 @@ extends \PHPUnit_Framework_TestCase
      * This is my first attempt at mocking...
      *
      * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * @preserveGlobalState  disabled
      */
     public function testMock()
     {
@@ -75,8 +75,8 @@ extends \PHPUnit_Framework_TestCase
             "postal"=> "1337"
         );
         $mock->shouldReceive('getInfo')
-             ->with($ipAddress)
-             ->andReturn($return);
+            ->with($ipAddress)
+            ->andReturn($return);
         $IpinfoIo = new IpinfoIo();
         $locale = $IpinfoIo->getInfo($ipAddress);
         $this->assertTrue((bool)$locale);

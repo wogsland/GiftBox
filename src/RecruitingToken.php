@@ -44,7 +44,8 @@ class RecruitingToken
             FROM recruiting_token
             LEFT JOIN recruiting_company ON recruiting_company.id = recruiting_company_id
             WHERE recruiting_token.user_id = '$user_id'
-            ORDER BY company, job_title");
+            ORDER BY company, job_title"
+        );
         $user_tokens = array();
         while($token = $results->fetch_object()) {
             $user_tokens[count($user_tokens)] = $token;

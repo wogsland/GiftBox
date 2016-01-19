@@ -44,7 +44,6 @@ ErrorHandler::register($logger);
 
 $google_app_engine = false;
 $prefix = "http://";
-$app_root = "/";
 $use_https = false;
 $socket = null;
 $stripe_secret_key = 'sk_test_RTcVNjcQVfYNiPCiY5O9CevV';
@@ -77,6 +76,15 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
 } else {
     $file_storage_path = 'uploads/';
 }
+if (!defined('GOOGLE_APP_ENGINE')) {
+    define('GOOGLE_APP_ENGINE', $google_app_engine);
+}
+if (!defined('STRIPE_SECRET_KEY')) {
+    define('STRIPE_SECRET_KEY', $stripe_secret_key);
+}
+if (!defined('STRIPE_PUBLISHABLE_KEY')) {
+    define('STRIPE_PUBLISHABLE_KEY', $stripe_publishable_key);
+}
 if (!defined('FILE_STORAGE_PATH')) {
     define('FILE_STORAGE_PATH', $file_storage_path);
 }
@@ -84,12 +92,12 @@ if (!defined('FILE_STORAGE_PATH')) {
 $database = "giftbox";
 $user = "giftbox";
 $password = "giftbox";
-$app_name = "Giftbox";
-$app_url = $prefix.$server.$app_root;
-$sender_email = "founder@givetoken.com";
+if (!defined('APP_URL')) {
+    define('APP_URL', $prefix.$server.'/');
+}
 
 // connect to database
-if ($google_app_engine) {
+if (GOOGLE_APP_ENGINE) {
     $mysqli = new mysqli(null, $user, $password, $database, null, $socket);
 } else {
     if (in_array($server, array('','gosizzle.local'))) {

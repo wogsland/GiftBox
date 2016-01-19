@@ -6,7 +6,7 @@ use \Stripe\Stripe;
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
 define('TITLE', 'S!zzle - Payments');
@@ -34,7 +34,7 @@ require __DIR__.'/header.php';
           </thead>
           <tbody>
             <?php
-            Stripe::setApiKey($stripe_secret_key);
+            Stripe::setApiKey(STRIPE_SECRET_KEY);
             $success = 'true';
             $data = Charge::all(array('customer'=>$_SESSION['stripe_id']));
             $payments = json_decode(ltrim($data, 'Stripe\Collection JSON: '))->data;
