@@ -121,6 +121,14 @@ if (!DEVELOPMENT) {
   </div>
   <div id="swagger-ui-container" class="swagger-ui-wrap" style="margin-bottom:100px;"></div>
   <div style="text-align:center; font-family: 'Roboto',sans-serif;">
+    Or you can use one of our SDKs:<br /><br />
+    <a href="#" target=csharpsdk>C#</a> |
+    <a href="#" target=javasdk>Java</a> |
+    <a href="https://packagist.org/packages/gosizzle/sizzle-php-sdk" target=phpsdk>PHP</a> |
+    <a href="#" target=pythonsdk>Python</a> |
+    <a href="#" target=rubysdk>Ruby</a>
+  </div>
+  <div style="text-align:center; font-family: 'Roboto',sans-serif;">
     <?php require __DIR__.'/footer.php';?>
   </div>
 </body>
