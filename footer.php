@@ -118,8 +118,6 @@
 <script src="/js/jquery.ajaxchimp.min.js"></script>
 <script src="/js/jquery.fitvids.min.js"></script>
 <script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>
   <script src="/js/login.min.js?v=<?php echo VERSION;?>"></script>

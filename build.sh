@@ -54,8 +54,6 @@ yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
 yuicompressor js/create_common.js -o public/js/create_common.min.js
 yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
 yuicompressor js/custom.js -o public/js/custom.min.js
-yuicompressor js/facebook_init.js -o public/js/facebook_init.min.js
-yuicompressor js/util.js -o public/js/util.min.js
 yuicompressor js/account.js -o public/js/account.min.js
 yuicompressor js/pricing.js -o public/js/pricing.min.js
 yuicompressor js/matchMedia.js -o public/js/matchMedia.min.js
