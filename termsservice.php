@@ -1,5 +1,4 @@
 <?php
-require_once 'config.php';
 define('TITLE', 'S!zzle - Terms of Service');
 require __DIR__.'/header.php';
 ?>

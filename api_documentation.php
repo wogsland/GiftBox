@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__.'/config.php';
-
 if (!DEVELOPMENT) {
   include __DIR__.'/error.php';die;
 } else {

@@ -1,8 +1,6 @@
 <?php
 use \Sizzle\User;
 
-require_once __DIR__.'/config.php';
-
 if (!logged_in() || !isset($_SESSION['email'])) {
     header('Location: '.$app_url.'pricing');
 }

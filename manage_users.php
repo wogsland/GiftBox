@@ -1,8 +1,6 @@
 <?php
 use \Sizzle\UserGroup;
 
-require_once 'config.php';
-
 if (!logged_in() || !is_admin()) {
     header('Location: '.$app_root);
 }

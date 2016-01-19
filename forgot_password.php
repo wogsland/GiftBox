@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__.'/config.php';
-
 define('TITLE', 'S!zzle - Password Reset');
 require __DIR__.'/header.php';
 ?>

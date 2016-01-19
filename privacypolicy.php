@@ -1,5 +1,4 @@
 <?php
-require_once 'config.php';
 define('TITLE', 'S!zzle - Privacy Policy');
 require __DIR__.'/header.php';
 ?>
