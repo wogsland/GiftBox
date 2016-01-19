@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2c40668526140e57aeaca8ce2c0768bb",
-    "content-hash": "cb10b333ff518dcfe8eaa03c2daab15d",
+    "hash": "56549e0724f9e2661ec68ade8efa6626",
+    "content-hash": "84154ec3abe78507f348f8cdb126cdce",
     "packages": [
         {
             "name": "google/apiclient",
@@ -49,6 +49,54 @@
                 "google"
             ],
             "time": "2015-10-16 22:11:08"
+        },
+        {
+            "name": "gosizzle/sizzle-php-sdk",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gosizzle/sizzle-php-sdk.git",
+                "reference": "0c03684e1a088b1d384bf74dc679bf3ac59b59f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gosizzle/sizzle-php-sdk/zipball/0c03684e1a088b1d384bf74dc679bf3ac59b59f3",
+                "reference": "0c03684e1a088b1d384bf74dc679bf3ac59b59f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "4.*",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SizzlePHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bradley Wogsland",
+                    "email": "bradley@wogsland.org",
+                    "homepage": "http://bradley.wogsland.org",
+                    "role": "lead"
+                }
+            ],
+            "description": "This SDK is for accessing the Sizzle API",
+            "homepage": "https://github.com/gosizzle/sizzle-php-sdk",
+            "keywords": [
+                "email",
+                "recruiting"
+            ],
+            "time": "2016-01-19 18:23:52"
         },
         {
             "name": "guzzlehttp/guzzle",

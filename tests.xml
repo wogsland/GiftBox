@@ -4,5 +4,8 @@
     <testsuite name="S!zzle">
       <directory>src/tests</directory>
     </testsuite>
+    <testsuite name="S!zzle SDK">
+      <directory>vendor/gosizzle/sizzle-php-sdk/src/tests</directory>
+    </testsuite>
   </testsuites>
 </phpunit>

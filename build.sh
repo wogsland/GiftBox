@@ -22,7 +22,7 @@ then
   exit
 fi
 
-# run unit tests
+# run PHP unit tests
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
 echo ""
 
