@@ -12,7 +12,7 @@ if (isset($_POST['email'], $_POST['message'])
     $from = $name . ' (' . $email . ')';
     $subject = '' == $subject ? 'Message from '.$from : $subject;
     $message .= "\r\n\r\n - $from";
-    if (DEVELOPMENT) {
+    if (ENVIRONMENT != 'production') {
         $to = 'bwogsland@gosizzle.io';
     } else {
         $to = 'contact@gosizzle.io';

@@ -1,5 +1,5 @@
 <?php
-if (!DEVELOPMENT) {
+if (ENVIRONMENT == 'production') {
   include __DIR__.'/error.php';die;
 } else {
   define('TITLE', 'S!zzle - API Documentation');

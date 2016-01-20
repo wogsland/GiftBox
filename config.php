@@ -23,25 +23,28 @@ if ('givetoken.com' == strtolower($server)
     $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
 }
-if (!defined('DEVELOPMENT')) {
-    define('DEVELOPMENT', ('www.givetoken.com' != $server));
+if (!defined('ENVIRONMENT')) {
+    define('ENVIRONMENT', 'www.givetoken.com' == $server ? 'production' : ('127.0.0.1' == $_SERVER['SERVER_ADDR'] ? 'local' : 'development'));
 }
+
 
 // setup Monolog error handler to report to Slack
 if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
 $logger = new Logger('bugs');
-if (DEVELOPMENT) {
-    $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
-    $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
-} else {
-    $name = 'Web Application: '.$_SERVER['REQUEST_URI'];
-    $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs', $name, false);
+if (ENVIRONMENT != 'local') {
+  if (ENVIRONMENT == 'development') {
+      $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
+      $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs-staging', $name, false);
+  } else {
+      $name = 'Web Application: '.$_SERVER['REQUEST_URI'];
+      $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs', $name, false);
+  }
+  $slackHandler->setLevel(Logger::DEBUG);
+  $logger->pushHandler($slackHandler);
+  ErrorHandler::register($logger);
 }
-$slackHandler->setLevel(Logger::DEBUG);
-$logger->pushHandler($slackHandler);
-ErrorHandler::register($logger);
 
 $google_app_engine = false;
 $prefix = "http://";

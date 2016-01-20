@@ -171,7 +171,7 @@ class Route
                 break;
             case 'test':
                 // this endpoint is just for non-production testing
-                if (DEVELOPMENT) {
+                if (ENVIRONMENT != 'production') {
                     include __DIR__.'/../lp/sizzle1.php';
                     break;
                 }

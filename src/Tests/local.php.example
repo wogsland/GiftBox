@@ -4,6 +4,6 @@ define('MYSQL_DB', 'giftbox');
 define('MYSQL_USER', 'giftbox');
 define('MYSQL_PASSWORD', 'giftbox');
 define('MYSQL_HOST', '127.0.0.1');
-define('DEVELOPMENT', ('www.givetoken.com' != (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null)));
+define('ENVIRONMENT', 'local');
 define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 ?>

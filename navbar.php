@@ -11,7 +11,7 @@
       <span class="icon-bar"></span>
       </button>
 
-      <?php if (DEVELOPMENT) { ?>
+      <?php if (ENVIRONMENT != 'production') { ?>
         <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
       <?php }?>
 
