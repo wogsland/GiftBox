@@ -3,7 +3,7 @@ use \Sizzle\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 
-if (GOOGLE_APP_ENGINE && $application_id === "s~stone-timing-557") {
+if (GOOGLE_APP_ENGINE && GOOGLE_APP_ID === "s~stone-timing-557") {
     // See from whence the vistor hails
     $IpinfoIo = new IpinfoIo();
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);

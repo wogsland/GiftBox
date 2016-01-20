@@ -64,14 +64,14 @@ if (isset($_SERVER['HTTPS'])) {
     }
 }
 if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
-    $application_id = $_SERVER["APPLICATION_ID"];
+    define('GOOGLE_APP_ID', $_SERVER["APPLICATION_ID"]);
     $google_app_engine = true;
-    if ($application_id === "s~stone-timing-557") {
+    if (GOOGLE_APP_ID === "s~stone-timing-557") {
         $file_storage_path = 'gs://tokenstorage/';
         $socket = '/cloudsql/stone-timing-557:test';
         $stripe_secret_key = 'sk_live_MuUj2k3WOTpvIgw8oIHaON2X';
         $stripe_publishable_key = 'pk_live_AbtrrWvSZZCvLYdiLohHC2Kz';
-    } elseif ($application_id === "s~t-sunlight-757") {
+    } elseif (GOOGLE_APP_ID === "s~t-sunlight-757") {
         $file_storage_path = 'gs://tokenstorage-staging/';
         $socket = '/cloudsql/t-sunlight-757:staging';
     } else {
