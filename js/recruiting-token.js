@@ -251,12 +251,12 @@ $(document).ready(function(){
       var overview = '' + data.data.job_description;
       var words = overview.split(' ');
       var shortDescription = '';
-      for (i = 0; i < 25; i++) {
+      for (i = 0; i < 50; i++) {
         if (words[i] !== undefined) {
           shortDescription += words[i] + ' ';
         }
       }
-      if (words.length >= 25) {
+      if (words.length >= 50) {
         shortDescription += ' ... ';
         shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
