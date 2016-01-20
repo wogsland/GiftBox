@@ -256,6 +256,10 @@ $(document).ready(function(){
           shortDescription += words[i] + ' ';
         }
       }
+      var paragraphCount = (temp.match(/<p>/g) || []).length;
+      if (4 <= paragraphCount) {
+        
+      }
       if (words.length >= 50) {
         shortDescription += ' ... ';
         shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
