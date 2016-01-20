@@ -126,8 +126,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/test', true, 302));// only on DEVELOPMENT
     }
 
-
-
     /**
      * Tests the endpoint routing of public/index.php for logged in admin user
      */
@@ -214,8 +212,6 @@ extends \PHPUnit_Framework_TestCase
      */
     private function checkStatusCode($endpoint, $loggedIn = false, $statusCode = 200, $isAdmin = false)
     {
-        //
-        // test created city
         $url = TEST_URL . $endpoint;
         ob_start();
         $ch = curl_init();

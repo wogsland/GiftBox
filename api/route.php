@@ -1,4 +1,12 @@
 <?php
+use Sizzle\API;
+use Sizzle\User;
+
+// default response
+$success = false;
+$data = '';
+$errors = array();
+
 // Parse URI
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
 $endpoint = $pieces[0];
@@ -13,21 +21,34 @@ if (isset($pieces[1])) {
     }
 }
 
-// Execute script if exists
-if (isset($endpoint_parts[2])) {
-    $file1 = __DIR__.'/'.$endpoint_parts[2] . '.php';
-    if (isset($endpoint_parts[3])) {
-        $file2 = __DIR__.'/'.$endpoint_parts[2] . '/' . $endpoint_parts[3] . '.php';
-        if (isset($endpoint_parts[4])) {
-            $file3 = __DIR__.'/'.$endpoint_parts[2] . '/';
-            $file3 .= $endpoint_parts[3]  . '/' . $endpoint_parts[4] . '.php';
-        }
+// validate user
+if (isset($get_parts['api_key'])) {
+    $api_key = escape_string($get_parts['api_key']);
+    $user = User::fetch($api_key, 'api_key');
+    if ((int) $user->getId() <= 0) {
+        $errors[] = 'Invalid API Key';
+    }
+} else {
+    $errors[] = 'Invalid User';
+}
+
+if (empty($errors)) {
+    $api = new API($endpoint);
+
+    // validate endpoint
+    if ($api->valid) {
+        $result = $api->process($user);
+        $success = $result['success'];
+        $data = $result['data'];
+        $errors = $result['errors'];
+    } else {
+        $errors[] = 'Invalid Endpoint';
     }
 }
-if (isset($file1) && file_exists($file1)) {
-    include $file1;
-} elseif (isset($file2) && file_exists($file2)) {
-    include $file2;
-} elseif (isset($file3) && file_exists($file3)) {
-    include $file3;
-}
+
+header('Content-Type: application/json');
+echo json_encode(array(
+    'success'=>$success,
+    'data'=>$data,
+    'errors'=>$errors
+));
