@@ -256,11 +256,11 @@ $(document).ready(function(){
           shortDescription += words[i] + ' ';
         }
       }
-      var paragraphCount = (temp.match(/<p>/g) || []).length;
-      if (4 <= paragraphCount) {
-        
+      var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
+      if (4 < paragraphCount) {
+        shortDescription = shortDescription.substring(0, getPosition(shortDescription, '<p>', 5));
       }
-      if (words.length >= 50) {
+      if (words.length >= 50 || 4 < paragraphCount) {
         shortDescription += ' ... ';
         shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
@@ -525,4 +525,16 @@ function getAssetHost() {
     default:
     return '/uploads';
   }
+}
+
+/**
+ * Gets the location of the ith occurance of m in str
+ *
+ * @param {string} string to search
+ * @param {string} string to find
+ * @param {int} which occurance to find
+ * @return {int} wher it occurred
+ */
+function getPosition(str, m, i) {
+   return str.split(m, i).join(m).length;
 }
