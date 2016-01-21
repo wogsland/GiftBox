@@ -29,7 +29,7 @@ if (!defined('ENVIRONMENT')) {
 
 
 // setup Monolog error handler to report to Slack
-if (!defined('SLACK_TOKEN')) {
+/*if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
 $logger = new Logger('bugs');
@@ -44,7 +44,7 @@ if (ENVIRONMENT != 'local') {
   $slackHandler->setLevel(Logger::DEBUG);
   $logger->pushHandler($slackHandler);
   ErrorHandler::register($logger);
-}
+}*/
 
 $google_app_engine = false;
 $prefix = "http://";
