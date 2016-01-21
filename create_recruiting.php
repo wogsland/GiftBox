@@ -119,9 +119,6 @@ require __DIR__.'/header.php';
         paper-toolbar {
             --paper-toolbar-background: #111111
         }
-        #home-icon {
-            color: white;
-        }
         #progress-bar {
             width: 100%;
             height: 70px;
@@ -187,7 +184,11 @@ require __DIR__.'/header.php';
                 <?php if (isset($token_company)) {
                     $company_name = '' == $token_company->name ? 'Unnamed Company' : $token_company->name;?>
                     <input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="<?php echo $token->recruiting_company_id ?>">
-                    <paper-card id="company-info" heading="<?php echo $company_name;?>">
+                    <paper-card id="company-info">
+                      <div class="card-content" style="height:90px;">
+                        <i class="pull-left" style="font-size:25px;padding:15px;font:normal;"><?php echo $company_name;?></i>
+                        <a class="pull-right" href="/create_company?id=<?php echo $token->recruiting_company_id ?>"><paper-button>EDIT COMPANY</paper-button></a>
+                      </div>
                     </paper-card>
                 <?php }?>
 
