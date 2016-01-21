@@ -6,7 +6,6 @@ Icon
 # Local storage #
 #################
 /public/uploads
-/ajax/uploads
 
 # Composer #
 ############
@@ -19,3 +18,7 @@ Icon
 # Testing #
 ###########
 /test.php
+
+# Credentials #
+###############
+/config/database.php

@@ -29,6 +29,12 @@ Make sure you have access & set your project remote
 
 To create a local instance of the S!zzle database, refer [here](https://docs.google.com/document/d/1MXBCEeGCU5t-bE5zGqCAwAo6kwSL1o1dpUI_QhV_IQE/edit?usp=sharing) or just use MySQL Workbench's Schema Transfer Wizard.
 
+You'll also need to
+
+    cp config/database.php.example config/database.php
+
+replacing the default credentials with whatever your choices are for local development,
+
 ### Apache
 
 If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include something like

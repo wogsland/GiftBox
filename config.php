@@ -29,6 +29,7 @@ if (!defined('ENVIRONMENT')) {
 
 
 // setup Monolog error handler to report to Slack
+// this causes a 500 error on AWS (is PHP 7 issue?)
 /*if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
@@ -93,22 +94,21 @@ if (!defined('FILE_STORAGE_PATH')) {
     define('FILE_STORAGE_PATH', $file_storage_path);
 }
 
-$database = "giftbox";
-$user = "giftbox";
-$password = "giftbox";
 if (!defined('APP_URL')) {
     define('APP_URL', $prefix.$server.'/');
 }
 
 // connect to database
-if (GOOGLE_APP_ENGINE) {
+switch (ENVIRONMENT) {
+    case 'production':
+    $database = "giftbox";
+    $user = "giftbox";
+    $password = "giftbox";
     $mysqli = new mysqli(null, $user, $password, $database, null, $socket);
-} else {
-    if (in_array($server, array('','gosizzle.local'))) {
-        $mysql_server = "127.0.0.1";
-    } else {
-        $mysql_server = 'p:'.$server;
-    }
+    break;
+    case 'development';
+    case 'local';
+    include __DIR__.'/config/database.php';
     $mysqli = new mysqli($mysql_server, $user, $password, $database);
 }
 if ($mysqli->connect_error) {
