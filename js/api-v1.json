@@ -38,22 +38,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the company",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
+            "type": "integer"
           }
         ],
         "responses": {
@@ -126,22 +115,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the company",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
+            "type": "integer"
           }
         ],
         "responses": {
@@ -170,22 +148,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "fileName",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The name of the image file",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
           }
         ],
         "responses": {
@@ -214,22 +181,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the company image",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
           }
         ],
         "responses": {
@@ -258,11 +214,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the company",
             "required": true,
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "myEnum",
@@ -302,22 +258,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "url",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The URL of the video",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
           }
         ],
         "responses": {
@@ -346,22 +291,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the company video",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
+            "type": "integer"
           }
         ],
         "responses": {
@@ -390,22 +324,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the token",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
           }
         ],
         "responses": {
@@ -478,22 +401,11 @@
         ],
         "parameters": [
           {
-            "name": "job",
+            "name": "id",
             "in": "query",
-            "description": "The name of the job",
+            "description": "The id of the token",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "myEnum",
-            "in": "query",
-            "description": "Whether or not",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Yes",
-              "No"
-            ]
           }
         ],
         "responses": {
@@ -521,6 +433,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id of the token",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "job",
             "in": "query",
