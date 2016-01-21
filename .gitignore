@@ -14,13 +14,7 @@ Icon
 
 # Bower #
 #########
-bower_components
-components
-
-# Polybuild #
-#############
-#recruiting_token.build.html
-#js/recruiting_token.min.js
+/components
 
 # Testing #
 ###########
