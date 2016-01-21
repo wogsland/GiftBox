@@ -36,6 +36,7 @@ If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include so
     <VirtualHost *:80>
         ServerAdmin username@gosizzle.io
         ServerName gosizzle.local
+        ServerAlias *.gosizzle.local
         DocumentRoot "/Library/Webserver/Documents/GiftBox/public"
 
         <Directory "/Library/Webserver/Documents/GiftBox/public">
@@ -49,7 +50,10 @@ If on a Mac, you can update `/etc/apache2/extra/httpd-vhosts.conf` to include so
         LogLevel warn
     </VirtualHost>
 
-and  restart Apache.
+and restart Apache. Then modify `/etc/hosts` to include
+
+    127.0.0.1       gosizzle.local
+    127.0.0.1       api.gosizzle.local
 
 ### Google Cloud SDK
 
