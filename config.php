@@ -10,7 +10,6 @@ define('VERSION', '1.9.2');
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
 require_once __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/vendor/stefangabos/zebra_session/Zebra_Session.php';
 
 //load functions
 require_once __DIR__.'/util.php';
@@ -118,7 +117,6 @@ new Connection($mysqli);
 
 // start session
 session_start();
-//$session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
 
 // record website hit
 if (isset($_COOKIE, $_COOKIE['visitor'])) {

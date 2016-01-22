@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56549e0724f9e2661ec68ade8efa6626",
-    "content-hash": "84154ec3abe78507f348f8cdb126cdce",
+    "hash": "eec9afa5680224165597b9e88820d684",
+    "content-hash": "1d221a7de8c9950b4428c2c7911ab3b6",
     "packages": [
         {
             "name": "google/apiclient",
@@ -793,56 +793,6 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "stefangabos/zebra_session",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stefangabos/Zebra_Session.git",
-                "reference": "9177fc0ffb058317aed17d8155dd8e8c077fb891"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stefangabos/Zebra_Session/zipball/9177fc0ffb058317aed17d8155dd8e8c077fb891",
-                "reference": "9177fc0ffb058317aed17d8155dd8e8c077fb891",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Zebra_Session": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Stefan Gabos",
-                    "email": "contact@stefangabos.ro",
-                    "homepage": "http://stefangabos.ro/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A PHP library acting as a wrapper for PHP's default session handling functions which stores data in a MySQL database, providing both better performance and better security and protection against session fixation and session hijacking.",
-            "homepage": "http://stefangabos.ro/php-libraries/zebra-session/",
-            "keywords": [
-                "database",
-                "fixation",
-                "flash",
-                "flashdata",
-                "hijack",
-                "locking",
-                "mysql",
-                "mysqli",
-                "session"
-            ],
-            "time": "2014-09-25 06:30:21"
         },
         {
             "name": "stripe/stripe-php",
@@ -1915,16 +1865,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67"
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e4fb41d5d0387d556e2c25534d630b3cce90ea67",
-                "reference": "e4fb41d5d0387d556e2c25534d630b3cce90ea67",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
+                "reference": "6731851d6aaf1d0d6c58feff1065227b7fda3ba8",
                 "shasum": ""
             },
             "require": {
@@ -1942,7 +1892,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1988,7 +1938,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2015-12-11 00:12:46"
+            "time": "2016-01-19 23:39:10"
         },
         {
             "name": "symfony/yaml",
