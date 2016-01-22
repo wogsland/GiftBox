@@ -107,7 +107,7 @@ switch (ENVIRONMENT) {
     break;
     case 'development';
     case 'local';
-    include __DIR__.'/config/database.php';
+    include __DIR__.'/config/credentials.php';
     $mysqli = new mysqli($mysql_server, $user, $password, $database);
 }
 if ($mysqli->connect_error) {

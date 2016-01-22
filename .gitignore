@@ -21,4 +21,4 @@ Icon
 
 # Credentials #
 ###############
-/config/database.php
+/config/credentials.php

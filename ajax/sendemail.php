@@ -1,8 +1,5 @@
 <?php
-use \Sizzle\Service\GoogleMail;
-
 $status = 'ERROR';
-header('Content-Type: application/json');
 if (isset($_POST['email'], $_POST['message'])
 && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
     $vars = array('email', 'message', 'name', 'subject');
@@ -17,11 +14,17 @@ if (isset($_POST['email'], $_POST['message'])
     } else {
         $to = 'contact@gosizzle.io';
     }
-    $GoogleMail = new GoogleMail();
-    if ($GoogleMail->sendMail($to, $subject, $message, 'founder@givetoken.com')) {
-        $status = 'SUCCESS';
-    }
+    $mandrill = new Mandrill(MANDRILL_API_KEY);
+    $mandrill->messages->send(array(
+      'to'=>array(array('email'=>$to)),
+      'from_email'=>'contact@gosizzle.io',
+      'from_name'=>'S!zzle',
+      'subject'=>$subject,
+      'html'=>$message
+    ));
+    $status = 'SUCCESS';
 }
+header('Content-Type: application/json');
 echo json_encode(array('status' => $status));
 
 ?>

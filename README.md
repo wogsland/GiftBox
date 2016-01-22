@@ -31,7 +31,7 @@ To create a local instance of the S!zzle database, refer [here](https://docs.goo
 
 You'll also need to
 
-    cp config/database.php.example config/database.php
+    cp config/credentials.php.example config/credentials.php
 
 replacing the default credentials with whatever your choices are for local development,
 
