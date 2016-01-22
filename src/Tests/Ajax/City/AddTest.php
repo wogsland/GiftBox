@@ -77,7 +77,7 @@ extends \PHPUnit_Framework_TestCase
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_COOKIE, TEST_COOKIE);
+        curl_setopt($ch, CURLOPT_COOKIE, getTestCookie(true));
         curl_setopt($ch, CURLOPT_URL, $url);
         $response = curl_exec($ch);
         $this->assertEquals(true, $response);
