@@ -29,10 +29,10 @@ if (!defined('ENVIRONMENT')) {
 
 // setup Monolog error handler to report to Slack
 // this causes a 500 error on AWS (is PHP 7 issue?)
-/*if (!defined('SLACK_TOKEN')) {
+if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
-$logger = new Logger('bugs');
+/*$logger = new Logger('bugs');
 if (ENVIRONMENT != 'local') {
   if (ENVIRONMENT == 'development') {
       $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
