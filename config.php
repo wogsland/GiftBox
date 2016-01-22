@@ -117,7 +117,8 @@ if ($mysqli->connect_error) {
 new Connection($mysqli);
 
 // start session
-$session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
+session_start();
+//$session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
 
 // record website hit
 if (isset($_COOKIE, $_COOKIE['visitor'])) {
