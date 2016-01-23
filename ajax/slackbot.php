@@ -10,7 +10,7 @@ if (ENVIRONMENT === "production") {
 
     //see if the visitor is NEW
     $new = '*New*';
-    $visitor_cookie = isset($_COOKIE, $_COOKIE['visitor']) ? escape_string($_COOKIE['visitor']) : '';
+    $visitor_cookie = escape_string($_COOKIE['visitor'] ?? '');
     $sql = "SELECT COUNT(*) requests FROM web_request
             WHERE visitor_cookie = '$visitor_cookie'";
     $result = execute_query($sql);

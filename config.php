@@ -135,11 +135,11 @@ if (isset($_SESSION, $_SESSION['user_id'])) {
     $value_user_id = '';
 }
 if (isset($_SERVER)) {
-    $host = isset($_SERVER['HTTP_HOST']) ? escape_string($_SERVER['HTTP_HOST']) : '';
-    $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? escape_string($_SERVER['HTTP_USER_AGENT']) : '';
-    $uri = isset($_SERVER['REQUEST_URI']) ? escape_string($_SERVER['REQUEST_URI']) : '';
-    $remote_ip = isset($_SERVER['REMOTE_ADDR']) ? escape_string($_SERVER['REMOTE_ADDR']) : '';
-    $script = isset($_SERVER['SCRIPT_NAME']) ? escape_string($_SERVER['SCRIPT_NAME']) : '';
+    $host = escape_string($_SERVER['HTTP_HOST'] ?? '');
+    $user_agent = escape_string($_SERVER['HTTP_USER_AGENT'] ?? '');
+    $uri = escape_string($_SERVER['REQUEST_URI'] ?? '');
+    $remote_ip = escape_string($_SERVER['REMOTE_ADDR'] ?? '');
+    $script = escape_string($_SERVER['SCRIPT_NAME'] ?? '');
     $query = "INSERT INTO web_request
         ($insert_user_id `visitor_cookie`, `host`, `user_agent`, `uri`, `remote_ip`, `script`)
         VALUES

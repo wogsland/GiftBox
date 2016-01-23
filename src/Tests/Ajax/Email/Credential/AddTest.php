@@ -6,7 +6,7 @@ use Sizzle\EmailCredential;
 /**
  * This class tests the ajax endpoint to add email credentials.
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Credential/AddTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Credential/AddTest
  */
 class AddTest
 extends \PHPUnit_Framework_TestCase

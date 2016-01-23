@@ -11,7 +11,7 @@ if (!logged_in()) {
     header('Location: '.APP_URL);
 }
 
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+$user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
     $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');

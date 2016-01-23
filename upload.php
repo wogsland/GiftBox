@@ -1,7 +1,7 @@
 <?php
 use google\appengine\api\log\LogService;
 
-$file_name = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
+$file_name = $_SERVER['HTTP_X_FILENAME'] ?? false;
 $content_type = null;
 if ($file_name) {
     echo file_get_contents('php://input');

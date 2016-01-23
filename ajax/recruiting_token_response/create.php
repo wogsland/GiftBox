@@ -2,12 +2,12 @@
 use Sizzle\RecruitingTokenResponse;
 
 // collect info from url
-$id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
-$email = isset($endpoint_parts[5]) ? escape_string($endpoint_parts[5]) : '';
+$id = escape_string($endpoint_parts[4] ?? '');
+$email = escape_string($endpoint_parts[5] ?? '');
 $email = urldecode($email);
-$response = isset($endpoint_parts[6]) ? escape_string($endpoint_parts[6]) : '';
+$response = escape_string($endpoint_parts[6] ?? '');
 $response = ucfirst(strtolower($response));
-$cookie = isset($_COOKIE['visitor']) ? escape_string($_COOKIE['visitor']) : '';
+$cookie = escape_string($_COOKIE['visitor'] ?? '');
 
 $success = 'false';
 $data = '';
