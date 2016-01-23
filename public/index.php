@@ -21,7 +21,7 @@ if (in_array($_SERVER['SERVER_NAME'], $apis)) {
         $gets = explode('&', $gets);
         foreach ($gets as $get) {
             $parts = explode('=', $get);
-            $get_parts[$parts[0]] = isset($parts[1]) ? $parts[1] : null;
+            $get_parts[$parts[0]] = $parts[1] ?? null;
         }
     }
 

@@ -15,7 +15,7 @@ require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/util.php';
 
 // Determine environment & fix URL as needed
-$server = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
+$server = $_SERVER['SERVER_NAME'] ?? null;
 if ('givetoken.com' == strtolower($server)
     || 'stone-timing-557.appspot.com' == strtolower($server)
 ) {

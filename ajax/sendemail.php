@@ -4,7 +4,7 @@ if (isset($_POST['email'], $_POST['message'])
 && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
     $vars = array('email', 'message', 'name', 'subject');
     foreach ($vars as $var) {
-        $$var = isset($_POST[$var]) ? $_POST[$var] : '';
+        $$var = $_POST[$var] ?? '';
     }
     $from = $name . ' (' . $email . ')';
     $subject = '' == $subject ? 'Message from '.$from : $subject;

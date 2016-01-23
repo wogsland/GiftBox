@@ -2,7 +2,7 @@
 use \Sizzle\EventLogger;
 use \Sizzle\UserMilestone;
 
-if (isset($_GET['uid']) && isset($_GET['key'])) {
+if (isset($_GET['uid'],$_GET['key'])) {
     $user_id = (int) $_GET['uid'];
     $key = escape_string($_GET['key']);
     try {
