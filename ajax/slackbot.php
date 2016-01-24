@@ -1,7 +1,9 @@
 <?php
+use \Monolog\{
+    Handler\SlackHandler,
+    Logger
+};
 use \Sizzle\Service\IpinfoIo;
-use \Monolog\Handler\SlackHandler;
-use \Monolog\Logger;
 
 if (ENVIRONMENT === "production") {
     // See from whence the vistor hails

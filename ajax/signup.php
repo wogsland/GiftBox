@@ -1,7 +1,9 @@
 <?php
-use \Sizzle\EventLogger;
-use \Sizzle\UserMilestone;
-use \Sizzle\User;
+use \Sizzle\{
+    EventLogger,
+    User,
+    UserMilestone
+};
 
 date_default_timezone_set('America/Chicago');
 

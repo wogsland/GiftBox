@@ -1,11 +1,13 @@
 <?php
-use \Sizzle\City;
-use \Sizzle\HTML;
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingToken;
-use \Sizzle\RecruitingCompanyImage;
-use \Sizzle\RecruitingCompanyVideo;
 use \google\appengine\api\cloud_storage\CloudStorageTools;
+use \Sizzle\{
+    City,
+    HTML,
+    RecruitingCompany,
+    RecruitingCompanyImage,
+    RecruitingCompanyVideo,
+    RecruitingToken
+};
 
 if (!logged_in()) {
     header('Location: '.APP_URL);

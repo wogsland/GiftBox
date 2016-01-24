@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\EventLogger;
-use \Sizzle\UserMilestone;
+use \Sizzle\{
+    EventLogger,
+    UserMilestone
+};
 
 if (isset($_GET['uid'],$_GET['key'])) {
     $user_id = (int) $_GET['uid'];

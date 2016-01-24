@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\HTML;
-use \Sizzle\RecruitingToken;
+use \Sizzle\{
+    HTML,
+    RecruitingToken
+};
 
 // collect id
 $user_id = escape_string($endpoint_parts[4] ?? '');
