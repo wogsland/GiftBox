@@ -65,7 +65,7 @@ class RecruitingToken
                   FROM recruiting_company
                   WHERE user_id = '$user_id'";
         $results = execute_query($query);
-        return $results->fetch_all(MYSQL_ASSOC);
+        return $results->fetch_all(MYSQLI_ASSOC);
     }
 
     public function init($post)
