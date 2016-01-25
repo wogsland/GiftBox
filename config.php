@@ -46,7 +46,6 @@ if (ENVIRONMENT != 'local') {
   ErrorHandler::register($logger);
 }*/
 
-$google_app_engine = false;
 $prefix = "http://";
 $use_https = false;
 $socket = null;
@@ -65,7 +64,6 @@ if (isset($_SERVER['HTTPS'])) {
 }
 if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
     define('GOOGLE_APP_ID', $_SERVER["APPLICATION_ID"]);
-    $google_app_engine = true;
     if (GOOGLE_APP_ID === "s~stone-timing-557") {
         $file_storage_path = 'gs://tokenstorage/';
         $socket = '/cloudsql/stone-timing-557:test';
@@ -79,9 +77,6 @@ if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
     }
 } else {
     $file_storage_path = 'uploads/';
-}
-if (!defined('GOOGLE_APP_ENGINE')) {
-    define('GOOGLE_APP_ENGINE', $google_app_engine);
 }
 if (!defined('STRIPE_SECRET_KEY')) {
     define('STRIPE_SECRET_KEY', $stripe_secret_key);

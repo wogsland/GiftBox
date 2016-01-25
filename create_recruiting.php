@@ -277,11 +277,7 @@ require __DIR__.'/header.php';
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
                               foreach ($token_images as $token_image) {
-                                  if (GOOGLE_APP_ENGINE) {
-                                      $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
-                                  } else {
-                                      $image_path = $file_storage_path.$token_image->file_name;
-                                  }
+                                  $image_path = $file_storage_path.$token_image->file_name;
                                   $image_id = str_replace('.', '_', $token_image->file_name);
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';
