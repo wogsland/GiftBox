@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests\Ajax\City;
+namespace Sizzle\Tests\Ajax\City;
 
-use GiveToken\City;
+use Sizzle\City;
 
 /**
  * This class tests the ajax endpoint to get a city.

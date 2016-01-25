@@ -1,15 +1,13 @@
 <?php
-use \GiveToken\User;
-
-require_once __DIR__.'/config.php';
+use \Sizzle\User;
 
 if (!logged_in() || !isset($_SESSION['email'])) {
-    header('Location: '.$app_url.'pricing');
+    header('Location: '.APP_URL.'pricing');
 }
 
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 
-define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
+define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 
 ?>

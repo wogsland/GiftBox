@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
 /**
  * This class tests analyticsauth.php

@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
@@ -54,7 +54,7 @@ class UserMilestone
                     $milestoneLogger = new Logger('milestones');
                     $User = new User($user_id);
                     $name = 'Customer Milestone Bot';
-                    if (DEVELOPMENT) {
+                    if (ENVIRONMENT != 'production') {
                         $slackHandler = new SlackHandler(SLACK_TOKEN, '#development', $name, false);
                         // this is turned off to avoid spamming Slack too much
                         // turn it on to test specific features

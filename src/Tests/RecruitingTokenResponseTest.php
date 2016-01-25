@@ -1,9 +1,9 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\RecruitingTokenResponse;
-use \GiveToken\RecruitingToken;
-use \GiveToken\User;
+use \Sizzle\RecruitingTokenResponse;
+use \Sizzle\RecruitingToken;
+use \Sizzle\User;
 
 /**
  * This class tests the RecruitingTokenResponse class
@@ -48,7 +48,7 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $result = new RecruitingTokenResponse();
-        $this->assertEquals('GiveToken\RecruitingTokenResponse', get_class($result));
+        $this->assertEquals('Sizzle\RecruitingTokenResponse', get_class($result));
     }
 
     /**

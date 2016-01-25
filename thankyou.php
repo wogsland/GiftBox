@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 if (isset($_GET['signup'])) {
     $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
@@ -7,7 +7,7 @@ if (isset($_GET['signup'])) {
     $message = 'Thank you for being awesome.<br/>';
 }
 
-define('TITLE', 'GiveToken.com - Thank You!');
+define('TITLE', 'S!zzle - Thank You!');
 require __DIR__.'/header.php';
 
 ?>

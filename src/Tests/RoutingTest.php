@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
 /**
  * This class tests public/index.php
@@ -126,8 +126,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/test', true, 302));// only on DEVELOPMENT
     }
 
-
-
     /**
      * Tests the endpoint routing of public/index.php for logged in admin user
      */
@@ -205,17 +203,15 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Checks that a given endpoint returns the desired status code.
      *
-     * @param string $endpoint - the endpoint to test
-     * @param boolean $loggedIn - is the user logged in (defaults false)
-     * @param int $statusCode - the status code to check for (defaults to 200)
-     * @param boolean $isAdmin - is the user logged in an admin (defaults false)
+     * @param string  $endpoint   - the endpoint to test
+     * @param boolean $loggedIn   - is the user logged in (defaults false)
+     * @param int     $statusCode - the status code to check for (defaults to 200)
+     * @param boolean $isAdmin    - is the user logged in an admin (defaults false)
      *
      * @return boolean - desired status code was returned
      */
     private function checkStatusCode($endpoint, $loggedIn = false, $statusCode = 200, $isAdmin = false)
     {
-        //
-        // test created city
         $url = TEST_URL . $endpoint;
         ob_start();
         $ch = curl_init();
@@ -227,17 +223,15 @@ extends \PHPUnit_Framework_TestCase
         }
         curl_setopt($ch, CURLOPT_URL, $url);
         $response = curl_exec($ch);
-        //$this->assertEquals(true, $response);
-        //$json = ob_get_contents();
+        $page = ob_get_contents();
         ob_end_clean();
-        //print_r($json);
-        //$return = json_decode($json);
-        //print_r($return);
         $foundCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($statusCode == $foundCode) {
             return true;
         } else {
             echo "\nFound status $foundCode instead of $statusCode at '$endpoint'.\n";
+            //echo $response;
+            //echo $page;
             return false;
         }
     }

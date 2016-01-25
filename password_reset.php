@@ -1,18 +1,18 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
 // make sure the secret is valid
 if (isset($_GET['secret'])) {
     $reset_code = escape_string($_GET['secret']);
     $user = User::fetch($reset_code, 'reset_code');
     if (!isset($user->email_address)) {
-        header('Location: '.$app_root);
+        header('Location: '.'/');
     }
 } else {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
-define('TITLE', 'GiveToken.com - Password Reset');
+define('TITLE', 'S!zzle - Password Reset');
 require __DIR__.'/header.php';
 ?>
 <style>

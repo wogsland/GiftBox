@@ -22,7 +22,7 @@ function loginInfo(message) {
 }
 
 function loginSuccess(app_root) {
-  $('#login-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully logged into GiveToken.</span></div>');
+  $('#login-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully logged into S!zzle.</span></div>');
   setTimeout(function(){
     $('#login-dialog').modal('hide');
     document.location.href = app_root;
@@ -39,7 +39,7 @@ function loginFacebook() {
 }
 
 function processLogin(userInfo) {
-  loginInfo("Logging into GiveToken.  Please wait...");
+  loginInfo("Logging into S!zzle.  Please wait...");
   $.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
       loginSuccess(data.app_root+'profile');

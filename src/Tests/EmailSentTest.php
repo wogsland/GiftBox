@@ -1,9 +1,9 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\EmailCredential;
-use \GiveToken\EmailSent;
-use \GiveToken\User;
+use \Sizzle\EmailCredential;
+use \Sizzle\EmailSent;
+use \Sizzle\User;
 
 /**
  * This class tests the EmailSent class
@@ -53,7 +53,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // no params
         $result = new EmailSent();
-        $this->assertEquals('GiveToken\EmailSent', get_class($result));
+        $this->assertEquals('Sizzle\EmailSent', get_class($result));
 
         // test with bad id
         $result2 = new EmailSent(-1);
@@ -81,8 +81,8 @@ extends \PHPUnit_Framework_TestCase
 
         // setup complete array
         $allDetails = array(
-            'to'=>rand() . '@givetoken.com',
-            'from'=>rand() . '@givetoken.com',
+            'to'=>rand() . '@gosizzle.io',
+            'from'=>rand() . '@gosizzle.io',
             'subject'=>rand() . ' Subject',
             'body'=>rand() . ' Body<br>',
             'email_credential_id'=>$this->EmailCredential->id,
@@ -134,9 +134,9 @@ extends \PHPUnit_Framework_TestCase
 
         // test creation with all details
         $details = $allDetails;
-        $details['reply_to'] = rand() . '@givetoken.com';
-        $details['cc'] = rand() . '@givetoken.com';
-        $details['bcc'] = rand() . '@givetoken.com';
+        $details['reply_to'] = rand() . '@gosizzle.io';
+        $details['cc'] = rand() . '@gosizzle.io';
+        $details['bcc'] = rand() . '@gosizzle.io';
         $details['error_message'] = 'Error ' . rand();
         $EmailSent = new EmailSent();
         $id = $EmailSent->create($details);

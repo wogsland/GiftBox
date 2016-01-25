@@ -1,5 +1,5 @@
 <?php
-use \GiveToken\RecruitingCompanyImage;
+use \Sizzle\RecruitingCompanyImage;
 
 // collect id
 $id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';

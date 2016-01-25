@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests\Ajax\Email\Credential;
+namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use \GiveToken\EmailCredential;
-use \GiveToken\User;
+use \Sizzle\EmailCredential;
+use \Sizzle\User;
 
 /**
  * This class tests the ajax endpoint to delete email credentials.

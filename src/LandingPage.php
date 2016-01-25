@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
-use \GiveToken\LandingPageView;
+use \Sizzle\LandingPageView;
 
 /**
  * This class is for database interaction with landing pages.

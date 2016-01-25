@@ -1,5 +1,4 @@
 <?php
-    require_once 'config.php';
     header('Content-Type: text/javascript');
 ?>
 
@@ -19,7 +18,7 @@ function processUpgrade(token, payFrom) {
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
 				signupClose();
-				openMessage("Welcome!", "You have successfully signed up with GiveToken.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
+				openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+upgradeData.email+".  Please activate your account before logging in.");
 			} else if (payFrom === "UPGRADE") {
         window.location.href = '/profile';
       } else {
@@ -38,7 +37,7 @@ function processUpgrade(token, payFrom) {
 function payWithStripe(email, payFrom) {
 
 	var handler = StripeCheckout.configure({
-		key: '<?php echo $stripe_publishable_key ?>',
+		key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
 //		image: '../images/logoicon.png',
 		email: email,
 		token: function(token) {

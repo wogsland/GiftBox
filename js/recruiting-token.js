@@ -236,7 +236,7 @@ $(document).ready(function(){
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', function(data) {
       if (data.success == 'false') {
-        window.location.href = 'https://www.givetoken.com';
+        window.location.href = 'https://www.gosizzle.io';
       }
       var tokenTitle;
       if (dataExists(data.data.company)) {
@@ -251,12 +251,16 @@ $(document).ready(function(){
       var overview = '' + data.data.job_description;
       var words = overview.split(' ');
       var shortDescription = '';
-      for (i = 0; i < 25; i++) {
+      for (i = 0; i < 50; i++) {
         if (words[i] !== undefined) {
           shortDescription += words[i] + ' ';
         }
       }
-      if (words.length >= 25) {
+      var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
+      if (4 < paragraphCount) {
+        shortDescription = shortDescription.substring(0, getPosition(shortDescription, '<p>', 5));
+      }
+      if (words.length >= 50 || 4 < paragraphCount) {
         shortDescription += ' ... ';
         shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
@@ -456,7 +460,7 @@ $(document).ready(function(){
       }
     });
   } else {
-    window.location.href = 'https://www.givetoken.com';
+    window.location.href = 'https://www.gosizzle.io';
   }
   smallScreen();
 });
@@ -521,4 +525,16 @@ function getAssetHost() {
     default:
     return '/uploads';
   }
+}
+
+/**
+ * Gets the location of the ith occurance of m in str
+ *
+ * @param {string} string to search
+ * @param {string} string to find
+ * @param {int} which occurance to find
+ * @return {int} wher it occurred
+ */
+function getPosition(str, m, i) {
+   return str.split(m, i).join(m).length;
 }

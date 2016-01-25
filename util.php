@@ -1,5 +1,5 @@
 <?php
-use GiveToken\Connection;
+use Sizzle\Connection;
 require_once __DIR__.'/src/autoload.php';
 
 function escape_string($string)
@@ -76,55 +76,4 @@ function debug_output($text)
         }
         echo $text."</pre>\n";
     }
-}
-
-function youtube_id($url)
-{
-    $id = null;
-    if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match)) {
-        $id = $match[count($match)-1];
-    }
-    return $id;
-}
-
-function is_youtube($url)
-{
-    $retval = false;
-    if (strpos($url, 'youtube.com') !== false || strpos($url, 'youtu.be') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
-function is_spotify($url)
-{
-    $retval = false;
-    if (strpos($url, 'spotify.com') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
-function is_soundcloud($url)
-{
-    $retval = false;
-    if (strpos($url, 'soundcloud.com') !== false) {
-        $retval = true;
-    }
-    return $retval;
-}
-
-function is_selected($field_value, $data_value, $select_string = 'selected')
-{
-    $retval = null;
-    if ($field_value == $data_value) {
-        $retval = $select_string;
-    }
-    return $retval;
-}
-
-function _session_start()
-{
-    $session = new Zebra_Session(Connection::$mysqli, 'sEcUr1tY_c0dE');
-    return $session;
 }

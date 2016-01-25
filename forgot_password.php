@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__.'/config.php';
-
-define('TITLE', 'GiveToken.com - Password Reset');
+define('TITLE', 'S!zzle - Password Reset');
 require __DIR__.'/header.php';
 ?>
 <style>

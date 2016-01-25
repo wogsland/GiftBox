@@ -5,13 +5,13 @@ if [ "$#" -gt 0 -a "$1" = "-h" ]
 then
   echo ""
   echo "NAME"
-  echo "     build -- builds GiveToken project"
+  echo "     build -- builds Sizzle project"
   echo ""
   echo "SYNOPSIS"
   echo "     ./build.sh [-h] [project]"
   echo ""
   echo "DESCRIPTION"
-  echo "     This tool is for building & pushing the GiveToken project. Choosing the project option master or staging"
+  echo "     This tool is for building & pushing the Sizzle project. Choosing the project option master or staging"
   echo "     will push the build to givetoken.com or t-sunlight-757.appspot.com respectively. Any other project option"
   echo "     will result in a push to <project>-dot-t-sunlight-757.appspot.com."
   echo ""
@@ -22,7 +22,7 @@ then
   exit
 fi
 
-# run unit tests
+# run PHP unit tests
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
 echo ""
 
@@ -54,8 +54,6 @@ yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
 yuicompressor js/create_common.js -o public/js/create_common.min.js
 yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
 yuicompressor js/custom.js -o public/js/custom.min.js
-yuicompressor js/facebook_init.js -o public/js/facebook_init.min.js
-yuicompressor js/util.js -o public/js/util.min.js
 yuicompressor js/account.js -o public/js/account.min.js
 yuicompressor js/pricing.js -o public/js/pricing.min.js
 yuicompressor js/matchMedia.js -o public/js/matchMedia.min.js
@@ -65,6 +63,7 @@ yuicompressor js/signup.js -o public/js/signup.min.js
 yuicompressor js/preloader.js -o public/js/preloader.min.js
 yuicompressor js/jquery.nav.js -o public/js/jquery.nav.min.js
 yuicompressor js/jquery.fitvids.js -o public/js/jquery.fitvids.min.js
+json-minify js/api-v1.json > public/js/api-v1.json
 echo "JavaScript minified"
 echo ""
 

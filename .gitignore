@@ -6,7 +6,6 @@ Icon
 # Local storage #
 #################
 /public/uploads
-/ajax/uploads
 
 # Composer #
 ############
@@ -14,14 +13,12 @@ Icon
 
 # Bower #
 #########
-bower_components
-components
-
-# Polybuild #
-#############
-#recruiting_token.build.html
-#js/recruiting_token.min.js
+/components
 
 # Testing #
 ###########
 /test.php
+
+# Credentials #
+###############
+/config/credentials.php

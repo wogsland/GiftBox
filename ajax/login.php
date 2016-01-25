@@ -1,7 +1,7 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\UserMilestone;
-use \GiveToken\User;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -9,7 +9,7 @@ $user = null;
 $event_type = null;
 $response['status'] = "ERROR";
 $response['message'] = "Unable to log in at this time.";
-$response['app_root'] = $app_root;
+$response['app_root'] = '/';
 
 $email = $_POST['login_email'];
 $login_type = $_POST['login_type'];
@@ -28,6 +28,7 @@ if (User::exists($email)) {
         if ($login_type == 'FACEBOOK') {
             $event_type = EventLogger::LOGIN_USING_FACEBOOK;
             $response['status'] = 'SUCCESS';
+            $response['message'] = "Log in with Facebook successful.";
         } else if ($login_type == 'EMAIL') {
             if (!$user->password) {
                 $response['status'] = "ERROR";
@@ -42,6 +43,7 @@ if (User::exists($email)) {
                 } else {
                     $event_type = EventLogger::LOGIN_USING_EMAIL;
                     $response['status'] = 'SUCCESS';
+                    $response['message'] = "Log in with email successful.";
                 }
             }
         }
@@ -49,8 +51,8 @@ if (User::exists($email)) {
             $_SESSION['user_id'] = $user->getId();
             $_SESSION['admin'] = $user->admin;
             $_SESSION['login_type'] = $login_type;
-            $_SESSION['app_root'] = $app_root;
-            $_SESSION['app_url'] = $app_url;
+            $_SESSION['app_root'] = '/';
+            $_SESSION['app_url'] = APP_URL;
             $_SESSION['level'] = $user->level;
             $_SESSION['email'] = $email;
             $_SESSION['stripe_id'] = $user->stripe_id;
@@ -64,7 +66,7 @@ if (User::exists($email)) {
     }
 } else {
     $response['status'] = "ERROR";
-    $response['message'] = "The email address \"".$email."\" does not belong to any GiveToken account. Please use the signup button to register!";
+    $response['message'] = "The email address \"".$email."\" does not belong to any S!zzle account. Please use the signup button to register!";
 }
 
 header('Content-Type: application/json');

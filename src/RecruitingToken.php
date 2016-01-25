@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 class RecruitingToken
 {
@@ -26,7 +26,7 @@ class RecruitingToken
             if ($key == null || !in_array($key, array('id','long_id'))) {
                 $key = 'id';
             }
-            $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("GiveToken\RecruitingToken");
+            $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("Sizzle\RecruitingToken");
             if ($token) {
                 foreach (get_object_vars($token) as $key => $value) {
                     if (isset($value)) {
@@ -44,7 +44,8 @@ class RecruitingToken
             FROM recruiting_token
             LEFT JOIN recruiting_company ON recruiting_company.id = recruiting_company_id
             WHERE recruiting_token.user_id = '$user_id'
-            ORDER BY company, job_title");
+            ORDER BY company, job_title"
+        );
         $user_tokens = array();
         while($token = $results->fetch_object()) {
             $user_tokens[count($user_tokens)] = $token;
@@ -64,7 +65,7 @@ class RecruitingToken
                   FROM recruiting_company
                   WHERE user_id = '$user_id'";
         $results = execute_query($query);
-        return $results->fetch_all(MYSQL_ASSOC);
+        return $results->fetch_all(MYSQLI_ASSOC);
     }
 
     public function init($post)

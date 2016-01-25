@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 class RecruitingCompanyVideo
 {
@@ -20,7 +20,7 @@ class RecruitingCompanyVideo
             $result = execute_query(
                 "SELECT * from recruiting_company_video
                 WHERE id = '$id'"
-            )->fetch_object("GiveToken\RecruitingCompanyVideo");
+            )->fetch_object("Sizzle\RecruitingCompanyVideo");
             if (isset($result)) {
                 foreach (get_object_vars($result) as $key => $value) {
                     $this->$key = $value;

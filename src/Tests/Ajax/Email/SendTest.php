@@ -1,8 +1,8 @@
 <?php
-namespace GiveToken\Tests\Ajax\Email;
+namespace Sizzle\Tests\Ajax\Email;
 
-use \GiveToken\EmailCredential;
-use \GiveToken\User;
+use \Sizzle\EmailCredential;
+use \Sizzle\User;
 
 /**
  * This class tests the ajax endpoint to send emails.
@@ -58,13 +58,13 @@ extends \PHPUnit_Framework_TestCase
 
         // no cookie, but post vars
         $fields = array(
-            'subject'=>'GiveToken Test Email',
+            'subject'=>'S!zzle Test Email',
             'body'=>'<b>Behold!</b> This is the body of an email.',
-            'address'=>'test@givetoken.com',
-            'replyTo'=>'reply-to@givetoken.com',
+            'address'=>'test@gosizzle.io',
+            'replyTo'=>'reply-to@gosizzle.io',
             'email_credential_id'=>1,
-            'cc'=>'cc@givetoken.com',
-            'bcc'=>'bcc@givetoken.com'
+            'cc'=>'cc@gosizzle.io',
+            'bcc'=>'bcc@gosizzle.io'
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -115,13 +115,13 @@ extends \PHPUnit_Framework_TestCase
     {
         $url = TEST_URL . "/ajax/email/send";
         $fields = array(
-            'subject'=>'GiveToken Test Email',
+            'subject'=>'S!zzle Test Email',
             'body'=>'<b>Behold!</b> This is the body of an email.',
-            'address'=>'test@givetoken.com',
-            'replyTo'=>'reply-to@givetoken.com',
+            'address'=>'test@gosizzle.io',
+            'replyTo'=>'reply-to@gosizzle.io',
             'email_credential_id'=>rand(),
-            'cc'=>'cc@givetoken.com',
-            'bcc'=>'bcc@givetoken.com'
+            'cc'=>'cc@gosizzle.io',
+            'bcc'=>'bcc@gosizzle.io'
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {

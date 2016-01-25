@@ -1,10 +1,10 @@
 <?php
-namespace GiveToken\Tests\Traits;
+namespace Sizzle\Tests\Traits;
 
 /**
  * Uses traits to allow for testing 
  */
 class Helper
 {
-    use \GiveToken\Traits\CamelToUnderscore;
+    use \Sizzle\Traits\CamelToUnderscore;
 }

@@ -2,7 +2,7 @@
 if (logged_in()) {
     header('Location: /profile');
 }
-define('TITLE', 'Sizzle - Sell the Sizzle not the Steak');
+define('TITLE', 'S!zzle - Sell the S!zzle not the Steak');
 include __DIR__.'/../header.php';
 ?>
     <style>
@@ -178,7 +178,7 @@ include __DIR__.'/../header.php';
             </div>
             <br />
             <h3>
-              Create enagaging material with Sizzle
+              Create enagaging material with S!zzle
             </h3>
             <div class="white-line">
             </div>
@@ -257,7 +257,7 @@ include __DIR__.'/../header.php';
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="Sizzle" id="inline-logo"> not the Steak</h1>
+            <h1>Sell the <img src="/assets/img/sizzle-logo.png" alt="S!zzle" id="inline-logo"> not the Steak</h1>
           </div>
         </div>
       </div>
@@ -276,7 +276,7 @@ include __DIR__.'/../header.php';
             <div class="white-line">
             </div>
             Recruiters send hundreds of messages and need a way to track
-            the success of each message. Sizzle provides an analytics
+            the success of each message. S!zzle provides an analytics
             package that allows the recruiter to see what candidates actually
             engage with.
           </div>

@@ -1,17 +1,16 @@
 <?php
-use \GiveToken\RecruitingToken;
+use \Sizzle\RecruitingToken;
 use \Stripe\Invoice;
 use \Stripe\Stripe;
 
 date_default_timezone_set('America/Chicago');
 
-require_once __DIR__.'/config.php';
 if (!logged_in()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
 $paid = false;
-Stripe::setApiKey($stripe_secret_key);
+Stripe::setApiKey(STRIPE_SECRET_KEY);
 if (isset($_GET['id'])) {
   $success = 'true';
   $data = Invoice::retrieve(array('id'=>$_GET['id']));
@@ -19,7 +18,7 @@ if (isset($_GET['id'])) {
   $paid = ($invoice->ending_balance == 0);
 }
 
-define('TITLE', 'GiveToken.com - Invoice Details');
+define('TITLE', 'S!zzle - Invoice Details');
 require __DIR__.'/header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.css"/>
@@ -74,7 +73,7 @@ require __DIR__.'/header.php';
       <?php if (isset($invoice)) { ?>
       $('#pay-now-button').on('click', function (email, payFrom) {
         var handler = StripeCheckout.configure({
-          key: '<?php echo $stripe_publishable_key; ?>',
+          key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
           email: '<?php echo $_SESSION['email']; ?>',
           token: function(token) {
             console.log(token);

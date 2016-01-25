@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
-use \GiveToken\EventLogger;
+use \Sizzle\User;
+use \Sizzle\EventLogger;
 
 date_default_timezone_set('America/Chicago');
 
@@ -10,7 +10,7 @@ $response['status'] = "ERROR";
 $response['message'] = "Unable to upgrade at this time.";
 
 // See your keys here https://dashboard.stripe.com/account
-\Stripe\Stripe::setApiKey($stripe_secret_key);
+\Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
 // Get the credit card details submitted by the form
 $token = $_POST['stripeToken'];
@@ -18,7 +18,7 @@ $email = $_POST['email'];
 $new_level = $_POST['newLevel'];
 $plan = $_POST['plan'];
 
-// Retrieve the GiveToken user recored
+// Retrieve the S!zzle user record
 $user = User::fetch($email);
 
 try {

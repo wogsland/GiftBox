@@ -1,5 +1,5 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
 /*
 
@@ -51,7 +51,7 @@ class UserGroup
             $user_group = execute_query(
                 "SELECT * from user_group
                 where id = $id"
-            )->fetch_object("GiveToken\UserGroup");
+            )->fetch_object("Sizzle\UserGroup");
             foreach (get_object_vars($user_group) as $key => $value) {
                 $this->$key = $value;
             }

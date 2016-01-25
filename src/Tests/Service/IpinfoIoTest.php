@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\Service\IpinfoIo;
+use \Sizzle\Service\IpinfoIo;
 
 /**
  * This class tests the IpinfoIoTest class
@@ -17,7 +17,7 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $IpinfoIo = new IpinfoIo();
-        $this->assertEquals('GiveToken\Service\IpinfoIo', get_class($IpinfoIo));
+        $this->assertEquals('Sizzle\Service\IpinfoIo', get_class($IpinfoIo));
     }
 
     /**
@@ -57,12 +57,12 @@ extends \PHPUnit_Framework_TestCase
      * This is my first attempt at mocking...
      *
      * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * @preserveGlobalState  disabled
      */
     public function testMock()
     {
-        $mock = \Mockery::mock('overload:\\GiveToken\\Service\\IpinfoIo');
-        $this->assertEquals('GiveToken\Service\IpinfoIo', get_class($mock));
+        $mock = \Mockery::mock('overload:\\Sizzle\\Service\\IpinfoIo');
+        $this->assertEquals('Sizzle\Service\IpinfoIo', get_class($mock));
         $ipAddress = '1.1.1.1';
         $return = (object) array(
             "ip"=> $ipAddress,
@@ -75,8 +75,8 @@ extends \PHPUnit_Framework_TestCase
             "postal"=> "1337"
         );
         $mock->shouldReceive('getInfo')
-             ->with($ipAddress)
-             ->andReturn($return);
+            ->with($ipAddress)
+            ->andReturn($return);
         $IpinfoIo = new IpinfoIo();
         $locale = $IpinfoIo->getInfo($ipAddress);
         $this->assertTrue((bool)$locale);

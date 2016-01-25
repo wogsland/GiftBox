@@ -1,9 +1,9 @@
 <?php
-use \GiveToken\Service\IpinfoIo;
+use \Sizzle\Service\IpinfoIo;
 use \Monolog\Handler\SlackHandler;
 use \Monolog\Logger;
 
-if ($google_app_engine && $application_id === "s~stone-timing-557") {
+if (ENVIRONMENT === "production") {
     // See from whence the vistor hails
     $IpinfoIo = new IpinfoIo();
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
@@ -69,7 +69,7 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
     }
 
     // Have Slackbot inform us of the visitor
-    $message = "$new $visitor to $app_url from ";
+    $message = "$new $visitor to " . APP_URL . " from ";
     $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
     $message .= isset($locale->region) && '' != $locale->region ? $locale->region . ', ' : '';
     $message .= isset($locale->country) && '' != $locale->country ? $locale->country : '';
@@ -77,7 +77,7 @@ if ($google_app_engine && $application_id === "s~stone-timing-557") {
     $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
     $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
     $visitorLogger = new Logger('milestones');
-    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'SizzleBot', false);
+    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'S!zzleBot', false);
     $slackHandler->setLevel(Logger::DEBUG);
     $visitorLogger->pushHandler($slackHandler);
     $visitorLogger->log(200, $message);

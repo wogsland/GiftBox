@@ -11,16 +11,12 @@
       <span class="icon-bar"></span>
       </button>
 
-      <?php if (DEVELOPMENT) { ?>
+      <?php if (ENVIRONMENT != 'production') { ?>
         <h3 class="pull-right" style="color:red;">DEVELOPMENT</h3>
       <?php }?>
 
-      <a class="navbar-brand" href="<?php echo $app_root ?>">
-        <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>
-            <img src="/assets/img/sizzle-logo.png" alt="">
-        <?php } else { ?>
-            <img src="/assets/img/logo-light.png" alt="">
-        <?php }?>
+      <a class="navbar-brand" href="<?php echo '/' ?>">
+        <img src="/assets/img/sizzle-logo.png" alt="">
       </a>
 
     </div>
@@ -29,33 +25,33 @@
     <div class="navbar-collapse collapse" id="kane-navigation">
       <ul class="nav navbar-nav navbar-right main-navigation">
         <?php if (!logged_in()) { ?>
-            <li><a href="/" class="external">Home</a></li>
+            <li><a href="/" class="external sizzle-nav-choice">Home</a></li>
         <?php } else { ?>
-            <li><a href="/create_recruiting" class="external">Create Token</a></li>
+            <li><a href="/create_recruiting" class="external sizzle-nav-choice">Create Token</a></li>
         <?php } ?>
         <?php if (!logged_in()) { ?>
-          <li><a href="/pricing" class="external">Pricing</a></li>
+          <li><a href="/pricing" class="external sizzle-nav-choice">Pricing</a></li>
         <?php } ?>
-        <!--<li><a href="blog.givetoken.com" class="external">Blog</a></li>-->
+        <!--<li><a href="blog.gosizzle.io" class="external sizzle-nav-choice">Blog</a></li>-->
         <?php if (logged_in()) { ?>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle external" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle external sizzle-nav-choice" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/upgrade" class="external account-dropdown" id="upgrade-dropdown">Upgrade</a></li>
+                <li><a href="/upgrade" class="external account-dropdown sizzle-nav-choice" id="upgrade-dropdown">Upgrade</a></li>
                 <li role="separator" class="divider" id="upgrade-divider"></li>
-                <li><a href="/tokens" class="external account-dropdown">My Tokens</a></li>
-                <li><a href="/profile" class="external account-dropdown">Profile</a></li>
-                <li><a href="/payments" class="external account-dropdown">Payments</a></li>
+                <li><a href="/tokens" class="external account-dropdown sizzle-nav-choice">My Tokens</a></li>
+                <li><a href="/profile" class="external account-dropdown sizzle-nav-choice">Profile</a></li>
+                <li><a href="/payments" class="external account-dropdown sizzle-nav-choice">Payments</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="javascript:void(0)" class="account-dropdown" onclick="logout();">Logout</a></li>
+                <li><a href="javascript:void(0)" class="account-dropdown sizzle-nav-choice" onclick="logout();">Logout</a></li>
               </ul>
             </li>
             <?php if (is_admin()) { ?>
-                <li><a href="/admin" class="external">Admin</a></li>
+                <li><a href="/admin" class="external sizzle-nav-choice">Admin</a></li>
             <?php }?>
         <?php } else { ?>
-            <li><a href="javascript:void(0)" onclick="loginOpen()">Login</a></li>
-            <li><a href="javascript:void(0)" onclick="signupOpen(1)">Sign Up</a></li>
+            <li><a href="javascript:void(0)" onclick="loginOpen()" class="sizzle-nav-choice">Login</a></li>
+            <li><a href="javascript:void(0)" onclick="signupOpen(1)" class="sizzle-nav-choice">Sign Up</a></li>
         <?php }?>
       </ul>
     </div>

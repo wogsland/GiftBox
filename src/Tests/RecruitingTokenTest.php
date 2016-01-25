@@ -1,9 +1,9 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\User;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\User;
 
 /**
  * This class tests the RecruitingToken class
@@ -42,7 +42,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // no params
         $result = new RecruitingToken();
-        $this->assertEquals('GiveToken\RecruitingToken', get_class($result));
+        $this->assertEquals('Sizzle\RecruitingToken', get_class($result));
 
         // save for 1 param
         $result->user_id = $this->User->getId();

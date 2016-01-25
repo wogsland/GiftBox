@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\EventLogger;
+use \Sizzle\EventLogger;
 
 /**
  * This class tests the EventLogger class
@@ -28,7 +28,7 @@ extends \PHPUnit_Framework_TestCase
         $event_type_id = rand();
         $event_info = 'info info '.rand().' info';
         $result = new EventLogger($user_id, $event_type_id, $event_info);
-        $this->assertEquals('GiveToken\EventLogger', get_class($result));
+        $this->assertEquals('Sizzle\EventLogger', get_class($result));
         $this->assertFalse(isset($result->id));
         $this->assertEquals($result->user_id, $user_id);
         $this->assertEquals($result->event_type_id, $event_type_id);

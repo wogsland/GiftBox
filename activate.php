@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\UserMilestone;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
 
 if (isset($_GET['uid']) && isset($_GET['key'])) {
     $user_id = (int) $_GET['uid'];
@@ -12,7 +12,7 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
         }
         $event = new EventLogger($user_id, EventLogger::ACTIVATE_ACCOUNT);
         $event->log();
-        $message = '<div>Your account is now active. You may now <a href="'.$app_root.'">Log in</a></div>';
+        $message = '<div>Your account is now active. You may now <a href="'.'/'.'">Log in</a></div>';
         $UserMilestone = new UserMilestone($user_id, 'Confirm Email');
     } catch (Exception $e) {
         $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
@@ -21,6 +21,6 @@ if (isset($_GET['uid']) && isset($_GET['key'])) {
     $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
 }
 
-header('Location: '.$app_root.'?action=login');
+header('Location: '.'/'.'?action=login');
 
 ?>

@@ -1,14 +1,14 @@
 <?php
-use \GiveToken\City;
-use \GiveToken\HTML;
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\RecruitingCompanyImage;
-use \GiveToken\RecruitingCompanyVideo;
+use \Sizzle\City;
+use \Sizzle\HTML;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\RecruitingCompanyImage;
+use \Sizzle\RecruitingCompanyVideo;
 use \google\appengine\api\cloud_storage\CloudStorageTools;
 
 if (!logged_in()) {
-    header('Location: '.$app_url);
+    header('Location: '.APP_URL);
 }
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
@@ -46,7 +46,7 @@ function paper_dropdown($label, $id, $options, $selected_index = null, $required
     echo '      </paper-dropdown-menu>'.PHP_EOL;
 }
 
-define('TITLE', 'GiveToken.com - Create Recruiting Token');
+define('TITLE', 'S!zzle - Create Recruiting Token');
 require __DIR__.'/header.php';
 ?>
 
@@ -277,11 +277,7 @@ require __DIR__.'/header.php';
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
                               foreach ($token_images as $token_image) {
-                                  if ($google_app_engine) {
-                                      $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
-                                  } else {
-                                      $image_path = $file_storage_path.$token_image->file_name;
-                                  }
+                                  $image_path = FILE_STORAGE_PATH.$token_image->file_name;
                                   $image_id = str_replace('.', '_', $token_image->file_name);
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';

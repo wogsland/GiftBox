@@ -1,6 +1,6 @@
 <?php
-use \GiveToken\User;
-use \GiveToken\EventLogger;
+use \Sizzle\User;
+use \Sizzle\EventLogger;
 
 $response['status'] = 'ERROR';
 if (isset($_SESSION['user_id'])) {

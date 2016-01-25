@@ -1,8 +1,7 @@
 <?php
-use \GiveToken\EventLogger;
-use \GiveToken\Service\GoogleMail;
-use \GiveToken\UserMilestone;
-use \GiveToken\User;
+use \Sizzle\EventLogger;
+use \Sizzle\UserMilestone;
+use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -10,14 +9,14 @@ $event = null;
 $user_id = null;
 $response['status'] = "ERROR";
 $response['message'] = "Unable to register at this time.";
-$response['app_root'] = $app_root;
+$response['app_root'] = '/';
 
 $vars = array('signup_email', 'first_name', 'last_name', 'signup_password', 'reg_type');
 foreach ($vars as $var) {
     $$var = isset($_POST[$var]) ? escape_string($_POST[$var]) : '';
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $password) {
+if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
 
     $user = new User();
     $user->email_address = $signup_email;
@@ -54,17 +53,17 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $password) {
 
         if ($reg_type == 'EMAIL') {
             // Send the email
-            $link = $app_url . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
+            $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
-            $sender_email = 'GiveToken <founder@givetoken.com>';
-            $GoogleMail = new GoogleMail();
-            $GoogleMail->sendMail(
-                $user->email_address,
-                'GiveToken Signup Confirmation',
-                $email_message,
-                $sender_email
-            );
+            $mandrill = new Mandrill(MANDRILL_API_KEY);
+            $mandrill->messages->send(array(
+              'to'=>array(array('email'=>$user->email_address)),
+              'from_email'=>'welcome@gosizzle.io',
+              'from_name'=>'S!zzle',
+              'subject'=>'S!zzle Signup Confirmation',
+              'html'=>$email_message
+            ));
         }
         $response['status'] = "SUCCESS";
         $response['message'] = "{$user->email_address} successsfully registered.";

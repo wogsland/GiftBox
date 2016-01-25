@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken;
+namespace Sizzle;
 
-use GiveToken\Social;
+use Sizzle\Social;
 
 class User
 {
@@ -39,8 +39,8 @@ class User
     /**
      * Fetches a user object by email or reset code
      *
-     * @param string                                      $value - the value of the key
-     * @param string key    - email_address or reset_code
+     * @param string $value - the value of the key
+     * @param string $key   - email_address or reset_code
      *
      * @param User - the corresponding object
      */
@@ -48,21 +48,24 @@ class User
     {
         $user = null;
         switch ($key) {
-        case 'email_address':
-            $condition = "upper(email_address) = '".strtoupper($value)."'";
-            break;
-        case 'reset_code':
-            $condition = "reset_code = '$value'";
-            break;
-        default:
-            return $user;
+            case 'api_key':
+                $condition = "api_key = '$value'";
+                break;
+            case 'email_address':
+                $condition = "upper(email_address) = '".strtoupper($value)."'";
+                break;
+            case 'reset_code':
+                $condition = "reset_code = '$value'";
+                break;
+            default:
+                return $user;
         }
         $result = execute_query(
             "SELECT * FROM user
             WHERE $condition"
         );
         if ($result->num_rows > 0) {
-            $user = $result->fetch_object("GiveToken\User");
+            $user = $result->fetch_object("Sizzle\User");
         }
         return $user;
     }
@@ -73,7 +76,7 @@ class User
             $user = execute_query(
                 "SELECT * from user
                 WHERE id = '$id'"
-            )->fetch_object("GiveToken\User");
+            )->fetch_object("Sizzle\User");
             foreach (get_object_vars($user) as $key => $value) {
                 $this->$key = $value;
             }

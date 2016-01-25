@@ -1,11 +1,11 @@
 <?php
-use \GiveToken\UserMilestone;
+use \Sizzle\UserMilestone;
 
 if (!logged_in() || !is_admin()) {
-    header('Location: '.$app_root);
+    header('Location: '.'/');
 }
 
-define('TITLE', 'GiveToken.com - Stalled Customers');
+define('TITLE', 'S!zzle - Stalled Customers');
 require __DIR__.'/../header.php';
 ?>
 <style>

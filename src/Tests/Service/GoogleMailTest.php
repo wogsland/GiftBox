@@ -1,7 +1,7 @@
 <?php
-namespace GiveToken\Tests;
+namespace Sizzle\Tests;
 
-use \GiveToken\Service\GoogleMail;
+use \Sizzle\Service\GoogleMail;
 
 /**
  * This class tests the GoogleMail class
@@ -17,7 +17,7 @@ extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $GoogleMail = new GoogleMail();
-        $this->assertEquals('GiveToken\Service\GoogleMail', get_class($GoogleMail));
+        $this->assertEquals('Sizzle\Service\GoogleMail', get_class($GoogleMail));
     }
 
     /**
@@ -34,17 +34,17 @@ extends \PHPUnit_Framework_TestCase
      * This is my first attempt at mocking...
      *
      * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * @preserveGlobalState  disabled
      */
     public function testMock()
     {
-        $mock = \Mockery::mock('overload:\\GiveToken\\Service\\GoogleMail');
-        $this->assertEquals('GiveToken\Service\GoogleMail', get_class($mock));
+        $mock = \Mockery::mock('overload:\\Sizzle\\Service\\GoogleMail');
+        $this->assertEquals('Sizzle\Service\GoogleMail', get_class($mock));
         $mock->shouldReceive('sendMail')
-             ->with('founder@givetoken.com','hi','hi','founder@givetoken.com')
-             ->andReturn(true);
+            ->with('founder@gosizzle.io', 'hi', 'hi', 'founder@gosizzle.io')
+            ->andReturn(true);
         $GoogleMail = new GoogleMail();
-        $this->assertTrue($GoogleMail->sendMail('founder@givetoken.com','hi','hi','founder@givetoken.com'));
+        $this->assertTrue($GoogleMail->sendMail('founder@gosizzle.io', 'hi', 'hi', 'founder@gosizzle.io'));
     }
 
     /**

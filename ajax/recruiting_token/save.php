@@ -1,9 +1,9 @@
 <?php
-use \GiveToken\City;
-use \GiveToken\HTML;
-use \GiveToken\RecruitingCompany;
-use \GiveToken\RecruitingToken;
-use \GiveToken\UserMilestone;
+use \Sizzle\City;
+use \Sizzle\HTML;
+use \Sizzle\RecruitingCompany;
+use \Sizzle\RecruitingToken;
+use \Sizzle\UserMilestone;
 
 date_default_timezone_set('America/Chicago');
 

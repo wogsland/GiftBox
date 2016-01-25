@@ -33,9 +33,9 @@
 <!-- JQUERY -->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-<title>GiveToken - Get Your Recruiting Emails Sizzling!</title>
+<title>S!zzle - Get Your Recruiting Emails Sizzling!</title>
 
-<meta name="description" content="GiveToken - Get Your Recruiting Emails Sizzling!" />
+<meta name="description" content="S!zzle - Get Your Recruiting Emails Sizzling!" />
 <meta name="theme-color" content="#0066cc">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="viewport" id="viewport-iphone5" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" media="(device-height: 568px)" />
@@ -77,7 +77,7 @@
 
   <h1>Recruiting made easy</h1>
   <p id="subhead">
-    GiveToken’s tool takes a boring recruiting email and transforms it into an
+    S!zzle’s tool takes a boring recruiting email and transforms it into an
     interactive job opportunity with every response seamlessly entering your CRM.
     All without any additional effort by the recruiter!
   </p>
@@ -91,7 +91,7 @@
     <form class="form-signup-email" action="/ajax/signup" data-form="gt_signup" method="post" id="gt-signup-email">
       <fieldset>
         <label>Your Email</label>
-        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@givetoken.com" required>
+        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@gosizzle.io" required>
       </fieldset>
 
       <fieldset>
@@ -108,7 +108,7 @@
 
 <section class="gt-home-reasons">
   <hr>
-  <h1>The 3 R’s of GiveToken</h1>
+  <h1>The 3 R’s of S!zzle</h1>
 
   <h2>Reduced Placement Time</h2>
   <p>
@@ -137,9 +137,9 @@
 
   <hr>
 
-  <h2>Move fast with GiveToken</h2>
+  <h2>Move fast with S!zzle</h2>
   <p>
-    Timing is everything. GiveToken will help you widen the recruiting funnel
+    Timing is everything. S!zzle will help you widen the recruiting funnel
     by increasing candidate engagement allowing you better selection in
     choosing the right candidate to place with the right company, lowering your
     time-to-hire.
@@ -149,10 +149,10 @@
 
   <h2>Innovating, Growing, Learning</h2>
   <p>
-    GiveToken brings best in class tools to a new product in the underserved
+    S!zzle brings best in class tools to a new product in the underserved
     market of email recruiting. While email is already the most effective form
     of communication in terms of ROI, little has been done to optimize that
-    return. GiveToken will take you to the next level.
+    return. S!zzle will take you to the next level.
   </p>
 
   <p>
@@ -170,13 +170,13 @@
   <h5>Get Your Recruiting Emails Sizzling!</h5>
 
   <p>
-    Copyright &copy;2015 GiveToken. All rights reserved.
+    Copyright &copy;2016 S!zzle. All rights reserved.
   </p>
 
   <p>
     Read <a href="/about">about us</a>,
-    <a href="http://blog.givetoken.com/">our company blog</a>,
-    <a href="mailto:hi@givetoken.com">email us</a>,
+    <a href="http://blog.gosizzle.io/">our company blog</a>,
+    <a href="mailto:hi@gosizzle.io">email us</a>,
     or join us on <a href="https://www.linkedin.com/company/4788844">LinkedIn</a>,
     <a href="https://twitter.com/give_token">Twitter</a>,
     <a href="https://www.facebook.com/givetokencom">Facebook</a>
@@ -187,7 +187,7 @@
     <strong>And finally, the fine print:</strong>
     <a href="/terms">Terms of service</a>,
     <a href="/privacy">privacy policy</a>,
-    <a href="https://status.givetoken.com/">system status</a>.
+    <a href="https://status.gosizzle.io/">system status</a>.
   </p>
 
   <p>Have a productive day!</p>

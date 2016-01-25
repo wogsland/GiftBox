@@ -1,7 +1,7 @@
 <?php
-use \GiveToken\User;
+use \Sizzle\User;
 
-define('TITLE', 'GiveToken.com - Give a Token of Appreciation');
+define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 ?>
 </head>
@@ -26,29 +26,29 @@ require __DIR__.'/header.php';
 ============================== -->
 <center style="margin-top:100px;margin-bottom:500px;">
   <h3>For pricing information please contact Robbie Zettler at</h3>
-  <a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@givetoken.com</b></h3></a>
+  <a href="mailto:rzettler@gosizzle.io?Subject=S!zzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
 </center>
 
 <!-- These modals will be deleted when Stripe is used -->
 
 <div class="modal fade"  id="premium-dialog" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class ="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title" id="gridSystemModalLabel"><b>Pricing Information</b></h3>
-			</div>
-			<div class ="modal-body">
-				<center>
-					<h3>Please contact Robbie Zettler at</h3>
-					<a href="mailto:rzettler@givetoken.com?Subject=Givetoken%20pricing" target="_top"><h3><b>rzettler@givetoken.com</b></h3></a>
-				</center>
-			</div>
-			<div class ="modal-footer">
-			  <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-			</div>
-		</div>
-	</div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class ="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="gridSystemModalLabel"><b>Pricing Information</b></h3>
+      </div>
+      <div class ="modal-body">
+        <center>
+          <h3>Please contact Robbie Zettler at</h3>
+          <a href="mailto:rzettler@gosizzle.io?Subject=S!zzle%20pricing" target="_top"><h3><b>rzettler@gosizzle.io</b></h3></a>
+        </center>
+      </div>
+      <div class ="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Modal 2-->
@@ -66,13 +66,13 @@ require __DIR__.'/header.php';
         <!-- Change so that this links to the sign up -->
         <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
         <p>
-          Thanks for looking at GiveToken! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
+          Thanks for looking at S!zzle! Pardon the dust as we add in the latest features. Please reach out to us we would love to talk to you!
         </p>
         <p>
-          We can be reached at rzettler@givetoken.com
+          We can be reached at rzettler@gosizzle.io
       </div>
       <div class ="modal-footer">
-        GiveToken
+        S!zzle
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>

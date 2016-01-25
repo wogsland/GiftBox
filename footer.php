@@ -67,11 +67,7 @@
 
 <div class="container">
   <!-- LOGO -->
-  <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>
-      <img src="/assets/img/sizzle-logo.png" alt="LOGO">
-  <?php } else { ?>
-      <img src="/assets/img/logo-light.png" alt="LOGO">
-  <?php }?>
+  <img src="/assets/img/sizzle-logo.png" alt="LOGO">
 
   <!-- SOCIAL ICONS -->
   <ul class="social-icons">
@@ -93,8 +89,7 @@
 
   <!-- COPYRIGHT TEXT -->
   <p class="copyright">
-    &copy;2016
-    <?php if(strpos(strtolower(TITLE), 'sizzle') !== false) { ?>GoSizzle.io,<?php }?> GiveToken.com &amp; Giftly Inc., All Rights Reserved.
+    &copy;2016 GoSizzle.io, GiveToken.com &amp; Giftly Inc., All Rights Reserved.
   </p>
 
 </div>
@@ -123,8 +118,6 @@
 <script src="/js/jquery.ajaxchimp.min.js"></script>
 <script src="/js/jquery.fitvids.min.js"></script>
 <script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/facebook_init.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/util.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>
   <script src="/js/login.min.js?v=<?php echo VERSION;?>"></script>
