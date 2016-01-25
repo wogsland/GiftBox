@@ -9,6 +9,6 @@ if ($file_name) {
         $content_type = substr($file_data, 5, $pos-6);
         $file_data =  base64_decode(substr($file_data, $pos + 7));
     }
-    file_put_contents($file_storage_path.$file_name, $file_data);
+    file_put_contents(FILE_STORAGE_PATH.$file_name, $file_data);
 }
 ?>
