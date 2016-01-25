@@ -1,6 +1,4 @@
 <?php
-use google\appengine\api\log\LogService;
-
 $file_name = $_SERVER['HTTP_X_FILENAME'] ?? false;
 $content_type = null;
 if ($file_name) {
@@ -11,21 +9,6 @@ if ($file_name) {
         $content_type = substr($file_data, 5, $pos-6);
         $file_data =  base64_decode(substr($file_data, $pos + 7));
     }
-    if (GOOGLE_APP_ENGINE) {
-        $ctx = stream_context_create(
-            ['gs'=>
-            [
-            'acl'=>'public-read',
-            'Content-Type' => $content_type,
-            'enable_cache' => false,
-            'read_cache_expiry_seconds' => 0,
-            'cache-control' => 'private, max-age=0,must-revalidate'
-            ]
-            ]
-        );
-        file_put_contents($file_storage_path.$file_name, $file_data, 0, $ctx);
-    } else {
-        file_put_contents($file_storage_path.$file_name, $file_data);
-    }
+    file_put_contents(FILE_STORAGE_PATH.$file_name, $file_data);
 }
 ?>
