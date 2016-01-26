@@ -16,14 +16,12 @@ require_once __DIR__.'/util.php';
 
 // Determine environment & fix URL as needed
 $server = $_SERVER['SERVER_NAME'] ?? null;
-if ('givetoken.com' == strtolower($server)
-    || 'stone-timing-557.appspot.com' == strtolower($server)
-) {
-    $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
+if ('gosizzle.io' == strtolower($server)) {
+    $url = 'https://www.gosizzle.io'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
 }
 if (!defined('ENVIRONMENT')) {
-    define('ENVIRONMENT', 'www.givetoken.com' == $server ? 'production' : ('127.0.0.1' == $_SERVER['SERVER_ADDR'] ? 'local' : 'development'));
+    define('ENVIRONMENT', 'www.gosizzle.io' == $server ? 'production' : ('127.0.0.1' == $_SERVER['SERVER_ADDR'] ? 'local' : 'development'));
 }
 
 
@@ -49,35 +47,26 @@ if (ENVIRONMENT != 'local') {
 $prefix = "http://";
 $use_https = false;
 $socket = null;
-$stripe_secret_key = 'sk_test_RTcVNjcQVfYNiPCiY5O9CevV';
-$stripe_publishable_key = 'pk_test_Gawg5LhHJ934MPXlvglZrdnL';
+if (ENVIRONMENT == 'production') {
+    $stripe_secret_key = 'sk_live_MuUj2k3WOTpvIgw8oIHaON2X';
+    $stripe_publishable_key = 'pk_live_AbtrrWvSZZCvLYdiLohHC2Kz';
+} else {
+    $stripe_secret_key = 'sk_test_RTcVNjcQVfYNiPCiY5O9CevV';
+    $stripe_publishable_key = 'pk_test_Gawg5LhHJ934MPXlvglZrdnL';
+}
 if (isset($_SERVER['HTTPS'])) {
     if ($_SERVER['HTTPS'] === "on") {
         $prefix = "https://";
         $use_https = true;
     } else {
-        if('www.givetoken.com' == $server) {
-            $url = 'https://www.givetoken.com'.$_SERVER['REQUEST_URI'];
+        if('www.gosizzle.io' == $server) {
+            $url = 'https://www.gosizzle.io'.$_SERVER['REQUEST_URI'];
             header("Location: $url ", true, 301);
         }
     }
 }
-if (isset($_SERVER["HTTP_X_APPENGINE_COUNTRY"])) {
-    define('GOOGLE_APP_ID', $_SERVER["APPLICATION_ID"]);
-    if (GOOGLE_APP_ID === "s~stone-timing-557") {
-        $file_storage_path = 'gs://tokenstorage/';
-        $socket = '/cloudsql/stone-timing-557:test';
-        $stripe_secret_key = 'sk_live_MuUj2k3WOTpvIgw8oIHaON2X';
-        $stripe_publishable_key = 'pk_live_AbtrrWvSZZCvLYdiLohHC2Kz';
-    } elseif (GOOGLE_APP_ID === "s~t-sunlight-757") {
-        $file_storage_path = 'gs://tokenstorage-staging/';
-        $socket = '/cloudsql/t-sunlight-757:staging';
-    } else {
-        $file_storage_path = 'gs://tokenstorage/';
-    }
-} else {
-    $file_storage_path = 'uploads/';
-}
+$file_storage_path = 'uploads/';
+
 if (!defined('STRIPE_SECRET_KEY')) {
     define('STRIPE_SECRET_KEY', $stripe_secret_key);
 }
