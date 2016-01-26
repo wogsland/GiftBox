@@ -16,7 +16,7 @@ require_once __DIR__.'/util.php';
 
 // Determine environment & fix URL as needed
 $server = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
-if ('gosizzle.io' == strtolower($server)) {
+if ('gosizzle.io' == strtolower($server) || 'givetoken.com' == strtolower($server) || 'www.givetoken.com' == strtolower($server)) {
     $url = 'https://www.gosizzle.io'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
 }
@@ -82,18 +82,8 @@ if (!defined('APP_URL')) {
 }
 
 // connect to database
-switch (ENVIRONMENT) {
-    case 'production':
-    $database = "giftbox";
-    $user = "giftbox";
-    $password = "giftbox";
-    $mysqli = new mysqli(null, $user, $password, $database, null, $socket);
-    break;
-    case 'development';
-    case 'local';
-    include __DIR__.'/config/credentials.php';
-    $mysqli = new mysqli($mysql_server, $user, $password, $database);
-}
+include __DIR__.'/config/credentials.php';
+$mysqli = new mysqli($mysql_server, $user, $password, $database);
 if ($mysqli->connect_error) {
     die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
 }
