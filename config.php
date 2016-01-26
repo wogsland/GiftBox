@@ -16,7 +16,6 @@ require_once __DIR__.'/util.php';
 
 // Determine environment & fix URL as needed
 $server = $_SERVER['SERVER_NAME'] ?? null;
-if ('gosizzle.io' == strtolower($server)) {
 if ('gosizzle.io' == strtolower($server) || 'givetoken.com' == strtolower($server) || 'www.givetoken.com' == strtolower($server)) {
     $url = 'https://www.gosizzle.io'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
