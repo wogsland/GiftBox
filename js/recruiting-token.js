@@ -518,10 +518,10 @@ function getUrlPath() {
  */
 function getAssetHost() {
   switch (window.location.hostname) {
-    case 'www.givetoken.com':
-    return 'https://tokenstorage.storage.googleapis.com';
-    case 'dev.givetoken.com':
-    return 'https://tokenstorage-staging.storage.googleapis.com';
+    //case 'www.givetoken.com':
+    //return 'https://tokenstorage.storage.googleapis.com';
+    //case 'dev.givetoken.com':
+    //return 'https://tokenstorage-staging.storage.googleapis.com';
     default:
     return '/uploads';
   }
