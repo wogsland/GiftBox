@@ -1,25 +1,26 @@
 <?php
-use \Sizzle\City;
-use \Sizzle\HTML;
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingToken;
-use \Sizzle\RecruitingCompanyImage;
-use \Sizzle\RecruitingCompanyVideo;
-use \google\appengine\api\cloud_storage\CloudStorageTools;
+use \Sizzle\{
+    HTML,
+    RecruitingCompany,
+    RecruitingCompanyImage,
+    RecruitingCompanyVideo
+};
 
 if (!logged_in()) {
     header('Location: '.APP_URL);
 }
 
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+$user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
-    $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
-    $token_company = new RecruitingCompany($token->recruiting_company_id);
-    $token_images = RecruitingCompanyImage::getTokenImages($token->id);
-    $token_videos = RecruitingCompanyVideo::getTokenVideos($token->id);
+    $token_company = new RecruitingCompany(escape_string($_GET['id']));
+    if ($token_company->user_id != $user_id && !is_admin()) {
+        header('Location: '.APP_URL.'/tokens');
+    }
+    $token_images = (new RecruitingCompanyImage())->getByCompanyId($token_company->id);
+    $token_videos = (new RecruitingCompanyVideo())->getByCompanyId($token_company->id);
 } else {
-    $token = new RecruitingToken();
+    $token_company = new RecruitingCompany();
     $token_images = array();
     $token_videos = array();
 }
@@ -155,16 +156,14 @@ require __DIR__.'/header.php';
   </div>
     <div class="center-column">
         <div id="left-column">
-            <form is="iron-form" id="recruiting-token-form">
-                <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
-                <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
+            <form is="iron-form" id="recruiting-company-form">
+                <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
 
-                <?php if (!isset($token_company)) { ?>
                     <paper-card id="company-info" heading="Important Company Info">
                         <div class="field-container">
-                            <?php paper_text('Company Name', 'company', ''); ?>
+                            <?php paper_text('Company Name', 'company', $token_company->name); ?>
                             <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
-                            <?php paper_textarea('Company Values', 'company-values', ''); ?>
+                            <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values)); ?>
                         </div>
                     </paper-card>
                     <paper-card id="company-images" heading="Company Images">
@@ -184,15 +183,11 @@ require __DIR__.'/header.php';
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
                               foreach ($token_images as $token_image) {
-                                  if (GOOGLE_APP_ENGINE) {
-                                      $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
-                                  } else {
-                                      $image_path = $file_storage_path.$token_image->file_name;
-                                  }
-                                  $image_id = str_replace('.', '_', $token_image->file_name);
+                                  $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
+                                  $image_id = str_replace('.', '_', $token_image['file_name']);
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';
-                                  echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image->id.'" src="'.$image_path.'">';
+                                  echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
                                   echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
                                   echo ' </div>';
                                   echo '</div>';
@@ -216,14 +211,32 @@ require __DIR__.'/header.php';
     -->
                                 </div>
                             </div>
-                            <?php if (count($token_images) > 0) {?>
+                            <?php if (count($token_videos) > 0) {?>
                               <div class="thumbnail-list-container" id="company-video-container">
                               <?php
                               foreach ($token_videos as $token_video) {
-                                  $image_id = substr($token_video->url, strrpos($token_video->url, '/')+1);
+                                  $image_id = $token_video['source_id'];
+                                  switch ($token_video['source']) {
+                                      case 'youtube':
+                                      $thumbnail_src = "https://img.youtube.com/vi/$image_id/0.jpg";
+                                      break;
+                                      case 'vimeo':
+                                      /*$vimeo_json_url = "https://vimeo.com/api/v2/video/$image_id.json";
+                                      ob_start();
+                                      $handle = curl_init();
+                                      curl_setopt($handle, CURLOPT_POST, true);
+                                      curl_setopt($handle, CURLOPT_URL, $vimeo_json_url);
+                                      $response = curl_exec($handle);
+                                      $json = ob_get_contents();
+                                      ob_end_clean();
+                                      $return = json_decode($json);*/
+                                      $thumbnail_src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Vimeo_Logo.svg/500px-Vimeo_Logo.svg.png';
+                                      //$thumbnail_src = $return[0]->thumbnail_medium;
+                                      break;
+                                  }
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';
-                                  echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video->id.'" src="'.$token_video->thumbnail_src.'">';
+                                  echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video['id'].'" src="'.$thumbnail_src.'">';
                                   echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
                                   echo ' </div>';
                                   echo '</div>';
@@ -242,7 +255,7 @@ require __DIR__.'/header.php';
                                   https://facebook.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-facebook', ''); ?>
+                                  <?php paper_text('', 'company-facebook', $token_company->facebook); ?>
                                 </td>
                               </tr>
                             </table>
@@ -252,7 +265,7 @@ require __DIR__.'/header.php';
                                   https://linkedin.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-linkedin', ''); ?>
+                                  <?php paper_text('', 'company-linkedin', $token_company->linkedin); ?>
                                 </td>
                               </tr>
                             </table>
@@ -262,7 +275,7 @@ require __DIR__.'/header.php';
                                   https://youtube.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-youtube', ''); ?>
+                                  <?php paper_text('', 'company-youtube', $token_company->youtube); ?>
                                 </td>
                               </tr>
                             </table>
@@ -272,7 +285,7 @@ require __DIR__.'/header.php';
                                   https://twitter.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-twitter', ''); ?>
+                                  <?php paper_text('', 'company-twitter', $token_company->twitter); ?>
                                 </td>
                               </tr>
                             </table>
@@ -282,47 +295,25 @@ require __DIR__.'/header.php';
                                   https://plus.google.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-google-plus', ''); ?>
+                                  <?php paper_text('', 'company-google-plus', $token_company->google_plus); ?>
                                 </td>
                               </tr>
                             </table>
                         </div>
                     </paper-card>
-                <?php } ?>
 
                 <div class="button-container">
-                    <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE</paper-button>
+                    <paper-button raised class="bottom-button" onclick="saveCompany()">SAVE</paper-button>
                 </div>
             </form>
         </div>
         <div id="right-column" class="pull-right">
             <div class="button-container">
-                <paper-button raised onclick="openToken()">OPEN</paper-button>
-                <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
+                <paper-button raised onclick="backToToken('<?php echo $_GET['referrer'] ?? '';?>')">BACK</paper-button>
+                <paper-button raised onclick="saveCompany()">SAVE</paper-button>
             </div>
        </div>
     </div>
-
-    <paper-dialog class="recruiting-dialog" id="open-dialog" modal>
-        <h2>Open</h2>
-        <form is="iron-form" id="open-token-form">
-            <div class="field-container">
-            <?php
-                $user_tokens = RecruitingToken::getUserTokens($user_id);
-                $tokens = array();
-                foreach ($user_tokens as $token) {
-                    $tokenCompanyName = ''!=$token->company ? $token->company : 'Unnamed Company';
-                    $tokens[$token->long_id] = $tokenCompanyName." - ".$token->job_title;
-                }
-                paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
-            ?>
-            </div>
-        </form>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processOpen()">Open</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
-        </div>
-    </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>

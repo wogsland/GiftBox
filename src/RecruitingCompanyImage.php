@@ -29,22 +29,6 @@ class RecruitingCompanyImage
         }
     }
 
-    public static function getTokenImages($recruiting_token_id)
-    {
-        $results =  execute_query(
-            "SELECT recruiting_company_image.id, recruiting_company_image.file_name
-            FROM recruiting_company_image, recruiting_token
-            WHERE recruiting_token.id = $recruiting_token_id
-            AND recruiting_company_image.recruiting_company_id =  recruiting_token.recruiting_company_id"
-        );
-        $token_images = array();
-        while($token_image = $results->fetch_object()) {
-            $token_images[count($token_images)] = $token_image;
-        }
-        $results->free();
-        return $token_images;
-    }
-
     /**
      * This function gets a protected property
      *
@@ -117,7 +101,7 @@ class RecruitingCompanyImage
     /**
      * This function gets information from the recruiting_company_image table
      *
-     * @param int $long_id - long id of the token to get images for
+     * @param string $long_id - long id of the token to get images for
      *
      * @return array - images associated with the token
      */
@@ -128,6 +112,26 @@ class RecruitingCompanyImage
                   FROM recruiting_company_image, recruiting_token
                   WHERE recruiting_company_image.recruiting_company_id = recruiting_token.recruiting_company_id
                   AND recruiting_token.long_id = '$long_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
+
+    /**
+     * This function gets information from the recruiting_company_image table
+     *
+     * @param int $id - company id of the company to get images for
+     *
+     * @return array - images associated with the company
+     */
+    public function getByCompanyId($id)
+    {
+        $return = array();
+        $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
+                  FROM recruiting_company_image
+                  WHERE recruiting_company_image.recruiting_company_id = '$id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
             $return[] = $row;

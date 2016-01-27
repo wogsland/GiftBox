@@ -5,7 +5,7 @@ use Monolog\Logger;
 use Sizzle\Connection;
 
 // set relesae version
-define('VERSION', '1.9.2');
+define('VERSION', '1.9.3');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';

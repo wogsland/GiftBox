@@ -11,7 +11,7 @@ use \Sizzle\{
 /**
  * This class tests the RecruitingCompanyImage class
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingCompanyImageTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingCompanyImageTest
  */
 class RecruitingCompanyImageTest
 extends \PHPUnit_Framework_TestCase
@@ -181,6 +181,34 @@ extends \PHPUnit_Framework_TestCase
         $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
         $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
         $images = $RecruitingCompanyImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $this->assertTrue(is_array($images));
+        $this->assertEquals(count($images), 3);
+        foreach ($images as $image) {
+            $this->assertTrue($image['id'] > 0);
+            $this->assertTrue(in_array($image['file_name'], $file_name));
+        }
+    }
+
+    /**
+     * Tests the getByCompanyId function.
+     */
+    public function testGetByCompanyId()
+    {
+        $RecruitingCompanyImage = new RecruitingCompanyImage();
+
+        // token with no images should return empty array
+        $images = $RecruitingCompanyImage->getByCompanyId($this->RecruitingCompany->id);
+        $this->assertTrue(is_array($images));
+        $this->assertTrue(empty($images));
+
+        // create token images
+        $file_name[1] = rand().'.jpg';
+        $file_name[2] = rand().'.jpg';
+        $file_name[3] = rand().'.jpg';
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $images = $RecruitingCompanyImage->getByCompanyId($this->RecruitingCompany->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
         foreach ($images as $image) {
