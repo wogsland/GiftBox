@@ -7,7 +7,7 @@ try{
 
     $apis = [
         'api.gosizzle.local',
-        'api.gosizzle.com'
+        'api.gosizzle.io'
     ];
     if (in_array($_SERVER['SERVER_NAME'], $apis)) {
         include __DIR__.'/../api/route.php';
