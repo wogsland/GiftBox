@@ -29,22 +29,6 @@ class RecruitingCompanyVideo
         }
     }
 
-    public static function getTokenVideos($recruiting_token_id)
-    {
-        $results =  execute_query(
-            "SELECT recruiting_company_video.id, recruiting_company_video.`source`, recruiting_company_video.source_id
-            FROM recruiting_company_video, recruiting_token
-            WHERE recruiting_token.id = $recruiting_token_id
-            AND recruiting_company_video.recruiting_company_id =  recruiting_token.recruiting_company_id"
-        );
-        $token_videos = array();
-        while($token_video = $results->fetch_object()) {
-            $token_videos[count($token_videos)] = $token_video;
-        }
-        $results->free();
-        return $token_videos;
-    }
-
     /**
      * This function gets a protected property
      *
@@ -110,6 +94,28 @@ class RecruitingCompanyVideo
                   FROM recruiting_company_video, recruiting_token
                   WHERE recruiting_company_video.recruiting_company_id = recruiting_token.recruiting_company_id
                   AND recruiting_token.long_id = '$long_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
+
+    /**
+     * This function gets information from the recruiting_company_video table
+     *
+     * @param int $id - company id of the company to get videos for
+     *
+     * @return array - videos associated with the company
+     */
+    public function getByCompanyId($id)
+    {
+        $return = array();
+        $query = "SELECT recruiting_company_video.id,
+                  recruiting_company_video.source,
+                  recruiting_company_video.source_id
+                  FROM recruiting_company_video
+                  WHERE recruiting_company_video.recruiting_company_id = '$id'";
         $results = execute_query($query);
         while ($row = $results->fetch_assoc()) {
             $return[] = $row;

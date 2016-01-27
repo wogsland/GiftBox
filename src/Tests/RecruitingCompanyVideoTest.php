@@ -11,7 +11,7 @@ use \Sizzle\{
 /**
  * This class tests the RecruitingCompanyVideo class
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingCompanyVideoTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/RecruitingCompanyVideoTest
  */
 class RecruitingCompanyVideoTest
 extends \PHPUnit_Framework_TestCase
@@ -135,6 +135,35 @@ extends \PHPUnit_Framework_TestCase
         $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
         $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
         $images = $RecruitingCompanyVideo->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
+        $this->assertTrue(is_array($images));
+        $this->assertEquals(count($images), 3);
+        foreach ($images as $image) {
+            $this->assertTrue($image['id'] > 0);
+            $this->assertTrue(in_array($image['source_id'], $source_id));
+        }
+    }
+
+    /**
+     * Tests the getByCompanyId function.
+     */
+    public function testGetByCompanyId()
+    {
+        $RecruitingCompanyVideo = new RecruitingCompanyVideo();
+
+        // token with no images should return empty array
+        $images = $RecruitingCompanyVideo->getByCompanyId($this->RecruitingCompany->id);
+        $this->assertTrue(is_array($images));
+        $this->assertTrue(empty($images));
+
+        // create token images
+        $source = 'vimeo';
+        $source_id[1] = rand();
+        $source_id[2] = rand();
+        $source_id[3] = rand();
+        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
+        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
+        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
+        $images = $RecruitingCompanyVideo->getByCompanyId($this->RecruitingCompany->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
         foreach ($images as $image) {
