@@ -51,6 +51,7 @@ echo ""
 
 # minify javascript
 yuicompressor js/smoothscroll.js -o public/js/smoothscroll.min.js
+yuicompressor js/wow.js -o public/js/wow.min.js
 yuicompressor js/create_common.js -o public/js/create_common.min.js
 yuicompressor js/create_recruiting.js -o public/js/create_recruiting.min.js
 yuicompressor js/custom.js -o public/js/custom.min.js
@@ -60,9 +61,6 @@ yuicompressor js/matchMedia.js -o public/js/matchMedia.min.js
 yuicompressor js/contact.js -o public/js/contact.min.js
 yuicompressor js/login.js -o public/js/login.min.js
 yuicompressor js/signup.js -o public/js/signup.min.js
-yuicompressor js/preloader.js -o public/js/preloader.min.js
-yuicompressor js/jquery.nav.js -o public/js/jquery.nav.min.js
-yuicompressor js/jquery.fitvids.js -o public/js/jquery.fitvids.min.js
 json-minify js/api-v1.json > public/js/api-v1.json
 echo "JavaScript minified"
 echo ""
