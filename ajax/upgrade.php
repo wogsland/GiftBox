@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\User;
-use \Sizzle\EventLogger;
+use \Sizzle\{
+    EventLogger,
+    User
+};
 
 date_default_timezone_set('America/Chicago');
 

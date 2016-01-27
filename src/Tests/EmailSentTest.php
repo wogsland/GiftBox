@@ -1,9 +1,11 @@
 <?php
 namespace Sizzle\Tests;
 
-use \Sizzle\EmailCredential;
-use \Sizzle\EmailSent;
-use \Sizzle\User;
+use \Sizzle\{
+    EmailCredential,
+    EmailSent,
+    User
+};
 
 /**
  * This class tests the EmailSent class

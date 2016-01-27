@@ -1,5 +1,4 @@
 <?php
-use \Sizzle\Service\GoogleMail;
 use \Sizzle\User;
 
 date_default_timezone_set('America/Chicago');
@@ -41,13 +40,14 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $link = APP_URL . 'password_reset?secret=' . $user->reset_code;
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
-            $sender_email = 'S!zzle <founder@givetoken.com>';
-            $GoogleMail = new GoogleMail();
-            $GoogleMail->sendMail(
-                $user->email_address,
-                'S!zzle Password Reset',
-                $email_message, $sender_email
-            );
+            $mandrill = new Mandrill(MANDRILL_API_KEY);
+            $mandrill->messages->send(array(
+              'to'=>array(array('email'=>$user->email_address)),
+              'from_email'=>'help@gosizzle.io',
+              'from_name'=>'S!zzle',
+              'subject'=>'S!zzle Password Reset',
+              'html'=>$email_message
+            ));
             $success = 'true';
             $data = 'Check your email.';
         } else {

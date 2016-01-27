@@ -42,7 +42,7 @@ function getTestCookie($admin = false)
     curl_setopt($ch, CURLOPT_HEADER, 1);
     $result = curl_exec($ch);
     preg_match_all('/^Set-Cookie: PHPSESSID=(.*?);/mi', $result, $matches);
-    $userCookie = $matches[1][1];
+    $userCookie = $matches[1][0];
     return 'PHPSESSID=' . $userCookie . ';';
 }
 define('TEST_COOKIE', getTestCookie());

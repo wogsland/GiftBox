@@ -6,7 +6,7 @@ date_default_timezone_set('America/Chicago');
 if (!logged_in()) {
     header('Location: '.'/');
 }
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+$user_id = $_SESSION['user_id'] ?? '';
 
 define('TITLE', 'S!zzle - Token Responses');
 require __DIR__.'/header.php';

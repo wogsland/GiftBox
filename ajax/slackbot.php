@@ -1,16 +1,18 @@
 <?php
+use \Monolog\{
+    Handler\SlackHandler,
+    Logger
+};
 use \Sizzle\Service\IpinfoIo;
-use \Monolog\Handler\SlackHandler;
-use \Monolog\Logger;
 
-if (GOOGLE_APP_ENGINE && GOOGLE_APP_ID === "s~stone-timing-557") {
+if (ENVIRONMENT === "production") {
     // See from whence the vistor hails
     $IpinfoIo = new IpinfoIo();
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
 
     //see if the visitor is NEW
     $new = '*New*';
-    $visitor_cookie = isset($_COOKIE, $_COOKIE['visitor']) ? escape_string($_COOKIE['visitor']) : '';
+    $visitor_cookie = escape_string($_COOKIE['visitor'] ?? '');
     $sql = "SELECT COUNT(*) requests FROM web_request
             WHERE visitor_cookie = '$visitor_cookie'";
     $result = execute_query($sql);

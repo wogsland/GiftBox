@@ -1,8 +1,10 @@
 <?php
 namespace Sizzle\Tests;
 
-use \Sizzle\UserMilestone;
-use \Sizzle\User;
+use \Sizzle\{
+    User,
+    UserMilestone
+};
 
 /**
  * This class tests the UserMilestone & Milestone classes

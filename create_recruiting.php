@@ -1,17 +1,19 @@
 <?php
-use \Sizzle\City;
-use \Sizzle\HTML;
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingToken;
-use \Sizzle\RecruitingCompanyImage;
-use \Sizzle\RecruitingCompanyVideo;
 use \google\appengine\api\cloud_storage\CloudStorageTools;
+use \Sizzle\{
+    City,
+    HTML,
+    RecruitingCompany,
+    RecruitingCompanyImage,
+    RecruitingCompanyVideo,
+    RecruitingToken
+};
 
 if (!logged_in()) {
     header('Location: '.APP_URL);
 }
 
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
+$user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
     $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
@@ -278,11 +280,7 @@ require __DIR__.'/header.php';
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
                               foreach ($token_images as $token_image) {
-                                  if (GOOGLE_APP_ENGINE) {
-                                      $image_path = CloudStorageTools::getPublicUrl($file_storage_path.$token_image->file_name, $use_https);
-                                  } else {
-                                      $image_path = $file_storage_path.$token_image->file_name;
-                                  }
+                                  $image_path = FILE_STORAGE_PATH.$token_image->file_name;
                                   $image_id = str_replace('.', '_', $token_image->file_name);
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';

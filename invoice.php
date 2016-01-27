@@ -1,7 +1,9 @@
 <?php
 use \Sizzle\RecruitingToken;
-use \Stripe\Invoice;
-use \Stripe\Stripe;
+use \Stripe\{
+    Invoice,
+    Stripe
+};
 
 date_default_timezone_set('America/Chicago');
 

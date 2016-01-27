@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
         'smtp_port'
     ];
     foreach ($params as $param) {
-        $$param = isset($_POST[$param]) ? escape_string($_POST[$param]) : null;
+        $$param = escape_string($_POST[$param] ?? null);
     }
     if (!filter_var($smtp_host, FILTER_VALIDATE_IP) === false
         && (int) $smtp_port == $smtp_port

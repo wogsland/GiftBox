@@ -1,10 +1,12 @@
 <?php
 namespace Sizzle\Tests;
 
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingToken;
-use \Sizzle\RecruitingCompanyImage;
-use \Sizzle\User;
+use \Sizzle\{
+    RecruitingCompany,
+    RecruitingCompanyImage,
+    RecruitingToken,
+    User
+};
 
 /**
  * This class tests the RecruitingCompanyImage class

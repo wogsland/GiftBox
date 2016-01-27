@@ -1,10 +1,12 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingCompanyImage;
-use \Sizzle\RecruitingToken;
-use \Sizzle\User;
+use \Sizzle\{
+    RecruitingCompany,
+    RecruitingCompanyImage,
+    RecruitingToken,
+    User
+};
 
 /**
  * This class tests the ajax endpoint to get the images for a token.

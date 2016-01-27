@@ -1,8 +1,10 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email;
 
-use \Sizzle\EmailCredential;
-use \Sizzle\User;
+use \Sizzle\{
+    EmailCredential,
+    User
+};
 
 /**
  * This class tests the ajax endpoint to send emails.

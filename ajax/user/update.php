@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\User;
-use \Sizzle\EventLogger;
+use \Sizzle\{
+    EventLogger,
+    User
+};
 
 function get_post($index)
 {

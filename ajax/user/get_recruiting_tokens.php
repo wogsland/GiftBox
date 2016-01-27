@@ -1,9 +1,11 @@
 <?php
-use \Sizzle\HTML;
-use \Sizzle\RecruitingToken;
+use \Sizzle\{
+    HTML,
+    RecruitingToken
+};
 
 // collect id
-$user_id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
+$user_id = escape_string($endpoint_parts[4] ?? '');
 
 $success = 'false';
 $data = '';

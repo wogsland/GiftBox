@@ -1,8 +1,10 @@
 <?php
 namespace Sizzle;
 
-use \Monolog\Handler\SlackHandler;
-use \Monolog\Logger;
+use \Monolog\{
+    Handler\SlackHandler,
+    Logger
+};
 
 class UserMilestone
 {

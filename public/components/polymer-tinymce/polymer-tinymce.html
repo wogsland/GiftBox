@@ -1,0 +1,115 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../import-tinymce/import-tinymce.html">
+
+<dom-module id="polymer-tinymce">
+
+  <template>
+    <textarea id="polymerTinymceTextarea" name="content" style="width:100%" class="te"></textarea>
+  </template>
+
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'polymer-tinymce',
+
+    properties:{
+
+      // "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+      
+      tinytoolbar:{
+        type:String,
+        value:"undo | bullist"
+      },
+
+      // ["advlist autolink lists link image charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table contextmenu paste"]
+
+      tinyplugins:{
+        type:Array,
+        value:["advlist autolink lists link image charmap preview anchor fullscreen"]
+      },
+
+      /* Html or an url that can be loaded from the editor. */
+      // [{title: 'Some title 1', description: 'Some desc 1', content: 'My content'}, 
+      // {title: 'Some title 2', description: 'Some desc 2', url: 'development.html'}]
+      templates: {
+        type: Array,
+        value: function () { return [] }
+      },
+
+      height: {
+        type: Number,
+        value: 168
+      },
+
+      baseUrl: {
+        type: String,
+        value: ''
+      }
+      
+    },
+
+    attached: function(){
+      this.prepareInitEditor();
+    },
+
+    prepareInitEditor: function () {
+      this.async(function () {
+        this.initEditor();
+      }.bind(this),100);
+    },
+
+    initEditor:function () {
+      
+      if (this.baseUrl !== '') {
+        tinymce.baseURL = this.baseUrl;
+      }
+      
+      tinymce.init({
+        selector: "#polymerTinymceTextarea",
+        templates: this.templates,
+        plugins: this.tinyplugins,
+        toolbar: this.tinytoolbar,
+        height: this.height,
+        setup: function (ed) {
+              ed.on('init', function(args) {
+
+                this.fire('tiny-init');
+                  
+              });
+
+              ed.on('focus', function(e) {
+
+                  this.fire('tiny-focus');
+
+              });
+
+              ed.on('NodeChange', function(e) {
+                  this.fire('tiny-node');
+
+              });
+          }
+      });
+    },
+
+    execCommand:function(command){
+      tinyMCE.activeEditor.execCommand(command);
+    },
+
+    getContent:function(){
+      return tinyMCE.activeEditor.getContent();
+    },
+
+    setContent:function(content){
+      if (tinyMCE && tinyMCE.activeEditor){
+        tinyMCE.activeEditor.setContent(content);
+      }
+      
+    }
+
+  });
+
+</script>

@@ -1,13 +1,15 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use \Sizzle\EmailCredential;
-use \Sizzle\User;
+use \Sizzle\{
+    EmailCredential,
+    User
+};
 
 /**
  * This class tests the ajax endpoint to delete email credentials.
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Credential/DeleteTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Credential/DeleteTest
  */
 class DeleteTest
 extends \PHPUnit_Framework_TestCase

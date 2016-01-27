@@ -1,7 +1,9 @@
 <?php
-use \Sizzle\EventLogger;
-use \Sizzle\UserMilestone;
-use \Sizzle\User;
+use \Sizzle\{
+    EventLogger,
+    User,
+    UserMilestone
+};
 
 date_default_timezone_set('America/Chicago');
 
@@ -21,13 +23,14 @@ if (isset($_POST['password'])) {
 
 if (User::exists($email)) {
     $user = User::fetch($email);
-    $expires = isset($user->active_until) ? $user->active_until : date('Y-m-d');
+    $expires = $user->active_until ?? date('Y-m-d');
     $DateTime1 = new \DateTime($expires);
     $DateTime2 = new \DateTime(date('Y-m-d'));
     if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
         if ($login_type == 'FACEBOOK') {
             $event_type = EventLogger::LOGIN_USING_FACEBOOK;
             $response['status'] = 'SUCCESS';
+            $response['message'] = "Log in with Facebook successful.";
         } else if ($login_type == 'EMAIL') {
             if (!$user->password) {
                 $response['status'] = "ERROR";
@@ -42,6 +45,7 @@ if (User::exists($email)) {
                 } else {
                     $event_type = EventLogger::LOGIN_USING_EMAIL;
                     $response['status'] = 'SUCCESS';
+                    $response['message'] = "Log in with email successful.";
                 }
             }
         }
