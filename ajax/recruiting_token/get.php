@@ -44,4 +44,8 @@ if ($id != '') {
     }
 }
 header('Content-Type: application/json');
-echo json_encode(array('success'=>$success, 'data'=>$data));
+foreach ($data as $key => $val) {
+    $data->$key = utf8_encode($val);
+}
+$result = array('success'=>$success, 'data'=>(array)$data);
+echo json_encode($result);
