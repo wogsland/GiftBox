@@ -19,5 +19,6 @@ class Connection
         ) {
             self::$mysqli = new \mysqli(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB);
         }
+        self::$mysqli->set_charset('utf8mb4'); 
     }
 }
