@@ -139,6 +139,10 @@ To also investigate the code coverage of the tests, you'll need the
 Make sure you put any unit tests in the `src/tests` directory and name them like
 MyAwesomeTest.php.
 
+For JavaScript testing,
+
+    npm install -g mocha
+
 ## <a id="deployment"></a>Deployment
 
 #### `develop` -> staging site
