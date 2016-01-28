@@ -113,10 +113,8 @@
 <script src="/js/wow.min.js"></script>
 <script src="/js/jquery.stellar.min.js"></script>
 <script src="/js/retina-1.1.0.min.js"></script>
-<script src="/js/jquery.nav.min.js"></script>
 <script src="/js/matchMedia.min.js"></script>
 <script src="/js/jquery.ajaxchimp.min.js"></script>
-<script src="/js/jquery.fitvids.min.js"></script>
 <script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) { ?>

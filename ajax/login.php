@@ -16,7 +16,7 @@ $response['app_root'] = '/';
 $email = $_POST['login_email'];
 $login_type = $_POST['login_type'];
 if (isset($_POST['password'])) {
-    $password = $_POST['password'];
+    $password = escape_string($_POST['password']);
 } else {
     $password = null;
 }
