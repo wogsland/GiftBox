@@ -32,4 +32,5 @@ try{
 } catch (Throwable $thrown) {
     http_response_code(500);
     require_once __DIR__.'/500.html';
+    $logger->addError($thrown->getMessage() . ' in ' . $thrown->getFile());
 }
