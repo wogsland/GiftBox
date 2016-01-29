@@ -32,7 +32,7 @@
         <?php if (!logged_in()) { ?>
           <li><a href="/pricing" class="external sizzle-nav-choice">Pricing</a></li>
         <?php } ?>
-        <!--<li><a href="blog.gosizzle.io" class="external sizzle-nav-choice">Blog</a></li>-->
+        <li><a href="http://blog.gosizzle.io" class="external sizzle-nav-choice">Blog</a></li>
         <?php if (logged_in()) { ?>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle external sizzle-nav-choice" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
