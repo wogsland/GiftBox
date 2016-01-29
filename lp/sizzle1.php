@@ -14,6 +14,10 @@ include __DIR__.'/../header.php';
     }
     #left-div-1 {
       padding-top: 50px;
+      visibility: hidden;
+    }
+    #right-div-1 {
+      visibility: hidden;
     }
     #signup-form-container {
       margin-top: 35px;
@@ -134,15 +138,6 @@ include __DIR__.'/../header.php';
   </head>
   <body>
 
-    <?php /*
-    <!-- =========================
-         PRE LOADER
-    ============================== -->
-    <div class="preloader">
-      <div class="status">&nbsp;</div>
-    </div>
-    */?>
-
     <!-- =========================
         Navbar
     ============================== -->
@@ -186,7 +181,7 @@ include __DIR__.'/../header.php';
             Email, InMail, Text
             <p>
           </div>
-          <div class="col-md-5 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+          <div id="right-div-1" class="col-md-5 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
             <img src="/assets/img/partial-screenshot.png" alt="screenshot" id="partial-sizzle">
           </div>
         </div>

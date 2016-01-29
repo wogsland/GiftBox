@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\EmailCredential;
-use \Sizzle\EmailSent;
+use \Sizzle\{
+    EmailCredential,
+    EmailSent
+};
 
 $success = 'false';
 $data = '';

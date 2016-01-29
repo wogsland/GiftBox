@@ -1,12 +1,14 @@
 <?php
-use \Sizzle\RecruitingCompany;
-use \Sizzle\RecruitingToken;
-use \Sizzle\UserMilestone;
+use \Sizzle\{
+    RecruitingCompany,
+    RecruitingToken,
+    UserMilestone
+};
 
 date_default_timezone_set('America/Chicago');
 
 // collect id
-$id = isset($endpoint_parts[4]) ? escape_string($endpoint_parts[4]) : '';
+$id = escape_string($endpoint_parts[4] ?? '');
 
 $success = 'false';
 $data = '';
@@ -42,8 +44,5 @@ if ($id != '') {
     }
 }
 header('Content-Type: application/json');
-foreach ($data as $key => $val) {
-    $data->$key = utf8_encode($val);
-}
-$result = array('success'=>$success, 'data'=>(array)$data);
+$result = array('success'=>$success, 'data'=>$data);
 echo json_encode($result);

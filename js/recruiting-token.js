@@ -262,7 +262,7 @@ $(document).ready(function(){
       }
       if (words.length >= 50 || 4 < paragraphCount) {
         shortDescription += ' ... ';
-        shortDescription += '<a href="#" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
+        shortDescription += '<a href="#overview-section" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
       }
       $('.gt-info-overview-short').html(shortDescription);
       if (!dataExists(data.data.job_description)) {

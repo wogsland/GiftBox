@@ -1,7 +1,9 @@
 <?php
-use \Sizzle\EventLogger;
-use \Sizzle\UserMilestone;
-use \Sizzle\User;
+use \Sizzle\{
+    EventLogger,
+    User,
+    UserMilestone
+};
 
 date_default_timezone_set('America/Chicago');
 
@@ -14,14 +16,14 @@ $response['app_root'] = '/';
 $email = $_POST['login_email'];
 $login_type = $_POST['login_type'];
 if (isset($_POST['password'])) {
-    $password = $_POST['password'];
+    $password = escape_string($_POST['password']);
 } else {
     $password = null;
 }
 
 if (User::exists($email)) {
     $user = User::fetch($email);
-    $expires = isset($user->active_until) ? $user->active_until : date('Y-m-d');
+    $expires = $user->active_until ?? date('Y-m-d');
     $DateTime1 = new \DateTime($expires);
     $DateTime2 = new \DateTime(date('Y-m-d'));
     if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {

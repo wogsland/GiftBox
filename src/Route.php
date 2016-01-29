@@ -81,6 +81,9 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'create_company':
+                include __DIR__.'/../create_company.php';
+                break;
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;

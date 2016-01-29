@@ -39,6 +39,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/'));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here'));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/'));
+        $this->assertTrue($this->checkStatusCode('/create_company', false, 302));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', false, 302));
         $this->assertTrue($this->checkStatusCode('/free_trial'));
         $this->assertTrue($this->checkStatusCode('/forgot_password'));
@@ -97,6 +98,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/', true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here', true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/', true));
+        $this->assertTrue($this->checkStatusCode('/create_company', true));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', true));
         $this->assertTrue($this->checkStatusCode('/free_trial', true));
         $this->assertTrue($this->checkStatusCode('/forgot_password', true));
@@ -155,6 +157,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/create_company', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/free_trial', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/forgot_password', true, 200, true));

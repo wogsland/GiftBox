@@ -1,6 +1,8 @@
 <?php
-use \Sizzle\User;
-use \Sizzle\EventLogger;
+use \Sizzle\{
+    EventLogger,
+    User
+};
 
 $response['status'] = 'ERROR';
 if (isset($_SESSION['user_id'])) {

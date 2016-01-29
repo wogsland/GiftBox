@@ -5,7 +5,7 @@ if (!logged_in() || !isset($_SESSION['email'])) {
     header('Location: '.APP_URL.'pricing');
 }
 
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+$email = $_SESSION['email'] ?? '';
 
 define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';

@@ -1,9 +1,9 @@
 <?php
 use \Sizzle\{
-    City,
     HTML,
     RecruitingCompany,
-    RecruitingToken
+    RecruitingCompanyImage,
+    RecruitingCompanyVideo
 };
 
 if (!logged_in()) {
@@ -13,13 +13,16 @@ if (!logged_in()) {
 $user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
-    $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
-    if ($token->user_id != $user_id && !is_admin()) {
+    $token_company = new RecruitingCompany(escape_string($_GET['id']));
+    if ($token_company->user_id != $user_id && !is_admin()) {
         header('Location: '.APP_URL.'/tokens');
     }
-    $token_company = new RecruitingCompany($token->recruiting_company_id);
+    $token_images = (new RecruitingCompanyImage())->getByCompanyId($token_company->id);
+    $token_videos = (new RecruitingCompanyVideo())->getByCompanyId($token_company->id);
 } else {
-    $token = new RecruitingToken();
+    $token_company = new RecruitingCompany();
+    $token_images = array();
+    $token_videos = array();
 }
 
 function paper_text($label, $id, $value, $required = false)
@@ -117,15 +120,6 @@ require __DIR__.'/header.php';
         paper-toolbar {
             --paper-toolbar-background: #111111
         }
-        #progress-bar {
-            width: 100%;
-            height: 70px;
-            padding: 7px 0px 0px 70px;
-        }
-        #token-strength {
-            width: 100%;
-            height: 300px;
-        }
         paper-fab{
             --paper-fab-background: #2193ED;
             display: inline-block;
@@ -153,10 +147,6 @@ require __DIR__.'/header.php';
           width: 500px;
           font-size: 18px;
         }
-        #use-existing-company-button {
-          margin-left: 50px;
-          margin-right: 50px;
-        }
     </style>
 
 </head>
@@ -165,98 +155,15 @@ require __DIR__.'/header.php';
     <?php require_once __DIR__.'/navbar.php';?>
   </div>
     <div class="center-column">
-        <?php /*<paper-card id="progress-bar">
-                <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
-                <span class="progress-text">Fill Out Token Form</span>
-                <div class="progress-line"></div>
-                <paper-fab icon="looks one" class="progress-fab"></paper-fab>
-                <span class="progress-text">Preview Token</span>
-                <div class="progress-line"></div>
-                <paper-fab icon="looks one" class="progress-fab"></paper-fab>
-                <span class="progress-text">Send Token</span>
-        </paper-card> */ ?>
         <div id="left-column">
-            <form is="iron-form" id="recruiting-token-form">
-                <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
-                <input type="hidden" id="long-id" name="long_id" value="<?php echo $token->long_id ?>">
-                <?php if (isset($token_company)) {
-                    $company_name = '' == $token_company->name ? 'Unnamed Company' : $token_company->name;?>
-                    <input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="<?php echo $token->recruiting_company_id ?>">
-                    <paper-card id="company-info">
-                      <div class="card-content" style="height:90px;">
-                        <i class="pull-left" style="font-size:25px;padding:15px;font:normal;"><?php echo $company_name;?></i>
-                        <a class="pull-right" href="<?php echo "/create_company?id={$token->recruiting_company_id}&referrer={$token->long_id}" ?>"><paper-button>EDIT COMPANY</paper-button></a>
-                      </div>
-                    </paper-card>
-                <?php }?>
+            <form is="iron-form" id="recruiting-company-form">
+                <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
 
-                <paper-card id="send-token-via" heading="Send Token via">
-                    <div id="send-link-list-container">
-                        <div class="send-link-container send-link-container-hover">
-                            <div class="inner-send-link-container">
-                                <div><i class="material-icons send-link-icon">image</i></div>
-                                <div class="send-link-text-container">Linked Image</div>
-                            </div>
-                        </div>
-                        <div class="send-link-container send-link-container-hover">
-                            <div class="inner-send-link-container">
-                                <i class="material-icons send-link-icon">insert_link</i>
-                                <div class="send-link-text-container">Link</div>
-                            </div>
-                        </div>
-                        <div class="send-link-container send-link-container-hover">
-                            <div class="inner-send-link-container">
-                                <i class="material-icons send-link-icon">email</i>
-                                <div class="send-link-text-container">Token e-Mail</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="send-link-content-container">
-                        <div class="send-link-content">
-                            <p>A linked image has been copied to your clipboard.  Simply go to your email, paste the image in, and send out the email.</p>
-                            <p>Certain email providers require an image to be linked separately. All information is provided below.</p>
-                        </div>
-                        <div class="send-link-content">
-                        </div>
-                        <div class="send-link-content">
-                            <p>Have us email out your Token.  This option will provide you with the greatest analytics and potential for A/B split testing.</p>
-                        </div>
-                    </div>
-                </paper-card>
-
-                <paper-card id="required-info" heading="Required Info">
-                    <div class="field-container">
-                        <?php
-                            paper_text('Job Title', 'job-title', $token->job_title, true);
-                            paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
-
-                            $all_cities = City::getAll();
-                            $cities = array();
-                            $selected_city = null;
-                            foreach ($all_cities as $index => $city) {
-                                $cities[$city->id] = $city->name;
-                                if ($city->id == $token->city_id) {
-                                    $selected_city = $index;
-                                }
-                            }
-                            paper_dropdown('Job Location', 'city-id', $cities, $selected_city, true);
-                        ?>
-                    </div>
-                </paper-card>
-                <paper-card id="basic-info" heading="Additional Info">
-                    <div class="field-container">
-                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required)); ?>
-                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities)); ?>
-                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks)); ?>
-                    </div>
-                </paper-card>
-
-                <?php if (!isset($token_company)) { ?>
                     <paper-card id="company-info" heading="Important Company Info">
                         <div class="field-container">
-                            <?php paper_text('Company Name', 'company', ''); ?>
+                            <?php paper_text('Company Name', 'company', $token_company->name); ?>
                             <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
-                            <?php paper_textarea('Company Values', 'company-values', ''); ?>
+                            <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values)); ?>
                         </div>
                     </paper-card>
                     <paper-card id="company-images" heading="Company Images">
@@ -272,7 +179,23 @@ require __DIR__.'/header.php';
                                     <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
     -->                            </div>
                             </div>
-                            <div class="thumbnail-list-container" id="company-image-container" hidden></div>
+                            <?php if (count($token_images) > 0) {?>
+                              <div class="thumbnail-list-container" id="company-image-container">
+                              <?php
+                              foreach ($token_images as $token_image) {
+                                  $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
+                                  $image_id = str_replace('.', '_', $token_image['file_name']);
+                                  echo '<div class="thumbnail-container">';
+                                  echo '  <div class="inner-thumbnail-container">';
+                                  echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
+                                  echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                                  echo ' </div>';
+                                  echo '</div>';
+                              }
+                              echo '</div>';
+                            } else { ?>
+                              <div class="thumbnail-list-container" id="company-image-container" hidden></div>
+                            <?php } ?>
                         </div>
                     </paper-card>
                     <paper-card id="company-videos" heading="Company Videos">
@@ -288,7 +211,40 @@ require __DIR__.'/header.php';
     -->
                                 </div>
                             </div>
-                            <div class="thumbnail-list-container" id="company-video-container" hidden></div>
+                            <?php if (count($token_videos) > 0) {?>
+                              <div class="thumbnail-list-container" id="company-video-container">
+                              <?php
+                              foreach ($token_videos as $token_video) {
+                                  $image_id = $token_video['source_id'];
+                                  switch ($token_video['source']) {
+                                      case 'youtube':
+                                      $thumbnail_src = "https://img.youtube.com/vi/$image_id/0.jpg";
+                                      break;
+                                      case 'vimeo':
+                                      /*$vimeo_json_url = "https://vimeo.com/api/v2/video/$image_id.json";
+                                      ob_start();
+                                      $handle = curl_init();
+                                      curl_setopt($handle, CURLOPT_POST, true);
+                                      curl_setopt($handle, CURLOPT_URL, $vimeo_json_url);
+                                      $response = curl_exec($handle);
+                                      $json = ob_get_contents();
+                                      ob_end_clean();
+                                      $return = json_decode($json);*/
+                                      $thumbnail_src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Vimeo_Logo.svg/500px-Vimeo_Logo.svg.png';
+                                      //$thumbnail_src = $return[0]->thumbnail_medium;
+                                      break;
+                                  }
+                                  echo '<div class="thumbnail-container">';
+                                  echo '  <div class="inner-thumbnail-container">';
+                                  echo '      <img class="recruiting-token-video photo-thumbnail" id="'.$image_id.'" data-id="'.$token_video['id'].'" src="'.$thumbnail_src.'">';
+                                  echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                                  echo ' </div>';
+                                  echo '</div>';
+                              }
+                              echo '</div>';
+                            } else { ?>
+                              <div class="thumbnail-list-container" id="company-video-container" hidden></div>
+                            <?php } ?>
                         </div>
                     </paper-card>
                     <paper-card id="company-social-media" heading="Company Social Media">
@@ -299,7 +255,7 @@ require __DIR__.'/header.php';
                                   https://facebook.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-facebook', ''); ?>
+                                  <?php paper_text('', 'company-facebook', $token_company->facebook); ?>
                                 </td>
                               </tr>
                             </table>
@@ -309,7 +265,7 @@ require __DIR__.'/header.php';
                                   https://linkedin.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-linkedin', ''); ?>
+                                  <?php paper_text('', 'company-linkedin', $token_company->linkedin); ?>
                                 </td>
                               </tr>
                             </table>
@@ -319,7 +275,7 @@ require __DIR__.'/header.php';
                                   https://youtube.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-youtube', ''); ?>
+                                  <?php paper_text('', 'company-youtube', $token_company->youtube); ?>
                                 </td>
                               </tr>
                             </table>
@@ -329,7 +285,7 @@ require __DIR__.'/header.php';
                                   https://twitter.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-twitter', ''); ?>
+                                  <?php paper_text('', 'company-twitter', $token_company->twitter); ?>
                                 </td>
                               </tr>
                             </table>
@@ -339,86 +295,25 @@ require __DIR__.'/header.php';
                                   https://plus.google.com/
                                 </td>
                                 <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-google-plus', ''); ?>
+                                  <?php paper_text('', 'company-google-plus', $token_company->google_plus); ?>
                                 </td>
                               </tr>
                             </table>
                         </div>
                     </paper-card>
-                <?php } ?>
 
                 <div class="button-container">
-                    <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
-                    <!--<paper-button raised class="bottom-button" onclick="finish()" disabled>FINISH</paper-button>-->
+                    <paper-button raised class="bottom-button" onclick="saveCompany()">SAVE</paper-button>
                 </div>
             </form>
         </div>
         <div id="right-column" class="pull-right">
-            <?php /*
-            <paper-card heading="Token Strength" id="token-strength">
-            </paper-card>
-            */ ?>
             <div class="button-container">
-                <paper-button raised onclick="openToken()">OPEN</paper-button>
-                <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
+                <paper-button raised onclick="backToToken('<?php echo $_GET['referrer'] ?? '';?>')">BACK</paper-button>
+                <paper-button raised onclick="saveCompany()">SAVE</paper-button>
             </div>
-            <div>
-                <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
-                  USE EXISTING COMPANY
-                </paper-button>
-            </div>
-            <?php /*if (is_admin()) : ?>
-                <paper-card heading="Add To Library" id="add-to-library">
-                    <div id="library-button-container">
-                        <paper-button class="library-button" raised>Company</paper-button>
-                        <paper-button class="library-button" raised>Images</paper-button>
-                        <paper-button class="library-button" raised>Video</paper-button>
-                    </div>
-                </paper-card>
-            <?php endif;*/ ?>
        </div>
     </div>
-
-    <paper-dialog class="recruiting-dialog" id="use-existing-company-dialog" modal>
-        <h2>Use Existing Company</h2>
-        <form is="iron-form" id="use-existing-company-form">
-            <div class="field-container">
-            <?php
-                $companies = RecruitingToken::getUserCompanies($user_id);
-                $options = array();
-                foreach ($companies as $co) {
-                    $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
-                }
-                paper_dropdown('Select a Company to use', 'company-to-use', $options, null, true);
-            ?>
-            </div>
-        </form>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processCompany()">Use</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
-        </div>
-    </paper-dialog>
-
-    <paper-dialog class="recruiting-dialog" id="open-dialog" modal>
-        <h2>Open</h2>
-        <form is="iron-form" id="open-token-form">
-            <div class="field-container">
-            <?php
-                $user_tokens = RecruitingToken::getUserTokens($user_id);
-                $tokens = array();
-                foreach ($user_tokens as $token) {
-                    $tokenCompanyName = ''!=$token->company ? $token->company : 'Unnamed Company';
-                    $tokens[$token->long_id] = $tokenCompanyName." - ".$token->job_title;
-                }
-                paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
-            ?>
-            </div>
-        </form>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processOpen()">Open</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
-        </div>
-    </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>

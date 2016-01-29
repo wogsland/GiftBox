@@ -1,11 +1,13 @@
 <?php
-use Monolog\ErrorHandler;
-use Monolog\Handler\SlackHandler;
-use Monolog\Logger;
+use Monolog\{
+    ErrorHandler,
+    Handler\SlackHandler,
+    Logger
+};
 use Sizzle\Connection;
 
 // set relesae version
-define('VERSION', '1.9.2');
+define('VERSION', '1.9.3');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
@@ -15,7 +17,7 @@ require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/util.php';
 
 // Determine environment & fix URL as needed
-$server = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : null;
+$server = $_SERVER['SERVER_NAME'] ?? null;
 if ('gosizzle.io' == strtolower($server) || 'givetoken.com' == strtolower($server) || 'www.givetoken.com' == strtolower($server)) {
     $url = 'https://www.gosizzle.io'.$_SERVER['REQUEST_URI'];
     header("Location: $url ", true, 301);
@@ -30,9 +32,9 @@ if (!defined('ENVIRONMENT')) {
 if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
-/*$logger = new Logger('bugs');
+$logger = new Logger('bugs');
 if (ENVIRONMENT != 'local') {
-  if (ENVIRONMENT == 'development') {
+  if (ENVIRONMENT != 'production') {
       $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
       $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs-staging', $name, false);
   } else {
@@ -42,7 +44,7 @@ if (ENVIRONMENT != 'local') {
   $slackHandler->setLevel(Logger::DEBUG);
   $logger->pushHandler($slackHandler);
   ErrorHandler::register($logger);
-}*/
+}
 
 $prefix = "http://";
 $use_https = false;
@@ -109,11 +111,11 @@ if (isset($_SESSION, $_SESSION['user_id'])) {
     $value_user_id = '';
 }
 if (isset($_SERVER)) {
-    $host = isset($_SERVER['HTTP_HOST']) ? escape_string($_SERVER['HTTP_HOST']) : '';
-    $user_agent = isset($_SERVER['HTTP_USER_AGENT']) ? escape_string($_SERVER['HTTP_USER_AGENT']) : '';
-    $uri = isset($_SERVER['REQUEST_URI']) ? escape_string($_SERVER['REQUEST_URI']) : '';
-    $remote_ip = isset($_SERVER['REMOTE_ADDR']) ? escape_string($_SERVER['REMOTE_ADDR']) : '';
-    $script = isset($_SERVER['SCRIPT_NAME']) ? escape_string($_SERVER['SCRIPT_NAME']) : '';
+    $host = escape_string($_SERVER['HTTP_HOST'] ?? '');
+    $user_agent = escape_string($_SERVER['HTTP_USER_AGENT'] ?? '');
+    $uri = escape_string($_SERVER['REQUEST_URI'] ?? '');
+    $remote_ip = escape_string($_SERVER['REMOTE_ADDR'] ?? '');
+    $script = escape_string($_SERVER['SCRIPT_NAME'] ?? '');
     $query = "INSERT INTO web_request
         ($insert_user_id `visitor_cookie`, `host`, `user_agent`, `uri`, `remote_ip`, `script`)
         VALUES
