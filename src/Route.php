@@ -136,6 +136,9 @@ class Route
                     echo "Disallow: /\n";
                 }
                 break;
+            case 'teapot':
+                include __DIR__.'/../teapot.php';
+                break;
             case 'terms':
                 include __DIR__.'/../termsservice.php';
                 break;
@@ -175,13 +178,16 @@ class Route
             case 'user':
                 include __DIR__.'/../admin/user_info.php';
                 break;
-            case 'teapot':
-                include __DIR__.'/../teapot.php';
-                break;
             case 'test':
                 // this endpoint is just for non-production testing
                 if (ENVIRONMENT != 'production') {
                     include __DIR__.'/../lp/sizzle1.php';
+                    break;
+                }
+            case 'zdrip':
+                // this endpoint is just for non-production testing
+                if (ENVIRONMENT != 'production') {
+                    include __DIR__.'/../deploy_develop.php';
                     break;
                 }
             default:
