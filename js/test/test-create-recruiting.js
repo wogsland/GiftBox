@@ -15,9 +15,14 @@ vm.runInThisContext(code);
 
 describe('create_recruiting', function() {
   describe('excludedLinkify', function() {
-    it('Should linkify most links', function () {
+    it('Should linkify most links, excluding asp.net', function () {
       var inputText = "Don't link asp.net but link google.com and www.kbb.com please!";
       var outputText = "Don't link asp.net but link <a href=\"http://google.com\" target=\"_blank\">google.com</a> and <a href=\"http://www.kbb.com\" target=\"_blank\">kbb.com</a> please!";
+      assert.equal(outputText, excludedLinkify(inputText));
+    });
+    it('Should linkify most links, excluding ASP.NET', function () {
+      var inputText = "Don't link ASP.NET but link example.com and customer.target.com please!";
+      var outputText = "Don't link ASP.NET but link <a href=\"http://example.com\" target=\"_blank\">example.com</a> and <a href=\"http://customer.target.com\" target=\"_blank\">customer.target.com</a> please!";
       assert.equal(outputText, excludedLinkify(inputText));
     });
   });

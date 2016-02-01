@@ -334,7 +334,8 @@ function linkifyCompanyText() {
  */
 function excludedLinkify (inputText) {
   var exclusions = [
-    {url:'asp.net', temp:'84gt43qg8ci4bci4'}
+    {url:'asp.net', temp:'84gt43qg8ci4bci4'},
+    {url:'ASP.NET', temp:'87c84c8n3cgnn7c4'}
   ];
   exclusions.forEach(function (e) {
     inputText = inputText.replace(e.url, e.temp);
