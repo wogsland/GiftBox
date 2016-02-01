@@ -163,6 +163,7 @@ scope._onVideosClick = function(event) {
 };
 
 scope._onYesClick = function(event) {
+  $('.gt-info-video').remove();
   $('#placeholder').css('background-color', 'green');
   this.$.list.sharedElements = {
     'ripple': event.target,
@@ -185,6 +186,7 @@ scope._onYesClick = function(event) {
 };
 
 scope._onMaybeClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -206,6 +208,7 @@ scope._onMaybeClick = function(event) {
 };
 
 scope._onNoClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -227,6 +230,7 @@ scope._onNoClick = function(event) {
 };
 
 scope._onBackClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
 
