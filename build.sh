@@ -24,8 +24,6 @@ fi
 ./vendor/bin/phpunit --bootstrap src/tests/autoload.php -c tests.xml
 echo ""
 
-	
-
 # build polymer
 polybuild --maximum-crush recruiting_token.php
 mv recruiting_token.build.js public/js/recruiting_token.min.js
@@ -69,6 +67,14 @@ echo ""
 rm -rf public/components
 cp -r components public/components
 echo "Components updated"
+echo ""
+
+# run Mocha unit tests
+MOCHA="$(mocha --version)"
+echo "Running JavaScript tests with Mocha $MOCHA"
+cd js
+mocha
+cd ..
 echo ""
 
 # see what's changed
