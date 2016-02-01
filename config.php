@@ -1,7 +1,9 @@
 <?php
-use Monolog\ErrorHandler;
-use Monolog\Handler\SlackHandler;
-use Monolog\Logger;
+use Monolog\{
+    ErrorHandler,
+    Handler\SlackHandler,
+    Logger
+};
 use Sizzle\Connection;
 
 // set relesae version
@@ -30,9 +32,9 @@ if (!defined('ENVIRONMENT')) {
 if (!defined('SLACK_TOKEN')) {
     define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
 }
-/*$logger = new Logger('bugs');
+$logger = new Logger('bugs');
 if (ENVIRONMENT != 'local') {
-  if (ENVIRONMENT == 'development') {
+  if (ENVIRONMENT != 'production') {
       $name = 'Dev Application: '.$_SERVER['REQUEST_URI'];
       $slackHandler = new SlackHandler(SLACK_TOKEN, '#bugs-staging', $name, false);
   } else {
@@ -42,7 +44,7 @@ if (ENVIRONMENT != 'local') {
   $slackHandler->setLevel(Logger::DEBUG);
   $logger->pushHandler($slackHandler);
   ErrorHandler::register($logger);
-}*/
+}
 
 $prefix = "http://";
 $use_https = false;

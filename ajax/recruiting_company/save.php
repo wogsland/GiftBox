@@ -28,8 +28,8 @@ if (isset($_SESSION['user_id'])) {
             $RecruitingCompany->user_id = $user_id;
             $RecruitingCompany->name = escape_string($_POST['company'] ?? '');
             $RecruitingCompany->website = escape_string($_POST['company_website'] ?? '');
-            $RecruitingCompany->values = escape_string($_POST['company_values'] ?? '');
-            $RecruitingCompany->values = HTML::to($RecruitingCompany->values);
+            $RecruitingCompany->values = HTML::to($_POST['company_values'] ?? '');
+            $RecruitingCompany->values = escape_string($RecruitingCompany->values);
             $RecruitingCompany->facebook = escape_string($_POST['company_facebook'] ?? '');
             $RecruitingCompany->linkedin = escape_string($_POST['company_linkedin'] ?? '');
             $RecruitingCompany->youtube = escape_string($_POST['company_youtube'] ?? '');
