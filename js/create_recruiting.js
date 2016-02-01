@@ -311,19 +311,39 @@ function isValid(id) {
 }
 
 function linkifyText() {
-  $("#job-title")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-title").val()));
-  $("#job-description")[0].updateValueAndPreserveCaret(Autolinker.link($("#job-description").val()));
-  $("#skills-required")[0].updateValueAndPreserveCaret(Autolinker.link($("#skills-required").val()));
-  $("#responsibilities")[0].updateValueAndPreserveCaret(Autolinker.link($("#responsibilities").val()));
-  $("#perks")[0].updateValueAndPreserveCaret(Autolinker.link($("#perks").val()));
+  $("#job-title")[0].updateValueAndPreserveCaret(excludedLinkify($("#job-title").val()));
+  $("#job-description")[0].updateValueAndPreserveCaret(excludedLinkify($("#job-description").val()));
+  $("#skills-required")[0].updateValueAndPreserveCaret(excludedLinkify($("#skills-required").val()));
+  $("#responsibilities")[0].updateValueAndPreserveCaret(excludedLinkify($("#responsibilities").val()));
+  $("#perks")[0].updateValueAndPreserveCaret(excludedLinkify($("#perks").val()));
   if($("#company").length) {
     linkifyCompanyText();
   }
 }
 
 function linkifyCompanyText() {
-  $("#company")[0].updateValueAndPreserveCaret(Autolinker.link($("#company").val()));
-  $("#company-values")[0].updateValueAndPreserveCaret(Autolinker.link($("#company-values").val()));
+  $("#company")[0].updateValueAndPreserveCaret(excludedLinkify($("#company").val()));
+  $("#company-values")[0].updateValueAndPreserveCaret(excludedLinkify($("#company-values").val()));
+}
+
+/**
+ * Linkify text excluding a black list
+ *
+ * @param {String} inputText The text to linkify
+ * @return {String} The linkified text
+ */
+function excludedLinkify (inputText) {
+  var exclusions = [
+    {url:'asp.net', temp:'84gt43qg8ci4bci4'}
+  ];
+  $.each(exclusions, function (i, e) {
+    inputText = inputText.replace(e.url, e.temp);
+  });
+  inputText = Autolinker.link(inputText);
+  $.each(exclusions, function (i, e) {
+    inputText = inputText.replace(e.temp, e.url);
+  });
+  return inputText;
 }
 
 function saveRecruitingToken(preview) {
