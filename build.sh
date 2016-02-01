@@ -5,15 +5,13 @@ if [ "$#" -gt 0 -a "$1" = "-h" ]
 then
   echo ""
   echo "NAME"
-  echo "     build -- builds Sizzle project"
+  echo "     build -- builds S!zzle project"
   echo ""
   echo "SYNOPSIS"
   echo "     ./build.sh [-h] [project]"
   echo ""
   echo "DESCRIPTION"
-  echo "     This tool is for building & pushing the Sizzle project. Choosing the project option master or staging"
-  echo "     will push the build to givetoken.com or t-sunlight-757.appspot.com respectively. Any other project option"
-  echo "     will result in a push to <project>-dot-t-sunlight-757.appspot.com."
+  echo "     This tool is for building & pushing the S!zzle project. Choosing the project option master or staging."
   echo ""
   echo "     The following options are available:"
   echo ""
@@ -71,16 +69,24 @@ cp -r components public/components
 echo "Components updated"
 echo ""
 
+# run Mocha unit tests
+MOCHA="$(mocha --version)"
+echo "Running JavaScript tests with Mocha $MOCHA"
+cd js
+mocha
+cd ..
+echo ""
+
 # see what's changed
 git status
 
-# push it up to gcloud
+# push it up to github
 if [ "$#" -gt 0 ]
 then
   echo ""
   case $1 in
-    "master") gcloud preview app deploy app.yaml --project stone-timing-557 --promote ;;
-    "staging") gcloud preview app deploy app.yaml --project t-sunlight-757 --promote ;;
-    *) gcloud preview app deploy app.yaml --project t-sunlight-757 --version $1 ;;
+#    "master") do nothing
+    "staging") git push github develop ;;
+#    *) do nothing ;;
   esac
 fi

@@ -336,11 +336,11 @@ function excludedLinkify (inputText) {
   var exclusions = [
     {url:'asp.net', temp:'84gt43qg8ci4bci4'}
   ];
-  $.each(exclusions, function (i, e) {
+  exclusions.forEach(function (e) {
     inputText = inputText.replace(e.url, e.temp);
   });
   inputText = Autolinker.link(inputText);
-  $.each(exclusions, function (i, e) {
+  exclusions.forEach(function (e) {
     inputText = inputText.replace(e.temp, e.url);
   });
   return inputText;
