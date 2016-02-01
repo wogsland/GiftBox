@@ -169,7 +169,8 @@ Cygwin or your favorite Windows version of Linux.
 
 ### <a id="deploy-staging"></a>Deploy to Staging
 
-TODO: create webhook for push to `develop` to call and pull it on the server.
+Any push to `develop` is automagically pulled onto the staging server except
+during the QA period for new releases.
 
 ### <a id="deploy-production"></a>Deploy to Production
 
