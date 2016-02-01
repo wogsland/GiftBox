@@ -130,6 +130,12 @@ class Route
             case 'recruiting_made_easy':
                 include __DIR__.'/../lp/bc1.php';
                 break;
+            case 'robots.txt':
+                if (ENVIRONMENT != 'production') {
+                    echo "User-agent: *\n";
+                    echo "Disallow: /\n";
+                }
+                break;
             case 'terms':
                 include __DIR__.'/../termsservice.php';
                 break;
