@@ -70,17 +70,23 @@ if (ENVIRONMENT === "production") {
         $visitor = 'visitor';
     }
 
-    // Have Slackbot inform us of the visitor
-    $message = "$new $visitor to " . APP_URL . " from ";
-    $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
-    $message .= isset($locale->region) && '' != $locale->region ? $locale->region . ', ' : '';
-    $message .= isset($locale->country) && '' != $locale->country ? $locale->country : '';
-    $message = rtrim($message);
-    $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
-    $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
-    $visitorLogger = new Logger('milestones');
-    $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'S!zzleBot', false);
-    $slackHandler->setLevel(Logger::DEBUG);
-    $visitorLogger->pushHandler($slackHandler);
-    $visitorLogger->log(200, $message);
+    $botsToExclude = [
+      'Googlebot'
+    ];
+
+    if (!in_array($visitor, $botsToExclude)) {
+        // Have Slackbot inform us of the visitor
+        $message = "$new $visitor to " . APP_URL . " from ";
+        $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
+        $message .= isset($locale->region) && '' != $locale->region ? $locale->region . ', ' : '';
+        $message .= isset($locale->country) && '' != $locale->country ? $locale->country : '';
+        $message = rtrim($message);
+        $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
+        $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';
+        $visitorLogger = new Logger('milestones');
+        $slackHandler = new SlackHandler(SLACK_TOKEN, '#website-visitors', 'S!zzleBot', false);
+        $slackHandler->setLevel(Logger::DEBUG);
+        $visitorLogger->pushHandler($slackHandler);
+        $visitorLogger->log(200, $message);
+    }
 }
