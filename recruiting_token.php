@@ -104,13 +104,25 @@
                     <div class="mdl-layout__tab-panel is-active" id="overview">
 
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                        <div class="mdl-grid" id="company-image-grid">
-                          <div class="mdl-cell mdl-cell--8-col" id="company-main-image">
-                            <img src="/uploads/Team.jpg">
+                        <div class="mdl-grid no-padding no-margin" id="company-image-grid">
+                          <div class="mdl-cell no-margin" id="company-main-image">
+                            <div id="supporting-company">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location"></i>
+                            </div>
                           </div>
-                          <div class="mdl-cell mdl-cell--4-col" id="company-secondary-images">
-                            <div class="mdl-grid">
-                              <img class="mdl-cell--stretch mdl-cell mdl-cell--12-col" src="/uploads/Parthenon.jpg">
+                          <div class="mdl-cell no-margin" id="company-secondary-images">
+                            <div class="mdl-grid no-padding">
+                              <div class="no-margin">
+                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px;">
+                              </div>
+                              <div class="no-margin">
+                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px;">
+                              </div>
+                              <div class="no-margin">
+                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px; -webkit-filter: brightness(25%);">
+                                <i class="material-icons plus-icon--overlay">add</i>
+                              </div>
                             </div>
                           </div>
                         </div>
