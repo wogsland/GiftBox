@@ -37,7 +37,6 @@ yuicompressor css/colorbox.css -o public/css/colorbox.min.css
 yuicompressor css/styles.css -o public/css/styles.min.css
 yuicompressor css/magnific-popup.css -o public/css/magnific-popup.min.css
 yuicompressor css/create_recruiting.css -o public/css/create_recruiting.min.css
-yuicompressor css/users_groups.css -o public/css/users_groups.min.css
 yuicompressor css/datatables.css -o public/css/datatables.min.css
 yuicompressor css/owl.theme.css -o public/css/owl.theme.min.css
 yuicompressor css/owl.carousel.css -o public/css/owl.carousel.min.css
