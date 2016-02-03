@@ -25,6 +25,7 @@ class User
     public $user_group;
     public $group_admin;
     public $reset_code;
+    public $internal;
 
     public static function exists($email_address)
     {
@@ -108,7 +109,7 @@ class User
     {
         if (!$this->id) {
             $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level, access_token "
-            .", location, position, company, about, username, user_group, group_admin) VALUES ("
+            .", location, position, company, about, username, user_group, group_admin, internal) VALUES ("
             ."'".escape_string($this->email_address)."'"
             .", '".escape_string($this->first_name)."'"
             .", '".escape_string($this->last_name)."'"
@@ -118,7 +119,8 @@ class User
             .", $this->level, '$this->access_token', '$this->location', '$this->position'"
             .", '$this->company', '$this->about', '$this->username'"
             .", ".($this->user_group ? $this->user_group : "null")
-            .", '$this->group_admin')";
+            .", '$this->group_admin'"
+            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."')";
             $this->id = insert($sql);
         } else {
             $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
