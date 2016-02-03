@@ -34,7 +34,7 @@ class Route
     public function go()
     {
         if (!isset($this->endpointPieces[1])) {
-            include __DIR__.'/../index.php';
+            include __DIR__.'/../lp/sizzle1.php';
         } else {
             switch ($this->endpointPieces[1]) {
             case '':
