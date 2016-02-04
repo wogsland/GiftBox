@@ -80,8 +80,7 @@
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
-                        <i class="gt-info-company"></i>
-                        <i class="gt-info-jobtitle"></i>
+                        <i class="gt-info-title"></i>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>
@@ -90,33 +89,33 @@
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
 
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+                      <section id="company-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onImagesClick">
                         <div class="mdl-grid no-padding no-margin" id="company-image-grid">
                           <div class="mdl-cell no-margin" id="company-main-image">
                             <div id="supporting-company">
-                              <i class="material-icons">room</i>
-                              <i class="gt-info-location"></i>
+                              <i class="material-icons">business</i>
+                              <i class="gt-info-company"></i>
                             </div>
                           </div>
                           <div class="mdl-cell no-margin" id="company-secondary-images">
-                            <div class="mdl-grid no-padding">
+                            <div class="mdl-grid no-padding" style="height:337px">
                               <div class="no-margin">
-                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px;">
+                                <img id="company-secondary-image-1" src="" class="company-secondary-image">
                               </div>
                               <div class="no-margin">
-                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px;">
+                                <img id="company-secondary-image-2" src="" class="company-secondary-image">
                               </div>
                               <div class="no-margin">
-                                <img src="/uploads/Parthenon.jpg" style="max-width: 100%; height: auto; max-height:150px; -webkit-filter: brightness(25%);">
+                                <img id="company-secondary-image-3" src="" class="company-secondary-image" style="-webkit-filter: brightness(25%);">
                                 <i class="material-icons plus-icon--overlay">add</i>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="mdl-card mdl-cell mdl-cell--12-col">
+                        <div class="mdl-card mdl-cell mdl-cell--12-col" id="company-description">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Company Information</h4>
-                            <p>
+                            <p id="company-description-text">
                               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet laoreet orci. Ut id massa ut diam ultrices convallis at nec elit. Suspendisse efficitur pellentesque sapien vel gravida. Praesent vitae vehicula lorem. Phasellus bibendum nunc tristique suscipit feugiat. Vestibulum in placerat urna. Curabitur malesuada ex vitae convallis vulputate.
                               Nulla facilisi. Phasellus a nisl sit amet nisi ullamcorper mattis non a dui. Fusce sit amet pellentesque urna. Nunc non orci dolor. Duis maximus felis in nisi finibus, ut tristique diam sodales. In sed egestas nisl, et vestibulum urna. Fusce mollis sed est sit amet viverra. Suspendisse sed velit non arcu lobortis iaculis et et arcu.
                             </p>

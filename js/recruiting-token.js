@@ -244,12 +244,13 @@ $(document).ready(function(){
       }
       var tokenTitle;
       if (dataExists(data.data.company)) {
-        $('.gt-info-company').text(data.data.company+' -');
+        $('.gt-info-company').text(data.data.company);
         tokenTitle = data.data.company+' - '+data.data.job_title;
       } else {
         tokenTitle = data.data.job_title;
       }
       $('title').text(tokenTitle);
+      $('.gt-info-title').text(tokenTitle);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
       var overview = '' + data.data.job_description;
@@ -304,6 +305,12 @@ $(document).ready(function(){
         $('#perks-button').hide();
         $('#perks-section').hide();
         $('#perks-section-2').hide();
+      }
+
+      if (dataExists(data.data.description)) {
+        $('#company-description-text').html(data.data.description);
+      } else {
+        $('#company-description').hide();
       }
 
       if (descriptionCount < 4) {
@@ -426,8 +433,25 @@ $(document).ready(function(){
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
         assetHost = getAssetHost();
-        $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        if (data.data.length > 3) {
+          $('#images-frontpage').hide();
+          $('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+          if ( $(window).width() < 739) {
+            $('#company-secondary-images').remove();
+            $('#company-main-image').css('width','100%');
+          } else {
+            $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
+            $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
+            $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
+          }
+          $('#videos-frontpage').removeClass('mdl-cell--6-col');
+          $('#videos-frontpage').addClass('mdl-cell--12-col');
+        } else {
+          $('#company-section').hide();
+          $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        }
       } else {
+        $('#company-section').hide();
         $('#images-frontpage').hide();
         $('#videos-frontpage').removeClass('mdl-cell--6-col');
         $('#videos-frontpage').addClass('mdl-cell--12-col');
