@@ -61,7 +61,7 @@ include __DIR__.'/../header.php';
             if (logged_in()) {
                 echo '<a href="/create_recruiting" class="btn btn-default btn-lg standard-button"><i class="icon_gift"></i>Create Token</a>';
             } else {
-                echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen(1)"><i class="icon_pencil"></i>Sign Up</a>';
+                echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="signupOpen()"><i class="icon_pencil"></i>Sign Up</a>';
                 echo ' or ';
                 echo '<a href="javascript:void(0)" class="btn btn-default btn-lg standard-button" onclick="loginOpen()"><i class="icon_key"></i>Login</a>';
             }

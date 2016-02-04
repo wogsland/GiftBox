@@ -1,8 +1,17 @@
 <?php
 use \Sizzle\User;
 
-if (isset($_GET['signup'])) {
-    $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
+if (isset($_GET['action'])) {
+    switch ($_GET['action']) {
+      case 'signup';
+      $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
+      break;
+      case 'enterprise';
+      $message = 'Thanks for your interest in our Enterprise pricing!<br/><i>Look for an email from our sales team to hit your inbox soon.</i>';
+      break;
+      default:
+      $message = 'Thank you!';
+    }
 } else {
     $message = 'Thank you for being awesome.<br/>';
 }

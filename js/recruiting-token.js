@@ -270,7 +270,6 @@ $(document).ready(function(){
       }
       $('.gt-info-overview-short').html(shortDescription);
       if (!dataExists(data.data.job_description)) {
-        $('#overview-drawer').hide();
         $('#overview-section-2').hide();
       }
       var descriptionCount = 0;
@@ -278,7 +277,6 @@ $(document).ready(function(){
         $('.gt-info-skills').html(data.data.skills_required);
         descriptionCount++;
       } else {
-        $('#skills-drawer').hide();
         $('#skills-button').hide();
         $('#skills-section').hide();
         $('#skills-section-2').hide();
@@ -288,7 +286,6 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#responsibilities-button').hide();
-        $('#responsibilities-drawer').hide();
         $('#responsibilities-section').hide();
         $('#responsibilities-section-2').hide();
       }
@@ -297,7 +294,6 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#values-button').hide();
-        $('#values-drawer').hide();
         $('#values-section').hide();
         $('#values-section-2').hide();
       }
@@ -306,7 +302,6 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#perks-button').hide();
-        $('#perks-drawer').hide();
         $('#perks-section').hide();
         $('#perks-section-2').hide();
       }
@@ -360,7 +355,6 @@ $(document).ready(function(){
         });
       } else {
         $('#location-frontpage').remove();
-        $('#location-drawer').remove();
       }
       var socialCount = 0;
       if (dataExists(data.data.company_twitter)) {
@@ -437,7 +431,6 @@ $(document).ready(function(){
         $('#images-frontpage').hide();
         $('#videos-frontpage').removeClass('mdl-cell--6-col');
         $('#videos-frontpage').addClass('mdl-cell--12-col');
-        $('#images-drawer').hide();
       }
     });
     url = '/ajax/recruiting_token/get_videos' + path[4];
@@ -460,7 +453,6 @@ $(document).ready(function(){
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
         $('#images-frontpage').addClass('mdl-cell--12-col');
-        $('#videos-drawer').hide();
       }
     });
   } else {

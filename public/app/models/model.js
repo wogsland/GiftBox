@@ -33,43 +33,14 @@ function getTokens(){
   return tokens;
 }
 
-function getSocial(){
-  var social = null;
-  $.ajax({
-    url: "/ajax/user/get_social",
-    async: false
-  }).done(function(data, textStatus, jqXHR){
-    social = data;
-  });
-  return social;
-}
-
 var user = getUser()[0];
 var tokens = getTokens();
-var social = getSocial();
-for(i = 0; i < social.length; i++){
-  social[i].name = social[i].network;
-  if(social[i].name == "Facebook"){
-    social[i].icon = "fa-facebook";
-  } else if (social[i].name == "Twitter"){
-    social[i].icon = "fa-twitter";
-  }
-}
-
 for (i=0; i < tokens.length; i++){
   tokens[i].variant = "01";
   tokens[i].name += "-"+tokens[i].id;
 }
 
-if(user.level == 1){
-  user.user_level = "Free Trial";
-} else if (user.level == 2){
-  user.user_level = "Standard";
-} else if (user.level == 3){
-  user.user_level = "Premium";
-} else if (user.level == 4){
-  user.user_level = "Enterprise";
-}
+user.user_level = "Free Trial";
 //get user information
 
 var Model = {
@@ -95,7 +66,7 @@ var Model = {
       {2: "Standard"},
       {3: "Premium"},
     ],
-    social: social
+    social: null
   },
 
   tokens: tokens,
