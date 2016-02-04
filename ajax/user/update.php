@@ -24,23 +24,12 @@ try {
     $user->company = get_post('company');
     $user->position = get_post('position');
     $user->about = get_post('about');
-    $user->social = get_post('social');
     $user->username = get_post('username');
     $user->user_group = get_post('group');
 
     // password
     if (isset($_POST['password']) && strlen($_POST['password']) > 0) {
         $user->password = password_hash($user->password, PASSWORD_DEFAULT);
-    }
-
-    if (is_array($user->social)) {
-        $social = new Social(null);
-        foreach ($user->social as $category) {
-            $social->network = $category["name"];
-            $social->user_id = $user_id;
-            $social->url = $category["url"];
-            $social->save();
-        }
     }
 
     // admin

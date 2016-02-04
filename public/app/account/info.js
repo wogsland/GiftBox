@@ -11,7 +11,6 @@ var AccountInfo = React.createClass({
 
   getState: function(props) {
     var state = props.profile || {};
-    state.selectedSocial = this.findUnusedSocial(state.social)[0].name;
     return state;
   },
 
@@ -21,30 +20,8 @@ var AccountInfo = React.createClass({
     this.setState(state);
   },
 
-  handleSocialChange: function(event) {
-    var state = {social: this.state.social};
-    var social = this.findByName(state.social, event.target.name);
-    if(social) {
-      social.url = event.target.value;
-      this.setState(state);
-    }
-  },
-
   editProfile: function() {
     var profile = jQuery.extend({}, this.props.profile, this.state);
-    AccountStore.editProfile(profile);
-  },
-
-  addSocial: function() {
-    var state = {social: this.state.social};
-    var social = this.findByName(this.social, this.state.selectedSocial);
-    if(social) {
-      state.social.push(jQuery.extend({url:this.state.selectedUrl}, social));
-    }
-    state.selectedUrl = '';
-    state.selectedSocial = this.findUnusedSocial(state.social)[0].name;
-    this.setState(state);
-    var profile = jQuery.extend({}, this.props.profile, this.state, state);
     AccountStore.editProfile(profile);
   },
 
@@ -75,40 +52,6 @@ var AccountInfo = React.createClass({
         </div>
       </form>
    </div>;
- },
-
- renderSocial: function(social) {
-   return <div className="form-group" key={social.name}>
-     <label className="col-sm-1 control-label">{social.name}</label>
-     <div className="col-sm-10">
-       <input type="text" placeholder={social.name + ' Web Address'} className="form-control tooltips" name={social.name} value={social.url} onChange={this.handleSocialChange} />
-     </div>
-     <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
-   </div>;
- },
-
- renderSocialOption: function(social) {
-   return <option key={social.name} value={social.name}>{social.name}</option>;
- },
-
- social: [
-   {name:'Twitter', icon:'fa-twitter'},
-   {name:'Facebook', icon:'fa-facebook'},
-   {name:'YouTube', icon: 'fa-youtube'},
-   {name:'Pinterest', icon:'fa-pinterest'},
-   {name:'Google+', icon:'fa-google-plus'},
-   {name:'Instagram', icon:'fa-instagram'},
-   {name:'Flickr', icon:'fa-flickr'},
-   {name:'LinkedIn', icon:'fa-linkedin'},
-   {name:'Reddit', icon:'fa-reddit'},
-   {name:'Tumblr', icon:'fa-tumblr'}
- ],
-
- findUnusedSocial: function(used) {
-   var self = this;
-   return this.social.filter(function(social) {
-     return !self.findByName(used, social.name);
-   });
  },
 
  findByName: function(array, name) {

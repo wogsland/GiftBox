@@ -95,15 +95,6 @@ class User
         }
     }
 
-    public function get_social($social_id)
-    {
-        $val = null;
-        if ($val !== null && $social_id !== null) {
-            $val = Social($social_id);
-        }
-        return $val;
-    }
-
     public function save()
     {
         if (!$this->id) {
