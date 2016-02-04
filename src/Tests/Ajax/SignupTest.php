@@ -21,6 +21,9 @@ extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests request via ajax endpoint.
+     *
+     * @runInSeparateProcess
+     * @preserveGlobalState  disabled
      */
     public function testInternalSignup()
     {
@@ -28,6 +31,10 @@ extends \PHPUnit_Framework_TestCase
         $email = rand().'@gosizzle.io';
         $password = rand();
 
+        $this->markTestIncomplete();
+        // need to find a way to Mock the ajax response so this won't actually sent emails
+
+        /*
         // test for created images
         $url = TEST_URL . "/ajax/signup";
         $fields = array(
@@ -58,6 +65,7 @@ extends \PHPUnit_Framework_TestCase
         $User = User::fetch($email);
         $this->assertEquals($User->email_address, $email);
         $this->assertEquals($User->internal, 'Y');
+        */
     }
 
     /**
