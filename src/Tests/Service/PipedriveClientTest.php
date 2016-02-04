@@ -3,6 +3,7 @@ namespace Sizzle\Tests;
 
 use \Devio\Pipedrive\Http\Response;
 use \Sizzle\Service\PipedriveClient;
+use \Sizzle\User;
 /**
  * This class tests the Pipedrive class
  *
@@ -13,6 +14,7 @@ class PipedriveClientTest
 {
     protected $pipedriveClient;
     protected $mockedPipedriveAPI;
+    protected $fakeUser;
 
     /**
      * Sets up before each test
@@ -21,6 +23,10 @@ class PipedriveClientTest
     {
         $this->mockedPipedriveAPI = \Mockery::mock('overload:\\Devio\Pipedrive\Pipedrive')->makePartial();
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
+        $this->fakeUser = new User();
+        $this->fakeUser->email_address = 'fakeemail@gosizzle.io';
+        $this->fakeUser->first_name = "";
+        $this->fakeUser->last_name = "";
     }
 
 
@@ -50,7 +56,11 @@ class PipedriveClientTest
      */
     public function testCreateFreeTrialWithExistingDealAndExistingPerson()
     {
-        $freeTrialEmailAddress = 'fakeemail@gosizzle.io';
+        $freeTrialEmailAddress = $this->fakeUser->email_address;
+        $signUpFirstName = $this->fakeUser->first_name;
+        $signUpLastName = $this->fakeUser->last_name;
+        $signUpPersonsName = empty($signUpFirstName) ? $freeTrialEmailAddress :  $signUpFirstName." ".$signUpLastName;
+
         $personId = 1;
         $organizationId = 2;
 
@@ -98,7 +108,7 @@ class PipedriveClientTest
 
 
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
-        $signupPayload = ["email_address" => $freeTrialEmailAddress, "first_name" => "Fake", "last_name" => "Person"];
+        $signupPayload = $this->fakeUser;
 
         $this->assertTrue($this->pipedriveClient->createFreeTrial($signupPayload));
     }
@@ -113,10 +123,11 @@ class PipedriveClientTest
      */
     public function testCreateFreeTrialWithNoExistingDealAndNoExistingPerson()
     {
-        $freeTrialEmailAddress = 'fakeemail@gosizzle.io';
-        $signUpFirstName = 'Fake';
-        $signUpLastName = 'Name';
-        $signUpPersonsName = $signUpFirstName." ".$signUpLastName;
+        $freeTrialEmailAddress = $this->fakeUser->email_address;
+        $signUpFirstName = $this->fakeUser->first_name;
+        $signUpLastName = $this->fakeUser->last_name;
+        $signUpPersonsName = empty($signUpFirstName) ? $freeTrialEmailAddress :  $signUpFirstName." ".$signUpLastName;
+
         $personId = 1;
         $organizationId = 2;
         $examplePipedrivePersonsFindByNameBodyResponse = "{
@@ -221,7 +232,7 @@ class PipedriveClientTest
             ->andReturn(new Response(200, json_decode($examplePipedriveDealsAddBodyResponse)));
 
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
-        $signupPayload = ["email_address" => $freeTrialEmailAddress, "first_name" => $signUpFirstName, "last_name" => $signUpLastName];
+        $signupPayload = $this->fakeUser;
 
         $this->assertTrue($this->pipedriveClient->createFreeTrial($signupPayload));
     }

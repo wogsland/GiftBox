@@ -25,7 +25,7 @@ class PipedriveClient
      */
     private function findPerson($newSignup)
     {
-        $findPersonResponse = $this->pipedrive->persons()->findByName($newSignup['email_address'], ["search_by_email" => true]);
+        $findPersonResponse = $this->pipedrive->persons()->findByName($newSignup->email_address, ["search_by_email" => true]);
         $foundPersonArray = $findPersonResponse->getData();
         if (!$findPersonResponse->isSuccess()) {
             throw new \Exception("Pipedrive request failed: ".$findPersonResponse->getContent()->error);
@@ -47,7 +47,7 @@ class PipedriveClient
      */
     private function createOrganizationWithFreeTrialStatus($newSignup)
     {
-        $organizationsAddResponse = $this->pipedrive->organizations()->add(["name" => $newSignup["email_address"], PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"]);
+        $organizationsAddResponse = $this->pipedrive->organizations()->add(["name" => $newSignup->email_address, PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"]);
         if (!$organizationsAddResponse->isSuccess()) {
             throw new \Exception("Pipedrive request failed: ".$organizationsAddResponse->getContent()->error);
         }
@@ -64,8 +64,10 @@ class PipedriveClient
      */
     private function createPerson($newSignup, $organizationId)
     {
+        // some signups don't have a first/last name, so we want to use email for name
+        $name = empty($newSignup->first_name) ? $newSignup->email_address :  $newSignup->first_name." ".$newSignup->last_name;
         $personsAddResponse = $this->pipedrive->persons()
-            ->add(["name" => $newSignup["first_name"]." ".$newSignup["last_name"], "org_id" => $organizationId, "email" => $newSignup["email_address"]]);
+            ->add(["name" => $name, "org_id" => $organizationId, "email" => $newSignup->email_address]);
         if (!$personsAddResponse->isSuccess()) {
             throw new \Exception("Pipedrive request failed: ".$personsAddResponse->getContent()->error);
         }
@@ -123,7 +125,7 @@ class PipedriveClient
                 // to the Organization Person.
                 $organization = $this->createOrganizationWithFreeTrialStatus($newSignup);
                 $person = $this->createPerson($newSignup, $organization->id);
-                $this->createDealInIdeaStage($newSignup["email_address"], $person->id, $organization->id);
+                $this->createDealInIdeaStage($newSignup->email_address, $person->id, $organization->id);
             } else {
                 // A Person was found. Assuming associated Organization and Deal exists as well
                 // Update the organization to "FreeTrial" status
@@ -132,6 +134,9 @@ class PipedriveClient
             return true;
         } catch (\Exception $e) {
             // There was a problem with the Pipedrive API
+            error_log("Error in PipedriveClient:");
+            error_log($e->getMessage());
+            error_log($e->getLine());
             return false;
         }
     }
