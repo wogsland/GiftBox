@@ -18,28 +18,6 @@ class PipedriveClient
     }
 
     /**
-     * Makes a dummy request to the Pipedrive API to verify
-     * that the API Key successfully authorizes requests
-     *
-     * @return boolean - api key is authorized
-     */
-    public function isAuthorized()
-    {
-        try {
-            $this->pipedrive->globalMessages->all();
-            return true;
-        } catch (PipedriveException $exception) {
-            // This may be a fragile way to verify authentication error.
-            $PIPEDRIVE_AUTH_ERROR_MESSAGE = "You need to be authorized to make this request.";
-            if ($PIPEDRIVE_AUTH_ERROR_MESSAGE === $exception->getMessage()) {
-                return false;
-            }
-
-            throw new \Exception("(Possibly) Broken Error Check. Auth Error message '".$exception->getMessage() +"'");
-        }
-    }
-
-    /**
      * Find's a Person in Pipedrive or creates them.
      *
      * @param array $newSignup - associative array of a new signup's information
