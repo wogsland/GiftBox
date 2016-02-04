@@ -206,7 +206,7 @@
         };
         $.post("/ajax/signup", userInfo, function(data, textStatus, jqXHR){
           if(data.status === "SUCCESS") {
-            window.location.href = '/thankyou?signup'
+            window.location.href = '/thankyou?action=signup'
           } else if (data.status === "ERROR") {
             console.log(data.message);
           }  else {
