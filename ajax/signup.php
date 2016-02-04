@@ -29,7 +29,6 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
     } else {
         $user->password = null;
     }
-    $user->level = 1;
     $types = ['EMAIL', 'FACEBOOK'];
     if (!in_array($reg_type, $types)) {
         $reg_type = 'EMAIL';

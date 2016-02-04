@@ -17,7 +17,6 @@ $response['message'] = "Unable to upgrade at this time.";
 // Get the credit card details submitted by the form
 $token = $_POST['stripeToken'];
 $email = $_POST['email'];
-$new_level = $_POST['newLevel'];
 $plan = $_POST['plan'];
 
 // Retrieve the S!zzle user record
@@ -44,7 +43,6 @@ if ($response['status'] == "SUCCESS") {
     $active_until->add(new DateInterval("P1M"));
 
     // Update the user properties
-    $user->level = $new_level;
     $user->stripe_id = $customer->id;
     $user->active_until = $active_until->format("Y-m-d");
 
@@ -56,9 +54,6 @@ if ($response['status'] == "SUCCESS") {
     $event->log();
 
     // Set the session variables
-    if (isset($_SESSION['level'])) {
-        $_SESSION['level'] = $new_level;
-    }
     $_SESSION['strip_id'] = $customer->id;
 }
 

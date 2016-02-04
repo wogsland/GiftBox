@@ -20,7 +20,6 @@ try {
     $user->first_name = get_post('first_name');
     $user->last_name = get_post('last_name');
     $user->email_address = get_post('email');
-    $user->level = get_post('level');
     $user->location = get_post('location');
     $user->company = get_post('company');
     $user->position = get_post('position');

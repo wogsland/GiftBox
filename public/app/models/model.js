@@ -61,15 +61,7 @@ for (i=0; i < tokens.length; i++){
   tokens[i].name += "-"+tokens[i].id;
 }
 
-if(user.level == 1){
-  user.user_level = "Free Trial";
-} else if (user.level == 2){
-  user.user_level = "Standard";
-} else if (user.level == 3){
-  user.user_level = "Premium";
-} else if (user.level == 4){
-  user.user_level = "Enterprise";
-}
+user.user_level = "Free Trial";
 //get user information
 
 var Model = {

@@ -21,7 +21,6 @@
             <input id="last_name" name="last_name" type="hidden" value="">
             <input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Email">
             <input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="Password">
-            <input type=hidden id="signup_level" name="signup_level" value="1">
             Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>
           </form>
           <div type="button" class="btn-lg btn-primary dialog-button-center" onclick="signupEmail()" style="border: 1px solid #e5e5e5; margin-top: 15px;margin-right: 20px; margin-left: 20px; text-align: center;">
