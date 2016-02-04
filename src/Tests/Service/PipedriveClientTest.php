@@ -14,7 +14,6 @@ class PipedriveClientTest
     protected $pipedriveClient;
     protected $mockedPipedriveAPI;
 
-
     /**
      * Sets up before each test
      */
@@ -44,7 +43,7 @@ class PipedriveClientTest
     /**
      * Verify that if a newly signed-up person exists in Pipedrive and there
      * is a deal associated with them already, then the associated organization
-     * is in a free trial state.
+     * is in a FreeTrial state.
      *
      * @runInSeparateProcess
      * @preserveGlobalState  disabled
@@ -74,59 +73,27 @@ class PipedriveClientTest
             }
         }";
 
-        $examplePipedrivePersonsDealsBodyResponse = "{
-            \"success\": true,
-            \"data\": [
-                {
-                    \"person_id\": {
-                        \"email\": [
-                            {
-                                \"value\": \"".$freeTrialEmailAddress."\",
-                                \"primary\": true
-                            }
-                        ]
-                    },
-                    \"org_id\": {
-                        \"value\": ".$organizationId."
-                    }
-                }
-            ]
-        }";
-
         $examplePipedriveUpdateOrganizationBodyResponse = "{
             \"success\": true,
-            \"data\": [
-                {
-                    \"id\": ".$organizationId.",
-                    \"6a06247b91272ae63df08657bd3fe5e716a7f519\": \"Free Trial\"
-                }
-            ],
-            \"additional_data\": {
-                \"pagination\": {
-                    \"start\": 0,
-                    \"limit\": 1,
-                    \"more_items_in_collection\": true,
-                    \"next_start\": 1
-                }
+            \"data\":
+            {
+                \"id\": ".$organizationId.",
+                \"".PIPEDRIVE_STATUS_COLUMN_KEY."\": \"FreeTrial\"
             }
         }";
         // The Persons API should be called to check if a Person exists in Pipedrive
-        // In this test, the Person exists
-        $this->mockedPipedriveAPI->shouldReceive('persons->findByName')->ordered()->once()
+        // In this test, the Person exists and we assume so does an Organization and Deal
+        $this->mockedPipedriveAPI
+            ->shouldReceive('persons->findByName')
+            ->ordered()->once()
             ->with($freeTrialEmailAddress, ["search_by_email" => true])
             ->andReturn(new Response(200, json_decode($examplePipedrivePersonsFindByNameBodyResponse)));
 
-        // Then, the Persons API should be called to check if a Deal is associated with the Person
-        // In this test, the Deal exists
-        $this->mockedPipedriveAPI->shouldReceive('persons->deals')->ordered()->once()
-            ->with($personId)
-            ->andReturn(new Response(200, json_decode($examplePipedrivePersonsDealsBodyResponse)));
-
         // Finally, the Organizations API should be called to update the associated Organization's
-        // status to "Free Trial"
+        // status to "FreeTrial"
         $this->mockedPipedriveAPI
             ->shouldReceive('organizations->update')->ordered()->once()
-            ->with($organizationId, array("6a06247b91272ae63df08657bd3fe5e716a7f519" => "FreeTrial"))
+            ->with($organizationId, array(PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"))
             ->andReturn(new Response(200, json_decode($examplePipedriveUpdateOrganizationBodyResponse)));
 
 
@@ -139,7 +106,7 @@ class PipedriveClientTest
     /**
      * Verify that if a newly signed-up Person doesn't exist in Pipedrive,
      * we will create a new Person, Deal and Organization, and set
-     * the Organization to a free trial state.
+     * the Organization to a FreeTrial state.
      *
      * @runInSeparateProcess
      * @preserveGlobalState  disabled
@@ -147,9 +114,11 @@ class PipedriveClientTest
     public function testCreateFreeTrialWithNoExistingDealAndNoExistingPerson()
     {
         $freeTrialEmailAddress = 'fakeemail@gosizzle.io';
+        $signUpFirstName = 'Fake';
+        $signUpLastName = 'Name';
+        $signUpPersonsName = $signUpFirstName." ".$signUpLastName;
         $personId = 1;
         $organizationId = 2;
-
         $examplePipedrivePersonsFindByNameBodyResponse = "{
             \"success\": true,
             \"data\": null,
@@ -163,64 +132,96 @@ class PipedriveClientTest
             }
         }";
 
-        $examplePipedrivePersonsDealsBodyResponse = "{
+        $examplePipedriveOrganizationsAddBodyResponse = "{
             \"success\": true,
-            \"data\": [
-                {
-                    \"person_id\": {
-                        \"email\": [
-                            {
-                                \"value\": \"".$freeTrialEmailAddress."\",
-                                \"primary\": true
-                            }
-                        ]
-                    },
-                    \"org_id\": {
-                        \"value\": ".$organizationId."
-                    }
-                }
-            ]
-        }";
-
-        $examplePipedriveUpdateOrganizationBodyResponse = "{
-            \"success\": true,
-            \"data\": [
-                {
-                    \"id\": ".$organizationId.",
-                    \"6a06247b91272ae63df08657bd3fe5e716a7f519\": \"Free Trial\"
-                }
-            ],
-            \"additional_data\": {
-                \"pagination\": {
-                    \"start\": 0,
-                    \"limit\": 1,
-                    \"more_items_in_collection\": true,
-                    \"next_start\": 1
-                }
+            \"data\": {
+                \"id\": ".$organizationId.",
+                \"name\": \"".$freeTrialEmailAddress."\",
+                \"".PIPEDRIVE_STATUS_COLUMN_KEY."\": \"FreeTrial\"
             }
         }";
+
+        $examplePipedrivePersonsAddBodyResponse = "{
+            \"success\": true,
+            \"data\": {
+                \"id\": ".$personId.",
+                \"org_id\": {
+                    \"name\": \"".$freeTrialEmailAddress."\",
+                    \"value\": \"".$organizationId."\"
+                },
+                \"name\": \"".$signUpPersonsName."\",
+                \"email\": [
+                    {
+                        \"label\": \"\",
+                        \"value\": \"".$freeTrialEmailAddress."\",
+                        \"primary\": true
+                    }
+                ],
+                \"org_name\": \"".$freeTrialEmailAddress."\"
+            }
+        }";
+
+        $examplePipedriveDealsAddBodyResponse = "{
+            \"success\": true,
+            \"data\": {
+                \"id\": 133,
+                \"person_id\": {
+                    \"name\": \"".$signUpPersonsName."\",
+                    \"email\": [
+                        {
+                            \"label\": \"\",
+                            \"value\": \"".$freeTrialEmailAddress."\",
+                            \"primary\": true
+                        }
+                    ],
+                    \"value\": \"".$personId."\"
+                },
+                \"org_id\": {
+                    \"name\": \"".$freeTrialEmailAddress."\",
+                    \"value\": \"".$organizationId."\"
+                },
+                \"stage_id\": 1,
+                \"title\": \"".$freeTrialEmailAddress."\",
+                \"person_name\": \"".$signUpPersonsName."\",
+                \"org_name\": \"".$freeTrialEmailAddress."\"
+            }
+        }";
+
         // The Persons API should be called to check if a Person exists in Pipedrive
-        // In this test, the Person exists
+        // In this test, the Person doesn't exist
         $this->mockedPipedriveAPI->shouldReceive('persons->findByName')->ordered()->once()
             ->with($freeTrialEmailAddress, ["search_by_email" => true])
             ->andReturn(new Response(200, json_decode($examplePipedrivePersonsFindByNameBodyResponse)));
-        
-        // Then, the Persons API should be called to check if a Deal is associated with the Person
-        // In this test, the Deal exists
-        $this->mockedPipedriveAPI->shouldReceive('persons->deals')->ordered()->once()
-            ->with($personId)
-            ->andReturn(new Response(200, json_decode($examplePipedrivePersonsDealsBodyResponse)));
 
-        // Finally, the Organizations API should be called to update the associated Organization's
-        // status to "Free Trial"
+        // Then, since no Person was found, we need to create a Person,
+        // Organization, and Deal. Order will be Organization->Person->Deal
+        // as each subsequent endpoint needs data from a previous call.
+        //
+        // The Organization API should be called to create an organization
+        // and set its status to FreeTrial.
+        $this->mockedPipedriveAPI->shouldReceive('organizations->add')
+            ->ordered()->once()
+            ->with(["name" => $freeTrialEmailAddress, PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"])
+            ->andReturn(new Response(200, json_decode($examplePipedriveOrganizationsAddBodyResponse)));
+
+        // Then Persons API should be called to create a Person
+        // associated with the just created Organization
         $this->mockedPipedriveAPI
-            ->shouldReceive('organizations->update')->ordered()->once()
-            ->with($organizationId, array("6a06247b91272ae63df08657bd3fe5e716a7f519" => "FreeTrial"))
-            ->andReturn(new Response(200, json_decode($examplePipedriveUpdateOrganizationBodyResponse)));
+            ->shouldReceive('persons->add')
+            ->ordered()->once()
+            ->with(["name" => $signUpPersonsName, "org_id" => $organizationId, "email" => $freeTrialEmailAddress])
+            ->andReturn(new Response(200, json_decode($examplePipedrivePersonsAddBodyResponse)));
 
+        // Finally the Deals API should be to create a new Deal in idea stage,
+        // associated with the just created Person and Organization
+        $this->mockedPipedriveAPI
+            ->shouldReceive('deals->add')
+            ->ordered()->once()
+            ->with(["title" => $freeTrialEmailAddress, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 1])
+            ->andReturn(new Response(200, json_decode($examplePipedriveDealsAddBodyResponse)));
 
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
-        $signupPayload = ["email_address" => $freeTrialEmailAddress, "first_name" => "Fake", "last_name" => "Person"];
+        $signupPayload = ["email_address" => $freeTrialEmailAddress, "first_name" => $signUpFirstName, "last_name" => $signUpLastName];
 
         $this->assertTrue($this->pipedriveClient->createFreeTrial($signupPayload));
     }

@@ -2,7 +2,6 @@
 namespace Sizzle\Service;
 
 use Devio\Pipedrive\Pipedrive;
-use Devio\Pipedrive\Exceptions\PipedriveException;
 
 /**
  * This class is for sending mail messages through Pipedrive
@@ -18,64 +17,78 @@ class PipedriveClient
     }
 
     /**
-     * Find's a Person in Pipedrive or creates them.
+     * Find a Person in Pipedrive by Email
      *
-     * @param array $newSignup - associative array of a new signup's information
-     * @return array[0,1] - 0 = Person data, 1 = true if created, false if found
-     * @throws Exception - Pipedrive errors
+     * @param mixed $newSignup - new signup's email, first and last name
+     * @return mixed/null - Person data or null, if none found
+     * @throws \Exception - Pipedrive errors
      */
-    private function findOrCreatePerson($newSignup)
+    private function findPerson($newSignup)
     {
         $findPersonResponse = $this->pipedrive->persons()->findByName($newSignup['email_address'], ["search_by_email" => true]);
-        $foundPerson = $findPersonResponse->getData()[0];
+        $foundPersonArray = $findPersonResponse->getData();
         if (!$findPersonResponse->isSuccess()) {
-            throw new \Exception("Pipedrive request failed: ".$findPersonResponse->error);
-        } else if (is_null($foundPerson)) {
-            // No Person found in Pipedrive. Create Person and return Person data
-            // TODO
-        } else {
-            // Person found in Pipedrive, return Person data
-            return array($foundPerson, false);
+            throw new \Exception("Pipedrive request failed: ".$findPersonResponse->getContent()->error);
         }
-    }
-
-    private function createOrganizationAndUpdatePerson($person)
-    {
-        // TODO
+        if (!is_null($foundPersonArray)) {
+            // Person found
+            return $foundPersonArray[0];
+        }
+        // No Person found
+        return null;
     }
 
     /**
-     * Creates or finds a Deal associated with a Person. We only want to create a Deal
-     * if the Person was created and to find a Dael if the Person was found. All other
-     * flows are undefined behavior.
+     * Creates a new Organization in the FreeTrial status
      *
-     * @param mixed $person - Person data from Pipeline
-     * @param boolean $personWasCreated - true if the $person was created in this flow, else false
-     * @return mixed - deal associated with $person
+     * @param mixed $newSignup - new signup's email, first and last name
+     * @return mixed - new Organization data
      * @throws \Exception - Pipedrive errors
      */
-    private function createOrFindDeal($person, $personWasCreated)
+    private function createOrganizationWithFreeTrialStatus($newSignup)
     {
-        $personsDealsResponse = $this->pipedrive->persons()->deals($person->id);
-        $foundDeals = $personsDealsResponse->getData();
-        $ideaStageId = 1; // This is the sale pipeline idea stage id
-        $retVal = null;
-        if (!$personsDealsResponse->isSuccess()) {
-            throw new \Exception("Pipedrive request failed: ".$personsDealsResponse->getContent()->error);
-        } else if (count($foundDeals) == 0) {
-            // No deal was found in Pipedrive. If the person was just created
-            // we should create the Deal and return Deal data. Otherwise,
-            // a person should have an existing deal and so this is undefined
-            // behavior
-            if (!$personWasCreated) {
-                throw new \Exception("Undefined behavior. An existing person should have an existing deal.");
-            }
-            // TODO
-        } else {
-            // Deal found. Assume first/only deal is associated deal
-            $retVal = $foundDeals[0];
+        $organizationsAddResponse = $this->pipedrive->organizations()->add(["name" => $newSignup["email_address"], PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"]);
+        if (!$organizationsAddResponse->isSuccess()) {
+            throw new \Exception("Pipedrive request failed: ".$organizationsAddResponse->getContent()->error);
         }
-        return $retVal;
+        return $organizationsAddResponse->getData();
+    }
+
+    /**
+     * Creates a new Person associated with an organization
+     *
+     * @param mixed $newSignup - new signup's email, first and last name
+     * @param mix $organizationId - organizationId to associate with new Person
+     * @return mixed - new Person data
+     * @throws \Exception - Pipedrive errors
+     */
+    private function createPerson($newSignup, $organizationId)
+    {
+        $personsAddResponse = $this->pipedrive->persons()
+            ->add(["name" => $newSignup["first_name"]." ".$newSignup["last_name"], "org_id" => $organizationId, "email" => $newSignup["email_address"]]);
+        if (!$personsAddResponse->isSuccess()) {
+            throw new \Exception("Pipedrive request failed: ".$personsAddResponse->getContent()->error);
+        }
+        return $personsAddResponse->getData();
+    }
+
+    /**
+     * Create a Deal in the Idea stage associated with
+     *
+     * @param $dealName - set as the new Persons email
+     * @param $personId - new Persons Pipedrive id
+     * @param $organizationId - new Organizations Pipedrive id
+     * @return mixed - new Deal data
+     * @throws \Exception - Pipedrive errors
+     */
+    private function createDealInIdeaStage($dealName, $personId, $organizationId)
+    {
+        $dealsAddResponse = $this->pipedrive->deals()
+            ->add(["title" => $dealName, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 1]);
+        if (!$dealsAddResponse->isSuccess()) {
+            throw new \Exception("Pipedrive request failed: ".$dealsAddResponse->getContent()->error);
+        }
+        return $dealsAddResponse->getData();
     }
 
     /**
@@ -84,15 +97,14 @@ class PipedriveClient
      * @param string $organizationId - the Organization's id in Pipedrive
      * @throws \Exception - Pipedrive errors
      */
-    private function setOrganizationStatusToFreeTrial($organizationId)
+    private function updateOrganzationToFreeTrial($organizationId)
     {
-        // "6a06247b91272ae63df08657bd3fe5e716a7f519" == status
-        $updateData = array("6a06247b91272ae63df08657bd3fe5e716a7f519" => "FreeTrial");
-        $response = $this->pipedrive->organizations()->update($organizationId, $updateData);
-        if (!$response->isSuccess()) {
+        $organizationsUpdateResponse = $this->pipedrive->organizations()->update($organizationId, [PIPEDRIVE_STATUS_COLUMN_KEY => "FreeTrial"]);
+        if (!$organizationsUpdateResponse->isSuccess()) {
             // Pipedrive failed
-            throw new \Exception("Pipedrive request failed: ".$response->getContent()->error);
+            throw new \Exception("Pipedrive request failed: ".$organizationsUpdateResponse->getContent()->error);
         }
+        return $organizationsUpdateResponse->getData();
     }
 
     /**
@@ -104,17 +116,19 @@ class PipedriveClient
     public function createFreeTrial($newSignup)
     {
         try {
-            list($person, $personWasCreated) = $this->findOrCreatePerson($newSignup);
-            $personHasAssociatedOrganization = array_key_exists('org_id', $person);
-            $shouldCreateOrganization = $personWasCreated || !$personHasAssociatedOrganization;
-            if ($shouldCreateOrganization) {
-                // Create Organization and link to Person
-                $organizationId = $this->createOrganizationAndUpdatePerson($person);
+            $person = $this->findPerson($newSignup);
+            if (is_null($person)) {
+                // No person found. Create an organization with status = "FreeTrial", then create a Person and
+                // associate to the Organization, then create a Deal in "Idea" stage and associate
+                // to the Organization Person.
+                $organization = $this->createOrganizationWithFreeTrialStatus($newSignup);
+                $person = $this->createPerson($newSignup, $organization->id);
+                $this->createDealInIdeaStage($newSignup["email_address"], $person->id, $organization->id);
             } else {
-                $organizationId = $person->org_id;
+                // A Person was found. Assuming associated Organization and Deal exists as well
+                // Update the organization to "FreeTrial" status
+                $this->updateOrganzationToFreeTrial($person->org_id);
             }
-            $this->createOrFindDeal($person, $personWasCreated);
-            $this->setOrganizationStatusToFreeTrial($organizationId);
             return true;
         } catch (\Exception $e) {
             // There was a problem with the Pipedrive API
