@@ -80,28 +80,48 @@
                     <!-- Top row, always visible -->
                     <div class="mdl-layout__header-row">
                       <span class="mdl-layout-title long-title">
-                        <i class="gt-info-company"></i>
-                        <i class="gt-info-jobtitle"></i>
+                        <i class="gt-info-title"></i>
                       </span>
                       <div class="mdl-layout-spacer"></div>
                     </div>
                   </header>
-                  <div class="mdl-layout__drawer" id="menuDrawer">
-                    <!--<span class="mdl-layout-title">Job Description</span>-->
-                    <nav class="mdl-navigation">
-                      <a class="mdl-layout-title mdl-navigation__link">Job Description</a>
-                      <a id="overview-drawer" class="mdl-navigation__link" href="#" on-click="_onOverviewClick">Overview</a>
-                      <a id="skills-drawer"  class="mdl-navigation__link" href="#skills-section" on-click="_onSkillsClick">Skills Required</a>
-                      <a id="responsibilities-drawer"  class="mdl-navigation__link" href="#responsibilities-section" on-click="_onResponsibilitiesClick">Responsibilities</a>
-                      <a id="values-drawer"  class="mdl-navigation__link" href="#values-section" on-click="_onValuesClick">Values</a>
-                      <a id="perks-drawer"  class="mdl-navigation__link" href="#perks-section" on-click="_onPerksClick">Perks</a>
-                      <a id="location-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onLocationClick">Location</a>
-                      <a id="images-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onImagesClick">Images</a>
-                      <a id="videos-drawer" class="mdl-layout-title mdl-navigation__link" on-click="_onVideosClick">Videos</a>
-                    </nav>
-                  </div>
+
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
+
+                      <section id="company-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onImagesClick">
+                        <div class="mdl-grid no-padding no-margin" id="company-image-grid">
+                          <div class="mdl-cell no-margin" id="company-main-image">
+                            <div id="supporting-company">
+                              <i class="material-icons">business</i>
+                              <i class="gt-info-company"></i>
+                            </div>
+                          </div>
+                          <div class="mdl-cell no-margin" id="company-secondary-images">
+                            <div class="mdl-grid no-padding" style="height:337px">
+                              <div class="no-margin">
+                                <img id="company-secondary-image-1" src="" class="company-secondary-image">
+                              </div>
+                              <div class="no-margin">
+                                <img id="company-secondary-image-2" src="" class="company-secondary-image">
+                              </div>
+                              <div class="no-margin">
+                                <img id="company-secondary-image-3" src="" class="company-secondary-image" style="-webkit-filter: brightness(25%);">
+                                <i class="material-icons plus-icon--overlay">add</i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mdl-card mdl-cell mdl-cell--12-col" id="company-description">
+                          <div class="mdl-card__supporting-text">
+                            <h4 class="mdl-color-text--primary-dark">Company Information</h4>
+                            <p id="company-description-text">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet laoreet orci. Ut id massa ut diam ultrices convallis at nec elit. Suspendisse efficitur pellentesque sapien vel gravida. Praesent vitae vehicula lorem. Phasellus bibendum nunc tristique suscipit feugiat. Vestibulum in placerat urna. Curabitur malesuada ex vitae convallis vulputate.
+                              Nulla facilisi. Phasellus a nisl sit amet nisi ullamcorper mattis non a dui. Fusce sit amet pellentesque urna. Nunc non orci dolor. Duis maximus felis in nisi finibus, ut tristique diam sodales. In sed egestas nisl, et vestibulum urna. Fusce mollis sed est sit amet viverra. Suspendisse sed velit non arcu lobortis iaculis et et arcu.
+                            </p>
+                          </div>
+                        </div>
+                      </section>
 
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
                         <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
@@ -133,6 +153,7 @@
                           </div>
                         </div>
                       </section>
+
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
                         <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
                           <i class="fa fa-twitter big-icon"></i>

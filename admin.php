@@ -34,12 +34,6 @@ require __DIR__.'/header.php';
         <li>
           <a href="/admin/add_city">Add Recruiting Token City</a>
         </li>
-        <?php /*<li>
-          <a href="manage_users.php">Manage Users</a>
-        </li>
-        <li>
-          <a href="manage_groups.php">Manage Groups</a>
-        </li>*/?>
       </ul>
     </nav>
   </div>

@@ -51,7 +51,7 @@
             <?php }?>
         <?php } else { ?>
             <li><a href="javascript:void(0)" onclick="loginOpen()" class="sizzle-nav-choice">Login</a></li>
-            <li><a href="javascript:void(0)" onclick="signupOpen(1)" class="sizzle-nav-choice">Sign Up</a></li>
+            <li><a href="javascript:void(0)" onclick="signupOpen()" class="sizzle-nav-choice">Sign Up</a></li>
         <?php }?>
       </ul>
     </div>

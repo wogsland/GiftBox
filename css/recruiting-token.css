@@ -297,6 +297,13 @@ i.huge-icon {
 i.big-icon {
   font-size:50px;
 }
+i.plus-icon--overlay {
+  font-size:100px;
+  position: absolute;
+  top: 230px;
+  left: 700px;
+  color:white;
+}
 .job-description-option {
   background-color: white;
   padding: 0;
@@ -319,7 +326,7 @@ i.big-icon {
   margin-right: 0px;
   margin-bottom: 48px;
 }
-#supporting-images, #supporting-videos, #supporting-location {
+#supporting-images, #supporting-videos, #supporting-location, #supporting-company {
   margin-top: 267px;
   height: 50px;
   padding-top: 20px;
@@ -332,7 +339,6 @@ i.big-icon {
 }
 #videos-frontpage {
   text-align:center;
-  /*background: url('https://i.ytimg.com/vi/AY-Sxu8Itsw/hqdefault.jpg') center / cover;*/
   margin-right: 0px;
   margin-left: 0px;
   margin-bottom: 48px;
@@ -357,9 +363,27 @@ i.big-icon {
 .mdl-layout-spacer {
 
 }
-.gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg, .gt-info-company, .gt-info-jobtitle {
+.gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg, .gt-info-company, .gt-info-jobtitle, .gt-info-title {
   font-style:normal;
 }
 #read-more {
   text-decoration: none;
+}
+.no-padding {
+  padding: 0;
+}
+.no-margin {
+  margin: 0;
+}
+#company-main-image {
+  height: 337px;
+  width: 75%;
+}
+#company-secondary-images {
+  height: 337px;
+  width: 25%;
+}
+.company-secondary-image {
+  width: 100%;
+  height:112.24px;
 }

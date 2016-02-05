@@ -12,7 +12,6 @@ class User
     public $password = null;
     public $activation_key = null;
     public $admin = "N";
-    public $level = 1;
     public $stripe_id;
     public $active_until;
     public $facebook_email;
@@ -25,6 +24,7 @@ class User
     public $user_group;
     public $group_admin;
     public $reset_code;
+    public $internal;
 
     public static function exists($email_address)
     {
@@ -95,30 +95,22 @@ class User
         }
     }
 
-    public function get_social($social_id)
-    {
-        $val = null;
-        if ($val !== null && $social_id !== null) {
-            $val = Social($social_id);
-        }
-        return $val;
-    }
-
     public function save()
     {
         if (!$this->id) {
-            $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, level, access_token "
-            .", location, position, company, about, username, user_group, group_admin) VALUES ("
+            $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, access_token "
+            .", location, position, company, about, username, user_group, group_admin, internal) VALUES ("
             ."'".escape_string($this->email_address)."'"
             .", '".escape_string($this->first_name)."'"
             .", '".escape_string($this->last_name)."'"
             .", ".($this->password ? "'".$this->password."'" : "null")
             .", ".($this->activation_key ? "'".$this->activation_key."'" : "null")
             .", '$this->admin'"
-            .", $this->level, '$this->access_token', '$this->location', '$this->position'"
+            .", '$this->access_token', '$this->location', '$this->position'"
             .", '$this->company', '$this->about', '$this->username'"
             .", ".($this->user_group ? $this->user_group : "null")
-            .", '$this->group_admin')";
+            .", '$this->group_admin'"
+            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."')";
             $this->id = insert($sql);
         } else {
             $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
@@ -127,7 +119,6 @@ class User
             . "password = ".($this->password ? "'".$this->password."'" : "null").", "
             . "activation_key = ".($this->activation_key ? "'".$this->activation_key."'" : "null").", "
             . "admin = '$this->admin', "
-            . "level = ".$this->level.", "
             . "stripe_id = ".($this->stripe_id ? "'".$this->stripe_id."'" : "null").", "
             . "active_until =  ".($this->active_until ? "'".$this->active_until."'" : "null").", "
             . "access_token = '$this->access_token', "

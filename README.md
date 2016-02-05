@@ -139,6 +139,10 @@ To also investigate the code coverage of the tests, you'll need the
 Make sure you put any unit tests in the `src/tests` directory and name them like
 MyAwesomeTest.php.
 
+For JavaScript testing,
+
+    npm install -g mocha
+
 ## <a id="deployment"></a>Deployment
 
 #### `develop` -> staging site
@@ -165,7 +169,8 @@ Cygwin or your favorite Windows version of Linux.
 
 ### <a id="deploy-staging"></a>Deploy to Staging
 
-TODO: create webhook for push to `develop` to call and pull it on the server.
+Any push to `develop` is automagically pulled onto the staging server except
+during the QA period for new releases.
 
 ### <a id="deploy-production"></a>Deploy to Production
 

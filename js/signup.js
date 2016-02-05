@@ -1,6 +1,5 @@
-function signupOpen(level) {
+function signupOpen() {
   signupClear();
-  $("#signup_level").val(level);
   $("#signup-dialog").modal();
 }
 
@@ -33,18 +32,14 @@ function signupSuccess(app_root, signupType, userInfo) {
   }
   $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with S!zzle!</span></div>');
 
-  if ($("#signup_level").val() == 2) {
-    payWithStripe(email, "SIGNUP");
+  if (userInfo.reg_type == "FACEBOOK") {
+    signupInfo("Logging into S!zzle...");
+    userInfo.login_email = userInfo.signup_email;
+    userInfo.login_type = userInfo.reg_type;
+    processLogin(userInfo);
   } else {
-    if (userInfo.reg_type == "FACEBOOK") {
-      signupInfo("Logging into S!zzle...");
-      userInfo.login_email = userInfo.signup_email;
-      userInfo.login_type = userInfo.reg_type;
-      processLogin(userInfo);
-    } else {
-      signupClose();
-      openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
-    }
+    signupClose();
+    openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
   }
 }
 
@@ -74,7 +69,6 @@ function handleFBReg(response) {
     FB.api('/me?fields=email,last_name,first_name', function(api_response) {
       api_response.reg_type = "FACEBOOK";
       api_response.signup_email = api_response.email;
-      api_response.signup_level = "1";
       processSignup(api_response, "FACEBOOK");
     });
   } else if (response.status === 'not_authorized') {

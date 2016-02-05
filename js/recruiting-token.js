@@ -163,6 +163,7 @@ scope._onVideosClick = function(event) {
 };
 
 scope._onYesClick = function(event) {
+  $('.gt-info-video').remove();
   $('#placeholder').css('background-color', 'green');
   this.$.list.sharedElements = {
     'ripple': event.target,
@@ -185,6 +186,7 @@ scope._onYesClick = function(event) {
 };
 
 scope._onMaybeClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -206,6 +208,7 @@ scope._onMaybeClick = function(event) {
 };
 
 scope._onNoClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.list.sharedElements = {
     'ripple': event.target,
     'reverse-ripple': event.target
@@ -227,6 +230,7 @@ scope._onNoClick = function(event) {
 };
 
 scope._onBackClick = function(event) {
+  $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
 
@@ -240,12 +244,13 @@ $(document).ready(function(){
       }
       var tokenTitle;
       if (dataExists(data.data.company)) {
-        $('.gt-info-company').text(data.data.company+' -');
+        $('.gt-info-company').text(data.data.company);
         tokenTitle = data.data.company+' - '+data.data.job_title;
       } else {
         tokenTitle = data.data.job_title;
       }
       $('title').text(tokenTitle);
+      $('.gt-info-title').text(tokenTitle);
       $('.gt-info-jobtitle').text(data.data.job_title);
       $('.gt-info-overview').html(data.data.job_description);
       var overview = '' + data.data.job_description;
@@ -266,7 +271,6 @@ $(document).ready(function(){
       }
       $('.gt-info-overview-short').html(shortDescription);
       if (!dataExists(data.data.job_description)) {
-        $('#overview-drawer').hide();
         $('#overview-section-2').hide();
       }
       var descriptionCount = 0;
@@ -274,7 +278,6 @@ $(document).ready(function(){
         $('.gt-info-skills').html(data.data.skills_required);
         descriptionCount++;
       } else {
-        $('#skills-drawer').hide();
         $('#skills-button').hide();
         $('#skills-section').hide();
         $('#skills-section-2').hide();
@@ -284,7 +287,6 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#responsibilities-button').hide();
-        $('#responsibilities-drawer').hide();
         $('#responsibilities-section').hide();
         $('#responsibilities-section-2').hide();
       }
@@ -293,7 +295,6 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#values-button').hide();
-        $('#values-drawer').hide();
         $('#values-section').hide();
         $('#values-section-2').hide();
       }
@@ -302,9 +303,14 @@ $(document).ready(function(){
         descriptionCount++;
       } else {
         $('#perks-button').hide();
-        $('#perks-drawer').hide();
         $('#perks-section').hide();
         $('#perks-section-2').hide();
+      }
+
+      if (dataExists(data.data.description)) {
+        $('#company-description-text').html(data.data.description);
+      } else {
+        $('#company-description').hide();
       }
 
       if (descriptionCount < 4) {
@@ -356,7 +362,6 @@ $(document).ready(function(){
         });
       } else {
         $('#location-frontpage').remove();
-        $('#location-drawer').remove();
       }
       var socialCount = 0;
       if (dataExists(data.data.company_twitter)) {
@@ -428,12 +433,28 @@ $(document).ready(function(){
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
         assetHost = getAssetHost();
-        $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        if (data.data.length > 3) {
+          $('#images-frontpage').hide();
+          $('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+          if ( $(window).width() < 739) {
+            $('#company-secondary-images').remove();
+            $('#company-main-image').css('width','100%');
+          } else {
+            $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
+            $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
+            $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
+          }
+          $('#videos-frontpage').removeClass('mdl-cell--6-col');
+          $('#videos-frontpage').addClass('mdl-cell--12-col');
+        } else {
+          $('#company-section').hide();
+          $('#images-frontpage').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        }
       } else {
+        $('#company-section').hide();
         $('#images-frontpage').hide();
         $('#videos-frontpage').removeClass('mdl-cell--6-col');
         $('#videos-frontpage').addClass('mdl-cell--12-col');
-        $('#images-drawer').hide();
       }
     });
     url = '/ajax/recruiting_token/get_videos' + path[4];
@@ -456,7 +477,6 @@ $(document).ready(function(){
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
         $('#images-frontpage').addClass('mdl-cell--12-col');
-        $('#videos-drawer').hide();
       }
     });
   } else {

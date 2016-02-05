@@ -34,7 +34,7 @@ class Route
     public function go()
     {
         if (!isset($this->endpointPieces[1])) {
-            include __DIR__.'/../index.php';
+            include __DIR__.'/../lp/sizzle1.php';
         } else {
             switch ($this->endpointPieces[1]) {
             case '':
@@ -130,6 +130,15 @@ class Route
             case 'recruiting_made_easy':
                 include __DIR__.'/../lp/bc1.php';
                 break;
+            case 'robots.txt':
+                if (ENVIRONMENT != 'production') {
+                    echo "User-agent: *\n";
+                    echo "Disallow: /\n";
+                }
+                break;
+            case 'teapot':
+                include __DIR__.'/../teapot.php';
+                break;
             case 'terms':
                 include __DIR__.'/../termsservice.php';
                 break;
@@ -169,13 +178,16 @@ class Route
             case 'user':
                 include __DIR__.'/../admin/user_info.php';
                 break;
-            case 'teapot':
-                include __DIR__.'/../teapot.php';
-                break;
             case 'test':
                 // this endpoint is just for non-production testing
                 if (ENVIRONMENT != 'production') {
                     include __DIR__.'/../lp/sizzle1.php';
+                    break;
+                }
+            case 'zdrip':
+                // this endpoint is just for non-production testing
+                if (ENVIRONMENT != 'production') {
+                    include __DIR__.'/../deploy_develop.php';
                     break;
                 }
             default:

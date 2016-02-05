@@ -6,4 +6,6 @@ define('MYSQL_PASSWORD', 'giftbox');
 define('MYSQL_HOST', '127.0.0.1');
 define('ENVIRONMENT', 'local');
 define('SLACK_TOKEN', 'xoxb-17521146128-nHU6t4aSx7NE0PYLxKRYqmjG');
+define('PIPEDRIVE_API_TOKEN', '123abc456efg789hij0k');
+define('PIPEDRIVE_STATUS_COLUMN_KEY', '6a06247b91272ae63df08657bd3fe5e716a7f519');
 ?>

@@ -2,7 +2,8 @@
 use \Sizzle\{
     EventLogger,
     User,
-    UserMilestone
+    UserMilestone,
+    Service\PipedriveClient
 };
 
 date_default_timezone_set('America/Chicago');
@@ -29,7 +30,6 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
     } else {
         $user->password = null;
     }
-    $user->level = 1;
     $types = ['EMAIL', 'FACEBOOK'];
     if (!in_array($reg_type, $types)) {
         $reg_type = 'EMAIL';
@@ -70,6 +70,10 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
         $response['status'] = "SUCCESS";
         $response['message'] = "{$user->email_address} successsfully registered.";
         $UserMilestone = new UserMilestone($user->getId(), 'Signup');
+
+        // Create Free trial in Pipedrive
+        $pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
+        $pipedriveClient->createFreeTrial($user);
     }
 }
 header('Content-Type: application/json');

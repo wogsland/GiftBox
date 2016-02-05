@@ -55,7 +55,6 @@ if (User::exists($email)) {
             $_SESSION['login_type'] = $login_type;
             $_SESSION['app_root'] = '/';
             $_SESSION['app_url'] = APP_URL;
-            $_SESSION['level'] = $user->level;
             $_SESSION['email'] = $email;
             $_SESSION['stripe_id'] = $user->stripe_id;
             $event = new EventLogger($user->getId(), $event_type);
