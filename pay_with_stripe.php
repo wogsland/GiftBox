@@ -36,6 +36,7 @@ function processUpgrade(token, payFrom) {
 	}).always(function() {
 		$(eventTarget).addClass("disable-clicks");
 	});
+}
 
 function payWithStripe(email, payFrom) {
 

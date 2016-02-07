@@ -42,7 +42,6 @@ require __DIR__.'/header.php';
     $('#send-password-button').on('click', function () {
       url = '/ajax/reset_password/';
       var eventTarget = event.target;
-      console.log(eventTarget);
       $(eventTarget).addClass("disable-clicks");
       $.post(
         url,
