@@ -167,6 +167,7 @@ include __DIR__.'/../header.php';
                   </label>
                 </div>
                 */?>
+                <div id="signup-alert-placeholder"></div>
                 <div id="continue-btn" class="btn">Continue</div>
               </form>
               30 Day Free Trial
@@ -342,23 +343,11 @@ include __DIR__.'/../header.php';
       $('#continue-btn').on('click', function(e) {
         //alert('click!');
         //$('#sizzle-signup-form').submit();
-        $.post(
-          "/ajax/signup",
-          {
+        var payload = {
             signup_email: $('#sizzle1_signup_email').val(),
             signup_password: $('#sizzle1_signup_password').val()
-          },
-          function(data, textStatus, jqXHR){
-            if(data.status === "SUCCESS") {
-              window.location.href = '/thankyou?action=signup'
-            } else if (data.status === "ERROR") {
-              console.log(data.message);
-            }  else {
-              console.log("Unknown return status: "+data.status);
-            }
-        }).fail(function() {
-          console.log("Sign up failed.");
-        });
+          };
+        processSignup(payload, "EMAIL");
       });
 
       // process contact form
