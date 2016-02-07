@@ -154,6 +154,7 @@ include __DIR__.'/../header.php';
             First Impressions Matter<br />
             <div id="signup-form-container">
               <form id="sizzle-signup-form" action="/ajax/signup" method="post">
+                <div id="signup-alert-placeholder"></div>
                 <div class="form-group" id="email-form-group">
                   <input type="email" class="form-control" id="sizzle1_signup_email" name="sizzle1_signup_email" placeholder="Email" autocomplete="off" required>
                 </div>
@@ -167,7 +168,6 @@ include __DIR__.'/../header.php';
                   </label>
                 </div>
                 */?>
-                <div id="signup-alert-placeholder"></div>
                 <div id="continue-btn" class="btn">Continue</div>
               </form>
               30 Day Free Trial
