@@ -14,6 +14,8 @@ function processUpgrade(token, payFrom) {
 		email: token.email,
 	};
 
+	var eventTarget = event.target;
+	$(eventTarget).addClass("disable-clicks");
 	$.post("/ajax/upgrade", upgradeData, function(data, textStatus, jqXHR){
 		if(data.status === "SUCCESS") {
 			if (payFrom === "SIGNUP") {
@@ -31,8 +33,9 @@ function processUpgrade(token, payFrom) {
 		}
 	}).fail(function() {
 		upgradeError("Upgrade failed!");
+	}).always(function() {
+		$(eventTarget).addClass("disable-clicks");
 	});
-}
 
 function payWithStripe(email, payFrom) {
 

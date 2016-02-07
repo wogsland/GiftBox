@@ -28,11 +28,12 @@ function openVimeo(vimeoUrl){
   var videoId = vimeoId(vimeoUrl);
   var fileFound = false;
   if (videoId) {
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      async: false,
       url: '/ajax/url-valid',
       data: {
         url: dataURL
@@ -50,6 +51,9 @@ function openVimeo(vimeoUrl){
       error: function() {
         $('label').css('color', 'red');
         $('#video-dialog-url').attr('label', 'Please choose a valid Vimeo URL.');
+      },
+      complete: function() {
+        $(eventTarget).removeClass("disable-clicks");
       }
     });
   } else {
@@ -68,12 +72,13 @@ function openVimeo(vimeoUrl){
 function openYouTube(url) {
   var videoId = youTubeID(url);
   if (videoId) {
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     var imageUrl = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
     var fileFound = false;
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      async: false,
       url: '/ajax/url-valid',
       data: {
         url: imageUrl
@@ -87,6 +92,9 @@ function openYouTube(url) {
           $('label').css('color', 'red');
           $('#video-dialog-url').attr('label', 'Please choose a valid Youtube URL.');
         }
+      },
+      complete: function() {
+        $(eventTarget).removeClass("disable-clicks");
       }
     });
     return fileFound;
@@ -109,6 +117,8 @@ function processVideoURL() {
     valid = openYouTube(url);
   } else if (isVimeoVid){
     valid = openVimeo(url);
+  } else {
+    reenableButtonThunk();
   }
   if (valid) {
     $('#video-dialog')[0].close();
@@ -355,6 +365,8 @@ function saveRecruitingToken(preview) {
     linkifyText();
     setStatus("Saving token...");
     serializedForm = document.getElementById("recruiting-token-form").serialize();
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     $.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
       if(data.status === "SUCCESS") {
         $("#id").val(data.id);
@@ -413,6 +425,8 @@ function saveRecruitingToken(preview) {
       $("#save-button").html("Save");
     },'json').fail(function() {
       alert("Save failed");
+    }).always(function() {
+      $(eventTarget).removeClass("disable-clicks");
     });
   }
 }
@@ -427,6 +441,8 @@ function saveCompany() {
     linkifyCompanyText();
     setStatus("Saving company...");
     serializedForm = document.getElementById("recruiting-company-form").serialize();
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     $.post("/ajax/recruiting_company/save/", serializedForm, function(data, textStatus){
       if(data.status === "SUCCESS") {
         $("#id").val(data.id);
@@ -474,6 +490,8 @@ function saveCompany() {
       $("#save-button").html("Save");
     },'json').fail(function() {
       alert("Save failed");
+    }).always(function() {
+      $(eventTarget).removeClass("disable-clicks");
     });
   }
 }

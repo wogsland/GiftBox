@@ -21,6 +21,8 @@ function sendMessage(event) {
 		contactForm.find( ".error" ).show();
 		return;
 	}
+	var eventTarget = event.target;
+	$(eventTarget).addClass("disable-clicks");
 
 	// Submit the form via Ajax
 	$.post("/ajax/sendemail", contactForm.serialize(),
@@ -38,6 +40,8 @@ function sendMessage(event) {
 	).fail(function() {
 		// TODO
 		alert( "error3" );
+	}).always(function() {
+		$(eventTarget).removeClass("disable-clicks");
 	});
 
 }

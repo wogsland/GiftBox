@@ -960,6 +960,9 @@ footer .form-control {
    SECTION:  FORM CONTROLS
 -----------------------------------------*/
 
+.disable-clicks {
+    pointer-events: none;
+}
 
 
 /*---------------------------------------

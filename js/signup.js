@@ -82,6 +82,8 @@ function handleFBReg(response) {
 
 function processSignup(userInfo, signupType) {
   signupInfo("Processing your registration.  Please wait...");
+  var eventTarget = event.target;
+  $(eventTarget).addClass("disable-clicks");
   $.post("/ajax/signup", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
       signupSuccess(data.app_root, signupType, userInfo);
@@ -92,6 +94,8 @@ function processSignup(userInfo, signupType) {
     }
   }).fail(function() {
     signupError("Sign up failed.");
+  }).always(function() {
+    $(eventTarget).removeClass("disable-clicks");
   });
 }
 
