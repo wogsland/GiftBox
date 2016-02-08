@@ -117,8 +117,6 @@ function processVideoURL() {
     valid = openYouTube(url);
   } else if (isVimeoVid){
     valid = openVimeo(url);
-  } else {
-    reenableButtonThunk();
   }
   if (valid) {
     $('#video-dialog')[0].close();
