@@ -11,8 +11,7 @@ if (isset($_POST['email'], $_POST['message'])
     $subject = '' == $subject ? 'Message from '.$from : $subject;
     $message .= "\r\n\r\n - $from";
     if (ENVIRONMENT != 'production') {
-//        $to = 'support+dev@gosizzle.io';
-        $to = 'robert.n.cohen@vanderbilt.edu';
+        $to = 'support+dev@gosizzle.io';
     } else {
         $to = 'support@gosizzle.io';
     }
