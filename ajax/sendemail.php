@@ -1,4 +1,5 @@
 <?php
+use \Sizzle\EventLogger;
 $status = 'ERROR';
 if (isset($_POST['email'], $_POST['message'])
 && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
@@ -10,19 +11,23 @@ if (isset($_POST['email'], $_POST['message'])
     $subject = '' == $subject ? 'Message from '.$from : $subject;
     $message .= "\r\n\r\n - $from";
     if (ENVIRONMENT != 'production') {
-        $to = 'bwogsland@gosizzle.io';
+//        $to = 'support+dev@gosizzle.io';
+        $to = 'robert.n.cohen@vanderbilt.edu';
     } else {
-        $to = 'contact@gosizzle.io';
+        $to = 'support@gosizzle.io';
     }
     $mandrill = new Mandrill(MANDRILL_API_KEY);
     $mandrill->messages->send(array(
       'to'=>array(array('email'=>$to)),
-      'from_email'=>'contact@gosizzle.io',
+      'from_email'=>'support@gosizzle.io',
       'from_name'=>'S!zzle',
       'subject'=>$subject,
-      'html'=>$message
+      'html'=>$message,
+      'headers'=>array('Reply-To'=>$email)
     ));
     $status = 'SUCCESS';
+    $event = new EventLogger(null, EventLogger::SUPPORT_EMAIL_SENT, $subject);
+    $event->log();
 }
 header('Content-Type: application/json');
 echo json_encode(array('status' => $status));
