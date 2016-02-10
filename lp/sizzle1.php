@@ -154,6 +154,7 @@ include __DIR__.'/../header.php';
             First Impressions Matter<br />
             <div id="signup-form-container">
               <form id="sizzle-signup-form" action="/ajax/signup" method="post">
+                <div id="signup-alert-placeholder-lp"></div>
                 <div class="form-group" id="email-form-group">
                   <input type="email" class="form-control" id="sizzle1_signup_email" name="sizzle1_signup_email" placeholder="Email" autocomplete="off" required>
                 </div>
@@ -342,22 +343,25 @@ include __DIR__.'/../header.php';
       $('#continue-btn').on('click', function(e) {
         //alert('click!');
         //$('#sizzle-signup-form').submit();
+        function lpSignupError(message) {
+          $('#signup-alert-placeholder-lp').html('<div class="text-danger"><h6>'+message+'</h6></div>');
+        }
         $.post(
           "/ajax/signup",
-          {
-            signup_email: $('#sizzle1_signup_email').val(),
-            signup_password: $('#sizzle1_signup_password').val()
-          },
-          function(data, textStatus, jqXHR){
-            if(data.status === "SUCCESS") {
+        {
+          signup_email: $('#sizzle1_signup_email').val(),
+          signup_password: $('#sizzle1_signup_password').val()
+        },
+        function(data, textStatus, jqXHR){
+          if(data.status === "SUCCESS") {
               window.location.href = '/thankyou?action=signup'
-            } else if (data.status === "ERROR") {
-              console.log(data.message);
-            }  else {
-              console.log("Unknown return status: "+data.status);
-            }
+          } else if (data.status === "ERROR") {
+            lpSignupError(data.message);
+          }  else {
+            lpSignupError("Unknown return status: "+data.status);
+          }
         }).fail(function() {
-          console.log("Sign up failed.");
+          lpSignupError("Sign up failed.");
         });
       });
 
@@ -366,14 +370,14 @@ include __DIR__.'/../header.php';
         e.preventDefault();
         $.post("/ajax/sendemail", $('#sizzle-contact-form').serialize(),
           function(data, textStatus, jqXHR){
-            if(data.status === "SUCCESS") {
-              $( ".error" ).hide();
-              $( ".success" ).show();
-            } else {
-              $( ".success" ).hide();
-              $( ".error" ).show();
+              if(data.status === "SUCCESS") {
+                $( ".error" ).hide();
+                $( ".success" ).show();
+              } else {
+                $( ".success" ).hide();
+                $( ".error" ).show();
+              }
             }
-          }
         ).fail(function() {
           $( ".error" ).show();
         });

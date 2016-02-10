@@ -39,7 +39,7 @@ function signupSuccess(app_root, signupType, userInfo) {
     processLogin(userInfo);
   } else {
     signupClose();
-    openMessage("Welcome!", "You have successfully signed up with S!zzle.  An activation email has been sent to "+email+".  Please activate your account before logging in.");
+    window.location = '/thankyou?action=signup&email='+email;
   }
 }
 

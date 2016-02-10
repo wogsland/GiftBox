@@ -27,6 +27,7 @@ if (isset($_SESSION['user_id'])) {
         try {
             $RecruitingCompany->user_id = $user_id;
             $RecruitingCompany->name = escape_string($_POST['company'] ?? '');
+            $RecruitingCompany->description = escape_string($_POST['company_description'] ?? '');
             $RecruitingCompany->website = escape_string($_POST['company_website'] ?? '');
             $RecruitingCompany->values = HTML::to($_POST['company_values'] ?? '');
             $RecruitingCompany->values = escape_string($RecruitingCompany->values);

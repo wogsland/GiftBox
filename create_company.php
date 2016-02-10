@@ -163,6 +163,7 @@ require __DIR__.'/header.php';
                         <div class="field-container">
                             <?php paper_text('Company Name', 'company', $token_company->name); ?>
                             <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
+                            <?php paper_textarea('Company Description', 'company-description', HTML::from($token_company->description)); ?>
                             <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values)); ?>
                         </div>
                     </paper-card>
