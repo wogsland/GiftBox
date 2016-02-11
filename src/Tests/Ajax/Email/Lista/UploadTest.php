@@ -77,7 +77,7 @@ extends \PHPUnit_Framework_TestCase
         $fileName = $this->createUploadFile();
         $path = realpath($fileName);
         $fields = array(
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $fileName",
@@ -120,7 +120,7 @@ extends \PHPUnit_Framework_TestCase
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $path",
@@ -134,7 +134,7 @@ extends \PHPUnit_Framework_TestCase
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $path",
@@ -171,7 +171,7 @@ extends \PHPUnit_Framework_TestCase
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $path",
@@ -209,7 +209,7 @@ extends \PHPUnit_Framework_TestCase
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $path",
@@ -246,7 +246,7 @@ extends \PHPUnit_Framework_TestCase
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
-            'file_contents'=>$path,
+            'fileName'=>$path,
         );
         $headers = array(
             "X-FILENAME: $path",
