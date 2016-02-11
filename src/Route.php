@@ -172,6 +172,9 @@ class Route
             case 'token_responses':
                 include __DIR__.'/../token_responses.php';
                 break;
+            case 'track':
+                include __DIR__.'/../track.php';
+                break;
             case 'upgrade':
                 include __DIR__.'/../upgrade.php';
                 break;
