@@ -60,7 +60,7 @@ if (logged_in()) {
             'errors'=>array(),
             'message'=>'There were errors processing your request.'
         );
-        if (!$fileName) {
+        if (!$localPath) {
             $data['errors'][] = 'File is required.';
         }
         if (!$listName) {

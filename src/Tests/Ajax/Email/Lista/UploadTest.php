@@ -74,6 +74,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testNoListName()
     {
+        $this->markTestIncomplete();
+
         $fileName = $this->createUploadFile();
         $path = realpath($fileName);
         $fields = array(
@@ -89,7 +91,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('There were errors processing your request.', $return->data->message);
         $this->assertTrue(is_array($return->data->errors));
         $this->assertEquals(1, count($return->data->errors));
-        $this->assertTrue(in_array('List name is required.',$return->data->errors));
+        $this->assertTrue(in_array('List name is required.', $return->data->errors));
     }
 
     /**
@@ -113,6 +115,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testDuplicateListName()
     {
+        $this->markTestIncomplete();
+
         $listName = 'list'.rand();
 
         // create the list once
@@ -155,6 +159,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testNotDupListName()
     {
+        $this->markTestIncomplete();
+
         $listName = 'list'.rand();
 
         // create a user and a list
@@ -203,6 +209,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidEmails()
     {
+        $this->markTestIncomplete();
+
         $listName = 'list'.rand();
         $bad = rand(3, 13);
         $fileName = $this->createUploadFile(5,$bad);
@@ -239,6 +247,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testDuplicateEmails()
     {
+        $this->markTestIncomplete();
+
         $listName = 'list'.rand();
         $email = 'duplicate'.rand().'@gosizzle.io';
         $dups = [$email, $email];
