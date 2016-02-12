@@ -1,5 +1,5 @@
 <?php
-if (!logged_in() && !is_admin()) {
+if (!logged_in() || !is_admin()) {
     header('Location: '.APP_URL);
 }
 

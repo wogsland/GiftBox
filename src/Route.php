@@ -142,6 +142,9 @@ class Route
             case 'teapot':
                 include __DIR__.'/../teapot.php';
                 break;
+            case 'send_recruiting':
+                include __DIR__.'/../send_recruiting.php';
+                break;
             case 'terms':
                 include __DIR__.'/../termsservice.php';
                 break;
