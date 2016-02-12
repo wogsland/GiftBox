@@ -117,7 +117,7 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the getUserCompanies function.
+     * Tests the getUser function.
      */
     public function testGetUser()
     {
