@@ -25,6 +25,7 @@ class User
     public $group_admin;
     public $reset_code;
     public $internal;
+    public $receive_token_notifications;
 
     public static function exists($email_address)
     {
@@ -129,7 +130,8 @@ class User
             . "username = '$this->username', "
             . "user_group = ".($this->user_group ? $this->user_group : "null").", "
             . "group_admin = '$this->group_admin', "
-            . "reset_code = '$this->reset_code' "
+            . "reset_code = '$this->reset_code', "
+            . "receive_token_notification = '$this->receive_token_notifications' "
             . "WHERE id = '$this->id'";
             execute($sql);
         }

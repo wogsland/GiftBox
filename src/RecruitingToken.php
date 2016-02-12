@@ -54,6 +54,19 @@ class RecruitingToken
         return $user_tokens;
     }
 
+    public function getUser()
+    {
+        $user = null;
+        $result = execute_query(
+          "SELECT * FROM user WHERE id='$this->user_id'"
+        );
+
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_object("Sizzle\User");
+        }
+        return $user;
+    }
+
     /**
      * Gets information about recruiting companies owned by the user specified
      *
