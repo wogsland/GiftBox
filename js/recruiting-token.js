@@ -307,8 +307,8 @@ $(document).ready(function(){
         $('#perks-section-2').hide();
       }
 
-      if (dataExists(data.data.description)) {
-        $('#company-description-text').html(data.data.description);
+      if (dataExists(data.data.company_description)) {
+        $('#company-description-text').html(data.data.company_description);
       } else {
         $('#company-description').hide();
       }

@@ -23,6 +23,7 @@ if ($id != '') {
             if (isset($company->id)) {
                 $data = get_object_vars($token);
                 $data['company'] = $company->name;
+                $data['company_description'] = $company->description;
                 $data['company_website'] = $company->website;
                 $data['company_values'] = $company->values;
                 $data['company_facebook'] = $company->facebook;

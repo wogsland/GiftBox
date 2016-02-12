@@ -86,7 +86,7 @@ class PipedriveClient
     private function createDealInIdeaStage($dealName, $personId, $organizationId)
     {
         $dealsAddResponse = $this->pipedrive->deals()
-            ->add(["title" => $dealName, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 1]);
+            ->add(["title" => $dealName, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 18]);
         if (!$dealsAddResponse->isSuccess()) {
             throw new \Exception("Pipedrive request failed: ".$dealsAddResponse->getContent()->error);
         }

@@ -7,7 +7,7 @@ use \Sizzle\User;
 /**
  * This class tests the Pipedrive class
  *
- * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/Tests/Service/PipedriveTest
+ * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/Tests/Service/PipedriveClientTest
  */
 class PipedriveClientTest
     extends \PHPUnit_Framework_TestCase
@@ -228,7 +228,7 @@ class PipedriveClientTest
         $this->mockedPipedriveAPI
             ->shouldReceive('deals->add')
             ->ordered()->once()
-            ->with(["title" => $freeTrialEmailAddress, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 1])
+            ->with(["title" => $freeTrialEmailAddress, "person_id" => $personId, "org_id" => $organizationId, "stage_id" => 18])
             ->andReturn(new Response(200, json_decode($examplePipedriveDealsAddBodyResponse)));
 
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
