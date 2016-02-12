@@ -54,6 +54,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/profile', false, 302));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy'));
         $this->assertTrue($this->checkStatusCode('/robots.txt'));
+        $this->assertTrue($this->checkStatusCode('/support'));
         $this->assertTrue($this->checkStatusCode('/teapot', false, 418));
         $this->assertTrue($this->checkStatusCode('/terms'));
         $this->assertTrue($this->checkStatusCode('/thankyou'));
