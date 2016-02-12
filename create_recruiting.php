@@ -349,7 +349,7 @@ require __DIR__.'/header.php';
 
                 <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
-                    <!--<paper-button raised class="bottom-button" onclick="finish()" disabled>FINISH</paper-button>-->
+                    <a href="#" id="token-preview" target="_blank"></a>
                 </div>
             </form>
         </div>
