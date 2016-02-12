@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5d68bbd19cc538fffd460a554cf99be0",
-    "content-hash": "644b9fbf4c8178c6a1c119cda0f3761b",
+    "hash": "de0fb5590c1761744d3f490d9dc28afc",
+    "content-hash": "95d37023300785b7bf116d659c073036",
     "packages": [
         {
             "name": "devio/pipedrive",
@@ -1054,16 +1054,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v3.7.1",
+            "version": "v3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "c3f6e545060b1f679c7fb1d06753dedca1dcfb02"
+                "reference": "9eb9cb699254d738a39067854ac74c6f178c661e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/c3f6e545060b1f679c7fb1d06753dedca1dcfb02",
-                "reference": "c3f6e545060b1f679c7fb1d06753dedca1dcfb02",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9eb9cb699254d738a39067854ac74c6f178c661e",
+                "reference": "9eb9cb699254d738a39067854ac74c6f178c661e",
                 "shasum": ""
             },
             "require": {
@@ -1105,7 +1105,7 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2016-02-01 14:58:59"
+            "time": "2016-02-08 17:28:39"
         }
     ],
     "packages-dev": [
@@ -1426,16 +1426,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "64d40a593fc31a8abf4ce3d200147ddf8ca64e52"
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/64d40a593fc31a8abf4ce3d200147ddf8ca64e52",
-                "reference": "64d40a593fc31a8abf4ce3d200147ddf8ca64e52",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/92f5c61b5c64159faec5298325ffab0c7e59dcc8",
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8",
                 "shasum": ""
             },
             "require": {
@@ -1444,7 +1444,7 @@
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-token-stream": "~1.3",
                 "sebastian/environment": "^1.3.2",
-                "sebastian/version": "~1.0"
+                "sebastian/version": "~1.0|~2.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
@@ -1484,7 +1484,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-01-11 10:05:34"
+            "time": "2016-02-04 13:05:19"
         },
         {
             "name": "phpunit/php-file-iterator",

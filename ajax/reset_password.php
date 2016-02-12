@@ -40,6 +40,7 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $link = APP_URL . 'password_reset?secret=' . $user->reset_code;
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
+            $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
             $mandrill->messages->send(array(
               'to'=>array(array('email'=>$user->email_address)),

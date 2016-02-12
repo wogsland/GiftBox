@@ -1,5 +1,5 @@
 <?php
-namespace Sizzle\Tests\Ajax\RecruitingToken;
+namespace Sizzle\Tests\Ajax;
 
 use \Sizzle\User;
 
