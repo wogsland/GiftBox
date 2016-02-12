@@ -14,6 +14,12 @@ var AccountInfo = React.createClass({
     return state;
   },
 
+  handleChangeReceiveTokenNotifications: function(event) {
+    // flip 'Y' to 'N' and vice versa
+    event.target.value = event.target.value === 'Y' ? 'N' : 'Y';
+    this.handleChange(event);
+  },
+
   handleChange: function(event) {
     var state = {};
     state[event.target.name] = event.target.value;
@@ -26,6 +32,9 @@ var AccountInfo = React.createClass({
   },
 
   render: function() {
+
+    var wantsToReceiveTokenResponseNotifications = this.state.receive_token_notifications === 'Y';
+
     return <div className="tab-pane active" id="account">
       <h2>Profile Settings</h2>
       <form className="form-horizontal form-bordered">
@@ -47,6 +56,13 @@ var AccountInfo = React.createClass({
           <label className="col-sm-1 control-label">Password</label>
           <div className="col-sm-10">
             <input type="password" placeholder="*******************" className="form-control tooltips" name="new_password" value={this.state.new_password} onChange={this.handleChange} />
+          </div>
+          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
+        </div>
+        <div className="form-group">
+          <label className="col-sm-1 control-label">Receive Token Response Notifications?</label>
+          <div className="col-sm-10">
+            <input type="checkbox" className="form-control tooltips" name="receive_token_notifications" checked={wantsToReceiveTokenResponseNotifications} onChange={this.handleChangeReceiveTokenNotifications} />
           </div>
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>

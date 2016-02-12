@@ -131,7 +131,7 @@ class User
             . "user_group = ".($this->user_group ? $this->user_group : "null").", "
             . "group_admin = '$this->group_admin', "
             . "reset_code = '$this->reset_code', "
-            . "receive_token_notification = '$this->receive_token_notifications' "
+            . "receive_token_notifications = '$this->receive_token_notifications' "
             . "WHERE id = '$this->id'";
             execute($sql);
         }

@@ -26,6 +26,7 @@ try {
     $user->about = get_post('about');
     $user->username = get_post('username');
     $user->user_group = get_post('group');
+    $user->receive_token_notifications = get_post('receive_token_notifications');
 
     // password
     if (isset($_POST['password']) && strlen($_POST['password']) > 0) {
