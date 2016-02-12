@@ -47,7 +47,7 @@ function paper_dropdown($label, $id, $options, $selected_index = null, $required
     echo '      </paper-dropdown-menu>'.PHP_EOL;
 }
 
-define('TITLE', 'S!zzle - Create Recruiting Token');
+define('TITLE', 'S!zzle - Create Recruiting Company');
 require __DIR__.'/header.php';
 ?>
 

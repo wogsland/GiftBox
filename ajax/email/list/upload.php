@@ -6,11 +6,12 @@ use \Sizzle\{
 
 $success = 'false';
 $data = '';
-$fileName = escape_string($_SERVER['HTTP_X_FILENAME'] ?? false);
+$fileName = escape_string($_POST['fileName'] ?? false);
 $listName = escape_string($_POST['listName'] ?? false);
+$localPath = $_FILES['listFile']['tmp_name'] ?? false;
 if (logged_in()) {
-    if ($fileName && $listName) {
-        $fileData = file_get_contents($_POST['file_contents']);
+    if ($fileName && $localPath && $listName) {
+        $fileData = file_get_contents($localPath);
         $fileData = str_replace("\r\n", "\n", $fileData);
         $fileData = str_replace("\n\r", "\n", $fileData);
         $fileData = rtrim($fileData, "\n");
@@ -59,7 +60,7 @@ if (logged_in()) {
             'errors'=>array(),
             'message'=>'There were errors processing your request.'
         );
-        if (!$fileName) {
+        if (!$localPath) {
             $data['errors'][] = 'File is required.';
         }
         if (!$listName) {

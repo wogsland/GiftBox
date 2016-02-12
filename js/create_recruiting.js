@@ -534,10 +534,15 @@ function processCompany() {
     $('#company-images').remove();
     $('#company-videos').remove();
     $('#company-social-media').remove();
-    chosenCard = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
-    chosenCard += '<paper-card id="company-info" heading="'+companyName+'">';
-    chosenCard += '</paper-card>';
-    $('#recruiting-token-form').prepend(chosenCard);
+    if($('#company-info-header').length) {
+      $('#recruiting-company-id').val(companyId);
+      $('#company-info-header').attr('heading', companyName);
+    } else {
+      chosenCard = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
+      chosenCard += '<paper-card id="company-info-header" heading="'+companyName+'">';
+      chosenCard += '</paper-card>';
+      $('#recruiting-token-form').prepend(chosenCard);
+    }
     $('#use-existing-company-dialog')[0].close();
     $('#status-dialog')[0].close();
   }
