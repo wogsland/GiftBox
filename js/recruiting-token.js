@@ -433,11 +433,12 @@ $(document).ready(function(){
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
         assetHost = getAssetHost();
-        if (data.data.length > 3) {
+        if (data.data.length > 0) {
           $('#images-frontpage').hide();
           $('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
-          if ( $(window).width() < 739) {
+          if ( $(window).width() < 739 || data.data.length == 1) {
             $('#company-secondary-images').remove();
+            $('#company-image-grid').css('width','100%');
             $('#company-main-image').css('width','100%');
           } else {
             $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
