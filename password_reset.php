@@ -59,6 +59,8 @@ require __DIR__.'/header.php';
       var password1 = $('#password1').val();
       var password2 = $('#password2').val();
       if (password1 === password2 && password1 !== '' && password1.length >= 8) {
+        var eventTarget = event.target;
+        $(eventTarget).addClass("disable-clicks");
         $.post(
           '/ajax/password_reset/',
           {
