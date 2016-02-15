@@ -7,9 +7,9 @@ use \Sizzle\{
 use Mockery\Exception;
 
 /**
- * This class tests the UserMilestone & Milestone classes
+ * This class tests the Support classes
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/UserMilestoneTest
+ * phpunit --bootstrap src/tests/autoload.php src/tests/SupportTest
  */
 class SupportTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,9 +26,9 @@ class SupportTest extends \PHPUnit_Framework_TestCase
   /**
    * Tests the __construct function.
    */
-  public function testConstructor()
+  public function testCreate()
   {
-    $Support = new Support("fakeEmail@gosizzle.io", "This is also a fake message");
+    $Support = Support::create("fakeEmail@gosizzle.io", "This is also a fake message");
     $this->assertEquals('Sizzle\Support', get_class($Support));
     $this->assertTrue(isset($Support->id));
     $this->assertEquals("fakeEmail@gosizzle.io", $Support->email_address);
