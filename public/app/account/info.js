@@ -60,11 +60,13 @@ var AccountInfo = React.createClass({
           <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
         <div className="form-group">
-          <label className="col-sm-1 control-label">Receive Token Response Notifications?</label>
-          <div className="col-sm-10">
-            <input type="checkbox" className="form-control tooltips" name="receive_token_notifications" checked={wantsToReceiveTokenResponseNotifications} onChange={this.handleChangeReceiveTokenNotifications} />
+          <div className="checkbox col-sm-offset-4 col-sm-3">
+            <label>
+              <input type="checkbox" name="receive_token_notifications" checked={wantsToReceiveTokenResponseNotifications} onChange={this.handleChangeReceiveTokenNotifications} />
+              Receive Token Notifications by Email?
+            </label>
           </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
+          <label className="col-sm-5 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
       </form>
    </div>;
