@@ -41,6 +41,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/'));
         $this->assertTrue($this->checkStatusCode('/create_company', false, 302));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', false, 302));
+        $this->assertTrue($this->checkStatusCode('/email_list', false, 302));
         $this->assertTrue($this->checkStatusCode('/free_trial'));
         $this->assertTrue($this->checkStatusCode('/forgot_password'));
         $this->assertTrue($this->checkStatusCode('/invoice', false, 302));
@@ -65,6 +66,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token/recruiting/'.rand(), false, 200));
         $this->assertTrue($this->checkStatusCode('/tokens', false, 302));
         $this->assertTrue($this->checkStatusCode('/token_responses', false, 302));
+        $this->assertTrue($this->checkStatusCode('/track'));
         $this->assertTrue($this->checkStatusCode('/upgrade', false, 302));
         $this->assertTrue($this->checkStatusCode('/upload'));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', false, 302));
@@ -102,6 +104,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/', true));
         $this->assertTrue($this->checkStatusCode('/create_company', true));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', true));
+        $this->assertTrue($this->checkStatusCode('/email_list', false, 302));
         $this->assertTrue($this->checkStatusCode('/free_trial', true));
         $this->assertTrue($this->checkStatusCode('/forgot_password', true));
         $this->assertTrue($this->checkStatusCode('/invoice', true));
@@ -125,6 +128,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token/recruiting/'.rand(), true, 200));
         $this->assertTrue($this->checkStatusCode('/tokens', true));
         $this->assertTrue($this->checkStatusCode('/token_responses', true));
+        $this->assertTrue($this->checkStatusCode('/track', true));
         $this->assertTrue($this->checkStatusCode('/upgrade', true));
         $this->assertTrue($this->checkStatusCode('/upload', true));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', true, 302));
@@ -162,6 +166,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/create_company', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/email_list', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/free_trial', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/forgot_password', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/invoice', true, 200, true));
@@ -185,6 +190,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token/recruiting/'.rand(), true, 200, true));
         $this->assertTrue($this->checkStatusCode('/tokens', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/token_responses', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/track', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/upgrade', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/upload', true, 200, true));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', true, 200, true));

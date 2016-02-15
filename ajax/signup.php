@@ -58,6 +58,7 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
             $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
+            $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
             $mandrill->messages->send(array(
               'to'=>array(array('email'=>$user->email_address)),

@@ -87,6 +87,9 @@ class Route
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;
+            case 'email_list':
+                include __DIR__.'/../email_list.php';
+                break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';
                 break;
@@ -171,6 +174,9 @@ class Route
                 break;
             case 'token_responses':
                 include __DIR__.'/../token_responses.php';
+                break;
+            case 'track':
+                include __DIR__.'/../track.php';
                 break;
             case 'upgrade':
                 include __DIR__.'/../upgrade.php';

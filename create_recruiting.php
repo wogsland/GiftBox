@@ -182,7 +182,7 @@ require __DIR__.'/header.php';
                 <?php if (isset($token_company)) {
                     $company_name = '' == $token_company->name ? 'Unnamed Company' : $token_company->name;?>
                     <input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="<?php echo $token->recruiting_company_id ?>">
-                    <paper-card id="company-info">
+                    <paper-card id="company-info-header">
                       <div class="card-content" style="height:90px;">
                         <i class="pull-left" style="font-size:25px;padding:15px;font:normal;"><?php echo $company_name;?></i>
                         <a class="pull-right" href="<?php echo "/create_company?id={$token->recruiting_company_id}&referrer={$token->long_id}" ?>"><paper-button>EDIT COMPANY</paper-button></a>
