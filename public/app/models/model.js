@@ -66,7 +66,8 @@ var Model = {
       {2: "Standard"},
       {3: "Premium"},
     ],
-    social: null
+    social: null,
+    receive_token_notifications: user.receive_token_notifications
   },
 
   tokens: tokens,
