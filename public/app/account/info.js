@@ -43,21 +43,18 @@ var AccountInfo = React.createClass({
           <div className="col-sm-10">
             <input type="text" placeholder="Name" className="form-control tooltips" name="name" value={this.state.name} onChange={this.handleChange} />
           </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
         <div className="form-group">
           <label className="col-sm-1 control-label">Email</label>
           <div className="col-sm-10">
             <input type="text" placeholder="Email" className="form-control tooltips" name="email" value={this.state.email} onChange={this.handleChange} />
           </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
         <div className="form-group">
           <label className="col-sm-1 control-label">Password</label>
           <div className="col-sm-10">
             <input type="password" placeholder="*******************" className="form-control tooltips" name="new_password" value={this.state.new_password} onChange={this.handleChange} />
           </div>
-          <label className="col-sm-1 control-label"><a onClick={this.editProfile}>Edit</a></label>
         </div>
         <div className="form-group">
           <div className="checkbox col-sm-offset-4 col-sm-3">
@@ -66,7 +63,7 @@ var AccountInfo = React.createClass({
               Receive Token Notifications by Email?
             </label>
           </div>
-          <label className="col-sm-5 control-label"><a onClick={this.editProfile}>Edit</a></label>
+          <label className="col-sm-5 control-label"><a onClick={this.editProfile}>Save</a></label>
         </div>
       </form>
    </div>;
