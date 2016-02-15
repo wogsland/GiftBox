@@ -4,7 +4,6 @@ namespace Sizzle\Tests;
 use \Sizzle\{
   Support
 };
-use Mockery\Exception;
 
 /**
  * This class tests the Support classes
