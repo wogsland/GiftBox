@@ -76,7 +76,7 @@ if (isset($_SESSION['user_id'])) {
         }
 
         // Generate a long_id if this is a new token
-        if (strlen($_POST['long_id']) == 0) {
+        if (!isset($_POST['long_id']) || strlen($_POST['long_id']) == 0) {
             do {
                 $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
             } while (!$token->uniqueLongId());

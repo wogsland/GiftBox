@@ -55,6 +55,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/profile', false, 302));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy'));
         $this->assertTrue($this->checkStatusCode('/robots.txt'));
+        $this->assertTrue($this->checkStatusCode('/send_recruiting', false, 302));
         $this->assertTrue($this->checkStatusCode('/support'));
         $this->assertTrue($this->checkStatusCode('/teapot', false, 418));
         $this->assertTrue($this->checkStatusCode('/terms'));
@@ -104,7 +105,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/ajax/anything/at/all/works/here/', true));
         $this->assertTrue($this->checkStatusCode('/create_company', true));
         $this->assertTrue($this->checkStatusCode('/create_recruiting', true));
-        $this->assertTrue($this->checkStatusCode('/email_list', false, 302));
+        $this->assertTrue($this->checkStatusCode('/email_list', true, 302));
         $this->assertTrue($this->checkStatusCode('/free_trial', true));
         $this->assertTrue($this->checkStatusCode('/forgot_password', true));
         $this->assertTrue($this->checkStatusCode('/invoice', true));
@@ -118,6 +119,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/profile', true));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy', true));
         $this->assertTrue($this->checkStatusCode('/robots.txt', true));
+        $this->assertTrue($this->checkStatusCode('/send_recruiting', true, 302));
         $this->assertTrue($this->checkStatusCode('/teapot', true, 418));
         $this->assertTrue($this->checkStatusCode('/terms', true));
         $this->assertTrue($this->checkStatusCode('/thankyou', true));
@@ -180,6 +182,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/profile', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/recruiting_made_easy', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/robots.txt', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/send_recruiting', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/teapot', true, 418, true));
         $this->assertTrue($this->checkStatusCode('/terms', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/thankyou', true, 200, true));
