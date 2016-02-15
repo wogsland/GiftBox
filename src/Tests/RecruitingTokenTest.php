@@ -132,4 +132,28 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->User->getId(),$user->getId());
         $this->assertEquals('N',$user->receive_token_notifications);
     }
+
+    /**
+     * Tests the getCompany function.
+     */
+    public function testGetCompany()
+    {
+        $co = new RecruitingCompany();
+        $co->name = 'Company '.rand();
+        $co->user_id = $this->User->getId();
+        $co->save();
+
+        $result = new RecruitingToken();
+        $result->user_id = $this->User->getId();
+        $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $result->recruiting_company_id = $co->id;
+        $result->save();
+
+        $company = $result->getCompany();
+        $this->assertNotNull($company);
+        $this->assertNotEquals('',$company);
+        $this->assertEquals($co->id,$company->id);
+        $this->assertEquals($co->name,$company->name);
+        $this->assertEquals($this->User->getId(),$company->user_id);
+    }
 }

@@ -12,15 +12,20 @@ $cookie = escape_string($_COOKIE['visitor'] ?? '');
 
 $success = 'false';
 $data = '';
-$RecruitingTokenResponse = new RecruitingTokenResponse();
-$id = $RecruitingTokenResponse->create($recruiting_token_id, $email, $response, $cookie);
+$recruiting_token_response = new RecruitingTokenResponse();
+$id = $recruiting_token_response->create($recruiting_token_id, $email, $response, $cookie);
 if ($id > 0) {
     $success = 'true';
     $data = array('id'=>$id);
 }
-$user = (new RecruitingToken($recruiting_token_id, 'long_id'))->getUser();
+$recruiting_token = new RecruitingToken($recruiting_token_id, 'long_id');
+$user = $recruiting_token->getUser();
+$company = $recruiting_token->getCompany();
 if (strcmp($user->receive_token_notifications, 'Y') == 0) {
+    $company_name = empty($company->name) ? "No Company Name" : $company->name;
     $email_message = file_get_contents(__DIR__.'/../../email_templates/token_response_notification.inline.html');
+    $email_message = str_replace('{{company_name}}', $company_name, $email_message);
+    $email_message = str_replace('{{job_title}}', $recruiting_token->job_title, $email_message);
     $email_message = str_replace('{{email_address}}', $email, $email_message);
     $email_message = str_replace('{{response}}', $response, $email_message);
     $mandrill = new Mandrill(MANDRILL_API_KEY);
