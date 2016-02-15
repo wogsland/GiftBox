@@ -1,5 +1,8 @@
 <?php
-use \Sizzle\EventLogger;
+use Sizzle\{
+  EventLogger,
+  Support
+};
 $status = 'ERROR';
 if (isset($_POST['email'], $_POST['message'])
 && filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
@@ -27,6 +30,7 @@ if (isset($_POST['email'], $_POST['message'])
     $status = 'SUCCESS';
     $event = new EventLogger(null, EventLogger::SUPPORT_EMAIL_SENT, $subject);
     $event->log();
+    Support::create($email, $message);
 }
 header('Content-Type: application/json');
 echo json_encode(array('status' => $status));
