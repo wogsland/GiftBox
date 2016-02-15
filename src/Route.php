@@ -139,6 +139,9 @@ class Route
                     echo "Disallow: /\n";
                 }
                 break;
+            case 'support':
+                include __DIR__.'/../support.php';
+                break;
             case 'teapot':
                 include __DIR__.'/../teapot.php';
                 break;

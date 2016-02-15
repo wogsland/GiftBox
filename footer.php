@@ -84,6 +84,7 @@
     <li><a href="/about">About Us</a></li>
     <li><a href="/terms">Terms and Conditions</a></li>
     <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/support">Contact Support</a></li>
   </ul>
 
   <!-- COPYRIGHT TEXT -->
