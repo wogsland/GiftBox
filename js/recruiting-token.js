@@ -436,7 +436,7 @@ $(document).ready(function(){
         if (data.data.length > 0) {
           $('#images-frontpage').hide();
           $('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
-          if ( $(window).width() < 739 || data.data.length == 1) {
+          if ( $(window).width() < 739 || data.data.length < 4) {
             $('#company-secondary-images').remove();
             $('#company-image-grid').css('width','100%');
             $('#company-main-image').css('width','100%');
