@@ -74,7 +74,7 @@ if (ENVIRONMENT === "production") {
       'Googlebot'
     ];
 
-    if (!in_array($visitor, $botsToExclude)) {
+    if ('*New*' == $new && !in_array($visitor, $botsToExclude)) {
         // Have Slackbot inform us of the visitor
         $message = "$new $visitor to " . APP_URL . " from ";
         $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
