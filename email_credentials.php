@@ -113,28 +113,28 @@ require __DIR__.'/header.php';
                 <paper-card id="company-info" heading="Email Credentials">
                     <div class="field-container">
                       <paper-input
-                        value="The input"
-                        label="Email Address"
+                        label="Username"
                         id="credential-email"
-                        name="credential_email">
+                        name="credential_email"
+                        required>
                       </paper-input>
                       <paper-input
-                        value="The input"
                         label="Password"
                         id="credential-password"
-                        name="credential_password">
+                        name="credential_password"
+                        required>
                       </paper-input>
                       <paper-input
-                        value="The input"
                         label="SMTP Host"
                         id="credential-host"
-                        name="credential_host">
+                        name="credential_host"
+                        required>
                       </paper-input>
                       <paper-input
-                        value="The input"
                         label="SMTP Port"
                         id="credential-port"
-                        name="credential_port">
+                        name="credential_port"
+                        required>
                       </paper-input>
                     </div>
                 </paper-card>
@@ -178,10 +178,18 @@ require __DIR__.'/header.php';
         success: function(data, textStatus){
           var message = data.data.message+'<br />';
           if(data.success === 'true') {
-            $('#status-message').html('Email credentials successfully saved');
+            $('#status-message').html('Email credentials saved');
             $('#status-dialog')[0].open();
           }  else {
             $('#status-message').html('Failed to save email credentials');
+            var height = 200;
+            var errors = '';
+            $.each(data.data.errors, function(i, v) {
+              errors += v+'<br/>';
+              height += 15;
+            });
+            $('#status-dialog').css('height',  height+'px');
+            $('#status-details').html(errors);
             $('#status-dialog')[0].open();
           }
         }
