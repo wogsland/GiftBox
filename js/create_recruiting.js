@@ -489,7 +489,7 @@ function saveCompany() {
         }
 
         closeStatus();
-        window.location = '/send_recruiting?referrer='+companyId+'&id='+data.long_id;
+        window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
       } else if (data.status === "ERROR") {
         alert(data.message);
       }  else {

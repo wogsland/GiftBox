@@ -4,6 +4,8 @@ if (!logged_in() || !is_admin()) {
 }
 
 $user_id = $_SESSION['user_id'] ?? '';
+$referrer = $_GET['referrer'] ?? '';
+$recruiting_token_id = $_GET['id'] ?? '';
 
 define('TITLE', 'S!zzle - Send Recruiting Token');
 require __DIR__.'/header.php';
@@ -109,6 +111,15 @@ require __DIR__.'/header.php';
         .progress-text.active {
           color: #009688;
         }
+        #link-info {
+          height:150px;
+        }
+        #send-to-email-list, #send-to-email-credentials {
+          width:60%;
+        }
+        #send-token-button {
+          margin-top: 30px;
+        }
     </style>
 
 </head>
@@ -127,3 +138,79 @@ require __DIR__.'/header.php';
       <paper-fab icon="looks one" class="progress-fab"></paper-fab>
       <span class="progress-text active"><strong>Send Token</strong></span>
     </paper-card>
+    <div id="left-column">
+      <paper-card id="link-info" heading="Token Link">
+        <div class="field-container">
+          <div class="pull-left" id="token-link" style="padding-top:15px;">
+            <a href="<?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>" target="_blank">
+              <?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>
+            </a>
+          </div>
+          <paper-button id="copy-link-button" class="pull-right" raised onclick="copyTokenLink()">COPY</paper-button>
+        </div>
+      </paper-card>
+      <h3>or</h3>
+      <paper-card id="send-to-info" heading="Send Via Email">
+        <div class="field-container">
+          <i>Send to an email or an email list.</i><br />
+          <paper-input
+            label="Email Address"
+            id="send-to-email">
+          </paper-input>
+          <paper-dropdown-menu
+            label="Choose Email List"
+            id="send-to-email-list">
+          </paper-dropdown-menu>
+          <a href="/email_list?referrer=<?php echo $recruiting_token_id;?>">
+            <paper-button>NEW LIST</paper-button>
+          </a>
+          <paper-dropdown-menu
+            label="Choose Email Credentials"
+            id="send-to-email-credentials">
+          </paper-dropdown-menu>
+          <a href="/email_credentials?referrer=<?php echo $recruiting_token_id;?>">
+            <paper-button>NEW CREDENTIALS</paper-button>
+          </a>
+          <br />
+          <paper-button id="send-token-button" raised onclick="copyTokenLink()">SEND</paper-button>
+        </div>
+      </paper-card>
+    </div>
+    <div id="right-column" class="pull-right">
+      <div class="button-container">
+        <paper-button raised onclick="backToCompany('<?php echo $referrer;?>', '<?php echo $recruiting_token_id;?>')">BACK</paper-button>
+      </div>
+    </div>
+  </div>
+  <?php require_once __DIR__.'/footer.php';?>
+
+  <!-- JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+  /**
+   * Redirects user back to the company edit page
+   *
+   * @param {String} id The id of the company to go back to
+   * @param {String} token The long_id of the token to go back to
+   */
+  function backToCompany(id, token) {
+    window.location = '/create_company?id='+id+'&referrer='+token;
+  }
+
+  /**
+   * Copies the token link to the keyboard
+   */
+  function copyTokenLink() {
+    var $temp = $("<input>")
+    $("body").append($temp);
+    $temp.val($('#token-link a').text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+    $('#copy-link-button').text('Copied!')
+  }
+  $( document ).ready(function() {
+
+  });
+  </script>
+</body>
+</html>

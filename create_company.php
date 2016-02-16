@@ -12,6 +12,7 @@ if (!logged_in()) {
 }
 
 $user_id = $_SESSION['user_id'] ?? '';
+$referrer = $_GET['referrer'] ?? '';
 
 if (isset($_GET['id'])) {
     $token_company = new RecruitingCompany(escape_string($_GET['id']));
@@ -180,7 +181,8 @@ require __DIR__.'/header.php';
       </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-company-form">
-                <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
+              <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
+              <input type="hidden" id="recruiting-token-id" name="recruiting_token_id" value="<?php echo $referrer;?>">
 
                     <paper-card id="company-info" heading="Important Company Info">
                         <i>Changes will affect every token associated with this company.</i>
@@ -330,7 +332,7 @@ require __DIR__.'/header.php';
         </div>
         <div id="right-column" class="pull-right">
             <div class="button-container">
-                <paper-button raised onclick="backToToken('<?php echo $_GET['referrer'] ?? '';?>')">BACK</paper-button>
+                <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
                 <paper-button raised onclick="saveCompany()">SAVE</paper-button>
             </div>
             <div>
