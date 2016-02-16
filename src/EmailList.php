@@ -126,4 +126,25 @@ class EmailList
         }
         return $success;
     }
+
+    /**
+     * This function gets email list information by the user id
+     *
+     * @param int $user_id - id of the user
+     *
+     * @return array - email lists associated with the user
+     */
+    public function getByUserId($user_id)
+    {
+        $return = array();
+        $query = "SELECT `name`, `id`
+                  FROM email_list
+                  WHERE deleted IS NULL
+                  AND user_id = '$user_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
 }

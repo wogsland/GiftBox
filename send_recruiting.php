@@ -1,11 +1,23 @@
 <?php
+use \Sizzle\{
+    EmailList,
+    EmailCredential,
+    RecruitingCompany,
+    RecruitingToken,
+    User
+};
+
 if (!logged_in() || !is_admin()) {
     header('Location: '.APP_URL);
 }
 
-$user_id = $_SESSION['user_id'] ?? '';
-$referrer = $_GET['referrer'] ?? '';
+$user_id = (int) ($_SESSION['user_id'] ?? '');
+$referrer = (int) ($_GET['referrer'] ?? '');
 $recruiting_token_id = $_GET['id'] ?? '';
+
+$user = new User($user_id);
+$credentials = (new EmailCredential())->getByUserId($user_id);
+$lists = (new EmailList())->getByUserId($user_id);
 
 define('TITLE', 'S!zzle - Send Recruiting Token');
 require __DIR__.'/header.php';
@@ -155,18 +167,32 @@ require __DIR__.'/header.php';
           <i>Send to an email or an email list.</i><br />
           <paper-input
             label="Email Address"
-            id="send-to-email">
+            id="send-to-email"
+            hidden>
           </paper-input>
+          <paper-button id="send-list-button" raised onclick="hideSingle()" hidden>EMAIL LIST</paper-button>
           <paper-dropdown-menu
             label="Choose Email List"
             id="send-to-email-list">
+            <paper-menu class="dropdown-content">
+              <?php foreach ($lists as $list) {
+                  echo '<paper-item value="'.$list['id'].'">'.$list['name'].'</paper-item>';
+              }?>
+            </paper-menu>
           </paper-dropdown-menu>
-          <a href="/email_list?referrer=<?php echo $recruiting_token_id;?>">
+          <a id="new-list-button" href="/email_list?referrer=<?php echo $recruiting_token_id;?>">
             <paper-button>NEW LIST</paper-button>
           </a>
+          <paper-button id="send-single-button" raised onclick="hideList()">SINGLE EMAIL</paper-button>
+          <br />
           <paper-dropdown-menu
             label="Choose Email Credentials"
             id="send-to-email-credentials">
+            <paper-menu class="dropdown-content">
+              <?php foreach ($credentials as $credential) {
+                  echo '<paper-item value="'.$credential['id'].'">'.$credential['credential'].'</paper-item>';
+              }?>
+            </paper-menu>
           </paper-dropdown-menu>
           <a href="/email_credentials?referrer=<?php echo $recruiting_token_id;?>">
             <paper-button>NEW CREDENTIALS</paper-button>
@@ -208,6 +234,18 @@ require __DIR__.'/header.php';
     $temp.remove();
     $('#copy-link-button').text('Copied!')
   }
+
+  /**
+   * Replaces the email list option with a single email
+   */
+  function hideList() {
+    $('#send-to-email-list').hide();
+    $('#new-list-button').hide();
+    $('#send-single-button').hide();
+    $('#send-to-email').removeAttr('hidden');
+    //$('#send-list-button').removeAttr('hidden');
+  }
+
   $( document ).ready(function() {
 
   });
