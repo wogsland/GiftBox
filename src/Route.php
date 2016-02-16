@@ -87,6 +87,9 @@ class Route
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;
+            case 'email_credentials':
+                include __DIR__.'/../email_credentials.php';
+                break;
             case 'email_list':
                 include __DIR__.'/../email_list.php';
                 break;
