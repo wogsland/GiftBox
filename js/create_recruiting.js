@@ -421,8 +421,8 @@ function saveRecruitingToken(preview) {
           if (preview) {
             $('#token-preview').attr('href', '/token/recruiting/'+data.long_id);
             $('#token-preview')[0].click();
-            //window.open('/token/recruiting/'+data.long_id , '_blank');
           }
+          window.location = '/create_company?id='+companyId+'&referrer='+data.long_id;
         } else if (data.status === "ERROR") {
           alert(data.message);
         }  else {
@@ -489,6 +489,7 @@ function saveCompany() {
         }
 
         closeStatus();
+        window.location = '/send_recruiting?referrer='+companyId+'&id='+data.long_id;
       } else if (data.status === "ERROR") {
         alert(data.message);
       }  else {
@@ -539,19 +540,24 @@ function processCompany() {
     var menu = $("#company-to-use")[0].contentElement;
     var companyId = menu.selectedItem.id;
     var companyName = $(menu.selectedItem).text();
-    $('#company-info').remove();
-    $('#company-images').remove();
-    $('#company-videos').remove();
-    $('#company-social-media').remove();
-    if($('#company-info-header').length) {
-      $('#recruiting-company-id').val(companyId);
-      $('#company-info-header').attr('heading', companyName);
-    } else {
-      chosenCard = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
-      chosenCard += '<paper-card id="company-info-header" heading="'+companyName+'">';
-      chosenCard += '</paper-card>';
-      $('#recruiting-token-form').prepend(chosenCard);
-    }
+    $('#id').val(companyId);
+    $.post(
+      '/ajax/recruiting_company/get',
+      {
+        recruiting_company_id: companyId,
+      },
+      function(data){
+        $('#company').val(data.data.name);
+        $('#company-description').val(data.data.description);
+        $('#company-values').val(data.data.values);
+        $('#company-facebook').val(data.data.facebook);
+        $('#company-google-plus').val(data.data.google_plus);
+        $('#company-linkedin').val(data.data.linkedin);
+        $('#company-pinterest').val(data.data.pinterest);
+        $('#company-twitter').val(data.data.twitter);
+      },
+      'json'
+    );
     $('#use-existing-company-dialog')[0].close();
     $('#status-dialog')[0].close();
   }

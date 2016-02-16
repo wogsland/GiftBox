@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
             error_log($e->getMessage());
             $response['status'] = "ERROR";
             $response['message'] = $e->getMessage();
-            $repsonse['object'] = $e;
+            $response['object'] = $e;
         }
         if ($RecruitingCompany->user_id != $user_id && !is_admin()) {
             $response['status'] = "ERROR";

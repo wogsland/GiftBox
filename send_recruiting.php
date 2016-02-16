@@ -106,6 +106,9 @@ require __DIR__.'/header.php';
         paper-dialog#status-dialog {
             --paper-dialog-background-color: #303030;
         }
+        .progress-text.active {
+          color: #009688;
+        }
     </style>
 
 </head>
@@ -122,5 +125,5 @@ require __DIR__.'/header.php';
       <span class="progress-text">Company Info</span>
       <div class="progress-line"></div>
       <paper-fab icon="looks one" class="progress-fab"></paper-fab>
-      <span class="progress-text">Send Token</span>
+      <span class="progress-text active"><strong>Send Token</strong></span>
     </paper-card>

@@ -153,9 +153,8 @@ require __DIR__.'/header.php';
           width: 500px;
           font-size: 18px;
         }
-        #use-existing-company-button {
-          margin-left: 50px;
-          margin-right: 50px;
+        .progress-text.active {
+          color: #009688;
         }
     </style>
 
@@ -165,16 +164,16 @@ require __DIR__.'/header.php';
     <?php require_once __DIR__.'/navbar.php';?>
   </div>
     <div class="center-column">
-        <?php /*<paper-card id="progress-bar">
+        <paper-card id="progress-bar">
                 <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
-                <span class="progress-text">Fill Out Token Form</span>
+                <span class="progress-text active"><strong>Job Info</strong></span>
                 <div class="progress-line"></div>
                 <paper-fab icon="looks one" class="progress-fab"></paper-fab>
-                <span class="progress-text">Preview Token</span>
+                <span class="progress-text">Company Info</span>
                 <div class="progress-line"></div>
                 <paper-fab icon="looks one" class="progress-fab"></paper-fab>
                 <span class="progress-text">Send Token</span>
-        </paper-card> */ ?>
+        </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-token-form">
                 <input type="hidden" id="id" name="id" value="<?php echo $token->id ?>">
@@ -182,12 +181,12 @@ require __DIR__.'/header.php';
                 <?php if (isset($token_company)) {
                     $company_name = '' == $token_company->name ? 'Unnamed Company' : $token_company->name;?>
                     <input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="<?php echo $token->recruiting_company_id ?>">
-                    <paper-card id="company-info-header">
+<!--                    <paper-card id="company-info-header">
                       <div class="card-content" style="height:90px;">
                         <i class="pull-left" style="font-size:25px;padding:15px;font:normal;"><?php echo $company_name;?></i>
                         <a class="pull-right" href="<?php echo "/create_company?id={$token->recruiting_company_id}&referrer={$token->long_id}" ?>"><paper-button>EDIT COMPANY</paper-button></a>
                       </div>
-                    </paper-card>
+                    </paper-card>-->
                 <?php }?>
 
                 <paper-card id="send-token-via" heading="Send Token via">
@@ -251,7 +250,7 @@ require __DIR__.'/header.php';
                     </div>
                 </paper-card>
 
-                <?php if (!isset($token_company)) { ?>
+                <?php /*if (!isset($token_company)) { ?>
                     <paper-card id="company-info" heading="Important Company Info">
                         <div class="field-container">
                             <?php paper_text('Company Name', 'company', ''); ?>
@@ -345,12 +344,12 @@ require __DIR__.'/header.php';
                             </table>
                         </div>
                     </paper-card>
-                <?php } ?>
+                <?php } */?>
 
-                <div class="button-container">
+<?php /*                <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
                     <a href="#" id="token-preview" target="_blank"></a>
-                </div>
+                </div>*/?>
             </form>
         </div>
         <div id="right-column" class="pull-right">
@@ -361,11 +360,6 @@ require __DIR__.'/header.php';
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
-            </div>
-            <div>
-                <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
-                  USE EXISTING COMPANY
-                </paper-button>
             </div>
             <?php /*if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">
@@ -378,26 +372,6 @@ require __DIR__.'/header.php';
             <?php endif;*/ ?>
        </div>
     </div>
-
-    <paper-dialog class="recruiting-dialog" id="use-existing-company-dialog" modal>
-        <h2>Use Existing Company</h2>
-        <form is="iron-form" id="use-existing-company-form">
-            <div class="field-container">
-            <?php
-                $companies = RecruitingToken::getUserCompanies($user_id);
-                $options = array();
-                foreach ($companies as $co) {
-                    $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
-                }
-                paper_dropdown('Select a Company to use', 'company-to-use', $options, null, true);
-            ?>
-            </div>
-        </form>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processCompany()">Use</paper-button>
-            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
-        </div>
-    </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="open-dialog" modal>
         <h2>Open</h2>
