@@ -1,5 +1,5 @@
 <?php
-if (!logged_in() || !is_admin()) {
+if (!logged_in()) {
     header('Location: '.APP_URL);
 }
 
@@ -179,6 +179,7 @@ require __DIR__.'/header.php';
           var message = data.data.message+'<br />';
           if(data.success === 'true') {
             $('#status-message').html('Email credentials saved');
+            $('#status-details').html('');
             $('#status-dialog')[0].open();
           }  else {
             $('#status-message').html('Failed to save email credentials');
