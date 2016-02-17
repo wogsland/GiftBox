@@ -161,7 +161,9 @@ require __DIR__.'/header.php';
           <paper-button id="copy-link-button" class="pull-right" raised onclick="copyTokenLink()">COPY</paper-button>
         </div>
       </paper-card>
+
       <h3>or</h3>
+
       <paper-card id="send-to-info" heading="Send Via Email">
         <div class="field-container">
           <i>Send to an email or an email list.</i><br />
@@ -187,7 +189,8 @@ require __DIR__.'/header.php';
           <br />
           <paper-dropdown-menu
             label="Choose Email Credentials"
-            id="send-to-email-credentials">
+            id="send-to-email-credentials"
+            on-iron-select="_itemSelected">
             <paper-menu class="dropdown-content">
               <?php foreach ($credentials as $credential) {
                   echo '<paper-item value="'.$credential['id'].'">'.$credential['credential'].'</paper-item>';
@@ -198,9 +201,16 @@ require __DIR__.'/header.php';
             <paper-button>NEW CREDENTIALS</paper-button>
           </a>
           <br />
-          <paper-button id="send-token-button" raised onclick="copyTokenLink()">SEND</paper-button>
+          <paper-textarea
+            label="Optional Message"
+            id="send-to-email-message"
+            rows="1">
+          </paper-textarea>
+          <br />
+          <paper-button id="send-token-button" raised onclick="sendEmails()">SEND</paper-button>
         </div>
       </paper-card>
+
     </div>
     <div id="right-column" class="pull-right">
       <div class="button-container">
@@ -208,6 +218,14 @@ require __DIR__.'/header.php';
       </div>
     </div>
   </div>
+
+  <paper-dialog class="recruiting-dialog" id="sent-dialog" modal>
+      <p id="sent-message">Your email(s) are being sent!</p>
+      <div class="button-container">
+          <paper-button dialog-dismiss id="ok-sent-button" hidden>OK</paper-button>
+      </div>
+  </paper-dialog>
+
   <?php require_once __DIR__.'/footer.php';?>
 
   <!-- JavaScript -->
@@ -246,9 +264,46 @@ require __DIR__.'/header.php';
     //$('#send-list-button').removeAttr('hidden');
   }
 
-  $( document ).ready(function() {
+  /**
+   * Queues up the email(s) to be sent & informs users
+   */
+  function sendEmails() {
+    $('#sent-dialog')[0].open();
+    $('#sent-message').html('Processing...');
+    $.ajax({
+      url: '/ajax/email/list/send/',
+      type: 'post',
+      data: {
+        token_id: '<?php echo $recruiting_token_id;?>',
+        email_list_id: $("#send-to-email-list paper-item[aria-selected='true']").attr('value'),
+        message: $('#send-to-email-message').val(),
+        email_credential_id: $("#send-to-email-credentials paper-item[aria-selected='true']").attr('value'),
+      },
+      dataType: 'json',
+      success: function(data, textStatus){
+        //var message = data.data.message+'<br />';
+        if(data.success === 'true') {
+          $('#sent-message').html('Your emails were sent.');
+        } else if (typeof data.data.errors !== 'undefined') {
+          var height = 120;
+          var errors = '';
 
-  });
+          $.each(data.data.errors, function(i, v) {
+            errors += v+'<br/>';
+            height += 15;
+          });
+          $('#sent-dialog').css('height',  height+'px');
+          $('#sent-message').html(errors);
+        } else {
+          $('#sent-message').html('Failed to send emails.');
+        }
+        $('#ok-sent-button').removeAttr('hidden');
+      }
+    }).fail(function() {
+      $('#sent-message').html('Failed to send emails.');
+      $('#ok-sent-button').removeAttr('hidden');
+    });
+  }
   </script>
 </body>
 </html>
