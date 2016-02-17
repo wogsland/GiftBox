@@ -20,8 +20,8 @@ if (isset($_SESSION['user_id'])) {
     if ('' == $password) {
         $errors[] = 'Password cannot be left blank';
     }
-    if (filter_var($smtp_host, FILTER_VALIDATE_IP) === false) {
-        $errors[] = 'Invalid IP provided for SMTP host';
+    if ($smtp_host == '') {
+        $errors[] = 'Invalid SMTP host';
     }
     if (0 >= (int) $smtp_port) {
         $errors[] = 'Invalid Port provided for SMTP host';

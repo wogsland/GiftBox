@@ -120,7 +120,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals(4, count($return->data->errors));
         $this->assertTrue(in_array('Username cannot be left blank', $return->data->errors));
         $this->assertTrue(in_array('Password cannot be left blank', $return->data->errors));
-        $this->assertTrue(in_array('Invalid IP provided for SMTP host', $return->data->errors));
+        $this->assertTrue(in_array('Invalid SMTP host', $return->data->errors));
         $this->assertTrue(in_array('Invalid Port provided for SMTP host', $return->data->errors));
     }
 }
