@@ -3,6 +3,7 @@ use \Sizzle\{
     EmailCredential,
     EmailList,
     EmailListEmail,
+    EmailSent,
     RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken
@@ -84,7 +85,7 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
                 'email_credential_id'
             ];
 
-            $mail->setFrom($EmailCredential->username, $_SESSION['email']); // This from email is ignored by gmail, but name isn't
+            $mail->setFrom($EmailCredential->username); // This from email is ignored by gmail, but name isn't
             $mail->addAddress($address);
             if (isset($replyTo)) {
                 $mail->addReplyTo($replyTo);
@@ -113,12 +114,22 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             $mail->Body = $email_message;
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
+            // attempt to send
             if (!$mail->send()) {
                 //print_r($mail);
                 $data['error'] = $mail->ErrorInfo;
             } else {
                 $success = 'true';
             }
+
+            // record result
+            $detailsToRecord['to'] = $address;
+            $detailsToRecord['from'] = $EmailCredential->username;
+            $detailsToRecord['subject'] = $mail->Subject;
+            $detailsToRecord['body'] = $mail->Body;
+            $detailsToRecord['email_credential_id'] = $email_credential_id;
+            $detailsToRecord['success'] = 'true' == $success ? 'Yes' : 'No';
+            (new EmailSent())->create($detailsToRecord);
         }
     }
 }
