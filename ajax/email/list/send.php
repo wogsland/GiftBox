@@ -4,6 +4,7 @@ use \Sizzle\{
     EmailList,
     EmailListEmail,
     RecruitingCompany,
+    RecruitingCompanyImage,
     RecruitingToken
 };
 
@@ -55,13 +56,6 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
     if (!isset($data['errors'])) {
         $emails = (new EmailListEmail())->getByEmailListId($email_list_id);
         //print_r($emails);die;
-        $email_message = file_get_contents(__DIR__.'/../../../email_templates/recruiting_token.inline.html');
-        $email_message = str_replace('{{message}}', ($message ?? ''), $email_message);
-        $link = APP_URL.'token/recruiting/'.$token_id;
-        $email_message = str_replace('{{link}}', $link, $email_message);
-        $email_message = str_replace('{{job_title}}', $RecruitingToken->job_title, $email_message);
-        $email_message = str_replace('{{email}}', $_SESSION['email'], $email_message);
-        $email_message = str_replace('{{long_id}}', $token_id, $email_message);
         foreach ($emails as $address) {
             /// instantiate mailer
             $mail = new PHPMailer;
@@ -102,6 +96,20 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
                 $mail->addCC($bcc);
             }
             $mail->Subject = $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
+            $email_message = file_get_contents(__DIR__.'/../../../email_templates/recruiting_token.inline.html');
+            $email_message = str_replace('{{message}}', ($message ?? ''), $email_message);
+            $link = APP_URL.'token/recruiting/'.$token_id;
+            $email_message = str_replace('{{link}}', $link, $email_message);
+            $email_message = str_replace('{{job_title}}', $RecruitingToken->job_title, $email_message);
+            $tracking = APP_URL."/track/open?t=3&e=$address&l=$token_id";
+            $email_message = str_replace('{{tracking_link}}', $tracking, $email_message);
+            $images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($token_id);
+            if (isset($images[0]['file_name'])) {
+                $image = '<img src="'.APP_URL.'uploads/'.$images[0]['file_name'].'" width=200 />';
+            } else {
+                $image = '';
+            }
+            $email_message = str_replace('{{image}}', $image, $email_message);
             $mail->Body = $email_message;
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
