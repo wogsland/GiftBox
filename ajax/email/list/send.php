@@ -2,6 +2,7 @@
 use \Sizzle\{
     EmailCredential,
     EmailList,
+    EmailListEmail,
     RecruitingCompany,
     RecruitingToken
 };
@@ -52,45 +53,8 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
     }
 
     if (!isset($data['errors'])) {
-        /// instantiate mailer
-        $mail = new PHPMailer;
-        $mail->isSMTP();
-        $mail->isHTML(true);
-        //$mail->SMTPDebug = 3; // Enable verbose debug output
-
-        /*
-        If testing locally with Gmail, you'll need to turn this on
-        https://www.google.com/settings/security/lesssecureapps
-        */
-
-        // add credentials
-        $mail->Host = $EmailCredential->smtp_host;
-        $mail->SMTPAuth = true;
-        $mail->Username = $EmailCredential->username;
-        $mail->Password = $EmailCredential->password;
-        $mail->SMTPSecure = 'tls'; // tle or ssl
-        //$mail->SMTPDebug = 3; // 2 for verbose debug output
-        $mail->Port = $EmailCredential->smtp_port;
-
-        $requiredParams = [
-            'subject',
-            'body',
-            'address',
-            'email_credential_id'
-        ];
-
-        $mail->setFrom($EmailCredential->username, $_SESSION['email']); // This from email is ignored by gmail, but name isn't
-        $mail->addAddress('bradley.wogsland@gmail.com');
-        if (isset($replyTo)) {
-            $mail->addReplyTo($replyTo);
-        }
-        if (isset($cc)) {
-            $mail->addCC($cc);
-        }
-        if (isset($bcc)) {
-            $mail->addCC($bcc);
-        }
-        $mail->Subject = $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
+        $emails = (new EmailListEmail())->getByEmailListId($email_list_id);
+        //print_r($emails);die;
         $email_message = file_get_contents(__DIR__.'/../../../email_templates/recruiting_token.inline.html');
         $email_message = str_replace('{{message}}', ($message ?? ''), $email_message);
         $link = APP_URL.'token/recruiting/'.$token_id;
@@ -98,14 +62,55 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
         $email_message = str_replace('{{job_title}}', $RecruitingToken->job_title, $email_message);
         $email_message = str_replace('{{email}}', $_SESSION['email'], $email_message);
         $email_message = str_replace('{{long_id}}', $token_id, $email_message);
-        $mail->Body = $email_message;
-        //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        foreach ($emails as $address) {
+            /// instantiate mailer
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->isHTML(true);
+            //$mail->SMTPDebug = 3; // Enable verbose debug output
 
-        if (!$mail->send()) {
-            //print_r($mail);
-            $data['error'] = $mail->ErrorInfo;
-        } else {
-            $success = 'true';
+            /*
+            If testing locally with Gmail, you'll need to turn this on
+            https://www.google.com/settings/security/lesssecureapps
+            */
+
+            // add credentials
+            $mail->Host = $EmailCredential->smtp_host;
+            $mail->SMTPAuth = true;
+            $mail->Username = $EmailCredential->username;
+            $mail->Password = $EmailCredential->password;
+            $mail->SMTPSecure = 'tls'; // tle or ssl
+            //$mail->SMTPDebug = 3; // 2 for verbose debug output
+            $mail->Port = $EmailCredential->smtp_port;
+
+            $requiredParams = [
+                'subject',
+                'body',
+                'address',
+                'email_credential_id'
+            ];
+
+            $mail->setFrom($EmailCredential->username, $_SESSION['email']); // This from email is ignored by gmail, but name isn't
+            $mail->addAddress($address);
+            if (isset($replyTo)) {
+                $mail->addReplyTo($replyTo);
+            }
+            if (isset($cc)) {
+                $mail->addCC($cc);
+            }
+            if (isset($bcc)) {
+                $mail->addCC($bcc);
+            }
+            $mail->Subject = $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
+            $mail->Body = $email_message;
+            //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            if (!$mail->send()) {
+                //print_r($mail);
+                $data['error'] = $mail->ErrorInfo;
+            } else {
+                $success = 'true';
+            }
         }
     }
 }

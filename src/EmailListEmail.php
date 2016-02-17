@@ -98,4 +98,25 @@ class EmailListEmail
         }
         return $success;
     }
+
+    /**
+     * This function gets emails on a list by the list id
+     *
+     * @param int $list_id - id of the list
+     *
+     * @return array - emails associated with the list
+     */
+    public function getByEmailListId($list_id)
+    {
+        $return = array();
+        $query = "SELECT `email`
+                  FROM email_list_email
+                  WHERE deleted IS NULL
+                  AND email_list_id = '$list_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row['email'];
+        }
+        return $return;
+    }
 }
