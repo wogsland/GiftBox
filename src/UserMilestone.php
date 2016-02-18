@@ -91,7 +91,7 @@ class UserMilestone
     {
         $query = "SELECT user.id, first_name, last_name, email_address,
                   COALESCE(MAX(web_request.created), 'Never') AS last_active,
-                  (SELECT GROUP_CONCAT(milestone.`name`, ', ')
+                  (SELECT GROUP_CONCAT(milestone.`name`)
                    FROM user_milestone
                    JOIN milestone ON milestone.id = milestone_id
                    WHERE user_id = user.id

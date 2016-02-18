@@ -66,7 +66,7 @@ body {
       <br />
       <h4><i class="greyed">Milestones Completed:</i></h4>
       <?php
-      $query = "SELECT GROUP_CONCAT(milestone.`name`, ', ') milestones
+      $query = "SELECT GROUP_CONCAT(milestone.`name`) milestones
                 FROM user_milestone
                 JOIN milestone ON milestone.id = milestone_id
                 WHERE user_id = $user_id
