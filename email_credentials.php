@@ -127,6 +127,7 @@ require __DIR__.'/header.php';
               label="Password"
               id="credential-password"
               name="credential_password"
+              type="password"
               required>
             </paper-input>
             <paper-input
