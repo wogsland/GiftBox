@@ -109,36 +109,41 @@ require __DIR__.'/header.php';
 </div>
 <div class="center-column">
     <div id="left-column">
-        <form is="iron-form" id="recruiting-company-form">
-                <paper-card id="company-info" heading="Email Credentials">
-                    <div class="field-container">
-                      <paper-input
-                        label="Username"
-                        id="credential-email"
-                        name="credential_email"
-                        required>
-                      </paper-input>
-                      <paper-input
-                        label="Password"
-                        id="credential-password"
-                        name="credential_password"
-                        required>
-                      </paper-input>
-                      <paper-input
-                        label="SMTP Host"
-                        id="credential-host"
-                        name="credential_host"
-                        required>
-                      </paper-input>
-                      <paper-input
-                        label="SMTP Port"
-                        id="credential-port"
-                        name="credential_port"
-                        required>
-                      </paper-input>
-                    </div>
-                </paper-card>
-        </form>
+      <form is="iron-form" id="recruiting-company-form">
+        <paper-card id="company-info" heading="Email Credentials">
+          <div class="field-container">
+            <i>
+              Currently only SMTP TLS authentication is supported. If you have
+              any questions please contact
+              <a href="mailto:support@gosizzle.io">support@gosizzle.io</a>.
+            </i>
+            <paper-input
+              label="Username"
+              id="credential-email"
+              name="credential_email"
+              required>
+            </paper-input>
+            <paper-input
+              label="Password"
+              id="credential-password"
+              name="credential_password"
+              required>
+            </paper-input>
+            <paper-input
+              label="SMTP Host"
+              id="credential-host"
+              name="credential_host"
+              required>
+            </paper-input>
+            <paper-input
+              label="SMTP Port"
+              id="credential-port"
+              name="credential_port"
+              required>
+            </paper-input>
+          </div>
+        </paper-card>
+      </form>
     </div>
     <div id="right-column" class="pull-right">
         <div class="button-container">

@@ -76,6 +76,9 @@ require __DIR__.'/header.php';
           text-align: left;
           color: rgb(252,84,87);
         }
+        #explanation-text {
+          text-align: left;
+        }
     </style>
 
 </head>
@@ -85,6 +88,12 @@ require __DIR__.'/header.php';
   </div>
     <div class="center-column">
         <div id="left-column">
+          <i id="explanation-text">
+            Please click below to upload an email list in the form of a text file
+            with a single email on each line
+            (<a href="/examples/email_list.txt" download>see example</a>).
+            Clicking upload more than once will create more than one list.
+          </i>
             <form is="iron-form" id="recruiting-company-form">
                 <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="uploadEmailList()">UPLOAD</paper-button>
