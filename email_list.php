@@ -63,7 +63,7 @@ require __DIR__.'/header.php';
         paper-dialog {
             --paper-dialog-background-color: #424242;
             color: white;
-             --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
+            --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
         }
         paper-dialog#status-dialog {
             --paper-dialog-background-color: #303030;
@@ -78,6 +78,10 @@ require __DIR__.'/header.php';
         }
         #explanation-text {
           text-align: left;
+        }
+        paper-input, paper-textarea, paper-dropdown-menu {
+            --paper-input-container-focus-color: #1094F7;
+            --paper-input-container-input-color: white
         }
     </style>
 
