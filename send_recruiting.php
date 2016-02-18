@@ -185,7 +185,7 @@ require __DIR__.'/header.php';
           <a id="new-list-button" href="/email_list?referrer=<?php echo $recruiting_token_id;?>">
             <paper-button>NEW LIST</paper-button>
           </a>
-          <paper-button id="send-single-button" raised onclick="hideList()">SINGLE EMAIL</paper-button>
+          <paper-button id="send-single-button" raised onclick="hideList()" hidden>SINGLE EMAIL</paper-button>
           <br />
           <paper-dropdown-menu
             label="Choose Email Credentials"
