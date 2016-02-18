@@ -531,38 +531,6 @@ function chooseCompany() {
   $('#use-existing-company-dialog')[0].open();
 }
 
-/**
- * Adds existing company choice to form & hides form elements
- */
-function processCompany() {
-  if ($("#use-existing-company-form")[0].validate()) {
-    setStatus("Attaching company...");
-    var menu = $("#company-to-use")[0].contentElement;
-    var companyId = menu.selectedItem.id;
-    var companyName = $(menu.selectedItem).text();
-    $('#id').val(companyId);
-    $.post(
-      '/ajax/recruiting_company/get',
-      {
-        recruiting_company_id: companyId,
-      },
-      function(data){
-        $('#company').val(data.data.name);
-        $('#company-description').val(data.data.description);
-        $('#company-values').val(data.data.values);
-        $('#company-facebook').val(data.data.facebook);
-        $('#company-google-plus').val(data.data.google_plus);
-        $('#company-linkedin').val(data.data.linkedin);
-        $('#company-pinterest').val(data.data.pinterest);
-        $('#company-twitter').val(data.data.twitter);
-      },
-      'json'
-    );
-    $('#use-existing-company-dialog')[0].close();
-    $('#status-dialog')[0].close();
-  }
-}
-
 function setStatus(message) {
   $('#status-message').html(message);
   $('#status-dialog').css('height', '170px');

@@ -392,19 +392,30 @@ require __DIR__.'/header.php';
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        $( document ).ready(function() {
-            $('#select-image-file').on('change', handleImageFileSelect);
-            $('#company-image-container').data('deleted', []);
-            $('#company-video-container').data('deleted', []);
-            $('.recruiting-token-image').each(function() {
-                var img = $(this);
-                img.data('saved', true);
-            });
-            $('.recruiting-token-video').each(function() {
-                var img = $(this);
-                img.data('saved', true);
-            });
+    /**
+     * Adds existing company choice to form & hides form elements
+     */
+    function processCompany() {
+      if ($("#use-existing-company-form")[0].validate()) {
+        setStatus("Attaching company...");
+        var menu = $("#company-to-use")[0].contentElement;
+        var companyId = menu.selectedItem.id;
+        window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
+      }
+    }
+    $( document ).ready(function() {
+        $('#select-image-file').on('change', handleImageFileSelect);
+        $('#company-image-container').data('deleted', []);
+        $('#company-video-container').data('deleted', []);
+        $('.recruiting-token-image').each(function() {
+            var img = $(this);
+            img.data('saved', true);
         });
+        $('.recruiting-token-video').each(function() {
+            var img = $(this);
+            img.data('saved', true);
+        });
+    });
     </script>
 </body>
 </html>
