@@ -123,6 +123,21 @@ require __DIR__.'/header.php';
               name="credential_email"
               required>
             </paper-input>
+            <paper-button
+              id="show-password-button"
+              class="pull-right"
+              raised
+              onclick="showPassword()">
+              SHOW
+            </paper-button>
+            <paper-button
+              id="hide-password-button"
+              class="pull-right"
+              raised
+              onclick="hidePassword()"
+              hidden>
+              HIDE
+            </paper-button>
             <paper-input
               label="Password"
               id="credential-password"
@@ -220,6 +235,24 @@ require __DIR__.'/header.php';
      */
     function dismissStatusDialog() {
       $('#status-dialog')[0].close();
+    }
+
+    /**
+     * Shows the password
+     */
+    function showPassword() {
+      $('#credential-password').removeAttr('type');
+      $('#hide-password-button').removeAttr('hidden');
+      $('#show-password-button').attr('hidden', 'hidden');
+    }
+
+    /**
+     * Hides the password
+     */
+    function hidePassword() {
+      $('#credential-password').attr('type', 'password');
+      $('#show-password-button').removeAttr('hidden');
+      $('#hide-password-button').attr('hidden', 'hidden');
     }
     </script>
 </body>
