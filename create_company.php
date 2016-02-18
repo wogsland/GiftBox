@@ -331,15 +331,15 @@ require __DIR__.'/header.php';
             </form>
         </div>
         <div id="right-column" class="pull-right">
-            <div class="button-container">
-                <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
-                <paper-button raised onclick="saveCompany()">SAVE</paper-button>
-            </div>
-            <div>
-                <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
-                  USE EXISTING COMPANY
-                </paper-button>
-            </div>
+          <div class="button-container">
+            <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
+            <paper-button raised onclick="saveCompany()">SAVE &amp; CONTINUE</paper-button>
+          </div>
+          <div>
+            <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
+              USE EXISTING COMPANY
+            </paper-button>
+          </div>
        </div>
     </div>
 

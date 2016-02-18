@@ -250,102 +250,6 @@ require __DIR__.'/header.php';
                     </div>
                 </paper-card>
 
-                <?php /*if (!isset($token_company)) { ?>
-                    <paper-card id="company-info" heading="Important Company Info">
-                        <div class="field-container">
-                            <?php paper_text('Company Name', 'company', ''); ?>
-                            <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
-                            <?php paper_textarea('Company Values', 'company-values', ''); ?>
-                        </div>
-                    </paper-card>
-                    <paper-card id="company-images" heading="Company Images">
-                        <div class="field-container">
-                            <div class="icon-bar">
-                                <span class="icon-bar-text">Add Images From: </span>
-                                <div class="icon-container">
-                                <input class="hidden-file-input" type="file" multiple id="select-image-file" />
-                                    <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
-    <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
-                                    <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
-                                    <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
-                                    <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
-    -->                            </div>
-                            </div>
-                            <div class="thumbnail-list-container" id="company-image-container" hidden></div>
-                        </div>
-                    </paper-card>
-                    <paper-card id="company-videos" heading="Company Videos">
-                        <div class="field-container">
-                            <div class="icon-bar">
-                                <span class="icon-bar-text">Add Videos From: </span>
-                                <div class="icon-container">
-                                    <paper-button class="icon-button" raised onclick="openVideoDialog()">WEB ADDRESS</paper-button>
-    <!--                            <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-video-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
-                                    <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
-                                    <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
-                                    <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
-    -->
-                                </div>
-                            </div>
-                            <div class="thumbnail-list-container" id="company-video-container" hidden></div>
-                        </div>
-                    </paper-card>
-                    <paper-card id="company-social-media" heading="Company Social Media">
-                        <div class="field-container">
-                            <table>
-                              <tr>
-                                <td class="company-social-site-td">
-                                  https://facebook.com/
-                                </td>
-                                <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-facebook', ''); ?>
-                                </td>
-                              </tr>
-                            </table>
-                            <table>
-                              <tr>
-                                <td class="company-social-site-td">
-                                  https://linkedin.com/
-                                </td>
-                                <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-linkedin', ''); ?>
-                                </td>
-                              </tr>
-                            </table>
-                            <table>
-                              <tr>
-                                <td class="company-social-site-td">
-                                  https://youtube.com/
-                                </td>
-                                <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-youtube', ''); ?>
-                                </td>
-                              </tr>
-                            </table>
-                            <table>
-                              <tr>
-                                <td class="company-social-site-td">
-                                  https://twitter.com/
-                                </td>
-                                <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-twitter', ''); ?>
-                                </td>
-                              </tr>
-                            </table>
-                            <table>
-                              <tr>
-                                <td class="company-social-site-td">
-                                  https://plus.google.com/
-                                </td>
-                                <td class="company-social-user-td">
-                                  <?php paper_text('', 'company-google-plus', ''); ?>
-                                </td>
-                              </tr>
-                            </table>
-                        </div>
-                    </paper-card>
-                <?php } */?>
-
 <?php /*                <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
                     <a href="#" id="token-preview" target="_blank"></a>
@@ -359,7 +263,7 @@ require __DIR__.'/header.php';
             */ ?>
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
-                <paper-button raised onclick="saveRecruitingToken()">SAVE</paper-button>
+                <paper-button raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
             </div>
             <?php /*if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">
