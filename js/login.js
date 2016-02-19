@@ -40,6 +40,8 @@ function loginFacebook() {
 
 function processLogin(userInfo) {
   loginInfo("Logging into S!zzle.  Please wait...");
+  var eventTarget = event.target;
+  $(eventTarget).addClass("disable-clicks");
   $.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
       loginSuccess(data.app_root+'profile');
@@ -50,6 +52,8 @@ function processLogin(userInfo) {
     }
   }).fail(function() {
     loginError("Login failed.");
+  }).always(function() {
+    $(eventTarget).removeClass("disable-clicks");
   });
 }
 
@@ -70,6 +74,8 @@ function handleFBLogin(response) {
       api_response.login_email = api_response.email;
       response.email = api_response.email;
       response.access_token = FB.getAuthResponse().accessToken;
+      var eventTarget = event.target;
+      $(eventTarget).addClass("disable-clicks");
       $.post("ajax/user/update_access_token", response, function(data, textStatus, jqXHR){
         if(data.status === "SUCCESS"){
           processLogin(api_response);
@@ -80,6 +86,8 @@ function handleFBLogin(response) {
         }
       }).fail(function() {
         loginError("Facebook authorization failed");
+      }).always(function() {
+        $(eventTarget).removeClass("disable-clicks");
       });
     });
     } else if (response.status === 'not_authorized') {

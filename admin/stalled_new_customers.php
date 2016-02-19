@@ -37,8 +37,7 @@ body {
                 <tr>
                   <td align="left">
                     <?php
-                    echo "<a href=\"/user/{$customer['id']}\">{$customer['first_name']} {$customer['last_name']}</a>";
-                    echo " (<a href=\"mailto:{$customer['email_address']}\">{$customer['email_address']}</a>)";
+                    echo "<a href=\"/user/{$customer['id']}\">{$customer['first_name']} {$customer['last_name']} ({$customer['email_address']})</a>";
                     ?>
                   </td>
                   <td><?php echo $customer['last_active'];?></td>

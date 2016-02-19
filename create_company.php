@@ -3,7 +3,8 @@ use \Sizzle\{
     HTML,
     RecruitingCompany,
     RecruitingCompanyImage,
-    RecruitingCompanyVideo
+    RecruitingCompanyVideo,
+    RecruitingToken
 };
 
 if (!logged_in()) {
@@ -11,6 +12,7 @@ if (!logged_in()) {
 }
 
 $user_id = $_SESSION['user_id'] ?? '';
+$referrer = $_GET['referrer'] ?? '';
 
 if (isset($_GET['id'])) {
     $token_company = new RecruitingCompany(escape_string($_GET['id']));
@@ -147,6 +149,18 @@ require __DIR__.'/header.php';
           width: 500px;
           font-size: 18px;
         }
+        #progress-bar {
+          width: 100%;
+          height: 70px;
+          padding: 7px 0px 0px 70px;
+        }
+        .progress-text.active {
+          color: #009688;
+        }
+        #use-existing-company-button {
+          margin-left: 50px;
+          margin-right: 50px;
+        }
     </style>
 
 </head>
@@ -155,11 +169,25 @@ require __DIR__.'/header.php';
     <?php require_once __DIR__.'/navbar.php';?>
   </div>
     <div class="center-column">
+      <paper-card id="progress-bar">
+        <a href="<?php echo '/create_recruiting?id='.$referrer;?>">
+          <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
+        </a>
+        <span class="progress-text">Job Info</span>
+        <div class="progress-line"></div>
+        <paper-fab icon="looks one" class="progress-fab"></paper-fab>
+        <span class="progress-text active"><strong>Company Info</strong></span>
+        <div class="progress-line"></div>
+        <paper-fab icon="looks one" class="progress-fab"></paper-fab>
+        <span class="progress-text">Send Token</span>
+      </paper-card>
         <div id="left-column">
             <form is="iron-form" id="recruiting-company-form">
-                <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
+              <input type="hidden" id="id" name="recruiting_company_id" value="<?php echo $token_company->id ?>">
+              <input type="hidden" id="recruiting-token-id" name="recruiting_token_id" value="<?php echo $referrer;?>">
 
                     <paper-card id="company-info" heading="Important Company Info">
+                        <i>Changes will affect every token associated with this company.</i>
                         <div class="field-container">
                             <?php paper_text('Company Name', 'company', $token_company->name); ?>
                             <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
@@ -302,19 +330,40 @@ require __DIR__.'/header.php';
                             </table>
                         </div>
                     </paper-card>
-
-                <div class="button-container">
-                    <paper-button raised class="bottom-button" onclick="saveCompany()">SAVE</paper-button>
-                </div>
             </form>
         </div>
         <div id="right-column" class="pull-right">
-            <div class="button-container">
-                <paper-button raised onclick="backToToken('<?php echo $_GET['referrer'] ?? '';?>')">BACK</paper-button>
-                <paper-button raised onclick="saveCompany()">SAVE</paper-button>
-            </div>
+          <div class="button-container">
+            <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
+            <paper-button raised onclick="saveCompany()">SAVE &amp; CONTINUE</paper-button>
+          </div>
+          <div>
+            <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
+              USE EXISTING COMPANY
+            </paper-button>
+          </div>
        </div>
     </div>
+
+    <paper-dialog class="recruiting-dialog" id="use-existing-company-dialog" modal>
+        <h2>Use Existing Company</h2>
+        <form is="iron-form" id="use-existing-company-form">
+            <div class="field-container">
+            <?php
+                $companies = RecruitingToken::getUserCompanies($user_id);
+                $options = array();
+                foreach ($companies as $co) {
+                    $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
+                }
+                paper_dropdown('Select a Company to use', 'company-to-use', $options, null, true);
+            ?>
+            </div>
+        </form>
+        <div class="buttons">
+            <paper-button class="dialog-button" onclick="processCompany()">Use</paper-button>
+            <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
+        </div>
+    </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
@@ -345,19 +394,30 @@ require __DIR__.'/header.php';
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        $( document ).ready(function() {
-            $('#select-image-file').on('change', handleImageFileSelect);
-            $('#company-image-container').data('deleted', []);
-            $('#company-video-container').data('deleted', []);
-            $('.recruiting-token-image').each(function() {
-                var img = $(this);
-                img.data('saved', true);
-            });
-            $('.recruiting-token-video').each(function() {
-                var img = $(this);
-                img.data('saved', true);
-            });
+    /**
+     * Adds existing company choice to form & hides form elements
+     */
+    function processCompany() {
+      if ($("#use-existing-company-form")[0].validate()) {
+        setStatus("Attaching company...");
+        var menu = $("#company-to-use")[0].contentElement;
+        var companyId = menu.selectedItem.id;
+        window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
+      }
+    }
+    $( document ).ready(function() {
+        $('#select-image-file').on('change', handleImageFileSelect);
+        $('#company-image-container').data('deleted', []);
+        $('#company-video-container').data('deleted', []);
+        $('.recruiting-token-image').each(function() {
+            var img = $(this);
+            img.data('saved', true);
         });
+        $('.recruiting-token-video').each(function() {
+            var img = $(this);
+            img.data('saved', true);
+        });
+    });
     </script>
 </body>
 </html>

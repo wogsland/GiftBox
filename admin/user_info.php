@@ -8,6 +8,7 @@ if (!logged_in() || !is_admin()) {
 date_default_timezone_set('America/Chicago');
 
 // collect id
+$endpoint_parts = explode('/', $_SERVER['REQUEST_URI']);
 if (isset($endpoint_parts[2]) && (int) $endpoint_parts[2] > 0) {
     $user_id = (int) $endpoint_parts[2];
     $User = new User($user_id);
@@ -20,7 +21,6 @@ if (isset($endpoint_parts[2]) && (int) $endpoint_parts[2] > 0) {
     } else {
         $user_id = 0;
     }
-    //echo '<pre>';print_r($User);die;
 } else {
     $user_id = 0;
 }
@@ -66,7 +66,7 @@ body {
       <br />
       <h4><i class="greyed">Milestones Completed:</i></h4>
       <?php
-      $query = "SELECT GROUP_CONCAT(milestone.`name`, ', ') milestones
+      $query = "SELECT GROUP_CONCAT(milestone.`name`) milestones
                 FROM user_milestone
                 JOIN milestone ON milestone.id = milestone_id
                 WHERE user_id = $user_id

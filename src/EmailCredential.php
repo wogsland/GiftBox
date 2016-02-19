@@ -133,4 +133,25 @@ class EmailCredential
         }
         return $success;
     }
+
+    /**
+     * This function gets email credential information by the user id
+     *
+     * @param int $user_id - id of the user
+     *
+     * @return array - email credentials associated with the user
+     */
+    public function getByUserId($user_id)
+    {
+        $return = array();
+        $query = "SELECT CONCAT(`username`, '@', smtp_host, ':', smtp_port) AS credential, `id`
+                  FROM email_credential
+                  WHERE deleted IS NULL
+                  AND user_id = '$user_id'";
+        $results = execute_query($query);
+        while ($row = $results->fetch_assoc()) {
+            $return[] = $row;
+        }
+        return $return;
+    }
 }

@@ -1,12 +1,12 @@
 <?php
 use \Sizzle\EventLogger;
 
-$response['login_type'] = $_SESSION['login_type'];
+$response['login_type'] = $_SESSION['login_type'] ?? null;
 $response['app_root'] = '/';
-$event = new EventLogger($_SESSION['user_id'], EventLogger::LOGOUT);
-$event->log();
+if (isset($_SESSION['user_id'])) {
+    (new EventLogger($_SESSION['user_id'], EventLogger::LOGOUT))->log();
+}
 
-//$session->stop();
 session_unset();
 session_destroy();
 

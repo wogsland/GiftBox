@@ -28,11 +28,12 @@ function openVimeo(vimeoUrl){
   var videoId = vimeoId(vimeoUrl);
   var fileFound = false;
   if (videoId) {
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      async: false,
       url: '/ajax/url-valid',
       data: {
         url: dataURL
@@ -50,6 +51,9 @@ function openVimeo(vimeoUrl){
       error: function() {
         $('label').css('color', 'red');
         $('#video-dialog-url').attr('label', 'Please choose a valid Vimeo URL.');
+      },
+      complete: function() {
+        $(eventTarget).removeClass("disable-clicks");
       }
     });
   } else {
@@ -68,12 +72,13 @@ function openVimeo(vimeoUrl){
 function openYouTube(url) {
   var videoId = youTubeID(url);
   if (videoId) {
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     var imageUrl = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
     var fileFound = false;
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      async: false,
       url: '/ajax/url-valid',
       data: {
         url: imageUrl
@@ -87,6 +92,9 @@ function openYouTube(url) {
           $('label').css('color', 'red');
           $('#video-dialog-url').attr('label', 'Please choose a valid Youtube URL.');
         }
+      },
+      complete: function() {
+        $(eventTarget).removeClass("disable-clicks");
       }
     });
     return fileFound;
@@ -355,64 +363,77 @@ function saveRecruitingToken(preview) {
     linkifyText();
     setStatus("Saving token...");
     serializedForm = document.getElementById("recruiting-token-form").serialize();
-    $.post("/ajax/recruiting_token/save/", serializedForm, function(data, textStatus){
-      if(data.status === "SUCCESS") {
-        $("#id").val(data.id);
-        $("#long-id").val(data.long_id);
-        var userId = data.user_id;
-        var tokenId = data.id;
-        var companyId = data.recruiting_company_id;
-        if (! $('#recruiting-company-id').length) {
-          companyInput = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
-          $('#recruiting-token-form').prepend(companyInput);
-        }
-        if (tokenId && userId) {
-          if ($('#company-images').length) {
-            // Upload and save the image files
-            $('.recruiting-token-image').each(function() {
-              var img = $(this);
-              img.data('token_id', tokenId);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                var file = img.data("file");
-                var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
-                img.data('file_name', fileName);
-                uploadFile(file, fileName, img);
-              }
-            });
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
+    $.ajax({
+      type: "POST",
+      url: "/ajax/recruiting_token/save/",
+      data: serializedForm,
+      dataType: 'json',
+      async: false,
+      success: function(data, textStatus){
+        if(data.status === "SUCCESS") {
+          $("#id").val(data.id);
+          $("#long-id").val(data.long_id);
+          var userId = data.user_id;
+          var tokenId = data.id;
+          var companyId = data.recruiting_company_id;
+          if (! $('#recruiting-company-id').length) {
+            companyInput = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
+            $('#recruiting-token-form').prepend(companyInput);
+          }
+          if (tokenId && userId) {
+            if ($('#company-images').length) {
+              // Upload and save the image files
+              $('.recruiting-token-image').each(function() {
+                var img = $(this);
+                img.data('token_id', tokenId);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  var file = img.data("file");
+                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  img.data('file_name', fileName);
+                  uploadFile(file, fileName, img);
+                }
+              });
 
-            // Delete any removed images
-            deleteChildren('image');
+              // Delete any removed images
+              deleteChildren('image');
+            }
+
+            if ($('#company-videos').length) {
+              // Save the video urls
+              $('.recruiting-token-video').each(function() {
+                var img = $(this);
+                img.data('token_id', tokenId);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  saveTokenVideo(img);
+                }
+              });
+
+              // Delete any removed videos
+              deleteChildren('video');
+            }
           }
 
-          if ($('#company-videos').length) {
-            // Save the video urls
-            $('.recruiting-token-video').each(function() {
-              var img = $(this);
-              img.data('token_id', tokenId);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                saveTokenVideo(img);
-              }
-            });
-
-            // Delete any removed videos
-            deleteChildren('video');
+          closeStatus();
+          if (preview) {
+            $('#token-preview').attr('href', '/token/recruiting/'+data.long_id);
+            $('#token-preview')[0].click();
           }
+          window.location = '/create_company?id='+companyId+'&referrer='+data.long_id;
+        } else if (data.status === "ERROR") {
+          alert(data.message);
+        }  else {
+          alert(textStatus);
         }
-
-        closeStatus();
-        if (preview) {
-          window.open('/token/recruiting/'+data.long_id , '_blank');
-        }
-      } else if (data.status === "ERROR") {
-        alert(data.message);
-      }  else {
-        alert(textStatus);
+        $("#save-button").html("Save");
       }
-      $("#save-button").html("Save");
-    },'json').fail(function() {
+    }).fail(function() {
       alert("Save failed");
+    }).always(function() {
+      $(eventTarget).removeClass("disable-clicks");
     });
   }
 }
@@ -427,6 +448,8 @@ function saveCompany() {
     linkifyCompanyText();
     setStatus("Saving company...");
     serializedForm = document.getElementById("recruiting-company-form").serialize();
+    var eventTarget = event.target;
+    $(eventTarget).addClass("disable-clicks");
     $.post("/ajax/recruiting_company/save/", serializedForm, function(data, textStatus){
       if(data.status === "SUCCESS") {
         $("#id").val(data.id);
@@ -466,6 +489,7 @@ function saveCompany() {
         }
 
         closeStatus();
+        window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
       } else if (data.status === "ERROR") {
         alert(data.message);
       }  else {
@@ -474,6 +498,8 @@ function saveCompany() {
       $("#save-button").html("Save");
     },'json').fail(function() {
       alert("Save failed");
+    }).always(function() {
+      $(eventTarget).removeClass("disable-clicks");
     });
   }
 }
@@ -503,33 +529,6 @@ function chooseCompany() {
   var menu = $("#company-to-use")[0].contentElement;
   menu.selected = null;
   $('#use-existing-company-dialog')[0].open();
-}
-
-/**
- * Adds existing company choice to form & hides form elements
- */
-function processCompany() {
-  if ($("#use-existing-company-form")[0].validate()) {
-    setStatus("Attaching company...");
-    var menu = $("#company-to-use")[0].contentElement;
-    var companyId = menu.selectedItem.id;
-    var companyName = $(menu.selectedItem).text();
-    $('#company-info').remove();
-    $('#company-images').remove();
-    $('#company-videos').remove();
-    $('#company-social-media').remove();
-    if($('#company-info-header').length) {
-      $('#recruiting-company-id').val(companyId);
-      $('#company-info-header').attr('heading', companyName);
-    } else {
-      chosenCard = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
-      chosenCard += '<paper-card id="company-info-header" heading="'+companyName+'">';
-      chosenCard += '</paper-card>';
-      $('#recruiting-token-form').prepend(chosenCard);
-    }
-    $('#use-existing-company-dialog')[0].close();
-    $('#status-dialog')[0].close();
-  }
 }
 
 function setStatus(message) {

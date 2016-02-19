@@ -60,13 +60,14 @@ var Model = {
     location: user.location,
     position: user.position,
     company: user.company,
-    about: user.about ? user.about : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu commodo leo. Ut ac mollis nulla, et imperdiet tortor. Donec ornare accumsan ipsum, placerat consectetur odio suscipit nec. Praesent tempor dignissim semper. In sapien lectus, pellentesque in risus id, tincidunt faucibus lacus. Donec venenatis lectus elementum, hendrerit sem a, luctus nisi. Cras malesuada vestibulum nulla sed laoreet. Curabitur laoreet urna sed facilisis tempus. Sed sodales lobortis nisi commodo fringilla. Praesent et purus vel neque consectetur commodo id ut diam. Fusce sem sapien, tristique vel turpis et, dapibus euismod diam. Vivamus a blandit erat, non bibendum nibh. Suspendisse nisi dui, porttitor ac sagittis vel, egestas ac est. Pellentesque diam enim, dictum ut nisl at, cursus iaculis lorem",
+    about: user.about ? user.about : "",
     levels: [
       {1: "Free"},
       {2: "Standard"},
       {3: "Premium"},
     ],
-    social: null
+    social: null,
+    receive_token_notifications: user.receive_token_notifications
   },
 
   tokens: tokens,

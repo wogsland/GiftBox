@@ -41,6 +41,8 @@ require __DIR__.'/header.php';
     });
     $('#send-password-button').on('click', function () {
       url = '/ajax/reset_password/';
+      var eventTarget = event.target;
+      $(eventTarget).addClass("disable-clicks");
       $.post(
         url,
         {
@@ -67,7 +69,10 @@ require __DIR__.'/header.php';
             $('#reset-message').html('Unable to reset password.'+request);
           }
         },
-        'json');
+        'json')
+          .always(function() {
+            $(eventTarget).removeClass("disable-clicks");
+          });
     });
   });
   </script>

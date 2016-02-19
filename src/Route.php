@@ -87,6 +87,9 @@ class Route
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;
+            case 'email_credentials':
+                include __DIR__.'/../email_credentials.php';
+                break;
             case 'email_list':
                 include __DIR__.'/../email_list.php';
                 break;
@@ -139,8 +142,14 @@ class Route
                     echo "Disallow: /\n";
                 }
                 break;
+            case 'support':
+                include __DIR__.'/../support.php';
+                break;
             case 'teapot':
                 include __DIR__.'/../teapot.php';
+                break;
+            case 'send_recruiting':
+                include __DIR__.'/../send_recruiting.php';
                 break;
             case 'terms':
                 include __DIR__.'/../termsservice.php';

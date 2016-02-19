@@ -112,10 +112,16 @@ extends \PHPUnit_Framework_TestCase
         $response = curl_exec($ch);
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
+        ob_end_clean();
         $return = json_decode($json);
         $this->assertEquals('false', $return->success);
-        $this->assertEquals('', $return->data);
-        ob_end_clean();
+        $this->assertTrue(is_object($return->data));
+        $this->assertTrue(is_array($return->data->errors));
+        $this->assertEquals(4, count($return->data->errors));
+        $this->assertTrue(in_array('Username cannot be left blank', $return->data->errors));
+        $this->assertTrue(in_array('Password cannot be left blank', $return->data->errors));
+        $this->assertTrue(in_array('Invalid SMTP host', $return->data->errors));
+        $this->assertTrue(in_array('Invalid Port provided for SMTP host', $return->data->errors));
     }
 }
 ?>

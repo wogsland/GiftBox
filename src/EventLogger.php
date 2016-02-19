@@ -14,6 +14,7 @@ class EventLogger
     const CHANGE_PASSWORD = 9;
     const UPGRADE = 10;
     const UPDATE_FACEBOOK_ACCESS_TOKEN = 11;
+    const SUPPORT_EMAIL_SENT = 12;
 
     public $id;
     public $user_id;
@@ -30,8 +31,9 @@ class EventLogger
 
     public function log()
     {
+        $user_id_insert_value = is_null($this->user_id) ? 'NULL' : "'".$this->user_id."'";
         $sql = "INSERT INTO event_log (user_id, event_type_id, event_info)
-            values ('".$this->user_id."', '".$this->event_type_id."', '".$this->event_info."')";
+            values (".$user_id_insert_value.", '".$this->event_type_id."', '".$this->event_info."')";
         execute($sql);
     }
 }

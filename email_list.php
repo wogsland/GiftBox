@@ -1,5 +1,5 @@
 <?php
-if (!logged_in() && !is_admin()) {
+if (!logged_in()) {
     header('Location: '.APP_URL);
 }
 
@@ -63,7 +63,7 @@ require __DIR__.'/header.php';
         paper-dialog {
             --paper-dialog-background-color: #424242;
             color: white;
-             --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
+            --paper-dialog-title: {font-size: 24px; font-weight: 300; margin-top: 10px}
         }
         paper-dialog#status-dialog {
             --paper-dialog-background-color: #303030;
@@ -76,6 +76,13 @@ require __DIR__.'/header.php';
           text-align: left;
           color: rgb(252,84,87);
         }
+        #explanation-text {
+          text-align: left;
+        }
+        paper-input, paper-textarea, paper-dropdown-menu {
+            --paper-input-container-focus-color: #1094F7;
+            --paper-input-container-input-color: white
+        }
     </style>
 
 </head>
@@ -85,6 +92,12 @@ require __DIR__.'/header.php';
   </div>
     <div class="center-column">
         <div id="left-column">
+          <i id="explanation-text">
+            Please click below to upload an email list in the form of a text file
+            with a single email on each line
+            (<a href="/examples/email_list.txt" download>see example</a>).
+            Clicking upload more than once will create more than one list.
+          </i>
             <form is="iron-form" id="recruiting-company-form">
                 <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="uploadEmailList()">UPLOAD</paper-button>

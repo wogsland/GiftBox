@@ -162,6 +162,8 @@ $("#subscribe").submit(function (e) {
     }
 
     if (isValidEmail(email)) {
+        var eventTarget = event.target;
+        $(eventTarget).addClass("disable-clicks");
         $.ajax({
             type: "POST",
             url: "subscribe/subscribe.php",
@@ -170,6 +172,9 @@ $("#subscribe").submit(function (e) {
                 $('.subscription-success').fadeIn(1000);
                 $('.subscription-error').fadeOut(500);
                 $('.hide-after').fadeOut(500);
+            },
+            complete: function() {
+                $(eventTarget).removeClass("disable-clicks");
             }
         });
     } else {
