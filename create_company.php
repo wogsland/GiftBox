@@ -170,7 +170,9 @@ require __DIR__.'/header.php';
   </div>
     <div class="center-column">
       <paper-card id="progress-bar">
-        <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
+        <a href="<?php echo '/create_recruiting?id='.$referrer;?>">
+          <paper-fab icon="looks one" class="progress-fab">1</paper-fab>
+        </a>
         <span class="progress-text">Job Info</span>
         <div class="progress-line"></div>
         <paper-fab icon="looks one" class="progress-fab"></paper-fab>
