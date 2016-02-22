@@ -182,6 +182,7 @@ function removeImage(img) {
  * @param {String} imageId The HTML id of the image or video object
  */
 function removeImageById(imageId) {
+  console.log(imageId);
   removeImage($('#'+imageId));
 }
 
