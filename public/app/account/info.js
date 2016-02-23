@@ -14,6 +14,12 @@ var AccountInfo = React.createClass({
     return state;
   },
 
+  handleChangeAllowTokenResponses: function(event) {
+    // flip 'Y' to 'N' and vice versa
+    event.target.value = event.target.value === 'Y' ? 'N' : 'Y';
+    this.handleChange(event);
+  },
+
   handleChangeReceiveTokenNotifications: function(event) {
     // flip 'Y' to 'N' and vice versa
     event.target.value = event.target.value === 'Y' ? 'N' : 'Y';
@@ -34,6 +40,7 @@ var AccountInfo = React.createClass({
   render: function() {
 
     var wantsToReceiveTokenResponseNotifications = this.state.receive_token_notifications === 'Y';
+    var allowTokenResponses = this.state.allow_token_responses === 'Y';
 
     return <div className="tab-pane active" id="account">
       <h2>Profile Settings</h2>
@@ -57,14 +64,22 @@ var AccountInfo = React.createClass({
           </div>
         </div>
         <div className="form-group">
-          <div className="checkbox col-sm-offset-4 col-sm-3">
+          <div className="checkbox col-sm-offset-1 col-sm-10">
             <label>
-              <input type="checkbox" name="receive_token_notifications" checked={wantsToReceiveTokenResponseNotifications} onChange={this.handleChangeReceiveTokenNotifications} />
-              Receive Token Notifications by Email?
+              <input type="checkbox" name="allow_token_responses" checked={allowTokenResponses} onChange={this.handleChangeAllowTokenResponses} />
+              Allow Token Responses?
             </label>
           </div>
-          <label className="col-sm-5 control-label"><a onClick={this.editProfile}>Save</a></label>
         </div>
+        <div className="form-group">
+          <div className="checkbox col-sm-offset-1 col-sm-10">
+            <label>
+              <input type="checkbox" name="receive_token_notifications" checked={wantsToReceiveTokenResponseNotifications} onChange={this.handleChangeReceiveTokenNotifications} />
+              Receive Token Response Notifications by Email?
+            </label>
+          </div>
+        </div>
+        <label className="col-sm-offset-7 col-sm-5 control-label"><a onClick={this.editProfile}>Save</a></label>
       </form>
    </div>;
  },

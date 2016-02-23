@@ -67,6 +67,7 @@ var Model = {
       {3: "Premium"},
     ],
     social: null,
+    allow_token_responses: user.allow_token_responses,
     receive_token_notifications: user.receive_token_notifications
   },
 
