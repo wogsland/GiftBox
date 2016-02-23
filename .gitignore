@@ -6,6 +6,7 @@ Icon
 # Local storage #
 #################
 /public/uploads
+/public/static_tokens
 
 # Composer #
 ############
