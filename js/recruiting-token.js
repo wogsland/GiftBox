@@ -458,6 +458,14 @@ $(document).ready(function(){
         $('#videos-frontpage').addClass('mdl-cell--12-col');
       }
     });
+    url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined && data.data.allowed !== undefined) {
+        if ('false' == data.data.allowed) {
+          $('#interested-row').hide();
+        }
+      }
+    });
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
