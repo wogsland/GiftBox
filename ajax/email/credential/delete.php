@@ -3,7 +3,7 @@ use \Sizzle\EmailCredential;
 
 $success = 'false';
 $data = '';
-if (isset($_SESSION['user_id'])) {
+if (logged_in()) {
     if (isset($_POST['id'])) {
         $id = (int) $_POST['id'];
         if ($id > 0) {

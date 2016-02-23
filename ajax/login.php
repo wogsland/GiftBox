@@ -13,8 +13,8 @@ $response['status'] = "ERROR";
 $response['message'] = "Unable to log in at this time.";
 $response['app_root'] = '/';
 
-$email = $_POST['login_email'];
-$login_type = $_POST['login_type'];
+$email = $_POST['login_email'] ?? '';
+$login_type = $_POST['login_type'] ?? 'EMAIL';
 if (isset($_POST['password'])) {
     $password = escape_string($_POST['password']);
 } else {

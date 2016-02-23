@@ -9,7 +9,7 @@ use \Sizzle\{
 
 date_default_timezone_set('America/Chicago');
 
-if (isset($_SESSION['user_id'])) {
+if (logged_in()) {
     $user_id = (int) $_SESSION['user_id'];
     try {
         // Save the token
