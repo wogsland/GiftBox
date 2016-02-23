@@ -212,6 +212,10 @@ function createThumbnail(object, parentId) {
 }
 
 function handleImageFileSelect(evt) {
+  // avoid trying to save before file upload is finished
+  $('#save-continue-button').addClass("disable-clicks");
+
+  // process files
   for (var i = 0; i < evt.target.files.length; i++) {
     var file = evt.target.files[i];
     if (!file.type.match(imageType)) {
@@ -220,13 +224,13 @@ function handleImageFileSelect(evt) {
     }
 
     // Create an image element to show the thumbnail
-
     var img = $('<img class="recruiting-token-image" id="'+file.name.replace('.', '_')+'">');
     img.attr('src', window.URL.createObjectURL(file));
     img.data('file', file);
     img.data('saved', false);
     createThumbnail(img, "company-image-container");
   }
+  $('#save-continue-button').removeClass("disable-clicks");
 }
 
 function uploadFileData(fileData, fileName, img) {
@@ -274,16 +278,23 @@ function deleteChildren(type) {
 }
 
 function postSave(img, url, params) {
-  $.post(url, params, function(data, textStatus){
-    if(data.status === "SUCCESS") {
-      img.data('id', data.id);
-      img.data("saved", true);
-    } else if (data.status === "ERROR") {
-      alert('Save failed: '+data.message);
-    }  else {
-      alert('Save failed: '+textStatus);
+  $.ajax({
+    type: 'POST',
+    datatype: 'json',
+    async: false,
+    url: url,
+    data: params,
+    success: function(data, textStatus){
+      if(data.status === "SUCCESS") {
+        img.data('id', data.id);
+        img.data("saved", true);
+      } else if (data.status === "ERROR") {
+        alert('Save failed: '+data.message);
+      }  else {
+        alert('Save failed: '+textStatus);
+      }
     }
-  },'json').fail(function() {
+  }).fail(function() {
     alert('Save failed.');
   });
 }
