@@ -29,6 +29,7 @@ if (logged_in()) {
         $user->about = get_post('about');
         $user->username = get_post('username');
         $user->user_group = get_post('group');
+        $user->allow_token_responses = get_post('allow_token_responses');
         $user->receive_token_notifications = get_post('receive_token_notifications');
 
         // password

@@ -37,19 +37,4 @@ var AccountProfile = React.createClass({
   getAvatar: function(user) {
     return (user.email && user.email !== '') ? 'http://www.gravatar.com/avatar/' + CryptoJS.MD5(user.email) : '/assets/img/user.png';
   },
-
-  renderAbout: function(about, expanded) {
-    if(about.length < 180) {
-      return <p className="mb30 small-txt">{about}</p>;
-    } else if(expanded) {
-      return <p className="mb30 small-txt">{about} <a href="#" onClick={this.toggleExpanded}>Show Less</a></p>;
-    } else {
-      return <p className="mb30 small-txt">{about.substr(0, 172)}... <a href="#" onClick={this.toggleExpanded}>Show More</a></p>;
-    }
-  },
-
-  renderSocial: function(social) {
-    return <li key={social.name}><i className={'fa ' + social.icon}></i> <a href= {"https://" + social.url} >{social.url}</a></li>
-  }
-
 });

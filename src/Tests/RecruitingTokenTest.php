@@ -130,6 +130,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($user);
         $this->assertNotEquals('',$user);
         $this->assertEquals($this->User->getId(),$user->getId());
+        $this->assertEquals('N',$user->allow_token_responses);
         $this->assertEquals('N',$user->receive_token_notifications);
     }
 
