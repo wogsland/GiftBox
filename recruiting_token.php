@@ -90,7 +90,7 @@
                     <div class="mdl-layout__tab-panel is-active" id="overview">
 
                       <section id="company-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onImagesClick">
-                        <div class="mdl-grid no-padding no-margin" id="company-image-grid">
+                        <div class="mdl-grid no-padding no-margin link-finger" id="company-image-grid">
                           <div class="mdl-cell no-margin" id="company-main-image">
                             <div id="supporting-company">
                               <i class="material-icons">business</i>
@@ -112,7 +112,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="mdl-card mdl-cell mdl-cell--12-col" id="company-description">
+                        <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="company-description">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark">Company Information</h4>
                             <p id="company-description-text">
@@ -132,7 +132,7 @@
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
                             <h4 class="mdl-color-text--primary-dark gt-info-jobtitle">Job Description</h4>
-                            <p class="gt-info-overview-short" on-click="_onOverviewClick">
+                            <p class="gt-info-overview-short link-finger" on-click="_onOverviewClick">
                             </p>
                           </div>
                           <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
@@ -173,7 +173,7 @@
                         </a>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
-                        <div class="mdl-card mdl-cell mdl-cell--12-col" id="location-frontpage">
+                        <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="location-frontpage">
                           <div id="supporting-location">
                             <i class="material-icons">room</i>
                             <i class="gt-info-location"></i>
@@ -181,14 +181,14 @@
                         </div>
                       </section>
                       <section class="section--center mdl-grid mdl-grid--no-spacing">
-                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="images-frontpage" on-click="_onImagesClick">
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
                           <div id="supporting-images">
                             <i class="material-icons">image</i> IMAGES
                           </div>
                         </div>
                         <div class="mdl-layout-spacer">
                         </div>
-                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp" id="videos-frontpage" on-click="_onVideosClick">
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="videos-frontpage" on-click="_onVideosClick">
                           <div id="supporting-videos">
                             <i class="material-icons">videocam</i> VIDEOS
                           </div>
