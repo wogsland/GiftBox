@@ -33,6 +33,7 @@ function openVimeo(vimeoUrl){
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
     $.ajax({
       type: 'POST',
+      async: false,
       dataType: 'json',
       url: '/ajax/url-valid',
       data: {
@@ -78,6 +79,7 @@ function openYouTube(url) {
     var fileFound = false;
     $.ajax({
       type: 'POST',
+      async: false,
       dataType: 'json',
       url: '/ajax/url-valid',
       data: {
