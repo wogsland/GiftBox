@@ -241,7 +241,7 @@ function uploadFileData(fileData, fileName, img) {
         // progress indicator goes here
       }
     };
-    xhr.open("POST", "/upload", true);
+    xhr.open("POST", "/upload", false);
     xhr.setRequestHeader("X-FILENAME", fileName);
     xhr.send(fileData);
     saveTokenImage(img, fileName);
