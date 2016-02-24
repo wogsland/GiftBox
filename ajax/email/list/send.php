@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->isHTML(true);
-            //$mail->SMTPDebug = 3; // Enable verbose debug output
+            $mail->SMTPDebug = 3; // Enable verbose debug output
 
             /*
             If testing locally with Gmail, you'll need to turn this on
