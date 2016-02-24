@@ -241,9 +241,9 @@ function uploadFileData(fileData, fileName, img) {
         // progress indicator goes here
       }
     };
-        xhr.open("POST", "/upload", true);
-        xhr.setRequestHeader("X-FILENAME", fileName);
-        xhr.send(fileData);
+    xhr.open("POST", "/upload", true);
+    xhr.setRequestHeader("X-FILENAME", fileName);
+    xhr.send(fileData);
     saveTokenImage(img, fileName);
     }
 }
@@ -464,53 +464,60 @@ function saveCompany() {
     serializedForm = document.getElementById("recruiting-company-form").serialize();
     var eventTarget = event.target;
     $(eventTarget).addClass("disable-clicks");
-    $.post("/ajax/recruiting_company/save/", serializedForm, function(data, textStatus){
-      if(data.status === "SUCCESS") {
-        $("#id").val(data.id);
-        var userId = data.user_id;
-        var companyId = data.id;
-        if (companyId && userId) {
-          if ($('#company-images').length) {
-            // Upload and save the image files
-            $('.recruiting-token-image').each(function() {
-              var img = $(this);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                var file = img.data("file");
-                var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
-                img.data('file_name', fileName);
-                uploadFile(file, fileName, img);
-              }
-            });
+    $.ajax({
+      type: 'POST',
+      async: false,
+      datatype: 'json',
+      url: "/ajax/recruiting_company/save/",
+      data: serializedForm,
+      success: function(data, textStatus){
+        if(data.status === "SUCCESS") {
+          $("#id").val(data.id);
+          var userId = data.user_id;
+          var companyId = data.id;
+          if (companyId && userId) {
+            if ($('#company-images').length) {
+              // Upload and save the image files
+              $('.recruiting-token-image').each(function() {
+                var img = $(this);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  var file = img.data("file");
+                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  img.data('file_name', fileName);
+                  uploadFile(file, fileName, img);
+                }
+              });
 
-            // Delete any removed images
-            deleteChildren('image');
+              // Delete any removed images
+              deleteChildren('image');
+            }
+
+            if ($('#company-videos').length) {
+              // Save the video urls
+              $('.recruiting-token-video').each(function() {
+                var img = $(this);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  saveTokenVideo(img);
+                }
+              });
+
+              // Delete any removed videos
+              deleteChildren('video');
+            }
           }
 
-          if ($('#company-videos').length) {
-            // Save the video urls
-            $('.recruiting-token-video').each(function() {
-              var img = $(this);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                saveTokenVideo(img);
-              }
-            });
-
-            // Delete any removed videos
-            deleteChildren('video');
-          }
+          closeStatus();
+          window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
+        } else if (data.status === "ERROR") {
+          alert(data.message);
+        }  else {
+          alert(textStatus);
         }
-
-        closeStatus();
-        window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
-      } else if (data.status === "ERROR") {
-        alert(data.message);
-      }  else {
-        alert(textStatus);
+        $("#save-button").html("Save");
       }
-      $("#save-button").html("Save");
-    },'json').fail(function() {
+    }).fail(function() {
       alert("Save failed");
     }).always(function() {
       $(eventTarget).removeClass("disable-clicks");
