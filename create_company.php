@@ -16,8 +16,8 @@ $referrer = $_GET['referrer'] ?? '';
 
 if (isset($_GET['id'])) {
     $token_company = new RecruitingCompany(escape_string($_GET['id']));
-    if ($token_company->user_id != $user_id && !is_admin()) {
-        header('Location: '.APP_URL.'/tokens');
+    if (isset($token_company->user_id) && $token_company->user_id != $user_id && !is_admin()) {
+        header('Location: '.APP_URL.'tokens');
     }
     $token_images = (new RecruitingCompanyImage())->getByCompanyId($token_company->id);
     $token_videos = (new RecruitingCompanyVideo())->getByCompanyId($token_company->id);
