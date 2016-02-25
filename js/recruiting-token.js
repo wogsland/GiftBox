@@ -1,5 +1,9 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 
+scope._onTrack = function(event) {
+  // do nothing, get no error
+};
+
 scope._onOverviewClick = function(event) {
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
