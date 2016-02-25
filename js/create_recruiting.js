@@ -444,7 +444,6 @@ function saveCompany() {
               // Upload and save the image files
               $('.recruiting-token-image').each(function() {
                 var img = $(this);
-                console.log(img);/* DO NOT DELETE - See #850 */
                 img.data('recruiting_company_id', companyId);
                 if (!img.data('saved')) {
                   var file = img.data("file");
@@ -474,7 +473,9 @@ function saveCompany() {
           }
 
           closeStatus();
-          window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
+          setTimeout(function(){
+            window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
+          },1000);
         } else if (data.status === "ERROR") {
           alert(data.message);
         }  else {
