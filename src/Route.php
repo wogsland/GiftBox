@@ -44,6 +44,9 @@ class Route
             case 'about':
                 include __DIR__.'/../about.php';
                 break;
+            case 'attribution':
+                include __DIR__.'/../attribution.php';
+                break;
             case 'activate':
                 include __DIR__.'/../activate.php';
                 break;

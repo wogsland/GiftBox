@@ -19,6 +19,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/'));
         $this->assertTrue($this->checkStatusCode('/index.html'));
         $this->assertTrue($this->checkStatusCode('/about'));
+        $this->assertTrue($this->checkStatusCode('/attribution'));
         $this->assertTrue($this->checkStatusCode('/activate', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', false, 302));
@@ -84,6 +85,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/', true, 302));
         $this->assertTrue($this->checkStatusCode('/index.html', true, 302));
         $this->assertTrue($this->checkStatusCode('/about', true));
+        $this->assertTrue($this->checkStatusCode('/attribution', true));
         $this->assertTrue($this->checkStatusCode('/activate', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 302));
@@ -149,6 +151,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/index.html', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/about', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/attribution', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/activate', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/admin', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 200, true));
