@@ -41,7 +41,7 @@ if (User::exists($email)) {
             } else {
                 if ($user->activation_key) {
                     $response['status'] = "ERROR";
-                    $response['message'] = $user->activation_key;
+                    $response['message'] = 'Please confirm email to activate account.';
                 } else {
                     $event_type = EventLogger::LOGIN_USING_EMAIL;
                     $response['status'] = 'SUCCESS';

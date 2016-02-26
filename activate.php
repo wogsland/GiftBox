@@ -11,12 +11,6 @@ $key = escape_string($_GET['key'] ?? '');
 $_SESSION['activation_key'] = $key;
 $type = strtolower($_GET['type'] ?? '');
 
-/* DELETE THIS TESTING BIT
-http://gosizzle.local/activate?uid=131&key=1234&type=emailtoken
-*/
-update("UPDATE `giftbox`.`user` SET `activation_key`='1234' WHERE `id`='131'");
-/*  DELETE ABOVE TESTING BIT*/
-
 // verify user exists
 try {
     $rows_affected = update("UPDATE user
