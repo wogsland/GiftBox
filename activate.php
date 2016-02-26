@@ -1,28 +1,60 @@
 <?php
 use \Sizzle\{
     EventLogger,
+    RecruitingToken,
+    User,
     UserMilestone
 };
 
-if (isset($_GET['uid'],$_GET['key'])) {
-    $user_id = (int) $_GET['uid'];
-    $key = escape_string($_GET['key']);
-    try {
-        $rows_affected = update("UPDATE user SET activation_key = NULL WHERE id = '$user_id' AND activation_key = '$key' LIMIT 1");
-        if ($rows_affected != 1) {
-            throw new Exception('Update failed');
-        }
-        $event = new EventLogger($user_id, EventLogger::ACTIVATE_ACCOUNT);
-        $event->log();
-        $message = '<div>Your account is now active. You may now <a href="'.'/'.'">Log in</a></div>';
-        $UserMilestone = new UserMilestone($user_id, 'Confirm Email');
-    } catch (Exception $e) {
-        $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+$user_id = (int) ($_GET['uid'] ?? 0);
+$key = escape_string($_GET['key'] ?? '');
+$_SESSION['activation_key'] = $key;
+$type = strtolower($_GET['type'] ?? '');
+
+/* DELETE THIS TESTING BIT
+http://gosizzle.local/activate?uid=131&key=1234&type=emailtoken
+*/
+update("UPDATE `giftbox`.`user` SET `activation_key`='1234' WHERE `id`='131'");
+/*  DELETE ABOVE TESTING BIT*/
+
+// verify user exists
+try {
+    $rows_affected = update("UPDATE user
+                             SET activation_key = NULL
+                             WHERE id = '$user_id'
+                             AND activation_key = '$key'
+                             LIMIT 1");
+    if ($rows_affected != 1) {
+        throw new Exception('Update failed');
     }
-} else {
-    $message = '<div>Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+    $UserMilestone = new UserMilestone($user_id, 'Confirm Email');
+    $user = new User($user_id);
+    $_SESSION['email'] = $user->email_address;
+} catch (Exception $e) {
+    $type = 'fail';
 }
 
-header('Location: '.'/'.'?action=login');
-
-?>
+switch ($type) {
+    case 'emailtoken':
+    // set session variable of user token
+    $tokens = RecruitingToken::getUserTokens($user_id);
+    $_SESSION['first_token'] = $tokens[0]->long_id;
+    $message = 'Please create a password to view your token.';
+    case 'nopassword':
+    // show create password page
+    $message = $message ?? 'Please set a password before logging in.';
+    require_once __DIR__.'/password_set.php';
+    //echo 'signup with passwrod here';
+    //print_r($_SESSION);
+    break;
+    case '':
+    $_SESSION['user_id'] = $user->getId();
+    $_SESSION['admin'] = $user->admin;
+    $_SESSION['app_root'] = '/';
+    $_SESSION['app_url'] = APP_URL;
+    $_SESSION['email'] = $user->email_address;
+    $_SESSION['stripe_id'] = $user->stripe_id;
+    $UserMilestone = new UserMilestone($user->getId(), 'Log In');
+    default:
+    header('Location: '.'/'.'?action=login');
+}
