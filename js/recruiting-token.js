@@ -430,7 +430,7 @@ $(document).ready(function(){
         }
       }
       if (dataExists(data.data.company_logo)) {
-        $('#briefcase-or-logo').html('<img src="'+assetHost+"/"+data.data.company_logo+'" width=200>');
+        $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
       }
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
