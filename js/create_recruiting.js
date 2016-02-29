@@ -211,7 +211,7 @@ function createThumbnail(object, parentId) {
 }
 
 function handleImageFileSelect(evt) {
-  // avoid trying to save before file upload is finished
+  // avoid trying to save before files are finished being added
   $('#save-continue-button').addClass("disable-clicks");
 
   // process files
@@ -230,6 +230,9 @@ function handleImageFileSelect(evt) {
     createThumbnail(img, "company-image-container");
   }
   $('#save-continue-button').removeClass("disable-clicks");
+
+  // empty selector so next change will be noted (see #862)
+  $('#select-image-file:file').val('');
 }
 
 function uploadFileData(fileData, fileName, img) {
