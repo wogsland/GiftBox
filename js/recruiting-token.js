@@ -1,5 +1,9 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 
+scope._onTrack = function(event) {
+  // do nothing, get no error
+};
+
 scope._onOverviewClick = function(event) {
   $('.current-section').text('Overview');
   $('.mdl-layout__drawer').removeClass('is-visible');
@@ -456,6 +460,14 @@ $(document).ready(function(){
         $('#images-frontpage').hide();
         $('#videos-frontpage').removeClass('mdl-cell--6-col');
         $('#videos-frontpage').addClass('mdl-cell--12-col');
+      }
+    });
+    url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
+    $.post(url, '', function(data) {
+      if (data.data !== undefined && data.data.allowed !== undefined) {
+        if ('false' == data.data.allowed) {
+          $('#interested-row').hide();
+        }
       }
     });
     url = '/ajax/recruiting_token/get_videos' + path[4];

@@ -387,3 +387,6 @@ i.plus-icon--overlay {
   width: 100%;
   height:112.24px;
 }
+.link-finger {
+  cursor: pointer;
+}

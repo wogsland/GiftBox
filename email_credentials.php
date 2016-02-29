@@ -32,6 +32,7 @@ require __DIR__.'/header.php';
 <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="/components/paper-dialog/paper-dialog.html">
 <link rel="import" href="/components/paper-fab/paper-fab.html">
+<link rel="import" href="/components/paper-tooltip/paper-tooltip.html">
 
 <style is="custom-style">
     .center-column {
@@ -113,9 +114,10 @@ require __DIR__.'/header.php';
         <paper-card id="company-info" heading="Email Credentials">
           <div class="field-container">
             <i>
-              Currently only SMTP TLS authentication is supported. If you have
-              any questions please contact
-              <a href="mailto:support@gosizzle.io">support@gosizzle.io</a>.
+              Instructions:
+              <a href="https://blog.gosizzle.io/version-1-10-0-release-7417eb683d62" target="_blank">
+                Gmail
+              </a>
             </i>
             <paper-input
               label="Username"
@@ -157,6 +159,12 @@ require __DIR__.'/header.php';
               name="credential_port"
               required>
             </paper-input>
+            <br />
+            <i>
+              Currently only SMTP TLS authentication is supported. If you have
+              any questions please contact
+              <a href="mailto:support@gosizzle.io">support@gosizzle.io</a>.
+            </i>
           </div>
         </paper-card>
       </form>

@@ -33,6 +33,7 @@ function openVimeo(vimeoUrl){
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
     $.ajax({
       type: 'POST',
+      async: false,
       dataType: 'json',
       url: '/ajax/url-valid',
       data: {
@@ -78,6 +79,7 @@ function openYouTube(url) {
     var fileFound = false;
     $.ajax({
       type: 'POST',
+      async: false,
       dataType: 'json',
       url: '/ajax/url-valid',
       data: {
@@ -209,6 +211,10 @@ function createThumbnail(object, parentId) {
 }
 
 function handleImageFileSelect(evt) {
+  // avoid trying to save before file upload is finished
+  $('#save-continue-button').addClass("disable-clicks");
+
+  // process files
   for (var i = 0; i < evt.target.files.length; i++) {
     var file = evt.target.files[i];
     if (!file.type.match(imageType)) {
@@ -217,27 +223,27 @@ function handleImageFileSelect(evt) {
     }
 
     // Create an image element to show the thumbnail
-
     var img = $('<img class="recruiting-token-image" id="'+file.name.replace('.', '_')+'">');
     img.attr('src', window.URL.createObjectURL(file));
     img.data('file', file);
     img.data('saved', false);
     createThumbnail(img, "company-image-container");
   }
+  $('#save-continue-button').removeClass("disable-clicks");
 }
 
 function uploadFileData(fileData, fileName, img) {
     var xhr = new XMLHttpRequest();
     if (xhr.upload) {
-    xhr.upload.onprogress = function(e) {
-      if (e.lengthComputable) {
-        // progress indicator goes here
-      }
-    };
-        xhr.open("POST", "/upload", true);
-        xhr.setRequestHeader("X-FILENAME", fileName);
-        xhr.send(fileData);
-    saveTokenImage(img, fileName);
+      xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+          // progress indicator goes here
+        }
+      };
+      xhr.open("POST", "/upload", false);
+      xhr.setRequestHeader("X-FILENAME", fileName);
+      xhr.send(fileData);
+      saveTokenImage(img, fileName);
     }
 }
 
@@ -271,16 +277,23 @@ function deleteChildren(type) {
 }
 
 function postSave(img, url, params) {
-  $.post(url, params, function(data, textStatus){
-    if(data.status === "SUCCESS") {
-      img.data('id', data.id);
-      img.data("saved", true);
-    } else if (data.status === "ERROR") {
-      alert('Save failed: '+data.message);
-    }  else {
-      alert('Save failed: '+textStatus);
+  $.ajax({
+    type: 'POST',
+    datatype: 'json',
+    async: false,
+    url: url,
+    data: params,
+    success: function(data, textStatus){
+      if(data.status === "SUCCESS") {
+        img.data('id', data.id);
+        img.data("saved", true);
+      } else if (data.status === "ERROR") {
+        alert('Save failed: '+data.message);
+      }  else {
+        alert('Save failed: '+textStatus);
+      }
     }
-  },'json').fail(function() {
+  }).fail(function() {
     alert('Save failed.');
   });
 }
@@ -343,7 +356,11 @@ function linkifyCompanyText() {
 function excludedLinkify (inputText) {
   var exclusions = [
     {url:'asp.net', temp:'84gt43qg8ci4bci4'},
-    {url:'ASP.NET', temp:'87c84c8n3cgnn7c4'}
+    {url:'ASP.NET', temp:'87c84c8n3cgnn7c4'},
+    {url:'avc.net', temp:'v5y5s4v5by5b55vb'},
+    {url:'AVC.NET', temp:'b7j7fjn6n7n7b6b6'},
+    {url:'apc.net', temp:'m87t8r6kbjv6j65b'},
+    {url:'APC.NET', temp:'23b46un6unndubyb'}
   ];
   exclusions.forEach(function (e) {
     inputText = inputText.replace(e.url, e.temp);
@@ -382,41 +399,6 @@ function saveRecruitingToken(preview) {
             companyInput = '<input type="hidden" id="recruiting-company-id" name="recruiting_company_id" value="'+companyId+'">';
             $('#recruiting-token-form').prepend(companyInput);
           }
-          if (tokenId && userId) {
-            if ($('#company-images').length) {
-              // Upload and save the image files
-              $('.recruiting-token-image').each(function() {
-                var img = $(this);
-                img.data('token_id', tokenId);
-                img.data('recruiting_company_id', companyId);
-                if (!img.data('saved')) {
-                  var file = img.data("file");
-                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
-                  img.data('file_name', fileName);
-                  uploadFile(file, fileName, img);
-                }
-              });
-
-              // Delete any removed images
-              deleteChildren('image');
-            }
-
-            if ($('#company-videos').length) {
-              // Save the video urls
-              $('.recruiting-token-video').each(function() {
-                var img = $(this);
-                img.data('token_id', tokenId);
-                img.data('recruiting_company_id', companyId);
-                if (!img.data('saved')) {
-                  saveTokenVideo(img);
-                }
-              });
-
-              // Delete any removed videos
-              deleteChildren('video');
-            }
-          }
-
           closeStatus();
           if (preview) {
             $('#token-preview').attr('href', '/token/recruiting/'+data.long_id);
@@ -450,53 +432,62 @@ function saveCompany() {
     serializedForm = document.getElementById("recruiting-company-form").serialize();
     var eventTarget = event.target;
     $(eventTarget).addClass("disable-clicks");
-    $.post("/ajax/recruiting_company/save/", serializedForm, function(data, textStatus){
-      if(data.status === "SUCCESS") {
-        $("#id").val(data.id);
-        var userId = data.user_id;
-        var companyId = data.id;
-        if (companyId && userId) {
-          if ($('#company-images').length) {
-            // Upload and save the image files
-            $('.recruiting-token-image').each(function() {
-              var img = $(this);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                var file = img.data("file");
-                var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
-                img.data('file_name', fileName);
-                uploadFile(file, fileName, img);
-              }
-            });
+    $.ajax({
+      type: 'POST',
+      async: false,
+      datatype: 'json',
+      url: "/ajax/recruiting_company/save/",
+      data: serializedForm,
+      success: function(data, textStatus){
+        if(data.status === "SUCCESS") {
+          $("#id").val(data.id);
+          var userId = data.user_id;
+          var companyId = data.id;
+          if (companyId && userId) {
+            if ($('#company-images').length) {
+              // Upload and save the image files
+              $('.recruiting-token-image').each(function() {
+                var img = $(this);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  var file = img.data("file");
+                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  img.data('file_name', fileName);
+                  uploadFile(file, fileName, img);
+                }
+              });
 
-            // Delete any removed images
-            deleteChildren('image');
+              // Delete any removed images
+              deleteChildren('image');
+            }
+
+            if ($('#company-videos').length) {
+              // Save the video urls
+              $('.recruiting-token-video').each(function() {
+                var img = $(this);
+                img.data('recruiting_company_id', companyId);
+                if (!img.data('saved')) {
+                  saveTokenVideo(img);
+                }
+              });
+
+              // Delete any removed videos
+              deleteChildren('video');
+            }
           }
 
-          if ($('#company-videos').length) {
-            // Save the video urls
-            $('.recruiting-token-video').each(function() {
-              var img = $(this);
-              img.data('recruiting_company_id', companyId);
-              if (!img.data('saved')) {
-                saveTokenVideo(img);
-              }
-            });
-
-            // Delete any removed videos
-            deleteChildren('video');
-          }
+          closeStatus();
+          setTimeout(function(){
+            window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
+          },1000);
+        } else if (data.status === "ERROR") {
+          alert(data.message);
+        }  else {
+          alert(textStatus);
         }
-
-        closeStatus();
-        window.location = '/send_recruiting?referrer='+companyId+'&id='+$('#recruiting-token-id').val();
-      } else if (data.status === "ERROR") {
-        alert(data.message);
-      }  else {
-        alert(textStatus);
+        $("#save-button").html("Save");
       }
-      $("#save-button").html("Save");
-    },'json').fail(function() {
+    }).fail(function() {
       alert("Save failed");
     }).always(function() {
       $(eventTarget).removeClass("disable-clicks");

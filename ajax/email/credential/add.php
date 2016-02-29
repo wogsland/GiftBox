@@ -4,7 +4,7 @@ use \Sizzle\EmailCredential;
 $success = 'false';
 $data = '';
 $errors = [];
-if (isset($_SESSION['user_id'])) {
+if (logged_in()) {
     $params = [
         'username',
         'password',

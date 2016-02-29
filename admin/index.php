@@ -4,17 +4,20 @@ if (!logged_in() || !is_admin()) {
 }
 
 define('TITLE', 'S!zzle - Admin');
-require __DIR__.'/header.php';
+require __DIR__.'/../header.php';
 ?>
 </head>
 <body>
   <div id="content-wrapper" style="margin-bottom: 300px; text-align:left; margin-left:50px;">
-    <?php require __DIR__.'/navbar.php';?>
+    <?php require __DIR__.'/../navbar.php';?>
     <h1 style="margin-top: 100px;">
       Admin Portal
     </h1>
     <nav id="create-top-nav">
       <ul>
+        <li>
+          <a href="/admin/create_account">Create Account</a>
+        </li>
         <li>
           <a href="/admin/stalled_new_customers">Stalled New Customers</a>
         </li>
@@ -37,6 +40,6 @@ require __DIR__.'/header.php';
       </ul>
     </nav>
   </div>
-    <?php require __DIR__.'/footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
 </body>
 </html>

@@ -44,12 +44,15 @@ class Route
             case 'about':
                 include __DIR__.'/../about.php';
                 break;
+            case 'attribution':
+                include __DIR__.'/../attribution.php';
+                break;
             case 'activate':
                 include __DIR__.'/../activate.php';
                 break;
             case 'admin':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
-                    include __DIR__.'/../admin.php';
+                    include __DIR__.'/../admin/index.php';
                 } else {
                     switch ($this->endpointPieces[2]) {
                     case 'active_users':
@@ -57,6 +60,9 @@ class Route
                         break;
                     case 'add_city':
                         include __DIR__.'/../admin/add_city.php';
+                        break;
+                    case 'create_account':
+                        include __DIR__.'/../admin/create_account.php';
                         break;
                     case 'stalled_new_customers':
                         include __DIR__.'/../admin/stalled_new_customers.php';

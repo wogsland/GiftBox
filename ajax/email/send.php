@@ -6,7 +6,7 @@ use \Sizzle\{
 
 $success = 'false';
 $data = '';
-if (isset($_SESSION['user_id'])) {
+if (logged_in()) {
     // escape params
     $params = [
         'subject',

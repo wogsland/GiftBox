@@ -214,6 +214,9 @@ require __DIR__.'/header.php';
                               foreach ($token_images as $token_image) {
                                   $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
                                   $image_id = str_replace('.', '_', $token_image['file_name']);
+                                  $image_id = str_replace(' ', '_', $image_id);
+                                  $image_id = str_replace('(', '_', $image_id);
+                                  $image_id = str_replace(')', '_', $image_id);
                                   echo '<div class="thumbnail-container">';
                                   echo '  <div class="inner-thumbnail-container">';
                                   echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
@@ -335,7 +338,7 @@ require __DIR__.'/header.php';
         <div id="right-column" class="pull-right">
           <div class="button-container">
             <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
-            <paper-button raised onclick="saveCompany()">SAVE &amp; CONTINUE</paper-button>
+            <paper-button id="save-continue-button" raised onclick="saveCompany()">SAVE &amp; CONTINUE</paper-button>
           </div>
           <div>
             <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
