@@ -47,8 +47,13 @@ body {
   <div>
     <?php require __DIR__.'/../navbar.php';?>
   </div>
-  <div class="row">
-    <div class="col-sm-offset-1 col-sm-10" id="user-info">
+  <div class="row" id="user-info">
+    <div class="pull-right">
+      <a href="/admin/recruiter_profile">
+        <button class="btn button-success">Add Recruiter Profile</button>
+      </a>
+    </div>
+    <div class="col-sm-offset-1 col-sm-10">
       <?php if (0 !== $user_id) { ?>
       <h3><i class="greyed"><?php echo $user_name;?></i></h3>
       <?php
