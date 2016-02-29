@@ -32,15 +32,14 @@ sed -i '' -e 's/\"fonts\//\"\/fonts\//g' recruiting_token.build.html
 echo "Polybuild finished."
 echo ""
 
+# gulp tasks
+npm run css
+
 # minify css
 yuicompressor css/colorbox.css -o public/css/colorbox.min.css
-yuicompressor css/styles.css -o public/css/styles.min.css
 yuicompressor css/magnific-popup.css -o public/css/magnific-popup.min.css
 yuicompressor css/create_recruiting.css -o public/css/create_recruiting.min.css
 yuicompressor css/datatables.css -o public/css/datatables.min.css
-yuicompressor css/owl.theme.css -o public/css/owl.theme.min.css
-yuicompressor css/owl.carousel.css -o public/css/owl.carousel.min.css
-yuicompressor css/nivo-lightbox.css -o public/css/nivo-lightbox.min.css
 yuicompressor css/at-at.css -o public/css/at-at.min.css
 yuicompressor css/ball-robot.css -o public/css/ball-robot.min.css
 echo "CSS minified"

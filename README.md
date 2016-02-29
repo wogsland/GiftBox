@@ -86,6 +86,7 @@ which will create everything you need in the untracked components directory.
 Polymer's polybuild, YUI compressor & json-minify are tools optimize & minify an
 app's code during the build process
 
+    npm install
     npm install -g polybuild
     npm install -g yuicompressor
     npm install -g json-minify

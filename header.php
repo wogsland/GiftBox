@@ -47,22 +47,12 @@
   <!-- FONT ICONS -->
   <link rel="stylesheet" href="/assets/elegant-icons/style.css">
   <link rel="stylesheet" href="/assets/app-icons/styles.css">
-  <link rel="stylesheet" href="/css/font-awesome.min.css">
   <!--[if lte IE 7]><script src="lte-ie7.js"></script><![endif]-->
 
   <link rel="stylesheet" href="/css/jquery-ui-1.10.4.min.css" />
 
   <!-- WEB FONTS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-
-  <!-- CAROUSEL AND LIGHTBOX -->
-  <link rel="stylesheet" href="/css/owl.theme.min.css">
-  <link rel="stylesheet" href="/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="/css/nivo-lightbox.min.css">
-  <link rel="stylesheet" href="/css/nivo_themes/default/default.css">
-
-  <!-- ANIMATIONS -->
-  <link rel="stylesheet" href="/css/animate.min.css">
 
   <!-- CUSTOM STYLESHEETS -->
   <link rel="stylesheet" href="/css/styles.min.css">

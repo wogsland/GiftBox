@@ -1,0 +1,21 @@
+color-darkGrey = #cccccc
+color-grey = #dedede
+color-white = #ffffff
+color-green = #3de7c1
+color-darkGreen = #009688
+
+color-error = #8A1414
+color-lightError = #ffcccc
+
+color-shadow = rgba(0, 0, 0, .2)
+
+z(diff, duration = 0)
+  if (diff > 0) {
+    box-shadow inset 0 0 0 color-shadow, 0 (diff * 2)px (diff * 4)px color-shadow
+  } else {
+    box-shadow inset 0 (- diff * 2)px (- diff * 4)px color-shadow, 0 0 0 color-shadow
+  }
+
+  if (duration > 0) {
+    transition box-shadow ease-in-out duration
+  }
