@@ -56,6 +56,8 @@ body {
       if ('Y' == $User->admin) echo ' <b>ADMIN</b>';
       ?>
       <br />
+      Created <?php echo $User->created;?>
+      <br />
       <?php
       if (isset($User->stripe_id) && '' !== $User->stripe_id) {
           echo 'Credit card info on file.';
