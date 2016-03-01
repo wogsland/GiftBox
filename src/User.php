@@ -79,8 +79,10 @@ class User
                 "SELECT * from user
                 WHERE id = '$id'"
             )->fetch_object("Sizzle\User");
-            foreach (get_object_vars($user) as $key => $value) {
-                $this->$key = $value;
+            if (is_object($user)) {
+                foreach (get_object_vars($user) as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
     }
