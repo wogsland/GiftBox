@@ -7,7 +7,7 @@ if (!logged_in() || !is_admin()) {
 
 date_default_timezone_set('America/Chicago');
 
-define('TITLE', 'S!zzle - Top Ten Tokens');
+define('TITLE', 'S!zzle - Token Stats');
 require __DIR__.'/../header.php';
 ?>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/dt/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.10,b-1.1.0,b-flash-1.1.0,b-html5-1.1.0,b-print-1.1.0/datatables.min.css"/>
@@ -68,7 +68,7 @@ body {
                     ON resp.recruiting_token_id = recruiting_token.id
                     WHERE user.id = recruiting_token.user_id
                     GROUP BY recruiting_token.id
-                    ORDER BY hits DESC";
+                    ORDER BY hits DESC, yeses DESC, job_title";
             $results = execute_query($sql);
             $rows = array();
             while ($row = $results->fetch_assoc()) { ?>
@@ -77,13 +77,18 @@ body {
                   <td><?php echo $row['yeses'];?></td>
                   <td><?php echo $row['nos'];?></td>
                   <td><?php echo $row['maybes'];?></td>
-                  <td><a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
-                    <?php echo $row['job_title'];?>
-                  </a></td>
+                  <td>
+                    <a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
+                      <?php echo $row['job_title'];?>
+                    </a>
+                    <a href="/create_recruiting?id=<?php echo $row['long_id'];?>" target=_blank>
+                      <span class="glyphicon glyphicon-pencil pull-right"></span>
+                    </a>
+                  </td>
                   <td>
                     <?php
-                    echo "<a href=\"/user/{$row['user_id']}\">{$row['first_name']} {$row['last_name']}</a>";
-                    echo " (<a href=\"mailto:{$row['email_address']}\">{$row['email_address']}</a>)";
+                    echo "<a href=\"/user/{$row['user_id']}\">{$row['first_name']} {$row['last_name']}";
+                    echo " ({$row['email_address']})</a>";
                     ?>
                   </td>
                   <td><?php echo date('m/d/Y g:i a', strtotime($row['created']));?></td>
