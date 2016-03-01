@@ -102,6 +102,9 @@ class Route
             case 'email_list':
                 include __DIR__.'/../email_list.php';
                 break;
+            case 'email_signup':
+                include __DIR__.'/../email_signup.php';
+                break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';
                 break;
