@@ -174,7 +174,7 @@ include __DIR__.'/../header.php';
             </div>
             <br />
             <h3>
-              Create enagaging material with S!zzle
+              Create engaging material with S!zzle
             </h3>
             <div class="white-line">
             </div>
@@ -195,7 +195,7 @@ include __DIR__.'/../header.php';
           <div id="left-div-2" class="col-md-4 wow fadeInLeft animated" data-wow-offset="10" data-wow-duration="1.5s">
             <h2>Reduced Time</h2>
             <div class="white-line"></div>
-            With more enagaging content, recruiters will see a
+            With more engaging content, recruiters will see a
             higher conversion rate. This means that recruiters will
             need to source and outreach to fewer candidates,
             creating more time for other placements.
