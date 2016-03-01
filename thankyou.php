@@ -10,6 +10,9 @@ if (isset($_GET['action'])) {
         $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
       }
       break;
+      case 'emailsignup';
+      $message = 'Thank you for signing up!<br/><i>We\'ll get back to you with your S!zzle job posting in 24 hours.</i>';
+      break;
       case 'enterprise';
       $message = 'Thanks for your interest in our Enterprise pricing!<br/><i>Look for an email from our sales team to hit your inbox soon.</i>';
       break;
