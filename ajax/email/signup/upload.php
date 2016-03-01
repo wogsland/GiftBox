@@ -3,16 +3,27 @@
 $success = 'false';
 $data = '';
 $fileName = escape_string($_POST['fileName'] ?? false);
+$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ? ($_POST['email'] ?? false) : false;
 $localPath = $_FILES['listFile']['tmp_name'] ?? false;
-if ($fileName && $localPath) {
-    $fileData = file_get_contents($localPath);
+if ($fileName && $localPath && $email) {
+    $fileData = base64_encode(file_get_contents($localPath));
     $mandrill = new Mandrill(MANDRILL_API_KEY);
+    $message = "Robbie! There's a new email signup!<br /><br />";
+    $message .= $email . " has signed up!<br /><br />";
+    $message .= 'Their job description is attached.';
     $mandrill->messages->send(array(
-      'to'=>array(array('email'=>'bwogsland@gosizzle.io')),
+      'to'=>array(array('email'=>'token@gosizzle.io')),
       'from_email'=>'emailsignup@gosizzle.io',
       'from_name'=>'S!zzle',
       'subject'=>'New S!zzle Email Signup',
-      'html'=>$fileData
+      'html'=>$message,
+      'attachments' => array(
+        array(
+            'content' => $fileData,
+            //'type' => "application/pdf",
+            'name' => $fileName,
+        )
+      )
     ));
     $data = array(
         'errors'=>array(),
@@ -26,6 +37,9 @@ if ($fileName && $localPath) {
     );
     if (!$localPath) {
         $data['errors'][] = 'File is required.';
+    }
+    if (!$email) {
+        $data['errors'][] = 'Valid email address is required.';
     }
 }
 

@@ -72,7 +72,7 @@ include __DIR__.'/header.php';
     <h2>Upload Your Job Description</h2>
     <form id="description-upload">
       <input class="hidden-file-input" type="file" id="select-list-file" name="listFile" hidden />
-      <paper-input id="upload-email" label="Email" name="email" autofocus></paper-input>
+      <paper-input id="upload-email" label="Email" name="email" onclick="" autofocus></paper-input>
       <paper-input id="upload-file" label="File Name" name="fileName" onclick="fireHiddenFileInput('#select-list-file')"></paper-input>
     </form>
     <i>We'll make it S!zzle...</i>
@@ -120,14 +120,13 @@ include __DIR__.'/header.php';
   $( document ).ready(function() {
     $('#select-list-file').change(function() {
       var filename = $('#select-list-file').val().replace('C:\\fakepath\\', '');
-      console.log('filename is '+filename)
-      if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
+      /*if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
         $('#upload-file label').html('<font color="red">Please choose a text file</font>');
         $('#upload-file').val('');
-      } else {
+      } else {*/
         $('#upload-file label').html('File Name');
         $('#upload-file').val(filename);
-      }
+      //}
     });
   });
 
@@ -135,9 +134,16 @@ include __DIR__.'/header.php';
    * Attempts to upload the job description to the ajax endpoint & presents success or error
    */
   function sizzleUpload() {
+    var invalid = false;
     if ('' == $('#upload-file').val()) {
       $('#upload-file label').html('<font color="red">Please choose a file</font>');
-    } else {
+      invalid = true;
+    }
+    if ('' == $('#upload-email').val()) {
+      $('#upload-email label').html('<font color="red">Please enter an email</font>');
+      invalid = true;
+    }
+    if (!invalid) {
       $('#upload-dialog')[0].close();
       $('#upload-errors').html('Processing...');
       $('#upload-process')[0].open();
