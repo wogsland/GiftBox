@@ -31,7 +31,7 @@ body {
   <div class="row">
     <div class="col-sm-offset-1 col-sm-10" id="users-table">
       <h2>USERS IN FREE TRIAL</h2>
-      <i>We started tracking user creation 12/7, so the oldest clump is on that date</i>
+      <i>We started tracking user creation 12/7, so the oldest clump is on that date.</i>
       <table class="table table-striped table-hover" id="responsive-table" hidden>
         <thead>
           <th>Days Into Trial</th>
