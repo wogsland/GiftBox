@@ -28,18 +28,16 @@ if (isset($_SESSION['user_id'])) {
         try {
             // save company info
             $RecruitingCompany->user_id = $user_id;
-            $RecruitingCompany->name = escape_string($_POST['company'] ?? '');
+            $RecruitingCompany->name = $_POST['company'] ?? '';
             $RecruitingCompany->description = HTML::to($_POST['company_description'] ?? '');
-            $RecruitingCompany->description = escape_string($RecruitingCompany->description);
-            $RecruitingCompany->website = escape_string($_POST['company_website'] ?? '');
+            $RecruitingCompany->website = $_POST['company_website'] ?? '';
             $RecruitingCompany->values = HTML::to($_POST['company_values'] ?? '');
-            $RecruitingCompany->values = escape_string($RecruitingCompany->values);
-            $RecruitingCompany->facebook = escape_string($_POST['company_facebook'] ?? '');
-            $RecruitingCompany->linkedin = escape_string($_POST['company_linkedin'] ?? '');
-            $RecruitingCompany->youtube = escape_string($_POST['company_youtube'] ?? '');
-            $RecruitingCompany->twitter = escape_string($_POST['company_twitter'] ?? '');
-            $RecruitingCompany->google_plus = escape_string($_POST['company_google_plus'] ?? '');
-            $RecruitingCompany->pinterest = escape_string($_POST['company_pinterest'] ?? '');
+            $RecruitingCompany->facebook = $_POST['company_facebook'] ?? '';
+            $RecruitingCompany->linkedin = $_POST['company_linkedin'] ?? '';
+            $RecruitingCompany->youtube = $_POST['company_youtube'] ?? '';
+            $RecruitingCompany->twitter = $_POST['company_twitter'] ?? '';
+            $RecruitingCompany->google_plus = $_POST['company_google_plus'] ?? '';
+            $RecruitingCompany->pinterest = $_POST['company_pinterest'] ?? '';
             $RecruitingCompany->save();
 
             // save company_id to token
