@@ -346,7 +346,7 @@ function linkifyText() {
 }
 
 function linkifyCompanyText() {
-  $("#company")[0].updateValueAndPreserveCaret(excludedLinkify($("#company").val()));
+  $("#company-description")[0].updateValueAndPreserveCaret(excludedLinkify($("#company-description").val()));
   $("#company-values")[0].updateValueAndPreserveCaret(excludedLinkify($("#company-values").val()));
 }
 
