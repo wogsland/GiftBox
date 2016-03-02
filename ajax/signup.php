@@ -19,13 +19,13 @@ foreach ($vars as $var) {
     $$var = escape_string($_POST[$var] ?? '');
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
+if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
 
     $user = new User();
     $user->email_address = $signup_email;
     $user->first_name = $first_name;
     $user->last_name = $last_name;
-    if (isset($_POST['signup_password'])) {
+    if ('' != $signup_password) {
         $user->password = $signup_password;
     } else {
         $user->password = null;
@@ -56,6 +56,9 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL) && '' != $signup_password) {
         if ($reg_type == 'EMAIL') {
             // Send the email
             $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
+            if ('' == $signup_password) {
+                $link .= '&type=nopassword';
+            }
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
