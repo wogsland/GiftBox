@@ -36,6 +36,7 @@ body {
           <th>Created</th>
           <th>Name</th>
           <th>Email</th>
+          <th>Organization</th>
           <th>Tokens</th>
           <th>Views</th>
           <th>Paying?</th>
@@ -45,6 +46,7 @@ body {
             $sql = "SELECT user.id,
                     CONCAT(user.first_name, ' ', user.last_name) as full_name,
                     user.email_address,
+                    COALESCE(organization.`name`, '-') AS organization,
                     COALESCE(recruiting_token.tokens, 0) AS tokens,
                     COALESCE(view.views, 0) AS views,
                     IF(COALESCE(user.stripe_id, 'No')='No','No','Yes') AS paying,
@@ -64,6 +66,8 @@ body {
                      GROUP BY recruiting_token.user_id
                     ) as view
                     ON user.id = view.user_id
+                    LEFT JOIN organization
+                    ON user.organization_id = organization.id
                     GROUP BY user.id
                     ORDER BY user.created
                     ";
@@ -74,6 +78,7 @@ body {
                   <td><?php echo date('m/d/Y g:i a', strtotime($row['created']));?></td>
                   <td><a href="/user/<?php echo $row['id'];?>"><?php echo $row['full_name'];?></a></td>
                   <td><a href="/user/<?php echo $row['id'];?>"><?php echo $row['email_address'];?></td>
+                  <td><?php echo $row['organization'];?></td>
                   <td><?php echo $row['tokens'];?></td>
                   <td><?php echo $row['views'];?></td>
                   <td><?php echo $row['paying'];?></td>

@@ -103,7 +103,7 @@ class User
     {
         if (!$this->id) {
             $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, access_token "
-            .", location, position, company, about, username, user_group, group_admin, internal) VALUES ("
+            .", location, position, company, about, username, user_group, group_admin, internal, organization_id) VALUES ("
             ."'".escape_string($this->email_address)."'"
             .", '".escape_string($this->first_name)."'"
             .", '".escape_string($this->last_name)."'"
@@ -114,7 +114,8 @@ class User
             .", '$this->company', '$this->about', '$this->username'"
             .", ".($this->user_group ? $this->user_group : "null")
             .", '$this->group_admin'"
-            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."')";
+            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."'"
+            .", ".(false !== strpos($this->email_address, 'gosizzle.io') ? '1' : 'NULL').")";
             $this->id = insert($sql);
         } else {
             $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
