@@ -23,11 +23,11 @@ require __DIR__.'/../header.php';
           <a href="/admin/organizations">All</a>
         </li>
         <li>
-          Customers:
+          Users:
           <a href="/admin/users">All</a> •
           <a href="/admin/stalled_new_customers">Stalled</a> •
           <a href="/admin/no_card_customers">Free Trial</a> •
-          <a href="/admin/active_users">Active Users</a>
+          <a href="/admin/active_users">Recently Active</a>
         </li>
         <li>
           <a href="/admin/create_account">Create Account</a>
