@@ -19,14 +19,15 @@ require __DIR__.'/../header.php';
           <a href="/admin/create_account">Create Account</a>
         </li>
         <li>
-          <a href="/admin/stalled_new_customers">Stalled New Customers</a>
+          Customers:
+          <a href="/admin/users">All</a>
+          <a href="/admin/stalled_new_customers">Stalled</a>
+          <a href="/admin/no_card_customers">Free Trial</a>
+          <a href="/admin/active_users">Active Users</a>
         </li>
         <li>
           Tokens:
           <a href="/admin/tokens">All</a>
-        </li>
-        <li>
-          <a href="/admin/active_users">Active Users</a>
         </li>
         <li>
           <a href="/admin/visitors">Website Vistors</a>

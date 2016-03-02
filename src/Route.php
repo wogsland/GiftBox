@@ -76,6 +76,9 @@ class Route
                     case 'transfer_token':
                         include __DIR__.'/../admin/transfer_token.php';
                         break;
+                    case 'users':
+                        include __DIR__.'/../admin/users.php';
+                        break;
                     case 'visitors':
                         include __DIR__.'/../admin/visitors.php';
                         break;
