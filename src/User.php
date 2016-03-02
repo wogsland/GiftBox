@@ -9,6 +9,7 @@ class User
     public $email_address;
     public $first_name;
     public $last_name;
+    public $organization_id;
     public $password = null;
     public $activation_key = null;
     public $admin = "N";

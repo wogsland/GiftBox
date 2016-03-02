@@ -61,6 +61,12 @@ body {
       if ('Y' == $User->admin) echo ' <b>ADMIN</b>';
       ?>
       <br />
+      <?php
+      if (isset($User->organization_id) && 0 < (int) $User->organization_id) {
+          echo "<a href=\"/organization/{$User->organization_id}\">Organization</a>";
+      }
+      ?>
+      <br />
       Created <?php echo date('m/d/Y g:i a', strtotime($User->created));?>
       <br />
       <?php

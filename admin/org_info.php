@@ -50,7 +50,7 @@ body {
       <br />
       <?php
       if (isset($org->paying_user) && '' !== $org->paying_user) {
-          echo "<a href=\"/user/{$row['paying_user']}\">Paying User</a>";
+          echo "<a href=\"/user/{$org->paying_user}\">Paying User</a>";
       } else {
           echo 'No paying user';
       }
