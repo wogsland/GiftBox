@@ -61,7 +61,7 @@ body {
       if ('Y' == $User->admin) echo ' <b>ADMIN</b>';
       ?>
       <br />
-      Created <?php echo $User->created;?>
+      Created <?php echo date('m/d/Y g:i a', strtotime($User->created));?>
       <br />
       <?php
       if (isset($User->stripe_id) && '' !== $User->stripe_id) {

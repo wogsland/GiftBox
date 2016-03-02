@@ -54,6 +54,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', false, 404));
         $this->assertTrue($this->checkStatusCode('/js/pay_with_stripe.js'));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js'));
+        $this->assertTrue($this->checkStatusCode('/organization', false, 302));
         $this->assertTrue($this->checkStatusCode('/password_reset', false, 302));
         $this->assertTrue($this->checkStatusCode('/pricing'));
         $this->assertTrue($this->checkStatusCode('/privacy'));
@@ -123,6 +124,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', true, 404));
         $this->assertTrue($this->checkStatusCode('/js/pay_with_stripe.js', true));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js', true));
+        $this->assertTrue($this->checkStatusCode('/organization', true, 302));
         $this->assertTrue($this->checkStatusCode('/password_reset', true, 302));
         $this->assertTrue($this->checkStatusCode('/pricing', true));
         $this->assertTrue($this->checkStatusCode('/privacy', true));
@@ -192,6 +194,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', true, 404, true));
         $this->assertTrue($this->checkStatusCode('/js/pay_with_stripe.js', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/organization', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/password_reset', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/pricing', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/privacy', true, 200, true));

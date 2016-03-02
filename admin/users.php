@@ -43,7 +43,7 @@ body {
         </thead>
         <tbody>
             <?php
-            $sql = "SELECT user.id,
+            $sql = "SELECT user.id, organization_id,
                     CONCAT(user.first_name, ' ', user.last_name) as full_name,
                     user.email_address,
                     COALESCE(organization.`name`, '-') AS organization,
@@ -78,7 +78,11 @@ body {
                   <td><?php echo date('m/d/Y g:i a', strtotime($row['created']));?></td>
                   <td><a href="/user/<?php echo $row['id'];?>"><?php echo $row['full_name'];?></a></td>
                   <td><a href="/user/<?php echo $row['id'];?>"><?php echo $row['email_address'];?></td>
-                  <td><?php echo $row['organization'];?></td>
+                  <td>
+                    <?php if (0 < (int) $row['organization_id']) {
+                      echo "<a href=\"/organization/{$row['organization_id']}\">{$row['organization']}</a>";
+                    }?>
+                  </td>
                   <td><?php echo $row['tokens'];?></td>
                   <td><?php echo $row['views'];?></td>
                   <td><?php echo $row['paying'];?></td>

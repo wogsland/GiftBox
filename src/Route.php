@@ -64,6 +64,9 @@ class Route
                     case 'create_account':
                         include __DIR__.'/../admin/create_account.php';
                         break;
+                    case 'organizations':
+                        include __DIR__.'/../admin/organizations.php';
+                        break;
                     case 'recruiter_profile':
                         include __DIR__.'/../admin/recruiter_profile.php';
                         break;
@@ -132,6 +135,9 @@ class Route
                         include $this->default;
                     }
                 }
+                break;
+            case 'organization':
+                include __DIR__.'/../admin/org_info.php';
                 break;
             case 'password_reset':
                 include __DIR__.'/../password_reset.php';
