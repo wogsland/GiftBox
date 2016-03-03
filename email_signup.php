@@ -29,6 +29,17 @@ include __DIR__.'/header.php';
   background-color: rgb(148,203,197);
   color: black;
 }
+#customers {
+  color: black;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: white;
+  padding-bottom: 50px;
+}
+#customers-heading {
+  margin-top:20px;
+  margin-bottom:30px;
+}
 </style>
 </head>
 <body>
@@ -63,6 +74,25 @@ include __DIR__.'/header.php';
         </div>
         <div id="right-div-1" class="col-md-8 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
           <iframe width="560" height="315" src="https://www.youtube.com/embed/DnpO_RTSNmQ" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="customers">
+    <div class="container">
+      <div class="row" id="customers-heading">
+        Some of Our Current Customers
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="images/iqtalentlogo.png">
+        </div>
+        <div class="col-sm-4">
+          <img src="images/solutionpartnerslogo.png">
+        </div>
+        <div class="col-sm-4">
+          <img src="images/plumleelogo.jpg">
         </div>
       </div>
     </div>
