@@ -18,6 +18,8 @@ class User
     public $facebook_email;
     public $access_token;
     public $position;
+    public $linkedin;
+    public $face_image;
     public $about;
     public $user_group;
     public $group_admin;
@@ -99,9 +101,12 @@ class User
 
     public function save()
     {
+        if (!isset($this->organization_id)) {
+            $this->organization_id = false !== strpos($this->email_address, 'gosizzle.io') ? '1' : null;
+        }
         if (!$this->id) {
             $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, access_token "
-            .", position, about, user_group, group_admin, internal, organization_id) VALUES ("
+            .", position, about, user_group, linkedin, face_image, group_admin, internal, organization_id) VALUES ("
             ."'".escape_string($this->email_address)."'"
             .", '".escape_string($this->first_name)."'"
             .", '".escape_string($this->last_name)."'"
@@ -111,9 +116,11 @@ class User
             .", '$this->access_token', '$this->position'"
             .", '$this->about' "
             .", ".($this->user_group ? $this->user_group : "null")
+            .", ".($this->linkedin ? "'$this->linkedin'" : "null")
+            .", ".($this->face_image ? "'$this->face_image'" : "null")
             .", '$this->group_admin'"
             .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."'"
-            .", ".(false !== strpos($this->email_address, 'gosizzle.io') ? '1' : 'NULL').")";
+            .", ".($this->organization_id ? "'$this->organization_id'" : "null").")";
             $this->id = insert($sql);
         } else {
             $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
@@ -128,6 +135,8 @@ class User
             . "position = '$this->position', "
             . "about = '$this->about', "
             . "user_group = ".($this->user_group ? $this->user_group : "null").", "
+            . "linkedin = ".($this->linkedin ? "'$this->linkedin'" : "null").", "
+            . "face_image = ".($this->face_image ? "'$this->face_image'" : "null").", "
             . "group_admin = '$this->group_admin', "
             . "reset_code = '$this->reset_code', "
             . "allow_token_responses = '$this->allow_token_responses', "

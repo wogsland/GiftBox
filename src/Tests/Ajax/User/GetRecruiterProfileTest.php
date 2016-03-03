@@ -2,6 +2,7 @@
 namespace Sizzle\Tests\Ajax\User;
 
 use \Sizzle\{
+    Organization,
     RecruitingCompany,
     RecruitingToken,
     User
@@ -10,7 +11,7 @@ use \Sizzle\{
 /**
  * This class tests the ajax endpoint to get the recruiter profile for a token.
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/User/GetRecruiterProfileTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/User/GetRecruiterProfileTest
  */
 class GetRecruiterProfileTest
 extends \PHPUnit_Framework_TestCase
@@ -24,15 +25,27 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests request via ajax endpoint.
+     * Set up for the tests by creating User/Company/Token
      */
-    public function testRequest()
+    public function setUp()
     {
+        $this->url = TEST_URL .'/ajax/user/get_recruiter_profile';
+
+        // setup test organization
+        $name = 'The '.rand().' Corporation';
+        $website = 'http://www.'.rand().'.org';
+        $this->Organization = new Organization((new Organization())->create($name, $website));
+
         // setup test user
         $User = new User();
         $User->email_address = rand();
         $User->first_name = rand();
         $User->last_name = rand();
+        $User->organization_id = $this->Organization->id;
+        $User->position = rand();
+        $User->linkedin = 'https://linkedin.com/in/'.rand();
+        $User->about = rand();
+        $User->face_image = rand().'.jpg';
         $User->save();
         $this->User = $User;
 
@@ -40,6 +53,7 @@ extends \PHPUnit_Framework_TestCase
         $RecruitingCompany = new RecruitingCompany();
         $RecruitingCompany->user_id = $this->User->getId();
         $RecruitingCompany->name = 'The '.rand().' Company';
+        $RecruitingCompany->website = 'https://'.rand().'.com/';
         $RecruitingCompany->save();
         $this->RecruitingCompany = $RecruitingCompany;
 
@@ -50,24 +64,32 @@ extends \PHPUnit_Framework_TestCase
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();
         $this->RecruitingToken = $RecruitingToken;
-/*
+    }
+
+    /**
+     * Tests request via ajax endpoint.
+     */
+    public function testRequest()
+    {
         // test for created images
-        $url = TEST_URL . "/ajax/recruiting_token/get_images/{$RecruitingToken->long_id}";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $this->url.'/'.$this->User->getId());
         $response = curl_exec($ch);
         $this->assertTrue($response);
         $json = ob_get_contents();
         ob_end_clean();
         $return = json_decode($json);
         $this->assertEquals('true', $return->success);
-        //print_r($return);
-        foreach ($return->data as $image) {
-            $this->assertTrue(in_array($image->id, $id));
-            $this->assertTrue(in_array($image->file_name, $file_name));
-        }*/
+        $this->assertEquals($this->User->first_name, $return->data->first_name);
+        $this->assertEquals($this->User->last_name, $return->data->last_name);
+        $this->assertEquals($this->User->position, $return->data->position);
+        $this->assertEquals($this->User->linkedin, $return->data->linkedin);
+        $this->assertEquals($this->User->about, $return->data->about);
+        $this->assertEquals($this->User->face_image, $return->data->face_image);
+        $this->assertEquals($this->Organization->website, $return->data->website);
+        $this->assertEquals($this->Organization->name, $return->data->organization);
     }
 
     /**
@@ -75,18 +97,17 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testFail()
     {
-    /*    $url = TEST_URL . "/ajax/recruiting_token/get_images";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL, $this->url);
         $response = curl_exec($ch);
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
         $return = json_decode($json);
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
-        ob_end_clean();*/
+        ob_end_clean();
     }
 }
 ?>
