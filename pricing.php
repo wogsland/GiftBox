@@ -46,34 +46,50 @@ require __DIR__.'/header.php';
   <ul class="Pricing__options">
     <li class="Pricing__option">
       <div class="Plan" data-min="0">
-        <i class="Plan__icon fa fa-home"></i>
-        <h2 class="Plan__name">Small Corp</h2>
-        <span class="Plan__features"><b>1-10</b> posts per month</span>
-        <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting">$100<sup>00</sup> / Month</button>
-        <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting">$900<sup>00</sup> / Year<div>25% savings!</div></button>
+        <div class="Plan__details">
+          <i class="Plan__icon fa fa-home"></i>
+          <h2 class="Plan__name">Small Corp</h2>
+          <span class="Plan__features"><b>1-10</b> posts per month</span>
+        </div>
+        <div class="Plan__buttons">
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting">$100<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting">$900<sup>00</sup> / Year<div>25% savings!</div></button>
+        </div>
       </div>
     </li><li class="Pricing__option">
       <div class="Plan" data-min="11">
-        <i class="Plan__icon fa fa-briefcase"></i>
-        <h2 class="Plan__name">Medium Corp</h2>
-        <span class="Plan__features"><b>11-50</b> posts per month</span>
-        <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-midlevel">$150<sup>00</sup> / Month</button>
-        <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-midlevel">$1,350<sup>00</sup> / Year<div>25% savings!</div></button>
+        <div class="Plan__details">
+          <i class="Plan__icon fa fa-briefcase"></i>
+          <h2 class="Plan__name">Medium Corp</h2>
+          <span class="Plan__features"><b>11-50</b> posts per month</span>
+        </div>
+        <div class="Plan__buttons">
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-midlevel">$150<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-midlevel">$1,350<sup>00</sup> / Year<div>25% savings!</div></button>
+        </div>
       </div>
     </li><li class="Pricing__option">
       <div class="Plan" data-min="51">
-        <i class="Plan__icon fa fa-building"></i>
-        <h2 class="Plan__name">Large Corp</h2>
-        <span class="Plan__features"><b>51-199</b> posts per month</span>
-        <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-upperlevel">$275<sup>00</sup> / Month</button>
-        <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-upperlevel">$2,475<sup>00</sup> / Year<div>25% savings!</div></button>
+        <div class="Plan__details">
+          <i class="Plan__icon fa fa-building"></i>
+          <h2 class="Plan__name">Large Corp</h2>
+          <span class="Plan__features"><b>51-199</b> posts per month</span>
+        </div>
+        <div class="Plan__buttons">
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-upperlevel">$275<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-upperlevel">$2,475<sup>00</sup> / Year<div>25% savings!</div></button>
+        </div>
       </div>
     </li><li class="Pricing__option">
       <div class="Plan" data-min="200">
-        <i class="Plan__icon fa fa-globe"></i>
-        <h2 class="Plan__name">Enterprise</h2>
-        <span class="Plan__features"><b>200+</b> posts per month</span>
-        <button class="Plan__callToAction Plan__callToAction--primary" type="button">Contact us</button>
+        <div class="Plan__details">
+          <i class="Plan__icon fa fa-globe"></i>
+          <h2 class="Plan__name">Enterprise</h2>
+          <span class="Plan__features"><b>200+</b> posts per month</span>
+        </div>
+        <div class="Plan__buttons">
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button">Contact us</button>
+        </div>
       </div>
     </li>
   </ul>

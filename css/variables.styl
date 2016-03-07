@@ -3,11 +3,12 @@ color-grey = #dedede
 color-white = #ffffff
 color-green = #3de7c1
 color-darkGreen = #009688
-
 color-error = #8A1414
 color-lightError = #ffcccc
-
 color-shadow = rgba(0, 0, 0, .2)
+
+breakpoint-small = 680px
+
 
 z(diff, duration = 0)
   if (diff > 0) {
@@ -19,3 +20,8 @@ z(diff, duration = 0)
   if (duration > 0) {
     transition box-shadow ease-in-out duration
   }
+
+breakpoint(size)
+  @media screen and (min-width: size)
+    &
+      {block}
