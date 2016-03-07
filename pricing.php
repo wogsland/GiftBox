@@ -53,7 +53,7 @@ require __DIR__.'/header.php';
         </div>
         <div class="Plan__buttons">
           <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting">$100<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting">$900<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-year">$900<sup>00</sup> / Year<div>25% savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
@@ -65,7 +65,7 @@ require __DIR__.'/header.php';
         </div>
         <div class="Plan__buttons">
           <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-midlevel">$150<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-midlevel">$1,350<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-midlevel-year">$1,350<sup>00</sup> / Year<div>25% savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
@@ -77,7 +77,7 @@ require __DIR__.'/header.php';
         </div>
         <div class="Plan__buttons">
           <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-upperlevel">$275<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-upperlevel">$2,475<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-upperlevel-year">$2,475<sup>00</sup> / Year<div>25% savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
@@ -140,23 +140,23 @@ require __DIR__.'/header.php';
         <div class ="modal-body">
 
           <p class="Form__group">Your first thirty days are <b>free</b>, and after that you'll be billed at the rate above!</p>
-          
+
           <input type="hidden" name="stripeToken" value="">
           <input type="hidden" name="plan" value="">
           <input type="hidden" name="billing" value="">
-          
+
           <div class="Form__group Form__feedback"></div>
-          
+
           <div class="Form__group">
             <label class="Form__label">Email</label>
             <input class="Form__input" type="text" data-validation="required email" name="email">
           </div>
-          
+
           <div class="Form__group">
             <label class="Form__label">Card number</label>
             <input class="Form__input" type="text" size="20" data-validation="required" data-stripe="number">
           </div>
-          
+
           <div class="Form__group Form__group--quarter">
             <label class="Form__label">Exp MM</label>
             <input class="Form__input" type="text" size="2" data-validation="required" data-stripe="exp-month">
