@@ -220,9 +220,9 @@ require __DIR__.'/header.php';
     $( document ).ready(function() {
       $('#select-list-file').change(function() {
         var filename = $('#select-list-file').val().replace('C:\\fakepath\\', '');
-        console.log('filename is '+filename)
         if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
           $('#email-list-file label').html('<font color="red">Please choose a text file</font>');
+          $('#upload-file').val('');
         } else {
           $('#email-list-file label').html('File Name');
           $('#email-list-file').val(filename);

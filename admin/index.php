@@ -16,26 +16,32 @@ require __DIR__.'/../header.php';
     <nav id="create-top-nav">
       <ul>
         <li>
-          <a href="/admin/create_account">Create Account</a>
+          <a href="/admin/visitors">Website Vistors</a>
         </li>
         <li>
-          <a href="/admin/stalled_new_customers">Stalled New Customers</a>
+          Organizations:
+          <a href="/admin/organizations">All</a>
+        </li>
+        <li>
+          Users:
+          <a href="/admin/users">All</a> •
+          <a href="/admin/stalled_new_customers">Stalled</a> •
+          <a href="/admin/no_card_customers">Free Trial</a> •
+          <a href="/admin/active_users">Recently Active</a>
+        </li>
+        <li>
+          <a href="/admin/create_account">Create Account</a>
         </li>
         <li>
           Tokens:
           <a href="/admin/tokens">All</a>
         </li>
         <li>
-          <a href="/admin/active_users">Active Users</a>
-        </li>
-        <li>
-          <a href="/admin/visitors">Website Vistors</a>
-        </li>
-        <li>
           <a href="/admin/transfer_token">Transfer Recruiting Token Ownership</a>
         </li>
         <li>
-          <a href="/admin/add_city">Add Recruiting Token City</a>
+          Cities:
+          <a href="/admin/add_city">Add</a>
         </li>
       </ul>
     </nav>

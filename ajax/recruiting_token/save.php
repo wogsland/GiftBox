@@ -13,9 +13,16 @@ if (logged_in()) {
     $user_id = (int) $_SESSION['user_id'];
     try {
         // Save the token
-        $token = new RecruitingToken();
+        $token_id = (int) ($_POST['id'] ?? 0);
+        if ($token_id > 0) {
+            $token = new RecruitingToken($token_id);
+        } else {
+            $token = new RecruitingToken();
+        }
         $token->init((object)$_POST);
-        $token->user_id = $user_id;
+        if (!isset($token->user_id)) {
+            $token->user_id = $user_id;
+        }
 
         // Polymer bug: convert the city name into an id
         if (isset($_POST['city_id'])) {

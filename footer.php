@@ -70,13 +70,9 @@
 
   <!-- SOCIAL ICONS -->
   <ul class="social-icons">
-    <li><a href="https://www.linkedin.com/company/7585107"><i class="social_linkedin_square"></i></a></li>
-    <li><a href="https://www.facebook.com/givetokencom"><i class="social_facebook_square"></i></a></li>
-    <li><a href="https://twitter.com/gosizzleio"><i class="social_twitter_square"></i></a></li>
-    <li><a href="https://www.pinterest.com/GiveToken/"><i class="social_pinterest_square"></i></a></li>
-<!--    <li><a href="#"><i class="social_googleplus_square"></i></a></li> -->
-    <li><a href="https://instagram.com/givetoken"><i class="social_instagram_square"></i></a></li>
-<!--    <li><a href="#"><i class="social_flickr_square"></i></a></li> -->
+    <li><a href="https://www.linkedin.com/company/7585107" target="_blank"><i class="social_linkedin_square"></i></a></li>
+    <li><a href="https://www.facebook.com/GoSizzle/" target="_blank"><i class="social_facebook_square"></i></a></li>
+    <li><a href="https://twitter.com/Go_Sizzle" target="_blank"><i class="social_twitter_square"></i></a></li>
   </ul>
 
   <!--Terms and Policy-->

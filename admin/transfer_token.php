@@ -99,7 +99,7 @@ body {
           html = '';
           $.each(data.data, function (key, value) {
             html += '<option value="'+value.long_id+'">';
-            html += value.jobtitle+' ('+value.long_id+')';
+            html += value.job_title+' ('+value.long_id+')';
             html +='</option>';
           });
           $('#token-id select').html(html);
