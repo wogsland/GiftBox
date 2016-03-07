@@ -47,14 +47,27 @@ body {
   <div>
     <?php require __DIR__.'/../navbar.php';?>
   </div>
-  <div class="row">
-    <div class="col-sm-offset-1 col-sm-10" id="user-info">
+  <div class="row" id="user-info">
+    <div class="pull-right">
+      <a href="/admin/recruiter_profile">
+        <button class="btn button-success">Add Recruiter Profile</button>
+      </a>
+    </div>
+    <div class="col-sm-offset-1 col-sm-10">
       <?php if (0 !== $user_id) { ?>
       <h3><i class="greyed"><?php echo $user_name;?></i></h3>
       <?php
       echo $email;
       if ('Y' == $User->admin) echo ' <b>ADMIN</b>';
       ?>
+      <br />
+      <?php
+      if (isset($User->organization_id) && 0 < (int) $User->organization_id) {
+          echo "<a href=\"/organization/{$User->organization_id}\">Organization</a>";
+      }
+      ?>
+      <br />
+      Created <?php echo date('m/d/Y g:i a', strtotime($User->created));?>
       <br />
       <?php
       if (isset($User->stripe_id) && '' !== $User->stripe_id) {

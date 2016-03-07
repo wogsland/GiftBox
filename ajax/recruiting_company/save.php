@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
     if (!isset($response, $response['status']) || $response['status'] != "ERROR") {
         try {
             // save company info
-            $RecruitingCompany->user_id = $user_id;
+            $RecruitingCompany->user_id = $RecruitingCompany->user_id ?? $user_id;
             $RecruitingCompany->name = $_POST['company'] ?? '';
             $RecruitingCompany->description = HTML::to($_POST['company_description'] ?? '');
             $RecruitingCompany->website = $_POST['company_website'] ?? '';

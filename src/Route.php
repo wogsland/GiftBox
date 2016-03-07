@@ -64,6 +64,15 @@ class Route
                     case 'create_account':
                         include __DIR__.'/../admin/create_account.php';
                         break;
+                    case 'no_card_customers':
+                        include __DIR__.'/../admin/no_card_customers.php';
+                        break;
+                    case 'organizations':
+                        include __DIR__.'/../admin/organizations.php';
+                        break;
+                    case 'recruiter_profile':
+                        include __DIR__.'/../admin/recruiter_profile.php';
+                        break;
                     case 'stalled_new_customers':
                         include __DIR__.'/../admin/stalled_new_customers.php';
                         break;
@@ -72,6 +81,9 @@ class Route
                         break;
                     case 'transfer_token':
                         include __DIR__.'/../admin/transfer_token.php';
+                        break;
+                    case 'users':
+                        include __DIR__.'/../admin/users.php';
                         break;
                     case 'visitors':
                         include __DIR__.'/../admin/visitors.php';
@@ -99,6 +111,9 @@ class Route
             case 'email_list':
                 include __DIR__.'/../email_list.php';
                 break;
+            case 'email_signup':
+                include __DIR__.'/../email_signup.php';
+                break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';
                 break;
@@ -123,6 +138,9 @@ class Route
                         include $this->default;
                     }
                 }
+                break;
+            case 'organization':
+                include __DIR__.'/../admin/org_info.php';
                 break;
             case 'password_reset':
                 include __DIR__.'/../password_reset.php';

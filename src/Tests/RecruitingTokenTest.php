@@ -10,7 +10,7 @@ use \Sizzle\{
 /**
  * This class tests the RecruitingToken class
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/RecruitingTokenTest
+ * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/tests/RecruitingTokenTest
  */
 class RecruitingTokenTest
 extends \PHPUnit_Framework_TestCase
@@ -156,5 +156,46 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($co->id,$company->id);
         $this->assertEquals($co->name,$company->name);
         $this->assertEquals($this->User->getId(),$company->user_id);
+    }
+
+    /**
+     * Tests the recruiter_profile enum is save properly
+     */
+    public function testSaveRecruiterProfile()
+    {
+        // create company
+        $co = new RecruitingCompany();
+        $co->name = 'Company '.rand();
+        $co->user_id = $this->User->getId();
+        $co->save();
+
+        // test save with default (N)
+        $result = new RecruitingToken();
+        $result->user_id = $this->User->getId();
+        $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $result->recruiting_company_id = $co->id;
+        $result->save();
+        $test = new RecruitingToken($result->id);
+        $this->assertEquals('N',$test->recruiter_profile);
+
+        // test save with Y
+        $result = new RecruitingToken();
+        $result->user_id = $this->User->getId();
+        $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $result->recruiting_company_id = $co->id;
+        $result->recruiter_profile = 'Y';
+        $result->save();
+        $test = new RecruitingToken($result->id);
+        $this->assertEquals($result->recruiter_profile,$test->recruiter_profile);
+
+        // test save with N
+        $result = new RecruitingToken();
+        $result->user_id = $this->User->getId();
+        $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $result->recruiting_company_id = $co->id;
+        $result->recruiter_profile = 'N';
+        $result->save();
+        $test = new RecruitingToken($result->id);
+        $this->assertEquals($result->recruiter_profile,$test->recruiter_profile);
     }
 }

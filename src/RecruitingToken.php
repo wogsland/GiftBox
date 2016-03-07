@@ -13,6 +13,7 @@ class RecruitingToken
     public $responsibilities;
     public $perks;
     public $recruiting_company_id;
+    public $recruiter_profile;
 
     /**
      * This function constructs the class

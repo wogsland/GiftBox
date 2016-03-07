@@ -9,6 +9,7 @@ class User
     public $email_address;
     public $first_name;
     public $last_name;
+    public $organization_id;
     public $password = null;
     public $activation_key = null;
     public $admin = "N";
@@ -16,11 +17,10 @@ class User
     public $active_until;
     public $facebook_email;
     public $access_token;
-    public $location;
     public $position;
-    public $company;
+    public $linkedin;
+    public $face_image;
     public $about;
-    public $username;
     public $user_group;
     public $group_admin;
     public $reset_code;
@@ -79,8 +79,10 @@ class User
                 "SELECT * from user
                 WHERE id = '$id'"
             )->fetch_object("Sizzle\User");
-            foreach (get_object_vars($user) as $key => $value) {
-                $this->$key = $value;
+            if (is_object($user)) {
+                foreach (get_object_vars($user) as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
     }
@@ -99,20 +101,26 @@ class User
 
     public function save()
     {
+        if (!isset($this->organization_id)) {
+            $this->organization_id = false !== strpos($this->email_address, 'gosizzle.io') ? '1' : null;
+        }
         if (!$this->id) {
             $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, access_token "
-            .", location, position, company, about, username, user_group, group_admin, internal) VALUES ("
+            .", position, about, user_group, linkedin, face_image, group_admin, internal, organization_id) VALUES ("
             ."'".escape_string($this->email_address)."'"
             .", '".escape_string($this->first_name)."'"
             .", '".escape_string($this->last_name)."'"
             .", ".($this->password ? "'".$this->password."'" : "null")
             .", ".($this->activation_key ? "'".$this->activation_key."'" : "null")
             .", '$this->admin'"
-            .", '$this->access_token', '$this->location', '$this->position'"
-            .", '$this->company', '$this->about', '$this->username'"
+            .", '$this->access_token', '$this->position'"
+            .", '$this->about' "
             .", ".($this->user_group ? $this->user_group : "null")
+            .", ".($this->linkedin ? "'$this->linkedin'" : "null")
+            .", ".($this->face_image ? "'$this->face_image'" : "null")
             .", '$this->group_admin'"
-            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."')";
+            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."'"
+            .", ".($this->organization_id ? "'$this->organization_id'" : "null").")";
             $this->id = insert($sql);
         } else {
             $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
@@ -124,12 +132,11 @@ class User
             . "stripe_id = ".($this->stripe_id ? "'".$this->stripe_id."'" : "null").", "
             . "active_until =  ".($this->active_until ? "'".$this->active_until."'" : "null").", "
             . "access_token = '$this->access_token', "
-            . "location = '$this->location', "
             . "position = '$this->position', "
-            . "company = '$this->company', "
             . "about = '$this->about', "
-            . "username = '$this->username', "
             . "user_group = ".($this->user_group ? $this->user_group : "null").", "
+            . "linkedin = ".($this->linkedin ? "'$this->linkedin'" : "null").", "
+            . "face_image = ".($this->face_image ? "'$this->face_image'" : "null").", "
             . "group_admin = '$this->group_admin', "
             . "reset_code = '$this->reset_code', "
             . "allow_token_responses = '$this->allow_token_responses', "

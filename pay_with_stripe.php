@@ -3,55 +3,55 @@
 ?>
 
 function upgradeError(message) {
-	console.log(message);
+  console.log(message);
 }
 
 function processUpgrade(token, payFrom) {
-	var upgradeData = {
-		newLevel: 2,
-		plan: 'recruiting',
-		stripeToken: token.id,
-		email: token.email,
-	};
+  var upgradeData = {
+    newLevel: 2,
+    plan: 'recruiting',
+    stripeToken: token.id,
+    email: token.email,
+  };
 
-	var eventTarget = event.target;
-	$(eventTarget).addClass("disable-clicks");
-	$.post("/ajax/upgrade", upgradeData, function(data, textStatus, jqXHR){
-		if(data.status === "SUCCESS") {
-			if (payFrom === "SIGNUP") {
-				signupClose();
-			} else if (payFrom === "UPGRADE") {
+  var eventTarget = event.target;
+  $(eventTarget).addClass("disable-clicks");
+  $.post("/ajax/upgrade", upgradeData, function(data, textStatus, jqXHR){
+    if(data.status === "SUCCESS") {
+      if (payFrom === "SIGNUP") {
+        signupClose();
+      } else if (payFrom === "UPGRADE") {
         window.location.href = '/profile';
       } else {
-				location.reload();
-			}
-		} else if (data.status === "ERROR") {
-			upgradeError("Upgrade failed: "+data.message);
-		}  else {
-			upgradeError("Upgrade failed: unknown data.status");
-		}
-	}).fail(function() {
-		upgradeError("Upgrade failed!");
-	}).always(function() {
-		$(eventTarget).addClass("disable-clicks");
-	});
+        location.reload();
+      }
+    } else if (data.status === "ERROR") {
+      upgradeError("Upgrade failed: "+data.message);
+    }  else {
+      upgradeError("Upgrade failed: unknown data.status");
+    }
+  }).fail(function() {
+    upgradeError("Upgrade failed!");
+  }).always(function() {
+    $(eventTarget).addClass("disable-clicks");
+  });
 }
 
 function payWithStripe(email, payFrom) {
 
-	var handler = StripeCheckout.configure({
-		key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
-//		image: '../images/logoicon.png',
-		email: email,
-		token: function(token) {
-			processUpgrade(token, payFrom);
-		}
-	});
+  var handler = StripeCheckout.configure({
+    key: '<?php echo STRIPE_PUBLISHABLE_KEY; ?>',
+//    image: '../images/logoicon.png',
+    email: email,
+    token: function(token) {
+      processUpgrade(token, payFrom);
+    }
+  });
 
-	// Open Checkout with further options
-	handler.open({
-		name: 'GiveToken',
-		description: "GiveToken ($250/month)",
-		amount: 25000
-	});
+  // Open Checkout with further options
+  handler.open({
+    name: 'GiveToken',
+    description: "GiveToken ($250/month)",
+    amount: 25000
+  });
 }
