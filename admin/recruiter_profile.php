@@ -11,12 +11,12 @@ if (!logged_in() || !is_admin()) {
 $user_id = (int) ($_GET['user_id'] ?? null);
 $recruiter = new User($user_id);
 if ($user_id > 0) {
-  $recruiter->first_name = $_GET['first_name'] ?? '';
-  $recruiter->last_name = $_GET['last_name'] ?? '';
-  $recruiter->position = $_GET['position'] ?? '';
-  $recruiter->linkedin = $_GET['linkedin'] ?? '';
-  $recruiter->about = $_GET['about'] ?? '';
-  $recruiter->face_image = $_GET['image_file'] ?? '';
+  $recruiter->first_name = $_GET['first_name'] ?? $recruiter->first_name;
+  $recruiter->last_name = $_GET['last_name'] ?? $recruiter->last_name;
+  $recruiter->position = $_GET['position'] ?? $recruiter->position;
+  $recruiter->linkedin = $_GET['linkedin'] ?? $recruiter->linkedin;
+  $recruiter->about = $_GET['about'] ?? $recruiter->about;
+  $recruiter->face_image = $_GET['image_file'] ?? $recruiter->face_image;
   $recruiter->save();
 }
 $organization = new Organization($recruiter->organization_id ?? null);
