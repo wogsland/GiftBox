@@ -277,7 +277,7 @@
                     $.ajax(
                         {
                             url: '/ajax/sendemail',
-                            data: this._contactForm.$el.serialize,
+                            data: this._contactForm.$el.serialize(),
                             type: 'post'
                         }
                     )

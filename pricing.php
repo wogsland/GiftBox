@@ -114,6 +114,7 @@ require __DIR__.'/header.php';
           <div class="Form__group">
             <label class="Form__label">Email</label>
             <input class="Form__input" type="text" data-validation="required email" name="email">
+            <input type="hidden" name="message" value="Interested in Enterprise pricing.">
           </div>
 
           <div class="Form__clearFix"></div>
