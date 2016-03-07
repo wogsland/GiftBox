@@ -1,6 +1,4 @@
 <?php
-use \Sizzle\EventLogger;
-
 $message = "Unable to change password at this time.";
 if (logged_in()) {
     $user_id = $_POST['user_id'];
@@ -11,8 +9,6 @@ if (logged_in()) {
         print_r($new_password);
         execute("UPDATE user set password = '".$hash."' WHERE id = ".$user_id);
     }
-    $event = new EventLogger($_POST['user_id'], EventLogger::CHANGE_PASSWORD);
-    $event->log();
     $message = "SUCCESS";
 }
 $json = '{"message":"'.$message.'"}';
