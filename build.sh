@@ -34,6 +34,7 @@ echo ""
 
 # gulp tasks
 npm run css
+npm run js
 
 # minify css
 yuicompressor css/colorbox.css -o public/css/colorbox.min.css
