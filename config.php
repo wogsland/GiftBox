@@ -7,7 +7,7 @@ use Monolog\{
 use Sizzle\Connection;
 
 // set relesae version
-define('VERSION', '1.10.1');
+define('VERSION', '1.10.3');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
