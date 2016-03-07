@@ -16,6 +16,10 @@ Icon
 #########
 /components
 
+# NPM #
+#######
+/node_modules
+
 # Testing #
 ###########
 /test.php
