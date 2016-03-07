@@ -32,8 +32,11 @@ require __DIR__.'/../header.php';
 body {
   background-color: white;
 }
-#user-info {
+#add-box {
   margin-top: 100px;
+  margin-right:100px;
+}
+#user-info {
   color: black;
   text-align: left;
 }
@@ -47,12 +50,14 @@ body {
   <div>
     <?php require __DIR__.'/../navbar.php';?>
   </div>
-  <div class="row" id="user-info">
-    <div class="pull-right">
-      <a href="/admin/recruiter_profile">
+  <div class="row">
+    <div class="pull-right" id="add-box">
+      <a href="/admin/recruiter_profile?user_id=<?= $user_id ?>">
         <button class="btn button-success">Add Recruiter Profile</button>
       </a>
     </div>
+  </div>
+  <div class="row" id="user-info">
     <div class="col-sm-offset-1 col-sm-10">
       <?php if (0 !== $user_id) { ?>
       <h3><i class="greyed"><?php echo $user_name;?></i></h3>
