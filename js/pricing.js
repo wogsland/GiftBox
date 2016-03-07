@@ -34,7 +34,7 @@
         /**
          * Maps the 0 to 1 value stored to the range and returns it.
          * Sets value (from mapped value) if provided.
-         * 
+         *
          * @param    {number} new_value The new value (optional).
          * @return {number} The current value.
          */
@@ -351,7 +351,7 @@
             $.ajax(
                 {
                     url: '/ajax/signup',
-                    data: { email: this._planForm.get('email').value },
+                    data: { signup_email: this._planForm.get('email').value },
                     type: 'post',
                     dataType: 'json'
                 }
