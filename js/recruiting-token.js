@@ -441,7 +441,9 @@ $(document).ready(function(){
           if (data.data !== undefined) {
             assetHost = getAssetHost();
             if (dataExists(data.data.face_image)) {
-              $('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
+              //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
+              $('#icon-or-face').remove();
+              $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
             }
             if (data.data.position !== undefined && data.data.position.length > 0) {
               $('#gt-info-recruiter-position').html(data.data.position);
