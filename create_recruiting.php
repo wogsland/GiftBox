@@ -91,7 +91,7 @@ require __DIR__.'/header.php';
         paper-card#send-token-via {
             display: none;
         }
-        paper-input, paper-textarea, paper-dropdown-menu, paper-checkbox {
+        paper-input, paper-textarea, paper-dropdown-menu {
             --paper-input-container-focus-color: #1094F7;
             --paper-input-container-input-color: white
         }
@@ -156,8 +156,13 @@ require __DIR__.'/header.php';
         .progress-text.active {
           color: #009688;
         }
-        #checkboxLabel {
-          color:white;
+        .paper-checkbox-0 #checkboxLabel.paper-checkbox {
+          color: white;
+        }
+        paper-checkbox {
+          --paper-checkbox-label-color: white;
+          --paper-checkbox-checkmark-color: black;
+          --paper-checkbox-checked-color: white;
         }
     </style>
 
