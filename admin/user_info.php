@@ -53,7 +53,7 @@ body {
   <div class="row">
     <div class="pull-right" id="add-box">
       <a href="/admin/recruiter_profile?user_id=<?= $user_id ?>">
-        <button class="btn button-success">Add Recruiter Profile</button>
+        <button class="btn button-success">Update Recruiter Profile</button>
       </a>
     </div>
   </div>

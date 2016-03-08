@@ -75,8 +75,10 @@ body {
                     }?>
                   </select>
               <?php } else if (count($from_users) == 1){
+                echo "<a href=\"/user/{$user_id}\">";
                 echo "{$from_users[0]['first_name']} {$from_users[0]['last_name']}";
                 echo " ({$from_users[0]['email_address']})";?>
+                </a>
                 <input
                   type="hidden"
                   name="user_id"
@@ -141,8 +143,11 @@ body {
                 placeholder="Full Bio"
                 rows="4"><?php echo $recruiter->about ?? '';?></textarea>
             </div>
-            <button type="submit" class="btn btn-success" id="submit-recruiter-profile">Submit</button>
+            <button type="submit" class="btn btn-success" id="submit-recruiter-profile">Save</button>
           </form>
+          <a href="/admin/edit_organization?id=<?= $organization->id ?>">
+            <button class="btn pull-right" id="edit-org-button">Edit Organization</button>
+          </a>
         </div>
     <?php }?>
   </div>
@@ -151,7 +156,6 @@ body {
   $(document).ready(function(){
     $('#submit-recruiter-profile').on('click', function (event) {
       event.preventDefault();
-      console.log(event)
 
       //save image
       if ($('#exampleInputFile')[0].files[0] !== undefined) {

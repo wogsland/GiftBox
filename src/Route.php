@@ -64,6 +64,9 @@ class Route
                     case 'create_account':
                         include __DIR__.'/../admin/create_account.php';
                         break;
+                    case 'edit_organization':
+                        include __DIR__.'/../admin/edit_organization.php';
+                        break;
                     case 'no_card_customers':
                         include __DIR__.'/../admin/no_card_customers.php';
                         break;
