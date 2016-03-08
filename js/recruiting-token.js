@@ -432,6 +432,45 @@ $(document).ready(function(){
       if (dataExists(data.data.company_logo)) {
         $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
       }
+      if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
+        $('#bio-button').remove();
+        $('#contact-button').remove();
+        $('#schedule-button').remove();
+        url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
+        $.post(url, '', function(data) {
+          if (data.data !== undefined) {
+            assetHost = getAssetHost();
+            if (dataExists(data.data.face_image)) {
+              $('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
+            }
+            if (data.data.position !== undefined && data.data.position.length > 0) {
+              $('#gt-info-recruiter-position').html(data.data.position);
+            } else {
+              $('#gt-info-recruiter-position').remove();
+            }
+            if (data.data.about !== undefined && data.data.about.length > 0) {
+              $('#gt-info-recruiter-bio').html(data.data.about);
+            } else {
+              $('#gt-info-recruiter-bio').remove();
+            }
+            if (data.data.linkedin !== undefined && data.data.linkedin.length > 0) {
+              $('#linkedin-button').attr('href', data.data.linkedin);
+            } else {
+              $('#linkedin-button').remove();
+            }
+            if (data.data.first_name !== undefined || data.data.last_name !== undefined) {
+              $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
+            } else {
+              // if there are no names a recruiter profile doens't make sense
+              $('#recruiter-section').remove();
+            }
+          } else {
+            $('#recruiter-section').remove();
+          }
+        },'json');
+      } else {
+        $('#recruiter-section').remove();
+      }
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
@@ -551,10 +590,6 @@ function getUrlPath() {
  */
 function getAssetHost() {
   switch (window.location.hostname) {
-    //case 'www.givetoken.com':
-    //return 'https://tokenstorage.storage.googleapis.com';
-    //case 'dev.givetoken.com':
-    //return 'https://tokenstorage-staging.storage.googleapis.com';
     default:
     return '/uploads';
   }
@@ -570,9 +605,4 @@ function getAssetHost() {
  */
 function getPosition(str, m, i) {
    return str.split(m, i).join(m).length;
-}
-
-function nacho () {
-  $.each([1],function(i, v){ console.log(i+' '+v);});
-  return true
 }
