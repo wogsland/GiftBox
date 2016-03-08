@@ -13,7 +13,7 @@ var path = '../public/components/Autolinker.js/dist/Autolinker.min.js';
 var code = fs.readFileSync(path);
 vm.runInThisContext(code);
 
-describe('create_recruiting', function() {
+describe('create_recruiting.js', function() {
   describe('excludedLinkify', function() {
     it('Should linkify most links, excluding asp.net', function () {
       var inputText = "Don't link asp.net but link google.com and www.kbb.com please!";

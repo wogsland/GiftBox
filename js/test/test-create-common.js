@@ -1,15 +1,8 @@
 var assert = require('assert');
 var fs = require('fs');
 var vm = require('vm');
-var jsdom = require('mocha-jsdom'); // This is necessary for testing jQuery in Mocha
 
-describe('mocha tests', function () {
-
-    jsdom();
-
-    before(function () {
-        $ = require('jquery');
-    });
+describe('create_common.js', function () {
 
     // includes file to test
     var path = 'create_common.js';

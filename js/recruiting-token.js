@@ -571,3 +571,8 @@ function getAssetHost() {
 function getPosition(str, m, i) {
    return str.split(m, i).join(m).length;
 }
+
+function nacho () {
+  $.each([1],function(i, v){ console.log(i+' '+v);});
+  return true
+}

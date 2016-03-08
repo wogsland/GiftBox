@@ -3,7 +3,7 @@ var fs = require('fs');
 var vm = require('vm');
 var jsdom = require('mocha-jsdom'); // This is necessary for testing jQuery in Mocha
 
-describe('mocha tests', function () {
+describe('contact.js', function () {
 
     jsdom();
 
@@ -16,7 +16,9 @@ describe('mocha tests', function () {
     var code = fs.readFileSync(path);
     vm.runInThisContext(code);
 
-    describe('sendMessage', function() {
-
+    describe('running', function () {
+        it('this test should run', function () {
+            assert.equal(true, true);
+        });
     });
 });
