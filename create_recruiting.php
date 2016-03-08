@@ -66,6 +66,7 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-toolbar/paper-toolbar.html">
     <link rel="import" href="/components/paper-styles/paper-styles.html">
     <link rel="import" href="/components/paper-card/paper-card.html">
+    <link rel="import" href="/components/paper-checkbox/paper-checkbox.html">
     <link rel="import" href="/components/paper-button/paper-button.html">
     <link rel="import" href="/components/paper-input/paper-textarea.html">
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
@@ -90,7 +91,7 @@ require __DIR__.'/header.php';
         paper-card#send-token-via {
             display: none;
         }
-        paper-input, paper-textarea, paper-dropdown-menu {
+        paper-input, paper-textarea, paper-dropdown-menu, paper-checkbox {
             --paper-input-container-focus-color: #1094F7;
             --paper-input-container-input-color: white
         }
@@ -154,6 +155,9 @@ require __DIR__.'/header.php';
         }
         .progress-text.active {
           color: #009688;
+        }
+        #checkboxLabel {
+          color:white;
         }
     </style>
 
@@ -248,6 +252,18 @@ require __DIR__.'/header.php';
                         <?php paper_textarea('Perks', 'perks', HTML::from($token->perks)); ?>
                     </div>
                 </paper-card>
+                <?php if(is_admin()) { ?>
+                    <paper-card id="admin-info" heading="Admin Settings">
+                      <div class="field-container">
+                        <paper-checkbox
+                        id="recruiter-profile"
+                        name="recruiter_profile"
+                        <?php echo isset($token->recruiter_profile) && 'Y' == $token->recruiter_profile ? 'checked' : '';?>>
+                        Show Recruiter Profile
+                      </paper-checkbox>
+                      </div>
+                    </paper-card>
+                <?php }?>
 
 <?php /*                <div class="button-container">
                     <paper-button raised class="bottom-button" onclick="saveRecruitingToken(true)">SAVE &amp; PREVIEW</paper-button>
