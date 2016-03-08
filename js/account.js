@@ -93,6 +93,6 @@ function saveMyAccount() {
 
     posting.always(function() {
       $(eventTarget).removeClass("disable-clicks");
-    })
+    });
   }
 }
