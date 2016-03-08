@@ -71,7 +71,7 @@ function openVimeo(vimeoUrl){
  * @return {Boolean} The validity of the URL
  */
 function openYouTube(url) {
-  var videoId = youTubeID(url);
+  var videoId = youTubeId(url);
   if (videoId) {
     var eventTarget = event.target;
     $(eventTarget).addClass("disable-clicks");
