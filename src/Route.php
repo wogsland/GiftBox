@@ -76,6 +76,9 @@ class Route
                     case 'recruiter_profile':
                         include __DIR__.'/../admin/recruiter_profile.php';
                         break;
+                    case 'send_token':
+                        include __DIR__.'/../admin/send_token.php';
+                        break;
                     case 'stalled_new_customers':
                         include __DIR__.'/../admin/stalled_new_customers.php';
                         break;

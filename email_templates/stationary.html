@@ -133,21 +133,22 @@ h1, h2, h3, h4, h5 {
 </style>
 
 
-<div class="outer" style="background: #FFF;font: 13px Arial, Helvetica, sans-serif;color: #222;line-height: 18px;margin-bottom: 10px;border-top: 5px #179B36 solid;">
-  <div class="inner" style="background: #000000;padding: 0 2% 1%;">
+<div class="outer">
+  <div class="inner">
     <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
       <tbody>
         <tr>
-          <td align="center" style="line-height: 18px;"><div id="email-contents" style="line-height: 18px;max-width: 600px;">
-              <table id="email-contents-wrapper" cellpadding="0" cellspacing="0" border="0" style="text-align: left;font: 13px Arial, Helvetica, sans-serif;color: #222;line-height: 18px;width: 100%;">
+          <td align="center"><div id="email-contents">
+              <table id="email-contents-wrapper" cellpadding="0" cellspacing="0" border="0">
                 <tbody>
                   <tr>
-                    <td id="logo-wrapper" colspan="1" style="line-height: 18px;padding-top: 12px;padding-bottom: 10px;">
+                    <td id="logo-wrapper" colspan="1">
                       <table width="100%" cellpadding="0" cellspacing="0" border="0">
                         <tr>
-                          <td class="email-logo" width="60%" style="line-height: 18px;">
-                            <a href="https://www.gosizzle.io/" style="text-decoration: none;color: #1155cc;">
-                              <img class="logo" src="https://www.gosizzle.io/assets/img/sizzle-logo.png" alt="S!zzle" style="border: none;padding-top: 10px;padding-bottom: 10px;">
+                          <td class="email-logo" width="60%">
+                            <a href="https://www.gosizzle.io/">
+                              <img class="logo" src="https://www.gosizzle.io/assets/img/sizzle-logo.png"
+                                alt="S!zzle">
                             </a>
                           </td>
                         </tr>
@@ -155,21 +156,10 @@ h1, h2, h3, h4, h5 {
                     </td>
                   </tr>
                   <tr>
-                    <td class="email-content-box-wrap" style="line-height: 18px;">
-                      <div class="email-content-box" style="line-height: 18px;box-shadow: 0 3px 3px -3px #aaa;background: #FFF;padding: 3.5%;border: 1px solid #e1e1e1;">
-                        <h2 id="email-header" style="font-family: Arial, Helvetica, sans-serif;color: #222 !important;margin-top: 7px;margin-bottom: 14px;font-size: 20px;line-height: 28px;font-weight: normal;">Password Reset</h2>
-                        <p class="stroke" style="height: 1px;margin-top: 0;margin-bottom: 13px;border-top: 1px solid #e5e5e5;text-align: right;line-height: 18px;margin: 13px 0;">&nbsp;</p>
-                        <p style="margin-bottom: 13px;margin: 13px 0;line-height: 18px;">
-                          Hi there! <br>
-                          <br>
-                          Please click on the link below to reset your password:<br><br>
-
-                          <a href="{{link}}" style="text-decoration: none;color: #1155cc;">{{link}}</a><br><br>
-
-                          This link will self destruct in 3 days.<br><br>
-
-                          Thanks, <br>
-                          The S!zzle Team
+                    <td class="email-content-box-wrap">
+                      <div class="email-content-box">
+                        <p>
+                          {{message}}
                         </p>
                       </div>
                     </td>
@@ -186,13 +176,13 @@ h1, h2, h3, h4, h5 {
 <table class="email-footer" cellpadding="0" cellspacing="0" border="0" width="100%">
   <tbody>
     <tr>
-      <td align="center" style="line-height: 18px;">
-        <div id="help-center" style="line-height: 1.4em;width: 450px;margin: auto;padding-bottom: 10px;color: #999;text-align: center;font: 11px Arial;max-width: 500px;">
+      <td align="center">
+        <div id="help-center">
           This information is confidential and is intended only for the
           recipient. Please see our
-          <a href="https://www.gosizzle.io/terms" style="text-decoration: none;color: #1155cc;">terms</a> for
+          <a href="https://www.gosizzle.io/terms">terms</a> for
           details or
-          <a href="mailto:sales@gosizzle.io" style="text-decoration: none;color: #1155cc;">email us</a>.<br><br>
+          <a href="mailto:sales@gosizzle.io">email us</a>.<br /><br />
 
           <strong>&copy; 2016 S!zzle</strong>
         </div>
@@ -201,4 +191,4 @@ h1, h2, h3, h4, h5 {
   </tbody>
 </table>
 
-<img src="https://www.gosizzle.io/track/open?t=2&e={{email}}" height="1" width="1">
+<img src="https://www.gosizzle.io/track/open?t=1&e={{email}}" height="1" width="1">

@@ -16,7 +16,7 @@ if (((int)$user_id == $user_id && is_admin()) || (logged_in() && $user_id == $_S
         $data = $token;
     }*/
     $tokens = execute_query(
-        "SELECT long_id, job_title
+        "SELECT long_id, job_title, id
          FROM recruiting_token
          WHERE user_id = '$user_id'
          ORDER BY job_title, long_id"
