@@ -44,19 +44,27 @@ body {
   background-color: lightgrey;
   font-style: normal;
 }
+.btn {
+  color: black;
+}
 </style>
 </head>
-<body id="visitors">
+<body id="user">
   <div>
     <?php require __DIR__.'/../navbar.php';?>
   </div>
+  <?php if (0 !== $user_id) { ?>
   <div class="row">
     <div class="pull-right" id="add-box">
+      <?php if (isset($User->activation_key) && '' != $User->activation_key) { ?>
+      <button class="btn button-success" id="activation-button">Resend Activation Email</button>
+      <?php }?>
       <a href="/admin/recruiter_profile?user_id=<?= $user_id ?>">
         <button class="btn button-success">Update Recruiter Profile</button>
       </a>
     </div>
   </div>
+  <?php }?>
   <div class="row" id="user-info">
     <div class="col-sm-offset-1 col-sm-10">
       <?php if (0 !== $user_id) { ?>
@@ -158,6 +166,20 @@ body {
       <?php }?>
     </div>
   </div>
-    <?php require __DIR__.'/../footer.php';?>
+  <?php require __DIR__.'/../footer.php';?>
+  <script>
+  $(document).ready(function(){
+    $('#activation-button').on('click', function (event) {
+      event.preventDefault();
+      $.post(
+        '/ajax/resend_activation',
+        {'id':'<?= $user_id ?>'},
+        function() {
+          $('#activation-button').remove();
+        }
+      );
+    });
+  });
+  </script>
 </body>
 </html>
