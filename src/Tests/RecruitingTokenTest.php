@@ -4,6 +4,7 @@ namespace Sizzle\Tests;
 use \Sizzle\{
     RecruitingCompany,
     RecruitingToken,
+    RecruitingTokenImage,
     User
 };
 
@@ -197,5 +198,25 @@ extends \PHPUnit_Framework_TestCase
         $result->save();
         $test = new RecruitingToken($result->id);
         $this->assertEquals($result->recruiter_profile,$test->recruiter_profile);
+    }
+
+    /**
+     * Tests the screenshot function.
+     */
+    public function testScreenshot()
+    {
+        $token = new RecruitingToken();
+        $token->user_id = $this->User->getId();
+        $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $token->save();
+
+        // Create images
+        $image = new RecruitingTokenImage();
+        $fileName = rand().'.jpg';
+        $id = $image->create($fileName, $token->id);
+
+        // Test function
+        $image = $token->screenshot();
+        $this->assertEquals($image, $fileName);
     }
 }

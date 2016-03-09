@@ -267,6 +267,18 @@ require __DIR__.'/header.php';
                         Show Recruiter Profile
                       </paper-checkbox>
                       </div>
+                      <?php if (isset($token->long_id) && false === $token->screenshot()) { ?>
+                      <div class="field-container" id="screenshot">
+                        <input class="hidden-file-input" type="file" id="select-image-file" />
+                        <paper-button id="screenshot-button" onclick="uploadScreenshot();">
+                          Upload Token Screenshot
+                        </paper-button>
+                      </div>
+                      <?php } elseif (isset($token->long_id)) { ?>
+                        <div class="field-container" id="screenshot">
+                          <img src="/uploads/<?= $token->screenshot()?>" />
+                        </div>
+                      <?php }?>
                     </paper-card>
                 <?php }?>
 
@@ -304,9 +316,9 @@ require __DIR__.'/header.php';
             <?php
                 $user_tokens = RecruitingToken::getUserTokens($user_id);
                 $tokens = array();
-                foreach ($user_tokens as $token) {
-                    $tokenCompanyName = ''!=$token->company ? $token->company : 'Unnamed Company';
-                    $tokens[$token->long_id] = $tokenCompanyName." - ".$token->job_title;
+                foreach ($user_tokens as $tkn) {
+                    $tokenCompanyName = ''!=$tkn->company ? $tkn->company : 'Unnamed Company';
+                    $tokens[$tkn->long_id] = $tokenCompanyName." - ".$tkn->job_title;
                 }
                 paper_dropdown('Select a Token to open', 'token-to-open', $tokens, null, true);
             ?>
@@ -346,5 +358,44 @@ require __DIR__.'/header.php';
     <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <?php if(is_admin()) { ?>
+    <script>
+    /**
+     * Uploads a screenshot of the token
+     */
+    function uploadScreenshot(){
+      $('#select-image-file').trigger('click');
+      $('#select-image-file:file').on('change', function() {
+        // upload image
+        if ($('#select-image-file')[0].files[0] !== undefined) {
+          var file = $('#select-image-file')[0].files[0];
+          var reader  = new FileReader();
+          reader.fileName = '<?= $user_id.'_'.$token->id.'_'?>'+file.name;
+          reader.onloadend = function () {
+            var xhr = new XMLHttpRequest();
+            if (xhr.upload) {
+              xhr.open("POST", "/upload", true);
+              xhr.setRequestHeader("X-FILENAME", '<?= $user_id.'_'.$token->id.'_'?>'+file.name);
+              xhr.send(reader.result);
+            }
+          };
+          reader.readAsDataURL(file);
+          // save to table
+          $.post(
+            '/ajax/recruiting_token/set_screenshot',
+            {
+              'tokenId':'<?= $token->id?>',
+              'fileName':'<?= $user_id.'_'.$token->id.'_'?>'+file.name
+            },
+            function() {
+              // remove button
+              $('#screenshot').html('Screenshot has been uploaded');
+            }
+          );
+        }
+      });
+    }
+    </script>
+    <?php }?>
 </body>
 </html>

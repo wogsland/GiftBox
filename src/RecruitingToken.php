@@ -186,4 +186,21 @@ class RecruitingToken
             return false;
         }
     }
+
+    /**
+     * This function returns the screenshot file name
+     *
+     * @return mixed - name of screenshot file or false if there isn't one
+     */
+    public function screenshot()
+    {
+        $return = false;
+        if (isset($this->id)) {
+            $images = (new RecruitingTokenImage())->getByRecruitingTokenId($this->id);
+            if (!empty($images)) {
+                $return = $images[0]['file_name'];
+            }
+        }
+        return $return;
+    }
 }
