@@ -6,7 +6,7 @@ use Sizzle\City;
 /**
  * This class tests the City class
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/CityTest
+ * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/tests/CityTest
  */
 class CityTest extends \PHPUnit_Framework_TestCase
 {
@@ -126,7 +126,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
 
         // update the city
         $city->save();
-        
+
         // go get the updated record
         $updated_city = new City($city->id);
         // check the properties of the updatedCity
@@ -140,7 +140,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
-    
+
     public function testGetAll()
     {
         $this->markTestIncomplete();
@@ -234,5 +234,56 @@ class CityTest extends \PHPUnit_Framework_TestCase
         $City = new City();
         $City->id = 12;
         $this->assertFalse($City->save());
+    }
+
+    /**
+     * Tests the match10 function.
+     */
+    public function testMatch10()
+    {
+        // too many test
+        $cities = (new City())->match10('');
+        $this->assertTrue(empty($cities));
+
+        // test 10
+        $firstPart = rand();
+        for ($i=0; $i<10; $i++) {
+            $this->createCity($firstPart.rand());
+        }
+
+        // 10 matches test
+        $cities = (new City())->match10($firstPart);
+        $this->assertFalse(empty($cities));
+        $this->assertEquals(10, count($cities));
+    }
+
+    /**
+     * Create a city
+     */
+    protected function createCity($name = null)
+    {
+        // create a city for testing
+        $city = new City();
+        $city->name = $name ?? "Test City";
+        $city->image_file = rand().".png";
+        $city->population = rand(10000, 10000000);
+        $city->longitude = rand(0, 100);
+        $city->latitude = rand(0, 100);
+        $city->county = "County " . rand(0, 100);
+        $city->country = "CT";
+        $city->timezone = "Awesome Standard Time";
+        $city->temp_hi_spring = rand(0, 100);
+        $city->temp_lo_spring = rand(0, 100);
+        $city->temp_avg_spring = rand(0, 100);
+        $city->temp_hi_summer = rand(0, 100);
+        $city->temp_lo_summer = rand(0, 100);
+        $city->temp_avg_summer = rand(0, 100);
+        $city->temp_hi_fall = rand(0, 100);
+        $city->temp_lo_fall = rand(0, 100);
+        $city->temp_avg_fall = rand(0, 100);
+        $city->temp_hi_winter = rand(0, 100);
+        $city->temp_lo_winter = rand(0, 100);
+        $city->temp_avg_winter = rand(0, 100);
+        $city->save();
     }
 }

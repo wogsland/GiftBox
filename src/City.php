@@ -120,4 +120,25 @@ class City extends DatabaseEntity
         $success = false;
         return $success;
     }
+
+    /**
+     * Gets a list of possible cities from first part.
+     *
+     * @param string $part - partially typed city name
+     *
+     * @return array - 10 or fewer matches; none if there's more
+     */
+    public function match10($part)
+    {
+        $cities = execute_query(
+          "SELECT * FROM city
+           WHERE name LIKE '$part%'
+           ORDER BY name"
+        )->fetch_all(MYSQLI_ASSOC);
+        if (count($cities) < 11) {
+            return $cities;
+        } else {
+            return [];
+        }
+    }
 }
