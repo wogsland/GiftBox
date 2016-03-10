@@ -40,57 +40,49 @@ body {
     <?php require __DIR__.'/../navbar.php';?>
   </div>
   <div class="row" id="user-info">
-    <?php if (!isset($_SESSION['rolled'])) { ?>
-        <div class="col-sm-offset-3 col-sm-6">
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <?php
-        $_SESSION['rolled'] = 'yup';
-    } else { ?>
-        <div class="col-sm-offset-1 col-sm-8">
-          <h1>Send User a Token</h1>
-          <form id="send-form">
-            <div class="form-group" id="user-id">
-              <?php if (count($users) > 1) { ?>
-                  <label for="user_id" class="col-sm-2 control-label">User</label>
-                  <select class="form-control" name="user_id">
-                    <option id="please-select">Please select the user</option>
-                    <?php foreach ($users as $user) {
-                        echo "<option value=\"{$user['id']}\"";
-                        echo isset($organization->paying_user) && $user['id'] == $organization->paying_user ? ' selected>' : '>';
-                        echo "{$user['first_name']} {$user['last_name']}";
-                        echo " ({$user['email_address']})";
-                        echo "</option>";
-                    }?>
-                  </select>
-              <?php }?>
-            </div>
-            <div class="form-group" id="token-id" hidden>
-              <label for="token_id" class="col-sm-2 control-label">Token</label>
-              <select class="form-control" name="token_id" required>
-
+    <div class="col-sm-offset-1 col-sm-8">
+      <h1>Send User a Token</h1>
+      <form id="send-form">
+        <div class="form-group" id="user-id">
+          <?php if (count($users) > 1) { ?>
+              <label for="user_id" class="col-sm-2 control-label">User</label>
+              <select class="form-control" name="user_id">
+                <option id="please-select">Please select the user</option>
+                <?php foreach ($users as $user) {
+                    echo "<option value=\"{$user['id']}\"";
+                    echo isset($organization->paying_user) && $user['id'] == $organization->paying_user ? ' selected>' : '>';
+                    echo "{$user['first_name']} {$user['last_name']}";
+                    echo " ({$user['email_address']})";
+                    echo "</option>";
+                }?>
               </select>
-            </div>
-            <div class="form-group">
-              <label for="subject" class="col-sm-2 control-label">Subject</label>
-              <input
-                type="text"
-                class="form-control"
-                name="subject"
-                placeholder="Subject">
-            </div>
-            <div class="form-group">
-              <label for="message" class="col-sm-2 control-label">Message</label>
-              <textarea
-                class="form-control"
-                name="message"
-                placeholder="Message for the User"
-                rows="4"></textarea>
-            </div>
-            <button type="submit" class="btn btn-success" id="send-button">Send</button>
-          </form>
+          <?php }?>
         </div>
-    <?php }?>
+        <div class="form-group" id="token-id" hidden>
+          <label for="token_id" class="col-sm-2 control-label">Token</label>
+          <select class="form-control" name="token_id" required>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="subject" class="col-sm-2 control-label">Subject</label>
+          <input
+            type="text"
+            class="form-control"
+            name="subject"
+            placeholder="Subject">
+        </div>
+        <div class="form-group">
+          <label for="message" class="col-sm-2 control-label">Message</label>
+          <textarea
+            class="form-control"
+            name="message"
+            placeholder="Message for the User"
+            rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success" id="send-button">Send</button>
+      </form>
+    </div>
   </div>
   <?php require __DIR__.'/../footer.php';?>
   <script>
