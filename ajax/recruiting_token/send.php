@@ -25,7 +25,7 @@ if (logged_in() && is_admin()) {
             echo $imageFile = $token->screenshot();
             if ($imageFile) {
                 $message .= '<a href="'.APP_URL.'token/recruiting/'.$token->long_id.'">';
-                $message .= '<img src="'.APP_URL.'uploads/'.$imageFile.'" width=200 />';
+                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20',$imageFile).'" width=200 />';
                 $message .= '</a>';
             }
             $email_message = str_replace('{{message}}', $message, $email_message);

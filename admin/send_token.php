@@ -124,9 +124,8 @@ body {
       url = '/ajax/recruiting_token/send';
       $.post(url, $('form').serialize(), function(data) {
         if (data.success === 'true') {
-          alert('Success!')
-          //$('#send-form').html("<h1>Token Transfer Complete!</h1>");
-          //$('#send-form').css('margin-bottom','500px');
+          $('#send-form').html("<h1>Email Sent!</h1>");
+          $('#send-form').css('margin-bottom','500px');
           window.scrollTo(0, 0);
         } else {
           console.log(data)
