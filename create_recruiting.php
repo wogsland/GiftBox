@@ -22,6 +22,11 @@ if (isset($_GET['id'])) {
     $token = new RecruitingToken();
 }
 
+if (isset($token->city_id)) {
+  $city = new City($token->city_id);
+  $city_name = $city->name ?? '';
+}
+
 function paper_text($label, $id, $value, $required = false)
 {
     echo PHP_EOL;
@@ -234,20 +239,20 @@ require __DIR__.'/header.php';
                 <paper-card id="required-info" heading="Required Info">
                     <div class="field-container">
                         <?php
-                            paper_text('Job Title', 'job-title', $token->job_title, true);
-                            paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
-
-                            $all_cities = City::getAll();
-                            $cities = array();
-                            $selected_city = null;
-                            foreach ($all_cities as $index => $city) {
-                                $cities[$city->id] = $city->name;
-                                if ($city->id == $token->city_id) {
-                                    $selected_city = $index;
-                                }
-                            }
-                            paper_dropdown('Job Location', 'city-id', $cities, $selected_city, true);
+                        paper_text('Job Title', 'job-title', $token->job_title, true);
+                        paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
                         ?>
+                      <paper-input
+                        value="<?= $city_name?>"
+                        required
+                        error-message="This is a required field"
+                        label="Job Location"
+                        id="city-id"
+                        name="city_id">
+                        <iron-icon icon="arrow-drop-down" id="city-dropdown-button" suffix></iron-icon>
+                      </paper-input>
+                      <paper-menu id="city-menu">
+                      </paper-menu>
                     </div>
                 </paper-card>
                 <paper-card id="basic-info" heading="Additional Info">
@@ -395,6 +400,37 @@ require __DIR__.'/header.php';
         }
       });
     }
+    $( document ).ready(function() {
+      $('#city-menu').hide();
+      $('#city-dropdown-button').on('click', function() {
+        $('#city-menu').toggle();
+      })
+      $('#city-id').on('keyup', function(){
+        $.post(
+          '/ajax/city/get_list',
+          {'typed':$('#city-id').val()},
+          function (data) {
+            if (data.success == 'true') {
+              menuItems = '';
+              $.each(data.data, function(index, city){
+                menuItems += '<paper-item id="'+city.id+'">'+city.name+'</paper-item>';
+              });
+              $('#city-menu').html(menuItems);
+              $('#city-menu').children('paper-item').each(function(index, item){
+                $(this).on('click',function(){
+                  $('#city-id').val($(this).html().trim())
+                  $('#city-menu').hide()
+                });
+              })
+              $('#city-menu').show()
+            } else {
+              $('#city-menu').hide()
+            }
+          },
+          'json'
+        );
+      });
+    });
     </script>
     <?php }?>
 </body>
