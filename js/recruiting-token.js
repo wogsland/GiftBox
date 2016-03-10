@@ -445,22 +445,24 @@ $(document).ready(function(){
               $('#icon-or-face').remove();
               $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
             }
-            if (data.data.position !== undefined && data.data.position.length > 0) {
+            if (dataExists(data.data.position)) {
               $('#gt-info-recruiter-position').html(data.data.position);
             } else {
               $('#gt-info-recruiter-position').remove();
             }
-            if (data.data.about !== undefined && data.data.about.length > 0) {
+            if (dataExists(data.data.about)) {
               $('#gt-info-recruiter-bio').html(data.data.about);
             } else {
               $('#gt-info-recruiter-bio').remove();
             }
-            if (data.data.linkedin !== undefined && data.data.linkedin.length > 0) {
+            if (dataExists(data.data.linkedin)) {
               $('#linkedin-button').attr('href', data.data.linkedin);
+              $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
+              $('.recruiter-profile-option').addClass('mdl-cell--12-col');
             } else {
               $('#linkedin-button').remove();
             }
-            if (data.data.first_name !== undefined || data.data.last_name !== undefined) {
+            if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
               $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
             } else {
               // if there are no names a recruiter profile doens't make sense

@@ -103,7 +103,6 @@ body {
   $(document).ready(function(){
     $('#submit-organization').on('click', function (event) {
       event.preventDefault();
-      console.log(event)
 
       $('#update-organization-form').submit();
     });

@@ -196,7 +196,6 @@
   <script>
   $(document).ready(function() {
       $('.submit-button').on('click', function(e){
-        console.log('form submitted')
         e.preventDefault();
         var email;
         var password;

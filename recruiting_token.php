@@ -155,23 +155,22 @@
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="recruiter-section">
                         <div class="mdl-card mdl-cell mdl-cell--8-col">
                           <div class="mdl-card__supporting-text">
-                            <i id="gt-info-recruiter-position">Minister of Silly Walks</i>
-                            <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name">Robbie Zettler</h4>
+                            <i id="gt-info-recruiter-position"></i>
+                            <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name"></h4>
                             <p id="gt-info-recruiter-bio">
-                              blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
                             </p>
                           </div>
                           <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="recruiter-options">
-                            <a id="bio-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option">
+                            <a id="bio-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                               Full Bio
                             </a>
-                            <a id="linkedin-button" target="_blank" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option">
+                            <a id="linkedin-button" target="_blank" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                               LinkedIn Page
                             </a>
-                            <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option">
+                            <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                               Contact Information
                             </a>
-                            <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option">
+                            <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                               Schedule Meeting
                             </a>
                           </div>

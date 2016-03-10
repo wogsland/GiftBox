@@ -304,7 +304,7 @@ i.plus-icon--overlay {
   left: 700px;
   color:white;
 }
-.job-description-option {
+.recruiter-profile-option, .job-description-option {
   background-color: white;
   padding: 0;
   margin: 0;

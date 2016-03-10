@@ -120,7 +120,6 @@ body {
           $('#send-form').css('margin-bottom','500px');
           window.scrollTo(0, 0);
         } else {
-          console.log(data)
           message = data.data.error ==! undefined ? data.data.error : 'All fields required!';
           alert(message);
         }
