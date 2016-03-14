@@ -86,6 +86,7 @@ which will create everything you need in the untracked components directory.
 Polymer's polybuild, YUI compressor & json-minify are tools optimize & minify an
 app's code during the build process
 
+    npm install
     npm install -g polybuild
     npm install -g yuicompressor
     npm install -g json-minify
@@ -151,15 +152,7 @@ For JavaScript testing,
 
 ### Build Script
 The build script (`build.sh`) runs unit tests, warns you of any untracked or
-uncommited files (**these will be included in the optional release to glcoud, but
-are not yet tracked in github**), minifies JavaScript & CSS, Polybuilds the token
-and optionally pushes to gcloud. For example, to deploy a test build,
-
-    ./build.sh username
-
-will do the above mentioned things and deploy to gcloud at
-[username-dot-t-sunlight-757.appspot.com](https://username-dot-t-sunlight-757.appspot.com).
-If we stick to using github usernames we can avoid collisions :smile:.
+uncommited files, minifies JavaScript & CSS, and Polybuilds the token.
 The full set of options is available in the help menu
 
     ./build.sh -h

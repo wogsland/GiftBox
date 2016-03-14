@@ -23,7 +23,7 @@ function isYouTube(url) {
  * @param {String} url The URL of a YouTube video
  * @return {String} The id extract from the URL if it's valid, null otherwise
  */
-function youTubeID(url) {
+function youTubeId(url) {
   //var result = url.match(/(youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+))/i);
   if (url !== undefined || url !== '') {
     var regExp = /^.*(youtu(?:\.be|be\.com)\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;

@@ -25,8 +25,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/admin/active_users', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/add_city', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', false, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', false, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/send_token', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/tokens', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/transfer_token', false, 302));
@@ -97,8 +99,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/add_city', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', true, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/send_token', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/tokens', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/transfer_token', true, 302));
@@ -169,8 +173,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/add_city', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/admin/send_token', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/tokens', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/transfer_token', true, 200, true));

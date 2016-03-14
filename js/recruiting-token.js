@@ -432,6 +432,49 @@ $(document).ready(function(){
       if (dataExists(data.data.company_logo)) {
         $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
       }
+      if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
+        $('#bio-button').remove();
+        $('#contact-button').remove();
+        $('#schedule-button').remove();
+        url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
+        $.post(url, '', function(data) {
+          if (data.data !== undefined) {
+            assetHost = getAssetHost();
+            if (dataExists(data.data.face_image)) {
+              //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
+              $('#icon-or-face').remove();
+              $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
+            }
+            if (dataExists(data.data.position)) {
+              $('#gt-info-recruiter-position').html(data.data.position);
+            } else {
+              $('#gt-info-recruiter-position').remove();
+            }
+            if (dataExists(data.data.about)) {
+              $('#gt-info-recruiter-bio').html(data.data.about);
+            } else {
+              $('#gt-info-recruiter-bio').remove();
+            }
+            if (dataExists(data.data.linkedin)) {
+              $('#linkedin-button').attr('href', data.data.linkedin);
+              $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
+              $('.recruiter-profile-option').addClass('mdl-cell--12-col');
+            } else {
+              $('#linkedin-button').remove();
+            }
+            if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
+              $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
+            } else {
+              // if there are no names a recruiter profile doens't make sense
+              $('#recruiter-section').remove();
+            }
+          } else {
+            $('#recruiter-section').remove();
+          }
+        },'json');
+      } else {
+        $('#recruiter-section').remove();
+      }
     },'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
@@ -551,10 +594,6 @@ function getUrlPath() {
  */
 function getAssetHost() {
   switch (window.location.hostname) {
-    //case 'www.givetoken.com':
-    //return 'https://tokenstorage.storage.googleapis.com';
-    //case 'dev.givetoken.com':
-    //return 'https://tokenstorage-staging.storage.googleapis.com';
     default:
     return '/uploads';
   }

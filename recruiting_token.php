@@ -152,6 +152,38 @@
                         </div>
                       </section>
 
+                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="recruiter-section">
+                        <div class="mdl-card mdl-cell mdl-cell--8-col">
+                          <div class="mdl-card__supporting-text">
+                            <i id="gt-info-recruiter-position"></i>
+                            <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name"></h4>
+                            <p id="gt-info-recruiter-bio">
+                            </p>
+                          </div>
+                          <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="recruiter-options">
+                            <a id="bio-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                              Full Bio
+                            </a>
+                            <a id="linkedin-button" target="_blank" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                              LinkedIn Page
+                            </a>
+                            <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                              Contact Information
+                            </a>
+                            <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                              Schedule Meeting
+                            </a>
+                          </div>
+                        </div>
+                        <div class="mdl-card mdl-cell mdl-cell--4-col" id="recruiter-face">
+                          <div class="mdl-card__supporting-icon">
+                            <h4 class="mdl-color-text--primary-contrast" id="icon-or-face">
+                              <i class="material-icons huge-icon">face</i>
+                            </h4>
+                          </div>
+                        </div>
+                      </section>
+
                       <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
                         <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
                           <i class="fa fa-twitter big-icon"></i>

@@ -1,6 +1,5 @@
 <?php
 use \Sizzle\{
-    EventLogger,
     RecruitingToken,
     User,
     UserMilestone

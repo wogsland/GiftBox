@@ -1,6 +1,5 @@
 <?php
 use \Sizzle\{
-    EventLogger,
     User,
     UserMilestone
 };
@@ -28,7 +27,6 @@ if (User::exists($email)) {
     $DateTime2 = new \DateTime(date('Y-m-d'));
     if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
         if ($login_type == 'FACEBOOK') {
-            $event_type = EventLogger::LOGIN_USING_FACEBOOK;
             $response['status'] = 'SUCCESS';
             $response['message'] = "Log in with Facebook successful.";
         } else if ($login_type == 'EMAIL') {
@@ -43,7 +41,6 @@ if (User::exists($email)) {
                     $response['status'] = "ERROR";
                     $response['message'] = 'Please confirm email to activate account.';
                 } else {
-                    $event_type = EventLogger::LOGIN_USING_EMAIL;
                     $response['status'] = 'SUCCESS';
                     $response['message'] = "Log in with email successful.";
                 }
@@ -57,8 +54,6 @@ if (User::exists($email)) {
             $_SESSION['app_url'] = APP_URL;
             $_SESSION['email'] = $email;
             $_SESSION['stripe_id'] = $user->stripe_id;
-            $event = new EventLogger($user->getId(), $event_type);
-            $event->log();
             $UserMilestone = new UserMilestone($user->getId(), 'Log In');
         }
     } else {

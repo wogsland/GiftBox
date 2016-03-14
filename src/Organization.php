@@ -47,6 +47,26 @@ class Organization
     }
 
     /**
+     * This function sets a protected property
+     *
+     * @param string $var - the class property to set
+     * @param string $val - the value to set it to
+     */
+    public function __set($var, $val)
+    {
+        if (isset($this->id)) {
+            $settable = ['name', 'website', 'paying_user'];
+            if (in_array($var, $settable)) {
+                $val = escape_string($val);
+                $sql = "UPDATE organization SET $var = '$val' WHERE id = '{$this->id}'";
+                if (1 == update($sql)) {
+                    $this->$var = $val;
+                }
+            }
+        }
+    }
+
+    /**
      * This function checks if a protected property is set
      *
      * @param string $var - the class property to check
