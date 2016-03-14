@@ -52,8 +52,8 @@ require __DIR__.'/header.php';
           <span class="Plan__features"><b>1-10</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
-          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting">$100<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-year">$900<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-133">$133<sup>33</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-year">$1200<sup>00</sup> / Year<div>25% savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
