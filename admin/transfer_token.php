@@ -118,6 +118,8 @@ body {
           $('#transfer-token-form').html("<h1>Token Transfer Complete!</h1>");
           $('#transfer-token-form').css('margin-bottom','500px');
           window.scrollTo(0, 0);
+        } else if (data.success === 'false') {
+          alert(data.data.error);
         } else {
           alert('All fields required!');
         }
