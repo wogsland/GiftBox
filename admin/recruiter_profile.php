@@ -53,13 +53,6 @@ body {
     <?php require __DIR__.'/../navbar.php';?>
   </div>
   <div class="row" id="user-info">
-    <?php if (!isset($_SESSION['rolled'])) { ?>
-        <div class="col-sm-offset-3 col-sm-6">
-          <iframe width="420" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <?php
-        $_SESSION['rolled'] = 'yup';
-    } else { ?>
         <div class="col-sm-offset-1 col-sm-8">
           <h1>Update Recruiter Profile</h1>
           <form id="update-recruiter-profile-form">
@@ -149,7 +142,6 @@ body {
             <button class="btn pull-right" id="edit-org-button">Edit Organization</button>
           </a>
         </div>
-    <?php }?>
   </div>
   <?php require __DIR__.'/../footer.php';?>
   <script>
