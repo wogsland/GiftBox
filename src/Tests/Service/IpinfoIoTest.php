@@ -1,5 +1,5 @@
 <?php
-namespace Sizzle\Tests;
+namespace Sizzle\Tests\Service;
 
 use \Sizzle\Service\IpinfoIo;
 
@@ -44,12 +44,12 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue((bool)$locale);
         $this->assertEquals($ipAddress, $locale->ip);
         $this->assertEquals('50-207-137-70-static.hfc.comcastbusiness.net', $locale->hostname);
-        $this->assertEquals('Stanford', $locale->city);
+        $this->assertEquals('Palo Alto', $locale->city);
         $this->assertEquals('California', $locale->region);
         $this->assertEquals('US', $locale->country);
-        $this->assertEquals('37.4178,-122.1720', $locale->loc);
+        $this->assertEquals('37.4576,-122.1041', $locale->loc);
         $this->assertEquals('AS7922 Comcast Cable Communications, Inc.', $locale->org);
-        $this->assertEquals('94305', $locale->postal);
+        $this->assertEquals('94303', $locale->postal);
     }
 
     /**

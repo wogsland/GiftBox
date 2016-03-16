@@ -199,7 +199,7 @@ class Route
                         include __DIR__.'/../get_chrome.html';
                     } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
-                        $long_id = trim('/', $this->endpointPieces[3]);
+                        $long_id = trim($this->endpointPieces[3],'/');
                         include __DIR__.'/../token/LinkedInBot.php';
                     } else {
                         include __DIR__.'/../recruiting_token.build.html';
