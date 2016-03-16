@@ -189,18 +189,21 @@ class Route
                 break;
             case 'token':
                 if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
-                    // don't display in native android browser
                     $detect = new \Mobile_Detect;
-                    if ($detect->isMobile()) {
-                        if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
-                            && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
-                            && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
-                        ) {
-                            include __DIR__.'/../get_chrome.html';
-                            die;
-                        }
+                    if ($detect->isMobile()
+                    && strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
+                    && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
+                    && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
+                    ) {
+                        // don't display in native android browser
+                        include __DIR__.'/../get_chrome.html';
+                    } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'LinkedInBot') !== false) {
+                        // display simplified form on LinkedIn
+                        $long_id = trim('/', $this->endpointPieces[3]);
+                        include __DIR__.'/../token/LinkedInBot.php';
+                    } else {
+                        include __DIR__.'/../recruiting_token.build.html';
                     }
-                    include __DIR__.'/../recruiting_token.build.html';
                 } else {
                     include $this->default;
                 }
