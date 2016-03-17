@@ -17,7 +17,7 @@ foreach ($vars as $var) {
     $$var = escape_string($_POST[$var] ?? '');
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
+if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
 
     $user = new User();
     $user->email_address = $signup_email;
@@ -57,13 +57,15 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(array(
-              'to'=>array(array('email'=>$user->email_address)),
-              'from_email'=>'welcome@gosizzle.io',
-              'from_name'=>'S!zzle',
-              'subject'=>'S!zzle Signup Confirmation',
-              'html'=>$email_message
-            ));
+            $mandrill->messages->send(
+                array(
+                    'to'=>array(array('email'=>$user->email_address)),
+                    'from_email'=>'welcome@gosizzle.io',
+                    'from_name'=>'S!zzle',
+                    'subject'=>'S!zzle Signup Confirmation',
+                    'html'=>$email_message
+                )
+            );
         }
         $response['status'] = "SUCCESS";
         $response['message'] = "{$user->email_address} successsfully registered.";

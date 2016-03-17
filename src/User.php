@@ -44,23 +44,23 @@ class User
      * @param string $value - the value of the key
      * @param string $key   - email_address or reset_code
      *
-     * @param User - the corresponding object
+     * @return User - the corresponding object
      */
     public static function fetch($value, $key = 'email_address')
     {
         $user = null;
         switch ($key) {
-            case 'api_key':
-                $condition = "api_key = '$value'";
-                break;
-            case 'email_address':
-                $condition = "upper(email_address) = '".strtoupper($value)."'";
-                break;
-            case 'reset_code':
-                $condition = "reset_code = '$value'";
-                break;
-            default:
-                return $user;
+        case 'api_key':
+            $condition = "api_key = '$value'";
+            break;
+        case 'email_address':
+            $condition = "upper(email_address) = '".strtoupper($value)."'";
+            break;
+        case 'reset_code':
+            $condition = "reset_code = '$value'";
+            break;
+        default:
+            return $user;
         }
         $result = execute_query(
             "SELECT * FROM user

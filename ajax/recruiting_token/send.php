@@ -25,18 +25,20 @@ if (logged_in() && is_admin()) {
             echo $imageFile = $token->screenshot();
             if ($imageFile) {
                 $message .= '<a href="'.APP_URL.'token/recruiting/'.$token->long_id.'">';
-                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20',$imageFile).'" width=200 />';
+                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=200 />';
                 $message .= '</a>';
             }
             $email_message = str_replace('{{message}}', $message, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(array(
-              'to'=>array(array('email'=>$user->email_address)),
-              'from_email'=>'token@gosizzle.io',
-              'from_name'=>'S!zzle',
-              'subject'=>$subject,
-              'html'=>$email_message
-            ));
+            $mandrill->messages->send(
+                array(
+                    'to'=>array(array('email'=>$user->email_address)),
+                    'from_email'=>'token@gosizzle.io',
+                    'from_name'=>'S!zzle',
+                    'subject'=>$subject,
+                    'html'=>$email_message
+                )
+            );
             $success = 'true';
         } else {
             $data['error'] = 'Invalid user or token';

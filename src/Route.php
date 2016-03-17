@@ -191,15 +191,15 @@ class Route
                 if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
                     $detect = new \Mobile_Detect;
                     if ($detect->isMobile()
-                    && strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
-                    && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
-                    && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
                     ) {
                         // don't display in native android browser
                         include __DIR__.'/../get_chrome.html';
                     } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
-                        $long_id = trim($this->endpointPieces[3],'/');
+                        $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/LinkedInBot.php';
                     } else {
                         include __DIR__.'/../recruiting_token.build.html';
@@ -254,16 +254,16 @@ class Route
      */
     public function register($endpoint, $fileToLoad)
     {
-        $endpoint = ltrim($endpoint,'/');
+        $endpoint = ltrim($endpoint, '/');
         $endpointParts = explode('/', $endpoint);
         switch (count($endpointParts)) {
-            case 0:
+        case 0:
             $this->endpointMap[''] = $fileToLoad;
             break;
-            case 1:
+        case 1:
             $this->endpointMap[$endpointParts[0]] = $fileToLoad;
             break;
-            case 2:
+        case 2:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {
@@ -275,7 +275,7 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = $fileToLoad;
             break;
-            case 3:
+        case 3:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {
@@ -296,7 +296,7 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]] = $fileToLoad;
             break;
-            case 4:
+        case 4:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {

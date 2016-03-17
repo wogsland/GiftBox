@@ -3,7 +3,7 @@ if (logged_in()) {
     header('Location: /profile');
 }
 define('TITLE', 'S!zzle - Sell the S!zzle not the Steak');
-include __DIR__.'/../header.php';
+require __DIR__.'/../header.php';
 ?>
     <style>
     .white-line {
@@ -142,7 +142,7 @@ include __DIR__.'/../header.php';
         Navbar
     ============================== -->
     <header class="header" data-stellar-background-ratio="0.5" id="home">
-          <?php include __DIR__.'/../navbar.php';?>
+        <?php require __DIR__.'/../navbar.php';?>
     </header>
 
     <section id="signup-call-to-action">
@@ -306,18 +306,18 @@ include __DIR__.'/../header.php';
       </div>
     </section>
 
-    <?php include __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
 
     <!-- =========================
         PAGE SPECIFIC SCRIPTS
     ============================== -->
     <script>
     $(document).ready(function(){
-      <?php
-      if (isset($_GET['action']) && 'login' == $_GET['action']) {
-          echo '$("#login-dialog").modal();';
-      }
-      ?>
+        <?php
+        if (isset($_GET['action']) && 'login' == $_GET['action']) {
+            echo '$("#login-dialog").modal();';
+        }
+        ?>
 
       if ( $(window).width() < 739) {
         // small screens adjustments

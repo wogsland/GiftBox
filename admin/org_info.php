@@ -43,7 +43,7 @@ body {
   </div>
   <div class="row" id="org-info">
     <div class="col-sm-offset-1 col-sm-10">
-      <?php if (0 !== $org_id) { ?>
+        <?php if (0 !== $org_id) { ?>
         <a href="/admin/edit_organization?id=<?= $org->id ?>">
           <button class="btn pull-right" id="edit-org-button">Edit</button>
         </a>
@@ -88,9 +88,9 @@ body {
         }
         ?>
         <br />
-      <?php } else { ?>
+        <?php } else { ?>
         <h2>Invalid user</h2>
-      <?php }?>
+        <?php }?>
     </div>
   </div>
     <?php require __DIR__.'/../footer.php';?>

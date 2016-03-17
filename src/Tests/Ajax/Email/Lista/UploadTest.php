@@ -66,7 +66,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('There were errors processing your request.', $return->data->message);
         $this->assertTrue(is_array($return->data->errors));
         $this->assertEquals(1, count($return->data->errors));
-        $this->assertTrue(in_array('File is required.',$return->data->errors));
+        $this->assertTrue(in_array('File is required.', $return->data->errors));
     }
 
     /**
@@ -213,7 +213,7 @@ extends \PHPUnit_Framework_TestCase
 
         $listName = 'list'.rand();
         $bad = rand(3, 13);
-        $fileName = $this->createUploadFile(5,$bad);
+        $fileName = $this->createUploadFile(5, $bad);
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
@@ -252,7 +252,7 @@ extends \PHPUnit_Framework_TestCase
         $listName = 'list'.rand();
         $email = 'duplicate'.rand().'@gosizzle.io';
         $dups = [$email, $email];
-        $fileName = $this->createUploadFile(5,0,$dups);
+        $fileName = $this->createUploadFile(5, 0, $dups);
         $path = realpath($fileName);
         $fields = array(
             'listName'=>$listName,
@@ -278,7 +278,8 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Tears down created things
      */
-    protected function tearDown() {
+    protected function tearDown() 
+    {
         foreach ($this->files as $file) {
             unlink($file);
         }
@@ -292,7 +293,8 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return string - path to the file
      */
-    protected function createUploadFile($good = 10, $bad = 0, $include = array()) {
+    protected function createUploadFile($good = 10, $bad = 0, $include = array()) 
+    {
         $hosts = ['@gosizzle.io', '@gmail.com', '@givetoken.com'];
         $newlines = ["\n", "\n\r", "\r\n"];
         $path = rand().'.txt';
@@ -320,7 +322,8 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return string - the curl return
      */
-    protected function curl($fields = '', $headers = array()) {
+    protected function curl($fields = '', $headers = array()) 
+    {
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);

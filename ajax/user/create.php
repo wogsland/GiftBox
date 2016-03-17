@@ -15,7 +15,7 @@ foreach ($vars as $var) {
     $$var = escape_string($_POST[$var] ?? '');
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
+if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
     if (User::exists($signup_email)) {
         $data['errors'] = "The email address $signup_email has already been registered.";
     } else {
@@ -25,10 +25,12 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
         $user->save();
 
         // transfer token if it exists
-        $rows_affected = update("UPDATE recruiting_token
-                                 SET user_id = ".$user->getId()."
-                                 WHERE long_id = '$token_id'
-                                 LIMIT 1");
+        $rows_affected = update(
+            "UPDATE recruiting_token
+             SET user_id = ".$user->getId()."
+             WHERE long_id = '$token_id'
+             LIMIT 1"
+        );
         if (1 == $rows_affected) {
             $type = 'emailtoken';
         } else {

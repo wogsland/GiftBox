@@ -59,7 +59,7 @@ class RecruitingToken
     {
         $user = null;
         $result = execute_query(
-          "SELECT * FROM user WHERE id='$this->user_id'"
+            "SELECT * FROM user WHERE id='$this->user_id'"
         );
 
         if ($result->num_rows > 0) {
@@ -72,7 +72,7 @@ class RecruitingToken
     {
         $company = null;
         $result = execute_query(
-          "SELECT * FROM recruiting_company WHERE id='$this->recruiting_company_id'"
+            "SELECT * FROM recruiting_company WHERE id='$this->recruiting_company_id'"
         );
 
         if ($result->num_rows > 0) {

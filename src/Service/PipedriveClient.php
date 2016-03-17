@@ -19,7 +19,7 @@ class PipedriveClient
     /**
      * Find a Person in Pipedrive by Email
      *
-     * @param mixed $newSignup - new signup's email, first and last name
+     * @param  mixed $newSignup - new signup's email, first and last name
      * @return mixed/null - Person data or null, if none found
      * @throws \Exception - Pipedrive errors
      */
@@ -41,7 +41,7 @@ class PipedriveClient
     /**
      * Creates a new Organization in the FreeTrial status
      *
-     * @param mixed $newSignup - new signup's email, first and last name
+     * @param  mixed $newSignup - new signup's email, first and last name
      * @return mixed - new Organization data
      * @throws \Exception - Pipedrive errors
      */
@@ -57,8 +57,8 @@ class PipedriveClient
     /**
      * Creates a new Person associated with an organization
      *
-     * @param mixed $newSignup - new signup's email, first and last name
-     * @param mix $organizationId - organizationId to associate with new Person
+     * @param  mixed $newSignup      - new signup's email, first and last name
+     * @param  mix   $organizationId - organizationId to associate with new Person
      * @return mixed - new Person data
      * @throws \Exception - Pipedrive errors
      */
@@ -77,9 +77,9 @@ class PipedriveClient
     /**
      * Create a Deal in the Idea stage associated with
      *
-     * @param $dealName - set as the new Persons email
-     * @param $personId - new Persons Pipedrive id
-     * @param $organizationId - new Organizations Pipedrive id
+     * @param  $dealName - set as the new Persons email
+     * @param  $personId - new Persons Pipedrive id
+     * @param  $organizationId - new Organizations Pipedrive id
      * @return mixed - new Deal data
      * @throws \Exception - Pipedrive errors
      */
@@ -96,7 +96,7 @@ class PipedriveClient
     /**
      * Updates an Organization's status in Pipedrive to "FreeTrial"
      *
-     * @param string $organizationId - the Organization's id in Pipedrive
+     * @param  string $organizationId - the Organization's id in Pipedrive
      * @throws \Exception - Pipedrive errors
      */
     private function updateOrganzationToFreeTrial($organizationId)
@@ -112,7 +112,7 @@ class PipedriveClient
     /**
      * Takes a new signup payload and sets up a FreeTrial status in Pipedrive.
      *
-     * @param mixed $newSignup - (email_address => ..., first_name => ..., last_name => ...)
+     * @param  mixed $newSignup - (email_address => ..., first_name => ..., last_name => ...)
      * @return bool - success
      */
     public function createFreeTrial($newSignup)

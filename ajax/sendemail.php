@@ -1,10 +1,11 @@
 <?php
 use Sizzle\{
-  Support
+    Support
 };
 $status = 'ERROR';
 if (isset($_POST['email'], $_POST['message'])
-&& filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+    && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
+) {
     $vars = array('email', 'message', 'name', 'subject');
     foreach ($vars as $var) {
         $$var = $_POST[$var] ?? '';
@@ -18,14 +19,16 @@ if (isset($_POST['email'], $_POST['message'])
         $to = 'support@gosizzle.io';
     }
     $mandrill = new Mandrill(MANDRILL_API_KEY);
-    $mandrill->messages->send(array(
-      'to'=>array(array('email'=>$to)),
-      'from_email'=>'support@gosizzle.io',
-      'from_name'=>'S!zzle',
-      'subject'=>$subject,
-      'html'=>$message,
-      'headers'=>array('Reply-To'=>$email)
-    ));
+    $mandrill->messages->send(
+        array(
+            'to'=>array(array('email'=>$to)),
+            'from_email'=>'support@gosizzle.io',
+            'from_name'=>'S!zzle',
+            'subject'=>$subject,
+            'html'=>$message,
+            'headers'=>array('Reply-To'=>$email)
+        )
+    );
     $status = 'SUCCESS';
     Support::create($email, $message);
 }
