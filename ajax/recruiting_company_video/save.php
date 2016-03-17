@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
             if (in_array($source, ['youtube','vimeo'])) {
                 // see if company belongs to this user
                 $RecruitingCompany = new RecruitingCompany($recruiting_company_id, 'id');
-                if ($RecruitingCompany->user_id == $user_id) {
+                if ($RecruitingCompany->user_id == $user_id || is_admin()) {
                     try {
                         // Save the token video
                         $recruiting_company_video = new RecruitingCompanyVideo();
