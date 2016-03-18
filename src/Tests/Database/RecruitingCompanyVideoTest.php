@@ -39,14 +39,14 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->user_id = $this->User->id;
         $RecruitingCompany->name = 'Company '.rand();
         $RecruitingCompany->save();
         $this->RecruitingCompany = $RecruitingCompany;
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->getId();
+        $RecruitingToken->user_id = $this->User->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();

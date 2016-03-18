@@ -32,13 +32,13 @@ if (isset($_SESSION['activation_key'], $_POST['activation_key'])
                 unset($_SESSION['first_token']);
             } else {
                 $data['url'] = '/profile';
-                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['user_id'] = $user->id;
                 $_SESSION['admin'] = $user->admin;
                 $_SESSION['app_root'] = '/';
                 $_SESSION['app_url'] = APP_URL;
                 $_SESSION['email'] = $user->email_address;
                 $_SESSION['stripe_id'] = $user->stripe_id;
-                $UserMilestone = new UserMilestone($user->getId(), 'Log In');
+                $UserMilestone = new UserMilestone($user->id, 'Log In');
             }
         }
     }

@@ -49,7 +49,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
 
         if ($reg_type == 'EMAIL') {
             // Send the email
-            $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
+            $link = APP_URL . 'activate?uid=' . $user->id . "&key=$user->activation_key";
             if ('' == $signup_password) {
                 $link .= '&type=nopassword';
             }
@@ -69,7 +69,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
         }
         $response['status'] = "SUCCESS";
         $response['message'] = "{$user->email_address} successsfully registered.";
-        $UserMilestone = new UserMilestone($user->getId(), 'Signup');
+        $UserMilestone = new UserMilestone($user->id, 'Signup');
 
         // Create Free trial in Pipedrive
         $pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);

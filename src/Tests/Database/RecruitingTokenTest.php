@@ -48,7 +48,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Sizzle\Database\RecruitingToken', get_class($result));
 
         // save for 1 param
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->save();
 
@@ -73,7 +73,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // Create token to dup against
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->getId();
+        $RecruitingToken->user_id = $this->User->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 
@@ -95,18 +95,18 @@ extends \PHPUnit_Framework_TestCase
         // create some companies fo rthe user
         $co1 = new RecruitingCompany();
         $co1->name = 'Company '.rand();
-        $co1->user_id = $this->User->getId();
+        $co1->user_id = $this->User->id;
         $co1->save();
         $co2 = new RecruitingCompany();
         $co2->name = 'Company '.rand();
-        $co2->user_id = $this->User->getId();
+        $co2->user_id = $this->User->id;
         $co2->save();
         $co3 = new RecruitingCompany();
         $co3->name = 'Company '.rand();
-        $co3->user_id = $this->User->getId();
+        $co3->user_id = $this->User->id;
         $co3->save();
 
-        $companies = RecruitingToken::getUserCompanies($this->User->getId());
+        $companies = RecruitingToken::getUserCompanies($this->User->id);
         //print_r($companies);
         $this->assertEquals(3, count($companies));
         $this->assertEquals($companies[0]['id'], $co1->id);
@@ -123,14 +123,14 @@ extends \PHPUnit_Framework_TestCase
     public function testGetUser()
     {
         $result = new RecruitingToken();
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->save();
 
         $user = $result->getUser();
         $this->assertNotNull($user);
         $this->assertNotEquals('', $user);
-        $this->assertEquals($this->User->getId(), $user->getId());
+        $this->assertEquals($this->User->id, $user->id);
         $this->assertEquals('Y', $user->allow_token_responses);
         $this->assertEquals('Y', $user->receive_token_notifications);
     }
@@ -142,11 +142,11 @@ extends \PHPUnit_Framework_TestCase
     {
         $co = new RecruitingCompany();
         $co->name = 'Company '.rand();
-        $co->user_id = $this->User->getId();
+        $co->user_id = $this->User->id;
         $co->save();
 
         $result = new RecruitingToken();
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->recruiting_company_id = $co->id;
         $result->save();
@@ -156,7 +156,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertNotEquals('', $company);
         $this->assertEquals($co->id, $company->id);
         $this->assertEquals($co->name, $company->name);
-        $this->assertEquals($this->User->getId(), $company->user_id);
+        $this->assertEquals($this->User->id, $company->user_id);
     }
 
     /**
@@ -167,12 +167,12 @@ extends \PHPUnit_Framework_TestCase
         // create company
         $co = new RecruitingCompany();
         $co->name = 'Company '.rand();
-        $co->user_id = $this->User->getId();
+        $co->user_id = $this->User->id;
         $co->save();
 
         // test save with default (N)
         $result = new RecruitingToken();
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->recruiting_company_id = $co->id;
         $result->save();
@@ -181,7 +181,7 @@ extends \PHPUnit_Framework_TestCase
 
         // test save with Y
         $result = new RecruitingToken();
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->recruiting_company_id = $co->id;
         $result->recruiter_profile = 'Y';
@@ -191,7 +191,7 @@ extends \PHPUnit_Framework_TestCase
 
         // test save with N
         $result = new RecruitingToken();
-        $result->user_id = $this->User->getId();
+        $result->user_id = $this->User->id;
         $result->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $result->recruiting_company_id = $co->id;
         $result->recruiter_profile = 'N';
@@ -206,7 +206,7 @@ extends \PHPUnit_Framework_TestCase
     public function testScreenshot()
     {
         $token = new RecruitingToken();
-        $token->user_id = $this->User->getId();
+        $token->user_id = $this->User->id;
         $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $token->save();
 

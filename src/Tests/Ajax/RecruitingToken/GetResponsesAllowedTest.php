@@ -46,7 +46,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 
@@ -81,7 +81,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 

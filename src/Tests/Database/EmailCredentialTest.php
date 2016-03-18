@@ -58,7 +58,7 @@ extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         // Info for email credentials
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
         $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
@@ -92,7 +92,7 @@ extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         // Info for email credentials to be updated
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
         $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
@@ -124,7 +124,7 @@ extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // Info for email credentials to be deleted
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
         $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);

@@ -46,7 +46,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($RecruitingCompany->name));
 
         // $id specified case
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $name = rand().' Inc.';
         $logo = rand().'.jpg';
         $website = 'www.'.rand().'com';
@@ -106,7 +106,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     {
         // test saving a new recruiting company
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->user_id = $this->User->id;
         $RecruitingCompany->name = rand().' Inc.';
         $RecruitingCompany->logo = rand().'.png';
         $RecruitingCompany->website = 'www.'.rand().'com';

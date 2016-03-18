@@ -27,7 +27,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
         // transfer token if it exists
         $rows_affected = update(
             "UPDATE recruiting_token
-             SET user_id = ".$user->getId()."
+             SET user_id = ".$user->id."
              WHERE long_id = '$token_id'
              LIMIT 1"
         );
@@ -39,13 +39,13 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
 
         // response url
         // http://gosizzle.local/activate?uid=131&key=1234&type=emailtoken
-        $url = APP_URL.'activate?uid=' . $user->getId();
+        $url = APP_URL.'activate?uid=' . $user->id;
         $url .= '&key=' . $user->activation_key . '&type=' . $type;
         $data['url'] = $url;
         $success = 'true';
 
         // milestone signup
-        $UserMilestone = new UserMilestone($user->getId(), 'Signup');
+        $UserMilestone = new UserMilestone($user->id, 'Signup');
 
         // Create Free trial in Pipedrive
         $pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);

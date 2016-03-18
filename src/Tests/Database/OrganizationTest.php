@@ -117,7 +117,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // test vars
         $name = 'The '.rand().' Corporation';
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
 
         // Create open
         $organization = new Organization();
@@ -146,7 +146,7 @@ extends \PHPUnit_Framework_TestCase
         // test ALL the things!
         $name = 'The '.rand().' Corporation';
         $website = 'http://www.'.rand().'.org';
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
 
         // Create open
         $organization = new Organization();

@@ -41,13 +41,13 @@ switch ($type) {
     //print_r($_SESSION);
     break;
     case '':
-    $_SESSION['user_id'] = $user->getId();
+    $_SESSION['user_id'] = $user->id;
     $_SESSION['admin'] = $user->admin;
     $_SESSION['app_root'] = '/';
     $_SESSION['app_url'] = APP_URL;
     $_SESSION['email'] = $user->email_address;
     $_SESSION['stripe_id'] = $user->stripe_id;
-    $UserMilestone = new UserMilestone($user->getId(), 'Log In');
+    $UserMilestone = new UserMilestone($user->id, 'Log In');
     default:
     header('Location: '.'/'.'?action=login');
 }

@@ -37,7 +37,7 @@ extends \PHPUnit_Framework_TestCase
         $this->User = $User;
 
         // Info for email credentials
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
         $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);

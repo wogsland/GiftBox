@@ -19,7 +19,6 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
      */
     public function create($recruiting_token_id, $email, $response, $cookie = '')
     {
-        $this->addReadOnly('created');
         $id = 0;
         if (filter_var($email, FILTER_VALIDATE_EMAIL)
             && in_array($response, array('Yes', 'No', 'Maybe'))

@@ -14,7 +14,6 @@ class Milestone extends \Sizzle\DatabaseEntity
      */
     public function __construct($milestone)
     {
-        $this->addReadOnly('created');
         // see if it's a name or id
         if ((int)$milestone > 0) {
             $query = "SELECT id, name, created

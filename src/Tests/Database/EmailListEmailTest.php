@@ -37,7 +37,7 @@ extends \PHPUnit_Framework_TestCase
         $this->User = $User;
 
         //set up the test list
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $name = 'My '.rand().'th List';
         $this->EmailList = new EmailList();
         $this->EmailList->create($user_id, $name);

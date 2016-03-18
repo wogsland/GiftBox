@@ -38,7 +38,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->getId();
+        $RecruitingToken->user_id = $this->User->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
         $this->RecruitingToken = $RecruitingToken;
@@ -85,7 +85,7 @@ extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         // grab for a single token
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $long_id = $this->RecruitingToken->long_id;
         $RecruitingTokenResponse = new RecruitingTokenResponse();
         $possible = ['Yes','No','Maybe'];
@@ -118,7 +118,7 @@ extends \PHPUnit_Framework_TestCase
 
         // grab for a single user, all tokens
         $RecruitingToken2 = new RecruitingToken();
-        $RecruitingToken2->user_id = $this->User->getId();
+        $RecruitingToken2->user_id = $this->User->id;
         $RecruitingToken2->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken2->save();
         $email = rand() . '@gmail.com';
@@ -130,7 +130,7 @@ extends \PHPUnit_Framework_TestCase
             'id' => $id
         );
         $RecruitingToken3 = new RecruitingToken();
-        $RecruitingToken3->user_id = $this->User->getId();
+        $RecruitingToken3->user_id = $this->User->id;
         $RecruitingToken3->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken3->save();
         $email = rand() . '@gmail.com';

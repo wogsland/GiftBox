@@ -170,7 +170,7 @@ extends \PHPUnit_Framework_TestCase
         $User->last_name = rand();
         $User->save();
         $emailList = new EmailList();
-        $emailListID = $emailList->create($User->getId(), $listName);
+        $emailListID = $emailList->create($User->id, $listName);
 
         // try to create a different list with the same name for a different user
         $fileName = $this->createUploadFile();

@@ -58,7 +58,7 @@ extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         // Info for email credentials
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $name = 'List #'.rand();
 
         // Create credentials
@@ -83,7 +83,7 @@ extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         // Info for email credentials to be updated
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $name = 'My '.rand().'th List';
         $EmailList = new EmailList();
         $id = $EmailList->create($user_id, $name);
@@ -109,7 +109,7 @@ extends \PHPUnit_Framework_TestCase
     public function testDelete()
     {
         // Info for email credentials to be deleted
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $name = 'Nom '.rand();
         $EmailList = new EmailList();
         $id = $EmailList->create($user_id, $name);

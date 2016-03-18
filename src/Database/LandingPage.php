@@ -17,7 +17,6 @@ class LandingPage extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        $this->addReadOnly('created');
         if ($id !== null && (int) $id == $id) {
             $condition = "AND id = '$id'";
         } else {

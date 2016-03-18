@@ -1,8 +1,6 @@
 <?php
 namespace Sizzle\Database;
 
-use Sizzle\Social;
-
 class User extends \Sizzle\DatabaseEntity
 {
     protected $email_address;
@@ -69,11 +67,6 @@ class User extends \Sizzle\DatabaseEntity
             $user = $result->fetch_object("Sizzle\Database\User");
         }
         return $user;
-    }
-
-    public function getId()
-    {
-        return $this->id;
     }
 
     public function update_token($token = null)

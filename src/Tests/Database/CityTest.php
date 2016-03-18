@@ -24,7 +24,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
     {
         // create a city for testing
         $city = new City();
-        $city->name = "Test City";
+        $city->name = "Test City ".rand();
         $city->image_file = "city.png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
@@ -139,11 +139,6 @@ class CityTest extends \PHPUnit_Framework_TestCase
                 }
             }
         }
-    }
-
-    public function testGetAll()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testGetIdFromName()

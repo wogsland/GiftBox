@@ -42,7 +42,7 @@ extends \PHPUnit_Framework_TestCase
         $user = User::fetch($email);
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertEquals($email, $user->email_address);
-        $this->assertEquals($userId, $user->getId());
+        $this->assertEquals($userId, $user->id);
         $user = User::fetch(rand() . $email); //this one shouldn't be there
         $this->assertFalse(isset($user));
 
@@ -56,7 +56,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertEquals($email, $user->email_address);
         $this->assertEquals($apiKey, $user->api_key);
-        $this->assertEquals($userId, $user->getId());
+        $this->assertEquals($userId, $user->id);
         $user = User::fetch(rand() . $apiKey, 'api_key'); //this one shouldn't be there
         $this->assertFalse(isset($user));
 
@@ -67,7 +67,7 @@ extends \PHPUnit_Framework_TestCase
         $user = User::fetch($email, 'email_address');
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertEquals($email, $user->email_address);
-        $this->assertEquals($userId, $user->getId());
+        $this->assertEquals($userId, $user->id);
         $user = User::fetch(rand() . $email, 'email_address'); //this one shouldn't be there
         $this->assertFalse(isset($user));
 
@@ -81,7 +81,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertEquals($email, $user->email_address);
         $this->assertEquals($reset, $user->reset_code);
-        $this->assertEquals($userId, $user->getId());
+        $this->assertEquals($userId, $user->id);
         $user = User::fetch(rand() . $reset, 'reset_code'); //this one shouldn't be there
         $this->assertFalse(isset($user));
 

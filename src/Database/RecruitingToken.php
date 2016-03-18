@@ -22,7 +22,6 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
      */
     public function __construct($value = null, $key = null)
     {
-        $this->addReadOnly('created');
         if ($value !== null) {
             if ($key == null || !in_array($key, array('id','long_id'))) {
                 $key = 'id';

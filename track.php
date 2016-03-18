@@ -21,7 +21,7 @@ if (0 === strpos($_SERVER['REQUEST_URI'],'/track/open')
 && is_numeric($_GET['t'])
 && filter_var($_GET['e'], FILTER_VALIDATE_EMAIL)) {
     $user = User::fetch($_GET['e']);
-    $user_id = is_null($user) ? $user : $user->getId();
+    $user_id = is_null($user) ? $user : $user->id;
     if (isset($_GET['l']) && $_GET['t'] == 3) {
         // recruiting token email needs a long id
         $long_id = escape_string($_GET['l']);

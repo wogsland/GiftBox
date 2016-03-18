@@ -26,34 +26,6 @@ class City extends \Sizzle\DatabaseEntity
     protected $created;
 
     /**
-     * Overrides DatabaseEntity::__construct() to set created as read-only
-     * after calling parent::__construct()
-     */
-    public function __construct($id = null)
-    {
-        parent::__construct($id);
-        $this->addReadOnly('created');
-    }
-
-    /**
-     * Gets all the cities sorted by name
-     *
-     * @return array - the cities
-     */
-    public static function getAll()
-    {
-        $cities = array();
-        $results = execute_query("SELECT * FROM city ORDER BY name");
-        if ($results) {
-            while($object = $results->fetch_object()) {
-                $cities[count($cities)] = $object;
-            }
-            $results->free();
-            return $cities;
-        }
-    }
-
-    /**
      * Gets the city id given the city name
      *
      * @param string $name - the name of the city to pull from the database

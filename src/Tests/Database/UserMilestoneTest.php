@@ -46,19 +46,18 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         // id case
-        $UserMilestone = new UserMilestone($this->User->getId(), $this->milestone_id);
+        $UserMilestone = new UserMilestone($this->User->id, $this->milestone_id);
         $this->assertEquals('Sizzle\Database\UserMilestone', get_class($UserMilestone));
         $this->assertTrue(isset($UserMilestone->id));
-        $this->assertEquals($this->User->getId(), $UserMilestone->user_id);
+        $this->assertEquals($this->User->id, $UserMilestone->user_id);
         $this->assertEquals($this->milestone_id, $UserMilestone->milestone_id);
         $this->assertTrue(isset($UserMilestone->created));
 
         // name case
-        $UserMilestone = new UserMilestone($this->User->getId(), $this->milestone_name);
-        //print_r($UserMilestone);
+        $UserMilestone = new UserMilestone($this->User->id, $this->milestone_name);
         $this->assertEquals('Sizzle\Database\UserMilestone', get_class($UserMilestone));
         $this->assertTrue(isset($UserMilestone->id));
-        $this->assertEquals($this->User->getId(), $UserMilestone->user_id);
+        $this->assertEquals($this->User->id, $UserMilestone->user_id);
         $this->assertEquals($this->milestone_id, $UserMilestone->milestone_id);
         $this->assertTrue(isset($UserMilestone->created));
     }
@@ -70,7 +69,7 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     {
         $query = "DELETE FROM user_milestone WHERE milestone_id = '{$this->milestone_id}'";
         execute($query);
-        $user_id = $this->User->getId();
+        $user_id = $this->User->id;
         $query = "DELETE FROM user WHERE id = '{$user_id}'";
         execute($query);
         $query = "DELETE FROM milestone WHERE id = '{$this->milestone_id}'";

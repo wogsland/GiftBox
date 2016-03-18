@@ -53,7 +53,7 @@ if (logged_in()) {
         $user->save();
 
         $response['status'] = "SUCCESS";
-        $response['user_id'] = $user->getId();
+        $response['user_id'] = $user->id;
     } catch (Exception $e) {
         $response['status'] = "ERROR";
         $response['message'] = $e->getMessage();

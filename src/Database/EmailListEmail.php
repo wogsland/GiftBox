@@ -17,7 +17,6 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        $this->addReadOnly('created');
         if ($id !== null && (int) $id == $id) {
             $token = execute_query(
                 "SELECT * FROM email_list_email

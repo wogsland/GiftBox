@@ -42,7 +42,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
 
@@ -50,8 +50,8 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
         $fields = array(
             'token_id'=>$RecruitingToken->long_id,
-            'old_user_id'=>$User1->getId(),
-            'new_user_id'=>$User2->getId()
+            'old_user_id'=>$User1->id,
+            'new_user_id'=>$User2->id
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -73,7 +73,7 @@ extends \PHPUnit_Framework_TestCase
 
         //check DB was updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
-        $this->assertEquals($User2->getId(), $RecruitingToken2->user_id);
+        $this->assertEquals($User2->id, $RecruitingToken2->user_id);
     }
 
     /**
@@ -95,12 +95,12 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test company with unrelated user
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User1->getId();
+        $RecruitingCompany->user_id = $User1->id;
         $RecruitingCompany->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
@@ -109,8 +109,8 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
         $fields = array(
             'token_id'=>$RecruitingToken->long_id,
-            'old_user_id'=>$User1->getId(),
-            'new_user_id'=>$User2->getId()
+            'old_user_id'=>$User1->id,
+            'new_user_id'=>$User2->id
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -133,7 +133,7 @@ extends \PHPUnit_Framework_TestCase
 
         //check DB was not updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
-        $this->assertEquals($User1->getId(), $RecruitingToken2->user_id);
+        $this->assertEquals($User1->id, $RecruitingToken2->user_id);
     }
 
     /**
@@ -155,12 +155,12 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User2->getId();
+        $RecruitingCompany->user_id = $User2->id;
         $RecruitingCompany->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
@@ -169,8 +169,8 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
         $fields = array(
             'token_id'=>$RecruitingToken->long_id,
-            'old_user_id'=>$User1->getId(),
-            'new_user_id'=>$User2->getId()
+            'old_user_id'=>$User1->id,
+            'new_user_id'=>$User2->id
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -192,7 +192,7 @@ extends \PHPUnit_Framework_TestCase
 
         //check DB was updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
-        $this->assertEquals($User2->getId(), $RecruitingToken2->user_id);
+        $this->assertEquals($User2->id, $RecruitingToken2->user_id);
     }
 
     /**
@@ -219,12 +219,12 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test company with unrelated user
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User3->getId();
+        $RecruitingCompany->user_id = $User3->id;
         $RecruitingCompany->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->getId();
+        $RecruitingToken->user_id = $User1->id;
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->save();
@@ -233,8 +233,8 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
         $fields = array(
             'token_id'=>$RecruitingToken->long_id,
-            'old_user_id'=>$User1->getId(),
-            'new_user_id'=>$User2->getId()
+            'old_user_id'=>$User1->id,
+            'new_user_id'=>$User2->id
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -257,7 +257,7 @@ extends \PHPUnit_Framework_TestCase
 
         //check DB was not updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
-        $this->assertEquals($User1->getId(), $RecruitingToken2->user_id);
+        $this->assertEquals($User1->id, $RecruitingToken2->user_id);
     }
 
     /**
