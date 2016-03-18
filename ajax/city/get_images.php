@@ -9,7 +9,7 @@ if (logged_in()) {
   ];
   $city_id = $_POST['city_id'];
   if (isset($city_id) && '' != $city_id) {
-    $HOST_NAME = "http://city.images.s3-us-west-2.amazonaws.com";
+    $HOST_NAME = "http://city.images.s3-us-west-2.amazonaws.com/";
     $imageUrls = CityImage::getAllImageUrlsForCity(escape_string($city_id));
     $data = array();
     foreach ($imageUrls as $url) {

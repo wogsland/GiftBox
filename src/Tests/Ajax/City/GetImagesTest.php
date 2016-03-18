@@ -19,6 +19,7 @@ class GetImagesTest
 
   public function setUp()
   {
+    // TODO: This is fragile, needs to be updated once the database is imported
     $this->city_id = 52011;
   }
 

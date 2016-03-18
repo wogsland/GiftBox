@@ -52,7 +52,7 @@ class CityImageTest extends \PHPUnit_Framework_TestCase
   protected function setUp()
   {
     // grab existing city with images
-    // This is fragile, needs to be updated once the database is imported
+    // TODO: This is fragile, needs to be updated once the database is imported
     $this->existing_city_with_images = new City(51975);
 
     // create new city
