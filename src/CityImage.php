@@ -27,13 +27,11 @@ class CityImage extends DatabaseEntity
     $imageUrls = array();
     $results = execute_query("SELECT * FROM city_image WHERE city_id='$city_id' ORDER BY image_file");
     if ($results) {
-      while($object = $results->fetch_object()) {
+      while ($object = $results->fetch_object()) {
         $imageUrls[count($imageUrls)] = $object;
       }
       $results->free();
-      return array(count($imageUrls) > 0, $imageUrls);
-    } else {
-      return array(false, $imageUrls);
     }
+    return $imageUrls;
   }
 }
