@@ -145,6 +145,9 @@ class Route
                     }
                 }
                 break;
+            case 'mascot':
+                include __DIR__.'/../mascot.php';
+                break;
             case 'organization':
                 include __DIR__.'/../admin/org_info.php';
                 break;
