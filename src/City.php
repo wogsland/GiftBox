@@ -4,7 +4,6 @@ namespace Sizzle;
 class City extends DatabaseEntity
 {
     protected $name;
-    protected $image_file;
     protected $population;
     protected $longitude;
     protected $latitude;

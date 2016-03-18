@@ -24,7 +24,6 @@ extends \PHPUnit_Framework_TestCase
     {
         // create a city
         $name = "City #" . rand();
-        $image_file = rand().".png";
         $population = rand(10000, 10000000);
         $longitude = rand(0, 100);
         $latitude = rand(0, 100);
@@ -48,7 +47,6 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/city/add";
         $fields = array(
             'name'=>$name,
-            'image_file'=>$image_file,
             'population'=>$population,
             'longitude'=>$longitude,
             'latitude'=>$latitude,
@@ -93,7 +91,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result->num_rows);
         $row = $result->fetch_assoc();
         $this->assertEquals($name, $row['name']);
-        $this->assertEquals($image_file, $row['image_file']);
         $this->assertEquals($population, $row['population']);
         $this->assertEquals($longitude, $row['longitude']);
         $this->assertEquals($latitude, $row['latitude']);
@@ -140,7 +137,6 @@ extends \PHPUnit_Framework_TestCase
     {
         // create city test variables
         $name = "City #" . rand();
-        $image_file = rand().".png";
         $population = rand(10000, 10000000);
         $longitude = rand(0, 100);
         $latitude = rand(0, 100);
@@ -164,7 +160,6 @@ extends \PHPUnit_Framework_TestCase
         $url = TEST_URL . "/ajax/city/add";
         $fields = array(
             'name'=>$name,
-            'image_file'=>$image_file,
             'population'=>$population,
             'longitude'=>$longitude,
             'latitude'=>$latitude,
