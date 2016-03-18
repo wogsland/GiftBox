@@ -34,12 +34,12 @@ class Route
     public function go()
     {
         if (!isset($this->endpointPieces[1])) {
-            include __DIR__.'/../lp/sizzle1.php';
+            include __DIR__.'/../lp/email_signup.php';
         } else {
             switch ($this->endpointPieces[1]) {
             case '':
             case 'index.html':
-                include __DIR__.'/../lp/sizzle1.php';
+                include __DIR__.'/../lp/email_signup.php';
                 break;
             case 'about':
                 include __DIR__.'/../about.php';
@@ -118,7 +118,7 @@ class Route
                 include __DIR__.'/../email_list.php';
                 break;
             case 'email_signup':
-                include __DIR__.'/../email_signup.php';
+                include __DIR__.'/../lp/email_signup.php';
                 break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';

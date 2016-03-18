@@ -3,7 +3,7 @@ if (logged_in()) {
     header('Location: /profile');
 }
 define('TITLE', 'S!zzle - Sell the S!zzle not the Steak');
-include __DIR__.'/header.php';
+include __DIR__.'/../header.php';
 ?>
 <link rel="import" href="/components/paper-button/paper-button.html">
 <link rel="import" href="/components/paper-dialog/paper-dialog.html">
@@ -48,7 +48,7 @@ include __DIR__.'/header.php';
       Navbar
   ============================== -->
   <header class="header" data-stellar-background-ratio="0.5" id="home">
-        <?php include __DIR__.'/navbar.php';?>
+        <?php include __DIR__.'/../navbar.php';?>
   </header>
 
   <section id="email-signup-call-to-action">
@@ -73,7 +73,7 @@ include __DIR__.'/header.php';
           <p>
         </div>
         <div id="right-div-1" class="col-md-8 wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/DnpO_RTSNmQ" frameborder="0" allowfullscreen></iframe>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/uHzRX-8jC3s" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ include __DIR__.'/header.php';
     </div>
   </paper-dialog>
 
-  <?php include __DIR__.'/footer.php';?>
+  <?php include __DIR__.'/../footer.php';?>
   <script>
   /**
    * Opens the Upload Dialog
@@ -148,6 +148,11 @@ include __DIR__.'/header.php';
      $(identifier).trigger('click');
   }
   $( document ).ready(function() {
+    <?php
+    if (isset($_GET['action']) && 'login' == $_GET['action']) {
+        echo '$("#login-dialog").modal();';
+    }
+    ?>
     $('#select-list-file').change(function() {
       var filename = $('#select-list-file').val().replace('C:\\fakepath\\', '');
       /*if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
@@ -158,6 +163,9 @@ include __DIR__.'/header.php';
         $('#upload-file').val(filename);
       //}
     });
+
+    url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
+    $.post(url);
   });
 
   /**
