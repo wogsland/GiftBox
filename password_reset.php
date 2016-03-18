@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 // make sure the secret is valid
 if (isset($_GET['secret'])) {

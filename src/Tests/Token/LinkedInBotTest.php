@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Token;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     City,
     RecruitingCompany,
     RecruitingCompanyImage,
@@ -515,7 +515,7 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Helper function to test things that should always be there
      */
-    protected function thingsThatShouldAlwaysBeThere($html) 
+    protected function thingsThatShouldAlwaysBeThere($html)
     {
         $this->assertContains('<!doctype html>', $html);
         $this->assertContains('<html lang="en">', $html);

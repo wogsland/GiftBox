@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingCompanyVideo,
     RecruitingToken,

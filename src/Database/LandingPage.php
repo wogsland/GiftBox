@@ -1,0 +1,50 @@
+<?php
+namespace Sizzle\Database;
+
+/**
+ * This class is for database interaction with landing pages.
+ */
+class LandingPage extends \Sizzle\DatabaseEntity
+{
+    protected $script;
+    protected $created;
+
+    /**
+     * This function constructs the class from a random landing page
+     * the specified id.
+     *
+     * @param int $id - optional id of the landing_page
+     */
+    public function __construct($id = null)
+    {
+        $this->addReadOnly('created');
+        if ($id !== null && (int) $id == $id) {
+            $condition = "AND id = '$id'";
+        } else {
+            $condition = "ORDER BY RAND() LIMIT 1";
+        }
+        $page = execute_query(
+            "SELECT * FROM landing_page
+            WHERE deleted IS NULL
+            $condition"
+        )->fetch_object();
+        if (is_object($page)) {
+            foreach (get_object_vars($page) as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    /**
+     * Records a hit on the landing page represented by this class
+     *
+     * @param string $visitor_cookie - cookie identifying the visitor
+     *
+     * @return boolean - success of recording
+     */
+    public function recordHit($visitor_cookie)
+    {
+        $LandingPageView = new LandingPageView();
+        $LandingPageView->create($this->id, $visitor_cookie);
+    }
+}

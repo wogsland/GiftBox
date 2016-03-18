@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {

@@ -2,7 +2,7 @@
 namespace Sizzle\Tests\Ajax\Email\Lista;
 //the word "List" doesn't work in namespaces, so I translated it to Spanish
 
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailList,
     EmailListEmail,
     User
@@ -278,7 +278,7 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Tears down created things
      */
-    protected function tearDown() 
+    protected function tearDown()
     {
         foreach ($this->files as $file) {
             unlink($file);
@@ -293,7 +293,7 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return string - path to the file
      */
-    protected function createUploadFile($good = 10, $bad = 0, $include = array()) 
+    protected function createUploadFile($good = 10, $bad = 0, $include = array())
     {
         $hosts = ['@gosizzle.io', '@gmail.com', '@givetoken.com'];
         $newlines = ["\n", "\n\r", "\r\n"];
@@ -322,7 +322,7 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return string - the curl return
      */
-    protected function curl($fields = '', $headers = array()) 
+    protected function curl($fields = '', $headers = array())
     {
         ob_start();
         $ch = curl_init();

@@ -1,8 +1,8 @@
 <?php
 use \Sizzle\{
     HTML,
-    RecruitingToken,
-    User
+    Database\RecruitingToken,
+    Database\User
 };
 
 if (logged_in() && is_admin()) {

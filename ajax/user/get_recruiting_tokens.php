@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
     HTML,
-    RecruitingToken
+    Database\RecruitingToken
 };
 
 // collect id

@@ -1,6 +1,6 @@
 <?php
-use Sizzle\RecruitingTokenResponse;
-use Sizzle\RecruitingToken;
+use Sizzle\Database\RecruitingTokenResponse;
+use Sizzle\Database\RecruitingToken;
 
 // collect info from url
 $recruiting_token_id = escape_string($endpoint_parts[4] ?? '');

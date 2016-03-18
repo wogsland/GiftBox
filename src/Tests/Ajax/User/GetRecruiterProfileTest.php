@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\User;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     Organization,
     RecruitingCompany,
     RecruitingToken,

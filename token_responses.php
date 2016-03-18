@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\RecruitingTokenResponse;
+use \Sizzle\Database\RecruitingTokenResponse;
 
 date_default_timezone_set('America/Chicago');
 

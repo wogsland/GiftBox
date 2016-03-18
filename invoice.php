@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\RecruitingToken;
+use \Sizzle\Database\RecruitingToken;
 use \Stripe\{
     Invoice,
     Stripe

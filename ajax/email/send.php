@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailCredential,
     EmailSent
 };

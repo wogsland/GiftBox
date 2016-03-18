@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
-    User,
-    UserMilestone,
+    Database\User,
+    Database\UserMilestone,
     Service\PipedriveClient
 };
 

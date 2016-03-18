@@ -1,5 +1,5 @@
 <?php
-use Sizzle\RecruitingCompany;
+use Sizzle\Database\RecruitingCompany;
 
 $success = 'false';
 $data = '';

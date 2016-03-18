@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\RecruitingTokenResponse;
+use \Sizzle\Database\RecruitingTokenResponse;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');

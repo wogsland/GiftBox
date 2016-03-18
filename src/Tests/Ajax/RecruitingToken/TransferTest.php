@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     RecruitingToken,
     RecruitingCompany,
     User
@@ -68,10 +68,8 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response);
         $json = ob_get_contents();
         ob_end_clean();
-        //print_r($json);
         $return = json_decode($json);
         $this->assertEquals('true', $return->success);
-        //print_r($return);
 
         //check DB was updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
