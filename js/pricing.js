@@ -389,6 +389,9 @@
         }
     };
 
-    var pricing = new Pricing(document.getElementById('pricing-page'));
+    var page = document.getElementById('pricing-page');
+    if (page) {
+        var pricing = new Pricing(page);
+    }
 
 }());

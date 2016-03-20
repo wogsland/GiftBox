@@ -1,23 +1,23 @@
 var gulp = require('gulp'),
     path = require('path'),
-    /*stylus = require('gulp-stylus'),
-    path = require('path'),
-    concat = require('gulp-concat'),
-    watch = require('gulp-watch'),
-    run = require('./gulp/run'),
-    rename = require('gulp-rename'),
-    plumber = require('gulp-plumber'),
-    order = require('gulp-order'),
-    compress = require('gulp-yuicompressor'),
-    json_minify = require('gulp-jsonminify'),
-    polybuild = require('polybuild'),
-    es = require('event-stream'),*/
-
+    p = PathHelper = {
+        js: function (name) {
+            return path.join('js', name + '.js');
+        },
+        vendor_js: function (name) {
+            return p.js(path.join('vendor', name));
+        },
+        css: function (name) {
+            return path.join('css', name + '.css');
+        },
+        vendor_css: function (name) {
+            return p.js(path.join('vendor', name));
+        }
+    },
     paths = {
         css: [
             path.join('css', 'owl.theme.css'),
             path.join('css', 'owl.carousel.css'),
-            path.join('css', 'nivo-lightbox.css'),
             path.join('css', 'font-awesome.min.css'),
             path.join('css', 'animate.css'),
             path.join('css', 'styles.css')
@@ -26,9 +26,68 @@ var gulp = require('gulp'),
             path.join('css', 'variables.styl'),
             path.join('css', 'Pricing.styl')
         ],
-        js: [
-            path.join('js', 'pricing.js')
-        ],
+        builds: {
+            api_documentation: {
+                vendor_js: [
+                    p.vendor_js('jquery.slideto.min'),
+                    p.vendor_js('jquery.wiggle.min'),
+                    p.vendor_js('jquery.ba-bbq.min'),
+                    p.vendor_js('handlebars-2.0.0.min'),
+                    p.vendor_js('highlight.7.3.pack'),
+                    p.vendor_js('underscore-min'),
+                    p.vendor_js('backbone-min'),
+                    p.vendor_js('swagger-ui.min'),
+                    p.vendor_js('highlight.7.3.pack'),
+                    p.vendor_js('jsoneditor.min'),
+                    p.vendor_js('marked.min'),
+                    p.vendor_js('swagger.oath.min')
+                ],
+                vendor_css: [],
+                js: [],
+                css: []
+            },
+            marketing: {
+                vendor_js: [
+                    /** TODO: These should generally be pulled from one of the package manager directories **/
+                    p.vendor_js('bootstrap.min'),
+                    p.vendor_js('smoothscroll'),
+                    p.vendor_js('jquery.scrollTo.min'),
+                    p.vendor_js('jquery.localScroll.min'),
+                    p.vendor_js('jquery-ui.min'),
+                    p.vendor_js('simple-expand.min'),
+                    p.vendor_js('wow'),
+                    p.vendor_js('jquery.stellar.min'),
+                    p.vendor_js('retina-1.1.0.min'),
+                    p.vendor_js('matchMedia'),
+                    p.vendor_js('jquery.ajaxchimp.min')
+                ],
+                vendor_css: [
+                    path.join('css', 'owl.theme.css'),
+                    path.join('css', 'owl.carousel.css'),
+                    path.join('css', 'font-awesome.min.css'),
+                    path.join('css', 'animate.css')
+                ],
+                js: [
+                    p.js('custom'),
+                    p.js('account'),
+                    p.js('pricing')
+                ],
+                css: [
+                    // Vanilla css
+                    path.join('css', 'styles.css'),
+
+                    // Stylus
+                    path.join('css', 'variables.styl'),
+                    path.join('css', 'Pricing.styl')
+                ]
+            },
+            application: {
+                vendor_js: [],
+                vendor_css: [],
+                js: [],
+                css: []
+            }
+        },
         json: [
             path.join('js', 'api-v1.json')
         ],
@@ -37,20 +96,16 @@ var gulp = require('gulp'),
         ],
         legacy: {
             js: [
-                path.join('js', 'smoothscroll.js'),
-                path.join('js', 'wow.js'),
-                path.join('js', 'create_common.js'),
-                path.join('js', 'create_recruiting.js'),
-                path.join('js', 'custom.js'),
-                path.join('js', 'account.js'),
-                path.join('js', 'matchMedia.js'),
-                path.join('js', 'contact.js'),
-                path.join('js', 'login.js'),
-                path.join('js', 'signup.js')
+                p.vendor_js('react.min'),
+                p.vendor_js('JSXTransformer'),
+                p.js('create_common'),
+                p.js('create_recruiting'),
+                p.js('free-trial.min'),
+                p.js('contact'),
+                p.js('login'),
+                p.js('signup')
             ],
             css: [
-                path.join('css', 'colorbox.css'),
-                path.join('css', 'magnific-popup.css'),
                 path.join('css', 'create_recruiting.css'),
                 path.join('css', 'datatables.css'),
                 path.join('css', 'at-at.css'),
@@ -59,8 +114,11 @@ var gulp = require('gulp'),
         },
         css_build: path.join('public', 'css'),
         js_build: path.join('public', 'js'),
+        js_dist: path.join('public', 'js', 'dist'),
         polymer_build: path.join('.')
     };
+
+
 
 gulp.task(
     'css',
@@ -74,7 +132,7 @@ gulp.task(
             rename = require('gulp-rename'),
             compress = require('gulp-yuicompressor');
 
-        // Busniness time
+        // Business time
         var css = gulp.src(paths.css),
             styl = gulp.src(paths.stylus)
                 .pipe(plumber())
@@ -105,17 +163,41 @@ gulp.task(
     function () {
         // Deps
         var plumber = require('gulp-plumber'),
+            compress = require('gulp-yuicompressor'),
+            concat = require('gulp-concat'),
+            es = require('event-stream'),
             rename = require('gulp-rename'),
-            compress = require('gulp-yuicompressor');
+            filter = require('gulp-filter');
 
         // Business time
-        return gulp.src(paths.js.concat(paths.legacy.js))
-            .pipe(plumber())
-            .pipe(compress({type: 'js'}))
-            .pipe(rename({
-                suffix: '.min'
-            }))
-            .pipe(gulp.dest(paths.js_build));
+
+        // Builds
+        var streams = [];
+        for (var build_name in paths.builds) {
+            if (paths.builds.hasOwnProperty(build_name)) {
+                var build = paths.builds[build_name],
+                    stream = gulp.src([].concat(build.vendor_js, build.js))
+                        .pipe(plumber())
+                        .pipe(concat(build_name + '.min.js'))
+                        .pipe(compress({type: 'js'}))
+                        .pipe(gulp.dest(paths.js_dist));
+                streams.push(stream);
+            }
+        }
+
+        //Legacy single serving files (to be refactored into builds or deleted)
+        var uniminified = filter(['**', '!**/*.min.js', '!**/JSXTransformer.js'], {restore: true});
+        streams.push(
+            gulp.src(paths.legacy.js)
+                .pipe(plumber())
+                .pipe(uniminified)
+                .pipe(compress({type: 'js'}))
+                .pipe(rename({suffix: '.min'}))
+                .pipe(uniminified.restore)
+                .pipe(gulp.dest(paths.js_build))
+        );
+
+        return es.merge(streams);
     }
 );
 
@@ -161,7 +243,7 @@ gulp.task(
 
         // Markup processing
         not_js
-            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/$2.min.js"'))
+            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/$.min.js"'))
             .pipe(replace('"fonts/', '"/fonts/'))
             .pipe(gulp.dest(paths.polymer_build));
 

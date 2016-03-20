@@ -137,9 +137,6 @@ class Route
                     case 'pay_with_stripe.js':
                         include __DIR__.'/../pay_with_stripe.php';
                         break;
-                    case 'JSXTransformer.js': // yuicompressor also barfs on this one
-                        include __DIR__.'/../js/JSXTransformer.js';
-                        break;
                     default:
                         include $this->default;
                     }

@@ -18,18 +18,7 @@ if (ENVIRONMENT == 'production') {
     font-family: 'Roboto',sans-serif;
   }
   </style>
-  <script src='/js/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='/js/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='/js/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='/js/handlebars-2.0.0.min.js' type='text/javascript'></script>
-  <script src='/js/underscore-min.js' type='text/javascript'></script>
-  <script src='/js/backbone-min.js' type='text/javascript'></script>
-  <script src='/js/swagger-ui.min.js' type='text/javascript'></script>
-  <script src='/js/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='/js/jsoneditor.min.js' type='text/javascript'></script>
-  <script src='/js/marked.min.js' type='text/javascript'></script>
-  <script src='/js/swagger-oauth.min.js' type='text/javascript'></script>
-
+  <script src='/js/dist/api_documentation.min.js?v=<?php= echo VERSION ?>' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       var url = window.location.search.match(/url=([^&]+)/);
