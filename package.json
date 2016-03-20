@@ -1,27 +1,35 @@
 {
-  "name": "''",
+  "name": "Sizzle.IO",
   "version": "0.0.0",
   "description": "",
-  "main": "''",
   "devDependencies": {
+    "chai": "^3.5.0",
     "event-stream": "^3.3.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
+    "gulp-filter": "^4.0.0",
+    "gulp-jsonminify": "^1.0.0",
     "gulp-order": "^1.1.1",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-stylus": "^2.3.0",
     "gulp-watch": "^4.3.5",
     "gulp-yuicompressor": "0.0.3",
     "jquery": "1.11.3",
+    "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
     "polybuild": "^1.1.0",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.1.5",
+    "sinon": "^1.17.3"
   },
   "scripts": {
+    "install-all": "composer install; bower install; npm install",
     "css": "./node_modules/.bin/gulp css",
     "js": "./node_modules/.bin/gulp js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "json": "./node_modules/.bin/gulp json",
+    "polybuild": "./node_modules/.bin/gulp polybuild",
+    "test": "cd js && ../node_modules/.bin/mocha --require test/bootstrap.js test"
   },
   "author": ""
 }

@@ -87,9 +87,6 @@ Polymer's polybuild, YUI compressor & json-minify are tools optimize & minify an
 app's code during the build process
 
     npm install
-    npm install -g polybuild
-    npm install -g yuicompressor
-    npm install -g json-minify
 
 NB: polybuild treats PHP like a comment and removes it.
 
@@ -140,9 +137,9 @@ To also investigate the code coverage of the tests, you'll need the
 Make sure you put any unit tests in the `src/tests` directory and name them like
 MyAwesomeTest.php.
 
-For JavaScript testing,
+For JavaScript testing, run the following command
 
-    npm install -g mocha
+    npm run test
 
 ## <a id="deployment"></a>Deployment
 
