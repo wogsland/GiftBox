@@ -113,9 +113,10 @@ if (ENVIRONMENT == 'production') {
     Or you can use one of our SDKs:<br /><br />
     <a href="#" target=csharpsdk>C#</a> |
     <a href="#" target=javasdk>Java</a> |
+    <a href="#" target=javascriptsdk>JavaScript</a> |
     <a href="https://packagist.org/packages/gosizzle/sizzle-php-sdk" target=phpsdk>PHP</a> |
-    <a href="#" target=pythonsdk>Python</a> |
-    <a href="#" target=rubysdk>Ruby</a>
+    <a href="https://github.com/gosizzle/sizzle-python-sdk" target=pythonsdk>Python</a> |
+    <a href="https://github.com/gosizzle/sizzle-ruby-sdk" target=rubysdk>Ruby</a>
   </div>
   <div style="text-align:center; font-family: 'Roboto',sans-serif;">
     <?php require __DIR__.'/footer.php';?>
