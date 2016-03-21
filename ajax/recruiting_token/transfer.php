@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingToken
 };
@@ -18,15 +18,15 @@ if (logged_in() && is_admin()) {
             $RecruitingCompany = new RecruitingCompany($RecruitingToken->recruiting_company_id);
             if (isset($RecruitingCompany->user_id)) {
                 switch ($RecruitingCompany->user_id) {
-                    case $new_user_id;
+                case $new_user_id;
                     // no city changes to make
                     break;
-                    case $_SESSION['user_id'];
+                case $_SESSION['user_id'];
                     // need to transfer
                     $RecruitingCompany->user_id = $new_user_id;
                     $RecruitingCompany->save();
                     break;
-                    default:
+                default:
                     //something is fubar
                     $data = array('error'=>'Company already assigned to a different user');
                 }

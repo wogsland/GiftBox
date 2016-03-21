@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\RecruitingTokenResponse;
+use \Sizzle\Database\RecruitingTokenResponse;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');
@@ -79,7 +79,7 @@ body {
                   <td><?php echo $row['maybes'];?></td>
                   <td>
                     <a href="/token/recruiting/<?php echo $row['long_id'];?>" target=_blank>
-                      <?php echo $row['job_title'];?>
+                        <?php echo $row['job_title'];?>
                     </a>
                     <a href="/create_recruiting?id=<?php echo $row['long_id'];?>" target=_blank>
                       <span class="glyphicon glyphicon-pencil pull-right"></span>

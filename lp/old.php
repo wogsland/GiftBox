@@ -3,7 +3,7 @@ if (logged_in()) {
     header('Location: /profile');
 }
 define('TITLE', 'S!zzle - Create your next message with S!zzle');
-include __DIR__.'/../header.php';
+require __DIR__.'/../header.php';
 ?>
 
 <script>
@@ -37,7 +37,7 @@ include __DIR__.'/../header.php';
 <!-- SOLID COLOR BG -->
 <div class="deep-dark-bg" style="min-height:500px;">
 
-    <?php include __DIR__.'/../navbar.php';?>
+    <?php require __DIR__.'/../navbar.php';?>
 
   <!-- CONTAINER -->
   <div class="container">
@@ -439,7 +439,7 @@ include __DIR__.'/../header.php';
 </div>
 <!-- /END CONTAINER -->
 
-<?php include __DIR__.'/../footer.php';?>
+<?php require __DIR__.'/../footer.php';?>
 
 <!-- =========================
     PAGE SPECIFIC SCRIPTS

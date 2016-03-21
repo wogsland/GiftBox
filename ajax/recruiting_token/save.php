@@ -1,10 +1,10 @@
 <?php
 use \Sizzle\{
-    City,
+    Database\City,
     HTML,
-    RecruitingCompany,
-    RecruitingToken,
-    UserMilestone
+    Database\RecruitingCompany,
+    Database\RecruitingToken,
+    Database\UserMilestone
 };
 
 date_default_timezone_set('America/Chicago');

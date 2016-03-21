@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');

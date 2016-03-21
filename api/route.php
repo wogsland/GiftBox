@@ -1,6 +1,6 @@
 <?php
 use Sizzle\API;
-use Sizzle\User;
+use Sizzle\Database\User;
 
 // default response
 $success = false;
@@ -25,7 +25,7 @@ if (isset($pieces[1])) {
 if (isset($get_parts['api_key'])) {
     $api_key = escape_string($get_parts['api_key']);
     $user = User::fetch($api_key, 'api_key');
-    if ((int) $user->getId() <= 0) {
+    if ((int) $user->id <= 0) {
         $errors[] = 'Invalid API Key';
     }
 } else {
@@ -47,8 +47,10 @@ if (empty($errors)) {
 }
 
 header('Content-Type: application/json');
-echo json_encode(array(
+echo json_encode(
+    array(
     'success'=>$success,
     'data'=>$data,
     'errors'=>$errors
-));
+    )
+);

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingToken,
     UserMilestone

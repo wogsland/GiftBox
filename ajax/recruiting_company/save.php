@@ -1,7 +1,7 @@
 <?php
 use Sizzle\{
-    RecruitingCompany,
-    RecruitingToken,
+    Database\RecruitingCompany,
+    Database\RecruitingToken,
     HTML
 };
 

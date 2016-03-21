@@ -1,6 +1,6 @@
 <?php
-use Sizzle\RecruitingTokenResponse;
-use Sizzle\RecruitingToken;
+use Sizzle\Database\RecruitingTokenResponse;
+use Sizzle\Database\RecruitingToken;
 
 // collect info from url
 $recruiting_token_id = escape_string($endpoint_parts[4] ?? '');
@@ -29,13 +29,15 @@ if (strcmp($user->receive_token_notifications, 'Y') == 0) {
     $email_message = str_replace('{{email_address}}', $email, $email_message);
     $email_message = str_replace('{{response}}', $response, $email_message);
     $mandrill = new Mandrill(MANDRILL_API_KEY);
-    $mandrill->messages->send(array(
-      'to'=>array(array('email'=>$user->email_address)),
-      'from_email'=>'notifications@gosizzle.io',
-      'from_name'=>'S!zzle',
-      'subject'=>'S!zzle Token Response Notification',
-      'html'=>$email_message
-    ));
+    $mandrill->messages->send(
+        array(
+            'to'=>array(array('email'=>$user->email_address)),
+            'from_email'=>'notifications@gosizzle.io',
+            'from_name'=>'S!zzle',
+            'subject'=>'S!zzle Token Response Notification',
+            'html'=>$email_message
+        )
+    );
 }
 header('Content-Type: application/json');
 echo json_encode(array('success'=>$success, 'data'=>$data));

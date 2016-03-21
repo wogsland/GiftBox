@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 date_default_timezone_set('America/Chicago');
 
@@ -19,13 +19,15 @@ if ($user_id > 0) {
         $email_message = str_replace('{{link}}', $link, $email_message);
         $email_message = str_replace('{{email}}', $user->email_address, $email_message);
         $mandrill = new Mandrill(MANDRILL_API_KEY);
-        $mandrill->messages->send(array(
-          'to'=>array(array('email'=>$user->email_address)),
-          'from_email'=>'welcome@gosizzle.io',
-          'from_name'=>'S!zzle',
-          'subject'=>'S!zzle Signup Confirmation',
-          'html'=>$email_message
-        ));
+        $mandrill->messages->send(
+            array(
+                'to'=>array(array('email'=>$user->email_address)),
+                'from_email'=>'welcome@gosizzle.io',
+                'from_name'=>'S!zzle',
+                'subject'=>'S!zzle Signup Confirmation',
+                'html'=>$email_message
+            )
+        );
         $success = 'true';
     }
 }

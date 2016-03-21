@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
-    User,
-    UserMilestone,
+    Database\User,
+    Database\UserMilestone,
     Service\PipedriveClient
 };
 
@@ -17,7 +17,7 @@ foreach ($vars as $var) {
     $$var = escape_string($_POST[$var] ?? '');
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
+if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
 
     $user = new User();
     $user->email_address = $signup_email;
@@ -49,7 +49,7 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
 
         if ($reg_type == 'EMAIL') {
             // Send the email
-            $link = APP_URL . 'activate?uid=' . $user->getId() . "&key=$user->activation_key";
+            $link = APP_URL . 'activate?uid=' . $user->id . "&key=$user->activation_key";
             if ('' == $signup_password) {
                 $link .= '&type=nopassword';
             }
@@ -57,17 +57,19 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(array(
-              'to'=>array(array('email'=>$user->email_address)),
-              'from_email'=>'welcome@gosizzle.io',
-              'from_name'=>'S!zzle',
-              'subject'=>'S!zzle Signup Confirmation',
-              'html'=>$email_message
-            ));
+            $mandrill->messages->send(
+                array(
+                    'to'=>array(array('email'=>$user->email_address)),
+                    'from_email'=>'welcome@gosizzle.io',
+                    'from_name'=>'S!zzle',
+                    'subject'=>'S!zzle Signup Confirmation',
+                    'html'=>$email_message
+                )
+            );
         }
         $response['status'] = "SUCCESS";
         $response['message'] = "{$user->email_address} successsfully registered.";
-        $UserMilestone = new UserMilestone($user->getId(), 'Signup');
+        $UserMilestone = new UserMilestone($user->id, 'Signup');
 
         // Create Free trial in Pipedrive
         $pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);

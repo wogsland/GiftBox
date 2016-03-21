@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');
@@ -53,88 +53,89 @@ body {
   <div>
     <?php require __DIR__.'/../navbar.php';?>
   </div>
-  <?php if (0 !== $user_id) { ?>
+    <?php if (0 !== $user_id) { ?>
   <div class="row">
     <div class="pull-right" id="add-box">
-      <?php if (isset($User->activation_key) && '' != $User->activation_key) { ?>
+        <?php if (isset($User->activation_key) && '' != $User->activation_key) { ?>
       <button class="btn button-success" id="activation-button">Resend Activation Email</button>
-      <?php }?>
+        <?php }?>
       <a href="/admin/recruiter_profile?user_id=<?= $user_id ?>">
         <button class="btn button-success">Update Recruiter Profile</button>
       </a>
     </div>
   </div>
-  <?php }?>
+    <?php }?>
   <div class="row" id="user-info">
     <div class="col-sm-offset-1 col-sm-10">
-      <?php if (0 !== $user_id) { ?>
+        <?php if (0 !== $user_id) { ?>
       <h3><i class="greyed"><?php echo $user_name;?></i></h3>
-      <?php
-      echo $email;
-      if ('Y' == $User->admin) echo ' <b>ADMIN</b>';
-      ?>
+        <?php
+        echo $email;
+        if ('Y' == $User->admin) { echo ' <b>ADMIN</b>'; 
+        }
+        ?>
       <br />
-      <?php
-      if (isset($User->organization_id) && 0 < (int) $User->organization_id) {
-          echo "<a href=\"/organization/{$User->organization_id}\">Organization</a>";
-      }
-      ?>
+        <?php
+        if (isset($User->organization_id) && 0 < (int) $User->organization_id) {
+            echo "<a href=\"/organization/{$User->organization_id}\">Organization</a>";
+        }
+        ?>
       <br />
       Created <?php echo date('m/d/Y g:i a', strtotime($User->created));?>
       <br />
-      <?php
-      if (isset($User->stripe_id) && '' !== $User->stripe_id) {
-          echo 'Credit card info on file.';
-      } else {
-          echo 'No credit card info on file.';
-      }
-      ?>
+        <?php
+        if (isset($User->stripe_id) && '' !== $User->stripe_id) {
+            echo 'Credit card info on file.';
+        } else {
+            echo 'No credit card info on file.';
+        }
+        ?>
       <br />
       <h4><i class="greyed">Milestones Completed:</i></h4>
-      <?php
-      $query = "SELECT GROUP_CONCAT(milestone.`name`) milestones
+        <?php
+        $query = "SELECT GROUP_CONCAT(milestone.`name`) milestones
                 FROM user_milestone
                 JOIN milestone ON milestone.id = milestone_id
                 WHERE user_id = $user_id
                 ORDER BY milestone.id";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['milestones'];
-      }
-      ?>
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['milestones'];
+        }
+        ?>
       <br />
       <h4><i class="greyed">Tokens:</i></h4>
-      <?php
-      $query = "SELECT count(*) tokens
+        <?php
+        $query = "SELECT count(*) tokens
                 FROM recruiting_token
                 WHERE user_id = $user_id";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['tokens'] . ' tokens created<br />';
-      }
-      $query = "SELECT count(*) token_views
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['tokens'] . ' tokens created<br />';
+        }
+        $query = "SELECT count(*) token_views
                 FROM recruiting_token, web_request
                 WHERE recruiting_token.user_id = $user_id
                 AND web_request.user_id IS NULL
                 AND web_request.uri LIKE CONCAT('%/token/recruiting/',recruiting_token.long_id,'%')";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['token_views'] . ' token views';
-      }
-      ?>
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['token_views'] . ' token views';
+        }
+        ?>
       <br />
       <h4><i class="greyed">Activity:</i></h4>
-      <?php
-      $query = "SELECT created
+        <?php
+        $query = "SELECT created
                 FROM web_request
                 WHERE user_id = $user_id
                 ORDER BY id DESC
                 LIMIT 1";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo 'Last active ' . $row['created'] . '<br />';
-      }
-      ?>
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo 'Last active ' . $row['created'] . '<br />';
+        }
+        ?>
       <table class="table table-striped table-hover">
         <thead>
           <th>Recent Requested Endpoint</th>
@@ -161,12 +162,12 @@ body {
             <?php }?>
         </tbody>
       </table>
-      <?php } else { ?>
+        <?php } else { ?>
         <h2>Invalid user</h2>
-      <?php }?>
+        <?php }?>
     </div>
   </div>
-  <?php require __DIR__.'/../footer.php';?>
+    <?php require __DIR__.'/../footer.php';?>
   <script>
   $(document).ready(function(){
     $('#activation-button').on('click', function (event) {

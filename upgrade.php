@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 if (!logged_in() || !isset($_SESSION['email'])) {
     header('Location: '.APP_URL.'pricing');

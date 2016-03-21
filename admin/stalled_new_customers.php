@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\UserMilestone;
+use \Sizzle\Database\UserMilestone;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');

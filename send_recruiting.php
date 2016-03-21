@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailList,
     EmailCredential,
     RecruitingCompany,

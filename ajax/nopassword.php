@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     User,
     UserMilestone
 };
@@ -11,7 +11,8 @@ $data = '';
 
 // check form came in on proper path
 if (isset($_SESSION['activation_key'], $_POST['activation_key'])
-&& $_POST['activation_key'] == $_SESSION['activation_key']) {
+    && $_POST['activation_key'] == $_SESSION['activation_key']
+) {
     unset($_SESSION['activation_key']);
     $email = escape_string($_SESSION['email']);
     $password = escape_string($_POST['password']);
@@ -27,17 +28,17 @@ if (isset($_SESSION['activation_key'], $_POST['activation_key'])
 
             // get url string
             if (isset($_SESSION['first_token'])) {
-              $data['url'] = '/token/recruiting/'.$_SESSION['first_token'];
-              unset($_SESSION['first_token']);
+                $data['url'] = '/token/recruiting/'.$_SESSION['first_token'];
+                unset($_SESSION['first_token']);
             } else {
-              $data['url'] = '/profile';
-              $_SESSION['user_id'] = $user->getId();
-              $_SESSION['admin'] = $user->admin;
-              $_SESSION['app_root'] = '/';
-              $_SESSION['app_url'] = APP_URL;
-              $_SESSION['email'] = $user->email_address;
-              $_SESSION['stripe_id'] = $user->stripe_id;
-              $UserMilestone = new UserMilestone($user->getId(), 'Log In');
+                $data['url'] = '/profile';
+                $_SESSION['user_id'] = $user->id;
+                $_SESSION['admin'] = $user->admin;
+                $_SESSION['app_root'] = '/';
+                $_SESSION['app_url'] = APP_URL;
+                $_SESSION['email'] = $user->email_address;
+                $_SESSION['stripe_id'] = $user->stripe_id;
+                $UserMilestone = new UserMilestone($user->id, 'Log In');
             }
         }
     }

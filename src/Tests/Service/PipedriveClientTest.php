@@ -1,9 +1,9 @@
 <?php
-namespace Sizzle\Tests;
+namespace Sizzle\Tests\Service;
 
 use \Devio\Pipedrive\Http\Response;
 use \Sizzle\Service\PipedriveClient;
-use \Sizzle\User;
+use \Sizzle\Database\User;
 /**
  * This class tests the Pipedrive class
  *

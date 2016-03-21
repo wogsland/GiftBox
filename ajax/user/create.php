@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
-    User,
-    UserMilestone,
+    Database\User,
+    Database\UserMilestone,
     Service\PipedriveClient
 };
 
@@ -15,7 +15,7 @@ foreach ($vars as $var) {
     $$var = escape_string($_POST[$var] ?? '');
 }
 
-if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
+if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
     if (User::exists($signup_email)) {
         $data['errors'] = "The email address $signup_email has already been registered.";
     } else {
@@ -25,10 +25,12 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
         $user->save();
 
         // transfer token if it exists
-        $rows_affected = update("UPDATE recruiting_token
-                                 SET user_id = ".$user->getId()."
-                                 WHERE long_id = '$token_id'
-                                 LIMIT 1");
+        $rows_affected = update(
+            "UPDATE recruiting_token
+             SET user_id = ".$user->id."
+             WHERE long_id = '$token_id'
+             LIMIT 1"
+        );
         if (1 == $rows_affected) {
             $type = 'emailtoken';
         } else {
@@ -37,13 +39,13 @@ if (filter_var($signup_email,FILTER_VALIDATE_EMAIL)) {
 
         // response url
         // http://gosizzle.local/activate?uid=131&key=1234&type=emailtoken
-        $url = APP_URL.'activate?uid=' . $user->getId();
+        $url = APP_URL.'activate?uid=' . $user->id;
         $url .= '&key=' . $user->activation_key . '&type=' . $type;
         $data['url'] = $url;
         $success = 'true';
 
         // milestone signup
-        $UserMilestone = new UserMilestone($user->getId(), 'Signup');
+        $UserMilestone = new UserMilestone($user->id, 'Signup');
 
         // Create Free trial in Pipedrive
         $pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);

@@ -1,5 +1,5 @@
 <?php
-namespace Sizzle\Tests;
+namespace Sizzle\Tests\Service;
 
 use \Sizzle\Service\GoogleMail;
 

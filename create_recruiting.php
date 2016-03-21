@@ -1,9 +1,11 @@
 <?php
 use \Sizzle\{
-    City,
     HTML,
-    RecruitingCompany,
-    RecruitingToken
+    Database\RecruitingCompany,
+    Database\RecruitingToken
+};
+use \Sizzle\Database\{
+    City
 };
 
 if (!logged_in()) {
