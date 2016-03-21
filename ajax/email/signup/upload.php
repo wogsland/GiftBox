@@ -3,7 +3,8 @@
 $success = 'false';
 $data = '';
 $fileName = escape_string($_POST['fileName'] ?? false);
-$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) ? ($_POST['email'] ?? false) : false;
+$email = $_POST['email'] ?? false;
+$email = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : false;
 $localPath = $_FILES['listFile']['tmp_name'] ?? false;
 if ($fileName && $localPath && $email) {
     $fileData = base64_encode(file_get_contents($localPath));
