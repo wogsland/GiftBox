@@ -18,14 +18,14 @@ if (ENVIRONMENT == 'production') {
     font-family: 'Roboto',sans-serif;
   }
   </style>
-  <script src='/js/dist/api_documentation.min.js?v=<?php= echo VERSION ?>' type='text/javascript'></script>
+  <script src='/js/dist/api_documentation.min.js?v=<?php echo VERSION ?>' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "../js/api-v1.json";
+        url = "/js/api-v1.json";
       }
 
       window.swaggerUi = new SwaggerUi({

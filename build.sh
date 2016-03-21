@@ -41,10 +41,10 @@ echo "JavaScript minified"
 echo ""
 
 # update public components - this needs tweeking
-#rm -rf public/components
-#cp -r components public/components
-#echo "Components updated"
-#echo ""
+rm -rf public/components
+cp -r components public/components
+echo "Components updated"
+echo ""
 
 # run Mocha unit tests
 echo "Running JavaScript tests"

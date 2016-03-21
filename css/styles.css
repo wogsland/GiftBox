@@ -123,7 +123,7 @@ li {
     position: absolute;
     left: 50%;
     top: 50%;
-    background-image: url("../assets/img/loading.gif");
+    background-image: url("/assets/img/loading.gif");
     background-repeat: no-repeat;
     background-position: center;
     -webkit-background-size: cover;
@@ -143,8 +143,8 @@ li {
 /* FONT FACE LOADER */
 @font-face {
     font-family: 'Lane';
-    src: url('../fonts/lanenar_Lane.eot');
-    src: url('../fonts/lanenar_Lane-.eot#iefix') format('embedded-opentype'), url('../fonts/lanenar_Lane.woff') format('woff'), url('../fonts/lanenar_Lane.ttf') format('truetype'), url('../fonts/lanenar_Lane.svg#Lane') format('svg');
+    src: url('/fonts/lanenar_Lane.eot');
+    src: url('/fonts/lanenar_Lane-.eot#iefix') format('embedded-opentype'), url('/fonts/lanenar_Lane.woff') format('woff'), url('/fonts/lanenar_Lane.ttf') format('truetype'), url('/fonts/lanenar_Lane.svg#Lane') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -153,7 +153,7 @@ li {
 
     @font-face {
         font-family: 'Lane';
-        src: url('../fonts/lanenar_Lane.svg#Lane') format('svg');
+        src: url('/fonts/lanenar_Lane.svg#Lane') format('svg');
     }
 }
 
@@ -563,7 +563,7 @@ object {
 }
 
 .token-ipad {
-    background: url(../assets/img/bg-1.jpg) 50% 0 fixed;
+    background: url(/assets/img/bg-1.jpg) 50% 0 fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -574,7 +574,7 @@ object {
     position: relative;
 }
 .token-iphone {
-    background: url(../assets/img/bg-2.jpg) 50% 0 fixed;
+    background: url(/assets/img/bg-2.jpg) 50% 0 fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -585,7 +585,7 @@ object {
     position: relative;
 }
 .token-macbook {
-    background: url(../assets/img/bg-3.jpg) 50% 0 fixed;
+    background: url(/assets/img/bg-3.jpg) 50% 0 fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
