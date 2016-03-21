@@ -19,13 +19,13 @@ gulp.task(
         // JS processing
         js
             .pipe(rename(function(path) {
-                path.basename = path.basename.replace('.build', '.min')
+                path.basename = path.basename.replace('.build', '.min');
             }))
             .pipe(gulp.dest(config.output.js_build));
 
         // Markup processing
         not_js
-            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/$.min.js"'))
+            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/$2.min.js"'))
             .pipe(replace('"fonts/', '"/fonts/'))
             .pipe(gulp.dest(config.output.polybuild));
 
