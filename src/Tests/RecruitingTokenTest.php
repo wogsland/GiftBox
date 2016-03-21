@@ -129,10 +129,10 @@ extends \PHPUnit_Framework_TestCase
 
         $user = $result->getUser();
         $this->assertNotNull($user);
-        $this->assertNotEquals('',$user);
-        $this->assertEquals($this->User->getId(),$user->getId());
-        $this->assertEquals('Y',$user->allow_token_responses);
-        $this->assertEquals('Y',$user->receive_token_notifications);
+        $this->assertNotEquals('', $user);
+        $this->assertEquals($this->User->getId(), $user->getId());
+        $this->assertEquals('Y', $user->allow_token_responses);
+        $this->assertEquals('Y', $user->receive_token_notifications);
     }
 
     /**
@@ -153,10 +153,10 @@ extends \PHPUnit_Framework_TestCase
 
         $company = $result->getCompany();
         $this->assertNotNull($company);
-        $this->assertNotEquals('',$company);
-        $this->assertEquals($co->id,$company->id);
-        $this->assertEquals($co->name,$company->name);
-        $this->assertEquals($this->User->getId(),$company->user_id);
+        $this->assertNotEquals('', $company);
+        $this->assertEquals($co->id, $company->id);
+        $this->assertEquals($co->name, $company->name);
+        $this->assertEquals($this->User->getId(), $company->user_id);
     }
 
     /**
@@ -177,7 +177,7 @@ extends \PHPUnit_Framework_TestCase
         $result->recruiting_company_id = $co->id;
         $result->save();
         $test = new RecruitingToken($result->id);
-        $this->assertEquals('N',$test->recruiter_profile);
+        $this->assertEquals('N', $test->recruiter_profile);
 
         // test save with Y
         $result = new RecruitingToken();
@@ -187,7 +187,7 @@ extends \PHPUnit_Framework_TestCase
         $result->recruiter_profile = 'Y';
         $result->save();
         $test = new RecruitingToken($result->id);
-        $this->assertEquals($result->recruiter_profile,$test->recruiter_profile);
+        $this->assertEquals($result->recruiter_profile, $test->recruiter_profile);
 
         // test save with N
         $result = new RecruitingToken();
@@ -197,7 +197,7 @@ extends \PHPUnit_Framework_TestCase
         $result->recruiter_profile = 'N';
         $result->save();
         $test = new RecruitingToken($result->id);
-        $this->assertEquals($result->recruiter_profile,$test->recruiter_profile);
+        $this->assertEquals($result->recruiter_profile, $test->recruiter_profile);
     }
 
     /**

@@ -42,13 +42,15 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(array(
-              'to'=>array(array('email'=>$user->email_address)),
-              'from_email'=>'help@gosizzle.io',
-              'from_name'=>'S!zzle',
-              'subject'=>'S!zzle Password Reset',
-              'html'=>$email_message
-            ));
+            $mandrill->messages->send(
+                array(
+                    'to'=>array(array('email'=>$user->email_address)),
+                    'from_email'=>'help@gosizzle.io',
+                    'from_name'=>'S!zzle',
+                    'subject'=>'S!zzle Password Reset',
+                    'html'=>$email_message
+                )
+            );
             $success = 'true';
             $data = 'Check your email.';
         } else {

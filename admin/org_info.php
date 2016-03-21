@@ -43,51 +43,54 @@ body {
   </div>
   <div class="row" id="org-info">
     <div class="col-sm-offset-1 col-sm-10">
-      <?php if (0 !== $org_id) { ?>
-      <h3><i class="greyed"><?php echo $org->name;?></i></h3>
-      <br />
-      Created <?php echo date('m/d/Y g:i a', strtotime($org->created));?>
-      <br />
-      <?php
-      if (isset($org->paying_user) && '' !== $org->paying_user) {
-          echo "<a href=\"/user/{$org->paying_user}\">Paying User</a>";
-      } else {
-          echo 'No paying user';
-      }
-      ?>
-      <br />
-      <h4><i class="greyed">Activity:</i></h4>
-      <?php
-      $query = "SELECT count(*) users
-                FROM user
-                WHERE organization_id = '$org_id'";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['users'] . ' users created<br />';
-      }
-      $query = "SELECT count(*) tokens
-                FROM recruiting_token, user
-                WHERE recruiting_token.user_id = user.id
-                AND organization_id = '$org_id'";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['tokens'] . ' tokens created<br />';
-      }
-      $query = "SELECT count(*) token_views
-                FROM recruiting_token, web_request, user
-                WHERE recruiting_token.user_id = user.id
-                AND organization_id = '$org_id'
-                AND web_request.user_id IS NULL
-                AND web_request.uri LIKE CONCAT('%/token/recruiting/',recruiting_token.long_id,'%')";
-      $result = execute_query($query);
-      if ($row = $result->fetch_assoc()) {
-          echo $row['token_views'] . ' token views';
-      }
-      ?>
-      <br />
-      <?php } else { ?>
+        <?php if (0 !== $org_id) { ?>
+        <a href="/admin/edit_organization?id=<?= $org->id ?>">
+          <button class="btn pull-right" id="edit-org-button">Edit</button>
+        </a>
+        <h3><i class="greyed"><?php echo $org->name;?></i></h3>
+        <br />
+        Created <?php echo date('m/d/Y g:i a', strtotime($org->created));?>
+        <br />
+        <?php
+        if (isset($org->paying_user) && '' !== $org->paying_user) {
+            echo "<a href=\"/user/{$org->paying_user}\">Paying User</a>";
+        } else {
+            echo 'No paying user';
+        }
+        ?>
+        <br />
+        <h4><i class="greyed">Activity:</i></h4>
+        <?php
+        $query = "SELECT count(*) users
+                  FROM user
+                  WHERE organization_id = '$org_id'";
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['users'] . ' users created<br />';
+        }
+        $query = "SELECT count(*) tokens
+                  FROM recruiting_token, user
+                  WHERE recruiting_token.user_id = user.id
+                  AND organization_id = '$org_id'";
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['tokens'] . ' tokens created<br />';
+        }
+        $query = "SELECT count(*) token_views
+                  FROM recruiting_token, web_request, user
+                  WHERE recruiting_token.user_id = user.id
+                  AND organization_id = '$org_id'
+                  AND web_request.user_id IS NULL
+                  AND web_request.uri LIKE CONCAT('%/token/recruiting/',recruiting_token.long_id,'%')";
+        $result = execute_query($query);
+        if ($row = $result->fetch_assoc()) {
+            echo $row['token_views'] . ' token views';
+        }
+        ?>
+        <br />
+        <?php } else { ?>
         <h2>Invalid user</h2>
-      <?php }?>
+        <?php }?>
     </div>
   </div>
     <?php require __DIR__.'/../footer.php';?>

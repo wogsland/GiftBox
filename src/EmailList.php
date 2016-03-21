@@ -14,8 +14,8 @@ class EmailList
     /**
      * This function constructs the class
      *
-     * @param mixed $value - optional id or name of the email list
-     * @param string $key  - if $value is id or name
+     * @param mixed  $value - optional id or name of the email list
+     * @param string $key   - if $value is id or name
      */
     public function __construct($value = null, $key = 'id')
     {
@@ -90,7 +90,7 @@ class EmailList
     /**
      * This function updates the email_list name column
      *
-     * @param string $name  - list name
+     * @param string $name - list name
      *
      * @return boolean - success of update
      */

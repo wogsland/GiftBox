@@ -14,8 +14,8 @@ class RecruitingTokenImage
     /**
      * This function constructs the class
      *
-     * @param mixed $value - optional id or name of the email list
-     * @param string $key  - if $value is id or name
+     * @param mixed  $value - optional id or name of the email list
+     * @param string $key   - if $value is id or name
      */
     public function __construct($value = null, $key = 'id')
     {

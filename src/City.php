@@ -131,9 +131,9 @@ class City extends DatabaseEntity
     public function match10($part)
     {
         $cities = execute_query(
-          "SELECT * FROM city
-           WHERE name LIKE '$part%'
-           ORDER BY name"
+            "SELECT * FROM city
+             WHERE name LIKE '$part%'
+             ORDER BY name"
         )->fetch_all(MYSQLI_ASSOC);
         if (count($cities) < 11) {
             return $cities;

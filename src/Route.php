@@ -34,12 +34,12 @@ class Route
     public function go()
     {
         if (!isset($this->endpointPieces[1])) {
-            include __DIR__.'/../lp/sizzle1.php';
+            include __DIR__.'/../lp/email_signup.php';
         } else {
             switch ($this->endpointPieces[1]) {
             case '':
             case 'index.html':
-                include __DIR__.'/../lp/sizzle1.php';
+                include __DIR__.'/../lp/email_signup.php';
                 break;
             case 'about':
                 include __DIR__.'/../about.php';
@@ -118,7 +118,7 @@ class Route
                 include __DIR__.'/../email_list.php';
                 break;
             case 'email_signup':
-                include __DIR__.'/../email_signup.php';
+                include __DIR__.'/../lp/email_signup.php';
                 break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';
@@ -192,18 +192,21 @@ class Route
                 break;
             case 'token':
                 if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
-                    // don't display in native android browser
                     $detect = new \Mobile_Detect;
-                    if ($detect->isMobile()) {
-                        if (strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
-                            && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
-                            && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
-                        ) {
-                            include __DIR__.'/../get_chrome.html';
-                            die;
-                        }
+                    if ($detect->isMobile()
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
+                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
+                    ) {
+                        // don't display in native android browser
+                        include __DIR__.'/../get_chrome.html';
+                    } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'LinkedInBot') !== false) {
+                        // display simplified form on LinkedIn
+                        $long_id = trim($this->endpointPieces[3], '/');
+                        include __DIR__.'/../token/LinkedInBot.php';
+                    } else {
+                        include __DIR__.'/../recruiting_token.build.html';
                     }
-                    include __DIR__.'/../recruiting_token.build.html';
                 } else {
                     include $this->default;
                 }
@@ -254,16 +257,16 @@ class Route
      */
     public function register($endpoint, $fileToLoad)
     {
-        $endpoint = ltrim($endpoint,'/');
+        $endpoint = ltrim($endpoint, '/');
         $endpointParts = explode('/', $endpoint);
         switch (count($endpointParts)) {
-            case 0:
+        case 0:
             $this->endpointMap[''] = $fileToLoad;
             break;
-            case 1:
+        case 1:
             $this->endpointMap[$endpointParts[0]] = $fileToLoad;
             break;
-            case 2:
+        case 2:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {
@@ -275,7 +278,7 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]] = $fileToLoad;
             break;
-            case 3:
+        case 3:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {
@@ -296,7 +299,7 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]] = $fileToLoad;
             break;
-            case 4:
+        case 4:
             if (!isset($this->endpointMap[$endpointParts[0]])) {
                 $this->endpointMap[$endpointParts[0]] = array();
             } else {

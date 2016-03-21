@@ -47,8 +47,10 @@ if (empty($errors)) {
 }
 
 header('Content-Type: application/json');
-echo json_encode(array(
+echo json_encode(
+    array(
     'success'=>$success,
     'data'=>$data,
     'errors'=>$errors
-));
+    )
+);

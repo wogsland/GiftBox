@@ -81,9 +81,9 @@ class Organization
     /**
      * This function creates an entry in the organization table
      *
-     * @param string $name     - name of organization
-     * @param string $website  - (optional) website of organization
-     * @param int $paying_user - (optional) user id of user who we charge
+     * @param string $name        - name of organization
+     * @param string $website     - (optional) website of organization
+     * @param int    $paying_user - (optional) user id of user who we charge
      *
      * @return int $id - id of inserted row or 0 on fail
      */
