@@ -1,6 +1,5 @@
 <?php
 use \Sizzle\Database\{
-    City,
     RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken
