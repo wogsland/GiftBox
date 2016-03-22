@@ -23,6 +23,7 @@
             }.bind(this));
 
             // Open forms
+            var $doc = $(document);
             $doc.on('click.pricing', '.Plan__callToAction', function(e) {
                 if (e.currentTarget.dataset.plan) {
                     this._planForm.set('plan', e.currentTarget.dataset.plan);
@@ -160,7 +161,7 @@
         {
             return function () {
                 window.location = "/thankyou?action=" + action;
-            }
+            };
         },
 
         _onProcessFailure: function (message)

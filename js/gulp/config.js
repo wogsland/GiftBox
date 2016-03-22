@@ -36,6 +36,8 @@ module.exports = {
             ],
             js: [
                 p.js('Sizzle'),
+                p.component('Form'),
+                p.component('Slider'),
                 p.controller('controller_factory'),
                 p.controller('Pricing'),
                 p.js('custom'),

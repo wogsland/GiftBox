@@ -47,7 +47,7 @@
     $(function() {
         Sizzle.trigger({
             type: 'bootstrap'
-        })
+        });
     });
 
 }(this, jQuery));

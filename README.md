@@ -121,50 +121,59 @@ and describe some combination of what was done, where it was done, and why.
 
 Github has a great reference [here](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/).
 
+
 ## <a id="frontend"></a>Frontend Direction
 
 ### Directory structure
 Javascript source exists in `/js`.
-Third party files that are _not_ loaded by one of our package managers for whatever reason should be dropped into
-`js/vendor`. This can be considered a big "do not manipulate these files" alert.
-Project tasks and task configuration lives in `/js/gulp`.
+Third party files that are _not_ loaded by one of our package managers for
+whatever reason should be dropped into `js/vendor`. This can be considered a
+big "do not manipulate these files" alert. Project tasks and task configuration
+lives in `/js/gulp`.
 
 ### The Application Object
-`/js/Sizzle.js` is the base Application object and namespace. All other functionality hangs off this parent object.
+`/js/Sizzle.js` is the base Application object and namespace. All other
+functionality hangs off this parent object.
 
 #### Events
 In addition to standard DOM events, `Sizzle` will emit the following events on `document`:
 
-* `bootstrap` - Triggered once all scripts are loaded in. This event should be considered the entry point of the front
-end application.
+* `bootstrap` - Triggered once all scripts are loaded in. This event should be
+considered the entry point of the frontend application.
 
 #### Components
-Components are self-contained pieces of functionality that manipulate the DOM or generate events. A good example is a
-custom input field, or a modal system.
+Components are self-contained pieces of functionality that manipulate the DOM or
+generate events. A good example is a custom input field, or a modal system.
 
 #### Controllers
-Controllers are generally 1 per page, and are responsible for configuring Components on any given page. Easiest way to
-create one of these is to use the factory method `Sizzle.Controllers.create(id, callback);`. It will ensure that your
+Controllers are generally 1 per page, and are responsible for configuring
+Components on any given page. Easiest way to create one of these is to use the
+factory method `Sizzle.Controllers.create(id, callback);`. It will ensure that your
 callback is not called unless an element with the provided id is on the page at `bootstrap`.
 
 ### Configuring The Build Process
-There are several `build` configurations in `/js/gulp/config.js`. Each one of these has four sections of files:
+There are several `build` configurations in `/js/gulp/config.js`. Each one of
+these has four sections of files:
 
 * vendor_js
 * vendor_css
 * js
 * css
 
-The build process concatenates all scripts and style together (vendor first), respectively, then compresses them and
-writes them to `public/{type}/dist`.
+The build process concatenates all scripts and style together (vendor first),
+respectively, then compresses them and writes them to `public/{type}/dist`.
 
-As a second pass, anything in `config.minify_and_migrate` is minified _without_ concatenation then muved to `public/{type}`.
+As a second pass, anything in `config.minify_and_migrate` is minified _without_
+concatenation then moved to `public/{type}`.
 
-It is a goal of this project to get anything in the `minify_and_migrate` list into one of the appropriate builds.
+It is a goal of this project to get anything in the `minify_and_migrate` list
+into one of the appropriate builds.
 
-*Never manipulate the public directory files directly.* These are your build files. If changes need to be made to a
-particular file, they should be done in the source files and then rebuild. Keeping this organized appropriately will
-ensure that front end code is easily traversable and scripts are generally easily identifiable.
+*Never manipulate the public directory files directly.* These are your build
+files. If changes need to be made to a particular file, they should be done in
+the source files and then rebuild. Keeping this organized appropriately will
+ensure that front end code is easily traversable and scripts are generally easily
+identifiable.
 
 ### A matter of style
 #### Javascript
