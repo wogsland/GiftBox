@@ -42,7 +42,7 @@ if (isset($token->id)) {
       <h1>
         <?= $token->job_title?>
         <?= isset($company->name) ? '- '.$company->name : '' ?>
-        - <?= $city->name?>
+        it's h1 <?= $city->name?>
       </h1>
       <?php if ('' != $image) { ?>
           <img src="<?= $image?>" title="Token screenshot or company image"/>
