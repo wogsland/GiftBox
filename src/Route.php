@@ -188,20 +188,21 @@ class Route
                 include __DIR__.'/../thankyou.php';
                 break;
             case 'token':
+                $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
                 if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
                     $detect = new \Mobile_Detect;
                     if ($detect->isMobile()
-                        && strpos($_SERVER['HTTP_USER_AGENT'], 'AppleWebKit') !== false
-                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') === false
-                        && strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') === false
+                        && strpos($userAgent, 'AppleWebKit') !== false
+                        && strpos($userAgent, 'Safari') === false
+                        && strpos($userAgent, 'Chrome') === false
                     ) {
                         // don't display in native android browser
                         include __DIR__.'/../get_chrome.html';
-                    } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'LinkedInBot') !== false) {
+                    } else if(strpos($userAgent, 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/LinkedInBot.php';
-                    } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false) {
+                    } else if(strpos($userAgent, 'facebookexternalhit') !== false) {
                         // display simplified form on Facebook
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';
