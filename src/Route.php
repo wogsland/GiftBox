@@ -201,6 +201,10 @@ class Route
                         // display simplified form on LinkedIn
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/LinkedInBot.php';
+                    } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false) {
+                        // display simplified form on Facebook
+                        $long_id = trim($this->endpointPieces[3], '/');
+                        include __DIR__.'/../token/LinkedInBot.php';
                     } else {
                         include __DIR__.'/../recruiting_token.build.html';
                     }
