@@ -207,7 +207,8 @@ class Route
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';
                     } else {
-                        include __DIR__.'/../recruiting_token.build.html';
+                        include $this->default;
+                        //include __DIR__.'/../recruiting_token.build.html';
                     }
                 } else {
                     include $this->default;
