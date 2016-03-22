@@ -15,7 +15,7 @@ function _getRunSequence(tasks, includeDone) {
             tasks.push(done);
         }
         return runSequence.apply(null, tasks);
-    }
+    };
 }
 
 module.exports = {
