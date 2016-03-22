@@ -204,7 +204,7 @@ class Route
                     } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false) {
                         // display simplified form on Facebook
                         $long_id = trim($this->endpointPieces[3], '/');
-                        include __DIR__.'/../token/LinkedInBot.php';
+                        include __DIR__.'/../token/facebookexternalhit.php';
                     } else {
                         include __DIR__.'/../recruiting_token.build.html';
                     }
