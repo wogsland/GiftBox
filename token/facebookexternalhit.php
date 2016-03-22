@@ -38,6 +38,7 @@ if (isset($token->id)) {
       <meta property="og:site_name" content="<?=$token->job_title?>" />
       <meta property="og:title" content="<?=$title?>" />
       <meta property="og:description" content="<?=$description?>">
+      <meta property="og:image" content="<?=$image ?? ''?>">
       <meta name="author" content="S!zzle">
     </head>
     <body>
