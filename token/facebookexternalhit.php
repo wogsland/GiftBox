@@ -25,13 +25,16 @@ if ($image !== false) {
     }
 }
 
+$description = $token->job_title . (isset($company->name) ? ' at '.$company->name : '');
+$description .= isset($token->job_description) ? ' - '.$token->job_description : '';
+
 if (isset($token->id)) {
     ?>
     <!doctype html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="description" content="<?= $token->job_title . (isset($company->name) ? '- '.$company->name : '')?>">
+      <meta name="description" content="<?=$description?>">
       <meta name="keywords" content="">
       <meta name="author" content="S!zzle">
     </head>
