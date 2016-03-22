@@ -11,10 +11,7 @@ use \Sizzle\Database\{
  */
 $long_id = escape_string($long_id);
 $token = new RecruitingToken($long_id, 'long_id');
-//print_r($token);
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
-$city = new City($token->city_id ?? '');
-//print_r($city);
 $image = $token->screenshot();
 if ($image !== false) {
     $image = APP_URL.'uploads/'.str_replace(' ', '%20',$image);
