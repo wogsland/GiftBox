@@ -34,9 +34,10 @@ if (isset($token->id)) {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="og:title" content="<?$title?>" />
-      <meta name="description" content="<?=$description?>">
-      <meta name="keywords" content="">
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="<?=$token->job_title?>" />
+      <meta property="og:title" content="<?=$title?>" />
+      <meta property="og:description" content="<?=$description?>">
       <meta name="author" content="S!zzle">
     </head>
     <body>
