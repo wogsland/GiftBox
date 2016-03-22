@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\EmailCredential;
+use \Sizzle\Database\EmailCredential;
 
 $success = 'false';
 $data = '';

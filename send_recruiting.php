@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailList,
     EmailCredential,
     RecruitingCompany,
@@ -14,6 +14,7 @@ if (!logged_in()) {
 $user_id = (int) ($_SESSION['user_id'] ?? '');
 $referrer = (int) ($_GET['referrer'] ?? '');
 $recruiting_token_id = $_GET['id'] ?? '';
+$token = new RecruitingToken(escape_string($recruiting_token_id), 'long_id');
 
 $user = new User($user_id);
 $credentials = (new EmailCredential())->getByUserId($user_id);
@@ -124,13 +125,19 @@ require __DIR__.'/header.php';
           color: #009688;
         }
         #link-info {
-          height:150px;
+          height:260px;
         }
         #send-to-email-list, #send-to-email-credentials {
           width:60%;
         }
         #send-token-button {
           margin-top: 30px;
+        }
+        #social-shares {
+          margin-top:0px;
+        }
+        #facebook-share {
+
         }
     </style>
 
@@ -155,14 +162,63 @@ require __DIR__.'/header.php';
       <span class="progress-text active"><strong>Send Token</strong></span>
     </paper-card>
     <div id="left-column">
-      <paper-card id="link-info" heading="Token Link">
+      <paper-card id="link-info" heading="Share Token Link">
         <div class="field-container">
           <div class="pull-left" id="token-link" style="padding-top:15px;">
             <a href="<?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>" target="_blank">
               <?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>
             </a>
           </div>
-          <paper-button id="copy-link-button" class="pull-right" raised onclick="copyTokenLink()">COPY</paper-button>
+          <div class="pull-right" id="social-shares">
+            <paper-button
+              id="copy-link-button"
+              style="margin-left:0px"
+              raised
+              onclick="copyTokenLink()">
+            COPY</paper-button>
+
+            <div id="li-root" style="margin-top:20px"></div>
+            <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+            <script
+              type="IN/Share"
+              data-url="<?php echo APP_URL.'token/recruiting/'.$recruiting_token_id;?>">
+            </script>
+
+            <div id="tw-root" style="margin-top:10px"></div>
+            <script>window.twttr = (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0],
+                t = window.twttr || {};
+              if (d.getElementById(id)) return t;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "https://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+
+              t._e = [];
+              t.ready = function(f) {
+                t._e.push(f);
+              };
+
+              return t;
+            }(document, "script", "twitter-wjs"));</script>
+            <a class="twitter-share-button"
+              href="https://twitter.com/intent/tweet?text=<?=urlencode($token->job_title)?>&url=<?=APP_URL.'token/recruiting/'.$recruiting_token_id?>"
+              >
+            Tweet</a>
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=82256972765";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            <div class="fb-share-button"
+              id="facebook-share"
+              data-href="<?=APP_URL.'token/recruiting/'.$recruiting_token_id?>"
+              data-layout="button">
+            </div>
+          </div>
         </div>
       </paper-card>
 

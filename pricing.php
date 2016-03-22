@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
@@ -188,7 +188,6 @@ require __DIR__.'/header.php';
 <!-- =========================
      PAGE SPECIFIC SCRIPTS
 ============================== -->
-<script src="js/pricing.min.js?v=<?php echo VERSION;?>"></script>
 
 </body>
 </html>

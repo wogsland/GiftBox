@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax;
 
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 /**
  * This class tests the ajax endpoint to sign up.

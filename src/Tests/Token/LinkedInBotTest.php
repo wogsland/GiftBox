@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Token;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     City,
     RecruitingCompany,
     RecruitingCompanyImage,
@@ -82,7 +82,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -124,13 +124,13 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test company
         $company = new RecruitingCompany();
-        $company->user_id = $this->user->getId();
+        $company->user_id = $this->user->id;
         $company->name = 'Anteil '.rand().', GmbH';
         $company->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -174,14 +174,14 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test company with image
         $company = new RecruitingCompany();
-        $company->user_id = $this->user->getId();
+        $company->user_id = $this->user->id;
         $company->save();
         $file = rand().'.png';
         (new RecruitingCompanyImage())->create($company->id, $file);
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -225,7 +225,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -273,7 +273,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -316,7 +316,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -360,13 +360,13 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test company
         $company = new RecruitingCompany();
-        $company->user_id = $this->user->getId();
+        $company->user_id = $this->user->id;
         $company->values = 'Aum';
         $company->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -410,7 +410,7 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -459,14 +459,14 @@ extends \PHPUnit_Framework_TestCase
     {
         // setup test company
         $company = new RecruitingCompany();
-        $company->user_id = $this->user->getId();
+        $company->user_id = $this->user->id;
         $company->name = 'Anteil '.rand().', GmbH';
         $company->values = 'Aum '.rand();
         $company->save();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->getId();
+        $RecruitingToken->user_id = $this->user->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
@@ -514,7 +514,7 @@ extends \PHPUnit_Framework_TestCase
     /**
      * Helper function to test things that should always be there
      */
-    protected function thingsThatShouldAlwaysBeThere($html) 
+    protected function thingsThatShouldAlwaysBeThere($html)
     {
         $this->assertContains('<!doctype html>', $html);
         $this->assertContains('<html lang="en">', $html);

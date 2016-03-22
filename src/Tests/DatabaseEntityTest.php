@@ -2,10 +2,11 @@
 namespace Sizzle\Tests;
 
 use Sizzle\DatabaseEntity;
+
 /**
  * This class tests the DatabaseEntity class
  *
- * phpunit --bootstrap src/tests/autoload.php src/tests/DatabaseEntityTest
+ * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/Tests/DatabaseEntityTest
  */
 class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +22,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $sql = "CREATE TABLE database_entity ("
+        $sql = "CREATE TABLE ntity ("
             . "id   INT(11) NOT NULL AUTO_INCREMENT,"
             . "name VARCHAR(100) NOT NULL,"
             . "PRIMARY KEY (id),"
@@ -29,7 +30,7 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
             . ")";
         execute($sql);
 
-        $sql = "INSERT into database_entity (name) VALUES ('test name')";
+        $sql = "INSERT into ntity (name) VALUES ('test name')";
         $this->existing_entity_id = insert($sql);
     }
 
@@ -69,9 +70,6 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
         // make sure all properties were inserted correctly
         $saved_entity = new DatabaseEntity($entity->id);
         $this->assertEquals($entity->name, $saved_entity->name);
-
-        // delete the inserted entity
-        $saved_entity->delete();
     }
 
     /**
@@ -88,21 +86,9 @@ class DatabaseEntityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('new name', $entity->name);
     }
 
-    /**
-     * Tests the delete function
-     */
-    public function testDelete()
-    {
-        $entity = new DatabaseEntity($this->existing_entity_id);
-        $this->assertEquals($this->existing_entity_id, $entity->id);
-        $entity->delete();
-        $entity = new DatabaseEntity($this->existing_entity_id);
-        $this->assertNull($entity->id);
-    }
-
     protected function tearDown()
     {
-        $sql = "DROP TABLE database_entity";
+        $sql = "DROP TABLE ntity";
         execute($sql);
     }
 }

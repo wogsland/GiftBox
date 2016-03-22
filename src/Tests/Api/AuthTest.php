@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Api;
 
-use Sizzle\User;
+use Sizzle\Database\User;
 
 /**
  * This class tests API authentication

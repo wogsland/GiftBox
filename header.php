@@ -55,7 +55,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 
   <!-- CUSTOM STYLESHEETS -->
-  <link rel="stylesheet" href="/css/styles.min.css">
+  <link rel="stylesheet" href="/css/dist/sizzle.min.css">
 
   <!--[if lt IE 9]>
         <script src="/js/html5shiv.js"></script>

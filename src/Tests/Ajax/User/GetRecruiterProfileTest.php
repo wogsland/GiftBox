@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\User;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     Organization,
     RecruitingCompany,
     RecruitingToken,
@@ -51,7 +51,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->getId();
+        $RecruitingCompany->user_id = $this->User->id;
         $RecruitingCompany->name = 'The '.rand().' Company';
         $RecruitingCompany->website = 'https://'.rand().'.com/';
         $RecruitingCompany->save();
@@ -59,7 +59,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->getId();
+        $RecruitingToken->user_id = $this->User->id;
         $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
         $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
         $RecruitingToken->save();
@@ -75,7 +75,7 @@ extends \PHPUnit_Framework_TestCase
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_URL, $this->url.'/'.$this->User->getId());
+        curl_setopt($ch, CURLOPT_URL, $this->url.'/'.$this->User->id);
         $response = curl_exec($ch);
         $this->assertTrue($response);
         $json = ob_get_contents();

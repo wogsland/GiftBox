@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     User
 };
 
@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
 
 if ($user != null && isset($_POST['access_token'])) {
     $access_token = $_POST['access_token'];
-    $user->update_token($access_token, $user->getId());
+    $user->update_token($access_token, $user->id);
     $response['status'] = 'SUCCESS';
 }
 
