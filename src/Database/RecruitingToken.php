@@ -152,4 +152,16 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         }
         return $return;
     }
+
+    /**
+     * This function returns the properties in an array
+     *
+     * @return array - array of class properties
+     */
+    public function toArray()
+    {
+        $data = get_object_vars($this);
+        unset($data['readOnly']);
+        return $data;
+    }
 }
