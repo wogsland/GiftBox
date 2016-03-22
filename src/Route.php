@@ -203,12 +203,10 @@ class Route
                         include __DIR__.'/../token/LinkedInBot.php';
                     } else if(strpos($_SERVER['HTTP_USER_AGENT'], 'facebookexternalhit') !== false) {
                         // display simplified form on Facebook
-                        echo 'tokkkken';die;
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';
                     } else {
-                        include $this->default;
-                        //include __DIR__.'/../recruiting_token.build.html';
+                        include __DIR__.'/../recruiting_token.build.html';
                     }
                 } else {
                     include $this->default;
