@@ -18,25 +18,14 @@ if (ENVIRONMENT == 'production') {
     font-family: 'Roboto',sans-serif;
   }
   </style>
-  <script src='/js/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='/js/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='/js/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='/js/handlebars-2.0.0.min.js' type='text/javascript'></script>
-  <script src='/js/underscore-min.js' type='text/javascript'></script>
-  <script src='/js/backbone-min.js' type='text/javascript'></script>
-  <script src='/js/swagger-ui.min.js' type='text/javascript'></script>
-  <script src='/js/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='/js/jsoneditor.min.js' type='text/javascript'></script>
-  <script src='/js/marked.min.js' type='text/javascript'></script>
-  <script src='/js/swagger-oauth.min.js' type='text/javascript'></script>
-
+  <script src='/js/dist/api_documentation.min.js?v=<?php echo VERSION ?>' type='text/javascript'></script>
   <script type="text/javascript">
     $(function () {
       var url = window.location.search.match(/url=([^&]+)/);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "../js/api-v1.json";
+        url = "/js/api-v1.json";
       }
 
       window.swaggerUi = new SwaggerUi({
@@ -124,9 +113,10 @@ if (ENVIRONMENT == 'production') {
     Or you can use one of our SDKs:<br /><br />
     <a href="#" target=csharpsdk>C#</a> |
     <a href="#" target=javasdk>Java</a> |
+    <a href="#" target=javascriptsdk>JavaScript</a> |
     <a href="https://packagist.org/packages/gosizzle/sizzle-php-sdk" target=phpsdk>PHP</a> |
-    <a href="#" target=pythonsdk>Python</a> |
-    <a href="#" target=rubysdk>Ruby</a>
+    <a href="https://github.com/gosizzle/sizzle-python-sdk" target=pythonsdk>Python</a> |
+    <a href="https://github.com/gosizzle/sizzle-ruby-sdk" target=rubysdk>Ruby</a>
   </div>
   <div style="text-align:center; font-family: 'Roboto',sans-serif;">
     <?php require __DIR__.'/footer.php';?>

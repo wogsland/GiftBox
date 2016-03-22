@@ -44,7 +44,6 @@ require __DIR__.'/header.php';
   <!-- =========================
        PAGE SPECIFIC SCRIPTS
   ============================== -->
-  <script src="js/pricing.min.js?v=<?php echo VERSION;?>"></script>
   <script>
     $('#upgrade-button').click();
   </script>

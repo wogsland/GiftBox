@@ -98,22 +98,11 @@
 <!-- =========================
      SCRIPTS
 ============================== -->
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/smoothscroll.min.js"></script>
-<script src="/js/jquery.scrollTo.min.js"></script>
-<script src="/js/jquery.localScroll.min.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/owl.carousel.min.js"></script>
-<script src="/js/nivo-lightbox.min.js"></script>
-<script src="/js/simple-expand.min.js"></script>
-<script src="/js/wow.min.js"></script>
-<script src="/js/jquery.stellar.min.js"></script>
-<script src="/js/retina-1.1.0.min.js"></script>
-<script src="/js/matchMedia.min.js"></script>
-<script src="/js/jquery.ajaxchimp.min.js"></script>
-<script src="/js/custom.min.js?v=<?php echo VERSION;?>"></script>
+<script src="/js/dist/sizzle.min.js?v=<?php echo VERSION;?>"></script>
 <script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
-<?php if (!logged_in()) { ?>
+<?php if (!logged_in()) {
+  /** TODO Move these into marketing.min build */
+?>
   <script src="/js/login.min.js?v=<?php echo VERSION;?>"></script>
   <script src="/js/signup.min.js?v=<?php echo VERSION;?>"></script>
 <?php } elseif (isset($_SESSION['stripe_id'])) { ?>
@@ -126,5 +115,4 @@
   });
   </script>
 <?php }?>
-<script src="/js/account.min.js?v=<?php echo VERSION;?>"></script>
 <script src="https://checkout.stripe.com/checkout.js"></script>
