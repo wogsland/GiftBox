@@ -29,13 +29,15 @@ if (logged_in() && is_admin()) {
                 $message .= '</a>';
             }
             $message .='<br /><br />Share on ';
-            $linkedInUrl = 'https://www.linkedin.com/shareArticle?mini=true&url='.APP_URL.'token/recruiting/'.$token->long_id;
+            $encodedLink = urlencode(APP_URL.'token/recruiting/'.$token->long_id);
+            $linkedInUrl = 'https://www.linkedin.com/shareArticle?mini=true&url='.$encodedLink;
             $linkedInUrl .= '&title='.urlencode($token->job_title).'&summary='.urlencode(HTML::from($token->job_description));
             if ($imageFile) {
                 $linkedInUrl .= '&source='.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile);
             }
             $message .=' <a href="'.$linkedInUrl.'">LinkedIn</a>,';
-            $message .=' <a href="https://twitter.com/home?status='.urlencode($token->job_title).'%20'.APP_URL.'token/recruiting/'.$token->long_id.'">Twitter</a>';
+            $message .=' <a href="https://twitter.com/home?status='.urlencode($token->job_title).'%20'.$encodedLink.'">Twitter</a>';
+            $message .=' or <a href="https://www.facebook.com/sharer/sharer.php?u='.$encodedLink.'">Facebook</a>.';
             $message .='<br /><br />';
             $email_message = str_replace('{{message}}', $message, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
