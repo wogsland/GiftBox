@@ -244,7 +244,6 @@ require __DIR__.'/header.php';
                         ?>
                       <paper-input
                         value="<?= $city_name?>"
-                        required
                         error-message="This is a required field"
                         label="Job Location"
                         id="city-id"
