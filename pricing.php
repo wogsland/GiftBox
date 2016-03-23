@@ -1,6 +1,8 @@
 <?php
 use \Sizzle\Database\User;
 
+$user = User::fetch($_SESSION['email'] ?? '');
+
 define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
 ?>
@@ -113,7 +115,7 @@ require __DIR__.'/header.php';
 
           <div class="Form__group">
             <label class="Form__label">Email</label>
-            <input class="Form__input" type="text" data-validation="required email" name="email">
+            <input class="Form__input" type="text" data-validation="required email" name="email" <?="value={$user->email_address}"?>>
             <input type="hidden" name="message" value="Interested in Enterprise pricing.">
           </div>
 
@@ -150,7 +152,7 @@ require __DIR__.'/header.php';
 
           <div class="Form__group">
             <label class="Form__label">Email</label>
-            <input class="Form__input" type="text" data-validation="required email" name="email">
+            <input class="Form__input" type="text" data-validation="required email" name="email" <?="value={$user->email_address}"?>>
           </div>
 
           <div class="Form__group">

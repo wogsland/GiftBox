@@ -24,7 +24,7 @@ var AccountProfile = React.createClass({
                   <button className="btn btn-primary btn-bordered">See Responses</button>
               </a>
               <br /><br />
-              <a href="/upgrade">
+              <a href="/pricing">
                 <button type="button" className="btn btn-success" id="upgrade-button">Upgrade</button>
               </a>
           </div>

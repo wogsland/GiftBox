@@ -37,7 +37,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle external sizzle-nav-choice" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/upgrade" class="external account-dropdown sizzle-nav-choice" id="upgrade-dropdown">Upgrade</a></li>
+                <li><a href="/pricing" class="external account-dropdown sizzle-nav-choice" id="upgrade-dropdown">Upgrade</a></li>
                 <li role="separator" class="divider" id="upgrade-divider"></li>
                 <li><a href="/tokens" class="external account-dropdown sizzle-nav-choice">My Tokens</a></li>
                 <li><a href="/profile" class="external account-dropdown sizzle-nav-choice">Profile</a></li>

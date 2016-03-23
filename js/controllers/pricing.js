@@ -9,6 +9,7 @@
         this._slider = new Sizzle.Components.Slider(this._$el.find('.Slider')[0]);
         this._plans = this._$el.find('.Plan');
         this._recommended = null;
+        this._existingUser = false;
         this._planForm = new Sizzle.Components.Form(this._$plan_dialog.find('.Form')[0]);
         this._contactForm = new Sizzle.Components.Form(this._$contact_dialog.find('.Form')[0]);
 
@@ -128,6 +129,7 @@
         {
             // Insert the token into the form so it gets submitted to the server
             this._planForm.set('stripeToken', response.id);
+            var signupEmail = this._planForm.get('email').value;
 
             // and send to the signup endpoint
             // TODO These should not be hard coded in the view
@@ -135,13 +137,18 @@
             $.ajax(
                 {
                     url: '/ajax/signup',
-                    data: { signup_email: this._planForm.get('email').value },
+                    data: { signup_email: signupEmail },
                     type: 'post',
                     dataType: 'json'
                 }
             )
+                .then(function(data) {
+                    if (data.message == 'The email address '+signupEmail+' has already been registered.') {
+                        this._existingUser = true;
+                    }
+                }.bind(this))
                 .then(this._upgradePlan.bind(this))
-                .then(this._redirectToThankYou('signup'))
+                .then(this._redirectToThankYou('signup').bind(this))
                 .fail(this._onProcessFailure.bind(this));
         },
 
@@ -160,7 +167,11 @@
         _redirectToThankYou: function(action)
         {
             return function () {
-                window.location = "/thankyou?action=" + action;
+                if ('signup' == action && this._existingUser) {
+                    window.location = "/thankyou?action=upgrade";
+                } else {
+                    window.location = "/thankyou?action=" + action;
+                }
             };
         },
 

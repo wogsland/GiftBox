@@ -222,9 +222,6 @@ class Route
             case 'track':
                 include __DIR__.'/../track.php';
                 break;
-            case 'upgrade':
-                include __DIR__.'/../upgrade.php';
-                break;
             case 'upload':
                 include __DIR__.'/../upload.php';
                 break;

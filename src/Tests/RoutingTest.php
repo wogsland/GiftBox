@@ -79,7 +79,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/tokens', false, 302));
         $this->assertTrue($this->checkStatusCode('/token_responses', false, 302));
         $this->assertTrue($this->checkStatusCode('/track'));
-        $this->assertTrue($this->checkStatusCode('/upgrade', false, 302));
         $this->assertTrue($this->checkStatusCode('/upload'));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', false, 302));
         $this->assertTrue($this->checkStatusCode('/test', false, 200));// only on DEVELOPMENT
@@ -154,7 +153,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/tokens', true));
         $this->assertTrue($this->checkStatusCode('/token_responses', true));
         $this->assertTrue($this->checkStatusCode('/track', true));
-        $this->assertTrue($this->checkStatusCode('/upgrade', true));
         $this->assertTrue($this->checkStatusCode('/upload', true));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', true, 302));
         $this->assertTrue($this->checkStatusCode('/test', true, 302));// only on DEVELOPMENT
@@ -229,7 +227,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/tokens', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/token_responses', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/track', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/upgrade', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/upload', true, 200, true));// should be under ajax?
         $this->assertTrue($this->checkStatusCode('/user', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/test', true, 302, true));// only on DEVELOPMENT
