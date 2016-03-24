@@ -102,6 +102,7 @@ class City extends \Sizzle\DatabaseEntity
      */
     public function match10($part)
     {
+        $part = escape_string($part);
         $cities = execute_query(
             "SELECT * FROM city
              WHERE name LIKE '$part%'

@@ -2,7 +2,7 @@
 use Sizzle\Database\City;
 
 // collect piece
-$part = escape_string($_POST['typed'] ?? '');
+$part = $_POST['typed'] ?? '';
 
 $success = 'false';
 $data = '';
