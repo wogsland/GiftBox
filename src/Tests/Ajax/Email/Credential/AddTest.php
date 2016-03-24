@@ -46,11 +46,11 @@ extends \PHPUnit_Framework_TestCase
         $response = curl_exec($ch);
         $this->assertEquals(true, $response);
         $json = ob_get_contents();
+        ob_end_clean();
         $return = json_decode($json);
         $this->assertEquals('true', $return->success);
         $this->assertEquals((int) $return->data->id, $return->data->id);
         $this->assertTrue(0 < $return->data->id);
-        ob_end_clean();
 
         // now test to see if it's in the database
         $EmailCredential = new EmailCredential($return->data->id);

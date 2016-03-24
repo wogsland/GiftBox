@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the web_request table.
+ */
 class WebRequest extends \Sizzle\DatabaseEntity
 {
     protected $visitor_cookie;

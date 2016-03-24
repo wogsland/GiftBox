@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_company_video table.
+ */
 class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_company_id;

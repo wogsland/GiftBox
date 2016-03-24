@@ -6,6 +6,9 @@ use \Monolog\{
     Logger
 };
 
+/**
+ * This class is for interacting with the user_milestone table.
+ */
 class UserMilestone extends \Sizzle\DatabaseEntity
 {
     protected $id;

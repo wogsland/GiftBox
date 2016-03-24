@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_token table.
+ */
 class RecruitingToken extends \Sizzle\DatabaseEntity
 {
     protected $long_id;

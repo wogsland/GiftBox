@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_token_response table.
+ */
 class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_token_id;

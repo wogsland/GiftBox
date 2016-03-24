@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the milestone table.
+ */
 class Milestone extends \Sizzle\DatabaseEntity
 {
     protected $name;

@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the user_recruiting_company table.
+ */
 class UserRecruitingCompany extends \Sizzle\DatabaseEntity
 {
     protected $user_id;

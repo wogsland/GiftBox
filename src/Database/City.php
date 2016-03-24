@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the city table.
+ */
 class City extends \Sizzle\DatabaseEntity
 {
     protected $name;

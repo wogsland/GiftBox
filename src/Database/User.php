@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the user table.
+ */
 class User extends \Sizzle\DatabaseEntity
 {
     protected $email_address;
