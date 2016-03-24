@@ -17,16 +17,11 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
      */
     public function create($recruiting_company_id, $file_name)
     {
-        $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
-                  VALUES ('$recruiting_company_id', '$file_name')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->recruiting_company_id = $recruiting_company_id;
-            $this->file_name = $file_name;
-            $this->created = date('Y-m-d H:i:s'); //close enough
-        }
-        return $id;
+        $this->unsetAll();
+        $this->recruiting_company_id = $recruiting_company_id;
+        $this->file_name = $file_name;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -39,6 +34,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
     public function getByRecruitingTokenId($recruiting_token_id)
     {
         $return = array();
+        $recruiting_token_id = (int) $recruiting_token_id;
         $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
                   FROM recruiting_company_image, recruiting_token
                   WHERE recruiting_company_image.recruiting_company_id = recruiting_token.recruiting_company_id
@@ -60,6 +56,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
     public function getByRecruitingTokenLongId($long_id)
     {
         $return = array();
+        $long_id = escape_string($long_id);
         $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
                   FROM recruiting_company_image, recruiting_token
                   WHERE recruiting_company_image.recruiting_company_id = recruiting_token.recruiting_company_id
@@ -81,6 +78,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
     public function getByCompanyId($id)
     {
         $return = array();
+        $id = (int) $id;
         $query = "SELECT recruiting_company_image.id, recruiting_company_image.file_name
                   FROM recruiting_company_image
                   WHERE recruiting_company_image.recruiting_company_id = '$id'";

@@ -5,6 +5,7 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_token_id;
     protected $email;
+    protected $visitor_cookie;
     protected $created;
 
     /**
@@ -19,24 +20,26 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
      */
     public function create($recruiting_token_id, $email, $response, $cookie = '')
     {
-        $id = 0;
+        $this->unsetAll();
+
+        // validate input
         if (filter_var($email, FILTER_VALIDATE_EMAIL)
             && in_array($response, array('Yes', 'No', 'Maybe'))
         ) {
+            $recruiting_token_id = escape_string($recruiting_token_id);
             $result = execute_query(
                 "SELECT id from recruiting_token
                 WHERE long_id = '$recruiting_token_id'"
             );
             if ($row = $result->fetch_assoc()) {
-                $recruiting_token_id = $row['id'];
-                $id = insert(
-                    "INSERT into recruiting_token_response
-                    (`recruiting_token_id`, `email`, `response`, `visitor_cookie`)
-                    VALUES ('$recruiting_token_id', '$email', '$response', '$cookie')"
-                );
+                $this->recruiting_token_id = $row['id'];
+                $this->email = $email;
+                $this->response = $response;
+                $this->visitor_cookie = $cookie;
+                $this->save();
             }
         }
-        return $id;
+        return (int) $this->id;
     }
 
     /**
@@ -50,7 +53,9 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
     public function get($user_id, $long_id = '')
     {
         $responses = array();
-        if (isset($user_id) && $user_id == (int) $user_id) {
+        if (isset($user_id)) {
+            $user_id = (int) $user_id;
+            $long_id = escape_string($long_id);
             if ('' != $long_id) {
                 $result = execute_query(
                     "SELECT id from recruiting_token

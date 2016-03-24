@@ -94,14 +94,12 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($RecruitingCompanyImage->id, $id);
         $this->assertEquals($RecruitingCompanyImage->file_name, $file_name);
         $this->assertEquals($RecruitingCompanyImage->recruiting_company_id, $this->RecruitingCompany->id);
-        $this->assertTrue(isset($RecruitingCompanyImage->created));
 
         // check it's in the DB
         $RecruitingCompanyImage2 = new RecruitingCompanyImage($id);
         $this->assertEquals($RecruitingCompanyImage2->id, $id);
         $this->assertEquals($RecruitingCompanyImage2->file_name, $file_name);
         $this->assertEquals($RecruitingCompanyImage2->recruiting_company_id, $this->RecruitingCompany->id);
-        $this->assertTrue(isset($RecruitingCompanyImage2->created));
     }
 
     /**

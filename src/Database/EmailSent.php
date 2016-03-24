@@ -33,21 +33,15 @@ class EmailSent extends \Sizzle\DatabaseEntity
         ) {
             // details contains minimal subset
 
-            // create list of columns & values
-            $columns = '';
-            $values = '';
             $keys = get_class_vars(get_class($this));
+            $this->unsetAll();
             foreach ($details as $key=>$value) {
                 if (array_key_exists($key, $keys)) {
-                    $columns .= ", `$key`";
-                    $values .= ", '$value'";
                     $this->$key = $value;
                 }
             }
-            $columns = ltrim($columns, ', ');
-            $values = ltrim($values, ', ');
-            $query = "INSERT INTO email_sent ($columns) VALUES ($values)";
-            $id = insert($query);
+            $this->save();
+            $id = $this->id;
         }
         return $id;
     }

@@ -46,6 +46,7 @@ class User extends \Sizzle\DatabaseEntity
     public static function fetch($value, $key = 'email_address')
     {
         $user = null;
+        $value = escape_string($value);
         switch ($key) {
         case 'api_key':
             $condition = "api_key = '$value'";
@@ -72,6 +73,7 @@ class User extends \Sizzle\DatabaseEntity
     public function update_token($token = null)
     {
         if ($token !== null) {
+            $token = escape_string($token);
             execute_query("UPDATE user set access_token = '".$token."' WHERE id = '$this->id'");
         }
     }

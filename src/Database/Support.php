@@ -21,10 +21,7 @@ class Support extends \Sizzle\DatabaseEntity
         $Support = new Support();
         $Support->email_address = $email_address;
         $Support->message = $message;
-
-        $sql = "INSERT INTO `giftbox`.`support` (`email_address`, `message`)
-                VALUES ('$Support->email_address', '$Support->message')";
-        $Support->id = insert($sql);
+        $Support->save();
         return $Support;
     }
 }

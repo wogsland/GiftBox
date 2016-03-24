@@ -42,23 +42,10 @@ class Organization extends \Sizzle\DatabaseEntity
      */
     public function create($name, $website = null, $paying_user = null)
     {
-        $query = "INSERT INTO organization (
-                    name
-                    ".(isset($website) ? ", website":'')."
-                    ".(isset($paying_user) ? ", paying_user":'')."
-                  )
-                  VALUES (
-                    '$name'
-                    ".(isset($website) ? ", '$website'":'')."
-                    ".(isset($paying_user) ? ", '$paying_user'":'')."
-                  )";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->name = $name;
-            $this->website = $website;
-            $this->paying_user = $paying_user;
-        }
-        return $id;
+        $this->name = $name;
+        $this->website = $website;
+        $this->paying_user = $paying_user;
+        $this->save();
+        return $this->id;
     }
 }

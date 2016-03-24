@@ -17,11 +17,12 @@ class LandingPageView extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        if ($id !== null && (int) $id == $id) {
+        if ($id !== null) {
+            $id = (int) $id;
             $page = execute_query(
                 "SELECT * FROM landing_page
-              WHERE deleted IS NULL
-              AND id = '$id'"
+                 WHERE deleted IS NULL
+                 AND id = '$id'"
             )->fetch_object();
             if (is_object($page)) {
                 foreach (get_object_vars($page) as $key => $value) {
@@ -41,14 +42,10 @@ class LandingPageView extends \Sizzle\DatabaseEntity
      */
     public function create($landing_page_id, $visitor_cookie)
     {
-        $sql = "INSERT INTO landing_page_view (landing_page_id, visitor_cookie)
-                VALUES ('$landing_page_id', '$visitor_cookie')";
-        $id = insert($sql);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->landing_page_id = $landing_page_id;
-            $this->visitor_cookie = $visitor_cookie;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->landing_page_id = $landing_page_id;
+        $this->visitor_cookie = $visitor_cookie;
+        $this->save();
+        return $this->id;
     }
 }

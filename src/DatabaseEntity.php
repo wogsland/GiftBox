@@ -45,14 +45,15 @@ implements \JsonSerializable
     }
 
     /**
-     * This function sets a protected property if it's not read only
+     * This function sets a protected property if it's not read only or the class
+     * doing it extends this class
      *
      * @param string $property - the class property to set
      * @param mixed  $value    - the value to set the property to
      */
     public function __set($property, $value)
     {
-        if (!in_array($property, $this->readOnly)) {
+        if (!in_array($property, $this->readOnly) || is_subclass_of($this, 'Sizzle\DatabaseEntity')) {
             $this->$property = $value;
         }
     }
@@ -144,5 +145,17 @@ implements \JsonSerializable
     public function jsonSerialize()
     {
         return (object) get_object_vars($this);
+    }
+
+    /**
+     * nsets all the class vars
+     */
+    public function unsetAll()
+    {
+        foreach (get_object_vars($this) as $key=>$value) {
+            if ('readOnly' != $key) {
+                unset($this->$key);
+            }
+        }
     }
 }

@@ -19,13 +19,15 @@ class EmailList extends \Sizzle\DatabaseEntity
     public function __construct($value = null, $key = 'id')
     {
         if ($value !== null) {
-            if ($key == 'id' && (int) $value == $value) {
+            if ($key == 'id') {
+                $id = (int) $value;
                 $token = execute_query(
                     "SELECT * FROM email_list
-                    WHERE id = '$value'
+                    WHERE id = '$id'
                     AND deleted IS NULL"
                 )->fetch_object("Sizzle\Database\EmailList");
             } elseif ($key == 'name') {
+                $value = escape_string($value);
                 $token = execute_query(
                     "SELECT * FROM email_list
                     WHERE name = '$value'
@@ -50,14 +52,11 @@ class EmailList extends \Sizzle\DatabaseEntity
      */
     public function create($user_id, $name)
     {
-        $query = "INSERT INTO email_list (user_id, name) VALUES ('$user_id', '$name')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->user_id = $user_id;
-            $this->name = $name;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->user_id = $user_id;
+        $this->name = $name;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -70,12 +69,9 @@ class EmailList extends \Sizzle\DatabaseEntity
     public function update($name)
     {
         if (isset($this->id)) {
-            $query = "UPDATE email_list SET name = '$name' WHERE id = {$this->id}";
-            $rows = update($query);
-            if ($rows > 0) {
-                $this->name = $name;
-                return true;
-            }
+            $this->name = $name;
+            $this->save();
+            return true;
         }
         return false;
     }
@@ -110,6 +106,7 @@ class EmailList extends \Sizzle\DatabaseEntity
     public function getByUserId($user_id)
     {
         $return = array();
+        $user_id = (int) $user_id;
         $query = "SELECT `name`, `id`
                   FROM email_list
                   WHERE deleted IS NULL

@@ -20,15 +20,11 @@ class RecruitingTokenImage extends \Sizzle\DatabaseEntity
      */
     public function create($file_name, $recruiting_token_id)
     {
-        $query = "INSERT INTO recruiting_token_image (file_name, recruiting_token_id)
-                 VALUES ('$file_name', '$recruiting_token_id')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->file_name = $file_name;
-            $this->recruiting_token_id = $recruiting_token_id;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->file_name = $file_name;
+        $this->recruiting_token_id = $recruiting_token_id;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -40,6 +36,7 @@ class RecruitingTokenImage extends \Sizzle\DatabaseEntity
      */
     public function getByRecruitingTokenId($recruiting_token_id)
     {
+        $recruiting_token_id = (int) $recruiting_token_id;
         $query = "SELECT * FROM recruiting_token_image
                  WHERE recruiting_token_id = '$recruiting_token_id'";
         return execute_query($query)->fetch_all(MYSQLI_ASSOC);

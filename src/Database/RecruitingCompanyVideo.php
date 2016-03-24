@@ -19,16 +19,12 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
      */
     public function create($recruiting_company_id, $source, $source_id)
     {
-        $query = "INSERT INTO recruiting_company_video (recruiting_company_id, source, source_id)
-                  VALUES ('$recruiting_company_id', '$source', '$source_id')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->recruiting_company_id = $recruiting_company_id;
-            $this->source = $source;
-            $this->source_id = $source_id;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->recruiting_company_id = $recruiting_company_id;
+        $this->source = $source;
+        $this->source_id = $source_id;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -41,6 +37,7 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
     public function getByRecruitingTokenLongId($long_id)
     {
         $return = array();
+        $long_id = escape_string($long_id);
         $query = "SELECT recruiting_company_video.id,
                   recruiting_company_video.source,
                   recruiting_company_video.source_id
@@ -64,6 +61,7 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
     public function getByCompanyId($id)
     {
         $return = array();
+        $id = (int) $id;
         $query = "SELECT recruiting_company_video.id,
                   recruiting_company_video.source,
                   recruiting_company_video.source_id

@@ -26,6 +26,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
             if ($key == null || !in_array($key, array('id','long_id'))) {
                 $key = 'id';
             }
+            $value = escape_string($value);
             $token = execute_query("SELECT * FROM recruiting_token WHERE $key = '$value'")->fetch_object("Sizzle\Database\RecruitingToken");
             if ($token) {
                 foreach (get_object_vars($token) as $key => $value) {
@@ -39,6 +40,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
 
     public static function getUserTokens($user_id)
     {
+        $user_id = (int) $user_id;
         $results =  execute_query(
             "SELECT recruiting_token.*, COALESCE(recruiting_company.`name`, 'Unnamed Company') as company
             FROM recruiting_token
@@ -87,6 +89,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
      */
     public static function getUserCompanies($user_id)
     {
+        $user_id = (int) $user_id;
         $query = "SELECT id, `name`
                   FROM recruiting_company
                   WHERE user_id = '$user_id'";
@@ -127,6 +130,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         if ('' == $long_id) {
             $long_id = $this->long_id;
         }
+        $long_id = escape_string($long_id);
         $sql = "SELECT id FROM recruiting_token WHERE long_id = '$long_id'";
         $result = execute_query($sql);
         if (0 == $result->num_rows) {

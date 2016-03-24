@@ -20,7 +20,8 @@ class EmailCredential extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        if ($id !== null && (int) $id == $id) {
+        if ($id !== null) {
+            $id = (int) $id;
             $token = execute_query(
                 "SELECT * FROM email_credential
                 WHERE id = '$id'
@@ -47,20 +48,14 @@ class EmailCredential extends \Sizzle\DatabaseEntity
      */
     public function create($user_id, $username, $password, $smtp_host, $smtp_port)
     {
-        $query = "INSERT INTO
-            email_credential (user_id, username, password, smtp_host, smtp_port)
-            VALUES
-            ('$user_id', '$username', '$password', '$smtp_host', '$smtp_port')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->user_id = $user_id;
-            $this->username = $username;
-            $this->password = $password;
-            $this->smtp_host = $smtp_host;
-            $this->smtp_port = $smtp_port;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->user_id = $user_id;
+        $this->username = $username;
+        $this->password = $password;
+        $this->smtp_host = $smtp_host;
+        $this->smtp_port = $smtp_port;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -119,6 +114,7 @@ class EmailCredential extends \Sizzle\DatabaseEntity
     public function getByUserId($user_id)
     {
         $return = array();
+        $user_id = (int) $user_id;
         $query = "SELECT CONCAT(`username`, '@', smtp_host, ':', smtp_port) AS credential, `id`
                   FROM email_credential
                   WHERE deleted IS NULL

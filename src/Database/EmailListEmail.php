@@ -17,7 +17,8 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        if ($id !== null && (int) $id == $id) {
+        if ($id !== null) {
+            $id = (int) $id;
             $token = execute_query(
                 "SELECT * FROM email_list_email
                 WHERE id = '$id'
@@ -41,15 +42,11 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
      */
     public function create($email_list_id, $email)
     {
-        $query = "INSERT INTO email_list_email (email_list_id, email)
-                  VALUES ('$email_list_id', '$email')";
-        $id = insert($query);
-        if ($id > 0) {
-            $this->id = $id;
-            $this->email_list_id = $email_list_id;
-            $this->email = $email;
-        }
-        return $id;
+        $this->unsetAll();
+        $this->email_list_id = $email_list_id;
+        $this->email = $email;
+        $this->save();
+        return $this->id;
     }
 
     /**
@@ -82,6 +79,7 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
     public function getByEmailListId($list_id)
     {
         $return = array();
+        $list_id = (int) $list_id;
         $query = "SELECT `email`
                   FROM email_list_email
                   WHERE deleted IS NULL

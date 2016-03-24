@@ -17,7 +17,8 @@ class LandingPage extends \Sizzle\DatabaseEntity
      */
     public function __construct($id = null)
     {
-        if ($id !== null && (int) $id == $id) {
+        if ($id !== null) {
+            $id = (int) $id;
             $condition = "AND id = '$id'";
         } else {
             $condition = "ORDER BY RAND() LIMIT 1";
@@ -43,7 +44,6 @@ class LandingPage extends \Sizzle\DatabaseEntity
      */
     public function recordHit($visitor_cookie)
     {
-        $LandingPageView = new LandingPageView();
-        $LandingPageView->create($this->id, $visitor_cookie);
+        (new LandingPageView())->create($this->id, $visitor_cookie);
     }
 }
