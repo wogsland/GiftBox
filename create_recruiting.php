@@ -15,7 +15,7 @@ if (!logged_in()) {
 $user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
-    $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
+    $token = new RecruitingToken($_GET['id'], 'long_id');
     if ($token->user_id != $user_id && !is_admin()) {
         header('Location: '.APP_URL.'/tokens');
     }

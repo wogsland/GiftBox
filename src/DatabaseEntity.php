@@ -20,6 +20,7 @@ implements \JsonSerializable
     public function __construct($id = null)
     {
         if ($id !== null && strlen($id) > 0) {
+            $id = escape_string($id);
             $sql = "SELECT * FROM {$this->tableName()} WHERE id = '$id'";
             $object = execute_query($sql)->fetch_object(get_class($this));
             if (isset($object)) {

@@ -25,7 +25,7 @@ if (isset($_SESSION['reset_attempt'], $_SESSION['reset_attempt']['date'], $_SESS
 
 // try email
 if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
-    $email = escape_string($_POST['email']);
+    $email = $_POST['email'];
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // find user corresponding to email
         $user = User::fetch($email);

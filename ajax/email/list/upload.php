@@ -6,8 +6,8 @@ use \Sizzle\Database\{
 
 $success = 'false';
 $data = '';
-$fileName = escape_string($_POST['fileName'] ?? false);
-$listName = escape_string($_POST['listName'] ?? false);
+$fileName = $_POST['fileName'] ?? false;
+$listName = $_POST['listName'] ?? false;
 $localPath = $_FILES['listFile']['tmp_name'] ?? false;
 if (logged_in()) {
     if ($fileName && $localPath && $listName) {

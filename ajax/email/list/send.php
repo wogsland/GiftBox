@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
     ];
     $allSet = true;
     foreach ($params as $param) {
-        $$param = isset($_POST[$param]) ? escape_string($_POST[$param]) : null;
+        $$param = $_POST[$param] ?? null;
         $allSet = $allSet && isset($$param);
     }
     if (!$allSet) {

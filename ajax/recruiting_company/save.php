@@ -42,8 +42,7 @@ if (isset($_SESSION['user_id'])) {
 
             // save company_id to token
             if (isset($_POST['recruiting_token_id'])) {
-                $recruiting_token_id = escape_string($_POST['recruiting_token_id']);
-                $RecruitingToken = new RecruitingToken($recruiting_token_id,  'long_id');
+                $RecruitingToken = new RecruitingToken($_POST['recruiting_token_id'],  'long_id');
                 if (isset($RecruitingToken->id)) {
                     $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
                     $RecruitingToken->save();

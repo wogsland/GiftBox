@@ -3,12 +3,10 @@ use Sizzle\Database\RecruitingTokenResponse;
 use Sizzle\Database\RecruitingToken;
 
 // collect info from url
-$recruiting_token_id = escape_string($endpoint_parts[4] ?? '');
-$email = escape_string($endpoint_parts[5] ?? '');
-$email = urldecode($email);
-$response = escape_string($endpoint_parts[6] ?? '');
-$response = ucfirst(strtolower($response));
-$cookie = escape_string($_COOKIE['visitor'] ?? '');
+$recruiting_token_id = $endpoint_parts[4] ?? '';
+$email = urldecode($endpoint_parts[5] ?? '');
+$response = ucfirst(strtolower($endpoint_parts[6] ?? ''));
+$cookie = $_COOKIE['visitor'] ?? '';
 
 $success = 'false';
 $data = '';

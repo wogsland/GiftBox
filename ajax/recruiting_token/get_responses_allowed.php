@@ -5,7 +5,7 @@ use \Sizzle\Database\{
 };
 
 // collect id
-$id = escape_string($endpoint_parts[4] ?? '');
+$id = $endpoint_parts[4] ?? '';
 
 $success = 'false';
 $allowed = 'true';

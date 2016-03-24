@@ -11,16 +11,13 @@ if (logged_in()) {
         'smtp_host',
         'smtp_port'
     ];
-    foreach ($params as $param) {
-        $$param = escape_string($_POST[$param] ?? null);
-    }
-    if ('' == $username) {
+    if (!isset($username) || '' == $username) {
         $errors[] = 'Username cannot be left blank';
     }
-    if ('' == $password) {
+    if (!isset($password) || '' == $password) {
         $errors[] = 'Password cannot be left blank';
     }
-    if ($smtp_host == '') {
+    if (!isset($smtp_host) || $smtp_host == '') {
         $errors[] = 'Invalid SMTP host';
     }
     if (0 >= (int) $smtp_port) {

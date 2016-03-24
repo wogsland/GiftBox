@@ -14,7 +14,7 @@ if (!logged_in()) {
 $user_id = (int) ($_SESSION['user_id'] ?? '');
 $referrer = (int) ($_GET['referrer'] ?? '');
 $recruiting_token_id = $_GET['id'] ?? '';
-$token = new RecruitingToken(escape_string($recruiting_token_id), 'long_id');
+$token = new RecruitingToken($recruiting_token_id, 'long_id');
 
 $user = new User($user_id);
 $credentials = (new EmailCredential())->getByUserId($user_id);

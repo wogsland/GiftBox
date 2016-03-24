@@ -8,7 +8,7 @@ use \Sizzle\Database\{
 date_default_timezone_set('America/Chicago');
 
 // collect id
-$id = escape_string($endpoint_parts[4] ?? '');
+$id = $endpoint_parts[4] ?? '';
 
 $success = 'false';
 $data = '';

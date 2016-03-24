@@ -2,7 +2,7 @@
 use \Sizzle\Database\RecruitingCompanyVideo;
 
 // collect id
-$id = escape_string($endpoint_parts[4] ?? '');
+$id = $endpoint_parts[4] ?? '';
 
 $success = 'false';
 $data = '';

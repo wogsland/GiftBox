@@ -2,7 +2,7 @@
 
 $success = 'false';
 $data = '';
-$fileName = escape_string($_POST['fileName'] ?? false);
+$fileName = $_POST['fileName'] ?? false;
 $email = $_POST['email'] ?? false;
 $email = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : false;
 $localPath = $_FILES['listFile']['tmp_name'] ?? false;
