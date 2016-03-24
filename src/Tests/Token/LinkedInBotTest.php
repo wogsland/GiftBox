@@ -2,7 +2,6 @@
 namespace Sizzle\Tests\Token;
 
 use \Sizzle\Database\{
-    City,
     RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken,
@@ -18,37 +17,17 @@ use \Sizzle\Database\{
 class LinkedInBotTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\City;
+
     /**
      * Sets up class vars
      */
     public function setUp()
     {
-        /// create a city for testing
-        $city = new City();
-        $city->name = "Test City #".rand();
-        $city->image_file = "city.png";
-        $city->population = rand(10000, 10000000);
-        $city->longitude = rand(0, 100);
-        $city->latitude = rand(0, 100);
-        $city->county = "County " . rand(0, 100);
-        $city->country = "CT";
-        $city->timezone = "Awesome Standard Time";
-        $city->temp_hi_spring = rand(0, 100);
-        $city->temp_lo_spring = rand(0, 100);
-        $city->temp_avg_spring = rand(0, 100);
-        $city->temp_hi_summer = rand(0, 100);
-        $city->temp_lo_summer = rand(0, 100);
-        $city->temp_avg_summer = rand(0, 100);
-        $city->temp_hi_fall = rand(0, 100);
-        $city->temp_lo_fall = rand(0, 100);
-        $city->temp_avg_fall = rand(0, 100);
-        $city->temp_hi_winter = rand(0, 100);
-        $city->temp_lo_winter = rand(0, 100);
-        $city->temp_avg_winter = rand(0, 100);
-        $city->save();
-        $this->city = $city;
+        // create a city for testing
+        $this->city = $this->createCity();
 
-        // setup test users
+        // setup test user
         $User1 = new User();
         $User1->email_address = rand();
         $User1->first_name = rand();
@@ -528,5 +507,13 @@ extends \PHPUnit_Framework_TestCase
         $this->assertContains('<body>', $html);
         $this->assertContains('</body>', $html);
         $this->assertContains('</html>', $html);
+    }
+
+    /**
+     * Delete cities created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteCities();
     }
 }

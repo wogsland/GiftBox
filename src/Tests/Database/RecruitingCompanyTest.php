@@ -2,8 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use Sizzle\Database\{
-    RecruitingCompany,
-    User
+    RecruitingCompany
 };
 
 /**
@@ -13,6 +12,8 @@ use Sizzle\Database\{
  */
 class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -27,12 +28,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
     }
 
     /**
@@ -165,9 +161,11 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-
+    /**
+     * Delete users created for testing
+     */
     protected function tearDown()
     {
-        //$this->User->delete();
+        //$this->deleteUsers();
     }
 }

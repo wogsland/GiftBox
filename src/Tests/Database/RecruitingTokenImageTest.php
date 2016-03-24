@@ -3,8 +3,7 @@ namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
     RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -15,6 +14,8 @@ use \Sizzle\Database\{
 class RecruitingTokenImageTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -44,11 +45,7 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
+        $User = $this->createUser();
         $token = new RecruitingToken();
         $token->user_id = $User->id;
         $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
@@ -76,11 +73,7 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testGetByRecruitingTokenId()
     {
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
+        $User = $this->createUser();
         $token = new RecruitingToken();
         $token->user_id = $User->id;
         $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
@@ -104,5 +97,13 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($images[1]['recruiting_token_id'], $token->id);
         $this->assertEquals($images[2]['file_name'], $fileName3);
         $this->assertEquals($images[2]['recruiting_token_id'], $token->id);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }

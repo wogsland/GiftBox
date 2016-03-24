@@ -10,6 +10,8 @@ use Sizzle\Database\City;
  */
 class CityTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\City;
+
     protected $existing_city;
 
     /**
@@ -23,29 +25,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // create a city for testing
-        $city = new City();
-        $city->name = "Test City ".rand();
-        $city->image_file = "city.png";
-        $city->population = rand(10000, 10000000);
-        $city->longitude = rand(0, 100);
-        $city->latitude = rand(0, 100);
-        $city->county = "County " . rand(0, 100);
-        $city->country = "CT";
-        $city->timezone = "Awesome Standard Time";
-        $city->temp_hi_spring = rand(0, 100);
-        $city->temp_lo_spring = rand(0, 100);
-        $city->temp_avg_spring = rand(0, 100);
-        $city->temp_hi_summer = rand(0, 100);
-        $city->temp_lo_summer = rand(0, 100);
-        $city->temp_avg_summer = rand(0, 100);
-        $city->temp_hi_fall = rand(0, 100);
-        $city->temp_lo_fall = rand(0, 100);
-        $city->temp_avg_fall = rand(0, 100);
-        $city->temp_hi_winter = rand(0, 100);
-        $city->temp_lo_winter = rand(0, 100);
-        $city->temp_avg_winter = rand(0, 100);
-        $city->save();
-        $this->existing_city = $city;
+        $this->existing_city = $this->createCity();
     }
 
     /**
@@ -147,9 +127,12 @@ class CityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->existing_city->id, $id);
     }
 
+    /**
+     * Delete cities created for testing
+     */
     protected function tearDown()
     {
-        $this->existing_city->delete();
+        $this->deleteCities();
     }
 
     /**
@@ -250,35 +233,5 @@ class CityTest extends \PHPUnit_Framework_TestCase
         $cities = (new City())->match10($firstPart);
         $this->assertFalse(empty($cities));
         $this->assertEquals(10, count($cities));
-    }
-
-    /**
-     * Create a city
-     */
-    protected function createCity(string $name = null)
-    {
-        // create a city for testing
-        $city = new City();
-        $city->name = $name ?? "Test City";
-        $city->image_file = rand().".png";
-        $city->population = rand(10000, 10000000);
-        $city->longitude = rand(0, 100);
-        $city->latitude = rand(0, 100);
-        $city->county = "County " . rand(0, 100);
-        $city->country = "CT";
-        $city->timezone = "Awesome Standard Time";
-        $city->temp_hi_spring = rand(0, 100);
-        $city->temp_lo_spring = rand(0, 100);
-        $city->temp_avg_spring = rand(0, 100);
-        $city->temp_hi_summer = rand(0, 100);
-        $city->temp_lo_summer = rand(0, 100);
-        $city->temp_avg_summer = rand(0, 100);
-        $city->temp_hi_fall = rand(0, 100);
-        $city->temp_lo_fall = rand(0, 100);
-        $city->temp_avg_fall = rand(0, 100);
-        $city->temp_hi_winter = rand(0, 100);
-        $city->temp_lo_winter = rand(0, 100);
-        $city->temp_avg_winter = rand(0, 100);
-        $city->save();
     }
 }

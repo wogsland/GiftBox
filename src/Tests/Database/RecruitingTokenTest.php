@@ -4,8 +4,7 @@ namespace Sizzle\Tests\Database;
 use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -16,6 +15,8 @@ use \Sizzle\Database\{
 class RecruitingTokenTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -30,12 +31,7 @@ extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
     }
 
     /**
@@ -218,5 +214,13 @@ extends \PHPUnit_Framework_TestCase
         // Test function
         $image = $token->screenshot();
         $this->assertEquals($image, $fileName);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }

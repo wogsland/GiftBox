@@ -3,8 +3,7 @@ namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
     RecruitingTokenResponse,
-    RecruitingToken,
-    User
+    RecruitingToken
 };
 
 /**
@@ -15,6 +14,8 @@ use \Sizzle\Database\{
 class RecruitingTokenResponseTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -29,12 +30,7 @@ extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
@@ -158,5 +154,13 @@ extends \PHPUnit_Framework_TestCase
             }
         }
         $this->assertEquals($new_count, $found);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteUsers();
     }
 }
