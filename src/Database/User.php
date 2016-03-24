@@ -123,6 +123,7 @@ class User extends \Sizzle\DatabaseEntity
             . "reset_code = '$this->reset_code', "
             . "allow_token_responses = '$this->allow_token_responses', "
             . "receive_token_notifications = '$this->receive_token_notifications' "
+            . ($this->organization_id ? ", organization_id = '{$this->organization_id}' " : '')
             . "WHERE id = '$this->id'";
             execute($sql);
         }

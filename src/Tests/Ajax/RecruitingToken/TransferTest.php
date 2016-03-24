@@ -3,8 +3,7 @@ namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
     RecruitingToken,
-    RecruitingCompany,
-    User
+    RecruitingCompany
 };
 
 /**
@@ -15,6 +14,8 @@ use \Sizzle\Database\{
 class TransferTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -29,16 +30,8 @@ extends \PHPUnit_Framework_TestCase
     public function testNoCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
@@ -82,16 +75,8 @@ extends \PHPUnit_Framework_TestCase
     public function testOldUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test company with unrelated user
         $RecruitingCompany = new RecruitingCompany();
@@ -142,16 +127,8 @@ extends \PHPUnit_Framework_TestCase
     public function testNewUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
@@ -201,21 +178,9 @@ extends \PHPUnit_Framework_TestCase
     public function testRandomUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
-        $User3 = new User();
-        $User3->email_address = rand();
-        $User3->first_name = rand();
-        $User3->last_name = rand();
-        $User3->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
+        $User3 = $this->createUser();
 
         // setup test company with unrelated user
         $RecruitingCompany = new RecruitingCompany();
@@ -277,6 +242,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }
 ?>

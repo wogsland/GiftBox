@@ -2,8 +2,7 @@
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
-    RecruitingToken,
-    User
+    RecruitingToken
 };
 
 /**
@@ -14,6 +13,8 @@ use \Sizzle\Database\{
 class GetResponsesAllowedTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -36,11 +37,7 @@ extends \PHPUnit_Framework_TestCase
     public function testResponsesAllowed()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
+        $User1 = $this->createUser();
         $User1->allow_token_responses = 'Y';
         $User1->save();
 
@@ -71,11 +68,7 @@ extends \PHPUnit_Framework_TestCase
     public function testResponsesNotAllowed()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
+        $User1 = $this->createUser();
         $User1->allow_token_responses = 'N';
         $User1->save();
 
@@ -116,6 +109,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('true', $return->data->allowed);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteUsers();
     }
 }
 ?>

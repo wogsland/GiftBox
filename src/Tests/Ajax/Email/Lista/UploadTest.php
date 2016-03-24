@@ -4,8 +4,7 @@ namespace Sizzle\Tests\Ajax\Email\Lista;
 
 use \Sizzle\Database\{
     EmailList,
-    EmailListEmail,
-    User
+    EmailListEmail
 };
 
 /**
@@ -16,6 +15,8 @@ use \Sizzle\Database\{
 class UploadTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -164,11 +165,7 @@ extends \PHPUnit_Framework_TestCase
         $listName = 'list'.rand();
 
         // create a user and a list
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
+        $User = $this->createUser();
         $emailList = new EmailList();
         $emailListID = $emailList->create($User->id, $listName);
 
@@ -283,6 +280,7 @@ extends \PHPUnit_Framework_TestCase
         foreach ($this->files as $file) {
             unlink($file);
         }
+        $this->deleteUsers();
     }
 
     /**

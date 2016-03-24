@@ -4,18 +4,19 @@ namespace Sizzle\Tests\Ajax\RecruitingToken;
 use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingCompanyVideo,
-    RecruitingToken,
-    User
+    RecruitingToken
 };
 
 /**
  * This class tests the ajax endpoint to get the videos for a token.
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/RecruitingToken/GetVideosTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/RecruitingToken/GetVideosTest
  */
 class GetVideosTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -30,12 +31,7 @@ extends \PHPUnit_Framework_TestCase
     public function testRequest()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
@@ -98,6 +94,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }
 ?>

@@ -3,8 +3,7 @@ namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
     RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -15,6 +14,8 @@ use \Sizzle\Database\{
 class SetScreenshotTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -29,11 +30,8 @@ extends \PHPUnit_Framework_TestCase
     public function testRequest()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
+        $User1 = $this->createUser();
+
 
         // setup test token
         $RecruitingToken = new RecruitingToken();
@@ -109,6 +107,14 @@ extends \PHPUnit_Framework_TestCase
         $return = json_decode($json);
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }
 ?>

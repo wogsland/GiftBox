@@ -3,15 +3,16 @@ namespace Sizzle\Tests\Service;
 
 use \Devio\Pipedrive\Http\Response;
 use \Sizzle\Service\PipedriveClient;
-use \Sizzle\Database\User;
+
 /**
  * This class tests the Pipedrive class
  *
  * ./vendor/bin/phpunit --bootstrap src/tests/autoload.php src/Tests/Service/PipedriveClientTest
  */
-class PipedriveClientTest
-    extends \PHPUnit_Framework_TestCase
+class PipedriveClientTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     protected $pipedriveClient;
     protected $mockedPipedriveAPI;
     protected $fakeUser;
@@ -23,10 +24,7 @@ class PipedriveClientTest
     {
         $this->mockedPipedriveAPI = \Mockery::mock('overload:\\Devio\Pipedrive\Pipedrive')->makePartial();
         $this->pipedriveClient = new PipedriveClient(PIPEDRIVE_API_TOKEN);
-        $this->fakeUser = new User();
-        $this->fakeUser->email_address = 'fakeemail@gosizzle.io';
-        $this->fakeUser->first_name = "";
-        $this->fakeUser->last_name = "";
+        $this->fakeUser = $this->createUser();
     }
 
 
@@ -36,6 +34,7 @@ class PipedriveClientTest
     public function tearDown()
     {
         \Mockery::close();
+        $this->deleteUsers();
     }
 
     /**

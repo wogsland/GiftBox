@@ -5,8 +5,7 @@ use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -18,6 +17,7 @@ class LinkedInBotTest
 extends \PHPUnit_Framework_TestCase
 {
     use \Sizzle\Tests\Traits\City;
+    use \Sizzle\Tests\Traits\User;
 
     /**
      * Sets up class vars
@@ -28,12 +28,7 @@ extends \PHPUnit_Framework_TestCase
         $this->city = $this->createCity();
 
         // setup test user
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $this->user = $User1;
+        $this->user = $this->createUser();
     }
 
     /**
@@ -493,8 +488,10 @@ extends \PHPUnit_Framework_TestCase
 
     /**
      * Helper function to test things that should always be there
+     *
+     * @param string $html - the html to test for things
      */
-    protected function thingsThatShouldAlwaysBeThere($html)
+    protected function thingsThatShouldAlwaysBeThere(string $html)
     {
         $this->assertContains('<!doctype html>', $html);
         $this->assertContains('<html lang="en">', $html);
@@ -510,10 +507,11 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Delete cities created for testing
+     * Delete cities & users created for testing
      */
     protected function tearDown()
     {
         //$this->deleteCities();
+        //$this->deleteUsers();
     }
 }

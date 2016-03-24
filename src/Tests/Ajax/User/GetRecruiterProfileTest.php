@@ -2,10 +2,8 @@
 namespace Sizzle\Tests\Ajax\User;
 
 use \Sizzle\Database\{
-    Organization,
     RecruitingCompany,
-    RecruitingToken,
-    User
+    RecruitingToken
 };
 
 /**
@@ -16,6 +14,9 @@ use \Sizzle\Database\{
 class GetRecruiterProfileTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\Organization;
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -37,17 +38,13 @@ extends \PHPUnit_Framework_TestCase
         $this->Organization = new Organization((new Organization())->create($name, $website));
 
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->organization_id = $this->Organization->id;
-        $User->position = rand();
-        $User->linkedin = 'https://linkedin.com/in/'.rand();
-        $User->about = rand();
-        $User->face_image = rand().'.jpg';
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
+        $this->User->organization_id = $this->Organization->id;
+        $this->User->position = rand();
+        $this->User->linkedin = 'https://linkedin.com/in/'.rand();
+        $this->User->about = rand();
+        $this->User->face_image = rand().'.jpg';
+        $this->User->save();
 
         // setup test company
         $RecruitingCompany = new RecruitingCompany();
@@ -108,6 +105,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }
 ?>
