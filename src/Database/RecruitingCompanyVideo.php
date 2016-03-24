@@ -6,7 +6,6 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
     protected $recruiting_company_id;
     protected $source;
     protected $source_id;
-    protected $created;
 
     /**
      * This function creates an entry in the recruiting_company_video table

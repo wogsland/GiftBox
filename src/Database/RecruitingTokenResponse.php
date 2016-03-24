@@ -6,7 +6,6 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
     protected $recruiting_token_id;
     protected $email;
     protected $visitor_cookie;
-    protected $created;
 
     /**
      * This function creates a resonse in the database

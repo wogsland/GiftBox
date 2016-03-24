@@ -11,7 +11,6 @@ class EmailCredential extends \Sizzle\DatabaseEntity
     protected $password;
     protected $smtp_host;
     protected $smtp_port;
-    protected $created;
 
     /**
      * This function constructs the class

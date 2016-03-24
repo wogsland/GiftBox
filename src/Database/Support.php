@@ -8,7 +8,6 @@ class Support extends \Sizzle\DatabaseEntity
 {
     protected $email_address;
     protected $message;
-    protected $created;
 
     /**
      * Saves a receipt of the sent support mail..

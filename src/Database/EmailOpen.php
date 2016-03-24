@@ -9,7 +9,6 @@ class EmailOpen extends \Sizzle\DatabaseEntity
     protected $email_template_id;
     protected $email_address;
     protected $recruiting_token_id;
-    protected $created;
 
     /**
      * This function creates an entry in the email_open table

@@ -8,7 +8,6 @@ class RecruitingTokenImage extends \Sizzle\DatabaseEntity
 {
     protected $file_name;
     protected $recruiting_token_id;
-    protected $created;
 
     /**
      * This function creates an entry in the recruiting_token_image table

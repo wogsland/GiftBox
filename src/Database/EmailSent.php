@@ -17,7 +17,6 @@ class EmailSent extends \Sizzle\DatabaseEntity
     protected $subject;
     protected $success;
     protected $error_message;
-    protected $created;
 
     /**
      * This function creates an entry in the email_sent table

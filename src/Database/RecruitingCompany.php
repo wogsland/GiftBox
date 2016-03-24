@@ -15,5 +15,4 @@ class RecruitingCompany extends \Sizzle\DatabaseEntity
     protected $twitter;
     protected $google_plus;
     protected $pinterest;
-    protected $created;
 }

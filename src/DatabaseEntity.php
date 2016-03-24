@@ -10,6 +10,7 @@ implements \JsonSerializable
     use \Sizzle\Traits\CamelToUnderscore;
 
     protected $id;
+    protected $created;
     protected $readOnly = ['id','readOnly','created'];
 
     /**

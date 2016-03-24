@@ -8,7 +8,6 @@ class EmailList extends \Sizzle\DatabaseEntity
 {
     protected $user_id;
     protected $name;
-    protected $created;
 
     /**
      * This function constructs the class

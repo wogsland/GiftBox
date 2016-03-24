@@ -23,7 +23,6 @@ class City extends \Sizzle\DatabaseEntity
     protected $temp_hi_winter;
     protected $temp_lo_winter;
     protected $temp_avg_winter;
-    protected $created;
 
     /**
      * Gets the city id given the city name

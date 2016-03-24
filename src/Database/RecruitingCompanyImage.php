@@ -5,7 +5,6 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_company_id;
     protected $file_name;
-    protected $created;
 
     /**
      * This function creates an entry in the recruiting_company_image table

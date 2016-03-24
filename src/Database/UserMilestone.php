@@ -11,7 +11,6 @@ class UserMilestone extends \Sizzle\DatabaseEntity
     protected $id;
     protected $user_id;
     protected $milestone_id;
-    protected $created;
 
     /**
      * This function constructs the class from a valid user_id & milestone.

@@ -9,7 +9,6 @@ class Organization extends \Sizzle\DatabaseEntity
     protected $name;
     protected $website;
     protected $paying_user;
-    protected $created;
 
     /**
      * This function sets a protected property

@@ -6,7 +6,6 @@ class UserRecruitingCompany extends \Sizzle\DatabaseEntity
     protected $user_id;
     protected $recruiting_company_id;
     protected $permissions;
-    protected $created;
 
     /**
      * This function constructs the class from an $id

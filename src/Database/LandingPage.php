@@ -7,7 +7,6 @@ namespace Sizzle\Database;
 class LandingPage extends \Sizzle\DatabaseEntity
 {
     protected $script;
-    protected $created;
 
     /**
      * This function constructs the class from a random landing page

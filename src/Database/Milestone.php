@@ -4,7 +4,6 @@ namespace Sizzle\Database;
 class Milestone extends \Sizzle\DatabaseEntity
 {
     protected $name;
-    protected $created;
 
     /**
      * This function constructs the class from a valid id or name.

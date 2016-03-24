@@ -8,7 +8,6 @@ class LandingPageView extends \Sizzle\DatabaseEntity
 {
     protected $landing_page_id;
     protected $visitor_cookie;
-    protected $created;
 
     /**
      * This function constructs the class from a landing page view
