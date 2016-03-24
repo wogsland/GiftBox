@@ -293,7 +293,7 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return string - path to the file
      */
-    protected function createUploadFile($good = 10, $bad = 0, $include = array())
+    protected function createUploadFile(int $good = 10, int $bad = 0, $include = array())
     {
         $hosts = ['@gosizzle.io', '@gmail.com', '@givetoken.com'];
         $newlines = ["\n", "\n\r", "\r\n"];

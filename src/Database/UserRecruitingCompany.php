@@ -15,7 +15,7 @@ class UserRecruitingCompany extends \Sizzle\DatabaseEntity
      *
      * @param int $id - id of the user_recruiting_company link
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
     }
 
@@ -29,7 +29,7 @@ class UserRecruitingCompany extends \Sizzle\DatabaseEntity
      *
      * @return mixed - false if fail or id if success
      */
-    public static function create($user_id, $recruiting_company_id, $permissions = 'Read Only')
+    public static function create(int $user_id, int $recruiting_company_id, string $permissions = 'Read Only')
     {
 
     }
@@ -41,7 +41,7 @@ class UserRecruitingCompany extends \Sizzle\DatabaseEntity
      *
      * @return boolean - success of update
      */
-    public static function updatePermissions($permissions)
+    public static function updatePermissions(string $permissions)
     {
 
     }

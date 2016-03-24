@@ -25,7 +25,7 @@ class EmailSent extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($details)
+    public function create(array $details)
     {
         $id = 0;
         if (is_array($details) && isset($details['to'], $details['from'], $details['subject'],$details['body'], $details['email_credential_id'], $details['success'])

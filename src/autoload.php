@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(
-    function ($class) {
+    function (string $class) {
         if (0 !== strpos($class, 'Sizzle')) {
             return;
         } else {

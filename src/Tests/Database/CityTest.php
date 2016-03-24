@@ -255,7 +255,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
     /**
      * Create a city
      */
-    protected function createCity($name = null)
+    protected function createCity(string $name = null)
     {
         // create a city for testing
         $city = new City();

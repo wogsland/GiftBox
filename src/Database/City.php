@@ -34,7 +34,7 @@ class City extends \Sizzle\DatabaseEntity
      *
      * @return int - the id of the named city
      */
-    public static function getIdFromName($name)
+    public static function getIdFromName(string $name)
     {
         $sql = "SELECT id FROM city WHERE name = '$name'";
         $id = execute_query($sql)->fetch_object()->id;
@@ -102,7 +102,7 @@ class City extends \Sizzle\DatabaseEntity
      *
      * @return array - 10 or fewer matches; none if there's more
      */
-    public function match10($part)
+    public function match10(string $part)
     {
         $part = escape_string($part);
         $cities = execute_query(

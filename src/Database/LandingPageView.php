@@ -14,7 +14,7 @@ class LandingPageView extends \Sizzle\DatabaseEntity
      *
      * @param int $id - optional id of the landing_page_view
      */
-    public function __construct($id = null)
+    public function __construct(int $id = null)
     {
         if ($id !== null) {
             $id = (int) $id;
@@ -39,7 +39,7 @@ class LandingPageView extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($landing_page_id, $visitor_cookie)
+    public function create(int $landing_page_id, string $visitor_cookie)
     {
         $this->unsetAll();
         $this->landing_page_id = $landing_page_id;

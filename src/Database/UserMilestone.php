@@ -22,7 +22,7 @@ class UserMilestone extends \Sizzle\DatabaseEntity
      * @param int   $user_id   - id of the user acheiving the milestone
      * @param mixed $milestone - name or id of milestone
      */
-    public function __construct($user_id, $milestone)
+    public function __construct(int $user_id, $milestone)
     {
         // get milestone
         $Milestone = new Milestone($milestone);

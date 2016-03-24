@@ -15,7 +15,7 @@ class EmailList extends \Sizzle\DatabaseEntity
      * @param mixed  $value - optional id or name of the email list
      * @param string $key   - if $value is id or name
      */
-    public function __construct($value = null, $key = 'id')
+    public function __construct($value = null, string $key = 'id')
     {
         if ($value !== null) {
             if ($key == 'id') {
@@ -49,7 +49,7 @@ class EmailList extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($user_id, $name)
+    public function create(int $user_id, string $name)
     {
         $this->unsetAll();
         $this->user_id = $user_id;
@@ -65,7 +65,7 @@ class EmailList extends \Sizzle\DatabaseEntity
      *
      * @return boolean - success of update
      */
-    public function update($name)
+    public function update(string $name)
     {
         if (isset($this->id)) {
             $this->name = $name;
@@ -102,7 +102,7 @@ class EmailList extends \Sizzle\DatabaseEntity
      *
      * @return array - email lists associated with the user
      */
-    public function getByUserId($user_id)
+    public function getByUserId(int $user_id)
     {
         $return = array();
         $user_id = (int) $user_id;

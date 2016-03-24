@@ -28,7 +28,7 @@ class User extends \Sizzle\DatabaseEntity
     protected $allow_token_responses;
     protected $receive_token_notifications;
 
-    public static function exists($email_address)
+    public static function exists(string $email_address)
     {
         $exists = false;
         $user = User::fetch($email_address);
@@ -46,7 +46,7 @@ class User extends \Sizzle\DatabaseEntity
      *
      * @return User - the corresponding object
      */
-    public static function fetch($value, $key = 'email_address')
+    public static function fetch($value, string $key = 'email_address')
     {
         $user = null;
         $value = escape_string($value);
@@ -73,7 +73,7 @@ class User extends \Sizzle\DatabaseEntity
         return $user;
     }
 
-    public function update_token($token = null)
+    public function update_token(string $token = null)
     {
         if ($token !== null) {
             $token = escape_string($token);

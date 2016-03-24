@@ -22,7 +22,7 @@ class WebRequest extends \Sizzle\DatabaseEntity
      *
      * @return boolean - is it?
      */
-    public function newVisitor($visitor_cookie)
+    public function newVisitor(string $visitor_cookie)
     {
         $visitor_cookie = escape_string($visitor_cookie);
         $sql = "SELECT COUNT(*) requests FROM web_request

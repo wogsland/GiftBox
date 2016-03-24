@@ -16,7 +16,7 @@ class Organization extends \Sizzle\DatabaseEntity
      * @param string $var - the class property to set
      * @param string $val - the value to set it to
      */
-    public function __set($var, $val)
+    public function __set(string $var, $val)
     {
         if (isset($this->id)) {
             $settable = ['name', 'website', 'paying_user'];

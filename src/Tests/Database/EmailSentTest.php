@@ -66,15 +66,22 @@ extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests the create function.
+     *
+     * @expectedException TypeError
      */
-    public function testCreate()
+    public function testCreateBadType()
     {
         // test creation with bad input
         $details = '';
         $EmailSent = new EmailSent();
         $id = $EmailSent->create($details);
-        $this->assertEquals(0, $id);
+    }
 
+    /**
+     * Tests the create function.
+     */
+    public function testCreate()
+    {
         // test creation with empty input
         $details = array();
         $EmailSent = new EmailSent();

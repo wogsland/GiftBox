@@ -18,7 +18,7 @@ class GoogleMail
      *
      * @return boolean - success of send
      */
-    public function sendMail($to, $subject, $message, $from)
+    public function sendMail(string $to, string $subject, string $message, string $from)
     {
         try {
             $mail_options = [

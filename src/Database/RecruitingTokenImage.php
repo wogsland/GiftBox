@@ -17,7 +17,7 @@ class RecruitingTokenImage extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($file_name, $recruiting_token_id)
+    public function create(string $file_name, int $recruiting_token_id)
     {
         $this->unsetAll();
         $this->file_name = $file_name;
@@ -33,7 +33,7 @@ class RecruitingTokenImage extends \Sizzle\DatabaseEntity
      *
      * @return array - image(s) information
      */
-    public function getByRecruitingTokenId($recruiting_token_id)
+    public function getByRecruitingTokenId(int $recruiting_token_id)
     {
         $recruiting_token_id = (int) $recruiting_token_id;
         $query = "SELECT * FROM recruiting_token_image

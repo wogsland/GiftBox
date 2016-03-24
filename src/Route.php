@@ -17,7 +17,7 @@ class Route
      * @param array $endpointPieces - the parsed pieces of the endpoint
      * @param array $gets           - associative array of GET variables
      */
-    public function __construct($endpointPieces, $gets = array())
+    public function __construct(array $endpointPieces, array $gets = array())
     {
         if (is_array($endpointPieces)) {
             $this->endpointPieces = $endpointPieces;
