@@ -24,6 +24,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         // create a city
         $city = new City();
         $city->name = "City #" . rand(0, 100);
+        $city->image_file = "city.png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);
@@ -76,6 +77,7 @@ class GetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('true', $return->success);
         $this->assertEquals($city->id, $return->data->id);
         $this->assertEquals($city->name, $return->data->name);
+        $this->assertEquals($city->image_file, $return->data->image_file);
         $this->assertEquals($city->population, $return->data->population);
         $this->assertEquals($city->longitude, $return->data->longitude);
         $this->assertEquals($city->latitude, $return->data->latitude);

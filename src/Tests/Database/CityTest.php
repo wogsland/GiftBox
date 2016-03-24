@@ -24,7 +24,8 @@ class CityTest extends \PHPUnit_Framework_TestCase
     {
         // create a city for testing
         $city = new City();
-        $city->name = "Test City".rand();
+        $city->name = "Test City ".rand();
+        $city->image_file = "city.png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);
@@ -69,6 +70,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
         // test saving a new city
         $city = new City();
         $city->name = "City #" . rand(0, 100);
+        $city->image_file = "city.png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);
@@ -160,6 +162,8 @@ class CityTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($City->save());
         $City->name = 'City of '.rand();
         $this->assertFalse($City->save());
+        $City->image_file = rand().'.jpg';
+        $this->assertFalse($City->save());
         $City->population = rand();
         $this->assertFalse($City->save());
         $City->longitude = rand(0, 180);
@@ -201,6 +205,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $result->num_rows);
         $row = $result->fetch_assoc();
         $this->assertEquals($City->name, $row['name']);
+        $this->assertEquals($City->image_file, $row['image_file']);
         $this->assertEquals($City->population, $row['population']);
         $this->assertEquals($City->longitude, $row['longitude']);
         $this->assertEquals($City->latitude, $row['latitude']);
@@ -255,6 +260,7 @@ class CityTest extends \PHPUnit_Framework_TestCase
         // create a city for testing
         $city = new City();
         $city->name = $name ?? "Test City";
+        $city->image_file = rand().".png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);

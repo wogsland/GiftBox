@@ -6,6 +6,7 @@ $data = '';
 if (logged_in() && is_admin()) {
     $vars = [
        'name',
+       'image_file',
        'population',
        'longitude',
        'latitude',
