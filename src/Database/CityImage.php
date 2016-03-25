@@ -1,21 +1,11 @@
 <?php
-namespace Sizzle;
+namespace Sizzle\Database;
 
-class CityImage extends DatabaseEntity
+class CityImage extends \Sizzle\DatabaseEntity
 {
   protected $city_id;
   protected $image_file;
   protected $created;
-
-  /**
-   * Overrides DatabaseEntity::__construct() to set created as read-only
-   * after calling parent::__construct()
-   */
-  public function __construct($id = null)
-  {
-    parent::__construct($id);
-    $this->addReadOnly('created');
-  }
 
   /**
    * Gets all the images for a city sorted by filename
