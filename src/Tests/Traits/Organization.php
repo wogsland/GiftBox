@@ -18,11 +18,10 @@ trait Organization
     protected function createOrganization()
     {
         // create an organization for testing
-        $organization = new Organization();
-        $organization->name = 'The '.rand().' Corporation';
-        $organization->website = 'http://www.'.rand().'.org';
-        $organization->save();
-        $this->$organizations[] = $organization->id;
+        $name = 'The '.rand().' Corporation';
+        $website = 'http://www.'.rand().'.org';
+        $organization = new Organization((new Organization())->create($name, $website));
+        $this->organizations[] = $organization->id;
         return $organization;
     }
 
@@ -31,7 +30,7 @@ trait Organization
      */
     protected function deleteOrganizations()
     {
-        foreach($this->$organizations as $id) {
+        foreach($this->organizations as $id) {
             $sql = "DELETE FROM organization WHERE id = '$id'";
             execute($sql);
         }

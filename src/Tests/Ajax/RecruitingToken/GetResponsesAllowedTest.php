@@ -1,10 +1,6 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\Database\{
-    RecruitingToken
-};
-
 /**
  * This class tests the ajax endpoint to get if responses are allowed for a token.
  *
@@ -13,7 +9,11 @@ use \Sizzle\Database\{
 class GetResponsesAllowedTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken,
+        \Sizzle\Tests\Traits\User {
+            \Sizzle\Tests\Traits\User::createUser insteadof \Sizzle\Tests\Traits\RecruitingToken;
+            \Sizzle\Tests\Traits\User::deleteUsers insteadof \Sizzle\Tests\Traits\RecruitingToken;
+        }
 
     /**
      * Requires the util.php file of functions
@@ -42,10 +42,7 @@ extends \PHPUnit_Framework_TestCase
         $User1->save();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, 'none');
 
         // test responses allowed
         ob_start();
@@ -73,10 +70,7 @@ extends \PHPUnit_Framework_TestCase
         $User1->save();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, 'none');
 
         // test responses not being allowed
         ob_start();
@@ -112,11 +106,11 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Delete users created for testing
+     * Delete things created for testing
      */
     protected function tearDown()
     {
-        $this->deleteUsers();
+        $this->deleteRecruitingTokens();
     }
 }
 ?>

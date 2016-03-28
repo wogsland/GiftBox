@@ -1,11 +1,6 @@
 <?php
 namespace Sizzle\Tests\Ajax\User;
 
-use \Sizzle\Database\{
-    RecruitingCompany,
-    RecruitingToken
-};
-
 /**
  * This class tests the ajax endpoint to get the recruiter profile for a token.
  *
@@ -15,7 +10,7 @@ class GetRecruiterProfileTest
 extends \PHPUnit_Framework_TestCase
 {
     use \Sizzle\Tests\Traits\Organization;
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Requires the util.php file of functions
@@ -33,9 +28,7 @@ extends \PHPUnit_Framework_TestCase
         $this->url = TEST_URL .'/ajax/user/get_recruiter_profile';
 
         // setup test organization
-        $name = 'The '.rand().' Corporation';
-        $website = 'http://www.'.rand().'.org';
-        $this->Organization = new Organization((new Organization())->create($name, $website));
+        $this->Organization = $this->createOrganization();
 
         // setup test user
         $this->User = $this->createUser();
@@ -46,21 +39,8 @@ extends \PHPUnit_Framework_TestCase
         $this->User->face_image = rand().'.jpg';
         $this->User->save();
 
-        // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'The '.rand().' Company';
-        $RecruitingCompany->website = 'https://'.rand().'.com/';
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
-
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $this->RecruitingToken = $this->createRecruitingToken($this->User->id);
     }
 
     /**
@@ -112,7 +92,8 @@ extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        //$this->deleteUsers();
+        $this->deleteRecruitingTokens();
+        $this->deleteOrganizations();
     }
 }
 ?>

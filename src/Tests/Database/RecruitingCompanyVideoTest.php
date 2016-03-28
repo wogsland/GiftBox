@@ -2,9 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    RecruitingCompany,
-    RecruitingCompanyVideo,
-    RecruitingToken
+    RecruitingCompanyVideo
 };
 
 /**
@@ -15,7 +13,7 @@ use \Sizzle\Database\{
 class RecruitingCompanyVideoTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Requires the util.php file of functions
@@ -34,19 +32,13 @@ extends \PHPUnit_Framework_TestCase
         $this->User = $this->createUser();
 
         // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'Company '.rand();
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
+        $this->RecruitingCompany = $this->createRecruitingCompany($this->User->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $this->RecruitingToken = $this->createRecruitingToken($this->User->id, $this->RecruitingCompany->id);
+
+        // test videos
+        $this->vids = array();
     }
 
     /**
@@ -69,6 +61,7 @@ extends \PHPUnit_Framework_TestCase
         $query = "INSERT INTO recruiting_company_video (recruiting_company_id, source_id)
                   VALUES ('{$this->RecruitingCompany->id}', '$source_id')";
         $id = insert($query);
+        $this->vids[] = $id;
         $result = new RecruitingCompanyVideo($id);
         $this->assertEquals('Sizzle\Database\RecruitingCompanyVideo', get_class($result));
         $this->assertTrue(isset($result->id));
@@ -87,6 +80,7 @@ extends \PHPUnit_Framework_TestCase
         $source_id = rand();
         $RecruitingCompanyVideo = new RecruitingCompanyVideo();
         $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id);
+        $this->vids[] = $id;
         $this->assertEquals($RecruitingCompanyVideo->id, $id);
         $this->assertEquals($RecruitingCompanyVideo->source, $source);
         $this->assertEquals($RecruitingCompanyVideo->source_id, $source_id);
@@ -97,6 +91,7 @@ extends \PHPUnit_Framework_TestCase
         $source_id = rand();
         $RecruitingCompanyVideo = new RecruitingCompanyVideo();
         $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id);
+        $this->vids[] = $id;
         $this->assertEquals($RecruitingCompanyVideo->id, $id);
         $this->assertEquals($RecruitingCompanyVideo->source, $source);
         $this->assertEquals($RecruitingCompanyVideo->source_id, $source_id);
@@ -127,9 +122,9 @@ extends \PHPUnit_Framework_TestCase
         $source_id[1] = rand();
         $source_id[2] = rand();
         $source_id[3] = rand();
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
         $images = $RecruitingCompanyVideo->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
@@ -156,9 +151,9 @@ extends \PHPUnit_Framework_TestCase
         $source_id[1] = rand();
         $source_id[2] = rand();
         $source_id[3] = rand();
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
-        $id = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
+        $this->vids[] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
         $images = $RecruitingCompanyVideo->getByCompanyId($this->RecruitingCompany->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
@@ -177,6 +172,7 @@ extends \PHPUnit_Framework_TestCase
         $query = "INSERT INTO recruiting_company_video (recruiting_company_id)
                   VALUES ('{$this->RecruitingCompany->id}')";
         $id = insert($query);
+        $this->vids[] = $id;
         $result = new RecruitingCompanyVideo($id);
 
 
@@ -199,6 +195,10 @@ extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        //$this->deleteUsers();
+        foreach($this->vids as $id) {
+            $sql = "DELETE FROM recruiting_company_video WHERE id = '$id'";
+            execute($sql);
+        }
+        $this->deleteRecruitingTokens();
     }
 }

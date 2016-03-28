@@ -2,9 +2,7 @@
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
-    RecruitingCompany,
-    RecruitingCompanyVideo,
-    RecruitingToken
+    RecruitingCompanyVideo
 };
 
 /**
@@ -15,7 +13,7 @@ use \Sizzle\Database\{
 class GetVideosTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Requires the util.php file of functions
@@ -30,23 +28,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testRequest()
     {
-        // setup test user
-        $this->User = $this->createUser();
-
-        // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'The '.rand().' Company';
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
-
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $recruitingToken = $this->createRecruitingToken();
 
         // setup test images
         $RecruitingCompanyVideo = new RecruitingCompanyVideo();
@@ -54,12 +37,13 @@ extends \PHPUnit_Framework_TestCase
         $source_id[1] = rand();
         $source_id[2] = rand();
         $source_id[3] = rand();
-        $id[1] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[1]);
-        $id[2] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[2]);
-        $id[3] = $RecruitingCompanyVideo->create($this->RecruitingCompany->id, $source, $source_id[3]);
+        $id[1] = $RecruitingCompanyVideo->create($recruitingToken->recruiting_company_id, $source, $source_id[1]);
+        $id[2] = $RecruitingCompanyVideo->create($recruitingToken->recruiting_company_id, $source, $source_id[2]);
+        $id[3] = $RecruitingCompanyVideo->create($recruitingToken->recruiting_company_id, $source, $source_id[3]);
+        $this->videos = $id;
 
         // test for created images
-        $url = TEST_URL . "/ajax/recruiting_token/get_videos/{$RecruitingToken->long_id}";
+        $url = TEST_URL . "/ajax/recruiting_token/get_videos/{$recruitingToken->long_id}";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
@@ -97,11 +81,17 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Delete users created for testing
+     * Delete things created for testing
      */
     protected function tearDown()
     {
-        //$this->deleteUsers();
+        if (isset($this->videos)) {
+            foreach ($this->videos as $id) {
+                $sql = "DELETE FROM recruiting_company_video WHERE id = '$id'";
+                execute($sql);
+            }
+        }
+        $this->deleteRecruitingTokens();
     }
 }
 ?>

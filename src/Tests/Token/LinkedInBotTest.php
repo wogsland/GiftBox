@@ -2,7 +2,6 @@
 namespace Sizzle\Tests\Token;
 
 use \Sizzle\Database\{
-    RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken,
     RecruitingTokenImage
@@ -17,7 +16,7 @@ class LinkedInBotTest
 extends \PHPUnit_Framework_TestCase
 {
     use \Sizzle\Tests\Traits\City;
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Sets up class vars
@@ -56,9 +55,7 @@ extends \PHPUnit_Framework_TestCase
     public function testMinimalToken()
     {
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
@@ -98,19 +95,13 @@ extends \PHPUnit_Framework_TestCase
     public function testCompanyName()
     {
         // setup test company
-        $company = new RecruitingCompany();
-        $company->user_id = $this->user->id;
-        $company->name = 'Anteil '.rand().', GmbH';
-        $company->save();
+        $company = $this->createRecruitingCompany($this->user->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, $company->id);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
-        $RecruitingToken->recruiting_company_id = $company->id;
         $RecruitingToken->save();
 
         // get the bot token version
@@ -148,20 +139,15 @@ extends \PHPUnit_Framework_TestCase
     public function testCompanyImage()
     {
         // setup test company with image
-        $company = new RecruitingCompany();
-        $company->user_id = $this->user->id;
-        $company->save();
+        $company = $this->createRecruitingCompany($this->user->id);
         $file = rand().'.png';
-        (new RecruitingCompanyImage())->create($company->id, $file);
+        $id = (new RecruitingCompanyImage())->create($company->id, $file);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, $company->id);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
-        $RecruitingToken->recruiting_company_id = $company->id;
         $RecruitingToken->save();
 
         // get the bot token version
@@ -187,6 +173,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertNotContains('<h2>Responsibilities</h2>', $response);
         $this->assertNotContains('<h2>Company Values</h2>', $response);
         $this->assertNotContains('<h2>Perks</h2>', $response);
+
+        // cleanup
+        $sql = "DELETE FROM recruiting_company_image WHERE id = '$id'";
+        execute($sql);
     }
 
     /**
@@ -199,9 +189,7 @@ extends \PHPUnit_Framework_TestCase
     public function testScreenshot()
     {
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
@@ -209,7 +197,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup screenshot
         $file = rand().'.gif';
-        (new RecruitingTokenImage())->create($file, $RecruitingToken->id);
+        $id = (new RecruitingTokenImage())->create($file, $RecruitingToken->id);
 
         // get the bot token version
         $url = TEST_URL.'/token/recruiting/'.$RecruitingToken->long_id;
@@ -235,6 +223,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertNotContains('<h2>Responsibilities</h2>', $response);
         $this->assertNotContains('<h2>Company Values</h2>', $response);
         $this->assertNotContains('<h2>Perks</h2>', $response);
+
+        // cleanup
+        $sql = "DELETE FROM recruiting_token_image WHERE id = '$id'";
+        execute($sql);
     }
 
     /**
@@ -247,9 +239,7 @@ extends \PHPUnit_Framework_TestCase
     public function testSkills()
     {
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
@@ -290,9 +280,7 @@ extends \PHPUnit_Framework_TestCase
     public function testResponsibilities()
     {
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->responsibilities = 'Be excellent to eachother. Party on dudes!';
@@ -334,19 +322,15 @@ extends \PHPUnit_Framework_TestCase
     public function testValues()
     {
         // setup test company
-        $company = new RecruitingCompany();
-        $company->user_id = $this->user->id;
-        $company->values = 'Aum';
+        $company = $this->createRecruitingCompany($this->user->id);
+        $company->values = 'Aum '.rand();
         $company->save();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, $company->id);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
-        $RecruitingToken->recruiting_company_id = $company->id;
         $RecruitingToken->save();
 
         // get the bot token version
@@ -384,9 +368,7 @@ extends \PHPUnit_Framework_TestCase
     public function testPerks()
     {
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->perks = rand().' ping pong tables';
@@ -433,16 +415,12 @@ extends \PHPUnit_Framework_TestCase
     public function testFullToken()
     {
         // setup test company
-        $company = new RecruitingCompany();
-        $company->user_id = $this->user->id;
-        $company->name = 'Anteil '.rand().', GmbH';
+        $company = $this->createRecruitingCompany($this->user->id);
         $company->values = 'Aum '.rand();
         $company->save();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->user->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, $company->id);
         $RecruitingToken->job_title = 'Job #'.rand();
         $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
         $RecruitingToken->city_id = $this->city->id;
@@ -454,7 +432,7 @@ extends \PHPUnit_Framework_TestCase
 
         // setup screenshot
         $file = rand().'.gif';
-        (new RecruitingTokenImage())->create($file, $RecruitingToken->id);
+        $id = (new RecruitingTokenImage())->create($file, $RecruitingToken->id);
 
         // get the bot token version
         $url = TEST_URL.'/token/recruiting/'.$RecruitingToken->long_id;
@@ -465,7 +443,6 @@ extends \PHPUnit_Framework_TestCase
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $response = curl_exec($ch);
-        //print_r($response);
         $this->assertEquals(200, curl_getinfo($ch, CURLINFO_HTTP_CODE));
 
         $this->thingsThatShouldAlwaysBeThere($response);
@@ -484,6 +461,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertContains($company->values, $response);
         $this->assertContains('<h2>Perks</h2>', $response);
         $this->assertContains($RecruitingToken->perks, $response);
+
+        // cleanup
+        $sql = "DELETE FROM recruiting_token_image WHERE id = '$id'";
+        execute($sql);
     }
 
     /**
@@ -511,7 +492,7 @@ extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        //$this->deleteCities();
-        //$this->deleteUsers();
+        $this->deleteRecruitingTokens();
+        $this->deleteCities();
     }
 }
