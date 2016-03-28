@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use Sizzle\EmailCredential;
+use Sizzle\Database\EmailCredential;
 
 /**
  * This class tests the ajax endpoint to add email credentials.

@@ -1,8 +1,8 @@
 <?php
 use \Sizzle\{
     HTML,
-    RecruitingToken,
-    User
+    Database\RecruitingToken,
+    Database\User
 };
 
 if (logged_in() && is_admin()) {
@@ -22,12 +22,23 @@ if (logged_in() && is_admin()) {
             $email_message = file_get_contents(__DIR__.'/../../email_templates/stationary.inline.html');
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
             $message = HTML::to($message).'<br /><br />';
-            echo $imageFile = $token->screenshot();
+            $imageFile = $token->screenshot();
             if ($imageFile) {
                 $message .= '<a href="'.APP_URL.'token/recruiting/'.$token->long_id.'">';
                 $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=200 />';
                 $message .= '</a>';
             }
+            $message .='<br /><br />Share on ';
+            $encodedLink = urlencode(APP_URL.'token/recruiting/'.$token->long_id);
+            $linkedInUrl = 'https://www.linkedin.com/shareArticle?mini=true&url='.$encodedLink;
+            $linkedInUrl .= '&title='.urlencode($token->job_title).'&summary='.urlencode(HTML::from($token->job_description));
+            if ($imageFile) {
+                $linkedInUrl .= '&source='.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile);
+            }
+            $message .=' <a href="'.$linkedInUrl.'">LinkedIn</a>,';
+            $message .=' <a href="https://twitter.com/home?status='.urlencode($token->job_title).'%20'.$encodedLink.'">Twitter</a>';
+            $message .=' or <a href="https://www.facebook.com/sharer/sharer.php?u='.$encodedLink.'">Facebook</a>.';
+            $message .='<br /><br />';
             $email_message = str_replace('{{message}}', $message, $email_message);
             $mandrill = new Mandrill(MANDRILL_API_KEY);
             $mandrill->messages->send(

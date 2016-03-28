@@ -10,7 +10,7 @@ implements \JsonSerializable
     use \Sizzle\Traits\CamelToUnderscore;
 
     protected $id;
-    protected $readOnly = ['id','readOnly'];
+    protected $readOnly = ['id','readOnly','created'];
 
     /**
      * Constructs the class
@@ -45,14 +45,15 @@ implements \JsonSerializable
     }
 
     /**
-     * This function sets a protected property if it's not read only
+     * This function sets a protected property if it's not read only or the class
+     * doing it extends this class
      *
      * @param string $property - the class property to set
      * @param mixed  $value    - the value to set the property to
      */
     public function __set($property, $value)
     {
-        if (!in_array($property, $this->readOnly)) {
+        if (!in_array($property, $this->readOnly) || is_subclass_of($this, 'Sizzle\DatabaseEntity')) {
             $this->$property = $value;
         }
     }
@@ -74,7 +75,7 @@ implements \JsonSerializable
      */
     protected function tableName()
     {
-        return $this->fromCamelCase(substr(get_class($this), strrpos(get_class(), '\\')+1));
+        return $this->fromCamelCase(substr(get_class($this), strrpos(get_class(), 'Database')+9));
     }
 
     /**
@@ -88,14 +89,14 @@ implements \JsonSerializable
     /**
      * Inserts into the database, setting $this->id
      */
-    protected function insert()
+    protected function insertRow()
     {
         $comma = '';
         $columns = '';
         $values = '';
         foreach (get_object_vars($this) as $key => $value) {
             if ($key !== 'readOnly' && !in_array($key, $this->readOnly) && isset($value)) {
-                $columns .= $comma.$key;
+                $columns .= $comma.'`'.$key.'`';
                 $values .= $comma."'".escape_string($value)."'";
                 $comma = ', ';
             }
@@ -107,13 +108,13 @@ implements \JsonSerializable
     /**
      * Updates the database using $this->id
      */
-    protected function update()
+    protected function updateRow()
     {
         $comma = null;
         $sql = "UPDATE {$this->tableName()} SET ";
         foreach (get_object_vars($this) as $key => $value) {
             if ($key !== 'readOnly' && !in_array($key, $this->readOnly)) {
-                $sql .= $comma.$key." = ";
+                $sql .= $comma.'`'.$key.'`'." = ";
                 if (strlen($value) > 0) {
                     $sql .= "'".escape_string($value)."'";
                 } else {
@@ -127,24 +128,14 @@ implements \JsonSerializable
     }
 
     /**
-     * Deletes from the database using $this->id
-     */
-    public function delete()
-    {
-        $table_name = substr(get_class(), strrpos(get_class(), '\\')+1);
-        $sql = "DELETE FROM {$this->tableName()} WHERE id = '$this->id'";
-        execute($sql);
-    }
-
-    /**
      * Inserts into or updates the database
      */
     public function save()
     {
         if (!$this->id) {
-            $this->insert();
+            $this->insertRow();
         } else {
-            $this->update();
+            $this->updateRow();
         }
     }
 
@@ -154,5 +145,17 @@ implements \JsonSerializable
     public function jsonSerialize()
     {
         return (object) get_object_vars($this);
+    }
+
+    /**
+     * nsets all the class vars
+     */
+    public function unsetAll()
+    {
+        foreach (get_object_vars($this) as $key=>$value) {
+            if ('readOnly' != $key) {
+                unset($this->$key);
+            }
+        }
     }
 }

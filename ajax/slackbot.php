@@ -21,51 +21,52 @@ if (ENVIRONMENT === "production") {
     }
 
     // see what visitor type is
-    if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'googlebot') !== false) {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    if (strpos(strtolower($userAgent), 'googlebot') !== false) {
         $visitor = 'Googlebot';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bingbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'bingbot') !== false) {
         $visitor = 'Bingbot';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'slackbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'slackbot') !== false) {
         $visitor = 'Slackbot';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'ahrefsBot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'ahrefsBot') !== false) {
         $visitor = 'AhrefsBot (https://ahrefs.com/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'mj12bot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'mj12bot') !== false) {
         $visitor = 'MJ12bot (http://www.majestic12.co.uk/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'blexbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'blexbot') !== false) {
         $visitor = 'BLEXBot (http://webmeup-crawler.com/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'twitterbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'twitterbot') !== false) {
         $visitor = 'Twitterbot';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'yandexbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'yandexbot') !== false) {
         $visitor = 'YandexBot (http://yandex.com/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'nextgensearchbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'nextgensearchbot') !== false) {
         $visitor = 'NextGenSearchBot (http://www.zoominfo.com/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'xovibot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'xovibot') !== false) {
         $visitor = 'XoviBot (http://www.xovibot.net/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'exabot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'exabot') !== false) {
         $visitor = 'Exabot (http://www.exabot.com/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'seznambot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'seznambot') !== false) {
         $visitor = 'SeznamBot (http://fulltext.sblog.cz/)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'dotbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'dotbot') !== false) {
         $visitor = 'DotBot (http://www.opensiteexplorer.org/dotbot)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'meanpathbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'meanpathbot') !== false) {
         $visitor = 'DotBot (http://www.opensiteexplorer.org/dotbot)';
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'spbot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'spbot') !== false) {
         $visitor = "spbot (http://OpenLinkProfiler.org/bot)";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'duckduckgo-favicons-bot') !== false) {
+    } else if (strpos(strtolower($userAgent), 'duckduckgo-favicons-bot') !== false) {
         $visitor = "DuckDuckGo-Favicons-Bot (http://duckduckgo.com)";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'baiduspider') !== false) {
+    } else if (strpos(strtolower($userAgent), 'baiduspider') !== false) {
         $visitor = "Baiduspider (http://www.baidu.com)";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'yahoo! slurp') !== false) {
+    } else if (strpos(strtolower($userAgent), 'yahoo! slurp') !== false) {
         $visitor = "Yahoo! Slurp";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'megaindex.ru') !== false) {
+    } else if (strpos(strtolower($userAgent), 'megaindex.ru') !== false) {
         $visitor = "MegaIndex.ru crawler (http://megaindex.com/crawler)";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'crazywebcrawler') !== false) {
+    } else if (strpos(strtolower($userAgent), 'crazywebcrawler') !== false) {
         $visitor = "crazywebcrawler (http://www.crazywebcrawler.com)";
-    } else if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'bot') !== false
-        || strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'crawler') !== false
-        || strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'spider') !== false
+    } else if (strpos(strtolower($userAgent), 'bot') !== false
+        || strpos(strtolower($userAgent), 'crawler') !== false
+        || strpos(strtolower($userAgent), 'spider') !== false
     ) {
-        $visitor = "unknown bot: {$_SERVER['HTTP_USER_AGENT']}";
+        $visitor = "unknown bot: {$userAgent}";
     } else {
         $visitor = 'visitor';
     }

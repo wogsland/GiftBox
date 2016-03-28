@@ -1,10 +1,10 @@
 <?php
 use \Sizzle\{
     HTML,
-    RecruitingCompany,
-    RecruitingCompanyImage,
-    RecruitingCompanyVideo,
-    RecruitingToken
+    Database\RecruitingCompany,
+    Database\RecruitingCompanyImage,
+    Database\RecruitingCompanyVideo,
+    Database\RecruitingToken
 };
 
 if (!logged_in()) {
@@ -55,7 +55,6 @@ require __DIR__.'/header.php';
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/create_recruiting.min.css">
 
     <!-- Polymer -->

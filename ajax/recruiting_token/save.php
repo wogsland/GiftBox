@@ -1,10 +1,10 @@
 <?php
 use \Sizzle\{
-    City,
+    Database\City,
     HTML,
-    RecruitingCompany,
-    RecruitingToken,
-    UserMilestone
+    Database\RecruitingCompany,
+    Database\RecruitingToken,
+    Database\UserMilestone
 };
 
 date_default_timezone_set('America/Chicago');
@@ -25,8 +25,10 @@ if (logged_in()) {
         }
 
         // Polymer bug: convert the city name into an id
-        if (isset($_POST['city_id'])) {
+        if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
             $token->city_id = City::getIdFromName($token->city_id);
+        } else {
+            $token->city_id = null;
         }
 
         // Generate a long_id if this is a new token

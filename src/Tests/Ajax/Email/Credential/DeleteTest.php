@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailCredential,
     User
 };
@@ -33,7 +33,7 @@ extends \PHPUnit_Framework_TestCase
         $User->first_name = rand();
         $User->last_name = rand();
         $User->save();
-        $user_id = $User->getId();
+        $user_id = $User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
         $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);

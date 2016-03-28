@@ -1,23 +1,24 @@
 <?php
-use \Sizzle\User;
-
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
-      case 'signup';
-      if (isset($_GET['email'])) {
-        $message = 'Thank you for signing up, '.$_GET['email'].'!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
-      } else {
-        $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
-      }
-      break;
-      case 'emailsignup';
-      $message = 'Thank you for signing up!<br/><i>We\'ll get back to you with your S!zzle job posting in 24 hours.</i>';
-      break;
-      case 'enterprise';
-      $message = 'Thanks for your interest in our Enterprise pricing!<br/><i>Look for an email from our sales team to hit your inbox soon.</i>';
-      break;
-      default:
-      $message = 'Thank you!';
+        case 'signup';
+        if (isset($_GET['email'])) {
+          $message = 'Thank you for signing up, '.$_GET['email'].'!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
+        } else {
+          $message = 'Thank you for signing up!<br/><i>Look for a confirmation email to hit your inbox soon.</i>';
+        }
+        break;
+        case 'emailsignup';
+        $message = 'Thank you for signing up!<br/><i>We\'ll get back to you with your S!zzle job posting in 24 hours.</i>';
+        break;
+        case 'enterprise';
+        $message = 'Thanks for your interest in our Enterprise pricing!<br/><i>Look for an email from our sales team to hit your inbox soon.</i>';
+        break;
+        case 'upgrade';
+        $message = 'Thanks for upgrading your account!<br/><i>We\'re glad you\'re finding our service useful and we look forward to continuing to serving you.</i>';
+        break;
+        default:
+        $message = 'Thank you!';
     }
 } else {
     $message = 'Thank you for being awesome.<br/>';

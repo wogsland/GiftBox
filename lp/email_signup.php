@@ -5,6 +5,9 @@ if (logged_in()) {
 define('TITLE', 'S!zzle - Sell the S!zzle not the Steak');
 include __DIR__.'/../header.php';
 ?>
+<meta property="og:video" content="https://www.youtube.com/watch?v=uHzRX-8jC3s" />
+<meta property="og:site_name" content="S!zzle" />
+<meta property="og:title" content="S!zzle" />
 <link rel="import" href="/components/paper-button/paper-button.html">
 <link rel="import" href="/components/paper-dialog/paper-dialog.html">
 <link rel="import" href="/components/paper-input/paper-input.html">

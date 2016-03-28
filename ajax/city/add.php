@@ -1,5 +1,5 @@
 <?php
-use Sizzle\City;
+use Sizzle\Database\City;
 
 $success = 'false';
 $data = '';

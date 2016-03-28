@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\RecruitingCompanyImage;
+use \Sizzle\Database\RecruitingCompanyImage;
 
 // collect id
 $id = escape_string($endpoint_parts[4] ?? '');

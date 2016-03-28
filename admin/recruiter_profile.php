@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     Organization,
     User
 };
@@ -75,7 +75,7 @@ body {
                 <input
                   type="hidden"
                   name="user_id"
-                  value="<?php echo $recruiter->getId() ?? '';?>">
+                  value="<?php echo $recruiter->id ?? '';?>">
               <?php }?>
             </div>
             <div class="form-group">

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Database\{
     RecruitingCompany,
     RecruitingToken,
     UserMilestone
@@ -21,7 +21,9 @@ if ($id != '') {
         ) {
             $company = new RecruitingCompany($token->recruiting_company_id);
             if (isset($company->id)) {
-                $data = get_object_vars($token);
+                //print_r($token);
+                $data = $token->toArray();
+                //print_r($data);
                 $data['company'] = $company->name;
                 $data['company_logo'] = $company->logo;
                 $data['company_description'] = $company->description;
@@ -35,10 +37,10 @@ if ($id != '') {
                 $data['company_pinterest'] = $company->pinterest;
                 $data = (object) $data;
             } else {
-                $data = $token;
+                $data = (object) $token->toArray();
             }
         } else {
-            $data = $token;
+            $data = (object) $token->toArray();
         }
         if (!logged_in()) {
             $UserMilestone = new UserMilestone($token->user_id, 'Token View By Non-User');

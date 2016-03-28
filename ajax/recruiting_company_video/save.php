@@ -1,7 +1,7 @@
 <?php
-use Sizzle\RecruitingCompany;
-use Sizzle\RecruitingCompanyVideo;
-use Sizzle\RecruitingToken;
+use Sizzle\Database\RecruitingCompany;
+use Sizzle\Database\RecruitingCompanyVideo;
+use Sizzle\Database\RecruitingToken;
 
 date_default_timezone_set('America/Chicago');
 

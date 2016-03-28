@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email;
 
-use \Sizzle\{
+use \Sizzle\Database\{
     EmailCredential,
     User
 };

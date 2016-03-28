@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\User;
+use \Sizzle\Database\User;
 
 date_default_timezone_set('America/Chicago');
 
