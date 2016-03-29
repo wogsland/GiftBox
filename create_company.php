@@ -19,8 +19,8 @@ if (isset($_GET['id'])) {
     if (isset($token_company->user_id) && $token_company->user_id != $user_id && !is_admin()) {
         header('Location: '.APP_URL.'tokens');
     }
-    $token_images = (new RecruitingCompanyImage())->getByCompanyId($token_company->id);
-    $token_videos = (new RecruitingCompanyVideo())->getByCompanyId($token_company->id);
+    $token_images = (new RecruitingCompanyImage())->getByCompanyId((int) $token_company->id);
+    $token_videos = (new RecruitingCompanyVideo())->getByCompanyId((int) $token_company->id);
 } else {
     $token_company = new RecruitingCompany();
     $token_images = array();
