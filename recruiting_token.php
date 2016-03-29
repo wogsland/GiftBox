@@ -59,6 +59,8 @@
     <link rel="import" href="components/paper-input/paper-input.html">
     <link rel="import" href="components/paper-button/paper-button.html">
     <link rel="import" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="components/paper-radio-button/paper-radio-button.html">
     <link rel="import" href="components/neon-animation/neon-animated-pages.html" async>
     <link rel="import" href="components/neon-animation/neon-animations.html" async>
     <link rel="import" href="elements/description-x-card.html" async>
@@ -237,11 +239,14 @@
                   </main>
                   <paper-dialog id="interest-dialog" modal>
                       <center><h2>Interested in this job?</h2></center>
-                      <paper-input id="email-paper-input" label="input email address" autofocus required></paper-input>
+                      <paper-radio-group selected="Yes">
+                        <paper-radio-button class="interest-radio-button" name="Yes">Yes, I'm interested</paper-radio-button><br />
+                        <paper-radio-button class="interest-radio-button" name="Maybe">Maybe</paper-radio-button><br />
+                        <paper-radio-button class="interest-radio-button" name="No">No, not for me</paper-radio-button>
+                      </paper-radio-group>
+                      <paper-input id="email-paper-input" label="email address" autofocus required></paper-input>
                       <div class="buttons">
-                        <paper-button>Yes</paper-button>
-                        <paper-button>Maybe</paper-button>
-                        <paper-button>No</paper-button>
+                        <paper-button>Submit</paper-button>
                         <paper-button dialog-dismiss on-click="_closeInterestDialog">Cancel</paper-button>
                       </div>
                   </paper-dialog>

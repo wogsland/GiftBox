@@ -401,4 +401,12 @@ i.plus-icon--overlay {
   position: fixed;
   right: 0px;
   bottom: 90px;
+  width: 333px;
+}
+.interest-radio-button {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+#email-paper-input {
+  margin-top: 0px;
 }
