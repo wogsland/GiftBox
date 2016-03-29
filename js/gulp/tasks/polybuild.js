@@ -25,7 +25,7 @@ gulp.task(
 
         // Markup processing
         not_js
-            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/$2.min.js"'))
+            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/dist/$2.min.js"'))
             .pipe(replace('"fonts/', '"/fonts/'))
             .pipe(gulp.dest(config.output.polybuild));
 

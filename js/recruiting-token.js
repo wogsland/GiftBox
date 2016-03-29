@@ -239,6 +239,17 @@ scope._onBackClick = function(event) {
 };
 
 $(document).ready(function(){
+  // initial token load (doesn't work if in background tab)
+  loadDataAndPopulateToken();
+
+  // reload the token data whenever the page comes into focus
+  window.onfocus = loadDataAndPopulateToken;
+});
+
+/**
+ * Handle loading the token data and putting it where it should go
+ */
+function loadDataAndPopulateToken() {
   path = getUrlPath();
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
     url = '/ajax/recruiting_token/get' + path[4];
@@ -539,7 +550,7 @@ $(document).ready(function(){
     window.location.href = 'https://www.gosizzle.io';
   }
   smallScreen();
-});
+}
 
 /**
  * Makes adjustments for small screens
