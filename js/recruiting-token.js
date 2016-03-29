@@ -11,7 +11,7 @@ scope._onOverviewClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -22,7 +22,7 @@ scope._onSkillsClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -33,7 +33,7 @@ scope._onValuesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -44,7 +44,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -55,18 +55,17 @@ scope._onPerksClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
-var cityId = 1;
 scope._onLocationClick = function(event) {
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 4;
+  this.$.pages.selected = 1;
   $('google-map').resize();
 };
 
@@ -77,7 +76,7 @@ scope._onImagesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 5;
+  this.$.pages.selected = 2;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_images' + path[4];
   $.post(url, '', function(data) {
@@ -131,7 +130,7 @@ scope._onVideosClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 6;
+  this.$.pages.selected = 3;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_videos' + path[4];
   $.post(url, '', function(data) {
@@ -166,96 +165,23 @@ scope._onVideosClick = function(event) {
   });
 };
 
+/**
+ * Opens the interest dialog
+ */
 scope._onInterestClick = function(event) {
-  $('.gt-info-video').remove();
-  $('#placeholder').css('background-color', 'green');
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 1;
-  $('#yes-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#yes-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#yes-content').text('Thanks for your interest!');
-      }
-    },'json');
-  });
+  $('#interest-dialog')[0].open();
 };
 
-scope._onYesClick = function(event) {
-  $('.gt-info-video').remove();
-  $('#placeholder').css('background-color', 'green');
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 1;
-  $('#yes-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#yes-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#yes-content').text('Thanks for your interest!');
-      }
-    },'json');
-  });
+/**
+ * Closes the interest dialog
+ */
+scope._closeInterestDialog = function (event) {
+  $('#interest-dialog')[0].close();
 };
 
-scope._onMaybeClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 2;
-  $('#maybe-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#maybe-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#maybe-email').val()) + '/maybe';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#maybe-content').text('Thanks for your interest!');
-      }
-    },'json');
-  });
-};
-
-scope._onNoClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 3;
-  $('#no-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#no-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#no-email').val()) + '/no';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#no-content').text("Thanks for telling us. We'll take you off our list!");
-      }
-    },'json');
-  });
-};
-
+/**
+ * Navigates back to the main page
+ */
 scope._onBackClick = function(event) {
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;

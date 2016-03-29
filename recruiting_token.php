@@ -55,6 +55,9 @@
 
     <!-- Polymer -->
     <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/paper-input/paper-input.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
     <link rel="import" href="components/paper-styles/paper-styles.html">
     <link rel="import" href="components/neon-animation/neon-animated-pages.html" async>
     <link rel="import" href="components/neon-animation/neon-animations.html" async>
@@ -62,7 +65,6 @@
     <link rel="import" href="elements/image-x-card.html" async>
     <link rel="import" href="elements/location-x-card.html" async>
     <link rel="import" href="elements/video-x-card.html" async>
-    <link rel="import" href="elements/x-card.html" async>
     <link rel="import" href="elements/x-cards-list.html">
 
   </head>
@@ -226,7 +228,6 @@
                           </div>
                         </div>
                       </section>
-                      <!-- FAB button with ripple -->
                       <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="interest-fab" on-click="_onInterestClick">
                         <i class="material-icons">thumb_up</i>
                       </button>
@@ -234,76 +235,20 @@
                       </section>
                     </div>
                   </main>
+                  <paper-dialog id="interest-dialog" modal>
+                      <center><h2>Interested in this job?</h2></center>
+                      <paper-input id="email-paper-input" label="input email address" autofocus required></paper-input>
+                      <div class="buttons">
+                        <paper-button>Yes</paper-button>
+                        <paper-button>Maybe</paper-button>
+                        <paper-button>No</paper-button>
+                        <paper-button dialog-dismiss on-click="_closeInterestDialog">Cancel</paper-button>
+                      </div>
+                  </paper-dialog>
                 </div>
               </div>
             </div>
           </x-cards-list>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">Yes</h2>
-              <div id="yes-content">
-                <p>
-                  I'm interested in this position. Tell me more.
-                </p>
-                <form id="yes-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="yes-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="yes-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">Maybe</h2>
-              <div id="maybe-content">
-                <p>
-                  I might be interested in this position. Tell me more.
-                </p>
-                <form id="maybe-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="maybe-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="maybe-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">No</h2>
-              <div id="no-content">
-                <p>
-                  No, I'm not interested right now.
-                </p>
-                <form id="no-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="no-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="no-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
           <location-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK

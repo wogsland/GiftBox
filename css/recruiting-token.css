@@ -391,9 +391,14 @@ i.plus-icon--overlay {
   cursor: pointer;
 }
 #interest-fab {
-    position: fixed;
-    background-color: rgb(25, 118, 210);
-    right: 30px;
-    bottom: 30px;
-    z-index: 999;
+  position: fixed;
+  background-color: rgb(25, 118, 210);
+  right: 30px;
+  bottom: 30px;
+  z-index: 999;
+}
+#interest-dialog {
+  position: fixed;
+  right: 0px;
+  bottom: 90px;
 }
