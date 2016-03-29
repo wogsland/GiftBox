@@ -226,23 +226,15 @@
                           </div>
                         </div>
                       </section>
+                      <!-- FAB button with ripple -->
+                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="interest-fab" on-click="_onInterestClick">
+                        <i class="material-icons">thumb_up</i>
+                      </button>
                       <section class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
                   </main>
                 </div>
-              </div>
-            </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
               </div>
             </div>
           </x-cards-list>

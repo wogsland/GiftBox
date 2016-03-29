@@ -166,6 +166,29 @@ scope._onVideosClick = function(event) {
   });
 };
 
+scope._onInterestClick = function(event) {
+  $('.gt-info-video').remove();
+  $('#placeholder').css('background-color', 'green');
+  this.$.list.sharedElements = {
+    'ripple': event.target,
+    'reverse-ripple': event.target
+  };
+  this.$.pages.selected = 1;
+  $('#yes-email-form').submit(function(e) {
+    e.preventDefault();
+  });
+  $('#yes-submit').click(function( event ) {
+    event.preventDefault();
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('#yes-content').text('Thanks for your interest!');
+      }
+    },'json');
+  });
+};
+
 scope._onYesClick = function(event) {
   $('.gt-info-video').remove();
   $('#placeholder').css('background-color', 'green');
