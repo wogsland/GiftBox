@@ -87,6 +87,18 @@ class GetImagesTest
     $query = "SELECT * FROM city_image WHERE `city_id` = '$city_id'";
     $result = execute_query($query);
     $this->assertEquals(4, $result->num_rows);
+
+    // lets grab one of the urls and make sure the image is public
+    ob_start();
+    $ch2 = curl_init();
+    curl_setopt($ch2, CURLOPT_URL, $return->data[0]);
+//    curl_setopt ($ch2, CURLOPT_HEADER, true);
+    $response = curl_exec($ch2);
+    $this->assertEquals(true, $response);
+    $info = curl_getinfo($ch2);
+    ob_end_clean();
+    $this->assertEquals(200, $info['http_code']);
+    $this->assertEquals('image', substr($info['content_type'],0,5));
   }
 
   /**
