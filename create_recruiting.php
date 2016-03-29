@@ -256,9 +256,9 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="basic-info" heading="Additional Info">
                     <div class="field-container">
-                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required)); ?>
-                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities)); ?>
-                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks)); ?>
+                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required ?? '')); ?>
+                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities ?? '')); ?>
+                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks ?? '')); ?>
                     </div>
                 </paper-card>
                 <?php if(is_admin()) { ?>
