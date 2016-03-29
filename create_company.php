@@ -190,8 +190,8 @@ require __DIR__.'/header.php';
                         <div class="field-container">
                             <?php paper_text('Company Name', 'company', $token_company->name); ?>
                             <?php //paper_text('Company Website', 'company-website', $token_company->website); ?>
-                            <?php paper_textarea('Company Description', 'company-description', HTML::from($token_company->description)); ?>
-                            <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values)); ?>
+                            <?php paper_textarea('Company Description', 'company-description', HTML::from($token_company->description ?? '')); ?>
+                            <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values ?? '')); ?>
                         </div>
                     </paper-card>
                     <paper-card id="company-images" heading="Company Images">
@@ -352,7 +352,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="use-existing-company-form">
             <div class="field-container">
             <?php
-                $companies = RecruitingToken::getUserCompanies($user_id);
+                $companies = RecruitingToken::getUserCompanies((int) $user_id);
                 $options = array();
                 foreach ($companies as $co) {
                     $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';

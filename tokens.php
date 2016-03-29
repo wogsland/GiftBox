@@ -31,7 +31,7 @@ require __DIR__.'/header.php';
         </thead>
         <tbody>
             <?php
-            $responses = RecruitingToken::getUserTokens($user_id);
+            $responses = RecruitingToken::getUserTokens((int) $user_id);
             foreach ($responses as $response) {
                 echo '<tr>';
                 echo "<td align=left>";

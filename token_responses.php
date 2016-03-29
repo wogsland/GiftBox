@@ -32,7 +32,7 @@ require __DIR__.'/header.php';
         <tbody>
             <?php
             $RecruitingTokenResponse = new RecruitingTokenResponse();
-            $responses = $RecruitingTokenResponse->get($user_id);
+            $responses = $RecruitingTokenResponse->get((int) $user_id);
             foreach ($responses as $response) {
                 echo '<tr>';
                 echo "<td><a href=\"/token/recruiting/{$response['long_id']}\">{$response['job_title']}</a><i hidden>{$response['long_id']}</i></td>";

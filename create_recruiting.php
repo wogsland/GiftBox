@@ -240,7 +240,7 @@ require __DIR__.'/header.php';
                     <div class="field-container">
                         <?php
                         paper_text('Job Title', 'job-title', $token->job_title, true);
-                        paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
+                        paper_textarea('Job Description', 'job-description', HTML::from($token->job_description ?? ''), true);
                         ?>
                       <paper-input
                         value="<?= $city_name?>"
@@ -318,7 +318,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="open-token-form">
             <div class="field-container">
             <?php
-                $user_tokens = RecruitingToken::getUserTokens($user_id);
+                $user_tokens = RecruitingToken::getUserTokens((int) $user_id);
                 $tokens = array();
                 foreach ($user_tokens as $tkn) {
                     $tokenCompanyName = ''!=$tkn->company ? $tkn->company : 'Unnamed Company';
