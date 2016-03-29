@@ -81,6 +81,7 @@
     <li><a href="/terms">Terms and Conditions</a></li>
     <li><a href="/privacy">Privacy Policy</a></li>
     <li><a href="/support">Contact Support</a></li>
+    <li><a href="/affiliates">Affiliate Program</a></li>
   </ul>
 
   <!-- COPYRIGHT TEXT -->

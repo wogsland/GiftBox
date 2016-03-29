@@ -44,6 +44,14 @@ class Route
             case 'about':
                 include __DIR__.'/../about.php';
                 break;
+            case 'affiliates':
+                include __DIR__.'/../affiliates.php';
+                break;
+            case 'affiliate':
+            case 'affiliate-program':
+            case 'affiliateprogram':
+                header('Location: /affiliates', true, 301);
+                break;
             case 'attribution':
                 include __DIR__.'/../attribution.php';
                 break;
