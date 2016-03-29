@@ -1,6 +1,8 @@
 <?php
-use Sizzle\Database\RecruitingTokenResponse;
-use Sizzle\Database\RecruitingToken;
+use Sizzle\Database\{
+    RecruitingTokenResponse,
+    RecruitingToken
+};
 
 // collect info from url
 $recruiting_token_id = $endpoint_parts[4] ?? '';
@@ -19,7 +21,7 @@ if ($id > 0) {
 $recruiting_token = new RecruitingToken($recruiting_token_id, 'long_id');
 $user = $recruiting_token->getUser();
 $company = $recruiting_token->getCompany();
-if (strcmp($user->receive_token_notifications, 'Y') == 0) {
+if (is_object($user) && isset($user->receive_token_notifications) && strcmp($user->receive_token_notifications, 'Y') == 0) {
     $company_name = empty($company->name) ? "No Company Name" : $company->name;
     $email_message = file_get_contents(__DIR__.'/../../email_templates/token_response_notification.inline.html');
     $email_message = str_replace('{{company_name}}', $company_name, $email_message);
