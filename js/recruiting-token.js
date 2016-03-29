@@ -173,6 +173,22 @@ scope._onInterestClick = function(event) {
 };
 
 /**
+ * Submits interest info
+ */
+scope._submitInterest = function (event) {
+  event.preventDefault();
+  url = '/ajax/recruiting_token_response/create' + path[4];
+  url += '/' + encodeURIComponent($('#email-paper-input').val()) + '/yes';
+  $.post(url, '', function(data) {
+    if (data.data.id !== undefined & data.data.id > 0) {
+      $('#interest-form').text('Thanks for your interest!');
+      $('#submit-interest-button').remove();
+      $('#dismiss-interest-button').text('DISMISS');
+    }
+  },'json');
+};
+
+/**
  * Closes the interest dialog
  */
 scope._closeInterestDialog = function (event) {

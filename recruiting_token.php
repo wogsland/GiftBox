@@ -238,16 +238,33 @@
                     </div>
                   </main>
                   <paper-dialog id="interest-dialog" modal>
-                      <center><h2>Interested in this job?</h2></center>
-                      <paper-radio-group selected="Yes">
-                        <paper-radio-button class="interest-radio-button" name="Yes">Yes, I'm interested</paper-radio-button><br />
-                        <paper-radio-button class="interest-radio-button" name="Maybe">Maybe</paper-radio-button><br />
-                        <paper-radio-button class="interest-radio-button" name="No">No, not for me</paper-radio-button>
-                      </paper-radio-group>
-                      <paper-input id="email-paper-input" label="email address" autofocus required></paper-input>
+                      <div id="interest-form">
+                        <center><h2>Interested in this job?</h2></center>
+                        <paper-radio-group selected="Yes">
+                          <paper-radio-button class="interest-radio-button" name="Yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No">No, not for me</paper-radio-button>
+                        </paper-radio-group>
+                        <paper-input
+                          type="email"
+                          id="email-paper-input"
+                          label="email address"
+                          autofocus
+                          required>
+                        </paper-input>
+                      </div>
                       <div class="buttons">
-                        <paper-button>Submit</paper-button>
-                        <paper-button dialog-dismiss on-click="_closeInterestDialog">Cancel</paper-button>
+                        <paper-button
+                          id="submit-interest-button"
+                          on-click="_submitInterest">
+                          Submit
+                        </paper-button>
+                        <paper-button
+                          id="dismiss-interest-button"
+                          dialog-dismiss
+                          on-click="_closeInterestDialog">
+                          Cancel
+                        </paper-button>
                       </div>
                   </paper-dialog>
                 </div>
