@@ -214,6 +214,12 @@ $(document).ready(function(){
   // initial token load (doesn't work if in background tab)
   loadDataAndPopulateToken();
 
+  // display the response form after 10 seconds
+  setTimeout(function(){
+    $('#interest-dialog')[0].open();
+  },
+  10000);
+
   // reload the token data whenever the page comes into focus
   window.onfocus = loadDataAndPopulateToken;
 });
