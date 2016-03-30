@@ -1,4 +1,5 @@
 <?php
+use Sizzle\Service\MandrillEmail;
 
 $success = 'false';
 $data = '';
@@ -8,11 +9,11 @@ $email = filter_var($email, FILTER_VALIDATE_EMAIL) ? $email : false;
 $localPath = $_FILES['listFile']['tmp_name'] ?? false;
 if ($fileName && $localPath && $email) {
     $fileData = base64_encode(file_get_contents($localPath));
-    $mandrill = new Mandrill(MANDRILL_API_KEY);
+    $mandrill = new MandrillEmail();
     $message = "Robbie! There's a new email signup!<br /><br />";
     $message .= $email . " has signed up!<br /><br />";
     $message .= 'Their job description is attached.';
-    $mandrill->messages->send(
+    $mandrill->send(
         array(
             'to'=>array(array('email'=>'token@gosizzle.io')),
             'from_email'=>'emailsignup@gosizzle.io',
