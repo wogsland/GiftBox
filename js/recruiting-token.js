@@ -184,6 +184,7 @@ scope._submitInterest = function (event) {
       $('#interest-form').text('Thanks for your interest!');
       $('#submit-interest-button').remove();
       $('#dismiss-interest-button').text('DISMISS');
+      $('#interest-fab').remove();
     }
   },'json');
 };
