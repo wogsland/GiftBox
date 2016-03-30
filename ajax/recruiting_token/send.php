@@ -4,6 +4,7 @@ use \Sizzle\{
     Database\RecruitingToken,
     Database\User
 };
+use Sizzle\Service\MandrillEmail;
 
 if (logged_in() && is_admin()) {
     $vars = ['user_id', 'token_id'];
@@ -40,8 +41,8 @@ if (logged_in() && is_admin()) {
             $message .=' or <a href="https://www.facebook.com/sharer/sharer.php?u='.$encodedLink.'">Facebook</a>.';
             $message .='<br /><br />';
             $email_message = str_replace('{{message}}', $message, $email_message);
-            $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(
+            $mandrill = new MandrillEmail();
+            $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
                     'from_email'=>'token@gosizzle.io',

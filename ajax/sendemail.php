@@ -2,6 +2,8 @@
 use Sizzle\Database\{
     Support
 };
+use Sizzle\Service\MandrillEmail;
+
 $status = 'ERROR';
 if (isset($_POST['email'], $_POST['message'])
     && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
@@ -18,8 +20,8 @@ if (isset($_POST['email'], $_POST['message'])
     } else {
         $to = 'support@gosizzle.io';
     }
-    $mandrill = new Mandrill(MANDRILL_API_KEY);
-    $mandrill->messages->send(
+    $mandrill = new MandrillEmail();
+    $mandrill->send(
         array(
             'to'=>array(array('email'=>$to)),
             'from_email'=>'support@gosizzle.io',
