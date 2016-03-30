@@ -169,27 +169,33 @@ scope._onVideosClick = function(event) {
  * Opens the interest dialog
  */
 scope._onInterestClick = function(event) {
-  $('#interest-dialog')[0].open();
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.open();
+  });
 };
 
 /**
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  var formIndex = 0;
+  if ($(event.path[8]).is('location-x-card')) {
+    formIndex = 1;
+  }
   event.preventDefault();
-  if ($('#email-paper-input')[0].validate()) {
-    $('#submit-interest-button').addClass('disable-clicks');
+  if ($('.email-paper-input')[formIndex].validate()) {
+    $('.submit-interest-button').addClass('disable-clicks');
     url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#email-paper-input').val());
+    url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
     url += '/' + $('#interest-response')[0].selectedItem.value;
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
-        $('#interest-form').text('Thanks for your interest!');
-        $('#submit-interest-button').remove();
-        $('#dismiss-interest-button').text('DISMISS');
-        $('#interest-fab').remove();
+        $('.interest-form').text('Thanks for your interest!');
+        $('.submit-interest-button').remove();
+        $('.dismiss-interest-button').text('DISMISS');
+        $('.interest-fab').remove();
       } else {
-        $('#submit-interest-button').removeClass('disable-clicks');
+        $('.submit-interest-button').removeClass('disable-clicks');
       }
     },'json');
   }
@@ -199,7 +205,9 @@ scope._submitInterest = function (event) {
  * Closes the interest dialog
  */
 scope._closeInterestDialog = function (event) {
-  $('#interest-dialog')[0].close();
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.close();
+  });
 };
 
 /**
@@ -213,12 +221,6 @@ scope._onBackClick = function(event) {
 $(document).ready(function(){
   // initial token load (doesn't work if in background tab)
   loadDataAndPopulateToken();
-
-  // display the response form after 10 seconds
-  setTimeout(function(){
-    $('#interest-dialog')[0].open();
-  },
-  10000);
 
   // reload the token data whenever the page comes into focus
   window.onfocus = loadDataAndPopulateToken;
@@ -625,7 +627,15 @@ function handleAjaxRecruitingTokenGet(data) {
 function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
   if (data.data !== undefined && data.data.allowed !== undefined) {
     if ('false' == data.data.allowed) {
-      $('#interested-row').hide();
+      $('.interest-fab').hide();
+    } else {
+      // display the response form after 10 seconds
+      setTimeout(function(){
+        $('.interest-dialog').each(function (i, dialog){
+          dialog.open();
+        });
+      },
+      10000);
     }
   }
 }

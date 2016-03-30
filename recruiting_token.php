@@ -230,15 +230,15 @@
                           </div>
                         </div>
                       </section>
-                      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" id="interest-fab" on-click="_onInterestClick">
-                        <i class="material-icons">thumb_up</i>
-                      </button>
                       <section class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
                   </main>
-                  <paper-dialog id="interest-dialog" modal>
-                      <div id="interest-form">
+                  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                    <i class="material-icons">thumb_up</i>
+                  </button>
+                  <paper-dialog class="interest-dialog" modal>
+                      <div class="interest-form">
                         <center><h2>Interested in this job?</h2></center>
                         <paper-radio-group selected="Yes" id="interest-response">
                           <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
@@ -247,7 +247,7 @@
                         </paper-radio-group>
                         <paper-input
                           type="email"
-                          id="email-paper-input"
+                          class="email-paper-input"
                           label="email address"
                           autofocus
                           error-message="Please input a valid email"
@@ -256,18 +256,19 @@
                       </div>
                       <div class="buttons">
                         <paper-button
-                          id="submit-interest-button"
+                          class="submit-interest-button"
                           on-click="_submitInterest">
                           Submit
                         </paper-button>
                         <paper-button
-                          id="dismiss-interest-button"
+                          class="dismiss-interest-button"
                           dialog-dismiss
                           on-click="_closeInterestDialog">
                           Cancel
                         </paper-button>
                       </div>
                   </paper-dialog>
+                  <!--<div class="arrow-down"></div>-->
                 </div>
               </div>
             </div>
@@ -276,17 +277,41 @@
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
-              </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                <i class="material-icons">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal>
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input
+                      type="email"
+                      class="email-paper-input"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="submit-interest-button"
+                      on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-interest-button"
+                      dialog-dismiss
+                      on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </location-x-card>
           <image-x-card>
