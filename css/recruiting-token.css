@@ -410,3 +410,6 @@ i.plus-icon--overlay {
 #email-paper-input {
   margin-top: 0px;
 }
+.disable-clicks {
+    pointer-events: none;
+}

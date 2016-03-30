@@ -177,16 +177,22 @@ scope._onInterestClick = function(event) {
  */
 scope._submitInterest = function (event) {
   event.preventDefault();
-  url = '/ajax/recruiting_token_response/create' + path[4];
-  url += '/' + encodeURIComponent($('#email-paper-input').val()) + '/yes';
-  $.post(url, '', function(data) {
-    if (data.data.id !== undefined & data.data.id > 0) {
-      $('#interest-form').text('Thanks for your interest!');
-      $('#submit-interest-button').remove();
-      $('#dismiss-interest-button').text('DISMISS');
-      $('#interest-fab').remove();
-    }
-  },'json');
+  if ($('#email-paper-input')[0].validate()) {
+    $('#submit-interest-button').addClass('disable-clicks');
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#email-paper-input').val());
+    url += '/' + $('#interest-response')[0].selectedItem.value;
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('#interest-form').text('Thanks for your interest!');
+        $('#submit-interest-button').remove();
+        $('#dismiss-interest-button').text('DISMISS');
+        $('#interest-fab').remove();
+      } else {
+        $('#submit-interest-button').removeClass('disable-clicks');
+      }
+    },'json');
+  }
 };
 
 /**

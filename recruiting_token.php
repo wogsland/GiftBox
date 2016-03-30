@@ -240,16 +240,17 @@
                   <paper-dialog id="interest-dialog" modal>
                       <div id="interest-form">
                         <center><h2>Interested in this job?</h2></center>
-                        <paper-radio-group selected="Yes">
-                          <paper-radio-button class="interest-radio-button" name="Yes">Yes, I'm interested</paper-radio-button><br />
-                          <paper-radio-button class="interest-radio-button" name="Maybe">Maybe</paper-radio-button><br />
-                          <paper-radio-button class="interest-radio-button" name="No">No, not for me</paper-radio-button>
+                        <paper-radio-group selected="Yes" id="interest-response">
+                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                         </paper-radio-group>
                         <paper-input
                           type="email"
                           id="email-paper-input"
                           label="email address"
                           autofocus
+                          error-message="Please input a valid email"
                           required>
                         </paper-input>
                       </div>
