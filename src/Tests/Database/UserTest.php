@@ -12,6 +12,7 @@ class UserTest
 extends \PHPUnit_Framework_TestCase
 {
     use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\Organization;
 
     /**
      * Requires the util.php file of functions
@@ -143,6 +144,47 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the getRecruiterProfile method.
+     */
+    public function testGetRecruiterProfile()
+    {
+        //fail on nonexistant user
+        $user = new User(-1);
+        $this->assertTrue(is_array($user->getRecruiterProfile()));
+        $this->assertTrue(empty($user->getRecruiterProfile()));
+
+        // should work for any user
+        $user2 = $this->createUser();
+        $profile2 = $user2->getRecruiterProfile();
+        $this->assertFalse(empty($profile2));
+        $this->assertEquals($user2->first_name, $profile2['first_name']);
+        $this->assertEquals($user2->last_name, $profile2['last_name']);
+        $this->assertEquals(null, $profile2['position']);
+        $this->assertEquals(null, $profile2['linkedin']);
+        $this->assertEquals(null, $profile2['website']);
+        $this->assertEquals(null, $profile2['about']);
+        $this->assertEquals(null, $profile2['face_image']);
+        $this->assertEquals(null, $profile2['organization']);
+
+        // user with a complete profile
+        $org = $this->createOrganization();
+        $org->website = 'http://awesome.'.rand().'.io';
+        $user3 = $this->createUser();
+        $user3->organization_id = $org->id;
+        $user3->save();
+        $profile3 = $user3->getRecruiterProfile();
+        $this->assertFalse(empty($profile3));
+        $this->assertEquals($user3->first_name, $profile3['first_name']);
+        $this->assertEquals($user3->last_name, $profile3['last_name']);
+        $this->assertEquals($user3->position, $profile3['position']);
+        $this->assertEquals($user3->linkedin, $profile3['linkedin']);
+        $this->assertEquals($org->website, $profile3['website']);
+        $this->assertEquals($user3->about, $profile3['about']);
+        $this->assertEquals($user3->face_image, $profile3['face_image']);
+        $this->assertEquals($org->name, $profile3['organization']);
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()
@@ -152,5 +194,6 @@ extends \PHPUnit_Framework_TestCase
             execute($sql);
         }
         $this->deleteUsers();
+        $this->deleteOrganizations();
     }
 }

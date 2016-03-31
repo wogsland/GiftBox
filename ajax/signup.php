@@ -15,7 +15,7 @@ $response['app_root'] = '/';
 
 $vars = array('signup_email', 'first_name', 'last_name', 'signup_password', 'reg_type');
 foreach ($vars as $var) {
-    $$var = escape_string($_POST[$var] ?? '');
+    $$var = $_POST[$var] ?? '';
 }
 
 if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
