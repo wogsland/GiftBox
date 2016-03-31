@@ -28,6 +28,13 @@ class User extends \Sizzle\DatabaseEntity
     protected $allow_token_responses;
     protected $receive_token_notifications;
 
+    /**
+     * Sees if an email corresponds to a user
+     *
+     * @param string $email_address - email address of potential user
+     *
+     * @return boolean - does the user exist in the database??
+     */
     public static function exists(string $email_address)
     {
         $exists = false;
@@ -73,6 +80,11 @@ class User extends \Sizzle\DatabaseEntity
         return $user;
     }
 
+    /**
+     * Updates the access token of the user
+     *
+     * @param string $token - the value of the new access token
+     */
     public function update_token(string $token = null)
     {
         if ($token !== null) {
@@ -81,6 +93,9 @@ class User extends \Sizzle\DatabaseEntity
         }
     }
 
+    /**
+     * Saves the user information from the class properties
+     */
     public function save()
     {
         if (!isset($this->organization_id)) {
@@ -129,4 +144,26 @@ class User extends \Sizzle\DatabaseEntity
         }
     }
 
+    /**
+     * Activates a new user
+     *
+     * @param string $key - the value of the activation key
+     *
+     * @return boolean - was the $key for that user who is now activated
+     */
+    public function activate(string $key)
+    {
+        $key = escape_string($key);
+        $rows_affected = update("UPDATE user
+                                 SET activation_key = NULL
+                                 WHERE id = '{$this->id}'
+                                 AND activation_key = '$key'
+                                 LIMIT 1");
+        if ($rows_affected != 1) {
+            return false;
+        } else {
+            $UserMilestone = new UserMilestone($this->id, 'Confirm Email');
+            return true;
+        }
+    }
 }

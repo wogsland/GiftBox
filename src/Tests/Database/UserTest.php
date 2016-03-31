@@ -11,6 +11,8 @@ use \Sizzle\Database\User;
 class UserTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,6 +30,14 @@ extends \PHPUnit_Framework_TestCase
         $user = new User();
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertFalse(isset($user->email_address));
+    }
+
+    /**
+     * Tests the exists method.
+     */
+    public function testExists()
+    {
+        $this->markTestIncomplete();
     }
 
     /**
@@ -88,5 +98,59 @@ extends \PHPUnit_Framework_TestCase
         // $key garbage
         $user = User::fetch($email, 'garbage');
         $this->assertFalse(isset($user));
+    }
+
+    /**
+     * Tests the update_token method.
+     */
+    public function testUpdateToken()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Tests the save method.
+     */
+    public function testSave()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Tests the activate method.
+     */
+    public function testActivate()
+    {
+        //create user that needs activation
+        $user = $this->createUser();
+        $user->activation_key = 'v5y3q'.rand().'nachoes';
+        $user->save();
+        $this->assertTrue($user->activate($user->activation_key));
+        $this->assertFalse($user->activate($user->activation_key)); // second time should fail
+
+        // create user that doens't need activation
+        $user2 = $this->createUser();
+        $key = 'jrhgksv'.rand().'gorilla';
+        $this->assertFalse($user2->activate($key));
+
+        // create user that needs activation, but use bad key
+        $user3 = $this->createUser();
+        $user3->activation_key = 'bsu4v65'.rand().'pecan';
+        $user3->save();
+        $key = '4ic7tq346b'.rand().'cashew';
+        $this->assertFalse($user3->activate($key));
+        $this->assertTrue($user3->activate($user3->activation_key)); // but true key should still work
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        foreach($this->users as $id) {
+            $sql = "DELETE FROM user_milestone WHERE user_id = '$id'";
+            execute($sql);
+        }
+        $this->deleteUsers();
     }
 }

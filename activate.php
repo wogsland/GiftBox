@@ -5,25 +5,14 @@ use \Sizzle\Database\{
     UserMilestone
 };
 
-$user_id = (int) ($_GET['uid'] ?? 0);
-$key = escape_string($_GET['key'] ?? '');
-$_SESSION['activation_key'] = $key;
 $type = strtolower($_GET['type'] ?? '');
 
-// verify user exists
-try {
-    $rows_affected = update("UPDATE user
-                             SET activation_key = NULL
-                             WHERE id = '$user_id'
-                             AND activation_key = '$key'
-                             LIMIT 1");
-    if ($rows_affected != 1) {
-        throw new Exception('Update failed');
-    }
-    $UserMilestone = new UserMilestone($user_id, 'Confirm Email');
-    $user = new User($user_id);
+// activate user
+$user = new User($_GET['uid'] ?? 0);
+if (isset($user->email_address) && $user->activate($_GET['key'] ?? '')) {
+    $_SESSION['activation_key'] = $_GET['key'];
     $_SESSION['email'] = $user->email_address;
-} catch (Exception $e) {
+} else {
     $type = 'fail';
 }
 
@@ -37,10 +26,9 @@ switch ($type) {
     // show create password page
     $message = $message ?? 'Please set a password before logging in.';
     require_once __DIR__.'/password_set.php';
-    //echo 'signup with passwrod here';
-    //print_r($_SESSION);
     break;
     case '':
+    // web only activation where user's already set up password
     $_SESSION['user_id'] = $user->id;
     $_SESSION['admin'] = $user->admin;
     $_SESSION['app_root'] = '/';
