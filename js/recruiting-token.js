@@ -1,4 +1,5 @@
 var scope = document.querySelector('template[is="dom-bind"]');
+var presentedInterestPopup = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -11,7 +12,7 @@ scope._onOverviewClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -22,7 +23,7 @@ scope._onSkillsClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -33,7 +34,7 @@ scope._onValuesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -44,7 +45,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -55,18 +56,17 @@ scope._onPerksClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
-var cityId = 1;
 scope._onLocationClick = function(event) {
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 4;
+  this.$.pages.selected = 1;
   $('google-map').resize();
 };
 
@@ -77,7 +77,7 @@ scope._onImagesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 5;
+  this.$.pages.selected = 2;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_images' + path[4];
   $.post(url, '', function(data) {
@@ -131,7 +131,7 @@ scope._onVideosClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 6;
+  this.$.pages.selected = 3;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_videos' + path[4];
   $.post(url, '', function(data) {
@@ -166,73 +166,60 @@ scope._onVideosClick = function(event) {
   });
 };
 
-scope._onYesClick = function(event) {
-  $('.gt-info-video').remove();
-  $('#placeholder').css('background-color', 'green');
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 1;
-  $('#yes-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#yes-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#yes-content').text('Thanks for your interest!');
-      }
-    },'json');
+/**
+ * Opens the interest dialog
+ */
+scope._onInterestClick = function(event) {
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.open();
   });
 };
 
-scope._onMaybeClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 2;
-  $('#maybe-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#maybe-submit').click(function( event ) {
-    event.preventDefault();
+/**
+ * Submits interest info
+ */
+scope._submitInterest = function (event) {
+  var formIndex = 0;
+  if ($(event.path[8]).is('location-x-card')) {
+    formIndex = 1;
+  } else if ($(event.path[5]).is('image-x-card')) {
+    formIndex = 2;
+  } else if ($(event.path[5]).is('video-x-card')) {
+    formIndex = 3;
+  } else if ($(event.path[5]).is('description-x-card')) {
+    formIndex = 4;
+  } else
+  event.preventDefault();
+  if ($('.email-paper-input')[formIndex].validate()) {
+    $('.submit-interest-button').addClass('disable-clicks');
     url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#maybe-email').val()) + '/maybe';
+    url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
+    url += '/' + $('#interest-response')[0].selectedItem.value;
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
-        $('#maybe-content').text('Thanks for your interest!');
+        $('.interest-form').text('Thanks for your interest!');
+        $('.submit-interest-button').remove();
+        $('.dismiss-interest-button').text('DISMISS');
+        $('.interest-fab').remove();
+      } else {
+        $('.submit-interest-button').removeClass('disable-clicks');
       }
     },'json');
+  }
+};
+
+/**
+ * Closes the interest dialog
+ */
+scope._closeInterestDialog = function (event) {
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.close();
   });
 };
 
-scope._onNoClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 3;
-  $('#no-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#no-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#no-email').val()) + '/no';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#no-content').text("Thanks for telling us. We'll take you off our list!");
-      }
-    },'json');
-  });
-};
-
+/**
+ * Navigates back to the main page
+ */
 scope._onBackClick = function(event) {
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
@@ -647,7 +634,18 @@ function handleAjaxRecruitingTokenGet(data) {
 function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
   if (data.data !== undefined && data.data.allowed !== undefined) {
     if ('false' == data.data.allowed) {
-      $('#interested-row').hide();
+      $('.interest-fab').hide();
+    } else {
+      // display the response form once after 10 seconds
+      if (!presentedInterestPopup) {
+        setTimeout(function(){
+          $('.interest-dialog').each(function (i, dialog){
+            dialog.open();
+          });
+        },
+        10000);
+        presentedInterestPopup = true;
+      }
     }
   }
 }
