@@ -1,4 +1,5 @@
 var scope = document.querySelector('template[is="dom-bind"]');
+var presentedInterestPopup = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -181,7 +182,13 @@ scope._submitInterest = function (event) {
   var formIndex = 0;
   if ($(event.path[8]).is('location-x-card')) {
     formIndex = 1;
-  }
+  } else if ($(event.path[5]).is('image-x-card')) {
+    formIndex = 2;
+  } else if ($(event.path[5]).is('video-x-card')) {
+    formIndex = 3;
+  } else if ($(event.path[5]).is('description-x-card')) {
+    formIndex = 4;
+  } else
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
@@ -629,13 +636,16 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
     } else {
-      // display the response form after 10 seconds
-      setTimeout(function(){
-        $('.interest-dialog').each(function (i, dialog){
-          dialog.open();
-        });
-      },
-      10000);
+      // display the response form once after 10 seconds
+      if (!presentedInterestPopup) {
+        setTimeout(function(){
+          $('.interest-dialog').each(function (i, dialog){
+            dialog.open();
+          });
+        },
+        10000);
+        presentedInterestPopup = true;
+      }
     }
   }
 }
