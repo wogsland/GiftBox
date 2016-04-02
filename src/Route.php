@@ -206,11 +206,11 @@ class Route
                     ) {
                         // don't display in native android browser
                         include __DIR__.'/../get_chrome.html';
-                    } else if(strpos($userAgent, 'LinkedInBot') !== false) {
+                    } else if (strpos($userAgent, 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/LinkedInBot.php';
-                    } else if(strpos($userAgent, 'facebookexternalhit') !== false) {
+                    } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
                         // display simplified form on Facebook
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';

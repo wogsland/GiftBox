@@ -18,7 +18,7 @@ trait RecruitingToken
     /**
      * Create a RecruitingToken for testing
      *
-     * @param int $user_id      - (optional) user id of token owner
+     * @param int   $user_id    - (optional) user id of token owner
      * @param mixed $company_id - (optional) company id of for the token or 'none'
      *
      * @return RecruitingToken - the new RecruitingToken
@@ -51,7 +51,7 @@ trait RecruitingToken
      */
     protected function deleteRecruitingTokens()
     {
-        foreach($this->recruitingTokens as $id) {
+        foreach ($this->recruitingTokens as $id) {
             $sql = "DELETE FROM recruiting_token WHERE id = '$id'";
             execute($sql);
         }

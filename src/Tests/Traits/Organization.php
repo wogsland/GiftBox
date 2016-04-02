@@ -30,7 +30,7 @@ trait Organization
      */
     protected function deleteOrganizations()
     {
-        foreach($this->organizations as $id) {
+        foreach ($this->organizations as $id) {
             $sql = "DELETE FROM organization WHERE id = '$id'";
             execute($sql);
         }

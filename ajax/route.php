@@ -1,4 +1,8 @@
 <?php
+/**
+ * Routes the AJAX reuqest
+ */
+
 // Parse URI
 $pieces = explode('?', $_SERVER['REQUEST_URI']);
 $endpoint = $pieces[0];

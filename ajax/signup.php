@@ -13,7 +13,13 @@ $response['status'] = "ERROR";
 $response['message'] = "Unable to register at this time.";
 $response['app_root'] = '/';
 
-$vars = array('signup_email', 'first_name', 'last_name', 'signup_password', 'reg_type');
+$vars = array(
+    'signup_email',
+    'first_name',
+    'last_name',
+    'signup_password',
+    'reg_type'
+);
 foreach ($vars as $var) {
     $$var = $_POST[$var] ?? '';
 }

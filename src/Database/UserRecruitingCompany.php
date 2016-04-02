@@ -23,9 +23,9 @@ class UserRecruitingCompany extends \Sizzle\DatabaseEntity
      * Creates a relationship between a user and a company and sets the class
      * properties
      *
-     * @param int $user_id - id of the user
-     * @param int $recruiting_company_id - id of the recruiting_company
-     * @param string $permissions - (optional) Owner, Edit, or Read Only
+     * @param int    $user_id               - id of the user
+     * @param int    $recruiting_company_id - id of the recruiting_company
+     * @param string $permissions           - (optional) Owner, Edit, or Read Only
      *
      * @return mixed - false if fail or id if success
      */

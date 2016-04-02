@@ -40,7 +40,7 @@ trait RecruitingCompany
      */
     protected function deleteRecruitingCompanies()
     {
-        foreach($this->recruitingCompanies as $id) {
+        foreach ($this->recruitingCompanies as $id) {
             $sql = "DELETE FROM recruiting_company WHERE id = '$id'";
             execute($sql);
         }

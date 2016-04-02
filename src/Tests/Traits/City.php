@@ -51,7 +51,7 @@ trait City
      */
     protected function deleteCities()
     {
-        foreach($this->cities as $id) {
+        foreach ($this->cities as $id) {
             $sql = "DELETE FROM city WHERE id = '$id'";
             execute($sql);
         }

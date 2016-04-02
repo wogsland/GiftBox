@@ -13,7 +13,7 @@ extends \PHPUnit_Framework_TestCase
         \Sizzle\Tests\Traits\User {
             \Sizzle\Tests\Traits\User::createUser insteadof \Sizzle\Tests\Traits\RecruitingToken;
             \Sizzle\Tests\Traits\User::deleteUsers insteadof \Sizzle\Tests\Traits\RecruitingToken;
-        }
+    }
 
     /**
      * Requires the util.php file of functions

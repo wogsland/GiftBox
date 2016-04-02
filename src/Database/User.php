@@ -113,11 +113,13 @@ class User extends \Sizzle\DatabaseEntity
     public function activate(string $key)
     {
         $key = escape_string($key);
-        $rows_affected = update("UPDATE user
-                                 SET activation_key = NULL
-                                 WHERE id = '{$this->id}'
-                                 AND activation_key = '$key'
-                                 LIMIT 1");
+        $rows_affected = update(
+            "UPDATE user
+            SET activation_key = NULL
+            WHERE id = '{$this->id}'
+            AND activation_key = '$key'
+            LIMIT 1"
+        );
         if ($rows_affected != 1) {
             return false;
         } else {

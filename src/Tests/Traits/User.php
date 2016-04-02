@@ -32,7 +32,7 @@ trait User
      */
     protected function deleteUsers()
     {
-        foreach($this->users as $id) {
+        foreach ($this->users as $id) {
             $sql = "DELETE FROM user WHERE id = '$id'";
             execute($sql);
         }
