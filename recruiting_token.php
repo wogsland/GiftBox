@@ -222,7 +222,7 @@
                     </div>
                   </main>
                   <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
-                    <i class="material-icons">thumb_up</i>
+                    <i class="material-icons interest-thumb">thumb_up</i>
                   </button>
                   <paper-dialog class="interest-dialog" modal>
                       <div class="interest-form">

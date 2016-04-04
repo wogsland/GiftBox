@@ -425,3 +425,9 @@ i.plus-icon--overlay {
   border-top: 20px solid white;
   box-shadow: 0 16px 24px 2px
 }
+.interest-thumb {
+  color: white;
+}
+.interest-thumb:hover {
+  color: black;
+}
