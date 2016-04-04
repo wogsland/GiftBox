@@ -14,7 +14,7 @@ if (ENVIRONMENT === "production") {
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
 
     //see if the visitor is NEW
-    $new = (new WebRequest())->newVisitor($cookie) ? '*New*' : 'Returning';
+    $new = (new WebRequest())->newVisitor($_COOKIE['visitor'] ?? '') ? '*New*' : 'Returning';
 
     // see what visitor type is
     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
