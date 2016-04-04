@@ -9,7 +9,6 @@ class EmailOpen extends \Sizzle\DatabaseEntity
     protected $email_template_id;
     protected $email_address;
     protected $recruiting_token_id;
-    protected $created;
 
     /**
      * This function creates an entry in the email_open table
@@ -20,7 +19,7 @@ class EmailOpen extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($template, $email, $token = null)
+    public function create(int $template, string $email, int $token = null)
     {
         $this->unsetAll();
         $this->email_template_id = $template;

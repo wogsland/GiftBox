@@ -4,6 +4,7 @@ use \Sizzle\{
     Database\UserMilestone,
     Service\PipedriveClient
 };
+use Sizzle\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
 
@@ -14,7 +15,7 @@ $response['app_root'] = '/';
 
 $vars = array('signup_email', 'first_name', 'last_name', 'signup_password', 'reg_type');
 foreach ($vars as $var) {
-    $$var = escape_string($_POST[$var] ?? '');
+    $$var = $_POST[$var] ?? '';
 }
 
 if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
@@ -56,8 +57,8 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
             $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
-            $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(
+            $mandrill = new MandrillEmail();
+            $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
                     'from_email'=>'welcome@gosizzle.io',

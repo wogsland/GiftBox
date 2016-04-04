@@ -2,8 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use Sizzle\Database\{
-    RecruitingCompany,
-    User
+    RecruitingCompany
 };
 
 /**
@@ -13,6 +12,8 @@ use Sizzle\Database\{
  */
 class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingCompany;
+
     /**
      * Requires the util.php file of functions
      */
@@ -27,12 +28,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
     }
 
     /**
@@ -42,6 +38,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     {
         // $id = null case
         $RecruitingCompany = new RecruitingCompany();
+        $this->recruitingCompanies[] = $RecruitingCompany->id;
         $this->assertEquals('Sizzle\Database\RecruitingCompany', get_class($RecruitingCompany));
         $this->assertFalse(isset($RecruitingCompany->name));
 
@@ -84,6 +81,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
                   )";
         $id = insert($query);
         $result = new RecruitingCompany($id);
+        $this->recruitingCompanies[] = $result->id;
         $this->assertTrue(isset($result->name));
         $this->assertEquals($result->id, $id);
         $this->assertEquals($result->user_id, $user_id);
@@ -106,6 +104,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     {
         // test saving a new recruiting company
         $RecruitingCompany = new RecruitingCompany();
+        $this->recruitingCompanies[] = $RecruitingCompany->id;
         $RecruitingCompany->user_id = $this->User->id;
         $RecruitingCompany->name = rand().' Inc.';
         $RecruitingCompany->logo = rand().'.png';
@@ -129,6 +128,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 
         // make sure all properties were inserted correctly
         $RecruitingCompany2 = new RecruitingCompany($RecruitingCompany->id);
+        $this->recruitingCompanies[] = $RecruitingCompany2->id;
         foreach (get_object_vars($RecruitingCompany2) as $key => $value) {
             $this->assertEquals($RecruitingCompany->$key, $value);
         }
@@ -160,14 +160,18 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 
         // make sure all properties were updated correctly
         $RecruitingCompany2 = new RecruitingCompany($RecruitingCompany->id);
+        $this->recruitingCompanies[] = $RecruitingCompany2->id;
         foreach (get_object_vars($RecruitingCompany2) as $key => $value) {
             $this->assertEquals($RecruitingCompany->$key, $value);
         }
     }
 
-
+    /**
+     * Delete users created for testing
+     */
     protected function tearDown()
     {
-        //$this->User->delete();
+        $this->deleteRecruitingCompanies();
+        //$this->deleteUsers();
     }
 }

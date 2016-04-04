@@ -1,13 +1,6 @@
 <?php
 namespace Sizzle\Tests\Ajax\User;
 
-use \Sizzle\Database\{
-    Organization,
-    RecruitingCompany,
-    RecruitingToken,
-    User
-};
-
 /**
  * This class tests the ajax endpoint to get the recruiter profile for a token.
  *
@@ -16,6 +9,9 @@ use \Sizzle\Database\{
 class GetRecruiterProfileTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\Organization;
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -32,38 +28,19 @@ extends \PHPUnit_Framework_TestCase
         $this->url = TEST_URL .'/ajax/user/get_recruiter_profile';
 
         // setup test organization
-        $name = 'The '.rand().' Corporation';
-        $website = 'http://www.'.rand().'.org';
-        $this->Organization = new Organization((new Organization())->create($name, $website));
+        $this->Organization = $this->createOrganization();
 
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->organization_id = $this->Organization->id;
-        $User->position = rand();
-        $User->linkedin = 'https://linkedin.com/in/'.rand();
-        $User->about = rand();
-        $User->face_image = rand().'.jpg';
-        $User->save();
-        $this->User = $User;
-
-        // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'The '.rand().' Company';
-        $RecruitingCompany->website = 'https://'.rand().'.com/';
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
+        $this->User = $this->createUser();
+        $this->User->organization_id = $this->Organization->id;
+        $this->User->position = rand();
+        $this->User->linkedin = 'https://linkedin.com/in/'.rand();
+        $this->User->about = rand();
+        $this->User->face_image = rand().'.jpg';
+        $this->User->save();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $this->RecruitingToken = $this->createRecruitingToken($this->User->id);
     }
 
     /**
@@ -108,6 +85,15 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteRecruitingTokens();
+        $this->deleteOrganizations();
     }
 }
 ?>

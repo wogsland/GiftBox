@@ -9,7 +9,6 @@ use \Sizzle\Database\{
 /**
  * This is simple HTML to show the right info on LinkedIn
  */
-$long_id = escape_string($long_id);
 $token = new RecruitingToken($long_id, 'long_id');
 //print_r($token);
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');

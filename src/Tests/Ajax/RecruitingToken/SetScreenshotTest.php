@@ -2,9 +2,7 @@
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
-    RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -15,6 +13,8 @@ use \Sizzle\Database\{
 class SetScreenshotTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,18 +28,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testRequest()
     {
-        // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken();
 
         $fileName = rand().'.jpg';
 
@@ -72,6 +62,10 @@ extends \PHPUnit_Framework_TestCase
         $image = new RecruitingTokenImage($return->data->id);
         $this->assertEquals($fileName, $image->file_name);
         $this->assertEquals($RecruitingToken->id, $image->recruiting_token_id);
+
+        // cleanup
+        $sql = "DELETE FROM recruiting_token_image WHERE id = '{$image->id}'";
+        execute($sql);
     }
 
     /**
@@ -109,6 +103,14 @@ extends \PHPUnit_Framework_TestCase
         $return = json_decode($json);
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
+    }
+
+    /**
+     * Delete things created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteRecruitingTokens();
     }
 }
 ?>

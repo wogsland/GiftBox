@@ -2,8 +2,7 @@
 namespace Sizzle\Tests;
 
 use \Sizzle\Database\{
-    EmailCredential,
-    User
+    EmailCredential
 };
 
 /**
@@ -14,6 +13,8 @@ use \Sizzle\Database\{
 class EmailCredentialTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,12 +29,7 @@ extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
     }
 
     /**
@@ -140,5 +136,13 @@ extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($EmailCredential->password));
         $this->assertFalse(isset($EmailCredential->smtp_host));
         $this->assertFalse(isset($EmailCredential->smtp_port));
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteUsers();
     }
 }

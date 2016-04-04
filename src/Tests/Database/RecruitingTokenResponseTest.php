@@ -2,9 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    RecruitingTokenResponse,
-    RecruitingToken,
-    User
+    RecruitingTokenResponse
 };
 
 /**
@@ -15,6 +13,8 @@ use \Sizzle\Database\{
 class RecruitingTokenResponseTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,20 +28,8 @@ extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
-
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $this->RecruitingToken = $this->createRecruitingToken();
     }
 
     /**
@@ -85,7 +73,6 @@ extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         // grab for a single token
-        $user_id = $this->User->id;
         $long_id = $this->RecruitingToken->long_id;
         $RecruitingTokenResponse = new RecruitingTokenResponse();
         $possible = ['Yes','No','Maybe'];
@@ -102,7 +89,7 @@ extends \PHPUnit_Framework_TestCase
             );
         }
         $this->assertEquals($count, count($responses));
-        $resp = $RecruitingTokenResponse->get($user_id, $long_id);
+        $resp = $RecruitingTokenResponse->get($this->RecruitingToken->user_id, $long_id);
         $this->assertEquals($count, count($resp));
         $found = 0;
         foreach ($responses as $r1) {
@@ -117,10 +104,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($count, $found);
 
         // grab for a single user, all tokens
-        $RecruitingToken2 = new RecruitingToken();
-        $RecruitingToken2->user_id = $this->User->id;
-        $RecruitingToken2->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken2->save();
+        $RecruitingToken2 = $this->createRecruitingToken($this->RecruitingToken->user_id);
         $email = rand() . '@gmail.com';
         $response = $possible[array_rand($possible)];
         $id = $RecruitingTokenResponse->create($RecruitingToken2->long_id, $email, $response);
@@ -129,10 +113,7 @@ extends \PHPUnit_Framework_TestCase
             'response' => $response,
             'id' => $id
         );
-        $RecruitingToken3 = new RecruitingToken();
-        $RecruitingToken3->user_id = $this->User->id;
-        $RecruitingToken3->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken3->save();
+        $RecruitingToken3 = $this->createRecruitingToken($this->RecruitingToken->user_id);
         $email = rand() . '@gmail.com';
         $response = $possible[array_rand($possible)];
         $id = $RecruitingTokenResponse->create($RecruitingToken3->long_id, $email, $response);
@@ -143,9 +124,9 @@ extends \PHPUnit_Framework_TestCase
         );
         $new_count = $count+2;
         $this->assertEquals($new_count, count($responses));
-        $resp = $RecruitingTokenResponse->get($user_id, $long_id);// without new two
+        $resp = $RecruitingTokenResponse->get($this->RecruitingToken->user_id, $long_id);// without new two
         $this->assertEquals($count, count($resp));
-        $resp = $RecruitingTokenResponse->get($user_id);//with new two
+        $resp = $RecruitingTokenResponse->get($this->RecruitingToken->user_id);//with new two
         $this->assertEquals($new_count, count($resp));
         $found = 0;
         foreach ($responses as $r1) {
@@ -158,5 +139,13 @@ extends \PHPUnit_Framework_TestCase
             }
         }
         $this->assertEquals($new_count, $found);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteRecruitingTokens();
     }
 }

@@ -14,15 +14,14 @@ if (isset($_SESSION['activation_key'], $_POST['activation_key'])
     && $_POST['activation_key'] == $_SESSION['activation_key']
 ) {
     unset($_SESSION['activation_key']);
-    $email = escape_string($_SESSION['email']);
-    $password = escape_string($_POST['password']);
+    $email = $_SESSION['email'];
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // find user corresponding to email
         $user = User::fetch($email);
 
         if (isset($user->email_address)) {
             // set password if user exists
-            $user->password = password_hash($password, PASSWORD_DEFAULT);
+            $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $user->save();
             $success = 'true';
 
@@ -48,16 +47,13 @@ if (isset($_SESSION['activation_key'], $_POST['activation_key'])
 if (isset($_POST['reset_code'], $_POST['password'])
     && $_SESSION['code_reset_attempt']['tries'] <= 3
 ) {
-    $reset_code = escape_string($_POST['reset_code']);
-    $password = escape_string($_POST['password']);
-
     // find user corresponding to email
-    $user = User::fetch($reset_code, 'reset_code');
+    $user = User::fetch($_POST['reset_code'], 'reset_code');
 
     // set password if user exists
     if (isset($user->email_address)) {
         $user->reset_code = '';
-        $user->password = password_hash($password, PASSWORD_DEFAULT);
+        $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user->save();
         $success = 'true';
     } else {

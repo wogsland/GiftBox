@@ -1,20 +1,22 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\Database\{
-    RecruitingToken,
-    RecruitingCompany,
-    User
-};
+use Sizzle\Database\RecruitingToken;
 
 /**
- * This class tests the ajax endpoint to get the videos for a token.
+ * This class tests the ajax endpoint to transfer tokens between users.
  *
  * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/RecruitingToken/TransferTest
  */
 class TransferTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken,
+        \Sizzle\Tests\Traits\User {
+            \Sizzle\Tests\Traits\User::createUser insteadof \Sizzle\Tests\Traits\RecruitingToken;
+            \Sizzle\Tests\Traits\User::deleteUsers insteadof \Sizzle\Tests\Traits\RecruitingToken;
+        }
+
     /**
      * Requires the util.php file of functions
      */
@@ -29,22 +31,11 @@ extends \PHPUnit_Framework_TestCase
     public function testNoCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, 'none');
 
         // test user transfer
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
@@ -82,28 +73,14 @@ extends \PHPUnit_Framework_TestCase
     public function testOldUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test company with unrelated user
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User1->id;
-        $RecruitingCompany->save();
+        $RecruitingCompany = $this->createRecruitingCompany($User1->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
 
         // test user transfer
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
@@ -142,28 +119,14 @@ extends \PHPUnit_Framework_TestCase
     public function testNewUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
 
         // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User2->id;
-        $RecruitingCompany->save();
+        $RecruitingCompany = $this->createRecruitingCompany($User2->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
 
         // test user transfer
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
@@ -201,33 +164,15 @@ extends \PHPUnit_Framework_TestCase
     public function testRandomUserCompany()
     {
         // setup test users
-        $User1 = new User();
-        $User1->email_address = rand();
-        $User1->first_name = rand();
-        $User1->last_name = rand();
-        $User1->save();
-        $User2 = new User();
-        $User2->email_address = rand();
-        $User2->first_name = rand();
-        $User2->last_name = rand();
-        $User2->save();
-        $User3 = new User();
-        $User3->email_address = rand();
-        $User3->first_name = rand();
-        $User3->last_name = rand();
-        $User3->save();
+        $User1 = $this->createUser();
+        $User2 = $this->createUser();
+        $User3 = $this->createUser();
 
         // setup test company with unrelated user
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $User3->id;
-        $RecruitingCompany->save();
+        $RecruitingCompany = $this->createRecruitingCompany($User3->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $User1->id;
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->save();
+        $RecruitingToken = $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
 
         // test user transfer
         $url = TEST_URL . "/ajax/recruiting_token/transfer";
@@ -277,6 +222,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete things created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteRecruitingTokens();
     }
 }
 ?>

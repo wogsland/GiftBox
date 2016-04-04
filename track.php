@@ -24,8 +24,7 @@ if (0 === strpos($_SERVER['REQUEST_URI'],'/track/open')
     $user_id = is_null($user) ? $user : $user->id;
     if (isset($_GET['l']) && $_GET['t'] == 3) {
         // recruiting token email needs a long id
-        $long_id = escape_string($_GET['l']);
-        $token = new RecruitingToken($long_id, 'long_id');
+        $token = new RecruitingToken($_GET['l'], 'long_id');
         if (isset($token->id)) {
             (new EmailOpen())->create((int) $_GET['t'], $_GET['e'], $token->id);
         }

@@ -13,7 +13,7 @@ class IpinfoIo
      *
      * @return mixed - an array of information or false on failure
      */
-    public function getInfo($ipAddress)
+    public function getInfo(string $ipAddress)
     {
         $url = "http://ipinfo.io/{$ipAddress}";
         $ch = curl_init();

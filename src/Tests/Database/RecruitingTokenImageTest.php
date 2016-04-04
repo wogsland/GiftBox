@@ -2,9 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    RecruitingToken,
-    RecruitingTokenImage,
-    User
+    RecruitingTokenImage
 };
 
 /**
@@ -15,6 +13,8 @@ use \Sizzle\Database\{
 class RecruitingTokenImageTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -44,15 +44,7 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $token = new RecruitingToken();
-        $token->user_id = $User->id;
-        $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $token->save();
+        $token = $this->createRecruitingToken();
 
         // Create image
         $image = new RecruitingTokenImage();
@@ -69,6 +61,10 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($image2->id, $id);
         $this->assertEquals($image2->file_name, $fileName);
         $this->assertEquals($image2->recruiting_token_id, $token->id);
+
+        // cleanup
+        $sql = "DELETE FROM recruiting_token_image WHERE id = '$id'";
+        execute($sql);
     }
 
     /**
@@ -76,24 +72,16 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testGetByRecruitingTokenId()
     {
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $token = new RecruitingToken();
-        $token->user_id = $User->id;
-        $token->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $token->save();
+        $token = $this->createRecruitingToken();
 
         // Create images
         $image = new RecruitingTokenImage();
         $fileName = rand().'.jpg';
         $fileName2 = rand().'.png';
         $fileName3 = rand().'.gif';
-        $id = $image->create($fileName, $token->id);
-        $id = $image->create($fileName2, $token->id);
-        $id = $image->create($fileName3, $token->id);
+        $ids[] = $image->create($fileName, $token->id);
+        $ids[] = $image->create($fileName2, $token->id);
+        $ids[] = $image->create($fileName3, $token->id);
 
         // Test function
         $images = (new RecruitingTokenImage())->getByRecruitingTokenId($token->id);
@@ -104,5 +92,19 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($images[1]['recruiting_token_id'], $token->id);
         $this->assertEquals($images[2]['file_name'], $fileName3);
         $this->assertEquals($images[2]['recruiting_token_id'], $token->id);
+
+        // cleanup
+        foreach ($ids as $id) {
+            $sql = "DELETE FROM recruiting_token_image WHERE id = '$id'";
+            execute($sql);
+        }
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteRecruitingTokens();
     }
 }

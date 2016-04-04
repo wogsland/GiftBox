@@ -1,12 +1,14 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_company_video table.
+ */
 class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_company_id;
     protected $source;
     protected $source_id;
-    protected $created;
 
     /**
      * This function creates an entry in the recruiting_company_video table
@@ -17,7 +19,7 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
      *
      * @return int - id of inserted row or 0 on fail
      */
-    public function create($recruiting_company_id, $source, $source_id)
+    public function create(int $recruiting_company_id, string $source, string $source_id)
     {
         $this->unsetAll();
         $this->recruiting_company_id = $recruiting_company_id;
@@ -34,7 +36,7 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
      *
      * @return array - videos associated with the token
      */
-    public function getByRecruitingTokenLongId($long_id)
+    public function getByRecruitingTokenLongId(string $long_id)
     {
         $return = array();
         $long_id = escape_string($long_id);
@@ -58,7 +60,7 @@ class RecruitingCompanyVideo extends \Sizzle\DatabaseEntity
      *
      * @return array - videos associated with the company
      */
-    public function getByCompanyId($id)
+    public function getByCompanyId(int $id)
     {
         $return = array();
         $id = (int) $id;

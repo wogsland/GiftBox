@@ -15,7 +15,7 @@ class HTML
      *
      * @return string - HTML
      */
-    public static function to($text)
+    public static function to(string $text)
     {
         if ('' == $text) {
             $html = $text;
@@ -76,7 +76,7 @@ class HTML
      *
      * @return string - plain text
      */
-    public static function from($html)
+    public static function from(string $html)
     {
         $text = '';
         if ('' != $html) {
@@ -101,7 +101,7 @@ class HTML
      *
      * @return boolean - HTML
      */
-    private static function hasBullet($text)
+    private static function hasBullet(string $text)
     {
         $has = strpos($text, "\n•") !== false;
         $has = $has || strpos($text, "\n •") !== false;
@@ -122,7 +122,7 @@ class HTML
      *
      * @return string - text with bullets replaced
      */
-    private static function replaceBullets($text)
+    private static function replaceBullets(string $text)
     {
         foreach (self::$bullets as $bullet) {
             $text = str_replace($bullet, '•', $text);
@@ -137,7 +137,7 @@ class HTML
      *
      * @return string - text with HTML list tags
      */
-    private static function bulletListTo($text)
+    private static function bulletListTo(string $text)
     {
         // replace first bullet
         if (0 === strpos($text, "•")) {

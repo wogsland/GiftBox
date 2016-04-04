@@ -17,7 +17,7 @@ class Route
      * @param array $endpointPieces - the parsed pieces of the endpoint
      * @param array $gets           - associative array of GET variables
      */
-    public function __construct($endpointPieces, $gets = array())
+    public function __construct(array $endpointPieces, array $gets = array())
     {
         if (is_array($endpointPieces)) {
             $this->endpointPieces = $endpointPieces;
@@ -43,6 +43,14 @@ class Route
                 break;
             case 'about':
                 include __DIR__.'/../about.php';
+                break;
+            case 'affiliates':
+                include __DIR__.'/../affiliates.php';
+                break;
+            case 'affiliate':
+            case 'affiliate-program':
+            case 'affiliateprogram':
+                header('Location: /affiliates', true, 301);
                 break;
             case 'attribution':
                 include __DIR__.'/../attribution.php';

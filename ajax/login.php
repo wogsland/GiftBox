@@ -14,11 +14,6 @@ $response['app_root'] = '/';
 
 $email = $_POST['login_email'] ?? '';
 $login_type = $_POST['login_type'] ?? 'EMAIL';
-if (isset($_POST['password'])) {
-    $password = escape_string($_POST['password']);
-} else {
-    $password = null;
-}
 
 if (User::exists($email)) {
     $user = User::fetch($email);
@@ -33,7 +28,7 @@ if (User::exists($email)) {
             if (!$user->password) {
                 $response['status'] = "ERROR";
                 $response['message'] = "This account was created using Facebook.<br>Please use the Log In With FaceBook button.";
-            } else if (!password_verify($password, $user->password)) {
+            } else if (!password_verify($_POST['password'] ?? '', $user->password)) {
                 $response['status'] = "ERROR";
                 $response['message'] = 'The password you entered is incorrect.';
             } else {

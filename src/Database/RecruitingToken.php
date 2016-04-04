@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_token table.
+ */
 class RecruitingToken extends \Sizzle\DatabaseEntity
 {
     protected $long_id;
@@ -20,7 +23,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
      * @param mixed  $value - optional id of the token
      * @param string $key   - optional parameter to test $value against: 'id' (default) or 'long_id'
      */
-    public function __construct($value = null, $key = null)
+    public function __construct($value = null, string $key = null)
     {
         if ($value !== null) {
             if ($key == null || !in_array($key, array('id','long_id'))) {
@@ -38,7 +41,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         }
     }
 
-    public static function getUserTokens($user_id)
+    public static function getUserTokens(int $user_id)
     {
         $user_id = (int) $user_id;
         $results =  execute_query(
@@ -87,7 +90,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
      *
      * @param int $user_id - the user whose companies are being returned
      */
-    public static function getUserCompanies($user_id)
+    public static function getUserCompanies(int $user_id)
     {
         $user_id = (int) $user_id;
         $query = "SELECT id, `name`
@@ -106,7 +109,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         }
     }
 
-    private function changeFileName($file_name)
+    private function changeFileName(string $file_name)
     {
         $new_file_name = $this->id."_".$this->user_id."_".$file_name;
         return $new_file_name;
@@ -125,7 +128,7 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
      *
      * @return boolean - is it unique
      */
-    public function uniqueLongId($long_id = '')
+    public function uniqueLongId(string $long_id = '')
     {
         if ('' == $long_id) {
             $long_id = $this->long_id;

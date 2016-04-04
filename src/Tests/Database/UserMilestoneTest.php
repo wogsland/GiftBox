@@ -2,7 +2,6 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    User,
     UserMilestone
 };
 
@@ -13,6 +12,8 @@ use \Sizzle\Database\{
  */
 class UserMilestoneTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -27,12 +28,7 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = 'user-'.rand().'@gosizzle.io';
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
 
         // setup test milestone
         $this->milestone_name = 'Super '.rand().' Thing';
@@ -69,10 +65,8 @@ class UserMilestoneTest extends \PHPUnit_Framework_TestCase
     {
         $query = "DELETE FROM user_milestone WHERE milestone_id = '{$this->milestone_id}'";
         execute($query);
-        $user_id = $this->User->id;
-        $query = "DELETE FROM user WHERE id = '{$user_id}'";
-        execute($query);
         $query = "DELETE FROM milestone WHERE id = '{$this->milestone_id}'";
         execute($query);
+        $this->deleteUsers();
     }
 }

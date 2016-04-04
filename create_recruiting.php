@@ -15,7 +15,7 @@ if (!logged_in()) {
 $user_id = $_SESSION['user_id'] ?? '';
 
 if (isset($_GET['id'])) {
-    $token = new RecruitingToken(escape_string($_GET['id']), 'long_id');
+    $token = new RecruitingToken($_GET['id'], 'long_id');
     if ($token->user_id != $user_id && !is_admin()) {
         header('Location: '.APP_URL.'/tokens');
     }
@@ -240,7 +240,7 @@ require __DIR__.'/header.php';
                     <div class="field-container">
                         <?php
                         paper_text('Job Title', 'job-title', $token->job_title, true);
-                        paper_textarea('Job Description', 'job-description', HTML::from($token->job_description), true);
+                        paper_textarea('Job Description', 'job-description', HTML::from($token->job_description ?? ''), true);
                         ?>
                       <paper-input
                         value="<?= $city_name?>"
@@ -256,9 +256,9 @@ require __DIR__.'/header.php';
                 </paper-card>
                 <paper-card id="basic-info" heading="Additional Info">
                     <div class="field-container">
-                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required)); ?>
-                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities)); ?>
-                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks)); ?>
+                        <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required ?? '')); ?>
+                        <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities ?? '')); ?>
+                        <?php paper_textarea('Perks', 'perks', HTML::from($token->perks ?? '')); ?>
                     </div>
                 </paper-card>
                 <?php if(is_admin()) { ?>
@@ -318,7 +318,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="open-token-form">
             <div class="field-container">
             <?php
-                $user_tokens = RecruitingToken::getUserTokens($user_id);
+                $user_tokens = RecruitingToken::getUserTokens((int) $user_id);
                 $tokens = array();
                 foreach ($user_tokens as $tkn) {
                     $tokenCompanyName = ''!=$tkn->company ? $tkn->company : 'Unnamed Company';

@@ -8,18 +8,15 @@ date_default_timezone_set('America/Chicago');
 if (isset($_SESSION['user_id'])) {
     $user_id = (int) $_SESSION['user_id'];
     if (isset($_POST['recruiting_company_id'])) {
-        $recruiting_company_id = (int) $_POST['recruiting_company_id'];
         if (isset($_POST['source'], $_POST['source_id'])) {
-            $source = escape_string($_POST['source']);
-            $source_id = escape_string($_POST['source_id']);
-            if (in_array($source, ['youtube','vimeo'])) {
+            if (in_array($_POST['source'], ['youtube','vimeo'])) {
                 // see if company belongs to this user
-                $RecruitingCompany = new RecruitingCompany($recruiting_company_id, 'id');
+                $RecruitingCompany = new RecruitingCompany($_POST['recruiting_company_id'], 'id');
                 if ($RecruitingCompany->user_id == $user_id || is_admin()) {
                     try {
                         // Save the token video
                         $recruiting_company_video = new RecruitingCompanyVideo();
-                        $id = $recruiting_company_video->create($recruiting_company_id, $source, $source_id);
+                        $id = $recruiting_company_video->create($_POST['recruiting_company_id'], $_POST['source'], $_POST['source_id']);
                         $response['status'] = "SUCCESS";
                         $response['id'] = $recruiting_company_video->id;
                     } catch (Exception $e) {

@@ -8,14 +8,13 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
 {
     protected $email_list_id;
     protected $email;
-    protected $created;
 
     /**
      * This function constructs the class
      *
      * @param int $id - optional id of the email
      */
-    public function __construct($id = null)
+    public function __construct(int $id = null)
     {
         if ($id !== null) {
             $id = (int) $id;
@@ -40,7 +39,7 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($email_list_id, $email)
+    public function create(int $email_list_id, string $email)
     {
         $this->unsetAll();
         $this->email_list_id = $email_list_id;
@@ -76,7 +75,7 @@ class EmailListEmail extends \Sizzle\DatabaseEntity
      *
      * @return array - emails associated with the list
      */
-    public function getByEmailListId($list_id)
+    public function getByEmailListId(int $list_id)
     {
         $return = array();
         $list_id = (int) $list_id;

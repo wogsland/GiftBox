@@ -13,9 +13,9 @@ require_once __DIR__.'/../vendor/stripe/stripe-php/init.php';
 \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
 
 // Get the credit card details submitted by the form
-$token = $_POST['stripeToken'];
-$email = $_POST['email'];
-$plan = $_POST['plan'];
+$token = $_POST['stripeToken'] ?? '';
+$email = $_POST['email'] ?? '';
+$plan = $_POST['plan'] ?? '';
 
 // Retrieve the S!zzle user record
 $user = User::fetch($email);

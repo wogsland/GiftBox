@@ -1,5 +1,6 @@
 <?php
 use \Sizzle\Database\User;
+use \Sizzle\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
 
@@ -18,8 +19,8 @@ if ($user_id > 0) {
         $email_message = file_get_contents(__DIR__.'/../email_templates/signup_email.inline.html');
         $email_message = str_replace('{{link}}', $link, $email_message);
         $email_message = str_replace('{{email}}', $user->email_address, $email_message);
-        $mandrill = new Mandrill(MANDRILL_API_KEY);
-        $mandrill->messages->send(
+        $mandrill = new MandrillEmail();
+        $mandrill->send(
             array(
                 'to'=>array(array('email'=>$user->email_address)),
                 'from_email'=>'welcome@gosizzle.io',

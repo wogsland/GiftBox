@@ -7,7 +7,6 @@ namespace Sizzle\Database;
 class LandingPage extends \Sizzle\DatabaseEntity
 {
     protected $script;
-    protected $created;
 
     /**
      * This function constructs the class from a random landing page
@@ -15,7 +14,7 @@ class LandingPage extends \Sizzle\DatabaseEntity
      *
      * @param int $id - optional id of the landing_page
      */
-    public function __construct($id = null)
+    public function __construct(int $id = null)
     {
         if ($id !== null) {
             $id = (int) $id;
@@ -42,7 +41,7 @@ class LandingPage extends \Sizzle\DatabaseEntity
      *
      * @return boolean - success of recording
      */
-    public function recordHit($visitor_cookie)
+    public function recordHit(string $visitor_cookie)
     {
         (new LandingPageView())->create($this->id, $visitor_cookie);
     }

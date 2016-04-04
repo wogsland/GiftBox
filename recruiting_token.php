@@ -20,22 +20,9 @@
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/gt-favicons.ico/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/gt-favicons.ico/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/gt-favicons.ico/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/gt-favicons.ico/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/gt-favicons.ico/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/gt-favicons.ico/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/gt-favicons.ico/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/gt-favicons.ico/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/gt-favicons.ico/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/gt-favicons.ico/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/gt-favicons.ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/gt-favicons.ico/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/gt-favicons.ico/favicon-16x16.png">
-    <link rel="manifest" href="/assets/gt-favicons.ico/manifest.json">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="/images/favicon.png">
     <meta name="theme-color" content="#ffffff">
     <!-- endFavicon -->
 
@@ -55,14 +42,18 @@
 
     <!-- Polymer -->
     <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+    <link rel="import" href="components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="components/paper-input/paper-input.html">
+    <link rel="import" href="components/paper-button/paper-button.html">
     <link rel="import" href="components/paper-styles/paper-styles.html">
+    <link rel="import" href="components/paper-radio-group/paper-radio-group.html">
+    <link rel="import" href="components/paper-radio-button/paper-radio-button.html">
     <link rel="import" href="components/neon-animation/neon-animated-pages.html" async>
     <link rel="import" href="components/neon-animation/neon-animations.html" async>
     <link rel="import" href="elements/description-x-card.html" async>
     <link rel="import" href="elements/image-x-card.html" async>
     <link rel="import" href="elements/location-x-card.html" async>
     <link rel="import" href="elements/video-x-card.html" async>
-    <link rel="import" href="elements/x-card.html" async>
     <link rel="import" href="elements/x-cards-list.html">
 
   </head>
@@ -230,154 +221,207 @@
                       </section>
                     </div>
                   </main>
+                  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                    <i class="material-icons">thumb_up</i>
+                  </button>
+                  <paper-dialog class="interest-dialog" modal>
+                      <div class="interest-form">
+                        <center><h2>Interested in this job?</h2></center>
+                        <paper-radio-group selected="Yes" id="interest-response">
+                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                        </paper-radio-group>
+                        <paper-input
+                          type="email"
+                          class="email-paper-input"
+                          label="email address"
+                          autofocus
+                          error-message="Please input a valid email"
+                          required>
+                        </paper-input>
+                      </div>
+                      <div class="buttons">
+                        <paper-button
+                          class="submit-interest-button"
+                          on-click="_submitInterest">
+                          Submit
+                        </paper-button>
+                        <paper-button
+                          class="dismiss-interest-button"
+                          dialog-dismiss
+                          on-click="_closeInterestDialog">
+                          Cancel
+                        </paper-button>
+                      </div>
+                  </paper-dialog>
+                  <!--<div class="arrow-down"></div>-->
                 </div>
-              </div>
-            </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
               </div>
             </div>
           </x-cards-list>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">Yes</h2>
-              <div id="yes-content">
-                <p>
-                  I'm interested in this position. Tell me more.
-                </p>
-                <form id="yes-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="yes-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="yes-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">Maybe</h2>
-              <div id="maybe-content">
-                <p>
-                  I might be interested in this position. Tell me more.
-                </p>
-                <form id="maybe-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="maybe-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="maybe-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
-          <x-card>
-            <div class="fit layout vertical center-center">
-              <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
-                BACK
-              </div>
-              <h2 class="mdl-color-text--primary-dark">No</h2>
-              <div id="no-content">
-                <p>
-                  No, I'm not interested right now.
-                </p>
-                <form id="no-email-form">
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <input type="email" class="mdl-textfield__input" id="no-email" name="email">
-                    <label class="mdl-textfield__label" for="email">Email</label>
-                  </div>
-                </form>
-                <div>
-                  <button id="no-submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Submit</button>
-                </div>
-              </div>
-            </div>
-          </x-card>
           <location-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
-              </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                <i class="material-icons">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal>
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input
+                      type="email"
+                      class="email-paper-input"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="submit-interest-button"
+                      on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-interest-button"
+                      dialog-dismiss
+                      on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </location-x-card>
           <image-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
-              </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                <i class="material-icons">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal>
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input
+                      type="email"
+                      class="email-paper-input"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="submit-interest-button"
+                      on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-interest-button"
+                      dialog-dismiss
+                      on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </image-x-card>
           <video-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
-              </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                <i class="material-icons">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal>
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input
+                      type="email"
+                      class="email-paper-input"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="submit-interest-button"
+                      on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-interest-button"
+                      dialog-dismiss
+                      on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </video-x-card>
           <description-x-card>
             <div class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
               BACK
             </div>
-            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="interested-row">
-              <div id="interested-disabled-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-color--primary-dark"  on-click="_onYesClick">Interested?</div>
-              <div id="interested-yes-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onYesClick">
-                YES
-              </div>
-              <div id="interested-maybe-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onMaybeClick">
-                MAYBE
-              </div>
-              <div id="interested-no-button" class="mdl-cell--3-col mdl-cell--1-col-phone mdl-button mdl-js-button interested-button mdl-button--raised mdl-js-ripple-effect" on-click="_onNoClick">
-                NO
-              </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                <i class="material-icons">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal>
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input
+                      type="email"
+                      class="email-paper-input"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="submit-interest-button"
+                      on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-interest-button"
+                      dialog-dismiss
+                      on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </description-x-card>
       </neon-animated-pages>

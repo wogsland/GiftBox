@@ -5,11 +5,9 @@ date_default_timezone_set('America/Chicago');
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_POST['recruiting_company_id'], $_POST['file_name'])) {
-        $recruiting_company_id = (int) $_POST['recruiting_company_id'];
-        $file_name = escape_string($_POST['file_name']);
         try {
             // Save the token image
-            $id = (new RecruitingCompanyImage())->create($recruiting_company_id, $file_name);
+            $id = (new RecruitingCompanyImage())->create($_POST['recruiting_company_id'], $_POST['file_name']);
             $response['status'] = "SUCCESS";
             $response['id'] = $id;
 

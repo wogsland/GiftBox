@@ -12,7 +12,7 @@ $data = '';
 
 $vars = array('signup_email', 'token_id');
 foreach ($vars as $var) {
-    $$var = escape_string($_POST[$var] ?? '');
+    $$var = $_POST[$var] ?? '';
 }
 
 if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {

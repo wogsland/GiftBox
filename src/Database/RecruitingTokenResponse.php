@@ -1,24 +1,26 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_token_response table.
+ */
 class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_token_id;
     protected $email;
     protected $visitor_cookie;
-    protected $created;
 
     /**
      * This function creates a resonse in the database
      *
-     * @param int    $recruiting_token_id - long id of the token
+     * @param string $recruiting_token_id - long id of the token
      * @param string $email               - email address of respondent
      * @param string $response            - Yes, No or Maybe
      * @param string $cookie              - unique cookie for this visitor
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_token_id, $email, $response, $cookie = '')
+    public function create(string $recruiting_token_id, string $email, string $response, string $cookie = '')
     {
         $this->unsetAll();
 
@@ -50,7 +52,7 @@ class RecruitingTokenResponse extends \Sizzle\DatabaseEntity
      *
      * @return array - responses
      */
-    public function get($user_id, $long_id = '')
+    public function get(int $user_id, string $long_id = '')
     {
         $responses = array();
         if (isset($user_id)) {

@@ -1,5 +1,6 @@
 <?php
 use \Sizzle\Database\User;
+use Sizzle\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
 
@@ -25,7 +26,7 @@ if (isset($_SESSION['reset_attempt'], $_SESSION['reset_attempt']['date'], $_SESS
 
 // try email
 if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
-    $email = escape_string($_POST['email']);
+    $email = $_POST['email'];
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // find user corresponding to email
         $user = User::fetch($email);
@@ -41,8 +42,8 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $email_message = file_get_contents(__DIR__.'/../email_templates/password_reset.inline.html');
             $email_message = str_replace('{{link}}', $link, $email_message);
             $email_message = str_replace('{{email}}', $user->email_address, $email_message);
-            $mandrill = new Mandrill(MANDRILL_API_KEY);
-            $mandrill->messages->send(
+            $mandrill = new MandrillEmail();
+            $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
                     'from_email'=>'help@gosizzle.io',

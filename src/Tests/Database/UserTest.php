@@ -11,6 +11,9 @@ use \Sizzle\Database\User;
 class UserTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\Organization;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,6 +31,14 @@ extends \PHPUnit_Framework_TestCase
         $user = new User();
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertFalse(isset($user->email_address));
+    }
+
+    /**
+     * Tests the exists method.
+     */
+    public function testExists()
+    {
+        $this->markTestIncomplete();
     }
 
     /**
@@ -88,5 +99,101 @@ extends \PHPUnit_Framework_TestCase
         // $key garbage
         $user = User::fetch($email, 'garbage');
         $this->assertFalse(isset($user));
+    }
+
+    /**
+     * Tests the update_token method.
+     */
+    public function testUpdateToken()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Tests the save method.
+     */
+    public function testSave()
+    {
+        $this->markTestIncomplete();
+    }
+
+    /**
+     * Tests the activate method.
+     */
+    public function testActivate()
+    {
+        //create user that needs activation
+        $user = $this->createUser();
+        $user->activation_key = 'v5y3q'.rand().'nachoes';
+        $user->save();
+        $this->assertTrue($user->activate($user->activation_key));
+        $this->assertFalse($user->activate($user->activation_key)); // second time should fail
+
+        // create user that doens't need activation
+        $user2 = $this->createUser();
+        $key = 'jrhgksv'.rand().'gorilla';
+        $this->assertFalse($user2->activate($key));
+
+        // create user that needs activation, but use bad key
+        $user3 = $this->createUser();
+        $user3->activation_key = 'bsu4v65'.rand().'pecan';
+        $user3->save();
+        $key = '4ic7tq346b'.rand().'cashew';
+        $this->assertFalse($user3->activate($key));
+        $this->assertTrue($user3->activate($user3->activation_key)); // but true key should still work
+    }
+
+    /**
+     * Tests the getRecruiterProfile method.
+     */
+    public function testGetRecruiterProfile()
+    {
+        //fail on nonexistant user
+        $user = new User(-1);
+        $this->assertTrue(is_array($user->getRecruiterProfile()));
+        $this->assertTrue(empty($user->getRecruiterProfile()));
+
+        // should work for any user
+        $user2 = $this->createUser();
+        $profile2 = $user2->getRecruiterProfile();
+        $this->assertFalse(empty($profile2));
+        $this->assertEquals($user2->first_name, $profile2['first_name']);
+        $this->assertEquals($user2->last_name, $profile2['last_name']);
+        $this->assertEquals(null, $profile2['position']);
+        $this->assertEquals(null, $profile2['linkedin']);
+        $this->assertEquals(null, $profile2['website']);
+        $this->assertEquals(null, $profile2['about']);
+        $this->assertEquals(null, $profile2['face_image']);
+        $this->assertEquals(null, $profile2['organization']);
+
+        // user with a complete profile
+        $org = $this->createOrganization();
+        $org->website = 'http://awesome.'.rand().'.io';
+        $user3 = $this->createUser();
+        $user3->organization_id = $org->id;
+        $user3->save();
+        $profile3 = $user3->getRecruiterProfile();
+        $this->assertFalse(empty($profile3));
+        $this->assertEquals($user3->first_name, $profile3['first_name']);
+        $this->assertEquals($user3->last_name, $profile3['last_name']);
+        $this->assertEquals($user3->position, $profile3['position']);
+        $this->assertEquals($user3->linkedin, $profile3['linkedin']);
+        $this->assertEquals($org->website, $profile3['website']);
+        $this->assertEquals($user3->about, $profile3['about']);
+        $this->assertEquals($user3->face_image, $profile3['face_image']);
+        $this->assertEquals($org->name, $profile3['organization']);
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        foreach($this->users as $id) {
+            $sql = "DELETE FROM user_milestone WHERE user_id = '$id'";
+            execute($sql);
+        }
+        $this->deleteUsers();
+        $this->deleteOrganizations();
     }
 }

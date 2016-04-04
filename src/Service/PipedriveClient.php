@@ -11,7 +11,7 @@ class PipedriveClient
 
     protected $pipedrive;
 
-    function __construct($api_key)
+    function __construct(string $api_key)
     {
         $this->pipedrive = new Pipedrive($api_key);
     }

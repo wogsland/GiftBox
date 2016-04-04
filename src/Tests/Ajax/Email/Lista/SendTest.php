@@ -3,8 +3,7 @@ namespace Sizzle\Tests\Ajax\Email\Lista;
 
 use \Sizzle\Database\{
     EmailCredential,
-    EmailList,
-    User
+    EmailList
 };
 
 /**

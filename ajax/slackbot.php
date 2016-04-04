@@ -3,7 +3,10 @@ use \Monolog\{
     Handler\SlackHandler,
     Logger
 };
-use \Sizzle\Service\IpinfoIo;
+use \Sizzle\{
+    Database\WebRequest,
+    Service\IpinfoIo
+};
 
 if (ENVIRONMENT === "production") {
     // See from whence the vistor hails
@@ -11,14 +14,7 @@ if (ENVIRONMENT === "production") {
     $locale = $IpinfoIo->getInfo($_SERVER['REMOTE_ADDR']);
 
     //see if the visitor is NEW
-    $new = '*New*';
-    $visitor_cookie = escape_string($_COOKIE['visitor'] ?? '');
-    $sql = "SELECT COUNT(*) requests FROM web_request
-            WHERE visitor_cookie = '$visitor_cookie'";
-    $result = execute_query($sql);
-    if (($row = $result->fetch_assoc()) && $row['requests'] > 3) {
-        $new = 'Returning';
-    }
+    $new = (new WebRequest())->newVisitor($cookie) ? '*New*' : 'Returning';
 
     // see what visitor type is
     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';

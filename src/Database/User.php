@@ -1,6 +1,9 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the user table.
+ */
 class User extends \Sizzle\DatabaseEntity
 {
     protected $email_address;
@@ -12,7 +15,6 @@ class User extends \Sizzle\DatabaseEntity
     protected $admin = "N";
     protected $stripe_id;
     protected $active_until;
-    protected $facebook_email;
     protected $access_token;
     protected $position;
     protected $linkedin;
@@ -25,7 +27,14 @@ class User extends \Sizzle\DatabaseEntity
     protected $allow_token_responses;
     protected $receive_token_notifications;
 
-    public static function exists($email_address)
+    /**
+     * Sees if an email corresponds to a user
+     *
+     * @param string $email_address - email address of potential user
+     *
+     * @return boolean - does the user exist in the database??
+     */
+    public static function exists(string $email_address)
     {
         $exists = false;
         $user = User::fetch($email_address);
@@ -43,7 +52,7 @@ class User extends \Sizzle\DatabaseEntity
      *
      * @return User - the corresponding object
      */
-    public static function fetch($value, $key = 'email_address')
+    public static function fetch($value, string $key = 'email_address')
     {
         $user = null;
         $value = escape_string($value);
@@ -70,7 +79,12 @@ class User extends \Sizzle\DatabaseEntity
         return $user;
     }
 
-    public function update_token($token = null)
+    /**
+     * Updates the access token of the user
+     *
+     * @param string $token - the value of the new access token
+     */
+    public function update_token(string $token = null)
     {
         if ($token !== null) {
             $token = escape_string($token);
@@ -78,51 +92,65 @@ class User extends \Sizzle\DatabaseEntity
         }
     }
 
+    /**
+     * Saves the user information from the class properties
+     */
     public function save()
     {
         if (!isset($this->organization_id)) {
             $this->organization_id = false !== strpos($this->email_address, 'gosizzle.io') ? '1' : null;
         }
-        if (!$this->id) {
-            $sql = "INSERT into user (email_address, first_name, last_name, password, activation_key, admin, access_token "
-            .", position, about, user_group, linkedin, face_image, group_admin, internal, organization_id) VALUES ("
-            ."'".escape_string($this->email_address)."'"
-            .", '".escape_string($this->first_name)."'"
-            .", '".escape_string($this->last_name)."'"
-            .", ".($this->password ? "'".$this->password."'" : "null")
-            .", ".($this->activation_key ? "'".$this->activation_key."'" : "null")
-            .", '$this->admin'"
-            .", '$this->access_token', '$this->position'"
-            .", '$this->about' "
-            .", ".($this->user_group ? $this->user_group : "null")
-            .", ".($this->linkedin ? "'$this->linkedin'" : "null")
-            .", ".($this->face_image ? "'$this->face_image'" : "null")
-            .", '$this->group_admin'"
-            .", '".(false !== strpos($this->email_address, 'gosizzle.io') ? 'Y' :'N')."'"
-            .", ".($this->organization_id ? "'$this->organization_id'" : "null").")";
-            $this->id = insert($sql);
+        parent::save();
+    }
+
+    /**
+     * Activates a new user
+     *
+     * @param string $key - the value of the activation key
+     *
+     * @return boolean - was the $key for that user who is now activated
+     */
+    public function activate(string $key)
+    {
+        $key = escape_string($key);
+        $rows_affected = update("UPDATE user
+                                 SET activation_key = NULL
+                                 WHERE id = '{$this->id}'
+                                 AND activation_key = '$key'
+                                 LIMIT 1");
+        if ($rows_affected != 1) {
+            return false;
         } else {
-            $sql = "UPDATE user SET email_address = '".escape_string($this->email_address)."', "
-            . "first_name = '".escape_string($this->first_name)."', "
-            . "last_name = '".escape_string($this->last_name)."', "
-            . "password = ".($this->password ? "'".$this->password."'" : "null").", "
-            . "activation_key = ".($this->activation_key ? "'".$this->activation_key."'" : "null").", "
-            . "admin = '".escape_string($this->admin)."', "
-            . "stripe_id = ".($this->stripe_id ? "'".escape_string($this->stripe_id)."'" : "null").", "
-            . "active_until =  ".($this->active_until ? "'".escape_string($this->active_until)."'" : "null").", "
-            . "access_token = '$this->access_token', "
-            . "position = '".escape_string($this->position)."', "
-            . "about = '".escape_string($this->about)."', "
-            . "user_group = ".escape_string($this->user_group ? $this->user_group : "null").", "
-            . "linkedin = ".($this->linkedin ? "'".escape_string($this->linkedin)."'" : "null").", "
-            . "face_image = ".($this->face_image ? "'".escape_string($this->face_image)."'" : "null").", "
-            . "group_admin = '".escape_string($this->group_admin)."', "
-            . "reset_code = '$this->reset_code', "
-            . "allow_token_responses = '$this->allow_token_responses', "
-            . "receive_token_notifications = '$this->receive_token_notifications' "
-            . "WHERE id = '$this->id'";
-            execute($sql);
+            $UserMilestone = new UserMilestone($this->id, 'Confirm Email');
+            return true;
         }
     }
 
+    /**
+     * Gets information for the recruiter profile
+     *
+     * @return array - the array of information
+     */
+    public function getRecruiterProfile()
+    {
+        //
+        $profile = execute_query(
+            "SELECT user.first_name,
+            user.last_name,
+            user.position,
+            user.linkedin,
+            organization.website,
+            user.about,
+            user.face_image,
+            organization.`name` AS organization
+            FROM user
+            LEFT JOIN organization ON user.organization_id = organization.id
+            WHERE user.id = '{$this->id}'"
+        )->fetch_all(MYSQLI_ASSOC);
+        if (1 == count($profile)) {
+            return $profile[0];
+        } else {
+            return array();
+        }
+    }
 }

@@ -1,4 +1,5 @@
 var scope = document.querySelector('template[is="dom-bind"]');
+var presentedInterestPopup = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -11,7 +12,7 @@ scope._onOverviewClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -22,7 +23,7 @@ scope._onSkillsClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -33,7 +34,7 @@ scope._onValuesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -44,7 +45,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
@@ -55,18 +56,17 @@ scope._onPerksClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 7;
+  this.$.pages.selected = 4;
   smallScreen();
 };
 
-var cityId = 1;
 scope._onLocationClick = function(event) {
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 4;
+  this.$.pages.selected = 1;
   $('google-map').resize();
 };
 
@@ -77,7 +77,7 @@ scope._onImagesClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 5;
+  this.$.pages.selected = 2;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_images' + path[4];
   $.post(url, '', function(data) {
@@ -131,7 +131,7 @@ scope._onVideosClick = function(event) {
     'fade-in': event.target,
     'fade-out': event.target
   };
-  this.$.pages.selected = 6;
+  this.$.pages.selected = 3;
   path = getUrlPath();
   url = '/ajax/recruiting_token/get_videos' + path[4];
   $.post(url, '', function(data) {
@@ -166,316 +166,81 @@ scope._onVideosClick = function(event) {
   });
 };
 
-scope._onYesClick = function(event) {
-  $('.gt-info-video').remove();
-  $('#placeholder').css('background-color', 'green');
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 1;
-  $('#yes-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#yes-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#yes-email').val()) + '/yes';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#yes-content').text('Thanks for your interest!');
-      }
-    },'json');
+/**
+ * Opens the interest dialog
+ */
+scope._onInterestClick = function(event) {
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.open();
   });
 };
 
-scope._onMaybeClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 2;
-  $('#maybe-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#maybe-submit').click(function( event ) {
-    event.preventDefault();
+/**
+ * Submits interest info
+ */
+scope._submitInterest = function (event) {
+  var formIndex = 0;
+  if ($(event.path[8]).is('location-x-card')) {
+    formIndex = 1;
+  } else if ($(event.path[5]).is('image-x-card')) {
+    formIndex = 2;
+  } else if ($(event.path[5]).is('video-x-card')) {
+    formIndex = 3;
+  } else if ($(event.path[5]).is('description-x-card')) {
+    formIndex = 4;
+  } else
+  event.preventDefault();
+  if ($('.email-paper-input')[formIndex].validate()) {
+    $('.submit-interest-button').addClass('disable-clicks');
     url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#maybe-email').val()) + '/maybe';
+    url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
+    url += '/' + $('#interest-response')[0].selectedItem.value;
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
-        $('#maybe-content').text('Thanks for your interest!');
+        $('.interest-form').text('Thanks for your interest!');
+        $('.submit-interest-button').remove();
+        $('.dismiss-interest-button').text('DISMISS');
+        $('.interest-fab').remove();
+      } else {
+        $('.submit-interest-button').removeClass('disable-clicks');
       }
     },'json');
+  }
+};
+
+/**
+ * Closes the interest dialog
+ */
+scope._closeInterestDialog = function (event) {
+  $('.interest-dialog').each(function (i, dialog){
+    dialog.close();
   });
 };
 
-scope._onNoClick = function(event) {
-  $('.gt-info-video').remove();
-  this.$.list.sharedElements = {
-    'ripple': event.target,
-    'reverse-ripple': event.target
-  };
-  this.$.pages.selected = 3;
-  $('#no-email-form').submit(function(e) {
-    e.preventDefault();
-  });
-  $('#no-submit').click(function( event ) {
-    event.preventDefault();
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#no-email').val()) + '/no';
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('#no-content').text("Thanks for telling us. We'll take you off our list!");
-      }
-    },'json');
-  });
-};
-
+/**
+ * Navigates back to the main page
+ */
 scope._onBackClick = function(event) {
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
 
 $(document).ready(function(){
+  // initial token load (doesn't work if in background tab)
+  loadDataAndPopulateToken();
+
+  // reload the token data whenever the page comes into focus
+  window.onfocus = loadDataAndPopulateToken;
+});
+
+/**
+ * Handle loading the token data and putting it where it should go
+ */
+function loadDataAndPopulateToken() {
   path = getUrlPath();
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
     url = '/ajax/recruiting_token/get' + path[4];
-    $.post(url, '', function(data) {
-      if (data.success == 'false') {
-        window.location.href = 'https://www.gosizzle.io';
-      }
-      var tokenTitle;
-      if (dataExists(data.data.company)) {
-        $('.gt-info-company').text(data.data.company);
-        tokenTitle = data.data.company+' - '+data.data.job_title;
-      } else {
-        tokenTitle = data.data.job_title;
-      }
-      $('title').text(tokenTitle);
-      $('.gt-info-title').text(tokenTitle);
-      $('.gt-info-jobtitle').text(data.data.job_title);
-      $('.gt-info-overview').html(data.data.job_description);
-      var overview = '' + data.data.job_description;
-      var words = overview.split(' ');
-      var shortDescription = '';
-      for (i = 0; i < 50; i++) {
-        if (words[i] !== undefined) {
-          shortDescription += words[i] + ' ';
-        }
-      }
-      var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
-      if (4 < paragraphCount) {
-        shortDescription = shortDescription.substring(0, getPosition(shortDescription, '<p>', 5));
-      }
-      if (words.length >= 50 || 4 < paragraphCount) {
-        shortDescription += ' ... ';
-        shortDescription += '<a href="#overview-section" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
-      }
-      $('.gt-info-overview-short').html(shortDescription);
-      if (!dataExists(data.data.job_description)) {
-        $('#overview-section-2').hide();
-      }
-      var descriptionCount = 0;
-      if (dataExists(data.data.skills_required)) {
-        $('.gt-info-skills').html(data.data.skills_required);
-        descriptionCount++;
-      } else {
-        $('#skills-button').hide();
-        $('#skills-section').hide();
-        $('#skills-section-2').hide();
-      }
-      if (dataExists(data.data.responsibilities)) {
-        $('.gt-info-responsibilities').html(data.data.responsibilities);
-        descriptionCount++;
-      } else {
-        $('#responsibilities-button').hide();
-        $('#responsibilities-section').hide();
-        $('#responsibilities-section-2').hide();
-      }
-      if (dataExists(data.data.company_values)) {
-        $('.gt-info-values').html(data.data.company_values);
-        descriptionCount++;
-      } else {
-        $('#values-button').hide();
-        $('#values-section').hide();
-        $('#values-section-2').hide();
-      }
-      if (dataExists(data.data.perks)) {
-        $('.gt-info-perks').html(data.data.perks);
-        descriptionCount++;
-      } else {
-        $('#perks-button').hide();
-        $('#perks-section').hide();
-        $('#perks-section-2').hide();
-      }
-
-      if (dataExists(data.data.company_description)) {
-        $('#company-description-text').html(data.data.company_description);
-      } else {
-        $('#company-description').hide();
-      }
-
-      if (descriptionCount < 4) {
-        switch (descriptionCount) {
-          case 3:
-          $('.job-description-option').removeClass('mdl-cell--3-col');
-          //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
-          $('.job-description-option').addClass('mdl-cell--4-col');
-          break;
-          case 2:
-          $('.job-description-option').removeClass('mdl-cell--3-col');
-          $('.job-description-option').addClass('mdl-cell--6-col');
-          break;
-          case 1:
-          $('.job-description-option').removeClass('mdl-cell--3-col');
-          //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
-          $('.job-description-option').addClass('mdl-cell--12-col');
-          break;
-        }
-      }
-      if(dataExists(data.data.city_id)) {
-        cityId = data.data.city_id;
-        url = '/ajax/city/get/'+cityId;
-        $.post(url, '', function(data) {
-          if (data.data.id !== undefined & data.data.id > 0) {
-            $('.gt-info-location').text(data.data.name);
-            var population = numberWithCommas(data.data.population);
-            $('.gt-city-population').text(population);
-            $('.gt-city-timezone').text(data.data.timezone);
-            $('.gt-city-county').text(data.data.county);
-            $('google-map')[0].latitude = data.data.latitude;
-            $('google-map')[0].longitude = data.data.longitude;
-            $('.gt-city-spring-hi').text(data.data.temp_hi_spring);
-            $('.gt-city-spring-lo').text(data.data.temp_lo_spring);
-            $('.gt-city-spring-avg').text(data.data.temp_avg_spring);
-            $('.gt-city-summer-hi').text(data.data.temp_hi_summer);
-            $('.gt-city-summer-lo').text(data.data.temp_lo_summer);
-            $('.gt-city-summer-avg').text(data.data.temp_avg_summer);
-            $('.gt-city-fall-hi').text(data.data.temp_hi_fall);
-            $('.gt-city-fall-lo').text(data.data.temp_lo_fall);
-            $('.gt-city-fall-avg').text(data.data.temp_avg_fall);
-            $('.gt-city-winter-hi').text(data.data.temp_hi_winter);
-            $('.gt-city-winter-lo').text(data.data.temp_lo_winter);
-            $('.gt-city-winter-avg').text(data.data.temp_avg_winter);
-            assetHost = getAssetHost();
-            $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.data.image_file+"') center / cover");
-            $('#location-back').css('background',"url('"+assetHost+"/"+data.data.image_file+"') center / cover");
-          }
-        });
-      } else {
-        $('#location-frontpage').remove();
-      }
-      var socialCount = 0;
-      if (dataExists(data.data.company_twitter)) {
-        $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
-        socialCount++;
-      } else {
-        $('.gt-info-twitter').remove();
-      }
-      if (dataExists(data.data.company_facebook)) {
-        $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
-        socialCount++;
-      } else {
-        $('.gt-info-facebook').remove();
-      }
-      if (dataExists(data.data.company_linkedin)) {
-        $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
-        socialCount++;
-      } else {
-        $('.gt-info-linkedin').remove();
-      }
-      if (dataExists(data.data.company_youtube)) {
-        $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
-        socialCount++;
-      } else {
-        $('.gt-info-youtube').remove();
-      }
-      if (dataExists(data.data.company_google_plus)) {
-        $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
-        socialCount++;
-      } else {
-        $('.gt-info-gplus').remove();
-      }
-      if (dataExists(data.data.company_pinterest)) {
-        $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
-        socialCount++;
-      } else {
-        $('.gt-info-pinterest').remove();
-      }
-      if (socialCount < 6) {
-        switch (socialCount) {
-          case 5:
-          $('.frontpage-social-button').css('width','20%');
-          break;
-          case 4:
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-          $('.frontpage-social-button').addClass('mdl-cell--3-col');
-          break;
-          case 3:
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
-          $('.frontpage-social-button').addClass('mdl-cell--4-col');
-          break;
-          case 2:
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-          $('.frontpage-social-button').addClass('mdl-cell--6-col');
-          break;
-          case 1:
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-          $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
-          $('.frontpage-social-button').addClass('mdl-cell--12-col');
-          break;
-        }
-      }
-      if (dataExists(data.data.company_logo)) {
-        $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
-      }
-      if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
-        $('#bio-button').remove();
-        $('#contact-button').remove();
-        $('#schedule-button').remove();
-        url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
-        $.post(url, '', function(data) {
-          if (data.data !== undefined) {
-            assetHost = getAssetHost();
-            if (dataExists(data.data.face_image)) {
-              //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
-              $('#icon-or-face').remove();
-              $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
-            }
-            if (dataExists(data.data.position)) {
-              $('#gt-info-recruiter-position').html(data.data.position);
-            } else {
-              $('#gt-info-recruiter-position').remove();
-            }
-            if (dataExists(data.data.about)) {
-              $('#gt-info-recruiter-bio').html(data.data.about);
-            } else {
-              $('#gt-info-recruiter-bio').remove();
-            }
-            if (dataExists(data.data.linkedin)) {
-              $('#linkedin-button').attr('href', data.data.linkedin);
-              $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
-              $('.recruiter-profile-option').addClass('mdl-cell--12-col');
-            } else {
-              $('#linkedin-button').remove();
-            }
-            if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
-              $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
-            } else {
-              // if there are no names a recruiter profile doens't make sense
-              $('#recruiter-section').remove();
-            }
-          } else {
-            $('#recruiter-section').remove();
-          }
-        },'json');
-      } else {
-        $('#recruiter-section').remove();
-      }
-    },'json');
+    $.post(url, '', handleAjaxRecruitingTokenGet,'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -506,13 +271,7 @@ $(document).ready(function(){
       }
     });
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
-    $.post(url, '', function(data) {
-      if (data.data !== undefined && data.data.allowed !== undefined) {
-        if ('false' == data.data.allowed) {
-          $('#interested-row').hide();
-        }
-      }
-    });
+    $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -539,7 +298,7 @@ $(document).ready(function(){
     window.location.href = 'https://www.gosizzle.io';
   }
   smallScreen();
-});
+}
 
 /**
  * Makes adjustments for small screens
@@ -609,4 +368,284 @@ function getAssetHost() {
  */
 function getPosition(str, m, i) {
    return str.split(m, i).join(m).length;
+}
+
+/**
+ * Handles the data return from ajax/city/get
+ *
+ * @param {object} the data
+ */
+function handleAjaxCityGet(data) {
+  if (data.id !== undefined & data.id > 0) {
+    $('.gt-info-location').text(data.name);
+    var population = numberWithCommas(data.population);
+    $('.gt-city-population').text(population);
+    $('.gt-city-timezone').text(data.timezone);
+    $('.gt-city-county').text(data.county);
+    $('google-map')[0].latitude = data.latitude;
+    $('google-map')[0].longitude = data.longitude;
+    $('.gt-city-spring-hi').text(data.temp_hi_spring);
+    $('.gt-city-spring-lo').text(data.temp_lo_spring);
+    $('.gt-city-spring-avg').text(data.temp_avg_spring);
+    $('.gt-city-summer-hi').text(data.temp_hi_summer);
+    $('.gt-city-summer-lo').text(data.temp_lo_summer);
+    $('.gt-city-summer-avg').text(data.temp_avg_summer);
+    $('.gt-city-fall-hi').text(data.temp_hi_fall);
+    $('.gt-city-fall-lo').text(data.temp_lo_fall);
+    $('.gt-city-fall-avg').text(data.temp_avg_fall);
+    $('.gt-city-winter-hi').text(data.temp_hi_winter);
+    $('.gt-city-winter-lo').text(data.temp_lo_winter);
+    $('.gt-city-winter-avg').text(data.temp_avg_winter);
+    assetHost = getAssetHost();
+    $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+    $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+  }
+}
+
+/**
+ * Handles the data return from /ajax/user/get_recruiter_profile/
+ *
+ * @param {object} the return
+ */
+function handleAjaxUserGetRecruiterProfile(data) {
+  if (data.data !== undefined) {
+    assetHost = getAssetHost();
+    if (dataExists(data.data.face_image)) {
+      //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
+      $('#icon-or-face').remove();
+      $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
+    }
+    if (dataExists(data.data.position)) {
+      $('#gt-info-recruiter-position').html(data.data.position);
+    } else {
+      $('#gt-info-recruiter-position').remove();
+    }
+    if (dataExists(data.data.about)) {
+      $('#gt-info-recruiter-bio').html(data.data.about);
+    } else {
+      $('#gt-info-recruiter-bio').remove();
+    }
+    if (dataExists(data.data.linkedin)) {
+      $('#linkedin-button').attr('href', data.data.linkedin);
+      $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
+      $('.recruiter-profile-option').addClass('mdl-cell--12-col');
+    } else {
+      $('#linkedin-button').remove();
+    }
+    if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
+      $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
+    } else {
+      // if there are no names a recruiter profile doens't make sense
+      $('#recruiter-section').remove();
+    }
+  } else {
+    $('#recruiter-section').remove();
+  }
+}
+
+/**
+ * Handles the data return from /ajax/recruiting_token/get
+ *
+ * @param {object} the return
+ */
+function handleAjaxRecruitingTokenGet(data) {
+  if (data.success == 'false') {
+    window.location.href = 'https://www.gosizzle.io';
+  }
+  var tokenTitle;
+  if (dataExists(data.data.company)) {
+    $('.gt-info-company').text(data.data.company);
+    tokenTitle = data.data.company+' - '+data.data.job_title;
+  } else {
+    tokenTitle = data.data.job_title;
+  }
+  $('title').text(tokenTitle);
+  $('.gt-info-title').text(tokenTitle);
+  $('.gt-info-jobtitle').text(data.data.job_title);
+  $('.gt-info-overview').html(data.data.job_description);
+  var overview = '' + data.data.job_description;
+  var words = overview.split(' ');
+  var shortDescription = '';
+  for (i = 0; i < 50; i++) {
+    if (words[i] !== undefined) {
+      shortDescription += words[i] + ' ';
+    }
+  }
+  var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
+  if (4 < paragraphCount) {
+    shortDescription = shortDescription.substring(0, getPosition(shortDescription, '<p>', 5));
+  }
+  if (words.length >= 50 || 4 < paragraphCount) {
+    shortDescription += ' ... ';
+    shortDescription += '<a href="#overview-section" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
+  }
+  $('.gt-info-overview-short').html(shortDescription);
+  if (!dataExists(data.data.job_description)) {
+    $('#overview-section-2').hide();
+  }
+  var descriptionCount = 0;
+  if (dataExists(data.data.skills_required)) {
+    $('.gt-info-skills').html(data.data.skills_required);
+    descriptionCount++;
+  } else {
+    $('#skills-button').hide();
+    $('#skills-section').hide();
+    $('#skills-section-2').hide();
+  }
+  if (dataExists(data.data.responsibilities)) {
+    $('.gt-info-responsibilities').html(data.data.responsibilities);
+    descriptionCount++;
+  } else {
+    $('#responsibilities-button').hide();
+    $('#responsibilities-section').hide();
+    $('#responsibilities-section-2').hide();
+  }
+  if (dataExists(data.data.company_values)) {
+    $('.gt-info-values').html(data.data.company_values);
+    descriptionCount++;
+  } else {
+    $('#values-button').hide();
+    $('#values-section').hide();
+    $('#values-section-2').hide();
+  }
+  if (dataExists(data.data.perks)) {
+    $('.gt-info-perks').html(data.data.perks);
+    descriptionCount++;
+  } else {
+    $('#perks-button').hide();
+    $('#perks-section').hide();
+    $('#perks-section-2').hide();
+  }
+
+  if (dataExists(data.data.company_description)) {
+    $('#company-description-text').html(data.data.company_description);
+  } else {
+    $('#company-description').hide();
+  }
+
+  if (descriptionCount < 4) {
+    switch (descriptionCount) {
+      case 3:
+      $('.job-description-option').removeClass('mdl-cell--3-col');
+      //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
+      $('.job-description-option').addClass('mdl-cell--4-col');
+      break;
+      case 2:
+      $('.job-description-option').removeClass('mdl-cell--3-col');
+      $('.job-description-option').addClass('mdl-cell--6-col');
+      break;
+      case 1:
+      $('.job-description-option').removeClass('mdl-cell--3-col');
+      //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
+      $('.job-description-option').addClass('mdl-cell--12-col');
+      break;
+    }
+  }
+  if(dataExists(data.data.city_id)) {
+    cityId = data.data.city_id;
+    url = '/ajax/city/get/'+cityId;
+    $.post(url, '', function(data) {
+      handleAjaxCityGet(data.data);
+    });
+  } else {
+    $('#location-frontpage').remove();
+  }
+  var socialCount = 0;
+  if (dataExists(data.data.company_twitter)) {
+    $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
+    socialCount++;
+  } else {
+    $('.gt-info-twitter').remove();
+  }
+  if (dataExists(data.data.company_facebook)) {
+    $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
+    socialCount++;
+  } else {
+    $('.gt-info-facebook').remove();
+  }
+  if (dataExists(data.data.company_linkedin)) {
+    $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
+    socialCount++;
+  } else {
+    $('.gt-info-linkedin').remove();
+  }
+  if (dataExists(data.data.company_youtube)) {
+    $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
+    socialCount++;
+  } else {
+    $('.gt-info-youtube').remove();
+  }
+  if (dataExists(data.data.company_google_plus)) {
+    $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
+    socialCount++;
+  } else {
+    $('.gt-info-gplus').remove();
+  }
+  if (dataExists(data.data.company_pinterest)) {
+    $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
+    socialCount++;
+  } else {
+    $('.gt-info-pinterest').remove();
+  }
+  if (socialCount < 6) {
+    switch (socialCount) {
+      case 5:
+      $('.frontpage-social-button').css('width','20%');
+      break;
+      case 4:
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+      $('.frontpage-social-button').addClass('mdl-cell--3-col');
+      break;
+      case 3:
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
+      $('.frontpage-social-button').addClass('mdl-cell--4-col');
+      break;
+      case 2:
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+      $('.frontpage-social-button').addClass('mdl-cell--6-col');
+      break;
+      case 1:
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
+      $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
+      $('.frontpage-social-button').addClass('mdl-cell--12-col');
+      break;
+    }
+  }
+  if (dataExists(data.data.company_logo)) {
+    $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
+  }
+  if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
+    $('#bio-button').remove();
+    $('#contact-button').remove();
+    $('#schedule-button').remove();
+    url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
+    $.post(url, '', handleAjaxUserGetRecruiterProfile, 'json');
+  } else {
+    $('#recruiter-section').remove();
+  }
+}
+
+/**
+ * Handles the data return from /ajax/recruiting_token/get_responses_allowed
+ *
+ * @param {object} the return
+ */
+function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
+  if (data.data !== undefined && data.data.allowed !== undefined) {
+    if ('false' == data.data.allowed) {
+      $('.interest-fab').hide();
+    } else {
+      // display the response form once after 10 seconds
+      if (!presentedInterestPopup) {
+        setTimeout(function(){
+          $('.interest-dialog').each(function (i, dialog){
+            dialog.open();
+          });
+        },
+        10000);
+        presentedInterestPopup = true;
+      }
+    }
+  }
 }

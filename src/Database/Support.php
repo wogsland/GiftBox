@@ -8,7 +8,6 @@ class Support extends \Sizzle\DatabaseEntity
 {
     protected $email_address;
     protected $message;
-    protected $created;
 
     /**
      * Saves a receipt of the sent support mail..
@@ -16,7 +15,7 @@ class Support extends \Sizzle\DatabaseEntity
      * @param $email_address
      * @param $message
      */
-    public static function create($email_address, $message)
+    public static function create(string $email_address, string $message)
     {
         $Support = new Support();
         $Support->email_address = $email_address;

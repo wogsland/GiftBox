@@ -11,14 +11,13 @@ class EmailCredential extends \Sizzle\DatabaseEntity
     protected $password;
     protected $smtp_host;
     protected $smtp_port;
-    protected $created;
 
     /**
      * This function constructs the class
      *
      * @param int $id - optional id of the email credentials
      */
-    public function __construct($id = null)
+    public function __construct(int $id = null)
     {
         if ($id !== null) {
             $id = (int) $id;
@@ -46,7 +45,7 @@ class EmailCredential extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($user_id, $username, $password, $smtp_host, $smtp_port)
+    public function create(int $user_id, string $username, string $password, string $smtp_host, string $smtp_port)
     {
         $this->unsetAll();
         $this->user_id = $user_id;
@@ -71,7 +70,7 @@ class EmailCredential extends \Sizzle\DatabaseEntity
      *
      * @return boolean - success of update
      */
-    public function update($username, $password, $smtp_host, $smtp_port)
+    public function update(string $username, string $password, string $smtp_host, string $smtp_port)
     {
         $id = 0;
         if (isset($this->id)) {
@@ -111,7 +110,7 @@ class EmailCredential extends \Sizzle\DatabaseEntity
      *
      * @return array - email credentials associated with the user
      */
-    public function getByUserId($user_id)
+    public function getByUserId(int $user_id)
     {
         $return = array();
         $user_id = (int) $user_id;

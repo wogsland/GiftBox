@@ -2,8 +2,7 @@
 namespace Sizzle\Tests\Ajax\Email\Credential;
 
 use \Sizzle\Database\{
-    EmailCredential,
-    User
+    EmailCredential
 };
 
 /**
@@ -14,6 +13,8 @@ use \Sizzle\Database\{
 class DeleteTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,11 +29,7 @@ extends \PHPUnit_Framework_TestCase
     public function testRequest()
     {
         // create credential
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
+        $User = $this->createUser();
         $user_id = $User->id;
         $username = 'user'.rand();
         $password = 'my'.rand();
@@ -128,6 +125,14 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        $this->deleteUsers();
     }
 }
 ?>

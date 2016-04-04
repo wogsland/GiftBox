@@ -2,8 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    EmailList,
-    User
+    EmailList
 };
 
 /**
@@ -14,6 +13,8 @@ use \Sizzle\Database\{
 class EmailListTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\User;
+
     /**
      * Requires the util.php file of functions
      */
@@ -28,12 +29,7 @@ extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
     }
 
     /**
@@ -123,5 +119,13 @@ extends \PHPUnit_Framework_TestCase
         // test with old (now "deleted") id
         $EmailList2 = new EmailList($id);
         $this->assertFalse(isset($EmailList2->id));
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        //$this->deleteUsers();
     }
 }

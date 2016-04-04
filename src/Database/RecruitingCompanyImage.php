@@ -1,11 +1,13 @@
 <?php
 namespace Sizzle\Database;
 
+/**
+ * This class is for interacting with the recruiting_company_image table.
+ */
 class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
 {
     protected $recruiting_company_id;
     protected $file_name;
-    protected $created;
 
     /**
      * This function creates an entry in the recruiting_company_image table
@@ -15,7 +17,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
      *
      * @return int $id - id of inserted row or 0 on fail
      */
-    public function create($recruiting_company_id, $file_name)
+    public function create(int $recruiting_company_id, string $file_name)
     {
         $this->unsetAll();
         $this->recruiting_company_id = $recruiting_company_id;
@@ -31,7 +33,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
      *
      * @return array - images associated with the token
      */
-    public function getByRecruitingTokenId($recruiting_token_id)
+    public function getByRecruitingTokenId(int $recruiting_token_id)
     {
         $return = array();
         $recruiting_token_id = (int) $recruiting_token_id;
@@ -53,7 +55,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
      *
      * @return array - images associated with the token
      */
-    public function getByRecruitingTokenLongId($long_id)
+    public function getByRecruitingTokenLongId(string $long_id)
     {
         $return = array();
         $long_id = escape_string($long_id);
@@ -75,7 +77,7 @@ class RecruitingCompanyImage extends \Sizzle\DatabaseEntity
      *
      * @return array - images associated with the company
      */
-    public function getByCompanyId($id)
+    public function getByCompanyId(int $id)
     {
         $return = array();
         $id = (int) $id;

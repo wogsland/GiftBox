@@ -10,6 +10,7 @@ implements \JsonSerializable
     use \Sizzle\Traits\CamelToUnderscore;
 
     protected $id;
+    protected $created;
     protected $readOnly = ['id','readOnly','created'];
 
     /**
@@ -20,6 +21,7 @@ implements \JsonSerializable
     public function __construct($id = null)
     {
         if ($id !== null && strlen($id) > 0) {
+            $id = escape_string($id);
             $sql = "SELECT * FROM {$this->tableName()} WHERE id = '$id'";
             $object = execute_query($sql)->fetch_object(get_class($this));
             if (isset($object)) {
@@ -37,7 +39,7 @@ implements \JsonSerializable
      *
      * @return mixed - the class property
      */
-    public function __get($property)
+    public function __get(string $property)
     {
         if (isset($this->$property)) {
             return $this->$property;
@@ -51,7 +53,7 @@ implements \JsonSerializable
      * @param string $property - the class property to set
      * @param mixed  $value    - the value to set the property to
      */
-    public function __set($property, $value)
+    public function __set(string $property, $value)
     {
         if (!in_array($property, $this->readOnly) || is_subclass_of($this, 'Sizzle\DatabaseEntity')) {
             $this->$property = $value;
@@ -65,7 +67,7 @@ implements \JsonSerializable
      *
      * @return bool - if the property is set
      */
-    public function __isset($property)
+    public function __isset(string $property)
     {
         return isset($this->$property);
     }
@@ -81,7 +83,7 @@ implements \JsonSerializable
     /**
      * Appends to the list of read only columns
      */
-    protected function addReadOnly($column)
+    protected function addReadOnly(string $column)
     {
         array_push($this->readOnly, $column);
     }

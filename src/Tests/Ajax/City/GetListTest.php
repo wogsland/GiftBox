@@ -1,8 +1,6 @@
 <?php
 namespace Sizzle\Tests\Ajax\City;
 
-use Sizzle\Database\City;
-
 /**
  * This class tests the ajax endpoint to get a city.
  *
@@ -10,7 +8,10 @@ use Sizzle\Database\City;
  */
 class GetListTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\City;
+
     protected $city;
+
     /**
      * Requires the util.php file of functions
      */
@@ -106,39 +107,11 @@ class GetListTest extends \PHPUnit_Framework_TestCase
         ob_end_clean();
     }
 
-    public function tearDown()
-    {
-        $this->city->delete();
-    }
-
     /**
-     * Create a city
+     * Delete cities created for testing
      */
-    protected function createCity($name = null)
+    protected function tearDown()
     {
-        // create a city for testing
-        $city = new City();
-        $city->name = $name ?? "Test City";
-        $city->image_file = rand().".png";
-        $city->population = rand(10000, 10000000);
-        $city->longitude = rand(0, 100);
-        $city->latitude = rand(0, 100);
-        $city->county = "County " . rand(0, 100);
-        $city->country = "CT";
-        $city->timezone = "Awesome Standard Time";
-        $city->temp_hi_spring = rand(0, 100);
-        $city->temp_lo_spring = rand(0, 100);
-        $city->temp_avg_spring = rand(0, 100);
-        $city->temp_hi_summer = rand(0, 100);
-        $city->temp_lo_summer = rand(0, 100);
-        $city->temp_avg_summer = rand(0, 100);
-        $city->temp_hi_fall = rand(0, 100);
-        $city->temp_lo_fall = rand(0, 100);
-        $city->temp_avg_fall = rand(0, 100);
-        $city->temp_hi_winter = rand(0, 100);
-        $city->temp_lo_winter = rand(0, 100);
-        $city->temp_avg_winter = rand(0, 100);
-        $city->save();
-        return $city;
+        $this->deleteCities();
     }
 }

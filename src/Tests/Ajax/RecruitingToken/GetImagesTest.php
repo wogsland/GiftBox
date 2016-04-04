@@ -2,20 +2,19 @@
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
 use \Sizzle\Database\{
-    RecruitingCompany,
-    RecruitingCompanyImage,
-    RecruitingToken,
-    User
+    RecruitingCompanyImage
 };
 
 /**
  * This class tests the ajax endpoint to get the images for a token.
  *
- * phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/RecruitingToken/GetImagesTest
+ * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/RecruitingToken/GetImagesTest
  */
 class GetImagesTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -29,40 +28,21 @@ extends \PHPUnit_Framework_TestCase
      */
     public function testRequest()
     {
-        // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
-
-        // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'The '.rand().' Company';
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
-
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $recruitingToken = $this->createRecruitingToken();
 
         // setup test images
         $RecruitingCompanyImage = new RecruitingCompanyImage();
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id[1] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
-        $id[2] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
-        $id[3] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $id[1] = $RecruitingCompanyImage->create($recruitingToken->recruiting_company_id, $file_name[1]);
+        $id[2] = $RecruitingCompanyImage->create($recruitingToken->recruiting_company_id, $file_name[2]);
+        $id[3] = $RecruitingCompanyImage->create($recruitingToken->recruiting_company_id, $file_name[3]);
+        $this->images = $id;
 
         // test for created images
-        $url = TEST_URL . "/ajax/recruiting_token/get_images/{$RecruitingToken->long_id}";
+        $url = TEST_URL . "/ajax/recruiting_token/get_images/{$recruitingToken->long_id}";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
@@ -97,6 +77,20 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('false', $return->success);
         $this->assertEquals('', $return->data);
         ob_end_clean();
+    }
+
+    /**
+     * Delete things created for testing
+     */
+    protected function tearDown()
+    {
+        if (isset($this->images)) {
+            foreach ($this->images as $id) {
+                $sql = "DELETE FROM recruiting_company_image WHERE id = '$id'";
+                execute($sql);
+            }
+        }
+        $this->deleteRecruitingTokens();
     }
 }
 ?>

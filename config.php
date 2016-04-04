@@ -4,10 +4,13 @@ use Monolog\{
     Handler\SlackHandler,
     Logger
 };
-use Sizzle\Connection;
+use Sizzle\{
+    Connection,
+    Database\WebRequest
+};
 
 // set relesae version
-define('VERSION', '1.10.5');
+define('VERSION', '1.10.6');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
@@ -102,23 +105,16 @@ if (isset($_COOKIE, $_COOKIE['visitor'])) {
 }
 // set or reset cookie to expire in a year
 setcookie('visitor', $visitor_cookie, time()+60*60*24*365);
+$webRequest = new WebRequest();
+$webRequest->visitor_cookie = $visitor_cookie;
 if (isset($_SESSION, $_SESSION['user_id'])) {
-    $user_id = escape_string($_SESSION['user_id']);
-    $insert_user_id = ' `user_id`, ';
-    $value_user_id = " '{$user_id}', ";
-} else {
-    $insert_user_id = '';
-    $value_user_id = '';
+    $webRequest->user_id = $_SESSION['user_id'];
 }
 if (isset($_SERVER)) {
-    $host = escape_string($_SERVER['HTTP_HOST'] ?? '');
-    $user_agent = escape_string($_SERVER['HTTP_USER_AGENT'] ?? '');
-    $uri = escape_string($_SERVER['REQUEST_URI'] ?? '');
-    $remote_ip = escape_string($_SERVER['REMOTE_ADDR'] ?? '');
-    $script = escape_string($_SERVER['SCRIPT_NAME'] ?? '');
-    $query = "INSERT INTO web_request
-        ($insert_user_id `visitor_cookie`, `host`, `user_agent`, `uri`, `remote_ip`, `script`)
-        VALUES
-        ($value_user_id '$visitor_cookie', '$host', '$user_agent', '$uri', '$remote_ip', '$script')";
-    insert($query);
+    $webRequest->host = ($_SERVER['HTTP_HOST'] ?? '');
+    $webRequest->user_agent = ($_SERVER['HTTP_USER_AGENT'] ?? '');
+    $webRequest->uri = ($_SERVER['REQUEST_URI'] ?? '');
+    $webRequest->remote_ip = ($_SERVER['REMOTE_ADDR'] ?? '');
+    $webRequest->script = ($_SERVER['SCRIPT_NAME'] ?? '');
+    $webRequest->save();
 }

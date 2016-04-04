@@ -30,7 +30,7 @@ if (logged_in() && is_admin()) {
     $City = new City();
     foreach ($vars as $var) {
         if (isset($_POST[$var]) && '' != $_POST[$var]) {
-            $City->$var = escape_string($_POST[$var]);
+            $City->$var = $_POST[$var];
         } else {
             $missing_var = true;
         }

@@ -2,10 +2,7 @@
 namespace Sizzle\Tests\Database;
 
 use \Sizzle\Database\{
-    RecruitingCompany,
-    RecruitingCompanyImage,
-    RecruitingToken,
-    User
+    RecruitingCompanyImage
 };
 
 /**
@@ -16,6 +13,8 @@ use \Sizzle\Database\{
 class RecruitingCompanyImageTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\RecruitingToken;
+
     /**
      * Requires the util.php file of functions
      */
@@ -30,27 +29,16 @@ extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // setup test user
-        $User = new User();
-        $User->email_address = rand();
-        $User->first_name = rand();
-        $User->last_name = rand();
-        $User->save();
-        $this->User = $User;
+        $this->User = $this->createUser();
 
         // setup test company
-        $RecruitingCompany = new RecruitingCompany();
-        $RecruitingCompany->user_id = $this->User->id;
-        $RecruitingCompany->name = 'The '.rand().' Company';
-        $RecruitingCompany->save();
-        $this->RecruitingCompany = $RecruitingCompany;
+        $this->RecruitingCompany = $this->createRecruitingCompany($this->User->id);
 
         // setup test token
-        $RecruitingToken = new RecruitingToken();
-        $RecruitingToken->user_id = $this->User->id;
-        $RecruitingToken->long_id = substr(md5(microtime()), rand(0, 26), 20);
-        $RecruitingToken->recruiting_company_id = $RecruitingCompany->id;
-        $RecruitingToken->save();
-        $this->RecruitingToken = $RecruitingToken;
+        $this->RecruitingToken = $this->createRecruitingToken($this->User->id, $this->RecruitingCompany->id);
+
+        // test images
+        $this->images = array();
     }
 
     /**
@@ -73,6 +61,7 @@ extends \PHPUnit_Framework_TestCase
         $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
                   VALUES ('{$this->RecruitingCompany->id}', '$file_name')";
         $id = insert($query);
+        $this->images[] = $id;
         $result = new RecruitingCompanyImage($id);
         $this->assertEquals('Sizzle\Database\RecruitingCompanyImage', get_class($result));
         $this->assertTrue(isset($result->id));
@@ -91,6 +80,7 @@ extends \PHPUnit_Framework_TestCase
         $file_name = rand().'.jpg';
         $RecruitingCompanyImage = new RecruitingCompanyImage();
         $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name);
+        $this->images[] = $id;
         $this->assertEquals($RecruitingCompanyImage->id, $id);
         $this->assertEquals($RecruitingCompanyImage->file_name, $file_name);
         $this->assertEquals($RecruitingCompanyImage->recruiting_company_id, $this->RecruitingCompany->id);
@@ -112,6 +102,7 @@ extends \PHPUnit_Framework_TestCase
         $query = "INSERT INTO recruiting_company_image (recruiting_company_id, file_name)
                   VALUES ('{$this->RecruitingCompany->id}', '$file_name')";
         $id = insert($query);
+        $this->images[] = $id;
         $result = new RecruitingCompanyImage($id);
         $this->assertTrue(isset($result->id));
 
@@ -147,9 +138,9 @@ extends \PHPUnit_Framework_TestCase
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
         $images = $RecruitingCompanyImage->getByRecruitingTokenId($this->RecruitingToken->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
@@ -175,9 +166,9 @@ extends \PHPUnit_Framework_TestCase
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
         $images = $RecruitingCompanyImage->getByRecruitingTokenLongId($this->RecruitingToken->long_id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
@@ -203,9 +194,9 @@ extends \PHPUnit_Framework_TestCase
         $file_name[1] = rand().'.jpg';
         $file_name[2] = rand().'.jpg';
         $file_name[3] = rand().'.jpg';
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
-        $id = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[1]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[2]);
+        $this->images[] = $RecruitingCompanyImage->create($this->RecruitingCompany->id, $file_name[3]);
         $images = $RecruitingCompanyImage->getByCompanyId($this->RecruitingCompany->id);
         $this->assertTrue(is_array($images));
         $this->assertEquals(count($images), 3);
@@ -213,5 +204,17 @@ extends \PHPUnit_Framework_TestCase
             $this->assertTrue($image['id'] > 0);
             $this->assertTrue(in_array($image['file_name'], $file_name));
         }
+    }
+
+    /**
+     * Delete users created for testing
+     */
+    protected function tearDown()
+    {
+        foreach($this->images as $id) {
+            $sql = "DELETE FROM recruiting_company_image WHERE id = '$id'";
+            execute($sql);
+        }
+        $this->deleteRecruitingTokens();
     }
 }

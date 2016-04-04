@@ -18,7 +18,7 @@ if (logged_in()) {
         'bcc'
     ];
     foreach ($params as $param) {
-        $$param = isset($_POST[$param]) ? escape_string($_POST[$param]) : null;
+        $$param = $_POST[$param] ?? null;
     }
 
     // check if all required params set

@@ -258,7 +258,7 @@ extends \PHPUnit_Framework_TestCase
      *
      * @return boolean - desired status code was returned
      */
-    private function checkStatusCode($endpoint, $loggedIn = false, $statusCode = 200, $isAdmin = false)
+    private function checkStatusCode(string $endpoint, bool $loggedIn = false, int $statusCode = 200, bool $isAdmin = false)
     {
         $url = TEST_URL . $endpoint;
         ob_start();
