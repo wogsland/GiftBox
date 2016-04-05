@@ -371,8 +371,8 @@ require __DIR__.'/header.php';
         <h2>Upload video from web address</h2>
         <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
         <div class="buttons">
-            <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
+            <paper-button class="dialog-button video-dialog-button" onclick="processVideoURL()">Add</paper-button>
+            <paper-button dialog-dismiss class="dialog-button video-dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
         </div>
     </paper-dialog>
 

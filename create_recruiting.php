@@ -334,15 +334,6 @@ require __DIR__.'/header.php';
         </div>
     </paper-dialog>
 
-    <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
-        <h2>Upload video from web address</h2>
-        <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
-        </div>
-    </paper-dialog>
-
     <paper-dialog class="recruiting-dialog" id="validation-dialog" modal>
         <h2>Problem...</h2>
         <p id="validation-message">No message supplied</p>

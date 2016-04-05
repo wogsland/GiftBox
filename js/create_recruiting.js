@@ -28,8 +28,7 @@ function openVimeo(vimeoUrl){
   var videoId = vimeoId(vimeoUrl);
   var fileFound = false;
   if (videoId) {
-    var eventTarget = event.target;
-    $(eventTarget).addClass("disable-clicks");
+    $('.video-dialog-button').addClass("disable-clicks");
     var dataURL = "https://vimeo.com/api/v2/video/"+ videoId +".json";
     $.ajax({
       type: 'POST',
@@ -54,7 +53,7 @@ function openVimeo(vimeoUrl){
         $('#video-dialog-url').attr('label', 'Please choose a valid Vimeo URL.');
       },
       complete: function() {
-        $(eventTarget).removeClass("disable-clicks");
+        $('.video-dialog-button').removeClass("disable-clicks");
       }
     });
   } else {
@@ -73,8 +72,7 @@ function openVimeo(vimeoUrl){
 function openYouTube(url) {
   var videoId = youTubeId(url);
   if (videoId) {
-    var eventTarget = event.target;
-    $(eventTarget).addClass("disable-clicks");
+    $('.video-dialog-button').addClass("disable-clicks");
     var imageUrl = "https://img.youtube.com/vi/"+videoId+"/0.jpg";
     var fileFound = false;
     $.ajax({
@@ -96,7 +94,7 @@ function openYouTube(url) {
         }
       },
       complete: function() {
-        $(eventTarget).removeClass("disable-clicks");
+        $('.video-dialog-button').removeClass("disable-clicks");
       }
     });
     return fileFound;
@@ -437,8 +435,7 @@ function saveCompany() {
     linkifyCompanyText();
     setStatus("Saving company...");
     serializedForm = document.getElementById("recruiting-company-form").serialize();
-    var eventTarget = event.target;
-    $(eventTarget).addClass("disable-clicks");
+    $('#save-continue-button').addClass("disable-clicks");
     $.ajax({
       type: 'POST',
       async: false,
@@ -497,7 +494,7 @@ function saveCompany() {
     }).fail(function() {
       alert("Save failed");
     }).always(function() {
-      $(eventTarget).removeClass("disable-clicks");
+      $('#save-continue-button').removeClass("disable-clicks");
     });
   }
 }
