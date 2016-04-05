@@ -299,7 +299,7 @@ require __DIR__.'/header.php';
             */ ?>
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
-                <paper-button raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
+                <paper-button id="save-continue-button" raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
             </div>
             <?php /*if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">

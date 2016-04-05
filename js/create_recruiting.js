@@ -388,8 +388,7 @@ function saveRecruitingToken(preview) {
     } else {
       serializedForm.recruiter_profile = 'N';
     }
-    var eventTarget = event.target;
-    $(eventTarget).addClass("disable-clicks");
+    $('#save-continue-button').addClass("disable-clicks");
     $.ajax({
       type: "POST",
       url: "/ajax/recruiting_token/save/",
@@ -423,7 +422,7 @@ function saveRecruitingToken(preview) {
     }).fail(function() {
       alert("Save failed");
     }).always(function() {
-      $(eventTarget).removeClass("disable-clicks");
+      $('#save-continue-button').removeClass("disable-clicks");
     });
   }
 }
