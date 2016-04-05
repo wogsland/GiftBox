@@ -73,8 +73,7 @@ function handleFBLogin(response) {
       api_response.login_email = api_response.email;
       response.email = api_response.email;
       response.access_token = FB.getAuthResponse().accessToken;
-      var eventTarget = event.target;
-      $(eventTarget).addClass("disable-clicks");
+      $('.dialog-button-center').addClass("disable-clicks");
       $.post("ajax/user/update_access_token", response, function(data, textStatus, jqXHR){
         if(data.status === "SUCCESS"){
           processLogin(api_response);
@@ -86,7 +85,7 @@ function handleFBLogin(response) {
       }).fail(function() {
         loginError("Facebook authorization failed");
       }).always(function() {
-        $(eventTarget).removeClass("disable-clicks");
+        $('.dialog-button-center').removeClass("disable-clicks");
       });
     });
     } else if (response.status === 'not_authorized') {
