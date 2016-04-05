@@ -40,8 +40,7 @@ function loginFacebook() {
 
 function processLogin(userInfo) {
   loginInfo("Logging into S!zzle.  Please wait...");
-  var eventTarget = event.target;
-  $(eventTarget).addClass("disable-clicks");
+  $('.dialog-button-center').addClass("disable-clicks");
   $.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
       loginSuccess(data.app_root+'profile');
@@ -53,7 +52,7 @@ function processLogin(userInfo) {
   }).fail(function() {
     loginError("Login failed.");
   }).always(function() {
-    $(eventTarget).removeClass("disable-clicks");
+    $('.dialog-button-center').removeClass("disable-clicks");
   });
 }
 
