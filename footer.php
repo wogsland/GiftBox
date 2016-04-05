@@ -100,7 +100,6 @@
      SCRIPTS
 ============================== -->
 <script src="/js/dist/sizzle.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) {
   /** TODO Move these into marketing.min build */
 ?>

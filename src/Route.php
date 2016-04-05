@@ -142,9 +142,6 @@ class Route
                     include $this->default;
                 } else {
                     switch ($this->endpointPieces[2]) {
-                    case 'pay_with_stripe.js':
-                        include __DIR__.'/../pay_with_stripe.php';
-                        break;
                     default:
                         include $this->default;
                     }
