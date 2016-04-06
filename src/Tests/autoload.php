@@ -22,7 +22,7 @@ require_once __DIR__.'/../../util.php';
  *
  * @return string - a cookie to access a logged in session
  */
-function getTestCookie($admin = false)
+function getTestCookie($admin = false, $shouldReturnCreatedUserId = false)
 {
     $password = 'nachos';
     $hash = password_hash($password, PASSWORD_DEFAULT);
@@ -43,7 +43,8 @@ function getTestCookie($admin = false)
     $result = curl_exec($ch);
     preg_match_all('/^Set-Cookie: PHPSESSID=(.*?);/mi', $result, $matches);
     $userCookie = $matches[1][0];
-    return 'PHPSESSID=' . $userCookie . ';';
+    $cookieString = 'PHPSESSID=' . $userCookie . ';';
+    return $shouldReturnCreatedUserId ? array($cookieString, $id) : $cookieString;
 }
 define('TEST_COOKIE', getTestCookie());
 if (!defined('FILE_STORAGE_PATH')) {
