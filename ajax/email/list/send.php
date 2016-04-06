@@ -17,7 +17,8 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
         'token_id',
         'email_list_id',
         'message',
-        'email_credential_id'
+        'email_credential_id',
+        'subject'
     ];
     $allSet = true;
     foreach ($params as $param) {
@@ -96,7 +97,7 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             if (isset($bcc)) {
                 $mail->addCC($bcc);
             }
-            $mail->Subject = $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
+            $mail->Subject = $subject ?? $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
             $email_message = file_get_contents(__DIR__.'/../../../email_templates/recruiting_token.inline.html');
             $email_message = str_replace('{{message}}', ($message ?? ''), $email_message);
             $link = APP_URL.'token/recruiting/'.$token_id;
