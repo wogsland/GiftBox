@@ -35,7 +35,7 @@ require __DIR__.'/header.php';
         </p>
         <iframe
           id="jobs-iframe"
-          src="<?=APP_URL.'job_listing?id=1'?>"
+          src="<?=APP_URL.'job_listing?id=sizzle'?>"
           height="400"
           width="100%"
           frameborder="0">

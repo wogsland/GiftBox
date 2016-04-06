@@ -1,5 +1,8 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Database\{
+    Organization,
+    User
+};
 
 date_default_timezone_set('America/Chicago');
 
@@ -8,7 +11,9 @@ if (!logged_in()) {
 }
 
 $user = new User($_SESSION['user_id'] ?? '');
-
+if (isset($user->organization_id) && 0 < (int) $user->organization_id) {
+    $organization = new Organization($user->organization_id);
+}
 define('TITLE', 'S!zzle - Get iframe Code');
 require __DIR__.'/header.php';
 ?>
@@ -22,7 +27,7 @@ require __DIR__.'/header.php';
   </div>
   <div class="row" id="datatable-div">
     <div class="col-sm-offset-2 col-sm-8">
-      <?php if (isset($user->organization_id) && 0 < (int) $user->organization_id) { ?>
+      <?php if (isset($organization->long_id)) { ?>
           <h2>Embeddable Job Listing Code</h2>
           <p style="text-align:left">
             Place the iframe code below into the HTML on your website to display
@@ -31,7 +36,7 @@ require __DIR__.'/header.php';
           <div style="text-align:left; margin-top:30px;">
             <pre>
 &lt;iframe
-  src="<?=APP_URL.'job_listing?id='.$user->organization_id?>"
+  src="<?=APP_URL.'job_listing?id='.$organization->long_id?>"
   height="400"
   width="100%"
   frameborder="0"&gt;

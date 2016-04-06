@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\Database\Organization;
 
-$organ = new Organization($_GET['id'] ?? '');
+$organ = new Organization($_GET['id'] ?? '', 'long_id');
 ?>
 <html>
 <head>
