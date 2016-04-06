@@ -13,7 +13,7 @@ use \Sizzle\Database\{
 class OrganizationTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Requires the util.php file of functions
@@ -164,10 +164,41 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the getJobs() function
+     */
+    public function testGetJobs()
+    {
+        $organization = new Organization();
+        $organization->create('Random '.rand().' Co');
+
+        // no jobs exist yet
+        $jobs = $organization->getJobs();
+        $this->assertTrue(is_array($jobs));
+        $this->assertTrue(empty($jobs));
+
+        // create a couple jobs & test
+        $this->User->organization_id = $organization->id;
+        $this->User->save();
+        $recruitingToken1 = $this->createRecruitingToken($this->User->id);
+        $recruitingToken2 = $this->createRecruitingToken($this->User->id);
+        $jobs2 = $organization->getJobs();
+        $this->assertTrue(is_array($jobs2));
+        $this->assertFalse(empty($jobs2));
+        $this->assertEquals(2, count($jobs2));
+        $this->assertEquals($recruitingToken1->job_title, $jobs2[0]['title']);
+        $this->assertEquals($recruitingToken1->job_description, $jobs2[0]['description']);
+        $this->assertEquals($recruitingToken1->long_id, $jobs2[0]['long_id']);
+        $this->assertEquals($recruitingToken2->job_title, $jobs2[1]['title']);
+        $this->assertEquals($recruitingToken2->job_description, $jobs2[1]['description']);
+        $this->assertEquals($recruitingToken2->long_id, $jobs2[1]['long_id']);
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()
     {
         //$this->deleteUsers();
+        //$this->deleteRecruitingTokens();
     }
 }

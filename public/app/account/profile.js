@@ -24,6 +24,10 @@ var AccountProfile = React.createClass({
                   <button className="btn btn-primary btn-bordered">See Responses</button>
               </a>
               <br /><br />
+              <a href="/iframe_code">
+                  <button className="btn btn-primary btn-bordered">Embeddable Job Listing</button>
+              </a>
+              <br /><br />
               <a href="/pricing">
                 <button type="button" className="btn btn-success" id="upgrade-button">Upgrade</button>
               </a>

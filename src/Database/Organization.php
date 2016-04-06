@@ -47,4 +47,26 @@ class Organization extends \Sizzle\DatabaseEntity
         $this->save();
         return $this->id;
     }
+
+    /**
+     * This function gets the jobs associated with an organization
+     *
+     * @return array - array of jobs with subarrays of information about them
+     */
+    public function getJobs()
+    {
+        $jobs = array();
+        if (isset($this->id)){
+            $sql = "SELECT recruiting_token.job_title as `title`,
+                    recruiting_token.job_description as `description`,
+                    recruiting_token.long_id
+                    FROM organization, user, recruiting_token
+                    WHERE organization.id = user.organization_id
+                    AND user.id = recruiting_token.user_id
+                    AND organization.id = '{$this->id}'";
+            $result = execute_query($sql);
+            $jobs = $result->fetch_all(MYSQLI_ASSOC);
+        }
+        return $jobs;
+    }
 }

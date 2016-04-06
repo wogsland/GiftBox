@@ -113,6 +113,9 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'careers':
+                include __DIR__.'/../careers.php';
+                break;
             case 'create_company':
                 include __DIR__.'/../create_company.php';
                 break;
@@ -136,6 +139,12 @@ class Route
                 break;
             case 'invoice':
                 include __DIR__.'/../invoice.php';
+                break;
+            case 'iframe_code':
+                include __DIR__.'/../iframe_code.php';
+                break;
+            case 'job_listing':
+                include __DIR__.'/../job_listing.php';
                 break;
             case 'js':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {

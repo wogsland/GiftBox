@@ -82,6 +82,7 @@
     <li><a href="/privacy">Privacy Policy</a></li>
     <li><a href="/support">Contact Support</a></li>
     <li><a href="/affiliates">Affiliate Program</a></li>
+    <li><a href="/careers">Careers</a></li>
   </ul>
 
   <!-- COPYRIGHT TEXT -->
