@@ -182,6 +182,22 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the delete function.
+     */
+    public function testDelete()
+    {
+        $token = $this->createRecruitingToken();
+        $id = $token->id;
+        $token->delete();
+        $sql = "SELECT id FROM recruiting_token WHERE id = '$id' AND deleted IS NOT NULL";
+        $result = execute_query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        $this->assertTrue(is_array($array));
+        $this->assertFalse(empty($array));
+        $this->assertEquals(1, count($array));
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()

@@ -57,13 +57,14 @@ class Organization extends \Sizzle\DatabaseEntity
     {
         $jobs = array();
         if (isset($this->id)){
-            $sql = "SELECT recruiting_token.job_title as `title`,
-                    recruiting_token.job_description as `description`,
+            $sql = "SELECT recruiting_token.job_title AS `title`,
+                    recruiting_token.job_description AS `description`,
                     recruiting_token.long_id
                     FROM organization, user, recruiting_token
                     WHERE organization.id = user.organization_id
                     AND user.id = recruiting_token.user_id
-                    AND organization.id = '{$this->id}'";
+                    AND organization.id = '{$this->id}'
+                    AND recruiting_token.deleted IS NULL";
             $result = execute_query($sql);
             $jobs = $result->fetch_all(MYSQLI_ASSOC);
         }

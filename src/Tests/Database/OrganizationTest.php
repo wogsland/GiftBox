@@ -191,6 +191,16 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($recruitingToken2->job_title, $jobs2[1]['title']);
         $this->assertEquals($recruitingToken2->job_description, $jobs2[1]['description']);
         $this->assertEquals($recruitingToken2->long_id, $jobs2[1]['long_id']);
+
+        // delete one and make sure it still works
+        $recruitingToken1->delete();
+        $jobs3 = $organization->getJobs();
+        $this->assertTrue(is_array($jobs3));
+        $this->assertFalse(empty($jobs3));
+        $this->assertEquals(1, count($jobs3));
+        $this->assertEquals($recruitingToken2->job_title, $jobs3[0]['title']);
+        $this->assertEquals($recruitingToken2->job_description, $jobs3[0]['description']);
+        $this->assertEquals($recruitingToken2->long_id, $jobs3[0]['long_id']);
     }
 
     /**
