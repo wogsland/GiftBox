@@ -231,6 +231,15 @@ $(document).ready(function(){
 
   // reload the token data whenever the page comes into focus
   window.onfocus = loadDataAndPopulateToken;
+
+  // escape should work the same as clicking cancel
+  $(document).keyup(function(e){
+    if(e.keyCode === 27) {
+      $('.interest-dialog').each(function (i, dialog){
+        dialog.close();
+      });
+    }
+  });
 });
 
 /**

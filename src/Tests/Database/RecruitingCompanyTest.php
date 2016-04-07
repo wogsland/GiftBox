@@ -208,7 +208,8 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        //$this->deleteRecruitingCompanies();
-        //$this->deleteUsers();
+        $this->deleteRecruitingCompanies();
+        $this->deleteUsers();
+        $this->deleteOrganizations();
     }
 }
