@@ -406,8 +406,23 @@ function handleAjaxCityGet(data) {
     $('.gt-city-winter-lo').text(data.temp_lo_winter);
     $('.gt-city-winter-avg').text(data.temp_avg_winter);
     assetHost = getAssetHost();
-    $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
-    $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+    if (dataExists(data.image_file)) {
+      // this'll be going away
+      $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+      $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+    } else {
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':data.id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined) {
+          image_file = imgData.data[0];
+          $('#location-frontpage').css('background',"url('"+image_file+"') center / cover");
+          $('#location-back').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+    }
   }
 }
 
