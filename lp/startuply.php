@@ -1,3 +1,8 @@
+<?php
+if (logged_in()) {
+    header('Location: /profile');
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,6 +21,24 @@
       rel="stylesheet">
 
   <?php require_once __DIR__."/../analyticstracking.php" ?>
+
+  <!-- Polymer -->
+  <script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="/components/paper-button/paper-button.html">
+  <link rel="import" href="/components/paper-dialog/paper-dialog.html">
+  <link rel="import" href="/components/paper-input/paper-input.html">
+  <style>
+  .recruiting-dialog {
+    width: 400px;
+    height: 250px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  paper-button {
+    background-color: inherit;
+    color: inherit;
+  }
+  </style>
 
   <!--[if lt IE 9]>
     <script src="assets2/js/html5shiv.js"></script>
@@ -554,7 +577,7 @@
       </div>
 
       <div class="col-md-12 col-lg-3">
-        <a href="#" class="btn btn-outline" style="margin-top: 7px;">UPLOAD</a>
+        <a class="btn btn-outline" style="margin-top: 7px;" onclick="uploadDescription()">UPLOAD</a>
       </div>
     </div>
   </section>
@@ -592,6 +615,29 @@
 
   <div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
 
+  <paper-dialog class="recruiting-dialog" id="upload-dialog" modal>
+    <h2>Upload Your Job Description</h2>
+    <form id="description-upload">
+      <input class="hidden-file-input" type="file" id="select-list-file" name="listFile" hidden />
+      <paper-input id="upload-email" label="Email" name="email" onclick="" autofocus></paper-input>
+      <paper-input id="upload-file" label="File Name" name="fileName" onclick="fireHiddenFileInput('#select-list-file')"></paper-input>
+    </form>
+    <i>We'll make it S!zzle...</i>
+    <div class="">
+      <paper-button class="dialog-button" onclick="sizzleUpload()">UPLOAD</paper-button>
+      <paper-button dialog-dismiss class="dialog-button" onclick="cancelUpload()">CANCEL</paper-button>
+    </div>
+  </paper-dialog>
+
+  <paper-dialog class="recruiting-dialog" id="upload-process" modal>
+    <div id="upload-errors"></div>
+    <div class="">
+      <paper-button id="try-again-button" class="dialog-button" onclick="tryAgain()" hidden>TRY AGAIN</paper-button>
+      <paper-button id="cancel-again-button" dialog-dismiss class="dialog-button" onclick="cancelUpload()" hidden>CANCEL</paper-button>
+      <paper-button id="cancel-again-button" dialog-dismiss class="dialog-button" onclick="cancelUpload()" hidden>CANCEL</paper-button>
+    </div>
+  </paper-dialog>
+
   <!--[if lt IE 9]>
     <script type="text/javascript" src="assets2/js/jquery-1.11.3.min.js?ver=1"></script>
   <![endif]-->
@@ -613,7 +659,110 @@
   $( document ).ready(function() {
     url = '/ajax/slackbot/<?php echo $_SERVER['REMOTE_ADDR'];?>';
     $.post(url);
+
+    $('#select-list-file').change(function() {
+      var filename = $('#select-list-file').val().replace('C:\\fakepath\\', '');
+      /*if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
+        $('#upload-file label').html('<font color="red">Please choose a text file</font>');
+        $('#upload-file').val('');
+      } else {*/
+        $('#upload-file label').html('File Name');
+        $('#upload-file').val(filename);
+      //}
+    });
   });
+
+  /**
+   * Opens the Upload Dialog
+   */
+  function uploadDescription() {
+    $('#upload-dialog')[0].open();
+  }
+
+  /**
+   * Closes the Upload Dialog
+   */
+  function cancelUpload() {
+    $('#upload-errors').html('');
+    $('#upload-dialog')[0].close();
+    $('#upload-process')[0].close();
+  }
+
+  /**
+   * Registers click on hidden file input.
+   *
+   * @param {String} identifier The jQuery identifier to click
+   */
+  function fireHiddenFileInput(identifier) {
+     $(identifier).trigger('click');
+  }
+
+  /**
+   * Attempts to upload the job description to the ajax endpoint & presents success or error
+   */
+  function sizzleUpload() {
+    var invalid = false;
+    if ('' == $('#upload-file').val()) {
+      $('#upload-file label').html('<font color="red">Please choose a file</font>');
+      invalid = true;
+    }
+    if ('' == $('#upload-email').val()) {
+      $('#upload-email label').html('<font color="red">Please enter an email</font>');
+      invalid = true;
+    }
+    if (!invalid) {
+      $('#upload-dialog')[0].close();
+      $('#upload-errors').html('Processing...');
+      $('#upload-process')[0].open();
+      var formData = new FormData($('#description-upload')[0]);
+      $.ajax({
+        url: '/ajax/email/signup/upload/',
+        type: 'post',
+        data: formData,
+        dataType: 'json',
+        headers: {
+          "X-FILENAME": $('#select-list-file').val(),
+        },
+        success: function(data, textStatus){
+          var message = data.data.message+'<br />';
+          if(data.success === 'true') {
+            $('#upload-errors').css('color','white');
+            window.location = '/thankyou?action=emailsignup';
+          }  else {
+            if (data.data.errors.length) {
+              $('#upload-errors').css('color','red');
+              message += '<strong>Errors:</strong><br />';
+              $.each(data.data.errors, function(index, error) {
+                message += error+'<br />';
+              })
+            }
+            $('#try-again-button').removeAttr('hidden');
+            $('#cancel-again-button').removeAttr('hidden');
+          }
+          $('#upload-errors').html(message);
+        },
+        //Options to tell jQuery not to process data or worry about content-type.
+        cache: false,
+        contentType: false,
+        processData: false
+      }).fail(function() {
+        $('#upload-errors').html('Uploading job description failed.');
+        $('#try-again-button').removeAttr('hidden');
+        $('#cancel-again-button').removeAttr('hidden');
+      });
+    }
+  }
+
+  /**
+   * Reverts modal
+   */
+  function tryAgain() {
+    $('#upload-process')[0].close();
+    $('#upload-dialog')[0].open();
+    //$('#upload-file').val('');
+    $('#try-again-button').attr('hidden','hidden');
+    $('#cancel-again-button').attr('hidden','hidden');
+  }
   </script>
 </body>
 </html>
