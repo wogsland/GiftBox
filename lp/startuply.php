@@ -271,7 +271,7 @@
           <div class="tab-content">
             <div class="tab-pane in active" id="home"><img src="assets2/img/features/Good_Images/LAPTOP_ONE.png" class="img-responsive animated" data-duration="900" data-animation="flip3dInTop" alt="macbook" /></div>
             <div class="tab-pane" id="profile"><img src="assets2/img/features/Good_Images/iPAD_ONE.png" class="img-responsive animated" data-duration="900" data-animation="roll3dInLeft" alt="macbook" /></div>
-            <div class="tab-pane" id="messages"><img src="assets2/img/features/Good_Images/LAPTOP_TWO.ong" class="img-responsive animated" data-duration="900" data-animation="fadeInRight" alt="macbook" /></div>
+            <div class="tab-pane" id="messages"><img src="assets2/img/features/Good_Images/LAPTOP_TWO.png" class="img-responsive animated" data-duration="900" data-animation="fadeInRight" alt="macbook" /></div>
           </div>
         </div>
       </div>
