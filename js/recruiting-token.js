@@ -231,6 +231,15 @@ $(document).ready(function(){
 
   // reload the token data whenever the page comes into focus
   window.onfocus = loadDataAndPopulateToken;
+
+  // escape should work the same as clicking cancel
+  $(document).keyup(function(e){
+    if(e.keyCode === 27) {
+      $('.interest-dialog').each(function (i, dialog){
+        dialog.close();
+      });
+    }
+  });
 });
 
 /**
@@ -397,8 +406,48 @@ function handleAjaxCityGet(data) {
     $('.gt-city-winter-lo').text(data.temp_lo_winter);
     $('.gt-city-winter-avg').text(data.temp_avg_winter);
     assetHost = getAssetHost();
-    $('#location-frontpage').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
-    $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+    if (dataExists(data.image_file)) {
+      // this'll be going away
+      $('#location-main-image').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+      $('#location-secondary-images').remove();
+      $('#location-image-grid').css('width','100%');
+      $('#location-main-image').css('width','100%');
+      $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+    } else {
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':data.id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#location-back').css('background',"url('"+image_file+"') center / cover");
+          $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
+          if (imgData.data.length < 4) {
+            // display 1 image
+            $('#location-secondary-images').remove();
+            $('#location-image-grid').css('width','100%');
+            $('#location-main-image').css('width','100%');
+          } else {
+            // display 4 images
+            console.log('dsiplaying 4 images')
+            $('#location-secondary-image-1').attr('src',imgData.data[1]);
+            $('#location-secondary-image-2').attr('src',imgData.data[2]);
+            $('#location-secondary-image-3').attr('src',imgData.data[3]);
+          }
+          /*$('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+          if ( $(window).width() < 739 || data.data.length < 4) {
+            $('#company-secondary-images').remove();
+            $('#company-image-grid').css('width','100%');
+            $('#company-main-image').css('width','100%');
+          } else {
+            $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
+            $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
+            $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
+          }*/
+        }
+      });
+    }
   }
 }
 
@@ -548,7 +597,7 @@ function handleAjaxRecruitingTokenGet(data) {
       handleAjaxCityGet(data.data);
     });
   } else {
-    $('#location-frontpage').remove();
+    $('#location-section').remove();
   }
   var socialCount = 0;
   if (dataExists(data.data.company_twitter)) {
