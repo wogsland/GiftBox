@@ -138,7 +138,7 @@ if (logged_in()) {
                 <p>With Sizzle's machine learning platform and advanced models you know that you are not only saving time, but using the best automated marketing and sales practices to increase your recruitment pipeline, while filtering out poor candidates.</p>
                 <br/>
                 <a href="#" class="btn btn-outline-color">Platform Overview</a>
-                <a href="#" class="btn btn-outline-color">See Live Example</a>
+                <a href="https://www.gosizzle.io/token/recruiting/8982ef2eebe2ef3c5" class="btn btn-outline-color" target="_blank">See Live Example</a>
               </article>
             </div>
           </div>
