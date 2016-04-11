@@ -12,7 +12,7 @@ if (logged_in()) {
         'smtp_port'
     ];
     foreach ($params as $param) {
-      $$param = $_POST[$param] ?? null;
+        $$param = $_POST[$param] ?? null;
     }
     if (!isset($username) || '' == $username) {
         $errors[] = 'Username cannot be left blank';

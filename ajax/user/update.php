@@ -6,30 +6,20 @@ use \Sizzle\Database\{
 $response = [];
 if (logged_in()) {
 
-    function get_post($index)
-    {
-        if (isset($_POST[$index])) {
-            return $_POST[$index];
-        } else {
-            return null;
-        }
-    }
-
     try {
-        $user_id = get_post('user_id');
-        $user = new User($user_id);
+        $user = new User($_POST['user_id'] ?? null);
 
-        $user->first_name = get_post('first_name');
-        $user->last_name = get_post('last_name');
-        $user->email_address = get_post('email');
-        $user->location = get_post('location');
-        $user->company = get_post('company');
-        $user->position = get_post('position');
-        $user->about = get_post('about');
-        $user->username = get_post('username');
-        $user->user_group = get_post('group');
-        $user->allow_token_responses = get_post('allow_token_responses');
-        $user->receive_token_notifications = get_post('receive_token_notifications');
+        $user->first_name = $_POST['first_name'] ?? null;
+        $user->last_name = $_POST['last_name'] ?? null;
+        $user->email_address = $_POST['email'] ?? null;
+        $user->location = $_POST['location'] ?? null;
+        $user->company = $_POST['company'] ?? null;
+        $user->position = $_POST['position'] ?? null;
+        $user->about = $_POST['about'] ?? null;
+        $user->username = $_POST['username'] ?? null;
+        $user->user_group = $_POST['group'] ?? null;
+        $user->allow_token_responses = $_POST['allow_token_responses'] ?? null;
+        $user->receive_token_notifications = $_POST['receive_token_notifications'] ?? null;
 
         // password
         if (isset($_POST['password']) && strlen($_POST['password']) > 0) {

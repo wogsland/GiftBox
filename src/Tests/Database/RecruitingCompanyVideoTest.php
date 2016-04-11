@@ -195,7 +195,7 @@ extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        foreach($this->vids as $id) {
+        foreach ($this->vids as $id) {
             $sql = "DELETE FROM recruiting_company_video WHERE id = '$id'";
             execute($sql);
         }

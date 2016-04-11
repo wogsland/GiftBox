@@ -82,6 +82,7 @@
     <li><a href="/privacy">Privacy Policy</a></li>
     <li><a href="/support">Contact Support</a></li>
     <li><a href="/affiliates">Affiliate Program</a></li>
+    <li><a href="/careers">Careers</a></li>
   </ul>
 
   <!-- COPYRIGHT TEXT -->
@@ -100,7 +101,6 @@
      SCRIPTS
 ============================== -->
 <script src="/js/dist/sizzle.min.js?v=<?php echo VERSION;?>"></script>
-<script src="/js/pay_with_stripe.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) {
   /** TODO Move these into marketing.min build */
 ?>

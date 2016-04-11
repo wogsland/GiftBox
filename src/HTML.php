@@ -34,7 +34,7 @@ class HTML
                 // find & process bulleted sections
                 $tempText = $text;
                 $sections = array();
-                while(strpos($tempText, "•") !== false) {
+                while (strpos($tempText, "•") !== false) {
                     $pos = strpos($tempText, "•");
                     $sections[] = substr($tempText, 0, $pos);
                     $textWithBullets = substr($tempText, $pos);

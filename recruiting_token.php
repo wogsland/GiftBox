@@ -195,14 +195,32 @@
                           <i class="fa fa-pinterest big-icon"></i>
                         </a>
                       </section>
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
-                        <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="location-frontpage">
-                          <div id="supporting-location">
-                            <i class="material-icons">room</i>
-                            <i class="gt-info-location"></i>
+
+                      <section id="location-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
+                        <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid">
+                          <div class="mdl-cell no-margin" id="location-main-image">
+                            <div id="supporting-location">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location"></i>
+                            </div>
+                          </div>
+                          <div class="mdl-cell no-margin" id="location-secondary-images">
+                            <div class="mdl-grid no-padding" style="height:337px">
+                              <div class="no-margin">
+                                <img id="location-secondary-image-1" src="" class="location-secondary-image">
+                              </div>
+                              <div class="no-margin">
+                                <img id="location-secondary-image-2" src="" class="location-secondary-image">
+                              </div>
+                              <div class="no-margin">
+                                <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
+                                <i class="material-icons plus-icon--overlay">add</i>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </section>
+
                       <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
                           <div id="supporting-images">
@@ -217,12 +235,13 @@
                           </div>
                         </div>
                       </section>
+
                       <section class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
                   </main>
                   <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
-                    <i class="material-icons">thumb_up</i>
+                    <i class="material-icons interest-thumb">thumb_up</i>
                   </button>
                   <paper-dialog class="interest-dialog" modal>
                       <div class="interest-form">

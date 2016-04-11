@@ -43,7 +43,7 @@
                 <li><a href="/profile" class="external account-dropdown sizzle-nav-choice">Profile</a></li>
                 <li><a href="/payments" class="external account-dropdown sizzle-nav-choice">Payments</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="javascript:void(0)" class="account-dropdown sizzle-nav-choice" onclick="logout();">Logout</a></li>
+                <li><a href="javascript:void(0)" class="account-dropdown sizzle-nav-choice" id="logout-button" onclick="logout();">Logout</a></li>
               </ul>
             </li>
             <?php if (is_admin()) { ?>

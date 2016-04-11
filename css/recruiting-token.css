@@ -315,10 +315,6 @@ i.plus-icon--overlay {
 #job-description-options, #recruiter-options {
   margin: 0px;
 }
-#location-frontpage {
-  text-align:center;
-  /*background: url('/images/MountainView.jpg') center / cover;*/
-}
 #images-frontpage {
   text-align:center;
   /*background: url('/images/bloom5.jpg') center / cover;*/
@@ -375,15 +371,15 @@ i.plus-icon--overlay {
 .no-margin {
   margin: 0;
 }
-#company-main-image {
+#company-main-image, #location-main-image {
   height: 337px;
   width: 75%;
 }
-#company-secondary-images {
+#company-secondary-images, #location-secondary-images {
   height: 337px;
   width: 25%;
 }
-.company-secondary-image {
+.company-secondary-image, .location-secondary-image {
   width: 100%;
   height:112.24px;
 }
@@ -424,4 +420,10 @@ i.plus-icon--overlay {
 
   border-top: 20px solid white;
   box-shadow: 0 16px 24px 2px
+}
+.interest-thumb {
+  color: white;
+}
+.interest-thumb:hover {
+  color: black;
 }

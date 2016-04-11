@@ -68,7 +68,8 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($email, $user->email_address);
         $this->assertEquals($apiKey, $user->api_key);
         $this->assertEquals($userId, $user->id);
-        $user = User::fetch(rand() . $apiKey, 'api_key'); //this one shouldn't be there
+        $user = User::fetch(rand() . $apiKey, 'api_key');
+        //this one shouldn't be there
         $this->assertFalse(isset($user));
 
         // $key = email_address
@@ -79,7 +80,8 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Sizzle\Database\User', get_class($user));
         $this->assertEquals($email, $user->email_address);
         $this->assertEquals($userId, $user->id);
-        $user = User::fetch(rand() . $email, 'email_address'); //this one shouldn't be there
+        $user = User::fetch(rand() . $email, 'email_address');
+        //this one shouldn't be there
         $this->assertFalse(isset($user));
 
         // $key = reset_code
@@ -93,7 +95,8 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals($email, $user->email_address);
         $this->assertEquals($reset, $user->reset_code);
         $this->assertEquals($userId, $user->id);
-        $user = User::fetch(rand() . $reset, 'reset_code'); //this one shouldn't be there
+        $user = User::fetch(rand() . $reset, 'reset_code');
+        //this one shouldn't be there
         $this->assertFalse(isset($user));
 
         // $key garbage
@@ -127,7 +130,8 @@ extends \PHPUnit_Framework_TestCase
         $user->activation_key = 'v5y3q'.rand().'nachoes';
         $user->save();
         $this->assertTrue($user->activate($user->activation_key));
-        $this->assertFalse($user->activate($user->activation_key)); // second time should fail
+        // second time should fail
+        $this->assertFalse($user->activate($user->activation_key));
 
         // create user that doens't need activation
         $user2 = $this->createUser();
@@ -140,7 +144,8 @@ extends \PHPUnit_Framework_TestCase
         $user3->save();
         $key = '4ic7tq346b'.rand().'cashew';
         $this->assertFalse($user3->activate($key));
-        $this->assertTrue($user3->activate($user3->activation_key)); // but true key should still work
+        // but true key should still work
+        $this->assertTrue($user3->activate($user3->activation_key));
     }
 
     /**
@@ -189,7 +194,7 @@ extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        foreach($this->users as $id) {
+        foreach ($this->users as $id) {
             $sql = "DELETE FROM user_milestone WHERE user_id = '$id'";
             execute($sql);
         }

@@ -37,7 +37,9 @@ class City extends \Sizzle\DatabaseEntity
     public static function getIdFromName(string $name)
     {
         $sql = "SELECT id FROM city WHERE name = '$name'";
-        $id = execute_query($sql)->fetch_object()->id;
+        $result = execute_query($sql);
+        $object = is_object($result) ? $result->fetch_object() : null;
+        $id = is_object($object) ? $object->id : null;
         return $id;
     }
 

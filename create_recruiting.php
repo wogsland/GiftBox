@@ -299,7 +299,7 @@ require __DIR__.'/header.php';
             */ ?>
             <div class="button-container">
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
-                <paper-button raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
+                <paper-button id="save-continue-button" raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
             </div>
             <?php /*if (is_admin()) : ?>
                 <paper-card heading="Add To Library" id="add-to-library">
@@ -331,15 +331,6 @@ require __DIR__.'/header.php';
         <div class="buttons">
             <paper-button class="dialog-button" onclick="processOpen()">Open</paper-button>
             <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
-        </div>
-    </paper-dialog>
-
-    <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
-        <h2>Upload video from web address</h2>
-        <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
-        <div class="buttons">
-            <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
         </div>
     </paper-dialog>
 

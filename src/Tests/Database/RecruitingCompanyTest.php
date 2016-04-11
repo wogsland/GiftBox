@@ -2,7 +2,8 @@
 namespace Sizzle\Tests\Database;
 
 use Sizzle\Database\{
-    RecruitingCompany
+    RecruitingCompany,
+    User
 };
 
 /**
@@ -12,6 +13,7 @@ use Sizzle\Database\{
  */
 class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\Organization;
     use \Sizzle\Tests\Traits\RecruitingCompany;
 
     /**
@@ -141,6 +143,7 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
      * Tests the save function when an update is required.
      *
      * @param   RecruitingCompany $RecruitingCompany - an existing company
+     *
      * @depends testSaveInsert
      */
     public function testSaveUpdate(RecruitingCompany $RecruitingCompany)
@@ -167,11 +170,46 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the getAll function
+     */
+    public function testGetAll()
+    {
+        // test company with organization
+        $org = $this->createOrganization();
+        $co = $this->createRecruitingCompany();
+        $user = new User($co->user_id);
+        $user->organization_id = $org->id;
+        $user->save();
+        $name = "{$co->name} ({$org->name})";
+
+        // test company without organization
+        $co2 = $this->createRecruitingCompany();
+        $name2 = "{$co->name} (No organization)";
+
+        // call & compare
+        $sql = 'SELECT COUNT(*) AS companies FROM recruiting_company';
+        $result = execute_query($sql);
+        $row = $result->fetch_assoc();
+        $companyCount = $row['companies'];
+        $all = (new RecruitingCompany())->getAll();
+        $this->assertEquals($companyCount, count($all));
+        $found = false;
+        foreach ($all as $company) {
+            if ($company['id'] == $co->id && $company['name'] == $name) {
+                $found = true;
+                break;
+            }
+        }
+        $this->assertTrue($found);
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()
     {
         $this->deleteRecruitingCompanies();
-        //$this->deleteUsers();
+        $this->deleteUsers();
+        $this->deleteOrganizations();
     }
 }

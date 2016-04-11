@@ -76,7 +76,7 @@ if (ENVIRONMENT === "production") {
         $message = "$new $visitor to " . APP_URL . " from ";
         $message .= isset($locale->city) && '' != $locale->city ? $locale->city . ', ' : '';
         $message .= isset($locale->region) && '' != $locale->region ? $locale->region . ', ' : '';
-        $message .= isset($locale->country) && '' != $locale->country ? $locale->country : '';
+        $message .= $locale->country ?? '';
         $message = rtrim($message);
         $message .= " ({$_SERVER['REMOTE_ADDR']}) ";
         $message .= isset($locale->org) && '' != $locale->org ? 'using ' . $locale->org : '';

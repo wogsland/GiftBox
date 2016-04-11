@@ -113,6 +113,9 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'careers':
+                include __DIR__.'/../careers.php';
+                break;
             case 'create_company':
                 include __DIR__.'/../create_company.php';
                 break;
@@ -137,14 +140,17 @@ class Route
             case 'invoice':
                 include __DIR__.'/../invoice.php';
                 break;
+            case 'iframe_code':
+                include __DIR__.'/../iframe_code.php';
+                break;
+            case 'job_listing':
+                include __DIR__.'/../job_listing.php';
+                break;
             case 'js':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
                     include $this->default;
                 } else {
                     switch ($this->endpointPieces[2]) {
-                    case 'pay_with_stripe.js':
-                        include __DIR__.'/../pay_with_stripe.php';
-                        break;
                     default:
                         include $this->default;
                     }
@@ -206,11 +212,11 @@ class Route
                     ) {
                         // don't display in native android browser
                         include __DIR__.'/../get_chrome.html';
-                    } else if(strpos($userAgent, 'LinkedInBot') !== false) {
+                    } else if (strpos($userAgent, 'LinkedInBot') !== false) {
                         // display simplified form on LinkedIn
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/LinkedInBot.php';
-                    } else if(strpos($userAgent, 'facebookexternalhit') !== false) {
+                    } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
                         // display simplified form on Facebook
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';

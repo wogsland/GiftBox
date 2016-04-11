@@ -12,11 +12,11 @@ $token = new RecruitingToken($long_id, 'long_id');
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
 $image = $token->screenshot();
 if ($image !== false) {
-    $image = APP_URL.'uploads/'.str_replace(' ', '%20',$image);
+    $image = APP_URL.'uploads/'.str_replace(' ', '%20', $image);
 } else {
     $images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($long_id);
     if (!empty($images)) {
-        $image = APP_URL.'uploads/'.str_replace(' ', '%20',$images[0]['file_name']);
+        $image = APP_URL.'uploads/'.str_replace(' ', '%20', $images[0]['file_name']);
     }
 }
 

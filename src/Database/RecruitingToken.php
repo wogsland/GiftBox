@@ -115,9 +115,12 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         return $new_file_name;
     }
 
+    /**
+     * Marks this token as deleted
+     */
     public function delete()
     {
-        $sql = "DELETE FROM recruiting_token WHERE id = '$this->id'";
+        $sql = "UPDATE recruiting_token SET deleted=now() WHERE id = '$this->id'";
         execute($sql);
     }
 

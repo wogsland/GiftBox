@@ -352,7 +352,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="use-existing-company-form">
             <div class="field-container">
             <?php
-                $companies = RecruitingToken::getUserCompanies((int) $user_id);
+                $companies = is_admin() ? (new RecruitingCompany())->getAll() : RecruitingToken::getUserCompanies((int) $user_id);
                 $options = array();
                 foreach ($companies as $co) {
                     $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
@@ -371,8 +371,8 @@ require __DIR__.'/header.php';
         <h2>Upload video from web address</h2>
         <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
         <div class="buttons">
-            <paper-button class="dialog-button" onclick="processVideoURL()">Add</paper-button>
-            <paper-button dialog-dismiss class="dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
+            <paper-button class="dialog-button video-dialog-button" onclick="processVideoURL()">Add</paper-button>
+            <paper-button dialog-dismiss class="dialog-button video-dialog-button" onclick="cancelVideoURL()">Cancel</paper-button>
         </div>
     </paper-dialog>
 
