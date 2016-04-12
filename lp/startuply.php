@@ -108,10 +108,9 @@ if (logged_in()) {
   <div id="clients" class="clients-section align-center">
     <div class="container">
       <ul class="list-inline logos">
-        <li><img class="animated" data-animation="fadeInDown" data-duration="500" src="assets2/img/logos/Logo-Sizzle-IQ.png" alt="mashable" /></li>
-        <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="200" src="assets2/img/logos/Logo-Sizzle-SP.png" alt="tnw" /></li>
-        <!--<li><img class="animated" data-animation="fadeInDown" data-duration="500" data-delay="400" src="assets2/img/logos/Logo-Sizzle-PL.png" alt="virgin" /></li>-->
-        <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="600" src="assets2/img/logos/Logo-Sizzle-RA.png" alt="microsoft" /></li>
+        <li><img class="animated" data-animation="fadeInDown" data-duration="500" src="assets2/img/logos/Logo-Sizzle-IQ.png" alt="IQ" /></li>
+        <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="200" src="assets2/img/logos/Logo-Sizzle-SP.png" alt="SP" /></li>
+        <li><img class="animated" data-animation="fadeInUp" data-duration="500" data-delay="600" src="assets2/img/logos/Logo-Sizzle-RA.png" alt="RA" /></li>
       </ul>
     </div>
   </div>
@@ -120,13 +119,30 @@ if (logged_in()) {
     <div class="container">
 
       <ul class="nav nav-tabs alt">
-        <li class="active"><a href="#first-tab-alt" data-toggle="tab">MARKET</a></li>
-        <li><a href="#second-tab-alt" data-toggle="tab">AUTOMATION</a></li>
+        <li class="active"><a href="#first-tab-alt" data-toggle="tab">AUTOMATION</a></li>
+        <li><a href="#second-tab-alt" data-toggle="tab">MARKET</a></li>
         <li><a href="#third-tab-alt" data-toggle="tab">INTEGRATION</a></li>
       </ul>
 
       <div class="tab-content alt">
         <div class="tab-pane active" id="first-tab-alt">
+          <div class="section-content row">
+            <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
+              <img src="assets2/img/features/PHONE_ONE_Cropped.jpg" class="img-responsive pull-right" alt="process 2" />
+            </div>
+            <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
+              <br/><br/>
+              <article class="align-center">
+                <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
+                <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
+                <p>Self-driving cars? Flying cars? Self-flying cars? A space elevator? A cure for the AIDS virus? A non-polluting engine that runs on the AIDS virus? Are these things even possible?</p>
+                <p>Well…at S!zzle, we are in active discussions about the long-term feasibility of these, as well as many other projects</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="second-tab-alt">
           <div class="section-content row">
             <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
               <img src="assets2/img/features/people.jpg" class="img-responsive" alt="process 3" />
@@ -140,22 +156,6 @@ if (logged_in()) {
                 <br/>
                 <?php /*<a href="#" class="btn btn-outline-color">Platform Overview</a>*/?>
                 <a href="https://www.gosizzle.io/token/recruiting/8982ef2eebe2ef3c5" class="btn btn-outline-color" target="_blank">See Live Example</a>
-              </article>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-pane" id="second-tab-alt">
-          <div class="section-content row">
-            <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-              <img src="assets2/img/features/PHONE_ONE_Cropped.jpg" class="img-responsive pull-right" alt="process 2" />
-            </div>
-            <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
-              <br/><br/>
-              <article class="align-center">
-                <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
-                <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
-                <p>In his igitur partibus duabus nihil erat, quod Zeno commuta rest gestiret. Sed virtutem ipsam inchoavit, nihil ampliusuma. Scien tiam pollicentur, quam non erat mirum sapientiae lorem cupido patria esse cariorem. Quae qui non vident, nihilamane umquam magnum ac cognitione.</p>
               </article>
             </div>
           </div>
