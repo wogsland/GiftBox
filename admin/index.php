@@ -38,10 +38,12 @@ require __DIR__.'/../header.php';
           <a href="/admin/send_token">Send</a> •
           <a href="/admin/transfer_token">Transfer Ownership</a>
         </li>
+        <?php /*
         <li>
           Cities:
           <a href="/admin/add_city">Add</a>
         </li>
+        */ ?>
       </ul>
     </nav>
   </div>
