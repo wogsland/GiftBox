@@ -91,6 +91,7 @@ if (logged_in()) {
       <div class="heading-block align-center">
         <h1>How Important is Your Time?</h1>
         <h5>Recruiting Automation for Recruiting Agencies, RPO, or Corporate HR</h5>
+        <a class="btn btn-outline" style="margin-top: 7px;" onclick="uploadDescription()">UPLOAD</a>
       </div>
       <div class="video-wrapper">
         <div class="container animated" data-animation="fadeInUp" data-delay="400" data-duration="700">
