@@ -137,7 +137,7 @@ if (logged_in()) {
                 <p class="sub-title">Saving time is valuable for every recruiter.</p>
                 <p>With Sizzle's machine learning platform and advanced models you know that you are not only saving time, but using the best automated marketing and sales practices to increase your recruitment pipeline, while filtering out poor candidates.</p>
                 <br/>
-                <a href="#" class="btn btn-outline-color">Platform Overview</a>
+                <?php /*<a href="#" class="btn btn-outline-color">Platform Overview</a>*/?>
                 <a href="https://www.gosizzle.io/token/recruiting/8982ef2eebe2ef3c5" class="btn btn-outline-color" target="_blank">See Live Example</a>
               </article>
             </div>
@@ -386,7 +386,7 @@ if (logged_in()) {
       </div>
     </div>
   </section>
-
+<?php /*
   <section id="feedback" class="section feedback-section align-center light-text">
     <div class="container animated" data-animation="fadeInDown" data-duration="500">
       <div class="section-header">
@@ -456,7 +456,7 @@ if (logged_in()) {
       </div>
     </div>
   </section>
-
+*/?>
   <section id="team" class="section team-section align-center dark-text">
     <div class="container">
       <div class="section-header">
