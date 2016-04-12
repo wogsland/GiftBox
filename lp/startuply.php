@@ -78,7 +78,7 @@ if (logged_in()) {
             <li><a href="#guarantee">Contacts</a></li>
           </ul>
           <ul class="navigation-bar navigation-bar-right">
-            <li><a href="register.html">Login</a></li>
+            <li><a href="/email_signup?action=login">Login</a></li>
             <li class="featured"><a class="btn btn-sm btn-outline-color" href="/pricing">Sign up</a></li>
           </ul>
         </div>
