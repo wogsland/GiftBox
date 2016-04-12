@@ -135,8 +135,8 @@ if (logged_in()) {
               <article class="align-center">
                 <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
                 <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
-                <p>Self-driving cars? Flying cars? Self-flying cars? A space elevator? A cure for the AIDS virus? A non-polluting engine that runs on the AIDS virus? Are these things even possible?</p>
-                <p>Well…at S!zzle, we are in active discussions about the long-term feasibility of these, as well as many other projects</p>
+                <p>Self-driving cars? Flying cars? Self-<i>flying cars</i>? A space elevator? A cure for the AIDS virus? A non-polluting engine that <i>runs</i> on the AIDS virus? Are these things even possible?</p>
+                <p>Well…at S!zzle, we are in <i>active</i> discussions about the long-term feasibility of these, as well as many other projects</p>
               </article>
             </div>
           </div>
@@ -242,18 +242,18 @@ if (logged_in()) {
       <div class="col-sm-12 col-lg-5 animated" data-animation="fadeInLeft" data-duration="500">
         <article>
           <h2>GET LIVE UPDATES</h2>
-           <p class="">No spam promise - only latest news and prices!</p>
+           <p class="">No spam. We promise. Only sizzling recruiting industry news!</p>
         </article>
       </div>
       <div class="col-sm-12 col-lg-7 animated" data-animation="fadeInRight" data-duration="500">
-        <form class="form mailchimp-form subscribe-form" style="padding-top: 10px;" action="<?=$_SERVER['PHP_SELF']; ?>" method="post">
+        <form id="subscribe-form" class="form mailchimp-form subscribe-form" style="padding-top: 10px;" action="/" method="get">
           <div class="form-group form-inline">
-            <input size="15" type="text" class="form-control required" name="FULLNAME" placeholder="Your name" />
-            <input size="25" type="email" class="form-control required" name="EMAIL" placeholder="your@email.com" />
+            <input type="hidden" name="message" value="new landing page subscribe" />
+            <input size="25" type="email" class="form-control required" name="email" placeholder="your@email.com" />
             <input type="submit" class="btn btn-outline" value="SUBSCRIBE" />
-            <span class="response"><? require_once('assets2/mailchimp/inc/store-address.php'); if($_GET['submit']){ echo storeAddress(); } ?></span>
           </div>
         </form>
+        <span class="response"></span>
       </div>
     </div>
   </section>
@@ -670,6 +670,25 @@ if (logged_in()) {
         $('#upload-file label').html('File Name');
         $('#upload-file').val(filename);
       //}
+    });
+
+    // process subscribe form
+    $('#subscribe-form').on('submit', function (e) {
+        e.preventDefault();
+        $.post("/ajax/sendemail", $('#subscribe-form').serialize(),
+            function (data, textStatus, jqXHR) {
+                if (data.status === "SUCCESS") {
+                    $(".response").html('Thanks for subscribing!');
+                    $('#subscribe-form').hide();
+                    $(".response").show();
+                } else {
+                    $(".response").html('Something unexpectedly bad happened. Try again?');
+                    $(".response").show();
+                }
+            }
+        ).fail(function () {
+            $(".error").show();
+        });
     });
   });
 
