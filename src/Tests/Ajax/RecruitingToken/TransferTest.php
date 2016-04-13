@@ -79,7 +79,8 @@ extends \PHPUnit_Framework_TestCase
         // setup test company with unrelated user
         $RecruitingCompany = $this->createRecruitingCompany($User1->id);
 
-        // setup test token
+        // setup test tokens
+        $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
         $RecruitingToken = $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
 
         // test user transfer
@@ -156,53 +157,6 @@ extends \PHPUnit_Framework_TestCase
         //check DB was updated
         $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
         $this->assertEquals($User2->id, $RecruitingToken2->user_id);
-    }
-
-    /**
-     * Tests request via ajax endpoint.
-     */
-    public function testRandomUserCompany()
-    {
-        // setup test users
-        $User1 = $this->createUser();
-        $User2 = $this->createUser();
-        $User3 = $this->createUser();
-
-        // setup test company with unrelated user
-        $RecruitingCompany = $this->createRecruitingCompany($User3->id);
-
-        // setup test token
-        $RecruitingToken = $this->createRecruitingToken($User1->id, $RecruitingCompany->id);
-
-        // test user transfer
-        $url = TEST_URL . "/ajax/recruiting_token/transfer";
-        $fields = array(
-            'token_id'=>$RecruitingToken->long_id,
-            'old_user_id'=>$User1->id,
-            'new_user_id'=>$User2->id
-        );
-        $fields_string = "";
-        foreach ($fields as $key=>$value) {
-            $fields_string .= $key.'='.$value.'&';
-        }
-        $fields_string = rtrim($fields_string, '&');
-        ob_start();
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_COOKIE, getTestCookie(true));
-        curl_setopt($ch, CURLOPT_URL, $url);
-        $response = curl_exec($ch);
-        $this->assertTrue($response);
-        $json = ob_get_contents();
-        ob_end_clean();
-        $return = json_decode($json);
-        $this->assertEquals('false', $return->success);
-        $this->assertEquals('Company already assigned to a different user', $return->data->error);
-
-        //check DB was not updated
-        $RecruitingToken2 = new RecruitingToken($RecruitingToken->long_id, 'long_id');
-        $this->assertEquals($User1->id, $RecruitingToken2->user_id);
     }
 
     /**

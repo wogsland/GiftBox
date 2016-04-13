@@ -30,7 +30,7 @@ trait RecruitingToken
             $user_id = $user->id;
         }
         if (!isset($company_id)) {
-            $company = $this->createRecruitingCompany();
+            $company = $this->createRecruitingCompany($user_id);
             $company_id = $company->id;
         }
 
