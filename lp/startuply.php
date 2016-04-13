@@ -549,7 +549,8 @@ if (logged_in()) {
               <div class="photo-wrapper">
                 <div class="overlay-wrapper">
                   <!--<img src="assets2/img/people/team-<?=rand(1,4)?>.jpg" alt="">-->
-                  <img src="assets2/img/people/bender.png" alt="">
+                  <!--<img src="assets2/img/people/bender.png" alt="">-->
+                  <img src="assets2/img/people/<?=rand(0,10) > 5 ? 'batman' : 'superman'?>.jpg" alt="">
                   <div class="overlay-content">
                     <div class="text-wrapper">
                       <div class="text-container">
