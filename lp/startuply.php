@@ -135,8 +135,8 @@ if (logged_in()) {
               <article class="align-center">
                 <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
                 <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
-                <p>Self-driving cars? Flying cars? Self-<i>flying cars</i>? A space elevator? A cure for the AIDS virus? A non-polluting engine that <i>runs</i> on the AIDS virus? Are these things even possible?</p>
-                <p>Well…at S!zzle, we are in <i>active</i> discussions about the long-term feasibility of these, as well as many other projects</p>
+                <p>Self-driving cars? Flying cars? Self-<i>flying cars</i>? A space elevator? A cure for the AIDS virus? A non-polluting space elevator engine that <i>runs</i> on the AIDS virus? Are these things even possible?</p>
+                <p>Probably, but it's not what <i>we're</i> working on. We are laser focused on optimizing recruit engagement by constantly testing and tweaking our platform. Focusing on what works and iterating quickly through <strong>A/B tests</strong> and <strong>machine learning</strong> we're building the best tools available to recruiters today.</p>
               </article>
             </div>
           </div>
