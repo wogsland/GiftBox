@@ -157,7 +157,9 @@ if (logged_in()) {
               <article class="align-center">
                 <h3>FOR EVERY <span class="highlight">RECRUITER</span></h3>
                 <p class="sub-title">Saving time is valuable for every recruiter.</p>
-                <p>With Sizzle's machine learning platform and advanced models you know that you are not only saving time, but using the best automated marketing and sales practices to increase your recruitment pipeline, while filtering out poor candidates.</p>
+                <p>
+                  With Sizzle's advanced models and machine learning platform, you are also not only saving time, but you are using the top automated marketing and sales practices. Using Sizzle will increase the top of your recruitment pipeline, while also filtering out poor candidates who don’t fit your position.
+                </p>
                 <br/>
                 <?php /*<a href="#" class="btn btn-outline-color">Platform Overview</a>*/?>
                 <a href="https://www.gosizzle.io/token/recruiting/8982ef2eebe2ef3c5" class="btn btn-outline-color" target="_blank">See Live Example</a>
