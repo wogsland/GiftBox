@@ -472,7 +472,7 @@ if (logged_in()) {
           <div class="team-member">
             <div class="photo-wrapper">
               <div class="overlay-wrapper">
-                <img src="assets2/img/people/team-1.jpg" alt="">
+                <img src="assets2/img/people/gary.jpg" alt="">
                 <div class="overlay-content">
                   <div class="text-wrapper">
                     <div class="text-container">
@@ -480,10 +480,10 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="#" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
-                    <li><a href="#" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="mailto:gpeters@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="https://twitter.com/gp_mazzone" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/gary.m.peters.7" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/gary-peters-98183446" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -497,7 +497,7 @@ if (logged_in()) {
           <div class="team-member">
             <div class="photo-wrapper">
               <div class="overlay-wrapper">
-                <img src="assets2/img/people/team-2.jpg" alt="">
+                <img src="assets2/img/people/robbie.png" alt="">
                 <div class="overlay-content">
                   <div class="text-wrapper">
                     <div class="text-container">
@@ -505,10 +505,10 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="#" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
-                    <li><a href="#" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="mailto:rzettler@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="https://twitter.com/rob_zet" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/robbie.zettler" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/robbiezettler" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                   </ul>
                 </div>
               </div>
@@ -522,7 +522,7 @@ if (logged_in()) {
           <div class="team-member">
             <div class="photo-wrapper">
               <div class="overlay-wrapper">
-                <img src="assets2/img/people/team-3.jpg" alt="">
+                <img src="assets2/img/people/bradley.jpg" alt="">
                 <div class="overlay-content">
                   <div class="text-wrapper">
                     <div class="text-container">
@@ -530,7 +530,7 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="bwogsland@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="mailto:bwogsland@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/wogsland" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://www.facebook.com/wogsland" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/wogsland" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
@@ -548,7 +548,8 @@ if (logged_in()) {
             <div class="team-member">
               <div class="photo-wrapper">
                 <div class="overlay-wrapper">
-                  <img src="assets2/img/people/team-4.jpg" alt="">
+                  <!--<img src="assets2/img/people/team-<?=rand(1,4)?>.jpg" alt="">-->
+                  <img src="assets2/img/people/bender.png" alt="">
                   <div class="overlay-content">
                     <div class="text-wrapper">
                       <div class="text-container">
@@ -559,7 +560,6 @@ if (logged_in()) {
                 </div>
               </div>
               <h5 class="name">You?</h5>
-              <p class="position">Developer</p>
             </div>
           </a>
         </div>
