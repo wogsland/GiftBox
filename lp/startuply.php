@@ -10,9 +10,14 @@ if (logged_in()) {
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>Home</title>
-  <meta name="description" content="Startups template">
-  <meta name="keywords" content="Startups template">
+  <title>S!zzle - Sell the S!zzle not the Steak</title>
+  <meta name="description" content="Recruiting Technology">
+  <meta name="keywords" content="recruiting, startups">
+
+  <meta property="og:video" content="https://www.youtube.com/watch?v=uHzRX-8jC3s" />
+  <meta property="og:site_name" content="S!zzle" />
+  <meta property="og:title" content="S!zzle" />
+
   <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" type="text/css" href="assets2/css/custom-animations.css" />
   <link rel="stylesheet" type="text/css" href="assets2/css/lib/font-awesome.min.css" />
