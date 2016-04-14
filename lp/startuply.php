@@ -77,7 +77,7 @@ if (logged_in()) {
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="/pricing">Prices</a></li>
-            <!--<li><a href="#feedback">Feedback</a></li>-->
+            <li><a href="#feedback">Feedback</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="https://blog.gosizzle.io">Blog</a></li>
             <li><a href="#guarantee">Contact</a></li>
