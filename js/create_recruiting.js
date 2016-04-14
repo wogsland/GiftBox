@@ -361,7 +361,9 @@ function excludedLinkify (inputText) {
     {url:'avc.net', temp:'v5y5s4v5by5b55vb'},
     {url:'AVC.NET', temp:'b7j7fjn6n7n7b6b6'},
     {url:'apc.net', temp:'m87t8r6kbjv6j65b'},
-    {url:'APC.NET', temp:'23b46un6unndubyb'}
+    {url:'APC.NET', temp:'23b46un6unndubyb'},
+    {url:'Salesforce.com', temp:'i3cc5si75cm5cik7c5'},
+    {url:'salesforce.com', temp:'29jftwkgpgmetfueeg'}
   ];
   exclusions.forEach(function (e) {
     inputText = inputText.replace(e.url, e.temp);
