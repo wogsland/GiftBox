@@ -10,7 +10,7 @@ if (logged_in()) {
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>S!zzle - Sell the S!zzle not the Steak</title>
+  <title>S!zzle - Sell the Sizzle not the Steak</title>
   <meta name="description" content="Recruiting Technology">
   <meta name="keywords" content="recruiting, startups">
 
@@ -77,10 +77,10 @@ if (logged_in()) {
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="/pricing">Prices</a></li>
-            <li><a href="#feedback">Feedback</a></li>
+            <!--<li><a href="#feedback">Feedback</a></li>-->
             <li><a href="#team">Team</a></li>
             <li><a href="https://blog.gosizzle.io">Blog</a></li>
-            <li><a href="#guarantee">Contacts</a></li>
+            <li><a href="#guarantee">Contact</a></li>
           </ul>
           <ul class="navigation-bar navigation-bar-right">
             <li><a href="/email_signup?action=login">Login</a></li>
@@ -95,7 +95,7 @@ if (logged_in()) {
     <div class="container">
       <div class="heading-block align-center">
         <h1>How Important is Your Time?</h1>
-        <h5>Recruiting Automation for Recruiting Agencies, RPO, or Corporate HR</h5>
+        <h5>Recruiting Automation for Recruiting Agencies, RPOs, and Corporate HR</h5>
         <a class="btn btn-outline" style="margin-top: 7px;" onclick="uploadDescription()">UPLOAD</a>
       </div>
       <div class="video-wrapper">
@@ -141,7 +141,7 @@ if (logged_in()) {
                 <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
                 <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
                 <p>Self-driving cars? Flying cars? Self-<i>flying cars</i>? A space elevator? A cure for the AIDS virus? A non-polluting space elevator engine that <i>runs</i> on the AIDS virus? Are these things even possible?</p>
-                <p>Probably, but it's not what <i>we're</i> working on. We are laser focused on optimizing recruit engagement by constantly testing and tweaking our platform. Focusing on what works and iterating quickly through <strong>A/B tests</strong> and <strong>machine learning</strong> we're building the best tools available to recruiters today.</p>
+                <p>Maybe... but it's not what <i>we're</i> working on. We are laser focused on optimizing recruit engagement by constantly testing and tweaking our platform. Focusing on what works and iterating quickly through <strong>A/B tests</strong> and <strong>machine learning</strong> we're building the best tools available to recruiters today.</p>
               </article>
             </div>
           </div>
@@ -158,7 +158,7 @@ if (logged_in()) {
                 <h3>FOR EVERY <span class="highlight">RECRUITER</span></h3>
                 <p class="sub-title">Saving time is valuable for every recruiter.</p>
                 <p>
-                  With Sizzle's advanced models and machine learning platform, you are also not only saving time, but you are using the top automated marketing and sales practices. Using Sizzle will increase the top of your recruitment pipeline, while also filtering out poor candidates who don’t fit your position.
+                  With Sizzle's advanced models and machine learning platform, you are not only saving time, but you are also using the top <strong>automated marketing</strong> and sales practices. Using Sizzle will increase the top of your recruitment pipeline, while also filtering out poor candidates who don’t fit your position.
                 </p>
                 <br/>
                 <?php /*<a href="#" class="btn btn-outline-color">Platform Overview</a>*/?>
@@ -181,7 +181,10 @@ if (logged_in()) {
               <article class="align-center">
                 <i class="material-icons md-48">contact_mail</i>
                 <span class="heading">SEND US AN EMAIL</span>
-                <p class="thin" >To begin all it takes is a job description<br />and an email! Just email us a job description<br /> Preferably web based or word doc!</p>
+                <p class="thin" >
+                  All it takes to begin is a job description and an email!
+                  Just send an email with a job description, preferably web link or word doc, to <a href="mailto:token@gosizzle.io">token@gosizzle.io</a>.
+                </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
             </div>
@@ -189,7 +192,10 @@ if (logged_in()) {
               <article class="align-center">
                 <i class="material-icons md-48">settings</i>
                 <span class="heading">OUR SYSTEM RUNS</span>
-                <p class="thin" >Sit tight for an hour while our system process<br />the job description you just sent us.<br />Guaranteed turn around within an hour!</p>
+                <p class="thin" >Sit tight while our system processes<br />
+                  the job description you just sent us.<br />
+                  Guaranteed turn around within 24 hours!
+                </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
             </div>
@@ -197,7 +203,9 @@ if (logged_in()) {
               <article class="align-center">
                 <i class="material-icons md-48">markunread_mailbox</i>
                 <span class="heading">RECEIVE TOKEN</span>
-                <p class="thin" >After being processed your new Token is sent straight to your inbox. Also for those who have integrated with us your job board page is also updated!</p>
+                <p class="thin" >Within 24 hours, your new <strong>Token</strong> is sent
+                straight to your inbox. Also, for those who have
+                integrated their job board with us, your job board page is updated too!</p>
               </article>
             </div>
           </div>
@@ -221,8 +229,15 @@ if (logged_in()) {
           <br/><br/>
           <article>
             <h3>A MODERN <span class="highlight">STARTUP</span></h3>
-            <p class="sub-title">Think outside the app! Time consuming apps are so 2000s.<br/> Join the modern startup world where everything is automated.</p>
-            <p>We aren't just another app. Apps are time consuming. Sizzle is automatic. Apps have endless forms to filled out with. Sizzle is formless (insert joke)! Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favortie email client.</p>
+            <p class="sub-title">
+              Think outside the app! Time consuming apps are <i>soooo</i> 2000s.
+            </p>
+            <p>
+              Sizzle lets you join the modern startup world and automatically improves your candidate outreach.
+            </p>
+            <p>
+              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to filled out with. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favortie email client.
+            </p>
           </article>
         </div>
 
@@ -236,7 +251,7 @@ if (logged_in()) {
           <article>
             <h3>HANG <span class="highlight">ON TO</span> YER HELMET</h3>
             <p class="sub-title">Sell the Sizzle, Not the Steak</p>
-            <p> Sizzle is designed to not just improve your companies ability to attract candidates, but we are hear to put your recruiting firm on the rocket ship to success. We expect you to have more passive candidates respond to you, leading to more placements, stronger revenue, and an improved brand that grows your client base without ever having to truly change your current process.</p>
+            <p> Sizzle is designed to not just improve your companies ability to <strong>attract candidates</strong>, but we are here to put your recruiting firm on the rocket ship to success. Expect to have more passive candidates respond to you, leading to more placements, stronger revenue, and an improved brand that grows your client base without ever having to truly change your current process.</p>
           </article>
         </div>
 
@@ -274,7 +289,7 @@ if (logged_in()) {
               <a href="#home" data-toggle="tab">
                 <div class="tab-info">
                   <div class="tab-title">Visual</div>
-                  <div class="tab-desc">We scrape the web to put together powerful, relevant visuals to create engagement</div>
+                  <div class="tab-desc">We scrape the web to put together powerful, relevant visuals to drive <strong>candidate engagement</strong>.</div>
                 </div>
                 <!--<div class="tab-icon"><span class="icon icon-multimedia-20"></span></div>-->
               </a>
@@ -283,7 +298,7 @@ if (logged_in()) {
               <a href="#profile" data-toggle="tab">
                 <div class="tab-info">
                   <div class="tab-title">Information Packed</div>
-                  <div class="tab-desc">Scraping the web allows us to provide essential material in non-overwhelming format</div>
+                  <div class="tab-desc">We take your essential material and make it non-overwhelming for the candidate.</div>
                 </div>
                 <!--<div class="tab-icon"><span class="icon icon-seo-icons-27"></span></div>-->
               </a>
@@ -292,7 +307,7 @@ if (logged_in()) {
               <a href="#messages" data-toggle="tab">
                 <div class="tab-info">
                   <div class="tab-title">Candidate Engagement Focused</div>
-                  <div class="tab-desc">If you do not provide a great experience you will lose engagement</div>
+                  <div class="tab-desc">We help you create a great experience for the candidate, improving candidate engagement.</div>
                 </div>
                 <!-- <div class="tab-icon"><span class="icon icon-seo-icons-28"></span></div>-->
               </a>
@@ -381,8 +396,7 @@ if (logged_in()) {
       <div class="section-header">
         <h2><span class="highlight">OUR</span> Recognition</h2>
         <p class="sub-header">
-          Sizzle is being talked about in a number of publications
-          <br />Sell the Sizzle!
+          The <strong>recruiting world</strong> is talking about Sizzle!
         </p>
       </div>
       <div class="section-content">
@@ -472,7 +486,7 @@ if (logged_in()) {
         <p class="sub-header">
           Lets meet the team that has made this product a reality!
         </p>
-        <p>Every member of the Sizzle team brings something different. We are firm believers in the mindset of don’t just be great… be different! We have gamers, a history buff, and a sports-a-holic, but one thing brings us all together… Star Wars (Oh wait… I meant Sizzle. But seriously, have you seen the new trailer?)</p>
+        <p>Every member of the <strong>Sizzle team</strong> brings something different. We are firm believers in the mindset of don’t just be great… be different! We have gamers, a history buff, and a sports-a-holic, but one thing brings us all together… Star Wars (Oh wait… I meant Sizzle. But seriously, have you seen the new Rogue One trailer?)</p>
       </div>
       <div class="section-content row">
         <div class="col-md-3 col-sm-3 col-xs-6 animated" data-animation="fadeInDown" data-duration="500">
@@ -599,7 +613,7 @@ if (logged_in()) {
             <img width="130" height="45" src="assets2/img/Logo-Sizzle-Sizzle.png" alt="logo" />
           </div>
           <p>Life is short and your time is valuable. Our mission is to save you and your clients time while bringing them a quality product that fully services their needs.</p>
-          <p><strong>Gary Peters, Founder</strong>.</p>
+          <p><strong>Gary Peters, Founder</strong></p>
         </div>
         <div class="col-sm-5 social-wrap col-xs-12">
           <strong class="heading">Social Networks</strong>
