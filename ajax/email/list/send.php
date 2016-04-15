@@ -97,7 +97,7 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             if (isset($bcc)) {
                 $mail->addCC($bcc);
             }
-            $mail->Subject = $subject ?? $RecruitingCompany->name . ' ' . $RecruitingToken->job_title;
+            $mail->Subject = $subject;
             $email_message = file_get_contents(__DIR__.'/../../../email_templates/recruiting_token.inline.html');
             $email_message = str_replace('{{message}}', ($message ?? ''), $email_message);
             $link = APP_URL.'token/recruiting/'.$token_id;
@@ -119,6 +119,8 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             if (!$mail->send()) {
                 //print_r($mail);
                 $data['error'] = $mail->ErrorInfo;
+                $data['isMock'] = $mail instanceof \Mockery\MockInterface;
+
             } else {
                 $success = 'true';
             }

@@ -269,11 +269,11 @@ require __DIR__.'/header.php';
             <paper-button>NEW CREDENTIALS</paper-button>
           </a>
           <br />
-          <paper-textarea
-            label="Required Subject. Default: <?php echo $company->name ?> <?php echo $token->job_title ?>"
-            id="send-to-email-subject"
-            rows="1">
-          </paper-textarea>
+            <paper-input
+              label="Required Subject"
+              value="<?php echo $company->name ?> <?php echo $token->job_title ?>"
+              id="send-to-email-subject">
+            </paper-input>
           <br />
           <paper-textarea
             label="Optional Message"

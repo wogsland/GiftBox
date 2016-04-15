@@ -16,23 +16,58 @@ new Sizzle\Bacon\Connection();
 require_once __DIR__.'/../../util.php';
 
 /**
- * This is a testing function for obtaining a valid cookie.
+ * This is a testing function for obtaining a valid cookie and the associated
+ * user id.
  *
  * @param boolean $admin - optionally specify user is to be an admin
  *
- * @return string - a cookie to access a logged in session
+ * @return array(string - a cookie to access a logged in session,
+ *               int - the id of the associated user)
  */
-function getTestCookie($admin = false, $shouldReturnCreatedUserId = false)
+function getTestCookieAndUserId($admin = false)
 {
     $password = 'nachos';
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $username = rand().'@gosizzle.io';
     if ($admin) {
         $query = "INSERT INTO user (first_name, last_name, email_address, password, admin)
-                  VALUES ('fake', 'user', '$username', '$hash', 'Y')";
+              VALUES ('fake', 'user', '$username', '$hash', 'Y')";
     } else {
         $query = "INSERT INTO user (first_name, last_name, email_address, password)
-                  VALUES ('fake', 'user', '$username', '$hash')";
+              VALUES ('fake', 'user', '$username', '$hash')";
+    }
+    $id = insert($query);
+
+    $ch = curl_init(TEST_URL . '/ajax/login');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, "login_email=$username&password=$password&login_type=EMAIL");
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    $result = curl_exec($ch);
+    preg_match_all('/^Set-Cookie: PHPSESSID=(.*?);/mi', $result, $matches);
+    $userCookie = $matches[1][0];
+    $cookieString = 'PHPSESSID=' . $userCookie . ';';
+    return array($cookieString, $id);
+}
+
+/**
+ * This is a testing function for obtaining a valid cookie.
+ *
+ * @param boolean $admin - optionally specify user is to be an admin
+ *
+ * @return string - a cookie to access a logged in session
+ */
+function getTestCookie($admin = false)
+{
+    $password = 'nachos';
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $username = rand().'@gosizzle.io';
+    if ($admin) {
+        $query = "INSERT INTO user (first_name, last_name, email_address, password, admin)
+              VALUES ('fake', 'user', '$username', '$hash', 'Y')";
+    } else {
+        $query = "INSERT INTO user (first_name, last_name, email_address, password)
+              VALUES ('fake', 'user', '$username', '$hash')";
     }
     execute_query($query);
     $ch = curl_init(TEST_URL . '/ajax/login');
@@ -44,7 +79,7 @@ function getTestCookie($admin = false, $shouldReturnCreatedUserId = false)
     preg_match_all('/^Set-Cookie: PHPSESSID=(.*?);/mi', $result, $matches);
     $userCookie = $matches[1][0];
     $cookieString = 'PHPSESSID=' . $userCookie . ';';
-    return $shouldReturnCreatedUserId ? array($cookieString, $id) : $cookieString;
+    return $cookieString;
 }
 define('TEST_COOKIE', getTestCookie());
 if (!defined('FILE_STORAGE_PATH')) {
