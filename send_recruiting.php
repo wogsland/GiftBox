@@ -166,7 +166,7 @@ require __DIR__.'/header.php';
           <div class="pull-left" id="token-link" style="padding-top:15px;">
             <a href="<?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>" target="_blank">
               <?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>
-            </a>
+            </a><br />
           </div>
           <div class="pull-right" id="social-shares">
             <paper-button
@@ -175,6 +175,14 @@ require __DIR__.'/header.php';
               raised
               onclick="copyTokenLink()">
             COPY</paper-button>
+
+              <a id="download-qr-code-link"><paper-button
+                id="download-qr-code-button"
+                style="margin-left:0px;"
+                raised
+                onclick=null">
+                Download QR Code
+                <div id="qr-code" hidden></div></paper-button></a>
 
             <div id="li-root" style="margin-top:20px"></div>
             <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
@@ -289,7 +297,10 @@ require __DIR__.'/header.php';
 
   <!-- JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
   <script>
+
+//   $('#qrcode').qrcode({width: 32,height: 32,text: "size doesn't matter"});
   /**
    * Redirects user back to the company edit page
    *
@@ -299,6 +310,16 @@ require __DIR__.'/header.php';
   function backToCompany(id, token) {
     window.location = '/create_company?id='+id+'&referrer='+token;
   }
+
+  /**
+   *  Downloads QR Code image link of token
+   */
+  $("#qr-code").qrcode("<?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>");
+  $("#download-qr-code-link")[0].href = $("#qr-code canvas")[0].toDataURL("image/png")
+  $("#download-qr-code-link")[0].download = "recruiting_token_qr_code.png";
+//function downloadQRCodeImage() {
+//  $("#qr-code").append("<iframe href=\"" + $("#qr-code canvas")[0].toDataURL("image/png") + "\" download hidden></iframe>");
+//}
 
   /**
    * Copies the token link to the keyboard
