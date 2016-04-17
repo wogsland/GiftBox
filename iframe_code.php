@@ -7,7 +7,7 @@ use \Sizzle\Database\{
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.'/');
+  login_then_redirect_back_here();
 }
 
 $user = new User($_SESSION['user_id'] ?? '');
