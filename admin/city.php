@@ -8,6 +8,13 @@ if (!logged_in() || !is_admin()) {
 define('TITLE', 'S!zzle - Add City');
 require __DIR__.'/../header.php';
 ?>
+<!-- Polymer -->
+<script src="/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<link rel="import" href="/components/paper-menu/paper-menu.html">
+<link rel="import" href="/components/paper-item/paper-item.html">
+<link rel="import" href="/components/paper-input/paper-input.html">
+<link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
+
 <style>
 body {
   background-color: white;
@@ -23,11 +30,19 @@ body {
   </div>
   <div class="row" id="city-form">
     <div class="col-sm-offset-3 col-sm-6">
-      <h1>Create City</h1>
+      <h1>Edit City</h1>
       <form>
         <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" placeholder="City Name" required>
+          <paper-input
+            error-message="This is a required field"
+            label="City Name"
+            id="name"
+            name="name">
+            <iron-icon icon="arrow-drop-down" id="city-dropdown-button" suffix></iron-icon>
+          </paper-input>
         </div>
+        <paper-menu id="city-menu">
+        </paper-menu>
         <div class="form-group">
           <label for="exampleInputFile">File input</label>
           <input type="file" id="exampleInputFile" name="exampleInputFile">
@@ -80,6 +95,35 @@ body {
     <?php require __DIR__.'/../footer.php';?>
   <script>
   $(document).ready(function(){
+    $('#city-menu').hide();
+    $('#city-dropdown-button').on('click', function() {
+      $('#city-menu').toggle();
+    })
+    $('#name').on('keyup', function(){
+      $.post(
+        '/ajax/city/get_list',
+        {'typed':$('#name').val()},
+        function (data) {
+          if (data.success == 'true') {
+            menuItems = '';
+            $.each(data.data, function(index, city){
+              menuItems += '<paper-item id="'+city.id+'">'+city.name+'</paper-item>';
+            });
+            $('#city-menu').html(menuItems);
+            $('#city-menu').children('paper-item').each(function(index, item){
+              $(this).on('click',function(){
+                $('#name').val($(this).html().trim())
+                $('#city-menu').hide()
+              });
+            })
+            $('#city-menu').show()
+          } else {
+            $('#city-menu').hide()
+          }
+        },
+        'json'
+      );
+    });
     $('#submit-city').on('click', function (event) {
       event.preventDefault();
 
