@@ -677,6 +677,9 @@ function handleAjaxRecruitingTokenGet(data) {
   updateSectionPositions();
 }
 
+/**
+ * Responsible for ordering the page sections after populating the token.
+ */
 function updateSectionPositions() {
   var wrapper = document.getElementById('ordered-sections'),
       ordered = [],
@@ -706,7 +709,8 @@ function updateSectionPositions() {
         section_id = typeof section === 'string' ? section : section.id,
         section_el = document.getElementById(section_id);
 
-    if (section_el === null) return;
+    if (elementIsPresent(section_el) === false) return;
+
     if (position === false) {
       ordered.push(section_el);
     } else {
@@ -716,6 +720,16 @@ function updateSectionPositions() {
 
   ordered.forEach(wrapper.appendChild.bind(wrapper));
 }
+
+/**
+ * Determines whether an element is present and visible on the page
+ * @param {HTMLElement} section_el
+ * @returns {boolean}
+ */
+function elementIsPresent(section_el) {
+  return section_el != null && section_el.style.display !== 'none';
+}
+
 /**
  * Handles the data return from /ajax/recruiting_token/get_responses_allowed
  *
