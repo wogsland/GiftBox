@@ -77,3 +77,8 @@ function debug_output($text)
         echo $text."</pre>\n";
     }
 }
+
+function login_then_redirect_back_here()
+{
+    header('Location: '.APP_URL."email_signup?action=login&next=".urlencode($_SERVER['REQUEST_URI']));
+}
