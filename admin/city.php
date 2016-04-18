@@ -22,6 +22,10 @@ body {
 #city-form {
   margin-top: 100px;
 }
+.image-input {
+  text-align: left;
+  margin-bottom: 15px;
+}
 </style>
 </head>
 <body id="add-city-body">
@@ -106,10 +110,36 @@ body {
             <form>
               <input type="hidden" name="city_id" class="city-id"></input>
               <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile" name="exampleInputFile">
-                <input type="hidden" id="image_file" name="image_file">
-                <p class="help-block">Please only upload public domain photos.</p>
+                <label for="exampleInputFile">File Input</label>
+                <div class="image-input">
+                  Chose files to replace the existing files. If < 4 files are
+                  chosen then only the first will show on the main page of the
+                  token. <strong>Please only upload public domain photos.</strong>
+                </div>
+                <div class="image-input">
+                  0
+                  <a id="stored-image-0" target="_blank"></a>
+                  <input type="file" id="exampleInputFile0" name="exampleInputFile0">
+                  <input type="hidden" id="image-file-0" name="image_file_0">
+                </div>
+                <div class="image-input">
+                  1
+                  <a id="stored-image-1" target="_blank"></a>
+                  <input type="file" id="exampleInputFile1" name="exampleInputFile1">
+                  <input type="hidden" id="image-file-1" name="image_file_1">
+                </div>
+                <div class="image-input">
+                  2
+                  <a id="stored-image-2" target="_blank"></a>
+                  <input type="file" id="exampleInputFile2" name="exampleInputFile2">
+                  <input type="hidden" id="image-file-2" name="image_file_2">
+                </div>
+                <div class="image-input">
+                  3
+                  <a id="stored-image-3" target="_blank"></a>
+                  <input type="file" id="exampleInputFile3" name="exampleInputFile3">
+                  <input type="hidden" id="image-file-3" name="image_file_3">
+                </div>
               </div>
               <button type="submit" class="btn btn-success" id="submit-images">Submit</button>
             </form>
@@ -171,6 +201,30 @@ body {
                   },
                   'json'
                 );
+                $.post(
+                  '/ajax/city/get_images/',
+                  {'city_id': $(this).attr('id')},
+                  function (data) {
+                    console.log(data)
+                    if (data.data[0] !== undefined) {
+                      $('#stored-image-0').html(data.data[0]);
+                      $('#stored-image-0').attr('href', data.data[0]);
+                    }
+                    if (data.data[1] !== undefined) {
+                      $('#stored-image-1').html(data.data[1]);
+                      $('#stored-image-1').attr('href', data.data[1]);
+                    }
+                    if (data.data[2] !== undefined) {
+                      $('#stored-image-2').html(data.data[2]);
+                      $('#stored-image-2').attr('href', data.data[2]);
+                    }
+                    if (data.data[3] !== undefined) {
+                      $('#stored-image-3').html(data.data[3]);
+                      $('#stored-image-3').attr('href', data.data[3]);
+                    }
+                  },
+                  'json'
+                );
               });
             })
             $('#city-menu').show()
@@ -199,6 +253,15 @@ body {
         });
       } else {
         //update existing city
+      }
+    });
+
+    $('#submit-images').on('click', function (event) {
+      event.preventDefault();
+      if ($('#city-id').val() == undefined) {
+        alert('Enter the city details first please.')
+      } else {
+        // save images
       }
     });
   });
