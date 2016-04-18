@@ -114,6 +114,31 @@ body {
               $(this).on('click',function(){
                 $('#name').val($(this).html().trim())
                 $('#city-menu').hide()
+                $.post(
+                  '/ajax/city/get/'+$(this).attr('id'),
+                  {},
+                  function (data) {
+                    $('#population').val(data.data.population);
+                    $('#longitude').val(data.data.longitude);
+                    $('#latitude').val(data.data.latitude);
+                    $('#county').val(data.data.county);
+                    $('#country').val(data.data.country);
+                    $('#timezone').val(data.data.timezone);
+                    $('#temp_hi_spring').val(data.data.temp_hi_spring);
+                    $('#temp_lo_spring').val(data.data.temp_lo_spring);
+                    $('#temp_avg_spring').val(data.data.temp_avg_spring);
+                    $('#temp_hi_summer').val(data.data.temp_hi_summer);
+                    $('#temp_lo_summer').val(data.data.temp_lo_summer);
+                    $('#temp_avg_summer').val(data.data.temp_avg_summer);
+                    $('#temp_hi_fall').val(data.data.temp_hi_fall);
+                    $('#temp_lo_fall').val(data.data.temp_lo_fall);
+                    $('#temp_avg_fall').val(data.data.temp_avg_fall);
+                    $('#temp_hi_winter').val(data.data.temp_hi_winter);
+                    $('#temp_lo_winter').val(data.data.temp_lo_winter);
+                    $('#temp_avg_winter').val(data.data.temp_avg_winter);
+                  },
+                  'json'
+                );
               });
             })
             $('#city-menu').show()
