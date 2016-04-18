@@ -1,6 +1,6 @@
 <?php
 if (!logged_in()) {
-    header('Location: '.APP_URL);
+  login_then_redirect_back_here();
 }
 
 $user_id = $_SESSION['user_id'] ?? '';
