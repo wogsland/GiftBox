@@ -490,6 +490,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
 }
 
 /**
@@ -673,8 +674,48 @@ function handleAjaxRecruitingTokenGet(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
 }
 
+function updateSectionPositions() {
+  var wrapper = document.getElementById('ordered-sections'),
+      ordered = [],
+    /*
+     * sectionPriority
+     *
+     * Each member of this semi-ordered array is either an id or an object with an id and a position.
+     * If the member is an id, or if position === false, then the section will appear in order.
+     * If the member has an explicit position, then the section will be placed in that position, and the rest of
+     * the sections will flow around it.
+     *
+     */
+    sectionPriority =
+    [
+      'company-section',
+      'recruiter-section',
+      'social-section',
+      'location-section',
+      {
+        id: 'job-description-section',
+        position: 1
+      }
+    ];
+
+  sectionPriority.forEach(function(section) {
+    var position = typeof section === 'string' ? false : section.position,
+        section_id = typeof section === 'string' ? section : section.id,
+        section_el = document.getElementById(section_id);
+
+    if (section_el === null) return;
+    if (position === false) {
+      ordered.push(section_el);
+    } else {
+      ordered = ordered.slice(0, position).concat(section_el).concat(ordered.slice(position));
+    }
+  });
+
+  ordered.forEach(wrapper.appendChild.bind(wrapper));
+}
 /**
  * Handles the data return from /ajax/recruiting_token/get_responses_allowed
  *

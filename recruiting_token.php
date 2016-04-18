@@ -79,147 +79,148 @@
 
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
-
-                      <section id="company-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onImagesClick">
-                        <div class="mdl-grid no-padding no-margin link-finger" id="company-image-grid">
-                          <div class="mdl-cell no-margin" id="company-main-image">
-                            <div id="supporting-company">
-                              <i class="material-icons">business</i>
-                              <i class="gt-info-company"></i>
-                            </div>
-                          </div>
-                          <div class="mdl-cell no-margin" id="company-secondary-images">
-                            <div class="mdl-grid no-padding" style="height:337px">
-                              <div class="no-margin">
-                                <img id="company-secondary-image-1" src="" class="company-secondary-image">
-                              </div>
-                              <div class="no-margin">
-                                <img id="company-secondary-image-2" src="" class="company-secondary-image">
-                              </div>
-                              <div class="no-margin">
-                                <img id="company-secondary-image-3" src="" class="company-secondary-image" style="-webkit-filter: brightness(25%);">
-                                <i class="material-icons plus-icon--overlay">add</i>
+                      <div id="ordered-sections">
+                        <section id="company-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onImagesClick">
+                          <div class="mdl-grid no-padding no-margin link-finger" id="company-image-grid">
+                            <div class="mdl-cell no-margin" id="company-main-image">
+                              <div id="supporting-company">
+                                <i class="material-icons">business</i>
+                                <i class="gt-info-company"></i>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="company-description">
-                          <div class="mdl-card__supporting-text">
-                            <h4 class="mdl-color-text--primary-dark">Company Information</h4>
-                            <p id="company-description-text">
-                            </p>
-                          </div>
-                        </div>
-                      </section>
-
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                        <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
-                          <div class="mdl-card__supporting-icon">
-                            <h4 class="mdl-color-text--primary-contrast" id="briefcase-or-logo">
-                              <i class="material-icons huge-icon">work</i>
-                            </h4>
-                          </div>
-                        </div>
-                        <div class="mdl-card mdl-cell mdl-cell--8-col">
-                          <div class="mdl-card__supporting-text">
-                            <h4 class="mdl-color-text--primary-dark gt-info-jobtitle">Job Description</h4>
-                            <p class="gt-info-overview-short link-finger" on-click="_onOverviewClick">
-                            </p>
-                          </div>
-                          <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
-                            <a id="skills-button" href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
-                              Skills Required
-                            </a>
-                            <a id="responsibilities-button"  href="#responsibilities-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onResponsibilitiesClick">
-                              Responsibilities
-                            </a>
-                            <a id="values-button"  href="#values-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onValuesClick">
-                              Values
-                            </a>
-                            <a id="perks-button"  href="#perks-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onPerksClick">
-                              Perks
-                            </a>
-                          </div>
-                        </div>
-                      </section>
-
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="recruiter-section">
-                        <div class="mdl-card mdl-cell mdl-cell--8-col">
-                          <div class="mdl-card__supporting-text">
-                            <i id="gt-info-recruiter-position"></i>
-                            <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name"></h4>
-                            <p id="gt-info-recruiter-bio">
-                            </p>
-                          </div>
-                          <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="recruiter-options">
-                            <a id="bio-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
-                              Full Bio
-                            </a>
-                            <a id="linkedin-button" target="_blank" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
-                              LinkedIn Page
-                            </a>
-                            <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
-                              Contact Information
-                            </a>
-                            <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
-                              Schedule Meeting
-                            </a>
-                          </div>
-                        </div>
-                        <div class="mdl-card mdl-cell mdl-cell--4-col" id="recruiter-face">
-                          <div class="mdl-card__supporting-icon">
-                            <h4 class="mdl-color-text--primary-contrast" id="icon-or-face">
-                              <i class="material-icons huge-icon">face</i>
-                            </h4>
-                          </div>
-                        </div>
-                      </section>
-
-                      <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section">
-                        <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
-                          <i class="fa fa-twitter big-icon"></i>
-                        </a>
-                        <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
-                          <i class="fa fa-facebook big-icon"></i>
-                        </a>
-                        <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
-                          <i class="fa fa-linkedin big-icon"></i>
-                        </a>
-                        <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
-                          <i class="fa fa-youtube big-icon"></i>
-                        </a>
-                        <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
-                          <i class="fa fa-google-plus big-icon"></i>
-                        </a>
-                        <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
-                          <i class="fa fa-pinterest big-icon"></i>
-                        </a>
-                      </section>
-
-                      <section id="location-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
-                        <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid">
-                          <div class="mdl-cell no-margin" id="location-main-image">
-                            <div id="supporting-location">
-                              <i class="material-icons">room</i>
-                              <i class="gt-info-location"></i>
-                            </div>
-                          </div>
-                          <div class="mdl-cell no-margin" id="location-secondary-images">
-                            <div class="mdl-grid no-padding" style="height:337px">
-                              <div class="no-margin">
-                                <img id="location-secondary-image-1" src="" class="location-secondary-image">
-                              </div>
-                              <div class="no-margin">
-                                <img id="location-secondary-image-2" src="" class="location-secondary-image">
-                              </div>
-                              <div class="no-margin">
-                                <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
-                                <i class="material-icons plus-icon--overlay">add</i>
+                            <div class="mdl-cell no-margin" id="company-secondary-images">
+                              <div class="mdl-grid no-padding" style="height:337px">
+                                <div class="no-margin">
+                                  <img id="company-secondary-image-1" src="" class="company-secondary-image">
+                                </div>
+                                <div class="no-margin">
+                                  <img id="company-secondary-image-2" src="" class="company-secondary-image">
+                                </div>
+                                <div class="no-margin">
+                                  <img id="company-secondary-image-3" src="" class="company-secondary-image" style="-webkit-filter: brightness(25%);">
+                                  <i class="material-icons plus-icon--overlay">add</i>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </section>
+                          <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="company-description">
+                            <div class="mdl-card__supporting-text">
+                              <h4 class="mdl-color-text--primary-dark">Company Information</h4>
+                              <p id="company-description-text">
+                              </p>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="job-description-section">
+                          <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
+                            <div class="mdl-card__supporting-icon">
+                              <h4 class="mdl-color-text--primary-contrast" id="briefcase-or-logo">
+                                <i class="material-icons huge-icon">work</i>
+                              </h4>
+                            </div>
+                          </div>
+                          <div class="mdl-card mdl-cell mdl-cell--8-col">
+                            <div class="mdl-card__supporting-text">
+                              <h4 class="mdl-color-text--primary-dark gt-info-jobtitle">Job Description</h4>
+                              <p class="gt-info-overview-short link-finger" on-click="_onOverviewClick">
+                              </p>
+                            </div>
+                            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
+                              <a id="skills-button" href="#skills-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onSkillsClick">
+                                Skills Required
+                              </a>
+                              <a id="responsibilities-button"  href="#responsibilities-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onResponsibilitiesClick">
+                                Responsibilities
+                              </a>
+                              <a id="values-button"  href="#values-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onValuesClick">
+                                Values
+                              </a>
+                              <a id="perks-button"  href="#perks-section" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect job-description-option" on-click="_onPerksClick">
+                                Perks
+                              </a>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="recruiter-section">
+                          <div class="mdl-card mdl-cell mdl-cell--8-col">
+                            <div class="mdl-card__supporting-text">
+                              <i id="gt-info-recruiter-position"></i>
+                              <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name"></h4>
+                              <p id="gt-info-recruiter-bio">
+                              </p>
+                            </div>
+                            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="recruiter-options">
+                              <a id="bio-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                                Full Bio
+                              </a>
+                              <a id="linkedin-button" target="_blank" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                                LinkedIn Page
+                              </a>
+                              <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                                Contact Information
+                              </a>
+                              <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                                Schedule Meeting
+                              </a>
+                            </div>
+                          </div>
+                          <div class="mdl-card mdl-cell mdl-cell--4-col" id="recruiter-face">
+                            <div class="mdl-card__supporting-icon">
+                              <h4 class="mdl-color-text--primary-contrast" id="icon-or-face">
+                                <i class="material-icons huge-icon">face</i>
+                              </h4>
+                            </div>
+                          </div>
+                        </section>
+
+                        <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section" id="social-section">
+                          <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
+                            <i class="fa fa-twitter big-icon"></i>
+                          </a>
+                          <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
+                            <i class="fa fa-facebook big-icon"></i>
+                          </a>
+                          <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
+                            <i class="fa fa-linkedin big-icon"></i>
+                          </a>
+                          <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
+                            <i class="fa fa-youtube big-icon"></i>
+                          </a>
+                          <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
+                            <i class="fa fa-google-plus big-icon"></i>
+                          </a>
+                          <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
+                            <i class="fa fa-pinterest big-icon"></i>
+                          </a>
+                        </section>
+
+                        <section id="location-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
+                          <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid">
+                            <div class="mdl-cell no-margin" id="location-main-image">
+                              <div id="supporting-location">
+                                <i class="material-icons">room</i>
+                                <i class="gt-info-location"></i>
+                              </div>
+                            </div>
+                            <div class="mdl-cell no-margin" id="location-secondary-images">
+                              <div class="mdl-grid no-padding" style="height:337px">
+                                <div class="no-margin">
+                                  <img id="location-secondary-image-1" src="" class="location-secondary-image">
+                                </div>
+                                <div class="no-margin">
+                                  <img id="location-secondary-image-2" src="" class="location-secondary-image">
+                                </div>
+                                <div class="no-margin">
+                                  <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
+                                  <i class="material-icons plus-icon--overlay">add</i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
 
                       <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
