@@ -26,7 +26,7 @@ if (logged_in() && is_admin()) {
             $imageFile = $token->screenshot();
             if ($imageFile) {
                 $message .= '<a href="'.APP_URL.'token/recruiting/'.$token->long_id.'">';
-                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=200 />';
+                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=700 />';
                 $message .= '</a>';
             }
             $message .='<br /><br />Share on ';

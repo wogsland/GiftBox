@@ -14,7 +14,7 @@ use Sizzle\Database\{
 class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
 {
     use \Sizzle\Tests\Traits\Organization;
-    use \Sizzle\Tests\Traits\RecruitingCompany;
+    use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
      * Requires the util.php file of functions
@@ -204,10 +204,26 @@ class RecruitingCompanyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the getTokens function
+     */
+    public function testGetTokens()
+    {
+        $us = $this->createUser();
+        $co = $this->createRecruitingCompany($us->id);
+        $tok1 = $this->createRecruitingToken($us->id, $co->id);
+        $tok2 = $this->createRecruitingToken($us->id, $co->id);
+        $tok3 = $this->createRecruitingToken($us->id, $co->id);
+        $tokens = $co->getTokens();
+        $this->assertTrue(is_array($tokens));
+        $this->assertEquals(3, count($tokens));
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()
     {
+        $this->deleteRecruitingTokens();
         $this->deleteRecruitingCompanies();
         $this->deleteUsers();
         $this->deleteOrganizations();

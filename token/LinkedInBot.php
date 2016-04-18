@@ -30,13 +30,13 @@ if (isset($token->id)) {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="description" content="S!zzle Recruiting Token">
+      <meta name="description" content="<?=$token->job_title?>">
       <meta name="keywords" content="">
       <meta name="author" content="S!zzle">
     </head>
     <body>
       <h1>
-        <?= $token->job_title?>
+        <?=$token->job_title?>
         <?= isset($company->name) ? '- '.$company->name : '' ?>
         - <?= $city->name?>
       </h1>
