@@ -68,7 +68,7 @@ class City extends \Sizzle\DatabaseEntity
 
         // check for required columns
         foreach (get_object_vars($this) as $key => $value) {
-            if (!in_array($key, $this->readOnly)) {
+            if (!in_array($key, $this->readOnly) && $key != 'image_file') {
                 $success = $success && isset($value);
             }
         }
