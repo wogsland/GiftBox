@@ -453,7 +453,7 @@ if (logged_in()) {
             <div class="switch flex-active">
               <img alt="client" src="assets2/img/people/mallie_froehlich.png" class="sm-pic img-circle pull-left" width="69" height="70">
               <p>
-                <span class="highlight">MALLIE FROEHLICH</span><br/>Recruiting Associate at <span class="highlight">IQ Talent</span>
+                <span class="highlight">MALLIE FROEHLICH</span><br/>Contract Recruiting at <span class="highlight">Auction.com</span>
               </p>
             </div>
           </div>
