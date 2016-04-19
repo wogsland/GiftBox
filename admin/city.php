@@ -252,7 +252,16 @@ body {
         });
       } else {
         //update existing city
-        alert('Need to write city update code here.')
+        url = '/ajax/city/update';
+        $.post(url, $('form').serialize(), function(data) {
+          if (data.success === 'true') {
+            $('#city-form').html("<h1>City Updated!</h1>Change can be a beautiful thing, no?");
+            $('#city-form').css('margin-bottom','500px');
+            window.scrollTo(0, 0);
+          } else {
+            alert('All fields required!');
+          }
+        });
       }
     });
 

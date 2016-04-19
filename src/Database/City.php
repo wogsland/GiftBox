@@ -93,8 +93,8 @@ class City extends \Sizzle\DatabaseEntity
      */
     protected function update()
     {
-        $success = false;
-        return $success;
+        parent::updateRow();
+        return true;
     }
 
     /**
