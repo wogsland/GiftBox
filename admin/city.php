@@ -269,6 +269,8 @@ body {
       if ($('#city-id-images').val() == '') {
         alert('Enter the city details first please.');
       } else {
+        $('#submit-images').prop( "disabled", true );
+
         // save images
         var formData = new FormData($(this)[0]);
         console.log(formData)

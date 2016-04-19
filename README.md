@@ -38,7 +38,7 @@ To create a local instance of the S!zzle database, use MySQL Workbench's Schema 
 
 ### AWS
 
-If you'll be testing AWS, you'll need to create `~/.aws/credentials` and enter the following:
+If you'll be testing AWS, you'll need to create `/.aws/credentials` and enter the following:
 
     [sizzle]
     aws_access_key_id = AWS_ACCESS_KEY_ID
