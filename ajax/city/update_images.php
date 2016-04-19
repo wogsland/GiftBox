@@ -1,4 +1,5 @@
 <?php
+use Aws\S3\S3Client;
 use Sizzle\Database\{
     City,
     CityImages
@@ -14,6 +15,13 @@ if (logged_in() && is_admin()) {
 
         $cities = $City->getCityImages();
         print_r($cities);
+
+        $s3Client = S3Client::factory(array(
+            'profile' => 'sizzle',
+            'region'  => 'us-west-2',
+            'version' => '2006-03-01'
+        ));
+        //print_r($s3Client);
     }
 }
 header('Content-Type: application/json');
