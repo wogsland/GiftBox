@@ -339,9 +339,14 @@ require __DIR__.'/header.php';
             <paper-button raised onclick="backToToken('<?php echo $referrer;?>')">BACK</paper-button>
             <paper-button id="save-continue-button" raised onclick="saveCompany()">SAVE &amp; CONTINUE</paper-button>
           </div>
-          <div>
+          <div class="button-container">
             <paper-button raised onclick="chooseCompany()" id="use-existing-company-button">
               USE EXISTING COMPANY
+            </paper-button>
+          </div>
+          <div class="button-container">
+            <paper-button raised onclick="skipCompany()" id="skip-company-button">
+              Skip COMPANY
             </paper-button>
           </div>
        </div>
@@ -406,6 +411,12 @@ require __DIR__.'/header.php';
         var companyId = menu.selectedItem.id;
         window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
       }
+    }
+    /**
+     * Skips this step
+     */
+    function skipCompany() {
+      window.location = '/send_recruiting?referrer='+null+'&id=<?php echo $referrer;?>';
     }
     $( document ).ready(function() {
         $('#select-image-file').on('change', handleImageFileSelect);
