@@ -62,8 +62,8 @@ body {
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
             <form>
-              <input type="hidden" name="name" class="city-name"></input>
-              <input type="hidden" name="city_id" class="city-id"></input>
+              <input type="hidden" name="name" class="city-name" id="city-name"></input>
+              <input type="hidden" name="city_id" class="city-id" id="city-id-details"></input>
               <div class="form-group">
                 <input type="text" class="form-control" id="population" name="population" placeholder="Population" required>
               </div>
@@ -108,7 +108,7 @@ body {
           </div>
           <div role="tabpanel" class="tab-pane" id="profile">
             <form>
-              <input type="hidden" name="city_id" class="city-id"></input>
+              <input type="hidden" name="city_id" class="city-id" id="city-id-images"></input>
               <div class="form-group">
                 <label for="exampleInputFile">File Input</label>
                 <div class="image-input">
@@ -205,7 +205,6 @@ body {
                   '/ajax/city/get_images/',
                   {'city_id': $(this).attr('id')},
                   function (data) {
-                    console.log(data)
                     if (data.data[0] !== undefined) {
                       $('#stored-image-0').html(data.data[0]);
                       $('#stored-image-0').attr('href', data.data[0]);
@@ -240,7 +239,7 @@ body {
       event.preventDefault();
 
       // save info in the database
-      if ($('#city-id').val() == undefined) {
+      if ($('#city-id-details').val() == '') {
         url = '/ajax/city/add';
         $.post(url, $('form').serialize(), function(data) {
           if (data.success === 'true') {
@@ -253,15 +252,17 @@ body {
         });
       } else {
         //update existing city
+        alert('Need to write city update code here.')
       }
     });
 
     $('#submit-images').on('click', function (event) {
       event.preventDefault();
-      if ($('#city-id').val() == undefined) {
+      if ($('#city-id-images').val() == '') {
         alert('Enter the city details first please.')
       } else {
         // save images
+        alert('Need to write image save code here.')
       }
     });
   });
