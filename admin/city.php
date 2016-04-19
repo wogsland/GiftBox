@@ -61,7 +61,7 @@ body {
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
-            <form>
+            <form id="details-form">
               <input type="hidden" name="name" class="city-name" id="city-name"></input>
               <input type="hidden" name="city_id" class="city-id" id="city-id-details"></input>
               <div class="form-group">
@@ -107,38 +107,37 @@ body {
             </form>
           </div>
           <div role="tabpanel" class="tab-pane" id="profile">
-            <form>
+            <form id="images-form" enctype="multipart/form-data">
               <input type="hidden" name="city_id" class="city-id" id="city-id-images"></input>
               <div class="form-group">
-                <label for="exampleInputFile">File Input</label>
+                <label>File Input</label>
                 <div class="image-input">
                   Chose files to replace the existing files. If < 4 files are
                   chosen then only the first will show on the main page of the
                   token. <strong>Please only upload public domain photos.</strong>
                 </div>
+                <div>
+                  <img src="/images/location-example.png" width="500" title="example image placement"/>
+                </div>
                 <div class="image-input">
                   0
                   <a id="stored-image-0" target="_blank"></a>
-                  <input type="file" id="exampleInputFile0" name="exampleInputFile0">
-                  <input type="hidden" id="image-file-0" name="image_file_0">
+                  <input type="file" id="image-file-0" name="image-file-0" />
                 </div>
                 <div class="image-input">
                   1
                   <a id="stored-image-1" target="_blank"></a>
-                  <input type="file" id="exampleInputFile1" name="exampleInputFile1">
-                  <input type="hidden" id="image-file-1" name="image_file_1">
+                  <input type="file" id="image-file-1" name="image-file-1" />
                 </div>
                 <div class="image-input">
                   2
                   <a id="stored-image-2" target="_blank"></a>
-                  <input type="file" id="exampleInputFile2" name="exampleInputFile2">
-                  <input type="hidden" id="image-file-2" name="image_file_2">
+                  <input type="file" id="image-file-2" name="image-file-2" />
                 </div>
                 <div class="image-input">
                   3
                   <a id="stored-image-3" target="_blank"></a>
-                  <input type="file" id="exampleInputFile3" name="exampleInputFile3">
-                  <input type="hidden" id="image-file-3" name="image_file_3">
+                  <input type="file" id="image-file-3" name="image-file-3" />
                 </div>
               </div>
               <button type="submit" class="btn btn-success" id="submit-images">Submit</button>
@@ -241,7 +240,7 @@ body {
       // save info in the database
       if ($('#city-id-details').val() == '') {
         url = '/ajax/city/add';
-        $.post(url, $('form').serialize(), function(data) {
+        $.post(url, $('#details-form').serialize(), function(data) {
           if (data.success === 'true') {
             $('#city-form').html("<h1>New City Created!</h1>It's like Sim City around here, but without Godzilla.");
             $('#city-form').css('margin-bottom','500px');
@@ -253,7 +252,7 @@ body {
       } else {
         //update existing city
         url = '/ajax/city/update';
-        $.post(url, $('form').serialize(), function(data) {
+        $.post(url, $('#details-form').serialize(), function(data) {
           if (data.success === 'true') {
             $('#city-form').html("<h1>City Updated!</h1>Change can be a beautiful thing, no?");
             $('#city-form').css('margin-bottom','500px');
@@ -265,13 +264,33 @@ body {
       }
     });
 
-    $('#submit-images').on('click', function (event) {
+    $('#images-form').on('submit', function (event) {
       event.preventDefault();
       if ($('#city-id-images').val() == '') {
-        alert('Enter the city details first please.')
+        alert('Enter the city details first please.');
       } else {
         // save images
-        alert('Need to write image save code here.')
+        var formData = new FormData($(this)[0]);
+        console.log(formData)
+        url = '/ajax/city/update_images';
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: formData,
+          async: true,
+          success: function (data) {
+            if (data.success === 'true') {
+              $('#city-form').html("<h1>City Updated!</h1>Change can be a beautiful thing, no?");
+              $('#city-form').css('margin-bottom','500px');
+              window.scrollTo(0, 0);
+            } else {
+              alert('All fields required!');
+            }
+          },
+          cache: false,
+          contentType: false,
+          processData: false
+        });
       }
     });
   });

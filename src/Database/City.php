@@ -128,4 +128,20 @@ class City extends \Sizzle\DatabaseEntity
         $sql = "DELETE FROM {$this->tableName()} WHERE id = '$this->id'";
         execute($sql);
     }
+
+    /**
+     * Gets CityImages corresponding to current City.
+     *
+     * @return array - city image information
+     */
+    public function getCityImages()
+    {
+        $sql = "SELECT id FROM city_image WHERE city_id = '$this->id'";
+        $results = execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+        $return = array();
+        foreach ($results as $row) {
+          $return[] = new CityImage($row['id']);
+        }
+        return $return;
+    }
 }
