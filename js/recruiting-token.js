@@ -393,18 +393,77 @@ function handleAjaxCityGet(data) {
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
     $('google-map')[0].longitude = data.longitude;
-    $('.gt-city-spring-hi').text(data.temp_hi_spring);
-    $('.gt-city-spring-lo').text(data.temp_lo_spring);
-    $('.gt-city-spring-avg').text(data.temp_avg_spring);
-    $('.gt-city-summer-hi').text(data.temp_hi_summer);
-    $('.gt-city-summer-lo').text(data.temp_lo_summer);
-    $('.gt-city-summer-avg').text(data.temp_avg_summer);
-    $('.gt-city-fall-hi').text(data.temp_hi_fall);
-    $('.gt-city-fall-lo').text(data.temp_lo_fall);
-    $('.gt-city-fall-avg').text(data.temp_avg_fall);
-    $('.gt-city-winter-hi').text(data.temp_hi_winter);
-    $('.gt-city-winter-lo').text(data.temp_lo_winter);
-    $('.gt-city-winter-avg').text(data.temp_avg_winter);
+
+    //temps
+    var missingTemp = false;
+    if (dataExists(data.temp_hi_spring)) {
+      $('.gt-city-spring-hi').text(data.temp_hi_spring);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_spring)) {
+      $('.gt-city-spring-lo').text(data.temp_lo_spring);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_spring)) {
+      $('.gt-city-spring-avg').text(data.temp_avg_spring);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_summer)) {
+      $('.gt-city-summer-hi').text(data.temp_hi_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_summer)) {
+      $('.gt-city-summer-lo').text(data.temp_lo_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_summer)) {
+      $('.gt-city-summer-avg').text(data.temp_avg_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_fall)) {
+      $('.gt-city-fall-hi').text(data.temp_hi_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_fall)) {
+      $('.gt-city-fall-lo').text(data.temp_lo_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_fall)) {
+      $('.gt-city-fall-avg').text(data.temp_avg_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_winter)) {
+      $('.gt-city-winter-hi').text(data.temp_hi_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_winter)) {
+      $('.gt-city-winter-lo').text(data.temp_lo_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_winter)) {
+      $('.gt-city-winter-avg').text(data.temp_avg_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (missingTemp) {
+      $('#spring-location').remove();
+      $('#summer-location').remove();
+      $('#fall-location').remove();
+      $('#winter-location').remove();
+    }
+
+    // image(s)
     assetHost = getAssetHost();
     if (dataExists(data.image_file)) {
       // this'll be going away
