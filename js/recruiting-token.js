@@ -489,7 +489,6 @@ function handleAjaxCityGet(data) {
             $('#location-main-image').css('width','100%');
           } else {
             // display 4 images
-            console.log('dsiplaying 4 images')
             $('#location-secondary-image-1').attr('src',imgData.data[1]);
             $('#location-secondary-image-2').attr('src',imgData.data[2]);
             $('#location-secondary-image-3').attr('src',imgData.data[3]);
