@@ -51,7 +51,7 @@ require __DIR__.'/header.php';
         $.post(
           '/ajax/nopassword/',
           {
-            activation_key: '<?php echo $key ?? '';?>',
+            activation_key: '<?php echo $_SESSION['activation_key'] ?? '';?>',
             password: password1
           },
           function (data) {
