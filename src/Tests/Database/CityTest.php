@@ -215,7 +215,6 @@ class CityTest extends \PHPUnit_Framework_TestCase
         // $id set case
         $City = new City();
         $City->id = 12;
-        print_r($City);
         $this->assertFalse($City->save());
     }
 
