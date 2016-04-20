@@ -10,7 +10,6 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
     protected $user_id;
     protected $job_title;
     protected $job_description;
-    protected $city_id;
     protected $skills_required;
     protected $responsibilities;
     protected $perks;
@@ -173,5 +172,60 @@ class RecruitingToken extends \Sizzle\DatabaseEntity
         $data = get_object_vars($this);
         unset($data['readOnly']);
         return $data;
+    }
+
+    /**
+     * Gets the cities associated with a Token
+     *
+     * @return array - array of City objects
+     */
+    public function getCities()
+    {
+        $sql = "SELECT city_id FROM recruiting_token_city WHERE recruiting_token_id = '$this->id'";
+        $results = execute_query($sql)->fetch_all(MYSQLI_ASSOC);
+        $return = array();
+        foreach ($results as $row) {
+          $return[] = new City($row['city_id']);
+        }
+        return $return;
+    }
+
+    /**
+     * Associates a city with the token
+     *
+     * @param int $city_id - the city to associate
+     *
+     * @return boolean - success/fail
+     */
+    public function addCity(int $city_id) {
+        if (0 < (int) $city_id) {
+            $id = (new RecruitingTokenCity())->create($city_id, $this->id);
+            return 0 < (int) $id;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Unassociates a city with the token
+     *
+     * @param int $city_id - the city to unassociate
+     *
+     * @return boolean - success/fail
+     */
+    public function removeCity(int $city_id) {
+        $sql = "SELECT id
+                FROM recruiting_token_city
+                WHERE recruiting_token_id = '$this->id'
+                AND city_id = '$city_id'
+                AND deleted IS NULL";
+        $result = execute_query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        if (count($array) == 1) {
+            $cityAssociation = new RecruitingTokenCity($array[0]['id']);
+            return $cityAssociation->delete();
+        } else {
+            return false;
+        }
     }
 }

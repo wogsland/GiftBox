@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
     $token = new RecruitingToken();
 }
 
-$city = new City($token->city_id ?? '');
+$city = ($token->getCities())[0] ?? new City();
 $city_name = $city->name ?? '';
 
 function paper_text($label, $id, $value, $required = false)

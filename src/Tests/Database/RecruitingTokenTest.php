@@ -14,6 +14,7 @@ use \Sizzle\Database\{
 class RecruitingTokenTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Tests\Traits\City;
     use \Sizzle\Tests\Traits\RecruitingToken;
 
     /**
@@ -198,10 +199,77 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the addCity function.
+     */
+    public function testAddCity()
+    {
+        $token = $this->createRecruitingToken();
+        $city = $this->createCity();
+        $this->assertTrue($token->addCity($city->id));
+        $sql = "SELECT city_id
+                FROM recruiting_token_city
+                WHERE recruiting_token_id = '$token->id'
+                AND deleted IS NULL";
+        $result = execute_query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        $this->assertTrue(is_array($array));
+        $this->assertFalse(empty($array));
+        $this->assertEquals(1, count($array));
+        $this->assertEquals($city->id, $array[0]['city_id']);
+
+        //cleanup
+        $this->assertTrue($token->removeCity($city->id));
+    }
+
+    /**
+     * Tests the removeCity function.
+     */
+    public function testRemoveCity()
+    {
+        $token = $this->createRecruitingToken();
+        $city = $this->createCity();
+        $this->assertTrue($token->addCity($city->id));
+        $this->assertTrue($token->removeCity($city->id));
+        $sql = "SELECT city_id
+                FROM recruiting_token_city
+                WHERE recruiting_token_id = '$token->id'
+                AND deleted IS NULL";
+        $result = execute_query($sql);
+        $array = $result->fetch_all(MYSQLI_ASSOC);
+        $this->assertTrue(is_array($array));
+        $this->assertTrue(empty($array));
+    }
+
+    /**
+     * Tests the getCities function.
+     */
+    public function testGetCities()
+    {
+        $token = $this->createRecruitingToken();
+        $city = $this->createCity();
+        $city2 = $this->createCity();
+        $this->assertTrue($token->addCity($city->id));
+        $this->assertTrue($token->addCity($city2->id));
+        $cities = $token->getCities();
+        $this->assertTrue(is_array($cities));
+        $this->assertFalse(empty($cities));
+        $this->assertEquals(2, count($cities));
+        $this->assertEquals('Sizzle\Database\City', get_class($cities[0]));
+        $this->assertEquals('Sizzle\Database\City', get_class($cities[1]));
+        $this->assertEquals($city->id, $cities[0]->id);
+        $this->assertEquals($city2->id, $cities[1]->id);
+
+        //cleanup
+        $this->assertTrue($token->removeCity($city->id));
+        $this->assertTrue($token->removeCity($city2->id));
+    }
+
+    /**
      * Delete users created for testing
      */
     protected function tearDown()
     {
-        $this->deleteRecruitingTokens();
+        //$this->deleteCities();
+        //$this->deleteRecruitingTokens();
     }
 }

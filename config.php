@@ -10,7 +10,7 @@ use Sizzle\{
 };
 
 // set relesae version
-define('VERSION', '1.10.9');
+define('VERSION', '1.11.0');
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';
