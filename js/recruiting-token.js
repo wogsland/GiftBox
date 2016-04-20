@@ -387,8 +387,9 @@ function getPosition(str, m, i) {
 function handleAjaxCityGet(data) {
   if (data.id !== undefined & data.id > 0) {
     $('.gt-info-location').text(data.name);
-    var population = numberWithCommas(data.population);
-    $('.gt-city-population').text(population);
+    if (dataExists(data.population)) {
+      $('.gt-city-population').text(numberWithCommas(data.population));
+    }
     $('.gt-city-timezone').text(data.timezone);
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
@@ -465,47 +466,38 @@ function handleAjaxCityGet(data) {
 
     // image(s)
     assetHost = getAssetHost();
-    if (dataExists(data.image_file)) {
-      // this'll be going away
-      $('#location-main-image').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
-      $('#location-secondary-images').remove();
-      $('#location-image-grid').css('width','100%');
-      $('#location-main-image').css('width','100%');
-      $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
-    } else {
-      url = '/ajax/city/get_images';
-      postData = {
-        'city_id':data.id
-      };
-      $.post(url, postData, function(imgData) {
-        if (imgData.data !== undefined && imgData.data.length > 0) {
-          image_file = imgData.data[0];
-          $('#location-back').css('background',"url('"+image_file+"') center / cover");
-          $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
-          if (imgData.data.length < 4) {
-            // display 1 image
-            $('#location-secondary-images').remove();
-            $('#location-image-grid').css('width','100%');
-            $('#location-main-image').css('width','100%');
-          } else {
-            // display 4 images
-            $('#location-secondary-image-1').attr('src',imgData.data[1]);
-            $('#location-secondary-image-2').attr('src',imgData.data[2]);
-            $('#location-secondary-image-3').attr('src',imgData.data[3]);
-          }
-          /*$('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
-          if ( $(window).width() < 739 || data.data.length < 4) {
-            $('#company-secondary-images').remove();
-            $('#company-image-grid').css('width','100%');
-            $('#company-main-image').css('width','100%');
-          } else {
-            $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
-            $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
-            $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
-          }*/
+    url = '/ajax/city/get_images';
+    postData = {
+      'city_id':data.id
+    };
+    $.post(url, postData, function(imgData) {
+      if (imgData.data !== undefined && imgData.data.length > 0) {
+        image_file = imgData.data[0];
+        $('#location-back').css('background',"url('"+image_file+"') center / cover");
+        $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
+        if (imgData.data.length < 4) {
+          // display 1 image
+          $('#location-secondary-images').remove();
+          $('#location-image-grid').css('width','100%');
+          $('#location-main-image').css('width','100%');
+        } else {
+          // display 4 images
+          $('#location-secondary-image-1').attr('src',imgData.data[1]);
+          $('#location-secondary-image-2').attr('src',imgData.data[2]);
+          $('#location-secondary-image-3').attr('src',imgData.data[3]);
         }
-      });
-    }
+        /*$('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        if ( $(window).width() < 739 || data.data.length < 4) {
+          $('#company-secondary-images').remove();
+          $('#company-image-grid').css('width','100%');
+          $('#company-main-image').css('width','100%');
+        } else {
+          $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
+          $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
+          $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
+        }*/
+      }
+    });
   }
 }
 
@@ -648,11 +640,10 @@ function handleAjaxRecruitingTokenGet(data) {
       break;
     }
   }
-  if(dataExists(data.data.city_id)) {
-    cityId = data.data.city_id;
-    url = '/ajax/city/get/'+cityId;
+  if(dataExists(data.data.long_id)) {
+    url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
-      handleAjaxCityGet(data.data);
+      handleAjaxCityGet(data.data[0]);
     });
   } else {
     $('#location-section').remove();
