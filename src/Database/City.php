@@ -7,7 +7,6 @@ namespace Sizzle\Database;
 class City extends \Sizzle\DatabaseEntity
 {
     protected $name;
-    protected $image_file;
     protected $population;
     protected $longitude;
     protected $latitude;
@@ -68,7 +67,7 @@ class City extends \Sizzle\DatabaseEntity
 
         // check for required columns
         foreach (get_object_vars($this) as $key => $value) {
-            if (!in_array($key, $this->readOnly) && $key != 'image_file') {
+            if (!in_array($key, $this->readOnly)) {
                 $success = $success && isset($value);
             }
         }
@@ -93,8 +92,29 @@ class City extends \Sizzle\DatabaseEntity
      */
     protected function update()
     {
-        parent::updateRow();
-        return true;
+        $update = isset($this->name);
+        $update = $update && isset($this->population);
+        $update = $update && isset( $this->longitude);
+        $update = $update && isset( $this->latitude);
+        $update = $update && isset( $this->county);
+        $update = $update && isset( $this->country);
+        $update = $update && isset( $this->timezone);
+        $update = $update && isset( $this->temp_hi_spring);
+        $update = $update && isset( $this->temp_lo_spring);
+        $update = $update && isset( $this->temp_avg_spring);
+        $update = $update && isset( $this->temp_hi_summer);
+        $update = $update && isset( $this->temp_lo_summer);
+        $update = $update && isset( $this->temp_avg_summer);
+        $update = $update && isset( $this->temp_hi_fall);
+        $update = $update && isset( $this->temp_lo_fall);
+        $update = $update && isset( $this->temp_avg_fall);
+        $update = $update && isset( $this->temp_hi_winter);
+        $update = $update && isset( $this->temp_lo_winter);
+        $update = $update && isset( $this->temp_avg_winter);
+        if ($update) {
+            parent::updateRow();
+        }
+        return $update;
     }
 
     /**

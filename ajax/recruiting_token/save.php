@@ -24,11 +24,12 @@ if (logged_in()) {
             $token->user_id = $user_id;
         }
 
-        // Polymer bug: convert the city name into an id
+        foreach ($token->getCities() as $currentCity) {
+            $token->removeCity($currentCity->id);
+        }
         if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
-            $token->city_id = City::getIdFromName($token->city_id);
-        } else {
-            $token->city_id = null;
+            // Polymer bug: convert the city name into an id
+            $token->addCity(City::getIdFromName($_POST['city_id']));
         }
 
         // Generate a long_id if this is a new token

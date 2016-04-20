@@ -12,7 +12,7 @@ use \Sizzle\Database\{
 $token = new RecruitingToken($long_id, 'long_id');
 //print_r($token);
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
-$city = new City($token->city_id ?? '');
+$city = ($token->getCities())[0] ?? new City();
 //print_r($city);
 $image = $token->screenshot();
 if ($image !== false) {

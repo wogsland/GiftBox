@@ -22,7 +22,6 @@ trait City
         // create a city for testing
         $city = new City();
         $city->name = $name ?? "Test City ".rand();
-        $city->image_file = rand().".png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);
