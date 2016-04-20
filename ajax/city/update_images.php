@@ -25,6 +25,7 @@ if (logged_in() && is_admin()) {
         foreach ($validUploads as $uploadIndex=>$upload) {
             // connect to S3 (once)
             $s3Client = $s3Client ?? S3Client::factory(array(
+                'profile' => 'sizzle',
                 'region'  => 'us-west-2',
                 'version' => '2006-03-01'
             ));
