@@ -424,13 +424,11 @@ if (logged_in()) {
                   <blockquote>Sizzle’s product brought a new level to my sourcing and recruiting efforts. With some more challenging roles to fill, Sizzle offers an easy way to connect candidates with all of the information they need to make an informed decision about their future.</blockquote>
                 </div>
               </li>
-              <?php /*
               <li>
                 <div class="testimonial align-center clearfix">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
+                  <blockquote>Awesome. Response time is amazing!</blockquote>
                 </div>
               </li>
-              */?>
               <li>
                 <div class="testimonial align-center clearfix">
                   <blockquote>Oh my gosh, this is GREAT! Thank you! Awesome. Love that it can take you to their LinkedIn page and even tells you about the geographic locations. Can’t wait to share it.</blockquote>
@@ -457,16 +455,14 @@ if (logged_in()) {
               </p>
             </div>
           </div>
-<?php /*
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch pull-left">
-              <img alt="client" src="assets2/img/people/profile-2.jpg" class="sm-pic img-circle pull-left" width="69" height="70">
+              <img alt="client" src="assets2/img/people/kyle_gatlin.jpg" class="sm-pic img-circle pull-left" width="69" height="70">
               <p>
-                <span class="highlight"></span><br/>Accountant at <span class="highlight">Vell Inc.</span>
+                <span class="highlight">KYLE GATLIN</span><br/>Recruiter for <span class="highlight">Rally Health</span>
               </p>
             </div>
           </div>
-          */?>
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch">
               <img alt="client" src="assets2/img/people/chelsea_lord.jpg" class="sm-pic img-circle pull-left" width="68" height="69">
