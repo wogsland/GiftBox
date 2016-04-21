@@ -26,3 +26,7 @@ ehthumbs.db
 # Credentials #
 ###############
 /config/credentials.php
+
+# Versioned elsewhere #
+#######################
+/src/bacon
