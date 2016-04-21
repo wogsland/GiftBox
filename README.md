@@ -12,7 +12,7 @@
 ### URLs
 (hosted on AWS)
 - production: [www.gosizzle.io](https://www.gosizzle.io/)
-- staging: [dev.gosizzle.io](http://dev.gosizzle.io)
+- development/staging: [dev.gosizzle.io](http://dev.gosizzle.io)
 
 
 ### Github
@@ -27,7 +27,12 @@ You'll also need to
 
     cp config/credentials.php.example config/credentials.php
 
-replacing the default credentials with whatever your choices are for local development,
+replacing the default credentials with whatever your choices are for local development.
+
+And add (Bacon)[https://github.com/GiveToken/Bacon] to your `src` after forking it:
+
+    cd src
+    git clone https://github.com/<your username>/Bacon.git
 
 
 ### <a id="database"></a>MySQL Database
