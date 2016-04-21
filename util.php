@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Connection;
+use Sizzle\Bacon\Connection;
 require_once __DIR__.'/src/autoload.php';
 
 function escape_string($string)
