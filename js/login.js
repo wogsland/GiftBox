@@ -50,7 +50,10 @@ function processLogin(userInfo) {
   $('.dialog-button-center').addClass("disable-clicks");
   $.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
-      var redirect = decodeURIComponent(getQueryParameters()['next']) || "profile";
+      var redirect = decodeURIComponent(getQueryParameters()['next']);
+      if (redirect == 'undefined') {
+        redirect = "profile";
+      }
       if (redirect.startsWith('/')) {
         redirect = redirect.slice(1);
       }
