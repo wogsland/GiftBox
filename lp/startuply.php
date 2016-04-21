@@ -412,7 +412,7 @@ if (logged_in()) {
   <section id="feedback" class="section feedback-section align-center light-text">
     <div class="container animated" data-animation="fadeInDown" data-duration="500">
       <div class="section-header">
-        <h2>WHAT <span class="highlight">SIZZLERS</span> SAY</h2>
+        <h2>WHAT <span class="highlight">RECRUITERS</span> SAY</h2>
       </div>
       <div class="section-content">
         <!-- BEGIN SLIDER CONTENT -->
@@ -430,12 +430,12 @@ if (logged_in()) {
                   <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
                 </div>
               </li>
+              */?>
               <li>
                 <div class="testimonial align-center clearfix">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
+                  <blockquote>Oh my gosh, this is GREAT! Thank you! Awesome. Love that it can take you to their LinkedIn page and even tells you about the geographic locations. Can’t wait to share it.</blockquote>
                 </div>
               </li>
-              */?>
             </ul>
           </div>
         </div>
@@ -466,16 +466,15 @@ if (logged_in()) {
               </p>
             </div>
           </div>
-
+          */?>
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch">
-              <img alt="client" src="assets2/img/people/profile-1.jpg" class="sm-pic img-circle pull-left" width="68" height="69">
+              <img alt="client" src="assets2/img/people/chelsea_lord.jpg" class="sm-pic img-circle pull-left" width="68" height="69">
               <p>
-                <span class="highlight">PETER MOOSOME</span><br/>VP Marketing at <span class="highlight">Footbook</span>
+                <span class="highlight">CHELSEA LORD</span><br/>Recruiter for <span class="highlight">Matco Tools</span>
               </p>
             </div>
           </div>
-          */?>
         </div>
         <!-- END CONTROLS -->
       </div>
@@ -556,7 +555,7 @@ if (logged_in()) {
                   <ul class="socials-block">
                     <li><a href="mailto:bwogsland@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/wogsland" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="https://www.facebook.com/wogsland" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.github.com/wogsland" class="github" title="Github" target="_blank"><i class="fa fa-github"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/wogsland" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                   </ul>
                 </div>
