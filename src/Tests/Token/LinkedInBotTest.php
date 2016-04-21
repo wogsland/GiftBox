@@ -15,8 +15,8 @@ use \Sizzle\Bacon\Database\{
 class LinkedInBotTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\City;
-    use \Sizzle\Tests\Traits\RecruitingToken;
+    use \Sizzle\Bacon\Tests\Traits\City;
+    use \Sizzle\Bacon\Tests\Traits\RecruitingToken;
 
     /**
      * Sets up class vars

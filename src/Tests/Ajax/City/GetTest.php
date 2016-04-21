@@ -8,7 +8,7 @@ namespace Sizzle\Tests\Ajax\City;
  */
 class GetTest extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\City;
+    use \Sizzle\Bacon\Tests\Traits\City;
 
     protected $city;
 
