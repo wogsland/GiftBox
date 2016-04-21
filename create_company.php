@@ -1,10 +1,10 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Bacon\{
     HTML,
-    Bacon\Database\RecruitingCompany,
-    Bacon\Database\RecruitingCompanyImage,
-    Bacon\Database\RecruitingCompanyVideo,
-    Bacon\Database\RecruitingToken
+    Database\RecruitingCompany,
+    Database\RecruitingCompanyImage,
+    Database\RecruitingCompanyVideo,
+    Database\RecruitingToken
 };
 
 if (!logged_in()) {

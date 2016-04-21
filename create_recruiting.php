@@ -1,8 +1,8 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Bacon\{
     HTML,
-    Bacon\Database\RecruitingCompany,
-    Bacon\Database\RecruitingToken
+    Database\RecruitingCompany,
+    Database\RecruitingToken
 };
 use \Sizzle\Bacon\Database\{
     City

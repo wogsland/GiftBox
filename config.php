@@ -4,9 +4,9 @@ use Monolog\{
     Handler\SlackHandler,
     Logger
 };
-use Sizzle\{
+use Sizzle\Bacon\{
     Connection,
-    Bacon\Database\WebRequest
+    Database\WebRequest
 };
 
 // set release version

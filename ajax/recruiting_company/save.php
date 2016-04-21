@@ -1,7 +1,7 @@
 <?php
-use Sizzle\{
-    Bacon\Database\RecruitingCompany,
-    Bacon\Database\RecruitingToken,
+use Sizzle\Bacon\{
+    Database\RecruitingCompany,
+    Database\RecruitingToken,
     HTML
 };
 

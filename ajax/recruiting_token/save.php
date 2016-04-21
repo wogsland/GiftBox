@@ -1,10 +1,10 @@
 <?php
-use \Sizzle\{
-    Bacon\Database\City,
+use \Sizzle\Bacon\{
+    Database\City,
     HTML,
-    Bacon\Database\RecruitingCompany,
-    Bacon\Database\RecruitingToken,
-    Bacon\Database\UserMilestone
+    Database\RecruitingCompany,
+    Database\RecruitingToken,
+    Database\UserMilestone
 };
 
 date_default_timezone_set('America/Chicago');
