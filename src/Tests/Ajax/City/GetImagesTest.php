@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\City;
 
-use Sizzle\Database\City;
+use Sizzle\Bacon\Database\City;
 /**
  * This class tests the ajax endpoint to get a city's images.
  *

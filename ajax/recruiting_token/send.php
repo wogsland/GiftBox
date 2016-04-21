@@ -1,8 +1,8 @@
 <?php
 use \Sizzle\{
     HTML,
-    Database\RecruitingToken,
-    Database\User
+    Bacon\Database\RecruitingToken,
+    Bacon\Database\User
 };
 use Sizzle\Service\MandrillEmail;
 

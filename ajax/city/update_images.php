@@ -1,6 +1,6 @@
 <?php
 use Aws\S3\S3Client;
-use Sizzle\Database\{
+use Sizzle\Bacon\Database\{
     City,
     CityImage
 };

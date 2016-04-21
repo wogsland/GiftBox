@@ -1,6 +1,6 @@
 <?php
 use Sizzle\API;
-use Sizzle\Database\User;
+use Sizzle\Bacon\Database\User;
 
 // default response
 $success = false;

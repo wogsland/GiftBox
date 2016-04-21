@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
-    Database\User,
-    Database\UserMilestone,
+    Bacon\Database\User,
+    Bacon\Database\UserMilestone,
     Service\PipedriveClient
 };
 use Sizzle\Service\MandrillEmail;

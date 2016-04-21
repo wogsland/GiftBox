@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingToken;
+use \Sizzle\Bacon\Database\RecruitingToken;
 
 // collect id
 $id = $endpoint_parts[4] ?? '';

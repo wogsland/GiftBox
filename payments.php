@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingToken;
+use \Sizzle\Bacon\Database\RecruitingToken;
 use \Stripe\{
     Charge,
     Stripe

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 
 define('TITLE', 'S!zzle - Set Password');
 require __DIR__.'/header.php';

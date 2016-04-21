@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Traits;
 
-use Sizzle\Database\RecruitingToken;
+use Sizzle\Bacon\Database\RecruitingToken;
 
 /**
  * Functions to create & tear down test RecruitingTokens

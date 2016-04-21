@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\EmailCredential;
+use \Sizzle\Bacon\Database\EmailCredential;
 
 $success = 'false';
 $data = '';

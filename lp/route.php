@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\LandingPage;
+use \Sizzle\Bacon\Database\LandingPage;
 
 // If the user hasn't been here, randomize the experience
 // Otherwise, take them to the page they saw before

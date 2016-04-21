@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Database\RecruitingCompanyVideo;
+use Sizzle\Bacon\Database\RecruitingCompanyVideo;
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];

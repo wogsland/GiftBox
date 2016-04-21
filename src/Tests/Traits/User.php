@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Traits;
 
-use Sizzle\Database\User;
+use Sizzle\Bacon\Database\User;
 
 /**
  * Functions to create & tear down test users

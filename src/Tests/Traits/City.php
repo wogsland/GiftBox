@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Traits;
 
-use Sizzle\Database\City;
+use Sizzle\Bacon\Database\City;
 
 /**
  * Functions to create & tear down test cities

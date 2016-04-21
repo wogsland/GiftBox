@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Traits;
 
-use Sizzle\Database\RecruitingCompany;
+use Sizzle\Bacon\Database\RecruitingCompany;
 
 /**
  * Functions to create & tear down test Recruiting Companies

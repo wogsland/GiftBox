@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email\Lista;
 
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     EmailCredential,
     EmailList
 };

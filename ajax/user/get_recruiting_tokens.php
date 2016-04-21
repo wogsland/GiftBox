@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\{
     HTML,
-    Database\RecruitingToken
+    Bacon\Database\RecruitingToken
 };
 
 // collect id

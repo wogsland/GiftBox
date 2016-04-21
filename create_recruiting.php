@@ -1,10 +1,10 @@
 <?php
 use \Sizzle\{
     HTML,
-    Database\RecruitingCompany,
-    Database\RecruitingToken
+    Bacon\Database\RecruitingCompany,
+    Bacon\Database\RecruitingToken
 };
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     City
 };
 

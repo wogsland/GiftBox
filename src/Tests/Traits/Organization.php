@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Traits;
 
-use Sizzle\Database\Organization;
+use Sizzle\Bacon\Database\Organization;
 
 /**
  * Functions to create & tear down test Organizations

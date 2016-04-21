@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Database\RecruitingCompanyImage;
+use Sizzle\Bacon\Database\RecruitingCompanyImage;
 
 date_default_timezone_set('America/Chicago');
 

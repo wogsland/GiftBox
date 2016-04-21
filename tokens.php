@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingToken;
+use \Sizzle\Bacon\Database\RecruitingToken;
 
 date_default_timezone_set('America/Chicago');
 

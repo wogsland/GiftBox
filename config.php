@@ -6,10 +6,10 @@ use Monolog\{
 };
 use Sizzle\{
     Connection,
-    Database\WebRequest
+    Bacon\Database\WebRequest
 };
 
-// set relesae version
+// set release version
 define('VERSION', '1.11.0');
 
 // autoload classes

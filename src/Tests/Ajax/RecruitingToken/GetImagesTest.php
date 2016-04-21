@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     RecruitingCompanyImage
 };
 

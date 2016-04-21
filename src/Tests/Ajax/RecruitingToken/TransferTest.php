@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use Sizzle\Database\RecruitingToken;
+use Sizzle\Bacon\Database\RecruitingToken;
 
 /**
  * This class tests the ajax endpoint to transfer tokens between users.

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 
 $user = User::fetch($_SESSION['email'] ?? '');
 

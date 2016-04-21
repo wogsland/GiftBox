@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     RecruitingCompany,
     RecruitingCompanyImage,
     RecruitingToken

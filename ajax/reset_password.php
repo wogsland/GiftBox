@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 use Sizzle\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
