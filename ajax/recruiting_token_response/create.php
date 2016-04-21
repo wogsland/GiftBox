@@ -3,7 +3,7 @@ use Sizzle\Bacon\Database\{
     RecruitingTokenResponse,
     RecruitingToken
 };
-use Sizzle\Service\MandrillEmail;
+use Sizzle\Bacon\Service\MandrillEmail;
 
 // collect info from url
 $recruiting_token_id = $endpoint_parts[4] ?? '';

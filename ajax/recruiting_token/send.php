@@ -4,7 +4,7 @@ use \Sizzle\Bacon\{
     Database\RecruitingToken,
     Database\User
 };
-use Sizzle\Service\MandrillEmail;
+use Sizzle\Bacon\Service\MandrillEmail;
 
 if (logged_in() && is_admin()) {
     $vars = ['user_id', 'token_id'];
