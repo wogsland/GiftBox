@@ -643,7 +643,82 @@ function handleAjaxRecruitingTokenGet(data) {
   if(dataExists(data.data.long_id)) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
-      handleAjaxCityGet(data.data[0]);
+      if (1 == data.data.length) {
+        handleAjaxCityGet(data.data[0]);
+        $('#doublet-location-section').remove();
+        $('#triplet-location-section').remove();
+      } else if (2 == data.data.length) {
+        $('#location-section').remove();
+        $('#triplet-location-section').remove();
+
+        // first location
+        $('.gt-info-location-1').text(data.data[0].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[0].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#doublet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // second location
+        $('.gt-info-location-2').text(data.data[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[1].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#doublet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+      } else {
+        $('#doublet-location-section').remove();
+        $('#location-section').remove();
+
+        // first location
+        $('.gt-info-location-1').text(data.data[0].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[0].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // second location
+        $('.gt-info-location-2').text(data.data[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[1].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // third location
+        $('.gt-info-location-3').text(data.data[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[2].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+      }
     });
   } else {
     $('#location-section').remove();
