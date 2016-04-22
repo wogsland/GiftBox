@@ -33,7 +33,7 @@ extends \PHPUnit_Framework_TestCase
 
         $fileName = rand().'.jpg';
 
-        // test user transfer
+        // test screenshot upload
         $url = TEST_URL . "/ajax/recruiting_token/set_screenshot";
         $fields = array(
             'tokenId'=>$RecruitingToken->id,

@@ -4,7 +4,7 @@ use \Sizzle\Bacon\Database\User;
 // make sure the secret is valid
 if (isset($_GET['secret'])) {
     $reset_code = $_GET['secret'];
-    $user = User::fetch($reset_code, 'reset_code');
+    $user = (new User())->fetch($reset_code, 'reset_code');
     if (!isset($user->email_address)) {
         header('Location: '.'/');
     }

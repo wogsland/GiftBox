@@ -28,7 +28,7 @@ if (isset($_POST['reset_code'], $_POST['password'])
     && $_SESSION['code_reset_attempt']['tries'] <= 3
 ) {
     // find user corresponding to email
-    $user = User::fetch($_POST['reset_code'], 'reset_code');
+    $user = (new User())->fetch($_POST['reset_code'], 'reset_code');
 
     // set password if user exists
     if (isset($user->email_address)) {
