@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var cities = [];
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -61,6 +62,7 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
+  handleAjaxCityGet(cities[$(event.target).attr('id').slice(-1) - 1]);
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
@@ -643,19 +645,20 @@ function handleAjaxRecruitingTokenGet(data) {
   if(dataExists(data.data.long_id)) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
-      if (1 == data.data.length) {
-        handleAjaxCityGet(data.data[0]);
+      cities = data.data;
+      if (1 == cities.length) {
+        handleAjaxCityGet(cities[0]);
         $('#doublet-location-section').remove();
         $('#triplet-location-section').remove();
-      } else if (2 == data.data.length) {
+      } else if (2 == cities.length) {
         $('#location-section').remove();
         $('#triplet-location-section').remove();
 
         // first location
-        $('.gt-info-location-1').text(data.data[0].name);
+        $('.gt-info-location-1').text(cities[0].name);
         url = '/ajax/city/get_images';
         postData = {
-          'city_id':data.data[0].id
+          'city_id':cities[0].id
         };
         $.post(url, postData, function(imgData) {
           if (imgData.data !== undefined && imgData.data.length > 0) {
@@ -665,10 +668,10 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // second location
-        $('.gt-info-location-2').text(data.data[1].name);
+        $('.gt-info-location-2').text(cities[1].name);
         url = '/ajax/city/get_images';
         postData = {
-          'city_id':data.data[1].id
+          'city_id':cities[1].id
         };
         $.post(url, postData, function(imgData) {
           if (imgData.data !== undefined && imgData.data.length > 0) {
@@ -681,10 +684,10 @@ function handleAjaxRecruitingTokenGet(data) {
         $('#location-section').remove();
 
         // first location
-        $('.gt-info-location-1').text(data.data[0].name);
+        $('.gt-info-location-1').text(cities[0].name);
         url = '/ajax/city/get_images';
         postData = {
-          'city_id':data.data[0].id
+          'city_id':cities[0].id
         };
         $.post(url, postData, function(imgData) {
           if (imgData.data !== undefined && imgData.data.length > 0) {
