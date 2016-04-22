@@ -58,55 +58,6 @@ class Route
             case 'activate':
                 include __DIR__.'/../activate.php';
                 break;
-            case 'admin':
-                if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
-                    include __DIR__.'/../admin/index.php';
-                } else {
-                    switch ($this->endpointPieces[2]) {
-                    case 'active_users':
-                        include __DIR__.'/../admin/active_users.php';
-                        break;
-                    case 'city':
-                        include __DIR__.'/../admin/city.php';
-                        break;
-                    case 'create_account':
-                        include __DIR__.'/../admin/create_account.php';
-                        break;
-                    case 'edit_organization':
-                        include __DIR__.'/../admin/edit_organization.php';
-                        break;
-                    case 'no_card_customers':
-                        include __DIR__.'/../admin/no_card_customers.php';
-                        break;
-                    case 'organizations':
-                        include __DIR__.'/../admin/organizations.php';
-                        break;
-                    case 'recruiter_profile':
-                        include __DIR__.'/../admin/recruiter_profile.php';
-                        break;
-                    case 'send_token':
-                        include __DIR__.'/../admin/send_token.php';
-                        break;
-                    case 'stalled_new_customers':
-                        include __DIR__.'/../admin/stalled_new_customers.php';
-                        break;
-                    case 'tokens':
-                        include __DIR__.'/../admin/token_stats.php';
-                        break;
-                    case 'transfer_token':
-                        include __DIR__.'/../admin/transfer_token.php';
-                        break;
-                    case 'users':
-                        include __DIR__.'/../admin/users.php';
-                        break;
-                    case 'visitors':
-                        include __DIR__.'/../admin/visitors.php';
-                        break;
-                    default:
-                        include $this->default;
-                    }
-                }
-                break;
             case 'ajax':
                 include __DIR__.'/../ajax/route.php';
                 break;
