@@ -646,6 +646,7 @@ function handleAjaxRecruitingTokenGet(data) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
       cities = data.data;
+      console.log(cities)
       if (1 == cities.length) {
         handleAjaxCityGet(cities[0]);
         $('#doublet-location-section').remove();
@@ -679,7 +680,7 @@ function handleAjaxRecruitingTokenGet(data) {
             $('#doublet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
           }
         });
-      } else {
+      } else if (3 == cities.length) {
         $('#doublet-location-section').remove();
         $('#location-section').remove();
 
@@ -721,6 +722,10 @@ function handleAjaxRecruitingTokenGet(data) {
             $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
           }
         });
+      } else { // no location
+        $('#triplet-location-section').remove();
+        $('#doublet-location-section').remove();
+        $('#location-section').remove();
       }
     });
   } else {
