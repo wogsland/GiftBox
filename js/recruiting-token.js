@@ -182,15 +182,42 @@ scope._onInterestClick = function(event) {
  */
 scope._submitInterest = function (event) {
   var formIndex = 0;
-  if ($(event.path[8]).is('location-x-card')) {
-    formIndex = 1;
-  } else if ($(event.path[5]).is('image-x-card')) {
-    formIndex = 2;
-  } else if ($(event.path[5]).is('video-x-card')) {
-    formIndex = 3;
-  } else if ($(event.path[5]).is('description-x-card')) {
-    formIndex = 4;
-  } else
+  console.log(event)
+  var eventPath = [];
+  if (event.path !== undefined) {
+    // Chrome
+    eventPath = event.path;
+    if ($(eventPath[8]).is('location-x-card')) {
+      formIndex = 1;
+    } else if ($(eventPath[5]).is('image-x-card')) {
+      formIndex = 2;
+    } else if ($(eventPath[5]).is('video-x-card')) {
+      formIndex = 3;
+    } else if ($(eventPath[5]).is('description-x-card')) {
+      formIndex = 4;
+    }
+  } else {
+    // Firefox & Safari
+    var currentElem = event.target;
+    while (currentElem) {
+      eventPath.push(currentElem);
+      currentElem = currentElem.parentElement;
+    }
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+      eventPath.push(document);
+    if (eventPath.indexOf(window) === -1)
+      eventPath.push(window);
+    console.log(eventPath)
+    if (eventPath[8].localName == 'location-x-card') {
+      formIndex = 1;
+    } else if (eventPath[5].localName == 'image-x-card') {
+      formIndex = 2;
+    } else if (eventPath[5].localName == 'video-x-card') {
+      formIndex = 3;
+    } else if (eventPath[5].localName == 'description-x-card') {
+      formIndex = 4;
+    }
+  }
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
