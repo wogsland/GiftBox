@@ -62,7 +62,11 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
-  handleAjaxCityGet(cities[$(event.target).attr('id').slice(-1) - 1]);
+  var cityId = $(event.target).attr('id').slice(-1) - 1;
+  if (isNaN(cityId)) {
+    cityId = 0;
+  }
+  handleAjaxCityGet(cities[cityId]);
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
@@ -182,7 +186,6 @@ scope._onInterestClick = function(event) {
  */
 scope._submitInterest = function (event) {
   var formIndex = 0;
-  console.log(event)
   var eventPath = [];
   if (event.path !== undefined) {
     // Chrome
@@ -207,7 +210,6 @@ scope._submitInterest = function (event) {
       eventPath.push(document);
     if (eventPath.indexOf(window) === -1)
       eventPath.push(window);
-    console.log(eventPath)
     if (eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
