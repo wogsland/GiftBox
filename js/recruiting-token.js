@@ -646,7 +646,6 @@ function handleAjaxRecruitingTokenGet(data) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
       cities = data.data;
-      console.log(cities)
       if (1 == cities.length) {
         handleAjaxCityGet(cities[0]);
         $('#doublet-location-section').remove();
