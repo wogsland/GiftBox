@@ -2,9 +2,9 @@
 use \Sizzle\Bacon\{
     Database\User,
     Database\UserMilestone,
-    Service\PipedriveClient
+    Service\PipedriveClient,
+    Service\MandrillEmail
 };
-use Sizzle\Bacon\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
 
