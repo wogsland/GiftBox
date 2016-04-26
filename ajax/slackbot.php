@@ -4,7 +4,7 @@ use \Monolog\{
     Logger
 };
 use \Sizzle\{
-    Database\WebRequest,
+    Bacon\Database\WebRequest,
     Service\IpinfoIo
 };
 

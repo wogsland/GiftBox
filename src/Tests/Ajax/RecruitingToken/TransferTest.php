@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\RecruitingToken;
 
-use Sizzle\Database\RecruitingToken;
+use Sizzle\Bacon\Database\RecruitingToken;
 
 /**
  * This class tests the ajax endpoint to transfer tokens between users.
@@ -11,10 +11,10 @@ use Sizzle\Database\RecruitingToken;
 class TransferTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\RecruitingToken,
-        \Sizzle\Tests\Traits\User {
-            \Sizzle\Tests\Traits\User::createUser insteadof \Sizzle\Tests\Traits\RecruitingToken;
-            \Sizzle\Tests\Traits\User::deleteUsers insteadof \Sizzle\Tests\Traits\RecruitingToken;
+    use \Sizzle\Bacon\Tests\Traits\RecruitingToken,
+        \Sizzle\Bacon\Tests\Traits\User {
+            \Sizzle\Bacon\Tests\Traits\User::createUser insteadof \Sizzle\Bacon\Tests\Traits\RecruitingToken;
+            \Sizzle\Bacon\Tests\Traits\User::deleteUsers insteadof \Sizzle\Bacon\Tests\Traits\RecruitingToken;
     }
 
     /**

@@ -5,7 +5,7 @@ require_once __DIR__.'/src/autoload.php';
 require_once __DIR__.'/vendor/autoload.php';
 require_once __DIR__.'/util.php';
 $mysqli = new mysqli($mysql_server, $user, $password, $database);
-new Sizzle\Connection($mysqli);
+new Sizzle\Bacon\Connection($mysqli);
 
 
 // watch for autodeployment webhook from Github

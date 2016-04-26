@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingCompanyVideo;
+use \Sizzle\Bacon\Database\RecruitingCompanyVideo;
 
 // collect id
 $id = $endpoint_parts[4] ?? '';

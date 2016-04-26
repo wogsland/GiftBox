@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 
 if (!logged_in() || !is_admin()) {
     header('Location: '.'/');

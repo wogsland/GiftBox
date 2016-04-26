@@ -1,8 +1,8 @@
 <?php
-use Sizzle\Database\{
+use Sizzle\Bacon\Database\{
     Support
 };
-use Sizzle\Service\MandrillEmail;
+use Sizzle\Bacon\Service\MandrillEmail;
 
 $status = 'ERROR';
 if (isset($_POST['email'], $_POST['message'])

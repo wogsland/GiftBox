@@ -2,7 +2,7 @@
 namespace Sizzle\Tests\Ajax\Email\Lista;
 //the word "List" doesn't work in namespaces, so I translated it to Spanish
 
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     EmailList,
     EmailListEmail
 };
@@ -15,7 +15,7 @@ use \Sizzle\Database\{
 class UploadTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Bacon\Tests\Traits\User;
 
     /**
      * Requires the util.php file of functions

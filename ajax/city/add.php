@@ -1,12 +1,11 @@
 <?php
-use Sizzle\Database\City;
+use Sizzle\Bacon\Database\City;
 
 $success = 'false';
 $data = '';
 if (logged_in() && is_admin()) {
     $vars = [
        'name',
-       'image_file',
        'population',
        'longitude',
        'latitude',

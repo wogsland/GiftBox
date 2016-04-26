@@ -1,10 +1,10 @@
 <?php
-use \Sizzle\Database\RecruitingTokenResponse;
+use \Sizzle\Bacon\Database\RecruitingTokenResponse;
 
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.'/');
+  login_then_redirect_back_here();
 }
 $user_id = $_SESSION['user_id'] ?? '';
 

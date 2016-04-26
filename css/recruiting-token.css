@@ -322,7 +322,7 @@ i.plus-icon--overlay {
   margin-right: 0px;
   margin-bottom: 48px;
 }
-#supporting-images, #supporting-videos, #supporting-location, #supporting-company {
+#supporting-images, #supporting-videos, #supporting-location, #supporting-company, #doublet-supporting-location-1, #doublet-supporting-location-2, #triplet-supporting-location-1, #triplet-supporting-location-2, #triplet-supporting-location-3 {
   margin-top: 267px;
   height: 50px;
   padding-top: 20px;
@@ -378,6 +378,10 @@ i.plus-icon--overlay {
 #company-secondary-images, #location-secondary-images {
   height: 337px;
   width: 25%;
+}
+#doublet-location-main-image-1, #doublet-location-main-image-2, #triplet-location-main-image-1, #triplet-location-main-image-2, #triplet-location-main-image-3 {
+  height: 337px;
+  width: 100%;
 }
 .company-secondary-image, .location-secondary-image {
   width: 100%;

@@ -6,7 +6,7 @@ $email = null;
 $user_id = null;
 
 if (!logged_in()) {
-    header('Location: '.'/');
+  login_then_redirect_back_here();
 }
 define('TITLE', 'S!zzle - Profile');
 require __DIR__.'/header.php';

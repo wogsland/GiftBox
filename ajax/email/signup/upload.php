@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Service\MandrillEmail;
+use Sizzle\Bacon\Service\MandrillEmail;
 
 $success = 'false';
 $data = '';

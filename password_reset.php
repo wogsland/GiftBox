@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 
 // make sure the secret is valid
 if (isset($_GET['secret'])) {

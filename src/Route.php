@@ -66,8 +66,8 @@ class Route
                     case 'active_users':
                         include __DIR__.'/../admin/active_users.php';
                         break;
-                    case 'add_city':
-                        include __DIR__.'/../admin/add_city.php';
+                    case 'city':
+                        include __DIR__.'/../admin/city.php';
                         break;
                     case 'create_account':
                         include __DIR__.'/../admin/create_account.php';

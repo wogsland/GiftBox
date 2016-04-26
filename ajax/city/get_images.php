@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Database\CityImage;
+use Sizzle\Bacon\Database\CityImage;
 
 $success = 'false';
 $data = '';

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     EmailList,
     EmailCredential,
     RecruitingCompany,
@@ -8,7 +8,7 @@ use \Sizzle\Database\{
 };
 
 if (!logged_in()) {
-    header('Location: '.APP_URL);
+  login_then_redirect_back_here();
 }
 
 $user_id = (int) ($_SESSION['user_id'] ?? '');

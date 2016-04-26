@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\Organization;
+use \Sizzle\Bacon\Database\Organization;
 
 $organ = new Organization($_GET['id'] ?? '', 'long_id');
 ?>

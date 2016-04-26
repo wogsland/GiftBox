@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\City;
 
-use Sizzle\Database\City;
+use Sizzle\Bacon\Database\City;
 /**
  * This class tests the ajax endpoint to get a city's images.
  *
@@ -23,7 +23,6 @@ class GetImagesTest
         // create a city
         $city = new City();
         $city->name = "City #" . rand(0, 100);
-        $city->image_file = "city.png";
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);

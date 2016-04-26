@@ -1,15 +1,15 @@
 <?php
-use \Sizzle\{
-    HTML,
+use \Sizzle\Bacon\{
+    Text\HTML,
     Database\RecruitingCompany,
     Database\RecruitingToken
 };
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     City
 };
 
 if (!logged_in()) {
-    header('Location: '.APP_URL);
+  login_then_redirect_back_here();
 }
 
 $user_id = $_SESSION['user_id'] ?? '';
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
     $token = new RecruitingToken();
 }
 
-$city = new City($token->city_id ?? '');
+$city = ($token->getCities())[0] ?? new City();
 $city_name = $city->name ?? '';
 
 function paper_text($label, $id, $value, $required = false)

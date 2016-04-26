@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var cities = [];
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -61,6 +62,11 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
+  var cityId = $(event.target).attr('id').slice(-1) - 1;
+  if (isNaN(cityId)) {
+    cityId = 0;
+  }
+  handleAjaxCityGet(cities[cityId]);
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
@@ -180,15 +186,40 @@ scope._onInterestClick = function(event) {
  */
 scope._submitInterest = function (event) {
   var formIndex = 0;
-  if ($(event.path[8]).is('location-x-card')) {
-    formIndex = 1;
-  } else if ($(event.path[5]).is('image-x-card')) {
-    formIndex = 2;
-  } else if ($(event.path[5]).is('video-x-card')) {
-    formIndex = 3;
-  } else if ($(event.path[5]).is('description-x-card')) {
-    formIndex = 4;
-  } else
+  var eventPath = [];
+  if (event.path !== undefined) {
+    // Chrome
+    eventPath = event.path;
+    if ($(eventPath[8]).is('location-x-card')) {
+      formIndex = 1;
+    } else if ($(eventPath[5]).is('image-x-card')) {
+      formIndex = 2;
+    } else if ($(eventPath[5]).is('video-x-card')) {
+      formIndex = 3;
+    } else if ($(eventPath[5]).is('description-x-card')) {
+      formIndex = 4;
+    }
+  } else {
+    // Firefox & Safari
+    var currentElem = event.target;
+    while (currentElem) {
+      eventPath.push(currentElem);
+      currentElem = currentElem.parentElement;
+    }
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+      eventPath.push(document);
+    if (eventPath.indexOf(window) === -1)
+      eventPath.push(window);
+    if (eventPath[8].localName == 'location-x-card') {
+      formIndex = 1;
+    } else if (eventPath[5].localName == 'image-x-card') {
+      formIndex = 2;
+    } else if (eventPath[5].localName == 'video-x-card') {
+      formIndex = 3;
+    } else if (eventPath[5].localName == 'description-x-card') {
+      formIndex = 4;
+    }
+  }
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
@@ -387,67 +418,117 @@ function getPosition(str, m, i) {
 function handleAjaxCityGet(data) {
   if (data.id !== undefined & data.id > 0) {
     $('.gt-info-location').text(data.name);
-    var population = numberWithCommas(data.population);
-    $('.gt-city-population').text(population);
+    if (dataExists(data.population)) {
+      $('.gt-city-population').text(numberWithCommas(data.population));
+    }
     $('.gt-city-timezone').text(data.timezone);
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
     $('google-map')[0].longitude = data.longitude;
-    $('.gt-city-spring-hi').text(data.temp_hi_spring);
-    $('.gt-city-spring-lo').text(data.temp_lo_spring);
-    $('.gt-city-spring-avg').text(data.temp_avg_spring);
-    $('.gt-city-summer-hi').text(data.temp_hi_summer);
-    $('.gt-city-summer-lo').text(data.temp_lo_summer);
-    $('.gt-city-summer-avg').text(data.temp_avg_summer);
-    $('.gt-city-fall-hi').text(data.temp_hi_fall);
-    $('.gt-city-fall-lo').text(data.temp_lo_fall);
-    $('.gt-city-fall-avg').text(data.temp_avg_fall);
-    $('.gt-city-winter-hi').text(data.temp_hi_winter);
-    $('.gt-city-winter-lo').text(data.temp_lo_winter);
-    $('.gt-city-winter-avg').text(data.temp_avg_winter);
-    assetHost = getAssetHost();
-    if (dataExists(data.image_file)) {
-      // this'll be going away
-      $('#location-main-image').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
-      $('#location-secondary-images').remove();
-      $('#location-image-grid').css('width','100%');
-      $('#location-main-image').css('width','100%');
-      $('#location-back').css('background',"url('"+assetHost+"/"+data.image_file+"') center / cover");
+
+    //temps
+    var missingTemp = false;
+    if (dataExists(data.temp_hi_spring)) {
+      $('.gt-city-spring-hi').text(data.temp_hi_spring);
     } else {
-      url = '/ajax/city/get_images';
-      postData = {
-        'city_id':data.id
-      };
-      $.post(url, postData, function(imgData) {
-        if (imgData.data !== undefined && imgData.data.length > 0) {
-          image_file = imgData.data[0];
-          $('#location-back').css('background',"url('"+image_file+"') center / cover");
-          $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
-          if (imgData.data.length < 4) {
-            // display 1 image
-            $('#location-secondary-images').remove();
-            $('#location-image-grid').css('width','100%');
-            $('#location-main-image').css('width','100%');
-          } else {
-            // display 4 images
-            console.log('dsiplaying 4 images')
-            $('#location-secondary-image-1').attr('src',imgData.data[1]);
-            $('#location-secondary-image-2').attr('src',imgData.data[2]);
-            $('#location-secondary-image-3').attr('src',imgData.data[3]);
-          }
-          /*$('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
-          if ( $(window).width() < 739 || data.data.length < 4) {
-            $('#company-secondary-images').remove();
-            $('#company-image-grid').css('width','100%');
-            $('#company-main-image').css('width','100%');
-          } else {
-            $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
-            $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
-            $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
-          }*/
-        }
-      });
+      missingTemp = true;
     }
+    if (dataExists(data.temp_lo_spring)) {
+      $('.gt-city-spring-lo').text(data.temp_lo_spring);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_spring)) {
+      $('.gt-city-spring-avg').text(data.temp_avg_spring);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_summer)) {
+      $('.gt-city-summer-hi').text(data.temp_hi_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_summer)) {
+      $('.gt-city-summer-lo').text(data.temp_lo_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_summer)) {
+      $('.gt-city-summer-avg').text(data.temp_avg_summer);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_fall)) {
+      $('.gt-city-fall-hi').text(data.temp_hi_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_fall)) {
+      $('.gt-city-fall-lo').text(data.temp_lo_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_fall)) {
+      $('.gt-city-fall-avg').text(data.temp_avg_fall);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_hi_winter)) {
+      $('.gt-city-winter-hi').text(data.temp_hi_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_lo_winter)) {
+      $('.gt-city-winter-lo').text(data.temp_lo_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (dataExists(data.temp_avg_winter)) {
+      $('.gt-city-winter-avg').text(data.temp_avg_winter);
+    } else {
+      missingTemp = true;
+    }
+    if (missingTemp) {
+      $('#spring-location').remove();
+      $('#summer-location').remove();
+      $('#fall-location').remove();
+      $('#winter-location').remove();
+    }
+
+    // image(s)
+    assetHost = getAssetHost();
+    url = '/ajax/city/get_images';
+    postData = {
+      'city_id':data.id
+    };
+    $.post(url, postData, function(imgData) {
+      if (imgData.data !== undefined && imgData.data.length > 0) {
+        image_file = imgData.data[0];
+        $('#location-back').css('background',"url('"+image_file+"') center / cover");
+        $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
+        if (imgData.data.length < 4) {
+          // display 1 image
+          $('#location-secondary-images').remove();
+          $('#location-image-grid').css('width','100%');
+          $('#location-main-image').css('width','100%');
+        } else {
+          // display 4 images
+          $('#location-secondary-image-1').attr('src',imgData.data[1]);
+          $('#location-secondary-image-2').attr('src',imgData.data[2]);
+          $('#location-secondary-image-3').attr('src',imgData.data[3]);
+        }
+        /*$('#company-main-image').css('background',"url('"+assetHost+"/"+data.data[0].file_name+"') center / cover");
+        if ( $(window).width() < 739 || data.data.length < 4) {
+          $('#company-secondary-images').remove();
+          $('#company-image-grid').css('width','100%');
+          $('#company-main-image').css('width','100%');
+        } else {
+          $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
+          $('#company-secondary-image-2').attr('src',assetHost+"/"+data.data[2].file_name);
+          $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
+        }*/
+      }
+    });
   }
 }
 
@@ -590,11 +671,90 @@ function handleAjaxRecruitingTokenGet(data) {
       break;
     }
   }
-  if(dataExists(data.data.city_id)) {
-    cityId = data.data.city_id;
-    url = '/ajax/city/get/'+cityId;
+  if(dataExists(data.data.long_id)) {
+    url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
-      handleAjaxCityGet(data.data);
+      cities = data.data;
+      if (1 == cities.length) {
+        handleAjaxCityGet(cities[0]);
+        $('#doublet-location-section').remove();
+        $('#triplet-location-section').remove();
+      } else if (2 == cities.length) {
+        $('#location-section').remove();
+        $('#triplet-location-section').remove();
+
+        // first location
+        $('.gt-info-location-1').text(cities[0].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':cities[0].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#doublet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // second location
+        $('.gt-info-location-2').text(cities[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':cities[1].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#doublet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+      } else if (3 == cities.length) {
+        $('#doublet-location-section').remove();
+        $('#location-section').remove();
+
+        // first location
+        $('.gt-info-location-1').text(cities[0].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':cities[0].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // second location
+        $('.gt-info-location-2').text(data.data[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[1].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+
+        // third location
+        $('.gt-info-location-3').text(data.data[1].name);
+        url = '/ajax/city/get_images';
+        postData = {
+          'city_id':data.data[2].id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+      } else { // no location
+        $('#triplet-location-section').remove();
+        $('#doublet-location-section').remove();
+        $('#location-section').remove();
+      }
     });
   } else {
     $('#location-section').remove();

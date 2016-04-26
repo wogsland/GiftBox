@@ -23,7 +23,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/activate', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/add_city', false, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/city', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/edit_organization', false, 302));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', false, 302));
@@ -99,7 +99,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/activate', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/add_city', true, 302));
+        $this->assertTrue($this->checkStatusCode('/admin/city', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 302));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 302));
@@ -175,7 +175,7 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/activate', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/admin', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/add_city', true, 200, true));
+        $this->assertTrue($this->checkStatusCode('/admin/city', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 200, true));

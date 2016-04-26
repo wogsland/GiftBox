@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     User,
     UserMilestone
 };
@@ -17,7 +17,8 @@ $login_type = $_POST['login_type'] ?? 'EMAIL';
 
 if (User::exists($email)) {
     $user = User::fetch($email);
-    $expires = $user->active_until ?? date('Y-m-d');
+    //$expires = $user->active_until ?? date('Y-m-d');
+    $expires = date('Y-m-d');
     $DateTime1 = new \DateTime($expires);
     $DateTime2 = new \DateTime(date('Y-m-d'));
     if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
