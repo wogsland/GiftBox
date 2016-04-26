@@ -3,8 +3,8 @@ use \Monolog\{
     Handler\SlackHandler,
     Logger
 };
-use \Sizzle\{
-    Bacon\Database\WebRequest,
+use \Sizzle\Bacon\{
+    Database\WebRequest,
     Service\IpinfoIo
 };
 
