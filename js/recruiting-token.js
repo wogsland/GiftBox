@@ -726,7 +726,7 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // second location
-        $('.gt-info-location-2').text(data.data[1].name);
+        $('.gt-info-location-2').text(cities[1].name);
         url = '/ajax/city/get_images';
         postData = {
           'city_id':data.data[1].id
@@ -739,7 +739,7 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // third location
-        $('.gt-info-location-3').text(data.data[1].name);
+        $('.gt-info-location-3').text(cities[3].name);
         url = '/ajax/city/get_images';
         postData = {
           'city_id':data.data[2].id
