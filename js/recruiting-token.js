@@ -739,7 +739,7 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // third location
-        $('.gt-info-location-3').text(cities[3].name);
+        $('.gt-info-location-3').text(cities[2].name);
         url = '/ajax/city/get_images';
         postData = {
           'city_id':data.data[2].id
