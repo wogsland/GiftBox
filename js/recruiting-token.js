@@ -62,7 +62,11 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
-  handleAjaxCityGet(cities[$(event.target).attr('id').slice(-1) - 1]);
+  var cityId = $(event.target).attr('id').slice(-1) - 1;
+  if (isNaN(cityId)) {
+    cityId = 0;
+  }
+  handleAjaxCityGet(cities[cityId]);
   $('.mdl-layout__drawer').removeClass('is-visible');
   this.$.list.sharedElements = {
     'fade-in': event.target,
@@ -182,15 +186,40 @@ scope._onInterestClick = function(event) {
  */
 scope._submitInterest = function (event) {
   var formIndex = 0;
-  if ($(event.path[8]).is('location-x-card')) {
-    formIndex = 1;
-  } else if ($(event.path[5]).is('image-x-card')) {
-    formIndex = 2;
-  } else if ($(event.path[5]).is('video-x-card')) {
-    formIndex = 3;
-  } else if ($(event.path[5]).is('description-x-card')) {
-    formIndex = 4;
-  } else
+  var eventPath = [];
+  if (event.path !== undefined) {
+    // Chrome
+    eventPath = event.path;
+    if ($(eventPath[8]).is('location-x-card')) {
+      formIndex = 1;
+    } else if ($(eventPath[5]).is('image-x-card')) {
+      formIndex = 2;
+    } else if ($(eventPath[5]).is('video-x-card')) {
+      formIndex = 3;
+    } else if ($(eventPath[5]).is('description-x-card')) {
+      formIndex = 4;
+    }
+  } else {
+    // Firefox & Safari
+    var currentElem = event.target;
+    while (currentElem) {
+      eventPath.push(currentElem);
+      currentElem = currentElem.parentElement;
+    }
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+      eventPath.push(document);
+    if (eventPath.indexOf(window) === -1)
+      eventPath.push(window);
+    if (eventPath[8].localName == 'location-x-card') {
+      formIndex = 1;
+    } else if (eventPath[5].localName == 'image-x-card') {
+      formIndex = 2;
+    } else if (eventPath[5].localName == 'video-x-card') {
+      formIndex = 3;
+    } else if (eventPath[5].localName == 'description-x-card') {
+      formIndex = 4;
+    }
+  }
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
@@ -679,7 +708,7 @@ function handleAjaxRecruitingTokenGet(data) {
             $('#doublet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
           }
         });
-      } else {
+      } else if (3 == cities.length) {
         $('#doublet-location-section').remove();
         $('#location-section').remove();
 
@@ -697,7 +726,7 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // second location
-        $('.gt-info-location-2').text(data.data[1].name);
+        $('.gt-info-location-2').text(cities[1].name);
         url = '/ajax/city/get_images';
         postData = {
           'city_id':data.data[1].id
@@ -710,7 +739,7 @@ function handleAjaxRecruitingTokenGet(data) {
         });
 
         // third location
-        $('.gt-info-location-3').text(data.data[1].name);
+        $('.gt-info-location-3').text(cities[2].name);
         url = '/ajax/city/get_images';
         postData = {
           'city_id':data.data[2].id
@@ -721,6 +750,10 @@ function handleAjaxRecruitingTokenGet(data) {
             $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
           }
         });
+      } else { // no location
+        $('#triplet-location-section').remove();
+        $('#doublet-location-section').remove();
+        $('#location-section').remove();
       }
     });
   } else {

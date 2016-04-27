@@ -18,7 +18,7 @@ $email = $_POST['email'] ?? '';
 $plan = $_POST['plan'] ?? '';
 
 // Retrieve the S!zzle user record
-$user = User::fetch($email);
+$user = (new User())->fetch($email);
 
 try {
     // Create the customer with a plan, this will also charge the customer

@@ -357,7 +357,7 @@ require __DIR__.'/header.php';
         <form is="iron-form" id="use-existing-company-form">
             <div class="field-container">
             <?php
-                $companies = is_admin() ? (new RecruitingCompany())->getAll() : RecruitingToken::getUserCompanies((int) $user_id);
+                $companies = is_admin() ? (new RecruitingCompany())->getAll() : (new RecruitingToken())->getUserCompanies((int) $user_id);
                 $options = array();
                 foreach ($companies as $co) {
                     $options[$co['id']] = '' != $co['name'] ? $co['name'] : 'Unnamed Company';
