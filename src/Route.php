@@ -110,9 +110,6 @@ class Route
             case 'mascot':
                 include __DIR__.'/../mascot.php';
                 break;
-            case 'organization':
-                include __DIR__.'/../admin/org_info.php';
-                break;
             case 'password_reset':
                 include __DIR__.'/../password_reset.php';
                 break;
@@ -189,9 +186,6 @@ class Route
                 break;
             case 'upload':
                 include __DIR__.'/../upload.php';
-                break;
-            case 'user':
-                include __DIR__.'/../admin/user_info.php';
                 break;
             case 'test':
                 // this endpoint is just for non-production testing
