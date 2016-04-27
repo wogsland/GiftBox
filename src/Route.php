@@ -157,6 +157,7 @@ class Route
                         && strpos($userAgent, 'AppleWebKit') !== false
                         && strpos($userAgent, 'Safari') === false
                         && strpos($userAgent, 'Chrome') === false
+                        && strpos($userAgent, 'iPhone') === false
                     ) {
                         // don't display in native android browser
                         include __DIR__.'/../get_chrome.html';
