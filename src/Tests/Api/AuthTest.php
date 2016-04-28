@@ -34,7 +34,7 @@ extends \PHPUnit_Framework_TestCase
         $this->apiKey = rand() . '_key';
         $sql = "INSERT INTO user (email_address, api_key)
                 VALUES ('{$this->email}', '{$this->apiKey}')";
-        $userId = insert($sql);
+        execute_query($sql);
         $this->user = (new User())->fetch($this->apiKey, 'api_key');
     }
 
