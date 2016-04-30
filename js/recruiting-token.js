@@ -504,8 +504,8 @@ function handleAjaxCityGet(data) {
     $.post(url, postData, function(imgData) {
       if (imgData.data !== undefined && imgData.data.length > 0) {
         image_file = imgData.data[0];
-        $('#location-back').css('background',"url('"+image_file+"') center / cover");
-        $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
+        $('#location-back').css('background',"#ffffff url('"+image_file+"') center / cover");
+        $('#location-main-image').css('background',"#ffffff url('"+image_file+"') center / cover");
         if (imgData.data.length < 4) {
           // display 1 image
           $('#location-secondary-images').remove();
