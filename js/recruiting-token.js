@@ -590,7 +590,6 @@ function handleAjaxRecruitingTokenGet(data) {
     tokenTitle = data.data.job_title;
   }
   $('title').text(tokenTitle);
-  $('.gt-info-title').text(tokenTitle);
   $('.gt-info-jobtitle').text(data.data.job_title);
   $('.gt-info-overview').html(data.data.job_description);
   var overview = '' + data.data.job_description;
