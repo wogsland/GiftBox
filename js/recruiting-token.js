@@ -727,7 +727,7 @@ function updateSectionPositions() {
  * @returns {boolean}
  */
 function elementIsPresent(section_el) {
-  return section_el != null && section_el.style.display !== 'none';
+  return (section_el != null) && (section_el.style.display !== 'none');
 }
 
 /**
