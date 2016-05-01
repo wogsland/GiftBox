@@ -89,43 +89,9 @@ scope._onImagesClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data !== undefined) {
       assetHost = getAssetHost();
-      i=1;
-      images = '';
-      $.each(data.data, function(index, value){
-        if (i%3 === 1) {
-          images += '<section class="section--center mdl-grid mdl-grid--no-spacing">';
-        }
-        images += '<div id="image-'+i+'" class="demo-card-image mdl-card mdl-cell--4-col-phone mdl-shadow--2dp">';
-        images += '<div class="mdl-card__title mdl-card--expand"></div>';
-        images += '</div>';
-        if (i%3 === 0) {
-          images += '</section>';
-        } else {
-          images += '<div class="mdl-layout-spacer"></div>';
-        }
-        i++;
-      });
-      if ((i-1)%3 !== 0) {
-        // the last line has only one or two images
-        images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
-        images += '<div class="mdl-card__title mdl-card--expand"></div>';
-        images += '</div>';
-        if ((i-1)%3 === 1) {
-          // the last line has only one image
-          images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
-          images += '<div class="mdl-card__title mdl-card--expand"></div>';
-          images += '</div>';
-        }
-        images += '</section>';
-      }
-      images += '<section class="section--footer mdl-color--light-grey mdl-grid">';
-      images += '</section>';
-      $('#images-container').html(images);
-      i=1;
-      $.each(data.data, function(index, value){
-        $('#image-' + i).css('background',"url('"+assetHost+"/"+value.file_name+"') center / cover");
-        i++;
-      });
+      images = getImagesGrid(data.data, assetHost);
+      $('#images-container').empty().append(images);
+
     }
   });
 };
@@ -857,4 +823,54 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
       }
     }
   }
+}
+
+function getImagesGrid(data, assetHost) {
+  var container = $('<ul class="ImageGrid ImageGrid is-loading">'),
+      loaded = 0,
+      onComplete = function () {
+        loaded++;
+        container.masonry('layout');
+        if (loaded === data.length) {
+          container.removeClass('is-loading');
+        }
+      };
+
+  container.append('<li class="ImageGrid-itemSizer">');
+  data.forEach(function (img) {
+    container.append(getImageGridItem(img, assetHost, onComplete));
+  });
+
+  container.masonry({
+    itemSelector: '.ImageGrid-item',
+    columnWidth: '.ImageGrid-itemSizer',
+    percentPosition: true,
+    transitionDuration: '0.1s'
+  });
+
+  return container;
+}
+
+function getImageGridItem(imgData, assetHost, cb) {
+  var preload = new Image(),
+      src = assetHost+'/'+imgData.file_name,
+      item = $('<li class="ImageGrid-item is-loading">'),
+      img = $('<img ' +
+          'id="image-' + imgData.id + '" ' +
+          'class="ImageGrid-image" ' +
+          'data-src="'+src+'"/>');
+
+  preload.onload = function() {
+    cb();
+    item.removeClass('is-loading');
+    img.attr('src', img.data('src'));
+    item.append(img);
+  };
+  preload.onerror = function() {
+    cb();
+    item.removeClass('is-loading').addClass('is-error');
+  };
+  preload.src = src;
+
+  return item;
 }

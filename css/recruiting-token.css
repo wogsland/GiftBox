@@ -431,3 +431,48 @@ i.plus-icon--overlay {
 .interest-thumb:hover {
   color: black;
 }
+
+/* IMAGES SECTIONS */
+
+#images-container {
+  padding: 0;
+}
+
+.ImageGrid {
+  list-style:none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.ImageGrid-item, .ImageGrid-itemSizer {
+  width: 100%;
+  display: inline-block;
+  padding: 10px;
+  box-sizing:border-box;
+}
+
+.ImageGrid-image {
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  /* TWO COLS */
+  .ImageGrid-item, .ImageGrid-itemSizer {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  /* THREE COLS */
+  .ImageGrid-item, .ImageGrid-itemSizer {
+    width: 33.333%;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  /* FOUR COLS */
+  .ImageGrid-item, .ImageGrid-itemSizer {
+    width: 25%;
+  }
+}
