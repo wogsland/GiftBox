@@ -46,7 +46,7 @@ if (logged_in()) {
         }
         if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
             // Polymer bug: convert the city name into an id
-            $token->addCity(City::getIdFromName($_POST['city_id']));
+            $token->addCity((new City())->getIdFromName($_POST['city_id']));
         }
 
         $response['status'] = "SUCCESS";

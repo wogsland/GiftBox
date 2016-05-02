@@ -236,7 +236,7 @@ if (logged_in()) {
               Sizzle lets you join the modern startup world and automatically improves your candidate outreach.
             </p>
             <p>
-              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to fill out. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favortie email client.
+              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to fill out. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favorite email client.
             </p>
           </article>
         </div>

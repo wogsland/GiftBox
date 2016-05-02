@@ -40,6 +40,9 @@
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <!-- Masonry -->
+    <script src="components/masonry/dist/masonry.pkgd.min.js" async></script>
+
     <!-- Polymer -->
     <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <link rel="import" href="components/paper-dialog/paper-dialog.html">
@@ -66,17 +69,7 @@
             <div class="fit layout vertical center-center">
               <div class="fit layout horizontal large">
 
-                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <header class="mdl-layout__header">
-                    <!-- Top row, always visible -->
-                    <div class="mdl-layout__header-row">
-                      <span class="mdl-layout-title long-title">
-                        <i class="gt-info-title"></i>
-                      </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                  </header>
-
+                <div class="mdl-layout mdl-js-layout">
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
 
