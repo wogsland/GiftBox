@@ -21,19 +21,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/about'));
         $this->assertTrue($this->checkStatusCode('/attribution'));
         $this->assertTrue($this->checkStatusCode('/activate', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/active_users', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/city', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/create_account', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/organizations', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/send_token', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/tokens', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/transfer_token', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/users', false, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/visitors', false, 302));
         $this->assertTrue($this->checkStatusCode('/ajax'));
         $this->assertTrue($this->checkStatusCode('/ajax/'));
         $this->assertTrue($this->checkStatusCode('/ajax/anything'));
@@ -61,7 +48,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', false, 404));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js'));
         $this->assertTrue($this->checkStatusCode('/mascot'));
-        $this->assertTrue($this->checkStatusCode('/organization', false, 302));
         $this->assertTrue($this->checkStatusCode('/password_reset', false, 302));
         $this->assertTrue($this->checkStatusCode('/pricing'));
         $this->assertTrue($this->checkStatusCode('/privacy'));
@@ -82,7 +68,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token_responses', false, 302));
         $this->assertTrue($this->checkStatusCode('/track'));
         $this->assertTrue($this->checkStatusCode('/upload'));// should be under ajax?
-        $this->assertTrue($this->checkStatusCode('/user', false, 302));
         $this->assertTrue($this->checkStatusCode('/test', false, 200));// only on DEVELOPMENT
     }
 
@@ -97,19 +82,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/about', true));
         $this->assertTrue($this->checkStatusCode('/attribution', true));
         $this->assertTrue($this->checkStatusCode('/activate', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/city', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/send_token', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/tokens', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/transfer_token', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/users', true, 302));
-        $this->assertTrue($this->checkStatusCode('/admin/visitors', true, 302));
         $this->assertTrue($this->checkStatusCode('/ajax', true));
         $this->assertTrue($this->checkStatusCode('/ajax/', true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything', true));
@@ -137,7 +109,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', true, 404));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js', true));
         $this->assertTrue($this->checkStatusCode('/mascot', true));
-        $this->assertTrue($this->checkStatusCode('/organization', true, 302));
         $this->assertTrue($this->checkStatusCode('/password_reset', true, 302));
         $this->assertTrue($this->checkStatusCode('/pricing', true));
         $this->assertTrue($this->checkStatusCode('/privacy', true));
@@ -158,7 +129,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token_responses', true));
         $this->assertTrue($this->checkStatusCode('/track', true));
         $this->assertTrue($this->checkStatusCode('/upload', true));// should be under ajax?
-        $this->assertTrue($this->checkStatusCode('/user', true, 302));
         $this->assertTrue($this->checkStatusCode('/test', true, 302));// only on DEVELOPMENT
     }
 
@@ -173,19 +143,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/about', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/attribution', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/activate', true, 302, true));
-        $this->assertTrue($this->checkStatusCode('/admin', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/active_users', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/city', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/create_account', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/edit_organization', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/organizations', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/no_card_customers', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/send_token', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/stalled_new_customers', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/tokens', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/transfer_token', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/users', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/admin/visitors', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/ajax', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/ajax/', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/ajax/anything', true, 200, true));
@@ -213,7 +170,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/js/', true, 404, true));
         $this->assertTrue($this->checkStatusCode('/js/JSXTransformer.js', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/mascot', true, 200, true));
-        $this->assertTrue($this->checkStatusCode('/organization', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/password_reset', true, 302, true));
         $this->assertTrue($this->checkStatusCode('/pricing', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/privacy', true, 200, true));
@@ -234,7 +190,6 @@ extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->checkStatusCode('/token_responses', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/track', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/upload', true, 200, true));// should be under ajax?
-        $this->assertTrue($this->checkStatusCode('/user', true, 200, true));
         $this->assertTrue($this->checkStatusCode('/test', true, 302, true));// only on DEVELOPMENT
     }
 

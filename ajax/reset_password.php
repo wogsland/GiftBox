@@ -29,7 +29,7 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
     $email = $_POST['email'];
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // find user corresponding to email
-        $user = User::fetch($email);
+        $user = (new User())->fetch($email);
 
         // send email if user exists
         if (isset($user->email_address)) {
