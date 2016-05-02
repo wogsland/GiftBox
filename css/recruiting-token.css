@@ -376,9 +376,18 @@ i.plus-icon--overlay {
   height: 337px;
   width: 100%;
 }
+#location-back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.2;
+}
 .company-secondary-image, .location-secondary-image {
   width: 100%;
   height:112.24px;
+  background-color: #ffffff;
 }
 .link-finger {
   cursor: pointer;
