@@ -1,10 +1,10 @@
 <?php
-use \Sizzle\{
-    Bacon\Database\User,
-    Bacon\Database\UserMilestone,
-    Service\PipedriveClient
+use \Sizzle\Bacon\{
+    Database\User,
+    Database\UserMilestone,
+    Service\PipedriveClient,
+    Service\MandrillEmail
 };
-use Sizzle\Bacon\Service\MandrillEmail;
 
 date_default_timezone_set('America/Chicago');
 
@@ -41,7 +41,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
     }
 
     // Make sure the email address is available:
-    if (User::exists($user->email_address)) {
+    if ((new User())->exists($user->email_address)) {
         $response['status'] = "ERROR";
         $response['message'] = "The email address $user->email_address has already been registered.";
     } else {

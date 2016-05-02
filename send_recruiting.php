@@ -176,6 +176,14 @@ require __DIR__.'/header.php';
               onclick="copyTokenLink()">
             COPY</paper-button>
 
+              <a id="download-qr-code-link"><paper-button
+                id="download-qr-code-button"
+                style="margin-left:0px;"
+                raised
+                onclick=null">
+                Download QR Code
+                <div id="qr-code" hidden></div></paper-button></a>
+
             <div id="li-root" style="margin-top:20px"></div>
             <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
             <script
@@ -289,7 +297,9 @@ require __DIR__.'/header.php';
 
   <!-- JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
   <script>
+
   /**
    * Redirects user back to the company edit page
    *
@@ -299,6 +309,14 @@ require __DIR__.'/header.php';
   function backToCompany(id, token) {
     window.location = '/create_company?id='+id+'&referrer='+token;
   }
+
+  /**
+   *  Generates QR Code and adds to link for download.
+   *
+   */
+  $("#qr-code").qrcode("<?php echo APP_URL."token/recruiting/".$recruiting_token_id;?>");
+  $("#download-qr-code-link")[0].href = $("#qr-code canvas")[0].toDataURL("image/png");
+  $("#download-qr-code-link")[0].download = "recruiting_token_qr_code.png";
 
   /**
    * Copies the token link to the keyboard

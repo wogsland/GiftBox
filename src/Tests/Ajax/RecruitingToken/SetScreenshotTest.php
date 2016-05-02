@@ -33,7 +33,7 @@ extends \PHPUnit_Framework_TestCase
 
         $fileName = rand().'.jpg';
 
-        // test user transfer
+        // test screenshot upload
         $url = TEST_URL . "/ajax/recruiting_token/set_screenshot";
         $fields = array(
             'tokenId'=>$RecruitingToken->id,
@@ -65,7 +65,7 @@ extends \PHPUnit_Framework_TestCase
 
         // cleanup
         $sql = "DELETE FROM recruiting_token_image WHERE id = '{$image->id}'";
-        execute($sql);
+        execute_query($sql);
     }
 
     /**

@@ -61,8 +61,8 @@ extends \PHPUnit_Framework_TestCase
         $this->assertEquals("$email successsfully registered.", $return->message);
 
         // test user created
-        $this->assertTrue(User::exists($email));
-        $User = User::fetch($email);
+        $this->assertTrue((new User())->exists($email));
+        $User = (new User())->fetch($email);
         $this->assertEquals($User->email_address, $email);
         $this->assertEquals($User->internal, 'Y');
         */

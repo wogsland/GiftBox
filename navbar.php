@@ -46,8 +46,19 @@
                 <li><a href="javascript:void(0)" class="account-dropdown sizzle-nav-choice" id="logout-button" onclick="logout();">Logout</a></li>
               </ul>
             </li>
-            <?php if (is_admin()) { ?>
-                <li><a href="/admin" class="external sizzle-nav-choice">Admin</a></li>
+            <?php if (is_admin()) {
+                switch (ENVIRONMENT) {
+                    case 'production':
+                    $adminURL = 'https://hermes.gosizzle.io';
+                    break;
+                    case 'development':
+                    $adminURL = 'http://hermesdev.gosizzle.io';
+                    break;
+                    default:
+                    $adminURL = 'http://hermes.gosizzle.local';
+                    break;
+                }?>
+                <li><a href="<?=$adminURL?>" class="external sizzle-nav-choice">Admin</a></li>
             <?php }?>
         <?php } else { ?>
             <li><a href="javascript:void(0)" onclick="loginOpen()" class="sizzle-nav-choice">Login</a></li>
