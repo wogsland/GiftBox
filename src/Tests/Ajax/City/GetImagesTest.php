@@ -46,10 +46,10 @@ class GetImagesTest
 
         // Add images to city
         $sql = "INSERT INTO `giftbox`.`city_image` (`city_id`, `image_file`) VALUES ('$city->id', 'AL/Ralph/3.svg');";
-        insert($sql); // image #1
-        insert($sql); // image #2
-        insert($sql); // image #3
-        insert($sql); // image #4
+        execute_query($sql); // image #1
+        execute_query($sql); // image #2
+        execute_query($sql); // image #3
+        execute_query($sql); // image #4
     }
 
     /**

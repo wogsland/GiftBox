@@ -9,8 +9,8 @@ use Sizzle\Bacon\{
     Database\WebRequest
 };
 
-// set release version
-define('VERSION', '1.11.0');
+// set release version in /version file
+define('VERSION', trim(file_get_contents(__DIR__.'/version')));
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';

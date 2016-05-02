@@ -1,7 +1,7 @@
 <?php
 use \Sizzle\Bacon\Database\User;
 
-$user = User::fetch($_SESSION['email'] ?? '');
+$user = (new User())->fetch($_SESSION['email'] ?? '');
 
 define('TITLE', 'S!zzle - Give a Token of Appreciation');
 require __DIR__.'/header.php';
