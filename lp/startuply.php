@@ -77,7 +77,7 @@ if (logged_in()) {
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="/pricing">Prices</a></li>
-            <!--<li><a href="#feedback">Feedback</a></li>-->
+            <li><a href="#feedback">Feedback</a></li>
             <li><a href="#team">Team</a></li>
             <li><a href="https://blog.gosizzle.io">Blog</a></li>
             <li><a href="#guarantee">Contact</a></li>
@@ -236,7 +236,7 @@ if (logged_in()) {
               Sizzle lets you join the modern startup world and automatically improves your candidate outreach.
             </p>
             <p>
-              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to fill out. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favortie email client.
+              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to fill out. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favorite email client.
             </p>
           </article>
         </div>
@@ -408,11 +408,11 @@ if (logged_in()) {
       </div>
     </div>
   </section>
-<?php /*
+
   <section id="feedback" class="section feedback-section align-center light-text">
     <div class="container animated" data-animation="fadeInDown" data-duration="500">
       <div class="section-header">
-        <h2>WHAT <span class="highlight">SIZZLERS</span> SAY</h2>
+        <h2>WHAT <span class="highlight">RECRUITERS</span> SAY</h2>
       </div>
       <div class="section-content">
         <!-- BEGIN SLIDER CONTENT -->
@@ -421,17 +421,17 @@ if (logged_in()) {
             <ul class="slides">
               <li>
                 <div class="testimonial align-center clearfix">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
+                  <blockquote>Sizzle’s product brought a new level to my sourcing and recruiting efforts. With some more challenging roles to fill, Sizzle offers an easy way to connect candidates with all of the information they need to make an informed decision about their future.</blockquote>
                 </div>
               </li>
               <li>
                 <div class="testimonial align-center clearfix">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
+                  <blockquote>Awesome. Response time is amazing!</blockquote>
                 </div>
               </li>
               <li>
                 <div class="testimonial align-center clearfix">
-                  <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum metus. Aenean vel rutrum velit. Duis aliquet augue non augue volutpat, ut viverra est sagittis. Duis elementum mi mauris, nec rhoncus dolor consectetur vitae lorem ipsum.</blockquote>
+                  <blockquote>Oh my gosh, this is GREAT! Thank you! Awesome. Love that it can take you to their LinkedIn page and even tells you about the geographic locations. Can’t wait to share it.</blockquote>
                 </div>
               </li>
             </ul>
@@ -449,27 +449,25 @@ if (logged_in()) {
         <div class="flex-manual">
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch flex-active">
-              <img alt="client" src="assets2/img/people/profile-1.jpg" class="sm-pic img-circle pull-left" width="69" height="70">
+              <img alt="client" src="assets2/img/people/mallie_froehlich.png" class="sm-pic img-circle pull-left" width="69" height="70">
               <p>
-                <span class="highlight">CHRIS MURDOCK</span><br/>Founder of <span class="highlight">IQ Talent</span>
+                <span class="highlight">MALLIE FROEHLICH</span><br/>Contract Recruiting at <span class="highlight">Auction.com</span>
               </p>
             </div>
           </div>
-
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch pull-left">
-              <img alt="client" src="assets2/img/people/profile-2.jpg" class="sm-pic img-circle pull-left" width="69" height="70">
+              <img alt="client" src="assets2/img/people/kyle_gatlin.jpg" class="sm-pic img-circle pull-left" width="69" height="70">
               <p>
-                <span class="highlight">JOHN DOESOME</span><br/>Accountant at <span class="highlight">Vell Inc.</span>
+                <span class="highlight">KYLE GATLIN</span><br/>Recruiter for <span class="highlight">Rally Health</span>
               </p>
             </div>
           </div>
-
           <div class="col-xs-12 col-sm-4 wrap">
             <div class="switch">
-              <img alt="client" src="assets2/img/people/profile-1.jpg" class="sm-pic img-circle pull-left" width="68" height="69">
+              <img alt="client" src="assets2/img/people/chelsea_lord.jpg" class="sm-pic img-circle pull-left" width="68" height="69">
               <p>
-                <span class="highlight">PETER MOOSOME</span><br/>VP Marketing at <span class="highlight">Footbook</span>
+                <span class="highlight">CHELSEA LORD</span><br/>Recruiter for <span class="highlight">Matco Tools</span>
               </p>
             </div>
           </div>
@@ -478,7 +476,7 @@ if (logged_in()) {
       </div>
     </div>
   </section>
-*/?>
+
   <section id="team" class="section team-section align-center dark-text">
     <div class="container">
       <div class="section-header">
@@ -553,7 +551,7 @@ if (logged_in()) {
                   <ul class="socials-block">
                     <li><a href="mailto:bwogsland@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/wogsland" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="https://www.facebook.com/wogsland" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.github.com/wogsland" class="github" title="Github" target="_blank"><i class="fa fa-github"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/wogsland" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
                   </ul>
                 </div>

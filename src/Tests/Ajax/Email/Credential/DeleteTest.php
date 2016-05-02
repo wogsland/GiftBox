@@ -1,7 +1,7 @@
 <?php
 namespace Sizzle\Tests\Ajax\Email\Credential;
 
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     EmailCredential
 };
 
@@ -13,7 +13,7 @@ use \Sizzle\Database\{
 class DeleteTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Bacon\Tests\Traits\User;
 
     /**
      * Requires the util.php file of functions

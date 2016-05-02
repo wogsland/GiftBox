@@ -1,10 +1,10 @@
 <?php
-use \Sizzle\{
-    HTML,
+use \Sizzle\Bacon\{
+    Text\HTML,
     Database\RecruitingToken,
     Database\User
 };
-use Sizzle\Service\MandrillEmail;
+use Sizzle\Bacon\Service\MandrillEmail;
 
 if (logged_in() && is_admin()) {
     $vars = ['user_id', 'token_id'];
@@ -26,7 +26,7 @@ if (logged_in() && is_admin()) {
             $imageFile = $token->screenshot();
             if ($imageFile) {
                 $message .= '<a href="'.APP_URL.'token/recruiting/'.$token->long_id.'">';
-                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=200 />';
+                $message .= '<img src="'.APP_URL.'uploads/'.str_replace(' ', '%20', $imageFile).'" width=700 />';
                 $message .= '</a>';
             }
             $message .='<br /><br />Share on ';

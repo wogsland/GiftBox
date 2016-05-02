@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     City,
     RecruitingCompany,
     RecruitingCompanyImage,
@@ -12,7 +12,7 @@ use \Sizzle\Database\{
 $token = new RecruitingToken($long_id, 'long_id');
 //print_r($token);
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
-$city = new City($token->city_id ?? '');
+$city = ($token->getCities())[0] ?? new City();
 //print_r($city);
 $image = $token->screenshot();
 if ($image !== false) {
@@ -30,13 +30,13 @@ if (isset($token->id)) {
     <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <meta name="description" content="S!zzle Recruiting Token">
+      <meta name="description" content="<?=$token->job_title?>">
       <meta name="keywords" content="">
       <meta name="author" content="S!zzle">
     </head>
     <body>
       <h1>
-        <?= $token->job_title?>
+        <?=$token->job_title?>
         <?= isset($company->name) ? '- '.$company->name : '' ?>
         - <?= $city->name?>
       </h1>

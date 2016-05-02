@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     es = require('event-stream'),
     replace = require('gulp-replace'),
-    config = require('../config');
+    config = require('../config'),
+    fs = require('fs');
 
 gulp.task(
     'polybuild',
@@ -25,7 +26,7 @@ gulp.task(
 
         // Markup processing
         not_js
-            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/dist/$2.min.js"'))
+            .pipe(replace(/(")([^"]+)(\.build\.js")/g, '"/js/dist/$2.min.js?v='+fs.readFileSync('version', {encoding: 'utf8'}).trim()+'"'))
             .pipe(replace('"fonts/', '"/fonts/'))
             .pipe(gulp.dest(config.output.polybuild));
 

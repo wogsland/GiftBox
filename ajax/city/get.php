@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Database\City;
+use Sizzle\Bacon\Database\City;
 
 // collect id
 $id = (int) ($endpoint_parts[4] ?? 0);

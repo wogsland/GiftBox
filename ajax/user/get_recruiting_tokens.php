@@ -1,6 +1,6 @@
 <?php
-use \Sizzle\{
-    HTML,
+use \Sizzle\Bacon\{
+    Text\HTML,
     Database\RecruitingToken
 };
 

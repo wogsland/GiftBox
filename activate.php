@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\{
+use \Sizzle\Bacon\Database\{
     RecruitingToken,
     User,
     UserMilestone
@@ -19,7 +19,7 @@ if (isset($user->email_address) && $user->activate($_GET['key'] ?? '')) {
 switch ($type) {
     case 'emailtoken':
     // set session variable of user token
-    $tokens = RecruitingToken::getUserTokens($user_id);
+    $tokens = (new RecruitingToken())->getUserTokens($user->id);
     $_SESSION['first_token'] = $tokens[0]->long_id;
     $message = 'Please create a password to view your token.';
     case 'nopassword':

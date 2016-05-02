@@ -38,12 +38,26 @@ function loginFacebook() {
   });
 }
 
+function getQueryParameters(str) {
+  // Taken from https://github.com/youbastard/jquery.getQueryParameters/blob/master/qp.js
+  return (str || document.location.search).replace(/(^\?)/, '').split("&").map(function (n) {
+    return n = n.split("="), this[n[0]] = n[1], this;
+  }.bind({}))[0];
+}
+
 function processLogin(userInfo) {
   loginInfo("Logging into S!zzle.  Please wait...");
   $('.dialog-button-center').addClass("disable-clicks");
   $.post("/ajax/login", userInfo, function(data, textStatus, jqXHR){
     if(data.status === "SUCCESS") {
-      loginSuccess(data.app_root+'profile');
+      var redirect = decodeURIComponent(getQueryParameters()['next']);
+      if (redirect == 'undefined') {
+        redirect = "profile";
+      }
+      if (redirect.startsWith('/')) {
+        redirect = redirect.slice(1);
+      }
+      loginSuccess(data.app_root+redirect);
     } else if (data.status === "ERROR") {
       loginError("Login failed. "+data.message);
     }  else {

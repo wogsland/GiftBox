@@ -1,7 +1,7 @@
 <?php
-use \Sizzle\{
+use \Sizzle\Bacon\{
     Database\City,
-    HTML,
+    Text\HTML,
     Database\RecruitingCompany,
     Database\RecruitingToken,
     Database\UserMilestone
@@ -24,13 +24,6 @@ if (logged_in()) {
             $token->user_id = $user_id;
         }
 
-        // Polymer bug: convert the city name into an id
-        if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
-            $token->city_id = City::getIdFromName($token->city_id);
-        } else {
-            $token->city_id = null;
-        }
-
         // Generate a long_id if this is a new token
         if (!isset($_POST['long_id']) || strlen($_POST['long_id']) == 0) {
             do {
@@ -46,6 +39,15 @@ if (logged_in()) {
 
         // save it
         $token->save();
+
+        // need to make sure token has an id before saving cities
+        foreach ($token->getCities() as $currentCity) {
+            $token->removeCity($currentCity->id);
+        }
+        if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
+            // Polymer bug: convert the city name into an id
+            $token->addCity((new City())->getIdFromName($_POST['city_id']));
+        }
 
         $response['status'] = "SUCCESS";
         $response['id'] = $token->id;

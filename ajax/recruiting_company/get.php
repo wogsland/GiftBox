@@ -1,5 +1,5 @@
 <?php
-use Sizzle\Database\RecruitingCompany;
+use Sizzle\Bacon\Database\RecruitingCompany;
 
 $success = 'false';
 $data = '';

@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingTokenImage;
+use \Sizzle\Bacon\Database\RecruitingTokenImage;
 
 if (logged_in() && is_admin()) {
     $vars = ['fileName', 'tokenId'];

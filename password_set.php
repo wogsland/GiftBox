@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\User;
+use \Sizzle\Bacon\Database\User;
 
 define('TITLE', 'S!zzle - Set Password');
 require __DIR__.'/header.php';
@@ -51,7 +51,7 @@ require __DIR__.'/header.php';
         $.post(
           '/ajax/nopassword/',
           {
-            activation_key: '<?php echo $key ?? '';?>',
+            activation_key: '<?php echo $_SESSION['activation_key'] ?? '';?>',
             password: password1
           },
           function (data) {

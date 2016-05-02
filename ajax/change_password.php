@@ -1,4 +1,8 @@
 <?php
+use \Sizzle\Bacon\Database\{
+    User
+};
+
 $message = "Unable to change password at this time.";
 if (logged_in()) {
     if (isset($_POST['user_id'], $_POST['new_password'])) {

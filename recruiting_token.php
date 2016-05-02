@@ -40,6 +40,9 @@
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <!-- Masonry -->
+    <script src="components/masonry/dist/masonry.pkgd.min.js" async></script>
+
     <!-- Polymer -->
     <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <link rel="import" href="components/paper-dialog/paper-dialog.html">
@@ -66,17 +69,7 @@
             <div class="fit layout vertical center-center">
               <div class="fit layout horizontal large">
 
-                <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-                  <header class="mdl-layout__header">
-                    <!-- Top row, always visible -->
-                    <div class="mdl-layout__header-row">
-                      <span class="mdl-layout-title long-title">
-                        <i class="gt-info-title"></i>
-                      </span>
-                      <div class="mdl-layout-spacer"></div>
-                    </div>
-                  </header>
-
+                <div class="mdl-layout mdl-js-layout">
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
                       <div id="ordered-sections">
@@ -221,6 +214,58 @@
                           </div>
                         </section>
                       </div>
+
+                      <section id="doublet-location-section" class="section--center mdl-grid mdl-grid--no-spacing" on-click="_onLocationClick">
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="doublet-location-image-grid-1">
+                          <div class="mdl-cell no-margin" id="doublet-location-main-image-1">
+                            <div id="doublet-supporting-location-1">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location-1">Location One</i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mdl-layout-spacer">
+                        </div>
+                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="doublet-location-image-grid-2">
+                          <div class="mdl-cell no-margin" id="doublet-location-main-image-2">
+                            <div id="doublet-supporting-location-2">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location-2">Location Two</i>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+
+                      <section id="triplet-location-section" class="section--center mdl-grid mdl-grid--no-spacing" on-click="_onLocationClick">
+                        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-1">
+                          <div class="mdl-cell no-margin" id="triplet-location-main-image-1">
+                            <div id="triplet-supporting-location-1">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location-1">Location One</i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mdl-layout-spacer">
+                        </div>
+                        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-2">
+                          <div class="mdl-cell no-margin" id="triplet-location-main-image-2">
+                            <div id="triplet-supporting-location-2">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location-2">Location Two</i>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mdl-layout-spacer">
+                        </div>
+                        <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-3">
+                          <div class="mdl-cell no-margin" id="triplet-location-main-image-3">
+                            <div id="triplet-supporting-location-3">
+                              <i class="material-icons">room</i>
+                              <i class="gt-info-location-3">Location Three</i>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
 
                       <section class="section--center mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">

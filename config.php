@@ -4,13 +4,13 @@ use Monolog\{
     Handler\SlackHandler,
     Logger
 };
-use Sizzle\{
+use Sizzle\Bacon\{
     Connection,
     Database\WebRequest
 };
 
-// set relesae version
-define('VERSION', '1.10.8');
+// set release version in /version file
+define('VERSION', trim(file_get_contents(__DIR__.'/version')));
 
 // autoload classes
 require_once __DIR__.'/src/autoload.php';

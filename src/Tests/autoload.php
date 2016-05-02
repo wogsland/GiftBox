@@ -10,7 +10,7 @@ require_once __DIR__.'/../../vendor/autoload.php';
 require_once __DIR__.'/../autoload.php';
 
 // connect to database
-new Sizzle\Connection();
+new Sizzle\Bacon\Connection();
 
 //load functions
 require_once __DIR__.'/../../util.php';
@@ -34,7 +34,7 @@ function getTestCookie($admin = false)
         $query = "INSERT INTO user (first_name, last_name, email_address, password)
                   VALUES ('fake', 'user', '$username', '$hash')";
     }
-    $id = insert($query);
+    execute_query($query);
     $ch = curl_init(TEST_URL . '/ajax/login');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POST, 1);

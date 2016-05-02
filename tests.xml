@@ -2,7 +2,10 @@
 <phpunit>
   <testsuites>
     <testsuite name="S!zzle">
-      <directory>src/tests</directory>
+      <directory>src/Tests</directory>
+    </testsuite>
+    <testsuite name="Bacon">
+      <directory>src/Bacon/Tests</directory>
     </testsuite>
     <testsuite name="S!zzle SDK">
       <directory>vendor/gosizzle/sizzle-php-sdk/src/tests</directory>

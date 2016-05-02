@@ -1,5 +1,5 @@
 <?php
-use \Sizzle\Database\RecruitingToken;
+use \Sizzle\Bacon\Database\RecruitingToken;
 use \Stripe\{
     Charge,
     Stripe
@@ -8,7 +8,7 @@ use \Stripe\{
 date_default_timezone_set('America/Chicago');
 
 if (!logged_in()) {
-    header('Location: '.'/');
+  login_then_redirect_back_here();
 }
 
 define('TITLE', 'S!zzle - Payments');
