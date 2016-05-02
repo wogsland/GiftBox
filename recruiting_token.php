@@ -40,6 +40,9 @@
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <!-- Masonry -->
+    <script src="components/masonry/dist/masonry.pkgd.min.js" async></script>
+
     <!-- Polymer -->
     <script src="components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <link rel="import" href="components/paper-dialog/paper-dialog.html">
