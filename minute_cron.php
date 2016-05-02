@@ -12,5 +12,5 @@ new Sizzle\Bacon\Connection($mysqli);
 $result = execute_query("SELECT `branch` FROM `deploy` WHERE `needed`='Yes' AND `branch`='develop'");
 if($row = $result->fetch_assoc()) {
     exec(__DIR__.'/deploy.sh');
-    update("UPDATE `deploy` SET `needed`='No' WHERE `branch`='develop'");
+    execute_query("UPDATE `deploy` SET `needed`='No' WHERE `branch`='develop'");
 }

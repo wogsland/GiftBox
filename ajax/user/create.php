@@ -1,5 +1,6 @@
 <?php
 use \Sizzle\Bacon\{
+    Connection,
     Database\User,
     Database\UserMilestone,
     Service\PipedriveClient
@@ -25,13 +26,13 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
         $user->save();
 
         // transfer token if it exists
-        $rows_affected = update(
+        execute_query(
             "UPDATE recruiting_token
              SET user_id = ".$user->id."
              WHERE long_id = '$token_id'
              LIMIT 1"
         );
-        if (1 == $rows_affected) {
+        if (1 == Connection::$mysqli->affected_rows) {
             $type = 'emailtoken';
         } else {
             $type = 'nopassword';

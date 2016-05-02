@@ -1,4 +1,4 @@
 <?php
 if (ENVIRONMENT == 'development') {
-    update("UPDATE `deploy` SET `needed`='Yes' WHERE `branch`='develop'");
+    execute_query("UPDATE `deploy` SET `needed`='Yes' WHERE `branch`='develop'");
 }
