@@ -819,6 +819,8 @@ function updateSectionPositions() {
       'recruiter-section',
       'social-section',
       'location-section',
+      'doublet-location-section',
+      'triplet-location-section',
       {
         id: 'job-description-section',
         position: 1
@@ -848,7 +850,7 @@ function updateSectionPositions() {
  * @returns {boolean}
  */
 function elementIsPresent(section_el) {
-  return (section_el != null) && (section_el.style.display !== 'none');
+  return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
 /**
