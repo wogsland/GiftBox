@@ -54,8 +54,8 @@ require __DIR__.'/header.php';
           <span class="Plan__features"><b>1-10</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
-          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-133">$133<sup>33</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-year">$1200<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-midlevel">$150<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-1500">$1500<sup>00</sup> / Year<div>2 month savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
@@ -66,8 +66,8 @@ require __DIR__.'/header.php';
           <span class="Plan__features"><b>11-50</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
-          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-midlevel">$150<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-midlevel-year">$1,350<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-upperlevel">$275<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-2750">$2,750<sup>00</sup> / Year<div>2 month savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
@@ -78,8 +78,8 @@ require __DIR__.'/header.php';
           <span class="Plan__features"><b>51-199</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
-          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-upperlevel">$275<sup>00</sup> / Month</button>
-          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-upperlevel-year">$2,475<sup>00</sup> / Year<div>25% savings!</div></button>
+          <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-600">$600<sup>00</sup> / Month</button>
+          <button class="Plan__callToAction" type="button" data-billing="y" data-plan="recruiting-6000">$6,000<sup>00</sup> / Year<div>2 month savings!</div></button>
         </div>
       </div>
     </li><li class="Pricing__option">
