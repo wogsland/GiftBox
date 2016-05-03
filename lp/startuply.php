@@ -404,6 +404,7 @@ if (logged_in()) {
           <!-- need to invert the colors, needs to be light grey not pressed, dark grey when pressed -->
           <li><a href="http://www.eremedia.com/ere/lever-raises-more-money/" target="_blank"><img src="assets2/img/logos/Pub-Sizzle-ERE.png" alt="ERE" /></a></li>
           <li><a href="http://recruitingdaily.com/media-candidate-response-rate/" target="_blank"><img src="assets2/img/logos/Pub-Sizzle-RD.png" alt="RD" /></a></li>
+          <li><a href="http://fistfuloftalent.com/2016/05/tim-sackett-talks-t3-pimp-job-descriptions.html" target="_blank"><img src="assets2/img/logos/Pub-Sizzle-FOT.png" alt="FOT" /></a></li>
         </ul>
       </div>
     </div>
