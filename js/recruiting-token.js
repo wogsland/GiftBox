@@ -847,8 +847,6 @@ function updateSectionPositions() {
     }
   });
 
-  console.log(ordered)
-
   ordered.forEach(wrapper.appendChild.bind(wrapper));
 }
 
