@@ -796,6 +796,9 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#recruiter-section').remove();
   }
   updateSectionPositions();
+  setTimeout(updateSectionPositions, 500);//for slow ajax responses
+  setTimeout(updateSectionPositions, 1000);//for slow ajax responses
+  setTimeout(updateSectionPositions, 5000);//for slow ajax responses
 }
 
 /**
@@ -817,13 +820,16 @@ function updateSectionPositions() {
     [
       'company-section',
       'recruiter-section',
-      'social-section',
       'location-section',
       'doublet-location-section',
       'triplet-location-section',
       {
         id: 'job-description-section',
         position: 1
+      },
+      {
+        id: 'social-section',
+        position: 2
       }
     ];
 
@@ -840,6 +846,8 @@ function updateSectionPositions() {
       ordered = ordered.slice(0, position).concat(section_el).concat(ordered.slice(position));
     }
   });
+
+  console.log(ordered)
 
   ordered.forEach(wrapper.appendChild.bind(wrapper));
 }
