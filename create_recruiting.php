@@ -335,7 +335,7 @@ require __DIR__.'/header.php';
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="validation-dialog" modal>
-        <h2>Problem...</h2>
+        <h2 style="margin-bottom:20px">Save Failed</h2>
         <p id="validation-message">No message supplied</p>
         <div class="buttons">
             <paper-button dialog-dismiss class="dialog-button" id="validation-button">OK</paper-button>
