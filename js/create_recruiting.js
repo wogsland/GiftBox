@@ -383,7 +383,7 @@ function saveRecruitingToken(preview) {
   var serializedForm = null;
   if ($('#recruiting-token-form')[0].validate()) {
     linkifyText();
-    setStatus("Saving token...");
+    //setStatus("Saving token...");
     serializedForm = document.getElementById("recruiting-token-form").serialize();
     if ('true' == $('#recruiter-profile').attr('aria-checked')) {
       serializedForm.recruiter_profile = 'Y';
@@ -415,7 +415,8 @@ function saveRecruitingToken(preview) {
           }
           window.location = '/create_company?id='+companyId+'&referrer='+data.long_id;
         } else if (data.status === "ERROR") {
-          alert(data.message);
+          $('#validation-message').html(data.message);
+          $('#validation-dialog')[0].open();
         }  else {
           alert(textStatus);
         }

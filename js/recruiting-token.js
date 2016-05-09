@@ -89,43 +89,9 @@ scope._onImagesClick = function(event) {
   $.post(url, '', function(data) {
     if (data.data !== undefined) {
       assetHost = getAssetHost();
-      i=1;
-      images = '';
-      $.each(data.data, function(index, value){
-        if (i%3 === 1) {
-          images += '<section class="section--center mdl-grid mdl-grid--no-spacing">';
-        }
-        images += '<div id="image-'+i+'" class="demo-card-image mdl-card mdl-cell--4-col-phone mdl-shadow--2dp">';
-        images += '<div class="mdl-card__title mdl-card--expand"></div>';
-        images += '</div>';
-        if (i%3 === 0) {
-          images += '</section>';
-        } else {
-          images += '<div class="mdl-layout-spacer"></div>';
-        }
-        i++;
-      });
-      if ((i-1)%3 !== 0) {
-        // the last line has only one or two images
-        images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
-        images += '<div class="mdl-card__title mdl-card--expand"></div>';
-        images += '</div>';
-        if ((i-1)%3 === 1) {
-          // the last line has only one image
-          images += '<div class="demo-card-image mdl-card mdl-cell--4-col-phone">';
-          images += '<div class="mdl-card__title mdl-card--expand"></div>';
-          images += '</div>';
-        }
-        images += '</section>';
-      }
-      images += '<section class="section--footer mdl-color--light-grey mdl-grid">';
-      images += '</section>';
-      $('#images-container').html(images);
-      i=1;
-      $.each(data.data, function(index, value){
-        $('#image-' + i).css('background',"url('"+assetHost+"/"+value.file_name+"') center / cover");
-        i++;
-      });
+      images = getImagesGrid(data.data, assetHost);
+      $('#images-container').empty().append(images);
+
     }
   });
 };
@@ -508,7 +474,7 @@ function handleAjaxCityGet(data) {
       if (imgData.data !== undefined && imgData.data.length > 0) {
         image_file = imgData.data[0];
         $('#location-back').css('background',"url('"+image_file+"') center / cover");
-        $('#location-main-image').css('background',"url('"+image_file+"') center / cover");
+        $('#location-main-image').css('background',"#ffffff url('"+image_file+"') center / cover");
         $('#location-image-grid').css('width','100%');
         if (imgData.data.length < 4) {
           // display 1 image
@@ -567,6 +533,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
 }
 
 /**
@@ -586,7 +553,6 @@ function handleAjaxRecruitingTokenGet(data) {
     tokenTitle = data.data.job_title;
   }
   $('title').text(tokenTitle);
-  $('.gt-info-title').text(tokenTitle);
   $('.gt-info-jobtitle').text(data.data.job_title);
   $('.gt-info-overview').html(data.data.job_description);
   var overview = '' + data.data.job_description;
@@ -829,6 +795,68 @@ function handleAjaxRecruitingTokenGet(data) {
   } else {
     $('#recruiter-section').remove();
   }
+  updateSectionPositions();
+  setTimeout(updateSectionPositions, 500);//for slow ajax responses
+  setTimeout(updateSectionPositions, 1000);//for slow ajax responses
+  setTimeout(updateSectionPositions, 5000);//for slow ajax responses
+}
+
+/**
+ * Responsible for ordering the page sections after populating the token.
+ */
+function updateSectionPositions() {
+  var wrapper = document.getElementById('ordered-sections'),
+      ordered = [],
+    /*
+     * sectionPriority
+     *
+     * Each member of this semi-ordered array is either an id or an object with an id and a position.
+     * If the member is an id, or if position === false, then the section will appear in order.
+     * If the member has an explicit position, then the section will be placed in that position, and the rest of
+     * the sections will flow around it.
+     *
+     */
+    sectionPriority =
+    [
+      'company-section',
+      'recruiter-section',
+      'location-section',
+      'doublet-location-section',
+      'triplet-location-section',
+      {
+        id: 'job-description-section',
+        position: 1
+      },
+      {
+        id: 'social-section',
+        position: 2
+      }
+    ];
+
+  sectionPriority.forEach(function(section) {
+    var position = typeof section === 'string' ? false : section.position,
+        section_id = typeof section === 'string' ? section : section.id,
+        section_el = document.getElementById(section_id);
+
+    if (elementIsPresent(section_el) === false) return;
+
+    if (position === false) {
+      ordered.push(section_el);
+    } else {
+      ordered = ordered.slice(0, position).concat(section_el).concat(ordered.slice(position));
+    }
+  });
+
+  ordered.forEach(wrapper.appendChild.bind(wrapper));
+}
+
+/**
+ * Determines whether an element is present and visible on the page
+ * @param {HTMLElement} section_el
+ * @returns {boolean}
+ */
+function elementIsPresent(section_el) {
+  return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
 /**
@@ -853,4 +881,54 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
       }
     }
   }
+}
+
+function getImagesGrid(data, assetHost) {
+  var container = $('<ul class="ImageGrid ImageGrid is-loading">'),
+      loaded = 0,
+      onComplete = function () {
+        loaded++;
+        container.masonry('layout');
+        if (loaded === data.length) {
+          container.removeClass('is-loading');
+        }
+      };
+
+  container.append('<li class="ImageGrid-itemSizer">');
+  data.forEach(function (img) {
+    container.append(getImageGridItem(img, assetHost, onComplete));
+  });
+
+  container.masonry({
+    itemSelector: '.ImageGrid-item',
+    columnWidth: '.ImageGrid-itemSizer',
+    percentPosition: true,
+    transitionDuration: '0.1s'
+  });
+
+  return container;
+}
+
+function getImageGridItem(imgData, assetHost, cb) {
+  var preload = new Image(),
+      src = assetHost+'/'+imgData.file_name,
+      item = $('<li class="ImageGrid-item is-loading">'),
+      img = $('<img ' +
+          'id="image-' + imgData.id + '" ' +
+          'class="ImageGrid-image" ' +
+          'data-src="'+src+'"/>');
+
+  preload.onload = function() {
+    cb();
+    item.removeClass('is-loading');
+    img.attr('src', img.data('src'));
+    item.append(img);
+  };
+  preload.onerror = function() {
+    cb();
+    item.removeClass('is-loading').addClass('is-error');
+  };
+  preload.src = src;
+
+  return item;
 }

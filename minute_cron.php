@@ -9,8 +9,11 @@ new Sizzle\Bacon\Connection($mysqli);
 
 
 // watch for autodeployment webhook from Github
-$result = execute_query("SELECT `branch` FROM `deploy` WHERE `needed`='Yes' AND `branch`='develop'");
-if($row = $result->fetch_assoc()) {
-    exec(__DIR__.'/deploy.sh');
-    update("UPDATE `deploy` SET `needed`='No' WHERE `branch`='develop'");
+$result = execute_query("SELECT `branch`, `repository` FROM `deploy` WHERE `needed`='Yes' AND `branch`='develop'");
+while ($row = $result->fetch_assoc()) {
+    $repos = ['Giftbox','Bacon'];
+    if (in_array($row['repository'], $repos)) {
+        exec(__DIR__.'/deploy.sh '.$row['repository']);
+        execute_query("UPDATE `deploy` SET `needed`='No' WHERE `branch`='develop' AND `repository`='{$row['repository']}'");
+    }
 }
