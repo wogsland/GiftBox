@@ -835,6 +835,7 @@ function updateSectionPositions() {
       'location-section',
       'doublet-location-section',
       'triplet-location-section',
+      'image-video-section',
       {
         id: 'job-description-section',
         position: 1
