@@ -548,6 +548,18 @@ function handleAjaxRecruitingTokenGet(data) {
   var tokenTitle;
   if (dataExists(data.data.company)) {
     $('.gt-info-company').text(data.data.company);
+    if (data.data.company.length > 36 && $(window).width() > 800) {
+      $('#supporting-company').css('height','100px');
+      $('#supporting-company').css('margin-top','217px');
+    } else if (data.data.company.length > 18 && $(window).width() <= 800) {
+      if (data.data.company.length > 36) {
+        $('#supporting-company').css('height','150px');
+        $('#supporting-company').css('margin-top','167px');
+      } else {
+        $('#supporting-company').css('height','100px');
+        $('#supporting-company').css('margin-top','217px');
+      }
+    }
     tokenTitle = data.data.company+' - '+data.data.job_title;
   } else {
     tokenTitle = data.data.job_title;
