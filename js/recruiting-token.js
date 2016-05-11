@@ -141,10 +141,20 @@ scope._onVideosClick = function(event) {
 /**
  * Opens the interest dialog
  */
-scope._onInterestClick = function(event) {
-  $('.interest-dialog').each(function (i, dialog){
-    dialog.open();
-  });
+scope._onInterestClick0 = function (event) {
+  $('.interest-dialog')[0].open();
+};
+scope._onInterestClick1= function (event) {
+  $('.interest-dialog')[1].open();
+};
+scope._onInterestClick2 = function (event) {
+  $('.interest-dialog')[2].open();
+};
+scope._onInterestClick3 = function (event) {
+  $('.interest-dialog')[3].open();
+};
+scope._onInterestClick4 = function (event) {
+  $('.interest-dialog')[4].open();
 };
 
 /**
