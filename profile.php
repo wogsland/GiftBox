@@ -36,7 +36,7 @@ require __DIR__.'/header.php';
      ACCOUNT PROFILE
 ============================== -->
 
-<script type="text/javascript" src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
+<script type="text/javascript" src="/js/md5.js"></script>
 <script type="text/javascript" src="/app/models/model.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/AccountStore.js?v=<?php echo VERSION;?>"></script>
 
