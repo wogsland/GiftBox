@@ -14,11 +14,11 @@ Once you have it in installed, cd to the project directory and run
 which will create everything you need in the untracked vendor directory.
 
 [npm](https://www.npmjs.com/) is used for the build process.
-Once you have it in installed, cd to the project directory andrun
+Once you have it in installed, cd to the project directory and run
 
     npm install
 
-Fork (Bacon)[https://github.com/GiveToken/Bacon] and add it to your `src` directory:
+Fork [Bacon](https://github.com/GiveToken/Bacon) and add it to your `src` directory:
 
     cd src
     git clone https://github.com/<your username>/Bacon.git
@@ -27,7 +27,7 @@ Download and install [MySQL workbench](https://www.mysql.com/products/workbench/
 To create a local instance of the giftbox database, use MySQL Workbench's Schema
 Transfer Wizard with the development credentials you were provided.
 
-You'll also need to
+From the project root directory,
 
     cp config/credentials.php.example config/credentials.php
 
@@ -141,7 +141,7 @@ as well as make any database changes required for the release.
 
 ## <a id="frontend"></a>Frontend Direction
 
-_NB: This part is a work in progress_
+_NB: Here below is a work in progress_
 
 ### Directory structure
 Javascript source exists in `/js`.
