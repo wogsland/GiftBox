@@ -9,6 +9,8 @@
 
 ## <a id="set-up"></a>Set Up
 
+PHP 7 is required and can be found [here](http://php-osx.liip.ch/).
+
 Fork this repo and clone it to `/Library/Webserver/Documents/` or your favorite
 location. The add the remote
 
@@ -32,9 +34,12 @@ And add (Bacon)[https://github.com/GiveToken/Bacon] to your `src` directory afte
 
     cd src
     git clone https://github.com/<your username>/Bacon.git
+    cd Bacon
+    git remote add github https://github.com/GiveToken/Bacon.git
 
 Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
-To create a local instance of the S!zzle database, use MySQL Workbench's Schema Transfer Wizard.
+To create a local instance of the S!zzle database, use MySQL Workbench's Schema
+Transfer Wizard with the development credentials you were provided.
 
 You'll also need to
 
@@ -67,6 +72,16 @@ Then modify `/etc/hosts` to include
 
     127.0.0.1       gosizzle.local
     127.0.0.1       api.gosizzle.local
+
+### Build Script
+The build script (`build.sh`) runs unit tests, warns you of any untracked or
+uncommited files, minifies JavaScript & CSS, and Polybuilds the token.
+The full set of options is available in the help menu
+
+    ./build.sh -h
+
+The important caveat is that this script was written on OSX and may not work on
+Cygwin or your favorite Windows version of Linux.
 
 ### Inessentials - you may not need to do these
 
@@ -133,32 +148,16 @@ For JavaScript testing, run the following command
 
 ## <a id="deployment"></a>Deployment
 
-#### `develop` -> staging site 
-
-#### `master` -> production
-
-### Build Script
-The build script (`build.sh`) runs unit tests, warns you of any untracked or
-uncommited files, minifies JavaScript & CSS, and Polybuilds the token.
-The full set of options is available in the help menu
-
-    ./build.sh -h
-
-The important caveat is that this script was written on OSX and may not work on
-Cygwin or your favorite Windows version of Linux.
-
-### <a id="deploy-staging"></a>Deploy to Staging
-
-Any push to `develop` is automagically pulled onto the staging server except
+Any push to the GiveToken `develop` is automagically pulled onto the staging server except
 during the QA period for new releases.
 
-### <a id="deploy-production"></a>Deploy to Production
-
-Log into the production webserver and
+For porduction deployment, log into the webserver and
 
     git branch YYYYMMDD.backup
     git pull origin master
     composer install
+
+as well as make any database changes required for the release.
 
 ## <a id="frontend"></a>Frontend Direction
 

@@ -53,14 +53,3 @@ echo ""
 
 # see what's changed
 git status
-
-# push it up to github
-if [ "$#" -gt 0 ]
-then
-  echo ""
-  case $1 in
-#    "master") do nothing
-    "staging") git push github develop ;;
-#    *) do nothing ;;
-  esac
-fi
