@@ -247,6 +247,20 @@ $(document).ready(function(){
       });
     }
   });
+
+  $(document).click(function(e){
+    console.log(e)
+    url = '/ajax/recruiting_token/click' + path[4];
+    $.post(url,
+      {'clickData':JSON.stringify(e, function( key, value) {
+        if( key == 'circularReference1' || key == 'circularReference2') {
+          return value.id;
+        } else {
+          return value;
+        }
+      })}
+    );
+  });
 });
 
 /**
