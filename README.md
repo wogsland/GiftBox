@@ -1,44 +1,30 @@
 # GoSizzle.io
 
-## Table of Contents
-1. [Set Up](#set-up)
-1. [Branching Strategy](#branching)
-1. [Frontend Direction](#frontend)
-1. [Testing](#testing)
-1. [Deployment](#deployment)
-
 ## <a id="set-up"></a>Set Up
-
 PHP 7 is required and can be found [here](http://php-osx.liip.ch/).
 
 Fork this repo and clone it to `/Library/Webserver/Documents/` or your favorite
-location. The add the remote
+location.
 
-    git remote add github https://github.com/GiveToken/GiftBox.git
-
-[Composer](https://getcomposer.org/) is the PHP package manager used to bring in
-3rd party PHP code. Once you have it in installed, cd to the project directory and
-run
+[Composer](https://getcomposer.org/) is the PHP package manager.
+Once you have it in installed, cd to the project directory and run
 
     composer install
 
 which will create everything you need in the untracked vendor directory.
 
 [npm](https://www.npmjs.com/) is used for the build process.
-Once you have it in installed, cd to the project directory and
-run
+Once you have it in installed, cd to the project directory andrun
 
     npm install
 
-And add (Bacon)[https://github.com/GiveToken/Bacon] to your `src` directory after forking it:
+Fork (Bacon)[https://github.com/GiveToken/Bacon] and add it to your `src` directory:
 
     cd src
     git clone https://github.com/<your username>/Bacon.git
-    cd Bacon
-    git remote add github https://github.com/GiveToken/Bacon.git
 
 Download and install [MySQL workbench](https://www.mysql.com/products/workbench/).
-To create a local instance of the S!zzle database, use MySQL Workbench's Schema
+To create a local instance of the giftbox database, use MySQL Workbench's Schema
 Transfer Wizard with the development credentials you were provided.
 
 You'll also need to
@@ -80,9 +66,6 @@ The full set of options is available in the help menu
 
     ./build.sh -h
 
-The important caveat is that this script was written on OSX and may not work on
-Cygwin or your favorite Windows version of Linux.
-
 ### Inessentials - you may not need to do these
 
 If you'll be testing AWS, you'll need to create `~/.aws/credentials` and enter the following:
@@ -94,18 +77,15 @@ If you'll be testing AWS, you'll need to create `~/.aws/credentials` and enter t
 with your specific credentials.
 
 [Bower](http://bower.io/) is a package manager used to bring in Polymer
-components. Once you have it in installed, cd to the project directory and
-run
+components. Once you have it in installed, cd to the project directory and run
 
     bower install
 
 which will create everything you need in the untracked components directory.
 
-## <a id="branching"></a>Branching Strategy
+## <a id="branching"></a>Branching
 
-1. All code on the `master` branch will always be production-ready. If it is not production-ready it should not be on `master`
-2. The `develop` branch is not a sacred cow. It will be wise to occasionally blow away the `develop` branch and create a new one off of master.
-3. Create branches off of `develop` (except hotfixes, create those off of `master`)
+1. Create branches off of `develop` (except hotfixes, create those off of `master`)
 using the following convention:
   - `feature`, `bug`, or `hotfix`
     - `feature` is new functionality
@@ -119,9 +99,9 @@ using the following convention:
   - The GH issue number
   - dashes, never underscores
   - A meaningful and short description of the branch, generally related to the title of the GH issue
-4. Commit messages reference the issue number  
+2. Commit messages reference the issue number  
 and describe some combination of what was done, where it was done, and why.
-5. All code gets merged into `develop` & `master` via pull request (PR) after approval by the project lead.
+3. All code gets merged into `develop` & `master` via pull request (PR) after approval by the project lead.
 
 Github has a great reference for handling merge conflicts [here](https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/).
 
@@ -151,7 +131,7 @@ For JavaScript testing, run the following command
 Any push to the GiveToken `develop` is automagically pulled onto the staging server except
 during the QA period for new releases.
 
-For porduction deployment, log into the webserver and
+For production deployment, log into the webserver and
 
     git branch YYYYMMDD.backup
     git pull origin master
