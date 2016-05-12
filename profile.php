@@ -41,7 +41,6 @@ require __DIR__.'/header.php';
 <script type="text/jsx" src="/app/account/AccountStore.js?v=<?php echo VERSION;?>"></script>
 
 <!-- React Components -->
-<script type="text/jsx" src="/app/account/profile.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/info.js?v=<?php echo VERSION;?>"></script>
 <script type="text/jsx" src="/app/account/index.js?v=<?php echo VERSION;?>"></script>
 
