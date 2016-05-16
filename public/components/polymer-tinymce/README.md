@@ -4,8 +4,8 @@ A tinymce HTML Editor as an Polymer Element.
 
 ```
 <polymer-tinymce id="editor"
-	  	tinytoolbar="insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image" 
-	  	tinyplugins='["advlist autolink lists link image charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table contextmenu paste"]'
+      tinytoolbar="insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image" 
+      tinyplugins='["advlist autolink lists link image charmap print preview anchor","searchreplace visualblocks code fullscreen","insertdatetime media table contextmenu paste"]'
 ></polymer-tinymce>
 ```
 
@@ -18,11 +18,11 @@ Get and set content:
         is: "demo-element",
 
         getContent:function(){
-        	this.$.contentInput.value = this.$.editor.getContent();
+          this.$.contentInput.value = this.$.editor.getContent();
         },
 
         setContent:function(){
-        	this.$.editor.setContent(this.$.contentInput.value);
+          this.$.editor.setContent(this.$.contentInput.value);
         }
 
       });
@@ -30,3 +30,5 @@ Get and set content:
 ```
 
 ![Demo Pic](http://www.synappses.com/wp-content/uploads/2015/06/tinymceDemo.png "Polymer-Tinymce")
+
+[Demo](http://jaysunsyn.github.io/polymer-tinymce)

@@ -3,40 +3,37 @@
   "authors": [
     "Jalal Fathi <jfathi.mail@gmail.com>"
   ],
+  "description": "A Polymer integration of the tinymce HTML editor.",
   "keywords": [
+    "web-component",
     "web-components",
     "html",
-    "editor",
-    "text",
-    "Polymer"
+    "editor"
   ],
-  "description": "A Polymer integration of the tinymce HTML editor.",
   "main": "polymer-tinymce.html",
-  "license": "MIT",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/<USERNAME>/seed-element/",
   "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "/.*",
+    "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0",
-    "import-tinymce": "*"
+    "polymer": "Polymer/polymer#^1.1.0",
+    "import-tinymce": "*",
+    "paper-button": "PolymerElements/paper-button#~1.0.11",
+    "paper-input": "PolymerElements/paper-input#~1.1.7"
   },
   "devDependencies": {
-    "web-component-tester": "*",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
   },
-  "homepage": "https://github.com/JaySunSyn/polymer-tinymce",
-  "_release": "c3a9203862",
+  "_release": "9fa99aa637",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "c3a9203862764ba9dad0358334a6b97fe984447d"
+    "commit": "9fa99aa6370d2a94d230a9f1b5d32edce7b6dab0"
   },
-  "_source": "git://github.com/JaySunSyn/polymer-tinymce.git",
+  "_source": "https://github.com/JaySunSyn/polymer-tinymce.git",
   "_target": "*",
-  "_originalSource": "polymer-tinymce",
-  "_direct": true
+  "_originalSource": "polymer-tinymce"
 }

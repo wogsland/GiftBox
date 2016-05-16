@@ -1,6 +1,6 @@
 {
   "name": "GiftBox",
-  "homepage": "https://github.com/wogsland/GiftBox",
+  "homepage": "https://github.com/GiveToken/GiftBox",
   "authors": [
     "Bradley Wogsland <bradley@wogsland.org>",
     "Gary Peters <gpeters@gosizzle.io>",
@@ -21,13 +21,13 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
-    "iron-input": "PolymerElements/iron-input#~1.0.6",
+    "iron-input": "PolymerElements/iron-input#^1.0.6",
     "neon-animation": "PolymerElements/neon-animation#~1.0.7",
     "google-map": "GoogleWebComponents/google-map#~1.1.4",
-    "paper-elements": "PolymerElements/paper-elements#~1.0.5",
-    "iron-form": "PolymerElements/iron-form#~1.0.11",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.5",
+    "iron-form": "PolymerElements/iron-form#^1.0.11",
     "Autolinker.js": "~0.22.0",
-    "paper-checkbox": "PolymerElements/paper-checkbox#~1.1.3",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^1.1.3",
     "masonry": "^4.1.0"
   }
 }

@@ -141,10 +141,20 @@ scope._onVideosClick = function(event) {
 /**
  * Opens the interest dialog
  */
-scope._onInterestClick = function(event) {
-  $('.interest-dialog').each(function (i, dialog){
-    dialog.open();
-  });
+scope._onInterestClick0 = function (event) {
+  $('.interest-dialog')[0].open();
+};
+scope._onInterestClick1= function (event) {
+  $('.interest-dialog')[1].open();
+};
+scope._onInterestClick2 = function (event) {
+  $('.interest-dialog')[2].open();
+};
+scope._onInterestClick3 = function (event) {
+  $('.interest-dialog')[3].open();
+};
+scope._onInterestClick4 = function (event) {
+  $('.interest-dialog')[4].open();
 };
 
 /**
@@ -548,6 +558,18 @@ function handleAjaxRecruitingTokenGet(data) {
   var tokenTitle;
   if (dataExists(data.data.company)) {
     $('.gt-info-company').text(data.data.company);
+    if (data.data.company.length > 36 && $(window).width() > 800) {
+      $('#supporting-company').css('height','100px');
+      $('#supporting-company').css('margin-top','217px');
+    } else if (data.data.company.length > 18 && $(window).width() <= 800) {
+      if (data.data.company.length > 36) {
+        $('#supporting-company').css('height','150px');
+        $('#supporting-company').css('margin-top','167px');
+      } else {
+        $('#supporting-company').css('height','100px');
+        $('#supporting-company').css('margin-top','217px');
+      }
+    }
     tokenTitle = data.data.company+' - '+data.data.job_title;
   } else {
     tokenTitle = data.data.job_title;
@@ -823,6 +845,7 @@ function updateSectionPositions() {
       'location-section',
       'doublet-location-section',
       'triplet-location-section',
+      'image-video-section',
       {
         id: 'job-description-section',
         position: 1

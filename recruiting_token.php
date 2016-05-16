@@ -265,28 +265,28 @@
                             </div>
                           </div>
                         </section>
-                      </div>
 
-                      <section class="section--center mdl-grid mdl-grid--no-spacing">
-                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
-                          <div id="supporting-images">
-                            <i class="material-icons">image</i> IMAGES
+                        <section class="section--center mdl-grid mdl-grid--no-spacing" id="image-video-section">
+                          <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
+                            <div id="supporting-images">
+                              <i class="material-icons">image</i> IMAGES
+                            </div>
                           </div>
-                        </div>
-                        <div class="mdl-layout-spacer">
-                        </div>
-                        <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="videos-frontpage" on-click="_onVideosClick">
-                          <div id="supporting-videos">
-                            <i class="material-icons">videocam</i> VIDEOS
+                          <div class="mdl-layout-spacer">
                           </div>
-                        </div>
-                      </section>
+                          <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="videos-frontpage" on-click="_onVideosClick">
+                            <div id="supporting-videos">
+                              <i class="material-icons">videocam</i> VIDEOS
+                            </div>
+                          </div>
+                        </section>
+                      </div>
 
                       <section class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
                   </main>
-                  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+                  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick0">
                     <i class="material-icons interest-thumb">thumb_up</i>
                   </button>
                   <paper-dialog class="interest-dialog" modal>
@@ -330,7 +330,7 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick1">
                 <i class="material-icons">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
@@ -371,7 +371,7 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick2">
                 <i class="material-icons">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
@@ -412,7 +412,7 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick3">
                 <i class="material-icons">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
@@ -453,7 +453,7 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick4">
                 <i class="material-icons">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>

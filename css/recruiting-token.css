@@ -292,9 +292,9 @@ i.big-icon {
 }
 i.plus-icon--overlay {
   font-size:100px;
-  position: absolute;
-  top: 230px;
-  left: 700px;
+  position: relative;
+  top: -110px;
+  left: 57px;
   color:white;
 }
 .recruiter-profile-option, .job-description-option {
@@ -354,6 +354,7 @@ i.plus-icon--overlay {
 }
 .gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg, .gt-info-company, .gt-info-jobtitle, .gt-info-title {
   font-style:normal;
+  line-height:100%;
 }
 #read-more {
   text-decoration: none;
