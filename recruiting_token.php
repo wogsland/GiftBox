@@ -312,6 +312,12 @@
                   </div>
                   <div class="buttons">
                     <paper-button
+                      class="apply-button"
+                      on-click="_applyNow"
+                      hidden>
+                      Apply Now
+                    </paper-button>
+                    <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
@@ -352,6 +358,12 @@
                     </paper-input>
                   </div>
                   <div class="buttons">
+                    <paper-button
+                      class="apply-button"
+                      on-click="_applyNow"
+                      hidden>
+                      Apply Now
+                    </paper-button>
                     <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">
@@ -394,6 +406,12 @@
                   </div>
                   <div class="buttons">
                     <paper-button
+                      class="apply-button"
+                      on-click="_applyNow"
+                      hidden>
+                      Apply Now
+                    </paper-button>
+                    <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
@@ -435,6 +453,12 @@
                   </div>
                   <div class="buttons">
                     <paper-button
+                      class="apply-button"
+                      on-click="_applyNow"
+                      hidden>
+                      Apply Now
+                    </paper-button>
+                    <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
@@ -475,6 +499,12 @@
                     </paper-input>
                   </div>
                   <div class="buttons">
+                    <paper-button
+                      class="apply-button"
+                      on-click="_applyNow"
+                      hidden>
+                      Apply Now
+                    </paper-button>
                     <paper-button
                       class="submit-interest-button"
                       on-click="_submitInterest">

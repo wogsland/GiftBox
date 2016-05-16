@@ -199,19 +199,50 @@ scope._submitInterest = function (event) {
   event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
+    var response = $('#interest-response')[0].selectedItem.value;
     url = '/ajax/recruiting_token_response/create' + path[4];
     url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
-    url += '/' + $('#interest-response')[0].selectedItem.value;
+    url += '/' + response;
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
-        $('.interest-form').text('Thanks for your interest!');
-        $('.submit-interest-button').remove();
-        $('.dismiss-interest-button').text('DISMISS');
+        if (response == 'yes' || response == 'maybe') {
+          // look for application link
+          applicationLink = 'http://google.com';
+
+          if ('' !== applicationLink) {
+            $('.interest-form').text('Would you like to submit an application?');
+            $('.interest-form').css('margin-bottom','30px');
+            $('.submit-interest-button').remove();
+            $('.apply-button').removeAttr('hidden');
+          } else {
+            $('.interest-form').text('Thanks for you interest!');
+            $('.submit-interest-button').remove();
+            $('.dismiss-interest-button').text('DISMISS');
+          }
+        } else {
+          $('.interest-form').text('Thanks for telling us!');
+          $('.submit-interest-button').remove();
+          $('.dismiss-interest-button').text('DISMISS');
+        }
         $('.interest-fab').remove();
       } else {
         $('.submit-interest-button').removeClass('disable-clicks');
       }
     },'json');
+  }
+};
+
+/**
+ * Forwards the user to the application page
+ */
+var applicationLink = '';
+scope._applyNow = function (event) {
+  if ('' !== applicationLink) {
+    window.location.href = applicationLink;
+  } else {
+    $('.apply-button').remove();
+    $('.interest-form').text('An error has occured forwarding you to the application.');
+    $('.dismiss-interest-button').text('DISMISS');
   }
 };
 
@@ -223,6 +254,16 @@ scope._closeInterestDialog = function (event) {
     dialog.close();
   });
 };
+
+/**
+ * Closes the apply dialog
+ */
+scope._closeApplyDialog = function (event) {
+  $('.apply-dialog').each(function (i, dialog){
+    dialog.close();
+  });
+};
+
 
 /**
  * Navigates back to the main page
