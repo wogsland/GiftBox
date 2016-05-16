@@ -730,32 +730,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                       </section>
                     </div>
                   </main>
-                  <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick0">
-                    <i class="material-icons interest-thumb">thumb_up</i>
-                  </button>
-                  <paper-dialog class="interest-dialog" modal="">
-                      <div class="interest-form">
-                        <center><h2>Interested in this job?</h2></center>
-                        <paper-radio-group selected="Yes" id="interest-response">
-                          <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br>
-                          <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br>
-                          <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
-                        </paper-radio-group>
-                        <paper-input type="email" class="email-paper-input" label="email address" autofocus="" error-message="Please input a valid email" required="">
-                        </paper-input>
-                      </div>
-                      <div class="buttons">
-                        <paper-button class="submit-interest-button" on-click="_submitInterest">
-                          Submit
-                        </paper-button>
-                        <paper-button class="dismiss-interest-button" dialog-dismiss="" on-click="_closeInterestDialog">
-                          Cancel
-                        </paper-button>
-                      </div>
-                  </paper-dialog>
-                  
                 </div>
               </div>
+            </div>
+            <div>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick0">
+                <i class="material-icons interest-thumb">thumb_up</i>
+              </button>
+              <paper-dialog class="interest-dialog" modal="">
+                  <div class="interest-form">
+                    <center><h2>Interested in this job?</h2></center>
+                    <paper-radio-group selected="Yes" id="interest-response">
+                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br>
+                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br>
+                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                    </paper-radio-group>
+                    <paper-input type="email" class="email-paper-input" label="email address" autofocus="" error-message="Please input a valid email" required="">
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button class="submit-interest-button" on-click="_submitInterest">
+                      Submit
+                    </paper-button>
+                    <paper-button class="dismiss-interest-button" dialog-dismiss="" on-click="_closeInterestDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </x-cards-list>
           <location-x-card>
