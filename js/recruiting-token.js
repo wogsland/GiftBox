@@ -207,18 +207,26 @@ scope._submitInterest = function (event) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
           // look for application link
-          applicationLink = 'http://google.com';
-
-          if ('' !== applicationLink) {
-            $('.interest-form').text('Would you like to submit an application?');
-            $('.interest-form').css('margin-bottom','30px');
-            $('.submit-interest-button').remove();
-            $('.apply-button').removeAttr('hidden');
-          } else {
-            $('.interest-form').text('Thanks for you interest!');
-            $('.submit-interest-button').remove();
-            $('.dismiss-interest-button').text('DISMISS');
-          }
+          $.post(
+            '/ajax/recruiting_token/get_apply_link' + path[4],
+            '',
+            function(data) {
+              if (data.data !== undefined) {
+                applicationLink = data.data;
+              }
+              if ('' !== applicationLink) {
+                $('.interest-form').text('Would you like to submit an application?');
+                $('.interest-form').css('margin-bottom','30px');
+                $('.submit-interest-button').remove();
+                $('.apply-button').removeAttr('hidden');
+              } else {
+                $('.interest-form').text('Thanks for you interest!');
+                $('.submit-interest-button').remove();
+                $('.dismiss-interest-button').text('DISMISS');
+              }
+            },
+            'json'
+          );
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
