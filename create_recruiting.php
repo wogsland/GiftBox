@@ -259,6 +259,7 @@ require __DIR__.'/header.php';
                         <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required ?? '')); ?>
                         <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities ?? '')); ?>
                         <?php paper_textarea('Perks', 'perks', HTML::from($token->perks ?? '')); ?>
+                        <?php paper_text('Link to Apply', 'apply-link', ($token->apply_link ?? '')); ?>
                     </div>
                 </paper-card>
                 <?php if(is_admin()) { ?>
