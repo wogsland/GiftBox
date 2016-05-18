@@ -250,8 +250,6 @@ require __DIR__.'/header.php';
                         name="city_id">
                         <iron-icon icon="arrow-drop-down" id="city-dropdown-button" suffix></iron-icon>
                       </paper-input>
-                      <paper-menu id="city-menu">
-                      </paper-menu>
                     </div>
                 </paper-card>
                 <paper-card id="basic-info" heading="Additional Info">
@@ -405,18 +403,20 @@ require __DIR__.'/header.php';
           {'typed':$('#city-id').val()},
           function (data) {
             if (data.success == 'true') {
-              menuItems = '';
+              $('#city-menu').remove()
+              menuItems = '<paper-menu id="city-menu">';
               $.each(data.data, function(index, city){
                 menuItems += '<paper-item id="'+city.id+'">'+city.name+'</paper-item>';
               });
-              $('#city-menu').html(menuItems);
-              $('#city-menu').children('paper-item').each(function(index, item){
-                $(this).on('click',function(){
+              menuItems += '</paper-menu>';
+              $(menuItems).insertAfter('#city-id');
+              $('#city-menu').show()
+              $('#city-menu').children().children('paper-item').each(function(index, item){
+                $(item).on('click',function(){
                   $('#city-id').val($(this).html().trim())
                   $('#city-menu').hide()
                 });
               })
-              $('#city-menu').show()
             } else {
               $('#city-menu').hide()
             }
