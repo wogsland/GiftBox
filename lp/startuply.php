@@ -133,7 +133,7 @@ if (logged_in()) {
         <div class="tab-pane active" id="first-tab-alt">
           <div class="section-content row">
             <div class="col-sm-6 pull-right animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
-              <img src="assets2/img/features/PHONE_ONE_Cropped.jpg" class="img-responsive pull-right" alt="process 2" />
+              <img src="assets2/img/features/PHONE_ONE_Cropped_Exact.png" class="img-responsive pull-right" alt="process 2" />
             </div>
             <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInLeft">
               <br/><br/>
