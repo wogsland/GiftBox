@@ -206,27 +206,9 @@ scope._submitInterest = function (event) {
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
-          // look for application link
-          $.post(
-            '/ajax/recruiting_token/get_apply_link' + path[4],
-            '',
-            function(data) {
-              if (data.data !== undefined) {
-                applicationLink = data.data;
-              }
-              if ('' !== applicationLink) {
-                $('.interest-form').text('Would you like to submit an application?');
-                $('.interest-form').css('margin-bottom','30px');
-                $('.submit-interest-button').remove();
-                $('.apply-button').removeAttr('hidden');
-              } else {
-                $('.interest-form').text('Thanks for you interest!');
-                $('.submit-interest-button').remove();
-                $('.dismiss-interest-button').text('DISMISS');
-              }
-            },
-            'json'
-          );
+          $('.interest-form').text('Thanks for you interest!');
+          $('.submit-interest-button').remove();
+          $('.dismiss-interest-button').text('DISMISS');
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -340,6 +322,22 @@ function loadDataAndPopulateToken() {
     });
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
+    $.post(
+      '/ajax/recruiting_token/get_apply_link' + path[4],
+      '',
+      function(data) {
+        if (data.data !== undefined) {
+          applicationLink = data.data;
+        }
+        if ('' !== applicationLink) {
+          $('.submit-interest-button').remove();
+          $('.apply-button').removeAttr('hidden');
+          $('.apply-button').text('APPLY');
+          $('.apply-button').removeClass('apply-button');
+        }
+      },
+      'json'
+    );
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
