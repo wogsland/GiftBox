@@ -160,7 +160,8 @@ scope._onInterestClick4 = function (event) {
 /**
  * Submits interest info
  */
-scope._submitInterest = function (event) {
+scope._submitInterest = submitInterest;
+function submitInterest(event) {
   var formIndex = 0;
   var eventPath = [];
   if (event.path !== undefined) {
@@ -220,7 +221,7 @@ scope._submitInterest = function (event) {
       }
     },'json');
   }
-};
+}
 
 /**
  * Forwards the user to the application page
@@ -228,6 +229,9 @@ scope._submitInterest = function (event) {
 var applicationLink = '';
 scope._applyNow = function (event) {
   if ('' !== applicationLink) {
+    if ($('.email-paper-input').length) {
+      submitInterest(event);
+    }
     window.location.href = applicationLink;
   } else {
     $('.apply-button').remove();
