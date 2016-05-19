@@ -479,3 +479,8 @@ i.plus-icon--overlay {
     width: 25%;
   }
 }
+
+.apply-button {
+  background-color: rgb(44,152,240);
+  color: white;
+}

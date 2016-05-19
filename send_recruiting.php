@@ -180,7 +180,7 @@ require __DIR__.'/header.php';
                 id="download-qr-code-button"
                 style="margin-left:0px;"
                 raised
-                onclick=null">
+                onclick="null">
                 Download QR Code
                 <div id="qr-code" hidden></div></paper-button></a>
 
