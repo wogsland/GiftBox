@@ -207,9 +207,13 @@ function submitInterest(event) {
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
-          $('.interest-form').text('Thanks for you interest!');
-          $('.submit-interest-button').remove();
-          $('.dismiss-interest-button').text('DISMISS');
+          if ('' !== applicationLink) {
+            window.location.href = applicationLink;
+          } else {
+            $('.interest-form').text('Thanks for you interest!');
+            $('.submit-interest-button').remove();
+            $('.dismiss-interest-button').text('DISMISS');
+          }
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -231,8 +235,9 @@ scope._applyNow = function (event) {
   if ('' !== applicationLink) {
     if ($('.email-paper-input').length) {
       submitInterest(event);
+    } else {
+      window.location.href = applicationLink;
     }
-    window.location.href = applicationLink;
   } else {
     $('.apply-button').remove();
     $('.interest-form').text('An error has occured forwarding you to the application.');

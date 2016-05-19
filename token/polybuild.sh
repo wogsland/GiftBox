@@ -23,13 +23,11 @@ then
   echo "Polybuild finished."
   echo ""
 
-  # see what's changed
-  git status
-
   if [ "$1" = "1A" ]
   then
     mv recruiting_token.php token/1A/
     mv js/recruiting-token.js token/1A/
+    sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1A\&/g' recruiting_token.build.html
     mv recruiting_token.build.html token/1A/
     mv public/js/dist/recruiting_token.min.js token/1A/
   fi
@@ -37,7 +35,11 @@ then
   then
     mv recruiting_token.php token/1B/
     mv js/recruiting-token.js token/1B/
+    sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1B\&/g' recruiting_token.build.html
     mv recruiting_token.build.html token/1B/
     mv public/js/dist/recruiting_token.min.js token/1B/
   fi
+
+  # see what's changed
+  git status
 fi
