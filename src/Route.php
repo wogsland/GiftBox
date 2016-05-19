@@ -1,6 +1,8 @@
 <?php
 namespace Sizzle;
 
+use Sizzle\Bacon\Database\WebRequest;
+
 /**
  * This class is for routing URI requests
  */
@@ -10,19 +12,20 @@ class Route
     protected $endpointPieces;
     protected $endpointMap;
     protected $gets;
+    protected $webRequestId;
 
     /**
      * Includes appropriate file based on the provided endpoint pieces
      *
      * @param array $endpointPieces - the parsed pieces of the endpoint
      * @param array $gets           - associative array of GET variables
+     * @param array $webRequestId   - associative array of GET variables
      */
-    public function __construct(array $endpointPieces, array $gets = array())
+    public function __construct(array $endpointPieces, array $gets = array(), int $webRequestId = null)
     {
-        if (is_array($endpointPieces)) {
-            $this->endpointPieces = $endpointPieces;
-            $this->gets = $gets;
-        }
+        $this->endpointPieces = $endpointPieces;
+        $this->gets = $gets;
+        $this->webRequestId = $webRequestId;
         $this->default = __DIR__.'/../error.php';
     }
 
@@ -100,6 +103,26 @@ class Route
             case 'js':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
                     include $this->default;
+                /* EXPERIMENT 1 */
+                } elseif (
+                'dist' == $this->endpointPieces[2]
+                && 'recruiting_token.min.js' == $this->endpointPieces[3]
+                && isset($this->gets['t'])
+                ) {
+                    $filename = __DIR__.'/../token/'.$this->gets['t'].'/recruiting_token.min.js';
+                    if (file_exists($filename)) {
+                        include $filename;
+
+                        //mark the web request
+                        $webRequest = new WebRequest($this->webRequestId);
+                        $webRequest->inExperiment(
+                            (int) substr($this->gets['t'], 0, 1),
+                            substr($this->gets['t'], 1)
+                        );
+                    } else {
+                        include $this->default;
+                    }
+                /* END EXPERIMENT 1 */
                 } else {
                     switch ($this->endpointPieces[2]) {
                     default:
@@ -170,7 +193,20 @@ class Route
                         $long_id = trim($this->endpointPieces[3], '/');
                         include __DIR__.'/../token/facebookexternalhit.php';
                     } else {
-                        include __DIR__.'/../recruiting_token.build.html';
+                        /* EXPERIMENT 1 */
+                        if (rand(1,100) > 50) {
+                            include __DIR__.'/../token/1A/recruiting_token.build.html';
+                            //mark the web request
+                            $webRequest = new WebRequest($this->webRequestId);
+                            $webRequest->inExperiment(1, 'A');
+                        } else {
+                            include __DIR__.'/../token/1B/recruiting_token.build.html';
+                            //need to tag javascript min version!!!
+                            //mark the web request
+                            $webRequest = new WebRequest($this->webRequestId);
+                            $webRequest->inExperiment(1, 'A');
+                        }
+                        /* END EXPERIMENT 1 */
                     }
                 } else {
                     include $this->default;
