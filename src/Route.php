@@ -204,7 +204,7 @@ class Route
                             //need to tag javascript min version!!!
                             //mark the web request
                             $webRequest = new WebRequest($this->webRequestId);
-                            $webRequest->inExperiment(1, 'A');
+                            $webRequest->inExperiment(1, 'B');
                         }
                         /* END EXPERIMENT 1 */
                     }
