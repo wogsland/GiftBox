@@ -409,6 +409,8 @@ require __DIR__.'/header.php';
     });
   }
 
+  <?php if (is_admin()) { ?>
+
   /**
    * Opens the Upload Dialog
    */
@@ -448,41 +450,39 @@ require __DIR__.'/header.php';
       $('#upload-errors').html('Processing...');
       $('#upload-process')[0].open();
       var formData = new FormData($('#description-upload')[0]);
-      /*$.ajax({
-        url: '/ajax/email/signup/upload/',
-        type: 'post',
-        data: formData,
-        dataType: 'json',
-        headers: {
-          "X-FILENAME": $('#select-list-file').val(),
-        },
-        success: function(data, textStatus){
-          var message = data.data.message+'<br />';
-          if(data.success === 'true') {
-            $('#upload-errors').css('color','white');
-            alert('success uploda screenshot')
-          }  else {
-            if (data.data.errors.length) {
-              $('#upload-errors').css('color','red');
-              message += '<strong>Errors:</strong><br />';
-              $.each(data.data.errors, function(index, error) {
-                message += error+'<br />';
-              })
-            }
-            $('#try-again-button').removeAttr('hidden');
+      if ($('#select-list-file')[0].files[0] !== undefined) {
+        var file = $('#select-list-file')[0].files[0];
+        var reader  = new FileReader();
+        reader.fileName = '<?= $user_id.'_'.$token->id.'_'?>'+file.name;
+        reader.onloadend = function () {
+          var xhr = new XMLHttpRequest();
+          if (xhr.upload) {
+            xhr.open("POST", "/upload", true);
+            xhr.setRequestHeader("X-FILENAME", '<?= $user_id.'_'.$token->id.'_'?>'+file.name);
+            xhr.send(reader.result);
+          }
+        };
+        reader.readAsDataURL(file);
+        // save to table
+        $.post(
+          '/ajax/recruiting_token/set_screenshot',
+          {
+            'tokenId':'<?= $token->id?>',
+            'fileName':'<?= $user_id.'_'.$token->id.'_'?>'+file.name
+          },
+          function() {
+            // remove button
+            $('#screenshot').html('Screenshot has been uploaded');
+            $('#upload-errors').html('Screenshot has been uploaded');
+            $('#cancel-again-button').html('DISMISS');
             $('#cancel-again-button').removeAttr('hidden');
           }
-          $('#upload-errors').html(message);
-        },
-        //Options to tell jQuery not to process data or worry about content-type.
-        cache: false,
-        contentType: false,
-        processData: false
-      }).fail(function() {
-        $('#upload-errors').html('Uploading job description failed.');
-        $('#try-again-button').removeAttr('hidden');
-        $('#cancel-again-button').removeAttr('hidden');
-      });*/
+        ).fail(function() {
+          $('#upload-errors').html('Uploading job description failed.');
+          $('#try-again-button').removeAttr('hidden');
+          $('#cancel-again-button').removeAttr('hidden');
+        });;
+      }
     }
   }
 
@@ -509,6 +509,8 @@ require __DIR__.'/header.php';
       //}
     });
   });
+
+  <?php }?>
   </script>
 </body>
 </html>

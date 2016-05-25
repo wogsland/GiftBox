@@ -11,6 +11,10 @@ if (logged_in() && is_admin()) {
     $success = 'false';
     $data = '';
     if ($fileName != '' && $tokenId > 0) {
+        // remove existing screenshot(s)
+        (new RecruitingToken($tokenId))->removeImages();
+
+        // add new screenshot
         $id = (new RecruitingTokenImage())->create($fileName, $tokenId);
         $data = array('id'=>$id);
         $success = 'true';
