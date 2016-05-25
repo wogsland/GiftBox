@@ -1,11 +1,9 @@
 <?php
 use \Sizzle\Bacon\{
     Text\HTML,
+    Database\City,
     Database\RecruitingCompany,
     Database\RecruitingToken
-};
-use \Sizzle\Bacon\Database\{
-    City
 };
 
 if (!logged_in()) {
@@ -270,14 +268,7 @@ require __DIR__.'/header.php';
                         Show Recruiter Profile
                       </paper-checkbox>
                       </div>
-                      <?php if (isset($token->long_id) && false === $token->screenshot()) { ?>
-                      <div class="field-container" id="screenshot">
-                        <input class="hidden-file-input" type="file" id="select-image-file" />
-                        <paper-button id="screenshot-button" onclick="uploadScreenshot();">
-                          Upload Token Screenshot
-                        </paper-button>
-                      </div>
-                      <?php } elseif (isset($token->long_id)) { ?>
+                      <?php if (isset($token->long_id) && false !== $token->screenshot()) { ?>
                         <div class="field-container" id="screenshot">
                           <img src="/uploads/<?= $token->screenshot()?>" />
                         </div>
@@ -300,15 +291,6 @@ require __DIR__.'/header.php';
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button id="save-continue-button" raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
             </div>
-            <?php /*if (is_admin()) : ?>
-                <paper-card heading="Add To Library" id="add-to-library">
-                    <div id="library-button-container">
-                        <paper-button class="library-button" raised>Company</paper-button>
-                        <paper-button class="library-button" raised>Images</paper-button>
-                        <paper-button class="library-button" raised>Video</paper-button>
-                    </div>
-                </paper-card>
-            <?php endif;*/ ?>
        </div>
     </div>
 
@@ -352,45 +334,6 @@ require __DIR__.'/header.php';
     <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <?php if(is_admin()) { ?>
-        <script>
-        /**
-         * Uploads a screenshot of the token
-         */
-        function uploadScreenshot(){
-          $('#select-image-file').trigger('click');
-          $('#select-image-file:file').on('change', function() {
-            // upload image
-            if ($('#select-image-file')[0].files[0] !== undefined) {
-              var file = $('#select-image-file')[0].files[0];
-              var reader  = new FileReader();
-              reader.fileName = '<?= $user_id.'_'.$token->id.'_'?>'+file.name;
-              reader.onloadend = function () {
-                var xhr = new XMLHttpRequest();
-                if (xhr.upload) {
-                  xhr.open("POST", "/upload", true);
-                  xhr.setRequestHeader("X-FILENAME", '<?= $user_id.'_'.$token->id.'_'?>'+file.name);
-                  xhr.send(reader.result);
-                }
-              };
-              reader.readAsDataURL(file);
-              // save to table
-              $.post(
-                '/ajax/recruiting_token/set_screenshot',
-                {
-                  'tokenId':'<?= $token->id?>',
-                  'fileName':'<?= $user_id.'_'.$token->id.'_'?>'+file.name
-                },
-                function() {
-                  // remove button
-                  $('#screenshot').html('Screenshot has been uploaded');
-                }
-              );
-            }
-          });
-        }
-        </script>
-    <?php }?>
     <script>
     $( document ).ready(function() {
       $('#city-menu').hide();
