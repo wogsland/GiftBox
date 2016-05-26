@@ -62,7 +62,15 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
-  var cityId = $(event.target).attr('id').slice(-1) - 1;
+  console.log($(event.target))
+  var cityId = 0;
+  if ($('#location-section').length === 0) {
+    if ($(event.target).is('div')) {
+      cityId = $(event.target).attr('id').slice(-1) - 1;
+    } else {
+      cityId = $(event.target).parents('div').attr('id').slice(-1) - 1;
+    }
+  }
   if (isNaN(cityId)) {
     cityId = 0;
   }
