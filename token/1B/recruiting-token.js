@@ -62,7 +62,6 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
-  console.log($(event.target))
   var cityId = 0;
   if ($('#location-section').length === 0) {
     if ($(event.target).is('div')) {
