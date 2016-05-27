@@ -911,7 +911,6 @@ function handleAjaxRecruitingTokenGet(data) {
   } else {
     $('#recruiter-section').remove();
   }
-  updateSectionPositions();
   setTimeout(updateSectionPositions, 500);//for slow ajax responses
   setTimeout(updateSectionPositions, 1000);//for slow ajax responses
   setTimeout(updateSectionPositions, 5000);//for slow ajax responses
