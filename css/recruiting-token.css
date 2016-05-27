@@ -315,7 +315,7 @@ i.plus-icon--overlay {
   margin-right: 0px;
   margin-bottom: 48px;
 }
-#supporting-images, #supporting-videos, #supporting-location, #supporting-company, #doublet-supporting-location-1, #doublet-supporting-location-2, #triplet-supporting-location-1, #triplet-supporting-location-2, #triplet-supporting-location-3 {
+#supporting-images, #supporting-videos, #supporting-location, #supporting-company, #doublet-supporting-location-1, #doublet-supporting-location-2, #triplet-supporting-location-1, #triplet-supporting-location-2, #triplet-supporting-location-3, .multi-supporting-location {
   margin-top: 267px;
   height: 50px;
   padding-top: 20px;
@@ -373,7 +373,7 @@ i.plus-icon--overlay {
   height: 337px;
   width: 25%;
 }
-#doublet-location-main-image-1, #doublet-location-main-image-2, #triplet-location-main-image-1, #triplet-location-main-image-2, #triplet-location-main-image-3 {
+#doublet-location-main-image-1, #doublet-location-main-image-2, #triplet-location-main-image-1, #triplet-location-main-image-2, #triplet-location-main-image-3, .location-main-image {
   height: 337px;
   width: 100%;
 }
