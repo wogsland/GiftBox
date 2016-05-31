@@ -154,6 +154,7 @@ include __DIR__.'/../header.php';
   function fireHiddenFileInput(identifier) {
      $(identifier).trigger('click');
   }
+
   $( document ).ready(function() {
     <?php
     if (isset($_GET['action']) && 'login' == $_GET['action']) {

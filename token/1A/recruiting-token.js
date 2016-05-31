@@ -62,7 +62,14 @@ scope._onPerksClick = function(event) {
 };
 
 scope._onLocationClick = function(event) {
-  var cityId = $(event.target).attr('id').slice(-1) - 1;
+  var cityId = 0;
+  if ($('#location-section').length === 0) {
+    if ($(event.target).is('div')) {
+      cityId = $(event.target).attr('id').slice(-1) - 1;
+    } else {
+      cityId = $(event.target).parents('div').attr('id').slice(-1) - 1;
+    }
+  }
   if (isNaN(cityId)) {
     cityId = 0;
   }
@@ -783,6 +790,37 @@ function handleAjaxRecruitingTokenGet(data) {
             $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
           }
         });
+      } else if (3 < cities.length) {
+        $('#triplet-location-section').remove();
+        $('#doublet-location-section').remove();
+        var numCities = cities.length;
+        var numExtraCities = cities.length % 3;
+        var locationHTML = '';
+        cities.forEach(function(value, index){
+          if (index < numCities - numExtraCities) {
+            locationHTML += getLocationHTML(4, index, value.name);
+          } else if (numExtraCities === 2) {
+            locationHTML += getLocationHTML(6, index, value.name);
+          } else if (numExtraCities === 1) {
+            locationHTML += getLocationHTML(12, index, value.name);
+          }
+          if (index < numCities - 1) {
+            locationHTML += getSpacerHTML();
+          }
+        });
+        $('#location-section').html(locationHTML);
+        url = '/ajax/city/get_images';
+        cities.forEach(function(value, index){
+          postData = {
+            'city_id':value.id
+          };
+          $.post(url, postData, function(imgData) {
+            if (imgData.data !== undefined && imgData.data.length > 0) {
+              image_file = imgData.data[0];
+              $('#location-main-image-'+index).css('background',"url('"+image_file+"') center / cover");
+            }
+          });
+        });
       } else { // no location
         $('#triplet-location-section').remove();
         $('#doublet-location-section').remove();
@@ -866,7 +904,6 @@ function handleAjaxRecruitingTokenGet(data) {
   } else {
     $('#recruiter-section').remove();
   }
-  updateSectionPositions();
   setTimeout(updateSectionPositions, 500);//for slow ajax responses
   setTimeout(updateSectionPositions, 1000);//for slow ajax responses
   setTimeout(updateSectionPositions, 5000);//for slow ajax responses
@@ -1003,4 +1040,30 @@ function getImageGridItem(imgData, assetHost, cb) {
   preload.src = src;
 
   return item;
+}
+
+/**
+ * Returns html for a location
+ * @param {int} width - 12, 6, 4 or 3
+ * @param {int} id - the id of the location in the array of locations
+ * @param {string} locName - the name of the location in the array of locations
+ * @returns {boolean}
+ */
+function getLocationHTML(width, id, locName) {
+  var returnHTML = '<div class="mdl-card mdl-cell mdl-cell--'+width+'-col mdl-shadow--2dp link-finger"';
+  returnHTML += 'id="location-image-grid-'+id+'">';
+  returnHTML += '<div class="mdl-cell no-margin location-main-image" id="location-main-image-'+id+'">';
+  returnHTML += '<div class="multi-supporting-location" id="supporting-location-'+id+'">';
+  returnHTML += '<i class="material-icons">room</i>';
+  returnHTML += '<i class="gt-info-location-'+id+'">'+locName+'</i>';
+  returnHTML += '</div></div></div>';
+  return returnHTML;
+}
+
+/**
+ * Returns html for a spacer
+ * @returns {boolean}
+ */
+function getSpacerHTML() {
+  return '<div class="mdl-layout-spacer"></div>';
 }

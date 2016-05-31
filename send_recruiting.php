@@ -282,6 +282,9 @@ require __DIR__.'/header.php';
     <div id="right-column" class="pull-right">
       <div class="button-container">
         <paper-button raised onclick="backToCompany('<?php echo $referrer;?>', '<?php echo $recruiting_token_id;?>')">BACK</paper-button>
+        <?php if (is_admin()) { ?>
+          <paper-button raised onclick="uploadScreenshot()">ADD SCREENSHOT</paper-button>
+        <?php }?>
       </div>
     </div>
   </div>
@@ -292,6 +295,30 @@ require __DIR__.'/header.php';
           <paper-button dialog-dismiss id="ok-sent-button" hidden>OK</paper-button>
       </div>
   </paper-dialog>
+
+  <?php if (is_admin()) { ?>
+  <paper-dialog class="recruiting-dialog" id="upload-dialog" modal>
+    <h2>Upload Screenshot</h2>
+    <form id="description-upload">
+      <input class="hidden-file-input" type="file" id="select-list-file" name="listFile" hidden />
+      <paper-input id="upload-file" label="File Name" name="fileName" onclick="fireHiddenFileInput('#select-list-file')"></paper-input>
+    </form>
+    <i>Will replace existing screenshot</i>
+    <div class="">
+      <paper-button class="dialog-button" onclick="screenshotUpload()">UPLOAD</paper-button>
+      <paper-button dialog-dismiss class="dialog-button" onclick="cancelUpload()">CANCEL</paper-button>
+    </div>
+  </paper-dialog>
+
+  <paper-dialog class="recruiting-dialog" id="upload-process" modal>
+    <div id="upload-errors"></div>
+    <div class="">
+      <paper-button id="try-again-button" class="dialog-button" onclick="tryAgain()" hidden>TRY AGAIN</paper-button>
+      <paper-button id="cancel-again-button" dialog-dismiss class="dialog-button" onclick="cancelUpload()" hidden>CANCEL</paper-button>
+      <paper-button id="cancel-again-button" dialog-dismiss class="dialog-button" onclick="cancelUpload()" hidden>CANCEL</paper-button>
+    </div>
+  </paper-dialog>
+  <?php }?>
 
   <?php require_once __DIR__.'/footer.php';?>
 
@@ -381,6 +408,109 @@ require __DIR__.'/header.php';
       $('#ok-sent-button').removeAttr('hidden');
     });
   }
+
+  <?php if (is_admin()) { ?>
+
+  /**
+   * Opens the Upload Dialog
+   */
+  function uploadScreenshot() {
+    $('#upload-dialog')[0].open();
+  }
+
+  /**
+   * Closes the Upload Dialog
+   */
+  function cancelUpload() {
+    $('#upload-errors').html('');
+    $('#upload-dialog')[0].close();
+    $('#upload-process')[0].close();
+  }
+
+  /**
+   * Registers click on hidden file input.
+   *
+   * @param {String} identifier The jQuery identifier to click
+   */
+  function fireHiddenFileInput(identifier) {
+     $(identifier).trigger('click');
+  }
+
+  /**
+   * Attempts to upload the job description to the ajax endpoint & presents success or error
+   */
+  function screenshotUpload() {
+    var invalid = false;
+    if ('' == $('#upload-file').val()) {
+      $('#upload-file label').html('<font color="red">Please choose a file</font>');
+      invalid = true;
+    }
+    if (!invalid) {
+      $('#upload-dialog')[0].close();
+      $('#upload-errors').html('Processing...');
+      $('#upload-process')[0].open();
+      var formData = new FormData($('#description-upload')[0]);
+      if ($('#select-list-file')[0].files[0] !== undefined) {
+        var file = $('#select-list-file')[0].files[0];
+        var reader  = new FileReader();
+        reader.fileName = '<?= $user_id.'_'.$token->id.'_'?>'+file.name;
+        reader.onloadend = function () {
+          var xhr = new XMLHttpRequest();
+          if (xhr.upload) {
+            xhr.open("POST", "/upload", true);
+            xhr.setRequestHeader("X-FILENAME", '<?= $user_id.'_'.$token->id.'_'?>'+file.name);
+            xhr.send(reader.result);
+          }
+        };
+        reader.readAsDataURL(file);
+        // save to table
+        $.post(
+          '/ajax/recruiting_token/set_screenshot',
+          {
+            'tokenId':'<?= $token->id?>',
+            'fileName':'<?= $user_id.'_'.$token->id.'_'?>'+file.name
+          },
+          function() {
+            // remove button
+            $('#screenshot').html('Screenshot has been uploaded');
+            $('#upload-errors').html('Screenshot has been uploaded');
+            $('#cancel-again-button').html('DISMISS');
+            $('#cancel-again-button').removeAttr('hidden');
+          }
+        ).fail(function() {
+          $('#upload-errors').html('Uploading job description failed.');
+          $('#try-again-button').removeAttr('hidden');
+          $('#cancel-again-button').removeAttr('hidden');
+        });;
+      }
+    }
+  }
+
+  /**
+   * Reverts modal
+   */
+  function tryAgain() {
+    $('#upload-process')[0].close();
+    $('#upload-dialog')[0].open();
+    //$('#upload-file').val('');
+    $('#try-again-button').attr('hidden','hidden');
+    $('#cancel-again-button').attr('hidden','hidden');
+  }
+
+  $( document ).ready(function() {
+    $('#select-list-file').change(function() {
+      var filename = $('#select-list-file').val().replace('C:\\fakepath\\', '');
+      /*if ($('#select-list-file:file')[0].files[0].type !== "text/plain") {
+        $('#upload-file label').html('<font color="red">Please choose a text file</font>');
+        $('#upload-file').val('');
+      } else {*/
+        $('#upload-file label').html('File Name');
+        $('#upload-file').val(filename);
+      //}
+    });
+  });
+
+  <?php }?>
   </script>
 </body>
 </html>
