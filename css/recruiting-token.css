@@ -190,47 +190,6 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
-#interested-row {
-  margin-bottom: 0px;
-}
-.interested-button{
-  color: white;
-  position: fixed;
-  display: block;
-  bottom: 0;
-  z-index: 900;
-  padding: 0px;
-}
-#interested-disabled-button {
-  color: white;
-  left: 0;
-}
-#interested-yes-button {
-  background-color: #4CAF50;
-  right: 0;
-  margin-right: 50%;
-}
-#interested-maybe-button {
-  background-color: #FFC107;
-  right: 0;
-  margin-right: 25%;
-}
-#interested-no-button {
-  background-color: #D0021B;
-  right: 0;
-}
-#yes-submit {
-  background-color: #4CAF50;
-}
-#maybe-submit {
-  background-color: #FFC107;
-}
-#no-submit {
-  background-color: #D0021B;
-}
-.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-  padding-right: 0;
-}
 .long-title {
   padding-left: 25px;
 }
@@ -415,18 +374,6 @@ i.plus-icon--overlay {
 }
 .disable-clicks {
     pointer-events: none;
-}
-.arrow-down {
-  position: fixed;
-  right: 40px;
-  bottom: 95px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-
-  border-top: 20px solid white;
-  box-shadow: 0 16px 24px 2px
 }
 .interest-thumb {
   color: white;
