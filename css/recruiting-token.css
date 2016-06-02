@@ -375,18 +375,6 @@ i.plus-icon--overlay {
 .disable-clicks {
     pointer-events: none;
 }
-.arrow-down {
-  position: fixed;
-  right: 40px;
-  bottom: 95px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-
-  border-top: 20px solid white;
-  box-shadow: 0 16px 24px 2px
-}
 .interest-thumb {
   color: white;
 }
