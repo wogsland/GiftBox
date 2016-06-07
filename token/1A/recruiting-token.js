@@ -990,10 +990,10 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
             $('.interest-dialog').each(function (i, dialog){
               dialog.open();
             });
+            presentedInterestPopup = true;
           }
         },
         (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
-        presentedInterestPopup = true;
       }
     }
   }
