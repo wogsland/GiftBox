@@ -9,6 +9,8 @@ $id = $endpoint_parts[4] ?? '';
 
 $success = 'false';
 $allowed = 'true';
+$autoPop = 'true';
+$autoPopDelay = 10;
 $errors = [];
 if ($id != '') {
     $token = new RecruitingToken($id, 'long_id');
@@ -18,6 +20,12 @@ if ($id != '') {
             $success = 'true';
             if ('N' == $user->allow_token_responses) {
                 $allowed = 'false';
+            } else {
+                if ('N' == $token->auto_popup) {
+                    $autoPop = 'false';
+                } else {
+                    $autoPopDelay = $token->auto_popup_delay;
+                }
             }
         } else {
             $errors[] = 'Unknown token creator';
@@ -28,7 +36,11 @@ if ($id != '') {
 } else {
     $errors[] = 'Token ID required';
 }
-$data = array('allowed'=>$allowed);
+$data = array(
+    'allowed'=>$allowed,
+    'autoPop'=>$autoPop,
+    'autoPopDelay'=>$autoPopDelay
+);
 header('Content-Type: application/json');
 $result = array('success'=>$success, 'data'=>$data, 'errors'=>$errors);
 echo json_encode($result);

@@ -150,18 +150,23 @@ scope._onVideosClick = function(event) {
  */
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
+  presentedInterestPopup = true;
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
+  presentedInterestPopup = true;
 };
 
 /**
@@ -984,15 +989,17 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
   if (data.data !== undefined && data.data.allowed !== undefined) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
-    } else {
+    } else if ('true' == data.data.autoPop) {
       // display the response form once after 10 seconds
       if (!presentedInterestPopup) {
         setTimeout(function(){
-          $('.interest-dialog').each(function (i, dialog){
-            dialog.open();
-          });
+          if (!presentedInterestPopup) {
+            $('.interest-dialog').each(function (i, dialog){
+              dialog.open();
+            });
+          }
         },
-        10000);
+        (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
         presentedInterestPopup = true;
       }
     }
