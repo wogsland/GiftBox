@@ -176,7 +176,7 @@ class Route
                 include __DIR__.'/../thankyou.php';
                 break;
             case 'token':
-                $long_id = trim($this->endpointPieces[3], '/');
+                $long_id = isset($this->endpointPieces[3]) ? trim($this->endpointPieces[3], '/') : '';
                 include $this->getTokenFile();
                 break;
             case 'tokens':
@@ -324,10 +324,12 @@ class Route
                 /* EXPERIMENT 2 */
                 $long_id = trim($this->endpointPieces[3], '/');
                 $token = new RecruitingToken($long_id, 'long_id');
-                $webRequest->inExperiment(
-                    2,
-                    ('N' == $token->auto_popup ? $token->auto_popup : $token->auto_popup_delay)
-                );
+                if (isset($token->auto_popup)) {
+                    $webRequest->inExperiment(
+                        2,
+                        ('N' == $token->auto_popup ? $token->auto_popup : $token->auto_popup_delay)
+                    );
+                }
                 /* END EXPERIMENT 2 */
 
                 /* EXPERIMENT 1 */

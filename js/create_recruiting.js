@@ -1,5 +1,12 @@
 var imageType = /image.*/;
 
+function updateDelay() {
+  $('#auto-popup-delay').val($('#delay-slider').val());
+  $('#auto-popup-delay').html($('#delay-slider').val());
+}
+var scope = document.querySelector('#delay-slider');
+scope._updateDelay = updateDelay;
+
 /**
  * Creates an HTML image
  *
@@ -390,6 +397,12 @@ function saveRecruitingToken(preview) {
     } else {
       serializedForm.recruiter_profile = 'N';
     }
+    if ('true' == $('#auto-popup').attr('aria-checked')) {
+      serializedForm.auto_popup = 'Y';
+    } else {
+      serializedForm.auto_popup = 'N';
+    }
+    serializedForm.auto_popup_delay = $('#auto-popup-delay').val();
     $('#save-continue-button').addClass("disable-clicks");
     $.ajax({
       type: "POST",

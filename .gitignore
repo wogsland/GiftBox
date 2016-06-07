@@ -18,6 +18,7 @@ ehthumbs.db
 # NPM #
 #######
 /node_modules
+npm-debug.log
 
 # Testing #
 ###########
