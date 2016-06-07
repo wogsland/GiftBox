@@ -1,11 +1,12 @@
 var imageType = /image.*/;
 
+/**
+ * Updates delay time from slider
+ */
 function updateDelay() {
   $('#auto-popup-delay').val($('#delay-slider').val());
   $('#auto-popup-delay').html($('#delay-slider').val());
 }
-var scope = document.querySelector('#delay-slider');
-scope._updateDelay = updateDelay;
 
 /**
  * Creates an HTML image
