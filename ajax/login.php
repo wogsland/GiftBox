@@ -1,5 +1,6 @@
 <?php
 use \Sizzle\Bacon\Database\{
+    Organization,
     User,
     UserMilestone
 };
@@ -49,7 +50,13 @@ if ((new User())->exists($email)) {
             $_SESSION['app_root'] = '/';
             $_SESSION['app_url'] = APP_URL;
             $_SESSION['email'] = $email;
-            $_SESSION['stripe_id'] = $user->stripe_id;
+            if (isset($user->stripe_id)) {
+                $_SESSION['stripe_id'] = $user->stripe_id;
+            } elseif (isset($user->organization_id)) {
+                $org = new Organization($user->organization_id);
+                $paying_user = new User($org->paying_user ?? NULL);
+                $_SESSION['stripe_id'] = $paying_user->stripe_id ?? NULL;
+            }
             $UserMilestone = new UserMilestone($user->id, 'Log In');
         }
     } else {
