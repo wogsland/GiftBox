@@ -327,7 +327,7 @@ class Route
                 if (isset($token->auto_popup)) {
                     $webRequest->inExperiment(
                         2,
-                        ('N' == $token->auto_popup ? $token->auto_popup : $token->auto_popup_delay)
+                        ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay)
                     );
                 }
                 /* END EXPERIMENT 2 */
