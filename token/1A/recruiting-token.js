@@ -1141,6 +1141,7 @@ function getImageGridItem(imgData, assetHost, cb) {
       img = $('<img ' +
           'id="image-' + imgData.id + '" ' +
           'class="ImageGrid-image" ' +
+          'onclick="displayPreview(this)" ' +
           'data-src="'+src+'"/>');
 
   preload.onload = function() {
@@ -1156,6 +1157,18 @@ function getImageGridItem(imgData, assetHost, cb) {
   preload.src = src;
 
   return item;
+}
+
+function displayPreview(self) {
+  var test = '<div class="preview preview-image-container">';
+  test += '<img class="preview preview-image" src="' + self.src + '">';
+  test += '</img></div>';
+
+  $(document.body).append(test);
+  $(document.body).find('.preview').bind('click.preview', function () {
+    $('.preview-image-container').remove();
+    $('.preview').unbind('click.preview');
+  });
 }
 
 /**

@@ -1160,8 +1160,21 @@ function getImageGridItem(imgData, assetHost, cb) {
     item.removeClass('is-loading').addClass('is-error');
   };
   preload.src = src;
+  preload.onclick = function () {
+    $(this).append(previewHtml(this.src));
+    $(this).find('.preview').bind('click.preview', function () {
+      $('.preview-image-container').remove();
+      $('.preview').unbind('click.preview');
+    })
+  };
 
   return item;
+}
+
+function previewHTML(src) {
+  var returnHTML = '<div class="preview preview-image-container">';
+  returnHTML += '<img class="preview preview-image" src="' + src + '">';
+  returnHTML += '</img></div>';
 }
 
 /**
