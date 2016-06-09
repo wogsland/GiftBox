@@ -404,6 +404,11 @@ function saveRecruitingToken(preview) {
       serializedForm.auto_popup = 'N';
     }
     serializedForm.auto_popup_delay = $('#auto-popup-delay').val();
+    if ('true' == $('#collect-name').attr('aria-checked')) {
+      serializedForm.collect_name = 'Y';
+    } else {
+      serializedForm.collect_name = 'N';
+    }
     $('#save-continue-button').addClass("disable-clicks");
     $.ajax({
       type: "POST",

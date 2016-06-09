@@ -11,6 +11,7 @@ $success = 'false';
 $allowed = 'true';
 $autoPop = 'true';
 $autoPopDelay = 10;
+$collectName = 'true';
 $errors = [];
 if ($id != '') {
     $token = new RecruitingToken($id, 'long_id');
@@ -26,6 +27,9 @@ if ($id != '') {
                 } else {
                     $autoPopDelay = $token->auto_popup_delay;
                 }
+                if ('N' == $token->collect_name) {
+                    $collectName = 'false';
+                }
             }
         } else {
             $errors[] = 'Unknown token creator';
@@ -39,7 +43,8 @@ if ($id != '') {
 $data = array(
     'allowed'=>$allowed,
     'autoPop'=>$autoPop,
-    'autoPopDelay'=>$autoPopDelay
+    'autoPopDelay'=>$autoPopDelay,
+    'collectName'=>$collectName
 );
 header('Content-Type: application/json');
 $result = array('success'=>$success, 'data'=>$data, 'errors'=>$errors);

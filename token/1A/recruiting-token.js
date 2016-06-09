@@ -978,6 +978,7 @@ function elementIsPresent(section_el) {
   return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
+var addedName = false;
 /**
  * Handles the data return from /ajax/recruiting_token/get_responses_allowed
  *
@@ -987,18 +988,31 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
   if (data.data !== undefined && data.data.allowed !== undefined) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
-    } else if ('true' == data.data.autoPop) {
-      // display the response form once after 10 seconds
-      if (!presentedInterestPopup) {
-        setTimeout(function(){
-          if (!presentedInterestPopup) {
-            $('.interest-dialog').each(function (i, dialog){
-              dialog.open();
-            });
-            presentedInterestPopup = true;
-          }
-        },
-        (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
+    } else {
+      if (!addedName && 'true' == data.data.collectName) {
+        var nameInput = '<paper-input';
+        nameInput += '  class="name-paper-input"';
+        nameInput += '  label="name"';
+        nameInput += '  autofocus';
+        nameInput += '  error-message="Please input your name"';
+        nameInput += '  required>';
+        nameInput += '</paper-input>';
+        $('.email-paper-input').after(nameInput);
+        addedName = true;
+      }
+      if ('true' == data.data.autoPop) {
+        // display the response form once after 10 seconds
+        if (!presentedInterestPopup) {
+          setTimeout(function(){
+            if (!presentedInterestPopup) {
+              $('.interest-dialog').each(function (i, dialog){
+                dialog.open();
+              });
+              presentedInterestPopup = true;
+            }
+          },
+          (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
+        }
       }
     }
   }
