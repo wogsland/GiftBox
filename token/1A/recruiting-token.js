@@ -403,6 +403,11 @@ function loadDataAndPopulateToken() {
           );
         }
       } else {
+        // expands main image for small screens
+        if ($(window).width() < 739) {
+          $('#location-secondary-images').remove();
+          $('#location-main-image').css('width','100%');
+        }
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
         $('#images-frontpage').addClass('mdl-cell--12-col');
