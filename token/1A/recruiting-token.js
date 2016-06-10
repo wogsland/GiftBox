@@ -1046,10 +1046,10 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
       if ('true' == data.data.autoPop) {
         // display the response form once after 10 seconds
         if (!presentedInterestPopup) {
-          disableBackButton();
           setTimeout(function(){
             if (!presentedInterestPopup) {
               $('.interest-dialog').each(function (i, dialog){
+                disableBackButton();
                 dialog.open();
                 openedInterestPopup = true;
               });
