@@ -308,7 +308,34 @@ $(document).ready(function(){
       });
     }
   });
+
+  var elapsed = 0;
+  closeInterestDialog();
+  setInterval(function() {
+    if (elapsed <= 50) {
+      if ($('.iron-overlay-backdrop-0').length === 0) {
+        $('.interest-dialog').each(function(i, dialog) {
+          dialog.close();
+        });
+      }
+      elapsed++;
+    } else {
+      clearInterval(this);
+    }
+  }, 1000);
 });
+
+/**
+ * Closes dialog box on click (iOS patch)
+ */
+function closeInterestDialog() {
+  $(document).not('.interest-fab').click(function() {
+    $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+      $(this).remove();
+    });
+  });
+}
 
 /**
  * Handle loading the token data and putting it where it should go
