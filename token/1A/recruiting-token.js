@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var openedInterestPopup = false;
 var cities = [];
 
 scope._onTrack = function(event) {
@@ -151,22 +152,32 @@ scope._onVideosClick = function(event) {
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 
 /**
@@ -175,6 +186,8 @@ scope._onInterestClick4 = function (event) {
 scope._submitInterest = function (event) {
   var formIndex = 0;
   var eventPath = [];
+  openedInterestPopup = false;
+  enableBackButton();
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
@@ -275,6 +288,8 @@ scope._applyNow = function (event) {
 scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
+    openedInterestPopup = false;
+    enableBackButton();
   });
 };
 
@@ -292,6 +307,11 @@ scope._closeApplyDialog = function (event) {
  * Navigates back to the main page
  */
 scope._onBackClick = function(event) {
+  if (openedInterestPopup) {
+    // removes functionality of back button when
+    // the interest dialog is opened
+    return;
+  }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
@@ -311,7 +331,30 @@ $(document).ready(function(){
       });
     }
   });
+
+  // BACK button support for iOS devices
+  $('.dismiss-interest-button, .submit-interest-button').click(function() {
+    enableBackButton();
+  });
 });
+
+/**
+ * Disables BACK button
+ */
+function disableBackButton() {
+  $('.back-button').addClass('mdl-button--disabled');
+  $('.back-button-lower').addClass('mdl-button--disabled');
+  $('.back-button-lower-right').addClass('mdl-button--disabled');
+}
+
+/**
+ * Enables BACK button
+ */
+function enableBackButton() {
+  $('.back-button').removeClass('mdl-button--disabled');
+  $('.back-button-lower').removeClass('mdl-button--disabled');
+  $('.back-button-lower-right').removeClass('mdl-button--disabled');
+}
 
 /**
  * Handle loading the token data and putting it where it should go
@@ -1009,7 +1052,9 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
           setTimeout(function(){
             if (!presentedInterestPopup) {
               $('.interest-dialog').each(function (i, dialog){
+                disableBackButton();
                 dialog.open();
+                openedInterestPopup = true;
               });
               presentedInterestPopup = true;
             }
