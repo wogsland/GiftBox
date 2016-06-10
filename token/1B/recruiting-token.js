@@ -1053,6 +1053,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
         if (!presentedInterestPopup) {
           setTimeout(function(){
             if (!presentedInterestPopup) {
+              disableBackButton();
               $('.interest-dialog').each(function (i, dialog){
                 dialog.open();
                 openedInterestPopup = true;
