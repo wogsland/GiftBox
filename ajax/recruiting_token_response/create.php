@@ -9,7 +9,7 @@ use Sizzle\Bacon\Service\MandrillEmail;
 $recruiting_token_id = $endpoint_parts[4] ?? '';
 $email = urldecode($endpoint_parts[5] ?? '');
 $response = ucfirst(strtolower($endpoint_parts[6] ?? ''));
-$name = ucfirst(strtolower($endpoint_parts[7] ?? ''));
+$name = urldecode($endpoint_parts[7] ?? '');
 $cookie = $_COOKIE['visitor'] ?? '';
 
 $success = 'false';
