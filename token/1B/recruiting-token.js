@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var openedInterestPopup = false;
 var cities = [];
 
 scope._onTrack = function(event) {
@@ -151,22 +152,32 @@ scope._onVideosClick = function(event) {
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
   presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 
 /**
@@ -176,6 +187,8 @@ scope._submitInterest = submitInterest;
 function submitInterest(event) {
   var formIndex = 0;
   var eventPath = [];
+  openedInterestPopup = false;
+  enableBackButton();
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
@@ -216,6 +229,9 @@ function submitInterest(event) {
     url = '/ajax/recruiting_token_response/create' + path[4];
     url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
     url += '/' + response;
+    if ($('.name-paper-input').length) {
+      url += '/' + encodeURIComponent($('.name-paper-input')[formIndex].value);
+    }
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
@@ -263,6 +279,8 @@ scope._applyNow = function (event) {
 scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
+    openedInterestPopup = false;
+    enableBackButton();
   });
 };
 
@@ -280,6 +298,11 @@ scope._closeApplyDialog = function (event) {
  * Navigates back to the main page
  */
 scope._onBackClick = function(event) {
+  if (openedInterestPopup) {
+    // removes functionality of back button when
+    // the interest dialog is opened
+    return;
+  }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
@@ -298,6 +321,11 @@ $(document).ready(function(){
         dialog.close();
       });
     }
+  });
+
+  // BACK button support for iOS devices
+  $('.dismiss-interest-button, .submit-interest-button').click(function() {
+    enableBackButton();
   });
 
   var elapsed = 0;
@@ -326,6 +354,24 @@ function closeInterestDialog() {
       $(this).remove();
     });
   });
+}
+
+/**
+ * Disables BACK button
+ */
+function disableBackButton() {
+  $('.back-button').addClass('mdl-button--disabled');
+  $('.back-button-lower').addClass('mdl-button--disabled');
+  $('.back-button-lower-right').addClass('mdl-button--disabled');
+}
+
+/**
+ * Enables BACK button
+ */
+function enableBackButton() {
+  $('.back-button').removeClass('mdl-button--disabled');
+  $('.back-button-lower').removeClass('mdl-button--disabled');
+  $('.back-button-lower-right').removeClass('mdl-button--disabled');
 }
 
 /**
@@ -1040,7 +1086,9 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
           setTimeout(function(){
             if (!presentedInterestPopup) {
               $('.interest-dialog').each(function (i, dialog){
+                disableBackButton();
                 dialog.open();
+                openedInterestPopup = true;
               });
               presentedInterestPopup = true;
             }
