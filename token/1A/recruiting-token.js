@@ -339,6 +339,7 @@ $(document).ready(function(){
  * Disables BACK button
  */
 function disableBackButton() {
+  $('.back-button').addClass('mdl-button--disabled');
   $('.back-button-lower').addClass('mdl-button--disabled');
   $('.back-button-lower-right').addClass('mdl-button--disabled');
 }
@@ -347,6 +348,7 @@ function disableBackButton() {
  * Enables BACK button
  */
 function enableBackButton() {
+  $('.back-button').removeClass('mdl-button--disabled');
   $('.back-button-lower').removeClass('mdl-button--disabled');
   $('.back-button-lower-right').removeClass('mdl-button--disabled');
 }
