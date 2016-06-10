@@ -319,6 +319,11 @@ $(document).ready(function(){
       });
     }
   });
+
+  // BACK button support for iOS devices
+  $('.dismiss-interest-button, .submit-interest-button').click(function() {
+    enableBackButton();
+  });
 });
 
 /**
@@ -326,6 +331,7 @@ $(document).ready(function(){
  */
 function disableBackButton() {
   $('.back-button-lower').addClass('mdl-button--disabled');
+  $('.back-button-lower-right').addClass('mdl-button--disabled');
 }
 
 /**
@@ -333,6 +339,7 @@ function disableBackButton() {
  */
 function enableBackButton() {
   $('.back-button-lower').removeClass('mdl-button--disabled');
+  $('.back-button-lower-right').removeClass('mdl-button--disabled');
 }
 
 /**
