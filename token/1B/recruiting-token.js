@@ -229,6 +229,9 @@ function submitInterest(event) {
     url = '/ajax/recruiting_token_response/create' + path[4];
     url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
     url += '/' + response;
+    if ($('.name-paper-input').length) {
+      url += '/' + encodeURIComponent($('.name-paper-input')[formIndex].value);
+    }
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
