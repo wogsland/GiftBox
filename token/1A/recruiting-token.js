@@ -330,6 +330,8 @@ $(document).ready(function(){
       $('.interest-dialog').each(function (i, dialog){
         dialog.close();
       });
+      openedInterestPopup = false;
+      enableBackButton();
     }
   });
 
