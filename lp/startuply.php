@@ -35,7 +35,6 @@ if (logged_in()) {
   <style>
   .recruiting-dialog {
     width: 400px;
-    height: 250px;
     padding-left: 25px;
     padding-right: 25px;
   }
