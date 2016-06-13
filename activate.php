@@ -1,5 +1,6 @@
 <?php
 use \Sizzle\Bacon\Database\{
+    Organization,
     RecruitingToken,
     User,
     UserMilestone
@@ -34,7 +35,13 @@ switch ($type) {
     $_SESSION['app_root'] = '/';
     $_SESSION['app_url'] = APP_URL;
     $_SESSION['email'] = $user->email_address;
-    $_SESSION['stripe_id'] = $user->stripe_id;
+    if (isset($user->stripe_id)) {
+        $_SESSION['stripe_id'] = $user->stripe_id;
+    } elseif (isset($user->organization_id)) {
+        $org = new Organization($user->organization_id);
+        $paying_user = new User($org->paying_user ?? NULL);
+        $_SESSION['stripe_id'] = $paying_user->stripe_id ?? NULL;
+    }
     $UserMilestone = new UserMilestone($user->id, 'Log In');
     default:
     header('Location: '.'/'.'?action=login');

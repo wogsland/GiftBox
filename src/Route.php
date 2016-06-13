@@ -1,7 +1,10 @@
 <?php
 namespace Sizzle;
 
-use Sizzle\Bacon\Database\WebRequest;
+use Sizzle\Bacon\Database\{
+    RecruitingToken,
+    WebRequest
+};
 
 /**
  * This class is for routing URI requests
@@ -173,44 +176,8 @@ class Route
                 include __DIR__.'/../thankyou.php';
                 break;
             case 'token':
-                $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-                if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
-                    $detect = new \Mobile_Detect;
-                    if ($detect->isMobile()
-                        && strpos($userAgent, 'AppleWebKit') !== false
-                        && strpos($userAgent, 'Safari') === false
-                        && strpos($userAgent, 'Chrome') === false
-                        && strpos($userAgent, 'iPhone') === false
-                    ) {
-                        // don't display in native android browser
-                        include __DIR__.'/../get_chrome.html';
-                    } else if (strpos($userAgent, 'LinkedInBot') !== false) {
-                        // display simplified form on LinkedIn
-                        $long_id = trim($this->endpointPieces[3], '/');
-                        include __DIR__.'/../token/LinkedInBot.php';
-                    } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
-                        // display simplified form on Facebook
-                        $long_id = trim($this->endpointPieces[3], '/');
-                        include __DIR__.'/../token/facebookexternalhit.php';
-                    } else {
-                        /* EXPERIMENT 1 */
-                        if (rand(1,100) > 50) {
-                            include __DIR__.'/../token/1A/recruiting_token.build.html';
-                            //mark the web request
-                            $webRequest = new WebRequest($this->webRequestId);
-                            $webRequest->inExperiment(1, 'A');
-                        } else {
-                            include __DIR__.'/../token/1B/recruiting_token.build.html';
-                            //need to tag javascript min version!!!
-                            //mark the web request
-                            $webRequest = new WebRequest($this->webRequestId);
-                            $webRequest->inExperiment(1, 'B');
-                        }
-                        /* END EXPERIMENT 1 */
-                    }
-                } else {
-                    include $this->default;
-                }
+                $long_id = isset($this->endpointPieces[3]) ? trim($this->endpointPieces[3], '/') : '';
+                include $this->getTokenFile();
                 break;
             case 'tokens':
                 include __DIR__.'/../tokens.php';
@@ -324,6 +291,63 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]][$endpointParts[3]] = $fileToLoad;
             break;
+        }
+    }
+
+    /**
+     * Gets the file to include for the token directory and all the complexity there around
+     *
+     * @return sting - filename to include
+     */
+    protected function getTokenFile()
+    {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
+            $detect = new \Mobile_Detect;
+            if ($detect->isMobile()
+                && strpos($userAgent, 'AppleWebKit') !== false
+                && strpos($userAgent, 'Safari') === false
+                && strpos($userAgent, 'Chrome') === false
+                && strpos($userAgent, 'iPhone') === false
+            ) {
+                // don't display in native android browser
+                return __DIR__.'/../get_chrome.html';
+            } else if (strpos($userAgent, 'LinkedInBot') !== false) {
+                // display simplified form on LinkedIn
+                return __DIR__.'/../token/LinkedInBot.php';
+            } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
+                // display simplified form on Facebook
+                return __DIR__.'/../token/facebookexternalhit.php';
+            } else {
+                $webRequest = new WebRequest($this->webRequestId);
+
+                /* EXPERIMENT 2 */
+                $long_id = trim($this->endpointPieces[3], '/');
+                $token = new RecruitingToken($long_id, 'long_id');
+                if (isset($token->auto_popup)) {
+                    $webRequest->inExperiment(
+                        2,
+                        ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay)
+                    );
+                }
+                /* END EXPERIMENT 2 */
+
+                /* EXPERIMENT 1 */
+                if (rand(1,100) > 50) {
+                    //mark the web request
+                    $webRequest->inExperiment(1, 'A');
+
+                    return __DIR__.'/../token/1A/recruiting_token.build.html';
+                } else {
+                    //mark the web request
+                    $webRequest->inExperiment(1, 'B');
+
+                    return __DIR__.'/../token/1B/recruiting_token.build.html';
+                }
+                /* END EXPERIMENT 1 */
+            }
+        } else {
+            return $this->default;
         }
     }
 }

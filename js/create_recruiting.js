@@ -1,6 +1,14 @@
 var imageType = /image.*/;
 
 /**
+ * Updates delay time from slider
+ */
+function updateDelay() {
+  $('#auto-popup-delay').val($('#delay-slider').val());
+  $('#auto-popup-delay').html($('#delay-slider').val());
+}
+
+/**
  * Creates an HTML image
  *
  * @param {String} id The source id of the video
@@ -389,6 +397,17 @@ function saveRecruitingToken(preview) {
       serializedForm.recruiter_profile = 'Y';
     } else {
       serializedForm.recruiter_profile = 'N';
+    }
+    if ('true' == $('#auto-popup').attr('aria-checked')) {
+      serializedForm.auto_popup = 'Y';
+    } else {
+      serializedForm.auto_popup = 'N';
+    }
+    serializedForm.auto_popup_delay = $('#auto-popup-delay').val();
+    if ('true' == $('#collect-name').attr('aria-checked')) {
+      serializedForm.collect_name = 'Y';
+    } else {
+      serializedForm.collect_name = 'N';
     }
     $('#save-continue-button').addClass("disable-clicks");
     $.ajax({

@@ -1,5 +1,6 @@
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
+var openedInterestPopup = false;
 var cities = [];
 
 scope._onTrack = function(event) {
@@ -150,18 +151,33 @@ scope._onVideosClick = function(event) {
  */
 scope._onInterestClick0 = function (event) {
   $('.interest-dialog')[0].open();
+  presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
+  presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick2 = function (event) {
   $('.interest-dialog')[2].open();
+  presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick3 = function (event) {
   $('.interest-dialog')[3].open();
+  presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 scope._onInterestClick4 = function (event) {
   $('.interest-dialog')[4].open();
+  presentedInterestPopup = true;
+  openedInterestPopup = true;
+  disableBackButton();
 };
 
 /**
@@ -171,6 +187,8 @@ scope._submitInterest = submitInterest;
 function submitInterest(event) {
   var formIndex = 0;
   var eventPath = [];
+  openedInterestPopup = false;
+  enableBackButton();
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
@@ -211,6 +229,9 @@ function submitInterest(event) {
     url = '/ajax/recruiting_token_response/create' + path[4];
     url += '/' + encodeURIComponent($('.email-paper-input')[formIndex].value);
     url += '/' + response;
+    if ($('.name-paper-input').length) {
+      url += '/' + encodeURIComponent($('.name-paper-input')[formIndex].value);
+    }
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
@@ -258,6 +279,8 @@ scope._applyNow = function (event) {
 scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
+    openedInterestPopup = false;
+    enableBackButton();
   });
 };
 
@@ -275,6 +298,11 @@ scope._closeApplyDialog = function (event) {
  * Navigates back to the main page
  */
 scope._onBackClick = function(event) {
+  if (openedInterestPopup) {
+    // removes functionality of back button when
+    // the interest dialog is opened
+    return;
+  }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
 };
@@ -292,9 +320,34 @@ $(document).ready(function(){
       $('.interest-dialog').each(function (i, dialog){
         dialog.close();
       });
+      openedInterestPopup = false;
+      enableBackButton();
     }
   });
+
+  // BACK button support for iOS devices
+  $('.dismiss-interest-button, .submit-interest-button').click(function() {
+    enableBackButton();
+  });
 });
+
+/**
+ * Disables BACK button
+ */
+function disableBackButton() {
+  $('.back-button').addClass('mdl-button--disabled');
+  $('.back-button-lower').addClass('mdl-button--disabled');
+  $('.back-button-lower-right').addClass('mdl-button--disabled');
+}
+
+/**
+ * Enables BACK button
+ */
+function enableBackButton() {
+  $('.back-button').removeClass('mdl-button--disabled');
+  $('.back-button-lower').removeClass('mdl-button--disabled');
+  $('.back-button-lower-right').removeClass('mdl-button--disabled');
+}
 
 /**
  * Handle loading the token data and putting it where it should go
@@ -371,6 +424,11 @@ function loadDataAndPopulateToken() {
           );
         }
       } else {
+        // expands main image for small screens
+        if ($(window).width() < 739) {
+          $('#location-secondary-images').remove();
+          $('#location-main-image').css('width','100%');
+        }
         $('#videos-frontpage').hide();
         $('#images-frontpage').removeClass('mdl-cell--6-col');
         $('#images-frontpage').addClass('mdl-cell--12-col');
@@ -975,6 +1033,7 @@ function elementIsPresent(section_el) {
   return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
+var addedName = false;
 /**
  * Handles the data return from /ajax/recruiting_token/get_responses_allowed
  *
@@ -985,15 +1044,32 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
     if ('false' == data.data.allowed) {
       $('.interest-fab').hide();
     } else {
-      // display the response form once after 10 seconds
-      if (!presentedInterestPopup) {
-        setTimeout(function(){
-          $('.interest-dialog').each(function (i, dialog){
-            dialog.open();
-          });
-        },
-        10000);
-        presentedInterestPopup = true;
+      if (!addedName && 'true' == data.data.collectName) {
+        var nameInput = '<paper-input';
+        nameInput += '  class="name-paper-input"';
+        nameInput += '  label="name"';
+        nameInput += '  autofocus';
+        nameInput += '  error-message="Please input your name"';
+        nameInput += '  required>';
+        nameInput += '</paper-input>';
+        $('.email-paper-input').after(nameInput);
+        addedName = true;
+      }
+      if ('true' == data.data.autoPop) {
+        // display the response form once after 10 seconds
+        if (!presentedInterestPopup) {
+          setTimeout(function(){
+            if (!presentedInterestPopup) {
+              $('.interest-dialog').each(function (i, dialog){
+                disableBackButton();
+                dialog.open();
+                openedInterestPopup = true;
+              });
+              presentedInterestPopup = true;
+            }
+          },
+          (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
+        }
       }
     }
   }

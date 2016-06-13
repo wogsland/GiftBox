@@ -75,6 +75,7 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/paper-slider/paper-slider.html">
 
     <style is="custom-style">
         .center-column {
@@ -262,11 +263,31 @@ require __DIR__.'/header.php';
                     <paper-card id="admin-info" heading="Admin Settings">
                       <div class="field-container">
                         <paper-checkbox
-                        id="recruiter-profile"
-                        name="recruiter_profile"
-                        <?php echo isset($token->recruiter_profile) && 'Y' == $token->recruiter_profile ? 'checked' : '';?>>
-                        Show Recruiter Profile
-                      </paper-checkbox>
+                          id="recruiter-profile"
+                          name="recruiter_profile"
+                          <?php echo isset($token->recruiter_profile) && 'Y' == $token->recruiter_profile ? 'checked' : '';?>>
+                          Show Recruiter Profile
+                        </paper-checkbox>
+                        <br />
+                        <paper-checkbox
+                          id="auto-popup"
+                          name="auto-popup"
+                          <?php echo isset($token->auto_popup) && 'Y' == $token->auto_popup ? 'checked' : '';?>>
+                          Automatic Interest Dialog Popup After <b id="auto-popup-delay"><?=$token->auto_popup_delay?></b> Seconds
+                        </paper-checkbox>
+                        <paper-slider
+                          id="delay-slider"
+                          value="<?=$token->auto_popup_delay?>"
+                          max="60"
+                          onChange="updateDelay();">
+                        </paper-slider>
+                        <paper-checkbox
+                          id="collect-name"
+                          name="collect-name"
+                          <?php echo isset($token->collect_name) && 'Y' == $token->collect_name ? 'checked' : '';?>>
+                          Collect Name of Interested Recruits
+                        </paper-checkbox>
+                        <br />
                       </div>
                       <?php if (isset($token->long_id) && false !== $token->screenshot()) { ?>
                         <div class="field-container" id="screenshot">
