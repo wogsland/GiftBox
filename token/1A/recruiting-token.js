@@ -310,6 +310,7 @@ scope._onBackClick = function(event) {
   if (openedInterestPopup) {
     // removes functionality of back button when
     // the interest dialog is opened
+    console.log('entered');
     return;
   }
   $('.gt-info-video').remove();
@@ -355,6 +356,8 @@ $(document).ready(function(){
         $('.interest-dialog').each(function(i, dialog) {
           dialog.close();
         });
+        openedInterestPopup = false;
+        enableBackButton();
       }
       elapsed++;
     } else {
