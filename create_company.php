@@ -345,6 +345,11 @@ require __DIR__.'/header.php';
             </paper-button>
           </div>
           <div class="button-container">
+            <paper-button raised onclick="initLinkedIn()" id="linkedin-scrape-button">
+              IMPORT FROM LINKEDIN
+            </paper-button>
+          </div>
+          <div class="button-container">
             <paper-button raised onclick="skipCompany()" id="skip-company-button">
               Skip COMPANY
             </paper-button>
@@ -370,6 +375,15 @@ require __DIR__.'/header.php';
             <paper-button class="dialog-button" onclick="processCompany()">Use</paper-button>
             <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
         </div>
+    </paper-dialog>
+
+    <paper-dialog class="recruiting-dialog" id="linkedin-dialog" modal>
+      <h2>Import company information from LinkedIn</h2>
+      <paper-input id="linkedin-url" label="Enter your company's LinkedIn username" autofocus></paper-input>
+      <div class="buttons">
+        <paper-button class="dialog-button" onclick="processLinkedIn()">Submit</paper-button>
+        <paper-button dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
+      </div>
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
@@ -399,6 +413,7 @@ require __DIR__.'/header.php';
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
     <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
+    <script src="js/scraper.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
     /**
