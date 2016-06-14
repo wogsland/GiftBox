@@ -76,6 +76,8 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/paper-toast/paper-toast.html">
+    <link rel="import" href="/components/paper-progress/paper-progress.html">
 
     <style is="custom-style">
         .center-column {
@@ -159,6 +161,9 @@ require __DIR__.'/header.php';
         #use-existing-company-button {
           margin-left: 50px;
           margin-right: 50px;
+        }
+        paper-progress {
+          width: 100%;
         }
     </style>
 
@@ -381,8 +386,14 @@ require __DIR__.'/header.php';
       <h2>Import company information from LinkedIn</h2>
       <paper-input id="linkedin-url" label="Enter your company's LinkedIn username" autofocus></paper-input>
       <div class="buttons">
-        <paper-button class="dialog-button" onclick="processLinkedIn()">Submit</paper-button>
+        <paper-button class="dialog-button" onclick="toast.open();processLinkedIn()">Submit</paper-button>
         <paper-button dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
+      </div>
+      <paper-toast id="toast" duration="0" text="Searching for LinkedIn company">
+        <paper-button id="toast-exit" onclick="toast.toggle();resetToast()" class="yellow-button">Close</paper-button>
+      </paper-toast>
+      <div id="linkedin-progress">
+        <paper-progress indeterminate></paper-progress>
       </div>
     </paper-dialog>
 
