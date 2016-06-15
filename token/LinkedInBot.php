@@ -11,7 +11,12 @@ use \Sizzle\Bacon\Database\{
  */
 $token = new RecruitingToken($long_id, 'long_id');
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
-$city = ($token->getCities())[0] ?? new City();
+$city_names = '';
+$cities = $token->getCities();
+foreach ($cities as $city) {
+  $city_names .= $city->name.' - ';
+  $city_names = rtrim($city_names, ' - ');
+}
 $images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($long_id);
 if (!empty($images)) {
     $image = APP_URL.'uploads/'.str_replace(' ', '%20', $images[0]['file_name']);
@@ -36,7 +41,7 @@ if (isset($token->id)) {
       <h1>
         <?=$token->job_title?>
         <?= isset($company->name) ? '- '.$company->name : '' ?>
-        - <?= $city->name?>
+        - <?=$city_names?>
       </h1>
         <?php if ('' != $image) { ?>
           <img src="<?= $image?>" title="Token screenshot or company image"/>
