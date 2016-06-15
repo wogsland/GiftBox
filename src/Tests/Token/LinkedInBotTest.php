@@ -510,6 +510,7 @@ extends \PHPUnit_Framework_TestCase
             $this->assertNotContains('<h2>Company Values</h2>', $response);
             $this->assertNotContains('<h2>Perks</h2>', $response);
         }
+        //echo $response;
     }
 
     /**
