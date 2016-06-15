@@ -481,6 +481,9 @@ function saveCompany() {
                   var file = img.data("file");
                   var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
                   img.data('file_name', fileName);
+                  console.log(file);
+                  console.log(fileName);
+                  console.log(img);
                   uploadFile(file, fileName, img);
                 }
               });
