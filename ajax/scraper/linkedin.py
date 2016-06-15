@@ -47,6 +47,11 @@ class LinkedInScraper(object):
         json = self.convert_json()
         if json != None:
             try:
+                self.company["name"] = json["companyName"]
+            except KeyError:
+                self.company["name"] = ""
+
+            try:
                 self.company["description"] = json["description"]
             except KeyError:
                 self.company["description"] = ""
