@@ -386,8 +386,9 @@ require __DIR__.'/header.php';
       <h2>Import company information from LinkedIn</h2>
       <paper-input id="linkedin-url" label="Enter your company's LinkedIn username" autofocus></paper-input>
       <div class="buttons">
-        <paper-button class="dialog-button" onclick="toast.open();processLinkedIn()">Submit</paper-button>
-        <paper-button dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
+        <paper-button id="linkedin-add-button" class="dialog-button" onclick="addData()">Add</paper-button>
+        <paper-button id="linkedin-submit-button" class="dialog-button" onclick="toast.open();processLinkedIn()">Submit</paper-button>
+        <paper-button id="linkedin-cancel-button" dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
       </div>
       <paper-toast id="toast" duration="0" text="Searching for LinkedIn company">
         <paper-button id="toast-exit" onclick="toast.toggle();resetToast()" class="yellow-button">Close</paper-button>
