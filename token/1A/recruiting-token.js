@@ -310,6 +310,7 @@ scope._onBackClick = function(event) {
   if (openedInterestPopup) {
     // removes functionality of back button when
     // the interest dialog is opened
+    console.log('entered');
     return;
   }
   $('.gt-info-video').remove();
@@ -334,11 +335,50 @@ $(document).ready(function(){
     }
   });
 
+  // enable BACK button if dialog box isn't open
+  var first = true;
+  $(document).click(function() {
+    if ($('.iron-overlay-backdrop-0').length === 0 && first) {
+      enableBackButton();
+      first = !first;
+    }
+  });
+
   // BACK button support for iOS devices
   $('.dismiss-interest-button, .submit-interest-button').click(function() {
     enableBackButton();
   });
+
+  // background sniffer to close interest dialog
+  var elapsed = 0;
+  closeInterestDialog();
+  setInterval(function() {
+    if (elapsed <= 50) {
+      if ($('.iron-overlay-backdrop-0').length === 0) {
+        $('.interest-dialog').each(function(i, dialog) {
+          dialog.close();
+        });
+        openedInterestPopup = false;
+        enableBackButton();
+      }
+      elapsed++;
+    } else {
+      clearInterval(this);
+    }
+  }, 1000);
 });
+
+/**
+ * Closes dialog box on click (iOS patch)
+ */
+function closeInterestDialog() {
+  $(document).not('.interest-fab').click(function() {
+    $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+      $(this).remove();
+    });
+  });
+}
 
 /**
  * Disables BACK button
