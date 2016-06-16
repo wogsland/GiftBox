@@ -15,8 +15,8 @@ $city_names = '';
 $cities = $token->getCities();
 foreach ($cities as $city) {
   $city_names .= $city->name.' - ';
-  $city_names = rtrim($city_names, ' - ');
 }
+$city_names = rtrim($city_names, ' - ');
 $images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($long_id);
 if (!empty($images)) {
     $image = APP_URL.'uploads/'.str_replace(' ', '%20', $images[0]['file_name']);
