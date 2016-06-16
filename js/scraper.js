@@ -17,7 +17,7 @@ function processLinkedIn() {
   var name = $input.val();
   if (name.length === 0) {
     $('label').css('color', 'red');
-    $input.attr('label', "Enter your company's LinkedIn username");
+    $input.attr('label', "Enter your company's LinkedIn username, i.e. 'sizzle'");
   } else {
     // handle progress bar
     $('#linkedin-progress').show();
@@ -78,48 +78,52 @@ function addData() {
 }
 
 function addName() {
-  var container = $('#company').children()[0];
-  var label = $(container).children()[2];
-  var labelContainer = $(label).children()[0];
-  var input = $(labelContainer).children()[1];
-  $(label).addClass('label-is-floating');
-  $(input).val(companyInfo['name']);
-  $(input).click(function() {
-    $(label).addClass('label-is-floating');
-  });
+  $('#company').val(companyInfo['name']);
 }
 
 function addDescription() {
-  var parent = $('paper-textarea')[0];
-  var textareaContainer = $(parent).children()[0];
-  var descripLabel = $(textareaContainer).children()[2];
-  var text = $('#textarea')[0];
-  $(descripLabel).addClass('label-is-floating');
-  $(text).val(companyInfo['description']);
-  $(text).click(function() {
-    $(descripLabel).addClass('label-is-floating');
-  });
-  $(document).click(function() {
-    if ($(text).val().length !== 0) {
-      $(descripLabel).addClass('label-is-floating');
-    }
-  });
+  $('#company-description').val(companyInfo['description']);
 }
 
 function addImages() {
-  var images = ["legacyLogo", "heroImage"];
+  var images = ["heroImage", "legacyLogo"];
   var img = null;
   for (var i = 0; i < images.length; i++) {
     if (companyInfo[images[i]].length > 0) {
       var url = 'https://media.licdn.com/media' + companyInfo[images[i]];
       img = $('<img class="recruiting-token-image" id="' + images[i] + '">');
       $(img).attr('src', url);
-      img.data('file', url);
-      img.data('file').name = images[i];
+      img.data('file', null);
+      img.data('name', images[i]);
       img.data('saved', false);
+      img.data('scraped', true);
       createThumbnail(img, "company-image-container");
     }
   }
+}
+
+function uploadScrapedImage(image, oldName, newName) {
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: 'ajax/linkedin-scraper',
+    data: {'oldName': oldName, 'newName': newName},
+    success: function(data, status) {
+      if (data['success']) {
+        saveScrapedImage(image, newName);
+      }
+    }
+  });
+}
+
+function saveScrapedImage(image, imageName) {
+  image.data('name', imageName);
+  var url = 'ajax/recruiting_company_image/save';
+  var params = {
+    recruiting_company_id: image.data('recruiting_company_id'),
+    file_name: imageName
+  };
+  postSave(image, url, params);
 }
 
 function handleToast(status) {
