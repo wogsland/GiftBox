@@ -25,8 +25,7 @@ fi
 echo ""
 
 # build polymer
-npm run polybuild
-echo "Polybuild finished."
+token/polybuild.sh both
 echo ""
 
 # minify css
