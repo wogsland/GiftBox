@@ -82,7 +82,6 @@ then
     setup_1A
     build_polymer
     cleanup_1A
-    git status
 
     echo
 
@@ -90,6 +89,7 @@ then
     setup_1B
     build_polymer
     cleanup_1B
+
     git status
   fi
 else
