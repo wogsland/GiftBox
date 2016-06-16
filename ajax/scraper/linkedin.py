@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from urllib.request import urlretrieve
 import requests
 import json
 import sys
@@ -58,11 +59,15 @@ class LinkedInScraper(object):
 
             try:
                 self.company["legacyLogo"] = json["legacySquareLogo"]
+                legacy_logo_url = self.media_prefix + self.company["legacyLogo"]
+                urlretrieve(legacy_logo_url, "legacyLogo.png")
             except KeyError:
                 self.company["legacyLogo"] = ""
 
             try:
                 self.company["heroImage"] = json["heroImage"]
+                hero_image_url = self.media_prefix + self.company["heroImage"]
+                urlretrieve(hero_image_url, "heroImage.png")
             except KeyError:
                 self.company["heroImage"] = ""
 
