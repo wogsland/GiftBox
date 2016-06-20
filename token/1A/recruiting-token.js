@@ -315,6 +315,7 @@ scope._onBackClick = function(event) {
   }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
+  removePreview();
 };
 
 $(document).ready(function(){
@@ -1165,10 +1166,12 @@ function displayPreview(self) {
   test += '</img></div>';
 
   $(document.body).append(test);
-  $(document.body).find('.preview').bind('click.preview', function () {
-    $('.preview-image-container').remove();
-    $('.preview').unbind('click.preview');
-  });
+  $(document.body).find('.preview').bind('click.preview', removePreview);
+}
+
+function removePreview() {
+  $('.preview-image-container').remove();
+  $('.preview').unbind('click.preview');
 }
 
 /**

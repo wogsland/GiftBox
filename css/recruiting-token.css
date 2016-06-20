@@ -425,6 +425,8 @@ i.plus-icon--overlay {
   bottom: 0;
   left: 0;
   margin: auto;
+  max-height: 90%;
+  max-width: 90%;
   position: absolute;
   right: 0;
   top: 0;
