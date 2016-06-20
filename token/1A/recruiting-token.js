@@ -187,7 +187,6 @@ scope._submitInterest = function (event) {
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
-  enableBackButton();
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
