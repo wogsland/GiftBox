@@ -203,12 +203,10 @@ scope._submitInterest = function (event) {
   } else {
     // Firefox & Safari
     var currentElem = event.target;
-    console.log("currentElem is ");console.log(currentElem)
     while (currentElem) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    console.log("currentElem is ");console.log(currentElem)
     console.log("eventPath is ");console.log(eventPath)
     if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
@@ -217,7 +215,7 @@ scope._submitInterest = function (event) {
       eventPath.push(window);
     }
     console.log("eventPath is ");console.log(eventPath)
-    if (eventPath[8].localName == 'location-x-card') {
+    if (eventPath[9].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
       formIndex = 2;
