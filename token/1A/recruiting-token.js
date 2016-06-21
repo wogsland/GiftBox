@@ -207,14 +207,12 @@ scope._submitInterest = function (event) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    console.log("eventPath is ");console.log(eventPath)
     if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
     }
     if (eventPath.indexOf(window) === -1) {
       eventPath.push(window);
     }
-    console.log("eventPath is ");console.log(eventPath)
     if (eventPath[9].localName == 'location-x-card' || eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
@@ -225,9 +223,6 @@ scope._submitInterest = function (event) {
       formIndex = 4;
     }
   }
-  console.log("eventPath is ");console.log(eventPath)
-  console.log("formIndex is ");console.log(formIndex)
-  console.log($('.email-paper-input')[formIndex])
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
     var response = $('#interest-response')[0].selectedItem.value;
