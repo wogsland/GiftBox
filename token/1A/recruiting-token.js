@@ -188,6 +188,7 @@ scope._submitInterest = function (event) {
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
+  console.log("event.path is "+event.path)
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
