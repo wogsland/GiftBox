@@ -215,7 +215,7 @@ scope._submitInterest = function (event) {
       eventPath.push(window);
     }
     console.log("eventPath is ");console.log(eventPath)
-    if (eventPath[9].localName == 'location-x-card') {
+    if (eventPath[9].localName == 'location-x-card' || eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
       formIndex = 2;
