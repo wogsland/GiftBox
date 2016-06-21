@@ -204,14 +204,20 @@ function submitInterest(event) {
   } else {
     // Firefox & Safari
     var currentElem = event.target;
+    console.log("currentElem is "+currentElem)
     while (currentElem) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+    console.log("currentElem is "+currentElem)
+    console.log("eventPath is "+eventPath)
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
-    if (eventPath.indexOf(window) === -1)
+    }
+    if (eventPath.indexOf(window) === -1) {
       eventPath.push(window);
+    }
+    console.log("eventPath is "+eventPath)
     if (eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
