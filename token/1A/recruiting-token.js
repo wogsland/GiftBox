@@ -184,6 +184,7 @@ scope._onInterestClick4 = function (event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  event.preventDefault();
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
@@ -220,7 +221,9 @@ scope._submitInterest = function (event) {
       formIndex = 4;
     }
   }
-  event.preventDefault();
+  console.log("eventPath is "+eventPath)
+  console.log("formIndex is "+formIndex)
+  console.log($('.email-paper-input')[formIndex])
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
     var response = $('#interest-response')[0].selectedItem.value;
