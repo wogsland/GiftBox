@@ -3,11 +3,16 @@
 $success = false;
 $data = null;
 
-if (isset($_POST['name']) && !empty($_POST['name'])) {
+if (isset($_POST['link']) && !empty($_POST['link'])) {
   $success = true;
-  $name = $_POST['name'];
-  $command = 'cd .. ; cd ajax/scraper ; sh run.sh ' . (string)$name;
-  $data = shell_exec($command);
+  $url = $_POST['link'];
+  if (filter_var($url, FILTER_VALIDATE_URL)) {
+    $fp = fopen('temp.json', 'w+');
+    fwrite($fp, json_encode(array('url'=>$url)));
+    fclose($fp);
+  }
+  //$command = 'cd .. ; cd ajax/scraper ; sh run.sh ' . (string)$name;
+  //$data = shell_exec($command);
 }
 
 $old_name = isset($_POST['oldName']) && !empty($_POST['oldName']);

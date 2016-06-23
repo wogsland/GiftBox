@@ -4,6 +4,7 @@ import requests
 import json
 import sys
 import re
+import os
 
 class LinkedInScraper(object):
     def __init__(self, name):
@@ -59,15 +60,17 @@ class LinkedInScraper(object):
 
             try:
                 self.company["legacyLogo"] = json["legacySquareLogo"]
-                legacy_logo_url = self.media_prefix + self.company["legacyLogo"]
-                urlretrieve(legacy_logo_url, "legacyLogo.png")
+                if "description" in self.company.keys():
+                    legacy_url = self.media_prefix + self.company["legacyLogo"]
+                    urlretrieve(legacy_url, "legacyLogo.png")
             except KeyError:
                 self.company["legacyLogo"] = ""
 
             try:
                 self.company["heroImage"] = json["heroImage"]
-                hero_image_url = self.media_prefix + self.company["heroImage"]
-                urlretrieve(hero_image_url, "heroImage.png")
+                if "description" in self.company.keys():
+                    hero_image_url = self.media_prefix + self.company["heroImage"]
+                    urlretrieve(hero_image_url, "heroImage.png")
             except KeyError:
                 self.company["heroImage"] = ""
 
@@ -75,8 +78,28 @@ class LinkedInScraper(object):
         return None
 
 if __name__ == "__main__":
-    company_name = sys.argv[1]
-    scraper = LinkedInScraper(company_name)
-    data = scraper.get_company_data()
-    data_json = json.dumps(data)
-    print(data_json)
+    #company_name = sys.argv[1]
+    #scraper = LinkedInScraper(company_name)
+    #data = scraper.get_company_data()
+    #data_json = json.dumps(data)
+    #print(data_json)
+
+    os.chdir("../../public")
+    target = "temp.json"
+    files = os.listdir()
+    if target in files:
+        f = open("temp.json", "r")
+        data = json.load(f)
+        print(data["url"])
+
+        '''
+        if len(files) != refreshed:
+            for f in refreshed:
+                if f not in files:
+                    print("Detected %s" % f)
+                    files.append(f)
+            for f in files:
+                if f not in refreshed:
+                    print("Removed %s" % f)
+                    files.remove(f)
+        '''

@@ -14,46 +14,52 @@ function initLinkedIn() {
 
 function processLinkedIn() {
   var $input = $('#linkedin-url');
-  var name = $input.val();
-  if (name.length === 0) {
+  var link = $input.val();
+  if (link.length === 0) {
     $('label').css('color', 'red');
-    $input.attr('label', "Enter your company's LinkedIn username, i.e. 'sizzle'");
+    $input.attr('label', "Enter your company's LinkedIn URL");
   } else {
     // handle progress bar
     $('#linkedin-progress').show();
     // hide the add button temporarily
     $('#linkedin-add-button').hide();
     // call function
-    openLinkedIn(name);
+    openLinkedIn(link);
   }
 }
 
-function openLinkedIn(companyName) {
+function openLinkedIn(companyLink) {
   $.ajax({
     type: 'POST',
     dataType: 'json',
     data: {
-      name: companyName
+      link: companyLink
     },
     url: '/ajax/linkedin-scraper',
     success: function(data) {
       try {
+        console.log(data);
         companyInfo = JSON.parse(data['data']);
       } catch (error) {
         console.error(error);
       }
 
-      if (companyInfo == null) {
-        handleToast(2);
-      } else if (
-          companyInfo['name'].length === 0 &&
-          companyInfo['description'].length === 0 &&
-          companyInfo['legacyLogo'].length === 0 &&
-          companyInfo['heroImage'].length === 0
+      //console.log(companyInfo);
+      $('#linkedin-progress').hide();
+
+      if (companyInfo === null ||
+        (companyInfo['name'].length === 0 &&
+        companyInfo['description'].length === 0 &&
+        companyInfo['legacyLogo'].length === 0 &&
+        companyInfo['heroImage'].length === 0)
       ) {
-        handleToast(1);
+        $('label').css('color', 'red');
+        $('#linkedin-url').attr('label', 'LinkedIn company not found');
       } else {
-        handleToast(0);
+
+        $('label').css('color', 'green');
+        $('#linkedin-url').attr('label', 'LinkedIn company and information found');
+        $('#linkedin-add-button').show();
       }
     },
     error: function(xhr, status, error) {
@@ -64,6 +70,7 @@ function openLinkedIn(companyName) {
 
 function cancelLinkedIn() {
   $('label').css('color', '');
+  $('#linkedin-url').attr('label', "Enter your company's LinkedIn URL");
   $('#linkedin-progress').hide();
   $('#linkedin-url').val("");
   $('#linkedin-add-button').hide();
@@ -71,7 +78,6 @@ function cancelLinkedIn() {
 
 function addData() {
   $('#linkedin-cancel-button').trigger('click');
-  $('#toast').hide();
   addName();
   addDescription();
   addImages();
@@ -124,29 +130,4 @@ function saveScrapedImage(image, imageName) {
     file_name: imageName
   };
   postSave(image, url, params);
-}
-
-function handleToast(status) {
-  var toastText = "";
-  switch(status) {
-    case 0:
-      toastText = "LinkedIn company and information found";
-      $('#linkedin-add-button').show();
-      break;
-    case 1:
-      toastText = "LinkedIn company found but no information found";
-      break;
-    case 2:
-      toastText = "LinkedIn company not found";
-      break;
-    default: break;
-  }
-  $('#toast').attr('text', toastText);
-
-  // hide progress when toast is set
-  $('#linkedin-progress').hide();
-}
-
-function resetToast() {
-  $('#toast').attr('text', 'Searching for LinkedIn company');
 }
