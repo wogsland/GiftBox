@@ -1,15 +1,15 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 import requests
+import subprocess
 import json
 import sys
 import re
 import os
 
 class LinkedInScraper(object):
-    def __init__(self, name):
-        self.name = name
-        self.url = "https://linkedin.com/company/" + self.name
+    def __init__(self, url):
+        self.url = url
         self.media_prefix = "https://media.licdn.com/media/"
         self.company = {}
 
@@ -78,28 +78,34 @@ class LinkedInScraper(object):
         return None
 
 if __name__ == "__main__":
-    #company_name = sys.argv[1]
-    #scraper = LinkedInScraper(company_name)
-    #data = scraper.get_company_data()
-    #data_json = json.dumps(data)
-    #print(data_json)
-
     os.chdir("../../public")
-    target = "temp.json"
-    files = os.listdir()
-    if target in files:
-        f = open("temp.json", "r")
-        data = json.load(f)
-        print(data["url"])
+    completed = []
 
-        '''
-        if len(files) != refreshed:
-            for f in refreshed:
-                if f not in files:
-                    print("Detected %s" % f)
-                    files.append(f)
-            for f in files:
-                if f not in refreshed:
-                    print("Removed %s" % f)
-                    files.remove(f)
-        '''
+    while True:
+        refreshed = os.listdir()
+        for item in refreshed:
+            if "temp" in item and item not in completed:
+                data = None
+                with open(item, "r") as f:
+                    data = json.load(f)
+                    f.close()
+
+                url = data["url"]
+                scraper = LinkedInScraper(url)
+                output = scraper.get_company_data()
+                output_json = json.dumps(output)
+
+                print(output_json)
+
+                fname = item.replace("temp", "data")
+                with open(fname, "w+") as f:
+                    f.write(output_json)
+                    f.close()
+                try:
+                    os.remove("heroImage.png")
+                    os.remove("legacyLogo.png")
+                except:
+                    pass
+
+                os.remove(item)
+                completed.append(item)
