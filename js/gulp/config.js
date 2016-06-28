@@ -92,7 +92,7 @@ module.exports = {
             p.js('contact'),
             p.js('login'),
             p.js('signup'),
-            p.js('scraper')
+            p.js('linkedin-scraper')
         ],
 
         json: [
