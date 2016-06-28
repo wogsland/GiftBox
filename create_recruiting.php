@@ -272,19 +272,19 @@ require __DIR__.'/header.php';
                         <paper-checkbox
                           id="auto-popup"
                           name="auto-popup"
-                          <?php echo isset($token->auto_popup) && 'Y' == $token->auto_popup ? 'checked' : '';?>>
-                          Automatic Interest Dialog Popup After <b id="auto-popup-delay"><?=$token->auto_popup_delay?></b> Seconds
+                          <?= (!isset($token->auto_popup) || 'Y' == $token->auto_popup) ? 'checked' : ''?>>
+                          Automatic Interest Dialog Popup After <b id="auto-popup-delay"><?=$token->auto_popup_delay ?? 15?></b> Seconds
                         </paper-checkbox>
                         <paper-slider
                           id="delay-slider"
-                          value="<?=$token->auto_popup_delay?>"
+                          value="<?=$token->auto_popup_delay ?? 15?>"
                           max="60"
                           onChange="updateDelay();">
                         </paper-slider>
                         <paper-checkbox
                           id="collect-name"
                           name="collect-name"
-                          <?php echo isset($token->collect_name) && 'Y' == $token->collect_name ? 'checked' : '';?>>
+                          <?= (!isset($token->collect_name) || 'Y' == $token->collect_name) ? 'checked' : ''?>>
                           Collect Name of Interested Recruits
                         </paper-checkbox>
                         <br />
