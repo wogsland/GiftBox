@@ -44,7 +44,6 @@ function openLinkedIn(companyLink) {
         console.error(error);
       }
 
-      //console.log(companyInfo);
       $('#linkedin-progress').hide();
 
       if (companyInfo === null ||
@@ -118,6 +117,9 @@ function uploadScrapedImage(image, oldName, newName) {
       if (data['success']) {
         saveScrapedImage(image, newName);
       }
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
     }
   });
 }
