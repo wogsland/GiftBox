@@ -184,10 +184,10 @@ scope._onInterestClick4 = function (event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  event.preventDefault();
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
-  enableBackButton();
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
@@ -207,11 +207,13 @@ scope._submitInterest = function (event) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
-    if (eventPath.indexOf(window) === -1)
+    }
+    if (eventPath.indexOf(window) === -1) {
       eventPath.push(window);
-    if (eventPath[8].localName == 'location-x-card') {
+    }
+    if (eventPath[9].localName == 'location-x-card' || eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
       formIndex = 2;
@@ -221,7 +223,6 @@ scope._submitInterest = function (event) {
       formIndex = 4;
     }
   }
-  event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
     var response = $('#interest-response')[0].selectedItem.value;
@@ -310,10 +311,12 @@ scope._onBackClick = function(event) {
   if (openedInterestPopup) {
     // removes functionality of back button when
     // the interest dialog is opened
+    console.log('entered');
     return;
   }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
+  removePreview();
 };
 
 $(document).ready(function(){
@@ -334,11 +337,50 @@ $(document).ready(function(){
     }
   });
 
+  // enable BACK button if dialog box isn't open
+  var first = true;
+  $(document).click(function() {
+    if ($('.iron-overlay-backdrop-0').length === 0 && first) {
+      enableBackButton();
+      first = !first;
+    }
+  });
+
   // BACK button support for iOS devices
   $('.dismiss-interest-button, .submit-interest-button').click(function() {
     enableBackButton();
   });
+
+  // background sniffer to close interest dialog
+  var elapsed = 0;
+  closeInterestDialog();
+  setInterval(function() {
+    if (elapsed <= 50) {
+      if ($('.iron-overlay-backdrop-0').length === 0) {
+        $('.interest-dialog').each(function(i, dialog) {
+          dialog.close();
+        });
+        openedInterestPopup = false;
+        enableBackButton();
+      }
+      elapsed++;
+    } else {
+      clearInterval(this);
+    }
+  }, 1000);
 });
+
+/**
+ * Closes dialog box on click (iOS patch)
+ */
+function closeInterestDialog() {
+  $(document).not('.interest-fab').click(function() {
+    $('.interest-dialog').each(function(i, dialog) {
+      dialog.close();
+      $(this).remove();
+    });
+  });
+}
 
 /**
  * Disables BACK button
@@ -1101,6 +1143,7 @@ function getImageGridItem(imgData, assetHost, cb) {
       img = $('<img ' +
           'id="image-' + imgData.id + '" ' +
           'class="ImageGrid-image" ' +
+          'onclick="displayPreview(this)" ' +
           'data-src="'+src+'"/>');
 
   preload.onload = function() {
@@ -1116,6 +1159,20 @@ function getImageGridItem(imgData, assetHost, cb) {
   preload.src = src;
 
   return item;
+}
+
+function displayPreview(self) {
+  var test = '<div class="preview preview-image-container">';
+  test += '<img class="preview preview-image" src="' + self.src + '">';
+  test += '</img></div>';
+
+  $(document.body).append(test);
+  $(document.body).find('.preview').bind('click.preview', removePreview);
+}
+
+function removePreview() {
+  $('.preview-image-container').remove();
+  $('.preview').unbind('click.preview');
 }
 
 /**
