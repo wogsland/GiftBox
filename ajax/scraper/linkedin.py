@@ -7,18 +7,22 @@ import os
 import re
 
 class LinkedInScraper(object):
+    """Web scraper for LinkedIn public company pages"""
+
     def __init__(self, url):
         self.url = url
         self.media_prefix = "https://media.licdn.com/media/"
         self.company = {}
 
     def get_source(self):
+        """Retrieves the HTML source of the page"""
         headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36"}
         response = requests.get(self.url, headers=headers)
         html = response.content.decode("utf-8")
         return html
 
     def parse_html(self):
+        """Parses HTML source for the JSON section"""
         source = self.get_source()
         soup = BeautifulSoup(source, "html.parser")
         soup.encode("utf-8")
@@ -26,6 +30,9 @@ class LinkedInScraper(object):
         return result
 
     def convert_json(self):
+        """Prepares the raw HTML source for JSON encoding with
+        string and regular expression replacements
+        """
         parsed_html = self.parse_html()
         if len(parsed_html) != 0:
             raw_html = str(parsed_html[0])
@@ -45,6 +52,9 @@ class LinkedInScraper(object):
         return None
 
     def get_company_data(self):
+        """Retrieves JSON information from the HTML source and
+        populates the company JSON object accordingly
+        """
         json = self.convert_json()
         if json != None:
             try:
@@ -77,6 +87,7 @@ class LinkedInScraper(object):
         return None
 
 if __name__ == "__main__":
+    # 10 length alphanumerical key
     fname = sys.argv[1]
     os.chdir("../../public")
     if fname in os.listdir():
