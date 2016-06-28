@@ -13,26 +13,24 @@ function generate_key($length) {
 }
 
 if (isset($_POST['link']) && !empty($_POST['link'])) {
-  $success = true;
   $url = $_POST['link'];
   if (filter_var($url, FILTER_VALIDATE_URL)) {
     if (strpos($url, '/company/') !== false) {
+      // generate key for collision protection
       $key = generate_key(10);
+
+      // write url to temp JSON file
       $fname = 'temp-' . $key . '.json';
       $fp = fopen($fname, 'w+');
       fwrite($fp, json_encode(array('url'=>$url)));
       fclose($fp);
 
-      $target = 'data-' . $key . '.json';
-      while (true) {
-        if (file_exists($target)) {
-          $data = (string)file_get_contents($target);
-          //if ($temp != "null") $data = $temp;
+      // synchronously call script and wait for response
+      // note: shell_exec doesn't take in POST variables
+      $command = 'cd .. ; cd ajax/scraper ; sh run.sh ' . $fname;
+      $data = shell_exec($command);
 
-          return;
-        }
-      }
-
+      $success = true;
     }
   }
 }
@@ -41,12 +39,15 @@ $old_name = isset($_POST['oldName']) && !empty($_POST['oldName']);
 $new_name = isset($_POST['newName']) && !empty($_POST['newName']);
 
 if ($old_name && $new_name) {
-  $success = true;
   $old_image = $_POST['oldName'];
   $new_image = $_POST['newName'];
-  $param = (string)$old_image . ' ' . (string)$new_image;
-  $command = 'cd .. ; cd ajax/scraper ; sh move.sh ' . $param;
-  $data = shell_exec($command);
+
+  // rename the images for database
+  if (file_exists("heroImage.png") || file_exists("legacyLogo.png")) {
+    rename($old_image, 'uploads/' . $new_image);
+  }
+
+  $success = true;
 }
 
 echo json_encode(array('success'=>$success, 'data'=>$data));
