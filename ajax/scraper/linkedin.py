@@ -1,11 +1,10 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 import requests
-import subprocess
 import json
 import sys
-import re
 import os
+import re
 
 class LinkedInScraper(object):
     def __init__(self, url):
@@ -78,34 +77,18 @@ class LinkedInScraper(object):
         return None
 
 if __name__ == "__main__":
+    fname = sys.argv[1]
     os.chdir("../../public")
-    completed = []
+    if fname in os.listdir():
+        # run the scraper
+        with open(fname) as json_raw:
+            temp = json.load(json_raw)
+        url = temp["url"]
+        scraper = LinkedInScraper(url)
+        data = scraper.get_company_data()
 
-    while True:
-        refreshed = os.listdir()
-        for item in refreshed:
-            if "temp" in item and item not in completed:
-                data = None
-                with open(item, "r") as f:
-                    data = json.load(f)
-                    f.close()
-
-                url = data["url"]
-                scraper = LinkedInScraper(url)
-                output = scraper.get_company_data()
-                output_json = json.dumps(output)
-
-                print(output_json)
-
-                fname = item.replace("temp", "data")
-                with open(fname, "w+") as f:
-                    f.write(output_json)
-                    f.close()
-                try:
-                    os.remove("heroImage.png")
-                    os.remove("legacyLogo.png")
-                except:
-                    pass
-
-                os.remove(item)
-                completed.append(item)
+        # clean up
+        os.remove(fname)
+        print(json.dumps(data))
+    else:
+        pass
