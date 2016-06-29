@@ -181,6 +181,11 @@ function removeImage(img) {
     }
   }
   img.parent().parent().remove();
+
+  // collapse container if there are no images
+  if ($('#company-image-container').children().length == 0) {
+    $('#company-image-container').attr('hidden', true);
+  }
 }
 
 /**
