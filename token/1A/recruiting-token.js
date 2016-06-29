@@ -351,6 +351,20 @@ $(document).ready(function(){
     enableBackButton();
   });
 
+
+  // fixes background modal on location page
+  setTimeout(function() {
+    var $parent = $('#location-content');
+    var elements = $parent.children().children();
+    var $div1 = $(elements[1]);
+    var $div2 = $(elements[2]);
+    $(elements[1]).remove();
+    $(elements[2]).remove();
+    var $superparent = $($parent.parent());
+    $superparent.append($div1);
+    $superparent.append($div2);
+  }, 2500);
+
   // background sniffer to close interest dialog
   var elapsed = 0;
   closeInterestDialog();
@@ -368,6 +382,7 @@ $(document).ready(function(){
       clearInterval(this);
     }
   }, 1000);
+
 });
 
 /**
