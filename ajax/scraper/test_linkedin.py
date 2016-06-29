@@ -3,9 +3,10 @@ from linkedin import LinkedInScraper
 
 class TestLinkedInScraper(TestCase):
     def setUp(self):
-        self.c1 = LinkedInScraper("google").get_company_data()
-        self.c2 = LinkedInScraper("asdfasdf").get_company_data()
-        self.c3 = LinkedInScraper("1284ljd").get_company_data()
+        base_url = "https://www.linkedin.com/company/"
+        self.c1 = LinkedInScraper(base_url + "google").get_company_data()
+        self.c2 = LinkedInScraper(base_url + "asdfasdf").get_company_data()
+        self.c3 = LinkedInScraper(base_url + "1284ljd").get_company_data()
 
     def test_company_1(self):
         self.assertTrue(len(self.c1["name"]) > 0)
