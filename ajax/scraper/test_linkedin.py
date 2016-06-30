@@ -1,5 +1,7 @@
 from unittest import TestCase, main
 from linkedin import LinkedInScraper
+import os
+import shutil
 
 class TestLinkedInScraper(TestCase):
     def setUp(self):
@@ -22,6 +24,15 @@ class TestLinkedInScraper(TestCase):
 
     def test_company_3(self):
         self.assertIsNone(self.c3)
+
+    def tearDown(self):
+        to_delete = ["__pycache__", "heroImage.png", "legacyLogo.png"]
+        for f in os.listdir():
+            if f in to_delete:
+                if f == "__pycache__":
+                    shutil.rmtree(f)
+                else:
+                    os.remove(f)
 
 if __name__ == "__main__":
     main()
