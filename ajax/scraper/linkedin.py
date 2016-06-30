@@ -89,7 +89,7 @@ class LinkedInScraper(object):
 if __name__ == "__main__":
     # 10 length alphanumerical key
     fname = sys.argv[1]
-    os.chdir("../../public")
+    os.chdir("../../public/uploads")
     if fname in os.listdir():
         # run the scraper
         with open(fname) as json_raw:

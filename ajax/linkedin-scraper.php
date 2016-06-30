@@ -21,7 +21,7 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
 
       // write url to temp JSON file
       $fname = 'temp-' . $key . '.json';
-      $fp = fopen($fname, 'w+');
+      $fp = fopen('uploads/' . $fname, 'w+');
       fwrite($fp, json_encode(array('url'=>$url)));
       fclose($fp);
 
@@ -29,7 +29,6 @@ if (isset($_POST['link']) && !empty($_POST['link'])) {
       // note: shell_exec doesn't take in POST variables
       $command = 'cd .. ; cd ajax/scraper ; sh run.sh ' . $fname;
       $data = shell_exec($command);
-
       $success = true;
     }
   }
@@ -43,8 +42,9 @@ if ($old_name && $new_name) {
   $new_image = $_POST['newName'];
 
   // rename the images for database
-  if (file_exists("heroImage.png") || file_exists("legacyLogo.png")) {
-    rename($old_image, 'uploads/' . $new_image);
+  if (file_exists('uploads/heroImage.png') ||
+      file_exists('uploads/legacyLogo.png')) {
+    rename('uploads/' . $old_image, 'uploads/' . $new_image);
   }
 
   $success = true;
