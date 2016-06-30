@@ -233,3 +233,37 @@ information, you can ensure they only run _when they need to_.
     you have a script that styles a `.ClassName` element a different way than you have elsewhere in the app, Don't just
     override `.ClassName`, create a modifier class that sits _with_ `.ClassName` and style _that_.
     `.ClassName.ClassName--alternative`
+
+## Setting up the Python scraper
+
+### Install Python 3.4.4
+
+- Go to [https://www.python.org/downloads/release/python-344/](https://www.python.org/downloads/release/python-344/) and download Python 3.4.4 (AWS supported version)
+- Follow the instructions on the GUI and wait until installation is complete
+- Check that Python 3.4.4 is installed by typing in `python3` on Terminal - you should get something like this:
+
+```sh
+Python 3.4.4 (v3.4.4:737efcadf5a6, Dec 19 2015, 20:38:52)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+- If a later version of Python is showing up, like Python 3.5.2, then you will need to uninstall it. Afterwards, follow the steps above to install the correct version.
+
+```sh
+sudo rm -rf /Library/Frameworks/Python.framework/Versions/3.5
+sudo rm -rf "/Applications/Python 3.5"
+```
+
+### Run the setup script
+
+- Run `setup.sh` to set up the virtual environment and download the dependencies for the scraper
+- Once that has completed, double check that there is a folder called `venv` in the `/ajax/scraper` directory
+- To ensure everything is correctly set up, run the test (`test_linkedin.py`) by executing the following:
+
+```sh
+source venv/bin/activate
+python3 test_linkedin.py
+deactivate
+```
