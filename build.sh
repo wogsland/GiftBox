@@ -50,5 +50,12 @@ echo "Running JavaScript tests"
 npm run test
 echo ""
 
+# run python scraper tests
+echo "RUnning Python scraper tests"
+source ajax/scraper/venv/bin/activate
+python3 ajax/scraper/test_linkedin.py
+deactivate
+echo ""
+
 # see what's changed
 git status
