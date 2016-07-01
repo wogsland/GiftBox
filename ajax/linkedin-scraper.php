@@ -12,6 +12,29 @@ function generate_key($length) {
   return $string;
 }
 
+if (isset($_POST['clear']) && !empty($_POST['clear'])) {
+  $key = $_POST['clear'];
+  $success = true;
+  if ($key == 'refresh') {
+    $files = scandir('uploads/');
+
+    for ($i = 0; $i < sizeof($files); $i++) {
+      if (preg_match('/[A-Za-z]+/', $files[$i])
+          && strpos($files[$i], '.png') !== false) {
+        $f = 'uploads/' . (string)$files[$i];
+        unlink($f);
+      }
+    }
+  } else {
+    if (file_exists('uploads/heroImage-' . $key . '.png')) {
+      unlink('uploads/heroImage-' . $key . '.png');
+    }
+    if (file_exists('uploads/legacyLogo-' . $key . '.png')) {
+      unlink('uploads/legacyLogo-' . $key . '.png');
+    }
+  }
+}
+
 if (isset($_POST['link']) && !empty($_POST['link'])) {
   $url = $_POST['link'];
   if (filter_var($url, FILTER_VALIDATE_URL)) {
@@ -42,8 +65,7 @@ if ($old_name && $new_name) {
   $new_image = $_POST['newName'];
 
   // rename the images for database
-  if (file_exists('uploads/heroImage.png') ||
-      file_exists('uploads/legacyLogo.png')) {
+  if (file_exists('uploads/' . $old_image)) {
     rename('uploads/' . $old_image, 'uploads/' . $new_image);
   }
 
