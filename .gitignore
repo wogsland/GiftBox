@@ -20,6 +20,10 @@ ehthumbs.db
 /node_modules
 npm-debug.log
 
+# Python #
+##########
+/ajax/scraper/venv
+
 # Testing #
 ###########
 /test.php
