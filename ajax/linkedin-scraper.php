@@ -19,7 +19,7 @@ if (isset($_POST['clear']) && !empty($_POST['clear'])) {
     $files = scandir('uploads/');
 
     for ($i = 0; $i < sizeof($files); $i++) {
-      if (preg_match('/[A-Za-z]+/', $files[$i])
+      if (preg_match('/^[A-Za-z]+/', $files[$i])
           && strpos($files[$i], '.png') !== false) {
         $f = 'uploads/' . (string)$files[$i];
         unlink($f);
