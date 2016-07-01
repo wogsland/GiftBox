@@ -51,7 +51,7 @@ class LinkedInScraper(object):
             return json.loads(raw_html)
         return None
 
-    def get_company_data(self):
+    def get_company_data(self, key):
         """Retrieves JSON information from the HTML source and
         populates the company JSON object accordingly
         """
@@ -71,7 +71,7 @@ class LinkedInScraper(object):
                 self.company["legacyLogo"] = json["legacySquareLogo"]
                 if "description" in self.company.keys():
                     legacy_url = self.media_prefix + self.company["legacyLogo"]
-                    urlretrieve(legacy_url, "legacyLogo.png")
+                    urlretrieve(legacy_url, "legacyLogo-%s.png" % key)
             except KeyError:
                 self.company["legacyLogo"] = ""
 
@@ -79,9 +79,19 @@ class LinkedInScraper(object):
                 self.company["heroImage"] = json["heroImage"]
                 if "description" in self.company.keys():
                     hero_image_url = self.media_prefix + self.company["heroImage"]
-                    urlretrieve(hero_image_url, "heroImage.png")
+                    urlretrieve(hero_image_url, "heroImage-%s.png" % key)
             except KeyError:
                 self.company["heroImage"] = ""
+
+            try:
+                self.company["url"] = self.url
+            except KeyError:
+                self.company["url"] = ""
+
+            try:
+                self.company["key"] = key
+            except KeyError:
+                self.company["key"] = ""
 
             return self.company
         return None
@@ -96,7 +106,12 @@ if __name__ == "__main__":
             temp = json.load(json_raw)
         url = temp["url"]
         scraper = LinkedInScraper(url)
-        data = scraper.get_company_data()
+
+        # extract the key
+        key = fname.replace("temp-", "")
+        key = key.replace(".json", "")
+
+        data = scraper.get_company_data(key)
 
         # clean up
         os.remove(fname)
