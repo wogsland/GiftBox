@@ -37,10 +37,6 @@ describe('scraper.js', function() {
   });
 
   describe('defaults', function() {
-    it('should not have the add button open by default', function() {
-      chai.expect($('#linkedin-add-button').is(':visible')).eql(false);
-    });
-
     it('should not have the progress bar open by deafult', function() {
       chai.expect($('#linkedin-progress').is(':visible')).eql(false);
     })
