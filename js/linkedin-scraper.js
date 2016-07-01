@@ -5,12 +5,18 @@ var text = 'https://www.linkedin.com/company/';
  * Hides elements upon the page loading
  */
 $(document).ready(function() {
-  // placeholder text
-  $('#linkedin-url').val(text);
-  // hide the add button
-  $('#linkedin-add-button').hide();
-  // hide and disable progress bar
+  $('#linkedin-url')
+    .val(text)
+    .keydown(function() {
+      $('label').css('color', '');
+      $('#linkedin-url').attr('label', "Enter your company's LinkedIn URL");
+      $('#linkedin-submit-button')
+        .text('Submit')
+        .attr('onclick', 'processLinkedIn()');
+    });
+  $('#linkedin-submit-button').text('Submit');
   $('#linkedin-progress').hide();
+  cleanUploads('refresh');
 });
 
 /**
@@ -18,7 +24,25 @@ $(document).ready(function() {
  */
 function initLinkedIn() {
   $('#linkedin-dialog')[0].open();
-  $('#linkedin-add-button').hide();
+  $('#linkedin-submit-button')
+    .text('Submit')
+    .attr('onclick', 'processLinkedIn()');
+}
+
+/**
+ * Clears unused LinkedIn images in the uploads directory
+ * that were generated from a previous scrape
+ */
+function cleanUploads(key) {
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    data: {'clear': key},
+    url: '/ajax/linkedin-scraper',
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
 }
 
 /**
@@ -34,8 +58,6 @@ function processLinkedIn() {
   } else {
     // handle progress bar
     $('#linkedin-progress').show();
-    // hide the add button temporarily
-    $('#linkedin-add-button').hide();
     // call function
     openLinkedIn(link);
   }
@@ -57,7 +79,6 @@ function openLinkedIn(companyLink) {
     url: '/ajax/linkedin-scraper',
     success: function(data) {
       try {
-        console.log(data);
         companyInfo = JSON.parse(data['data']);
       } catch (error) {
         console.error(error);
@@ -77,11 +98,13 @@ function openLinkedIn(companyLink) {
 
         $('label').css('color', 'green');
         $('#linkedin-url').attr('label', 'LinkedIn company and information found');
-        $('#linkedin-add-button').show();
+        $('#linkedin-submit-button')
+          .text('Select')
+          .attr('onclick', 'addData()');
       }
     },
     error: function(xhr, status, error) {
-      console.log(error);
+      console.error(error);
     }
   });
 }
@@ -93,8 +116,29 @@ function cancelLinkedIn() {
   $('label').css('color', '');
   $('#linkedin-url').attr('label', "Enter your company's LinkedIn URL");
   $('#linkedin-progress').hide();
-  $('#linkedin-add-button').hide();
   $('#linkedin-url').val(text);
+  $('#linkedin-submit-button')
+    .text('Select')
+    .attr('onclick', 'processLinkedIn()');
+  try {
+    var key = companyInfo['key'];
+    cleanUploads(key);
+  } catch (e) {}
+}
+
+/**
+ * Resets the LinkedIn modal window without removing
+ * data that was previously scraped
+ */
+function resetLinkedIn() {
+  $('#linkedin-dialog')[0].close();
+  $('label').css('color', '');
+  $('#linkedin-url').attr('label', "Enter your company's LinkedIn URL");
+  $('#linkedin-progress').hide();
+  $('#linkedin-url').val(text);
+  $('#linkedin-submit-button')
+    .text('Select')
+    .attr('onclick', 'processLinkedIn()');
 }
 
 /**
@@ -102,10 +146,25 @@ function cancelLinkedIn() {
  * the AJAX request was successful
  */
 function addData() {
-  $('#linkedin-cancel-button').trigger('click');
+  var alert = false;
+  var fields = ['#company', '#company-description', '#company-linkedin'];
+  for (var i = 0; i < fields.length; i++) {
+    if ($(fields[i]).val().length > 0) {
+      alert = true;
+      break;
+    }
+  }
+  if ($('#company-image-container').children().length !== 0) alert = true;
+  if (alert) {
+    var message = 'Warning: "Select" will replace data already in the form';
+    if (!confirm(message)) return;
+  }
   addName();
   addDescription();
+  clearExistingImages();
   addImages();
+  addURL();
+  resetLinkedIn();
 }
 
 /**
@@ -122,24 +181,46 @@ function addDescription() {
   $('#company-description').val(companyInfo['description']);
 }
 
+function clearExistingImages() {
+  var parent = '#company-image-container';
+  var container = '.photo-thumbnail';
+  var images = $(container);
+  for (var i = 0; i < images.length; i++) {
+    var id = $(images[i]).attr('id');
+    var key = id.slice(-10);
+    cleanUploads(key);
+  }
+  $(parent).children().length > 0 ? $(parent).empty() : null;
+}
+
 /**
  * Adds the default LinkedIn images to the images section
  */
 function addImages() {
-  var images = ["heroImage", "legacyLogo"];
+  var images = ['heroImage', 'legacyLogo'];
   var img = null;
   for (var i = 0; i < images.length; i++) {
+    var key = companyInfo['key'];
     if (companyInfo[images[i]].length > 0) {
       var url = 'https://media.licdn.com/media' + companyInfo[images[i]];
-      img = $('<img class="recruiting-token-image" id="' + images[i] + '">');
+      img = $('<img class="recruiting-token-image" id="' + images[i] + '-' + key + '">');
       $(img).attr('src', url);
       img.data('file', null);
-      img.data('name', images[i]);
+      img.data('name', images[i] + '-' + key);
       img.data('saved', false);
       img.data('scraped', true);
-      createThumbnail(img, "company-image-container");
+      createThumbnail(img, 'company-image-container');
     }
   }
+}
+
+/**
+ * Adds the LinkedIn URL to the social media section
+ */
+function addURL() {
+  var url = companyInfo['url'];
+  var shortURL = url.replace('https://www.linkedin.com/', '');
+  $('#company-linkedin').val(shortURL);
 }
 
 /**
@@ -162,7 +243,7 @@ function uploadScrapedImage(image, oldName, newName) {
       }
     },
     error: function(xhr, status, error) {
-      console.log(error);
+      console.error(error);
     }
   });
 }
