@@ -15,12 +15,14 @@ class TestLinkedInScraper(TestCase):
         self.assertTrue(len(self.c1["description"]) > 0)
         self.assertTrue(len(self.c1["heroImage"]) > 0)
         self.assertTrue(len(self.c1["legacyLogo"]) > 0)
+        self.assertTrue(len(self.c1["url"]) > 0)
 
     def test_company_2(self):
         self.assertTrue(len(self.c2["name"]) != 0)
         self.assertTrue(len(self.c2["description"]) == 0)
         self.assertTrue(len(self.c2["heroImage"]) == 0)
         self.assertTrue(len(self.c2["legacyLogo"]) == 0)
+        self.assertTrue(len(self.c2["url"]) != 0)
 
     def test_company_3(self):
         self.assertIsNone(self.c3)
