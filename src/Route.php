@@ -107,10 +107,9 @@ class Route
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
                     include $this->default;
                 /* EXPERIMENT 1 */
-                } elseif (
-                'dist' == $this->endpointPieces[2]
-                && 'recruiting_token.min.js' == $this->endpointPieces[3]
-                && isset($this->gets['t'])
+                } elseif ('dist' == $this->endpointPieces[2]
+                    && 'recruiting_token.min.js' == $this->endpointPieces[3]
+                    && isset($this->gets['t'])
                 ) {
                     $filename = __DIR__.'/../token/'.$this->gets['t'].'/recruiting_token.min.js';
                     if (file_exists($filename)) {
@@ -333,7 +332,7 @@ class Route
                 /* END EXPERIMENT 2 */
 
                 /* EXPERIMENT 1 */
-                if (rand(1,100) > 50) {
+                if (rand(1, 100) > 50) {
                     //mark the web request
                     $webRequest->inExperiment(1, 'A');
 

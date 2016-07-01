@@ -41,8 +41,8 @@ if (isset($_SESSION['activation_key'], $_POST['activation_key'])
                     $_SESSION['stripe_id'] = $user->stripe_id;
                 } elseif (isset($user->organization_id)) {
                     $org = new Organization($user->organization_id);
-                    $paying_user = new User($org->paying_user ?? NULL);
-                    $_SESSION['stripe_id'] = $paying_user->stripe_id ?? NULL;
+                    $paying_user = new User($org->paying_user ?? null);
+                    $_SESSION['stripe_id'] = $paying_user->stripe_id ?? null;
                 }
                 $UserMilestone = new UserMilestone($user->id, 'Log In');
             }
