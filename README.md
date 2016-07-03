@@ -90,7 +90,7 @@ which will create everything you need in the untracked components directory.
 
 - Go to [https://www.python.org/downloads/release/python-344/](https://www.python.org/downloads/release/python-344/) and download Python 3.4.4 (AWS supported version)
 - Follow the instructions on the GUI and wait until installation is complete
-- Check that Python 3.4.4 is installed by typing in `python3` on Terminal - you should get something like this:
+- Check that Python 3.4.4 is installed by typing in `python3.4` on Terminal - you should get something like this:
 
 ```sh
 Python 3.4.4 (v3.4.4:737efcadf5a6, Dec 19 2015, 20:38:52)
@@ -99,12 +99,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-- If a later version of Python is showing up, like Python 3.5.2, then you will need to uninstall it. Afterwards, follow the steps above to install the correct version.
-
-```sh
-sudo rm -rf /Library/Frameworks/Python.framework/Versions/3.5
-sudo rm -rf "/Applications/Python 3.5"
-```
+- If a later version of Python is showing up, like Python 3.5.x, then you do not need to uninstall it, but make sure you use `python3.4` instead of `python3`
 
 #### Run the setup script
 
