@@ -6,9 +6,9 @@ import shutil
 class TestLinkedInScraper(TestCase):
     def setUp(self):
         base_url = "https://www.linkedin.com/company/"
-        self.c1 = LinkedInScraper(base_url + "google").get_company_data()
-        self.c2 = LinkedInScraper(base_url + "asdfasdf").get_company_data()
-        self.c3 = LinkedInScraper(base_url + "1284ljd").get_company_data()
+        self.c1 = LinkedInScraper(base_url + "google").get_company_data("x")
+        self.c2 = LinkedInScraper(base_url + "asdfasdf").get_company_data("x")
+        self.c3 = LinkedInScraper(base_url + "1284ljd").get_company_data("x")
 
     def test_company_1(self):
         self.assertTrue(len(self.c1["name"]) > 0)
@@ -28,7 +28,7 @@ class TestLinkedInScraper(TestCase):
         self.assertIsNone(self.c3)
 
     def tearDown(self):
-        to_delete = ["__pycache__", "heroImage.png", "legacyLogo.png"]
+        to_delete = ["__pycache__", "heroImage-x.png", "legacyLogo-x.png"]
         for f in os.listdir():
             if f in to_delete:
                 if f == "__pycache__":
