@@ -13,8 +13,9 @@ Once you have it in installed, cd to the project directory and run
 
 which will create everything you need in the untracked vendor directory.
 
-[npm](https://www.npmjs.com/) is used for the build process.
-Once you have it in installed, cd to the project directory and run
+[npm](https://www.npmjs.com/) is used for the build process and ships with [Node.js](https://nodejs.org/en/download/current/). Make sure to grab the "current"
+version of Node.js rather than the LTS one, because the latter doesn't support
+ES6. Once you have it in installed, cd to the project directory and run
 
     npm install
 
