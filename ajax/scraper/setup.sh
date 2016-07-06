@@ -8,7 +8,7 @@ printf "\n${GREEN}Installing virtual environment${NC}\n"
 pip install virtualenv
 
 printf "\n${GREEN}Creating virtual environment${NC}\n"
-virtualenv -p python3 venv
+virtualenv -p python3.4 venv
 
 printf "\n${GREEN}Activating virtual environment${NC}\n"
 source venv/bin/activate

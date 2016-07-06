@@ -20,7 +20,7 @@ describe('scraper.js', function() {
   document = doc(fs.readFileSync('/Library/Webserver/Documents/GiftBox/create_company.php'));
 
   // includes file to test
-  var path = '/Library/Webserver/Documents/GiftBox/js/scraper.js';
+  var path = '/Library/Webserver/Documents/GiftBox/js/linkedin-scraper.js';
   var code = fs.readFileSync(path);
   //vm.runInThisContext(code);
 

@@ -76,7 +76,6 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
-    <link rel="import" href="/components/paper-toast/paper-toast.html">
     <link rel="import" href="/components/paper-progress/paper-progress.html">
 
     <style is="custom-style">
