@@ -391,6 +391,12 @@ require __DIR__.'/header.php';
       <div id="linkedin-progress">
         <paper-progress indeterminate></paper-progress>
       </div>
+      <paper-dialog class="recruiting-dialog" id="alert-dialog" modal>
+        <h2>Warning</h2>
+        <p>"Select" will replace data already in the form</p>
+        <paper-button id="alert-ok">Ok</paper-button>
+        <paper-button id="alert-cancel">Cancel</paper-button>
+      </paper-dialog>
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
