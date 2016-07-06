@@ -388,15 +388,18 @@ require __DIR__.'/header.php';
         <paper-button id="linkedin-submit-button" class="dialog-button" onclick="processLinkedIn()">Submit</paper-button>
         <paper-button id="linkedin-cancel-button" dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
       </div>
-      <div id="linkedin-progress">
-        <paper-progress indeterminate></paper-progress>
-      </div>
+
       <paper-dialog class="recruiting-dialog" id="alert-dialog" modal>
         <h2>Warning</h2>
         <p>"Select" will replace data already in the form</p>
         <paper-button id="alert-ok">Ok</paper-button>
         <paper-button id="alert-cancel">Cancel</paper-button>
       </paper-dialog>
+
+      <div id="linkedin-progress">
+        <paper-progress indeterminate></paper-progress>
+      </div>
+
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
