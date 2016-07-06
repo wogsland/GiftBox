@@ -484,9 +484,20 @@ function saveCompany() {
                 img.data('recruiting_company_id', companyId);
                 if (!img.data('saved')) {
                   var file = img.data("file");
-                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  var fileName = null;
+
+                  if (file == null) {
+                    fileName = userId+'_'+companyId+'_'+Date.now()+'_'+img.data('name')+'.png';
+                  } else {
+                    fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  }
                   img.data('file_name', fileName);
-                  uploadFile(file, fileName, img);
+
+                  if (img.data('scraped')) {
+                    uploadScrapedImage(img, img.data('name')+'.png', fileName);
+                  } else {
+                    uploadFile(file, fileName, img);
+                  }
                 }
               });
 

@@ -84,6 +84,35 @@ components. Once you have it in installed, cd to the project directory and run
 
 which will create everything you need in the untracked components directory.
 
+### Setting up the Python scraper
+
+#### Install Python 3.4.4
+
+- Go to [https://www.python.org/downloads/release/python-344/](https://www.python.org/downloads/release/python-344/) and download Python 3.4.4 (AWS supported version)
+- Follow the instructions on the GUI and wait until installation is complete
+- Check that Python 3.4.4 is installed by typing in `python3.4` on Terminal - you should get something like this:
+
+```sh
+Python 3.4.4 (v3.4.4:737efcadf5a6, Dec 19 2015, 20:38:52)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+- If a later version of Python is showing up, like Python 3.5.x, then you do not need to uninstall it, but make sure you use `python3.4` instead of `python3`
+
+#### Run the setup script
+
+- Run `setup.sh` to set up the virtual environment and download the dependencies for the scraper
+- Once that has completed, double check that there is a folder called `venv` in the `/ajax/scraper` directory
+- To ensure everything is correctly set up, run the test (`test_linkedin.py`) by executing the following:
+
+```sh
+source venv/bin/activate
+python3.4 test_linkedin.py
+deactivate
+```
+
 ## <a id="branching"></a>Branching
 
 1. Create branches off of `develop` (except hotfixes, create those off of `master`)
