@@ -16,6 +16,7 @@ $(document).ready(function() {
     });
   $('#linkedin-submit-button').text('Submit');
   $('#linkedin-progress').hide();
+  $('#alert-dialog')[0].close();
   cleanUploads('refresh');
 });
 
@@ -156,9 +157,24 @@ function addData() {
   }
   if ($('#company-image-container').children().length !== 0) alert = true;
   if (alert) {
-    var message = 'Warning: "Select" will replace data already in the form';
-    if (!confirm(message)) return;
+    $('#alert-dialog')[0].open();
+    $('#alert-ok').click(function() {
+      addDataConfirmed();
+      $('#alert-dialog')[0].close();
+    })
+    $('#alert-cancel').click(function() {
+      $('#alert-dialog')[0].close();
+      resetLinkedIn();
+    });
+  } else {
+    addDataConfirmed();
   }
+}
+
+/**
+ * Adds data to the token if there is confirmation
+ */
+function addDataConfirmed() {
   addName();
   addDescription();
   clearExistingImages();
