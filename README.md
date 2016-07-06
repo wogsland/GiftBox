@@ -109,7 +109,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ```sh
 source venv/bin/activate
-python3 test_linkedin.py
+python3.4 test_linkedin.py
 deactivate
 ```
 
