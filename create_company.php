@@ -348,11 +348,13 @@ require __DIR__.'/header.php';
               USE EXISTING COMPANY
             </paper-button>
           </div>
+          <!--
           <div class="button-container">
             <paper-button raised onclick="initLinkedIn()" id="linkedin-scrape-button">
               IMPORT FROM LINKEDIN
             </paper-button>
           </div>
+        -->
           <div class="button-container">
             <paper-button raised onclick="skipCompany()" id="skip-company-button">
               Skip COMPANY
