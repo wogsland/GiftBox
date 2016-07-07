@@ -1,11 +1,11 @@
-## Description
+### Description
 
-## Expected behavior
+### Expected behavior
 
-## Actual behavior
+### Actual behavior
 
-## Steps to reproduce
+### Steps to reproduce
 
-## Location (computer/mobile)
+### Location (computer/mobile)
 
-## Other information
+### Other information
