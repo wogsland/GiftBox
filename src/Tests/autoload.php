@@ -36,7 +36,9 @@ function getTestCookieAndUserId($admin = false)
         $query = "INSERT INTO user (first_name, last_name, email_address, password)
               VALUES ('fake', 'user', '$username', '$hash')";
     }
-    $id = insert($query);
+    execute_query($query);
+
+    $user = (new Sizzle\Bacon\Database\User())->fetch($username);
 
     $ch = curl_init(TEST_URL . '/ajax/login');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -47,7 +49,7 @@ function getTestCookieAndUserId($admin = false)
     preg_match_all('/^Set-Cookie: PHPSESSID=(.*?);/mi', $result, $matches);
     $userCookie = $matches[1][0];
     $cookieString = 'PHPSESSID=' . $userCookie . ';';
-    return array($cookieString, $id);
+    return array($cookieString, $user->id);
 }
 
 /**

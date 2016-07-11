@@ -9,7 +9,10 @@ use \Sizzle\Bacon\Database\{
     User
 };
 
-/**
+use Sizzle\Tests\Ajax\Email\fakeSMTP;
+
+
+/**a
  * This class tests the ajax endpoint to send emails.
  *
  * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Lista/SendTest
@@ -17,7 +20,7 @@ use \Sizzle\Bacon\Database\{
 class SendTest
 extends \PHPUnit_Framework_TestCase
 {
-    use \Sizzle\Tests\Traits\User;
+    use \Sizzle\Bacon\Tests\Traits\User;
     /**
      * Requires the util.php file of functions
      */
@@ -26,24 +29,22 @@ extends \PHPUnit_Framework_TestCase
     {
         include_once __DIR__ . '/../../../../../util.php';
     }
-
-    protected $overloadedPHPMailer;
     /**
      * Setup before each test
      */
     public function setUp()
     {
-       $this->overloadedPHPMailer = \Mockery::mock('overload:\PHPMailer')->makePartial();
-       $this->overloadedPHPMailer
-          ->shouldReceive('send')
-          ->andReturn(true);
-       $this->overloadedPHPMailer
-          ->shouldReceive('postSend')
-          ->andReturn(true);
-       $this->overloadedPHPMailer
-          ->shouldReceive('preSend')
-          ->andReturn(true);
-        $this->assertTrue((new \PHPMailer) instanceof \Mockery\MockInterface);
+//       $this->overloadedPHPMailer = \Mockery::mock('overload:\PHPMailer')->makePartial();
+//       $this->overloadedPHPMailer
+//          ->shouldReceive('send')
+//          ->andReturn(true);
+//       $this->overloadedPHPMailer
+//          ->shouldReceive('postSend')
+//          ->andReturn(true);
+//       $this->overloadedPHPMailer
+//          ->shouldReceive('preSend')
+//          ->andReturn(true);
+//        $this->assertTrue((new \PHPMailer) instanceof \Mockery\MockInterface);
 
         $this->url = TEST_URL . "/ajax/email/list/send";
 
@@ -65,9 +66,11 @@ extends \PHPUnit_Framework_TestCase
 
         $username = 'user'.rand();
         $password = 'my'.rand();
-        $smtp_host = rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255).'.'.rand(0, 255);
-        $smtp_port = rand(1, 1000);
+        $smtp_host = "localhost";
+        $smtp_port = 25;
 
+        $this->smtp = new fakeSMTP;
+        $this->smtp->receive();
         // Create credentials
         $this->EmailCredential = new EmailCredential();
         $this->EmailCredential->create($this->user->id, $username, $password, $smtp_host, $smtp_port);
@@ -94,6 +97,7 @@ extends \PHPUnit_Framework_TestCase
             $fields_string .= $key.'='.$value.'&';
         }
         $fields_string = rtrim($fields_string, '&');
+        echo "START";
         ob_start();
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_POST, true);
@@ -105,7 +109,14 @@ extends \PHPUnit_Framework_TestCase
         $json = ob_get_contents();
         $return = json_decode($json);
         ob_end_clean();
-
+        echo "GOGO";
+        var_export($this->hp);
+        if (!$this->hp->mail['rawEmail']) {
+            echo "NO EMAIL";
+        } else {
+            var_export($this->hp);
+            echo ' \n ';
+        }
         echo 'Response Data: ';
         var_export($json);
 //        $this->assertFalse(isset($return->data->errors));
