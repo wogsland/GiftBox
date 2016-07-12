@@ -192,7 +192,7 @@ function submitInterest(event) {
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
-    if ($(eventPath[8]).is('location-x-card')) {
+    if ($(eventPath[8]).is('location-x-card') || $(eventPath[6]).is('location-x-card')) {
       formIndex = 1;
     } else if ($(eventPath[5]).is('image-x-card')) {
       formIndex = 2;
