@@ -191,15 +191,17 @@ scope._submitInterest = function (event) {
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
-    if ($(eventPath[8]).is('location-x-card') || $(eventPath[6]).is('location-x-card')) {
-      formIndex = 1;
-    } else if ($(eventPath[5]).is('image-x-card')) {
-      formIndex = 2;
-    } else if ($(eventPath[5]).is('video-x-card')) {
-      formIndex = 3;
-    } else if ($(eventPath[5]).is('description-x-card')) {
-      formIndex = 4;
-    }
+    eventPath.forEach(function(eventPathVal){
+      if ($(eventPathVal).is('location-x-card')) {
+        formIndex = 1;
+      } else if ($(eventPathVal).is('image-x-card')) {
+        formIndex = 2;
+      } else if ($(eventPathVal).is('video-x-card')) {
+        formIndex = 3;
+      } else if ($(eventPathVal).is('description-x-card')) {
+        formIndex = 4;
+      }
+    });
   } else {
     // Firefox & Safari
     var currentElem = event.target;
