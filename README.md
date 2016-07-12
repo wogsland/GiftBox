@@ -82,7 +82,7 @@ components. Once you have it in installed, cd to the project directory and run
 
     bower install
 
-which will create everything you need in the untracked components directory.
+which will create everything you need in the untracked components directory. If there are console errors regarding permissions and access to certain files, run `sudo bower --allow-root install` instead.
 
 ### Setting up the Python scraper
 
