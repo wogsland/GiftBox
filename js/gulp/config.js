@@ -91,7 +91,8 @@ module.exports = {
             p.js('free-trial.min'),
             p.js('contact'),
             p.js('login'),
-            p.js('signup')
+            p.js('signup'),
+            p.js('linkedin-scraper')
         ],
 
         json: [

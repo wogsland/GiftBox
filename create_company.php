@@ -76,6 +76,7 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/paper-progress/paper-progress.html">
 
     <style is="custom-style">
         .center-column {
@@ -159,6 +160,9 @@ require __DIR__.'/header.php';
         #use-existing-company-button {
           margin-left: 50px;
           margin-right: 50px;
+        }
+        paper-progress {
+          width: 100%;
         }
     </style>
 
@@ -344,6 +348,13 @@ require __DIR__.'/header.php';
               USE EXISTING COMPANY
             </paper-button>
           </div>
+          <!--
+          <div class="button-container">
+            <paper-button raised onclick="initLinkedIn()" id="linkedin-scrape-button">
+              IMPORT FROM LINKEDIN
+            </paper-button>
+          </div>
+        -->
           <div class="button-container">
             <paper-button raised onclick="skipCompany()" id="skip-company-button">
               Skip COMPANY
@@ -370,6 +381,27 @@ require __DIR__.'/header.php';
             <paper-button class="dialog-button" onclick="processCompany()">Use</paper-button>
             <paper-button dialog-dismiss class="dialog-button">Cancel</paper-button>
         </div>
+    </paper-dialog>
+
+    <paper-dialog class="recruiting-dialog" id="linkedin-dialog" modal>
+      <h2>Import company information from LinkedIn</h2>
+      <paper-input id="linkedin-url" label="Enter your company's LinkedIn URL" autofocus></paper-input>
+      <div class="buttons">
+        <paper-button id="linkedin-submit-button" class="dialog-button" onclick="processLinkedIn()">Submit</paper-button>
+        <paper-button id="linkedin-cancel-button" dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
+      </div>
+
+      <paper-dialog class="recruiting-dialog" id="alert-dialog" modal>
+        <h2>Warning</h2>
+        <p>"Select" will replace data already in the form</p>
+        <paper-button id="alert-ok">Ok</paper-button>
+        <paper-button id="alert-cancel">Cancel</paper-button>
+      </paper-dialog>
+
+      <div id="linkedin-progress">
+        <paper-progress indeterminate></paper-progress>
+      </div>
+
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
@@ -399,6 +431,7 @@ require __DIR__.'/header.php';
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
     <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
+    <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
     /**

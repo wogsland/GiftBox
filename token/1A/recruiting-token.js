@@ -184,21 +184,24 @@ scope._onInterestClick4 = function (event) {
  * Submits interest info
  */
 scope._submitInterest = function (event) {
+  event.preventDefault();
   var formIndex = 0;
   var eventPath = [];
   openedInterestPopup = false;
   if (event.path !== undefined) {
     // Chrome
     eventPath = event.path;
-    if ($(eventPath[8]).is('location-x-card')) {
-      formIndex = 1;
-    } else if ($(eventPath[5]).is('image-x-card')) {
-      formIndex = 2;
-    } else if ($(eventPath[5]).is('video-x-card')) {
-      formIndex = 3;
-    } else if ($(eventPath[5]).is('description-x-card')) {
-      formIndex = 4;
-    }
+    eventPath.forEach(function(eventPathVal){
+      if ($(eventPathVal).is('location-x-card')) {
+        formIndex = 1;
+      } else if ($(eventPathVal).is('image-x-card')) {
+        formIndex = 2;
+      } else if ($(eventPathVal).is('video-x-card')) {
+        formIndex = 3;
+      } else if ($(eventPathVal).is('description-x-card')) {
+        formIndex = 4;
+      }
+    });
   } else {
     // Firefox & Safari
     var currentElem = event.target;
@@ -206,11 +209,13 @@ scope._submitInterest = function (event) {
       eventPath.push(currentElem);
       currentElem = currentElem.parentElement;
     }
-    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1)
+    if (eventPath.indexOf(window) === -1 && eventPath.indexOf(document) === -1) {
       eventPath.push(document);
-    if (eventPath.indexOf(window) === -1)
+    }
+    if (eventPath.indexOf(window) === -1) {
       eventPath.push(window);
-    if (eventPath[8].localName == 'location-x-card') {
+    }
+    if (eventPath[9].localName == 'location-x-card' || eventPath[8].localName == 'location-x-card') {
       formIndex = 1;
     } else if (eventPath[5].localName == 'image-x-card') {
       formIndex = 2;
@@ -220,7 +225,6 @@ scope._submitInterest = function (event) {
       formIndex = 4;
     }
   }
-  event.preventDefault();
   if ($('.email-paper-input')[formIndex].validate()) {
     $('.submit-interest-button').addClass('disable-clicks');
     var response = $('#interest-response')[0].selectedItem.value;
@@ -349,6 +353,20 @@ $(document).ready(function(){
     enableBackButton();
   });
 
+
+  // fixes background modal on location page
+  setTimeout(function() {
+    var $parent = $('#location-content');
+    var elements = $parent.children().children();
+    var $div1 = $(elements[1]);
+    var $div2 = $(elements[2]);
+    $(elements[1]).remove();
+    $(elements[2]).remove();
+    var $superparent = $($parent.parent());
+    $superparent.append($div1);
+    $superparent.append($div2);
+  }, 2500);
+
   // background sniffer to close interest dialog
   var elapsed = 0;
   closeInterestDialog();
@@ -366,6 +384,7 @@ $(document).ready(function(){
       clearInterval(this);
     }
   }, 1000);
+
 });
 
 /**
