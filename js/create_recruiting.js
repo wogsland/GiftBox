@@ -1,5 +1,46 @@
 var imageType = /image.*/;
 
+$(document).ready(function() {
+  var textFields = [
+    '#company',
+    '#company-description',
+    '#company-values',
+    '#company-facebook',
+    '#company-linkedin',
+    '#company-youtube',
+    '#company-twitter',
+    '#company-google-plus'
+  ];
+  $('#leaving-alert')[0].close();
+  $(window).bind('beforeunload', function(e) {
+    return 'hello world';
+  });
+  /*
+  window.onbeforeunload = function(e) {
+    return 'sure?';
+
+    e.preventDefault();
+    var leaving = function() {
+
+      $('#leaving-ok').click(function() {
+        e.returnValue = true;
+        return true;
+      });
+      $('#leaving-cancel').click(function() {
+        e.returnValue = false;
+        return false;
+      });
+      $('#leaving-alert')[0].open();
+
+      return 'sure?';
+    };
+    textFields.map(function(e) {
+      if ($(e).val().length !== 0) leaving();
+    });
+
+  }*/
+});
+
 /**
  * Updates delay time from slider
  */
