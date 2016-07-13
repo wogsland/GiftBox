@@ -125,7 +125,7 @@
         $.post("/ajax/demo_request", $('#demo-request-form').serialize(),
             function (data, textStatus, jqXHR) {
                 if (data.status === "SUCCESS") {
-                    $(".response").html('Thanks for your interest! One of our sales teem members will be in touch with you shortly to setup a demo.');
+                    $(".response").html('Thanks for your interest!<br /><br /> One of our sales team will be in touch with you shortly to schedule a demo.');
                     $('#demo-request-form').hide();
                     $('#call-to-action').hide();
                     $(".response").show();

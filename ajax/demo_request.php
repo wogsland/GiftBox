@@ -28,7 +28,7 @@ if (isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
         )
     );
     $status = 'SUCCESS';
-    //(new Support())->create($email, $message);
+    (new Support())->create($email, $subject);
 }
 header('Content-Type: application/json');
 echo json_encode(array('status' => $status));
