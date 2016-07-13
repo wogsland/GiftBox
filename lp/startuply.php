@@ -62,7 +62,7 @@ if (logged_in()) {
         <div class="navigation-brand">
           <div class="brand-logo">
             <!-- Maybe go back in an add in the cool looking to color alt logo-->
-            <a href="index.html" class="logo"></a><a href="index.html" class="logo logo-alt"></a>
+            <a href="index.html" class="logo"></a><a href="/" class="logo logo-alt"></a>
           </div>
         </div>
         <button class="navigation-toggle">
