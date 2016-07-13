@@ -425,6 +425,13 @@ require __DIR__.'/header.php';
         <p id="status-message">No message supplied</p>
     </paper-dialog>
 
+    <paper-dialog class="recruiting-dialog" id="leaving-alert" modal>
+      <h2>Warning</h2>
+      <p>Leaving this page will erase data already in the form</p>
+      <paper-button id="leaving-ok">Ok</paper-button>
+      <paper-button id="leaving-cancel">Cancel</paper-button>
+    </paper-dialog>
+
     <?php require_once __DIR__.'/footer.php';?>
 
     <!-- JavaScript -->
