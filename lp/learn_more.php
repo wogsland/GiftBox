@@ -57,7 +57,7 @@ img.emoji {
       <div class="container">
         <div class="navigation-brand">
           <div class="brand-logo">
-            <a href="index.html" class="logo"></a><a href="/" class="logo logo-alt"></a>
+            <a href="/" class="logo" style="margin-top:20px;"></a>
           </div>
           <button class="navigation-toggle visible-xs" type="button" data-target=".navbar-collapse">
             <span class="icon-bar base_clr_bg"></span>
@@ -70,14 +70,13 @@ img.emoji {
             <!-- Left menu -->
             <div class="menu-demo-menu-container">
               <ul id="menu-demo-menu" class="navigation-bar navigation-bar-left">
-                <li><a href="/#hero">Home</a></li>
-                <li><a href="/#about">About</a></li>
-                <li><a href="/#features">Features</a></li>
-                <li><a href="/pricing">Prices</a></li>
-                <li><a href="/#feedback">Feedback</a></li>
-                <li><a href="/#team">Team</a></li>
-                <li><a href="https://blog.gosizzle.io">Blog</a></li>
-                <li><a href="/#guarantee">Contact</a></li>
+                <li><a href="/#about">ABOUT</a></li>
+                <li><a href="/#features">FEATURES</a></li>
+                <li><a href="/pricing">PRICES</a></li>
+                <li><a href="/#feedback">FEEDBACK</a></li>
+                <li><a href="/#team">TEAM</a></li>
+                <li><a href="https://blog.gosizzle.io">BLOG</a></li>
+                <li><a href="/#guarantee">CONTACT</a></li>
               </ul>
             </div>            <!-- Right menu -->
             <div class="right-menu-wrap">
@@ -85,8 +84,8 @@ img.emoji {
 
               <div class="menu-loginregister-container">
                 <ul id="menu-loginregister" class="navigation-bar navigation-bar-right">
-                  <li><a href="/email_signup?action=login">Login</a></li>
-                  <li class="featured"><a class="btn btn-sm btn-outline-color" href="/pricing">Sign up</a></li>
+                  <li><a href="/email_signup?action=login">LOGIN</a></li>
+                  <li class="featured"><a class="btn btn-sm btn-outline-color" href="/pricing">SIGN UP</a></li>
                 </ul>
               </div>
             </div>

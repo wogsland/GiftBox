@@ -10913,3 +10913,14 @@ article.vsc-service-elem:hover .icon {
 .vsc-countdown-normal {
   text-transform: uppercase;
 }
+.navigation-header .navigation-brand .brand-logo .logo {
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	background-size: contain;
+	display: block;
+	height: 30px;
+	background-image: url("/assets2/img/Logo-Sizzle-Sizzle.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+	line-height: 30px;
+}
