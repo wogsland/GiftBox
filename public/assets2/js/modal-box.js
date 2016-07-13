@@ -3,7 +3,7 @@
 
     ModalBox = function (el) {
         this.el = $(el);
-    }
+    };
 
     ModalBox.prototype.center = function () {
         var $el = this.el,
