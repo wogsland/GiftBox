@@ -79,6 +79,9 @@ class Route
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;
+            case 'demo_request':
+                include __DIR__.'/../lp/demo_request.php';
+                break;
             case 'email_credentials':
                 include __DIR__.'/../email_credentials.php';
                 break;
@@ -131,6 +134,9 @@ class Route
                         include $this->default;
                     }
                 }
+                break;
+            case 'learn_more':
+                include __DIR__.'/../lp/learn_more.php';
                 break;
             case 'mascot':
                 include __DIR__.'/../mascot.php';

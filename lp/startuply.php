@@ -62,7 +62,7 @@ if (logged_in()) {
         <div class="navigation-brand">
           <div class="brand-logo">
             <!-- Maybe go back in an add in the cool looking to color alt logo-->
-            <a href="index.html" class="logo"></a><a href="index.html" class="logo logo-alt"></a>
+            <a href="index.html" class="logo"></a><a href="/" class="logo logo-alt"></a>
           </div>
         </div>
         <button class="navigation-toggle">
@@ -631,7 +631,15 @@ if (logged_in()) {
         </div>
       </div>
     </div>
-    <div class="copyright">Giftly Inc, 2016. All rights reserved.</div>
+    <div class="copyright">
+      &copy; Giftly Inc, 2016. All rights reserved.<br />
+      <!--Terms and Policy-->
+      <a href="/terms" style="color:white;">Terms and Conditions</a> |
+      <a href="/privacy" style="color:white;">Privacy Policy</a> |
+      <a href="/support" style="color:white;">Contact Support</a> |
+      <a href="/affiliates" style="color:white;">Affiliate Program</a> |
+      <a href="/careers" style="color:white;">Careers</a>
+    </div>
   </footer>
 
   <div class="back-to-top"><i class="fa fa-angle-up fa-3x"></i></div>
