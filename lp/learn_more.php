@@ -100,7 +100,7 @@ img.emoji {
 
 <div id="main-content">
   <div class="container-fluid">
-    <div id="video_promo"  class="  vc_row wpb_row vc_inner vc_row-fluid light row window_height centered-content" style="background-image: url(/assets2/img/background/low_poly_background.jpg);background-repeat: repeat;background-position: center center;"  data-token="MS4B4">
+    <div id="video_promo"  class="  vc_row wpb_row vc_inner vc_row-fluid light row window_height centered-content" style="background-image: url(/assets2/img/background/low_poly_background.jpg);background-repeat: no-repeat;background-position: top center center;background-attachment: fixed;background-size: cover;"  data-token="MS4B4">
       <center><span class="response"></span></center>
       <div class="container" id="outer-container">
   <div class="vc_col-sm-4 wpb_column column_container  vc_custom_1428499201617 ">
