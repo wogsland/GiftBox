@@ -329,11 +329,14 @@ class Route
                 /* EXPERIMENT 2 */
                 $long_id = trim($this->endpointPieces[3], '/');
                 $token = new RecruitingToken($long_id, 'long_id');
+
+                // reset for each new token load
+                $_SESSION['experiments'][$token->id] = array();
+
                 if (isset($token->auto_popup)) {
-                    $webRequest->inExperiment(
-                        2,
-                        ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay)
-                    );
+                    $experimentVersion = ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay);
+                    $webRequest->inExperiment(2, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>2, 'version'=>$experimentVersion);
                 }
                 /* END EXPERIMENT 2 */
 
@@ -341,11 +344,13 @@ class Route
                 if (rand(1, 100) > 50) {
                     //mark the web request
                     $webRequest->inExperiment(1, 'A');
+                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'A');
 
                     return __DIR__.'/../token/1A/recruiting_token.build.html';
                 } else {
                     //mark the web request
                     $webRequest->inExperiment(1, 'B');
+                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'B');
 
                     return __DIR__.'/../token/1B/recruiting_token.build.html';
                 }
