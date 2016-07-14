@@ -1,7 +1,6 @@
 <?php
 use \Sizzle\Bacon\Database\LandingPage;
 
-echo 'in demo';die;
 // If the user hasn't been here, randomize the experience
 // Otherwise, take them to the page they saw before
 if (!isset($_SESSION['landing_page'], $_SESSION['landing_page']['script'], $_SESSION['landing_page']['id'])) {
