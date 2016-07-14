@@ -100,7 +100,9 @@ img.emoji {
 
 <div id="main-content">
   <div class="container-fluid">
-    <div id="video_promo"  class="  vc_row wpb_row vc_inner vc_row-fluid light row window_height centered-content" style="background-image: url(/assets2/img/background/low_poly_background.jpg);background-repeat: repeat;background-position: center center;"  data-token="MS4B4"><div class="container">
+    <div id="video_promo"  class="  vc_row wpb_row vc_inner vc_row-fluid light row window_height centered-content" style="background-image: url(/assets2/img/background/low_poly_background.jpg);background-repeat: repeat;background-position: center center;"  data-token="MS4B4">
+      <center><span class="response"></span></center>
+      <div class="container" id="outer-container">
   <div class="vc_col-sm-4 wpb_column column_container  vc_custom_1428499201617 ">
     <div class="wpb_wrapper">
       <div id="vsc_row_oyyhossitl"  class="  vc_row wpb_row vc_inner vc_row-fluid vc_custom_1429209642025 dark container" style=""  data-token="0cvX9">
@@ -122,10 +124,10 @@ img.emoji {
 <div class="vc_empty_space"  style="height: 10px" ><span class="vc_empty_space_inner"></span></div>
 <div class="contact-form-7-data" data-token="IGlpL"><div role="form" class="wpcf7" id="wpcf7-f1343-p3987-o1" lang="en-US" dir="ltr">
 <div class="screen-reader-response"></div>
-<form method="post" class="wpcf7-form">
+<form method="post" class="wpcf7-form" id="demo-request-form">
 <div class="form form-overlay">
 <div class="form-group col-sm-8">
-         <span class="wpcf7-form-control-wrap EMAIL"><input type="email" name="EMAIL" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email" /></span>
+         <span class="wpcf7-form-control-wrap EMAIL"><input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email" /></span>
     </div>
 <div class="form-group col-sm-4">
          <input type="submit" value="GO!" class="wpcf7-form-control wpcf7-submit btn base_clr_bg btn-solid" />
@@ -147,7 +149,9 @@ img.emoji {
 
     </div>
   </div>
-</div></div>
+
+</div>
+</div>
 
     <div class="back-to-top"><a href="#"><i class="fa fa-angle-up fa-3x"></i></a></div>
 
@@ -164,11 +168,32 @@ img.emoji {
 
     </div>
   </div>
+
 </div></p>
-</div></div>
+
+</div>
+
+</div>
 <script type='text/javascript' src='/assets2/js/jquery.form.min.js'></script>
 <script type='text/javascript' src='/assets2/js/custom-isotope-portfolio.js'></script>
 <script type='text/javascript' src='/assets2/js/modal-box.js'></script>
 <script type='text/javascript' src='/assets2/js/custom.js'></script>
+<script>
+$( document ).ready(function() {
+  // process demo request form
+  $('#demo-request-form').on('submit', function (e) {
+      e.preventDefault();
+      $.post("/ajax/demo_request", $('#demo-request-form').serialize(),
+          function (data, textStatus, jqXHR) {
+              if (data.status === "SUCCESS") {
+                  $(".response").html('Thanks for your interest!<br /><br /> One of our sales team will be in touch with you shortly to schedule a demo.');
+                  $('#outer-container').hide();
+                  $(".response").show();
+              }
+          }
+      )
+  });
+});
+</script>
 </body>
 </html>
