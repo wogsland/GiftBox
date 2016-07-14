@@ -28,7 +28,11 @@ if (isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
         )
     );
     $status = 'SUCCESS';
-    (new Support())->create($email, $subject);
+    if (isset($_SESSION['landing_page']['id'], $_SESSION['landing_page']['script'])) {
+        $message = $subject." on landing page {$_SESSION['landing_page']['id']}";
+        $message .= " ({$_SESSION['landing_page']['script']}).";
+    }
+    (new Support())->create($email, $message ?? $subject);
 }
 header('Content-Type: application/json');
 echo json_encode(array('status' => $status));
