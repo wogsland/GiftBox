@@ -108,7 +108,9 @@ img.emoji {
       <div id="vsc_row_oyyhossitl"  class="  vc_row wpb_row vc_inner vc_row-fluid vc_custom_1429209642025 dark container" style=""  data-token="0cvX9">
   <div class="vc_col-sm-12 wpb_column column_container  ">
     <div class="wpb_wrapper">
-      <div class="section-wrap email-section"><h2 style="font-size: 62px;" class="section-title text-left">Sell the <b>Sizzle</b></h2></div>
+      <div class="section-wrap email-section">
+        <h2 style="font-size: 62px;" class="section-title text-left">Sell the <b><img src="/assets/img/sizzle-logo.png" width=220 /></b></h2>
+      </div>
     </div>
   </div>
 </div>
