@@ -146,7 +146,11 @@ img.emoji {
   <div class="wpb_single_image wpb_content_element vc_align_left">
     <div class="wpb_wrapper">
 
-      <div class="vc_single_image-wrapper   vc_box_border_grey"><a href="" data-modal-link="vivaco-3627"><img width="784" height="462" src="/assets2/img/features/Good_Images/LAPTOP_ONE_Cropped.png" class="vc_single_image-img attachment-full" alt="image_play_header" srcset="/assets2/img/features/Good_Images/LAPTOP_ONE_Cropped.png 300w, /assets2/img/features/Good_Images/LAPTOP_ONE_Cropped.png 768w, /assets2/img/features/Good_Images/LAPTOP_ONE_Cropped.png 784w" sizes="(max-width: 784px) 100vw, 784px" /></a></div>
+      <div class="vc_single_image-wrapper   vc_box_border_grey">
+        <a href="" data-modal-link="vivaco-3627">
+          <img width="784" height="462" src="/images/laptop_play.png" class="vc_single_image-img attachment-full" alt="image_play_header" srcset="/images/laptop_play.png 300w, /images/laptop_play.png 768w, /images/laptop_play.png 784w" sizes="(max-width: 784px) 100vw, 784px" />
+        </a>
+      </div>
     </div>
   </div>
 
