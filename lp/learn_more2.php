@@ -118,7 +118,7 @@ img.emoji {
   <div class="wpb_wrapper">
     <div class="wpb_text_column-text-style" style="">
       <div style="font-size: 17px;">
-        Job descriptions are more than just a list of requirements. Start making
+        Job descriptions should be more than just a list of requirements. Start making
         them Sizzle. Enter your email below to get started.
       </div>
     </div>
