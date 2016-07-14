@@ -448,7 +448,7 @@ Startuply = {
 
             } else {
                 if ( typeof toastr != 'undefined' ) toastr.error('An error occured. Please try again later.');
-                else alert('An error occured. Please try again later.');
+                else if ( typeof notoastr == 'undefined' ) alert('An error occured. Please try again later.');
 
                 _this.log( 'Form message', msg );
             }

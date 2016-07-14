@@ -113,10 +113,10 @@
   <script type="text/javascript" src="assets2/js/jquery.countdown.js"></script>
   <script type="text/javascript" src="assets2/js/jquery.waypoints.min.js"></script>
   <script type="text/javascript" src="assets2/js/jquery.validate.min.js"></script>
-  <script type="text/javascript" src="assets2/js/toastr.min.js"></script>
   <script type="text/javascript" src="assets2/js/startuply.js"></script>
 
   <script>
+  var notoastr = 'stop';
   $( document ).ready(function() {
     // process demo request form
     $('#demo-request-form').on('submit', function (e) {
