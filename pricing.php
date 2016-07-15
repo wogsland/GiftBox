@@ -36,8 +36,11 @@ require __DIR__.'/header.php';
 
 <section class="Pricing">
   <header class="Pricing__hero">
-    <h1 class="Pricing__title">Pick a plan and get the first 30 days free.</h1>
-    <p class="Pricing__message">That's right. <b>Free.</b> Use the slider to select the number of job postings you need per month, and we'll give you your first month on the house.</p>
+    <h1 class="Pricing__title">Pick a plan and start sizzling!</h1>
+    <p class="Pricing__message">
+      That's right. <b>En fuego.</b>
+      Just use the slider to select the number of job postings you need per month.
+    </p>
   </header>
   <div class="Pricing__slider">
     <div class="Slider" data-min="1" data-max="100" data-value="25">
