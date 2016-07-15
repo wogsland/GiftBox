@@ -186,6 +186,11 @@ function removeImage(img) {
   if ($('#company-image-container').children().length == 0) {
     $('#company-image-container').attr('hidden', true);
   }
+
+  // collapse container if there are no videos
+  if ($('#company-video-container').children().length == 0) {
+    $('#company-video-container').attr('hidden', true);
+  }
 }
 
 /**
