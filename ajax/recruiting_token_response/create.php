@@ -1,5 +1,6 @@
 <?php
 use Sizzle\Bacon\Database\{
+    ExperimentRecruitingTokenResponse,
     RecruitingTokenResponse,
     RecruitingToken
 };
@@ -21,6 +22,18 @@ if ($id > 0) {
     $data = array('id'=>$id);
 }
 $recruiting_token = new RecruitingToken($recruiting_token_id, 'long_id');
+
+// record any experiments
+if(isset($_SESSION['experiments'], $_SESSION['experiments'][$recruiting_token->id])) {
+    foreach ($_SESSION['experiments'][$recruiting_token->id] as $experiment) {
+        (new ExperimentRecruitingTokenResponse())->create(
+            $experiment['id'],
+            $experiment['version'],
+            $id
+        );
+    }
+}
+
 $user = $recruiting_token->getUser();
 $company = $recruiting_token->getCompany();
 if (is_object($user) && isset($user->receive_token_notifications) && strcmp($user->receive_token_notifications, 'Y') == 0) {
