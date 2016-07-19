@@ -329,13 +329,22 @@ class Route
             } else {
                 $webRequest = new WebRequest($this->webRequestId);
 
-                /* EXPERIMENT 2 */
+                // get token info for experiments
                 $long_id = trim($this->endpointPieces[3], '/');
                 $token = new RecruitingToken($long_id, 'long_id');
 
-                // reset for each new token load
+                // reset experiment list for each new token load
                 $_SESSION['experiments'][$token->id] = array();
 
+                /* EXPERIMENT 5 */
+                if (isset($token->collect_name)) {
+                    $experimentVersion = $token->collect_name;
+                    $webRequest->inExperiment(5, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>5, 'version'=>$experimentVersion);
+                }
+                /* END EXPERIMENT 2 */
+
+                /* EXPERIMENT 2 */
                 if (isset($token->auto_popup)) {
                     $experimentVersion = ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay);
                     $webRequest->inExperiment(2, $experimentVersion);
