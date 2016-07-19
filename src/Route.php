@@ -334,7 +334,15 @@ class Route
                 $token = new RecruitingToken($long_id, 'long_id');
 
                 // reset experiment list for each new token load
+                // storing this list in the session to retrieve upon response
                 $_SESSION['experiments'][$token->id] = array();
+
+                /* EXPERIMENT 6 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                $_SESSION['learnMore'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(6, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>6, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 6 */
 
                 /* EXPERIMENT 5 */
                 if (isset($token->collect_name)) {
@@ -342,7 +350,7 @@ class Route
                     $webRequest->inExperiment(5, $experimentVersion);
                     $_SESSION['experiments'][$token->id][] = array('id'=>5, 'version'=>$experimentVersion);
                 }
-                /* END EXPERIMENT 2 */
+                /* END EXPERIMENT 5 */
 
                 /* EXPERIMENT 2 */
                 if (isset($token->auto_popup)) {
