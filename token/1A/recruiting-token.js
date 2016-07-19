@@ -1216,3 +1216,13 @@ function getLocationHTML(width, id, locName) {
 function getSpacerHTML() {
   return '<div class="mdl-layout-spacer"></div>';
 }
+
+/**
+ * Populates learn more button
+ */
+function learnMore() {
+  html = '<section id="learn-more-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLearnMoreClick">';
+  html += '<paper-button id="learn-more" style="width: 100%;background-color: rgb(25,118,210);color: white;margin: 0;">Learn More</paper-button>';
+  html += '</section>';
+  $($('section')[0]).after(html);
+}
