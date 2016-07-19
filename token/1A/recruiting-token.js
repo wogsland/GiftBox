@@ -456,6 +456,16 @@ function loadDataAndPopulateToken() {
         $('#videos-frontpage').addClass('mdl-cell--12-col');
       }
     });
+
+    /* EXPERIMENT 6 */
+    url = '/ajax/experiment' + path[4];
+    $.post(url, {'id':6}, function(data){
+      if (data.learnMore) {
+        learnMore();
+      }
+    },'json');
+    /* END EXPERIMENT 6 */
+
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
     url = '/ajax/recruiting_token/get_videos' + path[4];
