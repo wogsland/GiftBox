@@ -183,7 +183,8 @@ scope._onInterestClick4 = function (event) {
 /**
  * Submits interest info
  */
-scope._submitInterest = function (event) {
+scope._submitInterest = submitInterest;
+function submitInterest(event) {
   event.preventDefault();
   var formIndex = 0;
   var eventPath = [];
@@ -269,7 +270,7 @@ scope._submitInterest = function (event) {
       }
     },'json');
   }
-};
+}
 
 /**
  * Forwards the user to the application page
@@ -313,7 +314,6 @@ scope._onBackClick = function(event) {
   if (openedInterestPopup) {
     // removes functionality of back button when
     // the interest dialog is opened
-    console.log('entered');
     return;
   }
   $('.gt-info-video').remove();
@@ -352,7 +352,6 @@ $(document).ready(function(){
   $('.dismiss-interest-button, .submit-interest-button').click(function() {
     enableBackButton();
   });
-
 
   // fixes background modal on location page
   setTimeout(function() {

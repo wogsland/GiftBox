@@ -459,17 +459,72 @@ require __DIR__.'/header.php';
       window.location = '/send_recruiting?referrer='+null+'&id=<?php echo $referrer;?>';
     }
     $( document ).ready(function() {
-        $('#select-image-file').on('change', handleImageFileSelect);
-        $('#company-image-container').data('deleted', []);
-        $('#company-video-container').data('deleted', []);
-        $('.recruiting-token-image').each(function() {
-            var img = $(this);
-            img.data('saved', true);
+      var textFields = [
+        '#company',
+        '#company-description',
+        '#company-values',
+        '#company-facebook',
+        '#company-linkedin',
+        '#company-youtube',
+        '#company-twitter',
+        '#company-google-plus'
+      ];
+
+      var fields = function() {
+        var _fields = false;
+        textFields.map(function(elem) {
+          if ($(elem).val().length !== 0) {
+            _fields = true;
+          }
         });
-        $('.recruiting-token-video').each(function() {
-            var img = $(this);
-            img.data('saved', true);
+        return _fields;
+      };
+
+      var images = function() {
+        return $('#company-image-container').children().length !== 0;
+      };
+
+      var videos = function() {
+        return $('#company-video-container').children().length !== 0;
+      };
+
+      $('#leaving-alert')[0].close();
+
+      var leaving = function(href) {
+        var $box = $('#leaving-alert')[0];
+        $('#leaving-ok').click(function() {
+          window.location.href = href;
         });
+        $box.open();
+      };
+
+      // handle links to another page
+      $('a').click(function(e) {
+        var href = $(this).attr('href');
+        if (href !== 'javascript:void(0)' && href !== undefined) {
+          if (fields() || images() || videos()) {
+            e.preventDefault();
+            leaving(href);
+          }
+        }
+      });
+
+      // handle back button, reload, and tab closed
+      window.onbeforeunload = function() {
+        if (fields() || images() || videos()) return '';
+      };
+
+      $('#select-image-file').on('change', handleImageFileSelect);
+      $('#company-image-container').data('deleted', []);
+      $('#company-video-container').data('deleted', []);
+      $('.recruiting-token-image').each(function() {
+        var img = $(this);
+        img.data('saved', true);
+      });
+      $('.recruiting-token-video').each(function() {
+        var img = $(this);
+        img.data('saved', true);
+      });
     });
     </script>
 </body>

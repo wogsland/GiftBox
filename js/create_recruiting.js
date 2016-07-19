@@ -1,63 +1,5 @@
 var imageType = /image.*/;
 
-$(document).ready(function() {
-  var textFields = [
-    '#company',
-    '#company-description',
-    '#company-values',
-    '#company-facebook',
-    '#company-linkedin',
-    '#company-youtube',
-    '#company-twitter',
-    '#company-google-plus'
-  ];
-
-  var fields = function() {
-    var _fields = false;
-    textFields.map(function(elem) {
-      if ($(elem).val().length !== 0) {
-        _fields = true;
-      }
-    });
-    return _fields;
-  };
-
-  var images = function() {
-    return $('#company-image-container').children().length !== 0;
-  };
-
-  var videos = function() {
-    return $('#company-video-container').children().length !== 0;
-  };
-
-  $('#leaving-alert')[0].close();
-
-  var leaving = function(href) {
-    var $box = $('#leaving-alert')[0];
-    $('#leaving-ok').click(function() {
-      window.location.href = href;
-    });
-    $box.open();
-  };
-
-  // handle links to another page
-  $('a').click(function(e) {
-    var href = $(this).attr('href');
-    if (href !== 'javascript:void(0)' && href !== undefined) {
-      if (fields() || images() || videos()) {
-        e.preventDefault();
-        leaving(href);
-      }
-    }
-  });
-
-  // handle back button, reload, and tab closed
-  window.onbeforeunload = function() {
-    if (fields() || images() || videos()) return '';
-  };
-
-});
-
 /**
  * Updates delay time from slider
  */
@@ -241,12 +183,12 @@ function removeImage(img) {
   img.parent().parent().remove();
 
   // collapse container if there are no images
-  if ($('#company-image-container').children().length == 0) {
+  if ($('#company-image-container').children().length === 0) {
     $('#company-image-container').attr('hidden', true);
   }
 
   // collapse container if there are no videos
-  if ($('#company-video-container').children().length == 0) {
+  if ($('#company-video-container').children().length === 0) {
     $('#company-video-container').attr('hidden', true);
   }
 }
@@ -549,7 +491,7 @@ function saveCompany() {
                   var file = img.data("file");
                   var fileName = null;
 
-                  if (file == null) {
+                  if (file === null) {
                     fileName = userId+'_'+companyId+'_'+Date.now()+'_'+img.data('name')+'.png';
                   } else {
                     fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
