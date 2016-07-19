@@ -361,19 +361,10 @@ class Route
                 /* END EXPERIMENT 2 */
 
                 /* EXPERIMENT 1 */
-                if (rand(1, 100) > 50) {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'A');
-                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'A');
-
-                    return __DIR__.'/../token/1A/recruiting_token.build.html';
-                } else {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'B');
-                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'B');
-
-                    return __DIR__.'/../token/1B/recruiting_token.build.html';
-                }
+                $experimentVersion = rand(1,100) > 50 ? 'A' : 'B';
+                $webRequest->inExperiment(1, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>$experimentVersion);
+                return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
                 /* END EXPERIMENT 1 */
             }
         } else {
