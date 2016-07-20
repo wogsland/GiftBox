@@ -330,6 +330,32 @@
                     </paper-button>
                   </div>
               </paper-dialog>
+              <paper-dialog id="learn-more-dialog" class="learn-more-dialog-wide" modal>
+                  <div class="learn-more-form">
+                    <center><h2>Enter your email below to learn more <br/> about this job opportunity.</h2></center>
+                    <paper-input
+                      type="email"
+                      id="learn-more-email"
+                      label="email address"
+                      autofocus
+                      error-message="Please input a valid email"
+                      required>
+                    </paper-input>
+                  </div>
+                  <div class="buttons">
+                    <paper-button
+                      class="learn-more-button"
+                      on-click="_submitLearnMore">
+                      Learn More
+                    </paper-button>
+                    <paper-button
+                      class="dismiss-learn-more-button"
+                      dialog-dismiss
+                      on-click="_closeLearnMoreDialog">
+                      Cancel
+                    </paper-button>
+                  </div>
+              </paper-dialog>
             </div>
           </x-cards-list>
           <location-x-card>

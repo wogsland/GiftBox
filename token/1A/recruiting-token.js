@@ -325,7 +325,6 @@ scope._closeInterestDialog = function (event) {
   });
 };
 
-
 /**
  * Closes the learn more dialog
  */

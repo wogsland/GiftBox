@@ -365,8 +365,7 @@ class Route
                 $experimentVersion = rand(1,100) > 50 ? 'A' : 'B';
                 $webRequest->inExperiment(1, $experimentVersion);
                 $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>$experimentVersion);
-                return __DIR__.'/../token/1A/recruiting_token.build.html';
-                //return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
+                return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
                 /* END EXPERIMENT 1 */
             }
         } else {
