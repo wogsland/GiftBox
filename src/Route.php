@@ -334,7 +334,16 @@ class Route
                 $token = new RecruitingToken($long_id, 'long_id');
 
                 // reset experiment list for each new token load
+                // storing this list in the session to retrieve upon response
                 $_SESSION['experiments'][$token->id] = array();
+
+                /* EXPERIMENT 6 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['learnMore']);
+                $_SESSION['learnMore'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(6, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>6, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 6 */
 
                 /* EXPERIMENT 5 */
                 if (isset($token->collect_name)) {
@@ -342,7 +351,7 @@ class Route
                     $webRequest->inExperiment(5, $experimentVersion);
                     $_SESSION['experiments'][$token->id][] = array('id'=>5, 'version'=>$experimentVersion);
                 }
-                /* END EXPERIMENT 2 */
+                /* END EXPERIMENT 5 */
 
                 /* EXPERIMENT 2 */
                 if (isset($token->auto_popup)) {
@@ -353,19 +362,10 @@ class Route
                 /* END EXPERIMENT 2 */
 
                 /* EXPERIMENT 1 */
-                if (rand(1, 100) > 50) {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'A');
-                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'A');
-
-                    return __DIR__.'/../token/1A/recruiting_token.build.html';
-                } else {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'B');
-                    $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>'B');
-
-                    return __DIR__.'/../token/1B/recruiting_token.build.html';
-                }
+                $experimentVersion = rand(1,100) > 50 ? 'A' : 'B';
+                $webRequest->inExperiment(1, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>$experimentVersion);
+                return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
                 /* END EXPERIMENT 1 */
             }
         } else {
