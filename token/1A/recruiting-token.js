@@ -2,6 +2,7 @@ var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
 var openedInterestPopup = false;
 var cities = [];
+var learnMoreChecked = false;
 var learnMoreOpen = false;
 
 scope._onTrack = function(event) {
@@ -151,10 +152,12 @@ scope._onVideosClick = function(event) {
  * Opens the interest dialog
  */
 scope._onInterestClick0 = function (event) {
-  $('.interest-dialog')[0].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
+  if (learnMoreOpen === false) {
+    $('.interest-dialog')[0].open();
+    presentedInterestPopup = true;
+    openedInterestPopup = true;
+    disableBackButton();
+  }
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
@@ -296,6 +299,15 @@ scope._closeInterestDialog = function (event) {
     openedInterestPopup = false;
     enableBackButton();
   });
+};
+
+
+/**
+ * Closes the learn more dialog
+ */
+scope._closeLearnMoreDialog = function (event) {
+  $('#learn-more-dialog')[0].close();
+  learnMoreOpen = false;
 };
 
 /**
@@ -459,14 +471,14 @@ function loadDataAndPopulateToken() {
     });
 
     /* EXPERIMENT 6 */
-    if (!learnMoreOpen) {
+    if (!learnMoreChecked) {
       url = '/ajax/experiment' + path[4];
       $.post(url, {'id':6}, function(data){
         if (data.learnMore) {
           learnMore();
         }
       },'json');
-      learnMoreOpen = true;
+      learnMoreChecked = true;
     }
     /* END EXPERIMENT 6 */
 
@@ -513,6 +525,8 @@ function smallScreen() {
     // small screens adjustments
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
+    $('.learn-more-dialog-wide').addClass('learn-more-dialog-skinny');
+    $('.learn-more-dialog-skinny').removeClass('learn-more-dialog-wide');
   }
 }
 
@@ -1149,7 +1163,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
         // display the response form once after 10 seconds
         if (!presentedInterestPopup) {
           setTimeout(function(){
-            if (!presentedInterestPopup) {
+            if (!presentedInterestPopup && learnMoreOpen === false) {
               $('.interest-dialog').each(function (i, dialog){
                 disableBackButton();
                 dialog.open();
@@ -1260,8 +1274,12 @@ function getSpacerHTML() {
  * Populates learn more button
  */
 function learnMore() {
-  html = '<section id="learn-more-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLearnMoreClick">';
-  html += '<paper-button id="learn-more" style="width: 100%;background-color: rgb(25,118,210);color: white;margin: 0;">Learn More</paper-button>';
+  html = '<section id="learn-more-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+  html += '<paper-button id="learn-more">Learn More</paper-button>';
   html += '</section>';
   $($('section')[0]).after(html);
+  $('#learn-more').click(function(event) {
+    $('#learn-more-dialog')[0].open();
+    learnMoreOpen = true;
+  });
 }

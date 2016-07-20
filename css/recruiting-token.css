@@ -457,3 +457,22 @@ i.plus-icon--overlay {
   background-color: rgb(44,152,240);
   color: white;
 }
+
+#learn-more {
+  width: 100%;
+  background-color: rgb(25,118,210);
+  color: white;margin: 0;
+}
+
+#learn-more-dialog {
+  padding-top:30px;
+  padding-bottom:30px;
+}
+.learn-more-dialog-wide {
+  padding-left:70px;
+  padding-right:70px;
+}
+.learn-more-dialog-skinny {
+  padding-left:10px;
+  padding-right:10px;
+}
