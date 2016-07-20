@@ -2,6 +2,7 @@ var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
 var openedInterestPopup = false;
 var cities = [];
+var learnMoreOpen = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -458,12 +459,15 @@ function loadDataAndPopulateToken() {
     });
 
     /* EXPERIMENT 6 */
-    url = '/ajax/experiment' + path[4];
-    $.post(url, {'id':6}, function(data){
-      if (data.learnMore) {
-        learnMore();
-      }
-    },'json');
+    if (!learnMoreOpen) {
+      url = '/ajax/experiment' + path[4];
+      $.post(url, {'id':6}, function(data){
+        if (data.learnMore) {
+          learnMore();
+        }
+      },'json');
+      learnMoreOpen = true;
+    }
     /* END EXPERIMENT 6 */
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
