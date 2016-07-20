@@ -308,6 +308,7 @@ scope._closeInterestDialog = function (event) {
 scope._closeLearnMoreDialog = function (event) {
   $('#learn-more-dialog')[0].close();
   learnMoreOpen = false;
+  $('.interest-fab').removeClass('mdl-button--disabled');
 };
 
 /**
@@ -1281,5 +1282,6 @@ function learnMore() {
   $('#learn-more').click(function(event) {
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
+    $('.interest-fab').addClass('mdl-button--disabled');
   });
 }
