@@ -331,11 +331,11 @@
                   </div>
               </paper-dialog>
               <paper-dialog id="learn-more-dialog" class="learn-more-dialog-wide" modal>
-                  <div class="interest-form">
+                  <div class="learn-more-form">
                     <center><h2>Enter your email below to learn more <br/> about this job opportunity.</h2></center>
                     <paper-input
                       type="email"
-                      class="email-paper-input"
+                      id="learn-more-email"
                       label="email address"
                       autofocus
                       error-message="Please input a valid email"
@@ -345,8 +345,8 @@
                   <div class="buttons">
                     <paper-button
                       class="learn-more-button"
-                      on-click="_submitLearnMore"
-                      hidden>
+                      on-click="_submitLearnMore">
+                      Learn More
                     </paper-button>
                     <paper-button
                       class="dismiss-learn-more-button"
