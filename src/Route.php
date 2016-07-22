@@ -70,6 +70,9 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'bb':
+                include __DIR__.'/../webhook/broadbean.php';
+                break;
             case 'careers':
                 include __DIR__.'/../careers.php';
                 break;
@@ -208,7 +211,7 @@ class Route
             case 'zdrip':
                 // this endpoint is just for non-production testing
                 if (ENVIRONMENT != 'production') {
-                    include __DIR__.'/../deploy_develop.php';
+                    include __DIR__.'/../webhook/deploy_develop.php';
                     break;
                 }
             default:
