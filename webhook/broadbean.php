@@ -1,11 +1,16 @@
 <?php
-use Sizzle\Bacon\Service\MandrillEmail;
+use Sizzle\Bacon\{
+    Database\User,
+    Database\RecruitingToken,
+    Service\MandrillEmail,
+    Text\HTML
+};
 
 //for testing purposes
 $_POST['job'] = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <job>
     <command>add</command>
-    <username>bobsmith</username>
+    <username>rczett@gmail.com</username>
     <password>p455w0rd</password>
     <contact_name>Bob Smith</contact_name>
     <contact_email>bob@smith.com</contact_email>
@@ -47,7 +52,14 @@ foreach ($vals as $val) {
 }
 
 // create token
-
+$token = new RecruitingToken();
+$token->user_id = 32;
+$token->long_id = substr(md5(microtime()), rand(0, 26), 20);
+$token->job_title = $vals[$index['JOB_TITLE'][0]]['value'];
+$token->job_description = HTML::to($vals[$index['JOB_DESCRIPTION'][0]]['value']);
+$token->skills_required = HTML::to($vals[$index['JOB_SKILLS'][0]]['value']);
+$token->save();
+$html .= "\nhttp://dev.gosizzle.io/token/recruiting/".$token->long_id;
 // email Robbie
 if (ENVIRONMENT != 'production') {
     $to = TEST_EMAIL;

@@ -71,7 +71,9 @@ class Route
                 include __DIR__.'/../api_documentation.php';
                 break;
             case 'bb':
-                include __DIR__.'/../webhook/broadbean.php';
+                if (ENVIRONMENT != 'production') {
+                    include __DIR__.'/../webhook/broadbean.php';
+                }
                 break;
             case 'careers':
                 include __DIR__.'/../careers.php';
