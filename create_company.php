@@ -502,16 +502,16 @@ require __DIR__.'/header.php';
       $('a').click(function(e) {
         var href = $(this).attr('href');
         if (href !== 'javascript:void(0)' && href !== undefined) {
-          if (fields() || images() || videos()) {
+          /*if (fields() || images() || videos()) {
             e.preventDefault();
             leaving(href);
-          }
+          }*/
         }
       });
 
       // handle back button, reload, and tab closed
       window.onbeforeunload = function() {
-        if (fields() || images() || videos()) return '';
+        //if (fields() || images() || videos()) return '';
       };
 
       $('#select-image-file').on('change', handleImageFileSelect);
