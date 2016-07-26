@@ -1,5 +1,7 @@
 <?php
 use Sizzle\Bacon\Database\{
+    ExperimentRecruitingTokenResponse,
+    FullcontactPerson,
     RecruitingTokenResponse,
     RecruitingToken
 };
@@ -21,6 +23,34 @@ if ($id > 0) {
     $data = array('id'=>$id);
 }
 $recruiting_token = new RecruitingToken($recruiting_token_id, 'long_id');
+
+// record any experiments
+if(isset($_SESSION['experiments'], $_SESSION['experiments'][$recruiting_token->id])) {
+    foreach ($_SESSION['experiments'][$recruiting_token->id] as $experiment) {
+        (new ExperimentRecruitingTokenResponse())->create(
+            $experiment['id'],
+            $experiment['version'],
+            $id
+        );
+    }
+}
+
+// hit the FullContact Person API to get the name if needed
+if ('' == $name && '' != $email) {
+    $url = 'https://api.fullcontact.com/v2/person.json?email='.urlencode($email);
+    $header = 'X-FullContact-APIKey: '.FULLCONTACT_APIKEY;
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array($header));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    $fullcontactResponse = curl_exec($ch);
+    $fullcontact = json_decode($fullcontactResponse);
+    $name = $fullcontact->contactInfo->fullName ?? '';
+    (new FullcontactPerson())->create($email, $fullcontactResponse, $id);
+}
+
 $user = $recruiting_token->getUser();
 $company = $recruiting_token->getCompany();
 if (is_object($user) && isset($user->receive_token_notifications) && strcmp($user->receive_token_notifications, 'Y') == 0) {

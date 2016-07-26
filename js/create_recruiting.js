@@ -183,8 +183,13 @@ function removeImage(img) {
   img.parent().parent().remove();
 
   // collapse container if there are no images
-  if ($('#company-image-container').children().length == 0) {
+  if ($('#company-image-container').children().length === 0) {
     $('#company-image-container').attr('hidden', true);
+  }
+
+  // collapse container if there are no videos
+  if ($('#company-video-container').children().length === 0) {
+    $('#company-video-container').attr('hidden', true);
   }
 }
 
@@ -486,7 +491,7 @@ function saveCompany() {
                   var file = img.data("file");
                   var fileName = null;
 
-                  if (file == null) {
+                  if (file === null) {
                     fileName = userId+'_'+companyId+'_'+Date.now()+'_'+img.data('name')+'.png';
                   } else {
                     fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;

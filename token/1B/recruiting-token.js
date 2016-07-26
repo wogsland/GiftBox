@@ -2,6 +2,9 @@ var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
 var openedInterestPopup = false;
 var cities = [];
+var learnMoreChecked = false;
+var learnMoreOpen = false;
+var presentedLearnMore = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -150,10 +153,12 @@ scope._onVideosClick = function(event) {
  * Opens the interest dialog
  */
 scope._onInterestClick0 = function (event) {
-  $('.interest-dialog')[0].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
+  if (learnMoreOpen === false) {
+    $('.interest-dialog')[0].open();
+    presentedInterestPopup = true;
+    openedInterestPopup = true;
+    disableBackButton();
+  }
 };
 scope._onInterestClick1= function (event) {
   $('.interest-dialog')[1].open();
@@ -259,6 +264,30 @@ function submitInterest(event) {
 }
 
 /**
+ * Submits learn more info
+ */
+scope._submitLearnMore = function(event) {
+  event.preventDefault();
+  if ($('#learn-more-email')[0].validate()) {
+    $('.learn-more-button').addClass('disable-clicks');
+    var response = 'Yes';
+    url = '/ajax/recruiting_token_response/create' + path[4];
+    url += '/' + encodeURIComponent($('#learn-more-email')[0].value);
+    url += '/' + response;
+    $.post(url, '', function(data) {
+      if (data.data.id !== undefined & data.data.id > 0) {
+        $('.learn-more-form').html("<h2>Thanks for your interest!<br />We'll be in touch</h2>");
+        $('.learn-more-button').remove();
+        $('.dismiss-learn-more-button').text('DISMISS');
+        $('.interest-fab').remove();
+      } else {
+        $('.learn-more-button').removeClass('disable-clicks');
+      }
+    },'json');
+  }
+};
+
+/**
  * Forwards the user to the application page
  */
 var applicationLink = '';
@@ -285,6 +314,15 @@ scope._closeInterestDialog = function (event) {
     openedInterestPopup = false;
     enableBackButton();
   });
+};
+
+/**
+ * Closes the learn more dialog
+ */
+scope._closeLearnMoreDialog = function (event) {
+  $('#learn-more-dialog')[0].close();
+  learnMoreOpen = false;
+  $('.interest-fab').removeClass('mdl-button--disabled');
 };
 
 /**
@@ -446,6 +484,19 @@ function loadDataAndPopulateToken() {
         $('#videos-frontpage').addClass('mdl-cell--12-col');
       }
     });
+
+    /* EXPERIMENT 6 */
+    if (!learnMoreChecked) {
+      url = '/ajax/experiment' + path[4];
+      $.post(url, {'id':6}, function(data){
+        if (data.learnMore) {
+          learnMore();
+        }
+      },'json');
+      learnMoreChecked = true;
+    }
+    /* END EXPERIMENT 6 */
+
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
     $.post(
@@ -505,6 +556,8 @@ function smallScreen() {
     // small screens adjustments
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
+    $('.learn-more-dialog-wide').addClass('learn-more-dialog-skinny');
+    $('.learn-more-dialog-skinny').removeClass('learn-more-dialog-wide');
   }
 }
 
@@ -1037,6 +1090,7 @@ function handleAjaxRecruitingTokenGet(data) {
 function updateSectionPositions() {
   var wrapper = document.getElementById('ordered-sections'),
       ordered = [],
+      sectionPriority = [];
     /*
      * sectionPriority
      *
@@ -1046,23 +1100,47 @@ function updateSectionPositions() {
      * the sections will flow around it.
      *
      */
-    sectionPriority =
-    [
-      'company-section',
-      'recruiter-section',
-      'location-section',
-      'doublet-location-section',
-      'triplet-location-section',
-      'image-video-section',
-      {
-        id: 'job-description-section',
-        position: 1
-      },
-      {
-        id: 'social-section',
-        position: 2
-      }
-    ];
+     if ($('#learn-more-section').length) {
+       sectionPriority =
+       [
+         'company-section',
+         'recruiter-section',
+         'location-section',
+         'doublet-location-section',
+         'triplet-location-section',
+         'image-video-section',
+         {
+           id: 'learn-more-section',
+           position: 1
+         },
+         {
+           id: 'job-description-section',
+           position: 2
+         },
+         {
+           id: 'social-section',
+           position: 3
+         }
+       ];
+     } else {
+       sectionPriority =
+       [
+         'company-section',
+         'recruiter-section',
+         'location-section',
+         'doublet-location-section',
+         'triplet-location-section',
+         'image-video-section',
+         {
+           id: 'job-description-section',
+           position: 1
+         },
+         {
+           id: 'social-section',
+           position: 2
+         }
+       ];
+     }
 
   sectionPriority.forEach(function(section) {
     var position = typeof section === 'string' ? false : section.position,
@@ -1116,7 +1194,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
         // display the response form once after 10 seconds
         if (!presentedInterestPopup) {
           setTimeout(function(){
-            if (!presentedInterestPopup) {
+            if (!presentedInterestPopup && !presentedLearnMore) {
               $('.interest-dialog').each(function (i, dialog){
                 disableBackButton();
                 dialog.open();
@@ -1221,4 +1299,20 @@ function getLocationHTML(width, id, locName) {
  */
 function getSpacerHTML() {
   return '<div class="mdl-layout-spacer"></div>';
+}
+
+/**
+ * Populates learn more button
+ */
+function learnMore() {
+  html = '<section id="learn-more-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+  html += '<paper-button id="learn-more">Learn More</paper-button>';
+  html += '</section>';
+  $($('section')[0]).after(html);
+  $('#learn-more').click(function(event) {
+    $('#learn-more-dialog')[0].open();
+    learnMoreOpen = true;
+    presentedLearnMore = true;
+    $('.interest-fab').addClass('mdl-button--disabled');
+  });
 }

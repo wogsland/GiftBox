@@ -70,6 +70,11 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'bb':
+                if (ENVIRONMENT != 'production') {
+                    include __DIR__.'/../webhook/broadbean.php';
+                }
+                break;
             case 'careers':
                 include __DIR__.'/../careers.php';
                 break;
@@ -208,7 +213,7 @@ class Route
             case 'zdrip':
                 // this endpoint is just for non-production testing
                 if (ENVIRONMENT != 'production') {
-                    include __DIR__.'/../deploy_develop.php';
+                    include __DIR__.'/../webhook/deploy_develop.php';
                     break;
                 }
             default:
@@ -329,29 +334,43 @@ class Route
             } else {
                 $webRequest = new WebRequest($this->webRequestId);
 
-                /* EXPERIMENT 2 */
+                // get token info for experiments
                 $long_id = trim($this->endpointPieces[3], '/');
                 $token = new RecruitingToken($long_id, 'long_id');
+
+                // reset experiment list for each new token load
+                // storing this list in the session to retrieve upon response
+                $_SESSION['experiments'][$token->id] = array();
+
+                /* EXPERIMENT 6 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['learnMore']);
+                $_SESSION['learnMore'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(6, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>6, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 6 */
+
+                /* EXPERIMENT 5 */
+                if (isset($token->collect_name)) {
+                    $experimentVersion = $token->collect_name;
+                    $webRequest->inExperiment(5, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>5, 'version'=>$experimentVersion);
+                }
+                /* END EXPERIMENT 5 */
+
+                /* EXPERIMENT 2 */
                 if (isset($token->auto_popup)) {
-                    $webRequest->inExperiment(
-                        2,
-                        ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay)
-                    );
+                    $experimentVersion = ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay);
+                    $webRequest->inExperiment(2, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>2, 'version'=>$experimentVersion);
                 }
                 /* END EXPERIMENT 2 */
 
                 /* EXPERIMENT 1 */
-                if (rand(1, 100) > 50) {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'A');
-
-                    return __DIR__.'/../token/1A/recruiting_token.build.html';
-                } else {
-                    //mark the web request
-                    $webRequest->inExperiment(1, 'B');
-
-                    return __DIR__.'/../token/1B/recruiting_token.build.html';
-                }
+                $experimentVersion = rand(1,100) > 50 ? 'A' : 'B';
+                $webRequest->inExperiment(1, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>$experimentVersion);
+                return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
                 /* END EXPERIMENT 1 */
             }
         } else {
