@@ -4,6 +4,7 @@ var openedInterestPopup = false;
 var cities = [];
 var learnMoreChecked = false;
 var learnMoreOpen = false;
+var presentedLearnMore = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -1193,7 +1194,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
         // display the response form once after 10 seconds
         if (!presentedInterestPopup) {
           setTimeout(function(){
-            if (!presentedInterestPopup && learnMoreOpen === false) {
+            if (!presentedInterestPopup && !presentedLearnMore) {
               $('.interest-dialog').each(function (i, dialog){
                 disableBackButton();
                 dialog.open();
@@ -1311,6 +1312,7 @@ function learnMore() {
   $('#learn-more').click(function(event) {
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
+    presentedLearnMore = true;
     $('.interest-fab').addClass('mdl-button--disabled');
   });
 }
