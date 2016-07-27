@@ -5,21 +5,21 @@ GREEN='\033[1;32m'
 NC='\033[0m' # No Color
 
 setup_1A() {
-  mv token/1A/recruiting_token.php .
+  mv token/recruiting_token.php .
   mv token/1A/recruiting-token.js js/
   rm token/1A/recruiting_token.build.html
   rm token/1A/recruiting_token.min.js
 }
 
 setup_1B() {
-  mv token/1B/recruiting_token.php .
+  mv token/recruiting_token.php .
   mv token/1B/recruiting-token.js js/
   rm token/1B/recruiting_token.build.html
   rm token/1B/recruiting_token.min.js
 }
 
 cleanup_1A() {
-  mv recruiting_token.php token/1A/
+  mv recruiting_token.php token/
   mv js/recruiting-token.js token/1A/
   sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1A\&/g' recruiting_token.build.html
   mv recruiting_token.build.html token/1A/
@@ -27,7 +27,7 @@ cleanup_1A() {
 }
 
 cleanup_1B() {
-  mv recruiting_token.php token/1B/
+  mv recruiting_token.php token/
   mv js/recruiting-token.js token/1B/
   sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1B\&/g' recruiting_token.build.html
   mv recruiting_token.build.html token/1B/
