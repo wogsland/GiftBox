@@ -6,14 +6,14 @@ NC='\033[0m' # No Color
 
 setup_1A() {
   mv token/recruiting_token.php .
-  mv token/1A/recruiting-token.js js/
+  php token/recruiting-token.js.php 1A > js/recruiting-token.js
   rm token/1A/recruiting_token.build.html
   rm token/1A/recruiting_token.min.js
 }
 
 setup_1B() {
   mv token/recruiting_token.php .
-  mv token/1B/recruiting-token.js js/
+  php token/recruiting-token.js.php 1B > js/recruiting-token.js
   rm token/1B/recruiting_token.build.html
   rm token/1B/recruiting_token.min.js
 }
