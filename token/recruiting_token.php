@@ -190,26 +190,42 @@
                         </section>
 
                         <section id="location-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" on-click="_onLocationClick">
-                          <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid">
-                            <div class="mdl-cell no-margin" id="location-main-image">
-                              <div id="supporting-location">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location"></i>
+                          <div class="mdl-card mdl-cell mdl-cell--12-col">
+                            <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid">
+                              <div class="mdl-cell no-margin" id="location-main-image">
+                                <div id="supporting-location">
+                                  <i class="material-icons">room</i>
+                                  <i class="gt-info-location"></i>
+                                </div>
+                              </div>
+                              <div class="mdl-cell no-margin" id="location-secondary-images">
+                                <div class="mdl-grid no-padding" style="height:337px">
+                                  <div class="no-margin">
+                                    <img id="location-secondary-image-1" src="" class="location-secondary-image">
+                                  </div>
+                                  <div class="no-margin">
+                                    <img id="location-secondary-image-2" src="" class="location-secondary-image">
+                                  </div>
+                                  <div class="no-margin">
+                                    <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
+                                    <i class="material-icons plus-icon--overlay">add</i>
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div class="mdl-cell no-margin" id="location-secondary-images">
-                              <div class="mdl-grid no-padding" style="height:337px">
-                                <div class="no-margin">
-                                  <img id="location-secondary-image-1" src="" class="location-secondary-image">
-                                </div>
-                                <div class="no-margin">
-                                  <img id="location-secondary-image-2" src="" class="location-secondary-image">
-                                </div>
-                                <div class="no-margin">
-                                  <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
-                                  <i class="material-icons plus-icon--overlay">add</i>
-                                </div>
-                              </div>
+                            <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="location-options">
+                              <a id="general-location-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-option">
+                                General
+                              </a>
+                              <a id="weather-location-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-option">
+                                Weather
+                              </a>
+                              <a id="housing-location-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-option">
+                                Housing
+                              </a>
+                              <a id="cost-location-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-option">
+                                Cost of Living
+                              </a>
                             </div>
                           </div>
                         </section>

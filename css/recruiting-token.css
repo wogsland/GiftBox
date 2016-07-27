@@ -256,7 +256,7 @@ i.plus-icon--overlay {
   left: 57px;
   color:white;
 }
-.recruiter-profile-option, .job-description-option {
+.recruiter-profile-option, .job-description-option, .location-option {
   background-color: white;
   padding: 0;
   margin: 0;
@@ -264,8 +264,11 @@ i.plus-icon--overlay {
   /*width: 19.4%;*/
   font-size: 12px;
 }
-#job-description-options, #recruiter-options {
+#job-description-options, #recruiter-options, #location-options {
   margin: 0px;
+}
+.options-row {
+  
 }
 #images-frontpage {
   text-align:center;
