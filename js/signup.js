@@ -24,23 +24,10 @@ function signupInfo(message) {
 }
 
 function signupSuccess(app_root, signupType, userInfo) {
-  var email;
-  if (signupType == "FACEBOOK") {
-    email = userInfo.signup_email;
-  } else {
-    email = $("#signup_email").val();
-  }
+  var email = $("#signup_email").val();
   $('#signup-alert-placeholder').html('<div class="alert alert-success"><span>You have successfully signed up with S!zzle!</span></div>');
-
-  if (userInfo.reg_type == "FACEBOOK") {
-    signupInfo("Logging into S!zzle...");
-    userInfo.login_email = userInfo.signup_email;
-    userInfo.login_type = userInfo.reg_type;
-    processLogin(userInfo);
-  } else {
-    signupClose();
-    window.location = '/thankyou?action=signup&email='+email;
-  }
+  signupClose();
+  window.location = '/thankyou?action=signup&email='+email;
 }
 
 function signupEmail() {
@@ -52,32 +39,6 @@ function signupEmail() {
   } else {
     processSignup($("#signup-form").serialize(), "EMAIL");
   }
-}
-
-function signupFacebook() {
-  $("#reg_type").val("FACEBOOK");
-  signupInfo("Checking Facebook login status.  Please wait...");
-  FB.login(function(response){
-    handleFBReg(response);
-  }, {
-    scope: 'user_photos, public_profile, email'
-  });
-}
-
-function handleFBReg(response) {
-    if (response.status === 'connected') {
-    FB.api('/me?fields=email,last_name,first_name', function(api_response) {
-      api_response.reg_type = "FACEBOOK";
-      api_response.signup_email = api_response.email;
-      processSignup(api_response, "FACEBOOK");
-    });
-  } else if (response.status === 'not_authorized') {
-    // The person is logged into Facebook, but not your app.
-    signupSuccess(data.app_root, "FACEBOOK");
-    } else {
-    // The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-    signupError("Sign Up using Facebook failed.");
-    }
 }
 
 function processSignup(userInfo, signupType) {

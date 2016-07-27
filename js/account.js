@@ -13,16 +13,6 @@ function logout() {
   $('#logout-button').addClass("disable-clicks");
   $.post("/ajax/logout", function(data, textStatus, jqXHR){
     if (data.status === "SUCCESS") {
-      if (data.login_type === "FACEBOOK") {
-        FB.getLoginStatus(function(response) {
-          // are they currently logged into Facebook?
-          if (response.status === 'connected') {
-            //they were authed so do the logout
-            FB.logout(function(response) {
-            });
-          }
-        });
-      }
       document.location.href = data.app_root;
     } else if (data.status === "ERROR") {
       alert(data.message);
