@@ -20,7 +20,7 @@ setup_1B() {
 
 cleanup_1A() {
   mv recruiting_token.php token/
-  mv js/recruiting-token.js token/1A/
+  rm js/recruiting-token.js
   sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1A\&/g' recruiting_token.build.html
   mv recruiting_token.build.html token/1A/
   mv public/js/dist/recruiting_token.min.js token/1A/
@@ -28,7 +28,7 @@ cleanup_1A() {
 
 cleanup_1B() {
   mv recruiting_token.php token/
-  mv js/recruiting-token.js token/1B/
+  rm js/recruiting-token.js
   sed -i '' -e 's/recruiting_token\.min\.js\?/recruiting_token\.min\.js\?t\=1B\&/g' recruiting_token.build.html
   mv recruiting_token.build.html token/1B/
   mv public/js/dist/recruiting_token.min.js token/1B/
