@@ -690,6 +690,13 @@ function handleAjaxCityGet(data) {
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
     $('google-map')[0].longitude = data.longitude;
+    $('#housing-location-button').click(function(e){
+      e.preventDefault();
+      var link = document.createElement('a');
+      link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
+      link.target = '_blank';
+      link.dispatchEvent(new MouseEvent('click'));
+    })
 
     //temps
     var missingTemp = false;
