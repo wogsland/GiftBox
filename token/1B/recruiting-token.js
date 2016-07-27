@@ -1140,6 +1140,7 @@ function updateSectionPositions() {
           position: 2
         }
       ];
+    }
 
   sectionPriority.forEach(function(section) {
     var position = typeof section === 'string' ? false : section.position,
