@@ -13,10 +13,10 @@ describe('recruiting-token.js', function () {
 
     // set up the document
     var doc = require('jsdom').jsdom;
-    document = doc(fs.readFileSync('../token/1B/recruiting_token.php'));
+    document = doc(fs.readFileSync('../token/recruiting_token.php'));
 
     // includes file to test
-    var path = '../token/1B/recruiting-token.js';
+    var path = '../token/1B/recruiting_token.min.js';
     var code = fs.readFileSync(path);
     //vm.runInThisContext(code);
 
