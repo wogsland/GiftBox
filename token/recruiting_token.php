@@ -198,20 +198,6 @@
                                   <i class="gt-info-location"></i>
                                 </div>
                               </div>
-                              <div class="mdl-cell no-margin" id="location-secondary-images">
-                                <div class="mdl-grid no-padding" style="height:337px">
-                                  <div class="no-margin">
-                                    <img id="location-secondary-image-1" src="" class="location-secondary-image">
-                                  </div>
-                                  <div class="no-margin">
-                                    <img id="location-secondary-image-2" src="" class="location-secondary-image">
-                                  </div>
-                                  <div class="no-margin">
-                                    <img id="location-secondary-image-3" src="" class="location-secondary-image" style="-webkit-filter: brightness(25%);">
-                                    <i class="material-icons plus-icon--overlay">add</i>
-                                  </div>
-                                </div>
-                              </div>
                             </div>
                             <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="location-options">
                               <a id="general-location-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-option">

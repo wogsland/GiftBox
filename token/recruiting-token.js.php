@@ -590,7 +590,6 @@ echo <<<'EOT'
       } else {
         // expands main image for small screens
         if ($(window).width() < 739) {
-          $('#location-secondary-images').remove();
           $('#location-main-image').css('width','100%');
         }
         $('#videos-frontpage').hide();
@@ -773,19 +772,8 @@ function handleAjaxCityGet(data) {
         $('#location-back').css('background',"url('"+image_file+"') center / cover");
         $('#location-main-image').css('background',"#ffffff url('"+image_file+"') center / cover");
         $('#location-image-grid').css('width','100%');
-        if (imgData.data.length < 4) {
-          // display 1 image
-          $('#location-secondary-images').remove();
-          $('#location-main-image').css('width','100%');
-        } else {
-          // display 4 images
-          $('#location-secondary-image-1').attr('src',imgData.data[1]);
-          $('#location-secondary-image-1').parent().css('width','100%');
-          $('#location-secondary-image-2').attr('src',imgData.data[2]);
-          $('#location-secondary-image-2').parent().css('width','100%');
-          $('#location-secondary-image-3').attr('src',imgData.data[3]);
-          $('#location-secondary-image-3').parent().css('width','100%');
-        }
+        // display 1 image
+        $('#location-main-image').css('width','100%');
       }
     });
   }

@@ -268,7 +268,7 @@ i.plus-icon--overlay {
   margin: 0px;
 }
 .options-row {
-  
+
 }
 #images-frontpage {
   text-align:center;
@@ -331,7 +331,7 @@ i.plus-icon--overlay {
   height: 337px;
   width: 75%;
 }
-#company-secondary-images, #location-secondary-images {
+#company-secondary-images {
   height: 337px;
   width: 25%;
 }
@@ -347,7 +347,7 @@ i.plus-icon--overlay {
   top: 0;
   opacity: 0.2;
 }
-.company-secondary-image, .location-secondary-image {
+.company-secondary-image {
   width: 100%;
   height:112.24px;
   background-color: #ffffff;
