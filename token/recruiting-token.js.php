@@ -248,6 +248,7 @@ function submitInterest(event) {
 EOT;
 if ('1A' == $argv[1]) {
     echo <<<'EOT'
+
           // look for application link
           $.post(
             '/ajax/recruiting_token/get_apply_link' + path[4],
@@ -272,6 +273,7 @@ if ('1A' == $argv[1]) {
 EOT;
 } else {
     echo <<<'EOT'
+
           if ('' !== applicationLink) {
             window.location.href = applicationLink;
           } else {
@@ -282,6 +284,7 @@ EOT;
 EOT;
 }
 echo <<<'EOT'
+
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -328,10 +331,12 @@ scope._applyNow = function (event) {
 EOT;
 if ('1A' == $argv[1]) {
     echo <<<'EOT'
+
     window.location.href = applicationLink;
 EOT;
 } else {
     echo <<<'EOT'
+
     if ($('.email-paper-input').length) {
       submitInterest(event);
     } else {
@@ -339,6 +344,8 @@ EOT;
     }
 EOT;
 }
+echo <<<'EOT'
+
   } else {
     $('.apply-button').remove();
     $('.interest-form').text('An error has occured forwarding you to the application.');
@@ -543,6 +550,7 @@ function loadDataAndPopulateToken() {
 EOT;
 if ('1B' == $argv[1]) {
     echo <<<'EOT'
+
     $.post(
       '/ajax/recruiting_token/get_apply_link' + path[4],
       '',
@@ -560,6 +568,9 @@ if ('1B' == $argv[1]) {
       'json'
     );
 EOT;
+}
+echo <<<'EOT'
+
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -1361,4 +1372,5 @@ function learnMore() {
     $('.interest-fab').addClass('mdl-button--disabled');
   });
 }
+
 EOT;
