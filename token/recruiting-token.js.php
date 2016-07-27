@@ -696,7 +696,14 @@ function handleAjaxCityGet(data) {
       link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
       link.target = '_blank';
       link.dispatchEvent(new MouseEvent('click'));
-    })
+    });
+    $('#cost-location-button').click(function(e){
+      e.preventDefault();
+      var link = document.createElement('a');
+      link.href = 'http://www.bestplaces.net/cost-of-living/';
+      link.target = '_blank';
+      link.dispatchEvent(new MouseEvent('click'));
+    });
 
     //temps
     var missingTemp = false;
