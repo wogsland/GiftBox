@@ -7,6 +7,7 @@ var cities = [];
 var learnMoreChecked = false;
 var learnMoreOpen = false;
 var presentedLearnMore = false;
+var setLocationButtons = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -690,20 +691,23 @@ function handleAjaxCityGet(data) {
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
     $('google-map')[0].longitude = data.longitude;
-    $('#housing-location-button').click(function(e){
-      e.preventDefault();
-      var link = document.createElement('a');
-      link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
-      link.target = '_blank';
-      link.dispatchEvent(new MouseEvent('click'));
-    });
-    $('#cost-location-button').click(function(e){
-      e.preventDefault();
-      var link = document.createElement('a');
-      link.href = 'http://www.bestplaces.net/cost-of-living/';
-      link.target = '_blank';
-      link.dispatchEvent(new MouseEvent('click'));
-    });
+    if (!setLocationButtons) {
+      $('#housing-location-button').click(function(e){
+        e.preventDefault();
+        var link = document.createElement('a');
+        link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
+        link.target = '_blank';
+        link.dispatchEvent(new MouseEvent('click'));
+      });
+      $('#cost-location-button').click(function(e){
+        e.preventDefault();
+        var link = document.createElement('a');
+        link.href = 'http://www.bestplaces.net/cost-of-living/';
+        link.target = '_blank';
+        link.dispatchEvent(new MouseEvent('click'));
+      });
+      setLocationButtons = true;
+    }
 
     //temps
     var missingTemp = false;
