@@ -31,6 +31,12 @@ if (isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
     if (isset($_SESSION['landing_page']['id'], $_SESSION['landing_page']['script'])) {
         $message = $subject." on landing page {$_SESSION['landing_page']['id']}";
         $message .= " ({$_SESSION['landing_page']['script']}).";
+    } elseif (isset($_SESSION['landing_page']['demo_request']['script'], $_SESSION['landing_page']['demo_request']['id'])) {
+        $message = $subject." on landing page {$_SESSION['landing_page']['demo_request']['id']}";
+        $message .= " ({$_SESSION['landing_page']['demo_request']['script']}).";
+    } elseif (isset($_SESSION['landing_page']['learn_more']['script'], $_SESSION['landing_page']['learn_more']['id'])) {
+        $message = $subject." on landing page {$_SESSION['landing_page']['learn_more']['id']}";
+        $message .= " ({$_SESSION['landing_page']['learn_more']['script']}).";
     }
     (new Support())->create($email, $message ?? $subject);
 }
