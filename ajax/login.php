@@ -23,13 +23,10 @@ if ((new User())->exists($email)) {
     $DateTime1 = new \DateTime($expires);
     $DateTime2 = new \DateTime(date('Y-m-d'));
     if (0 <= date_diff($DateTime2, $DateTime1)->format('%R%a')) {
-        if ($login_type == 'FACEBOOK') {
-            $response['status'] = 'SUCCESS';
-            $response['message'] = "Log in with Facebook successful.";
-        } else if ($login_type == 'EMAIL') {
+        if ($login_type == 'EMAIL') {
             if (!$user->password) {
                 $response['status'] = "ERROR";
-                $response['message'] = "This account was created using Facebook.<br>Please use the Log In With FaceBook button.";
+                $response['message'] = "There is no password set for this account. Please confirm your email before logging in.";
             } else if (!password_verify($_POST['password'] ?? '', $user->password)) {
                 $response['status'] = "ERROR";
                 $response['message'] = 'The password you entered is incorrect.';

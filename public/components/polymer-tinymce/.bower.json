@@ -1,5 +1,6 @@
 {
   "name": "polymer-tinymce",
+  "version": "1.0.0",
   "authors": [
     "Jalal Fathi <jfathi.mail@gmail.com>"
   ],
@@ -27,10 +28,10 @@
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "*"
   },
-  "_release": "9fa99aa637",
+  "_release": "1.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
+    "type": "version",
+    "tag": "1.0.0",
     "commit": "9fa99aa6370d2a94d230a9f1b5d32edce7b6dab0"
   },
   "_source": "https://github.com/JaySunSyn/polymer-tinymce.git",

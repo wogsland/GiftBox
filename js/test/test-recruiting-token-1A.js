@@ -13,16 +13,15 @@ describe('recruiting-token.js', function () {
 
     // set up the document
     var doc = require('jsdom').jsdom;
-    document = doc(fs.readFileSync('../token/1A/recruiting_token.php'));
+    document = doc(fs.readFileSync('../token/recruiting_token.php'));
 
     // includes file to test
-    var path = '../token/1A/recruiting-token.js';
+    var path = '../token/1A/recruiting_token.min.js';
     var code = fs.readFileSync(path);
-    //vm.runInThisContext(code);
 
     describe('running', function () {
         it('this test is here to run the JavaScript with jQuery', function () {
-            assert.notEqual(true, vm.runInThisContext(code));
+            assert.notEqual(false, vm.runInThisContext(code));
         });
     });
 

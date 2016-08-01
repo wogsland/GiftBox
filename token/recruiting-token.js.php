@@ -1,3 +1,5 @@
+<?php
+echo <<<'EOT'
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
 var openedInterestPopup = false;
@@ -5,6 +7,7 @@ var cities = [];
 var learnMoreChecked = false;
 var learnMoreOpen = false;
 var presentedLearnMore = false;
+var setLocationButtons = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -243,6 +246,35 @@ function submitInterest(event) {
     $.post(url, '', function(data) {
       if (data.data.id !== undefined & data.data.id > 0) {
         if (response == 'yes' || response == 'maybe') {
+EOT;
+if ('1A' == $argv[1]) {
+    echo <<<'EOT'
+
+          // look for application link
+          $.post(
+            '/ajax/recruiting_token/get_apply_link' + path[4],
+            '',
+            function(data) {
+              if (data.data !== undefined) {
+                applicationLink = data.data;
+              }
+              if ('' !== applicationLink) {
+                $('.interest-form').text('Would you like to submit an application?');
+                $('.interest-form').css('margin-bottom','30px');
+                $('.submit-interest-button').remove();
+                $('.apply-button').removeAttr('hidden');
+              } else {
+                $('.interest-form').text('Thanks for you interest!');
+                $('.submit-interest-button').remove();
+                $('.dismiss-interest-button').text('DISMISS');
+              }
+            },
+            'json'
+          );
+EOT;
+} else {
+    echo <<<'EOT'
+
           if ('' !== applicationLink) {
             window.location.href = applicationLink;
           } else {
@@ -250,6 +282,10 @@ function submitInterest(event) {
             $('.submit-interest-button').remove();
             $('.dismiss-interest-button').text('DISMISS');
           }
+EOT;
+}
+echo <<<'EOT'
+
         } else {
           $('.interest-form').text('Thanks for telling us!');
           $('.submit-interest-button').remove();
@@ -293,11 +329,24 @@ scope._submitLearnMore = function(event) {
 var applicationLink = '';
 scope._applyNow = function (event) {
   if ('' !== applicationLink) {
+EOT;
+if ('1A' == $argv[1]) {
+    echo <<<'EOT'
+
+    window.location.href = applicationLink;
+EOT;
+} else {
+    echo <<<'EOT'
+
     if ($('.email-paper-input').length) {
       submitInterest(event);
     } else {
       window.location.href = applicationLink;
     }
+EOT;
+}
+echo <<<'EOT'
+
   } else {
     $('.apply-button').remove();
     $('.interest-form').text('An error has occured forwarding you to the application.');
@@ -499,6 +548,10 @@ function loadDataAndPopulateToken() {
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
+EOT;
+if ('1B' == $argv[1]) {
+    echo <<<'EOT'
+
     $.post(
       '/ajax/recruiting_token/get_apply_link' + path[4],
       '',
@@ -515,6 +568,10 @@ function loadDataAndPopulateToken() {
       },
       'json'
     );
+EOT;
+}
+echo <<<'EOT'
+
     url = '/ajax/recruiting_token/get_videos' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -534,7 +591,6 @@ function loadDataAndPopulateToken() {
       } else {
         // expands main image for small screens
         if ($(window).width() < 739) {
-          $('#location-secondary-images').remove();
           $('#location-main-image').css('width','100%');
         }
         $('#videos-frontpage').hide();
@@ -635,6 +691,23 @@ function handleAjaxCityGet(data) {
     $('.gt-city-county').text(data.county);
     $('google-map')[0].latitude = data.latitude;
     $('google-map')[0].longitude = data.longitude;
+    if (!setLocationButtons) {
+      $('#housing-location-button').click(function(e){
+        e.preventDefault();
+        var link = document.createElement('a');
+        link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
+        link.target = '_blank';
+        link.dispatchEvent(new MouseEvent('click'));
+      });
+      $('#cost-location-button').click(function(e){
+        e.preventDefault();
+        var link = document.createElement('a');
+        link.href = 'http://www.bestplaces.net/cost-of-living/';
+        link.target = '_blank';
+        link.dispatchEvent(new MouseEvent('click'));
+      });
+      setLocationButtons = true;
+    }
 
     //temps
     var missingTemp = false;
@@ -717,19 +790,8 @@ function handleAjaxCityGet(data) {
         $('#location-back').css('background',"url('"+image_file+"') center / cover");
         $('#location-main-image').css('background',"#ffffff url('"+image_file+"') center / cover");
         $('#location-image-grid').css('width','100%');
-        if (imgData.data.length < 4) {
-          // display 1 image
-          $('#location-secondary-images').remove();
-          $('#location-main-image').css('width','100%');
-        } else {
-          // display 4 images
-          $('#location-secondary-image-1').attr('src',imgData.data[1]);
-          $('#location-secondary-image-1').parent().css('width','100%');
-          $('#location-secondary-image-2').attr('src',imgData.data[2]);
-          $('#location-secondary-image-2').parent().css('width','100%');
-          $('#location-secondary-image-3').attr('src',imgData.data[3]);
-          $('#location-secondary-image-3').parent().css('width','100%');
-        }
+        // display 1 image
+        $('#location-main-image').css('width','100%');
       }
     });
   }
@@ -1100,47 +1162,47 @@ function updateSectionPositions() {
      * the sections will flow around it.
      *
      */
-     if ($('#learn-more-section').length) {
-       sectionPriority =
-       [
-         'company-section',
-         'recruiter-section',
-         'location-section',
-         'doublet-location-section',
-         'triplet-location-section',
-         'image-video-section',
-         {
-           id: 'learn-more-section',
-           position: 1
-         },
-         {
-           id: 'job-description-section',
-           position: 2
-         },
-         {
-           id: 'social-section',
-           position: 3
-         }
-       ];
-     } else {
-       sectionPriority =
-       [
-         'company-section',
-         'recruiter-section',
-         'location-section',
-         'doublet-location-section',
-         'triplet-location-section',
-         'image-video-section',
-         {
-           id: 'job-description-section',
-           position: 1
-         },
-         {
-           id: 'social-section',
-           position: 2
-         }
-       ];
-     }
+    if ($('#learn-more-section').length) {
+      sectionPriority =
+      [
+        'company-section',
+        'recruiter-section',
+        'location-section',
+        'doublet-location-section',
+        'triplet-location-section',
+        'image-video-section',
+        {
+          id: 'learn-more-section',
+          position: 1
+        },
+        {
+          id: 'job-description-section',
+          position: 2
+        },
+        {
+          id: 'social-section',
+          position: 3
+        }
+      ];
+    } else {
+      sectionPriority =
+      [
+        'company-section',
+        'recruiter-section',
+        'location-section',
+        'doublet-location-section',
+        'triplet-location-section',
+        'image-video-section',
+        {
+          id: 'job-description-section',
+          position: 1
+        },
+        {
+          id: 'social-section',
+          position: 2
+        }
+      ];
+    }
 
   sectionPriority.forEach(function(section) {
     var position = typeof section === 'string' ? false : section.position,
@@ -1316,3 +1378,5 @@ function learnMore() {
     $('.interest-fab').addClass('mdl-button--disabled');
   });
 }
+
+EOT;

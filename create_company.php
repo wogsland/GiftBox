@@ -4,7 +4,8 @@ use \Sizzle\Bacon\{
     Database\RecruitingCompany,
     Database\RecruitingCompanyImage,
     Database\RecruitingCompanyVideo,
-    Database\RecruitingToken
+    Database\RecruitingToken,
+    Database\User
 };
 
 if (!logged_in()) {
@@ -16,7 +17,11 @@ $referrer = $_GET['referrer'] ?? '';
 
 if (isset($_GET['id'])) {
     $token_company = new RecruitingCompany($_GET['id']);
-    if (isset($token_company->user_id) && $token_company->user_id != $user_id && !is_admin()) {
+    $user = new User($user_id);
+    if (isset($token_company->organization_id)
+        && $token_company->organization_id != $user->organization_id
+        && !is_admin()
+    ) {
         header('Location: '.APP_URL.'tokens');
     }
     $token_images = (new RecruitingCompanyImage())->getByCompanyId((int) $token_company->id);

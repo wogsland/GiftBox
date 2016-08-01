@@ -2,11 +2,13 @@
 use Sizzle\Bacon\{
     Database\RecruitingCompany,
     Database\RecruitingToken,
+    Database\User,
     Text\HTML
 };
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $user = new User($user_id);
     if (isset($_POST['recruiting_company_id'])) {
         $recruiting_company_id = (int) $_POST['recruiting_company_id'];
         try {
@@ -17,7 +19,10 @@ if (isset($_SESSION['user_id'])) {
             $response['message'] = $e->getMessage();
             $response['object'] = $e;
         }
-        if (isset($RecruitingCompany->user_id) && $RecruitingCompany->user_id != $user_id && !is_admin()) {
+        if (isset($RecruitingCompany->organization_id)
+            && $RecruitingCompany->organization_id != $user->organization_id
+            && !is_admin()
+        ) {
             $response['status'] = "ERROR";
             $response['message'] = 'User does not have permission to modify this company.';
         }
@@ -27,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
     if (!isset($response, $response['status']) || $response['status'] != "ERROR") {
         try {
             // save company info
-            $RecruitingCompany->user_id = $RecruitingCompany->user_id ?? $user_id;
+            $RecruitingCompany->organization_id = $RecruitingCompany->organization_id ?? $user->organization_id;
             $RecruitingCompany->name = $_POST['company'] ?? '';
             $RecruitingCompany->description = HTML::to($_POST['company_description'] ?? '');
             $RecruitingCompany->website = $_POST['company_website'] ?? '';
