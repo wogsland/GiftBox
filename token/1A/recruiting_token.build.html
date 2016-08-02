@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><script src="/js/dist/recruiting_token.min.js?t=1A&v=1.13.0" defer=""></script><!--
+<!DOCTYPE html><html lang="en"><head><script src="/js/dist/recruiting_token.min.js?t=1A&v=1.13.1" defer=""></script><!--
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -761,13 +761,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-dialog>
               <paper-dialog id="learn-more-dialog" class="learn-more-dialog-wide" modal="">
                   <div class="learn-more-form">
-                    <center><h2>Enter your email below to learn more <br> about this job opportunity.</h2></center>
+                    <center>
+                      <h2 id="learn-more-modal-text"></h2>
+                    </center>
                     <paper-input type="email" id="learn-more-email" label="email address" autofocus="" error-message="Please input a valid email" required="">
                     </paper-input>
                   </div>
                   <div class="buttons">
                     <paper-button class="learn-more-button" on-click="_submitLearnMore">
-                      Learn More
                     </paper-button>
                     <paper-button class="dismiss-learn-more-button" dialog-dismiss="" on-click="_closeLearnMoreDialog">
                       Cancel

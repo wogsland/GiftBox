@@ -534,8 +534,8 @@ function loadDataAndPopulateToken() {
       }
     });
 
-    /* EXPERIMENT 6 */
     if (!learnMoreChecked) {
+      /* EXPERIMENT 6 */
       url = '/ajax/experiment' + path[4];
       $.post(url, {'id':6}, function(data){
         if (data.learnMore) {
@@ -543,8 +543,18 @@ function loadDataAndPopulateToken() {
         }
       },'json');
       learnMoreChecked = true;
+      /* END EXPERIMENT 6 */
+
+      /* EXPERIMENT 7 */
+      url = '/ajax/experiment' + path[4];
+      $.post(url, {'id':7}, function(data){
+        if (data.requestInterview) {
+          requestInterview();
+        }
+      },'json');
+      learnMoreChecked = true;
+      /* END EXPERIMENT 7 */
     }
-    /* END EXPERIMENT 6 */
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
@@ -1372,6 +1382,27 @@ function learnMore() {
   html += '</section>';
   $($('section')[0]).after(html);
   $('#learn-more').click(function(event) {
+    $('#learn-more-modal-text').html('Enter your email below to learn more <br/> about this job opportunity.')
+    $('.learn-more-button').html('Learn More')
+    $('#learn-more-dialog')[0].open();
+    learnMoreOpen = true;
+    presentedLearnMore = true;
+    $('.interest-fab').addClass('mdl-button--disabled');
+  });
+}
+
+
+/**
+ * Populates request an interview button
+ */
+function requestInterview() {
+  html = '<section id="request-interview-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+  html += '<paper-button id="request-interview">Request an Interview</paper-button>';
+  html += '</section>';
+  $($('section')[2]).after(html);
+  $('#request-interview').click(function(event) {
+    $('#learn-more-modal-text').html('Enter your email <br/>to request an interview')
+    $('.learn-more-button').html('Request Interview')
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
     presentedLearnMore = true;

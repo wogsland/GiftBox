@@ -334,7 +334,9 @@
               </paper-dialog>
               <paper-dialog id="learn-more-dialog" class="learn-more-dialog-wide" modal>
                   <div class="learn-more-form">
-                    <center><h2>Enter your email below to learn more <br/> about this job opportunity.</h2></center>
+                    <center>
+                      <h2 id="learn-more-modal-text"></h2>
+                    </center>
                     <paper-input
                       type="email"
                       id="learn-more-email"
@@ -348,7 +350,6 @@
                     <paper-button
                       class="learn-more-button"
                       on-click="_submitLearnMore">
-                      Learn More
                     </paper-button>
                     <paper-button
                       class="dismiss-learn-more-button"
