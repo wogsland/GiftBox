@@ -355,7 +355,7 @@ class Route
                 unset($_SESSION['requestInterview']);
                 $_SESSION['requestInterview'][$token->id] = $experimentVersion;
                 $webRequest->inExperiment(7, $experimentVersion);
-                $_SESSION['requestInterview'][$token->id][] = array('id'=>7, 'version'=>$experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>7, 'version'=>$experimentVersion);
                 /* END EXPERIMENT 7 */
 
                 /* EXPERIMENT 5 */

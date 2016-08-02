@@ -1162,7 +1162,6 @@ function handleAjaxRecruitingTokenGet(data) {
 function updateSectionPositions() {
   var wrapper = document.getElementById('ordered-sections'),
       ordered = [],
-      sectionPriority = [];
     /*
      * sectionPriority
      *
@@ -1172,46 +1171,34 @@ function updateSectionPositions() {
      * the sections will flow around it.
      *
      */
+    sectionPriority =
+    [
+      'company-section',
+      'recruiter-section',
+      'location-section',
+      'doublet-location-section',
+      'triplet-location-section',
+      'image-video-section'
+    ];
     if ($('#learn-more-section').length) {
-      sectionPriority =
-      [
-        'company-section',
-        'recruiter-section',
-        'location-section',
-        'doublet-location-section',
-        'triplet-location-section',
-        'image-video-section',
-        {
-          id: 'learn-more-section',
-          position: 1
-        },
-        {
-          id: 'job-description-section',
-          position: 2
-        },
-        {
-          id: 'social-section',
-          position: 3
-        }
-      ];
-    } else {
-      sectionPriority =
-      [
-        'company-section',
-        'recruiter-section',
-        'location-section',
-        'doublet-location-section',
-        'triplet-location-section',
-        'image-video-section',
-        {
-          id: 'job-description-section',
-          position: 1
-        },
-        {
-          id: 'social-section',
-          position: 2
-        }
-      ];
+      sectionPriority.push({
+        id: 'learn-more-section',
+        position: 1
+      });
+    }
+    sectionPriority.push({
+      id: 'job-description-section',
+      position: ($('#learn-more-section').length ? 2 : 1)
+    });
+    sectionPriority.push({
+      id: 'social-section',
+      position: ($('#learn-more-section').length ? 3 : 2)
+    });
+    if ($('#request-interview-section').length) {
+      sectionPriority.push({
+        id: 'request-interview-section',
+        position: ($('#learn-more-section').length ? 4 : 3)
+      });
     }
 
   sectionPriority.forEach(function(section) {
