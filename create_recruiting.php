@@ -352,7 +352,6 @@ require __DIR__.'/header.php';
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>

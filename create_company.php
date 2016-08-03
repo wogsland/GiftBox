@@ -203,18 +203,30 @@ require __DIR__.'/header.php';
                             <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values ?? '')); ?>
                         </div>
                     </paper-card>
-                    <paper-card id="company-images" heading="Company Images">
+                    <paper-card id="company-logo" heading="Company Logo">
                         <div class="field-container">
                             <div class="icon-bar">
                                 <span class="icon-bar-text">Add Images From: </span>
                                 <div class="icon-container">
-                                <input class="hidden-file-input" type="file" multiple id="select-image-file" />
+                                    <input class="hidden-file-input" type="file" multiple id="select-logo" />
+                                    <a class="icon-link"
+                                      id="desktop-icon-link"
+                                      href="javascript:void(0)"
+                                      onclick="$('#select-logo').trigger('click')">
+                                      <i class="fa fa-laptop fa-2x add-icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </paper-card>
+                    <paper-card id="company-images" heading="Large Company Images">
+                        <div class="field-container">
+                            <div class="icon-bar">
+                                <span class="icon-bar-text">Add Images From: </span>
+                                <div class="icon-container">
+                                    <input class="hidden-file-input" type="file" multiple id="select-image-file" />
                                     <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
-    <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
-                                    <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
-                                    <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
-                                    <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
-    -->                            </div>
+                                </div>
                             </div>
                             <?php if (count($token_images) > 0) {?>
                               <div class="thumbnail-list-container" id="company-image-container">
@@ -237,6 +249,8 @@ require __DIR__.'/header.php';
                               <div class="thumbnail-list-container" id="company-image-container" hidden></div>
                             <?php } ?>
                         </div>
+                    </paper-card>
+                    <paper-card id="company-mobile-image" heading="Company Mobile Image">
                     </paper-card>
                     <paper-card id="company-videos" heading="Company Videos">
                         <div class="field-container">
@@ -441,7 +455,6 @@ require __DIR__.'/header.php';
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
