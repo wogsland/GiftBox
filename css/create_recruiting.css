@@ -188,6 +188,7 @@ body {
   font-size: 10px;
   width: 80px;
   padding: 0;
+  text-align: center;
 }
 #validation-message {
   text-align: center;
