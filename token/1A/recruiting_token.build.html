@@ -145,7 +145,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="paper-input" assetpath="components/paper-input/">
   <template>
-    <style>:host{display:block;}:host([hidden]){display:none !important;}input::-webkit-input-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input:-moz-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input::-moz-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input:-ms-input-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}</style>
+    <style>:host{display:block;}:host([focused]){outline:none;}:host([hidden]){display:none !important;}input::-webkit-input-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input:-moz-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input::-moz-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}input:-ms-input-placeholder{color:var(--paper-input-container-color,--secondary-text-color);}label{pointer-events:none;}</style>
 
     <paper-input-container no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
 
@@ -185,17 +185,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 
 
-<dom-module id="paper-material" assetpath="components/paper-material/">
-  <template>
-    <style include="paper-material-shared-styles"></style>
-    <style>:host([animated]){@apply(--shadow-transition);}</style>
-
-    <content></content>
-  </template>
-</dom-module>
 <dom-module id="paper-button" assetpath="components/paper-button/">
   <template strip-whitespace="">
-    <style include="paper-material">:host{@apply(--layout-inline);@apply(--layout-center-center);position:relative;box-sizing:border-box;min-width:5.14em;margin:0 0.29em;background:transparent;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;font:inherit;text-transform:uppercase;outline-width:0;border-radius:3px;-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;user-select:none;cursor:pointer;z-index:0;padding:0.7em 0.57em;@apply(--paper-font-common-base);@apply(--paper-button);}:host([raised].keyboard-focus){font-weight:bold;@apply(--paper-button-raised-keyboard-focus);}:host(:not([raised]).keyboard-focus){font-weight:bold;@apply(--paper-button-flat-keyboard-focus);}:host([disabled]){background:#eaeaea;color:#a8a8a8;cursor:auto;pointer-events:none;@apply(--paper-button-disabled);}paper-ripple{color:var(--paper-button-ink-color);}</style>
+    <style include="paper-material-shared-styles">:host{@apply(--layout-inline);@apply(--layout-center-center);position:relative;box-sizing:border-box;min-width:5.14em;margin:0 0.29em;background:transparent;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;font:inherit;text-transform:uppercase;outline-width:0;border-radius:3px;-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;user-select:none;cursor:pointer;z-index:0;padding:0.7em 0.57em;@apply(--paper-font-common-base);@apply(--paper-button);}:host([hidden]){display:none !important;}:host([raised].keyboard-focus){font-weight:bold;@apply(--paper-button-raised-keyboard-focus);}:host(:not([raised]).keyboard-focus){font-weight:bold;@apply(--paper-button-flat-keyboard-focus);}:host([disabled]){background:#eaeaea;color:#a8a8a8;cursor:auto;pointer-events:none;@apply(--paper-button-disabled);}:host([animated]){@apply(--shadow-transition);}paper-ripple{color:var(--paper-button-ink-color);}</style>
 
     <content></content>
   </template>
@@ -229,10 +221,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 </dom-module>
 
 <dom-module id="neon-animated-pages" assetpath="components/neon-animation/">
-
-  <style>:host{display:block;position:relative;}:host > ::content > *{position:absolute;top:0;left:0;bottom:0;right:0;height:100%;}:host > ::content > :not(.iron-selected):not(.neon-animating){display:none !important;}:host > ::content > .neon-animating{pointer-events:none;}</style>
-
   <template>
+    <style>:host{display:block;position:relative;}:host > ::content > *{position:absolute;top:0;left:0;bottom:0;right:0;}:host > ::content > :not(.iron-selected):not(.neon-animating){display:none !important;}:host > ::content > .neon-animating{pointer-events:none;}</style>
+    
     <content id="content"></content>
   </template>
 
@@ -347,7 +338,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <style>:host{position:relative;display:block;height:100%;}#map{position:absolute;top:0;right:0;bottom:0;left:0;}</style>
   <template>
-    <google-maps-api id="api" api-key="[[apiKey]]" client-id="[[clientId]]" version="[[version]]" signed-in="[[signedIn]]" language="[[language]]" on-api-load="_mapApiLoaded"></google-maps-api>
+
+    <google-maps-api id="api" api-key="[[apiKey]]" client-id="[[clientId]]" version="[[version]]" signed-in="[[signedIn]]" language="[[language]]" on-api-load="_mapApiLoaded" maps-url="[[mapsUrl]]"></google-maps-api>
 
     <div id="map"></div>
 
