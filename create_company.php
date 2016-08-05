@@ -203,7 +203,7 @@ require __DIR__.'/header.php';
                             <?php paper_textarea('Company Values', 'company-values', HTML::from($token_company->values ?? '')); ?>
                         </div>
                     </paper-card>
-                    <paper-card id="company-images" heading="Large Company Images">
+                    <paper-card id="company-images" heading="Company Images">
                         <div class="field-container">
                             <div class="icon-bar">
                                 <span class="icon-bar-text">Add Images From: </span>
@@ -215,6 +215,7 @@ require __DIR__.'/header.php';
                             <?php if (count($token_images) > 0) {?>
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
+                              $i = 0;
                               foreach ($token_images as $token_image) {
                                   $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
                                   $image_id = str_replace('.', '_', $token_image['file_name']);
@@ -227,12 +228,13 @@ require __DIR__.'/header.php';
                                   echo '<img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
                                   echo '</div>';
                                   echo '<div class="image-thumbnail-buttons">';
-                                  echo '<paper-button raised class="remove-button" data-saved="true" >MARK LOGO</paper-button>';
-                                  echo '<paper-button raised class="remove-button" data-saved="true" >USE ON MOBILE</paper-button>';
+                                  echo '<paper-button raised class="remove-button" data-saved="true" onclick="markImageLogo(\''.$image_id.'\')">MARK LOGO</paper-button>';
+                                  echo '<paper-button id="mark-mobile-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageMobile(\''.$token_image['id'].'\', \''.$i.'\')">USE ON MOBILE</paper-button>';
                                   echo '<paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
                                   echo '</div>';
                                   echo '</div>';
                                   echo '</div>';
+                                  $i++;
                               }
                               echo '</div>';
                             } else { ?>
@@ -458,12 +460,34 @@ require __DIR__.'/header.php';
         window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
       }
     }
+
     /**
      * Skips this step
      */
     function skipCompany() {
       window.location = '/send_recruiting?referrer='+null+'&id=<?php echo $referrer;?>';
     }
+
+    /**
+     * Markes ye imagge fur mobile
+     */
+    function markImageMobile(id, index) {
+      var url = '/ajax/recruiting_company_image/mobile';
+      var params = {id: id};
+      $.post(url, params, function(data){
+        if('true' == data.success) {
+          $('#mark-mobile-button-'+index).prop("disabled",true);;
+          $('#mark-mobile-button-'+index).html('MOBILE IMAGE');
+          $('#mark-mobile-button-'+index).css('color', 'black');
+          $('#mark-mobile-button-'+index).css('background', '#2193ED');
+        }  else {
+          alert('Failed setting for mobile. ');
+        }
+      },'json').fail(function() {
+        alert('Failed to set for mobile.');
+      });
+    }
+
     $( document ).ready(function() {
       var textFields = [
         '#company',
