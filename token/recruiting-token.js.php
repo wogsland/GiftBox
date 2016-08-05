@@ -512,6 +512,12 @@ function loadDataAndPopulateToken() {
           if ( $(window).width() < 739 || data.data.length < 4) {
             $('#company-secondary-images').remove();
             $('#company-main-image').css('width','100%');
+            data.data.forEach(function(companyImageValue) {
+              console.log(companyImageValue)
+              if ('Y' == companyImageValue.mobile) {
+                $('#company-main-image').css('background',"url('"+assetHost+"/"+companyImageValue.file_name+"') center / cover");
+              }
+            });
           } else {
             $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
             $('#company-secondary-image-1').parent().css('width','100%');
