@@ -713,14 +713,30 @@ function handleAjaxCityGet(data) {
         var link = document.createElement('a');
         link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
         link.target = '_blank';
-        link.dispatchEvent(new MouseEvent('click'));
+        if(document.createEvent){
+          // for IE 11
+          eventMouse = document.createEvent("MouseEvent");
+          eventMouse.initMouseEvent("click",true,true,window,0,0,0,0,0,false,false,false,false,0,null);
+        } else {
+          eventMouse = new MouseEvent('click');
+        }
+        link.dispatchEvent(eventMouse);
       });
       $('#cost-location-button').click(function(e){
         e.preventDefault();
         var link = document.createElement('a');
+        //link.id = 'cost-location-link'
         link.href = 'http://www.bestplaces.net/cost-of-living/';
         link.target = '_blank';
-        link.dispatchEvent(new MouseEvent('click'));
+        if(document.createEvent){
+          // for IE 11
+          eventMouse = document.createEvent("MouseEvent");
+          eventMouse.initMouseEvent("click",true,true,window,0,0,0,0,0,false,false,false,false,0,null);
+        } else {
+          eventMouse = new MouseEvent('click');
+        }
+        link.dispatchEvent(eventMouse);
+        //$('#cost-location-link').click();
       });
       setLocationButtons = true;
     }
