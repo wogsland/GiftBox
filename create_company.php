@@ -208,17 +208,14 @@ require __DIR__.'/header.php';
                             <div class="icon-bar">
                                 <span class="icon-bar-text">Add Images From: </span>
                                 <div class="icon-container">
-                                <input class="hidden-file-input" type="file" multiple id="select-image-file" />
+                                    <input class="hidden-file-input" type="file" multiple id="select-image-file" />
                                     <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
-    <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
-                                    <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
-                                    <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
-                                    <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
-    -->                            </div>
+                                </div>
                             </div>
                             <?php if (count($token_images) > 0) {?>
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
+                              $i = 0;
                               foreach ($token_images as $token_image) {
                                   $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
                                   $image_id = str_replace('.', '_', $token_image['file_name']);
@@ -226,11 +223,18 @@ require __DIR__.'/header.php';
                                   $image_id = str_replace('(', '_', $image_id);
                                   $image_id = str_replace(')', '_', $image_id);
                                   echo '<div class="thumbnail-container">';
-                                  echo '  <div class="inner-thumbnail-container">';
-                                  echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
-                                  echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
-                                  echo ' </div>';
+                                  echo '<div class="inner-thumbnail-container">';
+                                  echo '<div class="image-thumbnail-image">';
+                                  echo '<img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
                                   echo '</div>';
+                                  echo '<div class="image-thumbnail-buttons">';
+                                  echo '<paper-button raised class="remove-button" data-saved="true" onclick="markImageLogo(\''.$image_id.'\')">MARK LOGO</paper-button>';
+                                  echo '<paper-button id="mark-mobile-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageMobile(\''.$token_image['id'].'\', \''.$i.'\')">USE ON MOBILE</paper-button>';
+                                  echo '<paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                                  echo '</div>';
+                                  echo '</div>';
+                                  echo '</div>';
+                                  $i++;
                               }
                               echo '</div>';
                             } else { ?>
@@ -441,7 +445,6 @@ require __DIR__.'/header.php';
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -457,12 +460,34 @@ require __DIR__.'/header.php';
         window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
       }
     }
+
     /**
      * Skips this step
      */
     function skipCompany() {
       window.location = '/send_recruiting?referrer='+null+'&id=<?php echo $referrer;?>';
     }
+
+    /**
+     * Markes ye imagge fur mobile
+     */
+    function markImageMobile(id, index) {
+      var url = '/ajax/recruiting_company_image/mobile';
+      var params = {id: id};
+      $.post(url, params, function(data){
+        if('true' == data.success) {
+          $('#mark-mobile-button-'+index).prop("disabled",true);;
+          $('#mark-mobile-button-'+index).html('MOBILE IMAGE');
+          $('#mark-mobile-button-'+index).css('color', 'black');
+          $('#mark-mobile-button-'+index).css('background', '#2193ED');
+        }  else {
+          alert('Failed setting for mobile. ');
+        }
+      },'json').fail(function() {
+        alert('Failed to set for mobile.');
+      });
+    }
+
     $( document ).ready(function() {
       var textFields = [
         '#company',

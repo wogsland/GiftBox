@@ -512,6 +512,12 @@ function loadDataAndPopulateToken() {
           if ( $(window).width() < 739 || data.data.length < 4) {
             $('#company-secondary-images').remove();
             $('#company-main-image').css('width','100%');
+            data.data.forEach(function(companyImageValue) {
+              console.log(companyImageValue)
+              if ('Y' == companyImageValue.mobile) {
+                $('#company-main-image').css('background',"url('"+assetHost+"/"+companyImageValue.file_name+"') center / cover");
+              }
+            });
           } else {
             $('#company-secondary-image-1').attr('src',assetHost+"/"+data.data[1].file_name);
             $('#company-secondary-image-1').parent().css('width','100%');
@@ -534,8 +540,8 @@ function loadDataAndPopulateToken() {
       }
     });
 
-    /* EXPERIMENT 6 */
     if (!learnMoreChecked) {
+      /* EXPERIMENT 6 */
       url = '/ajax/experiment' + path[4];
       $.post(url, {'id':6}, function(data){
         if (data.learnMore) {
@@ -543,8 +549,18 @@ function loadDataAndPopulateToken() {
         }
       },'json');
       learnMoreChecked = true;
+      /* END EXPERIMENT 6 */
+
+      /* EXPERIMENT 7 */
+      url = '/ajax/experiment' + path[4];
+      $.post(url, {'id':7}, function(data){
+        if (data.requestInterview) {
+          requestInterview();
+        }
+      },'json');
+      learnMoreChecked = true;
+      /* END EXPERIMENT 7 */
     }
-    /* END EXPERIMENT 6 */
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
@@ -697,14 +713,30 @@ function handleAjaxCityGet(data) {
         var link = document.createElement('a');
         link.href = 'http://www.zillow.com/homes/'+encodeURIComponent(data.name);
         link.target = '_blank';
-        link.dispatchEvent(new MouseEvent('click'));
+        if(document.createEvent){
+          // for IE 11
+          eventMouse = document.createEvent("MouseEvent");
+          eventMouse.initMouseEvent("click",true,true,window,0,0,0,0,0,false,false,false,false,0,null);
+        } else {
+          eventMouse = new MouseEvent('click');
+        }
+        link.dispatchEvent(eventMouse);
       });
       $('#cost-location-button').click(function(e){
         e.preventDefault();
         var link = document.createElement('a');
+        //link.id = 'cost-location-link'
         link.href = 'http://www.bestplaces.net/cost-of-living/';
         link.target = '_blank';
-        link.dispatchEvent(new MouseEvent('click'));
+        if(document.createEvent){
+          // for IE 11
+          eventMouse = document.createEvent("MouseEvent");
+          eventMouse.initMouseEvent("click",true,true,window,0,0,0,0,0,false,false,false,false,0,null);
+        } else {
+          eventMouse = new MouseEvent('click');
+        }
+        link.dispatchEvent(eventMouse);
+        //$('#cost-location-link').click();
       });
       setLocationButtons = true;
     }
@@ -1152,7 +1184,6 @@ function handleAjaxRecruitingTokenGet(data) {
 function updateSectionPositions() {
   var wrapper = document.getElementById('ordered-sections'),
       ordered = [],
-      sectionPriority = [];
     /*
      * sectionPriority
      *
@@ -1162,46 +1193,34 @@ function updateSectionPositions() {
      * the sections will flow around it.
      *
      */
+    sectionPriority =
+    [
+      'company-section',
+      'recruiter-section',
+      'location-section',
+      'doublet-location-section',
+      'triplet-location-section',
+      'image-video-section'
+    ];
     if ($('#learn-more-section').length) {
-      sectionPriority =
-      [
-        'company-section',
-        'recruiter-section',
-        'location-section',
-        'doublet-location-section',
-        'triplet-location-section',
-        'image-video-section',
-        {
-          id: 'learn-more-section',
-          position: 1
-        },
-        {
-          id: 'job-description-section',
-          position: 2
-        },
-        {
-          id: 'social-section',
-          position: 3
-        }
-      ];
-    } else {
-      sectionPriority =
-      [
-        'company-section',
-        'recruiter-section',
-        'location-section',
-        'doublet-location-section',
-        'triplet-location-section',
-        'image-video-section',
-        {
-          id: 'job-description-section',
-          position: 1
-        },
-        {
-          id: 'social-section',
-          position: 2
-        }
-      ];
+      sectionPriority.push({
+        id: 'learn-more-section',
+        position: 1
+      });
+    }
+    sectionPriority.push({
+      id: 'job-description-section',
+      position: ($('#learn-more-section').length ? 2 : 1)
+    });
+    sectionPriority.push({
+      id: 'social-section',
+      position: ($('#learn-more-section').length ? 3 : 2)
+    });
+    if ($('#request-interview-section').length) {
+      sectionPriority.push({
+        id: 'request-interview-section',
+        position: ($('#learn-more-section').length ? 4 : 3)
+      });
     }
 
   sectionPriority.forEach(function(section) {
@@ -1372,6 +1391,27 @@ function learnMore() {
   html += '</section>';
   $($('section')[0]).after(html);
   $('#learn-more').click(function(event) {
+    $('#learn-more-modal-text').html('Enter your email below to learn more <br/> about this job opportunity.')
+    $('.learn-more-button').html('Learn More')
+    $('#learn-more-dialog')[0].open();
+    learnMoreOpen = true;
+    presentedLearnMore = true;
+    $('.interest-fab').addClass('mdl-button--disabled');
+  });
+}
+
+
+/**
+ * Populates request an interview button
+ */
+function requestInterview() {
+  html = '<section id="request-interview-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+  html += '<paper-button id="request-interview">Request an Interview</paper-button>';
+  html += '</section>';
+  $($('section')[2]).after(html);
+  $('#request-interview').click(function(event) {
+    $('#learn-more-modal-text').html('Enter your email <br/>to request an interview')
+    $('.learn-more-button').html('Request Interview')
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
     presentedLearnMore = true;

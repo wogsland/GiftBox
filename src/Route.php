@@ -350,6 +350,14 @@ class Route
                 $_SESSION['experiments'][$token->id][] = array('id'=>6, 'version'=>$experimentVersion);
                 /* END EXPERIMENT 6 */
 
+                /* EXPERIMENT 7 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['requestInterview']);
+                $_SESSION['requestInterview'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(7, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>7, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 7 */
+
                 /* EXPERIMENT 5 */
                 if (isset($token->collect_name)) {
                     $experimentVersion = $token->collect_name;

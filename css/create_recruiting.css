@@ -157,18 +157,26 @@ body {
 }
 .thumbnail-container {
   display: inline-block;
-  width: 178px;
+  width: 300px;
   height: 160px;
   margin-right: 8px;
   margin-bottom: 10px;
   overflow: hidden;
 }
 .inner-thumbnail-container {
-  width: 178px;
+  width: 300px;
   height: 152px;
   display: table-cell;
   vertical-align: bottom;
   overflow: hidden;
+}
+.image-thumbnail-image {
+  float: left;
+  margin: 15px;
+}
+.image-thumbnail-buttons {
+  overflow: hidden;
+  margin: 15px;
 }
 .photo-thumbnail {
   display: block;
@@ -188,6 +196,7 @@ body {
   font-size: 10px;
   width: 80px;
   padding: 0;
+  text-align: center;
 }
 #validation-message {
   text-align: center;
