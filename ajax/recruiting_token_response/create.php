@@ -167,7 +167,7 @@ if (is_object($user) && isset($user->receive_token_notifications) && strcmp($use
     $mandrill->send(
         array(
             'to'=>array(array('email'=>$user->email_address)),
-            'from_email'=>'notifications@gosizzle.io',
+            'from_email'=>'notifications@GoSizzle.io',
             'from_name'=>'S!zzle',
             'subject'=>'S!zzle Token Response Notification',
             'html'=>$email_message

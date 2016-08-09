@@ -43,7 +43,7 @@ require __DIR__.'/header.php';
 &lt;/iframe&gt;</pre>
           </div>
       <?php } else { ?>
-          Please contact <a href="mailto:rzettler@gosizzle.io?subject=iframe">Robbie Zettler</a>
+          Please contact <a href="mailto:rzettler@GoSizzle.io?subject=iframe">Robbie Zettler</a>
           to have this feature set up for you.
       <?php }?>
     </div>

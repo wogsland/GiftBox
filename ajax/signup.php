@@ -64,7 +64,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
             $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
-                    'from_email'=>'welcome@gosizzle.io',
+                    'from_email'=>'welcome@GoSizzle.io',
                     'from_name'=>'S!zzle',
                     'subject'=>'S!zzle Signup Confirmation',
                     'html'=>$email_message

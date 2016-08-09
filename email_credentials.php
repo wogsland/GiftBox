@@ -163,7 +163,7 @@ require __DIR__.'/header.php';
             <i>
               Currently only SMTP TLS authentication is supported. If you have
               any questions please contact
-              <a href="mailto:support@gosizzle.io">support@gosizzle.io</a>.
+              <a href="mailto:support@GoSizzle.io">support@GoSizzle.io</a>.
             </i>
           </div>
         </paper-card>

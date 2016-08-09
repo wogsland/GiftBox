@@ -182,7 +182,7 @@ if (logged_in()) {
                 <span class="heading">SEND US AN EMAIL</span>
                 <p class="thin" >
                   All it takes to begin is a job description and an email!
-                  Just send an email with a job description, preferably web link or word doc, to <a href="mailto:token@gosizzle.io">token@gosizzle.io</a>.
+                  Just send an email with a job description, preferably web link or word doc, to <a href="mailto:token@GoSizzle.io">token@GoSizzle.io</a>.
                 </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
@@ -499,7 +499,7 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="mailto:gpeters@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="mailto:gpeters@GoSizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/gp_mazzone" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://www.facebook.com/gary.m.peters.7" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/gary-peters-98183446" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
@@ -524,7 +524,7 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="mailto:rzettler@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="mailto:rzettler@GoSizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/rob_zet" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://www.facebook.com/robbie.zettler" class="facebook" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/robbiezettler" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
@@ -549,7 +549,7 @@ if (logged_in()) {
                     </div>
                   </div>
                   <ul class="socials-block">
-                    <li><a href="mailto:bwogsland@gosizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
+                    <li><a href="mailto:bwogsland@GoSizzle.io" class="email" title="Email"><i class="fa fa-envelope-o"></i></a></li>
                     <li><a href="https://twitter.com/wogsland" class="twitter" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="https://www.github.com/wogsland" class="github" title="Github" target="_blank"><i class="fa fa-github"></i></a></li>
                     <li><a href="https://www.linkedin.com/in/wogsland" class="linked_in" title="Linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
@@ -624,7 +624,7 @@ if (logged_in()) {
         <div class="col-sm-3 col-xs-12">
           <strong class="heading">Our Contacts</strong>
           <ul class="list-unstyled">
-            <li><span class="icon icon-chat-messages-14"></span><a href="mailto:token@gosizzle.io">token@gosizzle.io</a></li>
+            <li><span class="icon icon-chat-messages-14"></span><a href="mailto:token@GoSizzle.io">token@GoSizzle.io</a></li>
             <li><span class="icon icon-seo-icons-34"></span>Nashville, TN 37204</li>
             <li><span class="icon icon-seo-icons-17"></span>(901)-486-7886</li>
           </ul>

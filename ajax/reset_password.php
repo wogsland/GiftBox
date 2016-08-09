@@ -46,7 +46,7 @@ if (isset($_POST['email']) && $_SESSION['reset_attempt']['tries'] <= 3) {
             $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
-                    'from_email'=>'help@gosizzle.io',
+                    'from_email'=>'help@GoSizzle.io',
                     'from_name'=>'S!zzle',
                     'subject'=>'S!zzle Password Reset',
                     'html'=>$email_message
