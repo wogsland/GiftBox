@@ -455,7 +455,10 @@ require __DIR__.'/header.php';
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script 
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
     <script>
     /**
      * Adds existing company choice to form & hides form elements

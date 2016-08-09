@@ -38,7 +38,11 @@
     <link rel="stylesheet" href="css/recruiting-token.css">
 
     <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous">
+    </script>
 
     <!-- Masonry -->
     <script src="components/masonry/dist/masonry.pkgd.min.js" async></script>
