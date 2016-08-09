@@ -228,7 +228,7 @@ require __DIR__.'/header.php';
                                   echo '<img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
                                   echo '</div>';
                                   echo '<div class="image-thumbnail-buttons">';
-                                  echo '<paper-button raised class="remove-button" data-saved="true" onclick="markImageLogo(\''.$image_id.'\')">MARK LOGO</paper-button>';
+                                  echo '<paper-button id="mark-logo-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageLogo(\''.$token_image['id'].'\', \''.$i.'\')">MARK LOGO</paper-button>';
                                   echo '<paper-button id="mark-mobile-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageMobile(\''.$token_image['id'].'\', \''.$i.'\')">USE ON MOBILE</paper-button>';
                                   echo '<paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
                                   echo '</div>';
@@ -485,6 +485,26 @@ require __DIR__.'/header.php';
         }
       },'json').fail(function() {
         alert('Failed to set for mobile.');
+      });
+    }
+
+    /**
+     * Markes ye imagge til logo
+     */
+    function markImageLogo(id, index) {
+      var url = '/ajax/recruiting_company_image/logo';
+      var params = {id: id};
+      $.post(url, params, function(data){
+        if('true' == data.success) {
+          $('#mark-logo-button-'+index).prop("disabled",true);;
+          $('#mark-logo-button-'+index).html('LOGO');
+          $('#mark-logo-button-'+index).css('color', 'black');
+          $('#mark-logo-button-'+index).css('background', '#2193ED');
+        }  else {
+          alert('Failed setting logo.');
+        }
+      },'json').fail(function() {
+        alert('Failed to set logo.');
       });
     }
 

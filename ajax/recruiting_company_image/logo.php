@@ -12,9 +12,9 @@ if (isset($_SESSION['user_id'])) {
             $allImages = $image->getByCompanyId($image->recruiting_company_id);
             foreach ($allImages as $img) {
                 $omg = new RecruitingCompanyImage($img['id']);
-                $omg->unmarkMobile();
+                $omg->unmarkLogo();
             }
-            $success = $image->markMobile() ? 'true' : 'false';
+            $success = $image->markLogo() ? 'true' : 'false';
         }
     }
 }
