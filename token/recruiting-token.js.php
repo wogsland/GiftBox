@@ -845,6 +845,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
       //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
       $('#icon-or-face').remove();
       $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
+      $('#recruiter-face').css('height','300px');
     }
     if (dataExists(data.data.position)) {
       $('#gt-info-recruiter-position').html(data.data.position);
@@ -866,7 +867,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
     if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
       $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
     } else {
-      // if there are no names a recruiter profile doens't make sense
+      // if there are no names a recruiter profile doesn't make sense
       $('#recruiter-section').remove();
     }
   } else {
