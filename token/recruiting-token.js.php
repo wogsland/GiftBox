@@ -513,8 +513,7 @@ function loadDataAndPopulateToken() {
             $('#company-secondary-images').remove();
             $('#company-main-image').css('width','100%');
             data.data.forEach(function(companyImageValue) {
-              console.log(companyImageValue)
-              if ('Y' == companyImageValue.mobile) {
+              if ('Y' == companyImageValue.mobile && $(window).width() < 739) {
                 $('#company-main-image').css('background',"url('"+assetHost+"/"+companyImageValue.file_name+"') center / cover");
               }
             });
@@ -526,6 +525,11 @@ function loadDataAndPopulateToken() {
             $('#company-secondary-image-3').attr('src',assetHost+"/"+data.data[3].file_name);
             $('#company-secondary-image-3').parent().css('width','100%');
           }
+          data.data.forEach(function(companyImageValue) {
+            if ('Y' == companyImageValue.logo) {
+              $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+companyImageValue.file_name+'" width=200>');
+            }
+          });
           $('#videos-frontpage').removeClass('mdl-cell--6-col');
           $('#videos-frontpage').addClass('mdl-cell--12-col');
         } else {
@@ -1161,9 +1165,7 @@ function handleAjaxRecruitingTokenGet(data) {
       break;
     }
   }
-  if (dataExists(data.data.company_logo)) {
-    $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+data.data.company_logo+'" width=200>');
-  }
+
   if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
     $('#bio-button').remove();
     $('#contact-button').remove();
