@@ -513,7 +513,7 @@ function loadDataAndPopulateToken() {
             $('#company-secondary-images').remove();
             $('#company-main-image').css('width','100%');
             data.data.forEach(function(companyImageValue) {
-              if ('Y' == companyImageValue.mobile) {
+              if ('Y' == companyImageValue.mobile && $(window).width() < 739) {
                 $('#company-main-image').css('background',"url('"+assetHost+"/"+companyImageValue.file_name+"') center / cover");
               }
             });
