@@ -40,16 +40,9 @@ if(isset($_SESSION['experiments'], $_SESSION['experiments'][$recruiting_token->i
 
 // hit the FullContact Person API to get information
 $extra_details = '';
-if ('' == $name && '' != $email) {
-    //if (ENVIRONMENT == 'production') {
-        $fullcontact = (new FullContact())->person($email, $id);
-    /*} else {
-        $filename = __DIR__.'/../../src/Bacon/Tests/Service/fullcontact_example.json';
-        $f = fopen($filename, 'r');
-        $fullcontact = json_decode(fread($f, filesize($filename)));
-        fclose($f);
-    }*/
-    $name = $fullcontact->contactInfo->fullName ?? '';
+if ('' != $email) {
+    $fullcontact = (new FullContact())->person($email, $id);
+    $name = '' == $name ? ($fullcontact->contactInfo->fullName ?? '') : $name;
 
     //process demographics
     if (isset($fullcontact->demographics)) {
