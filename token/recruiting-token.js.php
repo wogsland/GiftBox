@@ -60,11 +60,11 @@ scope._onImagesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 2;
-  path = getUrlPath();
+  path = Sizzle.Util.getUrlPath();
   url = '/ajax/recruiting_token/get_images' + path[4];
   $.post(url, '', function(data) {
     if (data.data !== undefined) {
-      assetHost = getAssetHost();
+      assetHost = Sizzle.Util.getAssetHost();
       images = getImagesGrid(data.data, assetHost);
       $('#images-container').empty().append(images);
 
@@ -80,7 +80,7 @@ scope._onVideosClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 3;
-  path = getUrlPath();
+  path = Sizzle.Util.getUrlPath();
   url = '/ajax/recruiting_token/get_videos' + path[4];
   $.post(url, '', function(data) {
     if (data.data !== undefined && data.data.length > 0) {
@@ -459,14 +459,14 @@ function enableBackButton() {
  * Handle loading the token data and putting it where it should go
  */
 function loadDataAndPopulateToken() {
-  path = getUrlPath();
+  path = Sizzle.Util.getUrlPath();
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
     url = '/ajax/recruiting_token/get' + path[4];
     $.post(url, '', handleAjaxRecruitingTokenGet,'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
-        assetHost = getAssetHost();
+        assetHost = Sizzle.Util.getAssetHost();
         if (data.data.length > 0) {
           $('#images-frontpage').hide();
           $('#company-image-grid').css('width','100%');
@@ -489,7 +489,7 @@ function loadDataAndPopulateToken() {
           }
           data.data.forEach(function(companyImageValue) {
             if ('Y' == companyImageValue.logo) {
-              $('#briefcase-or-logo').html('<img src="'+getAssetHost()+"/"+companyImageValue.file_name+'" width=200>');
+              $('#briefcase-or-logo').html('<img src="'+Sizzle.Util.getAssetHost()+"/"+companyImageValue.file_name+'" width=200>');
             }
           });
           $('#videos-frontpage').removeClass('mdl-cell--6-col');
@@ -581,65 +581,6 @@ echo <<<'EOT'
 }
 
 /**
- * Takes a number and adds commas to it every third digit
- *
- * @param {number} x The number to add commas to
- * @return {string} The number with commas added
- */
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-/**
- * Checks if data is defined, not null and not the empty string
- *
- * @param {mixed} data The data to check
- * @return {boolean} If data exists
- */
-function dataExists (data) {
-  return data !== undefined && data !== null && '' !== data;
-}
-
-/**
- * Returns the URL path broken into pieces
- *
- * @return {array} The URL path broken into pieces
- */
-function getUrlPath() {
-  var vars = {};
-  i = 0;
-  var parts = window.location.href.replace(/\/([a-zA-Z0-9]*)/gi, function(value) {
-    vars[i] = value;
-    i++;
-  });
-  return vars;
-}
-
-/**
- * Returns the host for referencing assets based on environment
- *
- * @return {string} The host for referencing assets
- */
-function getAssetHost() {
-  switch (window.location.hostname) {
-    default:
-    return '/uploads';
-  }
-}
-
-/**
- * Gets the location of the ith occurance of m in str
- *
- * @param {string} string to search
- * @param {string} string to find
- * @param {int} which occurance to find
- * @return {int} wher it occurred
- */
-function getPosition(str, m, i) {
-   return str.split(m, i).join(m).length;
-}
-
-/**
  * Handles the data return from ajax/city/get
  *
  * @param {object} the data
@@ -647,8 +588,8 @@ function getPosition(str, m, i) {
 function handleAjaxCityGet(data) {
   if (data.id !== undefined & data.id > 0) {
     $('.gt-info-location').text(data.name);
-    if (dataExists(data.population)) {
-      $('.gt-city-population').text(numberWithCommas(data.population));
+    if (Sizzle.Util.dataExists(data.population)) {
+      $('.gt-city-population').text(Sizzle.Util.numberWithCommas(data.population));
     }
     $('.gt-city-timezone').text(data.timezone);
     $('.gt-city-county').text(data.county);
@@ -690,62 +631,62 @@ function handleAjaxCityGet(data) {
 
     //temps
     var missingTemp = false;
-    if (dataExists(data.temp_hi_spring)) {
+    if (Sizzle.Util.dataExists(data.temp_hi_spring)) {
       $('.gt-city-spring-hi').text(data.temp_hi_spring);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_lo_spring)) {
+    if (Sizzle.Util.dataExists(data.temp_lo_spring)) {
       $('.gt-city-spring-lo').text(data.temp_lo_spring);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_avg_spring)) {
+    if (Sizzle.Util.dataExists(data.temp_avg_spring)) {
       $('.gt-city-spring-avg').text(data.temp_avg_spring);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_hi_summer)) {
+    if (Sizzle.Util.dataExists(data.temp_hi_summer)) {
       $('.gt-city-summer-hi').text(data.temp_hi_summer);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_lo_summer)) {
+    if (Sizzle.Util.dataExists(data.temp_lo_summer)) {
       $('.gt-city-summer-lo').text(data.temp_lo_summer);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_avg_summer)) {
+    if (Sizzle.Util.dataExists(data.temp_avg_summer)) {
       $('.gt-city-summer-avg').text(data.temp_avg_summer);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_hi_fall)) {
+    if (Sizzle.Util.dataExists(data.temp_hi_fall)) {
       $('.gt-city-fall-hi').text(data.temp_hi_fall);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_lo_fall)) {
+    if (Sizzle.Util.dataExists(data.temp_lo_fall)) {
       $('.gt-city-fall-lo').text(data.temp_lo_fall);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_avg_fall)) {
+    if (Sizzle.Util.dataExists(data.temp_avg_fall)) {
       $('.gt-city-fall-avg').text(data.temp_avg_fall);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_hi_winter)) {
+    if (Sizzle.Util.dataExists(data.temp_hi_winter)) {
       $('.gt-city-winter-hi').text(data.temp_hi_winter);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_lo_winter)) {
+    if (Sizzle.Util.dataExists(data.temp_lo_winter)) {
       $('.gt-city-winter-lo').text(data.temp_lo_winter);
     } else {
       missingTemp = true;
     }
-    if (dataExists(data.temp_avg_winter)) {
+    if (Sizzle.Util.dataExists(data.temp_avg_winter)) {
       $('.gt-city-winter-avg').text(data.temp_avg_winter);
     } else {
       missingTemp = true;
@@ -758,7 +699,7 @@ function handleAjaxCityGet(data) {
     }
 
     // image(s)
-    assetHost = getAssetHost();
+    assetHost = Sizzle.Util.getAssetHost();
     url = '/ajax/city/get_images';
     postData = {
       'city_id':data.id
@@ -783,31 +724,31 @@ function handleAjaxCityGet(data) {
  */
 function handleAjaxUserGetRecruiterProfile(data) {
   if (data.data !== undefined) {
-    assetHost = getAssetHost();
-    if (dataExists(data.data.face_image)) {
+    assetHost = Sizzle.Util.getAssetHost();
+    if (Sizzle.Util.dataExists(data.data.face_image)) {
       //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
       $('#icon-or-face').remove();
       $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
       $('#recruiter-face').css('height','300px');
     }
-    if (dataExists(data.data.position)) {
+    if (Sizzle.Util.dataExists(data.data.position)) {
       $('#gt-info-recruiter-position').html(data.data.position);
     } else {
       $('#gt-info-recruiter-position').remove();
     }
-    if (dataExists(data.data.about)) {
+    if (Sizzle.Util.dataExists(data.data.about)) {
       $('#gt-info-recruiter-bio').html(data.data.about);
     } else {
       $('#gt-info-recruiter-bio').remove();
     }
-    if (dataExists(data.data.linkedin)) {
+    if (Sizzle.Util.dataExists(data.data.linkedin)) {
       $('#linkedin-button').attr('href', data.data.linkedin);
       $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
       $('.recruiter-profile-option').addClass('mdl-cell--12-col');
     } else {
       $('#linkedin-button').remove();
     }
-    if (dataExists(data.data.email_address)) {
+    if (Sizzle.Util.dataExists(data.data.email_address)) {
       $('#email-now-button').attr('href', 'mailto:'+data.data.email_address);
       if ($('#linkedin-button').length) {
         $('.recruiter-profile-option').removeClass('mdl-cell--12-col');
@@ -819,7 +760,7 @@ function handleAjaxUserGetRecruiterProfile(data) {
     } else {
       $('#email-now-button').remove();
     }
-    if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
+    if (Sizzle.Util.dataExists(data.data.first_name) || Sizzle.Util.dataExists(data.data.last_name)) {
       $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
     } else {
       // if there are no names a recruiter profile doesn't make sense
@@ -841,7 +782,7 @@ function handleAjaxRecruitingTokenGet(data) {
     window.location.href = 'https://www.gosizzle.io';
   }
   var tokenTitle;
-  if (dataExists(data.data.company)) {
+  if (Sizzle.Util.dataExists(data.data.company)) {
     $('.gt-info-company').text(data.data.company);
     if (data.data.company.length > 36 && $(window).width() > 800) {
       $('#supporting-company').css('height','100px');
@@ -872,18 +813,18 @@ function handleAjaxRecruitingTokenGet(data) {
   }
   var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
   if (4 < paragraphCount) {
-    shortDescription = shortDescription.substring(0, getPosition(shortDescription, '<p>', 5));
+    shortDescription = shortDescription.substring(0, Sizzle.Util.getPosition(shortDescription, '<p>', 5));
   }
   if (words.length >= 50 || 4 < paragraphCount) {
     shortDescription += ' ... ';
     shortDescription += '<a href="#overview-section" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
   }
   $('.gt-info-overview-short').html(shortDescription);
-  if (!dataExists(data.data.job_description)) {
+  if (!Sizzle.Util.dataExists(data.data.job_description)) {
     $('#overview-section-2').hide();
   }
   var descriptionCount = 0;
-  if (dataExists(data.data.skills_required)) {
+  if (Sizzle.Util.dataExists(data.data.skills_required)) {
     $('.gt-info-skills').html(data.data.skills_required);
     descriptionCount++;
   } else {
@@ -891,7 +832,7 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#skills-section').hide();
     $('#skills-section-2').hide();
   }
-  if (dataExists(data.data.responsibilities)) {
+  if (Sizzle.Util.dataExists(data.data.responsibilities)) {
     $('.gt-info-responsibilities').html(data.data.responsibilities);
     descriptionCount++;
   } else {
@@ -899,7 +840,7 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#responsibilities-section').hide();
     $('#responsibilities-section-2').hide();
   }
-  if (dataExists(data.data.company_values)) {
+  if (Sizzle.Util.dataExists(data.data.company_values)) {
     $('.gt-info-values').html(data.data.company_values);
     descriptionCount++;
   } else {
@@ -907,7 +848,7 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#values-section').hide();
     $('#values-section-2').hide();
   }
-  if (dataExists(data.data.perks)) {
+  if (Sizzle.Util.dataExists(data.data.perks)) {
     $('.gt-info-perks').html(data.data.perks);
     descriptionCount++;
   } else {
@@ -916,7 +857,7 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#perks-section-2').hide();
   }
 
-  if (dataExists(data.data.company_description)) {
+  if (Sizzle.Util.dataExists(data.data.company_description)) {
     $('#company-description-text').html(data.data.company_description);
   } else {
     $('#company-description').hide();
@@ -940,7 +881,7 @@ function handleAjaxRecruitingTokenGet(data) {
       break;
     }
   }
-  if(dataExists(data.data.long_id)) {
+  if(Sizzle.Util.dataExists(data.data.long_id)) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', function(data) {
       cities = data.data;
@@ -1060,37 +1001,37 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#location-section').remove();
   }
   var socialCount = 0;
-  if (dataExists(data.data.company_twitter)) {
+  if (Sizzle.Util.dataExists(data.data.company_twitter)) {
     $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
     socialCount++;
   } else {
     $('.gt-info-twitter').remove();
   }
-  if (dataExists(data.data.company_facebook)) {
+  if (Sizzle.Util.dataExists(data.data.company_facebook)) {
     $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
     socialCount++;
   } else {
     $('.gt-info-facebook').remove();
   }
-  if (dataExists(data.data.company_linkedin)) {
+  if (Sizzle.Util.dataExists(data.data.company_linkedin)) {
     $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
     socialCount++;
   } else {
     $('.gt-info-linkedin').remove();
   }
-  if (dataExists(data.data.company_youtube)) {
+  if (Sizzle.Util.dataExists(data.data.company_youtube)) {
     $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
     socialCount++;
   } else {
     $('.gt-info-youtube').remove();
   }
-  if (dataExists(data.data.company_google_plus)) {
+  if (Sizzle.Util.dataExists(data.data.company_google_plus)) {
     $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
     socialCount++;
   } else {
     $('.gt-info-gplus').remove();
   }
-  if (dataExists(data.data.company_pinterest)) {
+  if (Sizzle.Util.dataExists(data.data.company_pinterest)) {
     $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
     socialCount++;
   } else {
@@ -1122,7 +1063,7 @@ function handleAjaxRecruitingTokenGet(data) {
     }
   }
 
-  if (dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
+  if (Sizzle.Util.dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
     $('#bio-button').remove();
     $('#contact-button').remove();
     $('#schedule-button').remove();
@@ -1191,7 +1132,7 @@ function updateSectionPositions() {
         section_id = typeof section === 'string' ? section : section.id,
         section_el = document.getElementById(section_id);
 
-    if (elementIsPresent(section_el) === false) return;
+    if (Sizzle.Util.elementIsPresent(section_el) === false) return;
 
     if (position === false) {
       ordered.push(section_el);
@@ -1201,15 +1142,6 @@ function updateSectionPositions() {
   });
 
   ordered.forEach(wrapper.appendChild.bind(wrapper));
-}
-
-/**
- * Determines whether an element is present and visible on the page
- * @param {HTMLElement} section_el
- * @returns {boolean}
- */
-function elementIsPresent(section_el) {
-  return (section_el !== null) && (section_el.style.display !== 'none');
 }
 
 var addedName = false;
