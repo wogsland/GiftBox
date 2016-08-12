@@ -1,4 +1,7 @@
 <?php
+require __DIR__.'/js/Sizzle.js';
+require __DIR__.'/js/Screen.js';
+
 echo <<<'EOT'
 var scope = document.querySelector('template[is="dom-bind"]');
 var presentedInterestPopup = false;
@@ -21,7 +24,7 @@ scope._onOverviewClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  smallScreen();
+  Sizzle.Screen.small();
 };
 
 scope._onSkillsClick = function(event) {
@@ -32,7 +35,7 @@ scope._onSkillsClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  smallScreen();
+  Sizzle.Screen.small();
 };
 
 scope._onValuesClick = function(event) {
@@ -43,7 +46,7 @@ scope._onValuesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  smallScreen();
+  Sizzle.Screen.small();
 };
 
 scope._onResponsibilitiesClick = function(event) {
@@ -54,7 +57,7 @@ scope._onResponsibilitiesClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  smallScreen();
+  Sizzle.Screen.small();
 };
 
 scope._onPerksClick = function(event) {
@@ -65,7 +68,7 @@ scope._onPerksClick = function(event) {
     'fade-out': event.target
   };
   this.$.pages.selected = 4;
-  smallScreen();
+  Sizzle.Screen.small();
 };
 
 scope._onLocationClick = function(event) {
@@ -631,18 +634,7 @@ echo <<<'EOT'
   } else {
     window.location.href = 'https://www.gosizzle.io';
   }
-  smallScreen();
-}
-
-/**
- * Makes adjustments for small screens
- */
-function smallScreen() {
-  if ( $(window).width() < 739) {
-    // small screens adjustments
-    $('.back-button-lower').addClass('back-button-lower-right');
-    $('.back-button-lower-right').removeClass('back-button-lower');
-  }
+  Sizzle.Screen.small();
 }
 
 /**
@@ -848,7 +840,6 @@ function handleAjaxCityGet(data) {
  */
 function handleAjaxUserGetRecruiterProfile(data) {
   if (data.data !== undefined) {
-    console.log(data.data);
     assetHost = getAssetHost();
     if (dataExists(data.data.face_image)) {
       //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
