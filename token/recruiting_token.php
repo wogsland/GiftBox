@@ -158,6 +158,9 @@
                               <a id="contact-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                                 Contact Information
                               </a>
+                              <a id="email-now-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
+                                Email Now
+                              </a>
                               <a id="schedule-button" class="mdl-cell mdl-cell--3-col mdl-cell--2-col-phone mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect recruiter-profile-option">
                                 Schedule Meeting
                               </a>

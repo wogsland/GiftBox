@@ -848,6 +848,7 @@ function handleAjaxCityGet(data) {
  */
 function handleAjaxUserGetRecruiterProfile(data) {
   if (data.data !== undefined) {
+    console.log(data.data);
     assetHost = getAssetHost();
     if (dataExists(data.data.face_image)) {
       //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
@@ -871,6 +872,18 @@ function handleAjaxUserGetRecruiterProfile(data) {
       $('.recruiter-profile-option').addClass('mdl-cell--12-col');
     } else {
       $('#linkedin-button').remove();
+    }
+    if (dataExists(data.data.email_address)) {
+      $('#email-now-button').attr('href', 'mailto:'+data.data.email_address);
+      if ($('#linkedin-button').length) {
+        $('.recruiter-profile-option').removeClass('mdl-cell--12-col');
+        $('.recruiter-profile-option').addClass('mdl-cell--6-col');
+      } else {
+        $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
+        $('.recruiter-profile-option').addClass('mdl-cell--12-col');
+      }
+    } else {
+      $('#email-now-button').remove();
     }
     if (dataExists(data.data.first_name) || dataExists(data.data.last_name)) {
       $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
