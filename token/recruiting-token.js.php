@@ -1,5 +1,9 @@
 <?php
+// js namespace
 require __DIR__.'/js/Sizzle.js';
+
+// js classes
+require __DIR__.'/js/Experiment.js';
 require __DIR__.'/js/Screen.js';
 
 echo <<<'EOT'
@@ -549,34 +553,18 @@ function loadDataAndPopulateToken() {
 
     if (!learnMoreChecked) {
       /* EXPERIMENT 6 */
-      url = '/ajax/experiment' + path[4];
-      $.post(url, {'id':6}, function(data){
-        if (data.learnMore) {
-          learnMore();
-        }
-      },'json');
-      learnMoreChecked = true;
+      Sizzle.Experiment.checkAndRun(path[4], 6, 'learnMore', 'learnMore');
       /* END EXPERIMENT 6 */
 
       /* EXPERIMENT 7 */
-      url = '/ajax/experiment' + path[4];
-      $.post(url, {'id':7}, function(data){
-        if (data.requestInterview) {
-          requestInterview();
-        }
-      },'json');
-      learnMoreChecked = true;
+      Sizzle.Experiment.checkAndRun(path[4], 7, 'requestInterview', 'requestInterview');
       /* END EXPERIMENT 7 */
 
-      /* EXPERIMENT * */
-      url = '/ajax/experiment' + path[4];
-      $.post(url, {'id':8}, function(data){
-        if (data.applyNow) {
-          applyNow();
-        }
-      },'json');
+      /* EXPERIMENT 8 */
+      Sizzle.Experiment.checkAndRun(path[4], 8, 'applyNow', 'applyNow');
+      /* END EXPERIMENT 8 */
+
       learnMoreChecked = true;
-      /* END EXPERIMENT * */
     }
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
