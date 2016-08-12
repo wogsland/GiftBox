@@ -129,11 +129,11 @@ img.emoji {
 <div class="screen-reader-response"></div>
 <form method="post" class="wpcf7-form" id="demo-request-form">
 <div class="form form-overlay">
-<div class="form-group col-sm-8">
+<!--<div class="form-group col-sm-8">
          <span class="wpcf7-form-control-wrap EMAIL"><input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" placeholder="Email" /></span>
-    </div>
+    </div>-->
 <div class="form-group col-sm-4">
-         <input type="submit" value="GO!" class="wpcf7-form-control wpcf7-submit btn base_clr_bg btn-solid" />
+         <input style="width:0px;padding-right:90px;padding-left:70px;" type="submit" value="GO!" class="wpcf7-form-control wpcf7-submit btn base_clr_bg btn-solid" />
       </div>
 </div>
 <div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div>
@@ -190,7 +190,8 @@ $( document ).ready(function() {
   // process demo request form
   $('#demo-request-form').on('submit', function (e) {
       e.preventDefault();
-      $.post("/ajax/demo_request", $('#demo-request-form').serialize(),
+      window.location = 'http://calendly.com/rzettler';
+      /*$.post("/ajax/demo_request", $('#demo-request-form').serialize(),
           function (data, textStatus, jqXHR) {
               if (data.status === "SUCCESS") {
                   $(".response").html('Thanks for your interest!<br /><br /> One of our sales team will be in touch with you shortly to schedule a demo.');
@@ -198,7 +199,7 @@ $( document ).ready(function() {
                   $(".response").show();
               }
           }
-      )
+      );*/
   });
 });
 </script>
