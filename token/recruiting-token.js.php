@@ -843,67 +843,13 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#location-section').remove();
   }
   var socialCount = 0;
-  if (Sizzle.Util.dataExists(data.data.company_twitter)) {
-    $('.gt-info-twitter').attr('href', 'http://twitter.com/'+data.data.company_twitter);
-    socialCount++;
-  } else {
-    $('.gt-info-twitter').remove();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_facebook)) {
-    $('.gt-info-facebook').attr('href', 'http://facebook.com/'+data.data.company_facebook);
-    socialCount++;
-  } else {
-    $('.gt-info-facebook').remove();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_linkedin)) {
-    $('.gt-info-linkedin').attr('href', 'http://linkedin.com/'+data.data.company_linkedin);
-    socialCount++;
-  } else {
-    $('.gt-info-linkedin').remove();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_youtube)) {
-    $('.gt-info-youtube').attr('href', 'http://youtube.com/'+data.data.company_youtube);
-    socialCount++;
-  } else {
-    $('.gt-info-youtube').remove();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_google_plus)) {
-    $('.gt-info-gplus').attr('href', 'http://plus.google.com/'+data.data.company_google_plus);
-    socialCount++;
-  } else {
-    $('.gt-info-gplus').remove();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_pinterest)) {
-    $('.gt-info-pinterest').attr('href', 'http://pinterest.com/'+data.data.company_pinterest);
-    socialCount++;
-  } else {
-    $('.gt-info-pinterest').remove();
-  }
-  if (socialCount < 6) {
-    switch (socialCount) {
-      case 5:
-      $('.frontpage-social-button').css('width','20%');
-      break;
-      case 4:
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-      $('.frontpage-social-button').addClass('mdl-cell--3-col');
-      break;
-      case 3:
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
-      $('.frontpage-social-button').addClass('mdl-cell--4-col');
-      break;
-      case 2:
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-      $('.frontpage-social-button').addClass('mdl-cell--6-col');
-      break;
-      case 1:
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col');
-      $('.frontpage-social-button').removeClass('mdl-cell--2-col-phone');
-      $('.frontpage-social-button').addClass('mdl-cell--12-col');
-      break;
-    }
-  }
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'twitter');
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'facebook');
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'linkedin');
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'youtube');
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'google_plus');
+  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'pinterest');
+  Sizzle.Social.resizeButtons(socialCount);
 
   if (Sizzle.Util.dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
     $('#bio-button').remove();
