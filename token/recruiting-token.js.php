@@ -77,38 +77,7 @@ scope._onVideosClick = function(event) {
 /**
  * Opens the interest dialog
  */
-scope._onInterestClick0 = function (event) {
-  if (learnMoreOpen === false) {
-    $('.interest-dialog')[0].open();
-    presentedInterestPopup = true;
-    openedInterestPopup = true;
-    disableBackButton();
-  }
-};
-scope._onInterestClick1= function (event) {
-  $('.interest-dialog')[1].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
-};
-scope._onInterestClick2 = function (event) {
-  $('.interest-dialog')[2].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
-};
-scope._onInterestClick3 = function (event) {
-  $('.interest-dialog')[3].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
-};
-scope._onInterestClick4 = function (event) {
-  $('.interest-dialog')[4].open();
-  presentedInterestPopup = true;
-  openedInterestPopup = true;
-  disableBackButton();
-};
+scope._onInterestClick = Sizzle.Token.interestClick;
 
 /**
  * Submits interest info
@@ -283,7 +252,7 @@ scope._closeInterestDialog = function (event) {
   $('.interest-dialog').each(function (i, dialog){
     dialog.close();
     openedInterestPopup = false;
-    enableBackButton();
+    Sizzle.Token.enableBackButton();
   });
 };
 
@@ -333,7 +302,7 @@ $(document).ready(function(){
         dialog.close();
       });
       openedInterestPopup = false;
-      enableBackButton();
+      Sizzle.Token.enableBackButton();
     }
   });
 
@@ -341,14 +310,14 @@ $(document).ready(function(){
   var first = true;
   $(document).click(function() {
     if ($('.iron-overlay-backdrop-0').length === 0 && first) {
-      enableBackButton();
+      Sizzle.Token.enableBackButton();
       first = !first;
     }
   });
 
   // BACK button support for iOS devices
   $('.dismiss-interest-button, .submit-interest-button').click(function() {
-    enableBackButton();
+    Sizzle.Token.enableBackButton();
   });
 
   // fixes background modal on location page
@@ -374,7 +343,7 @@ $(document).ready(function(){
           dialog.close();
         });
         openedInterestPopup = false;
-        enableBackButton();
+        Sizzle.Token.enableBackButton();
       }
       elapsed++;
     } else {
@@ -394,24 +363,6 @@ function closeInterestDialog() {
       $(this).remove();
     });
   });
-}
-
-/**
- * Disables BACK button
- */
-function disableBackButton() {
-  $('.back-button').addClass('mdl-button--disabled');
-  $('.back-button-lower').addClass('mdl-button--disabled');
-  $('.back-button-lower-right').addClass('mdl-button--disabled');
-}
-
-/**
- * Enables BACK button
- */
-function enableBackButton() {
-  $('.back-button').removeClass('mdl-button--disabled');
-  $('.back-button-lower').removeClass('mdl-button--disabled');
-  $('.back-button-lower-right').removeClass('mdl-button--disabled');
 }
 
 /**
@@ -688,7 +639,7 @@ function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
           setTimeout(function(){
             if (!presentedInterestPopup && !presentedLearnMore) {
               $('.interest-dialog').each(function (i, dialog){
-                disableBackButton();
+                Sizzle.Token.disableBackButton();
                 dialog.open();
                 openedInterestPopup = true;
               });

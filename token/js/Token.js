@@ -1,4 +1,36 @@
 Sizzle.Token = {
+
+  /**
+   * Disables BACK button
+   */
+  'disableBackButton': function() {
+    $('.back-button').addClass('mdl-button--disabled');
+    $('.back-button-lower').addClass('mdl-button--disabled');
+    $('.back-button-lower-right').addClass('mdl-button--disabled');
+  },
+
+  /**
+   * Enables BACK button
+   */
+  'enableBackButton': function() {
+    $('.back-button').removeClass('mdl-button--disabled');
+    $('.back-button-lower').removeClass('mdl-button--disabled');
+    $('.back-button-lower-right').removeClass('mdl-button--disabled');
+  },
+
+  /**
+   * Handles click on an interest fab
+   */
+  'interestClick': function (event) {
+    index = event.target.getAttribute('data-fab-index');
+    if (learnMoreOpen === false) {
+      $('.interest-dialog')[index].open();
+      presentedInterestPopup = true;
+      openedInterestPopup = true;
+      Sizzle.Token.disableBackButton();
+    }
+  },
+
   /**
    * Responsible for ordering the page sections after populating the token.
    */
