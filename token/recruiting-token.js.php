@@ -632,8 +632,6 @@ function smallScreen() {
     // small screens adjustments
     $('.back-button-lower').addClass('back-button-lower-right');
     $('.back-button-lower-right').removeClass('back-button-lower');
-    $('.learn-more-dialog-wide').addClass('learn-more-dialog-skinny');
-    $('.learn-more-dialog-skinny').removeClass('learn-more-dialog-wide');
   }
 }
 
@@ -1394,8 +1392,15 @@ function learnMore() {
   html += '</section>';
   $($('section')[0]).after(html);
   $('#learn-more').click(function(event) {
-    $('#learn-more-modal-text').html('Enter your email below to learn more <br/> about this job opportunity.')
     $('.learn-more-button').html('Learn More')
+    if ( $(window).width() < 739) {
+      // small screens adjustments
+      $('#learn-more-modal-text').html('Enter your email below<br /> to learn more about<br/> this job opportunity.')
+      $('#learn-more-dialog').addClass('learn-more-dialog-skinny');
+      $('#learn-more-dialog').removeClass('learn-more-dialog-wide');
+    } else {
+      $('#learn-more-modal-text').html('Enter your email below to learn more <br/> about this job opportunity.')
+    }
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
     presentedLearnMore = true;
@@ -1415,6 +1420,11 @@ function requestInterview() {
   $('#request-interview').click(function(event) {
     $('#learn-more-modal-text').html('Enter your email <br/>to request an interview')
     $('.learn-more-button').html('Request Interview')
+    if ( $(window).width() < 739) {
+      // small screens adjustments
+      $('#learn-more-dialog').addClass('learn-more-dialog-skinny');
+      $('#learn-more-dialog').removeClass('learn-more-dialog-wide');
+    }
     $('#learn-more-dialog')[0].open();
     learnMoreOpen = true;
     presentedLearnMore = true;
