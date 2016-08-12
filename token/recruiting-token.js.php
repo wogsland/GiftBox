@@ -30,26 +30,7 @@ scope._onValuesClick = Sizzle.JobDescription.valuesClick;
 scope._onResponsibilitiesClick = Sizzle.JobDescription.responsibilitiesClick;
 scope._onPerksClick = Sizzle.JobDescription.perksClick;
 scope._onLocationClick = Sizzle.Location.click;
-
-scope._onImagesClick = function(event) {
-  //$('.current-section').text('Images');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 2;
-  path = Sizzle.Util.getUrlPath();
-  url = '/ajax/recruiting_token/get_images' + path[4];
-  $.post(url, '', function(data) {
-    if (data.data !== undefined) {
-      assetHost = Sizzle.Util.getAssetHost();
-      images = getImagesGrid(data.data, assetHost);
-      $('#images-container').empty().append(images);
-
-    }
-  });
-};
+scope._onImagesClick = Sizzle.Image.sectionClick;
 
 scope._onVideosClick = function(event) {
   //$('.current-section').text('Videos');
@@ -324,7 +305,6 @@ scope._closeApplyDialog = function (event) {
   });
 };
 
-
 /**
  * Navigates back to the main page
  */
@@ -336,7 +316,7 @@ scope._onBackClick = function(event) {
   }
   $('.gt-info-video').remove();
   this.$.pages.selected = 0;
-  removePreview();
+  Sizzle.Image.removePreview();
 };
 
 $(document).ready(function(){
@@ -755,7 +735,7 @@ function getImageGridItem(imgData, assetHost, cb) {
       img = $('<img ' +
           'id="image-' + imgData.id + '" ' +
           'class="ImageGrid-image" ' +
-          'onclick="displayPreview(this)" ' +
+          'onclick="Sizzle.Image.displayPreview(this)" ' +
           'data-src="'+src+'"/>');
 
   preload.onload = function() {
@@ -771,20 +751,6 @@ function getImageGridItem(imgData, assetHost, cb) {
   preload.src = src;
 
   return item;
-}
-
-function displayPreview(self) {
-  var test = '<div class="preview preview-image-container">';
-  test += '<img class="preview preview-image" src="' + self.src + '">';
-  test += '</img></div>';
-
-  $(document.body).append(test);
-  $(document.body).find('.preview').bind('click.preview', removePreview);
-}
-
-function removePreview() {
-  $('.preview-image-container').remove();
-  $('.preview').unbind('click.preview');
 }
 
 /**
