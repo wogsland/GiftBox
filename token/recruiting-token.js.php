@@ -3,8 +3,11 @@
 require __DIR__.'/js/Sizzle.js';
 
 // js classes
-require __DIR__.'/js/Experiment.js';
-require __DIR__.'/js/Screen.js';
+foreach (scandir(__DIR__.'/js') as $jsFile) {
+    if (!in_array($jsFile, ['.', '..'])) {
+        require __DIR__.'/js/'.$jsFile;
+    }
+}
 
 echo <<<'EOT'
 var scope = document.querySelector('template[is="dom-bind"]');
@@ -20,60 +23,12 @@ scope._onTrack = function(event) {
   // do nothing, get no error
 };
 
-scope._onOverviewClick = function(event) {
-  $('.current-section').text('Overview');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 4;
-  Sizzle.Screen.small();
-};
-
-scope._onSkillsClick = function(event) {
-  $('.current-section').text('Skills Required');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 4;
-  Sizzle.Screen.small();
-};
-
-scope._onValuesClick = function(event) {
-  $('.current-section').text('Values');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 4;
-  Sizzle.Screen.small();
-};
-
-scope._onResponsibilitiesClick = function(event) {
-  $('.current-section').text('Responsibilities');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 4;
-  Sizzle.Screen.small();
-};
-
-scope._onPerksClick = function(event) {
-  $('.current-section').text('Perks');
-  $('.mdl-layout__drawer').removeClass('is-visible');
-  this.$.list.sharedElements = {
-    'fade-in': event.target,
-    'fade-out': event.target
-  };
-  this.$.pages.selected = 4;
-  Sizzle.Screen.small();
-};
+// assign click handlers
+scope._onOverviewClick = Sizzle.JobDescription.overviewClick;
+scope._onSkillsClick = Sizzle.JobDescription.skillsClick;
+scope._onValuesClick = Sizzle.JobDescription.valuesClick;
+scope._onResponsibilitiesClick = Sizzle.JobDescription.responsibilitiesClick;
+scope._onPerksClick = Sizzle.JobDescription.perksClick;
 
 scope._onLocationClick = function(event) {
   var cityId = 0;
