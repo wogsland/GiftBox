@@ -164,6 +164,9 @@ class Route
             case 'profile':
                 include __DIR__.'/../profile.php';
                 break;
+            case 'rain':
+                include __DIR__.'/../rain.php';
+                break;
             case 'recruiting_made_easy':
                 include __DIR__.'/../lp/bc1.php';
                 break;
