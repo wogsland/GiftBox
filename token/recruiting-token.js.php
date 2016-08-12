@@ -643,61 +643,7 @@ function handleAjaxRecruitingTokenGet(data) {
     tokenTitle = data.data.job_title;
   }
   $('title').text(tokenTitle);
-  $('.gt-info-jobtitle').text(data.data.job_title);
-  $('.gt-info-overview').html(data.data.job_description);
-  var overview = '' + data.data.job_description;
-  var words = overview.split(' ');
-  var shortDescription = '';
-  for (i = 0; i < 50; i++) {
-    if (words[i] !== undefined) {
-      shortDescription += words[i] + ' ';
-    }
-  }
-  var paragraphCount = (shortDescription.match(/<p>/g) || []).length;
-  if (4 < paragraphCount) {
-    shortDescription = shortDescription.substring(0, Sizzle.Util.getPosition(shortDescription, '<p>', 5));
-  }
-  if (words.length >= 50 || 4 < paragraphCount) {
-    shortDescription += ' ... ';
-    shortDescription += '<a href="#overview-section" id="read-more" class="mdl-color-text--primary-dark">read more</a>';
-  }
-  $('.gt-info-overview-short').html(shortDescription);
-  if (!Sizzle.Util.dataExists(data.data.job_description)) {
-    $('#overview-section-2').hide();
-  }
-  var descriptionCount = 0;
-  if (Sizzle.Util.dataExists(data.data.skills_required)) {
-    $('.gt-info-skills').html(data.data.skills_required);
-    descriptionCount++;
-  } else {
-    $('#skills-button').hide();
-    $('#skills-section').hide();
-    $('#skills-section-2').hide();
-  }
-  if (Sizzle.Util.dataExists(data.data.responsibilities)) {
-    $('.gt-info-responsibilities').html(data.data.responsibilities);
-    descriptionCount++;
-  } else {
-    $('#responsibilities-button').hide();
-    $('#responsibilities-section').hide();
-    $('#responsibilities-section-2').hide();
-  }
-  if (Sizzle.Util.dataExists(data.data.company_values)) {
-    $('.gt-info-values').html(data.data.company_values);
-    descriptionCount++;
-  } else {
-    $('#values-button').hide();
-    $('#values-section').hide();
-    $('#values-section-2').hide();
-  }
-  if (Sizzle.Util.dataExists(data.data.perks)) {
-    $('.gt-info-perks').html(data.data.perks);
-    descriptionCount++;
-  } else {
-    $('#perks-button').hide();
-    $('#perks-section').hide();
-    $('#perks-section-2').hide();
-  }
+  Sizzle.JobDescription.populateData(data.data);
 
   if (Sizzle.Util.dataExists(data.data.company_description)) {
     $('#company-description-text').html(data.data.company_description);
@@ -705,24 +651,6 @@ function handleAjaxRecruitingTokenGet(data) {
     $('#company-description').hide();
   }
 
-  if (descriptionCount < 4) {
-    switch (descriptionCount) {
-      case 3:
-      $('.job-description-option').removeClass('mdl-cell--3-col');
-      //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
-      $('.job-description-option').addClass('mdl-cell--4-col');
-      break;
-      case 2:
-      $('.job-description-option').removeClass('mdl-cell--3-col');
-      $('.job-description-option').addClass('mdl-cell--6-col');
-      break;
-      case 1:
-      $('.job-description-option').removeClass('mdl-cell--3-col');
-      //$('.job-description-option').removeClass('mdl-cell--2-col-phone');
-      $('.job-description-option').addClass('mdl-cell--12-col');
-      break;
-    }
-  }
   if(Sizzle.Util.dataExists(data.data.long_id)) {
     url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
     $.post(url, '', Sizzle.Location.handleAjaxGetCities);
