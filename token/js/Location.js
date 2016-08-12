@@ -28,6 +28,25 @@ Sizzle.Location = {
   },
 
   /**
+   * Returns html for a location
+   *
+   * @param {int} width - 12, 6, 4 or 3
+   * @param {int} id - the id of the location in the array of locations
+   * @param {string} locName - the name of the location in the array of locations
+   * @returns {boolean}
+   */
+  'getLocationHTML': function (width, id, locName) {
+    var returnHTML = '<div class="mdl-card mdl-cell mdl-cell--'+width+'-col mdl-shadow--2dp link-finger"';
+    returnHTML += 'id="location-image-grid-'+id+'">';
+    returnHTML += '<div class="mdl-cell no-margin location-main-image" id="location-main-image-'+id+'">';
+    returnHTML += '<div class="multi-supporting-location" id="supporting-location-'+id+'">';
+    returnHTML += '<i class="material-icons">room</i>';
+    returnHTML += '<i class="gt-info-location-'+id+'">'+locName+'</i>';
+    returnHTML += '</div></div></div>';
+    return returnHTML;
+  },
+
+  /**
    * Handles the data return from ajax/city/get
    *
    * @param {object} the data
@@ -161,6 +180,126 @@ Sizzle.Location = {
           $('#location-main-image').css('width','100%');
         }
       });
+    }
+  },
+
+  /**
+   * Handles the data return from ajax/recruiting_token/get_cities
+   *
+   * @param {object} the data
+   */
+  'handleAjaxGetCities': function(data) {
+    cities = data.data;
+    if (1 == cities.length) {
+      Sizzle.Location.handleAjaxCityGet(cities[0]);
+      $('#doublet-location-section').remove();
+      $('#triplet-location-section').remove();
+    } else if (2 == cities.length) {
+      $('#location-section').remove();
+      $('#triplet-location-section').remove();
+
+      // first location
+      $('.gt-info-location-1').text(cities[0].name);
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':cities[0].id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#doublet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+
+      // second location
+      $('.gt-info-location-2').text(cities[1].name);
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':cities[1].id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#doublet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+    } else if (3 == cities.length) {
+      $('#doublet-location-section').remove();
+      $('#location-section').remove();
+
+      // first location
+      $('.gt-info-location-1').text(cities[0].name);
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':cities[0].id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#triplet-location-main-image-1').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+
+      // second location
+      $('.gt-info-location-2').text(cities[1].name);
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':data.data[1].id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#triplet-location-main-image-2').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+
+      // third location
+      $('.gt-info-location-3').text(cities[2].name);
+      url = '/ajax/city/get_images';
+      postData = {
+        'city_id':data.data[2].id
+      };
+      $.post(url, postData, function(imgData) {
+        if (imgData.data !== undefined && imgData.data.length > 0) {
+          image_file = imgData.data[0];
+          $('#triplet-location-main-image-3').css('background',"url('"+image_file+"') center / cover");
+        }
+      });
+    } else if (3 < cities.length) {
+      $('#triplet-location-section').remove();
+      $('#doublet-location-section').remove();
+      var numCities = cities.length;
+      var numExtraCities = cities.length % 3;
+      var locationHTML = '';
+      cities.forEach(function(value, index){
+        if (index < numCities - numExtraCities) {
+          locationHTML += Sizzle.Location.getLocationHTML(4, index, value.name);
+        } else if (numExtraCities === 2) {
+          locationHTML += Sizzle.Location.getLocationHTML(6, index, value.name);
+        } else if (numExtraCities === 1) {
+          locationHTML += Sizzle.Location.getLocationHTML(12, index, value.name);
+        }
+        if (index < numCities - 1) {
+          locationHTML += getSpacerHTML();
+        }
+      });
+      $('#location-section').html(locationHTML);
+      url = '/ajax/city/get_images';
+      cities.forEach(function(value, index){
+        postData = {
+          'city_id':value.id
+        };
+        $.post(url, postData, function(imgData) {
+          if (imgData.data !== undefined && imgData.data.length > 0) {
+            image_file = imgData.data[0];
+            $('#location-main-image-'+index).css('background',"url('"+image_file+"') center / cover");
+          }
+        });
+      });
+    } else { // no location
+      $('#triplet-location-section').remove();
+      $('#doublet-location-section').remove();
+      $('#location-section').remove();
     }
   },
 };
