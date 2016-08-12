@@ -461,10 +461,17 @@ i.plus-icon--overlay {
   color: white;
 }
 
-#learn-more, #request-interview {
+#learn-more, #request-interview, #full-apply-now {
   width: 100%;
   background-color: rgb(25,118,210);
-  color: white;margin: 0;
+  color: white;
+  margin: 0;
+}
+#half-apply-now {
+  width: 48%;
+  margin: 0 0 0 2%;
+  background-color: rgb(25,118,210);
+  color: white;
 }
 
 #learn-more-dialog {

@@ -564,6 +564,16 @@ function loadDataAndPopulateToken() {
       },'json');
       learnMoreChecked = true;
       /* END EXPERIMENT 7 */
+
+      /* EXPERIMENT * */
+      url = '/ajax/experiment' + path[4];
+      $.post(url, {'id':8}, function(data){
+        if (data.applyNow) {
+          applyNow();
+        }
+      },'json');
+      learnMoreChecked = true;
+      /* END EXPERIMENT * */
     }
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
@@ -1208,19 +1218,24 @@ function updateSectionPositions() {
         id: 'learn-more-section',
         position: 1
       });
+    } else if ($('#full-apply-now-section').length) {
+      sectionPriority.push({
+        id: 'full-apply-now-section',
+        position: 1
+      });
     }
     sectionPriority.push({
       id: 'job-description-section',
-      position: ($('#learn-more-section').length ? 2 : 1)
+      position: (($('#learn-more-section').length || $('#full-apply-now-section').length) ? 2 : 1)
     });
     sectionPriority.push({
       id: 'social-section',
-      position: ($('#learn-more-section').length ? 3 : 2)
+      position: (($('#learn-more-section').length || $('#full-apply-now-section').length) ? 3 : 2)
     });
     if ($('#request-interview-section').length) {
       sectionPriority.push({
         id: 'request-interview-section',
-        position: ($('#learn-more-section').length ? 4 : 3)
+        position: (($('#learn-more-section').length || $('#full-apply-now-section').length) ? 4 : 3)
       });
     }
 
@@ -1408,7 +1423,6 @@ function learnMore() {
   });
 }
 
-
 /**
  * Populates request an interview button
  */
@@ -1420,6 +1434,39 @@ function requestInterview() {
   $('#request-interview').click(function(event) {
     $('#learn-more-modal-text').html('Enter your email <br/>to request an interview')
     $('.learn-more-button').html('Request Interview')
+    if ( $(window).width() < 739) {
+      // small screens adjustments
+      $('#learn-more-dialog').addClass('learn-more-dialog-skinny');
+      $('#learn-more-dialog').removeClass('learn-more-dialog-wide');
+    }
+    $('#learn-more-dialog')[0].open();
+    learnMoreOpen = true;
+    presentedLearnMore = true;
+    $('.interest-fab').addClass('mdl-button--disabled');
+  });
+}
+
+/**
+ * Populates apply now button with the assumption that the learn more button has
+ * already been created if it's going to be created.
+ */
+function applyNow() {
+  if ($('#learn-more-section').length) {
+    $('#learn-more').css('width', '48%');
+    $('#learn-more').css('margin-right', '2%');
+    $('#learn-more-section').removeClass('mdl-shadow--2dp');
+    $('#learn-more').addClass('mdl-shadow--2dp');
+    html = '<paper-button id="half-apply-now" class="open-apply-now-modal mdl-shadow--2dp">Apply Now</paper-button>';
+    $('#learn-more').after(html);
+  } else {
+    html = '<section id="full-apply-now-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">';
+    html += '<paper-button id="full-apply-now" class="open-apply-now-modal">Apply Now</paper-button>';
+    html += '</section>';
+    $($('section')[2]).after(html);
+  }
+  $('.open-apply-now-modal').click(function(event) {
+    $('#learn-more-modal-text').html('Enter your email <br/>to apply now')
+    $('.learn-more-button').html('Apply Now')
     if ( $(window).width() < 739) {
       // small screens adjustments
       $('#learn-more-dialog').addClass('learn-more-dialog-skinny');
