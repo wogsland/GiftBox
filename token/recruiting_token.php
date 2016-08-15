@@ -299,8 +299,8 @@
               </div>
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick0">
-                <i class="material-icons interest-thumb">thumb_up</i>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="0">
+                <i class="material-icons interest-thumb" data-fab-index="0">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
@@ -373,8 +373,8 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick1">
-                <i class="material-icons">thumb_up</i>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="1">
+                <i class="material-icons" data-fab-index="1">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
@@ -420,8 +420,8 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick2">
-                <i class="material-icons">thumb_up</i>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="2">
+                <i class="material-icons" data-fab-index="2">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
@@ -467,8 +467,8 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick3">
-                <i class="material-icons">thumb_up</i>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="3">
+                <i class="material-icons" data-fab-index="3">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
@@ -514,8 +514,8 @@
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick4">
-                <i class="material-icons">thumb_up</i>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="4">
+                <i class="material-icons" data-fab-index="4">thumb_up</i>
               </button>
               <paper-dialog class="interest-dialog" modal>
                   <div class="interest-form">
