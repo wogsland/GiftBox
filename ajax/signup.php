@@ -35,7 +35,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
     } else {
         $user->password = null;
     }
-    $types = ['EMAIL', 'FACEBOOK'];
+    $types = ['EMAIL'];
     if (!in_array($reg_type, $types)) {
         $reg_type = 'EMAIL';
     }
@@ -48,9 +48,6 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
         if ($reg_type == 'EMAIL') {
             $user->activation_key = md5(uniqid(mt_rand(), false));
             $user->password = password_hash($user->password, PASSWORD_DEFAULT);
-        } else if ($reg_type == 'FACEBOOK') {
-            $user->activation_key = null;
-            $user->password = null;
         }
         $user->save();
 
@@ -67,7 +64,7 @@ if (filter_var($signup_email, FILTER_VALIDATE_EMAIL)) {
             $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
-                    'from_email'=>'welcome@gosizzle.io',
+                    'from_email'=>'welcome@GoSizzle.io',
                     'from_name'=>'S!zzle',
                     'subject'=>'S!zzle Signup Confirmation',
                     'html'=>$email_message

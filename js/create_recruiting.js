@@ -1,4 +1,62 @@
 var imageType = /image.*/;
+var videoType = /video.*/;
+
+function isVimeo(url){
+  retVal = false;
+  if(url.indexOf("vimeo.com") > -1){
+    retVal = true;
+  }
+  return retVal;
+}
+
+function isYouTube(url) {
+  retVal = false;
+  if (url.indexOf("youtube.com") > -1 || url.indexOf("youtu.be") > -1) {
+    retVal = true;
+  }
+  return retVal;
+}
+
+/**
+ * Gets the id from a YouTube URL
+ *
+ * @param {String} url The URL of a YouTube video
+ * @return {String} The id extract from the URL if it's valid, null otherwise
+ */
+function youTubeId(url) {
+  //var result = url.match(/(youtu(?:\.be|be\.com)\/(?:.*v(?:\/|=)|(?:.*\/)?)([\w'-]+))/i);
+  if (url !== undefined || url !== '') {
+    var regExp = /^.*(youtu(?:\.be|be\.com)\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      return match[match.length - 1];
+    }
+  }
+  return null;
+}
+
+/**
+ * Gets the id from a Vimeo URL
+ *
+ * @param {String} url The URL of a Vimeo video
+ * @return {String} The id extract from the URL if it's valid, null otherwise
+ */
+function vimeoId(url){
+  var result = url.match(/^.*(?:vimeo.com)\/(?:channels\/|channels\/\w+\/|groups\/[^\/]*\/videos\/|album‌​\/\d+\/video\/|video\/|)(\d+)(?:$|\/|\?)/);
+  if(result){
+    return result[1];
+  } else {
+    return null;
+  }
+}
+
+/**
+ * Updates delay time from slider
+ */
+function updateDelay() {
+  $('#auto-popup-delay').val($('#delay-slider').val());
+  $('#auto-popup-delay').html($('#delay-slider').val());
+}
 
 /**
  * Creates an HTML image
@@ -173,6 +231,16 @@ function removeImage(img) {
     }
   }
   img.parent().parent().remove();
+
+  // collapse container if there are no images
+  if ($('#company-image-container').children().length === 0) {
+    $('#company-image-container').attr('hidden', true);
+  }
+
+  // collapse container if there are no videos
+  if ($('#company-video-container').children().length === 0) {
+    $('#company-video-container').attr('hidden', true);
+  }
 }
 
 /**
@@ -383,12 +451,23 @@ function saveRecruitingToken(preview) {
   var serializedForm = null;
   if ($('#recruiting-token-form')[0].validate()) {
     linkifyText();
-    setStatus("Saving token...");
+    //setStatus("Saving token...");
     serializedForm = document.getElementById("recruiting-token-form").serialize();
     if ('true' == $('#recruiter-profile').attr('aria-checked')) {
       serializedForm.recruiter_profile = 'Y';
     } else {
       serializedForm.recruiter_profile = 'N';
+    }
+    if ('true' == $('#auto-popup').attr('aria-checked')) {
+      serializedForm.auto_popup = 'Y';
+    } else {
+      serializedForm.auto_popup = 'N';
+    }
+    serializedForm.auto_popup_delay = $('#auto-popup-delay').html();
+    if ('true' == $('#collect-name').attr('aria-checked')) {
+      serializedForm.collect_name = 'Y';
+    } else {
+      serializedForm.collect_name = 'N';
     }
     $('#save-continue-button').addClass("disable-clicks");
     $.ajax({
@@ -415,7 +494,8 @@ function saveRecruitingToken(preview) {
           }
           window.location = '/create_company?id='+companyId+'&referrer='+data.long_id;
         } else if (data.status === "ERROR") {
-          alert(data.message);
+          $('#validation-message').html(data.message);
+          $('#validation-dialog')[0].open();
         }  else {
           alert(textStatus);
         }
@@ -459,9 +539,20 @@ function saveCompany() {
                 img.data('recruiting_company_id', companyId);
                 if (!img.data('saved')) {
                   var file = img.data("file");
-                  var fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  var fileName = null;
+
+                  if (file === null) {
+                    fileName = userId+'_'+companyId+'_'+Date.now()+'_'+img.data('name')+'.png';
+                  } else {
+                    fileName = userId+'_'+companyId+'_'+Date.now()+'_'+file.name;
+                  }
                   img.data('file_name', fileName);
-                  uploadFile(file, fileName, img);
+
+                  if (img.data('scraped')) {
+                    uploadScrapedImage(img, img.data('name')+'.png', fileName);
+                  } else {
+                    uploadFile(file, fileName, img);
+                  }
                 }
               });
 

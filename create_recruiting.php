@@ -1,11 +1,9 @@
 <?php
 use \Sizzle\Bacon\{
     Text\HTML,
+    Database\City,
     Database\RecruitingCompany,
     Database\RecruitingToken
-};
-use \Sizzle\Bacon\Database\{
-    City
 };
 
 if (!logged_in()) {
@@ -77,6 +75,7 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/paper-slider/paper-slider.html">
 
     <style is="custom-style">
         .center-column {
@@ -250,8 +249,6 @@ require __DIR__.'/header.php';
                         name="city_id">
                         <iron-icon icon="arrow-drop-down" id="city-dropdown-button" suffix></iron-icon>
                       </paper-input>
-                      <paper-menu id="city-menu">
-                      </paper-menu>
                     </div>
                 </paper-card>
                 <paper-card id="basic-info" heading="Additional Info">
@@ -259,26 +256,40 @@ require __DIR__.'/header.php';
                         <?php paper_textarea('Skills Required', 'skills-required', HTML::from($token->skills_required ?? '')); ?>
                         <?php paper_textarea('Responsibilities', 'responsibilities', HTML::from($token->responsibilities ?? '')); ?>
                         <?php paper_textarea('Perks', 'perks', HTML::from($token->perks ?? '')); ?>
+                        <?php paper_text('Link to Apply', 'apply-link', ($token->apply_link ?? '')); ?>
                     </div>
                 </paper-card>
                 <?php if(is_admin()) { ?>
                     <paper-card id="admin-info" heading="Admin Settings">
                       <div class="field-container">
                         <paper-checkbox
-                        id="recruiter-profile"
-                        name="recruiter_profile"
-                        <?php echo isset($token->recruiter_profile) && 'Y' == $token->recruiter_profile ? 'checked' : '';?>>
-                        Show Recruiter Profile
-                      </paper-checkbox>
+                          id="recruiter-profile"
+                          name="recruiter_profile"
+                          <?php echo isset($token->recruiter_profile) && 'Y' == $token->recruiter_profile ? 'checked' : '';?>>
+                          Show Recruiter Profile
+                        </paper-checkbox>
+                        <br />
+                        <paper-checkbox
+                          id="auto-popup"
+                          name="auto-popup"
+                          <?= (!isset($token->auto_popup) || 'Y' == $token->auto_popup) ? 'checked' : ''?>>
+                          Automatic Interest Dialog Popup After <b id="auto-popup-delay"><?=$token->auto_popup_delay ?? 15?></b> Seconds
+                        </paper-checkbox>
+                        <paper-slider
+                          id="delay-slider"
+                          value="<?=$token->auto_popup_delay ?? 15?>"
+                          max="60"
+                          onChange="updateDelay();">
+                        </paper-slider>
+                        <paper-checkbox
+                          id="collect-name"
+                          name="collect-name"
+                          <?= (!isset($token->collect_name) || 'Y' == $token->collect_name) ? 'checked' : ''?>>
+                          Collect Name of Interested Recruits
+                        </paper-checkbox>
+                        <br />
                       </div>
-                      <?php if (isset($token->long_id) && false === $token->screenshot()) { ?>
-                      <div class="field-container" id="screenshot">
-                        <input class="hidden-file-input" type="file" id="select-image-file" />
-                        <paper-button id="screenshot-button" onclick="uploadScreenshot();">
-                          Upload Token Screenshot
-                        </paper-button>
-                      </div>
-                      <?php } elseif (isset($token->long_id)) { ?>
+                      <?php if (isset($token->long_id) && false !== $token->screenshot()) { ?>
                         <div class="field-container" id="screenshot">
                           <img src="/uploads/<?= $token->screenshot()?>" />
                         </div>
@@ -301,15 +312,6 @@ require __DIR__.'/header.php';
                 <paper-button raised onclick="openToken()">OPEN</paper-button>
                 <paper-button id="save-continue-button" raised onclick="saveRecruitingToken()">SAVE &amp; CONTINUE</paper-button>
             </div>
-            <?php /*if (is_admin()) : ?>
-                <paper-card heading="Add To Library" id="add-to-library">
-                    <div id="library-button-container">
-                        <paper-button class="library-button" raised>Company</paper-button>
-                        <paper-button class="library-button" raised>Images</paper-button>
-                        <paper-button class="library-button" raised>Video</paper-button>
-                    </div>
-                </paper-card>
-            <?php endif;*/ ?>
        </div>
     </div>
 
@@ -335,7 +337,7 @@ require __DIR__.'/header.php';
     </paper-dialog>
 
     <paper-dialog class="recruiting-dialog" id="validation-dialog" modal>
-        <h2>Problem...</h2>
+        <h2 style="margin-bottom:20px">Save Failed</h2>
         <p id="validation-message">No message supplied</p>
         <div class="buttons">
             <paper-button dialog-dismiss class="dialog-button" id="validation-button">OK</paper-button>
@@ -350,48 +352,11 @@ require __DIR__.'/header.php';
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <?php if(is_admin()) { ?>
-        <script>
-        /**
-         * Uploads a screenshot of the token
-         */
-        function uploadScreenshot(){
-          $('#select-image-file').trigger('click');
-          $('#select-image-file:file').on('change', function() {
-            // upload image
-            if ($('#select-image-file')[0].files[0] !== undefined) {
-              var file = $('#select-image-file')[0].files[0];
-              var reader  = new FileReader();
-              reader.fileName = '<?= $user_id.'_'.$token->id.'_'?>'+file.name;
-              reader.onloadend = function () {
-                var xhr = new XMLHttpRequest();
-                if (xhr.upload) {
-                  xhr.open("POST", "/upload", true);
-                  xhr.setRequestHeader("X-FILENAME", '<?= $user_id.'_'.$token->id.'_'?>'+file.name);
-                  xhr.send(reader.result);
-                }
-              };
-              reader.readAsDataURL(file);
-              // save to table
-              $.post(
-                '/ajax/recruiting_token/set_screenshot',
-                {
-                  'tokenId':'<?= $token->id?>',
-                  'fileName':'<?= $user_id.'_'.$token->id.'_'?>'+file.name
-                },
-                function() {
-                  // remove button
-                  $('#screenshot').html('Screenshot has been uploaded');
-                }
-              );
-            }
-          });
-        }
-        </script>
-    <?php }?>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
     <script>
     $( document ).ready(function() {
       $('#city-menu').hide();
@@ -404,18 +369,20 @@ require __DIR__.'/header.php';
           {'typed':$('#city-id').val()},
           function (data) {
             if (data.success == 'true') {
-              menuItems = '';
+              $('#city-menu').remove()
+              menuItems = '<paper-menu id="city-menu">';
               $.each(data.data, function(index, city){
                 menuItems += '<paper-item id="'+city.id+'">'+city.name+'</paper-item>';
               });
-              $('#city-menu').html(menuItems);
-              $('#city-menu').children('paper-item').each(function(index, item){
-                $(this).on('click',function(){
+              menuItems += '</paper-menu>';
+              $(menuItems).insertAfter('#city-id');
+              $('#city-menu').show()
+              $('#city-menu').children().children('paper-item').each(function(index, item){
+                $(item).on('click',function(){
                   $('#city-id').val($(this).html().trim())
                   $('#city-menu').hide()
                 });
               })
-              $('#city-menu').show()
             } else {
               $('#city-menu').hide()
             }

@@ -15,8 +15,8 @@ if ($fileName && $localPath && $email) {
     $message .= 'Their job description is attached.';
     $mandrill->send(
         array(
-            'to'=>array(array('email'=>'token@gosizzle.io')),
-            'from_email'=>'emailsignup@gosizzle.io',
+            'to'=>array(array('email'=>'token@GoSizzle.io')),
+            'from_email'=>'emailsignup@GoSizzle.io',
             'from_name'=>'S!zzle',
             'subject'=>'New S!zzle Email Signup',
             'html'=>$message,

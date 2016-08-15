@@ -18,6 +18,11 @@ ehthumbs.db
 # NPM #
 #######
 /node_modules
+npm-debug.log
+
+# Python #
+##########
+/ajax/scraper/venv
 
 # Testing #
 ###########

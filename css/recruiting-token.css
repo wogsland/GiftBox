@@ -190,47 +190,6 @@ html, body {
 .mdl-demo .mdl-menu__container {
   z-index: 99;
 }
-#interested-row {
-  margin-bottom: 0px;
-}
-.interested-button{
-  color: white;
-  position: fixed;
-  display: block;
-  bottom: 0;
-  z-index: 900;
-  padding: 0px;
-}
-#interested-disabled-button {
-  color: white;
-  left: 0;
-}
-#interested-yes-button {
-  background-color: #4CAF50;
-  right: 0;
-  margin-right: 50%;
-}
-#interested-maybe-button {
-  background-color: #FFC107;
-  right: 0;
-  margin-right: 25%;
-}
-#interested-no-button {
-  background-color: #D0021B;
-  right: 0;
-}
-#yes-submit {
-  background-color: #4CAF50;
-}
-#maybe-submit {
-  background-color: #FFC107;
-}
-#no-submit {
-  background-color: #D0021B;
-}
-.demo-layout-waterfall .mdl-layout__header-row .mdl-navigation__link:last-of-type  {
-  padding-right: 0;
-}
 .long-title {
   padding-left: 25px;
 }
@@ -292,12 +251,12 @@ i.big-icon {
 }
 i.plus-icon--overlay {
   font-size:100px;
-  position: absolute;
-  top: 230px;
-  left: 700px;
+  position: relative;
+  top: -110px;
+  left: 57px;
   color:white;
 }
-.recruiter-profile-option, .job-description-option {
+.recruiter-profile-option, .job-description-option, .location-option {
   background-color: white;
   padding: 0;
   margin: 0;
@@ -305,8 +264,11 @@ i.plus-icon--overlay {
   /*width: 19.4%;*/
   font-size: 12px;
 }
-#job-description-options, #recruiter-options {
+#job-description-options, #recruiter-options, #location-options {
   margin: 0px;
+}
+.options-row {
+
 }
 #images-frontpage {
   text-align:center;
@@ -315,7 +277,7 @@ i.plus-icon--overlay {
   margin-right: 0px;
   margin-bottom: 48px;
 }
-#supporting-images, #supporting-videos, #supporting-location, #supporting-company, #doublet-supporting-location-1, #doublet-supporting-location-2, #triplet-supporting-location-1, #triplet-supporting-location-2, #triplet-supporting-location-3 {
+#supporting-images, #supporting-videos, #supporting-location, #supporting-company, #doublet-supporting-location-1, #doublet-supporting-location-2, #triplet-supporting-location-1, #triplet-supporting-location-2, #triplet-supporting-location-3, .multi-supporting-location {
   margin-top: 267px;
   height: 50px;
   padding-top: 20px;
@@ -354,6 +316,7 @@ i.plus-icon--overlay {
 }
 .gt-city-spring-hi, .gt-city-spring-lo, .gt-city-spring-avg, .gt-city-summer-hi, .gt-city-summer-lo, .gt-city-summer-avg, .gt-city-fall-hi, .gt-city-fall-lo, .gt-city-fall-avg, .gt-city-winter-hi, .gt-city-winter-lo, .gt-city-winter-avg, .gt-info-company, .gt-info-jobtitle, .gt-info-title {
   font-style:normal;
+  line-height:100%;
 }
 #read-more {
   text-decoration: none;
@@ -368,11 +331,11 @@ i.plus-icon--overlay {
   height: 337px;
   width: 75%;
 }
-#company-secondary-images, #location-secondary-images {
+#company-secondary-images {
   height: 337px;
   width: 25%;
 }
-#doublet-location-main-image-1, #doublet-location-main-image-2, #triplet-location-main-image-1, #triplet-location-main-image-2, #triplet-location-main-image-3 {
+#doublet-location-main-image-1, #doublet-location-main-image-2, #triplet-location-main-image-1, #triplet-location-main-image-2, #triplet-location-main-image-3, .location-main-image {
   height: 337px;
   width: 100%;
 }
@@ -384,7 +347,7 @@ i.plus-icon--overlay {
   top: 0;
   opacity: 0.2;
 }
-.company-secondary-image, .location-secondary-image {
+.company-secondary-image {
   width: 100%;
   height:112.24px;
   background-color: #ffffff;
@@ -415,18 +378,6 @@ i.plus-icon--overlay {
 .disable-clicks {
     pointer-events: none;
 }
-.arrow-down {
-  position: fixed;
-  right: 40px;
-  bottom: 95px;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-
-  border-top: 20px solid white;
-  box-shadow: 0 16px 24px 2px
-}
 .interest-thumb {
   color: white;
 }
@@ -447,6 +398,10 @@ i.plus-icon--overlay {
   line-height: 1;
 }
 
+.ImageGrid-item {
+  cursor: pointer;
+}
+
 .ImageGrid-item, .ImageGrid-itemSizer {
   width: 100%;
   display: inline-block;
@@ -456,6 +411,28 @@ i.plus-icon--overlay {
 
 .ImageGrid-image {
   width: 100%;
+}
+
+.preview-image-container {
+  background: rgba(100, 100, 100, 0.7);
+  cursor: pointer;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.preview-image {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-height: 90%;
+  max-width: 90%;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 @media screen and (min-width: 600px) {
@@ -477,4 +454,35 @@ i.plus-icon--overlay {
   .ImageGrid-item, .ImageGrid-itemSizer {
     width: 25%;
   }
+}
+
+.apply-button {
+  background-color: rgb(44,152,240);
+  color: white;
+}
+
+#learn-more, #request-interview, #full-apply-now {
+  width: 100%;
+  background-color: rgb(25,118,210);
+  color: white;
+  margin: 0;
+}
+#half-apply-now {
+  width: 48%;
+  margin: 0 0 0 2%;
+  background-color: rgb(25,118,210);
+  color: white;
+}
+
+#learn-more-dialog {
+  padding-top:30px;
+  padding-bottom:30px;
+}
+.learn-more-dialog-wide {
+  padding-left:70px;
+  padding-right:70px;
+}
+.learn-more-dialog-skinny {
+  padding-left:10px;
+  padding-right:10px;
 }

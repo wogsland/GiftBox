@@ -16,15 +16,15 @@ if (isset($_POST['email'], $_POST['message'])
     $subject = '' == $subject ? 'Message from '.$from : $subject;
     $message .= "\r\n\r\n - $from";
     if (ENVIRONMENT != 'production') {
-        $to = 'support+dev@gosizzle.io';
+        $to = TEST_EMAIL;
     } else {
-        $to = 'support@gosizzle.io';
+        $to = 'support@GoSizzle.io';
     }
     $mandrill = new MandrillEmail();
     $mandrill->send(
         array(
             'to'=>array(array('email'=>$to)),
-            'from_email'=>'support@gosizzle.io',
+            'from_email'=>'support@GoSizzle.io',
             'from_name'=>'S!zzle',
             'subject'=>$subject,
             'html'=>$message,

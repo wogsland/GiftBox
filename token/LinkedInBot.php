@@ -10,17 +10,20 @@ use \Sizzle\Bacon\Database\{
  * This is simple HTML to show the right info on LinkedIn
  */
 $token = new RecruitingToken($long_id, 'long_id');
-//print_r($token);
 $company = new RecruitingCompany($token->recruiting_company_id ?? '');
-$city = ($token->getCities())[0] ?? new City();
-//print_r($city);
-$image = $token->screenshot();
-if ($image !== false) {
-    $image = APP_URL.'uploads/'.str_replace(' ', '%20', $image);
+$city_names = '';
+$cities = $token->getCities();
+foreach ($cities as $city) {
+  $city_names .= $city->name.' - ';
+}
+$city_names = rtrim($city_names, ' - ');
+$images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($long_id);
+if (!empty($images)) {
+    $image = APP_URL.'uploads/'.str_replace(' ', '%20', $images[0]['file_name']);
 } else {
-    $images = (new RecruitingCompanyImage())->getByRecruitingTokenLongId($long_id);
-    if (!empty($images)) {
-        $image = APP_URL.'uploads/'.str_replace(' ', '%20', $images[0]['file_name']);
+    $image = $token->screenshot();
+    if ($image !== false) {
+        $image = APP_URL.'uploads/'.str_replace(' ', '%20', $image);
     }
 }
 
@@ -38,7 +41,7 @@ if (isset($token->id)) {
       <h1>
         <?=$token->job_title?>
         <?= isset($company->name) ? '- '.$company->name : '' ?>
-        - <?= $city->name?>
+        - <?=$city_names?>
       </h1>
         <?php if ('' != $image) { ?>
           <img src="<?= $image?>" title="Token screenshot or company image"/>

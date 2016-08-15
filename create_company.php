@@ -4,7 +4,8 @@ use \Sizzle\Bacon\{
     Database\RecruitingCompany,
     Database\RecruitingCompanyImage,
     Database\RecruitingCompanyVideo,
-    Database\RecruitingToken
+    Database\RecruitingToken,
+    Database\User
 };
 
 if (!logged_in()) {
@@ -16,7 +17,11 @@ $referrer = $_GET['referrer'] ?? '';
 
 if (isset($_GET['id'])) {
     $token_company = new RecruitingCompany($_GET['id']);
-    if (isset($token_company->user_id) && $token_company->user_id != $user_id && !is_admin()) {
+    $user = new User($user_id);
+    if (isset($token_company->organization_id)
+        && $token_company->organization_id != $user->organization_id
+        && !is_admin()
+    ) {
         header('Location: '.APP_URL.'tokens');
     }
     $token_images = (new RecruitingCompanyImage())->getByCompanyId((int) $token_company->id);
@@ -76,6 +81,7 @@ require __DIR__.'/header.php';
     <link rel="import" href="/components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="/components/paper-dialog/paper-dialog.html">
     <link rel="import" href="/components/paper-fab/paper-fab.html">
+    <link rel="import" href="/components/paper-progress/paper-progress.html">
 
     <style is="custom-style">
         .center-column {
@@ -160,6 +166,9 @@ require __DIR__.'/header.php';
           margin-left: 50px;
           margin-right: 50px;
         }
+        paper-progress {
+          width: 100%;
+        }
     </style>
 
 </head>
@@ -199,17 +208,14 @@ require __DIR__.'/header.php';
                             <div class="icon-bar">
                                 <span class="icon-bar-text">Add Images From: </span>
                                 <div class="icon-container">
-                                <input class="hidden-file-input" type="file" multiple id="select-image-file" />
+                                    <input class="hidden-file-input" type="file" multiple id="select-image-file" />
                                     <a class="icon-link" id="desktop-icon-link" href="javascript:void(0)" onclick="$('#select-image-file').trigger('click')"><i class="fa fa-laptop fa-2x add-icon"></i></a>
-    <!--                            <a class="icon-link" id="dropbox-icon-link" href="javascript:void(0)" onclick="openDropBoxImage()"><i class="fa fa-dropbox fa-2x add-icon"></i></a>
-                                    <a class="icon-link" href="javascript:void(0)" onclick="selectFacebookImage()"><i class="fa fa-facebook-square fa-2x add-icon"></i></a>
-                                    <paper-button class="icon-button" raised onclick="webAddress()">WEB ADDRESS</paper-button>
-                                    <paper-button class="icon-button" raised onclick="library()">LOCAL LIBRARY</paper-button>
-    -->                            </div>
+                                </div>
                             </div>
                             <?php if (count($token_images) > 0) {?>
                               <div class="thumbnail-list-container" id="company-image-container">
                               <?php
+                              $i = 0;
                               foreach ($token_images as $token_image) {
                                   $image_path = FILE_STORAGE_PATH.$token_image['file_name'];
                                   $image_id = str_replace('.', '_', $token_image['file_name']);
@@ -217,11 +223,26 @@ require __DIR__.'/header.php';
                                   $image_id = str_replace('(', '_', $image_id);
                                   $image_id = str_replace(')', '_', $image_id);
                                   echo '<div class="thumbnail-container">';
-                                  echo '  <div class="inner-thumbnail-container">';
-                                  echo '      <img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
-                                  echo '      <paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
-                                  echo ' </div>';
+                                  echo '<div class="inner-thumbnail-container">';
+                                  echo '<div class="image-thumbnail-image">';
+                                  echo '<img class="recruiting-token-image photo-thumbnail" id="'.$image_id.'" data-id="'.$token_image['id'].'" src="'.$image_path.'">';
                                   echo '</div>';
+                                  echo '<div class="image-thumbnail-buttons">';
+                                  if ('Y' == $token_image['logo']) {
+                                    echo '<paper-button id="mark-logo-button-'.$i.'" raised class="remove-button" style="color:black;background:#2193ED;")disabled>LOGO</paper-button>';
+                                  } else {
+                                    echo '<paper-button id="mark-logo-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageLogo(\''.$token_image['id'].'\', \''.$i.'\')">MARK LOGO</paper-button>';
+                                  }
+                                  if ('Y' == $token_image['mobile']) {
+                                    echo '<paper-button id="mark-mobile-button-'.$i.'" raised class="remove-button" style="color:black;background:#2193ED;")disabled>MOBILE IMAGE</paper-button>';
+                                  } else {
+                                    echo '<paper-button id="mark-mobile-button-'.$i.'" raised class="remove-button" data-saved="true" onclick="markImageMobile(\''.$token_image['id'].'\', \''.$i.'\')">USE ON MOBILE</paper-button>';
+                                  }
+                                  echo '<paper-button raised class="remove-button" data-saved="true" onclick="removeImageById(\''.$image_id.'\')">REMOVE</paper-button>';
+                                  echo '</div>';
+                                  echo '</div>';
+                                  echo '</div>';
+                                  $i++;
                               }
                               echo '</div>';
                             } else { ?>
@@ -344,6 +365,13 @@ require __DIR__.'/header.php';
               USE EXISTING COMPANY
             </paper-button>
           </div>
+          <!--
+          <div class="button-container">
+            <paper-button raised onclick="initLinkedIn()" id="linkedin-scrape-button">
+              IMPORT FROM LINKEDIN
+            </paper-button>
+          </div>
+        -->
           <div class="button-container">
             <paper-button raised onclick="skipCompany()" id="skip-company-button">
               Skip COMPANY
@@ -372,6 +400,27 @@ require __DIR__.'/header.php';
         </div>
     </paper-dialog>
 
+    <paper-dialog class="recruiting-dialog" id="linkedin-dialog" modal>
+      <h2>Import company information from LinkedIn</h2>
+      <paper-input id="linkedin-url" label="Enter your company's LinkedIn URL" autofocus></paper-input>
+      <div class="buttons">
+        <paper-button id="linkedin-submit-button" class="dialog-button" onclick="processLinkedIn()">Submit</paper-button>
+        <paper-button id="linkedin-cancel-button" dialog-dismiss class="dialog-button" onclick="cancelLinkedIn()">Cancel</paper-button>
+      </div>
+
+      <paper-dialog class="recruiting-dialog" id="alert-dialog" modal>
+        <h2>Warning</h2>
+        <p>"Select" will replace data already in the form</p>
+        <paper-button id="alert-ok">Ok</paper-button>
+        <paper-button id="alert-cancel">Cancel</paper-button>
+      </paper-dialog>
+
+      <div id="linkedin-progress">
+        <paper-progress indeterminate></paper-progress>
+      </div>
+
+    </paper-dialog>
+
     <paper-dialog class="recruiting-dialog" id="video-dialog" modal>
         <h2>Upload video from web address</h2>
         <paper-input id="video-dialog-url" label="Paste video embed URL here" autofocus></paper-input>
@@ -393,13 +442,23 @@ require __DIR__.'/header.php';
         <p id="status-message">No message supplied</p>
     </paper-dialog>
 
+    <paper-dialog class="recruiting-dialog" id="leaving-alert" modal>
+      <h2>Warning</h2>
+      <p>Leaving this page will erase data already in the form</p>
+      <paper-button dialog-dismiss class="dialog-button" id="leaving-ok">Ok</paper-button>
+      <paper-button dialog-dismiss class="dialog-button" id="leaving-cancel">Cancel</paper-button>
+    </paper-dialog>
+
     <?php require_once __DIR__.'/footer.php';?>
 
     <!-- JavaScript -->
     <script src="components/Autolinker.js/dist/Autolinker.min.js"></script>
-    <script src="js/create_common.min.js?v=<?php echo VERSION;?>"></script>
     <script src="js/create_recruiting.min.js?v=<?php echo VERSION;?>"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/linkedin-scraper.min.js?v=<?php echo VERSION;?>"></script>
+    <script 
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
     <script>
     /**
      * Adds existing company choice to form & hides form elements
@@ -412,24 +471,121 @@ require __DIR__.'/header.php';
         window.location = '/create_company?id='+companyId+'&referrer=<?php echo $referrer;?>';
       }
     }
+
     /**
      * Skips this step
      */
     function skipCompany() {
       window.location = '/send_recruiting?referrer='+null+'&id=<?php echo $referrer;?>';
     }
+
+    /**
+     * Markes ye imagge fur mobile
+     */
+    function markImageMobile(id, index) {
+      var url = '/ajax/recruiting_company_image/mobile';
+      var params = {id: id};
+      $.post(url, params, function(data){
+        if('true' == data.success) {
+          $('#mark-mobile-button-'+index).prop("disabled",true);;
+          $('#mark-mobile-button-'+index).html('MOBILE IMAGE');
+          $('#mark-mobile-button-'+index).css('color', 'black');
+          $('#mark-mobile-button-'+index).css('background', '#2193ED');
+        }  else {
+          alert('Failed setting for mobile. ');
+        }
+      },'json').fail(function() {
+        alert('Failed to set for mobile.');
+      });
+    }
+
+    /**
+     * Markes ye imagge til logo
+     */
+    function markImageLogo(id, index) {
+      var url = '/ajax/recruiting_company_image/logo';
+      var params = {id: id};
+      $.post(url, params, function(data){
+        if('true' == data.success) {
+          $('#mark-logo-button-'+index).prop("disabled",true);;
+          $('#mark-logo-button-'+index).html('LOGO');
+          $('#mark-logo-button-'+index).css('color', 'black');
+          $('#mark-logo-button-'+index).css('background', '#2193ED');
+        }  else {
+          alert('Failed setting logo.');
+        }
+      },'json').fail(function() {
+        alert('Failed to set logo.');
+      });
+    }
+
     $( document ).ready(function() {
-        $('#select-image-file').on('change', handleImageFileSelect);
-        $('#company-image-container').data('deleted', []);
-        $('#company-video-container').data('deleted', []);
-        $('.recruiting-token-image').each(function() {
-            var img = $(this);
-            img.data('saved', true);
+      var textFields = [
+        '#company',
+        '#company-description',
+        '#company-values',
+        '#company-facebook',
+        '#company-linkedin',
+        '#company-youtube',
+        '#company-twitter',
+        '#company-google-plus'
+      ];
+
+      var fields = function() {
+        var _fields = false;
+        textFields.map(function(elem) {
+          if ($(elem).val().length !== 0) {
+            _fields = true;
+          }
         });
-        $('.recruiting-token-video').each(function() {
-            var img = $(this);
-            img.data('saved', true);
+        return _fields;
+      };
+
+      var images = function() {
+        return $('#company-image-container').children().length !== 0;
+      };
+
+      var videos = function() {
+        return $('#company-video-container').children().length !== 0;
+      };
+
+      $('#leaving-alert')[0].close();
+
+      var leaving = function(href) {
+        var $box = $('#leaving-alert')[0];
+        $('#leaving-ok').click(function() {
+          window.location.href = href;
         });
+        $box.open();
+      };
+
+      // handle links to another page
+      $('a').click(function(e) {
+        var href = $(this).attr('href');
+        if (href !== 'javascript:void(0)' && href !== undefined) {
+          /*if (fields() || images() || videos()) {
+            e.preventDefault();
+            leaving(href);
+          }*/
+        }
+      });
+
+      // handle back button, reload, and tab closed
+      window.onbeforeunload = function() {
+        //if (fields() || images() || videos()) return '';
+      };
+
+      $('#select-image-file').on('change', handleImageFileSelect);
+      $('#company-image-container').data('deleted', []);
+      $('#company-video-container').data('deleted', []);
+      $('.recruiting-token-image').each(function() {
+        var img = $(this);
+        img.data('saved', true);
+      });
+      $('.recruiting-token-video').each(function() {
+        var img = $(this);
+        img.data('saved', true);
+      });
     });
     </script>
 </body>

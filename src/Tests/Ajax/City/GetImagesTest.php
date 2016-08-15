@@ -22,7 +22,7 @@ class GetImagesTest
     {
         // create a city
         $city = new City();
-        $city->name = "City #" . rand(0, 100);
+        $city->name = "City #" . rand();
         $city->population = rand(10000, 10000000);
         $city->longitude = rand(0, 100);
         $city->latitude = rand(0, 100);

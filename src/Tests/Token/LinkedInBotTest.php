@@ -468,6 +468,52 @@ extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests the endpoint with a good token long_id for a token containing
+     * job title
+     * location
+     * Job Description
+     * 2-6 cities
+     */
+    public function testMultipleCities()
+    {
+        // setup test token
+        $RecruitingToken = $this->createRecruitingToken($this->user->id, 'none');
+        $RecruitingToken->job_title = 'Job #'.rand();
+        $RecruitingToken->job_description = 'Do the '.rand().' things. Every day.';
+        $RecruitingToken->addCity($this->city->id);
+        for ($i = 1; $i < 8; $i++) {
+            $newCity = $this->createCity();
+            $RecruitingToken->addCity($newCity->id);
+            $RecruitingToken->save();
+
+            // get the bot token version
+            $url = TEST_URL.'/token/recruiting/'.$RecruitingToken->long_id;
+            //echo $url;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('User-agent: LinkedInBot 1.0 blah blah blah'));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            $response = curl_exec($ch);
+            $this->assertEquals(200, curl_getinfo($ch, CURLINFO_HTTP_CODE));
+
+            //print_r($response);
+            $this->thingsThatShouldAlwaysBeThere($response);
+            $this->assertContains($RecruitingToken->job_title, $response);
+            $this->assertContains('<h2>Job Description</h2>', $response);
+            $this->assertContains($RecruitingToken->job_description, $response);
+            $this->assertContains($this->city->name, $response);
+            $this->assertContains($newCity->name, $response);
+            $this->assertNotContains('<img src', $response);
+            $this->assertNotContains('<h2>Skills Required</h2>', $response);
+            $this->assertNotContains('<h2>Responsibilities</h2>', $response);
+            $this->assertNotContains('<h2>Company Values</h2>', $response);
+            $this->assertNotContains('<h2>Perks</h2>', $response);
+        }
+        //echo $response;
+    }
+
+    /**
      * Helper function to test things that should always be there
      *
      * @param string $html - the html to test for things

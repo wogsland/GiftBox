@@ -1,6 +1,11 @@
 <?php
 namespace Sizzle;
 
+use Sizzle\Bacon\Database\{
+    RecruitingToken,
+    WebRequest
+};
+
 /**
  * This class is for routing URI requests
  */
@@ -10,19 +15,20 @@ class Route
     protected $endpointPieces;
     protected $endpointMap;
     protected $gets;
+    protected $webRequestId;
 
     /**
      * Includes appropriate file based on the provided endpoint pieces
      *
      * @param array $endpointPieces - the parsed pieces of the endpoint
      * @param array $gets           - associative array of GET variables
+     * @param array $webRequestId   - associative array of GET variables
      */
-    public function __construct(array $endpointPieces, array $gets = array())
+    public function __construct(array $endpointPieces, array $gets = array(), int $webRequestId = null)
     {
-        if (is_array($endpointPieces)) {
-            $this->endpointPieces = $endpointPieces;
-            $this->gets = $gets;
-        }
+        $this->endpointPieces = $endpointPieces;
+        $this->gets = $gets;
+        $this->webRequestId = $webRequestId;
         $this->default = __DIR__.'/../error.php';
     }
 
@@ -64,6 +70,11 @@ class Route
             case 'api_documentation':
                 include __DIR__.'/../api_documentation.php';
                 break;
+            case 'bb':
+                if (ENVIRONMENT != 'production') {
+                    include __DIR__.'/../webhook/broadbean.php';
+                }
+                break;
             case 'careers':
                 include __DIR__.'/../careers.php';
                 break;
@@ -73,6 +84,9 @@ class Route
             case 'create_recruiting':
                 include __DIR__.'/../create_recruiting.php';
                 break;
+            case 'demo_request':
+                include __DIR__.'/../lp/demo_request.php';
+                break;
             case 'email_credentials':
                 include __DIR__.'/../email_credentials.php';
                 break;
@@ -81,6 +95,9 @@ class Route
                 break;
             case 'email_signup':
                 include __DIR__.'/../lp/email_signup.php';
+                break;
+            case 'example_video':
+                include __DIR__.'/../example_video.php';
                 break;
             case 'free_trial':
                 include __DIR__.'/../lp/free-trial.php';
@@ -100,12 +117,34 @@ class Route
             case 'js':
                 if (!isset($this->endpointPieces[2]) || '' == $this->endpointPieces[2]) {
                     include $this->default;
+                /* EXPERIMENT 1 */
+                } elseif ('dist' == $this->endpointPieces[2]
+                    && 'recruiting_token.min.js' == $this->endpointPieces[3]
+                    && isset($this->gets['t'])
+                ) {
+                    $filename = __DIR__.'/../token/'.$this->gets['t'].'/recruiting_token.min.js';
+                    if (file_exists($filename)) {
+                        include $filename;
+
+                        //mark the web request
+                        $webRequest = new WebRequest($this->webRequestId);
+                        $webRequest->inExperiment(
+                            (int) substr($this->gets['t'], 0, 1),
+                            substr($this->gets['t'], 1)
+                        );
+                    } else {
+                        include $this->default;
+                    }
+                /* END EXPERIMENT 1 */
                 } else {
                     switch ($this->endpointPieces[2]) {
                     default:
                         include $this->default;
                     }
                 }
+                break;
+            case 'learn_more':
+                include __DIR__.'/../lp/learn_more.php';
                 break;
             case 'mascot':
                 include __DIR__.'/../mascot.php';
@@ -117,13 +156,16 @@ class Route
                 include __DIR__.'/../payments.php';
                 break;
             case 'pricing':
-                include __DIR__.'/../pricing.php';
+                include __DIR__.'/../lp/pricing_splash.php';
                 break;
             case 'privacy':
                 include __DIR__.'/../privacypolicy.php';
                 break;
             case 'profile':
                 include __DIR__.'/../profile.php';
+                break;
+            case 'rain':
+                include __DIR__.'/../rain.php';
                 break;
             case 'recruiting_made_easy':
                 include __DIR__.'/../lp/bc1.php';
@@ -150,31 +192,8 @@ class Route
                 include __DIR__.'/../thankyou.php';
                 break;
             case 'token':
-                $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-                if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
-                    $detect = new \Mobile_Detect;
-                    if ($detect->isMobile()
-                        && strpos($userAgent, 'AppleWebKit') !== false
-                        && strpos($userAgent, 'Safari') === false
-                        && strpos($userAgent, 'Chrome') === false
-                        && strpos($userAgent, 'iPhone') === false
-                    ) {
-                        // don't display in native android browser
-                        include __DIR__.'/../get_chrome.html';
-                    } else if (strpos($userAgent, 'LinkedInBot') !== false) {
-                        // display simplified form on LinkedIn
-                        $long_id = trim($this->endpointPieces[3], '/');
-                        include __DIR__.'/../token/LinkedInBot.php';
-                    } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
-                        // display simplified form on Facebook
-                        $long_id = trim($this->endpointPieces[3], '/');
-                        include __DIR__.'/../token/facebookexternalhit.php';
-                    } else {
-                        include __DIR__.'/../recruiting_token.build.html';
-                    }
-                } else {
-                    include $this->default;
-                }
+                $long_id = isset($this->endpointPieces[3]) ? trim($this->endpointPieces[3], '/') : '';
+                include $this->getTokenFile();
                 break;
             case 'tokens':
                 include __DIR__.'/../tokens.php';
@@ -197,7 +216,7 @@ class Route
             case 'zdrip':
                 // this endpoint is just for non-production testing
                 if (ENVIRONMENT != 'production') {
-                    include __DIR__.'/../deploy_develop.php';
+                    include __DIR__.'/../webhook/deploy_develop.php';
                     break;
                 }
             default:
@@ -288,6 +307,93 @@ class Route
             }
             $this->endpointMap[$endpointParts[0]][$endpointParts[1]][$endpointParts[2]][$endpointParts[3]] = $fileToLoad;
             break;
+        }
+    }
+
+    /**
+     * Gets the file to include for the token directory and all the complexity there around
+     *
+     * @return sting - filename to include
+     */
+    protected function getTokenFile()
+    {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+        if (isset($this->endpointPieces[2],$this->endpointPieces[3]) && 'recruiting' == $this->endpointPieces[2]) {
+            $detect = new \Mobile_Detect;
+            if ($detect->isMobile()
+                && strpos($userAgent, 'AppleWebKit') !== false
+                && strpos($userAgent, 'Safari') === false
+                && strpos($userAgent, 'Chrome') === false
+                && strpos($userAgent, 'iPhone') === false
+            ) {
+                // don't display in native android browser
+                return __DIR__.'/../get_chrome.html';
+            } else if (strpos($userAgent, 'LinkedInBot') !== false) {
+                // display simplified form on LinkedIn
+                return __DIR__.'/../token/LinkedInBot.php';
+            } else if (strpos($userAgent, 'facebookexternalhit') !== false) {
+                // display simplified form on Facebook
+                return __DIR__.'/../token/facebookexternalhit.php';
+            } else {
+                $webRequest = new WebRequest($this->webRequestId);
+
+                // get token info for experiments
+                $long_id = trim($this->endpointPieces[3], '/');
+                $token = new RecruitingToken($long_id, 'long_id');
+
+                // reset experiment list for each new token load
+                // storing this list in the session to retrieve upon response
+                $_SESSION['experiments'][$token->id] = array();
+
+                /* EXPERIMENT 6 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['learnMore']);
+                $_SESSION['learnMore'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(6, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>6, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 6 */
+
+                /* EXPERIMENT 7 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['requestInterview']);
+                $_SESSION['requestInterview'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(7, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>7, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 7 */
+
+                /* EXPERIMENT 8 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['applyNow']);
+                $_SESSION['applyNow'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(8, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>8, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 8 */
+
+                /* EXPERIMENT 5 */
+                if (isset($token->collect_name)) {
+                    $experimentVersion = $token->collect_name;
+                    $webRequest->inExperiment(5, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>5, 'version'=>$experimentVersion);
+                }
+                /* END EXPERIMENT 5 */
+
+                /* EXPERIMENT 2 */
+                if (isset($token->auto_popup)) {
+                    $experimentVersion = ('N' == $token->auto_popup ? $token->auto_popup : (string) $token->auto_popup_delay);
+                    $webRequest->inExperiment(2, $experimentVersion);
+                    $_SESSION['experiments'][$token->id][] = array('id'=>2, 'version'=>$experimentVersion);
+                }
+                /* END EXPERIMENT 2 */
+
+                /* EXPERIMENT 1 */
+                $experimentVersion = rand(1,100) > 50 ? 'A' : 'B';
+                $webRequest->inExperiment(1, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>1, 'version'=>$experimentVersion);
+                return __DIR__.'/../token/1'.$experimentVersion.'/recruiting_token.build.html';
+                /* END EXPERIMENT 1 */
+            }
+        } else {
+            return $this->default;
         }
     }
 }

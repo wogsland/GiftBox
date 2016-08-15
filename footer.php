@@ -7,13 +7,6 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body center">
-          <div id="fb-root"></div>
-          <div type="button" class="btn-lg dialog-button-center btn-facebook" onclick="signupFacebook()" style="margin-right: 20px; margin-left: 20px; text-align: center;">
-            <i class="fa fa-facebook"></i> Sign Up With Facebook
-          </div>
-          <div style="margin-top: 20px; text-align: center;">
-            <span class="center">Or</span>
-          </div>
           <div id="signup-alert-placeholder"></div>
           <form id="signup-form" class="text-center">
             <input type="hidden" id="reg_type" name="reg_type" value="">
@@ -21,7 +14,7 @@
             <input id="last_name" name="last_name" type="hidden" value="">
             <input class="dialog-input large-input" id="signup_email" name="signup_email" type="text" placeholder="Email">
             <input class="dialog-input large-input" id="signup_password" name="signup_password" type="password" placeholder="Password">
-            Already a member? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>
+            Already Sizzling? Log in <a href="javascript:void(0)" onclick="switchToLogin()">here</a>
           </form>
           <div type="button" class="btn-lg btn-primary dialog-button-center" onclick="signupEmail()" style="border: 1px solid #e5e5e5; margin-top: 15px;margin-right: 20px; margin-left: 20px; text-align: center;">
             Sign Up With Email
@@ -37,13 +30,6 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
-          <div id="fb-root"></div>
-          <div type="button" class="btn-lg dialog-button-center btn-facebook" onclick="loginFacebook()" style="margin-right: 20px; margin-left: 20px;text-align: center;">
-            <i class="fa fa-facebook"></i> Log In With Facebook
-          </div>
-          <div style="margin-top: 20px; text-align: center;">
-            <span class="center">Or</span>
-          </div>
           <div id="login-alert-placeholder"></div>
           <form id="login-form">
             <input type="hidden" name="login_type" value="EMAIL">
@@ -100,6 +86,27 @@
 <!-- =========================
      SCRIPTS
 ============================== -->
+<script type="text/javascript">
+adroll_adv_id = "ITEJPSCUW5BL3GO5UTS44U";
+adroll_pix_id = "E6HC6OSXS5GYFLRK7K2ITW";
+/* OPTIONAL: provide email to improve user identification */
+/* adroll_email = "username@example.com"; */
+(function () {
+var _onload = function(){
+if (document.readyState && !/loaded|complete/.test(document.readyState)){setTimeout(_onload, 10);return}
+if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+var scr = document.createElement("script");
+var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+scr.setAttribute('async', 'true');
+scr.type = "text/javascript";
+scr.src = host + "/j/roundtrip.js";
+((document.getElementsByTagName('head') || [null])[0] ||
+document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+};
+if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+else {window.attachEvent('onload', _onload)}
+}());
+</script>
 <script src="/js/dist/sizzle.min.js?v=<?php echo VERSION;?>"></script>
 <?php if (!logged_in()) {
   /** TODO Move these into marketing.min build */

@@ -25,8 +25,7 @@ fi
 echo ""
 
 # build polymer
-npm run polybuild
-echo "Polybuild finished."
+token/polybuild.sh both
 echo ""
 
 # minify css
@@ -51,16 +50,12 @@ echo "Running JavaScript tests"
 npm run test
 echo ""
 
+# run python scraper tests
+echo "Running Python scraper tests"
+source ajax/scraper/venv/bin/activate
+python3.4 -B ajax/scraper/test_linkedin.py
+deactivate
+echo ""
+
 # see what's changed
 git status
-
-# push it up to github
-if [ "$#" -gt 0 ]
-then
-  echo ""
-  case $1 in
-#    "master") do nothing
-    "staging") git push github develop ;;
-#    *) do nothing ;;
-  esac
-fi

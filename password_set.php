@@ -56,7 +56,7 @@ require __DIR__.'/header.php';
           },
           function (data) {
             var failMessage = 'Error setting up account. Please contact ';
-            failMessage += '<a href="mailto:support@gosizzle.io">support@gosizzle.io</a>';
+            failMessage += '<a href="mailto:support@GoSizzle.io">support@GoSizzle.io</a>';
             failMessage += ' for assistance.';
             if (data.success !== undefined && data.data !== undefined) {
               if (data.success == 'true' && data.data.url !== undefined) {

@@ -36,11 +36,14 @@ require __DIR__.'/header.php';
 
 <section class="Pricing">
   <header class="Pricing__hero">
-    <h1 class="Pricing__title">Pick a plan and get the first 30 days free.</h1>
-    <p class="Pricing__message">That's right. <b>Free.</b> Use the slider to select the number of job postings you need per month, and we'll give you your first month on the house.</p>
+    <h1 class="Pricing__title">Pick a plan and start sizzling!</h1>
+    <p class="Pricing__message">
+      That's right. <b>En fuego.</b>
+      Just use the slider to select the number of job postings you need per month.
+    </p>
   </header>
   <div class="Pricing__slider">
-    <div class="Slider" data-min="1" data-max="200" data-value="25">
+    <div class="Slider" data-min="1" data-max="100" data-value="25">
       <div class="Slider__handle"><div class="Slider__label">0</div></div>
       <input type="hidden" class="Slider__value">
     </div>
@@ -75,7 +78,7 @@ require __DIR__.'/header.php';
         <div class="Plan__details">
           <i class="Plan__icon fa fa-building"></i>
           <h2 class="Plan__name">Large Corp</h2>
-          <span class="Plan__features"><b>51-199</b> posts per month</span>
+          <span class="Plan__features"><b>51-99</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
           <button class="Plan__callToAction Plan__callToAction--primary" type="button" data-billing="m" data-plan="recruiting-600">$600<sup>00</sup> / Month</button>
@@ -83,11 +86,11 @@ require __DIR__.'/header.php';
         </div>
       </div>
     </li><li class="Pricing__option">
-      <div class="Plan" data-min="200">
+      <div class="Plan" data-min="100">
         <div class="Plan__details">
           <i class="Plan__icon fa fa-globe"></i>
           <h2 class="Plan__name">Enterprise</h2>
-          <span class="Plan__features"><b>200+</b> posts per month</span>
+          <span class="Plan__features"><b>100+</b> posts per month</span>
         </div>
         <div class="Plan__buttons">
           <button class="Plan__callToAction Plan__callToAction--primary" type="button">Contact us</button>

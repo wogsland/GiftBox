@@ -1,4 +1,4 @@
-yoda@gosizzle.io
-bomb.voyage@gosizzle.io
-nacho.libre@gosizzle.io
+yoda@GoSizzle.io
+bomb.voyage@GoSizzle.io
+nacho.libre@GoSizzle.io
 mark.watney@botany.nasa.gov

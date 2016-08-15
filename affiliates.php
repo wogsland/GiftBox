@@ -40,7 +40,7 @@ require __DIR__.'/header.php';
           S!zzle is a Nashville, TN based company dedicated to helping
           recruiters. Do you know recruiters that might benefit from
           our service? Introduce us to them using
-          <a href="mailto:affiliate@gosizzle.io">affiliate@gosizzle.io</a>
+          <a href="mailto:affiliate@GoSizzle.io">affiliate@GoSizzle.io</a>
           and will cut you in on 50% for their first 6 months of service.
           That's up to $825 per lead! Just email us to get started.
         </p>
