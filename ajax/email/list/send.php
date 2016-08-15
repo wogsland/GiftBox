@@ -119,8 +119,6 @@ if (isset($_SESSION['user_id'], $_SESSION['email'])) {
             if (!$mail->send()) {
                 //print_r($mail);
                 $data['error'] = $mail->ErrorInfo;
-                $data['isMock'] = $mail instanceof \Mockery\MockInterface;
-
             } else {
                 $success = 'true';
             }
