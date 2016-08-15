@@ -44,6 +44,113 @@ Sizzle.Token = {
   },
 
   /**
+   * Handles the data return from /ajax/recruiting_token/get
+   *
+   * @param {object} the return
+   */
+  'handleAjaxRecruitingTokenGet': function (data) {
+    if (data.success == 'false') {
+      window.location.href = 'https://www.gosizzle.io';
+    }
+    var tokenTitle;
+    if (Sizzle.Util.dataExists(data.data.company)) {
+      $('.gt-info-company').text(data.data.company);
+      if (data.data.company.length > 36 && $(window).width() > 800) {
+        $('#supporting-company').css('height','100px');
+        $('#supporting-company').css('margin-top','217px');
+      } else if (data.data.company.length > 18 && $(window).width() <= 800) {
+        if (data.data.company.length > 36) {
+          $('#supporting-company').css('height','150px');
+          $('#supporting-company').css('margin-top','167px');
+        } else {
+          $('#supporting-company').css('height','100px');
+          $('#supporting-company').css('margin-top','217px');
+        }
+      }
+      tokenTitle = data.data.company+' - '+data.data.job_title;
+    } else {
+      tokenTitle = data.data.job_title;
+    }
+    $('title').text(tokenTitle);
+    Sizzle.JobDescription.populateData(data.data);
+
+    if (Sizzle.Util.dataExists(data.data.company_description)) {
+      $('#company-description-text').html(data.data.company_description);
+    } else {
+      $('#company-description').hide();
+    }
+
+    if(Sizzle.Util.dataExists(data.data.long_id)) {
+      url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
+      $.post(url, '', Sizzle.Location.handleAjaxGetCities);
+    } else {
+      $('#location-section').remove();
+    }
+    var socialCount = 0;
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'twitter');
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'facebook');
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'linkedin');
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'youtube');
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'google_plus');
+    socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'pinterest');
+    Sizzle.Social.resizeButtons(socialCount);
+
+    if (Sizzle.Util.dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
+      $('#bio-button').remove();
+      $('#contact-button').remove();
+      $('#schedule-button').remove();
+      url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
+      $.post(url, '', Sizzle.Recruiter.handleAjaxUserGetRecruiterProfile, 'json');
+    } else {
+      $('#recruiter-section').remove();
+    }
+    setTimeout(Sizzle.Token.updateSectionPositions, 500);//for slow ajax responses
+    setTimeout(Sizzle.Token.updateSectionPositions, 1000);//for slow ajax responses
+    setTimeout(Sizzle.Token.updateSectionPositions, 5000);//for slow ajax responses
+  },
+
+  /**
+   * Handles the data return from /ajax/recruiting_token/get_responses_allowed
+   *
+   * @param {object} the return
+   */
+  'handleAjaxRecruitingTokenGetResponsedAllowed': function (data) {
+    if (data.data !== undefined && data.data.allowed !== undefined) {
+      if ('false' == data.data.allowed) {
+        $('.interest-fab').hide();
+      } else {
+        if (!addedName && 'true' == data.data.collectName) {
+          var nameInput = '<paper-input';
+          nameInput += '  class="name-paper-input"';
+          nameInput += '  label="name"';
+          nameInput += '  autofocus';
+          nameInput += '  error-message="Please input your name"';
+          nameInput += '  required>';
+          nameInput += '</paper-input>';
+          $('.email-paper-input').after(nameInput);
+          addedName = true;
+        }
+        if ('true' == data.data.autoPop) {
+          // display the response form once after 10 seconds
+          if (!presentedInterestPopup) {
+            setTimeout(function(){
+              if (!presentedInterestPopup && !presentedLearnMore) {
+                $('.interest-dialog').each(function (i, dialog){
+                  Sizzle.Token.disableBackButton();
+                  dialog.open();
+                  openedInterestPopup = true;
+                });
+                presentedInterestPopup = true;
+              }
+            },
+            (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
+          }
+        }
+      }
+    }
+  },
+
+  /**
    * Handles click on an interest fab
    */
   'interestClick': function (event) {

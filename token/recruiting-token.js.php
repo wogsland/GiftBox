@@ -18,6 +18,7 @@ var learnMoreChecked = false;
 var learnMoreOpen = false;
 var presentedLearnMore = false;
 var setLocationButtons = false;
+var addedName = false;
 
 scope._onTrack = function(event) {
   // do nothing, get no error
@@ -33,6 +34,10 @@ scope._onLocationClick = Sizzle.Location.click;
 scope._onImagesClick = Sizzle.Image.sectionClick;
 scope._onVideosClick = Sizzle.Video.sectionClick;
 scope._onInterestClick = Sizzle.Token.interestClick;
+scope._onBackClick = Sizzle.Token.backClick;
+scope._closeInterestDialog = Sizzle.Token.closeInterestDialog;
+scope._closeLearnMoreDialog = Sizzle.LearnMore.close;
+scope._submitLearnMore = Sizzle.LearnMore.submit;
 
 /**
  * Submits interest info
@@ -146,30 +151,6 @@ echo <<<'EOT'
 }
 
 /**
- * Submits learn more info
- */
-scope._submitLearnMore = function(event) {
-  event.preventDefault();
-  if ($('#learn-more-email')[0].validate()) {
-    $('.learn-more-button').addClass('disable-clicks');
-    var response = 'Yes';
-    url = '/ajax/recruiting_token_response/create' + path[4];
-    url += '/' + encodeURIComponent($('#learn-more-email')[0].value);
-    url += '/' + response;
-    $.post(url, '', function(data) {
-      if (data.data.id !== undefined & data.data.id > 0) {
-        $('.learn-more-form').html("<h2>Thanks for your interest!<br />We'll be in touch</h2>");
-        $('.learn-more-button').remove();
-        $('.dismiss-learn-more-button').text('DISMISS');
-        $('.interest-fab').remove();
-      } else {
-        $('.learn-more-button').removeClass('disable-clicks');
-      }
-    },'json');
-  }
-};
-
-/**
  * Forwards the user to the application page
  */
 var applicationLink = '';
@@ -199,34 +180,6 @@ echo <<<'EOT'
     $('.dismiss-interest-button').text('DISMISS');
   }
 };
-
-/**
- * Closes the interest dialog
- */
-scope._closeInterestDialog = Sizzle.Token.closeInterestDialog;
-
-/**
- * Closes the learn more dialog
- */
-scope._closeLearnMoreDialog = function (event) {
-  $('#learn-more-dialog')[0].close();
-  learnMoreOpen = false;
-  $('.interest-fab').removeClass('mdl-button--disabled');
-};
-
-/**
- * Closes the apply dialog
- */
-scope._closeApplyDialog = function (event) {
-  $('.apply-dialog').each(function (i, dialog){
-    dialog.close();
-  });
-};
-
-/**
- * Navigates back to the main page
- */
-scope._onBackClick = Sizzle.Token.backClick;
 
 $(document).ready(function(){
   // initial token load (doesn't work if in background tab)
@@ -312,7 +265,7 @@ function loadDataAndPopulateToken() {
   path = Sizzle.Util.getUrlPath();
   if (path[2] === '/token' & path[3] == '/recruiting' & typeof path[4] !== 'undefined') {
     url = '/ajax/recruiting_token/get' + path[4];
-    $.post(url, '', handleAjaxRecruitingTokenGet,'json');
+    $.post(url, '', Sizzle.Token.handleAjaxRecruitingTokenGet,'json');
     url = '/ajax/recruiting_token/get_images' + path[4];
     $.post(url, '', function(data) {
       if (data.data !== undefined && data.data.length > 0) {
@@ -373,7 +326,7 @@ function loadDataAndPopulateToken() {
     }
 
     url = '/ajax/recruiting_token/get_responses_allowed' + path[4];
-    $.post(url, '', handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
+    $.post(url, '', Sizzle.Token.handleAjaxRecruitingTokenGetResponsedAllowed, 'json');
 EOT;
 if ('1B' == $argv[1]) {
     echo <<<'EOT'
@@ -428,169 +381,6 @@ echo <<<'EOT'
     window.location.href = 'https://www.gosizzle.io';
   }
   Sizzle.Screen.small();
-}
-
-/**
- * Handles the data return from /ajax/user/get_recruiter_profile/
- *
- * @param {object} the return
- */
-function handleAjaxUserGetRecruiterProfile(data) {
-  if (data.data !== undefined) {
-    assetHost = Sizzle.Util.getAssetHost();
-    if (Sizzle.Util.dataExists(data.data.face_image)) {
-      //$('#icon-or-face').html('<img src="'+assetHost+"/"+data.data.face_image+'" width=200>');
-      $('#icon-or-face').remove();
-      $('#recruiter-face').css('background','url("'+assetHost+"/"+data.data.face_image+'") 50% 50% / cover');
-      $('#recruiter-face').css('height','300px');
-    }
-    if (Sizzle.Util.dataExists(data.data.position)) {
-      $('#gt-info-recruiter-position').html(data.data.position);
-    } else {
-      $('#gt-info-recruiter-position').remove();
-    }
-    if (Sizzle.Util.dataExists(data.data.about)) {
-      $('#gt-info-recruiter-bio').html(data.data.about);
-    } else {
-      $('#gt-info-recruiter-bio').remove();
-    }
-    if (Sizzle.Util.dataExists(data.data.linkedin)) {
-      $('#linkedin-button').attr('href', data.data.linkedin);
-      $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
-      $('.recruiter-profile-option').addClass('mdl-cell--12-col');
-    } else {
-      $('#linkedin-button').remove();
-    }
-    if (Sizzle.Util.dataExists(data.data.email_address)) {
-      $('#email-now-button').attr('href', 'mailto:'+data.data.email_address);
-      if ($('#linkedin-button').length) {
-        $('.recruiter-profile-option').removeClass('mdl-cell--12-col');
-        $('.recruiter-profile-option').addClass('mdl-cell--6-col');
-      } else {
-        $('.recruiter-profile-option').removeClass('mdl-cell--3-col');
-        $('.recruiter-profile-option').addClass('mdl-cell--12-col');
-      }
-    } else {
-      $('#email-now-button').remove();
-    }
-    if (Sizzle.Util.dataExists(data.data.first_name) || Sizzle.Util.dataExists(data.data.last_name)) {
-      $('#gt-info-recruiter-name').html(data.data.first_name+' '+data.data.last_name);
-    } else {
-      // if there are no names a recruiter profile doesn't make sense
-      $('#recruiter-section').remove();
-    }
-  } else {
-    $('#recruiter-section').remove();
-  }
-  Sizzle.Token.updateSectionPositions();
-}
-
-/**
- * Handles the data return from /ajax/recruiting_token/get
- *
- * @param {object} the return
- */
-function handleAjaxRecruitingTokenGet(data) {
-  if (data.success == 'false') {
-    window.location.href = 'https://www.gosizzle.io';
-  }
-  var tokenTitle;
-  if (Sizzle.Util.dataExists(data.data.company)) {
-    $('.gt-info-company').text(data.data.company);
-    if (data.data.company.length > 36 && $(window).width() > 800) {
-      $('#supporting-company').css('height','100px');
-      $('#supporting-company').css('margin-top','217px');
-    } else if (data.data.company.length > 18 && $(window).width() <= 800) {
-      if (data.data.company.length > 36) {
-        $('#supporting-company').css('height','150px');
-        $('#supporting-company').css('margin-top','167px');
-      } else {
-        $('#supporting-company').css('height','100px');
-        $('#supporting-company').css('margin-top','217px');
-      }
-    }
-    tokenTitle = data.data.company+' - '+data.data.job_title;
-  } else {
-    tokenTitle = data.data.job_title;
-  }
-  $('title').text(tokenTitle);
-  Sizzle.JobDescription.populateData(data.data);
-
-  if (Sizzle.Util.dataExists(data.data.company_description)) {
-    $('#company-description-text').html(data.data.company_description);
-  } else {
-    $('#company-description').hide();
-  }
-
-  if(Sizzle.Util.dataExists(data.data.long_id)) {
-    url = '/ajax/recruiting_token/get_cities/' + data.data.long_id;
-    $.post(url, '', Sizzle.Location.handleAjaxGetCities);
-  } else {
-    $('#location-section').remove();
-  }
-  var socialCount = 0;
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'twitter');
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'facebook');
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'linkedin');
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'youtube');
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'google_plus');
-  socialCount += Sizzle.Social.applyLinkOrRemove(data.data, 'pinterest');
-  Sizzle.Social.resizeButtons(socialCount);
-
-  if (Sizzle.Util.dataExists(data.data.recruiter_profile) && 'Y' == data.data.recruiter_profile) {
-    $('#bio-button').remove();
-    $('#contact-button').remove();
-    $('#schedule-button').remove();
-    url = '/ajax/user/get_recruiter_profile/' + data.data.user_id;
-    $.post(url, '', handleAjaxUserGetRecruiterProfile, 'json');
-  } else {
-    $('#recruiter-section').remove();
-  }
-  setTimeout(Sizzle.Token.updateSectionPositions, 500);//for slow ajax responses
-  setTimeout(Sizzle.Token.updateSectionPositions, 1000);//for slow ajax responses
-  setTimeout(Sizzle.Token.updateSectionPositions, 5000);//for slow ajax responses
-}
-
-var addedName = false;
-/**
- * Handles the data return from /ajax/recruiting_token/get_responses_allowed
- *
- * @param {object} the return
- */
-function handleAjaxRecruitingTokenGetResponsedAllowed(data) {
-  if (data.data !== undefined && data.data.allowed !== undefined) {
-    if ('false' == data.data.allowed) {
-      $('.interest-fab').hide();
-    } else {
-      if (!addedName && 'true' == data.data.collectName) {
-        var nameInput = '<paper-input';
-        nameInput += '  class="name-paper-input"';
-        nameInput += '  label="name"';
-        nameInput += '  autofocus';
-        nameInput += '  error-message="Please input your name"';
-        nameInput += '  required>';
-        nameInput += '</paper-input>';
-        $('.email-paper-input').after(nameInput);
-        addedName = true;
-      }
-      if ('true' == data.data.autoPop) {
-        // display the response form once after 10 seconds
-        if (!presentedInterestPopup) {
-          setTimeout(function(){
-            if (!presentedInterestPopup && !presentedLearnMore) {
-              $('.interest-dialog').each(function (i, dialog){
-                Sizzle.Token.disableBackButton();
-                dialog.open();
-                openedInterestPopup = true;
-              });
-              presentedInterestPopup = true;
-            }
-          },
-          (data.data.autoPopDelay !== undefined ? data.data.autoPopDelay*1000 : 10000));
-        }
-      }
-    }
-  }
 }
 
 function getImagesGrid(data, assetHost) {
