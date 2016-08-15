@@ -15,6 +15,7 @@ $user_id = (int) ($_SESSION['user_id'] ?? '');
 $referrer = (int) ($_GET['referrer'] ?? '');
 $recruiting_token_id = $_GET['id'] ?? '';
 $token = new RecruitingToken($recruiting_token_id, 'long_id');
+$company = new RecruitingCompany($token->recruiting_company_id);
 
 $user = new User($user_id);
 $credentials = (new EmailCredential())->getByUserId($user_id);
@@ -268,6 +269,12 @@ require __DIR__.'/header.php';
             <paper-button>NEW CREDENTIALS</paper-button>
           </a>
           <br />
+            <paper-input
+              label="Required Subject"
+              value="<?php echo $company->name ?> <?php echo $token->job_title ?>"
+              id="send-to-email-subject">
+            </paper-input>
+          <br />
           <paper-textarea
             label="Optional Message"
             id="send-to-email-message"
@@ -385,6 +392,7 @@ require __DIR__.'/header.php';
         email_list_id: $("#send-to-email-list paper-item[aria-selected='true']").attr('value'),
         message: $('#send-to-email-message').val(),
         email_credential_id: $("#send-to-email-credentials paper-item[aria-selected='true']").attr('value'),
+        subject: $('#send-to-email-subject').val();
       },
       dataType: 'json',
       success: function(data, textStatus){
