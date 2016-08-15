@@ -203,13 +203,7 @@ echo <<<'EOT'
 /**
  * Closes the interest dialog
  */
-scope._closeInterestDialog = function (event) {
-  $('.interest-dialog').each(function (i, dialog){
-    dialog.close();
-    openedInterestPopup = false;
-    Sizzle.Token.enableBackButton();
-  });
-};
+scope._closeInterestDialog = Sizzle.Token.closeInterestDialog;
 
 /**
  * Closes the learn more dialog
@@ -232,16 +226,7 @@ scope._closeApplyDialog = function (event) {
 /**
  * Navigates back to the main page
  */
-scope._onBackClick = function(event) {
-  if (openedInterestPopup) {
-    // removes functionality of back button when
-    // the interest dialog is opened
-    return;
-  }
-  $('.gt-info-video').remove();
-  this.$.pages.selected = 0;
-  Sizzle.Image.removePreview();
-};
+scope._onBackClick = Sizzle.Token.backClick;
 
 $(document).ready(function(){
   // initial token load (doesn't work if in background tab)

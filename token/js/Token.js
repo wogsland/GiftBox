@@ -1,6 +1,31 @@
 Sizzle.Token = {
 
   /**
+   * Handles click on the back button
+   */
+  'backClick': function(event) {
+    if (openedInterestPopup) {
+      // removes functionality of back button when
+      // the interest dialog is opened
+      return;
+    }
+    $('.gt-info-video').remove();
+    this.$.pages.selected = 0;
+    Sizzle.Image.removePreview();
+  },
+
+  /**
+   * Closes the interest dialog
+   */
+  'closeInterestDialog': function (event) {
+    $('.interest-dialog').each(function (i, dialog){
+      dialog.close();
+      openedInterestPopup = false;
+      Sizzle.Token.enableBackButton();
+    });
+  },
+
+  /**
    * Disables BACK button
    */
   'disableBackButton': function() {
