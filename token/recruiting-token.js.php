@@ -20,9 +20,8 @@ var presentedLearnMore = false;
 var setLocationButtons = false;
 var addedName = false;
 
-scope._onTrack = function(event) {
-  // do nothing, get no error
-};
+// assign scroll handlers
+scope._onTrack = Sizzle.Track.scroll;
 
 // assign click handlers
 scope._onOverviewClick = Sizzle.JobDescription.overviewClick;
@@ -381,65 +380,6 @@ echo <<<'EOT'
     window.location.href = 'https://www.gosizzle.io';
   }
   Sizzle.Screen.small();
-}
-
-function getImagesGrid(data, assetHost) {
-  var container = $('<ul class="ImageGrid ImageGrid is-loading">'),
-      loaded = 0,
-      onComplete = function () {
-        loaded++;
-        container.masonry('layout');
-        if (loaded === data.length) {
-          container.removeClass('is-loading');
-        }
-      };
-
-  container.append('<li class="ImageGrid-itemSizer">');
-  data.forEach(function (img) {
-    container.append(getImageGridItem(img, assetHost, onComplete));
-  });
-
-  container.masonry({
-    itemSelector: '.ImageGrid-item',
-    columnWidth: '.ImageGrid-itemSizer',
-    percentPosition: true,
-    transitionDuration: '0.1s'
-  });
-
-  return container;
-}
-
-function getImageGridItem(imgData, assetHost, cb) {
-  var preload = new Image(),
-      src = assetHost+'/'+imgData.file_name,
-      item = $('<li class="ImageGrid-item is-loading">'),
-      img = $('<img ' +
-          'id="image-' + imgData.id + '" ' +
-          'class="ImageGrid-image" ' +
-          'onclick="Sizzle.Image.displayPreview(this)" ' +
-          'data-src="'+src+'"/>');
-
-  preload.onload = function() {
-    cb();
-    item.removeClass('is-loading');
-    img.attr('src', img.data('src'));
-    item.append(img);
-  };
-  preload.onerror = function() {
-    cb();
-    item.removeClass('is-loading').addClass('is-error');
-  };
-  preload.src = src;
-
-  return item;
-}
-
-/**
- * Returns html for a spacer
- * @returns {boolean}
- */
-function getSpacerHTML() {
-  return '<div class="mdl-layout-spacer"></div>';
 }
 
 /**

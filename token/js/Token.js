@@ -44,6 +44,14 @@ Sizzle.Token = {
   },
 
   /**
+   * Returns html for a spacer
+   * @returns {boolean}
+   */
+  'getSpacerHTML': function() {
+    return '<div class="mdl-layout-spacer"></div>';
+  },
+
+  /**
    * Handles the data return from /ajax/recruiting_token/get
    *
    * @param {object} the return
