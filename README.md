@@ -1,5 +1,7 @@
 # GoSizzle.io
 
+## <href="https://github.com/GiveToken/GiftBox/blob/master/CONTRIBUTING.md">Contributing</a>
+
 ## <a id="set-up"></a>Set Up
 PHP 7 is required and can be found [here](http://php-osx.liip.ch/).
 

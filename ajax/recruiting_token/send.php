@@ -45,7 +45,7 @@ if (logged_in() && is_admin()) {
             $mandrill->send(
                 array(
                     'to'=>array(array('email'=>$user->email_address)),
-                    'from_email'=>'token@gosizzle.io',
+                    'from_email'=>'token@GoSizzle.io',
                     'from_name'=>'S!zzle',
                     'subject'=>$subject,
                     'html'=>$email_message

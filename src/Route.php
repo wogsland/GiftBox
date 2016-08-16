@@ -164,6 +164,9 @@ class Route
             case 'profile':
                 include __DIR__.'/../profile.php';
                 break;
+            case 'rain':
+                include __DIR__.'/../rain.php';
+                break;
             case 'recruiting_made_easy':
                 include __DIR__.'/../lp/bc1.php';
                 break;
@@ -357,6 +360,14 @@ class Route
                 $webRequest->inExperiment(7, $experimentVersion);
                 $_SESSION['experiments'][$token->id][] = array('id'=>7, 'version'=>$experimentVersion);
                 /* END EXPERIMENT 7 */
+
+                /* EXPERIMENT 8 */
+                $experimentVersion = rand(1,100) > 50 ? 'Y' : 'N';
+                unset($_SESSION['applyNow']);
+                $_SESSION['applyNow'][$token->id] = $experimentVersion;
+                $webRequest->inExperiment(8, $experimentVersion);
+                $_SESSION['experiments'][$token->id][] = array('id'=>8, 'version'=>$experimentVersion);
+                /* END EXPERIMENT 8 */
 
                 /* EXPERIMENT 5 */
                 if (isset($token->collect_name)) {

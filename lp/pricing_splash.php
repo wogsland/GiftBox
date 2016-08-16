@@ -78,7 +78,7 @@
               doesn't, please click <a href="/assets/Sizzle_Pricing_Chart.pdf">here</a>.
             </p>
             <p class="heading-font">
-              You can also <a href="mailto:sales@gosizzle.io">contact us</a> for
+              You can also <a href="mailto:sales@GoSizzle.io">contact us</a> for
               more information.
             </p>
           </div>

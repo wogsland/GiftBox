@@ -83,9 +83,9 @@
             <div class="row">
               <span class="response"></span>
               <form id="demo-request-form" class="form form-dark">
-                <div class="form-group col-sm-12">
+                <!--<div class="form-group col-sm-12">
                   <input id="email" type="email" name="email" class="form-control required email" placeholder="Email">
-                </div>
+                </div>-->
                 <div class="form-group col-sm-12">
                   <input type="submit" value="Request Demo" class="btn btn-solid">
                 </div>
@@ -120,7 +120,8 @@
     // process demo request form
     $('#demo-request-form').on('submit', function (e) {
         e.preventDefault();
-        $.post("/ajax/demo_request", $('#demo-request-form').serialize(),
+        window.location = 'http://calendly.com/rzettler';
+        /*$.post("/ajax/demo_request", $('#demo-request-form').serialize(),
             function (data, textStatus, jqXHR) {
                 if (data.status === "SUCCESS") {
                     $(".response").html('Thanks for your interest!<br /><br /> One of our sales team will be in touch with you shortly to schedule a demo.');
@@ -129,7 +130,7 @@
                     $(".response").show();
                 }
             }
-        )
+        );*/
     });
   });
   </script>

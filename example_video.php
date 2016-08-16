@@ -1,5 +1,10 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
+<?php
+$video = $_GET['v'] ?? '';
+if (!in_array($video, ['okRv0XQ7Cjk', '5ka_yyMaRJk'])) {
+    $video = 'okRv0XQ7Cjk';
+}
+?>
 <!--[if IE 6]><html class="ie ie6 no-js" lang="en-US"><![endif]-->
 <!--[if IE 7]><html class="ie ie7 no-js" lang="en-US"><![endif]-->
 <!--[if IE 8]><html class="ie ie8 no-js" lang="en-US"><![endif]-->
@@ -11,7 +16,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
 
   <!-- Startuply favicon -->
-  <meta property="og:video" content="https://www.youtube.com/watch?v=uHzRX-8jC3s" />
+  <meta property="og:video" content="https://www.youtube.com/watch?v=<?=$video?>" />
   <meta property="og:site_name" content="S!zzle" />
   <meta property="og:title" content="S!zzle" />
 
@@ -102,7 +107,7 @@ img.emoji {
   <div class="container-fluid">
     <div id="video_promo"  class="  vc_row wpb_row vc_inner vc_row-fluid light row centered-content" style="padding-top: 180px; padding-bottom: 200px; background-image: url(/assets2/img/background/low_poly_background.jpg);background-repeat: no-repeat;background-position: top center center;background-attachment: fixed;background-size: cover;"  data-token="MS4B4">
       <center>
-        <iframe width="853" height="480" src="https://www.youtube.com/embed/okRv0XQ7Cjk" frameborder="0" allowfullscreen></iframe>
+        <iframe width="853" height="480" src="https://www.youtube.com/embed/<?=$video?>" frameborder="0" allowfullscreen></iframe>
       </center>
     </div>
 
@@ -115,7 +120,7 @@ img.emoji {
   <div class="wpb_video_widget wpb_content_element vc_clearfix   vc_video-aspect-ratio-169 vc_video-el-width-100 vc_video-align-left">
     <div class="wpb_wrapper">
 
-      <div class="wpb_video_wrapper"><iframe width="960" height="540" src="https://www.youtube.com/embed/uHzRX-8jC3s?feature=oembed" frameborder="0" allowfullscreen></iframe></div>
+      <div class="wpb_video_wrapper"><iframe width="960" height="540" src="https://www.youtube.com/embed/<?=$video?>?feature=oembed" frameborder="0" allowfullscreen></iframe></div>
     </div>
   </div>
 

@@ -16,7 +16,7 @@
     "gulp-stylus": "^2.3.0",
     "gulp-watch": "^4.3.5",
     "gulp-yuicompressor": "0.0.3",
-    "jquery": "1.11.3",
+    "jquery": "2.2.4",
     "mocha": "^2.4.5",
     "mocha-jsdom": "^1.1.0",
     "polybuild": "^1.1.0",

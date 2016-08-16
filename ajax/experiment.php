@@ -29,6 +29,17 @@ if (isset($_POST['id'], $long_id)) {
             header('Content-Type: application/json');
             echo json_encode(array('requestInterview' => $success));
             break;
+        case 8:
+            $success = false;
+            $token = new RecruitingToken($long_id, 'long_id');
+            if (isset($_SESSION['applyNow'],$_SESSION['applyNow'][$token->id])
+                && 'Y' == $_SESSION['applyNow'][$token->id]
+            ) {
+                $success = true;
+            }
+            header('Content-Type: application/json');
+            echo json_encode(array('applyNow' => $success));
+            break;
         default:
             http_response_code(404);
     }

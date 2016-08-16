@@ -40,16 +40,9 @@ if(isset($_SESSION['experiments'], $_SESSION['experiments'][$recruiting_token->i
 
 // hit the FullContact Person API to get information
 $extra_details = '';
-if ('' == $name && '' != $email) {
-    //if (ENVIRONMENT == 'production') {
-        $fullcontact = (new FullContact())->person($email, $id);
-    /*} else {
-        $filename = __DIR__.'/../../src/Bacon/Tests/Service/fullcontact_example.json';
-        $f = fopen($filename, 'r');
-        $fullcontact = json_decode(fread($f, filesize($filename)));
-        fclose($f);
-    }*/
-    $name = $fullcontact->contactInfo->fullName ?? '';
+if ('' != $email) {
+    $fullcontact = (new FullContact())->person($email, $id);
+    $name = '' == $name ? ($fullcontact->contactInfo->fullName ?? '') : $name;
 
     //process demographics
     if (isset($fullcontact->demographics)) {
@@ -167,7 +160,7 @@ if (is_object($user) && isset($user->receive_token_notifications) && strcmp($use
     $mandrill->send(
         array(
             'to'=>array(array('email'=>$user->email_address)),
-            'from_email'=>'notifications@gosizzle.io',
+            'from_email'=>'notifications@GoSizzle.io',
             'from_name'=>'S!zzle',
             'subject'=>'S!zzle Token Response Notification',
             'html'=>$email_message

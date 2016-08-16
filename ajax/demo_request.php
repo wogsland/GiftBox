@@ -14,13 +14,13 @@ if (isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)
     if (ENVIRONMENT != 'production') {
         $to = TEST_EMAIL;
     } else {
-        $to = 'sales@gosizzle.io';
+        $to = 'sales@GoSizzle.io';
     }
     $mandrill = new MandrillEmail();
     $mandrill->send(
         array(
             'to'=>array(array('email'=>$to)),
-            'from_email'=>'demo.request@gosizzle.io',
+            'from_email'=>'demo.request@GoSizzle.io',
             'from_name'=>'S!zzle Demo Request',
             'subject'=>$subject,
             'html'=>$subject,

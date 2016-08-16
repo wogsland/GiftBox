@@ -78,7 +78,7 @@
     <form class="form-signup-email" action="/ajax/signup" data-form="gt_signup" method="post" id="gt-signup-email">
       <fieldset>
         <label>Your Email</label>
-        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@gosizzle.io" required>
+        <input type="text" name="signup_email" id="signup_email" title="Your Email" placeholder="ghopper@GoSizzle.io" required>
       </fieldset>
 
       <fieldset>
@@ -163,7 +163,7 @@
   <p>
     Read <a href="/about">about us</a>,
     <a href="http://blog.gosizzle.io/">our company blog</a>,
-    <a href="mailto:hi@gosizzle.io">email us</a>,
+    <a href="mailto:hi@GoSizzle.io">email us</a>,
     or join us on <a href="https://www.linkedin.com/company/4788844">LinkedIn</a>,
     <a href="https://twitter.com/give_token">Twitter</a>,
     <a href="https://www.facebook.com/givetokencom">Facebook</a>

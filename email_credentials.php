@@ -163,7 +163,7 @@ require __DIR__.'/header.php';
             <i>
               Currently only SMTP TLS authentication is supported. If you have
               any questions please contact
-              <a href="mailto:support@gosizzle.io">support@gosizzle.io</a>.
+              <a href="mailto:support@GoSizzle.io">support@GoSizzle.io</a>.
             </i>
           </div>
         </paper-card>
@@ -188,7 +188,10 @@ require __DIR__.'/header.php';
     <?php require_once __DIR__.'/footer.php';?>
 
     <!-- JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
     <script>
     /**
      * Attempts to upload the email credentials to the ajax endpoint & closes dialog
