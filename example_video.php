@@ -119,7 +119,6 @@ img.emoji {
 
   <div class="wpb_video_widget wpb_content_element vc_clearfix   vc_video-aspect-ratio-169 vc_video-el-width-100 vc_video-align-left">
     <div class="wpb_wrapper">
-
       <div class="wpb_video_wrapper"><iframe width="960" height="540" src="https://www.youtube.com/embed/<?=$video?>?feature=oembed" frameborder="0" allowfullscreen></iframe></div>
     </div>
   </div>
@@ -138,6 +137,11 @@ img.emoji {
 <script type='text/javascript' src='/assets2/js/custom.js'></script>
 <script>
 $( document ).ready(function() {
+  // navigate to the native youtube app
+  if ($(window).width() < 739) {
+    var uri = 'youtube://<?=$video?>';
+    document.location = uri;
+  }
   // process demo request form
   $('#demo-request-form').on('submit', function (e) {
       e.preventDefault();
