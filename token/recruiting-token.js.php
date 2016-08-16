@@ -184,6 +184,9 @@ $(document).ready(function(){
   // initial token load (doesn't work if in background tab)
   loadDataAndPopulateToken();
 
+  // record all clicks
+  $(document).on("click", Sizzle.Token.click);
+
   // reload the token data whenever the page comes into focus
   window.onfocus = loadDataAndPopulateToken;
 

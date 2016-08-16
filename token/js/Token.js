@@ -15,6 +15,27 @@ Sizzle.Token = {
   },
 
   /**
+   * Records click anywhere on the token
+   */
+  'click': function(event) {
+    clickedId = event.target.id;
+    clickedHTML = $(event.target).prop('outerHTML');
+    clickedTag = clickedHTML.substring(0, clickedHTML.indexOf('>')+1);
+    path = Sizzle.Util.getUrlPath();
+    clickedToken = path[4].replace('/', '');
+    url = '/ajax/recruiting_token/click/';
+    $.post(
+      url,
+      {
+        'id': clickedId,
+        'tag': clickedTag,
+        'token': clickedToken
+      },
+      function(data) {}
+    );
+  },
+
+  /**
    * Closes the interest dialog
    */
   'closeInterestDialog': function (event) {
