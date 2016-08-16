@@ -70,10 +70,10 @@
     <template is="dom-bind">
       <neon-animated-pages id="pages" selected="0">
           <x-cards-list id="list">
-            <div class="fit layout vertical center-center">
-              <div class="fit layout horizontal large">
+            <div class="fit layout vertical center-center" id="div-1">
+              <div class="fit layout horizontal large" id="div-2">
 
-                <div class="mdl-layout mdl-js-layout">
+                <div class="mdl-layout mdl-js-layout" id="div-3">
                   <main class="mdl-layout__content" on-scroll="_onTrack">
                     <div class="mdl-layout__tab-panel is-active" id="overview">
                       <div id="ordered-sections">
@@ -81,28 +81,28 @@
                           <div class="mdl-grid no-padding no-margin link-finger" id="company-image-grid">
                             <div class="mdl-cell no-margin" id="company-main-image">
                               <div id="supporting-company">
-                                <i class="material-icons">business</i>
-                                <i class="gt-info-company"></i>
+                                <i id="token-tag-1" class="material-icons">business</i>
+                                <i id="token-tag-2" class="gt-info-company"></i>
                               </div>
                             </div>
                             <div class="mdl-cell no-margin" id="company-secondary-images">
-                              <div class="mdl-grid no-padding" style="height:337px">
-                                <div class="no-margin">
+                              <div class="mdl-grid no-padding" style="height:337px" id="div-4">
+                                <div class="no-margin" id="div-5">
                                   <img id="company-secondary-image-1" src="" class="company-secondary-image">
                                 </div>
-                                <div class="no-margin">
+                                <div class="no-margin" id="div-6">
                                   <img id="company-secondary-image-2" src="" class="company-secondary-image">
                                 </div>
-                                <div class="no-margin">
+                                <div class="no-margin" id="div-7">
                                   <img id="company-secondary-image-3" src="" class="company-secondary-image" style="-webkit-filter: brightness(25%);">
-                                  <i class="material-icons plus-icon--overlay">add</i>
+                                  <i id="token-tag-3" class="material-icons plus-icon--overlay">add</i>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--12-col link-finger" id="company-description">
-                            <div class="mdl-card__supporting-text">
-                              <h4 class="mdl-color-text--primary-dark">Company Information</h4>
+                            <div class="mdl-card__supporting-text" id="div-8">
+                              <h4 id="token-tag-4" class="mdl-color-text--primary-dark">Company Information</h4>
                               <p id="company-description-text">
                               </p>
                             </div>
@@ -111,16 +111,16 @@
 
                         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="job-description-section">
                           <div class="mdl-card mdl-cell mdl-cell--4-col" id="job-description-icon">
-                            <div class="mdl-card__supporting-icon">
+                            <div class="mdl-card__supporting-icon" id="div-9">
                               <h4 class="mdl-color-text--primary-contrast" id="briefcase-or-logo">
-                                <i class="material-icons huge-icon">work</i>
+                                <i id="token-tag-5" class="material-icons huge-icon">work</i>
                               </h4>
                             </div>
                           </div>
-                          <div class="mdl-card mdl-cell mdl-cell--8-col">
-                            <div class="mdl-card__supporting-text">
-                              <h4 class="mdl-color-text--primary-dark gt-info-jobtitle">Job Description</h4>
-                              <p class="gt-info-overview-short link-finger" on-click="_onOverviewClick">
+                          <div class="mdl-card mdl-cell mdl-cell--8-col" id="div-10">
+                            <div class="mdl-card__supporting-text" id="div-11">
+                              <h4 id="token-tag-6" class="mdl-color-text--primary-dark gt-info-jobtitle">Job Description</h4>
+                              <p id="token-tag-7" class="gt-info-overview-short link-finger" on-click="_onOverviewClick">
                               </p>
                             </div>
                             <div class="mdl-row section--center mdl-grid mdl-grid--no-spacing" id="job-description-options">
@@ -141,8 +141,8 @@
                         </section>
 
                         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="recruiter-section">
-                          <div class="mdl-card mdl-cell mdl-cell--8-col">
-                            <div class="mdl-card__supporting-text">
+                          <div class="mdl-card mdl-cell mdl-cell--8-col" id="div-12">
+                            <div class="mdl-card__supporting-text" id="div-13">
                               <i id="gt-info-recruiter-position"></i>
                               <h4 class="mdl-color-text--primary-dark" id="gt-info-recruiter-name"></h4>
                               <p id="gt-info-recruiter-bio">
@@ -167,42 +167,42 @@
                             </div>
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--4-col" id="recruiter-face">
-                            <div class="mdl-card__supporting-icon">
+                            <div class="mdl-card__supporting-icon" id="div-14">
                               <h4 class="mdl-color-text--primary-contrast" id="icon-or-face">
-                                <i class="material-icons huge-icon">face</i>
+                                <i id="token-tag-8" class="material-icons huge-icon">face</i>
                               </h4>
                             </div>
                           </div>
                         </section>
 
                         <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp social-section" id="social-section">
-                          <a href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
-                            <i class="fa fa-twitter big-icon"></i>
+                          <a id="token-tag-9" href="http://twitter.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-twitter">
+                            <i id="token-tag-10" class="fa fa-twitter big-icon"></i>
                           </a>
-                          <a href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
-                            <i class="fa fa-facebook big-icon"></i>
+                          <a id="token-tag-11" href="http://facebook.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-facebook">
+                            <i id="token-tag-12" class="fa fa-facebook big-icon"></i>
                           </a>
-                          <a href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
-                            <i class="fa fa-linkedin big-icon"></i>
+                          <a id="token-tag-13" href="http://linkedin.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-linkedin">
+                            <i id="token-tag-14" class="fa fa-linkedin big-icon"></i>
                           </a>
-                          <a href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
-                            <i class="fa fa-youtube big-icon"></i>
+                          <a id="token-tag-15" href="http://youtube.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-youtube">
+                            <i id="token-tag-16" class="fa fa-youtube big-icon"></i>
                           </a>
-                          <a href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
-                            <i class="fa fa-google-plus big-icon"></i>
+                          <a id="token-tag-16" href="http://plus.google.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-gplus">
+                            <i id="token-tag-17" class="fa fa-google-plus big-icon"></i>
                           </a>
-                          <a href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
-                            <i class="fa fa-pinterest big-icon"></i>
+                          <a id="token-tag-18" href="http://pinterest.com" target="_blank" class="mdl-cell--2-col mdl-cell--2-col-phone mdl-button--raised mdl-js-ripple-effect mdl-color-text--primary-contrast frontpage-social-button gt-info-pinterest">
+                            <i id="token-tag-19" class="fa fa-pinterest big-icon"></i>
                           </a>
                         </section>
 
                         <section id="location-section" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-                          <div class="mdl-card mdl-cell mdl-cell--12-col">
+                          <div class="mdl-card mdl-cell mdl-cell--12-col" id="div-15">
                             <div class="mdl-grid no-padding no-margin link-finger" id="location-image-grid" on-click="_onLocationClick">
                               <div class="mdl-cell no-margin" id="location-main-image">
                                 <div id="supporting-location">
-                                  <i class="material-icons">room</i>
-                                  <i class="gt-info-location"></i>
+                                  <i id="token-tag-20" class="material-icons">room</i>
+                                  <i id="token-tag-21" class="gt-info-location"></i>
                                 </div>
                               </div>
                             </div>
@@ -227,18 +227,18 @@
                           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="doublet-location-image-grid-1">
                             <div class="mdl-cell no-margin" id="doublet-location-main-image-1">
                               <div id="doublet-supporting-location-1">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location-1">Location One</i>
+                                <i id="token-tag-22" class="material-icons">room</i>
+                                <i id="token-tag-23" class="gt-info-location-1">Location One</i>
                               </div>
                             </div>
                           </div>
-                          <div class="mdl-layout-spacer">
+                          <div class="mdl-layout-spacer" id="div-17">
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="doublet-location-image-grid-2">
                             <div class="mdl-cell no-margin" id="doublet-location-main-image-2">
                               <div id="doublet-supporting-location-2">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location-2">Location Two</i>
+                                <i id="token-tag-24" class="material-icons">room</i>
+                                <i id="token-tag-25" class="gt-info-location-2">Location Two</i>
                               </div>
                             </div>
                           </div>
@@ -248,28 +248,28 @@
                           <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-1">
                             <div class="mdl-cell no-margin" id="triplet-location-main-image-1">
                               <div id="triplet-supporting-location-1">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location-1">Location One</i>
+                                <i id="token-tag-26" class="material-icons">room</i>
+                                <i id="token-tag-27" class="gt-info-location-1">Location One</i>
                               </div>
                             </div>
                           </div>
-                          <div class="mdl-layout-spacer">
+                          <div class="mdl-layout-spacer" id="div-18">
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-2">
                             <div class="mdl-cell no-margin" id="triplet-location-main-image-2">
                               <div id="triplet-supporting-location-2">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location-2">Location Two</i>
+                                <i id="token-tag-28" class="material-icons">room</i>
+                                <i id="token-tag-29" class="gt-info-location-2">Location Two</i>
                               </div>
                             </div>
                           </div>
-                          <div class="mdl-layout-spacer">
+                          <div class="mdl-layout-spacer" id="div-19">
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--4-col mdl-shadow--2dp link-finger" id="triplet-location-image-grid-3">
                             <div class="mdl-cell no-margin" id="triplet-location-main-image-3">
                               <div id="triplet-supporting-location-3">
-                                <i class="material-icons">room</i>
-                                <i class="gt-info-location-3">Location Three</i>
+                                <i id="token-tag-30" class="material-icons">room</i>
+                                <i id="token-tag-31" class="gt-info-location-3">Location Three</i>
                               </div>
                             </div>
                           </div>
@@ -278,20 +278,20 @@
                         <section class="section--center mdl-grid mdl-grid--no-spacing" id="image-video-section">
                           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="images-frontpage" on-click="_onImagesClick">
                             <div id="supporting-images">
-                              <i class="material-icons">image</i> IMAGES
+                              <i id="token-tag-32" class="material-icons">image</i> IMAGES
                             </div>
                           </div>
-                          <div class="mdl-layout-spacer">
+                          <div class="mdl-layout-spacer" id="div-20">
                           </div>
                           <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--2dp link-finger" id="videos-frontpage" on-click="_onVideosClick">
                             <div id="supporting-videos">
-                              <i class="material-icons">videocam</i> VIDEOS
+                              <i id="token-tag-33" class="material-icons">videocam</i> VIDEOS
                             </div>
                           </div>
                         </section>
                       </div>
 
-                      <section class="section--footer mdl-color--light-grey mdl-grid">
+                      <section id="token-tag-34" class="section--footer mdl-color--light-grey mdl-grid">
                       </section>
                     </div>
                   </main>
@@ -299,18 +299,21 @@
               </div>
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="0">
-                <i class="material-icons interest-thumb" data-fab-index="0">thumb_up</i>
+              <button id="token-tag-35" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="0">
+                <i id="token-tag-36" class="material-icons interest-thumb" data-fab-index="0">thumb_up</i>
               </button>
-              <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
+              <paper-dialog id="token-tag-37" class="interest-dialog" modal>
+                  <div id="token-tag-38" class="interest-form">
+                    <center id="token-tag-39">
+                      <h2 id="token-tag-40">Interested in this job?</h2>
+                    </center>
                     <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      <paper-radio-button id="token-tag-41" class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-42" class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-43" class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                     </paper-radio-group>
                     <paper-input
+                      id="token-tag-44"
                       type="email"
                       class="email-paper-input"
                       label="email address"
@@ -319,19 +322,22 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-45" class="buttons">
                     <paper-button
+                      id="token-tag-46"
                       class="apply-button"
                       on-click="_applyNow"
                       hidden>
                       Apply Now
                     </paper-button>
                     <paper-button
+                      id="token-tag-47"
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
                     </paper-button>
                     <paper-button
+                      id="token-tag-48"
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
@@ -340,7 +346,7 @@
                   </div>
               </paper-dialog>
               <paper-dialog id="learn-more-dialog" class="learn-more-dialog-wide" modal>
-                  <div class="learn-more-form">
+                  <div id="token-tag-49" class="learn-more-form">
                     <center>
                       <h2 id="learn-more-modal-text"></h2>
                     </center>
@@ -353,12 +359,14 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-50" class="buttons">
                     <paper-button
+                      id="token-tag-51"
                       class="learn-more-button"
                       on-click="_submitLearnMore">
                     </paper-button>
                     <paper-button
+                      id="token-tag-52"
                       class="dismiss-learn-more-button"
                       dialog-dismiss
                       on-click="_closeLearnMoreDialog">
@@ -369,22 +377,25 @@
             </div>
           </x-cards-list>
           <location-x-card>
-            <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+            <div id="token-tag-53" class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="1">
-                <i class="material-icons" data-fab-index="1">thumb_up</i>
+              <button id="token-tag-54" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="1">
+                <i id="token-tag-55" class="material-icons" data-fab-index="1">thumb_up</i>
               </button>
-              <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
+              <paper-dialog id="token-tag-56" class="interest-dialog" modal>
+                  <div id="token-tag-57" class="interest-form">
+                    <center id="token-tag-58">
+                      <h2 id="token-tag-59">Interested in this job?</h2>
+                    </center>
                     <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      <paper-radio-button id="token-tag-60" class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-61" class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-62" class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                     </paper-radio-group>
                     <paper-input
+                      id="token-tag-63"
                       type="email"
                       class="email-paper-input"
                       label="email address"
@@ -393,19 +404,22 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-64" class="buttons">
                     <paper-button
+                      id="token-tag-65"
                       class="apply-button"
                       on-click="_applyNow"
                       hidden>
                       Apply Now
                     </paper-button>
                     <paper-button
+                      id="token-tag-66"
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
                     </paper-button>
                     <paper-button
+                      id="token-tag-67"
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
@@ -416,22 +430,25 @@
             </div>
           </location-x-card>
           <image-x-card>
-            <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+            <div id="token-tag-68" class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
             <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="2">
-                <i class="material-icons" data-fab-index="2">thumb_up</i>
+              <button id="token-tag-69" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="2">
+                <i id="token-tag-70" class="material-icons" data-fab-index="2">thumb_up</i>
               </button>
-              <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
+              <paper-dialog id="token-tag-71" class="interest-dialog" modal>
+                  <div id="token-tag-72" class="interest-form">
+                    <center id="token-tag-73">
+                      <h2 id="token-tag-74">Interested in this job?</h2>
+                    </center>
                     <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      <paper-radio-button id="token-tag-75" class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-76" class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-77" class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                     </paper-radio-group>
                     <paper-input
+                      id="token-tag-78"
                       type="email"
                       class="email-paper-input"
                       label="email address"
@@ -440,19 +457,22 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-79" class="buttons">
                     <paper-button
+                      id="token-tag-80"
                       class="apply-button"
                       on-click="_applyNow"
                       hidden>
                       Apply Now
                     </paper-button>
                     <paper-button
+                      id="token-tag-81"
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
                     </paper-button>
                     <paper-button
+                      id="token-tag-82"
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
@@ -463,22 +483,25 @@
             </div>
           </image-x-card>
           <video-x-card>
-            <div class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
+            <div id="token-tag-83" class="mdl-button mdl-js-button mdl-button--raised back-button" on-click="_onBackClick">
               BACK
             </div>
-            <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="3">
-                <i class="material-icons" data-fab-index="3">thumb_up</i>
+            <div id="token-tag-84">
+              <button id="token-tag-85" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="3">
+                <i id="token-tag-86" class="material-icons" data-fab-index="3">thumb_up</i>
               </button>
-              <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
+              <paper-dialog id="token-tag-87" class="interest-dialog" modal>
+                  <div id="token-tag-88" class="interest-form">
+                    <center id="token-tag-89">
+                      <h2 id="token-tag-90">Interested in this job?</h2>
+                    </center>
                     <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      <paper-radio-button id="token-tag-91" class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-92" class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-93" class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                     </paper-radio-group>
                     <paper-input
+                      id="token-tag-94"
                       type="email"
                       class="email-paper-input"
                       label="email address"
@@ -487,19 +510,22 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-95" class="buttons">
                     <paper-button
+                      id="token-tag-96"
                       class="apply-button"
                       on-click="_applyNow"
                       hidden>
                       Apply Now
                     </paper-button>
                     <paper-button
+                      id="token-tag-97"
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
                     </paper-button>
                     <paper-button
+                      id="token-tag-98"
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
@@ -510,22 +536,25 @@
             </div>
           </video-x-card>
           <description-x-card>
-            <div class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
+            <div id="token-tag-99" class="mdl-button mdl-js-button mdl-button--raised back-button-lower" on-click="_onBackClick">
               BACK
             </div>
-            <div>
-              <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="4">
-                <i class="material-icons" data-fab-index="4">thumb_up</i>
+            <div id="token-tag-100">
+              <button id="token-tag-101" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect interest-fab" on-click="_onInterestClick" data-fab-index="4">
+                <i id="token-tag-102" class="material-icons" data-fab-index="4">thumb_up</i>
               </button>
-              <paper-dialog class="interest-dialog" modal>
-                  <div class="interest-form">
-                    <center><h2>Interested in this job?</h2></center>
+              <paper-dialog id="token-tag-103" class="interest-dialog" modal>
+                  <div id="token-tag-104" class="interest-form">
+                    <center id="token-tag-105">
+                      <h2 id="token-tag-106">Interested in this job?</h2>
+                    </center>
                     <paper-radio-group selected="Yes" id="interest-response">
-                      <paper-radio-button class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
-                      <paper-radio-button class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
+                      <paper-radio-button id="token-tag-107" class="interest-radio-button" name="Yes" value="yes">Yes, I'm interested</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-108" class="interest-radio-button" name="Maybe" value="maybe">Maybe</paper-radio-button><br />
+                      <paper-radio-button id="token-tag-109" class="interest-radio-button" name="No" value="no">No, not for me</paper-radio-button>
                     </paper-radio-group>
                     <paper-input
+                      id="token-tag-110"
                       type="email"
                       class="email-paper-input"
                       label="email address"
@@ -534,19 +563,22 @@
                       required>
                     </paper-input>
                   </div>
-                  <div class="buttons">
+                  <div id="token-tag-111" class="buttons">
                     <paper-button
+                      id="token-tag-112"
                       class="apply-button"
                       on-click="_applyNow"
                       hidden>
                       Apply Now
                     </paper-button>
                     <paper-button
+                      id="token-tag-113"
                       class="submit-interest-button"
                       on-click="_submitInterest">
                       Submit
                     </paper-button>
                     <paper-button
+                      id="token-tag-114"
                       class="dismiss-interest-button"
                       dialog-dismiss
                       on-click="_closeInterestDialog">
