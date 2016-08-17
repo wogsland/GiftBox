@@ -139,7 +139,7 @@ img.emoji {
 $( document ).ready(function() {
   // navigate to the native youtube app
   if ($(window).width() < 739) {
-    var uri = 'youtube://<?=$video?>';
+    var uri = 'vnd.youtube://<?=$video?>';
     document.location = uri;
   }
   // process demo request form
