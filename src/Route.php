@@ -328,6 +328,13 @@ class Route
             ) {
                 // don't display in native android browser
                 return __DIR__.'/../get_chrome.html';
+            } else if (strpos($userAgent, 'MSIE 9.0') !== false
+                      || strpos($userAgent, 'MSIE 8.0') !== false
+                      || strpos($userAgent, 'MSIE 7.0') !== false
+                      || strpos($userAgent, 'MSIE 6.0') !== false
+            ) {
+                // display in IE browsers unsupported by Polymer
+                return __DIR__.'/../get_chrome.html';
             } else if (strpos($userAgent, 'LinkedInBot') !== false) {
                 // display simplified form on LinkedIn
                 return __DIR__.'/../token/LinkedInBot.php';
