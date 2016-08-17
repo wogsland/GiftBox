@@ -392,7 +392,7 @@ require __DIR__.'/header.php';
         email_list_id: $("#send-to-email-list paper-item[aria-selected='true']").attr('value'),
         message: $('#send-to-email-message').val(),
         email_credential_id: $("#send-to-email-credentials paper-item[aria-selected='true']").attr('value'),
-        subject: $('#send-to-email-subject').val();
+        subject: $('#send-to-email-subject').val(),
       },
       dataType: 'json',
       success: function(data, textStatus){
