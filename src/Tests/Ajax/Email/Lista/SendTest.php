@@ -3,10 +3,16 @@ namespace Sizzle\Tests\Ajax\Email\Lista;
 
 use \Sizzle\Bacon\Database\{
     EmailCredential,
-    EmailList
+    EmailList,
+    EmailListEmail,
+    RecruitingToken,
+    User
 };
 
-/**
+use Sizzle\Tests\Ajax\Email\fakeSMTP;
+
+
+/**a
  * This class tests the ajax endpoint to send emails.
  *
  * ./vendor/bin/phpunit --bootstrap src/Tests/autoload.php src/Tests/Ajax/Email/Lista/SendTest
@@ -14,14 +20,15 @@ use \Sizzle\Bacon\Database\{
 class SendTest
 extends \PHPUnit_Framework_TestCase
 {
+    use \Sizzle\Bacon\Tests\Traits\User;
     /**
      * Requires the util.php file of functions
      */
+
     public static function setUpBeforeClass()
     {
-        include_once __DIR__.'/../../../../../util.php';
+        include_once __DIR__ . '/../../../../../util.php';
     }
-
     /**
      * Setup before each test
      */
@@ -32,10 +39,12 @@ extends \PHPUnit_Framework_TestCase
 
     /**
      * Tests successful request via ajax endpoint.
+     * @runInSeparateProcess
+     * @preserveGlobalState  disabled
      */
     public function testRequest()
     {
-        // need to set up testing email...
+        // need to set up testing email?
     }
 
     /**
@@ -67,7 +76,8 @@ extends \PHPUnit_Framework_TestCase
             'token_id'=>1,
             'email_list_id'=>1,
             'message'=>'toast',
-            'email_credential_id'=>1
+            'email_credential_id'=>1,
+            'subject'=>''
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
@@ -119,7 +129,8 @@ extends \PHPUnit_Framework_TestCase
             'token_id'=>-1,
             'email_list_id'=>-1,
             'message'=>'toast',
-            'email_credential_id'=>-1
+            'email_credential_id'=>-1,
+            'subject'=>''
         );
         $fields_string = "";
         foreach ($fields as $key=>$value) {
