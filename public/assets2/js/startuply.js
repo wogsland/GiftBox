@@ -632,7 +632,7 @@ Startuply = {
     unstickMenu: function () {
         var $header = $('header');
 
-        if ( $header.length && $header.is('.fixed-menu') ) {
+        if ( $header.length && $header.is('.fixed-menu') && typeof( pricingHeader) == 'undefined') {
             $header.removeClass('fixed-menu');
 
             this.log( 'Unstick menu' );

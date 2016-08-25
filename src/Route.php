@@ -156,7 +156,8 @@ class Route
                 include __DIR__.'/../payments.php';
                 break;
             case 'pricing':
-                include __DIR__.'/../lp/pricing_splash.php';
+                include __DIR__.'/../video_pricing.php';
+                //include __DIR__.'/../lp/pricing_splash.php';
                 break;
             case 'privacy':
                 include __DIR__.'/../privacypolicy.php';
