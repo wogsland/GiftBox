@@ -93,18 +93,19 @@ if (logged_in()) {
   <div id="hero" class="static-header window-height video-version hero-section light-text clearfix">
     <div class="container">
       <div class="heading-block align-center">
-        <h1>How Important is Your Time?</h1>
-        <h5>Recruiting Automation for Recruiting Agencies, RPOs, and Corporate HR</h5>
-        <a class="btn btn-outline" style="margin-top: 7px;" onclick="uploadDescription()">UPLOAD</a>
+        <h1>Video Job Descriptions</h1>
+        <h5>Turning Your Job Description into a High Quality Video in No Time for less than $250!</h5>
+        <a class="btn btn-outline" style="margin-top: 7px;" onclick="uploadDescription()">GET STARTED</a>
       </div>
       <div class="video-wrapper">
-        <div class="container animated" data-animation="fadeInUp" data-delay="400" data-duration="700">
+        <!--<div class="container animated" data-animation="fadeInUp" data-delay="400" data-duration="700">-->
           <div class="video-container">
             <div class="embed-container">
-              <iframe src="https://www.youtube.com/embed/uHzRX-8jC3s?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+              <iframe src="https://fast.wistia.com/embed/iframe/hr8hcdc5pp?videoFoam=true" frameborder="0" class="wistia_embed" name="wistia_embed" allowfullscreen></iframe><script src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+              <!--<script src="//fast.wistia.com/embed/medias/hr8hcdc5pp.jsonp" async></script><script src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_embed wistia_async_hr8hcdc5pp" style="height:360px;width:640px">&nbsp;</div>-->
             </div>
           </div>
-        </div>
+        <!--</div>-->
       </div>
     </div>
   </div>
@@ -123,9 +124,9 @@ if (logged_in()) {
     <div class="container">
 
       <ul class="nav nav-tabs alt">
-        <li class="active"><a href="#first-tab-alt" data-toggle="tab">AUTOMATION</a></li>
-        <li><a href="#second-tab-alt" data-toggle="tab">MARKET</a></li>
-        <li><a href="#third-tab-alt" data-toggle="tab">INTEGRATION</a></li>
+        <li class="active"><a href="#first-tab-alt" data-toggle="tab">FAST</a></li>
+        <li><a href="#second-tab-alt" data-toggle="tab">GREAT VALUE</a></li>
+        <li><a href="#third-tab-alt" data-toggle="tab">EASY</a></li>
       </ul>
 
       <div class="tab-content alt">
@@ -138,9 +139,9 @@ if (logged_in()) {
               <br/><br/>
               <article class="align-center">
                 <h3>NEW AGE <span class="highlight">TECHNOLOGY</span></h3>
-                <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform</p>
+                <p class="sub-title">Sizzle uses cutting edge technology at the core<br/> of its automation platform.</p>
                 <p>Self-driving cars? Flying cars? Self-<i>flying cars</i>? A space elevator? A cure for the AIDS virus? A non-polluting space elevator engine that <i>runs</i> on the AIDS virus? Are these things even possible?</p>
-                <p>Maybe... but it's not what <i>we're</i> working on. We are laser focused on optimizing recruit engagement by constantly testing and tweaking our platform. Focusing on what works and iterating quickly through <strong>A/B tests</strong> and <strong>machine learning</strong> we're building the best tools available to recruiters today.</p>
+                <p>Maybe... but it's not what <i>we're</i> working on. We are laser focused on optimizing candidate generation by constantly testing and tweaking our videos. Focusing on what works and iterating quickly through <strong>A/B tests</strong> and <strong>machine learning</strong>, we're building the best candidate generation tools available to recruiters today.</p>
               </article>
             </div>
           </div>
@@ -154,14 +155,14 @@ if (logged_in()) {
             <div class="col-sm-6 animated" data-delay="200" data-duration="700" data-animation="fadeInRight">
               <br/>
               <article class="align-center">
-                <h3>FOR EVERY <span class="highlight">RECRUITER</span></h3>
-                <p class="sub-title">Saving time is valuable for every recruiter.</p>
+                <h3>BUILT FOR EVERY <span class="highlight">RECRUITER</span></h3>
+                <p class="sub-title">High quality video content within your price range.</p>
                 <p>
-                  With Sizzle's advanced models and machine learning platform, you are not only saving time, but you are also using the top <strong>automated marketing</strong> and sales practices. Using Sizzle will increase the top of your recruitment pipeline, while also filtering out poor candidates who don’t fit your position.
+                  Creating videos for your job reqs used to cost thousands of dollars <strong>PER JOB</strong>. With Sizzle's advanced models and machine learning platform, you are not only saving time, but you are also using the best marketing and sales practices at an affordable price.
                 </p>
                 <br/>
                 <?php /*<a href="#" class="btn btn-outline-color">Platform Overview</a>*/?>
-                <a href="https://www.gosizzle.io/token/recruiting/8982ef2eebe2ef3c5" class="btn btn-outline-color" target="_blank">See Live Example</a>
+                <a href="https://www.gosizzle.io/example_video" class="btn btn-outline-color" target="_blank">See Test Example</a>
               </article>
             </div>
           </div>
@@ -172,7 +173,6 @@ if (logged_in()) {
             <h2>3 <span class="highlight">EASY</span> STEPS</h2>
             <p class="sub-header animated" data-duration="700" data-animation="zoomIn">
               It is easier than ever to get started with Sizzle!
-              <br />If you skip our free trial...
             </p>
           </div>
           <div class="section-content row animated" data-duration="700" data-delay="200" data-animation="fadeInDown">
@@ -182,7 +182,7 @@ if (logged_in()) {
                 <span class="heading">SEND US AN EMAIL</span>
                 <p class="thin" >
                   All it takes to begin is a job description and an email!
-                  Just send an email with a job description, preferably web link or word doc, to <a href="mailto:token@GoSizzle.io">token@GoSizzle.io</a>.
+                  Just send an email with a job description (web link or word doc) to <a href="mailto:rzettler@GoSizzle.io">Rzettler@GoSizzle.io</a>.
                 </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
@@ -193,7 +193,7 @@ if (logged_in()) {
                 <span class="heading">OUR SYSTEM RUNS</span>
                 <p class="thin" >Sit tight while our system processes<br />
                   the job description you just sent us.<br />
-                  Guaranteed turn around within 24 hours!
+              
                 </p>
               </article>
               <!--<span class="icon icon-arrows-04"></span>-->
@@ -201,10 +201,9 @@ if (logged_in()) {
             <div class="col-sm-4">
               <article class="align-center">
                 <i class="material-icons md-48">markunread_mailbox</i>
-                <span class="heading">RECEIVE TOKEN</span>
-                <p class="thin" >Within 24 hours, your new <strong>Token</strong> is sent
-                straight to your inbox. Also, for those who have
-                integrated their job board with us, your job board page is updated too!</p>
+                <span class="heading">RECEIVE MOTION</span>
+                <p class="thin" >Your new <strong>video</strong> job description is sent
+                straight to your inbox.</p>
               </article>
             </div>
           </div>
@@ -222,20 +221,20 @@ if (logged_in()) {
       <div class="section-content row">
         <div class="col-sm-6 pull-right animated" data-duration="500" data-animation="fadeInRight">
           <!--Why is this image staying small even thought I tried to make it larger (and the image itself is larger)-->
-          <img src="assets2/img/features/DESKTOP_ONE_Cropped.jpg" class="img-responsive" alt="process 2" width="1200" height="800"/>
+          <script src="//fast.wistia.com/embed/medias/ybk1oalqey.jsonp" async></script><script src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_embed wistia_async_ybk1oalqey" style="height:360px;width:640px">&nbsp;</div>
         </div>
         <div class="col-sm-6 align-left animated" data-duration="500" data-animation="fadeInLeft">
           <br/><br/>
           <article>
-            <h3>A MODERN <span class="highlight">STARTUP</span></h3>
+            <h3>THIS COULD BE YOUR <span class="highlight">VIDEO</span></h3>
             <p class="sub-title">
-              Think outside the app! Time consuming apps are <i>soooo</i> 2000s.
+              Think outside the job ad! Word Docs and Web Pages are <i>soooo</i> 2000s.
             </p>
             <p>
-              Sizzle lets you join the modern startup world and automatically improves your candidate outreach.
+              Sizzle lets you join the world of video - quickly and affordably.
             </p>
             <p>
-              We aren't just another app. Apps are time consuming. Sizzle is <strong>automatic</strong>. Apps have endless forms to fill out. Apps are another thing to learn. Sizzle only requires the mastery of the attachment button in your favorite email client.
+              We aren't just another digital ad agency. Sizzle is technology focused and fully <strong>automatic</strong>. Ad Agencies are expensive, distracting, and time consuming. Sizzle only requires the mastery of the attachment button.
             </p>
           </article>
         </div>
@@ -250,7 +249,7 @@ if (logged_in()) {
           <article>
             <h3>HANG <span class="highlight">ON TO</span> YER HELMET</h3>
             <p class="sub-title">Sell the Sizzle, Not the Steak</p>
-            <p> Sizzle is designed to not just improve your companies ability to <strong>attract candidates</strong>, but we are here to put your recruiting firm on the rocket ship to success. Expect to have more passive candidates respond to you, leading to more placements, stronger revenue, and an improved brand that grows your client base without ever having to truly change your current process.</p>
+            <p> Sizzle is designed to not just improve your company's ability to <strong>attract candidates</strong>, but we are here to put your recruiting team on the rocket ship to success. Expect to have more passive candidates respond to you, leading to better placements, stronger revenue, and an improved brand.
           </article>
         </div>
 
@@ -279,7 +278,7 @@ if (logged_in()) {
     </div>
   </section>
 
-  <section id="features" class="section features-section align-center inverted">
+  <!--<section id="features" class="section features-section align-center inverted">
     <div class="container">
       <div class="section-content">
         <div class="featured-tab">
@@ -289,27 +288,27 @@ if (logged_in()) {
                 <div class="tab-info">
                   <div class="tab-title">Visual</div>
                   <div class="tab-desc">We scrape the web to put together powerful, relevant visuals to drive <strong>candidate engagement</strong>.</div>
-                </div>
+                </div>-->
                 <!--<div class="tab-icon"><span class="icon icon-multimedia-20"></span></div>-->
-              </a>
+              <!--</a>
             </li>
             <li>
               <a href="#profile" data-toggle="tab">
                 <div class="tab-info">
                   <div class="tab-title">Information Packed</div>
                   <div class="tab-desc">We take your essential material and make it non-overwhelming for the candidate.</div>
-                </div>
+                </div>-->
                 <!--<div class="tab-icon"><span class="icon icon-seo-icons-27"></span></div>-->
-              </a>
+              <!--</a>
             </li>
             <li>
               <a href="#messages" data-toggle="tab">
                 <div class="tab-info">
                   <div class="tab-title">Candidate Engagement Focused</div>
                   <div class="tab-desc">We help you create a great experience for the candidate, improving candidate engagement.</div>
-                </div>
+                </div>-->
                 <!-- <div class="tab-icon"><span class="icon icon-seo-icons-28"></span></div>-->
-              </a>
+              <!--</a>
             </li>
           </ul>
 
@@ -321,7 +320,7 @@ if (logged_in()) {
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
   <!--
   <section id="features-list" class="section features-list-section align-center dark-text">
@@ -395,7 +394,7 @@ if (logged_in()) {
       <div class="section-header">
         <h2><span class="highlight">OUR</span> Recognition</h2>
         <p class="sub-header">
-          The <strong>recruiting world</strong> is talking about Sizzle!
+          The <strong>recruiting world</strong> is all about Sizzle!
         </p>
       </div>
       <div class="section-content">
@@ -592,7 +591,7 @@ if (logged_in()) {
       <div class="col-md-12 col-lg-9">
         <i class="icon icon-seo-icons-24 pull-left"></i>
         <article class="pull-left">
-          <h2>TRY US NOW FOR FREE!</h2>
+          <h2>TRY US NOW!</h2>
           <p class="thin">Want to see what it looks like to Sizzle? Send us a Job Description.</p>
         </article>
       </div>
@@ -610,7 +609,7 @@ if (logged_in()) {
           <div class="logo-wrapper">
             <img width="130" height="45" src="assets2/img/Logo-Sizzle-Sizzle.png" alt="logo" />
           </div>
-          <p>Life is short and your time is valuable. Our mission is to save you and your clients time while bringing them a quality product that fully services their needs.</p>
+          <p>What is a more irresistible Call-To-Action than the play button? A modern day Pandora's Box. It creates an unquenchable curisity to know what lies on the other side.</p>
           <p><strong>Gary Peters, Founder</strong></p>
         </div>
         <div class="col-sm-5 social-wrap col-xs-12">
@@ -624,7 +623,7 @@ if (logged_in()) {
         <div class="col-sm-3 col-xs-12">
           <strong class="heading">Our Contacts</strong>
           <ul class="list-unstyled">
-            <li><span class="icon icon-chat-messages-14"></span><a href="mailto:token@GoSizzle.io">token@GoSizzle.io</a></li>
+            <li><span class="icon icon-chat-messages-14"></span><a href="mailto:rzettler@GoSizzle.io">Rzettler@GoSizzle.io</a></li>
             <li><span class="icon icon-seo-icons-34"></span>Nashville, TN 37204</li>
             <li><span class="icon icon-seo-icons-17"></span>(901)-486-7886</li>
           </ul>
@@ -651,7 +650,7 @@ if (logged_in()) {
       <paper-input id="upload-email" label="Email" name="email" onclick="" autofocus></paper-input>
       <paper-input id="upload-file" label="File Name" name="fileName" onclick="fireHiddenFileInput('#select-list-file')"></paper-input>
     </form>
-    <i>We'll make it S!zzle...</i>
+    <i>Upload a Word Doc or PDF</i> </br> <i>We'll make it S!zzle...</i>
     <div class="">
       <paper-button class="dialog-button" onclick="sizzleUpload()">UPLOAD</paper-button>
       <paper-button dialog-dismiss class="dialog-button" onclick="cancelUpload()">CANCEL</paper-button>

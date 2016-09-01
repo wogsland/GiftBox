@@ -75,7 +75,7 @@
             <h2><span class="highlight">Pricing to Fit</span> Every Budget</h2>
             <p class="heading-font">
               Your download of our pricing information sheet should begin momentarily. If it
-              doesn't, please click <a href="/assets/Sizzle_Pricing_Chart.pdf">here</a>.
+              doesn't, please click <a href="/assets/Sizzle_Video_Bundles_Pricing_Web.pdf">here</a>.
             </p>
             <p class="heading-font">
               You can also <a href="mailto:sales@GoSizzle.io">contact us</a> for
@@ -109,8 +109,8 @@
     // process download
 
     var link = document.createElement('a');
-    link.href = "/assets/Sizzle_Pricing_Chart.pdf";
-    link.download = "Sizzle_Pricing_Chart.pdf";
+    link.href = "/assets/Sizzle_Video_Bundles_Pricing_Web.pdf";
+    link.download = "Sizzle_Video_Bundles_Pricing_Web.pdf";
     link.dispatchEvent(new MouseEvent('click'));
   });
   </script>
