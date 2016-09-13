@@ -41,8 +41,8 @@ require __DIR__.'/header.php';
           recruiters. Do you know recruiters that might benefit from
           our service? Introduce us to them using
           <a href="mailto:affiliate@GoSizzle.io">affiliate@GoSizzle.io</a>
-          and will cut you in on 50% for their first 6 months of service.
-          That's up to $825 per lead! Just email us to get started.
+          and we will cut you in on 10% of their first purchase.
+          That's up to $1,260 per lead! Just email us to get started.
         </p>
       </div>
     </div>

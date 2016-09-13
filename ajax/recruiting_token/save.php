@@ -41,16 +41,29 @@ if (logged_in()) {
         $token->save();
 
         // need to make sure token has an id before saving cities
-        foreach ($token->getCities() as $currentCity) {
-            $token->removeCity($currentCity->id);
-        }
         if (isset($_POST['city_id']) && '' != $_POST['city_id']) {
             // Polymer bug: convert the city name into an id
             $city_id = (new City())->getIdFromName($_POST['city_id']);
             if (0 >= (int) $city_id) {
                 throw new Exception('Invalid City');
             }
-            $token->addCity($city_id);
+
+            $cityAlreadyAssociated = false;
+            foreach ($token->getCities() as $currentCity) {
+                if ($currentCity->id != $city_id) {
+                    $token->removeCity($currentCity->id);
+                } else {
+                    $cityAlreadyAssociated = true;
+                }
+            }
+
+            if (!$cityAlreadyAssociated) {
+                $token->addCity($city_id);
+            }
+        } else {
+            foreach ($token->getCities() as $currentCity) {
+                $token->removeCity($currentCity->id);
+            }
         }
 
         $response['status'] = "SUCCESS";

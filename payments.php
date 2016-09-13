@@ -36,18 +36,22 @@ require __DIR__.'/header.php';
           </thead>
           <tbody>
             <?php
-            Stripe::setApiKey(STRIPE_SECRET_KEY);
-            $success = 'true';
-            $data = Charge::all(array('customer'=>$_SESSION['stripe_id']));
-            $payments = json_decode(ltrim($data, 'Stripe\Collection JSON: '))->data;
-            foreach ($payments as $payment) {
-                echo '<tr>';
-                echo "<td>$".money_format('%i', $payment->amount/100)."</td>";
-                echo "<td>{$payment->status}</td>";
-                echo "<td>{$payment->source->brand} ending in {$payment->source->last4}</td>";
-                echo "<td><a href=\"/invoice?id={$payment->invoice}\" target=_blank>invoice details</a></td>";
-                echo "<td>".date('d/m/Y g:i a', $payment->created)."</td>";
-                echo '</tr>';
+            try {
+                Stripe::setApiKey(STRIPE_SECRET_KEY);
+                $success = 'true';
+                $data = Charge::all(array('customer'=>$_SESSION['stripe_id']));
+                $payments = json_decode(ltrim($data, 'Stripe\Collection JSON: '))->data;
+                foreach ($payments as $payment) {
+                    echo '<tr>';
+                    echo "<td>$".money_format('%i', $payment->amount/100)."</td>";
+                    echo "<td>{$payment->status}</td>";
+                    echo "<td>{$payment->source->brand} ending in {$payment->source->last4}</td>";
+                    echo "<td><a href=\"/invoice?id={$payment->invoice}\" target=_blank>invoice details</a></td>";
+                    echo "<td>".date('d/m/Y g:i a', $payment->created)."</td>";
+                    echo '</tr>';
+                }
+            } catch (Exception $e) {
+                //ignore Stripe errors
             }?>
           </tbody>
         </table>
