@@ -72,73 +72,149 @@ if (logged_in()) {
     </nav>
   </header>
 
-  <section id="product" class="section product-section align-center dark-text animated" data-animation="fadeInUp" data-duration="500">
+  <section id="product" class="section product-section align-center dark-text animated" data-animation="fadeInUp" data-duration="500" style="margin-top:50px;">
     <div class="container">
       <div class="section-header">
         <h2>PRODUCT <span class="highlight">PACKAGES</span></h2>
         <p class="sub-header">
-          Lorem ipsum dolor sit atmet sit dolor greand fdanrh s
-          <br />dfs sit atmet sit dolor greand fdanrh sdfs
+          Pick a plan and start sizzling!
+          <br />
+          That's right. <b>En fuego.</b>
+          Just use the slider to select
+          <br />
+          the number of job postings you need per month.
         </p>
       </div>
       <div class="section-content row">
 
         <div class="col-sm-4">
           <div class="package-column disabled">
-            <div class="package-title">Individual</div>
+            <div class="package-title">STARTER</div>
             <div class="package-price">
-              <div class="price"><span class="currency">$</span>19</div>
-              <div class="period">per month</div>
+              <div class="price"><span class="currency">$</span>1,250</div>
+              <div class="period">one time</div>
             </div>
             <div class="package-detail">
               <ul class="list-unstyled">
-                <li><strong>Free</strong> Domain</li>
-                <li><strong>Unlimited</strong> Websites</li>
-                <li><strong>Unlimited</strong> Bandwidth</li>
-                <li><strong>Unlimited</strong> Disk Space</li>
+                <li><strong>1</strong> Recruiter</li>
+                <li><strong>5</strong> Job Bundle</li>
+                <li><strong>$250</strong> Cost Per Job<sup>*</sup></li>
               </ul>
-              <a href="#" class="btn btn-outline-color btn-block">Get started</a>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
             </div>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <div class="package-column">
-            <div class="package-title">Studio</div>
+          <div class="package-column disabled">
+            <div class="package-title">TIER 1</div>
             <div class="package-price">
-              <div class="price"><span class="currency">$</span>29</div>
-              <div class="period">subscription</div>
+              <div class="price"><span class="currency">$</span>2,400</div>
+              <div class="period">one time</div>
             </div>
             <div class="package-detail">
               <ul class="list-unstyled">
-                <li><strong>Free</strong> Domain</li>
-                <li><strong>Unlimited</strong> Websites</li>
-                <li><strong>Unlimited</strong> Bandwidth</li>
-                <li><strong>Unlimited</strong> Disk Space</li>
+                <li><strong>3</strong> Recruiters</li>
+                <li><strong>10</strong> Job Bundle</li>
+                <li><strong>$240</strong> Cost Per Job<sup>*</sup></li>
               </ul>
-              <a href="#" class="btn btn-outline-color btn-block">Get started</a>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
             </div>
           </div>
         </div>
 
         <div class="col-sm-4">
-          <div class="package-column">
-            <div class="package-title">Enterprise</div>
+          <div class="package-column disabled">
+            <div class="package-title">TIER 2</div>
             <div class="package-price">
-              <div class="price"><span class="currency">$</span>49</div>
-              <div class="period">per month</div>
+              <div class="price"><span class="currency">$</span>4,100</div>
+              <div class="period">one time</div>
             </div>
             <div class="package-detail">
               <ul class="list-unstyled">
-                <li><strong>Free</strong> Domain</li>
-                <li><strong>Unlimited</strong> Websites</li>
-                <li><strong>Unlimited</strong> Bandwidth</li>
-                <li><strong>Unlimited</strong> Disk Space</li>
+                <li><strong>5</strong> Recruiters</li>
+                <li><strong>18</strong> Job Bundle</li>
+                <li><strong>$227.70</strong> Cost Per Job<sup>*</sup></li>
               </ul>
-              <a href="#" class="btn btn-outline-color btn-block">Get started</a>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
             </div>
           </div>
         </div>
+
+        <div class="col-sm-4">
+          <div class="package-column disabled">
+            <div class="package-title">TIER 3</div>
+            <div class="package-price">
+              <div class="price"><span class="currency">$</span>7500</div>
+              <div class="period">one time</div>
+            </div>
+            <div class="package-detail">
+              <ul class="list-unstyled">
+                <li><strong>10</strong> Recruiters</li>
+                <li><strong>35</strong> Job Bundle</li>
+                <li><strong>$214.30</strong> Cost Per Job<sup>*</sup></li>
+              </ul>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="package-column disabled">
+            <div class="package-title">TIER 4</div>
+            <div class="package-price">
+              <div class="price"><span class="currency">$</span>12,600</div>
+              <div class="period">one time</div>
+            </div>
+            <div class="package-detail">
+              <ul class="list-unstyled">
+                <li><strong>12</strong> Recruiters</li>
+                <li><strong>60</strong> Job Bundle</li>
+                <li><strong>$210</strong> Cost Per Job<sup>*</sup></li>
+              </ul>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="package-column disabled">
+            <div class="package-title">TIER 5</div>
+            <div class="package-price">
+              <div class="price"><span class="currency">$</span>21,000</div>
+              <div class="period">one time</div>
+            </div>
+            <div class="package-detail">
+              <ul class="list-unstyled">
+                <li><strong>15</strong> Recruiters</li>
+                <li><strong>100</strong> Job Bundle</li>
+                <li><strong>$210</strong> Cost Per Job<sup>*</sup></li>
+              </ul>
+              <a href="#" class="btn btn-outline-color btn-block">Buy Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="package-column disabled">
+            <div class="package-title">ENTERPRISE</div>
+            <div class="package-price">
+              <div class="price">Boom</div>
+              <div class="period">contact us for pricing</div>
+            </div>
+            <div class="package-detail">
+              <ul class="list-unstyled">
+                <li><strong>More</strong> Recruiters</li>
+                <li><strong>Larger</strong> Job Bundle</li>
+                <li><strong>Cheaper</strong> Cost Per Job<sup>*</sup></li>
+              </ul>
+              <a href="#" class="btn btn-outline-color btn-block">Contact Us</a>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        * Activity fee of $50 per job per month also applied to all active jobs.
       </div>
     </div>
   </section>
